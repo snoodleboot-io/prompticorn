@@ -1,0 +1,62 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "promptcli"
+version = "0.1.0"
+description = "Build AI coding assistant configs from a shared prompt library"
+requires-python = ">=3.11"
+dependencies = [
+    "click>=8.1",
+    "sweet_tea>=0.1.0",
+]
+
+[project.scripts]
+prompt = "promptcli.cli:cli"
+
+[tool.hatch.build.targets.wheel]
+packages = ["promptcli"]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.0.2",
+    "pytest-cov>=7.0.0",
+    "ruff>=0.8.0",
+    "pre-commit>=4.0.0",
+]
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+
+[tool.ruff.lint]
+select = [
+    "E",     # pycodestyle errors
+    "W",     # pycodestyle warnings
+    "F",     # pyflakes
+    "I",     # isort
+    "B",     # flake8-bugbear
+    "C4",    # flake8-comprehensions
+    "UP",    # pyupgrade
+]
+ignore = [
+    "E501",  # line too long (handled by formatter)
+]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+
+[tool.pre-commit]
+# Ruff can handle: formatting, import sorting, common errors
+# For these, add to hooks below:
+#   - ruff
+#   - ruff format
+#
+# Recommended additional tools (ruff cannot handle):
+#   - mypy           # type checking
+#   - pytest         # testing
+#   - detect-secrets # secret detection
+#   - prettier       # markdown/yaml/json formatting
+#   - editorconfig-checker  # .editorconfig compliance

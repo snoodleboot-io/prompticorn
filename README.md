@@ -1,123 +1,160 @@
-<!-- path: README.md -->
-# Dev Prompt Library
+# Prompt Library
 
-A single source of truth for AI coding assistant rules, synced automatically
-into Kilo Code and Cline project structures.
+A shared library of AI coding assistant prompt files. Edit once in `prompts/`,
+build for any tool with a single command.
+
+Kilo Code is the primary target. Cline, Cursor, and GitHub Copilot are derived
+from the same source.
 
 ## Structure
 
 ```
 prompt-library/
-├── flat/                        ← THE SOURCE OF TRUTH — edit files here
-│   ├── core-system.md           ← always-on base behaviors
-│   ├── core-conventions.md      ← ⚙️ fill-ahead: your project's coding standards
-│   ├── architect-*.md           ← Kilo Architect mode / planning tasks
-│   ├── code-*.md                ← Kilo Code mode / implementation tasks
-│   ├── review-*.md              ← Kilo Review mode
-│   ├── debug-*.md               ← Kilo Debug mode
-│   ├── ask-*.md                 ← Kilo Ask mode / docs and Q&A
-│   └── orchestrator-*.md        ← Kilo Orchestrator mode / devops and process
+├── promptcli/                     ← installable package
+│   ├── prompts/                   ← THE SOURCE OF TRUTH — edit files here only
+│   │   ├── core-system.md         ← always-on base behaviors (all modes)
+│   │   ├── core-conventions.md    ← ⚙️ fill in for each project
+│   │   ├── architect-*.md
+│   │   ├── test-*.md
+│   │   ├── refactor-*.md
+│   │   ├── document-*.md
+│   │   ├── explain-*.md
+│   │   ├── migration-*.md
+│   │   ├── code-*.md
+│   │   ├── review-*.md
+│   │   ├── debug-*.md
+│   │   ├── ask-*.md
+│   │   ├── security-*.md
+│   │   ├── compliance-*.md
+│   │   └── orchestrator-*.md
+│   ├── builders/
+│   │   ├── kilo.py
+│   │   ├── cline.py
+│   │   ├── cursor.py
+│   │   └── copilot.py
+│   ├── registry.py                ← mode/file manifest — edit here to add modes
+│   └── cli.py                     ← Click entry point
 │
-├── kilo/                        ← Auto-generated — do not edit directly
-│   └── .kilocode/
-│       ├── rules/               ← loaded in ALL Kilo modes
-│       ├── rules-architect/     ← loaded only in Architect mode
-│       ├── rules-code/          ← loaded only in Code mode
-│       ├── rules-review/        ← loaded only in Review mode
-│       ├── rules-debug/         ← loaded only in Debug mode
-│       ├── rules-ask/           ← loaded only in Ask mode
-│       └── rules-orchestrator/  ← loaded only in Orchestrator mode
-│
-├── cline/                       ← Auto-generated — do not edit directly
-│   └── .clinerules              ← all rules concatenated into one file
-│
-└── sync.sh                      ← rebuilds kilo/ and cline/ from flat/
+└── pyproject.toml                 ← uv pip install -e . → `prompt` command
+```
+
+## Install
+
+Requires [uv](https://docs.astral.sh/uv/). Built with [hatchling](https://hatch.pypa.io/).
+
+```bash
+uv pip install -e .
+```
+
+This registers the `prompt` command globally.
+
+To sync dependencies into a project-local venv:
+
+```bash
+uv sync
+```
+
+## Commands
+
+### Build for a specific tool
+
+```bash
+# Run from inside your project directory — output lands there by default
+cd my-project
+
+prompt build kilo       # → .kilocode/
+prompt build cline      # → .clinerules
+prompt build cursor     # → .cursor/rules/ + .cursorrules (legacy)
+prompt build copilot    # → .github/copilot-instructions.md + .github/instructions/
+prompt build all        # → all of the above
+```
+
+### Target a different directory
+
+```bash
+prompt build kilo --output /path/to/my-project
+prompt build all  --output ~/projects/my-app
+```
+
+### Preview without writing
+
+```bash
+prompt build kilo --dry-run
+prompt build all  --dry-run
+```
+
+### Inspect and validate
+
+```bash
+prompt list       # show all modes and their registered prompt files
+prompt validate   # check for missing files and unregistered orphans
 ```
 
 ## Workflow
 
-### 1. Initial Setup
-
-Edit `flat/core-conventions.md` and fill in all `{{PLACEHOLDER}}` values for your project.
-Then run the sync script:
+### 1. Setup for a new project
 
 ```bash
-./sync.sh
+# 1. Fill in your project's coding standards
+$EDITOR prompts/core-conventions.md
+
+# 2. Build the config for your tool of choice
+cd my-project
+prompt build kilo
+
+# 3. Commit the generated config
+git add .kilocode/
+git commit -m "chore: add Kilo Code prompt config"
 ```
 
-### 2. Using with Kilo Code
-
-Copy the `.kilocode/` directory into your project root:
+### 2. Updating prompts
 
 ```bash
-cp -r kilo/.kilocode my-project/.kilocode
+# Edit the source file
+$EDITOR prompts/security-review.md
+
+# Rebuild — just the tools you use
+prompt build kilo --output ~/projects/my-project
 ```
 
-Or symlink for automatic updates:
+### 3. Adding a new prompt file to an existing mode
 
-```bash
-ln -s ~/dev-prompts/kilo/.kilocode my-project/.kilocode
-```
+1. Drop the `.md` file in `prompts/`
+2. Add the filename to `MODE_FILES[mode]` in `promptcli/registry.py`
+3. Add a `CONCAT_ORDER` entry if the file should appear in Cline/Cursor/Copilot output
+4. Run `prompt validate` to confirm
+5. Run `prompt build all`
 
-Commit `.kilocode/` to your repo so your team gets the same behavior.
+### 4. Adding a new mode
 
-Switch modes in the Kilo UI — the right rules load automatically. No prompting needed.
+1. Add an entry to `MODES` in `promptcli/registry.py`
+2. Add an entry to `MODE_FILES` with its prompt files
+3. Add a `COPILOT_APPLY` glob pattern
+4. Run `prompt validate` and `prompt build all`
 
-### 3. Using with Cline
+## Mode Reference
 
-Copy `.clinerules` into your project root:
+| Mode | Key | Purpose |
+|------|-----|---------|
+| Architect | `architect` | Scaffold projects, task breakdowns, data models |
+| Test | `test` | Coverage-first test writing |
+| Refactor | `refactor` | Structural changes, behavior preserved |
+| Document | `document` | Docstrings, READMEs, changelogs |
+| Explain | `explain` | Code walkthroughs for onboarding |
+| Migration | `migration` | Dependency upgrades, framework ports |
+| Code | `code` | Feature implementation, boilerplate |
+| Review | `review` | Code, performance, accessibility review |
+| Debug | `debug` | Root cause, log analysis, rubber duck |
+| Ask | `ask` | Q&A, decision logs |
+| Security | `security` | Security review (code and infra) |
+| Compliance | `compliance` | SOC 2, ISO 27001, GDPR, HIPAA, PCI-DSS |
+| Orchestrator | `orchestrator` | CI/CD, DevOps, PR descriptions |
 
-```bash
-cp cline/.clinerules my-project/.clinerules
-```
+## Tool Output Reference
 
-Commit it to the repo.
-
-Also paste `flat/core-system.md` into Cline's global Custom Instructions
-(VS Code → Cline → Settings → Custom Instructions) once — applies to all projects.
-
-### 4. Editing Rules
-
-Always edit files in `flat/` — never edit `kilo/` or `cline/` directly.
-
-After any edit:
-
-```bash
-./sync.sh                 # rebuild both
-./sync.sh --kilo-only     # rebuild kilo/ only
-./sync.sh --cline-only    # rebuild cline/ only
-./sync.sh --dry-run       # preview what would change
-```
-
-### 5. Per-Project Overrides
-
-To customize rules for a specific project without touching the global library:
-- For Kilo: edit the `.kilocode/rules/` files directly in that project after copying
-- For Cline: append to `.clinerules` under a `## PROJECT-SPECIFIC RULES` section
-
-These project-local edits will be overwritten if you re-run `sync.sh` and re-copy.
-To preserve them, keep project overrides in a separate section and re-apply after sync.
-
-## Marker Convention
-
-| Marker | Meaning | When |
-|--------|---------|------|
-| `{{PLACEHOLDER}}` | Fill ahead of time | Edit `core-conventions.md` at project setup |
-| `[describe this]` | Provide at runtime | When invoking a task in Kilo/Cline |
-
-## File Naming Convention in flat/
-
-Files are named `{mode}-{topic}.md` so the sync script knows where each one belongs:
-
-| Prefix | Goes to |
-|--------|---------|
-| `core-` | `.kilocode/rules/` (all modes) and Cline header |
-| `architect-` | `.kilocode/rules-architect/` |
-| `code-` | `.kilocode/rules-code/` |
-| `review-` | `.kilocode/rules-review/` |
-| `debug-` | `.kilocode/rules-debug/` |
-| `ask-` | `.kilocode/rules-ask/` |
-| `orchestrator-` | `.kilocode/rules-orchestrator/` |
-
-To add a new rule file: create `flat/{mode}-{topic}.md`, add a `copy` line
-to `sync.sh`, then run `./sync.sh`.
+| Tool | Command | What gets written |
+|------|---------|-------------------|
+| Kilo Code | `prompt build kilo` | `.kilocode/rules/` (always-on) + `.kilocode/rules-{mode}/` (per-mode) |
+| Cline | `prompt build cline` | `.clinerules` (all rules concatenated) |
+| Cursor | `prompt build cursor` | `.cursor/rules/{mode}/*.mdc` + `.cursorrules` (legacy) |
+| GitHub Copilot | `prompt build copilot` | `.github/copilot-instructions.md` + `.github/instructions/{mode}.instructions.md` |

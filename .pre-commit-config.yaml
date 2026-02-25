@@ -1,0 +1,45 @@
+# See https://pre-commit.com for more information
+repos:
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Python hooks (handled by ruff)
+  # ─────────────────────────────────────────────────────────────────────────────
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.0
+    hooks:
+      # Run ruff linter
+      - id: ruff
+        args: [--fix]
+      # Run ruff formatter
+      - id: ruff-format
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Additional tools (ruff cannot handle these)
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Uncomment if you want type checking:
+  # - repo: https://github.com/pre-commit/mirrors-mypy
+  #   rev: v1.13.0
+  #   hooks:
+  #     - id: mypy
+  #       args: [--strict, --ignore-missing-imports]
+  #       language_version: python3.11
+
+  # For secret detection, consider:
+  # - repo: https://github.com/Yelp/detect-secrets
+  #   rev: v1.5.0
+  #   hooks:
+  #     - id: detect-secrets
+  #       args: [--baseline, .secrets.baseline]
+
+  # For markdown/yaml/json formatting (not handled by ruff):
+  # - repo: https://github.com/pre-commit/mirrors-prettier
+  #   rev: v3.0.3
+  #   hooks:
+  #     - id: prettier
+  #       types: [markdown, yaml, json]
+
+  # For .editorconfig compliance:
+  # - repo: https://github.com/treyhunner/editorconfig-tools
+  #   rev: v1.0.0
+  #   hooks:
+  #     - id: editorconfig-checker
+  #       args: [-e]
