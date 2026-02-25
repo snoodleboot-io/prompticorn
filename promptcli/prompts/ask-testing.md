@@ -55,6 +55,52 @@ When asked for edge case inputs, cover:
 7. Missing required fields
 8. Logical contradictions
 
+### Test Naming
+
+Write descriptive test names that read like sentences:
+- `test_user_get_by_id_returns_user_when_found`
+- `test_calculator_add_returns_sum_of_two_numbers`
+- `test_parse_json_raises_on_invalid_input`
+
+Avoid vague names like `test1`, `test_check`, or `test_bad_input`.
+
+### Test Data Management
+
+- Use factories or fixtures for consistent test data
+- Keep test data minimal and focused on what's being tested
+- For databases: use test databases or transactions that roll back
+- Avoid sharing mutable state between tests
+
+### Test Isolation
+
+- Each test should be independent — run in any order
+- Clean up any created resources in teardown
+- Avoid tests that depend on execution order
+- Reset global state before each test
+
+### Async Testing
+
+When testing async code:
+- Ensure async functions are properly awaited
+- Test both success and error paths
+- Use async test utilities provided by the framework
+
+### CI/CD Integration
+
+Run tests in pipelines:
+- Fail CI if any test fails
+- Generate coverage reports
+- Run slow tests on schedule, not every commit
+- Use test markers to filter what runs in CI vs local
+
+### Mutation Testing
+
+To verify test quality:
+- Introduce small bugs (mutations) into code
+- Run tests — they should catch the mutation
+- Low mutation score means tests aren't catching bugs
+- Use tools like `mutmut` (Python) or `Stryker`
+
 ### Specialized Testing Approaches
 
 When appropriate for the project, consider:
