@@ -162,6 +162,108 @@ def list_prompts():
     click.echo()
 
 
+# ── init ───────────────────────────────────────────────────────────────────────
+
+
+@cli.command("init")
+def init_prompts():
+    """
+    Interactively initialize prompt configuration for your project.
+
+    Walks through questions to set up .prompty/configurations.yaml with
+    your language, runtime, package manager, testing framework, and more.
+    """
+    from promptcli.config import DEFAULT_CONFIG_TEMPLATE, ConfigHandler, create_default_config
+    from promptcli.questions import (
+        LANGUAGE_KEYS,
+        REPO_TYPE_MULTI_FOLDER,
+        REPO_TYPE_SINGLE,
+        RepositoryTypeQuestion,
+        get_language_questions,
+    )
+
+    click.echo("\n" + "=" * 60)
+    click.secho("  Prompt CLI Initialization", bold=True, fg="cyan")
+    click.echo("=" * 60)
+    click.echo("\nThis wizard will help you configure prompt conventions.")
+    click.echo("Press Enter to accept defaults shown in brackets.\n")
+
+    # Step 1: Repository type
+    repo_question = RepositoryTypeQuestion()
+    click.echo(f"\n{repo_question.question_text}\n")
+    click.echo(repo_question.explanation)
+    click.echo("\nOptions:")
+    for opt in repo_question.options:
+        explanation = repo_question.option_explanations.get(opt, "")
+        is_default = " [default]" if opt == repo_question.default else ""
+        click.echo(f"  {opt:30s} - {explanation}{is_default}")
+
+    repo_type = click.prompt(
+        "\nRepository type",
+        type=click.Choice(repo_question.options),
+        default=repo_question.default,
+    )
+
+    # Step 2: Language (only for single-language repos)
+    language = ""
+    if repo_type == REPO_TYPE_SINGLE:
+        click.echo("\n\nAvailable languages:")
+        for lang in sorted(LANGUAGE_KEYS):
+            click.echo(f"  - {lang}")
+
+        language = click.prompt(
+            "\nPrimary language",
+            type=click.Choice(LANGUAGE_KEYS),
+            default="python",
+        )
+
+        # Step 3: Language-specific questions
+        lang_questions = get_language_questions(language)
+        config = create_default_config(language, repo_type=repo_type)
+
+        for q in lang_questions:
+            click.echo(f"\n\n{q.question_text}\n")
+            click.echo(q.explanation)
+            click.echo("\nOptions:")
+            for opt in q.options:
+                explanation = q.option_explanations.get(opt, "")
+                is_default = " [default]" if opt == q.default else ""
+                click.echo(f"  {opt:30s} - {explanation}{is_default}")
+
+            # Store key without language prefix for config
+            config_key = q.key.replace(f"{language}_", "")
+            value = click.prompt(
+                f"\n{q.question_text().split('?')[0]}",
+                type=click.Choice(q.options),
+                default=q.default,
+            )
+            config["defaults"][config_key] = value
+    else:
+        # Multi-folder or mixed - just save repo type for now
+        config = DEFAULT_CONFIG_TEMPLATE.copy()
+        config["repository"]["type"] = repo_type
+        if repo_type == REPO_TYPE_MULTI_FOLDER:
+            click.echo("\n\nFolder mappings will be configured in a future step.")
+            click.echo("For now, set up your primary language:")
+            language = click.prompt(
+                "\nPrimary language",
+                type=click.Choice(LANGUAGE_KEYS),
+                default="python",
+            )
+            config["defaults"]["language"] = language
+
+    # Save configuration
+    ConfigHandler.save_config(config)
+
+    click.echo("\n\n" + "=" * 60)
+    click.secho("  Configuration saved!", bold=True, fg="green")
+    click.echo("=" * 60)
+    click.echo(f"\n  Config file: {ConfigHandler.get_config_path()}")
+    click.echo("\n  You can now run:")
+    click.echo("    prompt build <target>")
+    click.echo("\n  Or edit the config file directly to customize.\n")
+
+
 # ── validate ───────────────────────────────────────────────────────────────────
 
 
