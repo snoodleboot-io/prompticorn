@@ -170,10 +170,12 @@ class Registry(BaseModel):
 
     # ── Default ignore patterns for all agents ─────────────────────────────
     default_ignore_patterns: list[str] = [
+        # Python cache
+        "__pycache__/",
+        "*.py[cod]",
+        "*$py.class",
         # Dependencies
         "node_modules/",
-        "__pycache__/",
-        "*.pyc",
         ".venv/",
         "venv/",
         "env/",

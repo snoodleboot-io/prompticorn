@@ -37,3 +37,78 @@ After collecting answers, output:
 
 If summarizing from raw notes, apply the same output format.
 Rewrite vague action items as concrete ones or flag them as too vague to action.
+
+## Commit Message
+
+When the user asks to write a commit message:
+- Run `git diff --cached` for staged changes, or `git diff` for unstaged changes
+- If no diff provided, ask the user to stage their changes or run git diff yourself
+- Generate a commit message following conventional commits format:
+  - Format: `<type>(<scope>): <description>`
+  - Types: feat, fix, docs, style, refactor, test, chore, perf, ci, build
+  - Description: under 50 characters, lowercase, no period at end
+- If changes are complex, provide both a short subject line and a body:
+  - Subject: conventional commit format (under 50 chars)
+  - Body: explain "what" and "why", not "how" (wrap at 72 chars)
+  - Reference issue/ticket number if provided
+- Ask if they want a conventional commit or freeform message
+- Suggest the command to execute once the message is finalized
+
+## Pull Request Review
+
+When the user asks to review a pull request or run an automated review:
+
+### Step 1: Gather Context
+- Ask for PR URL or run `git diff main..HEAD` / `git diff <base>..<head>` to get the changes
+- Identify the files changed and the overall scope of the PR
+- Check if there's an associated issue or ticket number
+
+### Step 2: Multi-Mode Review
+
+Run reviews using the appropriate modes in sequence:
+
+1. **Full Code Review** (`review` mode via review-code.md):
+   - Review for correctness, security, error handling, performance, conventions, readability
+   - Report each issue with severity (BLOCKER, SUGGESTION, NIT), location, and suggested fix
+
+2. **Security Review** (`security` mode via security-review.md):
+   - Check for OWASP Top 10 issues, hardcoded secrets, injection vulnerabilities
+   - Auth/authz gaps, unsafe deserialization, input validation
+
+3. **Performance Review** (`review` mode via review-performance.md):
+   - N+1 queries, unnecessary computation, missing indexes, memory issues
+
+4. **Accessibility Review** (`review` mode via review-accessibility.md):
+   - ARIA labels, keyboard navigation, color contrast, screen reader support
+
+### Step 3: Line-Specific Comments
+
+For each line with issues:
+- Use the GitHub/GitLab API or CLI to add inline comments
+- Format: `File:Line - Severity - Issue description - Suggested fix`
+- Group comments by file for readability
+
+### Step 4: Review Summary
+
+Generate a summary with:
+- Total files changed, lines added, lines removed
+- Count of BLOCKERs, SUGGESTIONs, NITs
+- Verdict: Approve / Request changes / Needs discussion
+- List of specific files that need attention
+
+### Step 5: Actions and Verification
+
+Offer to take actions (ask before each):
+- **Comment**: Add general feedback on the PR
+- **Request changes**: Mark BLOCKERs requiring fixes before merge
+- **Approve**: If no BLOCKERs, offer to approve
+- **Create review summary**: Post a formatted review summary
+
+Ask for verification at key points:
+- "Should I run security checks first, or go straight to full code review?"
+- "Should I post inline comments, or just provide a summary?"
+- "Would you like me to approve this PR once the BLOCKERs are addressed?"
+- "Do you want me to re-review after the requested changes are made?"
+
+For GitHub CLI: `gh pr review --body "..." --request-changes` or `--approve`
+For GitLab: Use GitLab API to post merge request comments and approvals
