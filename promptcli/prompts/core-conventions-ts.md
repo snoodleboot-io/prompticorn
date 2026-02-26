@@ -28,11 +28,14 @@ Formatter:           {{FORMATTER}}          e.g., Prettier
 
 ### Testing
 Framework:            {{TEST_FRAMEWORK}}     e.g., Vitest, Jest
+Coverage target:      {{COVERAGE_%}}         e.g., 80%
 Mocking library:     {{MOCK_LIB}}           e.g., vitest/mock, jest.mock
 
 - Use `describe`/`it` blocks with descriptive names
 - Mock at the boundary (dependencies), not internals
 - Test behavior, not implementation
+- Unit tests: one function or method in isolation
+- Integration tests: at the service or module boundary
 
 ### Code Style
 - Use ESNext features (optional chaining, nullish coalescing)

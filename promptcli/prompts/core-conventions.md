@@ -61,16 +61,13 @@ Pattern: {{throw | return Result<T, E> | return [data, error]}}
 - Group imports: stdlib → third-party → internal (blank line between groups)
 - Flag any new dependency before adding it
 
-## Testing Standards
+## Testing
 
-Framework:           {{TEST_FRAMEWORK}}     e.g., Jest, Pytest, Go test
-Coverage target:     {{COVERAGE_%}}         e.g., 80%
-Test style:          AAA                    Arrange-Act-Assert
-Mocking library:     {{MOCK_LIB}}           e.g., jest.mock, unittest.mock
-
-- Unit tests: one function or method in isolation
-- Integration tests: at the service or module boundary
-- No test should depend on another test's state
+Testing conventions are language-specific. See your language's conventions file for:
+- Test framework recommendations
+- Coverage targets
+- Test style patterns
+- Mocking approaches
 
 ## Database
 

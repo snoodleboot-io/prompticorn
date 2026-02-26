@@ -3,6 +3,11 @@
 Database:            {{DATABASE}}           e.g., PostgreSQL, MySQL, SQLite
 ORM/Query:           {{ORM}}                e.g., Prisma, SQLAlchemy, GORM, Drizzle
 
+## Testing
+Framework:           {{TEST_FRAMEWORK}}     e.g., pytest, Go test, Jest
+Coverage target:      {{COVERAGE_%}}         e.g., 80%
+Mocking library:     {{MOCK_LIB}}           e.g., factory_boy, testfixtures
+
 ## SQL-Specific Rules
 
 ### Query Safety

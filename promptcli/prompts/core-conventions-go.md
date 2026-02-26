@@ -26,6 +26,7 @@ Formatter:           {{FORMATTER}}          e.g., gofmt, goimports
 
 ### Testing
 Framework:            {{TEST_FRAMEWORK}}     e.g., Go test
+Coverage target:      {{COVERAGE_%}}         e.g., 80%
 Mocking library:     {{MOCK_LIB}}           e.g., testify, gomock
 
 - Use table-driven tests with `testing.T.Run`

@@ -11,7 +11,7 @@ Formatter:           {{FORMATTER}}          e.g., Ruff, Black
 ### Type Hints
 - Type hints required on all public functions (use `pyright` or `mypy` to enforce)
 - Use `dataclasses` or `pydantic` for data shapes, not raw dicts
-- Use `typing.Optional[T]` instead of `T | None` for broader compatibility
+- Use `T | None` instead of `typing.Optional[T]`. This is the standard for modern python
 - Use `typing.TypeAlias` for complex type aliases
 
 ### Error Handling
@@ -31,15 +31,19 @@ Formatter:           {{FORMATTER}}          e.g., Ruff, Black
 - Use `__all__` to define public API
 
 ### Testing
-Framework:            {{TEST_FRAMEWORK}}     e.g., pytest
+Framework:           {{TEST_FRAMEWORK}}     e.g., pytest
+Coverage target:      {{COVERAGE_%}}         e.g., 80%
 Mocking library:     {{MOCK_LIB}}           e.g., unittest.mock, pytest-mock
 
 - Use `pytest` fixtures for setup/teardown
 - Use `pytest.mark.parametrize` for table-driven tests
 - Use `pytest.raises` for exception testing
+- Unit tests: one function or method in isolation
+- Integration tests: at the service or module boundary
 
 ### Code Style
 - Follow PEP 8 (enforced by Ruff)
 - Use f-strings for string formatting
 - Use `dataclasses` for simple data containers
-- Use `attrs` or `pydantic` for complex validation
+- Use `pydantic` for complex validation
+- Unless the code is a framework layer or there is a strong necessity - DO NOT use setattr or getattr.
