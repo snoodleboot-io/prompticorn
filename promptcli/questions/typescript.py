@@ -1,9 +1,9 @@
 # TypeScript language questions
 
-from promptcli.questions.base import BaseQuestion
+from promptcli.questions.base import Question
 
 
-class TypeScriptVersionQuestion(BaseQuestion):
+class TypeScriptVersionQuestion(Question):
     """Question handler for TypeScript version."""
 
     @property
@@ -40,7 +40,7 @@ class TypeScriptVersionQuestion(BaseQuestion):
         return "5.4"
 
 
-class TypeScriptPackageManagerQuestion(BaseQuestion):
+class TypeScriptPackageManagerQuestion(Question):
     """Question for TypeScript package manager."""
 
     @property
@@ -76,7 +76,7 @@ class TypeScriptPackageManagerQuestion(BaseQuestion):
         return "npm"
 
 
-class TypeScriptTestFrameworkQuestion(BaseQuestion):
+class TypeScriptTestFrameworkQuestion(Question):
     """Question for TypeScript test framework."""
 
     @property
@@ -112,7 +112,7 @@ class TypeScriptTestFrameworkQuestion(BaseQuestion):
         return "vitest"
 
 
-class TypeScriptFrameworkQuestion(BaseQuestion):
+class TypeScriptFrameworkQuestion(Question):
     """Question for TypeScript framework (React, Vue, etc)."""
 
     @property

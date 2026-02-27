@@ -4,6 +4,7 @@ import pytest
 
 
 @pytest.mark.slow
+@pytest.mark.placeholder
 def test_slow_placeholder():
     """Placeholder slow test."""
     # TODO: Add slow tests when we have:

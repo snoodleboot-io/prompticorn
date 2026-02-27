@@ -1,9 +1,9 @@
 # Python formatter question
 
-from promptcli.questions.base import BaseQuestion
+from promptcli.questions.base import Question
 
 
-class PythonFormatterQuestion(BaseQuestion):
+class PythonFormatterQuestion(Question):
     """Question for Python formatter - supports multiple selection."""
 
     @property

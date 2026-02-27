@@ -1,0 +1,22 @@
+# Question pipelines for each language
+# Each pipeline defines the sequence of questions to ask during init
+
+python:
+  - PythonRuntimeQuestion
+  - PythonPackageManagerQuestion
+  - PythonTestFrameworkQuestion
+  - PythonTestRunnerQuestion
+  - PythonLinterQuestion
+  - PythonFormatterQuestion
+
+typescript:
+  - TypeScriptVersionQuestion
+  - TypeScriptPackageManagerQuestion
+  - TypeScriptTestFrameworkQuestion
+  - TypeScriptFrameworkQuestion
+
+javascript:
+  - TypeScriptVersionQuestion
+  - TypeScriptPackageManagerQuestion
+  - TypeScriptTestFrameworkQuestion
+  - TypeScriptFrameworkQuestion

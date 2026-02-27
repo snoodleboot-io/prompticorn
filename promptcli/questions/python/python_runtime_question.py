@@ -1,9 +1,9 @@
 # Python runtime question
 
-from promptcli.questions.base import BaseQuestion
+from promptcli.questions.base import Question
 
 
-class PythonRuntimeQuestion(BaseQuestion):
+class PythonRuntimeQuestion(Question):
     """Question handler for Python runtime/version."""
 
     @property

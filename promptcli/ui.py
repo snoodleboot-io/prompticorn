@@ -108,16 +108,17 @@ def select_option_with_explain(
 
             for i, opt in enumerate(all_options):
                 num = f"{i + 1}."
+                # Initialize default_tag for all cases
+                if i == default_index:
+                    default_tag = " (default)"
+                else:
+                    default_tag = ""
                 if allow_multiple:
                     # Check if this option is selected
                     is_selected = i in selected if isinstance(selected, set) else i == selected
                     marker = "[*]" if is_selected else "[ ]"
                 else:
                     marker = "→" if i == selected else " "
-                    if i == default_index:
-                        default_tag = " (default)"
-                    else:
-                        default_tag = ""
 
                 # Show explanation for selected option OR for Explain
                 if allow_multiple:

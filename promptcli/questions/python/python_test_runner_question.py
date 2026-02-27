@@ -1,9 +1,9 @@
 # Python test runner question
 
-from promptcli.questions.base import BaseQuestion
+from promptcli.questions.base import Question
 
 
-class PythonTestRunnerQuestion(BaseQuestion):
+class PythonTestRunnerQuestion(Question):
     """Question for Python test runner (how tests are executed)."""
 
     @property

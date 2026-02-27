@@ -5,10 +5,15 @@ repository:
 defaults:
   language: python
   runtime: '3.12'
-  package_manager: uv
+  package_manager: poetry
   test_framework: pytest
-  linter: ruff
-  formatter: ruff
+  linter:
+  - ruff
+  - flake8
+  - pylint
+  - mypy
+  formatter:
+  - ruff
   coverage:
     line: 80
     branch: 70
@@ -17,4 +22,4 @@ defaults:
     mutation: 80
     path: 60
   repo_type: single-language
-  python: '3.12'
+  test_runner: pytest

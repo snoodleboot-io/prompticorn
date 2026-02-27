@@ -1,9 +1,9 @@
 # Python package manager question
 
-from promptcli.questions.base import BaseQuestion
+from promptcli.questions.base import Question
 
 
-class PythonPackageManagerQuestion(BaseQuestion):
+class PythonPackageManagerQuestion(Question):
     """Question for Python package manager."""
 
     @property

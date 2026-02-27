@@ -1,9 +1,9 @@
 # Python linter question
 
-from promptcli.questions.base import BaseQuestion
+from promptcli.questions.base import Question
 
 
-class PythonLinterQuestion(BaseQuestion):
+class PythonLinterQuestion(Question):
     """Question for Python linter - supports multiple selection."""
 
     @property

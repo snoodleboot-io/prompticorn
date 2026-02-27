@@ -1,9 +1,9 @@
 # Python test framework question
 
-from promptcli.questions.base import BaseQuestion
+from promptcli.questions.base import Question
 
 
-class PythonTestFrameworkQuestion(BaseQuestion):
+class PythonTestFrameworkQuestion(Question):
     """Question for Python test framework (how tests are written)."""
 
     @property
