@@ -16,15 +16,15 @@ def format_options_columns(
     Format options into columns for display.
 
     Fills columns left-to-right, top-to-bottom (1-8 in col 1, 9-16 in col 2, etc.)
-    Example with items_per_column=8:
-        1. python      9. php
-        2. typescript 10. swift
+    Example with items_per_column=8 and column_width=20:
+        1. python            9. php
+        2. typescript       10. swift
         ...
 
     Args:
         options: List of option strings
         items_per_column: Number of items per column (default 8)
-        column_width: Width reserved for each column
+        column_width: Width reserved for each column (default 20)
 
     Returns:
         Formatted string with options in columns
@@ -41,20 +41,16 @@ def format_options_columns(
         for col in range(num_columns):
             idx = col * items_per_column + row
             if idx < num_items:
-                # Format: " 1. optionname" or "10. optionname"
+                # Format: " 1. optionname        " (padded to column_width)
                 num_str = f"{idx + 1}."
-                part = f"{num_str:>3} {options[idx]}"
+                # Content is: num + space + option
+                content = f"{num_str:>3} {options[idx]}"
+                # Pad to column_width
+                part = content.ljust(column_width)
                 line_parts.append(part)
 
         if line_parts:
-            # Join with spacing
-            line = ""
-            for i, part in enumerate(line_parts):
-                if i > 0:
-                    # Add spacing between columns
-                    line += " " * 2
-                line += f"{part}"
-            lines.append(line)
+            lines.append("".join(line_parts))
 
     return "\n".join(lines)
 
@@ -96,42 +92,51 @@ def select_option_with_explain(
         print("=" * len(question))
         print(f"\n{question_explanation}\n")
 
-        if allow_multiple:
-            print("Enter numbers to toggle selection, Enter to confirm:\n")
+        # Check if we should use columns (more than 8 options)
+        use_columns = len(all_options) > 8
+
+        if use_columns:
+            # Use column layout
+            col_width = 20
+            print(format_options_columns(all_options, items_per_column=8, column_width=col_width))
         else:
-            print("Enter a number to select:\n")
-
-        for i, opt in enumerate(all_options):
-            num = f"{i + 1}."
+            # Use regular vertical list
             if allow_multiple:
-                # Check if this option is selected
-                is_selected = i in selected if isinstance(selected, set) else i == selected
-                marker = "[*]" if is_selected else "[ ]"
+                print("Enter numbers to toggle selection, Enter to confirm:\n")
             else:
-                marker = "→" if i == selected else " "
-                if i == default_index:
-                    default_tag = " (default)"
-                else:
-                    default_tag = ""
+                print("Enter a number to select:\n")
 
-            # Show explanation for selected option OR for Explain
-            if allow_multiple:
-                show_exp = i in selected if isinstance(selected, set) else i == selected
-            else:
-                show_exp = i == selected
+            for i, opt in enumerate(all_options):
+                num = f"{i + 1}."
+                if allow_multiple:
+                    # Check if this option is selected
+                    is_selected = i in selected if isinstance(selected, set) else i == selected
+                    marker = "[*]" if is_selected else "[ ]"
+                else:
+                    marker = "→" if i == selected else " "
+                    if i == default_index:
+                        default_tag = " (default)"
+                    else:
+                        default_tag = ""
 
-            if show_exp:
-                if opt == "Explain":
-                    exp = "Learn more about this question"
+                # Show explanation for selected option OR for Explain
+                if allow_multiple:
+                    show_exp = i in selected if isinstance(selected, set) else i == selected
                 else:
-                    exp = explanations.get(opt, "")
-                if exp:
-                    print(f"  {marker} {num} {opt}{default_tag}")
-                    print(f"       └─ {exp}")
+                    show_exp = i == selected
+
+                if show_exp:
+                    if opt == "Explain":
+                        exp = "Learn more about this question"
+                    else:
+                        exp = explanations.get(opt, "")
+                    if exp:
+                        print(f"  {marker} {num} {opt}{default_tag}")
+                        print(f"       └─ {exp}")
+                    else:
+                        print(f"  {marker} {num} {opt}{default_tag}")
                 else:
-                    print(f"  {marker} {num} {opt}{default_tag}")
-            else:
-                print(f"  {marker} {num} {opt}")
+                    print(f"  {marker} {num} {opt}")
 
         print("\nControls: Numbers to select, Enter to confirm, q to quit")
 
