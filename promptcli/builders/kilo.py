@@ -91,14 +91,14 @@ class KiloBuilder(Builder):
         destination.write_text(content, encoding="utf-8")
         return f"✓ {label}"
 
-    def _copy(self, src: Path, destination: Path, dry_run: bool) -> str:
+    def _copy(self, source_path: Path, destination: Path, dry_run: bool) -> str:
         rel = str(destination).split(".kilo/", 1)[-1]
         label = f".kilo/{rel}"
         if dry_run:
-            return f"[dry-run] {src.name} → {label}"
+            return f"[dry-run] {source_path.name} → {label}"
         destination.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(src, destination)
-        return f"✓ {src.name} → {label}"
+        shutil.copy2(source_path, destination)
+        return f"✓ {source_path.name} → {label}"
 
     def _build_ignore(self, output: Path, dry_run: bool) -> list[str]:
         """Generate .kiloignore file."""

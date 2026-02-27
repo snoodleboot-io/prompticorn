@@ -70,11 +70,11 @@ class CursorBuilder(Builder):
         lines = content.count("\n")
         return [f"✓ .cursorignore ({lines} lines)"]
 
-    def _copy(self, src: Path, destination: Path, dry_run: bool) -> str:
+    def _copy(self, source_path: Path, destination: Path, dry_run: bool) -> str:
         rel = str(destination).split(".cursor/", 1)[-1]
         label = f".cursor/{rel}"
         if dry_run:
-            return f"[dry-run] {src.name} → {label}"
+            return f"[dry-run] {source_path.name} → {label}"
         destination.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(src, destination)
-        return f"✓ {src.name} → {label}"
+        shutil.copy2(source_path, destination)
+        return f"✓ {source_path.name} → {label}"
