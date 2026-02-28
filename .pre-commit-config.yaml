@@ -1,0 +1,21 @@
+# See https://pre-commit.com for more information
+repos:
+  # ─────────────────────────────────────────────────────────────────────────────
+  # Python hooks (handled by ruff)
+  # ─────────────────────────────────────────────────────────────────────────────
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.0
+    hooks:
+      # Run ruff linter
+      - id: ruff
+        args: [--fix]
+        exclude: ^tests/
+      # Run ruff formatter
+      - id: ruff-format
+        exclude: ^tests/
+
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v3.0.3
+    hooks:
+      - id: prettier
+        types: [markdown, yaml, json]
