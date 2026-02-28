@@ -1,6 +1,6 @@
 # Java test framework question
 
-from promptcli.questions.base import Question
+from promptcli.questions.base.question import Question
 
 
 class JavaTestFrameworkQuestion(Question):

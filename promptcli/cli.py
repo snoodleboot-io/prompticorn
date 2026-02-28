@@ -17,11 +17,11 @@ import sys
 import click
 
 from promptcli.config import DEFAULT_CONFIG_TEMPLATE, ConfigHandler
-from promptcli.questions.base import (
+from promptcli.questions.base.constants import (
     REPO_TYPE_MULTI_FOLDER,
     REPO_TYPE_SINGLE,
-    RepositoryTypeQuestion,
 )
+from promptcli.questions.base.repository_type_question import RepositoryTypeQuestion
 from promptcli.questions.language import LANGUAGE_KEYS
 
 # from promptcli import fill_registry
@@ -132,7 +132,9 @@ def init_prompts():
 
     # Step 2 & 3: Handle language questions based on repo type
     if repo_type == REPO_TYPE_SINGLE:
-        from promptcli.questions.handlers import HandleSingleLanguageQuestions
+        from promptcli.questions.handlers.handle_single_language_questions import (
+            HandleSingleLanguageQuestions,
+        )
 
         handler = HandleSingleLanguageQuestions(select_option_with_explain)
         config = handler.handle(repo_type)

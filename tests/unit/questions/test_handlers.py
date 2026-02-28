@@ -4,10 +4,10 @@ from unittest.mock import Mock
 
 import pytest
 
-from promptcli.questions.handlers import (
-    LanguageQuestionHandler,
+from promptcli.questions.handlers.handle_single_language_questions import (
     HandleSingleLanguageQuestions,
 )
+from promptcli.questions.handlers.language_question_handler import LanguageQuestionHandler
 
 
 class TestLanguageQuestionHandler:

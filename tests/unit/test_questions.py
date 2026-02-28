@@ -2,23 +2,23 @@
 
 import pytest
 
-from promptcli.questions.base import (
-    RepositoryTypeQuestion,
-    FolderMappingQuestion,
+from promptcli.questions.base.constants import (
     REPO_TYPE_SINGLE,
     REPO_TYPE_MULTI_FOLDER,
     REPO_TYPE_MIXED,
 )
+from promptcli.questions.base.folder_mapping_question import FolderMappingQuestion
+from promptcli.questions.base.repository_type_question import RepositoryTypeQuestion
 from promptcli.questions.python.python_package_manager_question import PythonPackageManagerQuestion
 from promptcli.questions.python.python_runtime_question import PythonRuntimeQuestion
 from promptcli.questions.python.python_test_framework_question import PythonTestFrameworkQuestion
 from promptcli.questions.python.python_linter_question import PythonLinterQuestion
 from promptcli.questions.python.python_formatter_question import PythonFormatterQuestion
 from promptcli.questions.python.python_test_runner_question import PythonTestRunnerQuestion
-from promptcli.questions.handlers import (
-    LanguageQuestionHandler,
+from promptcli.questions.handlers.handle_single_language_questions import (
     HandleSingleLanguageQuestions,
 )
+from promptcli.questions.handlers.language_question_handler import LanguageQuestionHandler
 
 from promptcli.questions.typescript.typescript_version_question import (
     TypeScriptVersionQuestion,

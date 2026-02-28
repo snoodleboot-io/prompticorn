@@ -6,7 +6,7 @@ import yaml
 from sweet_tea.abstract_factory import AbstractFactory
 from sweet_tea.sweet_tea_error import SweetTeaError
 
-from promptcli.questions.base import Question
+from promptcli.questions.base.question import Question
 
 
 class QuestionPipelineError(Exception):
