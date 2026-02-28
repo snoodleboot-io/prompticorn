@@ -1,9 +1,10 @@
 """Vertical layout renderer."""
 
 from promptcli.ui.domain.context import PipelineContext
+from promptcli.ui.render.renderer import Renderer
 
 
-class VerticalLayoutRenderer:
+class VerticalLayoutRenderer(Renderer):
     """Renders options in vertical list."""
 
     def render(self, context: PipelineContext) -> str:

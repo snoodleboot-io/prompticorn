@@ -1,0 +1,1 @@
+"""UI domain models."""

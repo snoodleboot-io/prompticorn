@@ -1,9 +1,10 @@
 """Column layout renderer."""
 
 from promptcli.ui.domain.context import PipelineContext
+from promptcli.ui.render.renderer import Renderer
 
 
-class ColumnLayoutRenderer:
+class ColumnLayoutRenderer(Renderer):
     """Renders options in columns."""
 
     def __init__(self, items_per_column: int = 8, column_width: int = 20):

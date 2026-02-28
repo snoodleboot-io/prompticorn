@@ -1,9 +1,10 @@
 """Explain mode renderer."""
 
 from promptcli.ui.domain.context import PipelineContext
+from promptcli.ui.render.renderer import Renderer
 
 
-class ExplainRenderer:
+class ExplainRenderer(Renderer):
     """Renders explain mode."""
 
     def render(self, context: PipelineContext) -> str:
