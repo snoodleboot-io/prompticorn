@@ -94,6 +94,7 @@ class Registry(BaseModel):
     ]
 
     # ── Mode registry ───────────────────────────────────────────────────────
+    # TODO: Discover This
     modes: dict[str, str] = {
         "architect": "Architect",
         "test": "Test",
@@ -111,6 +112,7 @@ class Registry(BaseModel):
     }
 
     # ── Files per mode ───────────────────────────────────────────────────────
+    # TODO: This should be auto-discoverable
     mode_files: dict[str, list[str]] = {
         "architect": [
             "architect-scaffold.md",
@@ -164,6 +166,7 @@ class Registry(BaseModel):
         "orchestrator": [
             "orchestrator-devops.md",
             "orchestrator-meta.md",
+            "orchestrator-pr-description.md",
         ],
     }
 
@@ -261,7 +264,7 @@ class Registry(BaseModel):
     }
 
     # ── Kilo mode definitions ───────────────────────────────────────────────
-    kilo_modes: dict[str, dict[str, str]] = {
+    kilo_modes: dict[str, dict[str, str | list[str]]] = {
         "architect": {
             "name": "🏗️ Architect",
             "description": "Scaffold projects, create task breakdowns, and design data models",
@@ -357,7 +360,7 @@ class Registry(BaseModel):
 
     # ── Computed properties ────────────────────────────────────────────────
 
-    @computed_field
+    @computed_field  # type: ignore[prop-decorator]
     @property
     def all_registered_files(self) -> set[str]:
         """All files registered in the registry."""
@@ -422,7 +425,7 @@ class Registry(BaseModel):
         """Strip the mode prefix from a filename."""
         return _dest_name(mode_key, filename, ext)
 
-    def validate(self) -> list[str]:
+    def validate_files(self) -> list[str]:
         """Check every registered filename exists in prompts/."""
         errors: list[str] = []
 

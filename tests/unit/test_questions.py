@@ -3,32 +3,31 @@
 import pytest
 
 from promptcli.questions.base.constants import (
-    REPO_TYPE_SINGLE,
-    REPO_TYPE_MULTI_FOLDER,
     REPO_TYPE_MIXED,
+    REPO_TYPE_MULTI_FOLDER,
+    REPO_TYPE_SINGLE,
 )
 from promptcli.questions.base.folder_mapping_question import FolderMappingQuestion
 from promptcli.questions.base.repository_type_question import RepositoryTypeQuestion
-from promptcli.questions.python.python_package_manager_question import PythonPackageManagerQuestion
-from promptcli.questions.python.python_runtime_question import PythonRuntimeQuestion
-from promptcli.questions.python.python_test_framework_question import PythonTestFrameworkQuestion
-from promptcli.questions.python.python_linter_question import PythonLinterQuestion
-from promptcli.questions.python.python_formatter_question import PythonFormatterQuestion
-from promptcli.questions.python.python_test_runner_question import PythonTestRunnerQuestion
 from promptcli.questions.handlers.handle_single_language_questions import (
     HandleSingleLanguageQuestions,
 )
 from promptcli.questions.handlers.language_question_handler import LanguageQuestionHandler
-
-from promptcli.questions.typescript.typescript_version_question import (
-    TypeScriptVersionQuestion,
+from promptcli.questions.language import (
+    LANGUAGE_KEYS,
+    get_language_questions,
 )
+from promptcli.questions.python.python_formatter_question import PythonFormatterQuestion
+from promptcli.questions.python.python_linter_question import PythonLinterQuestion
+from promptcli.questions.python.python_package_manager_question import PythonPackageManagerQuestion
+from promptcli.questions.python.python_runtime_question import PythonRuntimeQuestion
+from promptcli.questions.python.python_test_framework_question import PythonTestFrameworkQuestion
+from promptcli.questions.python.python_test_runner_question import PythonTestRunnerQuestion
 from promptcli.questions.typescript.typescript_package_manager_question import (
     TypeScriptPackageManagerQuestion,
 )
-from promptcli.questions.language import (
-    get_language_questions,
-    LANGUAGE_KEYS,
+from promptcli.questions.typescript.typescript_version_question import (
+    TypeScriptVersionQuestion,
 )
 
 
@@ -405,14 +404,20 @@ class TestHandleSingleLanguageQuestions:
 
     def test_handler_initializes_with_selector(self):
         """Handler should initialize with a selector function."""
-        mock_selector = lambda **kwargs: "python"
+
+        def mock_selector(**kwargs):  # noqa: ARG001
+            return "python"
+
         handler = HandleSingleLanguageQuestions(mock_selector)
 
         assert handler.select_option == mock_selector
 
     def test_handle_returns_config_dict(self, monkeypatch):
         """Handle should return a configuration dictionary."""
-        mock_selector = lambda **kwargs: "python"
+
+        def mock_selector(**kwargs):  # noqa: ARG001
+            return "python"
+
         handler = HandleSingleLanguageQuestions(mock_selector)
 
         # Mock click.echo to avoid output during test
@@ -425,7 +430,10 @@ class TestHandleSingleLanguageQuestions:
 
     def test_python_questions_in_config(self, monkeypatch):
         """Python questions should populate config defaults."""
-        mock_selector = lambda **kwargs: "pytest" if "pytest" in kwargs.get("options", []) else "python"
+
+        def mock_selector(**kwargs):  # noqa: ARG001
+            return "pytest" if "pytest" in kwargs.get("options", []) else "python"
+
         handler = HandleSingleLanguageQuestions(mock_selector)
 
         # Mock click.echo to avoid output during test

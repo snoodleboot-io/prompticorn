@@ -11,7 +11,7 @@ Output layout:
 import shutil
 from pathlib import Path
 
-import yaml
+import yaml  # type: ignore[import-untyped]
 
 from promptcli.builders.builder import Builder
 from promptcli.registry import registry

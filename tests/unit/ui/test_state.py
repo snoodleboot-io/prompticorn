@@ -1,8 +1,9 @@
 """Unit tests for UI state classes."""
 
 import unittest
-from promptcli.ui.state.single import SingleSelectState
+
 from promptcli.ui.state.multi import MultiSelectState
+from promptcli.ui.state.single import SingleSelectState
 
 
 class TestSingleSelectState(unittest.TestCase):

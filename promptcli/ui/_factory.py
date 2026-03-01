@@ -6,10 +6,19 @@ from sweet_tea.abstract_factory import AbstractFactory
 from sweet_tea.registry import Registry
 
 from promptcli.ui.domain.context import PipelineContext
+from promptcli.ui.domain.input_provider import InputProvider
+from promptcli.ui.domain.renderer import Renderer
+from promptcli.ui.input.fallback import FallbackInputProvider
+from promptcli.ui.input.unix import UnixInputProvider
+from promptcli.ui.input.windows import WindowsInputProvider
 from promptcli.ui.render.columns import ColumnLayoutRenderer
 from promptcli.ui.render.explain import ExplainRenderer
-from promptcli.ui.render.renderer import Renderer
 from promptcli.ui.render.vertical import VerticalLayoutRenderer
+
+# Register input providers with snake_case keys for sweet_tea factory
+Registry.register("windows_input", WindowsInputProvider, library="promptcli")
+Registry.register("unix_input", UnixInputProvider, library="promptcli")
+Registry.register("fallback_input", FallbackInputProvider, library="promptcli")
 
 # Register renderers with snake_case keys for sweet_tea factory
 Registry.register("column_layout_renderer", ColumnLayoutRenderer, library="promptcli")
@@ -23,20 +32,18 @@ class UIFactory:
     @staticmethod
     def create_input_provider():
         """Create appropriate input provider for current platform."""
-        from promptcli.ui.input.fallback import FallbackInputProvider
-        from promptcli.ui.input.unix import UnixInputProvider
-        from promptcli.ui.input.windows import WindowsInputProvider
+        factory = AbstractFactory[InputProvider]
 
         try:
             if os.name == "nt":
-                return WindowsInputProvider()
+                return factory.create("windows_input")
             else:
-                return UnixInputProvider()
+                return factory.create("unix_input")
         except Exception:
-            return FallbackInputProvider()
+            return factory.create("fallback_input")
 
     @staticmethod
-    def create_renderer(context: PipelineContext) -> Renderer:
+    def create_renderer(context: PipelineContext):
         """Create appropriate renderer based on context."""
         factory = AbstractFactory[Renderer]
 

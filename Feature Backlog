@@ -1,0 +1,27 @@
+# Python Styling
+* constants are not allowed inside or outside of classes. Prefer the use of a YAML file if it is changeable at runtime. Use internal class variables otherwise. Never have a const value outside fo a class regardless - use a settings file (pydantic-settings)
+* Never use import forwarding (import -> re-export). This is an anti-pattern and not allowed
+* Question to use ABC or Interface (NotImplementedError)
+* Avoid the use of setattr and getattr unless an absolute necessity. Whenever present - ask yourself if it can be done another way. And ask the user if they are create a core/framework code or a generally reusable code
+* Make sure all modules have __init__.py in them
+
+# General Style
+* Filenames must be the snake case version of the class in the file
+* Only one class per file
+*
+
+Features/Enhancements
+* Discover 'keys' in various locations through injection. Hardcoded dictionaries are in many places
+* Pull Requests must use all the information from teh branch - and when
+* Roles should be aware of other roles. And in as much - they should know when to switch to the other roles absed on what they are asked
+* Disclaimer in Security & in Compliance about it being a supportive tool, but not definitive or in any way warrantied
+
+
+New Modes
+* Coding Enforcement - will review the code and find where it has diverged from teh established coding standards.
+
+
+Language Support
+* HTML for Static Website
+
+Self Updating

@@ -3,9 +3,9 @@
 import pytest
 
 from promptcli.questions.base.constants import (
-    REPO_TYPE_SINGLE,
-    REPO_TYPE_MULTI_FOLDER,
     REPO_TYPE_MIXED,
+    REPO_TYPE_MULTI_FOLDER,
+    REPO_TYPE_SINGLE,
     REPO_TYPES,
 )
 from promptcli.questions.base.folder_mapping_question import FolderMappingQuestion
@@ -25,10 +25,10 @@ class TestQuestion:
     def test_question_has_abstract_properties(self):
         """Question should define abstract properties."""
         # Check that the abstract methods are defined
-        assert hasattr(Question, 'key')
-        assert hasattr(Question, 'question_text')
-        assert hasattr(Question, 'explanation')
-        assert hasattr(Question, 'options')
+        assert hasattr(Question, "key")
+        assert hasattr(Question, "question_text")
+        assert hasattr(Question, "explanation")
+        assert hasattr(Question, "options")
 
 
 class TestRepositoryTypeQuestion:

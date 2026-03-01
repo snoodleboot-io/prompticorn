@@ -3,9 +3,10 @@
 from collections.abc import Iterator
 
 from promptcli.ui.domain.events import InputEvent, InputEventType
+from promptcli.ui.domain.input_provider import InputProvider
 
 
-class UnixInputProvider:
+class UnixInputProvider(InputProvider):
     """Unix-specific input using termios/tty."""
 
     def get_events(self) -> Iterator[InputEvent]:
@@ -15,15 +16,15 @@ class UnixInputProvider:
         import tty
 
         fd = sys.stdin.fileno()
-        old_settings = termios.tcgetattr(fd)
+        old_settings = termios.tcgetattr(fd)  # type: ignore[attr-defined]
 
         try:
-            tty.setraw(fd)
+            tty.setraw(fd)  # type: ignore[attr-defined]
             while True:
                 key = sys.stdin.read(1)
                 yield self._parse_key(key, sys.stdin)
         finally:
-            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)  # type: ignore[attr-defined]
 
     def _parse_key(self, key: str, stdin) -> InputEvent:
         """Parse Unix key codes into events."""

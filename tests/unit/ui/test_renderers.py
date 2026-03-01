@@ -24,6 +24,7 @@ class TestRendererBaseClass:
         """Base Renderer.render should raise NotImplementedError."""
         renderer = Renderer()
         from unittest.mock import Mock
+
         context = Mock()
 
         with pytest.raises(NotImplementedError):

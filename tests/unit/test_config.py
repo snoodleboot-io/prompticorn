@@ -1,12 +1,11 @@
 """Tests for config module."""
 
-import pytest
 import tempfile
 from pathlib import Path
 
 from promptcli.config import (
-    ConfigHandler,
     DEFAULT_CONFIG_TEMPLATE,
+    ConfigHandler,
     create_default_config,
 )
 
