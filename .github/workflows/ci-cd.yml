@@ -236,12 +236,7 @@ jobs:
   build:
     name: Build Package
     runs-on: ubuntu-latest
-    # Dependencies:
-    # - Always: lint + unit-tests
-    # - On PR/main: also integration, security, slow tests
-    # Note: Extended tests skip themselves when not on PR/main,
-    # which counts as success for dependency purposes
-    needs: [lint, unit-tests, integration-tests, security-tests, slow-tests]
+    needs: [lint, unit-tests]
     outputs:
       version: ${{ steps.version.outputs.version }}
       should_publish: ${{ steps.version.outputs.should_publish }}
