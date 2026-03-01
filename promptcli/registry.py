@@ -91,6 +91,7 @@ class Registry(BaseModel):
         "core-conventions-lua.md",
         "core-conventions-sql.md",
         "core-conventions-terraform.md",
+        "core-conventions-html.md",
     ]
 
     # ── Mode registry ───────────────────────────────────────────────────────

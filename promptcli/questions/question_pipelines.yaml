@@ -119,3 +119,8 @@ terraform:
 
 sql:
   - SqlDialectQuestion
+
+html:
+  - HtmlVersionQuestion
+  - HtmlFormatterQuestion
+  - HtmlLinterQuestion
