@@ -48,6 +48,7 @@ LANGUAGE_KEYS = [
     "groovy",
     "terraform",
     "sql",
+    "html",
 ]
 
 
