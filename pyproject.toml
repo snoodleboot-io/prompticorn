@@ -6,7 +6,28 @@ build-backend = "hatchling.build"
 name = "promptcli"
 version = "0.1.0"
 description = "Build AI coding assistant configs from a shared prompt library"
-requires-python = ">=3.11"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [
+    { name = "PromptCLI Contributors" },
+]
+keywords = ["cli", "ai", "prompts", "coding-assistant", "configuration"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Utilities",
+]
+requires-python = ">=3.10"
 dependencies = [
     "click>=8.1",
     "pydantic>=2.0",
@@ -14,6 +35,11 @@ dependencies = [
     "pyyaml>=6.0",
     "sweet_tea>=0.1.0",
 ]
+
+[project.urls]
+Homepage = "https://github.com/johna/promptcli"
+Repository = "https://github.com/johna/promptcli"
+Issues = "https://github.com/johna/promptcli/issues"
 
 [project.scripts]
 prompt = "promptcli.cli:cli"
@@ -27,10 +53,12 @@ dev = [
     "pytest-cov>=7.0.0",
     "ruff>=0.8.0",
     "pre-commit>=4.0.0",
+    "pyright>=1.1.389",
+    "build>=1.0.0",
 ]
 
 [tool.ruff]
-target-version = "py311"
+target-version = "py310"
 line-length = 100
 
 [tool.ruff.lint]
@@ -50,4 +78,33 @@ ignore = [
 [tool.ruff.format]
 quote-style = "double"
 indent-style = "space"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py", "*_test.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--tb=short",
+]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+    "integration: marks tests as integration tests",
+    "security: marks tests as security tests",
+    "unit: marks tests as unit tests",
+]
+
+[tool.pyright]
+pythonVersion = "3.10"
+include = ["promptcli"]
+exclude = ["tests", "**/__pycache__", ".venv"]
+ignore = [".venv"]
+strict = []
+typeCheckingMode = "standard"
+reportMissingImports = "warning"
+reportMissingTypeStubs = "warning"
+venvPath = "."
+venv = ".venv"
 

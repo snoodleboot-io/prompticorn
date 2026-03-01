@@ -3,7 +3,7 @@
 from pathlib import Path
 from typing import Any
 
-import yaml
+import yaml  # type: ignore[import-untyped]
 
 
 class ConfigHandler:
@@ -86,7 +86,7 @@ DEFAULT_CONFIG_TEMPLATE = {
 
 def create_default_config(language: str, **kwargs) -> dict[str, Any]:
     """Create a default configuration with sensible defaults for the language."""
-    config = DEFAULT_CONFIG_TEMPLATE.copy()
+    config: dict[str, Any] = DEFAULT_CONFIG_TEMPLATE.copy()
     config["repository"]["type"] = kwargs.get("repo_type", "single-language")
     config["defaults"]["language"] = language
 

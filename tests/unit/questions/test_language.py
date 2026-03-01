@@ -1,10 +1,8 @@
 """Tests for promptcli.questions.language module."""
 
-import pytest
-
 from promptcli.questions.language import (
-    get_language_questions,
     LANGUAGE_KEYS,
+    get_language_questions,
 )
 
 

@@ -1,0 +1,495 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+      - 'feat/**'
+      - 'feature/**'
+      - 'bug/**'
+      - 'fix/**'
+      - 'hotfix/**'
+      - 'security/**'
+  pull_request:
+    branches:
+      - main
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  PACKAGE_NAME: promptcli
+  PYTHON_MIN_VERSION: "3.10"
+  MAJOR_VERSION: "0"  # Hardcoded - edit this to bump major version for breaking changes
+  IS_MAIN: ${{ github.ref == 'refs/heads/main' }}
+
+jobs:
+  # =============================================================================
+  # PHASE 1: TEST
+  # =============================================================================
+
+  lint:
+    name: Lint & Format Check
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "0.5.x"
+          enable-cache: true
+
+      - name: Install dependencies
+        run: uv sync --dev
+
+      - name: Run Ruff linter
+        run: uv run ruff check --output-format=github .
+
+      - name: Run Ruff format check
+        run: uv run ruff format --check .
+
+      - name: Run type checking with pyright
+        run: uv run pyright
+
+  unit-tests:
+    name: Unit Tests (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+          allow-prereleases: true
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "0.5.x"
+          enable-cache: true
+
+      - name: Install dependencies
+        run: uv sync --dev
+
+      - name: Run unit tests with coverage
+        run: |
+          uv run pytest tests/unit \
+            --cov=promptcli \
+            --cov-report=xml \
+            --cov-report=html \
+            --junitxml=test-results/unit-test-results-${{ matrix.python-version }}.xml \
+            -v
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: test-results-${{ matrix.python-version }}
+          path: |
+            test-results/unit-test-results-${{ matrix.python-version }}.xml
+            htmlcov/
+            coverage.xml
+          retention-days: 30
+
+      - name: Upload coverage to Codecov
+        if: matrix.python-version == '3.11'
+        uses: codecov/codecov-action@v4
+        with:
+          files: coverage.xml
+          fail_ci_if_error: false
+          verbose: true
+        env:
+          CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  integration-tests:
+    name: Integration Tests
+    runs-on: ubuntu-latest
+    needs: [lint, unit-tests]
+    # Only run on main branch or PRs
+    if: github.ref == 'refs/heads/main' || github.event_name == 'pull_request'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "0.5.x"
+          enable-cache: true
+
+      - name: Install dependencies
+        run: uv sync --dev
+
+      - name: Run integration tests
+        run: |
+          uv run pytest tests/integration \
+            --junitxml=test-results/integration-test-results.xml \
+            -v
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: integration-test-results
+          path: test-results/integration-test-results.xml
+          retention-days: 30
+
+  security-tests:
+    name: Security Tests
+    runs-on: ubuntu-latest
+    needs: [lint, unit-tests]
+    # Only run on main branch or PRs
+    if: github.ref == 'refs/heads/main' || github.event_name == 'pull_request'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "0.5.x"
+          enable-cache: true
+
+      - name: Install dependencies
+        run: uv sync --dev
+
+      - name: Run security tests
+        run: |
+          uv run pytest tests/security \
+            --junitxml=test-results/security-test-results.xml \
+            -v
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: security-test-results
+          path: test-results/security-test-results.xml
+          retention-days: 30
+
+  slow-tests:
+    name: Slow Tests
+    runs-on: ubuntu-latest
+    needs: [lint, unit-tests]
+    # Only run on main branch or PRs
+    if: github.ref == 'refs/heads/main' || github.event_name == 'pull_request'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "0.5.x"
+          enable-cache: true
+
+      - name: Install dependencies
+        run: uv sync --dev
+
+      - name: Run slow tests
+        run: |
+          uv run pytest tests/slow \
+            --junitxml=test-results/slow-test-results.xml \
+            -v
+
+      - name: Upload test results
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: slow-test-results
+          path: test-results/slow-test-results.xml
+          retention-days: 30
+
+  # =============================================================================
+  # PHASE 2: BUILD
+  # =============================================================================
+
+  # Build for feature branches - fast, only core tests
+  build-feature:
+    name: Build Package (Feature Branch)
+    runs-on: ubuntu-latest
+    needs: [lint, unit-tests]
+    # Only run on feature branch pushes (not main, not PR)
+    if: github.event_name == 'push' && github.ref != 'refs/heads/main'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "0.5.x"
+          enable-cache: true
+
+      - name: Calculate derived version
+        id: version
+        run: |
+          python .github/scripts/calculate_version.py
+        env:
+          GITHUB_REF: ${{ github.ref }}
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_RUN_NUMBER: ${{ github.run_number }}
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+
+      - name: Update version in pyproject.toml
+        run: |
+          sed -i "s/^version = \"0.1.0\"/version = \"${{ steps.version.outputs.version }}\"/" pyproject.toml
+          cat pyproject.toml | grep "^version ="
+
+      - name: Build package
+        run: uv build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist-feature
+          path: dist/
+          retention-days: 1
+
+      - name: Test package installability
+        run: |
+          python -m venv test_env
+          source test_env/bin/activate
+          pip install dist/*.whl
+          prompt --help
+          python -c "import promptcli; print('promptcli imported successfully')"
+        shell: bash
+
+  # Build for release - requires all tests (integration, security, slow)
+  build-release:
+    name: Build Package (Release)
+    runs-on: ubuntu-latest
+    needs: [lint, unit-tests, integration-tests, security-tests, slow-tests]
+    # Only run on PRs or main branch pushes
+    if: github.event_name == 'pull_request' || github.ref == 'refs/heads/main'
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      should_publish: ${{ steps.version.outputs.should_publish }}
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          version: "0.5.x"
+          enable-cache: true
+
+      - name: Calculate derived version
+        id: version
+        run: |
+          python .github/scripts/calculate_version.py
+        env:
+          GITHUB_REF: ${{ github.ref }}
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_RUN_NUMBER: ${{ github.run_number }}
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+
+      - name: Update version in pyproject.toml
+        run: |
+          sed -i "s/^version = \"0.1.0\"/version = \"${{ steps.version.outputs.version }}\"/" pyproject.toml
+          cat pyproject.toml | grep "^version ="
+
+      - name: Build package
+        run: uv build
+
+      - name: Upload build artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+          retention-days: 7
+
+      - name: Test package installability
+        run: |
+          python -m venv test_env
+          source test_env/bin/activate
+          pip install dist/*.whl
+          prompt --help
+          python -c "import promptcli; print('promptcli imported successfully')"
+        shell: bash
+
+  # =============================================================================
+  # PHASE 3: PUBLISH (TestPyPI for PRs, PyPI for main branch merges)
+  # =============================================================================
+
+  publish-testpypi:
+    name: Publish to TestPyPI
+    runs-on: ubuntu-latest
+    needs: [build-release]
+    # Publish to TestPyPI on pull requests
+    if: github.event_name == 'pull_request' && needs.build.outputs.should_publish == 'true'
+    environment:
+      name: testpypi
+      url: https://test.pypi.org/p/${{ env.PACKAGE_NAME }}
+    permissions:
+      id-token: write  # Required for trusted publishing
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Publish to TestPyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          repository-url: https://test.pypi.org/legacy/
+          skip-existing: true
+
+  publish-pypi:
+    name: Publish to PyPI
+    runs-on: ubuntu-latest
+    needs: [build-release]
+    # Only publish on main branch push
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push' && needs.build.outputs.should_publish == 'true'
+    environment:
+      name: pypi
+      url: https://pypi.org/p/${{ env.PACKAGE_NAME }}
+    permissions:
+      id-token: write  # Required for trusted publishing
+    steps:
+      - name: Download build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: dist
+          path: dist/
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          skip-existing: false
+
+  # =============================================================================
+  # PHASE 4: VERIFY PUBLISH
+  # =============================================================================
+
+  verify-testpypi:
+    name: Verify TestPyPI Publish
+    runs-on: ubuntu-latest
+    needs: publish-testpypi
+    if: github.event_name == 'pull_request'
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Wait for package availability
+        run: sleep 60
+
+      - name: Install from TestPyPI and verify
+        run: |
+          python -m venv verify_env
+          source verify_env/bin/activate
+          pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ ${{ env.PACKAGE_NAME }}==${{ needs.build.outputs.version }}
+          # Verify CLI works
+          prompt --help
+          # Verify import works
+          python -c "import promptcli; print(f'Successfully installed promptcli {promptcli.__version__} from TestPyPI')"
+        shell: bash
+
+  verify-pypi:
+    name: Verify PyPI Publish
+    runs-on: ubuntu-latest
+    needs: publish-pypi
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Wait for package availability
+        run: sleep 60
+
+      - name: Install from PyPI and verify
+        run: |
+          python -m venv verify_env
+          source verify_env/bin/activate
+          pip install ${{ env.PACKAGE_NAME }}==${{ needs.build.outputs.version }}
+          # Verify CLI works
+          prompt --help
+          # Verify import works
+          python -c "import promptcli; print(f'Successfully installed promptcli {promptcli.__version__} from PyPI')"
+        shell: bash
+
+  # =============================================================================
+  # SUMMARY
+  # =============================================================================
+
+  test-summary:
+    name: Test Summary
+    runs-on: ubuntu-latest
+    needs: [unit-tests, integration-tests, security-tests, slow-tests]
+    if: always()
+    steps:
+      - name: Download all test results
+        uses: actions/download-artifact@v4
+        with:
+          path: test-results
+          pattern: test-results-*
+
+      - name: Summarize test results
+        run: |
+          echo "## Test Results Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          
+          for file in test-results/**/unit-test-results-*.xml; do
+            if [ -f "$file" ]; then
+              python_version=$(echo "$file" | grep -oP 'unit-test-results-\K[0-9.]+')
+              # Extract test count from JUnit XML (simplified)
+              tests=$(grep -oP 'tests="\K[0-9]+' "$file" | head -1 || echo "0")
+              failures=$(grep -oP 'failures="\K[0-9]+' "$file" | head -1 || echo "0")
+              errors=$(grep -oP 'errors="\K[0-9]+' "$file" | head -1 || echo "0")
+              
+              if [ "$failures" = "0" ] && [ "$errors" = "0" ]; then
+                echo "- ✅ Python $python_version: $tests tests passed" >> $GITHUB_STEP_SUMMARY
+              else
+                echo "- ❌ Python $python_version: $tests tests, $failures failures, $errors errors" >> $GITHUB_STEP_SUMMARY
+              fi
+            fi
+          done

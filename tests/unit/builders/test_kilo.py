@@ -36,7 +36,7 @@ class TestKiloBuilder(unittest.TestCase):
         builder = KiloBuilder()
         with tempfile.TemporaryDirectory() as tmpdir:
             output = Path(tmpdir)
-            result = builder.build(output, dry_run=False)
+            builder.build(output, dry_run=False)
             # Should have created files
             assert (output / ".kilo").exists()
 
@@ -45,7 +45,7 @@ class TestKiloBuilder(unittest.TestCase):
         builder = KiloBuilder()
         with tempfile.TemporaryDirectory() as tmpdir:
             output = Path(tmpdir)
-            result = builder.build(output, dry_run=True)
+            builder.build(output, dry_run=True)
             # No files should be created
             assert not (output / ".kilo").exists()
 

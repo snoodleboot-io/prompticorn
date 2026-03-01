@@ -13,6 +13,7 @@ Commands:
 """
 
 import sys
+from typing import Any
 
 import click
 
@@ -131,17 +132,18 @@ def init_prompts():
     )
 
     # Step 2 & 3: Handle language questions based on repo type
-    if repo_type == REPO_TYPE_SINGLE:
+    # Use isinstance() for proper type narrowing from str | list[str] to str
+    if isinstance(repo_type, str) and repo_type == REPO_TYPE_SINGLE:
         from promptcli.questions.handlers.handle_single_language_questions import (
             HandleSingleLanguageQuestions,
         )
 
         handler = HandleSingleLanguageQuestions(select_option_with_explain)
-        config = handler.handle(repo_type)
+        config: dict[str, Any] = handler.handle(repo_type)
     else:
         # Multi-folder or mixed - just save repo type for now
         config = DEFAULT_CONFIG_TEMPLATE.copy()
-        config["repository"]["type"] = repo_type
+        config["repository"]["type"] = repo_type  # type: ignore[index]
         if repo_type == REPO_TYPE_MULTI_FOLDER:
             click.echo("\n\nFolder mappings will be configured in a future step.")
             click.echo("For now, set up your primary language:")
@@ -150,7 +152,7 @@ def init_prompts():
                 type=click.Choice(LANGUAGE_KEYS),
                 default="python",
             )
-            config["defaults"]["language"] = language
+            config["defaults"]["language"] = language  # type: ignore[index]
 
     # Save configuration
     ConfigHandler.save_config(config)
@@ -174,7 +176,7 @@ def validate_prompts():
     are unregistered (orphans).
     """
     click.echo("\n▶ Validating prompt registry...\n")
-    errors = registry.validate()
+    errors = registry.validate_files()
     if not errors:
         click.secho("  ✓ All good — no missing or orphaned files.", fg="green")
     else:

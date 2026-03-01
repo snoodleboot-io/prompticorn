@@ -24,7 +24,7 @@ class RenderStage:
         print("\033[2J\033[H", end="")
 
         renderer = self.renderer_selector(context)
-        output = renderer.render(context)
+        output = renderer.render(context)  # type: ignore[attr-defined]
         print(output)
 
         if context.mode == "select":
@@ -36,7 +36,7 @@ class StateUpdateStage:
 
     def apply(self, command: object, context: PipelineContext) -> CommandResult:
         """Apply command and return result."""
-        return command.execute(context)
+        return command.execute(context)  # type: ignore[attr-defined, no-any-return]
 
 
 class CommandFactory:

@@ -1,12 +1,10 @@
 """Tests for promptcli.questions.typescript module."""
 
-import pytest
-
-from promptcli.questions.typescript.typescript_version_question import (
-    TypeScriptVersionQuestion,
-)
 from promptcli.questions.typescript.typescript_package_manager_question import (
     TypeScriptPackageManagerQuestion,
+)
+from promptcli.questions.typescript.typescript_version_question import (
+    TypeScriptVersionQuestion,
 )
 
 

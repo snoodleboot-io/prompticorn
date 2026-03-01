@@ -19,6 +19,7 @@ class PipelineOrchestrator:
     def run(self, question: QuestionContext) -> str | list[str]:
         """Run the complete pipeline for a question."""
         # Initialize state based on question type
+        initial_state: MultiSelectState | SingleSelectState
         if question.allow_multiple:
             initial_state = MultiSelectState({question.default_index}, len(question.options))
         else:
@@ -60,7 +61,7 @@ class PipelineOrchestrator:
 
             # Check for completion
             if not result.continue_pipeline:
-                return result.output_value
+                return result.output_value  # type: ignore[no-any-return]
 
     def _handle_explain_mode(self, context: PipelineContext, events) -> None:
         """Handle explain mode - wait for any key."""

@@ -6,6 +6,20 @@ build for any tool with a single command.
 Kilo Code is the primary target. Cline, Cursor, and GitHub Copilot are derived
 from the same source.
 
+## Versioning
+
+This project uses [derived versioning](docs/derived-versioning.md) designed for trunk-based development:
+
+- **Major**: Human-controlled via `.major-version` file (breaking changes)
+- **Minor**: Count of `feat/` branches merged since last major tag
+- **Patch**: Count of `bug/`/`hotfix/`/`security/` branches merged since last feature
+
+Branch naming conventions:
+- `feat/*` → increments minor version
+- `bug/*`, `hotfix/*`, `security/*` → increments patch version
+
+Version is calculated at merge time—no version file conflicts.
+
 ## Structure
 
 ```

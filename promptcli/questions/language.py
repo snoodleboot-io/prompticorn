@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-import yaml
+import yaml  # type: ignore[import-untyped]
 from sweet_tea.abstract_factory import AbstractFactory
 from sweet_tea.sweet_tea_error import SweetTeaError
 
@@ -55,7 +55,7 @@ def _load_pipelines() -> dict[str, list[str]]:
     """Load question pipelines from YAML file."""
     pipelines_path = Path(__file__).parent / "question_pipelines.yaml"
     with open(pipelines_path, encoding="utf-8") as f:
-        return yaml.safe_load(f)
+        return yaml.safe_load(f)  # type: ignore[no-any-return]
 
 
 def get_language_questions(language: str) -> list[Question]:

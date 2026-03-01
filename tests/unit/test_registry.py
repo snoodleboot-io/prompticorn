@@ -90,17 +90,17 @@ class TestRegistry(unittest.TestCase):
         assert result == "scaffold.mdc"
 
     def test_validate_returns_list(self):
-        """validate() should return a list."""
+        """validate_files() should return a list."""
         from promptcli.registry import registry
 
-        result = registry.validate()
+        result = registry.validate_files()
         assert isinstance(result, list)
 
     def test_validate_with_valid_files_returns_empty(self):
-        """validate() should return empty list when all files exist."""
+        """validate_files() should return empty list when all files exist."""
         from promptcli.registry import registry
 
-        errors = registry.validate()
+        errors = registry.validate_files()
         # Filter out orphan warnings - we may have extra files
         missing_errors = [e for e in errors if "MISSING" in e]
         assert len(missing_errors) == 0, f"Missing files: {missing_errors}"
