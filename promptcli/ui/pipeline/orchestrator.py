@@ -3,7 +3,7 @@
 from promptcli.ui.domain.context import PipelineContext, QuestionContext
 from promptcli.ui.pipeline.stages import CommandFactory
 from promptcli.ui.state.multi import MultiSelectState
-from promptcli.ui.state.single import SingleSelectState
+from promptcli.ui.state.single import SelectionState, SingleSelectState
 
 
 class PipelineOrchestrator:
@@ -20,7 +20,9 @@ class PipelineOrchestrator:
         """Run the complete pipeline for a question."""
         # Initialize state based on question type
         if question.allow_multiple:
-            initial_state = MultiSelectState({question.default_index}, len(question.options))
+            initial_state: SelectionState = MultiSelectState(
+                {question.default_index}, len(question.options)
+            )
         else:
             initial_state = SingleSelectState(question.default_index, len(question.options))
 
@@ -60,7 +62,7 @@ class PipelineOrchestrator:
 
             # Check for completion
             if not result.continue_pipeline:
-                return result.output_value
+                return result.output_value  # type: ignore[no-any-return]
 
     def _handle_explain_mode(self, context: PipelineContext, events) -> None:
         """Handle explain mode - wait for any key."""

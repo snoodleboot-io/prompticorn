@@ -16,15 +16,15 @@ class UnixInputProvider(InputProvider):
         import tty
 
         fd = sys.stdin.fileno()
-        old_settings = termios.tcgetattr(fd)
+        old_settings = termios.tcgetattr(fd)  # type: ignore[attr-defined]
 
         try:
-            tty.setraw(fd)
+            tty.setraw(fd)  # type: ignore[attr-defined]
             while True:
                 key = sys.stdin.read(1)
                 yield self._parse_key(key, sys.stdin)
         finally:
-            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+            termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)  # type: ignore[attr-defined]
 
     def _parse_key(self, key: str, stdin) -> InputEvent:
         """Parse Unix key codes into events."""

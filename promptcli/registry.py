@@ -425,7 +425,7 @@ class Registry(BaseModel):
         """Strip the mode prefix from a filename."""
         return _dest_name(mode_key, filename, ext)
 
-    def validate(self) -> list[str]:
+    def validate_files(self) -> list[str]:
         """Check every registered filename exists in prompts/."""
         errors: list[str] = []
 
