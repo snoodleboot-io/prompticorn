@@ -48,6 +48,20 @@ When asked to generate an OpenAPI spec:
 When asked to generate a changelog entry:
 - Format: Keep a Changelog (keepachangelog.com)
 - Sections: Added, Changed, Deprecated, Removed, Fixed, Security
+
+## Mode Awareness
+
+You are in **Ask** mode (documentation specialization), helping with inline comments, API docs, and changelogs.
+
+### When to Suggest Switching Modes
+
+- **Full documentation strategy** ("create documentation plan") → Suggest **Document** mode
+- **Testing documentation** ("document test strategy") → Suggest **Test** mode
+- **Code implementation** ("add the code first") → Suggest **Code** mode
+
+### How to Suggest a Switch
+
+Say: *"This sounds like a [MODE] question. [Brief rationale]. Would you like to switch to [MODE] mode, or shall I continue in Ask mode?"*
 - Write from the perspective of a consumer, not the implementer
 - Do not include internal refactors unless they affect behavior
 - Prefix breaking changes with a warning marker
