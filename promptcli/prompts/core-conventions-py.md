@@ -5,6 +5,7 @@ Runtime:              {{RUNTIME}}            e.g., CPython 3.11, PyPy
 Package Manager:      {{PACKAGE_MANAGER}}        e.g., poetry, pip, uv
 Linter:               {{LINTER}}             e.g., Ruff, flake8
 Formatter:           {{FORMATTER}}          e.g., Ruff, Black
+Abstract Class Style: {{ABSTRACT_CLASS_STYLE}}  e.g., abc, interface
 
 ## Python-Specific Rules
 
@@ -123,3 +124,50 @@ exclude_lines = [
 - Use `dataclasses` for simple data containers
 - Use `pydantic` for complex validation
 - Unless the code is a framework layer or there is a strong necessity - DO NOT use setattr or getattr.
+
+### Abstract Classes and Interfaces
+
+Selected Style: **{{ABSTRACT_CLASS_STYLE}}**
+
+{{#if ABSTRACT_CLASS_STYLE == "abc"}}
+#### Using Abstract Base Classes (abc module)
+- Inherit from `abc.ABC` for abstract base classes
+- Use `@abstractmethod` decorator for methods that must be implemented
+- Use `@abstractclassmethod` and `@abstractstaticmethod` where appropriate
+- Type checkers will catch incomplete implementations at static analysis time
+
+```python
+from abc import ABC, abstractmethod
+
+class Repository(ABC):
+    @abstractmethod
+    def get(self, id: str) -> Entity | None:
+        """Retrieve entity by ID. Must be implemented by subclasses."""
+        ...
+
+class SqlRepository(Repository):
+    def get(self, id: str) -> Entity | None:
+        # Concrete implementation
+        return self.session.query(Entity).get(id)
+```
+{{/if}}
+
+{{#if ABSTRACT_CLASS_STYLE == "interface"}}
+#### Using NotImplementedError (Informal Interfaces)
+- Raise `NotImplementedError` in methods that must be overridden
+- Document expected behavior in docstrings
+- Rely on runtime checks and duck typing
+- Simpler for cases where strict enforcement isn't needed
+
+```python
+class Repository:
+    def get(self, id: str) -> Entity | None:
+        """Retrieve entity by ID. Must be overridden by subclasses."""
+        raise NotImplementedError(f"{self.__class__.__name__} must implement get()")
+
+class SqlRepository(Repository):
+    def get(self, id: str) -> Entity | None:
+        # Concrete implementation
+        return self.session.query(Entity).get(id)
+```
+{{/if}}
