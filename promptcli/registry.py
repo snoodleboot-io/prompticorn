@@ -110,6 +110,8 @@ class Registry(BaseModel):
         "security": "Security",
         "compliance": "Compliance",
         "orchestrator": "Orchestrator",
+        "coding-enforcement": "Coding Enforcement",
+        "planning": "Planning",
     }
 
     # ── Files per mode ───────────────────────────────────────────────────────
@@ -169,6 +171,12 @@ class Registry(BaseModel):
             "orchestrator-meta.md",
             "orchestrator-pr-description.md",
         ],
+        "coding-enforcement": [
+            "coding-enforcement.md",
+        ],
+        "planning": [
+            "planning.md",
+        ],
     }
 
     # ── Concatenated output order ───────────────────────────────────────────
@@ -203,6 +211,8 @@ class Registry(BaseModel):
         ("DECISION LOG", "ask-decision-log.md"),
         ("DEVOPS", "orchestrator-devops.md"),
         ("META / PROCESS", "orchestrator-meta.md"),
+        ("CODING ENFORCEMENT", "coding-enforcement.md"),
+        ("PLANNING", "planning.md"),
     ]
 
     # ── Default ignore patterns for all agents ─────────────────────────────
