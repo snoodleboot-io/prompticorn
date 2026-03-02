@@ -3,7 +3,8 @@
 from promptcli.ui._factory import UIFactory
 from promptcli.ui.domain.context import QuestionContext
 from promptcli.ui.pipeline.orchestrator import PipelineOrchestrator
-from promptcli.ui.pipeline.stages import RenderStage, StateUpdateStage
+from promptcli.ui.pipeline.render_stage import RenderStage
+from promptcli.ui.pipeline.state_update_stage import StateUpdateStage
 
 
 def select_option_with_explain(

@@ -71,4 +71,4 @@ class PipelineContext:
 
 
 # Forward reference resolution
-from promptcli.ui.state.single import SelectionState  # noqa: E402
+from promptcli.ui.state.selection_state import SelectionState  # noqa: E402

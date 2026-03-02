@@ -3,7 +3,7 @@
 import tempfile
 from pathlib import Path
 
-from promptcli.config import (
+from promptcli.config_handler import (
     DEFAULT_CONFIG_TEMPLATE,
     ConfigHandler,
     create_default_config,

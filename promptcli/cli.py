@@ -17,7 +17,7 @@ from typing import Any
 
 import click
 
-from promptcli.config import DEFAULT_CONFIG_TEMPLATE, ConfigHandler
+from promptcli.config_handler import DEFAULT_CONFIG_TEMPLATE, ConfigHandler
 from promptcli.questions.base.constants import (
     REPO_TYPE_MULTI_FOLDER,
     REPO_TYPE_SINGLE,

@@ -45,6 +45,51 @@ src/
 Rule: One export per file unless it is a barrel (index.ts).
 Rule: Co-locate tests with source (auth.ts → auth.test.ts).
 
+### Class Organization Rules
+
+Rule: One class per file. Each class must be in its own dedicated file.
+Rule: Filename must be the snake_case version of the class name.
+  - Example: `class ConfigHandler` → `config_handler.py`
+  - Example: `class SelectionState` → `selection_state.py`
+  - Example: `class SingleSelectState` → `single_select_state.py`
+  - Example: `class RenderStage` → `render_stage.py`
+  - Example: `class CommandFactory` → `command_factory.py`
+
+This rule ensures:
+- Clear file-to-class mapping for maintainability
+- Easier navigation in IDEs
+- Consistent naming across the codebase
+- Simplified imports and dependency tracking
+
+### SOLID Principles for OOP Components
+
+All OOP components must follow SOLID principles:
+
+**S - Single Responsibility Principle (SRP)**
+- Each class has one reason to change
+- A class should do one thing and do it well
+- Split large classes into smaller, focused ones
+
+**O - Open/Closed Principle (OCP)**
+- Open for extension, closed for modification
+- Use inheritance, composition, or interfaces to extend behavior
+- Avoid modifying existing working code to add features
+
+**L - Liskov Substitution Principle (LSP)**
+- Subtypes must be substitutable for their base types
+- Derived classes should extend behavior without changing contracts
+- Breaking parent behavior in subclasses violates LSP
+
+**I - Interface Segregation Principle (ISP)**
+- Clients should not depend on interfaces they don't use
+- Split large interfaces into smaller, focused ones
+- Prefer multiple small interfaces over one large interface
+
+**D - Dependency Inversion Principle (DIP)**
+- Depend on abstractions, not concrete implementations
+- High-level modules should not depend on low-level modules
+- Both should depend on abstractions (interfaces/abstract classes)
+
 ## Error Handling
 
 Pattern: {{throw | return Result<T, E> | return [data, error]}}

@@ -1,9 +1,9 @@
 """Pipeline orchestrator for UI interactions."""
 
 from promptcli.ui.domain.context import PipelineContext, QuestionContext
-from promptcli.ui.pipeline.stages import CommandFactory
+from promptcli.ui.pipeline.command_factory import CommandFactory
 from promptcli.ui.state.multi import MultiSelectState
-from promptcli.ui.state.single import SingleSelectState
+from promptcli.ui.state.single_select_state import SingleSelectState
 
 
 class PipelineOrchestrator:
