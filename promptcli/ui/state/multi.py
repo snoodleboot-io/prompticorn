@@ -1,6 +1,6 @@
 """Multi-selection state implementation."""
 
-from promptcli.ui.state.single import SelectionState
+from promptcli.ui.state.selection_state import SelectionState
 
 
 class MultiSelectState(SelectionState):

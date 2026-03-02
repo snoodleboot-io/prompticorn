@@ -10,7 +10,7 @@ from promptcli.ui.domain.renderer import Renderer
 from promptcli.ui.render.columns import ColumnLayoutRenderer
 from promptcli.ui.render.explain import ExplainRenderer
 from promptcli.ui.render.vertical import VerticalLayoutRenderer
-from promptcli.ui.state.single import SingleSelectState
+from promptcli.ui.state.single_select_state import SingleSelectState
 
 
 class TestUIFactory:

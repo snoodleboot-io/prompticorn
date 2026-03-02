@@ -4,7 +4,7 @@ from typing import Any
 
 import click
 
-from promptcli.config import create_default_config
+from promptcli.config_handler import create_default_config
 from promptcli.questions.base.question import Question
 from promptcli.questions.language import LANGUAGE_KEYS, get_language_questions
 
