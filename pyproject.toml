@@ -9,7 +9,7 @@ description = "Build AI coding assistant configs from a shared prompt library"
 readme = "README.md"
 license = { text = "MIT" }
 authors = [
-    { name = "PromptCLI Contributors" },
+    { name = "john@snoodleboot.io" },
 ]
 keywords = ["cli", "ai", "prompts", "coding-assistant", "configuration"]
 classifiers = [
