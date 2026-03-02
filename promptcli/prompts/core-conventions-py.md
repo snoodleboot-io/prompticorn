@@ -29,6 +29,38 @@ Formatter:           {{FORMATTER}}          e.g., Ruff, Black
 - Use absolute imports (no relative `..` imports)
 - Group imports: stdlib → third-party → local (blank lines between)
 - Use `__all__` to define public API
+- **NEVER use import forwarding** — do not re-export imported symbols (e.g., `from module import X` then exposing `X` at package level). This is an anti-pattern and NOT allowed. Define public API explicitly.
+
+### Code Structure & Patterns
+
+#### Constants & Configuration (CRITICAL)
+- **NO constants allowed inside or outside of classes** — never define `CONSTANT = value` at module level OR as class constants
+- **For values changeable at runtime**: use a YAML configuration file
+- **For fixed configuration**: use internal class variables (not constants) or `pydantic-settings` with environment variable support
+- **Never have const values outside of a class** — always use a settings file (`pydantic-settings`) for configurable values
+- When asked to create constants, redirect to the appropriate configuration approach
+
+#### Dynamic Attribute Access
+- **AVOID `setattr` and `getattr`** unless absolutely necessary — these bypass type checking and make code harder to reason about
+- Before using: ask yourself if there's a type-safe alternative (dataclass, pydantic model, explicit properties)
+- If present: ask the user if they are creating core/framework code or generally reusable code — only acceptable for core framework code that MUST handle dynamic structures
+
+#### Module Structure
+- **ALL modules MUST have `__init__.py`** — every package directory must include an `__init__.py` file
+- Verify `__init__.py` exists before adding new modules
+- No implicit namespace packages allowed
+
+#### Type Casting
+- **DO NOT use type casting** (`typing.cast`, `isinstance` + cast patterns) UNLESS working with data primitives like `int`, `str`, `float`, `bool`
+- Primitive conversions (e.g., `int()`, `str()`, `float()`) are acceptable
+- Use proper type narrowing with `isinstance` checks instead of casting for complex types
+- Design APIs to return correct types rather than requiring casts
+
+#### Type Checking Enforcement
+- **ENFORCE the use of `pyright`** while coding — run continuously during development
+- Treat type errors as blocking issues
+- All code must pass pyright strict mode before commit
+- No commits with type errors or `Any` types without explicit justification
 
 ### Testing
 
