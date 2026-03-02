@@ -1,5 +1,8 @@
 """Tests for promptcli.questions.python module."""
 
+from promptcli.questions.python.python_abstract_class_style_question import (
+    PythonAbstractClassStyleQuestion,
+)
 from promptcli.questions.python.python_formatter_question import PythonFormatterQuestion
 from promptcli.questions.python.python_linter_question import PythonLinterQuestion
 from promptcli.questions.python.python_package_manager_question import PythonPackageManagerQuestion
@@ -202,6 +205,40 @@ class TestPythonTestRunnerQuestion:
     def test_option_explanations_for_all_options(self):
         """Each option should have an explanation."""
         q = PythonTestRunnerQuestion()
+
+        for opt in q.options:
+            assert opt in q.option_explanations
+
+
+class TestPythonAbstractClassStyleQuestion:
+    """Tests for PythonAbstractClassStyleQuestion."""
+
+    def test_question_has_required_properties(self):
+        """Question should have all required properties."""
+        q = PythonAbstractClassStyleQuestion()
+
+        assert q.key == "python_abstract_class_style"
+        assert q.question_text
+        assert q.explanation
+        assert q.options
+        assert q.default
+
+    def test_options_include_both_styles(self):
+        """Options should include both abstract class styles."""
+        q = PythonAbstractClassStyleQuestion()
+
+        assert "abc" in q.options
+        assert "interface" in q.options
+
+    def test_default_is_abc(self):
+        """Default should be abc (industry standard)."""
+        q = PythonAbstractClassStyleQuestion()
+
+        assert q.default == "abc"
+
+    def test_option_explanations_for_all_options(self):
+        """Each option should have an explanation."""
+        q = PythonAbstractClassStyleQuestion()
 
         for opt in q.options:
             assert opt in q.option_explanations

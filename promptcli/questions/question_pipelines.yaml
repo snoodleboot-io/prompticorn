@@ -8,6 +8,7 @@ python:
   - PythonTestRunnerQuestion
   - PythonLinterQuestion
   - PythonFormatterQuestion
+  - PythonAbstractClassStyleQuestion
 
 typescript:
   - TypeScriptVersionQuestion
