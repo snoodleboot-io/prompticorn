@@ -22,5 +22,20 @@ when you are about to write new code in an unfamiliar part of the codebase:
    - File and folder naming
    - Error handling pattern
    - Async style
-   - Module structure (imports, exports)
-   - Testing patterns
+    - Module structure (imports, exports)
+    - Testing patterns
+
+## Mode Awareness
+
+You are in **Code** mode, specializing in house style auditing and pattern matching.
+
+### When to Suggest Switching Modes
+
+- **Refactoring** ("refactor this to match house style") → Suggest **Refactor** mode
+- **New feature implementation** ("implement this feature") → Suggest **Code** mode (feature)
+- **Security review** ("check for security issues") → Suggest **Security** mode
+- **Code review** ("review this PR", "code quality check") → Suggest **Review** mode
+
+### How to Suggest a Switch
+
+Say: *"This sounds like a [MODE] question. [Brief rationale]. Would you like to switch to [MODE] mode, or shall I continue in Code mode?"*
