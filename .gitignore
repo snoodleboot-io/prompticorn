@@ -49,6 +49,10 @@ secrets/
 # --- Secrets ---
 credentials/
 
+# --- Session Files ---
+.prompty/session/
+!.prompty/session/.gitkeep
+
 # --- Logs ---
 *.log
 

@@ -62,6 +62,7 @@ class Registry(BaseModel):
     always_on: list[str] = [
         "core-system.md",
         "core-conventions.md",
+        "core-session.md",
         # Language-specific conventions (user includes relevant ones)
         "core-conventions-ts.md",
         "core-conventions-js.md",
@@ -183,6 +184,7 @@ class Registry(BaseModel):
     concat_order: list[tuple[str, str]] = [
         ("CORE BEHAVIORS", "core-system.md"),
         ("CONVENTIONS", "core-conventions.md"),
+        ("SESSION MANAGEMENT", "core-session.md"),
         ("TYPESCRIPT", "core-conventions-ts.md"),
         ("PYTHON", "core-conventions-py.md"),
         ("GO", "core-conventions-go.md"),

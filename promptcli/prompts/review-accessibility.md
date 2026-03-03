@@ -36,6 +36,35 @@ Check for:
 7. BREAKING CHANGES — would any of these changes break existing callers?
 8. DOCUMENTATION GAPS — what is unclear that a consumer would need to know?
 
+## Session Context
+
+Before starting work in Review mode:
+
+1. **Check for session file:**
+   - Run: `git branch --show-current`
+   - Look in `.prompty/session/` for files matching current branch
+   - If on `main` branch: suggest creating feature branch or ask for branch name
+
+2. **If no session exists:**
+   - Create `.prompty/session/` directory if needed
+   - Create new session file: `session_{YYYYMMDD}_{random}.md`
+   - Include YAML frontmatter with session_id, branch, created_at, current_mode="review"
+   - Initialize Mode History and Actions Taken sections
+
+3. **If session exists:**
+   - Read the session file
+   - Update `current_mode` to "review"
+   - Add entry to Mode History if different from previous mode
+   - Review Context Summary for current state
+
+4. **During work:**
+   - Record significant actions in Actions Taken section
+   - Update Context Summary as work progresses
+
+5. **On mode switch:**
+   - Update Mode History with exit timestamp and summary
+   - Update Context Summary
+
 ## Mode Awareness
 
 You are in **Review** mode (accessibility specialization), focusing on WCAG compliance and API usability.
