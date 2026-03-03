@@ -146,3 +146,16 @@ These files contain language-specific patterns for:
 - Type system usage
 - Testing frameworks and patterns
 - Module/dependency management
+
+## Session Context Management
+
+All modes must follow the session management protocol defined in `core-session.md`:
+
+1. **Check for session on startup** - Look for existing session for current branch
+2. **Create session if needed** - New session if none exists for current branch
+3. **Update on mode switch** - Record exit from current mode, entry to new mode
+4. **Record actions** - Log significant actions with timestamps
+5. **Maintain context** - Keep Context Summary current
+
+Session files provide continuity across mode switches and persist workflow state.
+See `core-session.md` for complete protocol and file format specifications.

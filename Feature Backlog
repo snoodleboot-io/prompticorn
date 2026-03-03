@@ -2,14 +2,6 @@
 
 Features/Enhancements
 * Discover 'keys' in various locations through injection. Hardcoded dictionaries are in many places
-* ✅ Pull Requests must use all the information from the branch - and when new commits are made, incorporate that as an update to the existing PR
-* ✅ Roles should be aware of other roles. And in as much - they should know when to switch to the other roles based on what they are asked
-* ✅ Disclaimer in Security & in Compliance about it being a supportive tool, but not definitive or in any way warrantied
-
-
-New Modes
-* Coding Enforcement - will review the code and find where it has diverged from teh established coding standards.
-
 
 Self Updating
 
