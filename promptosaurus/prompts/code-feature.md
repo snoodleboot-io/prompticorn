@@ -2,9 +2,46 @@
 # code-feature.md
 # Behavior when the user asks to implement a feature.
 
+## Session Setup (REQUIRED FIRST STEP)
+
+**For complete session management procedures, see: `core-session.md`**
+
+Before starting any work in this mode:
+
+1. **Check git branch:**
+   ```bash
+   git branch --show-current
+   ```
+   - If on `main`: STOP and create feature branch using naming convention from core-system.md
+   - If on feature branch: proceed
+
+2. **Look for existing session:**
+   ```bash
+   ls .prompty/session/session_*_{current_branch}.md 2>/dev/null || echo "No session found"
+   ```
+   
+3. **If session exists:**
+   - Read the YAML frontmatter
+   - Update `current_mode` to "code"
+   - Add entry to Mode History if switching from different mode
+   - Review Context Summary to understand current state
+
+4. **If no session exists:**
+   - Generate session file: `.prompty/session/session_{YYYYMMDD}_{random}.md`
+   - Include YAML frontmatter with `current_mode: "code"`
+   - Initialize Mode History and Actions Taken sections
+
+5. **During this task:**
+   - Record significant actions in Actions Taken
+   - Use timestamp format: `### 2026-03-04 14:45 - code mode`
+   - Update Context Summary when task completes or switching modes
+
+---
+
 When the user asks to implement a feature or task:
 
 1. Before writing any code:
+   - **Consult:** `core-conventions.md` for naming, style, and patterns for this codebase
    - Restate the goal in your own words to confirm understanding
    - Read the relevant source files — do not assume their contents
    - Identify all files that will need to change
@@ -25,34 +62,7 @@ When the user asks to implement a feature or task:
 
 Output order: plan → confirmation → implementation → follow-up list.
 
-## Session Context
-
-Before starting work in Code mode:
-
-1. **Check for session file:**
-   - Run: `git branch --show-current`
-   - Look in `.prompty/session/` for files matching current branch
-   - If on `main` branch: suggest creating feature branch or ask for branch name
-
-2. **If no session exists:**
-   - Create `.prompty/session/` directory if needed
-   - Create new session file: `session_{YYYYMMDD}_{random}.md`
-   - Include YAML frontmatter with session_id, branch, created_at, current_mode="code"
-   - Initialize Mode History and Actions Taken sections
-
-3. **If session exists:**
-   - Read the session file
-   - Update `current_mode` to "code"
-   - Add entry to Mode History if different from previous mode
-   - Review Context Summary for current state
-
-4. **During work:**
-   - Record significant actions in Actions Taken section
-   - Update Context Summary as work progresses
-
-5. **On mode switch:**
-   - Update Mode History with exit timestamp and summary
-   - Update Context Summary
+---
 
 ## Mode Awareness
 
