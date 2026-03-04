@@ -11,6 +11,7 @@ Output:
 
 from datetime import datetime
 from pathlib import Path
+from typing import Any
 
 from promptosaurus.builders.builder import Builder
 from promptosaurus.registry import registry
@@ -19,7 +20,9 @@ from promptosaurus.registry import registry
 class CopilotBuilder(Builder):
     """Builder for GitHub Copilot instruction files."""
 
-    def build(self, output: Path, dry_run: bool = False) -> list[str]:
+    def build(
+        self, output: Path, config: dict[str, Any] | None = None, dry_run: bool = False
+    ) -> list[str]:
         """
         Write Copilot instruction files under `output`.
         Returns a list of action strings for display.

@@ -112,3 +112,47 @@ Ask for verification at key points:
 
 For GitHub CLI: `gh pr review --body "..." --request-changes` or `--approve`
 For GitLab: Use GitLab API to post merge request comments and approvals
+
+## Session Context
+
+Before starting work in Orchestrator mode:
+
+1. **Check for session file:**
+   - Run: `git branch --show-current`
+   - Look in `.prompty/session/` for files matching current branch
+   - If on `main` branch: suggest creating feature branch or ask for branch name
+
+2. **If no session exists:**
+   - Create `.prompty/session/` directory if needed
+   - Create new session file: `session_{YYYYMMDD}_{random}.md`
+   - Include YAML frontmatter with session_id, branch, created_at, current_mode="orchestrator"
+   - Initialize Mode History and Actions Taken sections
+
+3. **If session exists:**
+   - Read the session file
+   - Update `current_mode` to "orchestrator"
+   - Add entry to Mode History if different from previous mode
+   - Review Context Summary for current state
+
+4. **During work:**
+   - Record significant actions in Actions Taken section
+   - Update Context Summary as work progresses
+
+5. **On mode switch:**
+   - Update Mode History with exit timestamp and summary
+   - Update Context Summary
+
+## Mode Awareness
+
+You are in **Orchestrator** mode, handling PR descriptions, retrospectives, and cross-cutting process tasks.
+
+### When to Suggest Switching Modes
+
+- **Code review of PR** ("review the actual code changes") → Suggest **Review** mode
+- **Security review needed** ("security check this PR") → Suggest **Security** mode
+- **Implementation of fixes** ("fix the issues found") → Suggest **Code** mode
+- **Architecture review** ("is this design sound?") → Suggest **Architect** mode
+
+### How to Suggest a Switch
+
+Say: *"This sounds like a [MODE] question. [Brief rationale]. Would you like to switch to [MODE] mode, or shall I continue in Orchestrator mode?"*

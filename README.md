@@ -70,32 +70,20 @@ uv sync
 
 ## Commands
 
-### Build for a specific tool
+### Initialize configuration for your project
 
 ```bash
-# Run from inside your project directory — output lands there by default
+# Run from inside your project directory
 cd my-project
 
-prompt build kilo       # → .kilo/
-prompt build cline      # → .clinerules
-prompt build cursor     # → .cursor/rules/ + .cursorrules (legacy)
-prompt build copilot    # → .github/copilot-instructions.md + .github/instructions/
-prompt build all        # → all of the above
+prompt init
 ```
 
-### Target a different directory
-
-```bash
-prompt build kilo --output /path/to/my-project
-prompt build all  --output ~/projects/my-app
-```
-
-### Preview without writing
-
-```bash
-prompt build kilo --dry-run
-prompt build all  --dry-run
-```
+This interactive command will:
+1. Ask about your repository type (single-language or multi-folder)
+2. Configure your language, runtime, package manager, and testing framework
+3. **Select which AI assistants to configure** (kilo, cline, cursor, copilot — multiple allowed)
+4. Generate all selected configurations automatically
 
 ### Inspect and validate
 
@@ -110,14 +98,14 @@ prompt validate   # check for missing files and unregistered orphans
 
 ```bash
 # 1. Fill in your project's coding standards
-$EDITOR prompts/core-conventions.md
+$EDITOR promptosaurus/prompts/core-conventions.md
 
-# 2. Build the config for your tool of choice
+# 2. Run init to configure and generate AI assistant configs
 cd my-project
-prompt build kilo
+prompt init
 
-# 3. Commit the generated config
-git add .kilo/
+# 3. Commit the generated config (example for Kilo Code)
+git add .kilo/ .kilocodemodes .kiloignore
 git commit -m "chore: add Kilo Code prompt config"
 ```
 
@@ -125,26 +113,26 @@ git commit -m "chore: add Kilo Code prompt config"
 
 ```bash
 # Edit the source file
-$EDITOR prompts/security-review.md
+$EDITOR promptosaurus/prompts/security-review.md
 
-# Rebuild — just the tools you use
-prompt build kilo --output ~/projects/my-project
+# Re-run init to regenerate configurations
+prompt init
 ```
 
 ### 3. Adding a new prompt file to an existing mode
 
-1. Drop the `.md` file in `prompts/`
-2. Add the filename to `MODE_FILES[mode]` in `promptcli/registry.py`
+1. Drop the `.md` file in `promptosaurus/prompts/`
+2. Add the filename to `MODE_FILES[mode]` in `promptosaurus/registry.py`
 3. Add a `CONCAT_ORDER` entry if the file should appear in Cline/Cursor/Copilot output
 4. Run `prompt validate` to confirm
-5. Run `prompt build all`
+5. Run `prompt init` to regenerate configurations
 
 ### 4. Adding a new mode
 
-1. Add an entry to `MODES` in `promptcli/registry.py`
+1. Add an entry to `MODES` in `promptosaurus/registry.py`
 2. Add an entry to `MODE_FILES` with its prompt files
 3. Add a `COPILOT_APPLY` glob pattern
-4. Run `prompt validate` and `prompt build all`
+4. Run `prompt validate` and `prompt init`
 
 ## Mode Reference
 
@@ -166,9 +154,9 @@ prompt build kilo --output ~/projects/my-project
 
 ## Tool Output Reference
 
-| Tool | Command | What gets written |
-|------|---------|-------------------|
-| Kilo Code | `prompt build kilo` | `.kilo/rules/` (always-on) + `.kilo/rules-{mode}/` (per-mode) |
-| Cline | `prompt build cline` | `.clinerules` (all rules concatenated) |
-| Cursor | `prompt build cursor` | `.cursor/rules/{mode}/*.mdc` + `.cursorrules` (legacy) |
-| GitHub Copilot | `prompt build copilot` | `.github/copilot-instructions.md` + `.github/instructions/{mode}.instructions.md` |
+| Tool | Selected via `prompt init` | What gets written |
+|------|---------------------------|-------------------|
+| Kilo Code | kilo | `.kilo/rules/` (always-on) + `.kilo/rules-{mode}/` (per-mode) + `.kilocodemodes` + `.kiloignore` |
+| Cline | cline | `.clinerules` (all rules concatenated) |
+| Cursor | cursor | `.cursor/rules/{mode}/*.mdc` + `.cursorrules` (legacy) |
+| GitHub Copilot | copilot | `.github/copilot-instructions.md` + `.github/instructions/{mode}.instructions.md` |

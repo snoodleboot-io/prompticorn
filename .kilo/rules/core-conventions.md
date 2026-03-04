@@ -1,17 +1,33 @@
 <!-- path: flat/core-conventions.md -->
 # core-conventions.md
-# Project coding standards. EDIT THIS FILE for each project.
+# Project coding standards - base conventions for all projects.
+# For language-specific rules, see: core-conventions-ts.md, core-conventions-py.md, etc.
 # All mode-specific rules inherit from this file.
 
-## Language & Runtime
+## Repository Structure
 
-Primary Language:    {{LANGUAGE}}           e.g., TypeScript 5.x
-Runtime:             {{RUNTIME}}            e.g., Node 20, Python 3.12, Go 1.22
-Package Manager:     {{PKG_MANAGER}}        e.g., pnpm, poetry, go mod
-Linter:              {{LINTER}}             e.g., ESLint, Ruff, golangci-lint
-Formatter:           {{FORMATTER}}          e.g., Prettier, Black, gofmt
+Repository type: {{single-language | multi-language-folder | mixed-collocation}}
 
-## Naming Conventions
+### If single-language:
+Include: core-conventions-[LANG].md where [LANG] matches your primary language
+
+### If multi-language-folder:
+Define each language area:
+- /frontend      → include: core-conventions-ts.md
+- /backend       → include: core-conventions-py.md
+- /shared        → include: core-conventions-go.md
+
+### If mixed-collocation:
+File extension determines which rules apply:
+- *.ts, *.tsx   → TypeScript rules
+- *.py           → Python rules
+- *.go           → Go rules
+
+## Shared Conventions
+
+These conventions apply to all languages and projects:
+
+### Naming Conventions
 
 Files:               {{kebab-case | snake_case | PascalCase}}
 Variables:           {{camelCase | snake_case}}
@@ -29,6 +45,51 @@ src/
 Rule: One export per file unless it is a barrel (index.ts).
 Rule: Co-locate tests with source (auth.ts → auth.test.ts).
 
+### Class Organization Rules
+
+Rule: One class per file. Each class must be in its own dedicated file.
+Rule: Filename must be the snake_case version of the class name.
+  - Example: `class ConfigHandler` → `config_handler.py`
+  - Example: `class SelectionState` → `selection_state.py`
+  - Example: `class SingleSelectState` → `single_select_state.py`
+  - Example: `class RenderStage` → `render_stage.py`
+  - Example: `class CommandFactory` → `command_factory.py`
+
+This rule ensures:
+- Clear file-to-class mapping for maintainability
+- Easier navigation in IDEs
+- Consistent naming across the codebase
+- Simplified imports and dependency tracking
+
+### SOLID Principles for OOP Components
+
+All OOP components must follow SOLID principles:
+
+**S - Single Responsibility Principle (SRP)**
+- Each class has one reason to change
+- A class should do one thing and do it well
+- Split large classes into smaller, focused ones
+
+**O - Open/Closed Principle (OCP)**
+- Open for extension, closed for modification
+- Use inheritance, composition, or interfaces to extend behavior
+- Avoid modifying existing working code to add features
+
+**L - Liskov Substitution Principle (LSP)**
+- Subtypes must be substitutable for their base types
+- Derived classes should extend behavior without changing contracts
+- Breaking parent behavior in subclasses violates LSP
+
+**I - Interface Segregation Principle (ISP)**
+- Clients should not depend on interfaces they don't use
+- Split large interfaces into smaller, focused ones
+- Prefer multiple small interfaces over one large interface
+
+**D - Dependency Inversion Principle (DIP)**
+- Depend on abstractions, not concrete implementations
+- High-level modules should not depend on low-level modules
+- Both should depend on abstractions (interfaces/abstract classes)
+
 ## Error Handling
 
 Pattern: {{throw | return Result<T, E> | return [data, error]}}
@@ -45,16 +106,13 @@ Pattern: {{throw | return Result<T, E> | return [data, error]}}
 - Group imports: stdlib → third-party → internal (blank line between groups)
 - Flag any new dependency before adding it
 
-## Testing Standards
+## Testing
 
-Framework:           {{TEST_FRAMEWORK}}     e.g., Jest, Pytest, Go test
-Coverage target:     {{COVERAGE_%}}         e.g., 80%
-Test style:          AAA                    Arrange-Act-Assert
-Mocking library:     {{MOCK_LIB}}           e.g., jest.mock, unittest.mock
-
-- Unit tests: one function or method in isolation
-- Integration tests: at the service or module boundary
-- No test should depend on another test's state
+Testing conventions are language-specific. See your language's conventions file for:
+- Test framework recommendations
+- Coverage targets
+- Test style patterns
+- Mocking approaches
 
 ## Database
 
@@ -71,25 +129,33 @@ PR size:             {{MAX_LINES}} lines changed (soft limit)
 
 Target:              {{DEPLOYMENT_TARGET}}  e.g., AWS Lambda, Vercel, GKE
 
-## Language-Specific Rules
+---
 
-### TypeScript
-- strict mode always on
-- No any — use unknown + type narrowing
-- Prefer interface for object shapes, type for unions/intersections
-- Always type function return values explicitly
+# Language-Specific Conventions
 
-### Python
-- Type hints required on all public functions
-- Use dataclasses or pydantic for data shapes, not raw dicts
-- Async: use asyncio — no mixing sync/async without explicit bridging
+For language-specific rules, include the appropriate file:
+- `core-conventions-ts.md` - TypeScript/JavaScript
+- `core-conventions-py.md` - Python
+- `core-conventions-go.md` - Go
+- `core-conventions-java.md` - Java
+- `core-conventions-rust.md` - Rust
+- `core-conventions-sql.md` - SQL
 
-### Go
-- Return (T, error) — never panic in library code
-- Use context.Context as first arg on all I/O functions
-- Prefer table-driven tests
+These files contain language-specific patterns for:
+- Error handling patterns
+- Type system usage
+- Testing frameworks and patterns
+- Module/dependency management
 
-### SQL
-- Parameterized queries always — no string interpolation
-- Migrations: always include up and down
-- Index any column used in WHERE or JOIN
+## Session Context Management
+
+All modes must follow the session management protocol defined in `core-session.md`:
+
+1. **Check for session on startup** - Look for existing session for current branch
+2. **Create session if needed** - New session if none exists for current branch
+3. **Update on mode switch** - Record exit from current mode, entry to new mode
+4. **Record actions** - Log significant actions with timestamps
+5. **Maintain context** - Keep Context Summary current
+
+Session files provide continuity across mode switches and persist workflow state.
+See `core-session.md` for complete protocol and file format specifications.

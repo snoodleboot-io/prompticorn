@@ -12,6 +12,7 @@ Output:
 
 import shutil
 from pathlib import Path
+from typing import Any
 
 from promptosaurus.builders._concat import build_concatenated
 from promptosaurus.builders.builder import Builder
@@ -21,7 +22,9 @@ from promptosaurus.registry import registry
 class CursorBuilder(Builder):
     """Builder for Cursor rule files."""
 
-    def build(self, output: Path, dry_run: bool = False) -> list[str]:
+    def build(
+        self, output: Path, config: dict[str, Any] | None = None, dry_run: bool = False
+    ) -> list[str]:
         """
         Write Cursor rule files under `output`.
         Returns a list of action strings for display.
