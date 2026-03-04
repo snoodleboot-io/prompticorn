@@ -1,1 +1,1 @@
-"""Unit tests for promptcli.builders."""
+"""Unit tests for promptosaurus.builders."""

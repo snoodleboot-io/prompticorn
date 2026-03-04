@@ -1,1 +1,1 @@
-"""Unit tests for promptcli."""
+"""Unit tests for promptosaurus."""

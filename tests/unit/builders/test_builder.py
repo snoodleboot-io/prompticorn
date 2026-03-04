@@ -1,11 +1,11 @@
-"""Unit tests for promptcli.builders.builder."""
+"""Unit tests for promptosaurus.builders.builder."""
 
 import unittest
 from pathlib import Path
 
 import pytest
 
-from promptcli.builders.builder import Builder
+from promptosaurus.builders.builder import Builder
 
 
 class TestBuilder(unittest.TestCase):

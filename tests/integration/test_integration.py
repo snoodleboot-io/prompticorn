@@ -1,4 +1,4 @@
-"""Security tests for promptcli - placeholder for future tests."""
+"""Security tests for promptosaurus - placeholder for future tests."""
 
 import pytest
 
