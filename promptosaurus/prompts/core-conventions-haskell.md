@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/core-conventions-haskell.md -->
 # Haskell Conventions
 
 Language:             {{LANGUAGE}}           e.g., Haskell 9.8

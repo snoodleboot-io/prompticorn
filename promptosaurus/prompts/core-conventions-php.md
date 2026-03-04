@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/core-conventions-php.md -->
 # PHP Conventions
 
 Language:             {{LANGUAGE}}           e.g., PHP 8.3

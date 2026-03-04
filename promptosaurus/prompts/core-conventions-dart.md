@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/core-conventions-dart.md -->
 # Dart Conventions
 
 Language:             {{LANGUAGE}}           e.g., Dart 3.2

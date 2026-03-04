@@ -1,4 +1,4 @@
-<!-- path: flat/code-refactor.md -->
+<!-- path: promptosaurus/prompts/code-refactor.md -->
 # code-refactor.md
 # Behavior when the user asks to refactor, simplify, or clean up code.
 

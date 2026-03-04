@@ -1,4 +1,4 @@
-<!-- path: flat/code-dependency-upgrade.md -->
+<!-- path: promptosaurus/prompts/code-dependency-upgrade.md -->
 # code-dependency-upgrade.md
 # Behavior when the user asks to upgrade a dependency or package.
 

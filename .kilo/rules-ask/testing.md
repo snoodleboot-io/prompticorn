@@ -1,4 +1,4 @@
-<!-- path: promptcli/prompts/ask-testing.md -->
+<!-- path: promptosaurus/prompts/ask-testing.md -->
 # ask-testing.md
 # Behavior when the user asks to generate tests.
 

@@ -250,8 +250,8 @@ customModes:
   - read
   - edit
   - command
-- slug: coding-enforcement
-  name: 🛡️ Coding Enforcement
+- slug: enforcement
+  name: 🛡️ Enforcement
   description: Reviews code against established coding standards and creates change
     requests
   roleDefinition: You are a senior software engineer specializing in code quality

@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/core-conventions-groovy.md -->
 # Groovy Conventions
 
 Language:             {{LANGUAGE}}           e 4.0.g., Groovy

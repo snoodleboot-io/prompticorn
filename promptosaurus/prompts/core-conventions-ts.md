@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/core-conventions-ts.md -->
 # TypeScript Conventions
 
 Language:             {{LANGUAGE}}           e.g., TypeScript 5.x

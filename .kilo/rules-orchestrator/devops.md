@@ -1,4 +1,4 @@
-<!-- path: flat/orchestrator-devops.md -->
+<!-- path: promptosaurus/prompts/orchestrator-devops.md -->
 # orchestrator-devops.md
 # Behavior when the user asks for CI/CD, Docker, env config, or deployment tasks.
 

@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/core-conventions-shell.md -->
 # Shell/Bash Conventions
 
 Language:             {{LANGUAGE}}           e.g., Bash 5.2, Zsh

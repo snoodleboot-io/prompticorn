@@ -52,6 +52,8 @@ credentials/
 # --- Session Files ---
 .prompty/session/
 !.prompty/session/.gitkeep
+.promptosaurus/sessions/
+!.promptosaurus/sessions/.gitkeep
 
 # --- Logs ---
 *.log

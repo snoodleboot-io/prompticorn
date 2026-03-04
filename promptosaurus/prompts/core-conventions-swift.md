@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/core-conventions-swift.md -->
 # Swift Conventions
 
 Language:             {{LANGUAGE}}           e.g., Swift 5.9

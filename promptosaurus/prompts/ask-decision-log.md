@@ -1,4 +1,4 @@
-<!-- path: flat/ask-decision-log.md -->
+<!-- path: promptosaurus/prompts/ask-decision-log.md -->
 # ask-decision-log.md
 # Behavior when the user asks to record an architectural or technical decision.
 

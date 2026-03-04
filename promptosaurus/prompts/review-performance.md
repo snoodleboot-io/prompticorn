@@ -1,4 +1,4 @@
-<!-- path: flat/review-performance.md -->
+<!-- path: promptosaurus/prompts/review-performance.md -->
 # review-performance.md
 # Behavior when the user asks for a performance review or audit.
 

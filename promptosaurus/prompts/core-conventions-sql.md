@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/core-conventions-sql.md -->
 # SQL Conventions
 
 Database:            {{DATABASE}}           e.g., PostgreSQL, MySQL, SQLite

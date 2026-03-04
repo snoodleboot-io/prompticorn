@@ -1,4 +1,4 @@
-<!-- path: flat/review-accessibility.md -->
+<!-- path: promptosaurus/prompts/review-accessibility.md -->
 # review-accessibility.md
 # Behavior when the user asks to review UI code for accessibility, or API for usability.
 

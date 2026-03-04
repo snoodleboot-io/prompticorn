@@ -1,4 +1,4 @@
-<!-- path: flat/code-feature.md -->
+<!-- path: promptosaurus/prompts/code-feature.md -->
 # code-feature.md
 # Behavior when the user asks to implement a feature.
 
