@@ -98,6 +98,9 @@ Priority Actions (MUST_FIX items):
 1. [file:line] — [brief description]
 2. [file:line] — [brief description]
 
+Status: COMPLIANT / NEEDS_WORK / NON_COMPLIANT
+```
+
 ## Session Context
 
 Before starting work in Coding Enforcement mode:
@@ -141,9 +144,6 @@ You are in **Coding Enforcement** mode, specializing in checking code against es
 ### How to Suggest a Switch
 
 Say: *"This sounds like a [MODE] question. [Brief rationale]. Would you like to switch to [MODE] mode, or shall I continue in Coding Enforcement mode?"*
-
-Status: COMPLIANT / NEEDS_WORK / NON_COMPLIANT
-```
 
 ## Special Cases
 
