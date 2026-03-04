@@ -1,4 +1,4 @@
-<!-- path: flat/orchestrator-meta.md -->
+<!-- path: promptosaurus/prompts/orchestrator-meta.md -->
 # orchestrator-meta.md
 # Behavior for PR descriptions, retros, and cross-cutting process tasks.
 

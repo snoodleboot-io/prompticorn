@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/document-strategy.md -->
 # document-strategy.md
 # Behavior when the user asks to generate or update documentation.
 #

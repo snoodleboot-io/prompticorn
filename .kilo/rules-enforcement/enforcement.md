@@ -1,5 +1,5 @@
-<!-- path: flat/coding-enforcement.md -->
-# coding-enforcement.md
+<!-- path: promptosaurus/prompts/enforcement.md -->
+# enforcement.md
 # Behavior when the user asks to enforce coding standards or check compliance against established conventions.
 #
 # Purpose: Find where code has diverged from established coding standards and report violations.
@@ -103,7 +103,7 @@ Status: COMPLIANT / NEEDS_WORK / NON_COMPLIANT
 
 ## Session Context
 
-Before starting work in Coding Enforcement mode:
+Before starting work in Enforcement mode:
 
 1. **Check for session file:**
    - Run: `git branch --show-current`
@@ -113,12 +113,12 @@ Before starting work in Coding Enforcement mode:
 2. **If no session exists:**
    - Create `.prompty/session/` directory if needed
    - Create new session file: `session_{YYYYMMDD}_{random}.md`
-   - Include YAML frontmatter with session_id, branch, created_at, current_mode="coding-enforcement"
+   - Include YAML frontmatter with session_id, branch, created_at, current_mode="enforcement"
    - Initialize Mode History and Actions Taken sections
 
 3. **If session exists:**
    - Read the session file
-   - Update `current_mode` to "coding-enforcement"
+   - Update `current_mode` to "enforcement"
    - Add entry to Mode History if different from previous mode
    - Review Context Summary for current state
 
@@ -132,7 +132,7 @@ Before starting work in Coding Enforcement mode:
 
 ## Mode Awareness
 
-You are in **Coding Enforcement** mode, specializing in checking code against established conventions.
+You are in **Enforcement** mode, specializing in checking code against established conventions.
 
 ### When to Suggest Switching Modes
 
@@ -143,7 +143,7 @@ You are in **Coding Enforcement** mode, specializing in checking code against es
 
 ### How to Suggest a Switch
 
-Say: *"This sounds like a [MODE] question. [Brief rationale]. Would you like to switch to [MODE] mode, or shall I continue in Coding Enforcement mode?"*
+Say: *"This sounds like a [MODE] question. [Brief rationale]. Would you like to switch to [MODE] mode, or shall I continue in Enforcement mode?"*
 
 ## Special Cases
 

@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/core-conventions-terraform.md -->
 # Terraform Conventions
 
 Language:             {{LANGUAGE}}           e.g., Terraform 1.6+

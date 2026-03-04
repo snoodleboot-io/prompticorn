@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/core-conventions-elixir.md -->
 # Elixir Conventions
 
 Language:             {{LANGUAGE}}           e.g., Elixir 1.15+

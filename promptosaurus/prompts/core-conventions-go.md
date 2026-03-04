@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/core-conventions-go.md -->
 # Go Conventions
 
 Language:             {{LANGUAGE}}           e.g., Go 1.22

@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/core-conventions-html.md -->
 # HTML Conventions
 
 Language:             {{LANGUAGE}}           e.g., HTML5

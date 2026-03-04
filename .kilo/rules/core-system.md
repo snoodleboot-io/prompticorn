@@ -1,4 +1,4 @@
-<!-- path: flat/core-system.md -->
+<!-- path: promptosaurus/prompts/core-system.md -->
 # core-system.md
 # Always-on base behaviors for all modes and tools.
 # EDIT THIS FILE to change global assistant behavior.

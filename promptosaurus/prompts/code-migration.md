@@ -1,4 +1,4 @@
-<!-- path: flat/code-migration.md -->
+<!-- path: promptosaurus/prompts/code-migration.md -->
 # code-migration.md
 # Behavior when the user asks to migrate code between patterns, libraries, or versions.
 

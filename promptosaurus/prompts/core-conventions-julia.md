@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/core-conventions-julia.md -->
 # Julia Conventions
 
 Language:             {{LANGUAGE}}           e.g., Julia 1.10

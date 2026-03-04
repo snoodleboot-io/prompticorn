@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/code-house-style.md -->
 
 # code-house-style.md
 # Behavior when the user asks to check or enforce house style.

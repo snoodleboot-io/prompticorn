@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/core-conventions-rust.md -->
 # Rust Conventions
 
 Language:             {{LANGUAGE}}           e.g., Rust 1.75

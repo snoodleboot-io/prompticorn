@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/core-session.md -->
 # Session Context Management
 
 ## Overview

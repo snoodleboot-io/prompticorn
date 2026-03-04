@@ -1,4 +1,4 @@
-<!-- path: flat/review-code.md -->
+<!-- path: promptosaurus/prompts/review-code.md -->
 # review-code.md
 # Behavior when the user asks for a code review.
 

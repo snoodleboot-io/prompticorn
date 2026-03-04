@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/test-strategy.md -->
 # test-strategy.md
 # Behavior when the user asks to write, run, or improve tests.
 

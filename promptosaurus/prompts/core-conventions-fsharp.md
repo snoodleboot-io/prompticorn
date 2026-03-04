@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/core-conventions-fsharp.md -->
 # F# Conventions
 
 Language:             {{LANGUAGE}}           e.g., F# 7.0
