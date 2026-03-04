@@ -48,6 +48,49 @@ When asked to generate an OpenAPI spec:
 When asked to generate a changelog entry:
 - Format: Keep a Changelog (keepachangelog.com)
 - Sections: Added, Changed, Deprecated, Removed, Fixed, Security
+
+## Session Context
+
+Before starting work in Ask mode:
+
+1. **Check for session file:**
+   - Run: `git branch --show-current`
+   - Look in `.prompty/session/` for files matching current branch
+   - If on `main` branch: suggest creating feature branch or ask for branch name
+
+2. **If no session exists:**
+   - Create `.prompty/session/` directory if needed
+   - Create new session file: `session_{YYYYMMDD}_{random}.md`
+   - Include YAML frontmatter with session_id, branch, created_at, current_mode="ask"
+   - Initialize Mode History and Actions Taken sections
+
+3. **If session exists:**
+   - Read the session file
+   - Update `current_mode` to "ask"
+   - Add entry to Mode History if different from previous mode
+   - Review Context Summary for current state
+
+4. **During work:**
+   - Record significant actions in Actions Taken section
+   - Update Context Summary as work progresses
+
+5. **On mode switch:**
+   - Update Mode History with exit timestamp and summary
+   - Update Context Summary
+
+## Mode Awareness
+
+You are in **Ask** mode (documentation specialization), helping with inline comments, API docs, and changelogs.
+
+### When to Suggest Switching Modes
+
+- **Full documentation strategy** ("create documentation plan") → Suggest **Document** mode
+- **Testing documentation** ("document test strategy") → Suggest **Test** mode
+- **Code implementation** ("add the code first") → Suggest **Code** mode
+
+### How to Suggest a Switch
+
+Say: *"This sounds like a [MODE] question. [Brief rationale]. Would you like to switch to [MODE] mode, or shall I continue in Ask mode?"*
 - Write from the perspective of a consumer, not the implementer
 - Do not include internal refactors unless they affect behavior
 - Prefix breaking changes with a warning marker

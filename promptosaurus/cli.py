@@ -3,16 +3,13 @@ cli.py
 Click-based CLI for the prompt library.
 
 Commands:
-  prompt build kilo    [--output DIR] [--dry-run]
-  prompt build cline   [--output DIR] [--dry-run]
-  prompt build cursor  [--output DIR] [--dry-run]
-  prompt build copilot [--output DIR] [--dry-run]
-  prompt build all     [--output DIR] [--dry-run]
-  prompt list
-  prompt validate
+  prompt init      - Interactive setup for AI assistant configurations
+  prompt list      - Show all registered modes and their prompt files
+  prompt validate  - Check for missing files and unregistered orphans
 """
 
 import sys
+from pathlib import Path
 from typing import Any
 
 import click
@@ -30,26 +27,6 @@ from promptosaurus.registry import registry
 
 # # ── Initialize registry ───────────────────────────────────────────────────────
 # fill_registry()
-
-
-# ── Shared options ─────────────────────────────────────────────────────────────
-
-output_option = click.option(
-    "--output",
-    "-o",
-    default=".",
-    show_default=True,
-    type=click.Path(file_okay=False, writable=True),
-    help="Directory to write output into. Defaults to current directory.",
-)
-
-dry_run_option = click.option(
-    "--dry-run",
-    "-n",
-    is_flag=True,
-    default=False,
-    help="Preview what would be written without touching the filesystem.",
-)
 
 
 # ── Root group ─────────────────────────────────────────────────────────────────
@@ -105,8 +82,9 @@ def init_prompts():
     """
     Interactively initialize prompt configuration for your project.
 
-    Walks through questions to set up .prompty/configurations.yaml with
+    Walks through questions to set up .promptosaurus/configurations.yaml with
     your language, runtime, package manager, testing framework, and more.
+    Then generates AI assistant configurations for selected tools.
     """
 
     from promptosaurus.ui._selector import select_option_with_explain
@@ -118,7 +96,26 @@ def init_prompts():
     click.echo("\nUse ↑/↓ arrows, numbers, or Enter for defaults.")
 
     try:
-        # Step 1: Repository type
+        # Step 1: Select which AI assistant configurations to generate
+        ai_tools = select_option_with_explain(
+            question="Which AI assistant configurations would you like to generate?",
+            options=["kilo", "cline", "cursor", "copilot"],
+            explanations={
+                "kilo": "Kilo Code - .kilo/ directory with rules and custom modes",
+                "cline": "Cline - .clinerules file (concatenated rules)",
+                "cursor": "Cursor - .cursor/rules/ directory + .cursorrules",
+                "copilot": "GitHub Copilot - .github/copilot-instructions.md",
+            },
+            question_explanation="Select one or more AI assistants to configure. Use space to select multiple.",
+            default_index=0,
+            allow_multiple=True,
+        )
+        # Normalize to list for consistent handling
+        if isinstance(ai_tools, str):
+            ai_tools = [ai_tools]
+
+        # Step 2: Repository type
+        click.echo("\n" + "-" * 60)
         repo_question = RepositoryTypeQuestion()
         default_idx = repo_question.options.index(repo_question.default)
 
@@ -130,7 +127,7 @@ def init_prompts():
             default_index=default_idx,
         )
 
-        # Step 2 & 3: Handle language questions based on repo type
+        # Step 3 & 4: Handle language questions based on repo type
         # Use isinstance() for proper type narrowing from str | list[str] to str
         if isinstance(repo_type, str) and repo_type == REPO_TYPE_SINGLE:
             from promptosaurus.questions.handlers.handle_single_language_questions import (
@@ -161,12 +158,46 @@ def init_prompts():
         click.echo("=" * 60)
         click.echo(f"\n  Config file: {ConfigHandler.get_config_path()}")
 
+        # Step 5: Generate selected AI assistant configurations
+        if ai_tools:
+            click.echo("\n" + "-" * 60)
+            click.secho("  Generating AI assistant configurations...", bold=True)
+            click.echo("-" * 60)
+
+            output_path = Path(".")
+            for tool in ai_tools:
+                builder_class = _get_builder(tool)
+                if builder_class:
+                    builder = builder_class()
+                    actions = builder.build(output_path, config=config, dry_run=False)
+                    for action in actions:
+                        click.echo(f"  {action}")
+                else:
+                    click.secho(f"  ✗ Unknown tool: {tool}", fg="yellow")
+
+            click.echo("\n" + "=" * 60)
+            click.secho("  Setup complete!", bold=True, fg="green")
+            click.echo("=" * 60)
+
     except UserCancelledError:
         click.echo("\n\nOperation cancelled. No changes were saved.")
         raise click.Abort() from None
-    click.echo("\n  You can now run:")
-    click.echo("    prompt build <target>")
-    click.echo("\n  Or edit the config file directly to customize.\n")
+
+
+def _get_builder(tool: str):
+    """Get the builder class for a given tool."""
+    from promptosaurus.builders.cline import ClineBuilder
+    from promptosaurus.builders.copilot import CopilotBuilder
+    from promptosaurus.builders.cursor import CursorBuilder
+    from promptosaurus.builders.kilo import KiloBuilder
+
+    builders = {
+        "kilo": KiloBuilder,
+        "cline": ClineBuilder,
+        "cursor": CursorBuilder,
+        "copilot": CopilotBuilder,
+    }
+    return builders.get(tool)
 
 
 # ── validate ───────────────────────────────────────────────────────────────────

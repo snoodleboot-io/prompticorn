@@ -1,0 +1,24 @@
+version: '1.0'
+repository:
+  type: single-language
+  mappings: {}
+defaults:
+  language: python
+  runtime: '3.14'
+  package_manager: uv
+  test_framework: hybrid
+  linter:
+  - ruff
+  - pyright
+  formatter:
+  - ruff
+  coverage:
+    line: 80
+    branch: 70
+    function: 90
+    statement: 85
+    mutation: 80
+    path: 60
+  repo_type: single-language
+  test_runner: pytest
+  abstract_class_style: interface
