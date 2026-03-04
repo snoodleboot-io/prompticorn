@@ -2,31 +2,35 @@
 
 import pytest
 
-from promptcli.questions.base.constants import (
+from promptosaurus.questions.base.constants import (
     REPO_TYPE_MIXED,
     REPO_TYPE_MULTI_FOLDER,
     REPO_TYPE_SINGLE,
 )
-from promptcli.questions.base.folder_mapping_question import FolderMappingQuestion
-from promptcli.questions.base.repository_type_question import RepositoryTypeQuestion
-from promptcli.questions.handlers.handle_single_language_questions import (
+from promptosaurus.questions.base.folder_mapping_question import FolderMappingQuestion
+from promptosaurus.questions.base.repository_type_question import RepositoryTypeQuestion
+from promptosaurus.questions.handlers.handle_single_language_questions import (
     HandleSingleLanguageQuestions,
 )
-from promptcli.questions.handlers.language_question_handler import LanguageQuestionHandler
-from promptcli.questions.language import (
+from promptosaurus.questions.handlers.language_question_handler import LanguageQuestionHandler
+from promptosaurus.questions.language import (
     LANGUAGE_KEYS,
     get_language_questions,
 )
-from promptcli.questions.python.python_formatter_question import PythonFormatterQuestion
-from promptcli.questions.python.python_linter_question import PythonLinterQuestion
-from promptcli.questions.python.python_package_manager_question import PythonPackageManagerQuestion
-from promptcli.questions.python.python_runtime_question import PythonRuntimeQuestion
-from promptcli.questions.python.python_test_framework_question import PythonTestFrameworkQuestion
-from promptcli.questions.python.python_test_runner_question import PythonTestRunnerQuestion
-from promptcli.questions.typescript.typescript_package_manager_question import (
+from promptosaurus.questions.python.python_formatter_question import PythonFormatterQuestion
+from promptosaurus.questions.python.python_linter_question import PythonLinterQuestion
+from promptosaurus.questions.python.python_package_manager_question import (
+    PythonPackageManagerQuestion,
+)
+from promptosaurus.questions.python.python_runtime_question import PythonRuntimeQuestion
+from promptosaurus.questions.python.python_test_framework_question import (
+    PythonTestFrameworkQuestion,
+)
+from promptosaurus.questions.python.python_test_runner_question import PythonTestRunnerQuestion
+from promptosaurus.questions.typescript.typescript_package_manager_question import (
     TypeScriptPackageManagerQuestion,
 )
-from promptcli.questions.typescript.typescript_version_question import (
+from promptosaurus.questions.typescript.typescript_version_question import (
     TypeScriptVersionQuestion,
 )
 
@@ -157,11 +161,11 @@ class TestPythonPackageManagerQuestion:
         assert "pip" in q.options
         assert "uv" in q.options
 
-    def test_default_is_poetry(self):
-        """Default should be poetry."""
+    def test_default_is_uv(self):
+        """Default should be uv."""
         q = PythonPackageManagerQuestion()
 
-        assert q.default == "poetry"
+        assert q.default == "uv"
 
 
 class TestPythonTestFrameworkQuestion:
@@ -181,11 +185,11 @@ class TestPythonTestFrameworkQuestion:
         assert "pytest" in q.options
         assert "unittest" in q.options
 
-    def test_default_is_pytest(self):
-        """Default should be pytest."""
+    def test_default_is_hybrid(self):
+        """Default should be hybrid."""
         q = PythonTestFrameworkQuestion()
 
-        assert q.default == "pytest"
+        assert q.default == "hybrid"
 
 
 class TestTypeScriptVersionQuestion:
@@ -292,7 +296,7 @@ class TestPythonLinterQuestion:
         assert "ruff" in q.options
         assert "flake8" in q.options
         assert "pylint" in q.options
-        assert "mypy" in q.options
+        assert "pyright" in q.options
 
     def test_default_is_ruff(self):
         """Default should be ruff."""

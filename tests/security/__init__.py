@@ -1,1 +1,1 @@
-"""Security tests for promptcli."""
+"""Security tests for promptosaurus."""

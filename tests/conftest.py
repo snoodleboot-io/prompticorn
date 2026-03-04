@@ -1,4 +1,4 @@
-"""Pytest configuration for promptcli tests."""
+"""Pytest configuration for promptosaurus tests."""
 
 import pytest
 

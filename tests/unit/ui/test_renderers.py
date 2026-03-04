@@ -2,13 +2,13 @@
 
 import pytest
 
-from promptcli.ui.domain.context import PipelineContext, QuestionContext
-from promptcli.ui.domain.renderer import Renderer
-from promptcli.ui.render.columns import ColumnLayoutRenderer
-from promptcli.ui.render.explain import ExplainRenderer
-from promptcli.ui.render.vertical import VerticalLayoutRenderer
-from promptcli.ui.state.multi import MultiSelectState
-from promptcli.ui.state.single_select_state import SingleSelectState
+from promptosaurus.ui.domain.context import PipelineContext, QuestionContext
+from promptosaurus.ui.domain.renderer import Renderer
+from promptosaurus.ui.render.columns import ColumnLayoutRenderer
+from promptosaurus.ui.render.explain import ExplainRenderer
+from promptosaurus.ui.render.vertical import VerticalLayoutRenderer
+from promptosaurus.ui.state.multi import MultiSelectState
+from promptosaurus.ui.state.single_select_state import SingleSelectState
 
 
 class TestRendererBaseClass:
