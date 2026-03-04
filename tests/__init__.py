@@ -1,1 +1,1 @@
-"""Test suite for promptcli."""
+"""Test suite for promptosaurus."""

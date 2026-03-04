@@ -1,6 +1,6 @@
-"""Tests for promptcli.questions.language module."""
+"""Tests for promptosaurus.questions.language module."""
 
-from promptcli.questions.language import (
+from promptosaurus.questions.language import (
     LANGUAGE_KEYS,
     get_language_questions,
 )

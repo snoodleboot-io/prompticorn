@@ -1,1 +1,1 @@
-# Tests for promptcli.questions module
+# Tests for promptosaurus.questions module

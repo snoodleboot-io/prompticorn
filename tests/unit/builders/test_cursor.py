@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from promptcli.builders.cursor import CursorBuilder
+from promptosaurus.builders.cursor import CursorBuilder
 
 
 class TestCursorBuilder(unittest.TestCase):
@@ -12,7 +12,7 @@ class TestCursorBuilder(unittest.TestCase):
 
     def test_cursor_builder_is_builder_subclass(self):
         """CursorBuilder should be a subclass of Builder."""
-        from promptcli.builders.builder import Builder
+        from promptosaurus.builders.builder import Builder
 
         self.assertTrue(issubclass(CursorBuilder, Builder))
 

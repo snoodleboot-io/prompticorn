@@ -1,1 +1,1 @@
-"""Integration tests for promptcli."""
+"""Integration tests for promptosaurus."""

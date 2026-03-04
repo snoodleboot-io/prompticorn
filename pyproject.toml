@@ -3,7 +3,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
-name = "promptcli"
+name = "promptosaurus"
 version = "0.1.0"
 description = "Build AI coding assistant configs from a shared prompt library"
 readme = "README.md"
@@ -37,15 +37,15 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/johna/promptcli"
-Repository = "https://github.com/johna/promptcli"
-Issues = "https://github.com/johna/promptcli/issues"
+Homepage = "https://github.com/johna/promptosaurus"
+Repository = "https://github.com/johna/promptosaurus"
+Issues = "https://github.com/johna/promptosaurus/issues"
 
 [project.scripts]
-prompt = "promptcli.cli:cli"
+promptosaurus = "promptosaurus.cli:cli"
 
 [tool.hatch.build.targets.wheel]
-packages = ["promptcli"]
+packages = ["promptosaurus"]
 
 [dependency-groups]
 dev = [
@@ -98,7 +98,7 @@ markers = [
 
 [tool.pyright]
 pythonVersion = "3.10"
-include = ["promptcli"]
+include = ["promptosaurus"]
 exclude = ["tests", "**/__pycache__", ".venv"]
 ignore = [".venv"]
 strict = []

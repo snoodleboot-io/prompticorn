@@ -1,10 +1,10 @@
-"""Unit tests for promptcli.builders.kilo."""
+"""Unit tests for promptosaurus.builders.kilo."""
 
 import tempfile
 import unittest
 from pathlib import Path
 
-from promptcli.builders.kilo import KiloBuilder
+from promptosaurus.builders.kilo import KiloBuilder
 
 
 class TestKiloBuilder(unittest.TestCase):
@@ -12,7 +12,7 @@ class TestKiloBuilder(unittest.TestCase):
 
     def test_kilo_builder_is_builder_subclass(self):
         """KiloBuilder should be a subclass of Builder."""
-        from promptcli.builders.builder import Builder
+        from promptosaurus.builders.builder import Builder
 
         assert issubclass(KiloBuilder, Builder)
 

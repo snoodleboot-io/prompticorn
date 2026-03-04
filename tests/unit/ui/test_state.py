@@ -2,8 +2,8 @@
 
 import unittest
 
-from promptcli.ui.state.multi import MultiSelectState
-from promptcli.ui.state.single_select_state import SingleSelectState
+from promptosaurus.ui.state.multi import MultiSelectState
+from promptosaurus.ui.state.single_select_state import SingleSelectState
 
 
 class TestSingleSelectState(unittest.TestCase):
