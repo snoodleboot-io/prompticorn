@@ -10,6 +10,7 @@ Output layout:
 
 import shutil
 from pathlib import Path
+from typing import Any
 
 import yaml  # type: ignore[import-untyped]
 
@@ -20,7 +21,42 @@ from promptosaurus.registry import registry
 class KiloBuilder(Builder):
     """Builder for Kilo Code .kilo/ directory structure."""
 
-    def build(self, output: Path, dry_run: bool = False) -> list[str]:
+    # Map of language names to their core-conventions file suffixes
+    LANGUAGE_FILE_MAP: dict[str, str] = {
+        "python": "core-conventions-py.md",
+        "typescript": "core-conventions-ts.md",
+        "javascript": "core-conventions-js.md",
+        "php": "core-conventions-php.md",
+        "ruby": "core-conventions-ruby.md",
+        "java": "core-conventions-java.md",
+        "csharp": "core-conventions-cs.md",
+        "go": "core-conventions-go.md",
+        "rust": "core-conventions-rust.md",
+        "r": "core-conventions-r.md",
+        "elixir": "core-conventions-elixir.md",
+        "elm": "core-conventions-elm.md",
+        "c": "core-conventions-c.md",
+        "cpp": "core-conventions-cpp.md",
+        "scala": "core-conventions-scala.md",
+        "kotlin": "core-conventions-kotlin.md",
+        "swift": "core-conventions-swift.md",
+        "objc": "core-conventions-objc.md",
+        "dart": "core-conventions-dart.md",
+        "julia": "core-conventions-julia.md",
+        "haskell": "core-conventions-haskell.md",
+        "clojure": "core-conventions-clojure.md",
+        "fsharp": "core-conventions-fsharp.md",
+        "shell": "core-conventions-shell.md",
+        "groovy": "core-conventions-groovy.md",
+        "lua": "core-conventions-lua.md",
+        "sql": "core-conventions-sql.md",
+        "terraform": "core-conventions-terraform.md",
+        "html": "core-conventions-html.md",
+    }
+
+    def build(
+        self, output: Path, config: dict[str, Any] | None = None, dry_run: bool = False
+    ) -> list[str]:
         """
         Write the Kilo .kilo/ structure under `output`.
         Returns a list of action strings for display.
@@ -28,16 +64,28 @@ class KiloBuilder(Builder):
         actions: list[str] = []
         base = output / ".kilo"
 
-        # Always-on rules
+        # Get selected language from config
+        selected_language = config.get("defaults", {}).get("language", "") if config else ""
+        language_file = (
+            self.LANGUAGE_FILE_MAP.get(selected_language.lower()) if selected_language else None
+        )
+
+        # Always-on rules (filter language-specific files)
         for filename in registry.always_on:
+            # Skip language-specific files that don't match the selected language
+            if filename.startswith("core-conventions-") and filename != language_file:
+                continue
+
             destination = base / "rules" / filename
-            actions.append(self._copy(registry.prompt_path(filename), destination, dry_run))
+            actions.append(self._copy(registry.prompt_path(filename), destination, dry_run, config))
 
         # Per-mode rules
         for mode_key, files in registry.mode_files.items():
             for filename in files:
                 destination = base / f"rules-{mode_key}" / registry.dest_name(mode_key, filename)
-                actions.append(self._copy(registry.prompt_path(filename), destination, dry_run))
+                actions.append(
+                    self._copy(registry.prompt_path(filename), destination, dry_run, config)
+                )
 
         # Generate .kilocodemodes manifest
         actions.append(self._write_manifest(output / ".kilocodemodes", dry_run))
@@ -91,14 +139,66 @@ class KiloBuilder(Builder):
         destination.write_text(content, encoding="utf-8")
         return f"✓ {label}"
 
-    def _copy(self, source_path: Path, destination: Path, dry_run: bool) -> str:
+    def _copy(
+        self,
+        source_path: Path,
+        destination: Path,
+        dry_run: bool,
+        config: dict[str, Any] | None = None,
+    ) -> str:
         rel = str(destination).split(".kilo/", 1)[-1]
         label = f".kilo/{rel}"
         if dry_run:
             return f"[dry-run] {source_path.name} → {label}"
         destination.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(source_path, destination)
+
+        # If config is provided and this is a language-specific conventions file,
+        # perform template substitution
+        if config and source_path.name.startswith("core-conventions-"):
+            content = source_path.read_text(encoding="utf-8")
+            content = self._substitute_template_variables(content, config)
+            destination.write_text(content, encoding="utf-8")
+        else:
+            shutil.copy2(source_path, destination)
+
         return f"✓ {source_path.name} → {label}"
+
+    def _substitute_template_variables(self, content: str, config: dict[str, Any]) -> str:
+        """Replace {{VARIABLE}} templates with values from config."""
+        defaults = config.get("defaults", {})
+
+        def format_value(value: Any) -> str:
+            """Format a value for substitution, handling lists."""
+            if isinstance(value, list):
+                return ", ".join(str(v) for v in value)
+            return str(value) if value is not None else ""
+
+        # Build mapping of template variables to config values
+        substitutions: dict[str, str] = {
+            "{{LANGUAGE}}": format_value(defaults.get("language", "")),
+            "{{RUNTIME}}": format_value(defaults.get("runtime", "")),
+            "{{PACKAGE_MANAGER}}": format_value(defaults.get("package_manager", "")),
+            "{{LINTER}}": format_value(defaults.get("linter", "")),
+            "{{FORMATTER}}": format_value(defaults.get("formatter", "")),
+            "{{ABSTRACT_CLASS_STYLE}}": format_value(defaults.get("abstract_class_style", "")),
+            "{{TESTING_FRAMEWORK}}": format_value(defaults.get("test_framework", "")),
+            "{{TEST_RUNNER}}": format_value(defaults.get("test_runner", "")),
+        }
+
+        # Add coverage variables
+        coverage = defaults.get("coverage", {})
+        substitutions["{{LINE_COVERAGE_%}}"] = str(coverage.get("line", 80))
+        substitutions["{{BRANCH_COVERAGE_%}}"] = str(coverage.get("branch", 70))
+        substitutions["{{FUNCTION_COVERAGE_%}}"] = str(coverage.get("function", 90))
+        substitutions["{{STATEMENT_COVERAGE_%}}"] = str(coverage.get("statement", 85))
+        substitutions["{{MUTATION_COVERAGE_%}}"] = str(coverage.get("mutation", 80))
+        substitutions["{{PATH_COVERAGE_%}}"] = str(coverage.get("path", 60))
+
+        # Perform substitutions
+        for template_var, value in substitutions.items():
+            content = content.replace(template_var, value)
+
+        return content
 
     def _build_ignore(self, output: Path, dry_run: bool) -> list[str]:
         """Generate .kiloignore file."""

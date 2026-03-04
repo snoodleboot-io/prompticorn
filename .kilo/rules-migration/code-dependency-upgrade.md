@@ -40,3 +40,47 @@ When asked to audit all dependencies:
 - Group results: security vulnerability | major update | minor/patch
 - For security issues: flag severity and whether the vulnerable code path is reachable
 - Recommend a prioritized upgrade order
+
+## Session Context
+
+Before starting work in Code mode:
+
+1. **Check for session file:**
+   - Run: `git branch --show-current`
+   - Look in `.prompty/session/` for files matching current branch
+   - If on `main` branch: suggest creating feature branch or ask for branch name
+
+2. **If no session exists:**
+   - Create `.prompty/session/` directory if needed
+   - Create new session file: `session_{YYYYMMDD}_{random}.md`
+   - Include YAML frontmatter with session_id, branch, created_at, current_mode="code"
+   - Initialize Mode History and Actions Taken sections
+
+3. **If session exists:**
+   - Read the session file
+   - Update `current_mode` to "code"
+   - Add entry to Mode History if different from previous mode
+   - Review Context Summary for current state
+
+4. **During work:**
+   - Record significant actions in Actions Taken section
+   - Update Context Summary as work progresses
+
+5. **On mode switch:**
+   - Update Mode History with exit timestamp and summary
+   - Update Context Summary
+
+## Mode Awareness
+
+You are in **Code** mode, specializing in dependency upgrades and security patches.
+
+### When to Suggest Switching Modes
+
+- **Security vulnerability analysis** ("is this CVE exploitable?") → Suggest **Security** mode
+- **Major framework migrations** ("upgrade from v1 to v2") → Suggest **Migration** mode
+- **Compliance requirements** ("dependency compliance audit") → Suggest **Compliance** mode
+- **Testing after upgrade** → Suggest **Test** mode
+
+### How to Suggest a Switch
+
+Say: *"This sounds like a [MODE] question. [Brief rationale]. Would you like to switch to [MODE] mode, or shall I continue in Code mode?"*
