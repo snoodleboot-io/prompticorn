@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from promptcli.builders.copilot import CopilotBuilder
+from promptosaurus.builders.copilot import CopilotBuilder
 
 
 class TestCopilotBuilder(unittest.TestCase):
@@ -12,7 +12,7 @@ class TestCopilotBuilder(unittest.TestCase):
 
     def test_copilot_builder_is_builder_subclass(self):
         """CopilotBuilder should be a subclass of Builder."""
-        from promptcli.builders.builder import Builder
+        from promptosaurus.builders.builder import Builder
 
         self.assertTrue(issubclass(CopilotBuilder, Builder))
 

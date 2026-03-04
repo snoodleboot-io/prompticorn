@@ -1,1 +1,1 @@
-"""Slow tests for promptcli."""
+"""Slow tests for promptosaurus."""

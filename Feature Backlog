@@ -2,7 +2,9 @@
 
 Features/Enhancements
 * Discover 'keys' in various locations through injection. Hardcoded dictionaries are in many places
+<<<<<<< HEAD
+
+=======
+>>>>>>> main
 
 Self Updating
-
-Session.md in hte .prompty directory to track actions between mode changes - all modes should reference it

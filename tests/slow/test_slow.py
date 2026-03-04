@@ -1,4 +1,4 @@
-"""Slow tests for promptcli - placeholder for future tests."""
+"""Slow tests for promptosaurus - placeholder for future tests."""
 
 import pytest
 

@@ -1,16 +1,16 @@
-"""Tests for promptcli.questions.base module."""
+"""Tests for promptosaurus.questions.base module."""
 
 import pytest
 
-from promptcli.questions.base.constants import (
+from promptosaurus.questions.base.constants import (
     REPO_TYPE_MIXED,
     REPO_TYPE_MULTI_FOLDER,
     REPO_TYPE_SINGLE,
     REPO_TYPES,
 )
-from promptcli.questions.base.folder_mapping_question import FolderMappingQuestion
-from promptcli.questions.base.question import Question
-from promptcli.questions.base.repository_type_question import RepositoryTypeQuestion
+from promptosaurus.questions.base.folder_mapping_question import FolderMappingQuestion
+from promptosaurus.questions.base.question import Question
+from promptosaurus.questions.base.repository_type_question import RepositoryTypeQuestion
 
 
 class TestQuestion:

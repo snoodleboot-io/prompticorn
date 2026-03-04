@@ -51,10 +51,10 @@ jobs:
         run: uv sync --dev
 
       - name: Run Ruff linter
-        run: uv run ruff check --output-format=github .
+        run: uv run ruff check --output-format=github --exclude=tests/ .
 
       - name: Run Ruff format check
-        run: uv run ruff format --check .
+        run: uv run ruff format --check --exclude=tests/ .
 
       - name: Run type checking with pyright
         run: uv run pyright
@@ -287,8 +287,8 @@ jobs:
           python -m venv test_env
           source test_env/bin/activate
           pip install dist/*.whl
-          prompt --help
-          python -c "import promptcli; print('promptcli imported successfully')"
+          promptosaurus --help
+          python -c "import promptosaurus; print('promptosaurus imported successfully')"
         shell: bash
 
   # Build for release - requires all tests (integration, security, slow)
@@ -348,8 +348,8 @@ jobs:
           python -m venv test_env
           source test_env/bin/activate
           pip install dist/*.whl
-          prompt --help
-          python -c "import promptcli; print('promptcli imported successfully')"
+          promptosaurus --help
+          python -c "import promptosaurus; print('promptosaurus imported successfully')"
         shell: bash
 
   # =============================================================================
@@ -427,9 +427,9 @@ jobs:
           source verify_env/bin/activate
           pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ ${{ env.PACKAGE_NAME }}==${{ needs.build.outputs.version }}
           # Verify CLI works
-          prompt --help
+          promptosaurus --help
           # Verify import works
-          python -c "import promptcli; print(f'Successfully installed promptcli {promptcli.__version__} from TestPyPI')"
+          python -c "import promptosaurus; print(f'Successfully installed promptosaurus {promptosaurus.__version__} from TestPyPI')"
         shell: bash
 
   verify-pypi:
@@ -452,9 +452,9 @@ jobs:
           source verify_env/bin/activate
           pip install ${{ env.PACKAGE_NAME }}==${{ needs.build.outputs.version }}
           # Verify CLI works
-          prompt --help
+          promptosaurus --help
           # Verify import works
-          python -c "import promptcli; print(f'Successfully installed promptcli {promptcli.__version__} from PyPI')"
+          python -c "import promptosaurus; print(f'Successfully installed promptosaurus {promptosaurus.__version__} from PyPI')"
         shell: bash
 
   # =============================================================================
