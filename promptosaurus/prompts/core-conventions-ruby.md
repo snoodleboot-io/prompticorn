@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/core-conventions-ruby.md -->
 # Ruby Conventions
 
 Language:             {{LANGUAGE}}           e.g., Ruby 3.3

@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/migration-strategy.md -->
 # migration-strategy.md
 # Behavior when the user asks to migrate code, upgrade frameworks,
 # change languages, or move between major versions.

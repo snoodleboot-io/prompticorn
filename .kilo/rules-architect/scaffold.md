@@ -1,4 +1,4 @@
-<!-- path: flat/architect-scaffold.md -->
+<!-- path: promptosaurus/prompts/architect-scaffold.md -->
 # architect-scaffold.md
 # Behavior when the user asks to scaffold or start a new project.
 

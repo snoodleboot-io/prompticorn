@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/core-conventions-py.md -->
 # Python Conventions
 
 Language:             python           e.g., Python 3.11+

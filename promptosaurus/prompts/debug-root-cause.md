@@ -1,4 +1,4 @@
-<!-- path: flat/debug-root-cause.md -->
+<!-- path: promptosaurus/prompts/debug-root-cause.md -->
 # debug-root-cause.md
 # Behavior when the user is debugging a bug or unexpected behavior.
 

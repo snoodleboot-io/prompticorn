@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/refactor-strategy.md -->
 # refactor-strategy.md
 # Behavior when the user asks to refactor code.
 #

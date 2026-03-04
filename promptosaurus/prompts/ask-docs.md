@@ -1,4 +1,4 @@
-<!-- path: flat/ask-docs.md -->
+<!-- path: promptosaurus/prompts/ask-docs.md -->
 # ask-docs.md
 # Behavior when the user asks to generate or improve documentation.
 

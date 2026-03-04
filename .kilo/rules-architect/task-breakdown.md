@@ -1,4 +1,4 @@
-<!-- path: flat/architect-task-breakdown.md -->
+<!-- path: promptosaurus/prompts/architect-task-breakdown.md -->
 # architect-task-breakdown.md
 # Behavior when the user asks to break down a feature, epic, or PRD into tasks.
 

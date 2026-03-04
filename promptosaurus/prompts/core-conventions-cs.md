@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/core-conventions-cs.md -->
 # C# Conventions
 
 Language:             {{LANGUAGE}}           e.g., C# 12, .NET 8

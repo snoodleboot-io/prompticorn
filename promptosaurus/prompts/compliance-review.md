@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/compliance-review.md -->
 # compliance-review.md
 # Behavior when the user asks for a compliance review of code, infrastructure, or data handling.
 #

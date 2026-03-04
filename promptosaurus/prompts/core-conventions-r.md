@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/core-conventions-r.md -->
 # R Conventions
 
 Language:             {{LANGUAGE}}           e.g., R 4.3+

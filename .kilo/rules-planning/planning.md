@@ -1,4 +1,4 @@
-<!-- path: flat/planning.md -->
+<!-- path: promptosaurus/prompts/planning.md -->
 # planning.md
 # Behavior when the user asks about planning, PRDs, ARDs, or starting new work.
 #

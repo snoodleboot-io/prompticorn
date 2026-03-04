@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/security-review.md -->
 # security-review.md
 # Behavior when the user asks for a security review of code or infrastructure.
 #

@@ -1,4 +1,4 @@
-<!-- path: flat/core-conventions.md -->
+<!-- path: promptosaurus/prompts/core-conventions.md -->
 # core-conventions.md
 # Project coding standards - base conventions for all projects.
 # For language-specific rules, see: core-conventions-ts.md, core-conventions-py.md, etc.

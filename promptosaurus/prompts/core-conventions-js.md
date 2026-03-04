@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/core-conventions-js.md -->
 # JavaScript Conventions
 
 Language:             {{LANGUAGE}}           e.g., JavaScript ES2024

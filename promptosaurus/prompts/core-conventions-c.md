@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/core-conventions-c.md -->
 # C Conventions
 
 Language:             {{LANGUAGE}}           e.g., C17, C23

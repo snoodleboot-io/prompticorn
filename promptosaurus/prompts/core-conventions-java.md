@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/core-conventions-java.md -->
 # Java Conventions
 
 Language:             {{LANGUAGE}}           e.g., Java 21

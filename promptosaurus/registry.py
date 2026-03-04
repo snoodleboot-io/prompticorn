@@ -111,7 +111,7 @@ class Registry(BaseModel):
         "security": "Security",
         "compliance": "Compliance",
         "orchestrator": "Orchestrator",
-        "coding-enforcement": "Coding Enforcement",
+        "enforcement": "Enforcement",
         "planning": "Planning",
     }
 
@@ -172,8 +172,8 @@ class Registry(BaseModel):
             "orchestrator-meta.md",
             "orchestrator-pr-description.md",
         ],
-        "coding-enforcement": [
-            "coding-enforcement.md",
+        "enforcement": [
+            "enforcement.md",
         ],
         "planning": [
             "planning.md",
@@ -213,7 +213,7 @@ class Registry(BaseModel):
         ("DECISION LOG", "ask-decision-log.md"),
         ("DEVOPS", "orchestrator-devops.md"),
         ("META / PROCESS", "orchestrator-meta.md"),
-        ("CODING ENFORCEMENT", "coding-enforcement.md"),
+        ("ENFORCEMENT", "enforcement.md"),
         ("PLANNING", "planning.md"),
     ]
 
@@ -369,8 +369,8 @@ class Registry(BaseModel):
             "whenToUse": "Use this mode when setting up CI/CD, managing DevOps tasks, or writing PR descriptions.",
             "groups": ["read", "edit", "command"],
         },
-        "coding-enforcement": {
-            "name": "🛡️ Coding Enforcement",
+        "enforcement": {
+            "name": "🛡️ Enforcement",
             "description": "Reviews code against established coding standards and creates change requests",
             "roleDefinition": "You are a senior software engineer specializing in code quality enforcement and compliance auditing. You review ALL code in the codebase systematically, comparing it against both general and language-specific coding standards. You locate convention files, scan code against documented rules, and produce detailed change request documentation for any violations found. You classify violations by severity (MUST_FIX, SHOULD_FIX, CONSIDER) and provide concrete fixes that bring code into compliance. You do not fix the code yourself — you document the issues and hand them off to the orchestrator mode for resolution. You flag architectural risks, pattern violations, and deviations from established conventions with precision and clarity.",
             "whenToUse": "Use this mode when enforcing coding standards, checking compliance against conventions, or auditing code for pattern violations.",

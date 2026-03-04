@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/core-conventions-scala.md -->
 # Scala Conventions
 
 Language:             {{LANGUAGE}}           e.g., Scala 3.4

@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/core-conventions-clojure.md -->
 # Clojure Conventions
 
 Language:             {{LANGUAGE}}           e.g., Clojure 1.12

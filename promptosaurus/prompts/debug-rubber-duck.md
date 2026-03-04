@@ -1,4 +1,4 @@
-<!-- path: flat/debug-rubber-duck.md -->
+<!-- path: promptosaurus/prompts/debug-rubber-duck.md -->
 # debug-rubber-duck.md
 # Behavior when the user wants to think through a problem out loud.
 

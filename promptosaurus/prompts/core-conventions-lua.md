@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/core-conventions-lua.md -->
 # Lua Conventions
 
 Language:             {{LANGUAGE}}           e.g., Lua 5.4

@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/explain-strategy.md -->
 # explain-strategy.md
 # Behavior when the user asks to explain code, a file, or a concept.
 #

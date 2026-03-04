@@ -1,4 +1,4 @@
-<!-- path: flat/code-boilerplate.md -->
+<!-- path: promptosaurus/prompts/code-boilerplate.md -->
 # code-boilerplate.md
 # Behavior when the user asks to generate boilerplate or structural code.
 

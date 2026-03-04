@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/core-conventions-cpp.md -->
 # C++ Conventions
 
 Language:             {{LANGUAGE}}           e.g., C++20, C++23

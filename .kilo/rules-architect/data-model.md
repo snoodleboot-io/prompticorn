@@ -1,4 +1,4 @@
-<!-- path: flat/architect-data-model.md -->
+<!-- path: promptosaurus/prompts/architect-data-model.md -->
 # architect-data-model.md
 # Behavior when the user asks to design a data model or schema.
 

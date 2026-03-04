@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/core-conventions-elm.md -->
 # Elm Conventions
 
 Language:             {{LANGUAGE}}           e.g., Elm 0.19

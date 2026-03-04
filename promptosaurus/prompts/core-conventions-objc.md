@@ -1,3 +1,4 @@
+<!-- path: promptosaurus/prompts/core-conventions-objc.md -->
 # Objective-C Conventions
 
 Language:             {{LANGUAGE}}           e.g., Objective-C

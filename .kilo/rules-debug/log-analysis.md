@@ -1,4 +1,4 @@
-<!-- path: flat/debug-log-analysis.md -->
+<!-- path: promptosaurus/prompts/debug-log-analysis.md -->
 # debug-log-analysis.md
 # Behavior when the user shares logs, stack traces, or distributed traces.
 
