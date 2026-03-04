@@ -17,8 +17,8 @@ Run these git commands:
 
 ### 2. Parse Branch Name for Context
 Extract information from branch name patterns:
-- **Ticket references:** JIRA-123, PROJ-456, #789
-- **Branch type:** feature/, bugfix/, hotfix/, chore/
+- **Ticket references:** PROJ-123, #789
+- **Branch type:** feat/, bugfix/, hotfix/
 - **Description:** The human-readable part after the type/ticket
 
 ### 3. Analyze Commits
@@ -68,90 +68,166 @@ Description of tests added or verification steps
 ### Fixes (optional)
 Links to issues this PR resolves
 
-## Checklist
+---
 
-Before submitting the PR, verify:
-- [ ] Summary section exists and is not empty
-- [ ] Summary explains WHAT the PR does
-- [ ] Summary explains WHY the change is needed
-- [ ] Summary is 2-4 sentences long
+## Examples: Good vs Bad PR Descriptions
 
-## Example Output
+### Example 1: Poor Description (Too Vague)
 
+❌ **Bad:**
+```markdown
+## Summary
+Fixed some bugs in the UI code.
+
+## Changes
+Updated files in the UI module.
+```
+
+**Problems:**
+- No WHAT (which bugs?)
+- No WHY (why does this matter?)
+- Too vague
+
+✓ **Fixed to:**
+```markdown
+## Summary
+Fixed the SweetTeaError that occurs when running `uv run prompt init` by implementing 
+explicit renderer registration with correct snake_case keys. This resolves the runtime 
+failure when the renderer factory couldn't find the windows_input renderer.
+
+## Changes
+- **fix(ui):** Add Renderer base class in domain layer
+- **fix(ui):** Update all renderers to inherit from base class
+- **fix(ui):** Register renderers with snake_case key format
+- **test(ui):** Add 17 unit tests for renderer registration and lookup
+
+## Testing
+All 17 UI factory tests pass. Coverage: 94%.
+```
+
+---
+
+### Example 2: Complex Multi-Commit PR
+
+**Situation:** 23 commits across 8 files implementing webhook support
+
+✓ **Good:**
 ```markdown
 ## Summary
 
-This PR implements proper SOLID factory pattern for UI renderer registration to fix the 
-SweetTeaError: The key windows_input not present. It adds a Renderer base class in the 
-domain layer and registers all renderers with explicit snake_case keys.
+This PR implements complete webhook support for event streaming. Users can now register 
+webhooks to receive real-time events when objects are created, updated, or deleted. 
+This reduces polling overhead for integrations and enables true event-driven architecture.
 
 ## Changes
 
-- **fix(ui):** Add Renderer base class in domain layer
-- **fix(ui):** Update renderers to inherit from base class
-- **fix(ui):** Register renderers with Registry.register()
-- **test(ui):** Add comprehensive unit tests
+**Data Model:**
+- **feat(schema):** Add webhooks table with URL, event filters, auth token
+- **feat(schema):** Add webhook_deliveries table for audit trail
+
+**API Endpoints:**
+- **feat(api):** POST /webhooks - Create new webhook
+- **feat(api):** GET /webhooks - List user's webhooks  
+- **feat(api):** DELETE /webhooks/{id} - Remove webhook
+- **feat(api):** GET /webhooks/{id}/deliveries - View delivery history
+
+**Core Logic:**
+- **feat(core):** Implement EventDispatcher to route events to webhooks
+- **feat(core):** Implement WebhookClient for HTTP delivery with retries
+- **feat(core):** Add exponential backoff for failed deliveries (max 10 attempts)
+
+**Security:**
+- **feat(auth):** Add webhook_secret generation and HMAC signing
+- **fix(security):** Validate webhook URLs to prevent SSRF attacks
+- **feat(security):** Rate limit webhook delivery (100/min per endpoint)
+
+**Testing:**
+- **test(integration):** Add 34 integration tests for webhook flow
+- **test:** Add 8 tests for exponential backoff logic
+- **test:** Add 6 security tests for SSRF validation and HMAC signing
+- **test:** 91% code coverage on webhook module
+
+**Documentation:**
+- **docs:** Add Webhook Setup Guide
+- **docs:** Add Webhook Event Reference
 
 ## Testing
 
-All 17 UI factory and renderer tests pass.
-
-## Fixes
-
-Resolves: SweetTeaError for missing renderer keys
-```
-
-## PR Update Format
-
-If an existing PR description is provided and new commits have been added:
-
-1. **Preserve** the original Summary section
-2. **Add** an "## Updates" section at the end
-3. **List** only the new commits since the last PR update
-4. **Note** any new breaking changes introduced
-
-Example:
-```markdown
-## Summary
-
-[Original summary preserved]
-
-## Changes
-
-[Original changes preserved]
-
-## Updates
-
-New commits added since last review:
-
-- **feat(api):** Add rate limiting middleware
-- **fix(auth):** Handle edge case in token validation
-- **test:** Add integration tests for rate limiting
-
-⚠️ **New Breaking Change:** API rate limits now default to 100 req/min (previously unlimited)
-```
-
-## Ticket References
-
-If ticket IDs are found in the branch name or commits, include them:
-
-```markdown
-## Related Tickets
-
-- JIRA-123: Add user authentication
-- JIRA-124: Implement token refresh
-```
+All tests passing in CI:
+- Unit tests: 52 total, all passing
+- Integration tests: 34 total, all passing
+- Coverage: 91% on webhook module (target: 80%)
 
 ## Breaking Changes
 
-If any commits have `BREAKING CHANGE:` footer or `!` marker (e.g., `feat!:`), add:
+None. Webhook support is entirely additive.
+```
+
+---
+
+### Example 3: Common Mistakes to Avoid
+
+❌ **Mistake: Vague change descriptions**
+```
+- Updated auth code
+- Added fixes
+- Refactored module
+```
+
+✓ **Instead:**
+```
+- **fix(auth):** Implement proper JWT token refresh with rotation
+- **fix(security):** Add HMAC signing to webhook payloads
+- **refactor(core):** Extract validation logic to separate module
+```
+
+---
+
+❌ **Mistake: Missing context**
+```
+## Summary
+Updated the database layer.
+
+## Changes
+Modified ORM usage and added caching.
+```
+
+✓ **Instead:**
+```
+## Summary
+Implemented query caching in the database layer to reduce N+1 query problems. 
+This change improves API response time for user list endpoints from 2s to 200ms 
+by caching role lookups that were hitting the database for every user.
+
+## Changes
+- **perf(db):** Add query cache for role lookups (30s TTL)
+- **feat(db):** Implement invalidation on role updates
+- **test:** Add 8 tests for cache invalidation
+- **docs:** Update database performance guidelines
+```
+
+---
+
+## Checklist: PR Description Completeness
+
+Before submitting any PR description:
 
 ```markdown
-## ⚠️ Breaking Changes
+## PR Description Quality Checklist
 
-- **Behavior change:** [Description of what changed]
-- **Migration:** [How to update existing code]
+- [ ] Summary is 2-4 sentences long
+- [ ] Summary answers: WHAT does this PR do?
+- [ ] Summary answers: WHY is this change needed?
+- [ ] No vague terms like "fixed", "updated", "refactored" in summary
+- [ ] Changes are grouped by type (feat, fix, test, docs, chore)
+- [ ] Each change entry is specific (includes file or component)
+- [ ] Testing section includes test counts and coverage %
+- [ ] Breaking changes section exists (even if "None")
+- [ ] Commit messages follow conventional commit format
+- [ ] No TODOs or outstanding issues left
 ```
+
+---
 
 ## Session Context
 
@@ -160,7 +236,7 @@ Before starting work in Orchestrator mode:
 1. **Check for session file:**
    - Run: `git branch --show-current`
    - Look in `.prompty/session/` for files matching current branch
-   - If on `main` branch: suggest creating feature branch or ask for branch name
+   - If on `main`: suggest creating feature branch or ask for branch name
 
 2. **If no session exists:**
    - Create `.prompty/session/` directory if needed
