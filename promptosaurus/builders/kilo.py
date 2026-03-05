@@ -55,8 +55,8 @@ class KiloBuilder(Builder):
         "html": "core-html.md",
     }
 
-    # Modes that are collapsed into single .opencode/rules/{MODE}.md files
-    COLLAPSED_MODES = ["architect", "code", "ask", "orchestrator", "debug"]
+    # All modes are collapsed into single .opencode/rules/{MODE}.md files
+    # (modes are sourced from registry.modes)
 
     # Core files that get concatenated into _base.md
     BASE_FILES = [
@@ -87,8 +87,8 @@ class KiloBuilder(Builder):
         # 2. Create _base.md (collapsed core files + language convention)
         actions.append(self._create_base_md(rules_dir, language_file, dry_run, config))
 
-        # 3. Create collapsed mode files for architect, code, ask, orchestrator, debug
-        for mode_key in self.COLLAPSED_MODES:
+        # 3. Create collapsed mode files for all modes
+        for mode_key in registry.modes.keys():
             if mode_key in registry.mode_files:
                 actions.append(
                     self._create_collapsed_mode_md(
@@ -96,26 +96,41 @@ class KiloBuilder(Builder):
                     )
                 )
 
-        # 4. Copy remaining mode files to old structure (for non-collapsed modes)
-        for mode_key, files in registry.mode_files.items():
-            if mode_key not in self.COLLAPSED_MODES:
-                # These modes still use the old per-file structure in .kilo/rules-{mode}/
-                base = output / ".kilo"
-                for filename in files:
-                    destination = (
-                        base / f"rules-{mode_key}" / registry.dest_name(mode_key, filename)
-                    )
-                    actions.append(
-                        self._copy(registry.prompt_path(filename), destination, dry_run, config)
-                    )
-
-        # 5. Generate .kilocodemodes manifest (only for non-collapsed modes)
+        # 4. Generate opencode.json and .kilocodemodes manifest
+        actions.append(self._create_opencode_json(output, dry_run))
         actions.append(self._write_manifest(output / ".kilocodemodes", dry_run))
 
-        # 6. Build .kiloignore
+        # 5. Build .kiloignore
         actions.extend(self._build_ignore(output, dry_run))
 
         return actions
+
+    def _create_opencode_json(self, output: Path, dry_run: bool) -> str:
+        """Generate opencode.json configuration file."""
+        destination = output / "opencode.json"
+        label = "opencode.json"
+
+        # Build instructions array - AGENTS.md, _base.md, and all mode files
+        instructions = [
+            "AGENTS.md",
+            ".opencode/rules/_base.md",
+        ]
+        # Add all mode files
+        for mode_key in sorted(registry.modes.keys()):
+            instructions.append(f".opencode/rules/{mode_key}.md")
+
+        data = {
+            "instructions": instructions,
+        }
+
+        import json
+
+        content = json.dumps(data, indent=2)
+
+        if dry_run:
+            return f"[dry-run] {label}"
+        destination.write_text(content, encoding="utf-8")
+        return f"✓ {label}"
 
     def _write_manifest(self, destination: Path, dry_run: bool) -> str:
         """Write the .kilocodemodes manifest file."""
@@ -239,34 +254,25 @@ This directory contains the agent instructions for Kilo Code.
 
 ## Available Agents
 
-### Core Agents (Built-in)
+All agents are collapsed into individual `.opencode/rules/{MODE}.md` files:
 
-These agents are built into Kilo Code and are always available:
-
-| Agent | Purpose |
-|-------|---------|
-| **Architect** | Scaffold projects, create task breakdowns, design data models |
-| **Code** | Feature implementation and boilerplate generation |
-| **Ask** | Q&A, decision logs, and documentation lookup |
-| **Orchestrator** | CI/CD, DevOps, and PR descriptions |
-| **Debug** | Root cause analysis, log analysis, and problem solving |
-
-### Custom Agents
-
-These agents are defined in `.kilocodemodes` and can be customized:
-
-| Agent | Purpose |
-|-------|---------|
-| **Test** | Write comprehensive tests with coverage-first approach |
-| **Refactor** | Improve code structure while preserving behavior |
-| **Document** | Generate documentation, READMEs, and changelogs |
-| **Explain** | Code walkthroughs and onboarding assistance |
-| **Migration** | Handle dependency upgrades and framework migrations |
-| **Review** | Code, performance, and accessibility reviews |
-| **Security** | Security reviews for code and infrastructure |
-| **Compliance** | SOC 2, ISO 27001, GDPR, HIPAA, PCI-DSS compliance |
-| **Enforcement** | Reviews code against established coding standards |
-| **Planning** | Develops PRDs and works with architects to create ARDs |
+| Mode | Purpose |
+|------|---------|
+| **architect** | Scaffold projects, create task breakdowns, design data models |
+| **code** | Feature implementation and boilerplate generation |
+| **ask** | Q&A, decision logs, and documentation lookup |
+| **orchestrator** | CI/CD, DevOps, and PR descriptions |
+| **debug** | Root cause analysis, log analysis, and problem solving |
+| **test** | Write comprehensive tests with coverage-first approach |
+| **refactor** | Improve code structure while preserving behavior |
+| **document** | Generate documentation, READMEs, and changelogs |
+| **explain** | Code walkthroughs and onboarding assistance |
+| **migration** | Handle dependency upgrades and framework migrations |
+| **review** | Code, performance, and accessibility reviews |
+| **security** | Security reviews for code and infrastructure |
+| **compliance** | SOC 2, ISO 27001, GDPR, HIPAA, PCI-DSS compliance |
+| **enforcement** | Reviews code against established coding standards |
+| **planning** | Develops PRDs and works with architects to create ARDs |
 
 ## Usage
 
@@ -275,8 +281,7 @@ behaviors and will suggest switching when appropriate.
 
 ## Configuration
 
-The `.opencode/rules/` directory contains the instruction files that define
-agent behaviors. The `opencode.json` file references these instructions:
+The `opencode.json` file references these instructions:
 
 ```json
 {

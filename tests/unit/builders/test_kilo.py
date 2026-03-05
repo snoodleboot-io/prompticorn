@@ -37,8 +37,12 @@ class TestKiloBuilder(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmpdir:
             output = Path(tmpdir)
             builder.build(output, dry_run=False)
-            # Should have created files
-            assert (output / ".kilo").exists()
+            # Should have created files in new structure
+            assert (output / ".opencode").exists()
+            assert (output / ".opencode" / "rules").exists()
+            assert (output / "AGENTS.md").exists()
+            assert (output / "opencode.json").exists()
+            assert (output / ".kilocodemodes").exists()
 
     def test_kilo_builder_dry_run(self):
         """KiloBuilder.build() with dry_run=True should not write files."""
@@ -47,7 +51,9 @@ class TestKiloBuilder(unittest.TestCase):
             output = Path(tmpdir)
             builder.build(output, dry_run=True)
             # No files should be created
-            assert not (output / ".kilo").exists()
+            assert not (output / ".opencode").exists()
+            assert not (output / "AGENTS.md").exists()
+            assert not (output / "opencode.json").exists()
 
     def test_kilo_builder_returns_action_strings(self):
         """KiloBuilder.build() should return action strings."""
