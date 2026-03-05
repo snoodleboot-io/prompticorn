@@ -5,6 +5,24 @@
 #
 # Pattern: Assess → Plan → Execute in phases. Never skip ahead.
 
+## Prerequisites — Complete Before Any Work
+
+1. **Read All Core Configuration Files** (REQUIRED FIRST)
+   - Read `core-system.md` — Follow always-on behaviors and git branch protocol
+   - Read `core-conventions.md` — Follow naming, structure, and error handling rules
+   - Read `core-session.md` — Follow session management protocol
+   - Read `core-conventions-{lang}.md` — Follow language-specific conventions
+
+   ALL output must comply with these core files exactly.
+
+2. **Check Git Branch** (per core-system.md)
+   - Run: `git branch --show-current`
+   - If on `main`: STOP and create feature branch first
+
+3. **Initialize/Update Session** (per core-session.md)
+   - Check `.prompty/session/` for existing session matching current branch
+   - Create or update session file with current mode
+
 ## Phase 1 — Assess (produce nothing yet)
 
 1. Read the official migration guide or changelog for the target version/framework.
