@@ -4,7 +4,7 @@ Builds Cursor rule files and .cursorignore.
 
 Output:
   {output}/.cursor/rules/core-system.mdc          ← always-on as .mdc
-  {output}/.cursor/rules/core-conventions.mdc
+  {output}/.cursor/rules/core.mdc
   {output}/.cursor/rules/{mode}/{topic}.mdc        ← per-mode as .mdc
   {output}/.cursorrules                            ← legacy fallback (concatenated)
   {output}/.cursorignore                           ← ignore patterns

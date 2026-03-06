@@ -1,14 +1,12 @@
 """
 builders/kilo.py
-Builds the .kilo/ directory structure for Kilo Code.
+Base class for Kilo Code configuration builders.
 
-Output layout:
-  {output}/.kilo/rules/              ← always-on (all modes)
-  {output}/.kilo/rules-{mode}/       ← per-mode files
-  {output}/.kilocodemodes           ← manifest defining custom modes
+Common functionality shared between CLI and IDE targets.
 """
 
 import shutil
+from abc import ABC, abstractmethod
 from pathlib import Path
 from typing import Any
 
@@ -18,126 +16,79 @@ from promptosaurus.builders.builder import Builder
 from promptosaurus.registry import registry
 
 
-class KiloBuilder(Builder):
-    """Builder for Kilo Code .kilo/ directory structure."""
+class KiloCodeBuilder(Builder, ABC):
+    """Base builder for Kilo Code configurations."""
 
-    # Map of language names to their core-conventions file suffixes
+    # Modes that are built-in to Kilo and should not be generated in output
+    KILO_BUILTIN_MODES = frozenset(
+        {
+            "architect",
+            "code",
+            "ask",
+            "debug",
+            "orchestrator",
+        }
+    )
+
+    @property
+    def custom_modes(self) -> list[str]:
+        """Return list of custom modes (excluding built-in Kilo modes)."""
+        return [m for m in registry.modes.keys() if m not in self.KILO_BUILTIN_MODES]
+
+    # Map of language names to their core file suffixes
     LANGUAGE_FILE_MAP: dict[str, str] = {
-        "python": "core-conventions-py.md",
-        "typescript": "core-conventions-ts.md",
-        "javascript": "core-conventions-js.md",
-        "php": "core-conventions-php.md",
-        "ruby": "core-conventions-ruby.md",
-        "java": "core-conventions-java.md",
-        "csharp": "core-conventions-cs.md",
-        "go": "core-conventions-go.md",
-        "rust": "core-conventions-rust.md",
-        "r": "core-conventions-r.md",
-        "elixir": "core-conventions-elixir.md",
-        "elm": "core-conventions-elm.md",
-        "c": "core-conventions-c.md",
-        "cpp": "core-conventions-cpp.md",
-        "scala": "core-conventions-scala.md",
-        "kotlin": "core-conventions-kotlin.md",
-        "swift": "core-conventions-swift.md",
-        "objc": "core-conventions-objc.md",
-        "dart": "core-conventions-dart.md",
-        "julia": "core-conventions-julia.md",
-        "haskell": "core-conventions-haskell.md",
-        "clojure": "core-conventions-clojure.md",
-        "fsharp": "core-conventions-fsharp.md",
-        "shell": "core-conventions-shell.md",
-        "groovy": "core-conventions-groovy.md",
-        "lua": "core-conventions-lua.md",
-        "sql": "core-conventions-sql.md",
-        "terraform": "core-conventions-terraform.md",
-        "html": "core-conventions-html.md",
+        "python": "core-py.md",
+        "typescript": "core-ts.md",
+        "javascript": "core-js.md",
+        "php": "core-php.md",
+        "ruby": "core-ruby.md",
+        "java": "core-java.md",
+        "csharp": "core-cs.md",
+        "go": "core-go.md",
+        "rust": "core-rust.md",
+        "r": "core-r.md",
+        "elixir": "core-elixir.md",
+        "elm": "core-elm.md",
+        "c": "core-c.md",
+        "cpp": "core-cpp.md",
+        "scala": "core-scala.md",
+        "kotlin": "core-kotlin.md",
+        "swift": "core-swift.md",
+        "objc": "core-objc.md",
+        "dart": "core-dart.md",
+        "julia": "core-julia.md",
+        "haskell": "core-haskell.md",
+        "clojure": "core-clojure.md",
+        "fsharp": "core-fsharp.md",
+        "shell": "core-shell.md",
+        "groovy": "core-groovy.md",
+        "lua": "core-lua.md",
+        "sql": "core-sql.md",
+        "terraform": "core-terraform.md",
+        "html": "core-html.md",
     }
 
+    # Core files that get concatenated into _base.md
+    BASE_FILES = [
+        "core-system.md",
+        "core.md",
+        "core-session.md",
+    ]
+
+    @abstractmethod
     def build(
         self, output: Path, config: dict[str, Any] | None = None, dry_run: bool = False
     ) -> list[str]:
         """
-        Write the Kilo .kilo/ structure under `output`.
+        Build Kilo Code configuration. Subclasses implement specific output formats.
         Returns a list of action strings for display.
         """
-        actions: list[str] = []
-        base = output / ".kilo"
+        pass
 
-        # Get selected language from config
-        selected_language = config.get("defaults", {}).get("language", "") if config else ""
-        language_file = (
-            self.LANGUAGE_FILE_MAP.get(selected_language.lower()) if selected_language else None
-        )
-
-        # Always-on rules (filter language-specific files)
-        for filename in registry.always_on:
-            # Skip language-specific files that don't match the selected language
-            if filename.startswith("core-conventions-") and filename != language_file:
-                continue
-
-            destination = base / "rules" / filename
-            actions.append(self._copy(registry.prompt_path(filename), destination, dry_run, config))
-
-        # Per-mode rules
-        for mode_key, files in registry.mode_files.items():
-            for filename in files:
-                destination = base / f"rules-{mode_key}" / registry.dest_name(mode_key, filename)
-                actions.append(
-                    self._copy(registry.prompt_path(filename), destination, dry_run, config)
-                )
-
-        # Generate .kilocodemodes manifest
-        actions.append(self._write_manifest(output / ".kilocodemodes", dry_run))
-
-        # Build .kiloignore
-        actions.extend(self._build_ignore(output, dry_run))
-
-        return actions
-
-    def _write_manifest(self, destination: Path, dry_run: bool) -> str:
-        """Write the .kilocodemodes manifest file."""
-        # Build data structure for YAML
-        modes = []
-        for mode_key, mode_info in registry.kilo_modes.items():
-            mode_data = {
-                "slug": mode_key,
-                "name": mode_info.get("name", mode_key.title()),
-                "description": mode_info.get("description", ""),
-                "roleDefinition": mode_info.get("roleDefinition", ""),
-                "whenToUse": mode_info.get("whenToUse", ""),
-                "groups": mode_info.get("groups", ["read", "edit", "command"]),
-            }
-            modes.append(mode_data)
-
-        data = {"customModes": modes}
-
-        # Generate YAML
-        content = yaml.dump(data, default_flow_style=False, allow_unicode=True, sort_keys=False)
-
-        # Post-process: quote roleDefinition values that contain colons
-        lines = content.split("\n")
-        new_lines = []
-        for line in lines:
-            if line.startswith("    roleDefinition:"):
-                key, value = line.split(":", 1)
-                value = value.strip()
-                # Quote if contains colon and not already quoted
-                if ":" in value:
-                    # Escape backslashes first, then quotes
-                    value = value.replace("\\", "\\\\").replace('"', '\\"')
-                    value = '"' + value + '"'
-                line = f"{key}: {value}"
-            new_lines.append(line)
-
-        content = "\n".join(new_lines)
-
-        label = ".kilocodemodes"
-
-        if dry_run:
-            return f"[dry-run] {label}"
-        destination.write_text(content, encoding="utf-8")
-        return f"✓ {label}"
+    @abstractmethod
+    def _get_agents_md_content(self) -> str:
+        """Get the AGENTS.md content specific to the builder type."""
+        pass
 
     def _copy(
         self,
@@ -154,7 +105,7 @@ class KiloBuilder(Builder):
 
         # If config is provided and this is a language-specific conventions file,
         # perform template substitution
-        if config and source_path.name.startswith("core-conventions-"):
+        if config and source_path.name.startswith("core-"):
             content = source_path.read_text(encoding="utf-8")
             content = self._substitute_template_variables(content, config)
             destination.write_text(content, encoding="utf-8")
@@ -200,6 +151,50 @@ class KiloBuilder(Builder):
 
         return content
 
+    def _write_manifest(self, destination: Path, dry_run: bool) -> str:
+        """Write the .kilocodemodes manifest file."""
+        # Build data structure for YAML
+        modes = []
+        for mode_key, mode_info in registry.kilo_modes.items():
+            mode_data = {
+                "slug": mode_key,
+                "name": mode_info.get("name", mode_key.title()),
+                "description": mode_info.get("description", ""),
+                "roleDefinition": mode_info.get("roleDefinition", ""),
+                "whenToUse": mode_info.get("whenToUse", ""),
+                "groups": mode_info.get("groups", ["read", "edit", "command"]),
+            }
+            modes.append(mode_data)
+
+        data = {"customModes": modes}
+
+        # Generate YAML
+        content = yaml.dump(data, default_flow_style=False, allow_unicode=True, sort_keys=False)
+
+        # Post-process: quote roleDefinition values that contain colons
+        lines = content.split("\n")
+        new_lines = []
+        for line in lines:
+            if line.startswith("    roleDefinition:"):
+                key, value = line.split(":", 1)
+                value = value.strip()
+                # Quote if contains colon and not already quoted
+                if ":" in value:
+                    # Escape backslashes first, then quotes
+                    value = value.replace("\\", "\\\\").replace('"', '\\"')
+                    value = '"' + value + '"'
+                line = f"{key}: {value}"
+            new_lines.append(line)
+
+        content = "\n".join(new_lines)
+
+        label = ".kilocodemodes"
+
+        if dry_run:
+            return f"[dry-run] {label}"
+        destination.write_text(content, encoding="utf-8")
+        return f"✓ {label}"
+
     def _build_ignore(self, output: Path, dry_run: bool) -> list[str]:
         """Generate .kiloignore file."""
         destination = output / ".kiloignore"
@@ -212,3 +207,127 @@ class KiloBuilder(Builder):
         destination.write_text(content, encoding="utf-8")
         lines = content.count("\n")
         return [f"✓ .kiloignore ({lines} lines)"]
+
+    def _create_base_md(
+        self,
+        rules_dir: Path,
+        language_file: str | None,
+        dry_run: bool,
+        config: dict[str, Any] | None = None,
+    ) -> str:
+        """Create _base.md by concatenating core files."""
+        destination = rules_dir / "_base.md"
+        label = ".opencode/rules/_base.md"
+
+        if dry_run:
+            return f"[dry-run] {label}"
+
+        # Collect content from base files
+        parts: list[str] = []
+
+        for filename in self.BASE_FILES:
+            source_path = registry.prompt_path(filename)
+            if source_path.exists():
+                content = source_path.read_text(encoding="utf-8")
+                # Strip header comments
+                lines = content.splitlines(keepends=True)
+                start = 0
+                for i, line in enumerate(lines[:3]):
+                    stripped = line.strip()
+                    if stripped.startswith("# ") and (
+                        stripped.endswith(".md") or "Behavior when" in stripped
+                    ):
+                        start = i + 1
+                    elif stripped.startswith("<!--") and stripped.endswith("-->"):
+                        start = i + 1
+                parts.append("".join(lines[start:]))
+
+        # Add language-specific conventions if selected
+        if language_file:
+            source_path = registry.prompt_path(language_file)
+            if source_path.exists():
+                content = source_path.read_text(encoding="utf-8")
+                # Apply template substitution for language files
+                if config:
+                    content = self._substitute_template_variables(content, config)
+                # Strip header comments
+                lines = content.splitlines(keepends=True)
+                start = 0
+                for i, line in enumerate(lines[:3]):
+                    stripped = line.strip()
+                    if stripped.startswith("# ") and stripped.endswith(".md"):
+                        start = i + 1
+                    elif stripped.startswith("<!--") and stripped.endswith("-->"):
+                        start = i + 1
+                parts.append("".join(lines[start:]))
+
+        # Join all parts with clear separators
+        full_content = "\n---\n\n".join(parts)
+
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_text(full_content, encoding="utf-8")
+        return f"✓ {label}"
+
+    def _create_collapsed_mode_md(
+        self,
+        rules_dir: Path,
+        mode_key: str,
+        filenames: list[str],
+        dry_run: bool,
+        config: dict[str, Any] | None = None,
+    ) -> str:
+        """Create a collapsed {MODE}.md file from multiple subagent files."""
+        destination = rules_dir / f"{mode_key}.md"
+        label = f".opencode/rules/{mode_key}.md"
+
+        if dry_run:
+            return f"[dry-run] {label}"
+
+        # Collect content from all subagent files
+        parts: list[str] = []
+
+        for filename in filenames:
+            source_path = registry.prompt_path(filename)
+            if source_path.exists():
+                content = source_path.read_text(encoding="utf-8")
+                # Strip header comments
+                lines = content.splitlines(keepends=True)
+                start = 0
+                for i, line in enumerate(lines[:3]):
+                    stripped = line.strip()
+                    if stripped.startswith("# ") and (
+                        stripped.endswith(".md") or "Behavior when" in stripped
+                    ):
+                        start = i + 1
+                    elif stripped.startswith("<!--") and stripped.endswith("-->"):
+                        start = i + 1
+                parts.append("".join(lines[start:]))
+
+        # Join all parts with clear separators
+        full_content = "\n---\n\n".join(parts)
+
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_text(full_content, encoding="utf-8")
+        return f"✓ {label}"
+
+    def _create_agents_md(self, output: Path, dry_run: bool) -> str:
+        """Create AGENTS.md user guide."""
+        destination = output / "AGENTS.md"
+        label = "AGENTS.md"
+
+        # Get builder-specific content
+        content = self._get_agents_md_content()
+
+        if dry_run:
+            return f"[dry-run] {label}"
+
+        destination.parent.mkdir(parents=True, exist_ok=True)
+        destination.write_text(content, encoding="utf-8")
+        return f"✓ {label}"
+
+
+# NOTE: For backwards compatibility, import KiloBuilder from:
+# - promptosaurus.builders.kilo_cli (CLI format, default)
+# - promptosaurus.builders.kilo_ide (IDE format)
+# - promptosaurus.builders (exports KiloBuilder as alias to KiloCLIBuilder)
+# - promptosaurus.builders.kilo (this file, exports KiloCodeBuilder base class)
