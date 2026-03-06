@@ -99,9 +99,10 @@ def init_prompts():
         # Step 1: Select which AI assistant configurations to generate
         ai_tools = select_option_with_explain(
             question="Which AI assistant configurations would you like to generate?",
-            options=["kilo", "cline", "cursor", "copilot"],
+            options=["kilo-cli", "kilo-ide", "cline", "cursor", "copilot"],
             explanations={
-                "kilo": "Kilo Code - .kilo/ directory with rules and custom modes",
+                "kilo-cli": "Kilo Code (CLI) - .opencode/rules/ with collapsed mode files",
+                "kilo-ide": "Kilo Code (IDE) - .kilo/rules-{mode}/ directory structure",
                 "cline": "Cline - .clinerules file (concatenated rules)",
                 "cursor": "Cursor - .cursor/rules/ directory + .cursorrules",
                 "copilot": "GitHub Copilot - .github/copilot-instructions.md",
@@ -189,10 +190,12 @@ def _get_builder(tool: str):
     from promptosaurus.builders.cline import ClineBuilder
     from promptosaurus.builders.copilot import CopilotBuilder
     from promptosaurus.builders.cursor import CursorBuilder
-    from promptosaurus.builders.kilo import KiloBuilder
+    from promptosaurus.builders.kilo_cli import KiloCLIBuilder
+    from promptosaurus.builders.kilo_ide import KiloIDEBuilder
 
     builders = {
-        "kilo": KiloBuilder,
+        "kilo-cli": KiloCLIBuilder,
+        "kilo-ide": KiloIDEBuilder,
         "cline": ClineBuilder,
         "cursor": CursorBuilder,
         "copilot": CopilotBuilder,

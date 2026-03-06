@@ -98,7 +98,7 @@ prompt validate   # check for missing files and unregistered orphans
 
 ```bash
 # 1. Fill in your project's coding standards
-$EDITOR promptosaurus/prompts/core-conventions.md
+$EDITOR promptosaurus/prompts/core.md
 
 # 2. Run init to configure and generate AI assistant configs
 cd my-project
