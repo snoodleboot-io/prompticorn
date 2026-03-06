@@ -430,7 +430,7 @@ class TestHandleSingleLanguageQuestions:
         config = handler.handle("single-language")
 
         assert isinstance(config, dict)
-        assert "defaults" in config
+        assert "spec" in config
 
     def test_python_questions_in_config(self, monkeypatch):
         """Python questions should populate config defaults."""
@@ -445,6 +445,6 @@ class TestHandleSingleLanguageQuestions:
 
         config = handler.handle("single-language")
 
-        assert "defaults" in config
-        # Config should have some defaults populated
-        assert isinstance(config["defaults"], dict)
+        assert "spec" in config
+        # Config should have some spec populated
+        assert isinstance(config["spec"], dict)

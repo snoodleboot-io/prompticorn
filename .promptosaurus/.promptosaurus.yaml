@@ -1,0 +1,23 @@
+version: '1.0'
+repository:
+  type: single-language
+  mappings: {}
+spec:
+  language: python
+  runtime: '3.12'
+  package_manager: uv
+  test_framework: hybrid
+  linter:
+  - ruff
+  - pyright
+  formatter:
+  - ruff
+  coverage:
+    line: 80
+    branch: 70
+    function: 90
+    statement: 85
+    mutation: 80
+    path: 60
+  test_runner: pytest
+  abstract_class_style: interface

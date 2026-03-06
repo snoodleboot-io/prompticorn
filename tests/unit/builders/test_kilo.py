@@ -17,21 +17,22 @@ class TestKiloCodeBuilderBase(unittest.TestCase):
         from promptosaurus.builders.kilo import KiloCodeBuilder
         assert hasattr(KiloCodeBuilder, "LANGUAGE_FILE_MAP")
         assert "python" in KiloCodeBuilder.LANGUAGE_FILE_MAP
-        assert "typescript" in KiloCodeBuilder.LANGUAGE_FILE_MAP
+        assert KiloCodeBuilder.LANGUAGE_FILE_MAP["python"] == "agents/core/core-conventions-python.md"
+        assert KiloCodeBuilder.LANGUAGE_FILE_MAP["typescript"] == "agents/core/core-conventions-typescript.md"
 
     def test_base_files(self):
         """KiloCodeBuilder should have BASE_FILES."""
         from promptosaurus.builders.kilo import KiloCodeBuilder
         assert hasattr(KiloCodeBuilder, "BASE_FILES")
-        assert "core-system.md" in KiloCodeBuilder.BASE_FILES
-        assert "core.md" in KiloCodeBuilder.BASE_FILES
+        assert "agents/core/core-system.md" in KiloCodeBuilder.BASE_FILES
+        assert "agents/core/core-conventions.md" in KiloCodeBuilder.BASE_FILES
 
     def test_substitute_template_variables_basic(self):
         """KiloCodeBuilder should substitute basic template variables."""
         builder = KiloCLIBuilder()
         content = "Language: {{LANGUAGE}}, Runtime: {{RUNTIME}}"
         config = {
-            "defaults": {
+            "spec": {
                 "language": "python",
                 "runtime": "CPython",
             }
@@ -45,7 +46,7 @@ class TestKiloCodeBuilderBase(unittest.TestCase):
         builder = KiloCLIBuilder()
         content = "Tools: {{LINTER}}, {{FORMATTER}}"
         config = {
-            "defaults": {
+            "spec": {
                 "linter": ["ruff", "mypy"],
                 "formatter": ["ruff"],
             }
@@ -59,7 +60,7 @@ class TestKiloCodeBuilderBase(unittest.TestCase):
         builder = KiloCLIBuilder()
         content = "Line: {{LINE_COVERAGE_%}}, Branch: {{BRANCH_COVERAGE_%}}"
         config = {
-            "defaults": {
+            "spec": {
                 "coverage": {
                     "line": 90,
                     "branch": 80,
@@ -74,7 +75,7 @@ class TestKiloCodeBuilderBase(unittest.TestCase):
         """KiloCodeBuilder should handle None values gracefully."""
         builder = KiloCLIBuilder()
         content = "Value: {{MISSING}}"
-        config = {"defaults": {}}
+        config = {"spec": {}}
         result = builder._substitute_template_variables(content, config)
         assert "" in result or result == content
 
@@ -253,7 +254,7 @@ class TestKiloCustomModes(unittest.TestCase):
             builder.build(output, dry_run=False)
             # Check that built-in mode directories are NOT created
             for mode in KiloCodeBuilder.KILO_BUILTIN_MODES:
-                mode_dir = output / ".kilo" / f"rules-{mode}"
+                mode_dir = output / ".kilocode" / f"rules-{mode}"
                 assert not mode_dir.exists(), f"rules-{mode}/ should NOT exist (built-in mode)"
 
 

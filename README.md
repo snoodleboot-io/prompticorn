@@ -105,7 +105,7 @@ cd my-project
 prompt init
 
 # 3. Commit the generated config (example for Kilo Code)
-git add .kilo/ .kilocodemodes .kiloignore
+git add .kilocode/ .kilocodemodes .kiloignore
 git commit -m "chore: add Kilo Code prompt config"
 ```
 
