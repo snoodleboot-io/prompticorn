@@ -17,7 +17,7 @@ class TestConfigHandler:
         """Should return default config path."""
         path = ConfigHandler.get_config_path()
 
-        assert path == Path(".promptosaurus") / "configurations.yaml"
+        assert path == Path(".promptosaurus") / ".promptosaurus.yaml"
 
     def test_get_custom_config_path_uses_default_filename(self):
         """Should return custom config path with default filename when directory provided."""
@@ -25,7 +25,7 @@ class TestConfigHandler:
         path = ConfigHandler.get_config_path(custom)
 
         # When a directory is provided, it should append the default filename
-        assert path == custom / "configurations.yaml"
+        assert path == custom / ".promptosaurus.yaml"
 
     def test_ensure_config_dir_creates_directory(self):
         """Should create config directory if it doesn't exist."""
@@ -56,7 +56,7 @@ class TestConfigHandler:
         """Should save and load config correctly."""
         with tempfile.TemporaryDirectory() as tmpdir:
             config_path = Path(tmpdir) / "config.yaml"
-            test_config = {"version": "1.0", "defaults": {"language": "python"}}
+            test_config = {"version": "1.0", "spec": {"language": "python"}}
 
             ConfigHandler.save_config(test_config, config_path)
 
@@ -86,11 +86,11 @@ class TestDefaultConfigTemplate:
 
     def test_template_has_defaults(self):
         """Template should have defaults key."""
-        assert "defaults" in DEFAULT_CONFIG_TEMPLATE
+        assert "spec" in DEFAULT_CONFIG_TEMPLATE
 
     def test_template_has_coverage(self):
         """Template should have coverage in defaults."""
-        assert "coverage" in DEFAULT_CONFIG_TEMPLATE["defaults"]
+        assert "coverage" in DEFAULT_CONFIG_TEMPLATE["spec"]
 
 
 class TestCreateDefaultConfig:
@@ -100,28 +100,28 @@ class TestCreateDefaultConfig:
         """Should create config with Python defaults."""
         config = create_default_config("python")
 
-        assert config["defaults"]["language"] == "python"
-        assert config["defaults"]["runtime"] == "3.12"
-        assert config["defaults"]["package_manager"] == "poetry"
-        assert config["defaults"]["test_framework"] == "pytest"
-        assert config["defaults"]["linter"] == "ruff"
-        assert config["defaults"]["formatter"] == "ruff"
+        assert config["spec"]["language"] == "python"
+        assert config["spec"]["runtime"] == "3.12"
+        assert config["spec"]["package_manager"] == "poetry"
+        assert config["spec"]["test_framework"] == "pytest"
+        assert config["spec"]["linter"] == "ruff"
+        assert config["spec"]["formatter"] == "ruff"
 
     def test_creates_typescript_config(self):
         """Should create config with TypeScript defaults."""
         config = create_default_config("typescript")
 
-        assert config["defaults"]["language"] == "typescript"
-        assert config["defaults"]["runtime"] == "5.4"
-        assert config["defaults"]["package_manager"] == "npm"
-        assert config["defaults"]["test_framework"] == "vitest"
+        assert config["spec"]["language"] == "typescript"
+        assert config["spec"]["runtime"] == "5.4"
+        assert config["spec"]["package_manager"] == "npm"
+        assert config["spec"]["test_framework"] == "vitest"
 
     def test_creates_javascript_config(self):
         """Should create config with JavaScript defaults."""
         config = create_default_config("javascript")
 
-        assert config["defaults"]["language"] == "javascript"
-        assert config["defaults"]["package_manager"] == "npm"
+        assert config["spec"]["language"] == "javascript"
+        assert config["spec"]["package_manager"] == "npm"
 
     def test_sets_repo_type(self):
         """Should set repository type."""
@@ -137,20 +137,20 @@ class TestCreateDefaultConfig:
             package_manager="pip",
         )
 
-        assert config["defaults"]["runtime"] == "3.11"
-        assert config["defaults"]["package_manager"] == "pip"
+        assert config["spec"]["runtime"] == "3.11"
+        assert config["spec"]["package_manager"] == "pip"
 
     def test_ignores_empty_kwargs(self):
         """Should ignore empty kwargs."""
         config = create_default_config("python", runtime="", package_manager=None)
 
         # Should still have defaults
-        assert config["defaults"]["runtime"] == "3.12"
-        assert config["defaults"]["package_manager"] == "poetry"
+        assert config["spec"]["runtime"] == "3.12"
+        assert config["spec"]["package_manager"] == "poetry"
 
     def test_unknown_language_keeps_defaults(self):
         """Unknown language should still have defaults from first match."""
         config = create_default_config("unknown_lang")
 
         # Should not crash, but may have empty values
-        assert config["defaults"]["language"] == "unknown_lang"
+        assert config["spec"]["language"] == "unknown_lang"

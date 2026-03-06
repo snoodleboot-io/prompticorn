@@ -54,7 +54,7 @@ class HandleSingleLanguageQuestions:
         for q in lang_questions:
             value = self._ask_question(q, language)
             config_key = q.key.replace(f"{language}_", "")
-            config["defaults"][config_key] = value
+            config["spec"][config_key] = value
 
         return config
 

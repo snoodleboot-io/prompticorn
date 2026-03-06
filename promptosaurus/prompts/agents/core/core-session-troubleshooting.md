@@ -10,17 +10,17 @@ This guide helps diagnose and fix issues with session files and session manageme
 ## Issue 1: Session File Not Found
 
 **Symptoms:**
-- No files in `.prompty/session/` directory
+- No files in `.promptosaurus/sessions/` directory
 - Getting "session not found" errors
 - Session management not working
 
 **Diagnosis:**
 ```bash
 # Check if directory exists
-ls -la .prompty/session/
+ls -la .promptosaurus/sessions/
 
 # List all session files
-ls -la .prompty/session/session_*.md
+ls -la .promptosaurus/sessions/session_*.md
 
 # Check if directory is gitignored
 cat .gitignore | grep session
@@ -31,7 +31,7 @@ cat .gitignore | grep session
 ### Solution A: Directory Doesn't Exist
 ```bash
 # Create directory
-mkdir -p .prompty/session/
+mkdir -p .promptosaurus/sessions/
 
 # Create first session
 # (Follow session file format from core-session.md)
@@ -40,7 +40,7 @@ mkdir -p .prompty/session/
 ### Solution B: Session Deleted Accidentally
 ```bash
 # Check git log to see if it was committed (shouldn't be)
-git log --all -- .prompty/session/
+git log --all -- .promptosaurus/sessions/
 
 # Recreate new session
 # (Sessions are safe to delete - they're gitignored)
@@ -58,13 +58,13 @@ git log --all -- .prompty/session/
 **Diagnosis:**
 ```bash
 # List all sessions and their branch names
-for file in .prompty/session/session_*.md; do
+for file in .promptosaurus/sessions/session_*.md; do
   echo "=== $file ==="
   head -5 "$file"
 done
 
 # Or use grep to find matching branches
-grep -l "branch: \"feat/PROJ-123-auth\"" .prompty/session/session_*.md
+grep -l "branch: \"feat/PROJ-123-auth\"" .promptosaurus/sessions/session_*.md
 ```
 
 **Solution:**
@@ -72,7 +72,7 @@ grep -l "branch: \"feat/PROJ-123-auth\"" .prompty/session/session_*.md
 1. **Identify which session is current:**
    ```bash
    # Check dates - most recent is likely current
-   ls -lt .prompty/session/session_*.md | head -3
+   ls -lt .promptosaurus/sessions/session_*.md | head -3
    ```
 
 2. **Merge information if needed:**
@@ -83,7 +83,7 @@ grep -l "branch: \"feat/PROJ-123-auth\"" .prompty/session/session_*.md
 3. **Delete duplicates:**
    ```bash
    # Keep the most recent, delete others
-   rm .prompty/session/session_older_date_*.md
+   rm .promptosaurus/sessions/session_older_date_*.md
    ```
 
 4. **Update the surviving session:**
@@ -107,7 +107,7 @@ git branch --show-current
 # Output: feat/PROJ-123-auth
 
 # Check session branch field
-grep "^branch:" .prompty/session/session_*.md
+grep "^branch:" .promptosaurus/sessions/session_*.md
 # Output: branch: "feat/PROJ-124-other"
 # ❌ MISMATCH!
 ```
@@ -160,7 +160,7 @@ git branch --show-current  # Should match session branch
 **Diagnosis:**
 ```bash
 # Check YAML syntax
-head -10 .prompty/session/session_*.md
+head -10 .promptosaurus/sessions/session_*.md
 
 # Should look like:
 # ---
@@ -222,10 +222,10 @@ branch: "feat/PROJ-123-auth"
 1. **Fix the YAML carefully:**
    ```bash
    # Open in editor and fix formatting
-   vim .prompty/session/session_20260304_k7m9x1.md
+   vim .promptosaurus/sessions/session_20260304_k7m9x1.md
    
    # Verify syntax after editing
-   head -10 .prompty/session/session_*.md
+   head -10 .promptosaurus/sessions/session_*.md
    ```
 
 2. **If too broken, create new session:**
@@ -247,7 +247,7 @@ branch: "feat/PROJ-123-auth"
 **Diagnosis:**
 ```bash
 # Read the entire session file carefully
-cat .prompty/session/session_*.md
+cat .promptosaurus/sessions/session_*.md
 
 # Check specific sections:
 # 1. Context Summary (what work is in progress?)
@@ -300,7 +300,7 @@ git show <commit>  # Details of specific commit
 **Diagnosis:**
 ```bash
 # Check session age
-ls -l .prompty/session/session_*.md
+ls -l .promptosaurus/sessions/session_*.md
 
 # Check how old the branch is
 git log -1 --format="%ai" main..HEAD
@@ -322,8 +322,8 @@ git log -1 --format="%ai" main..HEAD
 # and archive the old one
 
 # Archive old session
-mkdir -p .prompty/session/archive/
-mv .prompty/session/session_old_date_*.md .prompty/session/archive/
+mkdir -p .promptosaurus/sessions/archive/
+mv .promptosaurus/sessions/session_old_date_*.md .promptosaurus/sessions/archive/
 
 # Create new session with current state
 # (Copy relevant info from old session if needed)
@@ -334,8 +334,8 @@ mv .prompty/session/session_old_date_*.md .prompty/session/archive/
 # Archive old sessions after ~30 days
 # This keeps history but avoids confusion
 
-mkdir -p .prompty/session/archive/
-mv .prompty/session/session_*.md .prompty/session/archive/
+mkdir -p .promptosaurus/sessions/archive/
+mv .promptosaurus/sessions/session_*.md .promptosaurus/sessions/archive/
 
 # Keeps context but signals this is old work
 # Create new session for current work
@@ -353,7 +353,7 @@ mv .prompty/session/session_*.md .prompty/session/archive/
 **Diagnosis:**
 ```bash
 # Check if Mode History section exists
-grep -A 10 "## Mode History" .prompty/session/session_*.md
+grep -A 10 "## Mode History" .promptosaurus/sessions/session_*.md
 
 # If missing or only one entry, it needs updating
 ```
@@ -452,8 +452,8 @@ git checkout -b feat/PROJ-123-...
 ```bash
 # After ~1 week on a branch:
 # Archive old session if creating new one
-mkdir -p .prompty/session/archive/
-mv old_session.md .prompty/session/archive/
+mkdir -p .promptosaurus/sessions/archive/
+mv old_session.md .promptosaurus/sessions/archive/
 ```
 
 ---

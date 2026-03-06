@@ -38,7 +38,7 @@ class TestKiloIDEBuilder(unittest.TestCase):
             output = Path(tmpdir)
             builder.build(output, dry_run=False)
             # Should have created IDE-style structure
-            assert (output / ".kilo").exists()
+            assert (output / ".kilocode").exists()
             assert (output / ".kilocodemodes").exists()
             assert (output / ".kiloignore").exists()
             # Should also create AGENTS.md
@@ -51,7 +51,7 @@ class TestKiloIDEBuilder(unittest.TestCase):
             output = Path(tmpdir)
             builder.build(output, dry_run=True)
             # No files should be created
-            assert not (output / ".kilo").exists()
+            assert not (output / ".kilocode").exists()
             assert not (output / ".kilocodemodes").exists()
 
     def test_kilo_ide_builder_returns_action_strings(self):
@@ -70,7 +70,7 @@ class TestKiloIDEBuilder(unittest.TestCase):
             output = Path(tmpdir)
             builder.build(output, dry_run=False)
             # Should have created mode directories
-            kilo_dir = output / ".kilo"
+            kilo_dir = output / ".kilocode"
             # Check for at least one rules-{mode} directory
             has_mode_dir = any(
                 d.is_dir() and d.name.startswith("rules-")
@@ -113,12 +113,12 @@ class TestKiloIDEAgentsContent(unittest.TestCase):
         """KiloIDEBuilder AGENTS.md should include IDE structure info."""
         builder = KiloIDEBuilder()
         content = builder._get_agents_md_content()
-        # Should mention .kilo/ directory structure
-        assert ".kilo/" in content
+        # Should mention .kilocode/ directory structure
+        assert ".kilocode/" in content
         assert "IDE format" in content
         # Should mention core files location
-        assert "core-system.md" in content
-        assert "core.md" in content
+        assert "system.md" in content
+        assert "conventions.md" in content
 
     def test_agents_md_content_includes_all_modes(self):
         """KiloIDEBuilder AGENTS.md should list all modes."""
@@ -140,5 +140,5 @@ class TestKiloIDEAgentsContent(unittest.TestCase):
             assert agents_file.exists()
             content = agents_file.read_text(encoding="utf-8")
             # Verify IDE-specific content
-            assert ".kilo/" in content
+            assert ".kilocode/" in content
             assert "IDE format" in content
