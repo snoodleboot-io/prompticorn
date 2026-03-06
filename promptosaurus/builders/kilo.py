@@ -37,42 +37,42 @@ class KiloCodeBuilder(Builder, ABC):
 
     # Map of language names to their core file suffixes
     LANGUAGE_FILE_MAP: dict[str, str] = {
-        "python": "core-py.md",
-        "typescript": "core-ts.md",
-        "javascript": "core-js.md",
-        "php": "core-php.md",
-        "ruby": "core-ruby.md",
-        "java": "core-java.md",
-        "csharp": "core-cs.md",
-        "go": "core-go.md",
-        "rust": "core-rust.md",
-        "r": "core-r.md",
-        "elixir": "core-elixir.md",
-        "elm": "core-elm.md",
-        "c": "core-c.md",
-        "cpp": "core-cpp.md",
-        "scala": "core-scala.md",
-        "kotlin": "core-kotlin.md",
-        "swift": "core-swift.md",
-        "objc": "core-objc.md",
-        "dart": "core-dart.md",
-        "julia": "core-julia.md",
-        "haskell": "core-haskell.md",
-        "clojure": "core-clojure.md",
-        "fsharp": "core-fsharp.md",
-        "shell": "core-shell.md",
-        "groovy": "core-groovy.md",
-        "lua": "core-lua.md",
-        "sql": "core-sql.md",
-        "terraform": "core-terraform.md",
-        "html": "core-html.md",
+        "python": "agents/core/core-conventions-python.md",
+        "typescript": "agents/core/core-conventions-typescript.md",
+        "javascript": "agents/core/core-conventions-javascript.md",
+        "php": "agents/core/core-conventions-php.md",
+        "ruby": "agents/core/core-conventions-ruby.md",
+        "java": "agents/core/core-conventions-java.md",
+        "csharp": "agents/core/core-conventions-csharp.md",
+        "go": "agents/core/core-conventions-golang.md",
+        "rust": "agents/core/core-conventions-rust.md",
+        "r": "agents/core/core-conventions-r.md",
+        "elixir": "agents/core/core-conventions-elixir.md",
+        "elm": "agents/core/core-conventions-elm.md",
+        "c": "agents/core/core-conventions-c.md",
+        "cpp": "agents/core/core-conventions-cpp.md",
+        "scala": "agents/core/core-conventions-scala.md",
+        "kotlin": "agents/core/core-conventions-kotlin.md",
+        "swift": "agents/core/core-conventions-swift.md",
+        "objc": "agents/core/core-conventions-objc.md",
+        "dart": "agents/core/core-conventions-dart.md",
+        "julia": "agents/core/core-conventions-julia.md",
+        "haskell": "agents/core/core-conventions-haskell.md",
+        "clojure": "agents/core/core-conventions-clojure.md",
+        "fsharp": "agents/core/core-conventions-fsharp.md",
+        "shell": "agents/core/core-conventions-shell.md",
+        "groovy": "agents/core/core-conventions-groovy.md",
+        "lua": "agents/core/core-conventions-lua.md",
+        "sql": "agents/core/core-conventions-sql.md",
+        "terraform": "agents/core/core-conventions-terraform.md",
+        "html": "agents/core/core-conventions-html.md",
     }
 
     # Core files that get concatenated into _base.md
     BASE_FILES = [
-        "core-system.md",
-        "core.md",
-        "core-session.md",
+        "agents/core/core-system.md",
+        "agents/core/core-conventions.md",
+        "agents/core/core-session.md",
     ]
 
     @abstractmethod
@@ -97,8 +97,8 @@ class KiloCodeBuilder(Builder, ABC):
         dry_run: bool,
         config: dict[str, Any] | None = None,
     ) -> str:
-        rel = str(destination).split(".kilo/", 1)[-1]
-        label = f".kilo/{rel}"
+        rel = str(destination).split(".kilocode/", 1)[-1]
+        label = f".kilocode/{rel}"
         if dry_run:
             return f"[dry-run] {source_path.name} → {label}"
         destination.parent.mkdir(parents=True, exist_ok=True)
@@ -116,7 +116,7 @@ class KiloCodeBuilder(Builder, ABC):
 
     def _substitute_template_variables(self, content: str, config: dict[str, Any]) -> str:
         """Replace {{VARIABLE}} templates with values from config."""
-        defaults = config.get("defaults", {})
+        defaults = config.get("spec", {})
 
         def format_value(value: Any) -> str:
             """Format a value for substitution, handling lists."""

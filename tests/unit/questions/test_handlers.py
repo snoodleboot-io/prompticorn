@@ -42,7 +42,7 @@ class TestHandleSingleLanguageQuestions:
         config = handler.handle("single-language")
 
         assert isinstance(config, dict)
-        assert "defaults" in config
+        assert "spec" in config
 
     def test_python_questions_in_config(self, monkeypatch):
         """Python questions should populate config defaults."""
@@ -54,9 +54,9 @@ class TestHandleSingleLanguageQuestions:
 
         config = handler.handle("single-language")
 
-        assert "defaults" in config
-        # Config should have some defaults populated
-        assert isinstance(config["defaults"], dict)
+        assert "spec" in config
+        # Config should have some spec populated
+        assert isinstance(config["spec"], dict)
 
     def test_handler_with_mock_selector_returning_ruff(self, monkeypatch):
         """Handler should work with selector returning ruff for linter."""
@@ -72,4 +72,4 @@ class TestHandleSingleLanguageQuestions:
 
         # Verify the config was created
         assert config is not None
-        assert "defaults" in config
+        assert "spec" in config

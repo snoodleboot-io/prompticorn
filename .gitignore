@@ -74,3 +74,4 @@ build/
 *.egg
 target/
 out/
+/test_output/

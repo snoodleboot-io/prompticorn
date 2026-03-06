@@ -80,7 +80,7 @@ User works on a complex feature spanning multiple days. Session history provides
 
 | ID | Requirement | Priority |
 |----|-------------|----------|
-| F1.1 | Session files stored in `.prompty/session/` directory | Must |
+| F1.1 | Session files stored in `.promptosaurus/sessions/` directory | Must |
 | F1.2 | Session files named `session_{id}.md` with unique identifier | Must |
 | F1.3 | Session directory created automatically if it doesn't exist | Must |
 | F1.4 | Session files use Markdown with YAML frontmatter format | Must |
@@ -102,7 +102,7 @@ User works on a complex feature spanning multiple days. Session history provides
 | ID | Requirement | Priority |
 |----|-------------|----------|
 | F3.1 | AI context tracks currently active session ID | Must |
-| F3.2 | `current_session` pointer file stored at `.prompty/session/.current` | Must |
+| F3.2 | `current_session` pointer file stored at `.promptosaurus/sessions/.current` | Must |
 | F3.3 | Pointer file contains only the active session filename | Must |
 | F3.4 | Session ID is a URL-safe string (UUID or timestamp-based) | Must |
 | F3.5 | Session lookup falls back to branch-based search if pointer missing | Should |
@@ -184,7 +184,7 @@ mode_history:
     summary: "Reviewing implementation approach"
 context_summary: |
   Designing session context persistence for PromptCLI.
-  Key decisions: store in .prompty/session/, YAML frontmatter,
+  Key decisions: store in .promptosaurus/sessions/, YAML frontmatter,
   branch-based association, automatic lifecycle management.
 actions_taken:
   - timestamp: "2026-03-02T15:35:00Z"
@@ -205,7 +205,7 @@ actions_taken:
 Creating comprehensive design documents for session context persistence feature.
 
 ## Key Decisions
-1. Store session files in `.prompty/session/` directory
+1. Store session files in `.promptosaurus/sessions/` directory
 2. Use YAML frontmatter for metadata, Markdown body for details
 3. Branch association allows multiple sessions per branch
 4. Automatic session lifecycle (create/update without user action)
@@ -287,7 +287,7 @@ Each mode's system prompt should include:
 ## Session Context Awareness
 
 1. **On Startup:**
-   - Check `.prompty/session/.current` for active session pointer
+   - Check `.promptosaurus/sessions/.current` for active session pointer
    - If no active session exists for current branch, create new session file
    - Read session context and incorporate into your understanding
 

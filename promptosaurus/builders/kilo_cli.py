@@ -33,7 +33,7 @@ class KiloCLIBuilder(KiloCodeBuilder):
         rules_dir = output / ".opencode" / "rules"
 
         # Get selected language from config
-        selected_language = config.get("defaults", {}).get("language", "") if config else ""
+        selected_language = config.get("spec", {}).get("language", "") if config else ""
         language_file = (
             self.LANGUAGE_FILE_MAP.get(selected_language.lower()) if selected_language else None
         )

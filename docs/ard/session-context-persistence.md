@@ -12,7 +12,7 @@
 This ARD provides technical architecture and implementation guidance for the Session Context Persistence feature. The system will maintain persistent session files that capture context across mode switches, enabling continuity in the development workflow.
 
 **Key Technical Decisions:**
-- Session storage in `.prompty/session/` as Markdown files with YAML frontmatter
+- Session storage in `.promptosaurus/sessions/` as Markdown files with YAML frontmatter
 - Pydantic models for type-safe session data management
 - Git branch association for natural workflow alignment
 - Automatic session lifecycle management (no user intervention required)
@@ -44,7 +44,7 @@ This ARD provides technical architecture and implementation guidance for the Ses
                      ▼
 ┌─────────────────────────────────────────────────────────────────┐
 │                      File System Storage                        │
-│  .prompty/session/                                              │
+│  .promptosaurus/sessions/                                              │
 │    ├── session_abc123.md                                       │
 │    ├── session_def456.md                                       │
 │    └── .current                                                │
@@ -245,7 +245,7 @@ from .models import Session
 class SessionFileManager:
     """Manages file I/O operations for session storage."""
     
-    SESSION_DIR = ".prompty/session"
+    SESSION_DIR = ".promptosaurus/sessions"
     CURRENT_POINTER = ".current"
     
     def __init__(self, root_path: Optional[Path] = None):
@@ -650,7 +650,7 @@ mode_history:
     summary: "Reviewing implementation approach"
 context_summary: |
   Designing session context persistence for PromptCLI.
-  Key decisions: store in .prompty/session/, YAML frontmatter,
+  Key decisions: store in .promptosaurus/sessions/, YAML frontmatter,
   branch-based association, automatic lifecycle management.
 actions_taken:
   - timestamp: "2026-03-02T15:35:00Z"
@@ -672,7 +672,7 @@ version: "1.0"
 Creating comprehensive design documents for session context persistence feature.
 
 ## Key Decisions
-1. Store session files in `.prompty/session/` directory
+1. Store session files in `.promptosaurus/sessions/` directory
 2. Use YAML frontmatter for metadata, Markdown body for details
 3. Branch association allows multiple sessions per branch
 4. Automatic session lifecycle (create/update without user action)
@@ -727,7 +727,7 @@ All mode prompts must include a "Session Context Awareness" section. Here's the 
 Before beginning work, check for session context:
 
 1. **Check Active Session:**
-   - Read `.prompty/session/.current` for active session ID
+   - Read `.promptosaurus/sessions/.current` for active session ID
    - If no pointer exists, search for sessions by current branch name
    - If multiple sessions exist for branch, use most recently active
 
