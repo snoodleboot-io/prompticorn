@@ -10,7 +10,7 @@ Commands:
 
 import sys
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import click
 
@@ -82,7 +82,7 @@ def init_prompts():
     """
     Interactively initialize prompt configuration for your project.
 
-    Walks through questions to set up .promptosaurus/configurations.yaml with
+    Walks through questions to set up .promptosaurus/.promptosaurus.yaml with
     your language, runtime, package manager, testing framework, and more.
     Then generates AI assistant configurations for selected tools.
     """
@@ -96,24 +96,23 @@ def init_prompts():
     click.echo("\nUse ↑/↓ arrows, numbers, or Enter for defaults.")
 
     try:
-        # Step 1: Select which AI assistant configurations to generate
-        ai_tools = select_option_with_explain(
-            question="Which AI assistant configurations would you like to generate?",
+        # Step 1: Select which AI assistant to configure
+        ai_tool = select_option_with_explain(
+            question="Which AI assistant would you like to configure?",
             options=["kilo-cli", "kilo-ide", "cline", "cursor", "copilot"],
             explanations={
                 "kilo-cli": "Kilo Code (CLI) - .opencode/rules/ with collapsed mode files",
-                "kilo-ide": "Kilo Code (IDE) - .kilo/rules-{mode}/ directory structure",
+                "kilo-ide": "Kilo Code (IDE) - .kilocode/rules-{mode}/ directory structure",
                 "cline": "Cline - .clinerules file (concatenated rules)",
                 "cursor": "Cursor - .cursor/rules/ directory + .cursorrules",
                 "copilot": "GitHub Copilot - .github/copilot-instructions.md",
             },
-            question_explanation="Select one or more AI assistants to configure. Use space to select multiple.",
-            default_index=0,
-            allow_multiple=True,
+            question_explanation="Select one AI assistant to configure.",
+            default_index=1,
+            allow_multiple=False,
         )
-        # Normalize to list for consistent handling
-        if isinstance(ai_tools, str):
-            ai_tools = [ai_tools]
+        # Wrap single selection in list for consistent handling
+        ai_tools: list[str] = [cast(str, ai_tool)]
 
         # Step 2: Repository type
         click.echo("\n" + "-" * 60)
@@ -149,7 +148,7 @@ def init_prompts():
                     type=click.Choice(LANGUAGE_KEYS),
                     default="python",
                 )
-                config["defaults"]["language"] = language  # type: ignore[index]
+                config["spec"]["language"] = language  # type: ignore[index]
 
         # Save configuration
         ConfigHandler.save_config(config)
@@ -167,7 +166,7 @@ def init_prompts():
 
             output_path = Path(".")
             for tool in ai_tools:
-                builder_class = _get_builder(tool)
+                builder_class = _get_builder(tool)  # type: ignore[arg-type]
                 if builder_class:
                     builder = builder_class()
                     actions = builder.build(output_path, config=config, dry_run=False)

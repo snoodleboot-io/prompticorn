@@ -10,7 +10,7 @@ class ConfigHandler:
     """Handles reading and writing YAML configuration files."""
 
     DEFAULT_CONFIG_DIR = Path(".promptosaurus")
-    DEFAULT_CONFIG_FILE = "configurations.yaml"
+    DEFAULT_CONFIG_FILE = ".promptosaurus.yaml"
 
     @classmethod
     def get_config_path(cls, config_dir: Path | None = None) -> Path:
@@ -65,7 +65,7 @@ DEFAULT_CONFIG_TEMPLATE = {
         "type": "single-language",
         "mappings": {},
     },
-    "defaults": {
+    "spec": {
         "language": "",
         "runtime": "",
         "package_manager": "",
@@ -88,25 +88,25 @@ def create_default_config(language: str, **kwargs) -> dict[str, Any]:
     """Create a default configuration with sensible defaults for the language."""
     config: dict[str, Any] = DEFAULT_CONFIG_TEMPLATE.copy()
     config["repository"]["type"] = kwargs.get("repo_type", "single-language")
-    config["defaults"]["language"] = language
+    config["spec"]["language"] = language
 
     # Set language-specific defaults
     if language.lower() == "python":
-        config["defaults"]["runtime"] = "3.12"
-        config["defaults"]["package_manager"] = "poetry"
-        config["defaults"]["test_framework"] = "pytest"
-        config["defaults"]["linter"] = "ruff"
-        config["defaults"]["formatter"] = "ruff"
+        config["spec"]["runtime"] = "3.12"
+        config["spec"]["package_manager"] = "poetry"
+        config["spec"]["test_framework"] = "pytest"
+        config["spec"]["linter"] = "ruff"
+        config["spec"]["formatter"] = "ruff"
     elif language.lower() in ("typescript", "javascript"):
-        config["defaults"]["runtime"] = "5.4"
-        config["defaults"]["package_manager"] = "npm"
-        config["defaults"]["test_framework"] = "vitest"
-        config["defaults"]["linter"] = "eslint"
-        config["defaults"]["formatter"] = "prettier"
+        config["spec"]["runtime"] = "5.4"
+        config["spec"]["package_manager"] = "npm"
+        config["spec"]["test_framework"] = "vitest"
+        config["spec"]["linter"] = "eslint"
+        config["spec"]["formatter"] = "prettier"
 
-    # Override with any provided kwargs
+    # Override with any provided kwargs (except repo_type - it's already in repository.type)
     for key, value in kwargs.items():
-        if value:
-            config["defaults"][key] = value
+        if value and key != "repo_type":
+            config["spec"][key] = value
 
     return config
