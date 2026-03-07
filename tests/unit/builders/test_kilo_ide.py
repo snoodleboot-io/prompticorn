@@ -77,8 +77,7 @@ class TestKiloIDEBuilder(unittest.TestCase):
                 for d in kilo_dir.iterdir()
                 if d.name != "rules"
             )
-            # Note: This might not find rules-* if core files don't exist
-            # The important thing is the builder runs without error
+            self.assertTrue(has_mode_dir, "Expected at least one rules-{mode} directory")
 
 
 class TestKiloIDETemplateVariables(unittest.TestCase):
@@ -88,7 +87,7 @@ class TestKiloIDETemplateVariables(unittest.TestCase):
         """KiloIDEBuilder should substitute template variables."""
         builder = KiloIDEBuilder()
         config = {
-            "defaults": {
+            "spec": {
                 "language": "python",
                 "test_framework": "pytest",
             }
