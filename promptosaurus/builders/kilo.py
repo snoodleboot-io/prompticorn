@@ -6,7 +6,7 @@ Common functionality shared between CLI and IDE targets.
 """
 
 import shutil
-from abc import ABC, abstractmethod
+from abc import abstractmethod
 from pathlib import Path
 from typing import Any
 
@@ -16,11 +16,48 @@ from promptosaurus.builders.builder import Builder
 from promptosaurus.registry import registry
 
 
-class KiloCodeBuilder(Builder, ABC):
+def _load_kilo_modes_from_yaml() -> dict[str, Any]:
+    """Load kilo modes from the YAML file in the builders directory."""
+    yaml_path = Path(__file__).parent / "kilo_modes.yaml"
+    if not yaml_path.exists():
+        msg = (
+            f"Kilo modes YAML file not found: {yaml_path}\n"
+            "Please ensure kilo_modes.yaml exists in the promptosaurus/builders/ directory."
+        )
+        raise FileNotFoundError(msg)
+
+    with yaml_path.open(encoding="utf-8") as f:
+        data = yaml.safe_load(f)
+
+    return data.get("modes", {})
+
+
+def _load_language_file_map_from_yaml() -> dict[str, str]:
+    """Load language file map from the YAML file in the builders directory."""
+    yaml_path = Path(__file__).parent / "kilo_language_file_map.yaml"
+    if not yaml_path.exists():
+        msg = (
+            f"Language file map YAML not found: {yaml_path}\n"
+            "Please ensure kilo_language_file_map.yaml exists in the promptosaurus/builders/ directory."
+        )
+        raise FileNotFoundError(msg)
+
+    with yaml_path.open(encoding="utf-8") as f:
+        data = yaml.safe_load(f)
+
+    return data.get("language_file_map", {})
+
+
+# Load YAML at module level (not in class __init_subclass__)
+_KILO_MODES: dict[str, Any] = _load_kilo_modes_from_yaml()
+_LANGUAGE_FILE_MAP: dict[str, str] = _load_language_file_map_from_yaml()
+
+
+class KiloCodeBuilder(Builder):
     """Base builder for Kilo Code configurations."""
 
     # Modes that are built-in to Kilo and should not be generated in output
-    KILO_BUILTIN_MODES = frozenset(
+    _kilo_builtin_modes = frozenset(
         {
             "architect",
             "code",
@@ -30,43 +67,24 @@ class KiloCodeBuilder(Builder, ABC):
         }
     )
 
+    # Use YAML loaded at module level
+    _kilo_modes: dict[str, Any] = _KILO_MODES
+    _language_file_map: dict[str, str] = _LANGUAGE_FILE_MAP
+
+    @property
+    def kilo_modes(self) -> dict[str, Any]:
+        """Return the kilo modes loaded from YAML."""
+        return self._kilo_modes
+
+    @property
+    def language_file_map(self) -> dict[str, str]:
+        """Return the language file map loaded from YAML."""
+        return self._language_file_map
+
     @property
     def custom_modes(self) -> list[str]:
         """Return list of custom modes (excluding built-in Kilo modes)."""
-        return [m for m in registry.modes.keys() if m not in self.KILO_BUILTIN_MODES]
-
-    # Map of language names to their core file suffixes
-    LANGUAGE_FILE_MAP: dict[str, str] = {
-        "python": "agents/core/core-conventions-python.md",
-        "typescript": "agents/core/core-conventions-typescript.md",
-        "javascript": "agents/core/core-conventions-javascript.md",
-        "php": "agents/core/core-conventions-php.md",
-        "ruby": "agents/core/core-conventions-ruby.md",
-        "java": "agents/core/core-conventions-java.md",
-        "csharp": "agents/core/core-conventions-csharp.md",
-        "go": "agents/core/core-conventions-golang.md",
-        "rust": "agents/core/core-conventions-rust.md",
-        "r": "agents/core/core-conventions-r.md",
-        "elixir": "agents/core/core-conventions-elixir.md",
-        "elm": "agents/core/core-conventions-elm.md",
-        "c": "agents/core/core-conventions-c.md",
-        "cpp": "agents/core/core-conventions-cpp.md",
-        "scala": "agents/core/core-conventions-scala.md",
-        "kotlin": "agents/core/core-conventions-kotlin.md",
-        "swift": "agents/core/core-conventions-swift.md",
-        "objc": "agents/core/core-conventions-objc.md",
-        "dart": "agents/core/core-conventions-dart.md",
-        "julia": "agents/core/core-conventions-julia.md",
-        "haskell": "agents/core/core-conventions-haskell.md",
-        "clojure": "agents/core/core-conventions-clojure.md",
-        "fsharp": "agents/core/core-conventions-fsharp.md",
-        "shell": "agents/core/core-conventions-shell.md",
-        "groovy": "agents/core/core-conventions-groovy.md",
-        "lua": "agents/core/core-conventions-lua.md",
-        "sql": "agents/core/core-conventions-sql.md",
-        "terraform": "agents/core/core-conventions-terraform.md",
-        "html": "agents/core/core-conventions-html.md",
-    }
+        return [m for m in registry.modes.keys() if m not in self._kilo_builtin_modes]
 
     # Core files that get concatenated into _base.md
     BASE_FILES = [
@@ -155,7 +173,7 @@ class KiloCodeBuilder(Builder, ABC):
         """Write the .kilocodemodes manifest file."""
         # Build data structure for YAML
         modes = []
-        for mode_key, mode_info in registry.kilo_modes.items():
+        for mode_key, mode_info in self.kilo_modes.items():
             mode_data = {
                 "slug": mode_key,
                 "name": mode_info.get("name", mode_key.title()),
