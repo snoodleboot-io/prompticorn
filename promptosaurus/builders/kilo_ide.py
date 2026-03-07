@@ -105,7 +105,7 @@ class KiloIDEBuilder(KiloCodeBuilder):
         # Get selected language from config
         selected_language = config.get("spec", {}).get("language", "") if config else ""
         language_file = (
-            self.LANGUAGE_FILE_MAP.get(selected_language.lower()) if selected_language else None
+            self.language_file_map.get(selected_language.lower()) if selected_language else None
         )
 
         # 1. Create AGENTS.md user guide
@@ -127,8 +127,8 @@ class KiloIDEBuilder(KiloCodeBuilder):
                 destination_rules = output / ".kilocode" / "rules" / new_filename
                 actions.append(self._copy(source_path, destination_rules, dry_run, config))
 
-        # 3. Create per-mode directories with their files
-        for mode_key in self.custom_modes:
+        # 3. Create per-mode directories with their files (ALL 15 modes for IDE)
+        for mode_key in self.kilo_modes.keys():
             if mode_key in registry.mode_files:
                 mode_dir = output / ".kilocode" / f"rules-{mode_key}"
                 for filename in registry.mode_files[mode_key]:

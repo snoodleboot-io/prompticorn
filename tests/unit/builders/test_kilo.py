@@ -13,12 +13,15 @@ class TestKiloCodeBuilderBase(unittest.TestCase):
     """Tests for KiloCodeBuilder base class methods using concrete implementation."""
 
     def test_language_file_map(self):
-        """KiloCodeBuilder should have LANGUAGE_FILE_MAP."""
+        """KiloCodeBuilder should have language_file_map property loaded from YAML."""
         from promptosaurus.builders.kilo import KiloCodeBuilder
-        assert hasattr(KiloCodeBuilder, "LANGUAGE_FILE_MAP")
-        assert "python" in KiloCodeBuilder.LANGUAGE_FILE_MAP
-        assert KiloCodeBuilder.LANGUAGE_FILE_MAP["python"] == "agents/core/core-conventions-python.md"
-        assert KiloCodeBuilder.LANGUAGE_FILE_MAP["typescript"] == "agents/core/core-conventions-typescript.md"
+
+        # Test via instance to ensure YAML is loaded
+        builder = KiloCLIBuilder()
+        assert hasattr(KiloCodeBuilder, "language_file_map")
+        assert "python" in builder.language_file_map
+        assert builder.language_file_map["python"] == "agents/core/core-conventions-python.md"
+        assert builder.language_file_map["typescript"] == "agents/core/core-conventions-typescript.md"
 
     def test_base_files(self):
         """KiloCodeBuilder should have BASE_FILES."""
@@ -141,7 +144,7 @@ class TestKiloBuilder(unittest.TestCase):
         """KiloBuilder.build() should handle language config."""
         builder = KiloCLIBuilder()
         config = {
-            "defaults": {
+            "spec": {
                 "language": "python",
                 "test_framework": "pytest",
             }
@@ -157,7 +160,7 @@ class TestKiloBuilder(unittest.TestCase):
         """KiloBuilder should substitute all coverage template variables."""
         builder = KiloCLIBuilder()
         config = {
-            "defaults": {
+            "spec": {
                 "language": "python",
                 "coverage": {
                     "line": 90,
@@ -178,7 +181,7 @@ class TestKiloBuilder(unittest.TestCase):
         """KiloBuilder should handle TypeScript language config."""
         builder = KiloCLIBuilder()
         config = {
-            "defaults": {
+            "spec": {
                 "language": "typescript",
             }
         }
@@ -191,7 +194,7 @@ class TestKiloBuilder(unittest.TestCase):
         """KiloBuilder should handle JavaScript language config."""
         builder = KiloCLIBuilder()
         config = {
-            "defaults": {
+            "spec": {
                 "language": "javascript",
             }
         }
@@ -247,15 +250,15 @@ class TestKiloCustomModes(unittest.TestCase):
                 assert not mode_file.exists(), f"{mode}.md should NOT exist (built-in mode)"
 
     def test_ide_builder_uses_custom_modes(self):
-        """KiloIDEBuilder should create only custom mode directories."""
+        """KiloIDEBuilder should create mode directories for ALL 15 modes (not just custom modes)."""
         builder = KiloIDEBuilder()
         with tempfile.TemporaryDirectory() as tmpdir:
             output = Path(tmpdir)
             builder.build(output, dry_run=False)
-            # Check that built-in mode directories are NOT created
-            for mode in KiloCodeBuilder.KILO_BUILTIN_MODES:
+            # IDE should create directories for ALL 15 modes
+            for mode in builder.kilo_modes.keys():
                 mode_dir = output / ".kilocode" / f"rules-{mode}"
-                assert not mode_dir.exists(), f"rules-{mode}/ should NOT exist (built-in mode)"
+                assert mode_dir.exists(), f"rules-{mode}/ should exist for IDE"
 
 
 class TestKiloCLIAgentsContent(unittest.TestCase):

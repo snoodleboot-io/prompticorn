@@ -35,7 +35,7 @@ class KiloCLIBuilder(KiloCodeBuilder):
         # Get selected language from config
         selected_language = config.get("spec", {}).get("language", "") if config else ""
         language_file = (
-            self.LANGUAGE_FILE_MAP.get(selected_language.lower()) if selected_language else None
+            self.language_file_map.get(selected_language.lower()) if selected_language else None
         )
 
         # 1. Create AGENTS.md user guide
