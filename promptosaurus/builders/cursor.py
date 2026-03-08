@@ -14,7 +14,6 @@ import shutil
 from pathlib import Path
 from typing import Any
 
-from promptosaurus.builders.build_concatenated import build_concatenated
 from promptosaurus.builders.builder import Builder
 from promptosaurus.builders.ignore_generator import CursorIgnoreBuilder
 from promptosaurus.registry import registry
@@ -48,7 +47,7 @@ class CursorBuilder(Builder):
 
         # Legacy .cursorrules fallback
         legacy_dst = output / ".cursorrules"
-        content = build_concatenated("# .cursorrules")
+        content = self._build_concatenated("# .cursorrules")
         if dry_run:
             actions.append(f"[dry-run] .cursorrules ({content.count(chr(10))} lines, legacy)")
         else:

@@ -10,7 +10,6 @@ Output:
 from pathlib import Path
 from typing import Any
 
-from promptosaurus.builders.build_concatenated import build_concatenated
 from promptosaurus.builders.builder import Builder
 from promptosaurus.builders.ignore_generator import ClineIgnoreBuilder
 
@@ -29,7 +28,7 @@ class ClineBuilder(Builder):
 
         # Build .clinerules
         destination = output / ".clinerules"
-        content = build_concatenated("# .clinerules")
+        content = self._build_concatenated("# .clinerules")
 
         if dry_run:
             lines = content.count("\n")

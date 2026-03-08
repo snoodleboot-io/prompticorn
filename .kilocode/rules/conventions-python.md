@@ -8,6 +8,16 @@ Linter:               ruff, pyright             e.g., Ruff, flake8
 Formatter:           ruff          e.g., Ruff, Black
 Abstract Class Style: interface  e.g., abc, interface
 
+### Naming Conventions
+
+Files:               snake_case
+Variables:          snake_case
+Constants:          UPPER_SNAKE (discouraged - use pydantic-settings)
+Classes/Types:      PascalCase
+Functions:          snake_case
+Database tables:     snake_case
+Environment vars:    UPPER_SNAKE_CASE always
+
 ## Python-Specific Rules
 
 ### Type Hints
