@@ -210,7 +210,7 @@ customModes:
       - command
       - browser
       - - edit
-        - fileRegex: "\\.promptosaurus/sessions/.*\\.md$"
+        - fileRegex: "(docs/.*\\.md$|\\.promptosaurus/sessions/.*\\.md$)"
           description: Session management files
 
   - slug: planning
