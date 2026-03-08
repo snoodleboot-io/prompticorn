@@ -29,7 +29,14 @@ def _load_kilo_modes_from_yaml() -> dict[str, Any]:
     with yaml_path.open(encoding="utf-8") as f:
         data = yaml.safe_load(f)
 
-    return data.get("modes", {})
+    # customModes is a list of mode objects with 'slug' field - convert to dict
+    modes_list = data.get("customModes", [])
+    modes_dict: dict[str, Any] = {}
+    for mode in modes_list:
+        if isinstance(mode, dict) and "slug" in mode:
+            slug = mode["slug"]
+            modes_dict[slug] = mode
+    return modes_dict
 
 
 def _load_language_file_map_from_yaml() -> dict[str, str]:
@@ -170,48 +177,20 @@ class KiloCodeBuilder(Builder):
         return content
 
     def _write_manifest(self, destination: Path, dry_run: bool) -> str:
-        """Write the .kilocodemodes manifest file."""
-        # Build data structure for YAML
-        modes = []
-        for mode_key, mode_info in self.kilo_modes.items():
-            mode_data = {
-                "slug": mode_key,
-                "name": mode_info.get("name", mode_key.title()),
-                "description": mode_info.get("description", ""),
-                "roleDefinition": mode_info.get("roleDefinition", ""),
-                "whenToUse": mode_info.get("whenToUse", ""),
-                "groups": mode_info.get("groups", ["read", "edit", "command"]),
-            }
-            modes.append(mode_data)
+        """Write the .kilocodemodes manifest file.
 
-        data = {"customModes": modes}
-
-        # Generate YAML
-        content = yaml.dump(data, default_flow_style=False, allow_unicode=True, sort_keys=False)
-
-        # Post-process: quote roleDefinition values that contain colons
-        lines = content.split("\n")
-        new_lines = []
-        for line in lines:
-            if line.startswith("    roleDefinition:"):
-                key, value = line.split(":", 1)
-                value = value.strip()
-                # Quote if contains colon and not already quoted
-                if ":" in value:
-                    # Escape backslashes first, then quotes
-                    value = value.replace("\\", "\\\\").replace('"', '\\"')
-                    value = '"' + value + '"'
-                line = f"{key}: {value}"
-            new_lines.append(line)
-
-        content = "\n".join(new_lines)
-
-        label = ".kilocodemodes"
+        Simply copies the kilo_modes.yaml source file to preserve exact formatting.
+        """
+        # Read from the source YAML file to preserve exact formatting
+        source_path = Path(__file__).parent / "kilo_modes.yaml"
 
         if dry_run:
-            return f"[dry-run] {label}"
+            return "[dry-run] .kilocodemodes (copied from kilo_modes.yaml)"
+
+        # Copy the file content directly
+        content = source_path.read_text(encoding="utf-8")
         destination.write_text(content, encoding="utf-8")
-        return f"✓ {label}"
+        return "✓ .kilocodemodes"
 
     def _build_ignore(self, output: Path, dry_run: bool) -> list[str]:
         """Generate .kiloignore file."""
