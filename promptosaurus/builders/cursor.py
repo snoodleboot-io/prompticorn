@@ -14,8 +14,8 @@ import shutil
 from pathlib import Path
 from typing import Any
 
-from promptosaurus.builders._concat import build_concatenated
 from promptosaurus.builders.builder import Builder
+from promptosaurus.builders.ignore_generator import CursorIgnoreBuilder
 from promptosaurus.registry import registry
 
 
@@ -47,7 +47,7 @@ class CursorBuilder(Builder):
 
         # Legacy .cursorrules fallback
         legacy_dst = output / ".cursorrules"
-        content = build_concatenated("# .cursorrules")
+        content = self._build_concatenated("# .cursorrules")
         if dry_run:
             actions.append(f"[dry-run] .cursorrules ({content.count(chr(10))} lines, legacy)")
         else:
@@ -62,16 +62,7 @@ class CursorBuilder(Builder):
 
     def _build_ignore(self, output: Path, dry_run: bool) -> list[str]:
         """Generate .cursorignore file."""
-        destination = output / ".cursorignore"
-        content = registry.generate_cursorignore()
-
-        if dry_run:
-            lines = content.count("\n")
-            return [f"[dry-run] .cursorignore ({lines} lines)"]
-
-        destination.write_text(content, encoding="utf-8")
-        lines = content.count("\n")
-        return [f"✓ .cursorignore ({lines} lines)"]
+        return CursorIgnoreBuilder().build(output, dry_run)
 
     def _copy(self, source_path: Path, destination: Path, dry_run: bool) -> str:
         rel = str(destination).split(".cursor/", 1)[-1]

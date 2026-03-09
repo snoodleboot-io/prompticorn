@@ -7,6 +7,16 @@ Package Manager:      {{PACKAGE_MANAGER}}        e.g., Gradle
 Linter:              {{LINTER}}             e.g., CodeNarc
 Formatter:           {{FORMATTER}}          e.g., groovyfmt
 
+### Naming Conventions
+
+Files:              snake_case
+Variables:          camelCase
+Constants:          UPPER_SNAKE
+Classes/Types:      PascalCase
+Functions:          camelCase
+Database tables:    snake_case
+Environment vars:   UPPER_SNAKE_CASE always
+
 ## Groovy-Specific Rules
 
 ### Type System

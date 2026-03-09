@@ -7,6 +7,16 @@ Package Manager:      {{PACKAGE_MANAGER}}        e.g., elm
 Linter:               {{LINTER}}             e.g., elm-format, elm-review
 Formatter:           {{FORMATTER}}          e.g., elm-format
 
+### Naming Conventions
+
+Files:              PascalCase
+Variables:          camelCase
+Constants:          PascalCase
+Classes/Types:      PascalCase
+Functions:          PascalCase
+Database tables:    snake_case
+Environment vars:   UPPER_SNAKE_CASE always
+
 ## Elm-Specific Rules
 
 ### Architecture

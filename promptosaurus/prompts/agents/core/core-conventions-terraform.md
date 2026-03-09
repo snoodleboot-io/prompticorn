@@ -5,6 +5,16 @@ Language:             {{LANGUAGE}}           e.g., Terraform 1.6+
 Provider:             {{PROVIDER}}           e.g., AWS, Azure, GCP
 State:               {{STATE_BACKEND}}      e.g., S3, Azure Blob, GCS
 
+### Naming Conventions
+
+Files:              snake_case
+Variables:          snake_case
+Constants:          UPPER_SNAKE
+Classes/Types:      PascalCase (for modules)
+Functions:          snake_case
+Database tables:    snake_case
+Environment vars:   UPPER_SNAKE_CASE always
+
 ## Terraform-Specific Rules
 
 ### Infrastructure as Code

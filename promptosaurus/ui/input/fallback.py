@@ -9,15 +9,32 @@ from promptosaurus.ui.domain.input_provider import InputProvider
 class FallbackInputProvider(InputProvider):
     """Fallback using standard input - no raw mode."""
 
-    def get_events(self) -> Iterator[InputEvent]:
+    @property
+    def events(self) -> Iterator[InputEvent]:
         """Yield input events from standard input."""
-        user_input = input("Enter number(s), comma-separated: ").strip()
+        user_input = input(
+            "Enter number(s) or letter (a-d), comma-separated (or 'e' for explain): "
+        ).strip()
 
-        # Parse comma-separated numbers
+        # Check for explain mode first
+        if user_input.lower() == "e":
+            yield InputEvent(event_type=InputEventType.EXPLAIN)
+            yield InputEvent(event_type=InputEventType.ENTER)
+            return
+
+        # Map letters to numbers
+        letter_to_index = {"a": 0, "b": 1, "c": 2, "d": 3}
+
+        # Parse comma-separated numbers or letters
         try:
-            numbers = [int(x.strip()) for x in user_input.split(",")]
-            for num in numbers:
-                yield InputEvent(event_type=InputEventType.NUMBER, value=num)
+            for part in user_input.split(","):
+                part = part.strip().lower()
+                if part in letter_to_index:
+                    yield InputEvent(event_type=InputEventType.NUMBER, value=letter_to_index[part])
+                else:
+                    # Try to parse as number
+                    num = int(part)
+                    yield InputEvent(event_type=InputEventType.NUMBER, value=num)
         except ValueError:
             pass
 

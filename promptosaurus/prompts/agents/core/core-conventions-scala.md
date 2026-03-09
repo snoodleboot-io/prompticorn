@@ -7,6 +7,16 @@ Package Manager:      {{PACKAGE_MANAGER}}        e.g., sbt, mill
 Linter:              {{LINTER}}             e.g., Scalafmt, Scalafix
 Formatter:           {{FORMATTER}}          e.g., Scalafmt
 
+### Naming Conventions
+
+Files:               PascalCase
+Variables:          camelCase
+Constants:          UPPER_SNAKE
+Classes/Types:      PascalCase
+Functions:          camelCase
+Database tables:    snake_case
+Environment vars:   UPPER_SNAKE_CASE always
+
 ## Scala-Specific Rules
 
 ### Type System

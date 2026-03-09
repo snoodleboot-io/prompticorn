@@ -7,6 +7,16 @@ Package Manager:      {{PACKAGE_MANAGER}}        e.g., CocoaPods, Carthage
 Linter:              {{LINTER}}             e.g., clang-tidy
 Formatter:           {{FORMATTER}}          e.g., clang-format
 
+### Naming Conventions
+
+Files:              PascalCase or snake_case
+Variables:          camelCase
+Constants:          UPPER_SNAKE
+Classes/Types:      PascalCase
+Functions:          PascalCase
+Database tables:    snake_case
+Environment vars:   UPPER_SNAKE_CASE always
+
 ## Objective-C-Specific Rules
 
 ### Memory Management

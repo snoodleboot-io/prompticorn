@@ -5,6 +5,16 @@ Language:             {{LANGUAGE}}           e.g., Bash 5.2, Zsh
 Shell:              {{SHELL}}             e.g., Bash, Zsh
 Package Manager:      {{PACKAGE_MANAGER}}        e.g., apt, yum, brew
 
+### Naming Conventions
+
+Files:              snake_case
+Variables:          snake_case (or SCREAMING_SNAKE for env vars)
+Constants:          UPPER_SNAKE
+Classes/Types:      PascalCase
+Functions:          snake_case
+Database tables:    snake_case
+Environment vars:   UPPER_SNAKE_CASE always
+
 ## Shell-Specific Rules
 
 ### Error Handling

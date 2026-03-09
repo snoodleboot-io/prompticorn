@@ -1,11 +1,15 @@
 """Confirm command implementation."""
 
+from promptosaurus.ui.commands.command import Command
 from promptosaurus.ui.commands.result import CommandResult
 from promptosaurus.ui.domain.context import PipelineContext
-from promptosaurus.ui.state.multi import MultiSelectState
+from promptosaurus.ui.state.multi_selection_state import MultiSelectionState
+from promptosaurus.ui.state.mutual_exclusion_multi_selection_state import (
+    MutualExclusionMultiSelectionState,
+)
 
 
-class ConfirmCommand:
+class ConfirmCommand(Command):
     """Command to confirm selection."""
 
     def execute(self, context: PipelineContext) -> CommandResult:
@@ -28,9 +32,22 @@ class ConfirmCommand:
         else:  # Multi-select (Set[int])
             if explain_index in selection:
                 selection = {s for s in selection if s != explain_index}
+
+                # Choose the appropriate state class based on whether none_index is specified
+                if context.question.none_index is not None:
+                    new_state = MutualExclusionMultiSelectionState(
+                        selection,
+                        len(context.question.options),
+                        context.question.none_index,
+                    )
+                else:
+                    new_state = MultiSelectionState(
+                        selection,
+                        len(context.question.options),
+                    )
                 return CommandResult(
                     continue_pipeline=True,
-                    new_state=MultiSelectState(selection, len(context.question.options)),
+                    new_state=new_state,
                     transition_to="explain",
                 )
             return CommandResult(

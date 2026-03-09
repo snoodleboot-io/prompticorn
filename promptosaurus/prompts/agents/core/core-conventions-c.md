@@ -7,6 +7,16 @@ Package Manager:      {{PACKAGE_MANAGER}}        e.g., CMake, make
 Linter:               {{LINTER}}             e.g., cppcheck, clang-tidy
 Formatter:           {{FORMATTER}}          e.g., clang-format
 
+### Naming Conventions
+
+Files:               snake_case
+Variables:          snake_case
+Constants:          UPPER_SNAKE
+Classes/Types:      PascalCase
+Functions:          snake_case or PascalCase
+Database tables:    snake_case
+Environment vars:   UPPER_SNAKE_CASE always
+
 ## C-Specific Rules
 
 ### Memory Management

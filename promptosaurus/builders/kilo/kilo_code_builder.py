@@ -1,67 +1,27 @@
 """
-builders/kilo.py
+builders/kilo_code_builder.py
 Base class for Kilo Code configuration builders.
 
 Common functionality shared between CLI and IDE targets.
 """
 
 import shutil
-from abc import abstractmethod
 from pathlib import Path
 from typing import Any
 
-import yaml  # type: ignore[import-untyped]
-
 from promptosaurus.builders.builder import Builder
+from promptosaurus.builders.config import KiloConfig
+from promptosaurus.builders.ignore_generator import KiloIgnoreBuilder
+from promptosaurus.builders.utils import HeaderStripper
 from promptosaurus.registry import registry
 
 
-def _load_kilo_modes_from_yaml() -> dict[str, Any]:
-    """Load kilo modes from the YAML file in the builders directory."""
-    yaml_path = Path(__file__).parent / "kilo_modes.yaml"
-    if not yaml_path.exists():
-        msg = (
-            f"Kilo modes YAML file not found: {yaml_path}\n"
-            "Please ensure kilo_modes.yaml exists in the promptosaurus/builders/ directory."
-        )
-        raise FileNotFoundError(msg)
-
-    with yaml_path.open(encoding="utf-8") as f:
-        data = yaml.safe_load(f)
-
-    # customModes is a list of mode objects with 'slug' field - convert to dict
-    modes_list = data.get("customModes", [])
-    modes_dict: dict[str, Any] = {}
-    for mode in modes_list:
-        if isinstance(mode, dict) and "slug" in mode:
-            slug = mode["slug"]
-            modes_dict[slug] = mode
-    return modes_dict
-
-
-def _load_language_file_map_from_yaml() -> dict[str, str]:
-    """Load language file map from the YAML file in the builders directory."""
-    yaml_path = Path(__file__).parent / "kilo_language_file_map.yaml"
-    if not yaml_path.exists():
-        msg = (
-            f"Language file map YAML not found: {yaml_path}\n"
-            "Please ensure kilo_language_file_map.yaml exists in the promptosaurus/builders/ directory."
-        )
-        raise FileNotFoundError(msg)
-
-    with yaml_path.open(encoding="utf-8") as f:
-        data = yaml.safe_load(f)
-
-    return data.get("language_file_map", {})
-
-
-# Load YAML at module level (not in class __init_subclass__)
-_KILO_MODES: dict[str, Any] = _load_kilo_modes_from_yaml()
-_LANGUAGE_FILE_MAP: dict[str, str] = _load_language_file_map_from_yaml()
-
-
 class KiloCodeBuilder(Builder):
-    """Base builder for Kilo Code configurations."""
+    """Base builder for Kilo Code configurations.
+
+    Args:
+        config: Optional KiloConfig instance. If not provided, uses default config.
+    """
 
     # Modes that are built-in to Kilo and should not be generated in output
     _kilo_builtin_modes = frozenset(
@@ -74,33 +34,24 @@ class KiloCodeBuilder(Builder):
         }
     )
 
-    # Use YAML loaded at module level
-    _kilo_modes: dict[str, Any] = _KILO_MODES
-    _language_file_map: dict[str, str] = _LANGUAGE_FILE_MAP
+    def __init__(self, config: KiloConfig | None = None) -> None:
+        """Initialize builder with optional config.
+
+        Args:
+            config: KiloConfig instance. Uses default if not provided.
+        """
+        self._config = config or KiloConfig()
 
     @property
     def kilo_modes(self) -> dict[str, Any]:
-        """Return the kilo modes loaded from YAML."""
-        return self._kilo_modes
+        """Return the kilo modes from config."""
+        return self._config.kilo_modes
 
     @property
     def language_file_map(self) -> dict[str, str]:
-        """Return the language file map loaded from YAML."""
-        return self._language_file_map
+        """Return the language file map from config."""
+        return self._config.language_file_map
 
-    @property
-    def custom_modes(self) -> list[str]:
-        """Return list of custom modes (excluding built-in Kilo modes)."""
-        return [m for m in registry.modes.keys() if m not in self._kilo_builtin_modes]
-
-    # Core files that get concatenated into _base.md
-    BASE_FILES = [
-        "agents/core/core-system.md",
-        "agents/core/core-conventions.md",
-        "agents/core/core-session.md",
-    ]
-
-    @abstractmethod
     def build(
         self, output: Path, config: dict[str, Any] | None = None, dry_run: bool = False
     ) -> list[str]:
@@ -108,12 +59,11 @@ class KiloCodeBuilder(Builder):
         Build Kilo Code configuration. Subclasses implement specific output formats.
         Returns a list of action strings for display.
         """
-        pass
+        raise NotImplementedError()
 
-    @abstractmethod
     def _get_agents_md_content(self) -> str:
         """Get the AGENTS.md content specific to the builder type."""
-        pass
+        raise NotImplementedError()
 
     def _copy(
         self,
@@ -162,7 +112,41 @@ class KiloCodeBuilder(Builder):
         }
 
         # Add coverage variables
-        coverage = defaults.get("coverage", {})
+        # Coverage can be either a dict (legacy) or a string preset from the question
+        coverage_value = defaults.get("coverage", {})
+
+        # If coverage is a string preset, convert it to a dict
+        if isinstance(coverage_value, str):
+            COVERAGE_PRESETS = {
+                "strict": {
+                    "line": 90,
+                    "branch": 80,
+                    "function": 95,
+                    "statement": 90,
+                    "mutation": 85,
+                    "path": 70,
+                },
+                "standard": {
+                    "line": 80,
+                    "branch": 70,
+                    "function": 90,
+                    "statement": 85,
+                    "mutation": 80,
+                    "path": 60,
+                },
+                "minimal": {
+                    "line": 70,
+                    "branch": 60,
+                    "function": 80,
+                    "statement": 75,
+                    "mutation": 70,
+                    "path": 50,
+                },
+            }
+            coverage = COVERAGE_PRESETS.get(coverage_value, {})
+        else:
+            coverage = coverage_value if isinstance(coverage_value, dict) else {}
+
         substitutions["{{LINE_COVERAGE_%}}"] = str(coverage.get("line", 80))
         substitutions["{{BRANCH_COVERAGE_%}}"] = str(coverage.get("branch", 70))
         substitutions["{{FUNCTION_COVERAGE_%}}"] = str(coverage.get("function", 90))
@@ -194,16 +178,7 @@ class KiloCodeBuilder(Builder):
 
     def _build_ignore(self, output: Path, dry_run: bool) -> list[str]:
         """Generate .kiloignore file."""
-        destination = output / ".kiloignore"
-        content = registry.generate_kiloignore()
-
-        if dry_run:
-            lines = content.count("\n")
-            return [f"[dry-run] .kiloignore ({lines} lines)"]
-
-        destination.write_text(content, encoding="utf-8")
-        lines = content.count("\n")
-        return [f"✓ .kiloignore ({lines} lines)"]
+        return KiloIgnoreBuilder().build(output, dry_run)
 
     def _create_base_md(
         self,
@@ -222,22 +197,11 @@ class KiloCodeBuilder(Builder):
         # Collect content from base files
         parts: list[str] = []
 
-        for filename in self.BASE_FILES:
+        for filename in self._base_files:
             source_path = registry.prompt_path(filename)
             if source_path.exists():
                 content = source_path.read_text(encoding="utf-8")
-                # Strip header comments
-                lines = content.splitlines(keepends=True)
-                start = 0
-                for i, line in enumerate(lines[:3]):
-                    stripped = line.strip()
-                    if stripped.startswith("# ") and (
-                        stripped.endswith(".md") or "Behavior when" in stripped
-                    ):
-                        start = i + 1
-                    elif stripped.startswith("<!--") and stripped.endswith("-->"):
-                        start = i + 1
-                parts.append("".join(lines[start:]))
+                parts.append(HeaderStripper.strip(content))
 
         # Add language-specific conventions if selected
         if language_file:
@@ -247,16 +211,7 @@ class KiloCodeBuilder(Builder):
                 # Apply template substitution for language files
                 if config:
                     content = self._substitute_template_variables(content, config)
-                # Strip header comments
-                lines = content.splitlines(keepends=True)
-                start = 0
-                for i, line in enumerate(lines[:3]):
-                    stripped = line.strip()
-                    if stripped.startswith("# ") and stripped.endswith(".md"):
-                        start = i + 1
-                    elif stripped.startswith("<!--") and stripped.endswith("-->"):
-                        start = i + 1
-                parts.append("".join(lines[start:]))
+                parts.append(HeaderStripper.strip(content))
 
         # Join all parts with clear separators
         full_content = "\n---\n\n".join(parts)
@@ -287,18 +242,7 @@ class KiloCodeBuilder(Builder):
             source_path = registry.prompt_path(filename)
             if source_path.exists():
                 content = source_path.read_text(encoding="utf-8")
-                # Strip header comments
-                lines = content.splitlines(keepends=True)
-                start = 0
-                for i, line in enumerate(lines[:3]):
-                    stripped = line.strip()
-                    if stripped.startswith("# ") and (
-                        stripped.endswith(".md") or "Behavior when" in stripped
-                    ):
-                        start = i + 1
-                    elif stripped.startswith("<!--") and stripped.endswith("-->"):
-                        start = i + 1
-                parts.append("".join(lines[start:]))
+                parts.append(HeaderStripper.strip(content))
 
         # Join all parts with clear separators
         full_content = "\n---\n\n".join(parts)
@@ -321,10 +265,3 @@ class KiloCodeBuilder(Builder):
         destination.parent.mkdir(parents=True, exist_ok=True)
         destination.write_text(content, encoding="utf-8")
         return f"✓ {label}"
-
-
-# NOTE: For backwards compatibility, import KiloBuilder from:
-# - promptosaurus.builders.kilo_cli (CLI format, default)
-# - promptosaurus.builders.kilo_ide (IDE format)
-# - promptosaurus.builders (exports KiloBuilder as alias to KiloCLIBuilder)
-# - promptosaurus.builders.kilo (this file, exports KiloCodeBuilder base class)

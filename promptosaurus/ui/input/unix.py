@@ -9,7 +9,8 @@ from promptosaurus.ui.domain.input_provider import InputProvider
 class UnixInputProvider(InputProvider):
     """Unix-specific input using termios/tty."""
 
-    def get_events(self) -> Iterator[InputEvent]:
+    @property
+    def events(self) -> Iterator[InputEvent]:
         """Yield input events."""
         import sys
         import termios
@@ -26,7 +27,8 @@ class UnixInputProvider(InputProvider):
         finally:
             termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)  # type: ignore[attr-defined]
 
-    def _parse_key(self, key: str, stdin) -> InputEvent:
+    @staticmethod
+    def _parse_key(key: str, stdin) -> InputEvent:
         """Parse Unix key codes into events."""
         if key == "\r":
             return InputEvent(event_type=InputEventType.ENTER)
@@ -48,6 +50,14 @@ class UnixInputProvider(InputProvider):
             return InputEvent(event_type=InputEventType.QUIT)
         elif key.isdigit():
             return InputEvent(event_type=InputEventType.NUMBER, value=int(key))
+        elif key.lower() in "abcd":
+            # Map letters a-d (and A-D) to selection indices 0-3
+            letter_to_index = {"a": 0, "b": 1, "c": 2, "d": 3}
+            index = letter_to_index[key.lower()]
+            return InputEvent(event_type=InputEventType.NUMBER, value=index)
+        elif key.lower() == "e":
+            # 'e' or 'E' triggers explain mode directly
+            return InputEvent(event_type=InputEventType.EXPLAIN)
 
         return InputEvent(event_type=InputEventType.UNKNOWN, raw_key=key)
 

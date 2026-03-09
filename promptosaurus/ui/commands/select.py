@@ -1,10 +1,11 @@
 """Select command implementation."""
 
+from promptosaurus.ui.commands.command import Command
 from promptosaurus.ui.commands.result import CommandResult
 from promptosaurus.ui.domain.context import PipelineContext
 
 
-class SelectCommand:
+class SelectCommand(Command):
     """Command to select an option by number."""
 
     def __init__(self, number: int):

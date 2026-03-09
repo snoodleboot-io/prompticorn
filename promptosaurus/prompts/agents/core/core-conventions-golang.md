@@ -7,6 +7,16 @@ Package Manager:      {{PACKAGE_MANAGER}}        e.g., go mod
 Linter:               {{LINTER}}             e.g., golangci-lint
 Formatter:           {{FORMATTER}}          e.g., gofmt, goimports
 
+### Naming Conventions
+
+Files:               snake_case
+Variables:          mixedCase (camelCase)
+Constants:          MixedCase or UPPER_SNAKE
+Classes/Types:      PascalCase
+Functions:          PascalCase
+Database tables:    snake_case
+Environment vars:   UPPER_SNAKE_CASE always
+
 ## Go-Specific Rules
 
 ### Error Handling

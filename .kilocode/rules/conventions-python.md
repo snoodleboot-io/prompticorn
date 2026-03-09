@@ -8,6 +8,16 @@ Linter:               ruff, pyright             e.g., Ruff, flake8
 Formatter:           ruff          e.g., Ruff, Black
 Abstract Class Style: interface  e.g., abc, interface
 
+### Naming Conventions
+
+Files:               snake_case
+Variables:          snake_case
+Constants:          UPPER_SNAKE (discouraged - use pydantic-settings)
+Classes/Types:      PascalCase
+Functions:          snake_case
+Database tables:     snake_case
+Environment vars:    UPPER_SNAKE_CASE always
+
 ## Python-Specific Rules
 
 ### Type Hints
@@ -66,12 +76,12 @@ Abstract Class Style: interface  e.g., abc, interface
 ### Testing
 
 #### Coverage Targets
-Line:           80          e.g., 80%
-Branch:         70        e.g., 70%
-Function:       90       e.g., 90%
-Statement:      85      e.g., 85%
-Mutation:       80       e.g., 80%
-Path:           60           e.g., 60%
+Line:           90          e.g., 80%
+Branch:         80        e.g., 70%
+Function:       95       e.g., 90%
+Statement:      90      e.g., 85%
+Mutation:       85       e.g., 80%
+Path:           70           e.g., 60%
 
 #### Test Types
 

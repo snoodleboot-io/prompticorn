@@ -13,6 +13,7 @@ class InputEventType(Enum):
     DOWN = auto()
     ENTER = auto()
     QUIT = auto()
+    EXPLAIN = auto()  # Direct trigger for explain mode
     UNKNOWN = auto()
 
 

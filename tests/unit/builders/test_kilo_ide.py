@@ -4,7 +4,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from promptosaurus.builders.kilo_ide import KiloIDEBuilder
+from promptosaurus.builders.kilo.kilo_ide import KiloIDEBuilder
 
 
 class TestKiloIDEBuilder(unittest.TestCase):

@@ -7,6 +7,16 @@ Package Manager:      {{SWIFT_PACKAGE_MANAGER}}               e.g., Swift Packag
 Linter:               {{LINTER}}             e.g., SwiftLint
 Formatter:           {{FORMATTER}}          e.g., SwiftFormat
 
+### Naming Conventions
+
+Files:               PascalCase
+Variables:          camelCase
+Constants:          camelCase or UPPER_SNAKE
+Classes/Types:      PascalCase
+Functions:          PascalCase
+Database tables:    snake_case
+Environment vars:   UPPER_SNAKE_CASE always
+
 ## Swift-Specific Rules
 
 ### Type System

@@ -1,5 +1,7 @@
 """Base selection state implementation."""
 
+from __future__ import annotations
+
 
 class SelectionState:
     """Base class for selection state - Strategy pattern.
@@ -12,11 +14,11 @@ class SelectionState:
         """Get current selection(s)."""
         raise NotImplementedError(f"{self.__class__.__name__} must implement current_selection")
 
-    def select(self, index: int) -> "SelectionState":
+    def select(self, index: int) -> SelectionState:
         """Return new state after selection - immutable."""
         raise NotImplementedError(f"{self.__class__.__name__} must implement select")
 
-    def navigate(self, direction: int) -> "SelectionState":
+    def navigate(self, direction: int) -> SelectionState:
         """Return new state after navigation."""
         raise NotImplementedError(f"{self.__class__.__name__} must implement navigate")
 

@@ -13,6 +13,7 @@ class QuestionContext(BaseModel):
     default_index: int = 0
     default_indices: set[int] = {0}
     allow_multiple: bool = False
+    none_index: int | None = None  # Index of option that is mutually exclusive (e.g., 'none')
 
     class Config:
         frozen = True
@@ -58,11 +59,8 @@ class PipelineContext:
 
     @property
     def display_options(self) -> list[str]:
-        """Get options to display (includes Explain)."""
-        opts = list(self._question.options)
-        if "Explain" not in opts:
-            opts.append("Explain")
-        return opts
+        """Get options to display (without Explain - use 'e' keystroke instead)."""
+        return list(self._question.options)
 
     def get_explanation(self, option: str) -> str:
         """Get explanation for option."""

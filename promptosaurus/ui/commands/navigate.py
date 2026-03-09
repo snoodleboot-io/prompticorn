@@ -1,10 +1,11 @@
 """Navigate command implementation."""
 
+from promptosaurus.ui.commands.command import Command
 from promptosaurus.ui.commands.result import CommandResult
 from promptosaurus.ui.domain.context import PipelineContext
 
 
-class NavigateCommand:
+class NavigateCommand(Command):
     """Command to navigate up/down."""
 
     def __init__(self, direction: int):

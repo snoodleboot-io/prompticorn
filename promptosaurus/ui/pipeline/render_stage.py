@@ -32,7 +32,8 @@ class RenderStage:
             print(f"\nCurrent selection: {selection_text}")
             print("\nControls: Numbers to select, Enter to confirm, q to quit, ? for help")
 
-    def _format_current_selection(self, context: PipelineContext) -> str:
+    @staticmethod
+    def _format_current_selection(context: PipelineContext) -> str:
         """Format the current selection for display."""
         state = context.state
         options = context.question.options

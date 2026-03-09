@@ -7,6 +7,16 @@ Package Manager:      {{PACKAGE_MANAGER}}        e.g., Composer
 Linter:               {{LINTER}}             e.g., PHP CS Fixer, Pint
 Formatter:           {{FORMATTER}}          e.g., Pint, PHP CS Fixer
 
+### Naming Conventions
+
+Files:               snake_case
+Variables:          camelCase
+Constants:          UPPER_SNAKE
+Classes/Types:      PascalCase
+Functions:          camelCase or snake_case
+Database tables:    snake_case
+Environment vars:   UPPER_SNAKE_CASE always
+
 ## PHP-Specific Rules
 
 ### Type System
