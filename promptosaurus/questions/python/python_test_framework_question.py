@@ -1,4 +1,4 @@
-# Python test framework question
+"""Question for Python test framework selection."""
 
 from promptosaurus.questions.base.question import Question
 

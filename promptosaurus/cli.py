@@ -1,11 +1,25 @@
-"""
-cli.py
-Click-based CLI for the prompt library.
+"""CLI module for prompt library management.
+
+This module provides the command-line interface for managing AI assistant
+configurations. It uses Click to define the CLI commands and orchestrates
+the configuration, question handling, and output generation.
 
 Commands:
-  prompt init      - Interactive setup for AI assistant configurations
-  prompt list      - Show all registered modes and their prompt files
-  prompt validate  - Check for missing files and unregistered orphans
+    prompt init      - Interactive setup for AI assistant configurations
+    prompt list      - Show all registered modes and their prompt files
+    prompt validate  - Check for missing files and unregistered orphans
+
+Example:
+    >>> from promptosaurus.cli import cli
+    >>> # CLI is invoked via: prompt init
+
+Key Functions:
+    - cli: Main Click group for the prompt command
+    - list_prompts: Display all registered modes and their files
+    - init_prompts: Interactive initialization workflow
+    - update_config: Update configuration options
+    - switch_tool: Switch between AI tools
+    - validate_prompts: Validate configuration integrity
 """
 
 import sys
@@ -43,8 +57,7 @@ from promptosaurus.registry import registry
 
 @click.group()
 def cli():
-    """
-    Prompt library CLI — manage and validate your prompt configurations.
+    """Prompt library CLI — manage and validate your prompt configurations.
 
     Edit files in prompts/, then use `prompt list` to see available modes and
     `prompt validate` to check configuration integrity.
@@ -421,7 +434,22 @@ def update_command():
 
 
 def _get_builder(tool: str):
-    """Get the builder class for a given tool."""
+    """Get the builder class for a given tool.
+
+    This function maps a tool name to its corresponding builder class.
+    It imports the builder classes lazily to avoid circular imports.
+
+    Args:
+        tool: The tool name (e.g., 'kilo-cli', 'kilo-ide', 'cline', 'cursor', 'copilot').
+
+    Returns:
+        The builder class for the given tool, or None if tool is not recognized.
+
+    Example:
+        >>> builder_class = _get_builder('kilo-cli')
+        >>> builder_class is not None
+        True
+    """
     from promptosaurus.builders.cline import ClineBuilder
     from promptosaurus.builders.copilot import CopilotBuilder
     from promptosaurus.builders.cursor import CursorBuilder

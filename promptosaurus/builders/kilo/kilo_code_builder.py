@@ -1,8 +1,17 @@
-"""
-builders/kilo_code_builder.py
-Base class for Kilo Code configuration builders.
+"""Base class for Kilo Code configuration builders.
 
-Common functionality shared between CLI and IDE targets.
+This module provides the KiloCodeBuilder base class that contains common
+functionality shared between CLI and IDE targets for Kilo Code.
+
+Classes:
+    KiloCodeBuilder: Base builder for Kilo Code configurations.
+
+Example:
+    >>> from promptosaurus.builders.kilo.kilo_code_builder import KiloCodeBuilder
+    >>> # Subclass to create a specific builder
+    >>> class MyBuilder(KiloCodeBuilder):
+    ...     def build(self, output, config=None, dry_run=False):
+    ...         return ["Created files"]
 """
 
 import shutil
@@ -19,8 +28,27 @@ from promptosaurus.registry import registry
 class KiloCodeBuilder(Builder):
     """Base builder for Kilo Code configurations.
 
+    This abstract class provides common functionality for both CLI and IDE
+    output formats. It handles:
+    - Configuration management via KiloConfig
+    - File copying with template variable substitution
+    - Manifest file generation
+    - Ignore file generation
+    - Base and mode file creation
+
+    Attributes:
+        kilo_modes: Property returning the kilo modes from config.
+        language_file_map: Property returning the language file map from config.
+        _kilo_builtin_modes: Frozenset of built-in Kilo mode names.
+
     Args:
         config: Optional KiloConfig instance. If not provided, uses default config.
+
+    Example:
+        >>> builder = KiloCodeBuilder()
+        >>> modes = builder.kilo_modes
+        >>> print(len(modes) > 0)
+        True
     """
 
     # Modes that are built-in to Kilo and should not be generated in output
@@ -39,30 +67,76 @@ class KiloCodeBuilder(Builder):
 
         Args:
             config: KiloConfig instance. Uses default if not provided.
+
+        Example:
+            >>> # Use default config
+            >>> builder = KiloCodeBuilder()
+            >>> # Use custom config
+            >>> custom_config = KiloConfig()
+            >>> builder = KiloCodeBuilder(config=custom_config)
         """
         self._config = config or KiloConfig()
 
     @property
     def kilo_modes(self) -> dict[str, Any]:
-        """Return the kilo modes from config."""
+        """Return the kilo modes from config.
+
+        Returns:
+            Dictionary of mode slug to mode configuration.
+
+        Example:
+            >>> builder = KiloCodeBuilder()
+            >>> modes = builder.kilo_modes
+            >>> print("code" in modes)
+            True
+        """
         return self._config.kilo_modes
 
     @property
     def language_file_map(self) -> dict[str, str]:
-        """Return the language file map from config."""
+        """Return the language file map from config.
+
+        Returns:
+            Dictionary mapping language name to conventions file.
+
+        Example:
+            >>> builder = KiloCodeBuilder()
+            >>> lang_map = builder.language_file_map
+            >>> print(lang_map.get("python", ""))
+            core-conventions-python.md
+        """
         return self._config.language_file_map
 
     def build(
         self, output: Path, config: dict[str, Any] | None = None, dry_run: bool = False
     ) -> list[str]:
-        """
-        Build Kilo Code configuration. Subclasses implement specific output formats.
-        Returns a list of action strings for display.
+        """Build Kilo Code configuration. Subclasses implement specific output formats.
+
+        This method must be implemented by subclasses to generate the
+        appropriate output format for their target.
+
+        Args:
+            output: Directory path where files will be created.
+            config: Optional configuration dict with template variables.
+            dry_run: If True, preview what would be written without touching filesystem.
+
+        Returns:
+            List of action strings describing what was created.
+
+        Raises:
+            NotImplementedError: If subclass doesn't implement this method.
         """
         raise NotImplementedError()
 
     def _get_agents_md_content(self) -> str:
-        """Get the AGENTS.md content specific to the builder type."""
+        """Get the AGENTS.md content specific to the builder type.
+
+        Returns:
+            The content for the AGENTS.md file.
+
+        Raises:
+            NotImplementedError: If subclass doesn't implement this method.
+        """
         raise NotImplementedError()
 
     def _copy(
@@ -72,6 +146,30 @@ class KiloCodeBuilder(Builder):
         dry_run: bool,
         config: dict[str, Any] | None = None,
     ) -> str:
+        """Copy a source file to destination with optional template substitution.
+
+        Internal helper that handles file copying with support for
+        template variable substitution in language-specific conventions files.
+
+        Args:
+            source_path: Source file path to copy from.
+            destination: Destination file path to copy to.
+            dry_run: If True, return preview string without copying.
+            config: Optional config dict for template variable substitution.
+
+        Returns:
+            Action string describing the copy operation.
+
+        Example:
+            >>> action = self._copy(
+            ...     Path("core-conventions-python.md"),
+            ...     Path(".kilocode/rules/conventions-python.md"),
+            ...     False,
+            ...     {"spec": {"language": "python"}}
+            ... )
+            >>> print(action)
+            ✓ core-conventions-python.md → .kilocode/rules/conventions-python.md
+        """
         rel = str(destination).split(".kilocode/", 1)[-1]
         label = f".kilocode/{rel}"
         if dry_run:
@@ -90,7 +188,42 @@ class KiloCodeBuilder(Builder):
         return f"✓ {source_path.name} → {label}"
 
     def _substitute_template_variables(self, content: str, config: dict[str, Any]) -> str:
-        """Replace {{VARIABLE}} templates with values from config."""
+        """Replace {{VARIABLE}} templates with values from config.
+
+        This method performs template variable substitution on convention
+        files, replacing placeholders like {{LANGUAGE}} with actual values
+        from the configuration.
+
+        Supported variables:
+            - {{LANGUAGE}}: Programming language
+            - {{RUNTIME}}: Runtime version
+            - {{PACKAGE_MANAGER}}: Package manager
+            - {{LINTER}}: Linter tool
+            - {{FORMATTER}}: Formatter tool
+            - {{ABSTRACT_CLASS_STYLE}}: Abstract class style
+            - {{TESTING_FRAMEWORK}}: Testing framework
+            - {{TEST_RUNNER}}: Test runner
+            - {{LINE_COVERAGE_%}}: Line coverage target
+            - {{BRANCH_COVERAGE_%}}: Branch coverage target
+            - {{FUNCTION_COVERAGE_%}}: Function coverage target
+            - {{STATEMENT_COVERAGE_%}}: Statement coverage target
+            - {{MUTATION_COVERAGE_%}}: Mutation coverage target
+            - {{PATH_COVERAGE_%}}: Path coverage target
+
+        Args:
+            content: The template content with {{VARIABLE}} placeholders.
+            config: Configuration dict containing spec values.
+
+        Returns:
+            Content with all template variables replaced.
+
+        Example:
+            >>> content = "Language: {{LANGUAGE}}"
+            >>> config = {"spec": {"language": "python"}}
+            >>> result = self._substitute_template_variables(content, config)
+            >>> print(result)
+            Language: python
+        """
         defaults = config.get("spec", {})
 
         def format_value(value: Any) -> str:
@@ -164,6 +297,18 @@ class KiloCodeBuilder(Builder):
         """Write the .kilocodemodes manifest file.
 
         Simply copies the kilo_modes.yaml source file to preserve exact formatting.
+
+        Args:
+            destination: Path where the manifest file will be written.
+            dry_run: If True, return preview string without writing.
+
+        Returns:
+            Action string describing the operation.
+
+        Example:
+            >>> action = self._write_manifest(Path(".kilocodemodes"), False)
+            >>> print(action)
+            ✓ .kilocodemodes
         """
         # Read from the source YAML file to preserve exact formatting
         source_path = Path(__file__).parent / "kilo_modes.yaml"
@@ -177,7 +322,18 @@ class KiloCodeBuilder(Builder):
         return "✓ .kilocodemodes"
 
     def _build_ignore(self, output: Path, dry_run: bool) -> list[str]:
-        """Generate .kiloignore file."""
+        """Generate .kiloignore file.
+
+        Helper method that uses KiloIgnoreBuilder to generate the
+        ignore file for Kilo Code.
+
+        Args:
+            output: Output directory path.
+            dry_run: If True, return preview without writing.
+
+        Returns:
+            List containing action string for the ignore file.
+        """
         return KiloIgnoreBuilder().build(output, dry_run)
 
     def _create_base_md(
@@ -187,7 +343,30 @@ class KiloCodeBuilder(Builder):
         dry_run: bool,
         config: dict[str, Any] | None = None,
     ) -> str:
-        """Create _base.md by concatenating core files."""
+        """Create _base.md by concatenating core files.
+
+        Creates the base rules file by combining core convention files
+        and optionally adding language-specific conventions.
+
+        Args:
+            rules_dir: The rules directory path.
+            language_file: Optional language conventions filename.
+            dry_run: If True, return preview without writing.
+            config: Optional config for template substitution.
+
+        Returns:
+            Action string describing the operation.
+
+        Example:
+            >>> action = self._create_base_md(
+            ...     Path(".opencode/rules"),
+            ...     "core-conventions-python.md",
+            ...     False,
+            ...     {"spec": {"language": "python"}}
+            ... )
+            >>> print(action)
+            ✓ .opencode/rules/_base.md
+        """
         destination = rules_dir / "_base.md"
         label = ".opencode/rules/_base.md"
 
@@ -228,7 +407,31 @@ class KiloCodeBuilder(Builder):
         dry_run: bool,
         config: dict[str, Any] | None = None,
     ) -> str:
-        """Create a collapsed {MODE}.md file from multiple subagent files."""
+        """Create a collapsed {MODE}.md file from multiple subagent files.
+
+        Creates a single markdown file that contains all the subagent
+        content for a given mode, joined together with separators.
+
+        Args:
+            rules_dir: The rules directory path.
+            mode_key: The mode identifier (e.g., 'code', 'architect').
+            filenames: List of prompt filenames to include.
+            dry_run: If True, return preview without writing.
+            config: Optional config for template substitution.
+
+        Returns:
+            Action string describing the operation.
+
+        Example:
+            >>> action = self._create_collapsed_mode_md(
+            ...     Path(".opencode/rules"),
+            ...     "code",
+            ...     ["code-feature.md", "code-refactor.md"],
+            ...     False
+            ... )
+            >>> print(action)
+            ✓ .opencode/rules/code.md
+        """
         destination = rules_dir / f"{mode_key}.md"
         label = f".opencode/rules/{mode_key}.md"
 
@@ -252,7 +455,23 @@ class KiloCodeBuilder(Builder):
         return f"✓ {label}"
 
     def _create_agents_md(self, output: Path, dry_run: bool) -> str:
-        """Create AGENTS.md user guide."""
+        """Create AGENTS.md user guide.
+
+        Generates the AGENTS.md file that serves as the user guide
+        for the Kilo Code configuration.
+
+        Args:
+            output: Output directory path.
+            dry_run: If True, return preview without writing.
+
+        Returns:
+            Action string describing the operation.
+
+        Example:
+            >>> action = self._create_agents_md(Path("."), False)
+            >>> print(action)
+            ✓ AGENTS.md
+        """
         destination = output / "AGENTS.md"
         label = "AGENTS.md"
 

@@ -1,4 +1,4 @@
-# Python formatter question
+"""Question for Python code formatter selection."""
 
 from promptosaurus.questions.base.question import Question
 

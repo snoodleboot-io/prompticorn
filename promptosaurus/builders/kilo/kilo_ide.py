@@ -1,6 +1,7 @@
-"""
-builders/kilo_ide.py
-Kilo Code IDE builder - outputs .kilocode/rules-{mode}/ structure.
+"""Kilo Code IDE builder - outputs .kilocode/rules-{mode}/ structure.
+
+This module provides the KiloIDEBuilder class that generates the configuration
+files for Kilo Code in IDE format (used by VSCode/JetBrains extensions).
 
 Output layout:
   {output}/.kilocode/rules/                 <- core files (always loaded)
@@ -9,6 +10,24 @@ Output layout:
   {output}/.kiloignore                  <- ignore patterns
 
 This format is used by the KiloCode IDE extensions (VSCode/JetBrains).
+
+Functions:
+    _make_dest_filename: Convert prompt source path to destination filename.
+    _flatten_agent_path: Flatten agent path by removing mode prefix dynamically.
+
+Classes:
+    KiloIDEBuilder: Builder for Kilo Code .kilocode/rules-{mode}/ directory structure.
+
+Example:
+    >>> from pathlib import Path
+    >>> from promptosaurus.builders.kilo.kilo_ide import KiloIDEBuilder
+    >>> builder = KiloIDEBuilder()
+    >>> actions = builder.build(Path("./output"))
+    >>> for action in actions[:3]:
+    ...     print(action)
+    ✓ AGENTS.md
+    ✓ core-system.md → .kilocode/rules/core-system.md
+    ✓ core-conventions.md → .kilocode/rules/core-conventions.md
 """
 
 from pathlib import Path
@@ -19,8 +38,10 @@ from promptosaurus.registry import registry
 
 
 def _make_dest_filename(filename: str, mode_key: str | None = None) -> str:
-    """
-    Convert prompt source path to destination filename.
+    """Convert prompt source path to destination filename.
+
+    This function transforms the prompt source file paths into appropriate
+    destination filenames based on the file type and mode.
 
     Mapping rules:
     - agents/core/core-conventions-{lang}.md -> conventions-{lang}.md (language goes to rules/)
@@ -28,6 +49,21 @@ def _make_dest_filename(filename: str, mode_key: str | None = None) -> str:
     - agents/{agent}/subagents/{agent}-{slug}.md -> {slug}.md (subagent files)
     - agents/{agent}/{agent}.md -> {agent}.md (root agent files)
     - Any other agents/{agent}/ path -> flatten (remove subagents folder and agent prefix)
+
+    Args:
+        filename: The source prompt filename.
+        mode_key: Optional mode key for agent file transformations.
+
+    Returns:
+        The destination filename.
+
+    Example:
+        >>> _make_dest_filename("agents/core/core-system.md")
+        'system.md'
+        >>> _make_dest_filename("agents/core/core-conventions-python.md")
+        'conventions-python.md'
+        >>> _make_dest_filename("agents/code/subagents/code-feature.md", "code")
+        'feature.md'
     """
     # Handle core files first
     if filename.startswith("agents/core/core-conventions-"):
@@ -49,7 +85,7 @@ def _make_dest_filename(filename: str, mode_key: str | None = None) -> str:
         return f"{mode_key}.md"
 
     # For any other agents/{something}/ path, flatten it
-    # e.g., agents/code/subagents/code-feature.md -> when in migration mode
+    # e.g. agents/code/subagents/code-feature.md -> when in migration mode
     if filename.startswith("agents/"):
         return _flatten_agent_path(filename, mode_key)
 
@@ -60,7 +96,21 @@ def _flatten_agent_path(filename: str, mode_key: str) -> str:
     """Flatten agent path by removing mode prefix dynamically.
 
     Extracts the mode prefix from the filename itself rather than
-    using a hardcoded list.
+    using a hardcoded list. This handles cases where prompts are
+    organized in non-standard ways.
+
+    Args:
+        filename: The source prompt filename to flatten.
+        mode_key: The mode key being processed.
+
+    Returns:
+        The flattened filename with mode prefix removed.
+
+    Example:
+        >>> _flatten_agent_path("agents/code/subagents/code-feature.md", "code")
+        'feature.md'
+        >>> _flatten_agent_path("agents/refactor/subagents/refactor-structure.md", "refactor")
+        'structure.md'
     """
     slash1 = filename.find("/")
     if slash1 <= 0:
@@ -89,14 +139,57 @@ def _flatten_agent_path(filename: str, mode_key: str) -> str:
 
 
 class KiloIDEBuilder(KiloCodeBuilder):
-    """Builder for Kilo Code .kilocode/rules-{mode}/ directory structure (IDE format)."""
+    """Builder for Kilo Code .kilocode/rules-{mode}/ directory structure (IDE format).
+
+    This builder creates the IDE-format configuration used by the KiloCode
+    VSCode and JetBrains extensions. It generates:
+    - AGENTS.md: User guide
+    - .kilocode/rules/: Core convention files (always loaded)
+    - .kilocode/rules-{mode}/: Per-mode directories with individual files
+    - .kilocodemodes: All mode definitions
+    - .kiloignore: Ignore patterns
+
+    The IDE format keeps each prompt as a separate file in mode-specific
+    directories, allowing for more granular control.
+
+    Attributes:
+        Inherits all attributes from KiloCodeBuilder.
+
+    Example:
+        >>> builder = KiloIDEBuilder()
+        >>> # Build files
+        >>> actions = builder.build(Path("./my-project"))
+        >>> print(f\"Generated {len(actions)} files\")
+    """
 
     def build(
         self, output: Path, config: dict[str, Any] | None = None, dry_run: bool = False
     ) -> list[str]:
-        """
-        Write the Kilo .kilocode/rules-{mode}/ structure under `output`.
-        Returns a list of action strings for display.
+        """Write the Kilo .kilocode/rules-{mode}/ structure under `output`.
+
+        Generates the IDE-format configuration by:
+        1. Creating AGENTS.md user guide
+        2. Creating core files in .kilocode/rules/
+        3. Adding language-specific conventions if selected
+        4. Creating per-mode directories with individual files
+        5. Generating .kilocodemodes manifest
+        6. Building .kiloignore
+
+        Args:
+            output: Directory path where files will be created.
+            config: Optional configuration dict with template variables.
+            dry_run: If True, preview what would be written without touching filesystem.
+
+        Returns:
+            List of action strings describing what was created.
+
+        Example:
+            >>> from pathlib import Path
+            >>> builder = KiloIDEBuilder()
+            >>> # Normal run
+            >>> actions = builder.build(Path("./output"))
+            >>> # Dry run
+            >>> actions = builder.build(Path("./output"), dry_run=True)
         """
         actions: list[str] = []
 
@@ -147,7 +240,19 @@ class KiloIDEBuilder(KiloCodeBuilder):
         return actions
 
     def _get_agents_md_content(self) -> str:
-        """Get the AGENTS.md content for IDE format by reading from template file."""
+        """Get the AGENTS.md content for IDE format by reading from template file.
+
+        Returns:
+            The content for the AGENTS.md file.
+
+        Raises:
+            ValueError: If the AGENTS.md template file is not found.
+
+        Example:
+            >>> content = self._get_agents_md_content()
+            >>> print(len(content) > 0)
+            True
+        """
         path = Path(__file__).parent / "AGENTS_KILO_IDE.md"
         if not path.exists():
             raise ValueError("The AGENTS.md file was not found.")

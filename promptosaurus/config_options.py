@@ -1,4 +1,35 @@
-"""Configuration options management for the update command."""
+"""Configuration options management for the prompt update command.
+
+This module provides data structures and functions for managing configuration
+options that can be updated interactively via the `prompt update` command.
+
+The module defines:
+    - ConfigOption dataclass: Represents a single updateable configuration option
+    - CONFIG_OPTIONS: List of all available options
+    - Helper functions for loading, getting, and setting nested config values
+
+Constants:
+    REPO_TYPE_OPTIONS: Available repository type options
+    PACKAGE_MANAGER_OPTIONS: Available package manager options
+    TEST_FRAMEWORK_OPTIONS: Available test framework options
+    LINTER_OPTIONS: Available linter options
+    FORMATTER_OPTIONS: Available formatter options
+
+Classes:
+    ConfigOption: Dataclass representing a single configuration option
+
+Functions:
+    load_current_values: Load current config values into ConfigOption objects
+    get_nested_value: Get value from nested dict using dot notation
+    set_nested_value: Set value in nested dict using dot notation
+
+Example:
+    >>> from promptosaurus.config_options import CONFIG_OPTIONS, load_current_values
+    >>> config = {"spec": {"language": "python"}}
+    >>> options = load_current_values(config)
+    >>> options[0].current_value
+    'python'
+"""
 
 from dataclasses import dataclass
 from typing import Any
@@ -59,7 +90,29 @@ FORMATTER_OPTIONS = [
 
 @dataclass
 class ConfigOption:
-    """Represents a single configuration option that can be updated."""
+    """Represents a single configuration option that can be updated interactively.
+
+    This dataclass defines a configuration option that users can modify via the
+    `prompt update` command. Each option has a key (used in the config file),
+    a display name (shown to users), a type, and available choices if applicable.
+
+    Attributes:
+        key: The configuration key in dot notation (e.g., "spec.language").
+        display_name: Human-readable name shown in the UI.
+        option_type: Type of option - "single-select", "text", or "composite".
+        current_value: The current value from the configuration file.
+        available_options: List of valid choices for single-select options.
+
+    Example:
+        >>> opt = ConfigOption(
+        ...     key="spec.language",
+        ...     display_name="Language",
+        ...     option_type="single-select",
+        ...     available_options=["python", "typescript"]
+        ... )
+        >>> opt.key
+        'spec.language'
+    """
 
     key: str
     display_name: str
@@ -124,12 +177,21 @@ def load_current_values(
 ) -> list[ConfigOption]:
     """Load current values from config into ConfigOption objects.
 
+    This function populates the `current_value` attribute of each ConfigOption
+    by looking up values in the nested configuration dictionary using dot notation.
+
     Args:
-        config: The configuration dictionary
+        config: The configuration dictionary loaded from YAML.
         options: Optional list of ConfigOption objects. Defaults to CONFIG_OPTIONS.
 
     Returns:
-        List of ConfigOption objects with current values populated
+        List of ConfigOption objects with current values populated.
+
+    Example:
+        >>> config = {"spec": {"language": "python"}}
+        >>> options = load_current_values(config)
+        >>> options[0].current_value
+        'python'
     """
     if options is None:
         options = CONFIG_OPTIONS.copy()

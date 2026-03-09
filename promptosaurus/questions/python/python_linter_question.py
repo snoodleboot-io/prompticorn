@@ -1,4 +1,4 @@
-# Python linter question
+"""Question for Python linter configuration."""
 
 from promptosaurus.questions.base.question import Question
 

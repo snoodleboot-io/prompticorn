@@ -1,4 +1,4 @@
-# Folder mapping question
+"""Question for folder to language mappings in multi-language repositories."""
 
 from promptosaurus.questions.base.question import Question
 

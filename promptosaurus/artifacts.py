@@ -1,4 +1,28 @@
-"""Artifact management for AI tool configuration files."""
+"""Artifact management for AI tool configuration files.
+
+This module provides the ArtifactManager class for managing AI tool-specific
+configuration artifacts. It tracks which files each AI tool creates and removes
+when switching between tools.
+
+The ARTIFACT_FILES constant defines:
+    - Which files/directories each tool creates
+    - Which files/directories should be removed when switching to another tool
+
+This ensures clean transitions between different AI assistant configurations
+without leaving orphaned files.
+
+Classes:
+    ArtifactManager: Manages AI tool artifact creation and removal.
+
+Constants:
+    ARTIFACT_FILES: Dictionary mapping tool names to their create/remove artifacts.
+
+Example:
+    >>> from promptosaurus.artifacts import ArtifactManager
+    >>> manager = ArtifactManager(Path('.'))
+    >>> actions = manager.remove_artifacts('kilo-cli')
+    >>> # Removes .kilocode/, .clinerules, .cursor/, etc.
+"""
 
 import shutil
 from pathlib import Path
@@ -59,7 +83,19 @@ ARTIFACT_FILES: Final[dict[str, dict[str, set[str]]]] = {
 
 
 class ArtifactManager:
-    """Manage AI tool artifact creation and removal."""
+    """Manage AI tool artifact creation and removal.
+
+    This class handles cleaning up old AI tool artifacts when switching to a
+    new tool, and provides information about what artifacts each tool creates.
+
+    Attributes:
+        base_path: Root path for artifact operations.
+
+    Example:
+        >>> manager = ArtifactManager(Path('/project'))
+        >>> manager.remove_artifacts('kilo-cli')
+        ['Removed directory: .kilocode/', 'Removed file: .clinerules']
+    """
 
     def __init__(self, base_path: Path | None = None) -> None:
         """Initialize the artifact manager.
@@ -72,11 +108,24 @@ class ArtifactManager:
     def remove_artifacts(self, tool: str) -> list[str]:
         """Remove artifacts for a specific tool.
 
+        Removes all artifact files/directories that the specified tool does NOT create,
+        effectively cleaning up artifacts from other tools.
+
         Args:
-            tool: The AI tool name
+            tool: The AI tool name (e.g., 'kilo-cli', 'cline', 'cursor').
 
         Returns:
-            List of action messages describing what was removed
+            List of action messages describing what was removed.
+            Empty list if tool is not recognized.
+
+        Raises:
+            OSError: If file/directory removal fails.
+
+        Example:
+            >>> manager = ArtifactManager(Path('.'))
+            >>> actions = manager.remove_artifacts('kilo-cli')
+            >>> print(actions)
+            ['Removed directory: .kilocode/', 'Removed file: .clinerules']
         """
         if tool not in ARTIFACT_FILES:
             return []
@@ -105,7 +154,13 @@ class ArtifactManager:
         """Detect currently configured AI tool by checking which artifacts exist.
 
         Returns:
-            The name of the currently active tool, or None if no tool detected
+            The name of the currently active tool, or None if no tool detected.
+            Returns the first matching tool found.
+
+        Example:
+            >>> manager = ArtifactManager(Path('.'))
+            >>> tool = manager.current_tool
+            >>> print(tool)  # 'kilo-cli', 'cursor', etc., or None
         """
         for tool, files in ARTIFACT_FILES.items():
             # Check if any of this tool's unique files exist
@@ -119,10 +174,10 @@ class ArtifactManager:
         """Get the set of artifacts that should be created for a tool.
 
         Args:
-            tool: The AI tool name
+            tool: The AI tool name (e.g., 'kilo-cli', 'cline').
 
         Returns:
-            Set of artifact paths to create
+            Set of artifact paths to create. Empty set if tool not recognized.
         """
         if tool not in ARTIFACT_FILES:
             return set()
@@ -132,10 +187,10 @@ class ArtifactManager:
         """Get the set of artifacts that should be removed for a tool.
 
         Args:
-            tool: The AI tool name
+            tool: The AI tool name (e.g., 'kilo-cli', 'cline').
 
         Returns:
-            Set of artifact paths to remove
+            Set of artifact paths to remove. Empty set if tool not recognized.
         """
         if tool not in ARTIFACT_FILES:
             return set()

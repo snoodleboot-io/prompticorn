@@ -1,4 +1,4 @@
-# Repository type question
+"""Question for repository structure type selection."""
 
 from promptosaurus.questions.base.question import Question
 
