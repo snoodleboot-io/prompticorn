@@ -59,10 +59,10 @@ class TestHandleSingleLanguageQuestions:
         assert isinstance(config["spec"], dict)
 
     def test_handler_with_mock_selector_returning_ruff(self, monkeypatch):
-        """Handler should work with selector returning ruff for linter."""
+        """Handler should work with selector returning python for linter."""
         # First call returns "python" for language selection
         # Subsequent calls return answers for each question
-        mock_selector = Mock(return_value="ruff")
+        mock_selector = Mock(return_value="python")
         handler = HandleSingleLanguageQuestions(mock_selector)
 
         # Mock click.echo to avoid output during test

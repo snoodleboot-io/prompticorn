@@ -263,10 +263,9 @@ class TestGetLanguageQuestions:
         assert len(questions) > 0
 
     def test_get_unknown_language_returns_empty(self):
-        """Unknown language should return empty list."""
-        questions = get_language_questions("unknown_language")
-
-        assert questions == []
+        """Unknown language should raise ValueError."""
+        with pytest.raises(ValueError):
+            get_language_questions("unknown_language")
 
     def test_language_keys_includes_common_languages(self):
         """LANGUAGE_KEYS should include common languages."""
