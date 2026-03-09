@@ -19,7 +19,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  PACKAGE_NAME: promptcli
+  PACKAGE_NAME: promptosaurus
   PYTHON_MIN_VERSION: "3.10"
   MAJOR_VERSION: "0"  # Hardcoded - edit this to bump major version for breaking changes
   IS_MAIN: ${{ github.ref == 'refs/heads/main' }}
