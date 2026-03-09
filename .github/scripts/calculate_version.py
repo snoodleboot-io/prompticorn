@@ -114,9 +114,9 @@ class VersionCalculator:
         version = f"{major}.{new_minor}.{pr_number}"
 
         # Append run number only for TestPyPI preview builds
-        # Use + for local version identifier (PEP 440) instead of - which becomes .post
+        # Use .dev for development version (PEP 440 compliant for TestPyPI)
         if is_testpypi and run_number:
-            version = f"{version}+{run_number}"
+            version = f"{version}.dev{run_number}"
 
         return version
 
