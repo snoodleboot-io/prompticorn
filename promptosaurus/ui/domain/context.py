@@ -1,10 +1,59 @@
-"""Context models for UI pipeline."""
+"""Context models for UI pipeline.
+
+This module provides the context models that are passed through the UI pipeline.
+These models hold the immutable question data and mutable pipeline state.
+
+Classes:
+    QuestionContext: Immutable context for a question (Pydantic model).
+    PipelineContext: Mutable context passed through pipeline stages.
+
+Example:
+    >>> from promptosaurus.ui.domain.context import QuestionContext, PipelineContext
+    >>>
+    >>> # Create question context
+    >>> qc = QuestionContext(
+    ...     question="Choose a language:",
+    ...     options=["Python", "Go", "Rust"],
+    ...     explanations={"Python": "Data science", "Go": "Systems", "Rust": "Safety"},
+    ...     question_explanation="Select your primary language"
+    ... )
+    >>> print(qc.question)
+    Choose a language:
+"""
 
 from pydantic import BaseModel
 
 
 class QuestionContext(BaseModel):
-    """Context for a question - passed through pipeline."""
+    """Context for a question - passed through pipeline.
+
+    This Pydantic model holds all the immutable data about a question,
+    including the question text, available options, explanations, and
+    default selections.
+
+    Attributes:
+        question: The main question/prompt text.
+        options: List of available options to choose from.
+        explanations: Dictionary mapping options to their explanations.
+        question_explanation: Detailed explanation of what the question means.
+        default_index: Index of the default option.
+        default_indices: Set of default indices for multi-select.
+        allow_multiple: Whether multiple selections are allowed.
+        none_index: Index for a mutually exclusive option (e.g., "none of the above").
+
+    Config:
+        frozen: True - instances are immutable after creation.
+
+    Example:
+        >>> ctx = QuestionContext(
+        ...     question="Pick a language:",
+        ...     options=["Python", "TypeScript"],
+        ...     explanations={"Python": "Great for AI", "TypeScript": "Web standard"},
+        ...     question_explanation="Choose your primary language"
+        ... )
+        >>> print(ctx.options)
+        ['Python', 'TypeScript']
+    """
 
     question: str
     options: list[str]
@@ -20,7 +69,38 @@ class QuestionContext(BaseModel):
 
 
 class PipelineContext:
-    """Mutable context passed through pipeline stages."""
+    """Mutable context passed through pipeline stages.
+
+    This class holds the mutable state during pipeline execution,
+    including the current selection state and display mode. It wraps
+    the immutable QuestionContext and adds mutable properties.
+
+    Attributes:
+        _question: The immutable question context.
+        _state: Current selection state.
+        _mode: Current display mode (select or explain).
+
+    Properties:
+        question: Returns the QuestionContext.
+        state: Get/set the current SelectionState.
+        mode: Get/set the current mode (select or explain).
+        display_options: Get options to display.
+
+    Example:
+        >>> from promptosaurus.ui.domain.context import QuestionContext
+        >>> from promptosaurus.ui.state.single_selection_state import SingleSelectionState
+        >>>
+        >>> qc = QuestionContext(
+        ...     question="Test?",
+        ...     options=["A", "B"],
+        ...     explanations={"A": "First", "B": "Second"},
+        ...     question_explanation="Choose one"
+        ... )
+        >>> state = SingleSelectionState(options=["A", "B"], default_indices={0})
+        >>> ctx = PipelineContext(question=qc, state=state)
+        >>> print(ctx.mode)
+        select
+    """
 
     def __init__(
         self,
@@ -34,36 +114,71 @@ class PipelineContext:
 
     @property
     def question(self) -> QuestionContext:
-        """Get question context."""
+        """Get question context.
+
+        Returns:
+            The immutable QuestionContext for this pipeline.
+        """
         return self._question
 
     @property
     def state(self) -> "SelectionState":
-        """Get current selection state."""
+        """Get current selection state.
+
+        Returns:
+            The current SelectionState instance.
+        """
         return self._state
 
     @state.setter
     def state(self, value: "SelectionState") -> None:
-        """Set selection state."""
+        """Set selection state.
+
+        Args:
+            value: New SelectionState instance to set.
+        """
         self._state = value
 
     @property
     def mode(self) -> str:
-        """Get current mode (select or explain)."""
+        """Get current mode (select or explain).
+
+        Returns:
+            The current mode string ('select' or 'explain').
+        """
         return self._mode
 
     @mode.setter
     def mode(self, value: str) -> None:
-        """Set current mode."""
+        """Set current mode.
+
+        Args:
+            value: New mode string ('select' or 'explain').
+        """
         self._mode = value
 
     @property
     def display_options(self) -> list[str]:
-        """Get options to display (without Explain - use 'e' keystroke instead)."""
+        """Get options to display (without Explain - use 'e' keystroke instead).
+
+        Returns:
+            List of option strings to display to the user.
+        """
         return list(self._question.options)
 
     def get_explanation(self, option: str) -> str:
-        """Get explanation for option."""
+        """Get explanation for option.
+
+        Args:
+            option: The option string to get explanation for.
+
+        Returns:
+            The explanation string, or empty string if not found.
+
+        Example:
+            >>> ctx.get_explanation("Python")
+            'Great for AI and data science'
+        """
         if option == "Explain":
             return "Learn more about this question"
         return self._question.explanations.get(option, "")

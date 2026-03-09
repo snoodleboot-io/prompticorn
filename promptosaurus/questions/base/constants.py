@@ -1,4 +1,4 @@
-# Repository type constants for type safety
+"""Constants for repository types and configuration values."""
 
 REPO_TYPE_SINGLE = "single-language"
 REPO_TYPE_MULTI_FOLDER = "multi-language-folder"

@@ -1,12 +1,27 @@
-"""
-builders/copilot.py
-Builds GitHub Copilot instruction files and ignore files.
+"""Builder for GitHub Copilot instruction files and ignore files.
+
+This module provides the CopilotBuilder class that generates the configuration
+files required by GitHub Copilot AI assistant.
 
 Output:
   {output}/.github/copilot-instructions.md         ← always-on rules
   {output}/.github/instructions/{mode}.instructions.md  ← per-mode with applyTo
   {output}/.copilotignore                         ← ignore patterns
   {output}/.gitignore                             ← standard git ignore patterns
+
+Classes:
+    CopilotBuilder: Generates GitHub Copilot instruction files.
+
+Example:
+    >>> from pathlib import Path
+    >>> from promptosaurus.builders.copilot import CopilotBuilder
+    >>> builder = CopilotBuilder()
+    >>> actions = builder.build(Path("./output"))
+    >>> for action in actions[:3]:
+    ...     print(action)
+    ✓ .github/copilot-instructions.md
+    ✓ .github/instructions/architect.instructions.md
+    ✓ .github/instructions/code.instructions.md
 """
 
 from datetime import datetime
@@ -19,14 +34,53 @@ from promptosaurus.registry import registry
 
 
 class CopilotBuilder(Builder):
-    """Builder for GitHub Copilot instruction files."""
+    """Builder for GitHub Copilot instruction files.
+
+    This builder creates multiple output files for GitHub Copilot:
+    - .github/copilot-instructions.md: Always-on rules concatenated
+    - .github/instructions/{mode}.instructions.md: Per-mode rules with applyTo
+    - .copilotignore: Ignore patterns for Copilot
+    - .gitignore: Standard git ignore patterns
+
+    GitHub Copilot uses YAML frontmatter with 'applyTo' field to determine
+    which instructions apply to which files.
+
+    Attributes:
+        Inherits _base_files from Builder base class.
+
+    Example:
+        >>> builder = CopilotBuilder()
+        >>> # Build all files
+        >>> actions = builder.build(Path("./my-project"))
+        >>> print(f\"Generated {len(actions)} files\")
+    """
 
     def build(
         self, output: Path, config: dict[str, Any] | None = None, dry_run: bool = False
     ) -> list[str]:
-        """
-        Write Copilot instruction files under `output`.
-        Returns a list of action strings for display.
+        """Write Copilot instruction files under `output`.
+
+        Generates Copilot configuration by:
+        1. Creating copilot-instructions.md with always-on rules
+        2. Creating per-mode instruction files with applyTo frontmatter
+        3. Creating .copilotignore file
+        4. Creating .gitignore file
+
+        Args:
+            output: Directory path where the files will be created.
+            config: Optional configuration dict with template variables (unused for Copilot).
+            dry_run: If True, preview what would be written without touching filesystem.
+
+        Returns:
+            List of action strings describing what was created.
+
+        Example:
+            >>> from pathlib import Path
+            >>> builder = CopilotBuilder()
+            >>> # Normal run
+            >>> actions = builder.build(Path("./output"))
+            >>> # Dry run
+            >>> actions = builder.build(Path("./output"), dry_run=True)
         """
         actions: list[str] = []
         github = output / ".github"
@@ -47,6 +101,18 @@ class CopilotBuilder(Builder):
         return actions
 
     def _build_always_on(self, github: Path, dry_run: bool) -> list[str]:
+        """Build the always-on copilot-instructions.md file.
+
+        Creates the main Copilot instructions file that contains all
+        always-on rules concatenated together.
+
+        Args:
+            github: The .github directory path.
+            dry_run: If True, return preview without writing.
+
+        Returns:
+            List containing action string for the file.
+        """
         destination = github / "copilot-instructions.md"
         now = datetime.now().strftime("%Y-%m-%d %H:%M")
         lines: list[str] = [
@@ -81,6 +147,25 @@ class CopilotBuilder(Builder):
         files: list[str],
         dry_run: bool,
     ) -> list[str]:
+        """Build a per-mode instruction file.
+
+        Creates a mode-specific instruction file with YAML frontmatter
+        containing the applyTo field for file targeting.
+
+        Args:
+            github: The .github directory path.
+            mode_key: The mode identifier (e.g., 'code', 'architect').
+            files: List of prompt filenames for this mode.
+            dry_run: If True, return preview without writing.
+
+        Returns:
+            List containing action string for the file.
+
+        Example:
+            >>> actions = self._build_mode(Path(".github"), "code", ["code-feature.md"], False)
+            >>> print(actions)
+            ['✓ .github/instructions/code.instructions.md']
+        """
         destination = github / "instructions" / f"{mode_key}.instructions.md"
         label = registry.modes.get(mode_key, mode_key.title())
         apply = registry.copilot_apply.get(mode_key, "**")
@@ -111,9 +196,31 @@ class CopilotBuilder(Builder):
         return [f"✓ .github/instructions/{mode_key}.instructions.md"]
 
     def _build_copilotignore(self, output: Path, dry_run: bool) -> list[str]:
-        """Generate .copilotignore file."""
+        """Generate .copilotignore file.
+
+        Helper method that uses CopilotIgnoreBuilder to generate the
+        ignore file for GitHub Copilot.
+
+        Args:
+            output: Output directory path.
+            dry_run: If True, return preview without writing.
+
+        Returns:
+            List containing action string for the ignore file.
+        """
         return CopilotIgnoreBuilder().build(output, dry_run)
 
     def _build_gitignore(self, output: Path, dry_run: bool) -> list[str]:
-        """Generate .gitignore file."""
+        """Generate .gitignore file.
+
+        Helper method that uses GitIgnoreBuilder to generate a
+        standard .gitignore file.
+
+        Args:
+            output: Output directory path.
+            dry_run: If True, return preview without writing.
+
+        Returns:
+            List containing action string for the gitignore file.
+        """
         return GitIgnoreBuilder().build(output, dry_run)

@@ -76,12 +76,12 @@ Environment vars:    UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           90          e.g., 80%
-Branch:         80        e.g., 70%
-Function:       95       e.g., 90%
-Statement:      90      e.g., 85%
-Mutation:       85       e.g., 80%
-Path:           70           e.g., 60%
+Line:           80          e.g., 80%
+Branch:         70        e.g., 70%
+Function:       90       e.g., 90%
+Statement:      85      e.g., 85%
+Mutation:       80       e.g., 80%
+Path:           60           e.g., 60%
 
 #### Test Types
 

@@ -1,6 +1,8 @@
-"""
-registry.py
-Single source of truth for all modes, their prompt files, and output ordering.
+"""Registry module - Single source of truth for all modes, prompt files, and output ordering.
+
+This module provides the Registry class which serves as the central configuration
+for all modes, their associated prompt files, and output ordering. It validates
+that all registered files exist and provides methods for generating various ignore files.
 
 To add a new mode:
   1. Add it to modes (key → display label)
@@ -11,6 +13,20 @@ To add a new file to an existing mode:
   1. Drop the .md file in prompts/
   2. Add the filename to mode_files[mode]
   3. Add a concat_order entry with the section label
+
+Classes:
+    Registry: Pydantic model containing all mode and file registrations.
+
+Functions:
+    _prompt_body_cached: Read and cache prompt file content.
+    _dest_name: Strip mode prefix from filename for output.
+
+Example:
+    >>> from promptosaurus.registry import registry
+    >>> list(registry.modes.keys())
+    ['architect', 'test', 'refactor', 'document', 'explain', ...]
+    >>> registry.prompt_body('agents/core/core-system.md')[:50]
+    'Core System\\n\\nAlways-on base behaviors for all mo'
 """
 
 from functools import lru_cache
@@ -22,7 +38,26 @@ from pydantic import BaseModel, ConfigDict, computed_field, field_validator, mod
 # ── Module-level cached function ─────────────────────────────────────────────
 @lru_cache(maxsize=32)
 def _prompt_body_cached(prompts_dir: Path, filename: str) -> str:
-    """Read and process a prompt file (cached for performance)."""
+    """Read and process a prompt file with caching for performance.
+
+    This function reads a prompt file from the prompts directory, strips the
+    header comment lines (lines starting with # that end in .md or contain
+    "Behavior when"), and returns the cleaned content.
+
+    The results are cached using lru_cache to avoid repeated file I/O.
+
+    Args:
+        prompts_dir: Path to the prompts directory.
+        filename: Name of the prompt file to read.
+
+    Returns:
+        The prompt file content with header comments stripped.
+
+    Example:
+        >>> content = _prompt_body_cached(Path("./prompts"), "agents/core/core-system.md")
+        >>> content[:50]
+        'Core System\n\nAlways-on base behaviors for all mo'
+    """
     path = prompts_dir / filename
     lines = path.read_text(encoding="utf-8").splitlines(keepends=True)
     # Strip lines that are pure header comments (# filename or <!-- path: ... -->)
@@ -37,7 +72,26 @@ def _prompt_body_cached(prompts_dir: Path, filename: str) -> str:
 
 
 def _dest_name(mode_key: str, filename: str, ext: str = ".md") -> str:
-    """Strip the mode prefix from a filename."""
+    """Strip the mode prefix from a filename for output.
+
+    This function transforms a prompt filename by removing the mode-specific
+    prefix. For example, "code-feature.md" becomes "feature.md" when
+    the mode_key is "code".
+
+    Args:
+        mode_key: The mode key (e.g., "code", "debug").
+        filename: The original filename (e.g., "code-feature.md").
+        ext: The file extension to use. Defaults to ".md".
+
+    Returns:
+        The filename with mode prefix stripped.
+
+    Example:
+        >>> _dest_name("code", "code-feature.md")
+        'feature.md'
+        >>> _dest_name("debug", "debug-root-cause.md", ".mdc")
+        'root-cause.mdc'
+    """
     stem = filename
     prefix = f"{mode_key}-"
     if stem.startswith(prefix):
@@ -48,7 +102,31 @@ def _dest_name(mode_key: str, filename: str, ext: str = ".md") -> str:
 
 
 class Registry(BaseModel):
-    """Registry of all modes, prompt files, and output ordering."""
+    """Registry of all modes, prompt files, and output ordering.
+
+    This Pydantic model serves as the single source of truth for all agent modes,
+    their associated prompt files, and the ordering for concatenated output.
+    It validates that all registered files exist in the prompts directory.
+
+    Attributes:
+        prompts_dir: Path to the prompts directory containing all .md files.
+        always_on: List of prompt files that apply to all modes.
+        modes: Dictionary mapping mode keys to display names.
+        mode_files: Dictionary mapping mode keys to their prompt files.
+        concat_order: Ordered list of (section_label, filename) tuples for output.
+        default_ignore_patterns: List of glob patterns for ignore files.
+        copilot_apply: Dictionary mapping modes to glob patterns for Copilot.
+
+    Example:
+        >>> from promptosaurus.registry import registry
+        >>> # Get all registered modes
+        >>> print(list(registry.modes.keys()))
+        ['architect', 'test', 'refactor', ...]
+        >>> # Get prompt body
+        >>> body = registry.prompt_body('agents/core/core-system.md')
+        >>> len(body) > 0
+        True
+    """
 
     model_config = ConfigDict(
         frozen=True,
@@ -285,7 +363,19 @@ class Registry(BaseModel):
     @computed_field  # type: ignore[prop-decorator]
     @property
     def all_registered_files(self) -> set[str]:
-        """All files registered in the registry."""
+        """Get all files registered in the registry.
+
+        This computed property collects all unique prompt filenames from the
+        always_on list and all mode_files dictionaries.
+
+        Returns:
+            Set of all registered filename strings.
+
+        Example:
+            >>> registry = Registry()
+            >>> 'agents/core/core-system.md' in registry.all_registered_files
+            True
+        """
         files = set(self.always_on)
         for file_list in self.mode_files.values():
             files.update(file_list)
@@ -336,19 +426,85 @@ class Registry(BaseModel):
     # ── Methods ─────────────────────────────────────────────────────────────
 
     def prompt_path(self, filename: str) -> Path:
-        """Absolute path to a prompt file."""
+        """Get absolute path to a prompt file.
+
+        Args:
+            filename: The filename relative to prompts_dir (e.g., 'agents/core/core-system.md').
+
+        Returns:
+            Absolute Path to the prompt file.
+
+        Example:
+            >>> registry = Registry()
+            >>> path = registry.prompt_path('agents/core/core-system.md')
+            >>> path.exists()
+            True
+        """
         return self.prompts_dir / filename
 
     def prompt_body(self, filename: str) -> str:
-        """Read a prompt file and strip the header comment."""
+        """Read a prompt file and strip the header comment.
+
+        This method reads the file, removes header comments (lines starting with #
+        that end in .md or contain "Behavior when"), and returns the cleaned content.
+        Results are cached for performance.
+
+        Args:
+            filename: The filename relative to prompts_dir.
+
+        Returns:
+            The prompt file content with header comments stripped.
+
+        Example:
+            >>> registry = Registry()
+            >>> body = registry.prompt_body('agents/core/core-system.md')
+            >>> body.startswith('Core System')
+            True
+        """
         return _prompt_body_cached(self.prompts_dir, filename)
 
     def dest_name(self, mode_key: str, filename: str, ext: str = ".md") -> str:
-        """Strip the mode prefix from a filename."""
+        """Strip the mode prefix from a filename for output.
+
+        This function transforms a prompt filename by removing the mode-specific
+        prefix. For example, "code-feature.md" becomes "feature.md" when
+        the mode_key is "code".
+
+        Args:
+            mode_key: The mode key (e.g., "code", "debug").
+            filename: The original filename (e.g., "code-feature.md").
+            ext: The file extension to use. Defaults to ".md".
+
+        Returns:
+            The filename with mode prefix stripped.
+
+        Example:
+            >>> registry = Registry()
+            >>> registry.dest_name("code", "code-feature.md")
+            'feature.md'
+            >>> registry.dest_name("debug", "debug-root-cause.md", ".mdc")
+            'root-cause.mdc'
+        """
         return _dest_name(mode_key, filename, ext)
 
     def validate_files(self) -> list[str]:
-        """Check every registered filename exists in prompts/."""
+        """Check every registered filename exists in prompts/.
+
+        This method performs validation to ensure all registered files actually
+        exist in the prompts directory. It checks:
+        1. All files in always_on and mode_files exist
+        2. All files in concat_order are registered
+        3. No orphan files exist in prompts/ that aren't registered
+
+        Returns:
+            List of error messages. Empty list if all files are valid.
+
+        Example:
+            >>> registry = Registry()
+            >>> errors = registry.validate_files()
+            >>> len(errors)  # Should be 0 if all files exist
+            0
+        """
         errors: list[str] = []
 
         for fname in self.all_registered_files:
@@ -368,7 +524,22 @@ class Registry(BaseModel):
     # ── Ignore file generation ──────────────────────────────────────────────
 
     def generate_gitignore(self) -> str:
-        """Generate .gitignore content from default patterns."""
+        """Generate .gitignore content from default patterns.
+
+        Creates a complete .gitignore file with sections for dependencies,
+        build outputs, IDE files, secrets, logs, and OS-specific files.
+
+        Returns:
+            Complete .gitignore file content as a string.
+
+        Example:
+            >>> registry = Registry()
+            >>> content = registry.generate_gitignore()
+            >>> '# Auto-generated' in content
+            True
+            >>> 'node_modules/' in content
+            True
+        """
         lines = [
             "# Auto-generated by prompt CLI — edit patterns in registry.py then rebuild",
             "# --- Dependencies ---",
@@ -402,7 +573,20 @@ class Registry(BaseModel):
         return "\n".join(lines) + "\n"
 
     def generate_clineignore(self) -> str:
-        """Generate .clineignore content for Cline."""
+        """Generate .clineignore content for Cline.
+
+        Creates a .clineignore file that tells Cline which files and directories
+        to ignore during analysis.
+
+        Returns:
+            Complete .clineignore file content as a string.
+
+        Example:
+            >>> registry = Registry()
+            >>> content = registry.generate_clineignore()
+            >>> '# Auto-generated' in content
+            True
+        """
         lines = [
             "# Auto-generated by prompt CLI — edit patterns in registry.py then rebuild",
             "# Files and directories to ignore in Cline",
@@ -412,7 +596,20 @@ class Registry(BaseModel):
         return "\n".join(lines) + "\n"
 
     def generate_cursorignore(self) -> str:
-        """Generate .cursorignore content for Cursor."""
+        """Generate .cursorignore content for Cursor.
+
+        Creates a .cursorignore file that tells Cursor which files and directories
+        to ignore during analysis.
+
+        Returns:
+            Complete .cursorignore file content as a string.
+
+        Example:
+            >>> registry = Registry()
+            >>> content = registry.generate_cursorignore()
+            >>> '# Auto-generated' in content
+            True
+        """
         lines = [
             "# Auto-generated by prompt CLI — edit patterns in registry.py then rebuild",
             "# Files and directories to ignore in Cursor",
@@ -422,7 +619,20 @@ class Registry(BaseModel):
         return "\n".join(lines) + "\n"
 
     def generate_kiloignore(self) -> str:
-        """Generate .kiloignore content for Kilo Code."""
+        """Generate .kiloignore content for Kilo Code.
+
+        Creates a .kiloignore file that tells Kilo Code which files and directories
+        to ignore during analysis.
+
+        Returns:
+            Complete .kiloignore file content as a string.
+
+        Example:
+            >>> registry = Registry()
+            >>> content = registry.generate_kiloignore()
+            >>> '# Auto-generated' in content
+            True
+        """
         lines = [
             "# Auto-generated by prompt CLI — edit patterns in registry.py then rebuild",
             "# Files and directories to ignore in Kilo Code",
@@ -432,7 +642,20 @@ class Registry(BaseModel):
         return "\n".join(lines) + "\n"
 
     def generate_copilotignore(self) -> str:
-        """Generate .copilotignore content for GitHub Copilot."""
+        """Generate .copilotignore content for GitHub Copilot.
+
+        Creates a .copilotignore file that tells GitHub Copilot which files and
+        directories to ignore during code completion and analysis.
+
+        Returns:
+            Complete .copilotignore file content as a string.
+
+        Example:
+            >>> registry = Registry()
+            >>> content = registry.generate_copilotignore()
+            >>> '# Auto-generated' in content
+            True
+        """
         lines = [
             "# Auto-generated by prompt CLI — edit patterns in registry.py then rebuild",
             "# Files and directories to ignore in GitHub Copilot",
