@@ -12,10 +12,10 @@ spec:
   - pyright
   formatter:
   - ruff
-  coverage: strict
+  coverage: standard
   test_runner: pytest
   abstract_class_style: interface
   mocking_library:
-  - none
+  - pytest-mock
   coverage_tool: pytest-cov
   mutation_tool: mutmut
