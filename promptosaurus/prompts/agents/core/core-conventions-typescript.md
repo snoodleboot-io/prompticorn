@@ -7,6 +7,16 @@ Package Manager:      {{PACKAGE_MANAGER}}        e.g., npm, pnpm, yarn
 Linter:               {{LINTER}}             e.g., ESLint
 Formatter:           {{FORMATTER}}          e.g., Prettier
 
+### Naming Conventions
+
+Files:               kebab-case
+Variables:          camelCase
+Constants:          UPPER_SNAKE
+Classes/Types:      PascalCase
+Functions:          camelCase
+Database tables:    snake_case
+Environment vars:   UPPER_SNAKE_CASE always
+
 ## TypeScript-Specific Rules
 
 ### Type System

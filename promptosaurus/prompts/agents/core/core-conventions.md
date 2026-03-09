@@ -26,20 +26,6 @@ File extension determines which rules apply:
 - *.py           → Python rules
 - *.go           → Go rules
 
-## Shared Conventions
-
-These conventions apply to all languages and projects:
-
-### Naming Conventions
-
-Files:               {{kebab-case | snake_case | PascalCase}}
-Variables:           {{camelCase | snake_case}}
-Constants:           {{UPPER_SNAKE | PascalCase}}
-Classes/Types:       {{PascalCase}}
-Functions:           {{camelCase | snake_case}}
-Database tables:     {{snake_case | PascalCase}}
-Environment vars:    UPPER_SNAKE_CASE always
-
 ## File & Folder Structure
 
 src/
@@ -50,7 +36,7 @@ Rule: Co-locate tests with source (auth.ts → auth.test.ts).
 
 ### Class Organization Rules
 
-Rule: One class per file. Each class must be in its own dedicated file.
+Rule: One class per file. Each class must be in its own dedicated file. This must be STRICTLY enforced.
 Rule: Filename must be the snake_case version of the class name.
   - Example: `class ConfigHandler` → `config_handler.py`
   - Example: `class SelectionState` → `selection_state.py`

@@ -4,13 +4,13 @@ import pytest
 from sweet_tea.abstract_factory import AbstractFactory
 from sweet_tea.sweet_tea_error import SweetTeaError
 
-from promptosaurus.ui._factory import UIFactory
 from promptosaurus.ui.domain.context import PipelineContext, QuestionContext
 from promptosaurus.ui.domain.renderer import Renderer
 from promptosaurus.ui.render.columns import ColumnLayoutRenderer
 from promptosaurus.ui.render.explain import ExplainRenderer
 from promptosaurus.ui.render.vertical import VerticalLayoutRenderer
-from promptosaurus.ui.state.single_select_state import SingleSelectState
+from promptosaurus.ui.state.single_selection_state import SingleSelectionState
+from promptosaurus.ui.ui_factory import UIFactory
 
 
 class TestUIFactory:
@@ -24,7 +24,7 @@ class TestUIFactory:
             explanations={},
             question_explanation="",
         )
-        state = SingleSelectState(selected=0, max_index=1)
+        state = SingleSelectionState(selected=0, max_index=1)
         context = PipelineContext(question=question, state=state, mode="select")
 
         renderer = UIFactory.create_renderer(context)
@@ -39,7 +39,7 @@ class TestUIFactory:
             explanations={},
             question_explanation="",
         )
-        state = SingleSelectState(selected=0, max_index=4)
+        state = SingleSelectionState(selected=0, max_index=4)
         context = PipelineContext(question=question, state=state, mode="select")
 
         renderer = UIFactory.create_renderer(context)
@@ -54,7 +54,7 @@ class TestUIFactory:
             explanations={},
             question_explanation="",
         )
-        state = SingleSelectState(selected=0, max_index=9)
+        state = SingleSelectionState(selected=0, max_index=9)
         context = PipelineContext(question=question, state=state, mode="select")
 
         renderer = UIFactory.create_renderer(context)
@@ -69,7 +69,7 @@ class TestUIFactory:
             explanations={},
             question_explanation="Test explanation",
         )
-        state = SingleSelectState(selected=0, max_index=1)
+        state = SingleSelectionState(selected=0, max_index=1)
         context = PipelineContext(question=question, state=state, mode="explain")
 
         renderer = UIFactory.create_renderer(context)

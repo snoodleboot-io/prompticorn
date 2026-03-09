@@ -1,10 +1,11 @@
 """No-op command implementation."""
 
+from promptosaurus.ui.commands.command import Command
 from promptosaurus.ui.commands.result import CommandResult
 from promptosaurus.ui.domain.context import PipelineContext
 
 
-class NoOpCommand:
+class NoOpCommand(Command):
     """No-op command for unknown inputs."""
 
     def execute(self, context: PipelineContext) -> CommandResult:

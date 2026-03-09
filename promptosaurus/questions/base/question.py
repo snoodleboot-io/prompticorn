@@ -58,3 +58,11 @@ class Question(ABC):
     def explain_option(self, option: str) -> str:
         """Get explanation for a specific option."""
         return self.option_explanations.get(option, "")
+
+    @property
+    def none_index(self) -> int | None:
+        """Index of option that is mutually exclusive with all others (e.g., 'none').
+        If set, selecting this option deselects all others, and selecting any other
+        option deselects this one.
+        """
+        return None

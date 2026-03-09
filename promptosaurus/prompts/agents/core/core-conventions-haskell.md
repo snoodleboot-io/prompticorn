@@ -6,6 +6,16 @@ Package Manager:      {{PACKAGE_MANAGER}}        e.g., Cabal, Stack
 Linter:              {{LINTER}}             e.g., HLint, Stan
 Formatter:           {{FORMATTER}}          e.g., Brittany, Ormolu
 
+### Naming Conventions
+
+Files:              snake_case
+Variables:          camelCase
+Constants:          PascalCase
+Classes/Types:      PascalCase
+Functions:          snake_case (camelCase for type classes)
+Database tables:    snake_case
+Environment vars:   UPPER_SNAKE_CASE always
+
 ## Haskell-Specific Rules
 
 ### Type System

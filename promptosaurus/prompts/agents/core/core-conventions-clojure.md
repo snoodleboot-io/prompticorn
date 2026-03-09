@@ -7,6 +7,16 @@ Package Manager:      {{PACKAGE_MANAGER}}        e.g., deps.edn, Leiningen
 Linter:              {{LINTER}}             e.g., eastwood, clj-kondo
 Formatter:           {{FORMATTER}}          e.g., cljfmt
 
+### Naming Conventions
+
+Files:              snake_case
+Variables:          kebab-case
+Constants:          UPPER_SNAKE
+Classes/Types:      PascalCase (for protocols/records)
+Functions:          kebab-case
+Database tables:    snake_case
+Environment vars:   UPPER_SNAKE_CASE always
+
 ## Clojure-Specific Rules
 
 ### Data Structures

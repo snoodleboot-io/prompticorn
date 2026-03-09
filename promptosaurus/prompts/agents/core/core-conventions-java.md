@@ -7,6 +7,16 @@ Package Manager:      {{PACKAGE_MANAGER}}        e.g., Maven, Gradle
 Linter:               {{LINTER}}             e.g., Checkstyle, SpotBugs
 Formatter:           {{FORMATTER}}          e.g., Google Java Format, Spotless
 
+### Naming Conventions
+
+Files:               PascalCase
+Variables:          camelCase
+Constants:          UPPER_SNAKE
+Classes/Types:      PascalCase
+Functions:          camelCase
+Database tables:    snake_case
+Environment vars:   UPPER_SNAKE_CASE always
+
 ## Java-Specific Rules
 
 ### Type System

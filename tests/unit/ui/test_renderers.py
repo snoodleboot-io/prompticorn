@@ -7,8 +7,8 @@ from promptosaurus.ui.domain.renderer import Renderer
 from promptosaurus.ui.render.columns import ColumnLayoutRenderer
 from promptosaurus.ui.render.explain import ExplainRenderer
 from promptosaurus.ui.render.vertical import VerticalLayoutRenderer
-from promptosaurus.ui.state.multi import MultiSelectState
-from promptosaurus.ui.state.single_select_state import SingleSelectState
+from promptosaurus.ui.state.multi_selection_state import MultiSelectionState
+from promptosaurus.ui.state.single_selection_state import SingleSelectionState
 
 
 class TestRendererBaseClass:
@@ -47,7 +47,7 @@ class TestColumnLayoutRenderer:
             explanations={},
             question_explanation="",
         )
-        state = SingleSelectState(selected=0, max_index=9)
+        state = SingleSelectionState(selected=0, max_index=9)
         context = PipelineContext(question=question, state=state, mode="select")
 
         output = renderer.render(context)
@@ -75,7 +75,7 @@ class TestVerticalLayoutRenderer:
             question_explanation="",
             default_index=0,
         )
-        state = SingleSelectState(selected=0, max_index=1)
+        state = SingleSelectionState(selected=0, max_index=1)
         context = PipelineContext(question=question, state=state, mode="select")
 
         output = renderer.render(context)
@@ -95,7 +95,7 @@ class TestVerticalLayoutRenderer:
             question_explanation="",
             allow_multiple=True,
         )
-        state = MultiSelectState(selected={0}, max_index=1)
+        state = MultiSelectionState(selected={0}, max_index=1)
         context = PipelineContext(question=question, state=state, mode="select")
 
         output = renderer.render(context)
@@ -121,7 +121,7 @@ class TestExplainRenderer:
             explanations={"Option A": "This is option A", "Option B": "This is option B"},
             question_explanation="This is the question explanation",
         )
-        state = SingleSelectState(selected=0, max_index=1)
+        state = SingleSelectionState(selected=0, max_index=1)
         context = PipelineContext(question=question, state=state, mode="explain")
 
         output = renderer.render(context)

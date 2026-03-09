@@ -6,6 +6,16 @@ Version:              {{VERSION}}            e.g., HTML5, HTML4 Strict, XHTML5
 Formatter:            {{FORMATTER}}          e.g., prettier, html-beautify, djLint
 Linter:               {{LINTER}}             e.g., htmlhint, W3C Validator
 
+### Naming Conventions
+
+Files:              kebab-case
+Variables:          kebab-case (for CSS classes/IDs)
+Constants:          kebab-case
+Classes/Types:      PascalCase (for components)
+Functions:          camelCase (JS), kebab-case (CSS)
+Database tables:    snake_case
+Environment vars:   UPPER_SNAKE_CASE always
+
 ## HTML-Specific Rules
 
 ### Document Structure

@@ -7,6 +7,16 @@ Package Manager:      {{PACKAGE_MANAGER}}        e.g., CMake, vcpkg, Conan
 Linter:               {{LINTER}}             e.g., clang-tidy, cppcheck
 Formatter:           {{FORMATTER}}          e.g., clang-format
 
+### Naming Conventions
+
+Files:               snake_case
+Variables:          snake_case
+Constants:          UPPER_SNAKE
+Classes/Types:      PascalCase
+Functions:          PascalCase or snake_case
+Database tables:    snake_case
+Environment vars:   UPPER_SNAKE_CASE always
+
 ## C++-Specific Rules
 
 ### Modern C++

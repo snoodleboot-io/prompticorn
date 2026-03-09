@@ -1,9 +1,11 @@
 """Single selection state implementation."""
 
+from __future__ import annotations
+
 from promptosaurus.ui.state.selection_state import SelectionState
 
 
-class SingleSelectState(SelectionState):
+class SingleSelectionState(SelectionState):
     """Single selection state - immutable."""
 
     def __init__(self, selected: int, max_index: int):
@@ -15,16 +17,16 @@ class SingleSelectState(SelectionState):
         """Get current selection."""
         return self._selected
 
-    def select(self, index: int) -> "SingleSelectState":
+    def select(self, index: int) -> SingleSelectionState:
         """Return new state after selection."""
         if 0 <= index <= self._max:
-            return SingleSelectState(index, self._max)
+            return SingleSelectionState(index, self._max)
         return self
 
-    def navigate(self, direction: int) -> "SingleSelectState":
+    def navigate(self, direction: int) -> SingleSelectionState:
         """Return new state after navigation."""
         new_index = max(0, min(self._max, self._selected + direction))
-        return SingleSelectState(new_index, self._max)
+        return SingleSelectionState(new_index, self._max)
 
     def is_selected(self, index: int) -> bool:
         """Check if index is selected."""

@@ -100,7 +100,8 @@ class ArtifactManager:
 
         return actions
 
-    def get_current_tool(self) -> str | None:
+    @property
+    def current_tool(self) -> str | None:
         """Detect currently configured AI tool by checking which artifacts exist.
 
         Returns:

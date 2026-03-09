@@ -1,10 +1,10 @@
 """Public UI API - main entry point for interactive selection."""
 
-from promptosaurus.ui._factory import UIFactory
 from promptosaurus.ui.domain.context import QuestionContext
 from promptosaurus.ui.pipeline.orchestrator import PipelineOrchestrator
 from promptosaurus.ui.pipeline.render_stage import RenderStage
 from promptosaurus.ui.pipeline.state_update_stage import StateUpdateStage
+from promptosaurus.ui.ui_factory import UIFactory
 
 
 def select_option_with_explain(
@@ -15,6 +15,7 @@ def select_option_with_explain(
     default_index: int = 0,
     default_indices: set[int] | None = None,
     allow_multiple: bool = False,
+    none_index: int | None = None,
 ) -> str | list[str]:
     """
     Interactive selection with number keys and explain option.
@@ -30,6 +31,7 @@ def select_option_with_explain(
         default_index=default_index,
         default_indices=default_indices if default_indices is not None else {default_index},
         allow_multiple=allow_multiple,
+        none_index=none_index,
     )
 
     input_provider = UIFactory.create_input_provider()

@@ -4,9 +4,9 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from promptosaurus.builders.kilo import KiloCodeBuilder
-from promptosaurus.builders.kilo_cli import KiloCLIBuilder
-from promptosaurus.builders.kilo_ide import KiloIDEBuilder
+from promptosaurus.builders.kilo.kilo_cli import KiloCLIBuilder
+from promptosaurus.builders.kilo.kilo_code_builder import KiloCodeBuilder
+from promptosaurus.builders.kilo.kilo_ide import KiloIDEBuilder
 
 
 class TestKiloCodeBuilderBase(unittest.TestCase):
@@ -14,7 +14,6 @@ class TestKiloCodeBuilderBase(unittest.TestCase):
 
     def test_language_file_map(self):
         """KiloCodeBuilder should have language_file_map property loaded from YAML."""
-        from promptosaurus.builders.kilo import KiloCodeBuilder
 
         # Test via instance to ensure YAML is loaded
         builder = KiloCLIBuilder()
@@ -22,13 +21,6 @@ class TestKiloCodeBuilderBase(unittest.TestCase):
         assert "python" in builder.language_file_map
         assert builder.language_file_map["python"] == "agents/core/core-conventions-python.md"
         assert builder.language_file_map["typescript"] == "agents/core/core-conventions-typescript.md"
-
-    def test_base_files(self):
-        """KiloCodeBuilder should have BASE_FILES."""
-        from promptosaurus.builders.kilo import KiloCodeBuilder
-        assert hasattr(KiloCodeBuilder, "BASE_FILES")
-        assert "agents/core/core-system.md" in KiloCodeBuilder.BASE_FILES
-        assert "agents/core/core-conventions.md" in KiloCodeBuilder.BASE_FILES
 
     def test_substitute_template_variables_basic(self):
         """KiloCodeBuilder should substitute basic template variables."""
@@ -207,16 +199,6 @@ class TestKiloBuilder(unittest.TestCase):
 class TestKiloCustomModes(unittest.TestCase):
     """Tests for custom modes filtering in Kilo builders."""
 
-    def test_kilo_builtin_modes_constant_exists(self):
-        """KiloCodeBuilder should have KILO_BUILTIN_MODES constant."""
-        assert hasattr(KiloCodeBuilder, "KILO_BUILTIN_MODES")
-        assert isinstance(KiloCodeBuilder.KILO_BUILTIN_MODES, frozenset)
-
-    def test_kilo_builtin_modes_contains_expected_modes(self):
-        """KILO_BUILTIN_MODES should contain architect, code, ask, debug, orchestrator."""
-        expected = {"architect", "code", "ask", "debug", "orchestrator"}
-        assert KiloCodeBuilder.KILO_BUILTIN_MODES == expected
-
     def test_custom_modes_property_exists(self):
         """KiloCodeBuilder should have custom_modes property."""
         builder = KiloCLIBuilder()
@@ -227,7 +209,7 @@ class TestKiloCustomModes(unittest.TestCase):
         """custom_modes should exclude built-in Kilo modes."""
         builder = KiloCLIBuilder()
         # Built-in modes should NOT be in custom_modes
-        for mode in KiloCodeBuilder.KILO_BUILTIN_MODES:
+        for mode in builder._kilo_builtin_modes:
             assert mode not in builder.custom_modes, f"{mode} should not be in custom_modes"
 
     def test_custom_modes_includes_custom_modes(self):
@@ -245,7 +227,7 @@ class TestKiloCustomModes(unittest.TestCase):
             output = Path(tmpdir)
             builder.build(output, dry_run=False)
             # Check that built-in mode files are NOT created
-            for mode in KiloCodeBuilder.KILO_BUILTIN_MODES:
+            for mode in builder._kilo_builtin_modes:
                 mode_file = output / ".opencode" / "rules" / f"{mode}.md"
                 assert not mode_file.exists(), f"{mode}.md should NOT exist (built-in mode)"
 

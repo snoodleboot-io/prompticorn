@@ -4,6 +4,16 @@
 Database:            {{DATABASE}}           e.g., PostgreSQL, MySQL, SQLite
 ORM/Query:           {{ORM_QUERY_BUILDER}}                e.g., Prisma, SQLAlchemy, GORM, Drizzle
 
+### Naming Conventions
+
+Files:              snake_case
+Variables:          snake_case
+Constants:          UPPER_SNAKE
+Classes/Types:      PascalCase (for views/procedures)
+Functions:          snake_case
+Database tables:    snake_case
+Environment vars:   UPPER_SNAKE_CASE always
+
 ### Testing
 
 #### Coverage Targets

@@ -7,6 +7,16 @@ Package Manager:      {{PACKAGE_MANAGER}}        e.g., Bundler
 Linter:               {{LINTER}}             e.g., RuboCop
 Formatter:           {{FORMATTER}}          e.g., Rufo, RuboCop
 
+### Naming Conventions
+
+Files:              snake_case
+Variables:          snake_case
+Constants:          UPPER_SNAKE
+Classes/Types:      PascalCase
+Functions:          snake_case (methods)
+Database tables:    snake_case
+Environment vars:   UPPER_SNAKE_CASE always
+
 ## Ruby-Specific Rules
 
 ### Type System

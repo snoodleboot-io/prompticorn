@@ -14,6 +14,7 @@ from pathlib import Path
 from typing import Any
 
 from promptosaurus.builders.builder import Builder
+from promptosaurus.builders.ignore_generator import CopilotIgnoreBuilder, GitIgnoreBuilder
 from promptosaurus.registry import registry
 
 
@@ -111,26 +112,8 @@ class CopilotBuilder(Builder):
 
     def _build_copilotignore(self, output: Path, dry_run: bool) -> list[str]:
         """Generate .copilotignore file."""
-        destination = output / ".copilotignore"
-        content = registry.generate_copilotignore()
-
-        if dry_run:
-            lines = content.count("\n")
-            return [f"[dry-run] .copilotignore ({lines} lines)"]
-
-        destination.write_text(content, encoding="utf-8")
-        lines = content.count("\n")
-        return [f"✓ .copilotignore ({lines} lines)"]
+        return CopilotIgnoreBuilder().build(output, dry_run)
 
     def _build_gitignore(self, output: Path, dry_run: bool) -> list[str]:
         """Generate .gitignore file."""
-        destination = output / ".gitignore"
-        content = registry.generate_gitignore()
-
-        if dry_run:
-            lines = content.count("\n")
-            return [f"[dry-run] .gitignore ({lines} lines)"]
-
-        destination.write_text(content, encoding="utf-8")
-        lines = content.count("\n")
-        return [f"✓ .gitignore ({lines} lines)"]
+        return GitIgnoreBuilder().build(output, dry_run)

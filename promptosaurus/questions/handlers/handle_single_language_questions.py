@@ -76,6 +76,7 @@ class HandleSingleLanguageQuestions:
         default_indices = (
             question.default_indices if hasattr(question, "default_indices") else {default_idx}
         )
+        none_index = getattr(question, "none_index", None)
 
         return self.select_option(
             question=question.question_text,
@@ -85,4 +86,5 @@ class HandleSingleLanguageQuestions:
             default_index=default_idx,
             default_indices=default_indices,
             allow_multiple=allow_multiple,
+            none_index=none_index,
         )

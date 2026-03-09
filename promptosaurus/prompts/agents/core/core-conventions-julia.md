@@ -6,6 +6,16 @@ Package Manager:      {{PACKAGE_MANAGER}}        e.g., Pkg
 Linter:              {{LINTER}}             e.g., Jet.jl, Lint.jl
 Formatter:           {{FORMATTER}}          e.g., JuliaFormatter
 
+### Naming Conventions
+
+Files:              snake_case
+Variables:          snake_case
+Constants:          UPPER_SNAKE
+Classes/Types:      PascalCase
+Functions:          snake_case
+Database tables:    snake_case
+Environment vars:   UPPER_SNAKE_CASE always
+
 ## Julia-Specific Rules
 
 ### Type System

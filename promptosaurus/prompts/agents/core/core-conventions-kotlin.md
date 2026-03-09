@@ -7,6 +7,16 @@ Package Manager:      {{PACKAGE_MANAGER}}        e.g., Gradle, Maven
 Linter:               {{LINTER}}             e.g., ktlint, detekt
 Formatter:           {{FORMATTER}}          e.g., ktlint
 
+### Naming Conventions
+
+Files:               PascalCase
+Variables:          camelCase
+Constants:          UPPER_SNAKE
+Classes/Types:      PascalCase
+Functions:          camelCase
+Database tables:    snake_case
+Environment vars:   UPPER_SNAKE_CASE always
+
 ## Kotlin-Specific Rules
 
 ### Null Safety

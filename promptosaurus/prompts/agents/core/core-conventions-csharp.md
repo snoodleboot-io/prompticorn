@@ -7,6 +7,16 @@ Package Manager:      {{PACKAGE_MANAGER}}        e.g., NuGet, dotnet
 Linter:               {{LINTER}}             e.g., StyleCop, SonarLint
 Formatter:           {{FORMATTER}}          e.g., dotnet format, ReSharper
 
+### Naming Conventions
+
+Files:               PascalCase
+Variables:          camelCase
+Constants:          UPPER_SNAKE
+Classes/Types:      PascalCase
+Functions:          PascalCase
+Database tables:    PascalCase
+Environment vars:   UPPER_SNAKE_CASE always
+
 ## C#-Specific Rules
 
 ### Type System

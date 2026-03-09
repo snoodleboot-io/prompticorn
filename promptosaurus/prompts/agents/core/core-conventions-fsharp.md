@@ -7,6 +7,16 @@ Package Manager:      {{PACKAGE_MANAGER}}        e.g., NuGet, dotnet
 Linter:              {{LINTER}}             e.g., Fantomas
 Formatter:           {{FORMATTER}}          e.g., Fantomas
 
+### Naming Conventions
+
+Files:              PascalCase
+Variables:          camelCase
+Constants:          PascalCase
+Classes/Types:      PascalCase
+Functions:          PascalCase
+Database tables:    snake_case
+Environment vars:   UPPER_SNAKE_CASE always
+
 ## F#-Specific Rules
 
 ### Type System

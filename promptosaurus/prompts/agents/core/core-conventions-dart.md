@@ -7,6 +7,16 @@ Package Manager:      {{PACKAGE_MANAGER}}        e.g., pub
 Linter:               {{LINTER}}             e.g., dart analyze
 Formatter:           {{FORMATTER}}          e.g., dart format
 
+### Naming Conventions
+
+Files:              snake_case
+Variables:          camelCase
+Constants:          camelCase or UPPER_SNAKE
+Classes/Types:      PascalCase
+Functions:          camelCase
+Database tables:    snake_case
+Environment vars:   UPPER_SNAKE_CASE always
+
 ## Dart-Specific Rules
 
 ### Null Safety

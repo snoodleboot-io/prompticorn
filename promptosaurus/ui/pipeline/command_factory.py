@@ -1,6 +1,7 @@
 """Command factory for UI pipeline."""
 
 from promptosaurus.ui.commands.confirm import ConfirmCommand
+from promptosaurus.ui.commands.explain import ExplainCommand
 from promptosaurus.ui.commands.navigate import NavigateCommand
 from promptosaurus.ui.commands.noop import NoOpCommand
 from promptosaurus.ui.commands.quit import QuitCommand
@@ -11,7 +12,8 @@ from promptosaurus.ui.domain.events import InputEvent, InputEventType
 class CommandFactory:
     """Factory for creating commands from input events."""
 
-    def create_command(self, event: InputEvent) -> object:
+    @staticmethod
+    def create_command(event: InputEvent) -> object:
         """Create command from input event."""
         if event.event_type == InputEventType.NUMBER and event.value is not None:
             return SelectCommand(event.value)
@@ -23,5 +25,7 @@ class CommandFactory:
             return ConfirmCommand()
         elif event.event_type == InputEventType.QUIT:
             return QuitCommand()
+        elif event.event_type == InputEventType.EXPLAIN:
+            return ExplainCommand()
         else:
             return NoOpCommand()

@@ -7,6 +7,16 @@ Package Manager:      {{PACKAGE_MANAGER}}        e.g., mix
 Linter:               {{LINTER}}             e.g., Credo, Sobelow
 Formatter:           {{FORMATTER}}          e.g., mix format
 
+### Naming Conventions
+
+Files:              snake_case
+Variables:          snake_case
+Constants:          UPPER_SNAKE
+Classes/Types:      PascalCase (Modules)
+Functions:          snake_case
+Database tables:    snake_case
+Environment vars:   UPPER_SNAKE_CASE always
+
 ## Elixir-Specific Rules
 
 ### Error Handling

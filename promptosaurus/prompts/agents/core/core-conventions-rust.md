@@ -7,6 +7,16 @@ Package Manager:      {{PACKAGE_MANAGER}}        e.g., Cargo
 Linter:               {{LINTER}}             e.g., Clippy
 Formatter:           {{FORMATTER}}          e.g., rustfmt
 
+### Naming Conventions
+
+Files:               snake_case
+Variables:          snake_case
+Constants:          UPPER_SNAKE
+Classes/Types:      PascalCase
+Functions:          snake_case
+Database tables:    snake_case
+Environment vars:   UPPER_SNAKE_CASE always
+
 ## Rust-Specific Rules
 
 ### Error Handling
