@@ -214,20 +214,37 @@ def main():
     calculator = VersionCalculator()
     version, warnings = calculator.calculate_version()
 
-    # Determine if this is a publishable build (only main branch)
+    # Publishing logic:
+    # - TestPyPI: open PRs targeting main (preview builds)
+    # - PyPI: PRs merged to main (release builds)
+    # - Direct push to main: NO publishing (main is protected, but we explicitly block)
     event_name = os.environ.get("GITHUB_EVENT_NAME", "push")
-    ref = os.environ.get("GITHUB_REF", "")
-    is_main = ref == "refs/heads/main" or ref == "refs/heads/master"
-    should_publish = is_main and event_name == "push"
+    action = os.environ.get("GITHUB_ACTION", "")
+
+    # For PR events, check if it's targeting main
+    base_ref = os.environ.get("GITHUB_BASE_REF", "")
+    is_pr_to_main = base_ref == "refs/heads/main" or base_ref == "main"
+
+    # TestPyPI: open PRs targeting main (preview build)
+    # Only runs when PR is open, not when closed/merged
+    should_publish_testpypi = event_name == "pull_request" and is_pr_to_main and action != "closed"
+
+    # PyPI: merged PR to main
+    # When PR is closed AND merged (action=closed, but this is merge)
+    # We detect merged PR by: pull_request event with action=closed targeting main
+    # Note: direct push to main uses event_name=push, so this won't trigger
+    should_publish_pypi = event_name == "pull_request" and action == "closed" and is_pr_to_main
 
     # Output for GitHub Actions
     if "GITHUB_OUTPUT" in os.environ:
         with open(os.environ["GITHUB_OUTPUT"], "a") as f:
             f.write(f"version={version}\n")
-            f.write(f"should_publish={str(should_publish).lower()}\n")
+            f.write(f"should_publish_testpypi={str(should_publish_testpypi).lower()}\n")
+            f.write(f"should_publish_pypi={str(should_publish_pypi).lower()}\n")
 
     print(f"Version: {version}")
-    print(f"Publish: {should_publish}")
+    print(f"Publish TestPyPI: {should_publish_testpypi}")
+    print(f"Publish PyPI: {should_publish_pypi}")
 
     if warnings:
         print("\nWarnings:")
