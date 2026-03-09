@@ -19,7 +19,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  PACKAGE_NAME: promptcli
+  PACKAGE_NAME: promptosaurus
   PYTHON_MIN_VERSION: "3.10"
   MAJOR_VERSION: "0"  # Hardcoded - edit this to bump major version for breaking changes
   IS_MAIN: ${{ github.ref == 'refs/heads/main' }}
@@ -79,7 +79,6 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v3
         with:
-          version: "0.5.x"
           enable-cache: true
 
       - name: Install dependencies
@@ -133,7 +132,6 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v3
         with:
-          version: "0.5.x"
           enable-cache: true
 
       - name: Install dependencies
