@@ -1,138 +1,83 @@
-# Prompt Library
+# Promptosaurus
 
-A shared library of AI coding assistant prompt files. Edit once in `prompts/`,
-build for any tool with a single command.
+A shared library of AI coding assistant prompt files. Edit once in `prompts/`, build for any tool with a single command.
 
-Kilo Code is the primary target. Cline, Cursor, and GitHub Copilot are derived
-from the same source.
-
-## Versioning
-
-This project uses [derived versioning](docs/derived-versioning.md) designed for trunk-based development:
-
-- **Major**: Human-controlled via `.major-version` file (breaking changes)
-- **Minor**: Count of `feat/` branches merged since last major tag
-- **Patch**: Count of `bug/`/`hotfix/`/`security/` branches merged since last feature
-
-Branch naming conventions:
-- `feat/*` → increments minor version
-- `bug/*`, `hotfix/*`, `security/*` → increments patch version
-
-Version is calculated at merge time—no version file conflicts.
-
-## Structure
-
-```
-prompt-library/
-├── promptcli/                     ← installable package
-│   ├── prompts/                   ← THE SOURCE OF TRUTH — edit files here only
-│   │   ├── core-system.md         ← always-on base behaviors (all modes)
-│   │   ├── core-conventions.md    ← ⚙️ fill in for each project
-│   │   ├── architect-*.md
-│   │   ├── test-*.md
-│   │   ├── refactor-*.md
-│   │   ├── document-*.md
-│   │   ├── explain-*.md
-│   │   ├── migration-*.md
-│   │   ├── code-*.md
-│   │   ├── review-*.md
-│   │   ├── debug-*.md
-│   │   ├── ask-*.md
-│   │   ├── security-*.md
-│   │   ├── compliance-*.md
-│   │   └── orchestrator-*.md
-│   ├── builders/
-│   │   ├── kilo.py
-│   │   ├── cline.py
-│   │   ├── cursor.py
-│   │   └── copilot.py
-│   ├── registry.py                ← mode/file manifest — edit here to add modes
-│   └── cli.py                     ← Click entry point
-│
-└── pyproject.toml                 ← uv pip install -e . → `prompt` command
-```
+Kilo Code is the primary target. Cline, Cursor, and GitHub Copilot are derived from the same source.
 
 ## Install
 
-Requires [uv](https://docs.astral.sh/uv/). Built with [hatchling](https://hatch.pypa.io/).
+Install via pip:
 
 ```bash
-uv pip install -e .
+pip install promptosaurus
 ```
 
-This registers the `prompt` command globally.
-
-To sync dependencies into a project-local venv:
+Or with uv:
 
 ```bash
-uv sync
+uv add promptosaurus
 ```
 
-## Commands
+This installs the `promptosaurus` CLI command.
 
-### Initialize configuration for your project
+## Quick Start
+
+### 1. Initialize your project
+
+Run from inside your project directory:
 
 ```bash
-# Run from inside your project directory
 cd my-project
-
-prompt init
+promptosaurus init
 ```
 
 This interactive command will:
 1. Ask about your repository type (single-language or multi-folder)
 2. Configure your language, runtime, package manager, and testing framework
-3. **Select which AI assistants to configure** (kilo, cline, cursor, copilot — multiple allowed)
+3. Select which AI assistants to configure (kilo, cline, cursor, copilot — multiple allowed)
 4. Generate all selected configurations automatically
 
-### Inspect and validate
+### 2. List available modes
 
 ```bash
-prompt list       # show all modes and their registered prompt files
-prompt validate   # check for missing files and unregistered orphans
+promptosaurus list
 ```
+
+Shows all modes and their registered prompt files.
+
+### 3. Validate configuration
+
+```bash
+promptosaurus validate
+```
+
+Check for missing files and unregistered orphans.
+
+## Commands
+
+| Command | Description |
+|---------|-------------|
+| `promptosaurus init` | Interactively initialize prompt configuration for your project |
+| `promptosaurus list` | List all registered modes and their prompt files |
+| `promptosaurus switch` | Switch to a different AI assistant tool |
+| `promptosaurus update` | Update configuration options interactively |
+| `promptosaurus validate` | Check that all registered prompt files exist and no files are missing |
 
 ## Workflow
 
-### 1. Setup for a new project
+### Adding prompts to your project
+
+1. Run `promptosaurus init` to generate configurations
+2. Edit files in the generated directories (e.g., `.kilo/rules/`)
+3. Run `promptosaurus init` again to regenerate
+
+### Updating prompts
+
+Edit the source prompts, then re-run:
 
 ```bash
-# 1. Fill in your project's coding standards
-$EDITOR promptosaurus/prompts/core.md
-
-# 2. Run init to configure and generate AI assistant configs
-cd my-project
-prompt init
-
-# 3. Commit the generated config (example for Kilo Code)
-git add .kilocode/ .kilocodemodes .kiloignore
-git commit -m "chore: add Kilo Code prompt config"
+promptosaurus init
 ```
-
-### 2. Updating prompts
-
-```bash
-# Edit the source file
-$EDITOR promptosaurus/prompts/security-review.md
-
-# Re-run init to regenerate configurations
-prompt init
-```
-
-### 3. Adding a new prompt file to an existing mode
-
-1. Drop the `.md` file in `promptosaurus/prompts/`
-2. Add the filename to `MODE_FILES[mode]` in `promptosaurus/registry.py`
-3. Add a `CONCAT_ORDER` entry if the file should appear in Cline/Cursor/Copilot output
-4. Run `prompt validate` to confirm
-5. Run `prompt init` to regenerate configurations
-
-### 4. Adding a new mode
-
-1. Add an entry to `MODES` in `promptosaurus/registry.py`
-2. Add an entry to `MODE_FILES` with its prompt files
-3. Add a `COPILOT_APPLY` glob pattern
-4. Run `prompt validate` and `prompt init`
 
 ## Mode Reference
 
@@ -152,11 +97,27 @@ prompt init
 | Compliance | `compliance` | SOC 2, ISO 27001, GDPR, HIPAA, PCI-DSS |
 | Orchestrator | `orchestrator` | CI/CD, DevOps, PR descriptions |
 
-## Tool Output Reference
+## Tool Output
 
-| Tool | Selected via `prompt init` | What gets written |
-|------|---------------------------|-------------------|
-| Kilo Code | kilo | `.kilo/rules/` (always-on) + `.kilo/rules-{mode}/` (per-mode) + `.kilocodemodes` + `.kiloignore` |
-| Cline | cline | `.clinerules` (all rules concatenated) |
-| Cursor | cursor | `.cursor/rules/{mode}/*.mdc` + `.cursorrules` (legacy) |
-| GitHub Copilot | copilot | `.github/copilot-instructions.md` + `.github/instructions/{mode}.instructions.md` |
+| Tool | Output Directory/Files |
+|------|----------------------|
+| Kilo Code | `.kilo/rules/` (always-on) + `.kilo/rules-{mode}/` (per-mode) + `.kilocodemodes` + `.kiloignore` |
+| Cline | `.clinerules` (all rules concatenated) |
+| Cursor | `.cursor/rules/{mode}/*.mdc` + `.cursorrules` (legacy) |
+| GitHub Copilot | `.github/copilot-instructions.md` + `.github/instructions/{mode}.instructions.md` |
+
+## Development
+
+To contribute or develop locally:
+
+```bash
+# Clone the repository
+git clone https://github.com/snoodleboot-io/promptosaurus.git
+cd promptosaurus
+
+# Install in development mode
+pip install -e .
+
+# Or with uv
+uv pip install -e .
+```
