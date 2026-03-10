@@ -5,6 +5,29 @@ EDIT THIS FILE to change global assistant behavior.
 
 ## ⚠️ STARTUP CHECKLIST - COMPLETE BEFORE ANY WORK
 
+### 🚨 THE HARD STOP RULE: NO EXCUSES ACCEPTED
+
+**The following are NOT valid reasons to skip branch/session management - they are INVALID EXCUSES:**
+- ❌ "It's just a planning task"
+- ❌ "It's only documentation"
+- ❌ "We're only discussing/designing"
+- ❌ "It's just a quick question"
+- ❌ "It's a read-only operation"
+- ❌ "I'll do it after I finish this small thing"
+- ❌ "This is a small change"
+- ❌ "The user didn't ask me to create a branch"
+- ❌ "I want to test something first"
+- ❌ "I'm just exploring the codebase"
+- ❌ "This is a one-off command"
+
+**Planning IS work. Documentation IS work. Design IS work. Discussion IS work.**
+
+**If you find yourself thinking "maybe I don't need to..." → STOP. You DO need to.**
+
+**If on `main` branch → STOP and create a feature branch BEFORE any other action.**
+
+---
+
 ### 1. Check Git Branch (REQUIRED FIRST STEP)
 
 **ALWAYS run this command FIRST before any work:**
