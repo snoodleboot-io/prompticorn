@@ -7,6 +7,7 @@ on:
       - 'feat/**'
       - 'feature/**'
       - 'bug/**'
+      - 'bugfix/**'
       - 'fix/**'
       - 'hotfix/**'
       - 'security/**'
@@ -44,7 +45,6 @@ jobs:
       - name: Install uv
         uses: astral-sh/setup-uv@v3
         with:
-          version: "0.5.x"
           enable-cache: true
 
       - name: Install dependencies
@@ -260,10 +260,14 @@ jobs:
         run: |
           python .github/scripts/calculate_version.py
         env:
+          PACKAGE_NAME: ${{ env.PACKAGE_NAME }}
           GITHUB_REF: ${{ github.ref }}
           GITHUB_SHA: ${{ github.sha }}
           GITHUB_RUN_NUMBER: ${{ github.run_number }}
           GITHUB_EVENT_NAME: ${{ github.event_name }}
+          GITHUB_BASE_REF: ${{ github.base_ref }}
+          GITHUB_ACTION: ${{ github.action }}
+          MAJOR_VERSION: ${{ env.MAJOR_VERSION }}
 
       - name: Update version in pyproject.toml
         run: |
@@ -322,10 +326,14 @@ jobs:
         run: |
           python .github/scripts/calculate_version.py
         env:
+          PACKAGE_NAME: ${{ env.PACKAGE_NAME }}
           GITHUB_REF: ${{ github.ref }}
           GITHUB_SHA: ${{ github.sha }}
           GITHUB_RUN_NUMBER: ${{ github.run_number }}
           GITHUB_EVENT_NAME: ${{ github.event_name }}
+          GITHUB_BASE_REF: ${{ github.base_ref }}
+          GITHUB_ACTION: ${{ github.action }}
+          MAJOR_VERSION: ${{ env.MAJOR_VERSION }}
 
       - name: Update version in pyproject.toml
         run: |
@@ -409,7 +417,7 @@ jobs:
   verify-testpypi:
     name: Verify TestPyPI Publish
     runs-on: ubuntu-latest
-    needs: publish-testpypi
+    needs: [publish-testpypi, build-release]
     if: github.event_name == 'pull_request'
     steps:
       - name: Set up Python
@@ -424,7 +432,19 @@ jobs:
         run: |
           python -m venv verify_env
           source verify_env/bin/activate
-          pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ ${{ env.PACKAGE_NAME }}==${{ needs.build.outputs.version }}
+          
+          # Retry up to 3 times if package not immediately available
+          for i in 1 2 3; do
+            echo "Attempt $i: Installing promptosaurus==${{ needs.build-release.outputs.version }}..."
+            if pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ ${{ env.PACKAGE_NAME }}==${{ needs.build-release.outputs.version }}; then
+              echo "Package installed successfully!"
+              break
+            else
+              echo "Attempt $i failed, waiting 30s before retry..."
+              sleep 30
+            fi
+          done
+          
           # Verify CLI works
           promptosaurus --help
           # Verify import works
@@ -434,7 +454,7 @@ jobs:
   verify-pypi:
     name: Verify PyPI Publish
     runs-on: ubuntu-latest
-    needs: publish-pypi
+    needs: [publish-pypi, build-release]
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     steps:
       - name: Set up Python
@@ -449,7 +469,19 @@ jobs:
         run: |
           python -m venv verify_env
           source verify_env/bin/activate
-          pip install ${{ env.PACKAGE_NAME }}==${{ needs.build.outputs.version }}
+          
+          # Retry up to 3 times if package not immediately available
+          for i in 1 2 3; do
+            echo "Attempt $i: Installing promptosaurus==${{ needs.build-release.outputs.version }}..."
+            if pip install ${{ env.PACKAGE_NAME }}==${{ needs.build-release.outputs.version }}; then
+              echo "Package installed successfully!"
+              break
+            else
+              echo "Attempt $i failed, waiting 30s before retry..."
+              sleep 30
+            fi
+          done
+          
           # Verify CLI works
           promptosaurus --help
           # Verify import works
