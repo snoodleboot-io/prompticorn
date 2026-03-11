@@ -1,48 +1,22 @@
 version: '1.0'
 repository:
-  type: multi-language-monorepo
+  type: single-language
   mappings: {}
 spec:
-  - folder: backend/api
-    type: backend
-    subtype: api
-    language: python
-    runtime: '3.12'
-    package_manager: poetry
-    test_framework: pytest
-    linter: ruff
-    formatter: ruff
-    coverage: strict
-    python_runtime: '3.14'
-    python_package_manager: uv
-    python_test_framework: hybrid
-    python_test_runner: pytest
-    python_linter:
-      - ruff
-    python_formatter:
-      - ruff
-    python_abstract_class_style: interface
-    mocking_library:
-      - unittest.mock
-    coverage_tool: pytest-cov
-    mutation_tool: mutmut
-  - folder: frontend/ui
-    type: frontend
-    subtype: ui
-    language: typescript
-    runtime: '5.4'
-    package_manager: npm
-    test_framework: vitest
-    linter: eslint
-    formatter: prettier
-    coverage:
-      line: 80
-      branch: 70
-      function: 90
-      statement: 85
-      mutation: 80
-      path: 60
-    typescript_version: '5.4'
-    typescript_package_manager: npm
-    typescript_test_framework: vitest
-    typescript_framework: none
+  language: python
+  runtime: '3.12'
+  package_manager: uv
+  test_framework: hybrid
+  linter:
+    - ruff
+    - pyright
+  formatter:
+    - ruff
+  coverage: standard
+  repo_type: single-language
+  test_runner: pytest
+  abstract_class_style: interface
+  mocking_library:
+    - pytest-mock
+  coverage_tool: pytest-cov
+  mutation_tool: mutmut

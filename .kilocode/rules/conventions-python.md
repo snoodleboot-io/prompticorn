@@ -3,10 +3,10 @@
 
 Language:             python           e.g., Python 3.11+
 Runtime:              3.12            e.g., CPython 3.11, PyPy
-Package Manager:      poetry        e.g., poetry, pip, uv
-Linter:               ruff             e.g., Ruff, flake8
+Package Manager:      uv        e.g., poetry, pip, uv
+Linter:               ruff, pyright             e.g., Ruff, flake8
 Formatter:           ruff          e.g., Ruff, Black
-Abstract Class Style:   e.g., abc, interface
+Abstract Class Style: interface  e.g., abc, interface
 
 ### Naming Conventions
 
@@ -76,12 +76,12 @@ Environment vars:    UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           90          e.g., 80%
-Branch:         80        e.g., 70%
-Function:       95       e.g., 90%
-Statement:      90      e.g., 85%
-Mutation:       85       e.g., 80%
-Path:           70           e.g., 60%
+Line:           80          e.g., 80%
+Branch:         70        e.g., 70%
+Function:       90       e.g., 90%
+Statement:      85      e.g., 85%
+Mutation:       80       e.g., 80%
+Path:           60           e.g., 60%
 
 #### Test Types
 
@@ -108,7 +108,7 @@ Path:           70           e.g., 60%
 - Test edge cases automatically generated
 
 #### Framework & Tools
-Framework:         pytest       e.g., pytest
+Framework:         hybrid       e.g., pytest
 Mocking library:   {{MOCKING_LIBRARY}}             e.g., unittest.mock, pytest-mock
 Coverage tool:    {{COVERAGE_TOOL}}             e.g., pytest-cov, coverage.py
 Mutation tool:    {{MUTATION_TOOL}}        e.g., mutmut, pytest-mutmut
@@ -370,7 +370,7 @@ def create_handler(config: dict):
 
 ### Abstract Classes and Interfaces
 
-Selected Style: ****
+Selected Style: **interface**
 
 {{#if ABSTRACT_CLASS_STYLE == "abc"}}
 #### Using Abstract Base Classes (abc module)

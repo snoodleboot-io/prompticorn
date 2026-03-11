@@ -32,12 +32,9 @@ Example:
 from pathlib import Path
 from typing import Any
 
-import yaml  # type: ignore[import-untyped]
 from ruamel.yaml import YAML
 
 from promptosaurus.questions.base.spec_handler import (
-    MultiLanguageSpecHandler,
-    SingleLanguageSpecHandler,
     SpecHandler,
 )
 

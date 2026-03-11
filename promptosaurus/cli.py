@@ -56,12 +56,31 @@ from promptosaurus.questions.base.repository_type_question import RepositoryType
 from promptosaurus.questions.language import LANGUAGE_KEYS
 from promptosaurus.registry import registry
 
-
 # Valid languages for each preset type/subtype
 PRESET_VALID_LANGUAGES: dict[str, dict[str, list[str]]] = {
     "backend": {
-        "api": ["python", "typescript", "javascript", "go", "java", "rust", "csharp", "ruby", "php"],
-        "library": ["python", "typescript", "javascript", "go", "java", "rust", "csharp", "ruby", "php"],
+        "api": [
+            "python",
+            "typescript",
+            "javascript",
+            "go",
+            "java",
+            "rust",
+            "csharp",
+            "ruby",
+            "php",
+        ],
+        "library": [
+            "python",
+            "typescript",
+            "javascript",
+            "go",
+            "java",
+            "rust",
+            "csharp",
+            "ruby",
+            "php",
+        ],
         "worker": ["python", "go", "rust", "java"],
         "cli": ["python", "go", "rust", "csharp", "ruby", "php"],
     },
@@ -123,6 +142,11 @@ def _setup_monorepo_folders() -> list[dict[str, Any]]:
             allow_multiple=False,
         )
 
+        # folder_type is str when allow_multiple=False
+        if not isinstance(folder_type, str):
+            click.secho("  Error: Expected single selection. Try again.", fg="red")
+            continue
+
         if folder_type == "custom":
             # Custom folder: prompt for folder path
             folder_path = click.prompt(
@@ -162,20 +186,26 @@ def _setup_monorepo_folders() -> list[dict[str, Any]]:
 
             # Get subtypes for this preset
             subtypes = list(FOLDER_TYPE_PRESETS[preset_type].keys())
-            subtype_options = [f"{s} ({FOLDER_TYPE_PRESETS[preset_type][s]['language']})" for s in subtypes]
+            subtype_options = [
+                f"{s} ({FOLDER_TYPE_PRESETS[preset_type][s]['language']})" for s in subtypes
+            ]
 
             # Step 2: Ask for subtype
-            subtype_choice = select_option_with_explain(
-                question=f"What {preset_type} subtype?",
-                options=subtype_options,
-                explanations={
-                    f"{s} ({FOLDER_TYPE_PRESETS[preset_type][s]['language']})": f"{preset_type.capitalize()} {s} - uses {FOLDER_TYPE_PRESETS[preset_type][s]['language']}"
-                    for s in subtypes
-                },
-                question_explanation=f"Select the {preset_type} subtype to create",
-                default_index=0,
-                allow_multiple=False,
+            subtype_choice = cast(
+                str,
+                select_option_with_explain(
+                    question=f"What {preset_type} subtype?",
+                    options=subtype_options,
+                    explanations={
+                        f"{s} ({FOLDER_TYPE_PRESETS[preset_type][s]['language']})": f"{preset_type.capitalize()} {s} - uses {FOLDER_TYPE_PRESETS[preset_type][s]['language']}"
+                        for s in subtypes
+                    },
+                    question_explanation=f"Select the {preset_type} subtype to create",
+                    default_index=0,
+                    allow_multiple=False,
+                ),
             )
+            # subtype_choice is str when allow_multiple=False
             subtype = subtype_choice.split(" (")[0]  # Extract subtype name
 
             # Step 3: Ask for folder path
@@ -198,17 +228,22 @@ def _setup_monorepo_folders() -> list[dict[str, Any]]:
             if default_language not in valid_languages:
                 valid_languages.insert(0, default_language)
 
-            language_choice = select_option_with_explain(
-                question="Programming language?",
-                options=valid_languages,
-                explanations={
-                    lang: f"Use {lang} for this {preset_type}/{subtype} folder" for lang in valid_languages
-                },
-                question_explanation=f"Select language for {folder_path}. Default is {default_language} based on preset.",
-                default_index=0,
-                allow_multiple=False,
+            language_choice = cast(
+                str,
+                select_option_with_explain(
+                    question="Programming language?",
+                    options=valid_languages,
+                    explanations={
+                        lang: f"Use {lang} for this {preset_type}/{subtype} folder"
+                        for lang in valid_languages
+                    },
+                    question_explanation=f"Select language for {folder_path}. Default is {default_language} based on preset.",
+                    default_index=0,
+                    allow_multiple=False,
+                ),
             )
-            language = language_choice
+            # language_choice is str when allow_multiple=False
+            language: str = language_choice
 
             # Create folder spec
             spec = FolderSpec(
@@ -258,7 +293,7 @@ def _ask_language_questions_for_folder(spec: dict[str, Any]) -> dict[str, Any]:
     Raises:
         QuestionPipelineError: If questions cannot be loaded for the language
     """
-    from promptosaurus.questions.language import get_language_questions, QuestionPipelineError
+    from promptosaurus.questions.language import QuestionPipelineError, get_language_questions
     from promptosaurus.ui._selector import select_option_with_explain
 
     folder_path = spec.get("folder", "")
@@ -285,7 +320,7 @@ def _ask_language_questions_for_folder(spec: dict[str, Any]) -> dict[str, Any]:
             options=question.options,
             explanations=question.option_explanations,
             question_explanation=question.explanation,
-            default_index=0 if question.default_indices else None,
+            default_index=0,
             allow_multiple=question.allow_multiple,
         )
 
@@ -314,7 +349,7 @@ def _ask_folder_questions(folder_specs: list[dict[str, Any]]) -> list[dict[str, 
     Raises:
         QuestionPipelineError: If questions cannot be loaded for a language
     """
-    from promptosaurus.questions.language import get_language_questions, QuestionPipelineError
+    from promptosaurus.questions.language import get_language_questions
     from promptosaurus.ui._selector import select_option_with_explain
 
     updated_specs: list[dict[str, Any]] = []
@@ -333,8 +368,6 @@ def _ask_folder_questions(folder_specs: list[dict[str, Any]]) -> list[dict[str, 
     Raises:
         QuestionPipelineError: If questions cannot be loaded for a language
     """
-    from promptosaurus.questions.language import get_language_questions, QuestionPipelineError
-    from promptosaurus.ui._selector import select_option_with_explain
 
     updated_specs: list[dict[str, Any]] = []
 
@@ -360,7 +393,7 @@ def _ask_folder_questions(folder_specs: list[dict[str, Any]]) -> list[dict[str, 
                 options=question.options,
                 explanations=question.option_explanations,
                 question_explanation=question.explanation,
-                default_index=0 if question.default_indices else None,
+                default_index=0,
                 allow_multiple=question.allow_multiple,
             )
 
@@ -370,6 +403,7 @@ def _ask_folder_questions(folder_specs: list[dict[str, Any]]) -> list[dict[str, 
         updated_specs.append(spec)
 
     return updated_specs
+
 
 # # ── Initialize registry ───────────────────────────────────────────────────────
 # fill_registry()

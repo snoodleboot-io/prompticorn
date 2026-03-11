@@ -9,8 +9,8 @@ from typing import Any
 
 from promptosaurus.questions.base.folder_spec import (
     DEFAULT_COVERAGE,
-    FolderSpec,
     LANGUAGE_DEFAULTS,
+    FolderSpec,
 )
 
 
@@ -100,9 +100,8 @@ class SingleLanguageSpecHandler(SpecHandler):
             >>> spec["language"]
             'python'
         """
-        defaults = LANGUAGE_DEFAULTS.get(
-            language.lower(),
-            LANGUAGE_DEFAULTS.get("python"),
+        defaults: dict[str, str] = (
+            LANGUAGE_DEFAULTS.get(language.lower()) or LANGUAGE_DEFAULTS.get("python") or {}
         )
 
         spec: dict[str, Any] = {
@@ -122,11 +121,11 @@ class SingleLanguageSpecHandler(SpecHandler):
 
         return spec
 
-    def get_language(self, spec: dict[str, Any]) -> str:
+    def get_language(self, spec: dict[str, Any] | list[dict[str, Any]]) -> str:
         """Get language from spec dict.
 
         Args:
-            spec: The spec dictionary
+            spec: The spec dictionary (or list of specs - uses first one)
 
         Returns:
             The language
@@ -136,6 +135,8 @@ class SingleLanguageSpecHandler(SpecHandler):
             >>> handler.get_language({"language": "python"})
             'python'
         """
+        if isinstance(spec, list):
+            return spec[0].get("language", "") if spec else ""
         return spec.get("language", "")
 
     def is_multi_language(self) -> bool:
@@ -216,11 +217,11 @@ class MultiLanguageSpecHandler(SpecHandler):
         """
         return self._spec
 
-    def get_language(self, spec: list[dict[str, Any]]) -> str:
+    def get_language(self, spec: dict[str, Any] | list[dict[str, Any]]) -> str:
         """Get primary language from first folder.
 
         Args:
-            spec: The spec list (ignored, uses internal state)
+            spec: The spec (ignored, uses internal state)
 
         Returns:
             Language of first folder, or empty string

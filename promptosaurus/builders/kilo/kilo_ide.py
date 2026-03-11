@@ -226,7 +226,9 @@ class KiloIDEBuilder(KiloCodeBuilder):
         # 2b. Add language-specific conventions for ALL languages in multi-language monorepo
         languages_added: set[str] = set()
         for selected_language in selected_languages:
-            language_file = self.language_file_map.get(selected_language.lower()) if selected_language else None
+            language_file = (
+                self.language_file_map.get(selected_language.lower()) if selected_language else None
+            )
             if language_file and selected_language.lower() not in languages_added:
                 source_path = registry.prompt_path(language_file)
                 if source_path.exists():

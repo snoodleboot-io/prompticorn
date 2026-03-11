@@ -3,7 +3,6 @@
 from dataclasses import dataclass, field
 from typing import Any
 
-
 # Language-specific defaults
 LANGUAGE_DEFAULTS: dict[str, dict[str, str]] = {
     "python": {
@@ -124,7 +123,9 @@ class FolderSpec:
         lang_key = self.language.lower()
 
         # Get defaults for this language
-        defaults = LANGUAGE_DEFAULTS.get(lang_key, LANGUAGE_DEFAULTS.get("python"))
+        defaults: dict[str, str] = (
+            LANGUAGE_DEFAULTS.get(lang_key) or LANGUAGE_DEFAULTS.get("python") or {}
+        )
 
         # Apply defaults if not specified
         if not self.runtime and "runtime" in defaults:
