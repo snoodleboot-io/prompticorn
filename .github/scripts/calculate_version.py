@@ -102,13 +102,21 @@ class VersionCalculator:
             if is_pr:
                 print("ERROR: PR number is required for PR builds")
                 sys.exit(1)
-            # For non-PR pushes (feature branches), use timestamp-based dev version
-            # Format: 0.0.0.devHHMMSS where HHMMSS is hour/minute/second
-            now = datetime.now()
-            dev_suffix = now.strftime("%H%M%S")
-            version = f"{major}.{new_minor}.0.dev{dev_suffix}"
-            print(f"Non-PR push: using dev version {version}")
-            return version
+            # Check if we are on the main branch
+            github_ref = os.environ.get("GITHUB_REF", "").strip()
+            if github_ref == "refs/heads/main":
+                # For pushes to main, use a release version (without dev suffix)
+                version = f"{major}.{new_minor}.0"
+                print(f"Push to main: using release version {version}")
+                return version
+            else:
+                # For non-PR pushes (feature branches), use timestamp-based dev version
+                # Format: 0.0.0.devHHMMSS where HHMMSS is hour/minute/second
+                now = datetime.now()
+                dev_suffix = now.strftime("%H%M%S")
+                version = f"{major}.{new_minor}.0.dev{dev_suffix}"
+                print(f"Non-PR push: using dev version {version}")
+                return version
 
         # Build version: MAJOR.MINOR.PATCH[-RUN]
         version = f"{major}.{new_minor}.{pr_number}"
@@ -139,6 +147,7 @@ def main():
     action = os.environ.get("GITHUB_ACTION", "").strip()
     base_ref = os.environ.get("GITHUB_BASE_REF", "").strip()
     run_number = os.environ.get("GITHUB_RUN_NUMBER", "").strip()
+    github_ref = os.environ.get("GITHUB_REF", "").strip()
 
     # Determine if this is a PR
     is_pr = event_name == "pull_request"
@@ -156,6 +165,14 @@ def main():
     # Determine publishing targets
     is_testpypi = is_pr and is_pr_to_main and action != "closed"
     is_pypi = is_pr and action == "closed" and is_pr_to_main
+
+    # Debug information
+    print(
+        f"DEBUG: GITHUB_REF='{github_ref}', GITHUB_EVENT_NAME='{event_name}', GITHUB_ACTION='{action}', GITHUB_BASE_REF='{base_ref}', GITHUB_RUN_NUMBER='{run_number}'"
+    )
+    print(
+        f"DEBUG: is_pr={is_pr}, is_pr_to_main={is_pr_to_main}, pr_number={pr_number}, is_testpypi={is_testpypi}, is_pypi={is_pypi}"
+    )
 
     # Calculate version
     calculator = VersionCalculator(package_name)
