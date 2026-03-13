@@ -32,10 +32,11 @@ promptosaurus init
 ```
 
 This interactive command will:
-1. Ask about your repository type (single-language or multi-folder)
-2. Configure your language, runtime, package manager, and testing framework
-3. Select which AI assistants to configure (kilo, cline, cursor, copilot — multiple allowed)
-4. Generate all selected configurations automatically
+1. Ask about your repository type (single-language or multi-language-monorepo)
+2. For multi-language-monorepo: configure folders with standard presets or custom paths
+3. Configure your language, runtime, package manager, and testing framework
+4. Select which AI assistants to configure (kilo, cline, cursor, copilot — multiple allowed)
+5. Generate all selected configurations automatically
 
 ### 2. List available modes
 
@@ -52,6 +53,61 @@ promptosaurus validate
 ```
 
 Check for missing files and unregistered orphans.
+
+## Multi-Language Monorepo
+
+Promptosaurus supports monorepo projects with multiple language-specific folders.
+
+### Standard Presets
+
+When you select `multi-language-monorepo` during `promptosaurus init`, you can choose from standard folder types:
+
+| Type | Subtypes | Default Language |
+|------|----------|-------------------|
+| `backend` | api, library, worker, cli | Python |
+| `frontend` | ui, library, e2e | TypeScript |
+
+Example workflow:
+
+```bash
+$ promptosaurus init
+
+# Select "multi-language-monorepo" when asked about repository type
+
+# Add folders:
+# 1. backend (preset) -> api -> backend/api -> Python
+# 2. frontend (preset) -> ui -> frontend -> TypeScript
+# 3. Add another? No
+```
+
+### Custom Folders
+
+For custom folder structures, select "custom" and provide:
+- Folder path (supports hierarchical paths like `services/auth/api`)
+- Programming language
+
+### Generated Config
+
+For a monorepo, the `.promptosaurus.yaml` will have:
+
+```yaml
+version: "1.0"
+repository:
+  type: "multi-language-monorepo"
+spec:
+  - folder: "backend/api"
+    type: "backend"
+    subtype: "api"
+    language: "python"
+    runtime: "3.12"
+    package_manager: "poetry"
+  - folder: "frontend"
+    type: "frontend"
+    subtype: "ui"
+    language: "typescript"
+    runtime: "5.4"
+    package_manager: "npm"
+```
 
 ## Commands
 

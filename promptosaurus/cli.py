@@ -34,19 +34,376 @@ from promptosaurus.cli_utils import (
     normalize_tool_name,
     validate_tool_name,
 )
-from promptosaurus.config_handler import DEFAULT_CONFIG_TEMPLATE, ConfigHandler
+from promptosaurus.config_handler import (
+    DEFAULT_CONFIG_TEMPLATE,
+    DEFAULT_MULTI_LANGUAGE_CONFIG_TEMPLATE,
+    ConfigHandler,
+)
 from promptosaurus.config_options import (
     CONFIG_OPTIONS,
     load_current_values,
     set_nested_value,
 )
 from promptosaurus.questions.base.constants import (
-    REPO_TYPE_MULTI_FOLDER,
+    REPO_TYPE_MULTI_MONOREPO,
     REPO_TYPE_SINGLE,
+)
+from promptosaurus.questions.base.folder_spec import (
+    FOLDER_TYPE_PRESETS,
+    FolderSpec,
 )
 from promptosaurus.questions.base.repository_type_question import RepositoryTypeQuestion
 from promptosaurus.questions.language import LANGUAGE_KEYS
 from promptosaurus.registry import registry
+
+# Valid languages for each preset type/subtype
+PRESET_VALID_LANGUAGES: dict[str, dict[str, list[str]]] = {
+    "backend": {
+        "api": [
+            "python",
+            "typescript",
+            "javascript",
+            "go",
+            "java",
+            "rust",
+            "csharp",
+            "ruby",
+            "php",
+        ],
+        "library": [
+            "python",
+            "typescript",
+            "javascript",
+            "go",
+            "java",
+            "rust",
+            "csharp",
+            "ruby",
+            "php",
+        ],
+        "worker": ["python", "go", "rust", "java"],
+        "cli": ["python", "go", "rust", "csharp", "ruby", "php"],
+    },
+    "frontend": {
+        "ui": ["typescript", "javascript"],
+        "library": ["typescript", "javascript"],
+        "e2e": ["typescript", "javascript", "python"],
+    },
+}
+
+
+def _get_valid_languages(preset_type: str, subtype: str) -> list[str]:
+    """Get valid languages for a preset type/subtype.
+
+    Args:
+        preset_type: The folder type (backend or frontend)
+        subtype: The folder subtype
+
+    Returns:
+        List of valid language keys
+    """
+    if preset_type in PRESET_VALID_LANGUAGES:
+        if subtype in PRESET_VALID_LANGUAGES[preset_type]:
+            return PRESET_VALID_LANGUAGES[preset_type][subtype]
+    # Fallback to common languages if not found
+    return ["python", "typescript", "javascript", "go", "java", "rust"]
+
+
+def _setup_monorepo_folders() -> list[dict[str, Any]]:
+    """Interactive setup for monorepo folder configuration.
+
+    This function prompts the user to add folders to their monorepo,
+    either through standard presets (frontend/backend) or custom paths.
+
+    Returns:
+        List of folder specifications.
+    """
+    from promptosaurus.ui._selector import select_option_with_explain
+
+    folder_specs: list[dict[str, Any]] = []
+    add_more = True
+
+    while add_more:
+        click.echo("\n" + "-" * 60)
+        click.secho("  Add Folder", bold=True)
+        click.echo("-" * 60)
+
+        # Step 1: Ask for folder type (preset or custom)
+        folder_type = select_option_with_explain(
+            question="What type of folder would you like to add?",
+            options=["backend (preset)", "frontend (preset)", "custom"],
+            explanations={
+                "backend (preset)": "Backend folder types: api, library, worker, cli",
+                "frontend (preset)": "Frontend folder types: ui, library, e2e",
+                "custom": "Define your own folder type and configuration",
+            },
+            question_explanation="Select a folder type: backend (api, library, worker, cli), frontend (ui, library, e2e), or custom",
+            default_index=0,
+            allow_multiple=False,
+        )
+
+        # folder_type is str when allow_multiple=False
+        if not isinstance(folder_type, str):
+            click.secho("  Error: Expected single selection. Try again.", fg="red")
+            continue
+
+        if folder_type == "custom":
+            # Custom folder: prompt for folder path
+            folder_path = click.prompt(
+                "\nFolder path (e.g., services/auth/api)",
+                default="",
+            ).strip()
+
+            if not folder_path:
+                click.secho("  Folder path cannot be empty. Skipping.", fg="yellow")
+                continue
+
+            # Prompt for language
+            language = click.prompt(
+                "\nProgramming language",
+                type=click.Choice(LANGUAGE_KEYS),
+                default="python",
+            )
+
+            # Create custom folder spec
+            spec = FolderSpec(
+                folder=folder_path,
+                type="custom",
+                subtype="custom",
+                language=language,
+            )
+            spec_dict = spec.to_dict()
+
+            # Immediately ask language-specific questions for this folder
+            spec_dict = _ask_language_questions_for_folder(spec_dict)
+
+            folder_specs.append(spec_dict)
+            click.echo(f"\n  Added: {folder_path} ({language})")
+
+        else:
+            # Preset: extract folder type
+            preset_type = folder_type.split(" (")[0]  # "backend" or "frontend"
+
+            # Get subtypes for this preset
+            subtypes = list(FOLDER_TYPE_PRESETS[preset_type].keys())
+            subtype_options = [
+                f"{s} ({FOLDER_TYPE_PRESETS[preset_type][s]['language']})" for s in subtypes
+            ]
+
+            # Step 2: Ask for subtype
+            subtype_choice = cast(
+                str,
+                select_option_with_explain(
+                    question=f"What {preset_type} subtype?",
+                    options=subtype_options,
+                    explanations={
+                        f"{s} ({FOLDER_TYPE_PRESETS[preset_type][s]['language']})": f"{preset_type.capitalize()} {s} - uses {FOLDER_TYPE_PRESETS[preset_type][s]['language']}"
+                        for s in subtypes
+                    },
+                    question_explanation=f"Select the {preset_type} subtype to create",
+                    default_index=0,
+                    allow_multiple=False,
+                ),
+            )
+            # subtype_choice is str when allow_multiple=False
+            subtype = subtype_choice.split(" (")[0]  # Extract subtype name
+
+            # Step 3: Ask for folder path
+            folder_path = click.prompt(
+                f"\nFolder path (e.g., {preset_type}/{subtype})",
+                default=f"{preset_type}/{subtype}",
+            ).strip()
+
+            if not folder_path:
+                folder_path = f"{preset_type}/{subtype}"
+
+            # Get preset defaults
+            preset_defaults = FOLDER_TYPE_PRESETS[preset_type][subtype]
+            default_language = preset_defaults["language"]
+
+            # Step 4: Ask for language - filter to valid languages for this preset
+            valid_languages = _get_valid_languages(preset_type, subtype)
+
+            # Ensure default is in the list and at the front
+            if default_language not in valid_languages:
+                valid_languages.insert(0, default_language)
+
+            language_choice = cast(
+                str,
+                select_option_with_explain(
+                    question="Programming language?",
+                    options=valid_languages,
+                    explanations={
+                        lang: f"Use {lang} for this {preset_type}/{subtype} folder"
+                        for lang in valid_languages
+                    },
+                    question_explanation=f"Select language for {folder_path}. Default is {default_language} based on preset.",
+                    default_index=0,
+                    allow_multiple=False,
+                ),
+            )
+            # language_choice is str when allow_multiple=False
+            language: str = language_choice
+
+            # Create folder spec
+            spec = FolderSpec(
+                folder=folder_path,
+                type=preset_type,
+                subtype=subtype,
+                language=language,
+            )
+            spec_dict = spec.to_dict()
+
+            # Immediately ask language-specific questions for this folder
+            spec_dict = _ask_language_questions_for_folder(spec_dict)
+
+            folder_specs.append(spec_dict)
+            click.echo(f"\n  Added: {folder_path} ({language})")
+
+        # Step 4: Ask if more folders
+        click.echo("\n")
+        more = select_option_with_explain(
+            question="Add another folder?",
+            options=["Yes", "No"],
+            explanations={
+                "Yes": "Add another folder to the monorepo",
+                "No": "Finish adding folders",
+            },
+            question_explanation="Choose whether to add more folders or finish setup",
+            default_index=1,
+            allow_multiple=False,
+        )
+        add_more = more == "Yes"
+
+    return folder_specs
+
+
+def _ask_language_questions_for_folder(spec: dict[str, Any]) -> dict[str, Any]:
+    """Ask language-specific questions for a single folder.
+
+    This function runs the language questionnaire for one folder spec,
+    immediately after the folder is created (not in batch later).
+
+    Args:
+        spec: A single folder specification
+
+    Returns:
+        Updated folder specification with language-specific config
+
+    Raises:
+        QuestionPipelineError: If questions cannot be loaded for the language
+    """
+    from promptosaurus.questions.language import QuestionPipelineError, get_language_questions
+    from promptosaurus.ui._selector import select_option_with_explain
+
+    folder_path = spec.get("folder", "")
+    language = spec.get("language", "")
+
+    if not language:
+        return spec
+
+    click.echo("\n" + "-" * 60)
+    click.secho(f"  Configuring: {folder_path} ({language})", bold=True)
+    click.echo("-" * 60)
+
+    # Get language-specific questions
+    try:
+        questions = get_language_questions(language)
+    except QuestionPipelineError:
+        # If no questions defined for this language, skip
+        return spec
+
+    # Ask each question
+    for question in questions:
+        answer = select_option_with_explain(
+            question=question.question_text,
+            options=question.options,
+            explanations=question.option_explanations,
+            question_explanation=question.explanation,
+            default_index=0,
+            allow_multiple=question.allow_multiple,
+        )
+
+        # Store the answer in the spec
+        spec[question.key] = answer
+
+    return spec
+
+
+def _ask_folder_questions(folder_specs: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """Ask language-specific questions for each folder in the monorepo.
+
+    This function iterates through each folder spec and asks the language-specific
+    configuration questions (linter, test framework, etc.) defined in the question
+    pipeline for each folder's language.
+
+    Note: This is a batch operation that runs AFTER all folders are added.
+    For inline language questions during folder creation, use _ask_language_questions_for_folder.
+
+    Args:
+        folder_specs: List of folder specifications from _setup_monorepo_folders
+
+    Returns:
+        Updated list of folder specifications with language-specific config
+
+    Raises:
+        QuestionPipelineError: If questions cannot be loaded for a language
+    """
+    from promptosaurus.questions.language import get_language_questions
+    from promptosaurus.ui._selector import select_option_with_explain
+
+    updated_specs: list[dict[str, Any]] = []
+    """Ask language-specific questions for each folder in the monorepo.
+
+    This function iterates through each folder spec and asks the language-specific
+    configuration questions (linter, test framework, etc.) defined in the question
+    pipeline for that folder's language.
+
+    Args:
+        folder_specs: List of folder specifications from _setup_monorepo_folders
+
+    Returns:
+        Updated list of folder specifications with language-specific config
+
+    Raises:
+        QuestionPipelineError: If questions cannot be loaded for a language
+    """
+
+    updated_specs: list[dict[str, Any]] = []
+
+    for spec in folder_specs:
+        folder_path = spec.get("folder", "")
+        language = spec.get("language", "")
+
+        if not language:
+            updated_specs.append(spec)
+            continue
+
+        click.echo("\n" + "-" * 60)
+        click.secho(f"  Configuring: {folder_path} ({language})", bold=True)
+        click.echo("-" * 60)
+
+        # Get language-specific questions - this will raise if there are issues
+        questions = get_language_questions(language)
+
+        # Ask each question
+        for question in questions:
+            answer = select_option_with_explain(
+                question=question.question_text,
+                options=question.options,
+                explanations=question.option_explanations,
+                question_explanation=question.explanation,
+                default_index=0,
+                allow_multiple=question.allow_multiple,
+            )
+
+            # Store the answer in the spec
+            spec[question.key] = answer
+
+        updated_specs.append(spec)
+
+    return updated_specs
+
 
 # # ── Initialize registry ───────────────────────────────────────────────────────
 # fill_registry()
@@ -160,17 +517,33 @@ def init_prompts():
             config: dict[str, Any] = handler.handle(repo_type)
         else:
             # Multi-folder or mixed - just save repo type for now
-            config = DEFAULT_CONFIG_TEMPLATE.copy()
-            config["repository"]["type"] = repo_type  # type: ignore[index]
-            if repo_type == REPO_TYPE_MULTI_FOLDER:
-                click.echo("\n\nFolder mappings will be configured in a future step.")
-                click.echo("For now, set up your primary language:")
-                language = click.prompt(
-                    "\nPrimary language",
-                    type=click.Choice(LANGUAGE_KEYS),
-                    default="python",
-                )
-                config["spec"]["language"] = language  # type: ignore[index]
+            if repo_type == REPO_TYPE_MULTI_MONOREPO:
+                # Interactive folder setup for multi-language monorepo
+                config = DEFAULT_MULTI_LANGUAGE_CONFIG_TEMPLATE.copy()
+                config["repository"]["type"] = repo_type
+
+                # Run interactive folder setup
+                # (language questions are now asked inline for each folder)
+                folder_specs = _setup_monorepo_folders()
+
+                config["spec"] = folder_specs
+
+                # Create folders that don't exist
+                if folder_specs:
+                    click.echo("\n" + "-" * 60)
+                    click.secho("  Creating folders...", bold=True)
+                    click.echo("-" * 60)
+                    for spec in folder_specs:
+                        folder_path = Path(spec["folder"])
+                        if not folder_path.exists():
+                            folder_path.mkdir(parents=True, exist_ok=True)
+                            click.echo(f"  Created: {spec['folder']}")
+                        else:
+                            click.echo(f"  Exists: {spec['folder']}")
+            else:
+                # Mixed or other repo types - use default template
+                config = DEFAULT_CONFIG_TEMPLATE.copy()
+                config["repository"]["type"] = repo_type
 
         # Save configuration
         ConfigHandler.save_config(config)
