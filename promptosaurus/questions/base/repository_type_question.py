@@ -26,13 +26,13 @@ This affects which convention files are included in your prompts."""
 
     @property
     def options(self) -> list[str]:
-        return ["single-language", "multi-language-folder", "mixed"]
+        return ["single-language", "multi-language-monorepo", "mixed"]
 
     @property
     def option_explanations(self) -> dict[str, str]:
         return {
             "single-language": "One language in the entire codebase (e.g., pure Python, TypeScript only)",
-            "multi-language-folder": "Different languages in different folders (e.g., /frontend=TypeScript, /backend=Python)",
+            "multi-language-monorepo": "Different languages in different folders (e.g., /frontend=TypeScript, /backend=Python)",
             "mixed": "Multiple languages mixed in the same folders (rare, complex setups)",
         }
 

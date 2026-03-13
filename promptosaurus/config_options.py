@@ -37,7 +37,7 @@ from typing import Any
 from promptosaurus.questions.language import LANGUAGE_KEYS
 
 # Available options for single-select config fields
-REPO_TYPE_OPTIONS = ["single-language", "multi-language-folder", "mixed-collocation"]
+REPO_TYPE_OPTIONS = ["single-language", "multi-language-monorepo", "mixed-collocation"]
 
 PACKAGE_MANAGER_OPTIONS = [
     "poetry",

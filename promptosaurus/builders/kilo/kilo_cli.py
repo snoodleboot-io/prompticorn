@@ -31,6 +31,7 @@ from pathlib import Path
 from typing import Any
 
 from promptosaurus.builders.kilo.kilo_code_builder import KiloCodeBuilder
+from promptosaurus.builders.kilo.kilo_ide import _make_dest_filename
 from promptosaurus.registry import registry
 
 
@@ -108,17 +109,46 @@ class KiloCLIBuilder(KiloCodeBuilder):
         actions: list[str] = []
         rules_dir = output / ".opencode" / "rules"
 
-        # Get selected language from config
-        selected_language = config.get("spec", {}).get("language", "") if config else ""
-        language_file = (
-            self.language_file_map.get(selected_language.lower()) if selected_language else None
-        )
+        # Get selected language(s) from config
+        # Handle both single-language (dict) and multi-language (list) configs
+        spec = config.get("spec", {}) if config else {}
+        selected_languages: list[str] = []
+        if isinstance(spec, list):
+            # Multi-language monorepo: get ALL unique languages from all folders
+            languages_seen = set()
+            for folder_spec in spec:
+                lang = folder_spec.get("language", "")
+                if lang and lang.lower() not in languages_seen:
+                    languages_seen.add(lang.lower())
+                    selected_languages.append(lang)
+        else:
+            # Single language: use existing behavior
+            lang = spec.get("language", "") if spec else ""
+            if lang:
+                selected_languages.append(lang)
 
         # 1. Create AGENTS.md user guide
         actions.append(self._create_agents_md(output, dry_run))
 
         # 2. Create _base.md (collapsed core files + language convention)
+        # For multi-language, use first language for base.md
+        selected_language = selected_languages[0] if selected_languages else ""
+        language_file = (
+            self.language_file_map.get(selected_language.lower()) if selected_language else None
+        )
         actions.append(self._create_base_md(rules_dir, language_file, dry_run, config))
+
+        # 3. Add language-specific convention files for ALL languages
+        languages_added: set[str] = set()
+        for lang in selected_languages:
+            lang_file = self.language_file_map.get(lang.lower()) if lang else None
+            if lang_file and lang.lower() not in languages_added:
+                source_path = registry.prompt_path(lang_file)
+                if source_path.exists():
+                    new_filename = _make_dest_filename(lang_file)
+                    destination_rules = output / ".opencode" / "rules" / new_filename
+                    actions.append(self._copy(source_path, destination_rules, dry_run, config))
+                    languages_added.add(lang.lower())
 
         # 3. Create collapsed mode files for custom modes only
         for mode_key in self.custom_modes:

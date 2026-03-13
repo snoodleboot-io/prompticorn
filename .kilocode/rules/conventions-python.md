@@ -2,7 +2,7 @@
 # Core Conventions Python
 
 Language:             python           e.g., Python 3.11+
-Runtime:              3.14            e.g., CPython 3.11, PyPy
+Runtime:              3.12            e.g., CPython 3.11, PyPy
 Package Manager:      uv        e.g., poetry, pip, uv
 Linter:               ruff, pyright             e.g., Ruff, flake8
 Formatter:           ruff          e.g., Ruff, Black

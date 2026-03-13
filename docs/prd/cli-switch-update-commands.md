@@ -140,7 +140,7 @@ After initial setup with `prompt init`, users may want to modify specific config
 
 | Option | Type | Current Values | Validation |
 |--------|------|-----------------|------------|
-| Repository Type | Single-select | single-language, multi-language-folder, mixed-collocation | Must be valid option |
+| Repository Type | Single-select | single-language, multi-language-monorepo, mixed-collocation | Must be valid option |
 | Language | Single-select | python, typescript, go, java, rust, etc. | Must be from LANGUAGE_KEYS |
 | Runtime | Text | e.g., "3.12", "5.4" | Non-empty string |
 | Package Manager | Single-select | poetry, npm, pip, etc. | Non-empty string |

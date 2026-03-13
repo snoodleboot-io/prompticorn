@@ -4,7 +4,7 @@ import pytest
 
 from promptosaurus.questions.base.constants import (
     REPO_TYPE_MIXED,
-    REPO_TYPE_MULTI_FOLDER,
+    REPO_TYPE_MULTI_MONOREPO,
     REPO_TYPE_SINGLE,
 )
 from promptosaurus.questions.base.folder_mapping_question import FolderMappingQuestion
@@ -53,7 +53,7 @@ class TestRepositoryTypeQuestion:
         q = RepositoryTypeQuestion()
 
         assert REPO_TYPE_SINGLE in q.options
-        assert REPO_TYPE_MULTI_FOLDER in q.options
+        assert REPO_TYPE_MULTI_MONOREPO in q.options
         assert REPO_TYPE_MIXED in q.options
 
     def test_default_is_single_language(self):

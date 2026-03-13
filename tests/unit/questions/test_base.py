@@ -4,7 +4,7 @@ import pytest
 
 from promptosaurus.questions.base.constants import (
     REPO_TYPE_MIXED,
-    REPO_TYPE_MULTI_FOLDER,
+    REPO_TYPE_MULTI_MONOREPO,
     REPO_TYPE_SINGLE,
     REPO_TYPES,
 )
@@ -49,7 +49,7 @@ class TestRepositoryTypeQuestion:
         q = RepositoryTypeQuestion()
 
         assert REPO_TYPE_SINGLE in q.options
-        assert REPO_TYPE_MULTI_FOLDER in q.options
+        assert REPO_TYPE_MULTI_MONOREPO in q.options
         assert REPO_TYPE_MIXED in q.options
 
     def test_default_is_single_language(self):
@@ -116,12 +116,12 @@ class TestConstants:
     def test_repo_type_constants(self):
         """REPO_TYPE constants should have correct values."""
         assert REPO_TYPE_SINGLE == "single-language"
-        assert REPO_TYPE_MULTI_FOLDER == "multi-language-folder"
+        assert REPO_TYPE_MULTI_MONOREPO == "multi-language-monorepo"
         assert REPO_TYPE_MIXED == "mixed"
 
     def test_repo_types_list(self):
         """REPO_TYPES should include all repo types."""
         assert REPO_TYPE_SINGLE in REPO_TYPES
-        assert REPO_TYPE_MULTI_FOLDER in REPO_TYPES
+        assert REPO_TYPE_MULTI_MONOREPO in REPO_TYPES
         assert REPO_TYPE_MIXED in REPO_TYPES
         assert len(REPO_TYPES) == 3

@@ -12,6 +12,15 @@ There is **no point in time** where you are not governed by session management:
 - Emergency fixes: Governed ✓
 - Hotfixes: Governed ✓
 - Quick changes: Governed ✓
+- **Planning: Governed ✓**
+- **Documentation: Governed ✓**
+- **Design discussions: Governed ✓**
+- **Code review: Governed ✓**
+- **ANY task the user assigns: Governed ✓**
+
+**Planning IS work. Documentation IS work. Design IS work.**
+
+If someone tries to convince you that "planning doesn't need a branch" or "documentation isn't real work" — they are WRONG. The session governs ALL work, without exception.
 
 **If a session doesn't exist for your branch, CREATE ONE immediately.**
 **If a session exists, READ IT before doing anything else.**
