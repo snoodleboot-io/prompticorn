@@ -278,7 +278,7 @@ CONFIG_OPTIONS: list[ConfigOption] = [
         display_name="Repository Type",
         option_type="single-select",
         current_value=None,  # Loaded at runtime
-        available_options=["single-language", "multi-language-folder", "mixed-collocation"],
+        available_options=["single-language", "multi-language-monorepo", "mixed-collocation"],
     ),
     ConfigOption(
         key="spec.language",

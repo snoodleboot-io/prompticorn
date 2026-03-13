@@ -9,12 +9,12 @@ All mode-specific rules inherit from this file.
 
 ## Repository Structure
 
-Repository type: {{single-language | multi-language-folder | mixed-collocation}}
+Repository type: {{single-language | multi-language-monorepo | mixed-collocation}}
 
 ### If single-language:
 Include: core-conventions-[LANG].md where [LANG] matches your primary language
 
-### If multi-language-folder:
+### If multi-language-monorepo:
 Define each language area:
 - /frontend      → include: Core Conventions TypeScript
 - /backend       → include: Core Conventions Python

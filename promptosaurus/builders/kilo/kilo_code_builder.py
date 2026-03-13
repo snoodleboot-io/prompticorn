@@ -224,7 +224,11 @@ class KiloCodeBuilder(Builder):
             >>> print(result)
             Language: python
         """
-        defaults = config.get("spec", {})
+        defaults = config.get("spec", {}) if config else {}
+        # Handle both single-language (dict) and multi-language (list) configs
+        if isinstance(defaults, list):
+            # Multi-language monorepo: get config from first folder
+            defaults = defaults[0] if defaults else {}
 
         def format_value(value: Any) -> str:
             """Format a value for substitution, handling lists."""

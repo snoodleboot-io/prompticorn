@@ -1,131 +1,210 @@
 # Question pipelines for each language
 # Each pipeline defines the sequence of questions to ask during init
+#
+# STRUCTURE:
+# - core: Questions asked ONCE per language (same across all folders)
+# - fungible: Questions asked for EACH folder with context-aware options
+#   Keyed by folder type (backend/api, backend/worker, frontend/ui, etc.)
 
 python:
-  - PythonRuntimeQuestion
-  - PythonPackageManagerQuestion
-  - PythonTestFrameworkQuestion
-  - PythonTestRunnerQuestion
-  - PythonLinterQuestion
-  - PythonFormatterQuestion
-  - PythonAbstractClassStyleQuestion
-  - PythonCoverageTargetsQuestion
-  - PythonMockingLibraryQuestion
-  - PythonCoverageToolQuestion
-  - PythonMutationToolQuestion
+  core:
+    - PythonRuntimeQuestion
+    - PythonPackageManagerQuestion
+    - PythonTestFrameworkQuestion
+    - PythonTestRunnerQuestion
+    - PythonLinterQuestion
+    - PythonFormatterQuestion
+    - PythonAbstractClassStyleQuestion
+    - PythonCoverageTargetsQuestion
+    - PythonMockingLibraryQuestion
+    - PythonCoverageToolQuestion
+    - PythonMutationToolQuestion
+  fungible:
+    backend/api:
+      - PythonAPIFrameworkQuestion
+    backend/worker:
+      - PythonWorkerFrameworkQuestion
+    frontend/ui:
+      - PythonUIFrameworkQuestion
+    frontend/e2e: []
 
 typescript:
-  - TypeScriptVersionQuestion
-  - TypeScriptPackageManagerQuestion
-  - TypeScriptTestFrameworkQuestion
-  - TypeScriptFrameworkQuestion
+  core:
+    - TypeScriptVersionQuestion
+    - TypeScriptPackageManagerQuestion
+    - TypeScriptTestFrameworkQuestion
+  fungible:
+    frontend/ui:
+      - TypeScriptFrameworkQuestion
+    frontend/e2e: []
 
 javascript:
-  - TypeScriptVersionQuestion
-  - TypeScriptPackageManagerQuestion
-  - TypeScriptTestFrameworkQuestion
-  - TypeScriptFrameworkQuestion
+  core:
+    - TypeScriptVersionQuestion
+    - TypeScriptPackageManagerQuestion
+    - TypeScriptTestFrameworkQuestion
+  fungible:
+    frontend/ui:
+      - TypeScriptFrameworkQuestion
+    frontend/e2e: []
 
 go:
-  - GoVersionQuestion
-  - GoLinterQuestion
-  - GoFormatterQuestion
-  - GoTestFrameworkQuestion
+  core:
+    - GoVersionQuestion
+    - GoLinterQuestion
+    - GoFormatterQuestion
+    - GoTestFrameworkQuestion
+  fungible:
+    backend/api: []
+    backend/cli: []
 
 rust:
-  - RustVersionQuestion
-  - RustPackageManagerQuestion
-  - RustLinterQuestion
-  - RustFormatterQuestion
-  - RustTestFrameworkQuestion
+  core:
+    - RustVersionQuestion
+    - RustPackageManagerQuestion
+    - RustLinterQuestion
+    - RustFormatterQuestion
+    - RustTestFrameworkQuestion
+  fungible:
+    backend/api: []
+    backend/cli: []
 
 java:
-  - JavaVersionQuestion
-  - JavaBuildToolQuestion
-  - JavaLinterQuestion
-  - JavaTestFrameworkQuestion
+  core:
+    - JavaVersionQuestion
+    - JavaBuildToolQuestion
+    - JavaLinterQuestion
+    - JavaTestFrameworkQuestion
+  fungible:
+    backend/api: []
 
 csharp:
-  - CSharpVersionQuestion
-  - CSharpFrameworkQuestion
-  - CSharpTestFrameworkQuestion
+  core:
+    - CSharpVersionQuestion
+    - CSharpTestFrameworkQuestion
+  fungible:
+    backend/api: []
 
 ruby:
-  - RubyVersionQuestion
-  - RubyPackageManagerQuestion
-  - RubyLinterQuestion
-  - RubyTestFrameworkQuestion
+  core:
+    - RubyVersionQuestion
+    - RubyPackageManagerQuestion
+    - RubyLinterQuestion
+    - RubyTestFrameworkQuestion
+  fungible:
+    backend/api: []
+    backend/worker: []
 
 php:
-  - PhpVersionQuestion
-  - PhpPackageManagerQuestion
-  - PhpTestFrameworkQuestion
+  core:
+    - PhpVersionQuestion
+    - PhpPackageManagerQuestion
+    - PhpTestFrameworkQuestion
+  fungible:
+    backend/api: []
 
 swift:
-  - SwiftVersionQuestion
-  - SwiftPackageManagerQuestion
-  - SwiftTestFrameworkQuestion
+  core:
+    - SwiftVersionQuestion
+    - SwiftPackageManagerQuestion
+    - SwiftTestFrameworkQuestion
+  fungible:
+    backend/api: []
 
 kotlin:
-  - KotlinVersionQuestion
-  - KotlinBuildToolQuestion
-  - KotlinTestFrameworkQuestion
+  core:
+    - KotlinVersionQuestion
+    - KotlinBuildToolQuestion
+    - KotlinTestFrameworkQuestion
+  fungible:
+    backend/api: []
 
 scala:
-  - ScalaVersionQuestion
-  - ScalaBuildToolQuestion
-  - ScalaTestFrameworkQuestion
+  core:
+    - ScalaVersionQuestion
+    - ScalaBuildToolQuestion
+    - ScalaTestFrameworkQuestion
+  fungible:
+    backend/api: []
 
 elixir:
-  - ElixirVersionQuestion
-  - ElixirTestFrameworkQuestion
+  core:
+    - ElixirVersionQuestion
+    - ElixirTestFrameworkQuestion
+  fungible: []
 
 elm:
-  - ElmVersionQuestion
-  - ElmTestFrameworkQuestion
+  core:
+    - ElmVersionQuestion
+    - ElmTestFrameworkQuestion
+  fungible: []
 
 haskell:
-  - HaskellCompilerQuestion
-  - HaskellBuildToolQuestion
+  core:
+    - HaskellCompilerQuestion
+    - HaskellBuildToolQuestion
+  fungible: []
 
 clojure:
-  - ClojureVersionQuestion
-  - ClojureBuildToolQuestion
+  core:
+    - ClojureVersionQuestion
+    - ClojureBuildToolQuestion
+  fungible: []
 
 fsharp:
-  - FSharpVersionQuestion
-  - FSharpFrameworkQuestion
+  core:
+    - FSharpVersionQuestion
+  fungible:
+    backend/api: []
 
 dart:
-  - DartVersionQuestion
-  - DartTestFrameworkQuestion
+  core:
+    - DartVersionQuestion
+    - DartTestFrameworkQuestion
+  fungible: []
 
 julia:
-  - JuliaVersionQuestion
-  - JuliaPackageManagerQuestion
+  core:
+    - JuliaVersionQuestion
+    - JuliaPackageManagerQuestion
+  fungible: []
 
 lua:
-  - LuaVersionQuestion
-  - LuaTestFrameworkQuestion
+  core:
+    - LuaVersionQuestion
+    - LuaTestFrameworkQuestion
+  fungible: []
 
 r:
-  - RVersionQuestion
-  - RPackageManagerQuestion
+  core:
+    - RVersionQuestion
+    - RPackageManagerQuestion
+  fungible: []
 
 shell:
-  - ShellTypeQuestion
-  - ShellLinterQuestion
+  core:
+    - ShellTypeQuestion
+    - ShellLinterQuestion
+  fungible: []
 
 groovy:
-  - GroovyVersionQuestion
+  core:
+    - GroovyVersionQuestion
+  fungible: []
 
 terraform:
-  - TerraformVersionQuestion
+  core:
+    - TerraformVersionQuestion
+  fungible: []
 
 sql:
-  - SqlDialectQuestion
+  core:
+    - SqlDialectQuestion
+  fungible: []
 
 html:
-  - HtmlVersionQuestion
-  - HtmlFormatterQuestion
-  - HtmlLinterQuestion
+  core:
+    - HtmlVersionQuestion
+    - HtmlFormatterQuestion
+    - HtmlLinterQuestion
+  fungible: []
