@@ -129,7 +129,7 @@ class VersionCalculator:
         return version
 
 
-    def main():
+def main():
         """Main entry point for CI/CD integration."""
         # Get package name from environment or use default (strip whitespace)
         package_name = os.environ.get("PACKAGE_NAME", "promptosaurus").strip()
