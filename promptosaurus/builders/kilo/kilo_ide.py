@@ -193,11 +193,23 @@ class KiloIDEBuilder(KiloCodeBuilder):
         """
         actions: list[str] = []
 
-        # Get selected language from config
-        selected_language = config.get("spec", {}).get("language", "") if config else ""
-        language_file = (
-            self.language_file_map.get(selected_language.lower()) if selected_language else None
-        )
+        # Get selected language(s) from config
+        # Handle both single-language (dict) and multi-language (list) configs
+        spec = config.get("spec", {}) if config else {}
+        selected_languages: list[str] = []
+        if isinstance(spec, list):
+            # Multi-language monorepo: get ALL unique languages from all folders
+            languages_seen = set()
+            for folder_spec in spec:
+                lang = folder_spec.get("language", "")
+                if lang and lang.lower() not in languages_seen:
+                    languages_seen.add(lang.lower())
+                    selected_languages.append(lang)
+        else:
+            # Single language: use existing behavior
+            lang = spec.get("language", "") if spec else ""
+            if lang:
+                selected_languages.append(lang)
 
         # 1. Create AGENTS.md user guide
         actions.append(self._create_agents_md(output, dry_run))
@@ -211,13 +223,19 @@ class KiloIDEBuilder(KiloCodeBuilder):
             destination = output / ".kilocode" / "rules" / new_filename
             actions.append(self._copy(source_path, destination, dry_run, config))
 
-        # 2b. Add language-specific conventions to .kilocode/rules/ if selected
-        if language_file:
-            source_path = registry.prompt_path(language_file)
-            if source_path.exists():
-                new_filename = _make_dest_filename(language_file)
-                destination_rules = output / ".kilocode" / "rules" / new_filename
-                actions.append(self._copy(source_path, destination_rules, dry_run, config))
+        # 2b. Add language-specific conventions for ALL languages in multi-language monorepo
+        languages_added: set[str] = set()
+        for selected_language in selected_languages:
+            language_file = (
+                self.language_file_map.get(selected_language.lower()) if selected_language else None
+            )
+            if language_file and selected_language.lower() not in languages_added:
+                source_path = registry.prompt_path(language_file)
+                if source_path.exists():
+                    new_filename = _make_dest_filename(language_file)
+                    destination_rules = output / ".kilocode" / "rules" / new_filename
+                    actions.append(self._copy(source_path, destination_rules, dry_run, config))
+                    languages_added.add(selected_language.lower())
 
         # 3. Create per-mode directories with their files (ALL 15 modes for IDE)
         for mode_key in self.kilo_modes.keys():

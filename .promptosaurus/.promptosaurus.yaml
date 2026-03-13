@@ -4,18 +4,19 @@ repository:
   mappings: {}
 spec:
   language: python
-  runtime: '3.14'
+  runtime: '3.12'
   package_manager: uv
   test_framework: hybrid
   linter:
-  - ruff
-  - pyright
+    - ruff
+    - pyright
   formatter:
-  - ruff
+    - ruff
   coverage: standard
+  repo_type: single-language
   test_runner: pytest
   abstract_class_style: interface
   mocking_library:
-  - pytest-mock
+    - pytest-mock
   coverage_tool: pytest-cov
   mutation_tool: mutmut

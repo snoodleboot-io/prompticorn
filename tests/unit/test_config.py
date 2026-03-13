@@ -63,6 +63,47 @@ class TestConfigHandler:
             loaded = ConfigHandler.load_config(config_path)
             assert loaded == test_config
 
+    def test_save_config_yaml_formatting(self):
+        """YAML should use proper 2-space indentation for lists."""
+        with tempfile.TemporaryDirectory() as tmpdir:
+            config_path = Path(tmpdir) / "config.yaml"
+            # Config with list (like multi-language monorepo spec)
+            test_config = {
+                "version": "1.0",
+                "spec": [
+                    {
+                        "folder": "backend/api",
+                        "type": "backend",
+                        "language": "python",
+                        "python_linter": ["ruff"],
+                    }
+                ]
+            }
+
+            ConfigHandler.save_config(test_config, config_path)
+
+            # Read the raw YAML text
+            yaml_text = config_path.read_text()
+
+            # Check proper indentation:
+            # - "spec:" should be at indent 0
+            # - "- folder:" should be at indent 2 (dash at indent 2)
+            # - "type:" should be at indent 4
+            lines = yaml_text.split("\n")
+            for line in lines:
+                if line.startswith("spec:"):
+                    # spec: should have no leading spaces
+                    assert not line.startswith(" "), f"spec: should have no leading spaces: {line!r}"
+                elif line.startswith("- folder:"):
+                    # List item should start with exactly 2 spaces then dash
+                    assert line.startswith("  -"), f"List item should have 2-space indent: {line!r}"
+                elif line.startswith("  type:") or line.startswith("  language:"):
+                    # Properties should have 2-space indent
+                    assert line.startswith("  "), f"Property should have 2-space indent: {line!r}"
+                elif line.startswith("    - ruff"):
+                    # Nested list item should have 4-space indent
+                    assert line.startswith("    -"), f"Nested list should have 4-space indent: {line!r}"
+
     def test_load_nonexistent_returns_empty_dict(self):
         """Should return empty dict for non-existent config."""
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -125,9 +166,9 @@ class TestCreateDefaultConfig:
 
     def test_sets_repo_type(self):
         """Should set repository type."""
-        config = create_default_config("python", repo_type="multi-language-folder")
+        config = create_default_config("python", repo_type="multi-language-monorepo")
 
-        assert config["repository"]["type"] == "multi-language-folder"
+        assert config["repository"]["type"] == "multi-language-monorepo"
 
     def test_overrides_with_kwargs(self):
         """Should override defaults with provided kwargs."""

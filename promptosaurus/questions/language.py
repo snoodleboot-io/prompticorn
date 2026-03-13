@@ -6,6 +6,8 @@ the appropriate Question classes using the sweet_tea factory pattern.
 
 Functions:
     get_language_questions: Get all questions for a specific language.
+    get_core_questions: Get core questions for a language (shared across folders).
+    get_fungible_questions: Get fungible questions for a language + folder type.
     _load_pipelines: Load question pipelines from YAML file.
 
 Classes:
@@ -23,12 +25,13 @@ Example:
     >>>
     >>> # Get questions for Python
     >>> questions = get_language_questions("python")
-    >>> print(f\"Found {len(questions)} questions for Python\")
+    >>> print(f"Found {len(questions)} questions for Python")
     >>> for q in questions[:3]:
-    ...     print(f\"  - {q.key}: {q.question_text}\")
+    ...     print(f"  - {q.key}: {q.question_text}")
 """
 
 from pathlib import Path
+from typing import Any
 
 import yaml  # type: ignore[import-untyped]
 from sweet_tea.abstract_factory import AbstractFactory
@@ -103,14 +106,16 @@ LANGUAGE_KEYS = [
 ]
 
 
-def _load_pipelines() -> dict[str, list[str]]:
+def _load_pipelines() -> dict[str, Any]:
     """Load question pipelines from YAML file.
 
     Reads the question_pipelines.yaml file which defines which
     question classes should be asked for each language.
 
     Returns:
-        Dictionary mapping language keys to lists of question class names.
+        Dictionary mapping language keys to either:
+        - List of question class names (backward compat)
+        - Dict with 'core' and 'fungible' keys
 
     Raises:
         FileNotFoundError: If the pipelines YAML file doesn't exist.
@@ -118,19 +123,119 @@ def _load_pipelines() -> dict[str, list[str]]:
 
     Example:
         >>> pipelines = _load_pipelines()
-        >>> print(pipelines.get("python", []))
-        ['LanguageQuestion', 'PythonLinterQuestion', ...]
+        >>> print(pipelines.get("python", {}))
+        {'core': [...], 'fungible': {...}}
     """
     pipelines_path = Path(__file__).parent / "question_pipelines.yaml"
     with open(pipelines_path, encoding="utf-8") as f:
         return yaml.safe_load(f)  # type: ignore[no-any-return]
 
 
+def get_core_questions(language: str) -> list[Question]:
+    """Get core questions for a specific language.
+
+    Core questions are asked ONCE per language and shared across all folders.
+
+    Args:
+        language: The language key (e.g., 'python', 'typescript').
+
+    Returns:
+        List of core Question instances.
+
+    Raises:
+        QuestionPipelineError: If a question class cannot be loaded.
+        ValueError: If the language is not supported.
+    """
+    questions: list[Question] = []
+    lang = language.lower()
+
+    if lang not in LANGUAGE_KEYS:
+        raise ValueError(f"Unsupported language: {lang}. Available: {LANGUAGE_KEYS}")
+
+    pipelines = _load_pipelines()
+    lang_config = pipelines.get(lang, [])
+
+    # Handle both old format (list) and new format (dict with core/fungible)
+    if isinstance(lang_config, list):
+        # Old format: just a list of questions (all treated as core)
+        question_classes = lang_config
+    elif isinstance(lang_config, dict):
+        # New format: dict with 'core' and 'fungible'
+        question_classes = lang_config.get("core", [])
+    else:
+        question_classes = []
+
+    # Instantiate each question class
+    factory = AbstractFactory[Question]
+    for class_name in question_classes:
+        try:
+            question = factory.create(class_name)
+            questions.append(question)
+        except SweetTeaError as e:
+            raise QuestionPipelineError(
+                class_name=class_name,
+                language=lang,
+                reason=f"Class not registered or not a subclass of BaseQuestion: {e}",
+            ) from e
+
+    return questions
+
+
+def get_fungible_questions(language: str, folder_type: str) -> list[Question]:
+    """Get fungible questions for a specific language and folder type.
+
+    Fungible questions are asked for EACH folder and can differ per workspace.
+
+    Args:
+        language: The language key (e.g., 'python', 'typescript').
+        folder_type: The folder type (e.g., 'backend/api', 'frontend/ui').
+
+    Returns:
+        List of fungible Question instances for this language + folder type.
+    """
+    questions: list[Question] = []
+    lang = language.lower()
+
+    if lang not in LANGUAGE_KEYS:
+        return []  # No questions for unsupported languages
+
+    pipelines = _load_pipelines()
+    lang_config = pipelines.get(lang, {})
+
+    # Handle both old format (list) and new format (dict with core/fungible)
+    if isinstance(lang_config, list):
+        # Old format: no fungible questions
+        return []
+    elif isinstance(lang_config, dict):
+        fungible_config = lang_config.get("fungible", {})
+        if isinstance(fungible_config, dict):
+            question_classes = fungible_config.get(folder_type, [])
+        else:
+            question_classes = []
+    else:
+        question_classes = []
+
+    # Instantiate each question class
+    factory = AbstractFactory[Question]
+    for class_name in question_classes:
+        try:
+            question = factory.create(class_name)
+            questions.append(question)
+        except SweetTeaError:
+            # Skip if question class not found (e.g., not implemented yet)
+            pass
+
+    return questions
+
+
 def get_language_questions(language: str) -> list[Question]:
-    """Get all questions for a specific language.
+    """Get all questions for a specific language (core only).
 
     Loads and instantiates all Question classes defined in the pipeline
     for the given language using the sweet_tea AbstractFactory.
+
+    Note: This returns core questions only. For fungible questions,
+    use get_fungible_questions() with the folder type.
 
     Args:
         language: The language key (e.g., 'python', 'typescript', 'go').
@@ -144,33 +249,9 @@ def get_language_questions(language: str) -> list[Question]:
 
     Example:
         >>> questions = get_language_questions("python")
-        >>> print(f\"Found {len(questions)} questions\")
+        >>> print(f"Found {len(questions)} questions")
         >>> for q in questions:
-        ...     print(f\"  {q.key}: {q.question_text}\")
+        ...     print(f"  {q.key}: {q.question_text}")
     """
-    questions: list[Question] = []
-    lang = language.lower()
-
-    # Validate language is supported
-    if lang not in LANGUAGE_KEYS:
-        raise ValueError(f"Unsupported language: {lang}. Available: {LANGUAGE_KEYS}")
-
-    # Load pipeline from YAML
-    pipelines = _load_pipelines()
-    question_classes = pipelines.get(lang, [])
-
-    # Instantiate each question class using sweet_tea AbstractFactory
-    factory = AbstractFactory[Question]
-    for class_name in question_classes:
-        try:
-            question = factory.create(class_name)
-            questions.append(question)
-        except SweetTeaError as e:
-            # Class not found in registry or type mismatch
-            raise QuestionPipelineError(
-                class_name=class_name,
-                language=lang,
-                reason=f"Class not registered or not a subclass of BaseQuestion: {e}",
-            ) from e
-
-    return questions
+    # For backward compatibility, return core questions
+    return get_core_questions(language)
