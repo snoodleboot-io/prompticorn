@@ -111,6 +111,8 @@ ORM/Query:           {{ORM}}                e.g., Prisma, SQLAlchemy, GORM
 ## Git & PR Conventions
 
 Branch naming:       feat|fix|chore|docs / ticket-id - short-description
+MANDATORY WITHOUT EXCEPTION: Ticket IDs MUST be real and obtained from user-provided files, actual project tickets, or the feature request. 
+DO NOT hallucinate, invent, or use fake ticket IDs like "PROJ-123" or "#456" unless they are explicitly provided in the user's request or associated project documentation.
 Commit style:        {{Conventional Commits | free-form}}
 PR size:             {{MAX_LINES}} lines changed (soft limit)
 

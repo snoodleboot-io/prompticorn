@@ -223,6 +223,14 @@ If a task touches more than 3 files or involves a design decision:
 - Write a short plan first
 - Wait for confirmation before making any changes
 
+### Use Subtasks/Agents When Appropriate
+
+When a task can be broken down into smaller, specialized components:
+- Consider using subtasks or specialized agents (e.g., Code, Test, Review modes)
+- Leverage agent-specific expertise for better quality and efficiency
+- Coordinate between agents using orchestrator mode for complex workflows
+- Ensure proper session management when switching between agents
+
 ### Questions
 
 - Ask one focused question at a time — never a list of blockers
