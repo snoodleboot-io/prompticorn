@@ -1,0 +1,6 @@
+"Summary of changes:"  
+""  
+"- Updated planning prompts to use specific folders: docs/prd/ for PRDs, docs/ard/ for ARDs, and docs/tasks/ for task breakdowns"  
+"- Clarified in core prompts that subtasks/agents should be used when appropriate for better quality and efficiency"  
+"- Fixed Python codebase deviations from standards by converting module-level UPPER_SNAKE constants to internal class variables in constants.py"  
+"- Strengthened planning prompt to prevent hallucination of fake information - added mandatory guidance to use only real ticket IDs from user-provided files or feature requests" 
