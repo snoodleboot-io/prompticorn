@@ -2,11 +2,7 @@
 
 import pytest
 
-from promptosaurus.questions.base.constants import (
-    REPO_TYPE_MIXED,
-    REPO_TYPE_MULTI_MONOREPO,
-    REPO_TYPE_SINGLE,
-)
+from promptosaurus.questions.base.constants import RepositoryTypes
 from promptosaurus.questions.base.folder_mapping_question import FolderMappingQuestion
 from promptosaurus.questions.base.repository_type_question import RepositoryTypeQuestion
 from promptosaurus.questions.handlers.handle_single_language_questions import (
@@ -52,15 +48,15 @@ class TestRepositoryTypeQuestion:
         """Options should include all valid repo types."""
         q = RepositoryTypeQuestion()
 
-        assert REPO_TYPE_SINGLE in q.options
-        assert REPO_TYPE_MULTI_MONOREPO in q.options
-        assert REPO_TYPE_MIXED in q.options
+        assert RepositoryTypes.SINGLE in q.options
+        assert RepositoryTypes.MULTI_MONOREPO in q.options
+        assert RepositoryTypes.MIXED in q.options
 
     def test_default_is_single_language(self):
         """Default should be single-language."""
         q = RepositoryTypeQuestion()
 
-        assert q.default == REPO_TYPE_SINGLE
+        assert q.default == RepositoryTypes.SINGLE
 
     def test_option_explanations_exist(self):
         """Each option should have an explanation."""
@@ -74,8 +70,8 @@ class TestRepositoryTypeQuestion:
         """explain_option should return the explanation for an option."""
         q = RepositoryTypeQuestion()
 
-        explanation = q.explain_option(REPO_TYPE_SINGLE)
-        assert explanation == q.option_explanations[REPO_TYPE_SINGLE]
+        explanation = q.explain_option(RepositoryTypes.SINGLE)
+        assert explanation == q.option_explanations[RepositoryTypes.SINGLE]
 
     def test_explain_option_unknown_returns_empty(self):
         """explain_option for unknown option should return empty string."""

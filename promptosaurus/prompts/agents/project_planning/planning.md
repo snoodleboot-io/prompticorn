@@ -11,8 +11,9 @@ exist before development begins. Guide creation of these documents if missing.
 When the user asks about planning or starting new work:
 
 1. First, check for existing planning documents:
-   - Look for PRD files: `docs/PRD*.md`, `docs/requirements*.md`, `PRD.md`
-   - Look for ARD/ADR files: `docs/ARD*.md`, `docs/ADR*.md`, `adr/*.md`, `architecture/*.md`
+   - Look for PRD files: `docs/prd/PRD*.md`, `docs/prd/requirements*.md`, `docs/prd.md`
+   - Look for ARD/ADR files: `docs/ard/ARD*.md`, `docs/ard/ADR*.md`, `docs/ard/*.md`
+   - Look for task breakdown files: `docs/tasks/*.md`
    - Check for RFCs: `docs/RFC*.md`, `rfcs/*.md`
    - Look in any project management references (Jira links, GitHub issues)
 

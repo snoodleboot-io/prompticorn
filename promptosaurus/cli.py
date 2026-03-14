@@ -44,10 +44,7 @@ from promptosaurus.config_options import (
     load_current_values,
     set_nested_value,
 )
-from promptosaurus.questions.base.constants import (
-    REPO_TYPE_MULTI_MONOREPO,
-    REPO_TYPE_SINGLE,
-)
+from promptosaurus.questions.base.constants import RepositoryTypes
 from promptosaurus.questions.base.folder_spec import (
     FOLDER_TYPE_PRESETS,
     FolderSpec,
@@ -508,7 +505,7 @@ def init_prompts():
 
         # Step 3 & 4: Handle language questions based on repo type
         # Use isinstance() for proper type narrowing from str | list[str] to str
-        if isinstance(repo_type, str) and repo_type == REPO_TYPE_SINGLE:
+        if isinstance(repo_type, str) and repo_type == RepositoryTypes.SINGLE:
             from promptosaurus.questions.handlers.handle_single_language_questions import (
                 HandleSingleLanguageQuestions,
             )
@@ -517,7 +514,7 @@ def init_prompts():
             config: dict[str, Any] = handler.handle(repo_type)
         else:
             # Multi-folder or mixed - just save repo type for now
-            if repo_type == REPO_TYPE_MULTI_MONOREPO:
+            if repo_type == RepositoryTypes.MULTI_MONOREPO:
                 # Interactive folder setup for multi-language monorepo
                 config = DEFAULT_MULTI_LANGUAGE_CONFIG_TEMPLATE.copy()
                 config["repository"]["type"] = repo_type

@@ -2,12 +2,7 @@
 
 import pytest
 
-from promptosaurus.questions.base.constants import (
-    REPO_TYPE_MIXED,
-    REPO_TYPE_MULTI_MONOREPO,
-    REPO_TYPE_SINGLE,
-    REPO_TYPES,
-)
+from promptosaurus.questions.base.constants import RepositoryTypes, REPO_TYPES
 from promptosaurus.questions.base.folder_mapping_question import FolderMappingQuestion
 from promptosaurus.questions.base.question import Question
 from promptosaurus.questions.base.repository_type_question import RepositoryTypeQuestion
@@ -48,15 +43,15 @@ class TestRepositoryTypeQuestion:
         """Options should include all valid repo types."""
         q = RepositoryTypeQuestion()
 
-        assert REPO_TYPE_SINGLE in q.options
-        assert REPO_TYPE_MULTI_MONOREPO in q.options
-        assert REPO_TYPE_MIXED in q.options
+        assert RepositoryTypes.SINGLE in q.options
+        assert RepositoryTypes.MULTI_MONOREPO in q.options
+        assert RepositoryTypes.MIXED in q.options
 
     def test_default_is_single_language(self):
         """Default should be single-language."""
         q = RepositoryTypeQuestion()
 
-        assert q.default == REPO_TYPE_SINGLE
+        assert q.default == RepositoryTypes.SINGLE
 
     def test_option_explanations_exist(self):
         """Each option should have an explanation."""
@@ -70,8 +65,8 @@ class TestRepositoryTypeQuestion:
         """explain_option should return the explanation for an option."""
         q = RepositoryTypeQuestion()
 
-        explanation = q.explain_option(REPO_TYPE_SINGLE)
-        assert explanation == q.option_explanations[REPO_TYPE_SINGLE]
+        explanation = q.explain_option(RepositoryTypes.SINGLE)
+        assert explanation == q.option_explanations[RepositoryTypes.SINGLE]
 
     def test_explain_option_unknown_returns_empty(self):
         """explain_option for unknown option should return empty string."""
@@ -115,13 +110,13 @@ class TestConstants:
 
     def test_repo_type_constants(self):
         """REPO_TYPE constants should have correct values."""
-        assert REPO_TYPE_SINGLE == "single-language"
-        assert REPO_TYPE_MULTI_MONOREPO == "multi-language-monorepo"
-        assert REPO_TYPE_MIXED == "mixed"
+        assert RepositoryTypes.SINGLE == "single-language"
+        assert RepositoryTypes.MULTI_MONOREPO == "multi-language-monorepo"
+        assert RepositoryTypes.MIXED == "mixed"
 
     def test_repo_types_list(self):
         """REPO_TYPES should include all repo types."""
-        assert REPO_TYPE_SINGLE in REPO_TYPES
-        assert REPO_TYPE_MULTI_MONOREPO in REPO_TYPES
-        assert REPO_TYPE_MIXED in REPO_TYPES
+        assert RepositoryTypes.SINGLE in REPO_TYPES
+        assert RepositoryTypes.MULTI_MONOREPO in REPO_TYPES
+        assert RepositoryTypes.MIXED in REPO_TYPES
         assert len(REPO_TYPES) == 3
