@@ -44,15 +44,46 @@ class VersionCalculator:
                 version = data["info"]["version"]
 
                 # Parse version (handle formats like 1.2.3, 1.2.3-beta, etc.)
-                # Strip any pre-release/local suffixes
-                # PEP 440: X.Y.Y.devN, X.Y.YaN, X.Y.YbN, X.Y.YrcN, X.Y.Y, X.Y.Y.postN, X.Y.Y+local
-                # Only split on . and + to preserve the base version
-                version = re.split(r"[.+]", version)[0]
+                # We want to extract the major and minor version numbers
+                # Split on '.' to get parts
                 parts = version.split(".")
-
-                major = int(parts[0]) if len(parts) > 0 else 0
-                minor = int(parts[1]) if len(parts) > 1 else 0
-
+                
+                if len(parts) < 2:
+                    # Not enough parts for major.minor
+                    return None
+                    
+                # Extract major (first part)
+                try:
+                    major = int(parts[0])
+                except ValueError:
+                    # If first part is not a pure number, try to extract numeric prefix
+                    major_str = ""
+                    for char in parts[0]:
+                        if char.isdigit():
+                            major_str += char
+                        else:
+                            break
+                    if not major_str:
+                        return None
+                    major = int(major_str)
+                
+                # Extract minor (second part)
+                try:
+                    minor = int(parts[1])
+                except ValueError:
+                    # If second part is not a pure number, try to extract numeric prefix
+                    minor_str = ""
+                    for char in parts[1]:
+                        if char.isdigit():
+                            minor_str += char
+                        else:
+                            break
+                    if not minor_str:
+                        # If we can't extract a number, default to 0
+                        minor = 0
+                    else:
+                        minor = int(minor_str)
+                
                 return (major, minor)
         except Exception as e:
             print(f"PyPI query failed: {e}", file=sys.stderr)
@@ -104,9 +135,16 @@ class VersionCalculator:
                 sys.exit(1)
             # Check if we are on the main branch
             github_ref = os.environ.get("GITHUB_REF", "").strip()
-            if github_ref == "refs/heads/main":
+            is_main_branch = github_ref == "refs/heads/main"
+            
+            # Also check IS_MAIN environment variable as fallback
+            is_main_env = os.environ.get("IS_MAIN", "").strip().lower()
+            if is_main_env == "true":
+                is_main_branch = True
+                
+            if is_main_branch:
                 # For pushes to main, use a release version (without dev suffix)
-                version = f"{major}.{new_minor}.0"
+                version = f"{major}.{new_minor}.0.0"
                 print(f"Push to main: using release version {version}")
                 return version
             else:
@@ -114,12 +152,12 @@ class VersionCalculator:
                 # Format: 0.0.0.devHHMMSS where HHMMSS is hour/minute/second
                 now = datetime.now()
                 dev_suffix = now.strftime("%H%M%S")
-                version = f"{major}.{new_minor}.0.dev{dev_suffix}"
+                version = f"{major}.{new_minor}.0.0.dev{dev_suffix}"
                 print(f"Non-PR push: using dev version {version}")
                 return version
 
-        # Build version: MAJOR.MINOR.PATCH[-RUN]
-        version = f"{major}.{new_minor}.{pr_number}"
+        # Build version: MAJOR.MINOR.0.PR_NUMBER[-RUN]
+        version = f"{major}.{new_minor}.0.{pr_number}"
 
         # Append run number only for TestPyPI preview builds
         # Use .dev for development version (PEP 440 compliant for TestPyPI)
