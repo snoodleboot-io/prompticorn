@@ -144,7 +144,7 @@ def main():
 
     # Get GitHub context
     event_name = os.environ.get("GITHUB_EVENT_NAME", "push").strip()
-    action = os.environ.get("GITHUB_ACTION", "").strip()
+    action = os.environ.get("GITHUB_EVENT_ACTION", "").strip()
     base_ref = os.environ.get("GITHUB_BASE_REF", "").strip()
     run_number = os.environ.get("GITHUB_RUN_NUMBER", "").strip()
     github_ref = os.environ.get("GITHUB_REF", "").strip()
