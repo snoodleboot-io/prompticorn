@@ -5,7 +5,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "promptosaurus"
-version = "0.2.0"
+version = "0.1.0"
 description = "Build AI coding assistant configs from a shared prompt library"
 readme = "README.md"
 license = { text = "MIT" }
