@@ -1,8 +1,8 @@
 """promptosaurus — prompt library build tool."""
 
-from sweet_tea.registry import Registry
+from importlib.metadata import PackageNotFoundError, version
 
-from importlib.metadata import version, PackageNotFoundError
+from sweet_tea.registry import Registry
 
 try:
     __version__ = version("promptosaurus")
