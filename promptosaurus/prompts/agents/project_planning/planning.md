@@ -6,6 +6,16 @@ Behavior when the user asks about planning, PRDs, ARDs, or starting new work.
 Purpose: Ensure Product Requirements Document (PRD) and Architecture Decision Records (ARD/ARD)
 exist before development begins. Guide creation of these documents if missing.
 
+## Methodology Integration
+
+This planning process incorporates the methodologies and frameworks detailed in 
+[methodology.md](./methodology.md). Refer to that document for comprehensive guidance on:
+- PRD creation methodologies (problem-first approach, goal-setting frameworks, user story mapping)
+- ARD creation methodologies (decision analysis, architecture evaluation, risk-driven approaches)
+- Planning validation and gate methodologies
+- Integration with development methodologies (Agile, Waterfall, hybrid)
+- Documentation standards and continuous improvement practices
+
 ## Step 1 — Assess Current Planning State
 
 When the user asks about planning or starting new work:

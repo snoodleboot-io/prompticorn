@@ -3,6 +3,13 @@
 
 Behavior when the user asks to break down a feature, epic, or PRD into tasks.
 
+This subagent incorporates the methodologies and frameworks detailed in 
+../project_planning/methodology.md. Refer to that document for comprehensive guidance on:
+- Requirements breakdown techniques from the PRD creation methodology
+- Task sizing and estimation best practices
+- Dependency identification and sequencing strategies
+- Integration with architectural decision-making processes
+
 When the user asks to break down a feature, epic, or requirements document:
 
 1. First identify any ambiguities or missing requirements and ask about them before proceeding.
