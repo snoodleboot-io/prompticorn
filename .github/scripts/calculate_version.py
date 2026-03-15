@@ -43,15 +43,18 @@ class VersionCalculator:
                 data = json.loads(response.read())
                 version = data["info"]["version"]
 
-                # Parse version (handle formats like 1.2.3, 1.2.3-beta, etc.)
-                # Strip any pre-release/local suffixes
-                # PEP 440: X.Y.Y.devN, X.Y.YaN, X.Y.YbN, X.Y.YrcN, X.Y.Y, X.Y.Y.postN, X.Y.Y+local
-                # Only split on . and + to preserve the base version
-                version = re.split(r"[.+]", version)[0]
-                parts = version.split(".")
+                # Parse version, extracting only the MAJOR.MINOR base.
+                # PEP 440 allows: X.Y.Z, X.Y.ZaN, X.Y.ZbN, X.Y.ZrcN,
+                #                 X.Y.Z.devN, X.Y.Z.postN, X.Y.Z+local
+                # We only need MAJOR and MINOR, so match the leading two
+                # numeric segments and ignore everything after.
+                match = re.match(r"^(\d+)\.(\d+)", version)
+                if not match:
+                    print(f"PyPI version '{version}' could not be parsed", file=sys.stderr)
+                    return None
 
-                major = int(parts[0]) if len(parts) > 0 else 0
-                minor = int(parts[1]) if len(parts) > 1 else 0
+                major = int(match.group(1))
+                minor = int(match.group(2))
 
                 return (major, minor)
         except Exception as e:
