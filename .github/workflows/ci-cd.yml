@@ -321,19 +321,19 @@ jobs:
           version: "0.5.x"
           enable-cache: true
 
-       - name: Calculate derived version
-         id: version
-         run: |
-           python .github/scripts/calculate_version.py
-         env:
-           PACKAGE_NAME: ${{ env.PACKAGE_NAME }}
-           GITHUB_REF: ${{ github.ref }}
-           GITHUB_SHA: ${{ github.sha }}
-           GITHUB_RUN_NUMBER: ${{ github.run_number }}
-           GITHUB_EVENT_NAME: ${{ github.event_name }}
-           GITHUB_BASE_REF: ${{ github.base_ref }}
-           GITHUB_EVENT_ACTION: ${{ github.event.action || '' }}
-           MAJOR_VERSION: ${{ env.MAJOR_VERSION }}
+      - name: Calculate derived version
+        id: version
+        run: |
+          python .github/scripts/calculate_version.py
+        env:
+          PACKAGE_NAME: ${{ env.PACKAGE_NAME }}
+          GITHUB_REF: ${{ github.ref }}
+          GITHUB_SHA: ${{ github.sha }}
+          GITHUB_RUN_NUMBER: ${{ github.run_number }}
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
+          GITHUB_BASE_REF: ${{ github.base_ref }}
+          GITHUB_EVENT_ACTION: ${{ github.event.action || '' }}
+          MAJOR_VERSION: ${{ env.MAJOR_VERSION }}
 
       - name: Update version in pyproject.toml
         run: |
