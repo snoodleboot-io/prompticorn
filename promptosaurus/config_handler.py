@@ -91,6 +91,8 @@ class ConfigHandler:
         if config_dir is None:
             config_dir = cls.DEFAULT_CONFIG_DIR
         config_dir.mkdir(parents=True, exist_ok=True)
+        # Also create sessions directory for session management
+        (config_dir / "sessions").mkdir(parents=True, exist_ok=True)
         return config_dir
 
     @classmethod
