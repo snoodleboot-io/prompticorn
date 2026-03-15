@@ -255,19 +255,19 @@ jobs:
           version: "0.5.x"
           enable-cache: true
 
-       - name: Calculate derived version
-         id: version
-         run: |
-           python .github/scripts/calculate_version.py
-         env:
-           PACKAGE_NAME: ${{ env.PACKAGE_NAME }}
-           GITHUB_REF: ${{ github.ref }}
-           GITHUB_SHA: ${{ github.sha }}
-           GITHUB_RUN_NUMBER: ${{ github.run_number }}
-           GITHUB_EVENT_NAME: ${{ github.event_name }}
-           GITHUB_BASE_REF: ${{ github.base_ref }}
-           GITHUB_EVENT_ACTION: ${{ github.event.action || '' }}
-           MAJOR_VERSION: ${{ env.MAJOR_VERSION }}
+      - name: Calculate derived version
+        id: version
+        run: |
+         python .github/scripts/calculate_version.py
+        env:
+         PACKAGE_NAME: ${{ env.PACKAGE_NAME }}
+         GITHUB_REF: ${{ github.ref }}
+         GITHUB_SHA: ${{ github.sha }}
+         GITHUB_RUN_NUMBER: ${{ github.run_number }}
+         GITHUB_EVENT_NAME: ${{ github.event_name }}
+         GITHUB_BASE_REF: ${{ github.base_ref }}
+         GITHUB_EVENT_ACTION: ${{ github.event.action || '' }}
+         MAJOR_VERSION: ${{ env.MAJOR_VERSION }}
 
       - name: Update version in pyproject.toml
         run: |
@@ -432,7 +432,7 @@ jobs:
         run: |
           python -m venv verify_env
           source verify_env/bin/activate
-          
+
           # Retry up to 3 times if package not immediately available
           for i in 1 2 3; do
             echo "Attempt $i: Installing promptosaurus==${{ needs.build-release.outputs.version }}..."
@@ -444,7 +444,7 @@ jobs:
               sleep 30
             fi
           done
-          
+
           # Verify CLI works
           promptosaurus --help
           # Verify import works
@@ -469,7 +469,7 @@ jobs:
         run: |
           python -m venv verify_env
           source verify_env/bin/activate
-          
+
           # Retry up to 3 times if package not immediately available
           for i in 1 2 3; do
             echo "Attempt $i: Installing promptosaurus==${{ needs.build-release.outputs.version }}..."
@@ -481,7 +481,7 @@ jobs:
               sleep 30
             fi
           done
-          
+
           # Verify CLI works
           promptosaurus --help
           # Verify import works
