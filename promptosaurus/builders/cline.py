@@ -59,7 +59,7 @@ class ClineBuilder(Builder):
 
         Args:
             output: Directory path where the files will be created.
-            config: Optional configuration dict with template variables (unused for Cline).
+            config: Optional configuration dict with template variables.
             dry_run: If True, preview what would be written without touching filesystem.
 
         Returns:
@@ -81,7 +81,7 @@ class ClineBuilder(Builder):
 
         # Build .clinerules
         destination = output / ".clinerules"
-        content = self._build_concatenated("# .clinerules")
+        content = self._build_concatenated("# .clinerules", config)
 
         if dry_run:
             lines = content.count("\n")

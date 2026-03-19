@@ -36,6 +36,8 @@ class Builder:
     Methods:
         build: Generate output configuration files.
         _build_concatenated: Create concatenated rules file content.
+        _substitute_template_variables: Replace {{VARIABLE}} templates with values from config.
+        _copy: Copy a source file to destination with optional template substitution.
     """
 
     _base_files = [
@@ -66,7 +68,7 @@ class Builder:
         raise NotImplementedError("Subclasses must implement build()")
 
     @classmethod
-    def _build_concatenated(cls, tool_comment: str) -> str:
+    def _build_concatenated(cls, tool_comment: str, config: dict[str, Any] | None = None) -> str:
         """Returns the full text of a concatenated rules file.
 
         This helper method creates a concatenated rules file by combining all
@@ -74,6 +76,7 @@ class Builder:
 
         Args:
             tool_comment: First-line comment identifying the tool (e.g., '# .clinerules').
+            config: Optional configuration dict with template variables.
 
         Returns:
             Complete concatenated rules file content as a string.
@@ -95,6 +98,11 @@ class Builder:
         for label, filename in registry.concat_order:
             try:
                 body = registry.prompt_body(filename)
+                # Apply template substitution if config is provided
+                if config:
+                    # Create a temporary instance to access the instance method
+                    temp_instance = cls()
+                    body = temp_instance._substitute_template_variables(body, config)
             except FileNotFoundError:
                 lines.append(f"## {label} — MISSING: {filename}")
                 lines.append("")
@@ -107,3 +115,129 @@ class Builder:
             lines.append("")
 
         return "\n".join(lines) + "\n"
+
+    def _substitute_template_variables(self, content: str, config: dict[str, Any]) -> str:
+        """Replace {{VARIABLE}} templates with values from config.
+
+        This method performs template variable substitution on content,
+        replacing placeholders like {{LANGUAGE}} with actual values
+        from the configuration.
+
+        Args:
+            content: The template content with {{VARIABLE}} placeholders.
+            config: Configuration dict containing spec values.
+
+        Returns:
+            Content with all template variables replaced.
+        """
+        defaults = config.get("spec", {}) if config else {}
+        # Handle both single-language (dict) and multi-language (list) configs
+        if isinstance(defaults, list):
+            # Multi-language monorepo: get config from first folder
+            defaults = defaults[0] if defaults else {}
+
+        def format_value(value: Any) -> str:
+            """Format a value for substitution, handling lists."""
+            if isinstance(value, list):
+                return ", ".join(str(v) for v in value)
+            return str(value) if value is not None else ""
+
+        # Build mapping of template variables to config values
+        substitutions: dict[str, str] = {
+            "{{LANGUAGE}}": format_value(defaults.get("language", "")),
+            "{{RUNTIME}}": format_value(defaults.get("runtime", "")),
+            "{{PACKAGE_MANAGER}}": format_value(defaults.get("package_manager", "")),
+            "{{LINTER}}": format_value(defaults.get("linter", "")),
+            "{{FORMATTER}}": format_value(defaults.get("formatter", "")),
+            "{{ABSTRACT_CLASS_STYLE}}": format_value(defaults.get("abstract_class_style", "")),
+            "{{TESTING_FRAMEWORK}}": format_value(defaults.get("test_framework", "")),
+            "{{TEST_RUNNER}}": format_value(defaults.get("test_runner", "")),
+        }
+
+        # Add coverage variables
+        # Coverage can be either a dict (legacy) or a string preset from the question
+        coverage_value = defaults.get("coverage", {})
+
+        # If coverage is a string preset, convert it to a dict
+        if isinstance(coverage_value, str):
+            COVERAGE_PRESETS = {
+                "strict": {
+                    "line": 90,
+                    "branch": 80,
+                    "function": 95,
+                    "statement": 90,
+                    "mutation": 85,
+                    "path": 70,
+                },
+                "standard": {
+                    "line": 80,
+                    "branch": 70,
+                    "function": 90,
+                    "statement": 85,
+                    "mutation": 80,
+                    "path": 60,
+                },
+                "minimal": {
+                    "line": 70,
+                    "branch": 60,
+                    "function": 80,
+                    "statement": 75,
+                    "mutation": 70,
+                    "path": 50,
+                },
+            }
+            coverage = COVERAGE_PRESETS.get(coverage_value, {})
+        else:
+            coverage = coverage_value if isinstance(coverage_value, dict) else {}
+
+        substitutions["{{LINE_COVERAGE_%}}"] = str(coverage.get("line", 80))
+        substitutions["{{BRANCH_COVERAGE_%}}"] = str(coverage.get("branch", 70))
+        substitutions["{{FUNCTION_COVERAGE_%}}"] = str(coverage.get("function", 90))
+        substitutions["{{STATEMENT_COVERAGE_%}}"] = str(coverage.get("statement", 85))
+        substitutions["{{MUTATION_COVERAGE_%}}"] = str(coverage.get("mutation", 80))
+        substitutions["{{PATH_COVERAGE_%}}"] = str(coverage.get("path", 60))
+
+        # Perform substitutions
+        for template_var, value in substitutions.items():
+            content = content.replace(template_var, value)
+
+        return content
+
+    def _copy(
+        self,
+        source_path: Path,
+        destination: Path,
+        dry_run: bool,
+        config: dict[str, Any] | None = None,
+    ) -> str:
+        """Copy a source file to destination with optional template substitution.
+
+        Internal helper that handles file copying with support for
+        template variable substitution in files that need it.
+
+        Args:
+            source_path: Source file path to copy from.
+            destination: Destination file path to copy to.
+            dry_run: If True, return preview string without copying.
+            config: Optional config dict for template variable substitution.
+
+        Returns:
+            Action string describing the copy operation.
+        """
+        rel = str(destination).split(".kilocode/", 1)[-1]
+        label = f".kilocode/{rel}"
+        if dry_run:
+            return f"[dry-run] {source_path.name} → {label}"
+        destination.parent.mkdir(parents=True, exist_ok=True)
+
+        # If config is provided and this is a language-specific conventions file,
+        # perform template substitution
+        if config and source_path.name.startswith("core-"):
+            content = source_path.read_text(encoding="utf-8")
+            content = self._substitute_template_variables(content, config)
+            destination.write_text(content, encoding="utf-8")
+        else:
+            import shutil
+            shutil.copy2(source_path, destination)
+
+        return f"✓ {source_path.name} → {label}"

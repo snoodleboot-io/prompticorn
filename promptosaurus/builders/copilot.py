@@ -68,7 +68,7 @@ class CopilotBuilder(Builder):
 
         Args:
             output: Directory path where the files will be created.
-            config: Optional configuration dict with template variables (unused for Copilot).
+            config: Optional configuration dict with template variables.
             dry_run: If True, preview what would be written without touching filesystem.
 
         Returns:
@@ -86,11 +86,11 @@ class CopilotBuilder(Builder):
         github = output / ".github"
 
         # Always-on: copilot-instructions.md
-        actions.extend(self._build_always_on(github, dry_run))
+        actions.extend(self._build_always_on(github, config, dry_run))
 
         # Per-mode instruction files
         for mode_key, files in registry.mode_files.items():
-            actions.extend(self._build_mode(github, mode_key, files, dry_run))
+            actions.extend(self._build_mode(github, mode_key, files, config, dry_run))
 
         # Build .copilotignore
         actions.extend(self._build_copilotignore(output, dry_run))
@@ -100,7 +100,7 @@ class CopilotBuilder(Builder):
 
         return actions
 
-    def _build_always_on(self, github: Path, dry_run: bool) -> list[str]:
+    def _build_always_on(self, github: Path, config: dict[str, Any] | None = None, dry_run: bool = False) -> list[str]:
         """Build the always-on copilot-instructions.md file.
 
         Creates the main Copilot instructions file that contains all
@@ -108,6 +108,7 @@ class CopilotBuilder(Builder):
 
         Args:
             github: The .github directory path.
+            config: Optional configuration dict with template variables.
             dry_run: If True, return preview without writing.
 
         Returns:
@@ -145,7 +146,8 @@ class CopilotBuilder(Builder):
         github: Path,
         mode_key: str,
         files: list[str],
-        dry_run: bool,
+        config: dict[str, Any] | None = None,
+        dry_run: bool = False,
     ) -> list[str]:
         """Build a per-mode instruction file.
 
@@ -156,6 +158,7 @@ class CopilotBuilder(Builder):
             github: The .github directory path.
             mode_key: The mode identifier (e.g., 'code', 'architect').
             files: List of prompt filenames for this mode.
+            config: Optional configuration dict with template variables.
             dry_run: If True, return preview without writing.
 
         Returns:
@@ -180,6 +183,11 @@ class CopilotBuilder(Builder):
         for filename in files:
             try:
                 body = registry.prompt_body(filename)
+                # Apply template substitution if config is provided
+                if config:
+                    # Create a temporary instance to access the instance method
+                    temp_instance = self.__class__()
+                    body = temp_instance._substitute_template_variables(body, config)
             except FileNotFoundError:
                 lines.append(f"<!-- MISSING: {filename} -->")
                 continue

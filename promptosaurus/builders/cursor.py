@@ -70,7 +70,7 @@ class CursorBuilder(Builder):
 
         Args:
             output: Directory path where the files will be created.
-            config: Optional configuration dict with template variables (unused for Cursor).
+            config: Optional configuration dict with template variables.
             dry_run: If True, preview what would be written without touching filesystem.
 
         Returns:
@@ -91,18 +91,18 @@ class CursorBuilder(Builder):
         for filename in registry.always_on:
             mdc_name = filename.replace(".md", ".mdc")
             destination = rules_base / mdc_name
-            actions.append(self._copy(registry.prompt_path(filename), destination, dry_run))
+            actions.append(self._copy(registry.prompt_path(filename), destination, dry_run, config))
 
         # Per-mode rules as .mdc in subdirectories
         for mode_key, files in registry.mode_files.items():
             for filename in files:
                 dname = registry.dest_name(mode_key, filename, ext=".mdc")
                 destination = rules_base / mode_key / dname
-                actions.append(self._copy(registry.prompt_path(filename), destination, dry_run))
+                actions.append(self._copy(registry.prompt_path(filename), destination, dry_run, config))
 
         # Legacy .cursorrules fallback
         legacy_dst = output / ".cursorrules"
-        content = self._build_concatenated("# .cursorrules")
+        content = self._build_concatenated("# .cursorrules", config)
         if dry_run:
             actions.append(f"[dry-run] .cursorrules ({content.count(chr(10))} lines, legacy)")
         else:
