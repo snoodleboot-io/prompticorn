@@ -8,13 +8,6 @@ Classes:
 
 Functions:
     _prompt_body_cached: Cached function for reading and processing prompt files.
-
-Example:
-    >>> from promptosaurus.builders.utils import HeaderStripper
-    >>> content = "# test.md\n\n## Content here"
-    >>> stripped = HeaderStripper.strip(content)
-    >>> print(stripped)
-    ## Content here
 """
 
 from functools import lru_cache
@@ -33,20 +26,6 @@ class HeaderStripper:
 
     This is useful when generating concatenated output where you want
     clean content without the metadata headers.
-
-    Example:
-        >>> content = '''# example.md
-
-        <!-- path: prompts/example.md -->
-
-        ## Real Content
-
-        This is the actual content.'''
-        >>> stripped = HeaderStripper.strip(content)
-        >>> print(stripped)
-        ## Real Content
-
-        This is the actual content.
     """
 
     @staticmethod
@@ -61,13 +40,6 @@ class HeaderStripper:
 
         Returns:
             Content with header comments removed.
-
-        Example:
-            >>> content = "# test.md\n\n## Section\nContent"
-            >>> result = HeaderStripper.strip(content)
-            >>> print(result)
-            ## Section
-            Content
         """
         lines = content.splitlines(keepends=True)
         start = 0
@@ -101,12 +73,6 @@ def _prompt_body_cached(prompts_dir: Path, filename: str) -> str:
 
     Raises:
         FileNotFoundError: If the specified file doesn't exist.
-
-    Example:
-        >>> from pathlib import Path
-        >>> content = _prompt_body_cached(Path("./prompts"), "agents/core/core-system.md")
-        >>> print(len(content) > 0)
-        True
     """
     path = prompts_dir / filename
     content = path.read_text(encoding="utf-8")

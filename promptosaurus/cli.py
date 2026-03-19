@@ -9,10 +9,6 @@ Commands:
     prompt list      - Show all registered modes and their prompt files
     prompt validate  - Check for missing files and unregistered orphans
 
-Example:
-    >>> from promptosaurus.cli import cli
-    >>> # CLI is invoked via: prompt init
-
 Key Functions:
     - cli: Main Click group for the prompt command
     - list_prompts: Display all registered modes and their files
@@ -27,6 +23,7 @@ from pathlib import Path
 from typing import Any, cast
 
 import click
+from sweet_tea.inverter_factory import InverterFactory
 
 from promptosaurus.artifacts import ArtifactManager
 from promptosaurus.cli_utils import (
@@ -475,13 +472,13 @@ def init_prompts():
         # Step 1: Select which AI assistant to configure
         ai_tool = select_option_with_explain(
             question="Which AI assistant would you like to configure?",
-            options=["kilo-cli", "kilo-ide", "cline", "cursor", "copilot"],
+            options=["Kilo CLI", "Kilo IDE", "Cline", "Cursor", "Copilot"],
             explanations={
-                "kilo-cli": "Kilo Code (CLI) - .opencode/rules/ with collapsed mode files",
-                "kilo-ide": "Kilo Code (IDE) - .kilocode/rules-{mode}/ directory structure",
-                "cline": "Cline - .clinerules file (concatenated rules)",
-                "cursor": "Cursor - .cursor/rules/ directory + .cursorrules",
-                "copilot": "GitHub Copilot - .github/copilot-instructions.md",
+                "Kilo CLI": "Kilo Code (CLI) - .opencode/rules/ with collapsed mode files",
+                "Kilo IDE": "Kilo Code (IDE) - .kilocode/rules-{mode}/ directory structure",
+                "Cline": "Cline - .clinerules file (concatenated rules)",
+                "Cursor": "Cursor - .cursor/rules/ directory + .cursorrules",
+                "Copilot": "GitHub Copilot - .github/copilot-instructions.md",
             },
             question_explanation="Select one AI assistant to configure.",
             default_index=1,
@@ -619,18 +616,18 @@ def switch_command(tool_name: str | None):
     else:
         # Show interactive menu
         try:
-            tool_options = ["kilo-cli", "kilo-ide", "cline", "cursor", "copilot"]
+            tool_options = ["Kilo CLI", "Kilo IDE", "Cline", "Cursor", "Copilot"]
             target_tool = cast(
                 str,
                 select_option_with_explain(
                     question="Which AI assistant would you like to switch to?",
                     options=tool_options,
                     explanations={
-                        "kilo-cli": "Kilo Code (CLI) - .opencode/rules/ with collapsed mode files",
-                        "kilo-ide": "Kilo Code (IDE) - .kilocode/rules-{mode}/ directory structure",
-                        "cline": "Cline - .clinerules file (concatenated rules)",
-                        "cursor": "Cursor - .cursor/rules/ directory + .cursorrules",
-                        "copilot": "GitHub Copilot - .github/copilot-instructions.md",
+                        "Kilo CLI": "Kilo Code (CLI) - .opencode/rules/ with collapsed mode files",
+                        "Kilo IDE": "Kilo Code (IDE) - .kilocode/rules-{mode}/ directory structure",
+                        "Cline": "Cline - .clinerules file (concatenated rules)",
+                        "Cursor": "Cursor - .cursor/rules/ directory + .cursorrules",
+                        "Copilot": "GitHub Copilot - .github/copilot-instructions.md",
                     },
                     question_explanation="Select an AI assistant to switch to.",
                     default_index=1,
@@ -815,25 +812,9 @@ def _get_builder(tool: str):
     Returns:
         The builder class for the given tool, or None if tool is not recognized.
 
-    Example:
-        >>> builder_class = _get_builder('kilo-cli')
-        >>> builder_class is not None
-        True
     """
-    from promptosaurus.builders.cline import ClineBuilder
-    from promptosaurus.builders.copilot import CopilotBuilder
-    from promptosaurus.builders.cursor import CursorBuilder
-    from promptosaurus.builders.kilo.kilo_cli import KiloCLIBuilder
-    from promptosaurus.builders.kilo.kilo_ide import KiloIDEBuilder
 
-    builders = {
-        "kilo-cli": KiloCLIBuilder,
-        "kilo-ide": KiloIDEBuilder,
-        "cline": ClineBuilder,
-        "cursor": CursorBuilder,
-        "copilot": CopilotBuilder,
-    }
-    return builders.get(tool)
+    return InverterFactory.create(key=tool)
 
 
 # ── validate ───────────────────────────────────────────────────────────────────

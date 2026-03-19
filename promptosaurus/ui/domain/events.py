@@ -6,16 +6,6 @@ handling keyboard input in the UI pipeline.
 Classes:
     InputEventType: Enum of supported input event types.
     InputEvent: Immutable input event with type and value.
-
-Example:
-    >>> from promptosaurus.ui.domain.events import InputEventType, InputEvent
-    >>>
-    >>> # Create events
-    >>> num_event = InputEvent(event_type=InputEventType.NUMBER, value=1, raw_key="1")
-    >>> enter_event = InputEvent(event_type=InputEventType.ENTER, raw_key="\\n")
-    >>>
-    >>> print(num_event.event_type)
-    InputEventType.NUMBER
 """
 
 from enum import Enum, auto
@@ -37,12 +27,6 @@ class InputEventType(Enum):
         QUIT: Quit/cancel key (q or Escape).
         EXPLAIN: Direct trigger for explain mode (e key).
         UNKNOWN: Unrecognized key press.
-
-    Example:
-        >>> print(InputEventType.UP.name)
-        UP
-        >>> InputEventType.UP == InputEventType.UP
-        True
     """
 
     NUMBER = auto()
@@ -68,13 +52,6 @@ class InputEvent(BaseModel):
 
     Config:
         frozen: True - instances are immutable after creation.
-
-    Example:
-        >>> event = InputEvent(event_type=InputEventType.NUMBER, value=2, raw_key="2")
-        >>> print(event.value)
-        2
-        >>> event.event_type == InputEventType.NUMBER
-        True
     """
 
     event_type: InputEventType

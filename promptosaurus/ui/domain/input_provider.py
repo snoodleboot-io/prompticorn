@@ -5,18 +5,6 @@ which handle platform-specific keyboard input.
 
 Classes:
     InputProvider: Abstract base class for input providers.
-
-Example:
-    >>> from promptosaurus.ui.domain.input_provider import InputProvider
-    >>>
-    >>> # Implement a custom provider
-    >>> class MyInputProvider(InputProvider):
-    ...     @property
-    ...     def events(self):
-    ...         # Yield events
-    ...         pass
-    ...     def supports_raw(self):
-    ...         return False
 """
 
 from collections.abc import Iterator
@@ -37,12 +25,6 @@ class InputProvider:
 
     Methods:
         supports_raw: Check if raw input mode is supported.
-
-    Example:
-        >>> # Concrete implementations available:
-        >>> from promptosaurus.ui.input.windows import WindowsInputProvider
-        >>> from promptosaurus.ui.input.unix import UnixInputProvider
-        >>> from promptosaurus.ui.input.fallback import FallbackInputProvider
     """
 
     @property

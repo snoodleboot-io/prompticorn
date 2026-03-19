@@ -6,15 +6,6 @@ configuration choice in the prompt init flow.
 
 Classes:
     Question: Abstract base class for all questions.
-
-Example:
-    >>> from promptosaurus.questions.base.question import Question
-    >>>
-    >>> # Each question must implement these properties:
-    >>> # - key: Unique identifier
-    >>> # - question_text: What to ask
-    >>> # - explanation: Why we're asking
-    >>> # - options: Available choices
 """
 
 from abc import ABC, abstractmethod
@@ -40,24 +31,6 @@ class Question(ABC):
         default_indices: Default selected indices for multi-select.
         allow_multiple: Whether multiple selections are allowed.
         none_index: Index of mutually exclusive option (optional).
-
-    Example:
-        >>> class MyQuestion(Question):
-        ...     @property
-        ...     def key(self) -> str:
-        ...         return "my_question"
-        ...
-        ...     @property
-        ...     def question_text(self) -> str:
-        ...         return "Choose an option:"
-        ...
-        ...     @property
-        ...     def explanation(self) -> str:
-        ...         return "This helps with X"
-        ...
-        ...     @property
-        ...     def options(self) -> list[str]:
-        ...         return ["A", "B", "C"]
     """
 
     @property
@@ -67,12 +40,6 @@ class Question(ABC):
 
         Returns:
             A unique string key that identifies this question.
-
-        Example:
-            >>> class MyQuestion(Question):
-            ...     @property
-            ...     def key(self) -> str:
-            ...         return "language"
         """
         pass
 
@@ -83,12 +50,6 @@ class Question(ABC):
 
         Returns:
             The question text to display to the user.
-
-        Example:
-            >>> class MyQuestion(Question):
-            ...     @property
-            ...     def question_text(self) -> str:
-            ...         return "Choose your programming language:"
         """
         pass
 
@@ -100,12 +61,6 @@ class Question(ABC):
         Returns:
             Explanation of why this question matters and what
             configuration problem it solves.
-
-        Example:
-            >>> class MyQuestion(Question):
-            ...     @property
-            ...     def explanation(self) -> str:
-            ...         return "The language determines available tools and conventions"
         """
         pass
 
@@ -116,12 +71,6 @@ class Question(ABC):
 
         Returns:
             List of option strings that the user can choose from.
-
-        Example:
-            >>> class MyQuestion(Question):
-            ...     @property
-            ...     def options(self) -> list[str]:
-            ...         return ["Python", "TypeScript", "Go"]
         """
         pass
 
@@ -132,15 +81,6 @@ class Question(ABC):
         Returns:
             Dictionary mapping option strings to their explanations.
             Empty by default.
-
-        Example:
-            >>> class MyQuestion(Question):
-            ...     @property
-            ...     def option_explanations(self) -> dict[str, str]:
-            ...         return {
-            ...             "Python": "Great for data science",
-            ...             "TypeScript": "Type-safe JavaScript"
-            ...         }
         """
         return {}
 
@@ -151,11 +91,6 @@ class Question(ABC):
         Returns:
             The default option to use if user doesn't specify.
             Defaults to first option.
-
-        Example:
-            >>> question = MyQuestion()
-            >>> print(question.default)
-            Python
         """
         return self.options[0] if self.options else ""
 
@@ -165,11 +100,6 @@ class Question(ABC):
 
         Returns:
             Set of default indices to select. Defaults to first option.
-
-        Example:
-            >>> question = MyQuestion()
-            >>> print(question.default_indices)
-            {0}
         """
         # Default to first option if no specific defaults set
         return {0} if self.options else set()
@@ -180,11 +110,6 @@ class Question(ABC):
 
         Returns:
             True if multiple options can be selected, False otherwise.
-
-        Example:
-            >>> question = MyQuestion()
-            >>> print(question.allow_multiple)
-            False
         """
         return False
 
@@ -196,11 +121,6 @@ class Question(ABC):
 
         Returns:
             The explanation for the option, or empty string if not found.
-
-        Example:
-            >>> question = MyQuestion()
-            >>> print(question.explain_option("Python"))
-            Great for data science
         """
         return self.option_explanations.get(option, "")
 
@@ -214,11 +134,5 @@ class Question(ABC):
 
         Returns:
             The index of the mutually exclusive option, or None if not applicable.
-
-        Example:
-            >>> class FrameworkQuestion(Question):
-            ...     @property
-            ...     def none_index(self) -> int | None:
-            ...         return 0  # "None" is first option
         """
         return None

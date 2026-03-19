@@ -85,16 +85,6 @@ class FolderSpec:
         linter: The linter tool
         formatter: The formatter tool
         coverage: Coverage targets
-
-    Example:
-        >>> spec = FolderSpec(
-        ...     folder="frontend",
-        ...     type="frontend",
-        ...     subtype="ui",
-        ...     language="typescript",
-        ... )
-        >>> spec.package_manager
-        'npm'
     """
 
     folder: str
@@ -144,16 +134,6 @@ class FolderSpec:
 
         Returns:
             Dictionary representation of the folder spec.
-
-        Example:
-            >>> spec = FolderSpec(
-            ...     folder="frontend",
-            ...     type="frontend",
-            ...     subtype="ui",
-            ...     language="typescript",
-            ... )
-            >>> spec.to_dict()["folder"]
-            'frontend'
         """
         return {
             "folder": self.folder,
@@ -177,17 +157,6 @@ class FolderSpec:
 
         Returns:
             FolderSpec instance.
-
-        Example:
-            >>> data = {
-            ...     "folder": "backend",
-            ...     "type": "backend",
-            ...     "subtype": "api",
-            ...     "language": "python",
-            ... }
-            >>> spec = FolderSpec.from_dict(data)
-            >>> spec.folder
-            'backend'
         """
         # Extract coverage if present
         coverage = data.pop("coverage", None)
@@ -227,9 +196,5 @@ def get_preset_defaults(folder_type: str, subtype: str) -> dict[str, str]:
 
     Returns:
         Dictionary with default values for the preset
-
-    Example:
-        >>> get_preset_defaults("backend", "api")
-        {'language': 'python', 'subtype': 'api'}
     """
     return FOLDER_TYPE_PRESETS.get(folder_type, {}).get(subtype, {})

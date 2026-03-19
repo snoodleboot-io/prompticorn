@@ -6,17 +6,6 @@ the CommandFactory from input events and executed by the StateUpdateStage.
 
 Classes:
     Command: Abstract base class for all command implementations.
-
-Example:
-    >>> from promptosaurus.ui.commands.command import Command
-    >>> from promptosaurus.ui.commands.result import CommandResult
-    >>> from promptosaurus.ui.domain.context import PipelineContext
-    >>>
-    >>> # Subclass to create a new command
-    >>> class MyCommand(Command):
-    ...     def execute(self, context: PipelineContext) -> CommandResult | None:
-    ...         # Implementation
-    ...         return CommandResult(continue_pipeline=True)
 """
 
 from promptosaurus.ui.commands.result import CommandResult
@@ -35,22 +24,6 @@ class Command:
 
     Methods:
         execute: Apply the command action to the pipeline context.
-
-    Example:
-        >>> from promptosaurus.ui.commands.select import SelectCommand
-        >>> from promptosaurus.ui.domain.context import PipelineContext, QuestionContext
-        >>> from promptosaurus.ui.state.single_selection_state import SingleSelectionState
-        >>>
-        >>> qc = QuestionContext(
-        ...     question="Test?",
-        ...     options=["A", "B", "C"],
-        ...     explanations={},
-        ...     question_explanation=""
-        ... )
-        >>> state = SingleSelectionState(0, 3)
-        >>> ctx = PipelineContext(question=qc, state=state, mode="select")
-        >>> cmd = SelectCommand(1)
-        >>> result = cmd.execute(ctx)
     """
 
     def execute(self, context: PipelineContext) -> CommandResult | None:
@@ -68,11 +41,5 @@ class Command:
 
         Raises:
             NotImplementedError: If subclass doesn't implement this method.
-
-        Example:
-            >>> class MyCommand(Command):
-            ...     def execute(self, context: PipelineContext) -> CommandResult | None:
-            ...         context.state.toggle(0)
-            ...         return CommandResult(continue_pipeline=True)
         """
         raise NotImplementedError(f"{self.__class__.__name__} must implement execute()")

@@ -5,16 +5,8 @@ functionality shared between CLI and IDE targets for Kilo Code.
 
 Classes:
     KiloCodeBuilder: Base builder for Kilo Code configurations.
-
-Example:
-    >>> from promptosaurus.builders.kilo.kilo_code_builder import KiloCodeBuilder
-    >>> # Subclass to create a specific builder
-    >>> class MyBuilder(KiloCodeBuilder):
-    ...     def build(self, output, config=None, dry_run=False):
-    ...         return ["Created files"]
 """
 
-import shutil
 from pathlib import Path
 from typing import Any
 
@@ -43,12 +35,6 @@ class KiloCodeBuilder(Builder):
 
     Args:
         config: Optional KiloConfig instance. If not provided, uses default config.
-
-    Example:
-        >>> builder = KiloCodeBuilder()
-        >>> modes = builder.kilo_modes
-        >>> print(len(modes) > 0)
-        True
     """
 
     # Modes that are built-in to Kilo and should not be generated in output
@@ -67,13 +53,6 @@ class KiloCodeBuilder(Builder):
 
         Args:
             config: KiloConfig instance. Uses default if not provided.
-
-        Example:
-            >>> # Use default config
-            >>> builder = KiloCodeBuilder()
-            >>> # Use custom config
-            >>> custom_config = KiloConfig()
-            >>> builder = KiloCodeBuilder(config=custom_config)
         """
         self._config = config or KiloConfig()
 
@@ -83,12 +62,6 @@ class KiloCodeBuilder(Builder):
 
         Returns:
             Dictionary of mode slug to mode configuration.
-
-        Example:
-            >>> builder = KiloCodeBuilder()
-            >>> modes = builder.kilo_modes
-            >>> print("code" in modes)
-            True
         """
         return self._config.kilo_modes
 
@@ -98,12 +71,6 @@ class KiloCodeBuilder(Builder):
 
         Returns:
             Dictionary mapping language name to conventions file.
-
-        Example:
-            >>> builder = KiloCodeBuilder()
-            >>> lang_map = builder.language_file_map
-            >>> print(lang_map.get("python", ""))
-            core-conventions-python.md
         """
         return self._config.language_file_map
 
@@ -139,8 +106,6 @@ class KiloCodeBuilder(Builder):
         """
         raise NotImplementedError()
 
-
-
     def _write_manifest(self, destination: Path, dry_run: bool) -> str:
         """Write the .kilocodemodes manifest file.
 
@@ -152,11 +117,6 @@ class KiloCodeBuilder(Builder):
 
         Returns:
             Action string describing the operation.
-
-        Example:
-            >>> action = self._write_manifest(Path(".kilocodemodes"), False)
-            >>> print(action)
-            ✓ .kilocodemodes
         """
         # Read from the source YAML file to preserve exact formatting
         source_path = Path(__file__).parent / "kilo_modes.yaml"
@@ -204,16 +164,6 @@ class KiloCodeBuilder(Builder):
 
         Returns:
             Action string describing the operation.
-
-        Example:
-            >>> action = self._create_base_md(
-            ...     Path(".opencode/rules"),
-            ...     "core-conventions-python.md",
-            ...     False,
-            ...     {"spec": {"language": "python"}}
-            ... )
-            >>> print(action)
-            ✓ .opencode/rules/_base.md
         """
         destination = rules_dir / "_base.md"
         label = ".opencode/rules/_base.md"
@@ -269,16 +219,6 @@ class KiloCodeBuilder(Builder):
 
         Returns:
             Action string describing the operation.
-
-        Example:
-            >>> action = self._create_collapsed_mode_md(
-            ...     Path(".opencode/rules"),
-            ...     "code",
-            ...     ["code-feature.md", "code-refactor.md"],
-            ...     False
-            ... )
-            >>> print(action)
-            ✓ .opencode/rules/code.md
         """
         destination = rules_dir / f"{mode_key}.md"
         label = f".opencode/rules/{mode_key}.md"
@@ -314,11 +254,6 @@ class KiloCodeBuilder(Builder):
 
         Returns:
             Action string describing the operation.
-
-        Example:
-            >>> action = self._create_agents_md(Path("."), False)
-            >>> print(action)
-            ✓ AGENTS.md
         """
         destination = output / "AGENTS.md"
         label = "AGENTS.md"

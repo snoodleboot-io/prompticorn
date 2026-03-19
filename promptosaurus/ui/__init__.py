@@ -34,17 +34,6 @@ Classes:
     select_option_with_explain: Main entry point for interactive selection.
     confirm_interactive: Yes/no confirmation dialog.
     prompt_with_default: Input prompt with default value.
-
-Example:
-    >>> from promptosaurus.ui import select_option_with_explain
-    >>> result = select_option_with_explain(
-    ...     question="Choose a language:",
-    ...     options=["Python", "TypeScript", "Go"],
-    ...     explanations={"Python": "Popular for data science", "TypeScript": "Web development", "Go": "Systems programming"},
-    ...     question_explanation="Select your primary language"
-    ... )
-    >>> print(result)
-    Python
 """
 
 from promptosaurus.ui._selector import (

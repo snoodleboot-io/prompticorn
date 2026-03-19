@@ -11,17 +11,6 @@ Output:
 
 Classes:
     CopilotBuilder: Generates GitHub Copilot instruction files.
-
-Example:
-    >>> from pathlib import Path
-    >>> from promptosaurus.builders.copilot import CopilotBuilder
-    >>> builder = CopilotBuilder()
-    >>> actions = builder.build(Path("./output"))
-    >>> for action in actions[:3]:
-    ...     print(action)
-    ✓ .github/copilot-instructions.md
-    ✓ .github/instructions/architect.instructions.md
-    ✓ .github/instructions/code.instructions.md
 """
 
 from datetime import datetime
@@ -47,12 +36,6 @@ class CopilotBuilder(Builder):
 
     Attributes:
         Inherits _base_files from Builder base class.
-
-    Example:
-        >>> builder = CopilotBuilder()
-        >>> # Build all files
-        >>> actions = builder.build(Path("./my-project"))
-        >>> print(f\"Generated {len(actions)} files\")
     """
 
     def build(
@@ -73,14 +56,6 @@ class CopilotBuilder(Builder):
 
         Returns:
             List of action strings describing what was created.
-
-        Example:
-            >>> from pathlib import Path
-            >>> builder = CopilotBuilder()
-            >>> # Normal run
-            >>> actions = builder.build(Path("./output"))
-            >>> # Dry run
-            >>> actions = builder.build(Path("./output"), dry_run=True)
         """
         actions: list[str] = []
         github = output / ".github"
@@ -100,7 +75,9 @@ class CopilotBuilder(Builder):
 
         return actions
 
-    def _build_always_on(self, github: Path, config: dict[str, Any] | None = None, dry_run: bool = False) -> list[str]:
+    def _build_always_on(
+        self, github: Path, config: dict[str, Any] | None = None, dry_run: bool = False
+    ) -> list[str]:
         """Build the always-on copilot-instructions.md file.
 
         Creates the main Copilot instructions file that contains all
@@ -163,11 +140,6 @@ class CopilotBuilder(Builder):
 
         Returns:
             List containing action string for the file.
-
-        Example:
-            >>> actions = self._build_mode(Path(".github"), "code", ["code-feature.md"], False)
-            >>> print(actions)
-            ['✓ .github/instructions/code.instructions.md']
         """
         destination = github / "instructions" / f"{mode_key}.instructions.md"
         label = registry.modes.get(mode_key, mode_key.title())

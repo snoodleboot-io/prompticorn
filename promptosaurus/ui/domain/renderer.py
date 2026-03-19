@@ -5,15 +5,6 @@ which handle displaying the UI to the user.
 
 Classes:
     Renderer: Abstract base class for renderers.
-
-Example:
-    >>> from promptosaurus.ui.domain.renderer import Renderer
-    >>> from promptosaurus.ui.domain.context import PipelineContext
-    >>>
-    >>> # Implement a custom renderer
-    >>> class MyRenderer(Renderer):
-    ...     def render(self, context: PipelineContext) -> str:
-    ...         return "Custom output"
 """
 
 from promptosaurus.ui.domain.context import PipelineContext
@@ -33,11 +24,6 @@ class Renderer:
 
     Methods:
         render: Render the given context and return the output string.
-
-    Example:
-        >>> from promptosaurus.ui.render.vertical import VerticalLayoutRenderer
-        >>> renderer = VerticalLayoutRenderer()
-        >>> # Would render context to string
     """
 
     def render(self, context: PipelineContext) -> str:

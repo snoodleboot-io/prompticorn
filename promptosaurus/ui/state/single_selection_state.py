@@ -5,23 +5,6 @@ single-option selection behavior (only one option can be selected at a time).
 
 Classes:
     SingleSelectionState: Single selection state - immutable.
-
-Example:
-    >>> from promptosaurus.ui.state.single_selection_state import SingleSelectionState
-    >>>
-    >>> state = SingleSelectionState(selected=0, max_index=3)
-    >>> print(state.current_selection)
-    0
-    >>>
-    >>> # Navigate
-    >>> new_state = state.navigate(1)
-    >>> print(new_state.current_selection)
-    1
-    >>>
-    >>> # Select
-    >>> new_state = state.select(2)
-    >>> print(new_state.current_selection)
-    2
 """
 
 from __future__ import annotations
@@ -42,13 +25,6 @@ class SingleSelectionState(SelectionState):
     Attributes:
         _selected: The currently selected index.
         _max: The maximum valid index.
-
-    Example:
-        >>> state = SingleSelectionState(selected=1, max_index=4)
-        >>> state.is_selected(1)
-        True
-        >>> state.is_selected(2)
-        False
     """
 
     def __init__(self, selected: int, max_index: int):
@@ -67,11 +43,6 @@ class SingleSelectionState(SelectionState):
 
         Returns:
             The currently selected index.
-
-        Example:
-            >>> state = SingleSelectionState(selected=2, max_index=5)
-            >>> state.current_selection
-            2
         """
         return self._selected
 
@@ -85,12 +56,6 @@ class SingleSelectionState(SelectionState):
 
         Returns:
             New SingleSelectionState with the selection applied.
-
-        Example:
-            >>> state = SingleSelectionState(selected=0, max_index=3)
-            >>> new_state = state.select(2)
-            >>> new_state.current_selection
-            2
         """
         if 0 <= index <= self._max:
             return SingleSelectionState(index, self._max)
@@ -106,12 +71,6 @@ class SingleSelectionState(SelectionState):
 
         Returns:
             New SingleSelectionState after navigation.
-
-        Example:
-            >>> state = SingleSelectionState(selected=1, max_index=3)
-            >>> new_state = state.navigate(1)  # Move down
-            >>> new_state.current_selection
-            2
         """
         new_index = max(0, min(self._max, self._selected + direction))
         return SingleSelectionState(new_index, self._max)
@@ -124,12 +83,5 @@ class SingleSelectionState(SelectionState):
 
         Returns:
             True if the index is currently selected.
-
-        Example:
-            >>> state = SingleSelectionState(selected=1, max_index=3)
-            >>> state.is_selected(1)
-            True
-            >>> state.is_selected(2)
-            False
         """
         return index == self._selected

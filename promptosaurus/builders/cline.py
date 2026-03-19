@@ -9,14 +9,6 @@ Output:
 
 Classes:
     ClineBuilder: Generates .clinerules and .clineignore for Cline.
-
-Example:
-    >>> from pathlib import Path
-    >>> from promptosaurus.builders.cline import ClineBuilder
-    >>> builder = ClineBuilder()
-    >>> actions = builder.build(Path("./output"))
-    >>> print(actions)
-    ['✓ .clinerules (150 lines)', '✓ .clineignore (25 lines)']
 """
 
 from pathlib import Path
@@ -38,14 +30,6 @@ class ClineBuilder(Builder):
 
     Attributes:
         Inherits _base_files from Builder base class.
-
-    Example:
-        >>> builder = ClineBuilder()
-        >>> # Build files
-        >>> actions = builder.build(Path("./my-project"))
-        >>> # Check output
-        >>> for action in actions:
-        ...     print(action)
     """
 
     def build(
@@ -64,24 +48,12 @@ class ClineBuilder(Builder):
 
         Returns:
             List of action strings describing what was created.
-
-        Example:
-            >>> from pathlib import Path
-            >>> builder = ClineBuilder()
-            >>> # Normal run
-            >>> actions = builder.build(Path("./output"))
-            >>> print(actions)
-            ['✓ .clinerules (150 lines)', '✓ .clineignore (25 lines)']
-            >>> # Dry run
-            >>> actions = builder.build(Path("./output"), dry_run=True)
-            >>> print(actions)
-            ['[dry-run] .clinerules (150 lines)', '[dry-run] .clineignore (25 lines)']
         """
         actions: list[str] = []
 
         # Build .clinerules
         destination = output / ".clinerules"
-        content = self._build_concatenated("# .clinerules", config)
+        content = self._build_concatenated_content("# .clinerules", config)
 
         if dry_run:
             lines = content.count("\n")

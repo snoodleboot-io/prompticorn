@@ -1,5 +1,5 @@
+from typing import Any
 
-from typing import Any, Dict
 from promptosaurus.builders.template_handlers.template_handler import TemplateHandler
 
 
@@ -13,7 +13,7 @@ class CoverageHandler(TemplateHandler):
             "FUNCTION_COVERAGE_%",
             "STATEMENT_COVERAGE_%",
             "MUTATION_COVERAGE_%",
-            "PATH_COVERAGE_%"
+            "PATH_COVERAGE_%",
         }
 
     def handle(self, variable_name: str, config: dict[str, Any]) -> str:
@@ -64,13 +64,18 @@ class CoverageHandler(TemplateHandler):
 
         key = variable_to_key.get(variable_name)
         if key:
-            return str(coverage.get(key, {
-                "line": 80,
-                "branch": 70,
-                "function": 90,
-                "statement": 85,
-                "mutation": 80,
-                "path": 60,
-            }.get(key, 0)))
+            return str(
+                coverage.get(
+                    key,
+                    {
+                        "line": 80,
+                        "branch": 70,
+                        "function": 90,
+                        "statement": 85,
+                        "mutation": 80,
+                        "path": 60,
+                    }.get(key, 0),
+                )
+            )
 
         return ""

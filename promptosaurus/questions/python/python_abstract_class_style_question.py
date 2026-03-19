@@ -19,18 +19,3 @@ class PythonAbstractClassStyleQuestion(Question):
         return """Abstract class style affects how you define interfaces and abstract base classes:
 - abc: Formal abstract base classes using the abc module (explicit, type-checker friendly)
 - interface: Informal interfaces using NotImplementedError (simpler, duck-typing friendly)"""
-
-    @property
-    def options(self) -> list[str]:
-        return ["interface", "abc"]
-
-    @property
-    def option_explanations(self) -> dict[str, str]:
-        return {
-            "interface": "NotImplementedError - raise in methods to indicate subclass must override",
-            "abc": "Abstract Base Classes - use abc.ABC and @abstractmethod for formal interfaces",
-        }
-
-    @property
-    def default(self) -> str:
-        return "interface"

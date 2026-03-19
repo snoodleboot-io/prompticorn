@@ -13,17 +13,6 @@ Output layout:
 
 Classes:
     KiloCLIBuilder: Builder for Kilo Code .opencode/rules/ directory structure.
-
-Example:
-    >>> from pathlib import Path
-    >>> from promptosaurus.builders.kilo.kilo_cli import KiloCLIBuilder
-    >>> builder = KiloCLIBuilder()
-    >>> actions = builder.build(Path("./output"))
-    >>> for action in actions[:3]:
-    ...     print(action)
-    ✓ AGENTS.md
-    ✓ .opencode/rules/_base.md
-    ✓ .opencode/rules/code.md
 """
 
 import json
@@ -52,12 +41,6 @@ class KiloCLIBuilder(KiloCodeBuilder):
 
     Attributes:
         custom_modes: Property returning list of custom modes (excluding built-in).
-
-    Example:
-        >>> builder = KiloCLIBuilder()
-        >>> # Build files
-        >>> actions = builder.build(Path("./my-project"))
-        >>> print(f\"Generated {len(actions)} files\")
     """
 
     @property
@@ -69,12 +52,6 @@ class KiloCLIBuilder(KiloCodeBuilder):
 
         Returns:
             List of custom mode slugs.
-
-        Example:
-            >>> builder = KiloCLIBuilder()
-            >>> modes = builder.custom_modes
-            >>> print([m for m in modes if m not in builder._kilo_builtin_modes])
-            ['refactor', 'document', 'review', ...]
         """
         return [m for m in registry.modes.keys() if m not in self._kilo_builtin_modes]
 
@@ -97,14 +74,6 @@ class KiloCLIBuilder(KiloCodeBuilder):
 
         Returns:
             List of action strings describing what was created.
-
-        Example:
-            >>> from pathlib import Path
-            >>> builder = KiloCLIBuilder()
-            >>> # Normal run
-            >>> actions = builder.build(Path("./output"))
-            >>> # Dry run
-            >>> actions = builder.build(Path("./output"), dry_run=True)
         """
         actions: list[str] = []
         rules_dir = output / ".opencode" / "rules"
@@ -180,11 +149,6 @@ class KiloCLIBuilder(KiloCodeBuilder):
 
         Returns:
             Action string describing the operation.
-
-        Example:
-            >>> action = self._create_opencode_json(Path("."), False)
-            >>> print(action)
-            ✓ opencode.json
         """
         destination = output / "opencode.json"
         label = "opencode.json"
@@ -217,11 +181,6 @@ class KiloCLIBuilder(KiloCodeBuilder):
 
         Raises:
             ValueError: If the AGENTS.md template file is not found.
-
-        Example:
-            >>> content = self._get_agents_md_content()
-            >>> print(len(content) > 0)
-            True
         """
         path = Path(__file__).parent / "AGENTS_KILO_CLI.md"
         if not path.exists():

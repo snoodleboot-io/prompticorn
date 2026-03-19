@@ -20,18 +20,3 @@ class RubyPackageManagerQuestion(Question):
 
 - Bundler is the standard for application dependency management
 - RubyGems is the built-in package manager for installing gems"""
-
-    @property
-    def options(self) -> list[str]:
-        return ["bundler", "rubygems"]
-
-    @property
-    def option_explanations(self) -> dict[str, str]:
-        return {
-            "bundler": "Standard for apps - manages gem dependencies via Gemfile, recommended",
-            "rubygems": "Built-in - direct gem installation, less common for projects",
-        }
-
-    @property
-    def default(self) -> str:
-        return "bundler"

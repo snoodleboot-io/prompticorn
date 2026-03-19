@@ -6,26 +6,6 @@ state management, and rendering into a cohesive user experience.
 
 Classes:
     PipelineOrchestrator: Orchestrates the complete UI pipeline.
-
-Example:
-    >>> from promptosaurus.ui.pipeline.orchestrator import PipelineOrchestrator
-    >>> from promptosaurus.ui.domain.context import QuestionContext
-    >>> from promptosaurus.ui.input.fallback import FallbackInputProvider
-    >>> from promptosaurus.ui.pipeline.render_stage import RenderStage
-    >>> from promptosaurus.ui.pipeline.state_update_stage import StateUpdateStage
-    >>> from promptosaurus.ui.ui_factory import UIFactory
-    >>>
-    >>> # Create components
-    >>> input_provider = FallbackInputProvider()
-    >>> render_stage = RenderStage(renderer_selector=UIFactory.create_renderer)
-    >>> state_update = StateUpdateStage()
-    >>>
-    >>> # Create orchestrator
-    >>> orchestrator = PipelineOrchestrator(
-    ...     input_provider=input_provider,
-    ...     render_stage=render_stage,
-    ...     state_update_stage=state_update
-    ... )
 """
 
 from promptosaurus.ui.domain.context import PipelineContext, QuestionContext
@@ -58,14 +38,6 @@ class PipelineOrchestrator:
         render_stage: Handles rendering the UI.
         state_update_stage: Applies commands to state.
         command_factory: Creates commands from events.
-
-    Example:
-        >>> orchestrator = PipelineOrchestrator(
-        ...     input_provider=my_input_provider,
-        ...     render_stage=my_render_stage,
-        ...     state_update_stage=my_state_update
-        ... )
-        >>> result = orchestrator.run(question_context)
     """
 
     def __init__(self, input_provider, render_stage, state_update_stage):
@@ -100,18 +72,6 @@ class PipelineOrchestrator:
 
         Raises:
             UserCancelledError: If the user quits the interaction.
-
-        Example:
-            >>> from promptosaurus.ui.domain.context import QuestionContext
-            >>> qc = QuestionContext(
-            ...     question="Choose:",
-            ...     options=["A", "B", "C"],
-            ...     explanations={"A": "First", "B": "Second", "C": "Third"},
-            ...     question_explanation="Pick one"
-            ... )
-            >>> result = orchestrator.run(qc)
-            >>> print(result)
-            A
         """
         # Initialize state based on question type
         initial_state: SelectionState

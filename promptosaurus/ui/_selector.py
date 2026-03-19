@@ -8,25 +8,6 @@ Functions:
     select_option_with_explain: Interactive selection with number keys and explain option.
     confirm_interactive: Yes/no confirmation dialog.
     prompt_with_default: Input prompt with default value.
-
-Example:
-    >>> from promptosaurus.ui import select_option_with_explain, confirm_interactive
-    >>>
-    >>> # Single selection
-    >>> language = select_option_with_explain(
-    ...     question="Choose a language:",
-    ...     options=["Python", "TypeScript", "Go"],
-    ...     explanations={
-    ...         "Python": "Popular for data science and AI",
-    ...         "TypeScript": "Type-safe JavaScript for web",
-    ...         "Go": "Systems programming by Google"
-    ...     },
-    ...     question_explanation="Select your primary language"
-    ... )
-    >>>
-    >>> # Confirmation
-    >>> if confirm_interactive("Continue with installation?"):
-    ...     print("Proceeding...")
 """
 
 from promptosaurus.ui.domain.context import QuestionContext
@@ -69,21 +50,6 @@ def select_option_with_explain(
 
     Raises:
         UserCancelledError: If the user presses the quit key (typically 'q' or 'Escape').
-
-    Example:
-        >>> result = select_option_with_explain(
-        ...     question="Choose a language:",
-        ...     options=["Python", "TypeScript", "Go"],
-        ...     explanations={
-        ...         "Python": "Popular for data science",
-        ...         "TypeScript": "Type-safe JavaScript",
-        ...         "Go": "Systems programming"
-        ...     },
-        ...     question_explanation="Select your primary language",
-        ...     default_index=0
-        ... )
-        >>> print(result)
-        Python
     """
     context = QuestionContext(
         question=question,
@@ -121,13 +87,6 @@ def confirm_interactive(prompt: str, default: bool = True) -> bool:
 
     Returns:
         True if user confirmed ("Yes"), False if they declined ("No").
-
-    Example:
-        >>> if confirm_interactive("Install dependencies?"):
-        ...     print("Installing...")
-        >>> # Or with No as default
-        >>> if not confirm_interactive("Delete files?", default=False):
-        ...     print("Keeping files")
     """
     result = select_option_with_explain(
         question=prompt,
@@ -151,11 +110,6 @@ def prompt_with_default(prompt: str, default: str) -> str:
 
     Returns:
         The user's input if non-empty, otherwise the default value.
-
-    Example:
-        >>> name = prompt_with_default("Enter your name", "Anonymous")
-        >>> # If user presses Enter without typing: returns "Anonymous"
-        >>> # If user types "John": returns "John"
     """
     suffix = f" [{default}]" if default else ""
     response = input(f"{prompt}{suffix}: ").strip()
