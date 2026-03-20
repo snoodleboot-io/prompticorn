@@ -11,7 +11,7 @@ Classes:
 from collections.abc import Callable
 from datetime import datetime
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 from promptosaurus.builders.template_handlers.abstract_class_style_handler import (
     AbstractClassStyleHandler,
@@ -175,6 +175,26 @@ class Builder:
 
         return "\n".join(lines) + "\n"
 
+    def _build_concatenated(self, tool_comment: str, config: dict[str, Any] | None = None) -> str:
+        """Alias for _build_concatenated_content for backward compatibility."""
+        return self._build_concatenated_content(tool_comment, config)
+
+    def _get_template_substitutions(self, defaults: dict[str, Any], format_value) -> dict[str, str]:
+        """Get template variable substitutions.
+
+        This method can be overridden by subclasses to add custom template
+        variables beyond the default ones handled by registered handlers.
+
+        Args:
+            defaults: Default configuration values from spec
+            format_value: Function to format values (unused in base implementation)
+
+        Returns:
+            Dictionary mapping template variables to their substituted values
+        """
+        # Base implementation returns empty dict - subclasses can add custom vars
+        return {}
+
     def _substitute_template_variables(
         self, content: str, config: dict[str, Any] | None = None
     ) -> str:
@@ -183,7 +203,8 @@ class Builder:
         This method performs template variable substitution on content,
         replacing placeholders like {{LANGUAGE}} with actual values
         from the configuration. It uses registered template variable handlers
-        to determine how to substitute each variable.
+        to determine how to substitute each variable, and allows subclasses
+        to add custom substitutions via _get_template_substitutions.
 
         Args:
             content: The template content with {{VARIABLE}} placeholders.
@@ -207,13 +228,20 @@ class Builder:
         import re
 
         # Find all template variables in the content
-        template_pattern = r"\{\{([A-Z_][A-Z0-9_]*)\}\}"
+        template_pattern = r"\{\{([A-Z_][A-Z0-9_%]*)\}\}"
         matches = re.findall(template_pattern, content)
 
+        # Get custom substitutions from subclass (if any)
+        # Provide default empty dict if config is None to satisfy type checker
+        config = config or {}
+        substitutions = self._get_template_substitutions(cast(dict[str, Any], config), lambda x: x)
+
         # Process each unique template variable
-        substitutions = {}
         for var_name in set(matches):
             template_var = f"{{{{{var_name}}}}}"
+            # Skip if already handled by subclass
+            if template_var in substitutions:
+                continue
             if config is not None:
                 value = self._get_variable_value(var_name, config)
                 if value is not None:  # Only substitute if we have a value

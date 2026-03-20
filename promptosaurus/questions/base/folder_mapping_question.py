@@ -21,8 +21,20 @@ class FolderMappingQuestion(Question):
     def explanation(self) -> str:
         return """Map each folder to its primary language.
 
-  /frontend → typescript
-  /backend → python
-  /shared → go
+   /frontend → typescript
+   /backend → python
+   /shared → go
 
 This determines which language conventions to apply for each area."""
+
+    @property
+    def options(self) -> list[str]:
+        return []
+
+    @property
+    def default(self) -> str:
+        return ""
+
+    @property
+    def allow_multiple(self) -> bool:
+        return False

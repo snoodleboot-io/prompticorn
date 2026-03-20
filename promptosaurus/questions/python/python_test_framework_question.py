@@ -15,6 +15,10 @@ class PythonTestFrameworkQuestion(Question):
         return "What testing framework do you want to use?"
 
     @property
+    def options(self) -> list[str]:
+        return ["hybrid", "pytest", "unittest"]
+
+    @property
     def explanation(self) -> str:
         return """Test framework affects how tests are written:
 - hybrid: unittest.TestCase with limited pytest fixtures and mocking

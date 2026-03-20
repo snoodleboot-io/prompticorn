@@ -21,3 +21,11 @@ class TypeScriptPackageManagerQuestion(Question):
 - Lock file handling
 - Workspace support
 - Node version management"""
+
+    @property
+    def options(self) -> list[str]:
+        return ["npm", "pnpm", "yarn"]
+
+    @property
+    def default(self) -> str:
+        return "npm"

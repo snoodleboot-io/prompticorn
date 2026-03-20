@@ -54,6 +54,7 @@ class KiloCodeBuilder(Builder):
         Args:
             config: KiloConfig instance. Uses default if not provided.
         """
+        super().__init__()
         self._config = config or KiloConfig()
 
     @property

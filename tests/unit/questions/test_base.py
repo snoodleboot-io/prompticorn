@@ -112,7 +112,7 @@ class TestConstants:
         """REPO_TYPE constants should have correct values."""
         assert RepositoryTypes.SINGLE == "single-language"
         assert RepositoryTypes.MULTI_MONOREPO == "multi-language-monorepo"
-        assert RepositoryTypes.MIXED == "mixed"
+        assert RepositoryTypes.MIXED == "mixed-collocation"
 
     def test_repo_types_list(self):
         """REPO_TYPES should include all repo types."""

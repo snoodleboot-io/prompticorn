@@ -21,3 +21,15 @@ class TypeScriptTestFrameworkQuestion(Question):
 - Mocking capabilities
 - Assertion syntax
 - Coverage reporting"""
+
+    @property
+    def options(self) -> list[str]:
+        return ["vitest", "jest"]
+
+    @property
+    def default(self) -> str:
+        return "vitest"
+
+    @property
+    def allow_multiple(self) -> bool:
+        return False

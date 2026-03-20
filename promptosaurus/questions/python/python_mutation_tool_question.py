@@ -20,3 +20,15 @@ class PythonMutationToolQuestion(Question):
 - mutmut: Most popular Python mutation tester, fast and comprehensive
 - pytest-mutmut: pytest integration for mutmut, runs as pytest plugin
 - none: Skip mutation testing (faster CI, less thorough)"""
+
+    @property
+    def options(self) -> list[str]:
+        return ["mutmut", "pytest-mutmut", "none"]
+
+    @property
+    def default(self) -> str:
+        return "mutmut"
+
+    @property
+    def allow_multiple(self) -> bool:
+        return False

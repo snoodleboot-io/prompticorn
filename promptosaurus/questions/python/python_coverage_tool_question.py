@@ -19,3 +19,15 @@ class PythonCoverageToolQuestion(Question):
         return """Coverage tool measures how much of your code is tested:
 - pytest-cov: Industry standard, integrates with pytest, widely used
 - coverage.py: The classic coverage tool, works with any test runner"""
+
+    @property
+    def options(self) -> list[str]:
+        return ["pytest-cov", "coverage.py"]
+
+    @property
+    def default(self) -> str:
+        return "pytest-cov"
+
+    @property
+    def allow_multiple(self) -> bool:
+        return False

@@ -22,3 +22,15 @@ class PythonMockingLibraryQuestion(Question):
 - freezegun: Mock time/date for testing time-dependent code
 - responses: Mock HTTP requests/responses
 - none: No mocking (use real objects for integration/acceptance tests)"""
+
+    @property
+    def options(self) -> list[str]:
+        return ["unittest.mock", "pytest-mock", "freezegun", "responses", "none"]
+
+    @property
+    def default(self) -> str:
+        return "unittest.mock"
+
+    @property
+    def allow_multiple(self) -> bool:
+        return True

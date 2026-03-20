@@ -21,3 +21,11 @@ class PythonPackageManagerQuestion(Question):
 - Virtual environment handling
 - Build system integration
 - Publishing to PyPI"""
+
+    @property
+    def options(self) -> list[str]:
+        return ["pip", "uv", "poetry", "pipenv", "conda"]
+
+    @property
+    def default(self) -> str:
+        return "uv"

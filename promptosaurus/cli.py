@@ -23,9 +23,10 @@ from pathlib import Path
 from typing import Any, cast
 
 import click
-from sweet_tea.inverter_factory import InverterFactory
+from sweet_tea.abstract_inverter_factory import AbstractInverterFactory  # type: ignore[import]
 
 from promptosaurus.artifacts import ArtifactManager
+from promptosaurus.builders.builder import Builder
 from promptosaurus.cli_utils import (
     get_supported_tools_display,
     normalize_tool_name,
@@ -466,7 +467,7 @@ def init_prompts():
     click.echo("\n" + "=" * 60)
     click.secho("  Prompt CLI Initialization", bold=True, fg="cyan")
     click.echo("=" * 60)
-    click.echo("\nUse ↑/↓ arrows, numbers, or Enter for defaults.")
+    click.echo("\nUse up/down arrows, numbers, or Enter for defaults.")
 
     try:
         # Step 1: Select which AI assistant to configure
@@ -484,8 +485,8 @@ def init_prompts():
             default_index=1,
             allow_multiple=False,
         )
-        # Wrap single selection in list for consistent handling
-        ai_tools: list[str] = [cast(str, ai_tool)]
+        # Store the selected AI tool
+        selected_tool: str = cast(str, ai_tool)
 
         # Step 2: Repository type
         click.echo("\n" + "-" * 60)
@@ -548,21 +549,20 @@ def init_prompts():
         click.echo(f"\n  Config file: {ConfigHandler.get_config_path()}")
 
         # Step 5: Generate selected AI assistant configurations
-        if ai_tools:
+        if selected_tool:
             click.echo("\n" + "-" * 60)
             click.secho("  Generating AI assistant configurations...", bold=True)
             click.echo("-" * 60)
 
             output_path = Path(".")
-            for tool in ai_tools:
-                builder_class = _get_builder(tool)  # type: ignore[arg-type]
-                if builder_class:
-                    builder = builder_class()
-                    actions = builder.build(output_path, config=config, dry_run=False)
-                    for action in actions:
-                        click.echo(f"  {action}")
-                else:
-                    click.secho(f"  ✗ Unknown tool: {tool}", fg="yellow")
+            builder_class = _get_builder(selected_tool)  # type: ignore[arg-type]
+            if builder_class:
+                builder = builder_class()
+                actions = builder.build(output_path, config=config, dry_run=False)
+                for action in actions:
+                    click.echo(f"  {action}")
+            else:
+                click.secho(f"  ✗ Unknown tool: {selected_tool}", fg="yellow")
 
             click.echo("\n" + "=" * 60)
             click.secho("  Setup complete!", bold=True, fg="green")
@@ -736,7 +736,7 @@ def update_command():
                 question="Select an option to modify (or select 'Save & Exit' to save):",
                 options=[opt[0] for opt in display_options] + ["Save & Exit"],
                 explanations={opt[0]: f"{opt[2]}: {opt[1]}" for opt in display_options},
-                question_explanation="Use ↑/↓ arrows to navigate, Enter to select.\nCurrent values are shown in blue, changes in green.",
+                question_explanation="Use up/down arrows to navigate, Enter to select.\nCurrent values are shown in blue, changes in green.",
                 default_index=len(display_options),  # Default to Save & Exit
                 allow_multiple=False,
             )
@@ -800,7 +800,7 @@ def update_command():
             selected_opt.current_value = new_value
 
 
-def _get_builder(tool: str):
+def _get_builder(tool: str) -> type[Builder]:
     """Get the builder class for a given tool.
 
     This function maps a tool name to its corresponding builder class.
@@ -814,7 +814,7 @@ def _get_builder(tool: str):
 
     """
 
-    return InverterFactory.create(key=tool)
+    return cast(type[Builder], AbstractInverterFactory[Builder].create(key=tool))
 
 
 # ── validate ───────────────────────────────────────────────────────────────────
