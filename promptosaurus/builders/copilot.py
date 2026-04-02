@@ -57,6 +57,13 @@ class CopilotBuilder(Builder):
         Returns:
             List of action strings describing what was created.
         """
+        # Protocol Extensions: Configure and validate handlers
+        validation_errors = self._configure_handlers(config)
+        if validation_errors:
+            # Log validation errors but don't fail build - handlers have default behavior
+            for error in validation_errors:
+                print(f"Warning: Template handler validation error: {error}")
+
         actions: list[str] = []
         github = output / ".github"
 

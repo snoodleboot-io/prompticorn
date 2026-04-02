@@ -115,6 +115,9 @@ class Builder:
         self._template_handlers = self._template_handler_factory()
         self._template_handler_registry = self._get_default_template_handler_registry()
 
+        # Protocol Extensions: Factory integration for template handlers
+        self._initialize_handlers()
+
     def build(
         self, output: Path, config: dict[str, Any] | None = None, dry_run: bool = False
     ) -> list[str]:
@@ -326,6 +329,64 @@ class Builder:
             registry.register_handler(handler)
 
         return registry
+
+    def _initialize_handlers(self) -> None:
+        """Initialize template handlers with factory integration.
+
+        Calls inject_dependencies and initialize on all template handlers
+        as part of the Protocol Extensions for Sprint 4.
+        """
+        # For now, inject empty dependencies dict - handlers can override to use it
+        dependencies = {}
+
+        for handler in self._template_handlers:
+            handler.inject_dependencies(dependencies)
+            handler.initialize()
+
+        # Also initialize handlers in registry
+        for handler in self._template_handler_registry.get_handlers():
+            handler.inject_dependencies(dependencies)
+            handler.initialize()
+
+    def _configure_handlers(self, config: dict[str, Any] | None) -> list[str]:
+        """Configure template handlers with config.
+
+        Calls configure and validate_configuration on all template handlers.
+        Returns list of validation error messages.
+
+        Args:
+            config: Configuration dict to pass to handlers
+
+        Returns:
+            List of validation error messages from all handlers
+        """
+        if config is None:
+            config = {}
+
+        validation_errors: list[str] = []
+
+        for handler in self._template_handlers:
+            handler.configure(config)
+            errors = handler.validate_configuration(config)
+            validation_errors.extend(errors)
+
+        for handler in self._template_handler_registry.get_handlers():
+            handler.configure(config)
+            errors = handler.validate_configuration(config)
+            validation_errors.extend(errors)
+
+        return validation_errors
+
+    def _cleanup_handlers(self) -> None:
+        """Clean up template handlers.
+
+        Calls cleanup on all template handlers to release resources.
+        """
+        for handler in self._template_handlers:
+            handler.cleanup()
+
+        for handler in self._template_handler_registry.get_handlers():
+            handler.cleanup()
 
     def _copy(
         self,
