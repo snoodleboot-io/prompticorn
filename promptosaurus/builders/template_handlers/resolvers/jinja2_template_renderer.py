@@ -288,9 +288,11 @@ class Jinja2TemplateRenderer:
         - Filters: {{value | filter}}
         - Conditionals: {% if condition %}...{% endif %}
         - Loops: {% for item in items %}...{% endfor %}
-        - Template inheritance: {% extends "base.html" %}
-        - Includes: {% include "partial.html" %}
-        - Macros: {% macro name(params) %}...{% endmacro %}
+        - Template inheritance: {% extends "base.html" %}{% block name %}...{% endblock %}
+        - Includes: {% include "partial.html" %} - inserts template content with shared context
+        - Macros: {% macro name(params) %}...{% endmacro %} - reusable template functions
+        - Imports: {% import "macros.html" as m %} - import macros from other templates
+        - Selective imports: {% from "macros.html" import macro1, macro2 %}
 
         Args:
             template_content: The template string to render
@@ -349,11 +351,17 @@ class Jinja2TemplateRenderer:
             ) from e
 
     def handle_by_name(self, template_name: str, variables: dict[str, Any]) -> str:
-        """Render a template by name using the registry loader for inheritance.
+        """Render a template by name using the registry loader for full Jinja2 support.
 
         This method loads a template from the registry by name and renders it,
-        enabling full template inheritance support where templates can extend
-        other templates using {% extends "template-name" %}.
+        enabling full template features:
+        - Template inheritance: {% extends "template-name" %}{% block %}...{% endblock %}
+        - Includes: {% include "template-name" %} - loads templates from registry
+        - Imports: {% import "template-name" as m %} - import macros from registry templates
+        - All other Jinja2 features (macros, filters, conditionals, loops)
+
+        Template files loaded via include/import are resolved from the registry,
+        enabling modular template organization across multiple prompt files.
 
         Args:
             template_name: Name of the template to load from registry
