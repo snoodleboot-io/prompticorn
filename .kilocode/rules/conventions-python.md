@@ -1,8 +1,7 @@
-<!-- path: promptosaurus/prompts/agents/core/core-conventions-python.md -->
-# Core Conventions Python
+<!-- path: promptosaurus/prompts/agents/core/core-conventions-python.md --># Core Conventions Python
 
 Language:             python           e.g., Python 3.11+
-Runtime:              3.12            e.g., CPython 3.11, PyPy
+Runtime:              3.14            e.g., CPython 3.11, PyPy
 Package Manager:      uv        e.g., poetry, pip, uv
 Linter:               ['ruff', 'pyright']             e.g., Ruff, flake8
 Formatter:           ['ruff']          e.g., Ruff, Black
@@ -75,49 +74,49 @@ Environment vars:    UPPER_SNAKE_CASE always
 
 ### Testing
 
-#### Coverage Targets
-Line:           80          e.g., 80%
-Branch:         70        e.g., 70%
-Function:       90       e.g., 90%
-Statement:      85      e.g., 85%
-Mutation:       80       e.g., 80%
-Path:           60           e.g., 60%
+#### Test Organization by Type
 
-#### Test Types
+**Unit Tests:**
+- Fast, isolated tests of individual functions/methods
+- Mock external dependencies completely
+- Target: 80%+ coverage
+- Framework: pytest
 
-##### Unit Tests
-- One function or method in isolation
-- Mock all external dependencies (database, API calls, filesystem)
-- Use `pytest` fixtures for setup/teardown
-- Use `pytest.mark.parametrize` for table-driven tests
-- Use `pytest.raises` for exception testing
-
-##### Integration Tests
-- Test at service or module boundary
+**Integration Tests:**
+- Multi-component tests at service boundaries
 - Use real database (testcontainers) or in-memory alternatives
-- Test API endpoints, database queries, file operations
-- Clean up test data after each test
+- Target: Key workflows and API contracts
+- Framework: pytest with fixtures
 
-##### Mutation Tests
-- Use `mutmut` or `pytest-mutmut` to verify test quality
+**Mutation Tests:**
+- Verify test quality by introducing bugs
+- Tools: mutmut, pytest-mutmut
 - Run after unit tests pass
-- Aim to kill mutations in core business logic
+- Target: 80%+ mutation score on critical code
 
-##### Property-Based Tests
-- Use `hypothesis` for generative testing
-- Test edge cases automatically generated
+**Property-Based Tests:**
+- Generative testing with automatically generated inputs
+- Tool: hypothesis
+- Great for edge cases and boundary conditions
 
-#### Framework & Tools
-Framework:         hybrid       e.g., pytest
-Mocking library:   {{MOCKING_LIBRARY}}             e.g., unittest.mock, pytest-mock
-Coverage tool:    {{COVERAGE_TOOL}}             e.g., pytest-cov, coverage.py
-Mutation tool:    {{MUTATION_TOOL}}        e.g., mutmut, pytest-mutmut
 
-#### Scaffolding
+
+#### Coverage Targets
+
+| Metric | Target | Notes |
+|--------|--------|-------|
+| Line Coverage | 80% | Code line execution coverage |
+| Branch Coverage | 70% | Conditional branch coverage |
+| Function Coverage | 90% | All functions tested |
+| Statement Coverage | 85% | All statements executed |
+| Mutation Score | 80% | Fault injection detection |
+| Path Coverage | 60% | Code path execution coverage |
+
+#### Test Scaffolding
 
 ```bash
 # Install
-pip install pytest pytest-cov pytest-mock hypothesis mutmut
+uv pip install pytest pytest-cov pytest-mock hypothesis mutmut
 
 # Run tests
 pytest                          # Run all tests
@@ -147,7 +146,10 @@ exclude_lines = [
 ]
 ```
 
+
+
 ##### CI Integration
+
 ```yaml
 # GitHub Actions example
 - name: Run tests
@@ -159,6 +161,8 @@ exclude_lines = [
     mutmut run
     mutmut html > mutation_report.html
 ```
+
+
 
 ### Code Style
 - Follow PEP 8 (enforced by Ruff)
@@ -175,8 +179,10 @@ exclude_lines = [
 - Use `@property.deleter` when cleanup logic is needed on attribute deletion
 - Prevent setting when inappropriate by raising `AttributeError` or `TypeError` in setters
 
+#### Good vs Bad - Python
+
+**✓ Good:**
 ```python
-# GOOD - property with controlled access
 class Temperature:
     def __init__(self, celsius: float = 0.0) -> None:
         self._celsius = celsius
@@ -194,8 +200,10 @@ class Temperature:
     @celsius.deleter
     def celsius(self) -> None:
         self._celsius = 0.0
+```
 
-# BAD - direct field access or getter/setter methods
+**✗ Bad:**
+```python
 class Temperature:
     def __init__(self) -> None:
         self.celsius = 0.0  # Direct access - no validation
@@ -276,35 +284,54 @@ def my_decorator(func):
 - Use `async for` for async iterators
 - Never use `time.sleep()` in async code - use `await asyncio.sleep()`
 
+#### Async Patterns - Python
+
+**✓ Correct:**
 ```python
 import asyncio
-from contextlib import asynccontextmanager
 
-class AsyncResource:
-    async def fetch(self) -> bytes:
-        """Async operation."""
-        await asyncio.sleep(0.1)  # Never use time.sleep() in async code
-        return b"data"
+# Async function with proper await
+async def fetch_user(user_id: int) -> User:
+    result = await database.get_user(user_id)
+    return result
 
-    async def __aenter__(self) -> "AsyncResource":
-        """Async context manager entry."""
-        await self.connect()
-        return self
+# Never use time.sleep in async code
+async def process_with_delay():
+    await asyncio.sleep(1)  # ✓ Correct
+    # NOT: time.sleep(1)  # ❌ Blocks event loop
 
-    async def __aexit__(self, exc_type, exc_val, exc_tb) -> None:
-        """Async context manager exit."""
-        await self.disconnect()
+# Async context managers
+async with database_connection() as conn:
+    user = await conn.get_user(1)
 
-@asynccontextmanager
-async def managed_resource() -> Iterator[AsyncResource]:
-    """Async context manager using decorator."""
-    resource = AsyncResource()
-    await resource.connect()
-    try:
-        yield resource
-    finally:
-        await resource.disconnect()
+# Using asyncio.gather for concurrency
+async def fetch_multiple():
+    tasks = [
+        fetch_user(1),
+        fetch_user(2),
+        fetch_user(3),
+    ]
+    results = await asyncio.gather(*tasks)
+    return results
 ```
+
+**✗ Avoid:**
+```python
+# ❌ Mixing sync and async
+def sync_function():
+    result = await async_function()  # Can't await in sync
+
+# ❌ Using time.sleep in async code
+async def bad_delay():
+    time.sleep(1)  # ❌ Blocks entire event loop
+
+# ❌ Not awaiting async calls
+async def fetch():
+    user = fetch_user(1)  # ❌ Not awaited
+    return user
+```
+
+
 
 #### Context Managers (sync and async)
 - **ALWAYS use context managers** for resource management (files, connections, locks)
@@ -372,30 +399,7 @@ def create_handler(config: dict):
 
 Selected Style: **interface**
 
-{{#if ABSTRACT_CLASS_STYLE == "abc"}}
-#### Using Abstract Base Classes (abc module)
-- Inherit from `abc.ABC` for abstract base classes
-- Use `@abstractmethod` decorator for methods that must be implemented
-- Use `@abstractclassmethod` and `@abstractstaticmethod` where appropriate
-- Type checkers will catch incomplete implementations at static analysis time
 
-```python
-from abc import ABC, abstractmethod
-
-class Repository(ABC):
-    @abstractmethod
-    def get(self, id: str) -> Entity | None:
-        """Retrieve entity by ID. Must be implemented by subclasses."""
-        ...
-
-class SqlRepository(Repository):
-    def get(self, id: str) -> Entity | None:
-        # Concrete implementation
-        return self.session.query(Entity).get(id)
-```
-{{/if}}
-
-{{#if ABSTRACT_CLASS_STYLE == "interface"}}
 #### Using NotImplementedError (Informal Interfaces)
 - Raise `NotImplementedError` in methods that must be overridden
 - Document expected behavior in docstrings
@@ -413,4 +417,3 @@ class SqlRepository(Repository):
         # Concrete implementation
         return self.session.query(Entity).get(id)
 ```
-{{/if}}

@@ -27,16 +27,17 @@ class RenderStage:
         This is called once on the first render() call to set up
         the terminal for proper rendering. Subsequent calls reuse
         the same curses window.
+
+        Note: We do NOT call curses.noecho(), curses.raw(), or curses.cbreak()
+        here. The input provider (UnixInputProvider) handles terminal mode
+        configuration. Curses is used only for rendering operations.
         """
         if self._initialized:
             return
 
         try:
             self._stdscr = curses.initscr()
-            # Configure curses: no echo, raw input mode
-            curses.noecho()
-            curses.raw()
-            # Enable line wrapping
+            # Enable special key handling (not a terminal mode change)
             self._stdscr.keypad(True)
             self._initialized = True
         except Exception:
@@ -45,11 +46,14 @@ class RenderStage:
             self._initialized = False
 
     def _cleanup_curses(self) -> None:
-        """Clean up curses and restore terminal to normal state."""
+        """Clean up curses and release the window.
+
+        Note: We do NOT restore terminal modes (echo, cbreak) here since
+        we never set them in the first place. The input provider manages
+        terminal modes independently.
+        """
         if self._stdscr and self._initialized:
             try:
-                curses.echo()
-                curses.nocbreak()
                 self._stdscr.keypad(False)
                 curses.endwin()
             except Exception:
