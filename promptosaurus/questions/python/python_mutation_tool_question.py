@@ -26,6 +26,14 @@ class PythonMutationToolQuestion(Question):
         return ["mutmut", "pytest-mutmut", "none"]
 
     @property
+    def option_explanations(self) -> dict[str, str]:
+        return {
+            "mutmut": "Standalone mutation tester, fast, comprehensive reports, CLI-driven",
+            "pytest-mutmut": "pytest plugin for mutmut, integrates with pytest, runs as part of test suite",
+            "none": "No mutation testing, faster CI but less thorough test quality verification",
+        }
+
+    @property
     def default(self) -> str:
         return "mutmut"
 

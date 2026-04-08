@@ -33,9 +33,9 @@ These targets are used by pytest-cov and enforced in CI/CD pipelines."""
     @property
     def option_explanations(self) -> dict[str, str]:
         return {
-            "strict": "Line: 90%, Branch: 80%, Function: 95%, Statement: 90%, Mutation: 85%, Path: 70% - For production libraries",
-            "standard": "Line: 80%, Branch: 70%, Function: 90%, Statement: 85%, Mutation: 80%, Path: 60% - Balanced approach (recommended)",
-            "minimal": "Line: 70%, Branch: 60%, Function: 80%, Statement: 75%, Mutation: 70%, Path: 50% - For prototypes or legacy code",
+            "strict": "Production libraries: 90% line, 80% branch, 95% function, 90% statement, 85% mutation, 70% path",
+            "standard": "General projects: 80% line, 70% branch, 90% function, 85% statement, 80% mutation, 60% path (recommended)",
+            "minimal": "Prototypes/legacy: 70% line, 60% branch, 80% function, 75% statement, 70% mutation, 50% path",
         }
 
     @property

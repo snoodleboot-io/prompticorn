@@ -32,7 +32,7 @@ class PythonTestRunnerQuestion(Question):
     @property
     def option_explanations(self) -> dict[str, str]:
         return {
-            "pytest": "Recommended, runs pytest/unittest/doctest/nose2",
-            "nose2": "Runs unittest and pytest-compatible tests",
-            "unittest": "Built-in test runner",
+            "pytest": "Industry standard, runs pytest/unittest/doctest/nose2, powerful plugins",
+            "nose2": "Test runner compatible with unittest and pytest-style tests",
+            "unittest": "Built-in Python test runner, no external dependencies needed",
         }

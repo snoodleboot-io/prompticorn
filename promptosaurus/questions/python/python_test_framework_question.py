@@ -24,3 +24,11 @@ class PythonTestFrameworkQuestion(Question):
 - hybrid: unittest.TestCase with limited pytest fixtures and mocking
 - pytest: Industry standard, powerful fixtures, great reporting
 - unittest: Built-in, simple, no dependencies"""
+
+    @property
+    def option_explanations(self) -> dict[str, str]:
+        return {
+            "hybrid": "Mix unittest.TestCase with some pytest features, transitional approach",
+            "pytest": "Modern framework with powerful fixtures, parametrization, great plugins",
+            "unittest": "Built-in framework, uses class-based tests, no external dependencies",
+        }

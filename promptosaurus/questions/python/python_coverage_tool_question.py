@@ -25,6 +25,13 @@ class PythonCoverageToolQuestion(Question):
         return ["pytest-cov", "coverage.py"]
 
     @property
+    def option_explanations(self) -> dict[str, str]:
+        return {
+            "pytest-cov": "pytest plugin for coverage, integrates seamlessly with pytest, generates reports",
+            "coverage.py": "Standalone coverage tool, works with any test runner, detailed HTML reports",
+        }
+
+    @property
     def default(self) -> str:
         return "pytest-cov"
 

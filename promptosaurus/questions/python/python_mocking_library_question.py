@@ -28,6 +28,16 @@ class PythonMockingLibraryQuestion(Question):
         return ["unittest.mock", "pytest-mock", "freezegun", "responses", "none"]
 
     @property
+    def option_explanations(self) -> dict[str, str]:
+        return {
+            "unittest.mock": "Standard library mocking, built-in to Python, no dependencies needed",
+            "pytest-mock": "pytest fixture-based mocking, cleaner syntax than unittest.mock",
+            "freezegun": "Mock system time and datetime, useful for testing time-dependent behavior",
+            "responses": "Mock HTTP requests, test code without hitting real APIs",
+            "none": "Skip mocking libraries, use real objects for integration tests",
+        }
+
+    @property
     def default(self) -> str:
         return "unittest.mock"
 
