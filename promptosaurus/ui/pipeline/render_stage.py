@@ -1,9 +1,8 @@
 """Render stage for UI pipeline."""
 
-import subprocess
 import sys
+import time
 from collections.abc import Callable
-from platform import system
 
 from promptosaurus.ui.domain.context import PipelineContext
 
@@ -16,18 +15,17 @@ class RenderStage:
 
     def render(self, context: PipelineContext) -> None:
         """Render current state."""
-        # Clear screen using subprocess for reliability across all terminals.
-        # subprocess.run() is more reliable than os.system() as it doesn't
-        # interact unpredictably with Python's print() function.
-        if system() in ("Linux", "Darwin"):
-            # Use 'clear' command on Unix-like systems
-            subprocess.run(["clear"], check=False)
-        else:
-            # Fallback to ANSI escape codes for Windows and other systems.
-            # Use sys.stdout.write() directly (not print()) and flush immediately
-            # to ensure codes are processed before subsequent output.
-            sys.stdout.write("\033[2J\033[H")
-            sys.stdout.flush()
+        # Use terminal reset escape code \033c to fully reset terminal state.
+        # This is more aggressive than just clearing - it resets cursor position,
+        # modes, and any accumulated state that might cause misalignment.
+        # Write directly with sys.stdout.write() and flush immediately
+        # to ensure the escape code is processed before subsequent output.
+        sys.stdout.write("\033c")
+        sys.stdout.flush()
+
+        # Small delay to let terminal process the reset and avoid race conditions.
+        # This ensures cursor positioning and output formatting is correct.
+        time.sleep(0.05)
 
         # Show question and explanation at the top
         question = context.question
