@@ -74,6 +74,39 @@ class TestSingleSelectState(unittest.TestCase):
         state.navigate(2)
         self.assertEqual(state.current_selection, 0)  # Original unchanged
 
+    def test_navigate_with_columns_down(self):
+        """Test navigating down in multi-column layout (same column, next row)."""
+        # 4 columns, 6 items per column (24 items total)
+        # Position:  0  1  2  3
+        #            4  5  6  7
+        #            8  9 10 11
+        #           12 13 14 15
+        #           16 17 18 19
+        #           20 21 22 23
+        state = SingleSelectionState(5, 23)  # Column 1, row 0
+        new_state = state.navigate_with_columns(1, items_per_column=6)
+        self.assertEqual(new_state.current_selection, 11)  # Column 1, row 1 (5 + 6 = 11)
+
+    def test_navigate_with_columns_up(self):
+        """Test navigating up in multi-column layout (same column, previous row)."""
+        state = SingleSelectionState(11, 23)  # Column 1, row 1
+        new_state = state.navigate_with_columns(-1, items_per_column=6)
+        self.assertEqual(new_state.current_selection, 5)  # Column 1, row 0 (11 - 6 = 5)
+
+    def test_navigate_with_columns_down_at_boundary(self):
+        """Test navigating down in column when at bottom row stays at current."""
+        state = SingleSelectionState(20, 23)  # Column 2, row 3 (last row)
+        new_state = state.navigate_with_columns(1, items_per_column=6)
+        self.assertEqual(
+            new_state.current_selection, 23
+        )  # Column 2, row 4 would be 26, clamped to 23
+
+    def test_navigate_with_columns_up_at_boundary(self):
+        """Test navigating up in column when at top row stays at 0."""
+        state = SingleSelectionState(1, 23)  # Column 0, row 0
+        new_state = state.navigate_with_columns(-1, items_per_column=6)
+        self.assertEqual(new_state.current_selection, 0)  # Can't go above 0
+
 
 class TestMultiSelectState(unittest.TestCase):
     """Multi-selection state machine tests."""

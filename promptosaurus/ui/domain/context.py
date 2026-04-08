@@ -55,12 +55,15 @@ class PipelineContext:
         _question: The immutable question context.
         _state: Current selection state.
         _mode: Current display mode (select or explain).
+        _items_per_column: Items per column for multi-column layouts (None if single column).
 
     Properties:
         question: Returns the QuestionContext.
         state: Get/set the current SelectionState.
         mode: Get/set the current mode (select or explain).
         display_options: Get options to display.
+        items_per_column: Get/set items per column for multi-column layouts.
+        layout_columns: Property that returns True if using multi-column layout.
     """
 
     def __init__(
@@ -68,10 +71,12 @@ class PipelineContext:
         question: QuestionContext,
         state: "SelectionState",
         mode: str = "select",
+        items_per_column: int | None = None,
     ):
         self._question = question
         self._state = state
         self._mode = mode
+        self._items_per_column = items_per_column
 
     @property
     def question(self) -> QuestionContext:
@@ -117,6 +122,33 @@ class PipelineContext:
             value: New mode string ('select' or 'explain').
         """
         self._mode = value
+
+    @property
+    def items_per_column(self) -> int | None:
+        """Get items per column for multi-column layouts.
+
+        Returns:
+            Number of items per column, or None if single-column layout.
+        """
+        return self._items_per_column
+
+    @items_per_column.setter
+    def items_per_column(self, value: int | None) -> None:
+        """Set items per column for multi-column layouts.
+
+        Args:
+            value: Number of items per column, or None for single-column layout.
+        """
+        self._items_per_column = value
+
+    @property
+    def layout_columns(self) -> bool:
+        """Check if using multi-column layout.
+
+        Returns:
+            True if multi-column layout is active, False otherwise.
+        """
+        return self._items_per_column is not None
 
     @property
     def display_options(self) -> list[str]:

@@ -6,6 +6,7 @@ from collections.abc import Callable
 from typing import Any
 
 from promptosaurus.ui.domain.context import PipelineContext
+from promptosaurus.ui.render.columns import ColumnLayoutRenderer
 
 
 class RenderStage:
@@ -131,6 +132,13 @@ class RenderStage:
 
             # Render the options using the renderer
             renderer = self.renderer_selector(context)
+
+            # Set items_per_column on context if using column layout renderer
+            if isinstance(renderer, ColumnLayoutRenderer):
+                context.items_per_column = renderer.items_per_column
+            else:
+                context.items_per_column = None
+
             output = renderer.render(context)  # type: ignore[attr-defined]
 
             # Add renderer output (may span multiple lines)
@@ -183,6 +191,13 @@ class RenderStage:
             print(f"{question.question_explanation}\n")
 
         renderer = self.renderer_selector(context)
+
+        # Set items_per_column on context if using column layout renderer
+        if isinstance(renderer, ColumnLayoutRenderer):
+            context.items_per_column = renderer.items_per_column
+        else:
+            context.items_per_column = None
+
         output = renderer.render(context)  # type: ignore[attr-defined]
         print(output)
 
