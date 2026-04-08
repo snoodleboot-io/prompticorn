@@ -1,4 +1,6 @@
 <!-- path: promptosaurus/prompts/agents/core/core-conventions-typescript.md -->
+{%- import 'macros/testing_sections.jinja2' as testing -%}
+{%- import 'macros/coverage_targets.jinja2' as coverage -%}
 # Core Conventions TypeScript
 
 Language:             {{config.language | default('typescript')}}           e.g., TypeScript 5.x
@@ -39,87 +41,20 @@ Environment vars:   UPPER_SNAKE_CASE always
 
 ### Testing
 
-#### Coverage Targets
-Line:           {{config.coverage.line}}          e.g., 80%
-Branch:         {{config.coverage.branch}}        e.g., 70%
-Function:       {{config.coverage.function}}       e.g., 90%
-Statement:      {{config.coverage.statement}}      e.g., 85%
-Mutation:       {{config.coverage.mutation}}       e.g., 80%
-Path:           {{config.coverage.path}}           e.g., 60%
+{{ testing.render_test_types('typescript') }}
 
-#### Test Types
+{{ coverage.render_coverage_table(
+  line=config.coverage.line | default('90'),
+  branch=config.coverage.branch | default('80'),
+  function=config.coverage.function | default('95'),
+  statement=config.coverage.statement | default('90'),
+  mutation=config.coverage.mutation | default('85'),
+  path=config.coverage.path | default('70')
+) }}
 
-##### Unit Tests
-- One function or method in isolation
-- Mock external dependencies (APIs, filesystem, database)
-- Use `describe`/`it` blocks with descriptive names
-- Test behavior, not implementation
+{{ testing.render_test_scaffolding('typescript', 'pnpm') }}
 
-##### Integration Tests
-- Test at service or module boundary
-- Use real services or in-memory alternatives (msw, testcontainers)
-- Test API endpoints, database queries, file operations
-
-##### E2E Tests
-- Use Playwright or Cypress for browser testing
-- Test critical user flows end-to-end
-
-##### Mutation Tests
-- Use `stryker-mutator` to verify test quality
-- Run after unit tests pass
-
-##### Component Tests
-- Use Testing Library (@testing-library/react, @testing-library/vue)
-- Test component rendering and user interactions
-
-#### Framework & Tools
-Framework:       {{config.testing_framework}}        e.g., Vitest, Jest
-Mocking library: {{config.mocking_library}}              e.g., vitest/mock, jest.mock
-Coverage tool:  {{config.coverage_tool}}              e.g., Vitest coverage, Jest coverage
-E2E tool:       {{config.e2e_tool}}             e.g., Playwright, Cypress
-Mutation tool:  {{config.mutation_tool}}          e.g., stryker-mutator
-
-#### Scaffolding
-
-```bash
-# Install (using pnpm)
-pnpm add -D vitest @vitest/coverage-v8 @testing-library/react jest-mock-extended
-
-# Run tests
-vitest run                    # Run all tests
-vitest run --coverage         # With coverage
-vitest run --coverage.branch  # Line + branch
-
-# Configuration (vitest.config.ts)
-import { defineConfig } from 'vitest/config'
-
-export default defineConfig({
-  test: {
-    globals: true,
-    environment: 'node',
-    coverage: {
-      provider: 'v8',
-      reporter: ['text', 'html'],
-      branches: true,
-      functions: true,
-      lines: true,
-      statements: true,
-    },
-  },
-})
-```
-
-##### CI Integration
-```yaml
-# GitHub Actions example
-- name: Run tests
-  run: pnpm vitest run --coverage
-
-- name: Mutation tests
-  run: |
-    pnpm add -D @stryker-mutator/core
-    npx stryker run
-```
+{{ testing.render_ci_integration('typescript') }}
 
 ### Code Style
 - Use ESNext features (optional chaining, nullish coalescing)

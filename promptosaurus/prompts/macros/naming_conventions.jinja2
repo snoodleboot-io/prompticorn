@@ -1,0 +1,304 @@
+{#
+  naming_conventions.jinja2
+  
+  Naming conventions macro library for generating naming guidelines.
+  Provides reusable macros for rendering naming convention tables across languages.
+  
+  Usage:
+    {% import 'macros/naming_conventions.jinja2' as naming %}
+    {{ naming.render_naming_conventions('python') }}
+    {{ naming.render_naming_table(language, patterns) }}
+    {{ naming.render_naming_examples(language) }}
+#}
+
+{% macro render_naming_conventions(language) -%}
+### Naming Conventions
+
+{% if language == 'python' -%}
+| Element | Convention | Example |
+|---------|-----------|---------|
+| Files | snake_case | `user_service.py` |
+| Variables | snake_case | `user_count`, `is_active` |
+| Constants | UPPER_SNAKE (in config) | Use pydantic-settings instead |
+| Classes/Types | PascalCase | `UserService`, `LoginRequest` |
+| Functions | snake_case | `get_user_by_id()` |
+| Methods | snake_case | `user.validate_email()` |
+| Private methods | _snake_case | `_internal_method()` |
+| Dunder methods | __snake_case__ | `__init__()`, `__str__()` |
+| Database tables | snake_case | `user_accounts`, `order_items` |
+| Environment vars | UPPER_SNAKE_CASE | `DATABASE_URL`, `API_KEY` |
+| Module names | snake_case | `auth.py`, `user_service.py` |
+| Package names | snake_case | `src/auth/`, `src/models/` |
+
+{% elif language == 'typescript' -%}
+| Element | Convention | Example |
+|---------|-----------|---------|
+| Files | kebab-case | `user-service.ts` |
+| Variables | camelCase | `userName`, `isActive` |
+| Constants | UPPER_SNAKE | `API_TIMEOUT`, `MAX_RETRIES` |
+| Classes/Types | PascalCase | `UserService`, `LoginRequest` |
+| Functions | camelCase | `getUserById()`, `validateEmail()` |
+| Interfaces | PascalCase | `IUserService`, `User` |
+| Types | PascalCase | `UserRole`, `ApiResponse` |
+| Enums | PascalCase | `UserRole`, `HttpStatus` |
+| Private fields | #field (class private) | `#cachedUser` |
+| Getters/Setters | camelCase | `get name()`, `set name()` |
+| Database tables | snake_case | `user_accounts`, `order_items` |
+| Environment vars | UPPER_SNAKE_CASE | `DATABASE_URL`, `API_KEY` |
+| Path aliases | @ prefix | `@/services`, `@/types` |
+| Component files | PascalCase | `UserForm.tsx`, `NavBar.tsx` |
+| Hook files | camelCase | `useAuth.ts`, `useFetch.ts` |
+
+{% elif language == 'go' -%}
+| Element | Convention | Example |
+|---------|-----------|---------|
+| Files | snake_case | `user_service.go` |
+| Package names | lowercase | `package user` |
+| Functions/Methods | PascalCase (exported) | `GetUserByID()` |
+| Private functions | camelCase | `validateEmail()` |
+| Variables | camelCase (short) | `count`, `isActive` |
+| Constants | PascalCase (exported) | `MaxRetries` |
+| Interfaces | PascalCase + er suffix | `UserService`, `Writer` |
+| Structs | PascalCase | `User`, `LoginRequest` |
+| Struct fields | PascalCase (exported) | `Name`, `IsActive` |
+| Database tables | snake_case | `user_accounts` |
+| Environment vars | UPPER_SNAKE_CASE | `DATABASE_URL` |
+
+{% else -%}
+| Element | Convention | Notes |
+|---------|-----------|-------|
+| Files | snake_case | Language-specific naming |
+| Variables | snake_case or camelCase | Depends on language |
+| Classes | PascalCase | Consistent across languages |
+| Functions | snake_case or camelCase | Language-dependent |
+| Constants | UPPER_SNAKE | Discouraged in favor of config |
+| Database tables | snake_case | Standard in most databases |
+| Environment vars | UPPER_SNAKE_CASE | Consistent across languages |
+
+{% endif -%}
+{%- endmacro %}
+
+{% macro render_naming_table(language, patterns) -%}
+### Naming Conventions - {{ language | capitalize }}
+
+| Element | Pattern | Example |
+|---------|---------|---------|
+{% for item in patterns -%}
+| {{ item.element }} | {{ item.pattern }} | {{ item.example }} |
+{% endfor %}
+{%- endmacro %}
+
+{% macro render_naming_examples(language) -%}
+#### Naming Examples - {{ language | capitalize }}
+
+{% if language == 'python' -%}
+**Good naming:**
+```python
+# Functions and variables
+def calculate_user_balance(user_id: int) -> float:
+    """Calculate total balance for a user."""
+    active_accounts = get_user_accounts(user_id)
+    total_balance = sum(account.balance for account in active_accounts)
+    return total_balance
+
+# Classes
+class UserService:
+    """Service for user operations."""
+    
+    def __init__(self, database: Database) -> None:
+        self._database = database
+    
+    def get_user_by_id(self, user_id: int) -> User | None:
+        """Retrieve user by ID."""
+        return self._database.query(User).filter(User.id == user_id).first()
+
+# Private methods
+def _validate_email(email: str) -> bool:
+    """Internal validation helper."""
+    return "@" in email
+
+# Database models
+class UserAccount(Base):
+    __tablename__ = "user_accounts"
+    
+    id: int = Column(Integer, primary_key=True)
+    email: str = Column(String, unique=True)
+    is_active: bool = Column(Boolean, default=True)
+
+# Configuration (not constants)
+from pydantic_settings import BaseSettings
+
+class Settings(BaseSettings):
+    database_url: str
+    api_timeout: int = 30
+```
+
+**Avoid:**
+```python
+# ❌ Unclear naming
+def calc(uid):  # too short
+    return data
+
+# ❌ Constants at module level (❌ NOT ALLOWED)
+MAX_USERS = 100  # Should be in config
+
+# ❌ Mixed conventions
+class user_service:  # should be UserService
+    def GetUsers(self):  # should be get_users
+        pass
+
+# ❌ Overly abbreviated
+def get_usr_acct(uid: int):  # should be get_user_account
+    pass
+```
+
+{% elif language == 'typescript' -%}
+**Good naming:**
+```typescript
+// Functions and variables
+function calculateUserBalance(userId: number): number {
+  const activeAccounts = getUserAccounts(userId);
+  const totalBalance = activeAccounts.reduce((sum, account) => sum + account.balance, 0);
+  return totalBalance;
+}
+
+// Classes and interfaces
+interface IUserService {
+  getUserById(userId: number): Promise<User | null>;
+  createUser(data: CreateUserRequest): Promise<User>;
+}
+
+class UserService implements IUserService {
+  private database: Database;
+
+  constructor(database: Database) {
+    this.database = database;
+  }
+
+  async getUserById(userId: number): Promise<User | null> {
+    return this.database.users.findById(userId);
+  }
+}
+
+// Types and enums
+type UserRole = 'admin' | 'user' | 'guest';
+
+enum UserStatus {
+  Active = 'active',
+  Inactive = 'inactive',
+  Suspended = 'suspended',
+}
+
+// Constants (module-level for config)
+const API_TIMEOUT = 30000;  // milliseconds
+const MAX_RETRIES = 3;
+
+// React component
+function UserProfile({ userId }: { userId: number }): JSX.Element {
+  const [user, setUser] = useState<User | null>(null);
+  const isLoadingUser = user === null;
+
+  return <div>{isLoadingUser ? 'Loading...' : user?.name}</div>;
+}
+
+// Custom hook
+function useAuth(): { user: User | null; logout: () => void } {
+  const [user, setUser] = useState<User | null>(null);
+
+  const logout = (): void => {
+    setUser(null);
+  };
+
+  return { user, logout };
+}
+
+// Database schema (snake_case)
+interface UserAccount {
+  id: number;
+  user_id: number;
+  email: string;
+  is_active: boolean;
+}
+```
+
+**Avoid:**
+```typescript
+// ❌ Unclear naming
+function calc(uid: any): any {
+  return data;
+}
+
+// ❌ Mixed conventions
+class User_Service {  // should be UserService
+  public GetUsers() {  // should be getUsers
+    return [];
+  }
+}
+
+// ❌ Non-standard constants
+const userMaxCount = 100;  // should be USER_MAX_COUNT or MAX_USER_COUNT
+
+// ❌ Overly abbreviated
+function getUserAcc(uid: number): Account {  // should be getUserAccount
+  return db.findAcct(uid);
+}
+```
+
+{% else -%}
+See language-specific naming conventions documentation for {{ language }}.
+
+{% endif -%}
+{%- endmacro %}
+
+{% macro render_naming_checklist(language) -%}
+#### Naming Conventions Checklist
+
+{% if language == 'python' -%}
+```
+Python Naming Checklist:
+- [ ] All filenames use snake_case (my_module.py, not MyModule.py)
+- [ ] All classes use PascalCase (UserService, not user_service)
+- [ ] All functions/methods use snake_case (get_user, not getUser)
+- [ ] Private methods start with _ (_internal_method)
+- [ ] Dunder methods have __ on both sides (__init__, not _init_)
+- [ ] Constants are in configuration files, not module-level
+- [ ] Variable names are clear (user_count, not uc)
+- [ ] Boolean variables start with is_ or has_ (is_active, has_permission)
+- [ ] Database tables use snake_case
+- [ ] Environment variables use UPPER_SNAKE_CASE
+- [ ] No single-letter variables except in loops (for i in range(n))
+- [ ] Type hints use T | None (not Optional[T])
+```
+
+{% elif language == 'typescript' -%}
+```
+TypeScript Naming Checklist:
+- [ ] All filenames use kebab-case (user-service.ts, not UserService.ts)
+- [ ] All classes use PascalCase (UserService, not user_service)
+- [ ] All functions/variables use camelCase (getUser, not get_user)
+- [ ] All interfaces start with I or end with able (IUserService, Serializable)
+- [ ] All types use PascalCase (UserRole, ApiResponse)
+- [ ] All enums use PascalCase values (UserRole.Admin, not UserRole.ADMIN)
+- [ ] Constants use UPPER_SNAKE_CASE (API_TIMEOUT, MAX_RETRIES)
+- [ ] Component files use PascalCase (UserForm.tsx, NavBar.tsx)
+- [ ] Hook files use camelCase (useAuth.ts, useFetch.ts)
+- [ ] Boolean variables start with is, has, or can (isActive, hasPermission)
+- [ ] Private fields use # prefix (#privateField)
+- [ ] Database columns use snake_case (user_id, created_at)
+```
+
+{% else -%}
+```
+Naming Conventions Checklist:
+- [ ] File naming follows {{ language }} conventions
+- [ ] Classes use PascalCase
+- [ ] Functions/methods follow {{ language }} standard
+- [ ] Variables are clearly named
+- [ ] No ambiguous abbreviations
+- [ ] Boolean values start with is/has/can
+- [ ] Constants are properly defined
+- [ ] Database objects use snake_case
+```
+
+{% endif -%}
+{%- endmacro %}

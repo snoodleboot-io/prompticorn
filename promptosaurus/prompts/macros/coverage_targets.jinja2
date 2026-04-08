@@ -1,0 +1,260 @@
+{#
+  coverage_targets.jinja2
+  
+  Coverage targets table macro library for generating standardized coverage metrics.
+  Provides reusable macros for rendering coverage tables and targets across languages.
+  
+  Usage:
+    {% import 'macros/coverage_targets.jinja2' as coverage %}
+    {{ coverage.render_coverage_table(coverage_targets) }}
+    {{ coverage.render_coverage_description(metric_name, target_value) }}
+    {{ coverage.render_coverage_checklist(language) }}
+#}
+
+{% macro render_coverage_table(line, branch, function, statement, mutation, path) -%}
+#### Coverage Targets
+
+| Metric | Target | Notes |
+|--------|--------|-------|
+| Line Coverage | {{ line }}% | Code line execution coverage |
+| Branch Coverage | {{ branch }}% | Conditional branch coverage |
+| Function Coverage | {{ function }}% | All functions tested |
+| Statement Coverage | {{ statement }}% | All statements executed |
+| Mutation Score | {{ mutation }}% | Fault injection detection |
+| Path Coverage | {{ path }}% | Code path execution coverage |
+
+{%- endmacro %}
+
+{% macro render_coverage_details(language) -%}
+#### Coverage Metric Definitions
+
+{% if language == 'python' -%}
+**Line Coverage (80%+ target)**
+- Percentage of source lines executed by tests
+- Tools: pytest-cov, coverage.py
+- Helps identify untested code paths
+
+**Branch Coverage (70%+ target)**
+- Percentage of conditional branches executed
+- Tools: pytest-cov with --cov-branch
+- Catches missing if/else and loop conditions
+
+**Function Coverage (90%+ target)**
+- Percentage of functions/methods with at least one test
+- Tools: pytest-cov
+- Every function should have explicit test coverage
+
+**Statement Coverage (85%+ target)**
+- Similar to line coverage, counts statements
+- Tools: coverage.py
+- Complements line coverage for complex statements
+
+**Mutation Testing (80%+ target)**
+- Measure of test quality by introducing bugs
+- Tools: mutmut, pytest-mutmut
+- Verifies that tests catch real defects
+
+**Path Coverage (60%+ target)**
+- Percentage of unique execution paths tested
+- Complex metric, requires dedicated tools
+- Focus on critical business logic paths
+
+{% elif language == 'typescript' -%}
+**Line Coverage (90%+ target)**
+- Percentage of source lines executed by tests
+- Tools: Vitest coverage, Jest coverage, c8
+- Essential for TypeScript strict mode projects
+
+**Branch Coverage (80%+ target)**
+- Percentage of conditional branches executed
+- Tools: Vitest coverage with branch option
+- Catches missing if/else and optional chains
+
+**Function Coverage (95%+ target)**
+- Percentage of functions with at least one test
+- Tools: Vitest coverage, c8
+- Every exported function must be tested
+
+**Statement Coverage (90%+ target)**
+- Statement-level coverage tracking
+- Tools: Vitest coverage
+- Fine-grained test verification
+
+**Mutation Score (85%+ target)**
+- Test quality measured by fault injection
+- Tools: @stryker-mutator/core
+- Ensures tests catch real bugs
+
+**Path Coverage (70%+ target)**
+- Unique execution paths through code
+- Important for conditional logic
+- Focus on business-critical paths
+
+{% else -%}
+**Line Coverage (80%+ target)**
+- Percentage of source lines executed by tests
+
+**Branch Coverage (70%+ target)**
+- Percentage of conditional branches executed
+
+**Function Coverage (90%+ target)**
+- Percentage of functions tested
+
+**Statement Coverage (85%+ target)**
+- Percentage of statements executed
+
+**Mutation Score (80%+ target)**
+- Test quality measured by fault injection
+
+**Path Coverage (60%+ target)**
+- Percentage of unique execution paths tested
+
+{% endif -%}
+{%- endmacro %}
+
+{% macro render_coverage_table_simple(targets) -%}
+#### Coverage Targets
+
+| Metric | Target |
+|--------|--------|
+{% for metric, value in targets.items() -%}
+| {{ metric | capitalize }} | {{ value }}% |
+{% endfor %}
+{%- endmacro %}
+
+{% macro render_coverage_checklist(language) -%}
+#### Coverage Quality Checklist
+
+{% if language == 'python' -%}
+```
+Pytest Coverage Checklist:
+- [ ] All public functions have unit tests
+- [ ] All branches (if/else, loops) are tested
+- [ ] Edge cases and boundary conditions covered
+- [ ] Error paths and exceptions tested
+- [ ] Fixtures are properly scoped (function, module, session)
+- [ ] No use of .skip without documented reason
+- [ ] Coverage report reviewed for gaps
+- [ ] Mutation testing shows >80% score
+- [ ] Integration tests cover service boundaries
+- [ ] Parametrized tests cover multiple inputs
+- [ ] Mock objects verify expected calls
+- [ ] Test data is minimal and focused
+```
+
+Configuration to enforce coverage:
+```ini
+# pyproject.toml
+[tool.pytest.ini_options]
+minversion = "7.0"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "--cov --cov-branch --cov-report=html --cov-fail-under=80"
+```
+
+{% elif language == 'typescript' -%}
+```
+Vitest Coverage Checklist:
+- [ ] All exported functions have unit tests
+- [ ] All branches in conditional logic are tested
+- [ ] Error conditions and edge cases covered
+- [ ] Component rendering and interactions tested
+- [ ] API mocking with msw or jest.mock
+- [ ] Async operations properly tested (await)
+- [ ] Coverage report reviewed for red zones
+- [ ] No untested code in production files
+- [ ] Type narrowing tested for union types
+- [ ] Parametrized tests cover variants
+- [ ] Setup/teardown properly configured
+- [ ] Mutation testing shows >85% score
+```
+
+Configuration to enforce coverage:
+```typescript
+// vitest.config.ts
+export default defineConfig({
+  test: {
+    coverage: {
+      all: true,
+      include: ['src/**/*.ts', 'src/**/*.tsx'],
+      exclude: [
+        'node_modules/',
+        'dist/',
+        'src/**/*.d.ts',
+        'src/**/index.ts',
+      ],
+      thresholds: {
+        lines: 90,
+        functions: 95,
+        branches: 80,
+        statements: 90,
+      },
+    },
+  },
+})
+```
+
+{% else -%}
+```
+Coverage Quality Checklist:
+- [ ] All public functions are tested
+- [ ] All conditional branches are covered
+- [ ] Error cases and exceptions are tested
+- [ ] Edge cases and boundary values included
+- [ ] Coverage report shows >80% overall
+- [ ] Critical business logic has 90%+ coverage
+- [ ] No untested code shipped to production
+- [ ] Mutation testing verifies test quality
+- [ ] Integration tests cover service boundaries
+```
+
+{% endif -%}
+{%- endmacro %}
+
+{% macro render_coverage_improvement_guide() -%}
+#### Improving Coverage
+
+**Strategy for Increasing Coverage:**
+
+1. **Identify gaps:**
+   ```bash
+   # Generate HTML coverage report
+   pytest --cov --cov-report=html
+   # Open htmlcov/index.html and look for red (uncovered) lines
+   ```
+
+2. **Prioritize high-impact areas:**
+   - Error handling paths (exceptions, validations)
+   - Business logic (core algorithms, calculations)
+   - Public APIs (entry points for users)
+
+3. **Add edge case tests:**
+   - Boundary values (min, max, zero, empty)
+   - Invalid inputs (None, wrong type, malformed)
+   - State transitions (before, during, after)
+
+4. **Use parametrized tests:**
+   ```python
+   @pytest.mark.parametrize("input,expected", [
+       (0, 0),
+       (1, 1),
+       (-1, 1),  # absolute value test
+   ])
+   def test_absolute_value(input, expected):
+       assert abs(input) == expected
+   ```
+
+5. **Test error conditions:**
+   ```python
+   def test_error_handling():
+       with pytest.raises(ValueError):
+           invalid_function(bad_input)
+   ```
+
+6. **Run mutation testing:**
+   - Install: `pip install mutmut`
+   - Run: `mutmut run`
+   - Review: `mutmut results`
+   - Fixes: Add tests that catch the mutations
+
+{%- endmacro %}

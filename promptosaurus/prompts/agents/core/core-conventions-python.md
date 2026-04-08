@@ -1,4 +1,8 @@
 <!-- path: promptosaurus/prompts/agents/core/core-conventions-python.md -->
+{%- import 'macros/naming_conventions.jinja2' as naming -%}
+{%- import 'macros/testing_sections.jinja2' as testing -%}
+{%- import 'macros/coverage_targets.jinja2' as coverage -%}
+{%- import 'macros/code_examples.jinja2' as examples -%}
 # Core Conventions Python
 
 Language:             {{config.language | default('python')}}           e.g., Python 3.11+
@@ -75,90 +79,20 @@ Environment vars:    UPPER_SNAKE_CASE always
 
 ### Testing
 
-#### Coverage Targets
-Line:           {{config.coverage.line}}          e.g., 80%
-Branch:         {{config.coverage.branch}}        e.g., 70%
-Function:       {{config.coverage.function}}       e.g., 90%
-Statement:      {{config.coverage.statement}}      e.g., 85%
-Mutation:       {{config.coverage.mutation}}       e.g., 80%
-Path:           {{config.coverage.path}}           e.g., 60%
+{{ testing.render_test_types('python') }}
 
-#### Test Types
+{{ coverage.render_coverage_table(
+  line=config.coverage.line | default('80'),
+  branch=config.coverage.branch | default('70'),
+  function=config.coverage.function | default('90'),
+  statement=config.coverage.statement | default('85'),
+  mutation=config.coverage.mutation | default('80'),
+  path=config.coverage.path | default('60')
+) }}
 
-##### Unit Tests
-- One function or method in isolation
-- Mock all external dependencies (database, API calls, filesystem)
-- Use `pytest` fixtures for setup/teardown
-- Use `pytest.mark.parametrize` for table-driven tests
-- Use `pytest.raises` for exception testing
+{{ testing.render_test_scaffolding('python', 'uv') }}
 
-##### Integration Tests
-- Test at service or module boundary
-- Use real database (testcontainers) or in-memory alternatives
-- Test API endpoints, database queries, file operations
-- Clean up test data after each test
-
-##### Mutation Tests
-- Use `mutmut` or `pytest-mutmut` to verify test quality
-- Run after unit tests pass
-- Aim to kill mutations in core business logic
-
-##### Property-Based Tests
-- Use `hypothesis` for generative testing
-- Test edge cases automatically generated
-
-#### Framework & Tools
-Framework:         {{config.testing_framework}}       e.g., pytest
-Mocking library:   {{config.mocking_library}}             e.g., unittest.mock, pytest-mock
-Coverage tool:    {{config.coverage_tool}}             e.g., pytest-cov, coverage.py
-Mutation tool:    {{config.mutation_tool}}        e.g., mutmut, pytest-mutmut
-
-#### Scaffolding
-
-```bash
-# Install
-pip install pytest pytest-cov pytest-mock hypothesis mutmut
-
-# Run tests
-pytest                          # Run all tests
-pytest --cov                    # With coverage
-pytest --cov --cov-branch       # Line + branch coverage
-pytest --cov-report=html        # HTML report
-
-# Mutation testing
-mutmut run
-mutmut report
-
-# Configuration (pyproject.toml)
-[tool.pytest.ini_options]
-testpaths = ["tests"]
-python_files = ["test_*.py"]
-addopts = "-v --strict-markers"
-
-[tool.coverage.run]
-source = ["src"]
-branch = true
-
-[tool.coverage.report]
-exclude_lines = [
-    "pragma: no cover",
-    "if __name__ == .__main__.:",
-    "raise NotImplementedError",
-]
-```
-
-##### CI Integration
-```yaml
-# GitHub Actions example
-- name: Run tests
-  run: pytest --cov --cov-branch --cov-report=xml
-
-- name: Mutation tests
-  run: |
-    pip install mutmut
-    mutmut run
-    mutmut html > mutation_report.html
-```
+{{ testing.render_ci_integration('python') }}
 
 ### Code Style
 - Follow PEP 8 (enforced by Ruff)
@@ -175,9 +109,8 @@ exclude_lines = [
 - Use `@property.deleter` when cleanup logic is needed on attribute deletion
 - Prevent setting when inappropriate by raising `AttributeError` or `TypeError` in setters
 
-```python
-# GOOD - property with controlled access
-class Temperature:
+{{ examples.render_pattern_comparison('python', 
+'class Temperature:
     def __init__(self, celsius: float = 0.0) -> None:
         self._celsius = celsius
 
@@ -193,10 +126,8 @@ class Temperature:
 
     @celsius.deleter
     def celsius(self) -> None:
-        self._celsius = 0.0
-
-# BAD - direct field access or getter/setter methods
-class Temperature:
+        self._celsius = 0.0',
+'class Temperature:
     def __init__(self) -> None:
         self.celsius = 0.0  # Direct access - no validation
 
@@ -204,8 +135,8 @@ class Temperature:
         return self._celsius
 
     def set_celsius(self, value: float) -> None:  # Old-style setter
-        self._celsius = value
-```
+        self._celsius = value'
+) }}
 
 #### Public/Protected/Private Scoping
 - Use single underscore `_` prefix for protected/internal attributes and methods
@@ -276,35 +207,7 @@ def my_decorator(func):
 - Use `async for` for async iterators
 - Never use `time.sleep()` in async code - use `await asyncio.sleep()`
 
-```python
-import asyncio
-from contextlib import asynccontextmanager
-
-class AsyncResource:
-    async def fetch(self) -> bytes:
-        """Async operation."""
-        await asyncio.sleep(0.1)  # Never use time.sleep() in async code
-        return b"data"
-
-    async def __aenter__(self) -> "AsyncResource":
-        """Async context manager entry."""
-        await self.connect()
-        return self
-
-    async def __aexit__(self, exc_type, exc_val, exc_tb) -> None:
-        """Async context manager exit."""
-        await self.disconnect()
-
-@asynccontextmanager
-async def managed_resource() -> Iterator[AsyncResource]:
-    """Async context manager using decorator."""
-    resource = AsyncResource()
-    await resource.connect()
-    try:
-        yield resource
-    finally:
-        await resource.disconnect()
-```
+{{ examples.render_async_patterns('python') }}
 
 #### Context Managers (sync and async)
 - **ALWAYS use context managers** for resource management (files, connections, locks)
