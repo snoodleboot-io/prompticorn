@@ -1,11 +1,11 @@
 <!-- path: promptosaurus/prompts/agents/core/core-conventions-clojure.md -->
 # Core Conventions Clojure
 
-Language:             {{LANGUAGE}}           e.g., Clojure 1.12
-Runtime:              {{RUNTIME}}            e.g., JVM
-Package Manager:      {{PACKAGE_MANAGER}}        e.g., deps.edn, Leiningen
-Linter:              {{LINTER}}             e.g., eastwood, clj-kondo
-Formatter:           {{FORMATTER}}          e.g., cljfmt
+Language:             {{config.language}}           e.g., Clojure 1.12
+Runtime:              {{config.runtime}}            e.g., JVM
+Package Manager:      {{config.package_manager}}        e.g., deps.edn, Leiningen
+Linter:              {{config.linter}}             e.g., eastwood, clj-kondo
+Formatter:           {{config.formatter}}          e.g., cljfmt
 
 ### Naming Conventions
 
@@ -33,6 +33,6 @@ Environment vars:   UPPER_SNAKE_CASE always
 - Use meaningful names
 
 ### Testing
-Framework:       {{TESTING_FRAMEWORK}}        e.g., clojure.test
-Property tool:   {{PROPERTY_TOOL}}        e.g., test.check
-Coverage tool:  {{COVERAGE_TOOL}}              e.g., cloverage
+Framework:       {{config.testing_framework}}        e.g., clojure.test
+Property tool:   {{config.property_tool}}        e.g., test.check
+Coverage tool:  {{config.coverage_tool}}              e.g., cloverage

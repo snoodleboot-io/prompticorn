@@ -20,18 +20,3 @@ class RubyTestFrameworkQuestion(Question):
 
 - RSpec is behavior-driven with expressive syntax
 - Minitest is simpler, built into Ruby stdlib"""
-
-    @property
-    def options(self) -> list[str]:
-        return ["rspec", "minitest"]
-
-    @property
-    def option_explanations(self) -> dict[str, str]:
-        return {
-            "rspec": "Behavior-driven - expressive DSL, great mocking, recommended",
-            "minitest": "Built-in - simpler, faster, no dependencies",
-        }
-
-    @property
-    def default(self) -> str:
-        return "rspec"

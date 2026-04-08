@@ -47,12 +47,12 @@ class PythonUIFrameworkQuestion(Question):
     def option_explanations(self) -> dict[str, str]:
         """Get explanations for each option."""
         return {
-            "streamlit": "Streamlit - rapid prototyping, data apps",
-            "dash": "Dash - Plotly-based, analytical apps",
-            "reflex": "Reflex (Pynecone) - full-stack Python web apps",
-            "nicegui": "NiceGUI - simple GUI library",
-            "shiny": "Shiny for Python - R Shiny port",
-            "none": "No framework - using templates only",
+            "streamlit": "Simple data app framework, rapid prototyping from Python scripts to web apps",
+            "dash": "Enterprise analytical dashboards with Plotly charts, full interactivity",
+            "reflex": "Full-stack Python web framework, write frontend and backend in Python",
+            "nicegui": "Simple lightweight GUI library, desktop and web applications",
+            "shiny": "Reactive web framework ported from R Shiny, for data-driven applications",
+            "none": "No framework - using HTML templates only",
         }
 
     def format_prompt(self) -> list:

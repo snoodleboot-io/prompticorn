@@ -1,9 +1,9 @@
 <!-- path: promptosaurus/prompts/agents/core/core-conventions-terraform.md -->
 # Core Conventions Terraform
 
-Language:             {{LANGUAGE}}           e.g., Terraform 1.6+
-Provider:             {{PROVIDER}}           e.g., AWS, Azure, GCP
-State:               {{STATE_BACKEND}}      e.g., S3, Azure Blob, GCS
+Language:             {{config.language}}           e.g., Terraform 1.6+
+Provider:             {{config.provider}}           e.g., AWS, Azure, GCP
+State:               {{config.state_backend}}      e.g., S3, Azure Blob, GCS
 
 ### Naming Conventions
 
@@ -35,9 +35,9 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           {{LINE_COVERAGE_%}}          e.g., 80%
-Branch:         {{BRANCH_COVERAGE_%}}        e.g., 70%
-Path:           {{PATH_COVERAGE_%}}           e.g., 60%
+Line:           {{config.coverage.line}}          e.g., 80%
+Branch:         {{config.coverage.branch}}        e.g., 70%
+Path:           {{config.coverage.path}}           e.g., 60%
 
 #### Test Types
 
@@ -61,9 +61,9 @@ Path:           {{PATH_COVERAGE_%}}           e.g., 60%
 - Use examples for validation
 
 #### Framework & Tools
-Validation:    {{TERRAFORM_VALIDATE}}    e.g., terraform validate
-Linting:       {{LINT_TOOL}}           e.g., tflint, checkov
-Policy:        {{POLICY_TOOL}}         e.g., Sentinel, Conftest, OPA
+Validation:    {{config.terraform_validate}}    e.g., terraform validate
+Linting:       {{config.lint_tool}}           e.g., tflint, checkov
+Policy:        {{config.policy_tool}}         e.g., Sentinel, Conftest, OPA
 
 #### Scaffolding
 

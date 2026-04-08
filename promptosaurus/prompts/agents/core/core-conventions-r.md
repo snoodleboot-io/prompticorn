@@ -1,10 +1,10 @@
 <!-- path: promptosaurus/prompts/agents/core/core-conventions-r.md -->
 # Core Conventions R
 
-Language:             {{LANGUAGE}}           e.g., R 4.3+
-Package Manager:      {{PACKAGE_MANAGER}}        e.g., renv, pacman
-Linter:              {{LINTER}}             e.g., lintr
-Formatter:           {{FORMATTER}}          e.g., styler, formatR
+Language:             {{config.language}}           e.g., R 4.3+
+Package Manager:      {{config.package_manager}}        e.g., renv, pacman
+Linter:              {{config.linter}}             e.g., lintr
+Formatter:           {{config.formatter}}          e.g., styler, formatR
 
 ### Naming Conventions
 
@@ -36,11 +36,11 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           {{LINE_COVERAGE_%}}          e.g., 80%
-Branch:         {{BRANCH_COVERAGE_%}}        e.g., 70%
-Function:       {{FUNCTION_COVERAGE_%}}       e.g., 90%
-Statement:      {{STATEMENT_COVERAGE_%}}      e.g., 85%
-Path:           {{PATH_COVERAGE_%}}           e.g., 60%
+Line:           {{config.coverage.line}}          e.g., 80%
+Branch:         {{config.coverage.branch}}        e.g., 70%
+Function:       {{config.coverage.function}}       e.g., 90%
+Statement:      {{config.coverage.statement}}      e.g., 85%
+Path:           {{config.coverage.path}}           e.g., 60%
 
 #### Test Types
 
@@ -54,9 +54,9 @@ Path:           {{PATH_COVERAGE_%}}           e.g., 60%
 - Test data transformations
 
 #### Framework & Tools
-Framework:       {{TESTING_FRAMEWORK}}        e.g., testthat, tinytest
-Mocking:        {{MOCKING_LIBRARY}}              e.g., mockery, mockr
-Coverage tool:  {{COVERAGE_TOOL}}              e.g., covr
+Framework:       {{config.testing_framework}}        e.g., testthat, tinytest
+Mocking:        {{config.mocking_library}}              e.g., mockery, mockr
+Coverage tool:  {{config.coverage_tool}}              e.g., covr
 
 #### Scaffolding
 

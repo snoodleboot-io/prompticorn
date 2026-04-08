@@ -5,23 +5,6 @@ multi-option selection behavior (multiple options can be selected simultaneously
 
 Classes:
     MultiSelectionState: Multi-selection state - allows selecting multiple options.
-
-Example:
-    >>> from promptosaurus.ui.state.multi_selection_state import MultiSelectionState
-    >>>
-    >>> state = MultiSelectionState(selected={0, 1}, max_index=4)
-    >>> print(state.current_selection)
-    {0, 1}
-    >>>
-    >>> # Toggle selection
-    >>> new_state = state.select(2)
-    >>> print(new_state.current_selection)
-    {0, 1, 2}
-    >>>
-    >>> # Deselect
-    >>> new_state = state.select(0)
-    >>> print(new_state.current_selection)
-    {1}
 """
 
 from __future__ import annotations
@@ -42,13 +25,6 @@ class MultiSelectionState(SelectionState):
     Attributes:
         _selected: Frozenset of selected indices.
         _max: The maximum valid index.
-
-    Example:
-        >>> state = MultiSelectionState(selected={0, 2}, max_index=4)
-        >>> state.is_selected(0)
-        True
-        >>> state.is_selected(1)
-        False
     """
 
     def __init__(self, selected: set[int], max_index: int):
@@ -67,11 +43,6 @@ class MultiSelectionState(SelectionState):
 
         Returns:
             Set of currently selected indices.
-
-        Example:
-            >>> state = MultiSelectionState(selected={1, 2}, max_index=5)
-            >>> state.current_selection
-            {1, 2}
         """
         return set(self._selected)
 
@@ -86,17 +57,6 @@ class MultiSelectionState(SelectionState):
 
         Returns:
             New MultiSelectionState with the toggle applied.
-
-        Example:
-            >>> state = MultiSelectionState(selected={0}, max_index=3)
-            >>> # Select new
-            >>> new_state = state.select(1)
-            >>> new_state.current_selection
-            {0, 1}
-            >>> # Deselect
-            >>> new_state = state.select(0)
-            >>> new_state.current_selection
-            {1}
         """
         if index > self._max:
             return self
@@ -119,12 +79,6 @@ class MultiSelectionState(SelectionState):
 
         Returns:
             The same state instance (no change).
-
-        Example:
-            >>> state = MultiSelectionState(selected={0, 1}, max_index=3)
-            >>> new_state = state.navigate(1)
-            >>> new_state is state
-            True
         """
         return self
 
@@ -136,12 +90,5 @@ class MultiSelectionState(SelectionState):
 
         Returns:
             True if the index is currently selected.
-
-        Example:
-            >>> state = MultiSelectionState(selected={1, 3}, max_index=5)
-            >>> state.is_selected(1)
-            True
-            >>> state.is_selected(2)
-            False
         """
         return index in self._selected

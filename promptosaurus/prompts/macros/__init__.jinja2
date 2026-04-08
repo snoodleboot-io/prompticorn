@@ -1,0 +1,195 @@
+{#
+  Macro Libraries Documentation
+  
+  This file documents all available macro libraries that can be imported
+  and used in Jinja2 templates across the promptosaurus project.
+  
+  == MACRO LIBRARIES ==
+  
+  1. testing_sections.jinja2
+     - render_testing_section(language, framework, coverage_targets)
+     - render_test_types(language)
+     - render_test_scaffolding(language, package_manager)
+     - render_ci_integration(language)
+  
+  2. coverage_targets.jinja2
+     - render_coverage_table(line, branch, function, statement, mutation, path)
+     - render_coverage_details(language)
+     - render_coverage_table_simple(targets)
+     - render_coverage_checklist(language)
+     - render_coverage_improvement_guide()
+  
+  3. naming_conventions.jinja2
+     - render_naming_conventions(language)
+     - render_naming_table(language, patterns)
+     - render_naming_examples(language)
+     - render_naming_checklist(language)
+  
+  4. code_examples.jinja2
+     - render_code_example(language, code, description)
+     - render_pattern_comparison(language, good_code, bad_code, title)
+     - render_python_import_pattern()
+     - render_python_type_hints()
+     - render_python_error_handling()
+     - render_typescript_pattern()
+     - render_async_patterns(language)
+     - render_code_review_checklist(language)
+  
+  5. error_handling.jinja2
+     - render_error_section(pattern, description)
+     - render_error_pattern(language, pattern_name)
+     - render_error_recovery_guide(scenario)
+     - render_error_monitoring_checklist()
+  
+  6. checklist.jinja2
+     - render_checklist(items, title)
+     - render_numbered_steps(steps, title)
+     - render_verification_checklist(checks, category)
+     - render_code_quality_checklist(language)
+     - render_review_checklist()
+     - render_deployment_checklist()
+     - render_testing_checklist()
+     - render_git_workflow_checklist()
+     - render_documentation_checklist()
+  
+  == USAGE EXAMPLES ==
+  
+  Example 1: Import and use testing macro
+  -------
+  {% raw %}
+  {% import 'macros/testing_sections.jinja2' as testing %}
+  
+  {{ testing.render_testing_section('python', 'pytest', {
+      'line': 80,
+      'branch': 70,
+      'function': 90,
+      'statement': 85,
+      'mutation': 80,
+      'path': 60
+  }) }}
+  {% endraw %}
+  
+  
+  Example 2: Import and use coverage macro
+  -------
+  {% raw %}
+  {% import 'macros/coverage_targets.jinja2' as coverage %}
+  
+  {{ coverage.render_coverage_table(80, 70, 90, 85, 80, 60) }}
+  {{ coverage.render_coverage_checklist('python') }}
+  {% endraw %}
+  
+  
+  Example 3: Import and use naming conventions
+  -------
+  {% raw %}
+  {% import 'macros/naming_conventions.jinja2' as naming %}
+  
+  {{ naming.render_naming_conventions('python') }}
+  {{ naming.render_naming_examples('python') }}
+  {{ naming.render_naming_checklist('python') }}
+  {% endraw %}
+  
+  
+  Example 4: Import and use code examples
+  -------
+  {% raw %}
+  {% import 'macros/code_examples.jinja2' as examples %}
+  
+  {{ examples.render_python_import_pattern() }}
+  {{ examples.render_python_type_hints() }}
+  {{ examples.render_async_patterns('python') }}
+  {{ examples.render_code_review_checklist('python') }}
+  {% endraw %}
+  
+  
+  Example 5: Import and use error handling
+  -------
+  {% raw %}
+  {% import 'macros/error_handling.jinja2' as errors %}
+  
+  {{ errors.render_error_pattern('python', 'exception_hierarchy') }}
+  {{ errors.render_error_recovery_guide('database_failures') }}
+  {{ errors.render_error_monitoring_checklist() }}
+  {% endraw %}
+  
+  
+  Example 6: Import and use checklists
+  -------
+  {% raw %}
+  {% import 'macros/checklist.jinja2' as checklists %}
+  
+  {{ checklists.render_code_quality_checklist('python') }}
+  {{ checklists.render_review_checklist() }}
+  {{ checklists.render_deployment_checklist() }}
+  {{ checklists.render_testing_checklist() }}
+  {% endraw %}
+  
+  
+  == IMPORTANT CONTEXT VARIABLES ==
+  
+  These variables should be available in your template context:
+  
+  - language: str (e.g., 'python', 'typescript', 'go')
+  - framework: str (e.g., 'pytest', 'vitest', 'jest')
+  - package_manager: str (e.g., 'uv', 'pip', 'npm', 'pnpm')
+  - coverage_targets: dict with keys: line, branch, function, statement, mutation, path
+  - version: str (semantic version)
+  
+  Example context:
+  {% raw %}
+  {
+    'language': 'python',
+    'framework': 'pytest',
+    'package_manager': 'uv',
+    'coverage_targets': {
+        'line': 80,
+        'branch': 70,
+        'function': 90,
+        'statement': 85,
+        'mutation': 80,
+        'path': 60
+    }
+  }
+  {% endraw %}
+  
+  
+  == MACRO COMPOSITION EXAMPLES ==
+  
+  You can compose multiple macros in a single template:
+  
+  {% raw %}
+  {% import 'macros/testing_sections.jinja2' as testing %}
+  {% import 'macros/coverage_targets.jinja2' as coverage %}
+  {% import 'macros/code_examples.jinja2' as examples %}
+  
+  # Testing Setup Guide
+  
+  {{ testing.render_testing_section(language, framework, coverage_targets) }}
+  
+  {{ coverage.render_coverage_checklist(language) }}
+  
+  {{ examples.render_code_review_checklist(language) }}
+  {% endraw %}
+  
+  
+  == EXTENDING MACROS ==
+  
+  To extend or customize a macro, create a new template that imports
+  and wraps the existing macro:
+  
+  {% raw %}
+  {% import 'macros/testing_sections.jinja2' as base_testing %}
+  
+  {% macro custom_testing_guide(language) %}
+  # Custom Testing Guide for {{ language | capitalize }}
+  
+  {{ base_testing.render_testing_section(language, 'pytest', coverage_targets) }}
+  
+  ## Additional Notes
+  Custom organization-specific guidance here...
+  
+  {% endmacro %}
+  {% endraw %}
+  
+#}

@@ -1,11 +1,13 @@
 <!-- path: promptosaurus/prompts/agents/core/core-conventions-kotlin.md -->
+{%- import 'macros/testing_sections.jinja2' as testing -%}
+{%- import 'macros/coverage_targets.jinja2' as coverage -%}
 # Core Conventions Kotlin
 
-Language:             {{LANGUAGE}}           e.g., Kotlin 1.9
-Runtime:              {{RUNTIME}}            e.g., JVM 21, Kotlin/JS, Kotlin/Native
-Package Manager:      {{PACKAGE_MANAGER}}        e.g., Gradle, Maven
-Linter:               {{LINTER}}             e.g., ktlint, detekt
-Formatter:           {{FORMATTER}}          e.g., ktlint
+Language:             {{config.language}}           e.g., Kotlin 1.9
+Runtime:              {{config.runtime}}            e.g., JVM 21, Kotlin/JS, Kotlin/Native
+Package Manager:      {{config.package_manager}}        e.g., Gradle, Maven
+Linter:               {{config.linter}}             e.g., ktlint, detekt
+Formatter:           {{config.formatter}}          e.g., ktlint
 
 ### Naming Conventions
 
@@ -37,51 +39,13 @@ Environment vars:   UPPER_SNAKE_CASE always
 
 ### Testing
 
-#### Coverage Targets
-Line:           {{LINE_COVERAGE_%}}          e.g., 80%
-Branch:         {{BRANCH_COVERAGE_%}}        e.g., 70%
-Function:       {{FUNCTION_COVERAGE_%}}       e.g., 90%
-Statement:      {{STATEMENT_COVERAGE_%}}      e.g., 85%
-Path:           {{PATH_COVERAGE_%}}           e.g., 60%
+{{ testing.render_test_types('kotlin') }}
 
-#### Test Types
-
-##### Unit Tests
-- Use JUnit 5 or Kotest
-- Use MockK for mocking
-- Test one function/class in isolation
-
-##### Integration Tests
-- Use Spring Boot Test for integration
-- Use Testcontainers for databases
-
-##### Property Tests
-- Use Kotest property-based testing
-
-#### Framework & Tools
-Framework:       {{TESTING_FRAMEWORK}}        e.g., JUnit 5, Kotest
-Mocking:        {{MOCKING_LIBRARY}}              e.g., MockK
-Property tool:   {{PROPERTY_TOOL}}        e.g., Kotest
-Coverage tool:  {{COVERAGE_TOOL}}              e.g., JaCoCo
-
-#### Scaffolding
-
-```kotlin
-// build.gradle.kts
-dependencies {
-    testImplementation("io.kotest:kotest-runner-junit5:5.8.0")
-    testImplementation("io.kotest:kotest-property:5.8.0")
-    testImplementation("io.mockk:mockk:1.13.8")
-}
-
-// Run tests
-././gradlew testgradlew test
- -Pcoverage=true
-```
-
-##### CI Integration
-```yaml
-# GitHub Actions
-- name: Run tests
-  run: ./gradlew test
-```
+{{ coverage.render_coverage_table(
+  line=config.coverage.line | default('80'),
+  branch=config.coverage.branch | default('70'),
+  function=config.coverage.function | default('90'),
+  statement=config.coverage.statement | default('85'),
+  mutation=config.coverage.mutation | default('80'),
+  path=config.coverage.path | default('60')
+) }}

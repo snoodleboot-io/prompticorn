@@ -1,11 +1,11 @@
 <!-- path: promptosaurus/prompts/agents/core/core-conventions-c.md -->
 # Core Conventions C
 
-Language:             {{LANGUAGE}}           e.g., C17, C23
-Compiler:            {{RUNTIME}}            e.g., GCC, Clang, MSVC
-Package Manager:      {{PACKAGE_MANAGER}}        e.g., CMake, make
-Linter:               {{LINTER}}             e.g., cppcheck, clang-tidy
-Formatter:           {{FORMATTER}}          e.g., clang-format
+Language:             {{config.language}}           e.g., C17, C23
+Compiler:            {{config.runtime}}            e.g., GCC, Clang, MSVC
+Package Manager:      {{config.package_manager}}        e.g., CMake, make
+Linter:               {{config.linter}}             e.g., cppcheck, clang-tidy
+Formatter:           {{config.formatter}}          e.g., clang-format
 
 ### Naming Conventions
 
@@ -40,11 +40,11 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           {{LINE_COVERAGE_%}}          e.g., 80%
-Branch:         {{BRANCH_COVERAGE_%}}        e.g., 70%
-Function:       {{FUNCTION_COVERAGE_%}}       e.g., 90%
-Statement:      {{STATEMENT_COVERAGE_%}}      e.g., 85%
-Path:           {{PATH_COVERAGE_%}}           e.g., 60%
+Line:           {{config.coverage.line}}          e.g., 80%
+Branch:         {{config.coverage.branch}}        e.g., 70%
+Function:       {{config.coverage.function}}       e.g., 90%
+Statement:      {{config.coverage.statement}}      e.g., 85%
+Path:           {{config.coverage.path}}           e.g., 60%
 
 #### Test Types
 
@@ -62,9 +62,9 @@ Path:           {{PATH_COVERAGE_%}}           e.g., 60%
 - Run in CI pipeline
 
 #### Framework & Tools
-Framework:       {{TESTING_FRAMEWORK}}        e.g., Unity, Check, CMocka
-Coverage tool:  {{COVERAGE_TOOL}}              e.g., lcov, gcov
-Static analysis: {{LINT_TOOL}}           e.g., cppcheck, clang-tidy
+Framework:       {{config.testing_framework}}        e.g., Unity, Check, CMocka
+Coverage tool:  {{config.coverage_tool}}              e.g., lcov, gcov
+Static analysis: {{config.lint_tool}}           e.g., cppcheck, clang-tidy
 
 #### Scaffolding
 

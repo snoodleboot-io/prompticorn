@@ -1,0 +1,279 @@
+{#
+  testing_sections.jinja2
+  
+  Testing patterns macro library for generating testing framework setup sections.
+  Provides reusable macros for rendering comprehensive testing guidance across
+  different languages and testing frameworks.
+  
+  Usage:
+    {% import 'macros/testing_sections.jinja2' as testing %}
+    {{ testing.render_testing_section('python', 'pytest', coverage_targets) }}
+    {{ testing.render_test_types(language) }}
+    {{ testing.render_test_scaffolding(language, package_manager) }}
+#}
+
+{% macro render_testing_section(language, framework, coverage_targets) -%}
+### Testing
+
+#### Coverage Targets
+{% for metric, value in coverage_targets.items() %}
+{{ metric | capitalize }}:{{ "           " }}{{ value }}{{ "          " }}e.g., {{ value }}%
+{% endfor %}
+
+#### Test Types
+
+{% if language == 'python' -%}
+##### Unit Tests
+- One function or method in isolation
+- Mock all external dependencies (database, API calls, filesystem)
+- Use `pytest` fixtures for setup/teardown
+- Use `pytest.mark.parametrize` for table-driven tests
+- Use `pytest.raises` for exception testing
+
+##### Integration Tests
+- Test at service or module boundary
+- Use real database (testcontainers) or in-memory alternatives
+- Test API endpoints, database queries, file operations
+- Clean up test data after each test
+
+##### Mutation Tests
+- Use `mutmut` or `pytest-mutmut` to verify test quality
+- Run after unit tests pass
+- Aim to kill mutations in core business logic
+
+##### Property-Based Tests
+- Use `hypothesis` for generative testing
+- Test edge cases automatically generated
+
+{% elif language == 'typescript' -%}
+##### Unit Tests
+- One function or method in isolation
+- Mock external dependencies (APIs, filesystem, database)
+- Use `describe`/`it` blocks with descriptive names
+- Test behavior, not implementation
+
+##### Integration Tests
+- Test at service or module boundary
+- Use real services or in-memory alternatives (msw, testcontainers)
+- Test API endpoints, database queries, file operations
+
+##### E2E Tests
+- Use Playwright or Cypress for browser testing
+- Test critical user flows end-to-end
+
+##### Component Tests
+- Use Testing Library (@testing-library/react, @testing-library/vue)
+- Test component rendering and user interactions
+
+##### Mutation Tests
+- Use `stryker-mutator` to verify test quality
+- Run after unit tests pass
+
+{% else -%}
+##### Unit Tests
+- One function or method in isolation
+- Mock all external dependencies
+- Use framework-specific setup/teardown patterns
+
+##### Integration Tests
+- Test at service or module boundary
+- Use real or in-memory implementations of external services
+- Clean up test data after each test
+
+{% endif -%}
+#### Framework & Tools
+Framework:{{ "         " }}{{ framework }}
+{%- endmacro %}
+
+{% macro render_test_types(language) -%}
+#### Test Organization by Type
+
+{% if language == 'python' -%}
+**Unit Tests:**
+- Fast, isolated tests of individual functions/methods
+- Mock external dependencies completely
+- Target: 80%+ coverage
+- Framework: pytest
+
+**Integration Tests:**
+- Multi-component tests at service boundaries
+- Use real database (testcontainers) or in-memory alternatives
+- Target: Key workflows and API contracts
+- Framework: pytest with fixtures
+
+**Mutation Tests:**
+- Verify test quality by introducing bugs
+- Tools: mutmut, pytest-mutmut
+- Run after unit tests pass
+- Target: 80%+ mutation score on critical code
+
+**Property-Based Tests:**
+- Generative testing with automatically generated inputs
+- Tool: hypothesis
+- Great for edge cases and boundary conditions
+
+{% elif language == 'typescript' -%}
+**Unit Tests:**
+- Fast, isolated tests of individual functions
+- Mock external dependencies
+- Target: 90%+ coverage
+- Framework: Vitest or Jest
+
+**Integration Tests:**
+- Multi-component tests
+- Use msw for API mocking or testcontainers for databases
+- Target: Component interactions and data flow
+
+**E2E Tests:**
+- Full application testing from user perspective
+- Tool: Playwright or Cypress
+- Target: Critical user flows
+
+**Component Tests (React/Vue):**
+- Test component rendering and user interactions
+- Tool: @testing-library/react or @testing-library/vue
+- Target: Component behavior, not implementation
+
+**Mutation Tests:**
+- Verify test quality
+- Tool: @stryker-mutator/core
+- Target: 85%+ mutation score
+
+{% else -%}
+**Unit Tests:**
+- Isolated tests of individual units
+- Mock external dependencies
+- Use language-specific testing framework
+
+**Integration Tests:**
+- Multi-component tests at boundaries
+- Test real integrations where possible
+
+**E2E Tests:**
+- Full system testing
+- Critical user flows
+
+{% endif -%}
+{%- endmacro %}
+
+{% macro render_test_scaffolding(language, package_manager='pip') -%}
+#### Test Scaffolding
+
+{% if language == 'python' and package_manager == 'uv' -%}
+```bash
+# Install
+uv pip install pytest pytest-cov pytest-mock hypothesis mutmut
+
+# Run tests
+pytest                          # Run all tests
+pytest --cov                    # With coverage
+pytest --cov --cov-branch       # Line + branch coverage
+pytest --cov-report=html        # HTML report
+
+# Mutation testing
+mutmut run
+mutmut report
+
+# Configuration (pyproject.toml)
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+addopts = "-v --strict-markers"
+
+[tool.coverage.run]
+source = ["src"]
+branch = true
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "if __name__ == .__main__.:",
+    "raise NotImplementedError",
+]
+```
+
+{% elif language == 'typescript' and package_manager == 'pnpm' -%}
+```bash
+# Install (using pnpm)
+pnpm add -D vitest @vitest/coverage-v8 @testing-library/react jest-mock-extended
+
+# Run tests
+vitest run                    # Run all tests
+vitest run --coverage         # With coverage
+vitest run --coverage.branch  # Line + branch
+
+# Configuration (vitest.config.ts)
+import { defineConfig } from 'vitest/config'
+
+export default defineConfig({
+  test: {
+    globals: true,
+    environment: 'node',
+    coverage: {
+      provider: 'v8',
+      reporter: ['text', 'html'],
+      branches: true,
+      functions: true,
+      lines: true,
+      statements: true,
+    },
+  },
+})
+```
+
+{% else -%}
+```bash
+# Install dependencies for testing
+# Use your language-specific package manager
+
+# Run tests
+# Use your language-specific test runner
+
+# Configure coverage reporting
+# Adjust to your framework specifications
+```
+
+{% endif -%}
+{%- endmacro %}
+
+{% macro render_ci_integration(language) -%}
+##### CI Integration
+
+{% if language == 'python' -%}
+```yaml
+# GitHub Actions example
+- name: Run tests
+  run: pytest --cov --cov-branch --cov-report=xml
+
+- name: Mutation tests
+  run: |
+    pip install mutmut
+    mutmut run
+    mutmut html > mutation_report.html
+```
+
+{% elif language == 'typescript' -%}
+```yaml
+# GitHub Actions example
+- name: Run tests
+  run: pnpm vitest run --coverage
+
+- name: Mutation tests
+  run: |
+    pnpm add -D @stryker-mutator/core
+    npx stryker run
+```
+
+{% else -%}
+```yaml
+# GitHub Actions example
+# Adjust paths and commands for your language and framework
+- name: Run tests
+  run: # Your test command here
+  
+- name: Generate coverage
+  run: # Your coverage command here
+```
+
+{% endif -%}
+{%- endmacro %}

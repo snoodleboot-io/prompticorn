@@ -23,18 +23,8 @@ class TypeScriptVersionQuestion(Question):
 
     @property
     def options(self) -> list[str]:
-        return ["5.4", "5.3", "5.2", "5.1", "5.0"]
-
-    @property
-    def option_explanations(self) -> dict[str, str]:
-        return {
-            "5.4": "Latest stable - best inference, const type params, recommended",
-            "5.3": "Recent stable - excellent all-around",
-            "5.2": "Stable - decorators,/modifiers, narrowing",
-            "5.1": "Long-term support - very stable, maximum compatibility",
-            "5.0": "Major release - significant changes, may need updates",
-        }
+        return ["5.4", "5.x", "5.3", "5.0", "4.x", "3.x"]
 
     @property
     def default(self) -> str:
-        return "5.4"
+        return "5.x"

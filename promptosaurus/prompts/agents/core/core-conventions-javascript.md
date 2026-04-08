@@ -1,11 +1,11 @@
 <!-- path: promptosaurus/prompts/agents/core/core-conventions-javascript.md -->
 # Core Conventions JavaScript
 
-Language:             {{LANGUAGE}}           e.g., JavaScript ES2024
-Runtime:              {{RUNTIME}}            e.g., Node.js 20, Deno, Bun
-Package Manager:      {{PACKAGE_MANAGER}}        e.g., npm, pnpm, yarn
-Linter:               {{LINTER}}             e.g., ESLint
-Formatter:           {{FORMATTER}}          e.g., Prettier
+Language:             {{config.language | default('javascript')}}           e.g., JavaScript ES2024
+Runtime:              {{config.runtime | default('Node.js 20')}}            e.g., Node.js 20, Deno, Bun
+Package Manager:      {{config.package_manager | default('npm')}}        e.g., npm, pnpm, yarn
+Linter:               {{config.linter | default('eslint')}}             e.g., ESLint
+Formatter:           {{config.formatter | default('prettier')}}          e.g., Prettier
 
 ### Naming Conventions
 
@@ -38,12 +38,12 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           {{LINE_COVERAGE_%}}          e.g., 80%
-Branch:         {{BRANCH_COVERAGE_%}}        e.g., 70%
-Function:       {{FUNCTION_COVERAGE_%}}       e.g., 90%
-Statement:      {{STATEMENT_COVERAGE_%}}      e.g., 85%
-Mutation:       {{MUTATION_COVERAGE_%}}       e.g., 80%
-Path:           {{PATH_COVERAGE_%}}           e.g., 60%
+Line:           {{config.coverage.line}}          e.g., 80%
+Branch:         {{config.coverage.branch}}        e.g., 70%
+Function:       {{config.coverage.function}}       e.g., 90%
+Statement:      {{config.coverage.statement}}      e.g., 85%
+Mutation:       {{config.coverage.mutation}}       e.g., 80%
+Path:           {{config.coverage.path}}           e.g., 60%
 
 #### Test Types
 
@@ -63,10 +63,10 @@ Path:           {{PATH_COVERAGE_%}}           e.g., 60%
 - Use `stryker-mutator` for JavaScript
 
 #### Framework & Tools
-Framework:       {{TESTING_FRAMEWORK}}        e.g., Jest, Vitest, Mocha
-Mocking library: {{MOCKING_LIBRARY}}              e.g., jest-mock, sinon
-Coverage tool:  {{COVERAGE_TOOL}}              e.g., Jest coverage, c8
-E2E tool:       {{E2E_TOOL}}             e.g., Playwright, Cypress
+Framework:       {{config.testing_framework}}        e.g., Jest, Vitest, Mocha
+Mocking library: {{config.mocking_library}}              e.g., jest-mock, sinon
+Coverage tool:  {{config.coverage_tool}}              e.g., Jest coverage, c8
+E2E tool:       {{config.e2e_tool}}             e.g., Playwright, Cypress
 
 #### Scaffolding
 

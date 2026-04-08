@@ -77,7 +77,7 @@ class TestConfigHandler:
                         "language": "python",
                         "python_linter": ["ruff"],
                     }
-                ]
+                ],
             }
 
             ConfigHandler.save_config(test_config, config_path)
@@ -93,7 +93,9 @@ class TestConfigHandler:
             for line in lines:
                 if line.startswith("spec:"):
                     # spec: should have no leading spaces
-                    assert not line.startswith(" "), f"spec: should have no leading spaces: {line!r}"
+                    assert not line.startswith(" "), (
+                        f"spec: should have no leading spaces: {line!r}"
+                    )
                 elif line.startswith("- folder:"):
                     # List item should start with exactly 2 spaces then dash
                     assert line.startswith("  -"), f"List item should have 2-space indent: {line!r}"
@@ -102,7 +104,9 @@ class TestConfigHandler:
                     assert line.startswith("  "), f"Property should have 2-space indent: {line!r}"
                 elif line.startswith("    - ruff"):
                     # Nested list item should have 4-space indent
-                    assert line.startswith("    -"), f"Nested list should have 4-space indent: {line!r}"
+                    assert line.startswith("    -"), (
+                        f"Nested list should have 4-space indent: {line!r}"
+                    )
 
     def test_load_nonexistent_returns_empty_dict(self):
         """Should return empty dict for non-existent config."""

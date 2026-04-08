@@ -17,17 +17,6 @@ Functions:
 
 Classes:
     KiloIDEBuilder: Builder for Kilo Code .kilocode/rules-{mode}/ directory structure.
-
-Example:
-    >>> from pathlib import Path
-    >>> from promptosaurus.builders.kilo.kilo_ide import KiloIDEBuilder
-    >>> builder = KiloIDEBuilder()
-    >>> actions = builder.build(Path("./output"))
-    >>> for action in actions[:3]:
-    ...     print(action)
-    ✓ AGENTS.md
-    ✓ core-system.md → .kilocode/rules/core-system.md
-    ✓ core-conventions.md → .kilocode/rules/core-conventions.md
 """
 
 from pathlib import Path
@@ -56,14 +45,6 @@ def _make_dest_filename(filename: str, mode_key: str | None = None) -> str:
 
     Returns:
         The destination filename.
-
-    Example:
-        >>> _make_dest_filename("agents/core/core-system.md")
-        'system.md'
-        >>> _make_dest_filename("agents/core/core-conventions-python.md")
-        'conventions-python.md'
-        >>> _make_dest_filename("agents/code/subagents/code-feature.md", "code")
-        'feature.md'
     """
     # Handle core files first
     if filename.startswith("agents/core/core-conventions-"):
@@ -105,12 +86,6 @@ def _flatten_agent_path(filename: str, mode_key: str) -> str:
 
     Returns:
         The flattened filename with mode prefix removed.
-
-    Example:
-        >>> _flatten_agent_path("agents/code/subagents/code-feature.md", "code")
-        'feature.md'
-        >>> _flatten_agent_path("agents/refactor/subagents/refactor-structure.md", "refactor")
-        'structure.md'
     """
     slash1 = filename.find("/")
     if slash1 <= 0:
@@ -154,12 +129,6 @@ class KiloIDEBuilder(KiloCodeBuilder):
 
     Attributes:
         Inherits all attributes from KiloCodeBuilder.
-
-    Example:
-        >>> builder = KiloIDEBuilder()
-        >>> # Build files
-        >>> actions = builder.build(Path("./my-project"))
-        >>> print(f\"Generated {len(actions)} files\")
     """
 
     def build(
@@ -182,14 +151,6 @@ class KiloIDEBuilder(KiloCodeBuilder):
 
         Returns:
             List of action strings describing what was created.
-
-        Example:
-            >>> from pathlib import Path
-            >>> builder = KiloIDEBuilder()
-            >>> # Normal run
-            >>> actions = builder.build(Path("./output"))
-            >>> # Dry run
-            >>> actions = builder.build(Path("./output"), dry_run=True)
         """
         actions: list[str] = []
 
@@ -265,11 +226,6 @@ class KiloIDEBuilder(KiloCodeBuilder):
 
         Raises:
             ValueError: If the AGENTS.md template file is not found.
-
-        Example:
-            >>> content = self._get_agents_md_content()
-            >>> print(len(content) > 0)
-            True
         """
         path = Path(__file__).parent / "AGENTS_KILO_IDE.md"
         if not path.exists():

@@ -2,7 +2,7 @@
 
 import pytest
 
-from promptosaurus.questions.base.constants import RepositoryTypes, REPO_TYPES
+from promptosaurus.questions.base.constants import REPO_TYPES, RepositoryTypes
 from promptosaurus.questions.base.folder_mapping_question import FolderMappingQuestion
 from promptosaurus.questions.base.question import Question
 from promptosaurus.questions.base.repository_type_question import RepositoryTypeQuestion
@@ -112,7 +112,7 @@ class TestConstants:
         """REPO_TYPE constants should have correct values."""
         assert RepositoryTypes.SINGLE == "single-language"
         assert RepositoryTypes.MULTI_MONOREPO == "multi-language-monorepo"
-        assert RepositoryTypes.MIXED == "mixed"
+        assert RepositoryTypes.MIXED == "mixed-collocation"
 
     def test_repo_types_list(self):
         """REPO_TYPES should include all repo types."""

@@ -30,27 +30,17 @@ class PythonMockingLibraryQuestion(Question):
     @property
     def option_explanations(self) -> dict[str, str]:
         return {
-            "unittest.mock": "Built-in - no dependencies, standard library, widely used",
-            "pytest-mock": "pytest plugin - convenient fixture injection, cleaner syntax (recommended)",
-            "freezegun": "Mock time/date - freeze datetime for testing time-dependent code",
-            "responses": "Mock HTTP - mock requests library responses for API testing",
-            "none": "No mocking - use real objects for integration/acceptance tests",
+            "unittest.mock": "Standard library mocking, built-in to Python, no dependencies needed",
+            "pytest-mock": "pytest fixture-based mocking, cleaner syntax than unittest.mock",
+            "freezegun": "Mock system time and datetime, useful for testing time-dependent behavior",
+            "responses": "Mock HTTP requests, test code without hitting real APIs",
+            "none": "Skip mocking libraries, use real objects for integration tests",
         }
+
+    @property
+    def default(self) -> str:
+        return "unittest.mock"
 
     @property
     def allow_multiple(self) -> bool:
         return True
-
-    @property
-    def default(self) -> str:
-        return "pytest-mock"
-
-    @property
-    def default_indices(self) -> set[int]:
-        # Default to pytest-mock (index 1)
-        return {1}
-
-    @property
-    def none_index(self) -> int | None:
-        # 'none' is at index 4
-        return 4

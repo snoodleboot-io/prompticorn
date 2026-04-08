@@ -22,13 +22,6 @@ Functions:
     load_current_values: Load current config values into ConfigOption objects
     get_nested_value: Get value from nested dict using dot notation
     set_nested_value: Set value in nested dict using dot notation
-
-Example:
-    >>> from promptosaurus.config_options import CONFIG_OPTIONS, load_current_values
-    >>> config = {"spec": {"language": "python"}}
-    >>> options = load_current_values(config)
-    >>> options[0].current_value
-    'python'
 """
 
 from dataclasses import dataclass
@@ -102,16 +95,6 @@ class ConfigOption:
         option_type: Type of option - "single-select", "text", or "composite".
         current_value: The current value from the configuration file.
         available_options: List of valid choices for single-select options.
-
-    Example:
-        >>> opt = ConfigOption(
-        ...     key="spec.language",
-        ...     display_name="Language",
-        ...     option_type="single-select",
-        ...     available_options=["python", "typescript"]
-        ... )
-        >>> opt.key
-        'spec.language'
     """
 
     key: str
@@ -186,12 +169,6 @@ def load_current_values(
 
     Returns:
         List of ConfigOption objects with current values populated.
-
-    Example:
-        >>> config = {"spec": {"language": "python"}}
-        >>> options = load_current_values(config)
-        >>> options[0].current_value
-        'python'
     """
     if options is None:
         options = CONFIG_OPTIONS.copy()

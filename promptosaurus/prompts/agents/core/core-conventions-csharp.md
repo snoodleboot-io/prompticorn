@@ -1,11 +1,11 @@
 <!-- path: promptosaurus/prompts/agents/core/core-conventions-csharp.md -->
 # Core Conventions C#
 
-Language:             {{LANGUAGE}}           e.g., C# 12, .NET 8
-Runtime:              {{RUNTIME}}            e.g., .NET 8, Mono
-Package Manager:      {{PACKAGE_MANAGER}}        e.g., NuGet, dotnet
-Linter:               {{LINTER}}             e.g., StyleCop, SonarLint
-Formatter:           {{FORMATTER}}          e.g., dotnet format, ReSharper
+Language:             {{config.language}}           e.g., C# 12, .NET 8
+Runtime:              {{config.runtime}}            e.g., .NET 8, Mono
+Package Manager:      {{config.package_manager}}        e.g., NuGet, dotnet
+Linter:               {{config.linter}}             e.g., StyleCop, SonarLint
+Formatter:           {{config.formatter}}          e.g., dotnet format, ReSharper
 
 ### Naming Conventions
 
@@ -39,12 +39,12 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           {{LINE_COVERAGE_%}}          e.g., 80%
-Branch:         {{BRANCH_COVERAGE_%}}        e.g., 70%
-Function:       {{FUNCTION_COVERAGE_%}}       e.g., 90%
-Statement:      {{STATEMENT_COVERAGE_%}}      e.g., 85%
-Mutation:       {{MUTATION_COVERAGE_%}}       e.g., 80%
-Path:           {{PATH_COVERAGE_%}}           e.g., 60%
+Line:           {{config.coverage.line}}          e.g., 80%
+Branch:         {{config.coverage.branch}}        e.g., 70%
+Function:       {{config.coverage.function}}       e.g., 90%
+Statement:      {{config.coverage.statement}}      e.g., 85%
+Mutation:       {{config.coverage.mutation}}       e.g., 80%
+Path:           {{config.coverage.path}}           e.g., 60%
 
 #### Test Types
 
@@ -65,9 +65,9 @@ Path:           {{PATH_COVERAGE_%}}           e.g., 60%
 - Use BenchmarkDotNet for micro-benchmarks
 
 #### Framework & Tools
-Framework:       {{TESTING_FRAMEWORK}}        e.g., xUnit, NUnit, MSTest
-Mocking library: {{MOCKING_LIBRARY}}              e.g., Moq, NSubstitute
-Coverage tool:  {{COVERAGE_TOOL}}              e.g., Coverlet, dotnet-coverage
+Framework:       {{config.testing_framework}}        e.g., xUnit, NUnit, MSTest
+Mocking library: {{config.mocking_library}}              e.g., Moq, NSubstitute
+Coverage tool:  {{config.coverage_tool}}              e.g., Coverlet, dotnet-coverage
 
 #### Scaffolding
 

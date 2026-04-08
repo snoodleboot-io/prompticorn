@@ -46,11 +46,11 @@ class PythonAPIFrameworkQuestion(Question):
     def option_explanations(self) -> dict[str, str]:
         """Get explanations for each option."""
         return {
-            "fastapi": "FastAPI - modern, async, auto-docs, type hints",
-            "flask": "Flask - lightweight, flexible, extensions",
-            "django": "Django - full-featured, ORM, admin, auth",
-            "starlette": "Starlette - ASGI framework, minimal",
-            "none": "No framework - using stdlib only",
+            "fastapi": "Modern async framework with automatic OpenAPI docs, type validation, excellent performance",
+            "flask": "Lightweight and flexible, minimal dependencies, easy to learn and extend",
+            "django": "Full-featured framework with ORM, admin interface, built-in authentication and permissions",
+            "starlette": "Minimal ASGI framework for advanced use cases, excellent for microservices",
+            "none": "No framework - using only Python standard library",
         }
 
     def format_prompt(self) -> list:

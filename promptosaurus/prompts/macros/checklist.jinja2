@@ -1,0 +1,405 @@
+{#
+  checklist.jinja2
+  
+  Checklist patterns macro library for generating reusable checklist items.
+  Provides reusable macros for checklists, task lists, and verification steps.
+  
+  Usage:
+    {% import 'macros/checklist.jinja2' as checklists %}
+    {{ checklists.render_checklist(items, 'Code Review') }}
+    {{ checklists.render_numbered_steps(steps, 'Installation') }}
+    {{ checklists.render_verification_checklist(checks) }}
+#}
+
+{% macro render_checklist(items, title='') -%}
+{% if title %}#### {{ title }}
+
+{% endif -%}
+```
+{% for item in items -%}
+- [ ] {{ item }}
+{% endfor -%}
+```
+{%- endmacro %}
+
+{% macro render_numbered_steps(steps, title='') -%}
+{% if title %}#### {{ title }}
+
+{% endif -%}
+{% for step in steps -%}
+{{ loop.index }}. {{ step }}
+{% if loop.last == False %}
+{% endif %}
+{% endfor -%}
+{%- endmacro %}
+
+{% macro render_verification_checklist(checks, category='') -%}
+#### {% if category %}{{ category }} - {% endif %}Verification Checklist
+
+```
+{% for check in checks -%}
+- [ ] {{ check }}
+{% endfor -%}
+```
+{%- endmacro %}
+
+{% macro render_code_quality_checklist(language) -%}
+#### Code Quality Checklist - {{ language | capitalize }}
+
+{% if language == 'python' -%}
+```
+Python Code Quality Checklist:
+- [ ] All functions have docstrings
+- [ ] All public functions have type hints
+- [ ] No use of Any without justification
+- [ ] No relative imports (use absolute imports)
+- [ ] Imports properly grouped and ordered
+- [ ] No unused imports
+- [ ] No hardcoded configuration values
+- [ ] Exception handling uses custom exceptions
+- [ ] Resources use context managers
+- [ ] No swallowed exceptions (silent pass)
+- [ ] Functions are < 50 lines
+- [ ] Cyclomatic complexity < 10
+- [ ] No magic numbers (use named constants)
+- [ ] Variable names are clear and descriptive
+- [ ] Database queries use parameterized statements
+- [ ] Async/await properly used (no blocking calls)
+- [ ] f-strings used for string formatting
+- [ ] Dataclasses/pydantic used for data shapes
+- [ ] Logging includes context
+- [ ] Tests have descriptive names
+- [ ] Coverage targets met (80%+ line)
+- [ ] Mutation tests pass (80%+ score)
+- [ ] Linter (ruff) passes without warnings
+- [ ] Type checker (pyright) passes in strict mode
+- [ ] No deprecated libraries or patterns
+```
+
+{% elif language == 'typescript' -%}
+```
+TypeScript Code Quality Checklist:
+- [ ] All functions/methods have JSDoc comments
+- [ ] All parameters and return types are typed
+- [ ] No use of any (use unknown with narrowing)
+- [ ] All imports use path aliases (@/)
+- [ ] Prefer named exports over default exports
+- [ ] No circular imports
+- [ ] Error handling for all async operations
+- [ ] All promises are awaited
+- [ ] Try/catch blocks for error handling
+- [ ] No console.log in production code
+- [ ] Functions are < 50 lines
+- [ ] Cyclomatic complexity < 10
+- [ ] Component props are properly typed
+- [ ] React hooks dependencies correct
+- [ ] No unnecessary re-renders
+- [ ] Async functions have clear cancellation
+- [ ] Environment variables validated at startup
+- [ ] API calls handle timeouts
+- [ ] Error messages are user-friendly
+- [ ] Tests have descriptive names
+- [ ] Coverage targets met (90%+ line)
+- [ ] Mutation tests pass (85%+ score)
+- [ ] Linter (ESLint) passes without warnings
+- [ ] Type checker passes in strict mode
+- [ ] No deprecated dependencies
+```
+
+{% else -%}
+```
+Code Quality Checklist - {{ language | capitalize }}:
+- [ ] All functions have documentation
+- [ ] Consistent naming conventions followed
+- [ ] No unused variables or imports
+- [ ] Error handling implemented
+- [ ] Edge cases handled
+- [ ] Code is DRY (Don't Repeat Yourself)
+- [ ] Functions have single responsibility
+- [ ] Tests written and passing
+- [ ] Coverage targets met
+- [ ] Linter passes without warnings
+```
+
+{% endif -%}
+{%- endmacro %}
+
+{% macro render_review_checklist() -%}
+#### Code Review Checklist
+
+**Design & Architecture**
+```
+- [ ] Solution matches requirements
+- [ ] Design is consistent with existing patterns
+- [ ] No unnecessary complexity
+- [ ] Reusable components identified
+- [ ] Database schema efficient
+- [ ] API design follows REST/GraphQL standards
+- [ ] Error handling strategy clear
+- [ ] Security considerations addressed
+```
+
+**Implementation**
+```
+- [ ] Code follows style guide exactly
+- [ ] Functions have single responsibility
+- [ ] Variable/function names are clear
+- [ ] No magic numbers or hardcoded values
+- [ ] Comments explain WHY, not WHAT
+- [ ] Edge cases handled
+- [ ] Inputs validated properly
+- [ ] Resources properly cleaned up
+```
+
+**Testing**
+```
+- [ ] Unit tests written for all public functions
+- [ ] Edge cases and errors tested
+- [ ] No mocking when real implementation should be used
+- [ ] Test names are descriptive
+- [ ] Setup/teardown proper
+- [ ] Coverage targets met
+- [ ] Integration tests for service boundaries
+```
+
+**Documentation**
+```
+- [ ] Functions have docstrings/comments
+- [ ] Complex logic explained
+- [ ] README updated if needed
+- [ ] Breaking changes documented
+- [ ] Migration guide provided if needed
+```
+
+**Performance & Security**
+```
+- [ ] No N+1 queries
+- [ ] No unnecessary loops/iterations
+- [ ] Secrets not hardcoded or logged
+- [ ] Input validation prevents injection
+- [ ] Authentication/authorization checked
+- [ ] Rate limiting considered
+```
+
+{%- endmacro %}
+
+{% macro render_deployment_checklist() -%}
+#### Deployment Checklist
+
+**Pre-Deployment**
+```
+- [ ] All tests passing locally
+- [ ] All tests passing in CI
+- [ ] Code review completed
+- [ ] No breaking changes documented
+- [ ] Database migrations created (if needed)
+- [ ] Environment variables documented
+- [ ] Secrets configured in deployment environment
+- [ ] Rollback plan documented
+```
+
+**Deployment**
+```
+- [ ] Feature flag enabled (if applicable)
+- [ ] Deployment starts (follow runbook)
+- [ ] Monitor error rates during deployment
+- [ ] Monitor response times during deployment
+- [ ] Smoke tests executed
+- [ ] Database migrations ran successfully
+- [ ] Cache invalidated (if needed)
+- [ ] Service health checks pass
+```
+
+**Post-Deployment**
+```
+- [ ] Verify deployed version matches commit
+- [ ] Monitor error rates for 30 minutes
+- [ ] Monitor response times for 30 minutes
+- [ ] Check business metrics/KPIs
+- [ ] Check logs for unexpected errors
+- [ ] Verify new features work as expected
+- [ ] Performance metrics acceptable
+- [ ] Document any issues encountered
+```
+
+**Rollback Criteria**
+```
+- [ ] Error rate > 1% above baseline
+- [ ] Response time > 2x baseline
+- [ ] Critical business functionality broken
+- [ ] Data corruption detected
+- [ ] Security vulnerability discovered
+```
+
+{%- endmacro %}
+
+{% macro render_testing_checklist(line_target=80, branch_target=70, function_target=90, statement_target=85, mutation_target=80) -%}
+#### Testing Checklist
+
+**Unit Test Coverage**
+```
+- [ ] All public functions have tests
+- [ ] Happy path tested
+- [ ] Error cases tested
+- [ ] Edge cases tested (empty, null, boundary)
+- [ ] Invalid inputs tested
+- [ ] State transitions tested
+- [ ] Async operations properly tested
+- [ ] Mocks only for external dependencies
+- [ ] No test interdependencies
+- [ ] Parametrized tests for multiple inputs
+```
+
+**Test Quality**
+```
+- [ ] Test names describe what is tested
+- [ ] One assertion per test (or related assertions)
+- [ ] Arrange-Act-Assert pattern followed
+- [ ] Test data is minimal and relevant
+- [ ] Fixtures are properly scoped
+- [ ] Setup/teardown cleanup properly
+- [ ] No hardcoded test data
+- [ ] Deterministic (no timing issues)
+- [ ] Fast (unit tests < 100ms each)
+- [ ] Isolated (no side effects)
+```
+
+**Coverage Targets**
+```
+- [ ] Line coverage >= {{ line_target }}%
+- [ ] Branch coverage >= {{ branch_target }}%
+- [ ] Function coverage >= {{ function_target }}%
+- [ ] Statement coverage >= {{ statement_target }}%
+- [ ] Mutation score >= {{ mutation_target }}%
+- [ ] Critical paths tested
+```
+
+**Integration Tests**
+```
+- [ ] Service boundaries tested
+- [ ] Database operations tested
+- [ ] External API calls tested (with mocks)
+- [ ] Error scenarios tested
+- [ ] Data flow verified end-to-end
+```
+
+{%- endmacro %}
+
+{% macro render_git_workflow_checklist() -%}
+#### Git Workflow Checklist
+
+**Before Creating Branch**
+```
+- [ ] Ensure main branch is up to date
+- [ ] Ticket/issue number obtained
+- [ ] Ticket clearly describes requirements
+```
+
+**Creating Branch**
+```
+- [ ] Branch name follows convention (feat/PROJ-123-description)
+- [ ] Branch created from main
+- [ ] Correct branch checked out
+```
+
+**During Development**
+```
+- [ ] Commits use conventional commit format
+- [ ] Commit messages explain WHY, not WHAT
+- [ ] Commits are atomic (one logical change)
+- [ ] No merge commits from main (rebase instead)
+- [ ] Code pushed regularly (not just end of day)
+```
+
+**Before PR**
+```
+- [ ] All tests passing locally
+- [ ] Linter passing locally
+- [ ] Type checker passing locally
+- [ ] Coverage targets met
+- [ ] No debug code or console.log
+- [ ] No hardcoded credentials
+- [ ] Documentation updated if needed
+- [ ] CHANGELOG updated if needed
+```
+
+**Creating PR**
+```
+- [ ] PR title is clear and matches issue
+- [ ] PR description is complete
+- [ ] PR description includes testing notes
+- [ ] Related issues linked
+- [ ] Reviewers assigned
+- [ ] Labels added appropriately
+```
+
+**After PR Review**
+```
+- [ ] All review comments addressed
+- [ ] Suggested changes incorporated
+- [ ] Re-review confirmed fixes
+- [ ] No unresolved conversations
+- [ ] All status checks passing
+```
+
+**Merging PR**
+```
+- [ ] All approvals received
+- [ ] All CI checks passing
+- [ ] Branch is up to date with main
+- [ ] Squash/rebase appropriately
+- [ ] Merge commit message is clear
+- [ ] Branch deleted after merge
+```
+
+{%- endmacro %}
+
+{% macro render_documentation_checklist() -%}
+#### Documentation Checklist
+
+**Code Documentation**
+```
+- [ ] Module docstrings present
+- [ ] Function docstrings present
+- [ ] Docstrings explain purpose and parameters
+- [ ] Complex logic has inline comments
+- [ ] Comments explain WHY, not WHAT
+- [ ] Type hints documented (for complex types)
+- [ ] Deprecated code marked clearly
+- [ ] Examples provided for complex functions
+```
+
+**API Documentation**
+```
+- [ ] All endpoints documented
+- [ ] Request/response schemas documented
+- [ ] Error codes documented
+- [ ] Authentication method documented
+- [ ] Rate limiting documented
+- [ ] Example requests/responses provided
+- [ ] Curl/Python/JavaScript examples included
+```
+
+**User Documentation**
+```
+- [ ] Installation instructions clear
+- [ ] Configuration options documented
+- [ ] Common use cases explained
+- [ ] Troubleshooting section present
+- [ ] FAQ updated
+- [ ] Screenshots/diagrams included
+- [ ] Links to related documentation
+```
+
+**Operational Documentation**
+```
+- [ ] Deployment runbook created
+- [ ] Rollback procedure documented
+- [ ] Monitoring metrics documented
+- [ ] Alerting rules documented
+- [ ] On-call runbook updated
+- [ ] Playbook for common issues
+- [ ] Database migration process documented
+```
+
+{%- endmacro %}

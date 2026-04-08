@@ -22,7 +22,9 @@ class TestTypeScriptVersionQuestion:
         """Options should include recent TypeScript versions."""
         q = TypeScriptVersionQuestion()
 
-        assert "5.4" in q.options
+        assert "5.x" in q.options
+        assert "4.x" in q.options
+        assert "3.x" in q.options
         assert "5.3" in q.options
         assert "5.0" in q.options
 
@@ -30,7 +32,7 @@ class TestTypeScriptVersionQuestion:
         """Default should be latest stable version."""
         q = TypeScriptVersionQuestion()
 
-        assert q.default == "5.4"
+        assert q.default == "5.x"
 
 
 class TestTypeScriptPackageManagerQuestion:

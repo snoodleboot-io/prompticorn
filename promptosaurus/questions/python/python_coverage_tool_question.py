@@ -27,10 +27,14 @@ class PythonCoverageToolQuestion(Question):
     @property
     def option_explanations(self) -> dict[str, str]:
         return {
-            "pytest-cov": "Industry standard - integrates seamlessly with pytest, great reporting (recommended)",
-            "coverage.py": "Classic tool - works with any test runner, standalone coverage analysis",
+            "pytest-cov": "pytest plugin for coverage, integrates seamlessly with pytest, generates reports",
+            "coverage.py": "Standalone coverage tool, works with any test runner, detailed HTML reports",
         }
 
     @property
     def default(self) -> str:
         return "pytest-cov"
+
+    @property
+    def allow_multiple(self) -> bool:
+        return False

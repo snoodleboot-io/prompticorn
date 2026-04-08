@@ -1,11 +1,11 @@
 <!-- path: promptosaurus/prompts/agents/core/core-conventions-swift.md -->
 # Core Conventions Swift
 
-Language:             {{LANGUAGE}}           e.g., Swift 5.9
-Runtime:              {{RUNTIME}}            e.g., macOS, iOS, Linux
-Package Manager:      {{SWIFT_PACKAGE_MANAGER}}               e.g., Swift Package Manager, CocoaPods
-Linter:               {{LINTER}}             e.g., SwiftLint
-Formatter:           {{FORMATTER}}          e.g., SwiftFormat
+Language:             {{config.language}}           e.g., Swift 5.9
+Runtime:              {{config.runtime}}            e.g., macOS, iOS, Linux
+Package Manager:      {{config.swift_package_manager}}               e.g., Swift Package Manager, CocoaPods
+Linter:               {{config.linter}}             e.g., SwiftLint
+Formatter:           {{config.formatter}}          e.g., SwiftFormat
 
 ### Naming Conventions
 
@@ -38,10 +38,10 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           {{LINE_COVERAGE_%}}          e.g., 80%
-Branch:         {{BRANCH_COVERAGE_%}}        e.g., 70%
-Function:       {{FUNCTION_COVERAGE_%}}       e.g., 90%
-Statement:      {{STATEMENT_COVERAGE_%}}      e.g., 85%
+Line:           {{config.coverage.line}}          e.g., 80%
+Branch:         {{config.coverage.branch}}        e.g., 70%
+Function:       {{config.coverage.function}}       e.g., 90%
+Statement:      {{config.coverage.statement}}      e.g., 85%
 
 #### Test Types
 
@@ -57,9 +57,9 @@ Statement:      {{STATEMENT_COVERAGE_%}}      e.g., 85%
 - Use SwiftSnapshotTesting for visual testing
 
 #### Framework & Tools
-Framework:       {{TESTING_FRAMEWORK}}        e.g., XCTest
-Mocking:        {{MOCKING_LIBRARY}}              e.g., Mockingbird
-Coverage tool:  {{COVERAGE_TOOL}}              e.g., Xcode coverage
+Framework:       {{config.testing_framework}}        e.g., XCTest
+Mocking:        {{config.mocking_library}}              e.g., Mockingbird
+Coverage tool:  {{config.coverage_tool}}              e.g., Xcode coverage
 
 #### Scaffolding
 

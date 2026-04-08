@@ -1,11 +1,11 @@
 <!-- path: promptosaurus/prompts/agents/core/core-conventions-objc.md -->
 # Core Conventions Objective-C
 
-Language:             {{LANGUAGE}}           e.g., Objective-C
-Runtime:              {{RUNTIME}}            e.g., macOS, iOS
-Package Manager:      {{PACKAGE_MANAGER}}        e.g., CocoaPods, Carthage
-Linter:              {{LINTER}}             e.g., clang-tidy
-Formatter:           {{FORMATTER}}          e.g., clang-format
+Language:             {{config.language}}           e.g., Objective-C
+Runtime:              {{config.runtime}}            e.g., macOS, iOS
+Package Manager:      {{config.package_manager}}        e.g., CocoaPods, Carthage
+Linter:              {{config.linter}}             e.g., clang-tidy
+Formatter:           {{config.formatter}}          e.g., clang-format
 
 ### Naming Conventions
 
@@ -37,15 +37,15 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           {{LINE_COVERAGE_%}}          e.g., 80%
-Branch:         {{BRANCH_COVERAGE_%}}        e.g., 70%
-Function:       {{FUNCTION_COVERAGE_%}}       e.g., 90%
+Line:           {{config.coverage.line}}          e.g., 80%
+Branch:         {{config.coverage.branch}}        e.g., 70%
+Function:       {{config.coverage.function}}       e.g., 90%
 
 #### Test Types
 - Use XCTest for testing
 - Use OCMock for mocking
 
 #### Framework & Tools
-Framework:       {{TESTING_FRAMEWORK}}        e.g., XCTest
-Mocking:        {{MOCKING_LIBRARY}}              e.g., OCMock
-Coverage tool:  {{COVERAGE_TOOL}}              e.g., Xcode coverage
+Framework:       {{config.testing_framework}}        e.g., XCTest
+Mocking:        {{config.mocking_library}}              e.g., OCMock
+Coverage tool:  {{config.coverage_tool}}              e.g., Xcode coverage

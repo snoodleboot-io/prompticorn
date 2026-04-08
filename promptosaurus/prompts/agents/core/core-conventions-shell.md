@@ -1,9 +1,9 @@
 <!-- path: promptosaurus/prompts/agents/core/core-conventions-shell.md -->
 # Core Conventions Shell
 
-Language:             {{LANGUAGE}}           e.g., Bash 5.2, Zsh
-Shell:              {{SHELL}}             e.g., Bash, Zsh
-Package Manager:      {{PACKAGE_MANAGER}}        e.g., apt, yum, brew
+Language:             {{config.language}}           e.g., Bash 5.2, Zsh
+Shell:              {{config.shell}}             e.g., Bash, Zsh
+Package Manager:      {{config.package_manager}}        e.g., apt, yum, brew
 
 ### Naming Conventions
 
@@ -30,13 +30,13 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           {{LINE_COVERAGE_%}}          e.g., 80%
+Line:           {{config.coverage.line}}          e.g., 80%
 
 #### Test Types
 - Use bats-core for testing
 - Test scripts as black box
 
 #### Framework & Tools
-Framework:       {{TESTING_FRAMEWORK}}        e.g., bats-core, shunit2
-Linting:       {{LINT_TOOL}}           e.g., shellcheck
-Coverage tool:  {{COVERAGE_TOOL}}              e.g., bashcov
+Framework:       {{config.testing_framework}}        e.g., bats-core, shunit2
+Linting:       {{config.lint_tool}}           e.g., shellcheck
+Coverage tool:  {{config.coverage_tool}}              e.g., bashcov

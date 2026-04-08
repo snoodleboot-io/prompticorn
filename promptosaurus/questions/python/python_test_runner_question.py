@@ -15,6 +15,10 @@ class PythonTestRunnerQuestion(Question):
         return "What test runner do you want to use?"
 
     @property
+    def options(self) -> list[str]:
+        return ["pytest", "nose2", "unittest"]
+
+    @property
     def explanation(self) -> str:
         return """Test runner affects how tests are executed:
 - pytest: Recommended, runs pytest/unittest/doctest/nose2
@@ -22,17 +26,13 @@ class PythonTestRunnerQuestion(Question):
 - unittest: Built-in test runner"""
 
     @property
-    def options(self) -> list[str]:
-        return ["pytest", "nose2", "unittest"]
+    def default(self) -> str:
+        return "pytest"
 
     @property
     def option_explanations(self) -> dict[str, str]:
         return {
-            "pytest": "Recommended - runs pytest, unittest, doctest, nose2 tests",
-            "nose2": "nose successor - runs unittest and pytest-compatible tests",
-            "unittest": "Built-in test runner for unittest tests",
+            "pytest": "Industry standard, runs pytest/unittest/doctest/nose2, powerful plugins",
+            "nose2": "Test runner compatible with unittest and pytest-style tests",
+            "unittest": "Built-in Python test runner, no external dependencies needed",
         }
-
-    @property
-    def default(self) -> str:
-        return "pytest"

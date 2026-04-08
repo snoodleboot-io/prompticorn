@@ -8,6 +8,77 @@ from promptosaurus.builders.kilo.kilo_cli import KiloCLIBuilder
 from promptosaurus.builders.kilo.kilo_code_builder import KiloCodeBuilder
 from promptosaurus.builders.kilo.kilo_ide import KiloIDEBuilder
 
+PYTHON_CONFIG = {
+    "spec": {
+        "language": "python",
+        "runtime": "CPython 3.12",
+        "package_manager": "uv",
+        "linter": ["ruff", "pyright"],
+        "formatter": ["ruff"],
+        "testing_framework": "pytest",
+        "mocking_library": "unittest.mock",
+        "coverage_tool": "pytest-cov",
+        "mutation_tool": "mutmut",
+        "abstract_class_style": "interface",
+        "coverage": {
+            "line": 80,
+            "branch": 70,
+            "function": 90,
+            "statement": 85,
+            "mutation": 80,
+            "path": 60,
+        },
+    }
+}
+
+TYPESCRIPT_CONFIG = {
+    "spec": {
+        "language": "typescript",
+        "runtime": "Node 20",
+        "package_manager": "pnpm",
+        "linter": ["eslint"],
+        "formatter": ["prettier"],
+        "testing_framework": "vitest",
+        "mocking_library": "vitest/mock",
+        "coverage_tool": "v8",
+        "e2e_tool": "playwright",
+        "mutation_tool": "stryker-mutator",
+        "abstract_class_style": "interface",
+        "coverage": {
+            "line": 80,
+            "branch": 70,
+            "function": 90,
+            "statement": 85,
+            "mutation": 80,
+            "path": 60,
+        },
+    }
+}
+
+JAVASCRIPT_CONFIG = {
+    "spec": {
+        "language": "javascript",
+        "runtime": "Node 20",
+        "package_manager": "npm",
+        "linter": ["eslint"],
+        "formatter": ["prettier"],
+        "testing_framework": "jest",
+        "mocking_library": "jest.mock",
+        "coverage_tool": "istanbul",
+        "e2e_tool": "playwright",
+        "mutation_tool": "stryker-mutator",
+        "abstract_class_style": "interface",
+        "coverage": {
+            "line": 80,
+            "branch": 70,
+            "function": 90,
+            "statement": 85,
+            "mutation": 80,
+            "path": 60,
+        },
+    }
+}
+
 
 class TestKiloCodeBuilderBase(unittest.TestCase):
     """Tests for KiloCodeBuilder base class methods using concrete implementation."""
@@ -20,12 +91,14 @@ class TestKiloCodeBuilderBase(unittest.TestCase):
         assert hasattr(KiloCodeBuilder, "language_file_map")
         assert "python" in builder.language_file_map
         assert builder.language_file_map["python"] == "agents/core/core-conventions-python.md"
-        assert builder.language_file_map["typescript"] == "agents/core/core-conventions-typescript.md"
+        assert (
+            builder.language_file_map["typescript"] == "agents/core/core-conventions-typescript.md"
+        )
 
     def test_substitute_template_variables_basic(self):
         """KiloCodeBuilder should substitute basic template variables."""
         builder = KiloCLIBuilder()
-        content = "Language: {{LANGUAGE}}, Runtime: {{RUNTIME}}"
+        content = "Language: {{config.language}}, Runtime: {{config.runtime}}"
         config = {
             "spec": {
                 "language": "python",
@@ -39,7 +112,7 @@ class TestKiloCodeBuilderBase(unittest.TestCase):
     def test_substitute_template_variables_list(self):
         """KiloCodeBuilder should handle list values in templates."""
         builder = KiloCLIBuilder()
-        content = "Tools: {{LINTER}}, {{FORMATTER}}"
+        content = "Tools: {{config.linter}}, {{config.formatter}}"
         config = {
             "spec": {
                 "linter": ["ruff", "mypy"],
@@ -53,7 +126,7 @@ class TestKiloCodeBuilderBase(unittest.TestCase):
     def test_substitute_template_variables_coverage(self):
         """KiloCodeBuilder should substitute coverage variables."""
         builder = KiloCLIBuilder()
-        content = "Line: {{LINE_COVERAGE_%}}, Branch: {{BRANCH_COVERAGE_%}}"
+        content = "Line: {{config.coverage.line}}, Branch: {{config.coverage.branch}}"
         config = {
             "spec": {
                 "coverage": {
@@ -69,10 +142,10 @@ class TestKiloCodeBuilderBase(unittest.TestCase):
     def test_substitute_template_variables_none_values(self):
         """KiloCodeBuilder should handle None values gracefully."""
         builder = KiloCLIBuilder()
-        content = "Value: {{MISSING}}"
+        content = "Value: {{config.missing | default('')}}"
         config = {"spec": {}}
         result = builder._substitute_template_variables(content, config)
-        assert "" in result or result == content
+        assert "Value: " in result
 
 
 class TestKiloBuilder(unittest.TestCase):
@@ -135,15 +208,9 @@ class TestKiloBuilder(unittest.TestCase):
     def test_kilo_builder_with_language_config(self):
         """KiloBuilder.build() should handle language config."""
         builder = KiloCLIBuilder()
-        config = {
-            "spec": {
-                "language": "python",
-                "test_framework": "pytest",
-            }
-        }
         with tempfile.TemporaryDirectory() as tmpdir:
             output = Path(tmpdir)
-            result = builder.build(output, config=config)
+            result = builder.build(output, config=PYTHON_CONFIG)
             assert isinstance(result, list)
             # Should have created language-specific file
             assert (output / ".opencode" / "rules" / "_base.md").exists()
@@ -154,6 +221,15 @@ class TestKiloBuilder(unittest.TestCase):
         config = {
             "spec": {
                 "language": "python",
+                "runtime": "CPython 3.12",
+                "package_manager": "uv",
+                "linter": ["ruff", "pyright"],
+                "formatter": ["ruff"],
+                "testing_framework": "pytest",
+                "mocking_library": "unittest.mock",
+                "coverage_tool": "pytest-cov",
+                "mutation_tool": "mutmut",
+                "abstract_class_style": "interface",
                 "coverage": {
                     "line": 90,
                     "branch": 80,
@@ -161,7 +237,7 @@ class TestKiloBuilder(unittest.TestCase):
                     "statement": 88,
                     "mutation": 85,
                     "path": 70,
-                }
+                },
             }
         }
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -172,27 +248,17 @@ class TestKiloBuilder(unittest.TestCase):
     def test_kilo_builder_with_typescript(self):
         """KiloBuilder should handle TypeScript language config."""
         builder = KiloCLIBuilder()
-        config = {
-            "spec": {
-                "language": "typescript",
-            }
-        }
         with tempfile.TemporaryDirectory() as tmpdir:
             output = Path(tmpdir)
-            result = builder.build(output, config=config)
+            result = builder.build(output, config=TYPESCRIPT_CONFIG)
             assert isinstance(result, list)
 
     def test_kilo_builder_with_javascript(self):
         """KiloBuilder should handle JavaScript language config."""
         builder = KiloCLIBuilder()
-        config = {
-            "spec": {
-                "language": "javascript",
-            }
-        }
         with tempfile.TemporaryDirectory() as tmpdir:
             output = Path(tmpdir)
-            result = builder.build(output, config=config)
+            result = builder.build(output, config=JAVASCRIPT_CONFIG)
             assert isinstance(result, list)
 
 
@@ -216,7 +282,18 @@ class TestKiloCustomModes(unittest.TestCase):
         """custom_modes should include non-built-in modes."""
         builder = KiloCLIBuilder()
         # These are custom modes that should be included
-        expected_custom = {"test", "refactor", "document", "explain", "migration", "review", "security", "compliance", "enforcement", "planning"}
+        expected_custom = {
+            "test",
+            "refactor",
+            "document",
+            "explain",
+            "migration",
+            "review",
+            "security",
+            "compliance",
+            "enforcement",
+            "planning",
+        }
         for mode in expected_custom:
             assert mode in builder.custom_modes, f"{mode} should be in custom_modes"
 

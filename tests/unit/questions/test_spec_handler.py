@@ -1,7 +1,12 @@
 """Tests for promptosaurus.questions.base.spec_handler module."""
 
 import pytest
-from promptosaurus.questions.base.spec_handler import SpecHandler, SingleLanguageSpecHandler, MultiLanguageSpecHandler
+
+from promptosaurus.questions.base.spec_handler import (
+    MultiLanguageSpecHandler,
+    SingleLanguageSpecHandler,
+    SpecHandler,
+)
 
 
 class TestSingleLanguageSpecHandler:

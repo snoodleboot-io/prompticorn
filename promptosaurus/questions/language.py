@@ -15,19 +15,6 @@ Classes:
 
 Constants:
     LANGUAGE_KEYS: List of available language keys for dynamic lookup.
-
-Example:
-    >>> from promptosaurus.questions.language import get_language_questions, LANGUAGE_KEYS
-    >>>
-    >>> # Check available languages
-    >>> print("python" in LANGUAGE_KEYS)
-    True
-    >>>
-    >>> # Get questions for Python
-    >>> questions = get_language_questions("python")
-    >>> print(f"Found {len(questions)} questions for Python")
-    >>> for q in questions[:3]:
-    ...     print(f"  - {q.key}: {q.question_text}")
 """
 
 from pathlib import Path
@@ -50,13 +37,6 @@ class QuestionPipelineError(Exception):
         class_name: The name of the question class that failed to load.
         language: The language for which the question was being loaded.
         reason: The reason for the failure.
-
-    Example:
-        >>> try:
-        ...     questions = get_language_questions("invalid_language")
-        ... except QuestionPipelineError as e:
-        ...     print(e.class_name)
-        ...     print(e.language)
     """
 
     def __init__(self, class_name: str, language: str, reason: str) -> None:
@@ -120,11 +100,6 @@ def _load_pipelines() -> dict[str, Any]:
     Raises:
         FileNotFoundError: If the pipelines YAML file doesn't exist.
         yaml.YAMLError: If the YAML file is malformed.
-
-    Example:
-        >>> pipelines = _load_pipelines()
-        >>> print(pipelines.get("python", {}))
-        {'core': [...], 'fungible': {...}}
     """
     pipelines_path = Path(__file__).parent / "question_pipelines.yaml"
     with open(pipelines_path, encoding="utf-8") as f:
@@ -246,12 +221,6 @@ def get_language_questions(language: str) -> list[Question]:
     Raises:
         QuestionPipelineError: If a question class cannot be loaded.
         ValueError: If the language is not supported.
-
-    Example:
-        >>> questions = get_language_questions("python")
-        >>> print(f"Found {len(questions)} questions")
-        >>> for q in questions:
-        ...     print(f"  {q.key}: {q.question_text}")
     """
     # For backward compatibility, return core questions
     return get_core_questions(language)

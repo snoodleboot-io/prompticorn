@@ -24,16 +24,12 @@ class TypeScriptTestFrameworkQuestion(Question):
 
     @property
     def options(self) -> list[str]:
-        return ["vitest", "jest", "mocha"]
-
-    @property
-    def option_explanations(self) -> dict[str, str]:
-        return {
-            "vitest": "Fast, modern - Vite-native, great DX, recommended for new projects",
-            "jest": "Popular - Facebook-maintained, great ecosystem, widely used",
-            "mocha": "Flexible - simple, good for legacy projects",
-        }
+        return ["vitest", "jest"]
 
     @property
     def default(self) -> str:
         return "vitest"
+
+    @property
+    def allow_multiple(self) -> bool:
+        return False

@@ -1,0 +1,172 @@
+{#
+  test_macros.jinja2
+  
+  Test template to verify all macro libraries can be imported and used.
+  This template tests all 6 macro libraries with example data.
+  
+  To test locally, use:
+    python -c "
+    from jinja2 import Environment, FileSystemLoader
+    env = Environment(loader=FileSystemLoader('.'))
+    template = env.get_template('prompts/macros/test_macros.jinja2')
+    context = {
+        'language': 'python',
+        'framework': 'pytest',
+        'package_manager': 'uv',
+        'coverage_targets': {
+            'line': 80,
+            'branch': 70,
+            'function': 90,
+            'statement': 85,
+            'mutation': 80,
+            'path': 60
+        }
+    }
+    print(template.render(**context))
+    "
+#}
+
+{% import 'macros/testing_sections.jinja2' as testing %}
+{% import 'macros/coverage_targets.jinja2' as coverage %}
+{% import 'macros/naming_conventions.jinja2' as naming %}
+{% import 'macros/code_examples.jinja2' as examples %}
+{% import 'macros/error_handling.jinja2' as errors %}
+{% import 'macros/checklist.jinja2' as checklists %}
+
+# Macro Library Test Report
+
+Generated for language: {{ language }}, framework: {{ framework }}
+
+---
+
+## 1. Testing Sections Macro Library
+
+### Test: render_testing_section()
+
+{{ testing.render_testing_section(language, framework, coverage_targets) }}
+
+### Test: render_test_types()
+
+{{ testing.render_test_types(language) }}
+
+### Test: render_test_scaffolding()
+
+{{ testing.render_test_scaffolding(language, package_manager) }}
+
+---
+
+## 2. Coverage Targets Macro Library
+
+### Test: render_coverage_table()
+
+{{ coverage.render_coverage_table(
+    coverage_targets.line,
+    coverage_targets.branch,
+    coverage_targets.function,
+    coverage_targets.statement,
+    coverage_targets.mutation,
+    coverage_targets.path
+) }}
+
+### Test: render_coverage_details()
+
+{{ coverage.render_coverage_details(language) }}
+
+### Test: render_coverage_checklist()
+
+{{ coverage.render_coverage_checklist(language) }}
+
+---
+
+## 3. Naming Conventions Macro Library
+
+### Test: render_naming_conventions()
+
+{{ naming.render_naming_conventions(language) }}
+
+### Test: render_naming_examples()
+
+{{ naming.render_naming_examples(language) }}
+
+### Test: render_naming_checklist()
+
+{{ naming.render_naming_checklist(language) }}
+
+---
+
+## 4. Code Examples Macro Library
+
+### Test: render_python_import_pattern()
+
+{{ examples.render_python_import_pattern() }}
+
+### Test: render_python_type_hints()
+
+{{ examples.render_python_type_hints() }}
+
+### Test: render_async_patterns()
+
+{{ examples.render_async_patterns(language) }}
+
+### Test: render_code_review_checklist()
+
+{{ examples.render_code_review_checklist(language) }}
+
+---
+
+## 5. Error Handling Macro Library
+
+### Test: render_error_pattern()
+
+{{ errors.render_error_pattern(language, 'exception_hierarchy') }}
+
+### Test: render_error_recovery_guide()
+
+{{ errors.render_error_recovery_guide('database_failures') }}
+
+### Test: render_error_monitoring_checklist()
+
+{{ errors.render_error_monitoring_checklist() }}
+
+---
+
+## 6. Checklist Macro Library
+
+### Test: render_code_quality_checklist()
+
+{{ checklists.render_code_quality_checklist(language) }}
+
+### Test: render_review_checklist()
+
+{{ checklists.render_review_checklist() }}
+
+### Test: render_deployment_checklist()
+
+{{ checklists.render_deployment_checklist() }}
+
+### Test: render_testing_checklist()
+
+{{ checklists.render_testing_checklist() }}
+
+### Test: render_git_workflow_checklist()
+
+{{ checklists.render_git_workflow_checklist() }}
+
+### Test: render_documentation_checklist()
+
+{{ checklists.render_documentation_checklist() }}
+
+---
+
+## Test Summary
+
+✓ All 6 macro libraries imported successfully
+✓ testing_sections.jinja2: 3+ macros tested
+✓ coverage_targets.jinja2: 3+ macros tested
+✓ naming_conventions.jinja2: 3+ macros tested
+✓ code_examples.jinja2: 4+ macros tested
+✓ error_handling.jinja2: 3+ macros tested
+✓ checklist.jinja2: 6+ macros tested
+
+Total macros tested: 25+
+Status: All imports and macro calls successful

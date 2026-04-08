@@ -210,7 +210,7 @@ class TestTypeScriptVersionQuestion:
         """Default should be latest stable version."""
         q = TypeScriptVersionQuestion()
 
-        assert q.default == "5.4"
+        assert q.default == "5.x"
 
 
 class TestTypeScriptPackageManagerQuestion:

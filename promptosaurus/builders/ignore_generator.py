@@ -14,12 +14,6 @@ Classes:
     CursorIgnoreBuilder: Generates .cursorignore content for Cursor.
     CopilotIgnoreBuilder: Generates .copilotignore content for GitHub Copilot.
     GitIgnoreBuilder: Generates .gitignore content.
-
-Example:
-    >>> from promptosaurus.builders.ignore_generator import KiloIgnoreBuilder
-    >>> builder = KiloIgnoreBuilder()
-    >>> print(builder.filename)
-    .kiloignore
 """
 
 from pathlib import Path
@@ -42,15 +36,6 @@ class IgnoreFileBuilder:
 
     Methods:
         build: Generate and write the ignore file.
-
-    Example:
-        >>> class MyIgnoreBuilder(IgnoreFileBuilder):
-        ...     @property
-        ...     def filename(self) -> str:
-        ...         return ".myignore"
-        ...     @property
-        ...     def content(self) -> str:
-        ...         return "*.log\\n"
     """
 
     @property
@@ -91,14 +76,6 @@ class IgnoreFileBuilder:
 
         Raises:
             FileExistsError: If the file already exists and cannot be overwritten.
-
-        Example:
-            >>> from pathlib import Path
-            >>> from promptosaurus.builders.ignore_generator import KiloIgnoreBuilder
-            >>> builder = KiloIgnoreBuilder()
-            >>> actions = builder.build(Path("./output"))
-            >>> print(actions)
-            ['✓ .kiloignore (42 lines)']
         """
         destination = output / self.filename
         if dry_run:
@@ -115,11 +92,6 @@ class KiloIgnoreBuilder(IgnoreFileBuilder):
 
     This builder creates the ignore file that tells Kilo Code which files
     to exclude from processing. Content is generated from the registry.
-
-    Example:
-        >>> builder = KiloIgnoreBuilder()
-        >>> print(builder.filename)
-        .kiloignore
     """
 
     @property
@@ -136,11 +108,6 @@ class ClineIgnoreBuilder(IgnoreFileBuilder):
 
     This builder creates the ignore file that tells Cline which files
     to exclude from processing. Content is generated from the registry.
-
-    Example:
-        >>> builder = ClineIgnoreBuilder()
-        >>> print(builder.filename)
-        .clineignore
     """
 
     @property
@@ -157,11 +124,6 @@ class CursorIgnoreBuilder(IgnoreFileBuilder):
 
     This builder creates the ignore file that tells Cursor which files
     to exclude from processing. Content is generated from the registry.
-
-    Example:
-        >>> builder = CursorIgnoreBuilder()
-        >>> print(builder.filename)
-        .cursorignore
     """
 
     @property
@@ -178,11 +140,6 @@ class CopilotIgnoreBuilder(IgnoreFileBuilder):
 
     This builder creates the ignore file that tells GitHub Copilot which files
     to exclude from processing. Content is generated from the registry.
-
-    Example:
-        >>> builder = CopilotIgnoreBuilder()
-        >>> print(builder.filename)
-        .copilotignore
     """
 
     @property
@@ -199,11 +156,6 @@ class GitIgnoreBuilder(IgnoreFileBuilder):
 
     This builder creates a standard .gitignore file with common ignore patterns
     for Python projects. Content is generated from the registry.
-
-    Example:
-        >>> builder = GitIgnoreBuilder()
-        >>> print(builder.filename)
-        .gitignore
     """
 
     @property

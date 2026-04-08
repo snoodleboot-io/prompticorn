@@ -20,18 +20,3 @@ class PhpTestFrameworkQuestion(Question):
 
 - PHPUnit is the industry standard with extensive features
 - Pest is a modern alternative with elegant syntax built on PHPUnit"""
-
-    @property
-    def options(self) -> list[str]:
-        return ["phpunit", "pest"]
-
-    @property
-    def option_explanations(self) -> dict[str, str]:
-        return {
-            "phpunit": "Industry standard - xUnit style, extensive assertions, widely used",
-            "pest": "Modern elegant - beautiful syntax, built on PHPUnit, growing popularity",
-        }
-
-    @property
-    def default(self) -> str:
-        return "phpunit"

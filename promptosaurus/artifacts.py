@@ -16,12 +16,6 @@ Classes:
 
 Constants:
     ARTIFACT_FILES: Dictionary mapping tool names to their create/remove artifacts.
-
-Example:
-    >>> from promptosaurus.artifacts import ArtifactManager
-    >>> manager = ArtifactManager(Path('.'))
-    >>> actions = manager.remove_artifacts('kilo-cli')
-    >>> # Removes .kilocode/, .clinerules, .cursor/, etc.
 """
 
 import shutil
@@ -90,11 +84,6 @@ class ArtifactManager:
 
     Attributes:
         base_path: Root path for artifact operations.
-
-    Example:
-        >>> manager = ArtifactManager(Path('/project'))
-        >>> manager.remove_artifacts('kilo-cli')
-        ['Removed directory: .kilocode/', 'Removed file: .clinerules']
     """
 
     def __init__(self, base_path: Path | None = None) -> None:
@@ -120,12 +109,6 @@ class ArtifactManager:
 
         Raises:
             OSError: If file/directory removal fails.
-
-        Example:
-            >>> manager = ArtifactManager(Path('.'))
-            >>> actions = manager.remove_artifacts('kilo-cli')
-            >>> print(actions)
-            ['Removed directory: .kilocode/', 'Removed file: .clinerules']
         """
         if tool not in ARTIFACT_FILES:
             return []
@@ -156,11 +139,6 @@ class ArtifactManager:
         Returns:
             The name of the currently active tool, or None if no tool detected.
             Returns the first matching tool found.
-
-        Example:
-            >>> manager = ArtifactManager(Path('.'))
-            >>> tool = manager.current_tool
-            >>> print(tool)  # 'kilo-cli', 'cursor', etc., or None
         """
         for tool, files in ARTIFACT_FILES.items():
             # Check if any of this tool's unique files exist

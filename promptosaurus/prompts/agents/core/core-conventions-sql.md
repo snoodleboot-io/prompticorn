@@ -1,8 +1,8 @@
 <!-- path: promptosaurus/prompts/agents/core/core-conventions-sql.md -->
 # Core Conventions SQL
 
-Database:            {{DATABASE}}           e.g., PostgreSQL, MySQL, SQLite
-ORM/Query:           {{ORM_QUERY_BUILDER}}                e.g., Prisma, SQLAlchemy, GORM, Drizzle
+Database:            {{config.database}}           e.g., PostgreSQL, MySQL, SQLite
+ORM/Query:           {{config.orm_query_builder}}                e.g., Prisma, SQLAlchemy, GORM, Drizzle
 
 ### Naming Conventions
 
@@ -17,12 +17,12 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           {{LINE_COVERAGE_%}}          e.g., 80%
-Branch:         {{BRANCH_COVERAGE_%}}        e.g., 70%
-Function:       {{FUNCTION_COVERAGE_%}}       e.g., 90%
-Statement:      {{STATEMENT_COVERAGE_%}}      e.g., 85%
-Mutation:       {{MUTATION_COVERAGE_%}}       e.g., 80%
-Path:           {{PATH_COVERAGE_%}}           e.g., 60%
+Line:           {{config.coverage.line}}          e.g., 80%
+Branch:         {{config.coverage.branch}}        e.g., 70%
+Function:       {{config.coverage.function}}       e.g., 90%
+Statement:      {{config.coverage.statement}}      e.g., 85%
+Mutation:       {{config.coverage.mutation}}       e.g., 80%
+Path:           {{config.coverage.path}}           e.g., 60%
 
 #### Test Types
 
@@ -52,10 +52,10 @@ Path:           {{PATH_COVERAGE_%}}           e.g., 60%
 - Test under load with realistic data volumes
 
 #### Framework & Tools
-Framework:       {{TESTING_FRAMEWORK}}        e.g., pytest, Go test, Jest
-Mocking library: {{MOCKING_LIBRARY}}              e.g., factory_boy, testfixtures
-Coverage tool:  {{COVERAGE_TOOL}}              e.g., coverage.py, istanbul
-Factory tool:   {{FACTORY_TOOL}}          e.g., factory_boy, testdata
+Framework:       {{config.testing_framework}}        e.g., pytest, Go test, Jest
+Mocking library: {{config.mocking_library}}              e.g., factory_boy, testfixtures
+Coverage tool:  {{config.coverage_tool}}              e.g., coverage.py, istanbul
+Factory tool:   {{config.factory_tool}}          e.g., factory_boy, testdata
 
 #### Scaffolding
 

@@ -6,22 +6,9 @@ These models hold the immutable question data and mutable pipeline state.
 Classes:
     QuestionContext: Immutable context for a question (Pydantic model).
     PipelineContext: Mutable context passed through pipeline stages.
-
-Example:
-    >>> from promptosaurus.ui.domain.context import QuestionContext, PipelineContext
-    >>>
-    >>> # Create question context
-    >>> qc = QuestionContext(
-    ...     question="Choose a language:",
-    ...     options=["Python", "Go", "Rust"],
-    ...     explanations={"Python": "Data science", "Go": "Systems", "Rust": "Safety"},
-    ...     question_explanation="Select your primary language"
-    ... )
-    >>> print(qc.question)
-    Choose a language:
 """
 
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class QuestionContext(BaseModel):
@@ -43,17 +30,9 @@ class QuestionContext(BaseModel):
 
     Config:
         frozen: True - instances are immutable after creation.
-
-    Example:
-        >>> ctx = QuestionContext(
-        ...     question="Pick a language:",
-        ...     options=["Python", "TypeScript"],
-        ...     explanations={"Python": "Great for AI", "TypeScript": "Web standard"},
-        ...     question_explanation="Choose your primary language"
-        ... )
-        >>> print(ctx.options)
-        ['Python', 'TypeScript']
     """
+
+    model_config = ConfigDict(frozen=True)
 
     question: str
     options: list[str]
@@ -63,9 +42,6 @@ class QuestionContext(BaseModel):
     default_indices: set[int] = {0}
     allow_multiple: bool = False
     none_index: int | None = None  # Index of option that is mutually exclusive (e.g., 'none')
-
-    class Config:
-        frozen = True
 
 
 class PipelineContext:
@@ -85,21 +61,6 @@ class PipelineContext:
         state: Get/set the current SelectionState.
         mode: Get/set the current mode (select or explain).
         display_options: Get options to display.
-
-    Example:
-        >>> from promptosaurus.ui.domain.context import QuestionContext
-        >>> from promptosaurus.ui.state.single_selection_state import SingleSelectionState
-        >>>
-        >>> qc = QuestionContext(
-        ...     question="Test?",
-        ...     options=["A", "B"],
-        ...     explanations={"A": "First", "B": "Second"},
-        ...     question_explanation="Choose one"
-        ... )
-        >>> state = SingleSelectionState(options=["A", "B"], default_indices={0})
-        >>> ctx = PipelineContext(question=qc, state=state)
-        >>> print(ctx.mode)
-        select
     """
 
     def __init__(
@@ -174,10 +135,6 @@ class PipelineContext:
 
         Returns:
             The explanation string, or empty string if not found.
-
-        Example:
-            >>> ctx.get_explanation("Python")
-            'Great for AI and data science'
         """
         if option == "Explain":
             return "Learn more about this question"

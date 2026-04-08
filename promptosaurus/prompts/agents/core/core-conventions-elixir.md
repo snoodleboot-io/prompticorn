@@ -1,11 +1,11 @@
 <!-- path: promptosaurus/prompts/agents/core/core-conventions-elixir.md -->
 # Core Conventions Elixir
 
-Language:             {{LANGUAGE}}           e.g., Elixir 1.15+
-Runtime:              {{RUNTIME}}            e.g., OTP 26
-Package Manager:      {{PACKAGE_MANAGER}}        e.g., mix
-Linter:               {{LINTER}}             e.g., Credo, Sobelow
-Formatter:           {{FORMATTER}}          e.g., mix format
+Language:             {{config.language}}           e.g., Elixir 1.15+
+Runtime:              {{config.runtime}}            e.g., OTP 26
+Package Manager:      {{config.package_manager}}        e.g., mix
+Linter:               {{config.linter}}             e.g., Credo, Sobelow
+Formatter:           {{config.formatter}}          e.g., mix format
 
 ### Naming Conventions
 
@@ -40,11 +40,11 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           {{LINE_COVERAGE_%}}          e.g., 80%
-Branch:         {{BRANCH_COVERAGE_%}}        e.g., 70%
-Function:       {{FUNCTION_COVERAGE_%}}       e.g., 90%
-Statement:      {{STATEMENT_COVERAGE_%}}      e.g., 85%
-Path:           {{PATH_COVERAGE_%}}           e.g., 60%
+Line:           {{config.coverage.line}}          e.g., 80%
+Branch:         {{config.coverage.branch}}        e.g., 70%
+Function:       {{config.coverage.function}}       e.g., 90%
+Statement:      {{config.coverage.statement}}      e.g., 85%
+Path:           {{config.coverage.path}}           e.g., 60%
 
 #### Test Types
 
@@ -62,10 +62,10 @@ Path:           {{PATH_COVERAGE_%}}           e.g., 60%
 - Use PropCheck for property-based testing
 
 #### Framework & Tools
-Framework:       {{TESTING_FRAMEWORK}}        e.g., ExUnit
-Mocking:        {{MOCKING_LIBRARY}}              e.g., Mox
-Property tool:   {{PROPERTY_TOOL}}        e.g., PropCheck, StreamData
-Coverage tool:  {{COVERAGE_TOOL}}              e.g., ExCoveralls
+Framework:       {{config.testing_framework}}        e.g., ExUnit
+Mocking:        {{config.mocking_library}}              e.g., Mox
+Property tool:   {{config.property_tool}}        e.g., PropCheck, StreamData
+Coverage tool:  {{config.coverage_tool}}              e.g., ExCoveralls
 
 #### Scaffolding
 

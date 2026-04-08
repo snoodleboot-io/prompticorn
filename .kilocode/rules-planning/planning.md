@@ -6,13 +6,24 @@ Behavior when the user asks about planning, PRDs, ARDs, or starting new work.
 Purpose: Ensure Product Requirements Document (PRD) and Architecture Decision Records (ARD/ARD)
 exist before development begins. Guide creation of these documents if missing.
 
+## Methodology Integration
+
+This planning process incorporates the methodologies and frameworks detailed in 
+[methodology.md](./methodology.md). Refer to that document for comprehensive guidance on:
+- PRD creation methodologies (problem-first approach, goal-setting frameworks, user story mapping)
+- ARD creation methodologies (decision analysis, architecture evaluation, risk-driven approaches)
+- Planning validation and gate methodologies
+- Integration with development methodologies (Agile, Waterfall, hybrid)
+- Documentation standards and continuous improvement practices
+
 ## Step 1 — Assess Current Planning State
 
 When the user asks about planning or starting new work:
 
 1. First, check for existing planning documents:
-   - Look for PRD files: `docs/PRD*.md`, `docs/requirements*.md`, `PRD.md`
-   - Look for ARD/ADR files: `docs/ARD*.md`, `docs/ADR*.md`, `adr/*.md`, `architecture/*.md`
+   - Look for PRD files: `docs/prd/PRD*.md`, `docs/prd/requirements*.md`, `docs/prd.md`
+   - Look for ARD/ADR files: `docs/ard/ARD*.md`, `docs/ard/ADR*.md`, `docs/ard/*.md`
+   - Look for task breakdown files: `docs/tasks/*.md`
    - Check for RFCs: `docs/RFC*.md`, `rfcs/*.md`
    - Look in any project management references (Jira links, GitHub issues)
 

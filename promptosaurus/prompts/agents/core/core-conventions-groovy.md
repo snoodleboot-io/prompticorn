@@ -1,11 +1,11 @@
 <!-- path: promptosaurus/prompts/agents/core/core-conventions-groovy.md -->
 # Core Conventions Groovy
 
-Language:             {{LANGUAGE}}           e 4.0.g., Groovy
-Runtime:              {{RUNTIME}}            e.g., JVM
-Package Manager:      {{PACKAGE_MANAGER}}        e.g., Gradle
-Linter:              {{LINTER}}             e.g., CodeNarc
-Formatter:           {{FORMATTER}}          e.g., groovyfmt
+Language:             {{config.language}}           e 4.0.g., Groovy
+Runtime:              {{config.runtime}}            e.g., JVM
+Package Manager:      {{config.package_manager}}        e.g., Gradle
+Linter:              {{config.linter}}             e.g., CodeNarc
+Formatter:           {{config.formatter}}          e.g., groovyfmt
 
 ### Naming Conventions
 
@@ -30,5 +30,5 @@ Environment vars:   UPPER_SNAKE_CASE always
 - Follow Groovy style guide
 
 ### Testing
-Framework:       {{TESTING_FRAMEWORK}}        e.g., Spock
-Coverage tool:  {{COVERAGE_TOOL}}              e.g., JaCoCo
+Framework:       {{config.testing_framework}}        e.g., Spock
+Coverage tool:  {{config.coverage_tool}}              e.g., JaCoCo

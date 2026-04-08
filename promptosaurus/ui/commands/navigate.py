@@ -3,6 +3,7 @@
 from promptosaurus.ui.commands.command import Command
 from promptosaurus.ui.commands.result import CommandResult
 from promptosaurus.ui.domain.context import PipelineContext
+from promptosaurus.ui.state.single_selection_state import SingleSelectionState
 
 
 class NavigateCommand(Command):
@@ -13,8 +14,12 @@ class NavigateCommand(Command):
         self.direction = direction
 
     def execute(self, context: PipelineContext) -> CommandResult:
-        """Execute navigate command."""
+        """Execute navigate command.
+
+        Moves selection up or down.
+        """
         new_state = context.state.navigate(self.direction)
+
         return CommandResult(
             continue_pipeline=True,
             new_state=new_state,

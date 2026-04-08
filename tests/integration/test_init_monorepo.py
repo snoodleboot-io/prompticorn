@@ -3,10 +3,6 @@
 These tests exercise the actual CLI flow to catch bugs in the full user journey.
 """
 
-import pytest
-from unittest.mock import patch, MagicMock
-
-from promptosaurus.cli import _setup_monorepo_folders
 from promptosaurus.questions.base.folder_spec import FolderSpec
 
 
@@ -65,10 +61,13 @@ class TestMonorepoConfig:
     def test_multi_language_config_template(self):
         """Verify multi-language config template exists."""
         from promptosaurus.config_handler import DEFAULT_MULTI_LANGUAGE_CONFIG_TEMPLATE
-        
+
         assert "repository" in DEFAULT_MULTI_LANGUAGE_CONFIG_TEMPLATE
         assert "spec" in DEFAULT_MULTI_LANGUAGE_CONFIG_TEMPLATE
-        assert DEFAULT_MULTI_LANGUAGE_CONFIG_TEMPLATE["repository"]["type"] == "multi-language-monorepo"
+        assert (
+            DEFAULT_MULTI_LANGUAGE_CONFIG_TEMPLATE["repository"]["type"]
+            == "multi-language-monorepo"
+        )
 
     def test_spec_list_structure(self):
         """Verify spec can be a list of folder specs."""
@@ -97,7 +96,7 @@ class TestMonorepoPresetTypes:
     def test_backend_preset_types(self):
         """Verify backend preset types are defined."""
         from promptosaurus.questions.base.folder_spec import FOLDER_TYPE_PRESETS
-        
+
         assert "backend" in FOLDER_TYPE_PRESETS
         assert "api" in FOLDER_TYPE_PRESETS["backend"]
         assert "library" in FOLDER_TYPE_PRESETS["backend"]
@@ -107,7 +106,7 @@ class TestMonorepoPresetTypes:
     def test_frontend_preset_types(self):
         """Verify frontend preset types are defined."""
         from promptosaurus.questions.base.folder_spec import FOLDER_TYPE_PRESETS
-        
+
         assert "frontend" in FOLDER_TYPE_PRESETS
         assert "ui" in FOLDER_TYPE_PRESETS["frontend"]
         assert "library" in FOLDER_TYPE_PRESETS["frontend"]
@@ -116,7 +115,7 @@ class TestMonorepoPresetTypes:
     def test_preset_languages(self):
         """Verify preset languages are correct."""
         from promptosaurus.questions.base.folder_spec import FOLDER_TYPE_PRESETS
-        
+
         # Backend defaults to Python
         assert FOLDER_TYPE_PRESETS["backend"]["api"]["language"] == "python"
         # Frontend defaults to TypeScript

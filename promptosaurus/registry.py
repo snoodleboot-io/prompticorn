@@ -20,13 +20,6 @@ Classes:
 Functions:
     _prompt_body_cached: Read and cache prompt file content.
     _dest_name: Strip mode prefix from filename for output.
-
-Example:
-    >>> from promptosaurus.registry import registry
-    >>> list(registry.modes.keys())
-    ['architect', 'test', 'refactor', 'document', 'explain', ...]
-    >>> registry.prompt_body('agents/core/core-system.md')[:50]
-    'Core System\\n\\nAlways-on base behaviors for all mo'
 """
 
 from functools import lru_cache
@@ -52,11 +45,6 @@ def _prompt_body_cached(prompts_dir: Path, filename: str) -> str:
 
     Returns:
         The prompt file content with header comments stripped.
-
-    Example:
-        >>> content = _prompt_body_cached(Path("./prompts"), "agents/core/core-system.md")
-        >>> content[:50]
-        'Core System\n\nAlways-on base behaviors for all mo'
     """
     path = prompts_dir / filename
     lines = path.read_text(encoding="utf-8").splitlines(keepends=True)
@@ -85,12 +73,6 @@ def _dest_name(mode_key: str, filename: str, ext: str = ".md") -> str:
 
     Returns:
         The filename with mode prefix stripped.
-
-    Example:
-        >>> _dest_name("code", "code-feature.md")
-        'feature.md'
-        >>> _dest_name("debug", "debug-root-cause.md", ".mdc")
-        'root-cause.mdc'
     """
     stem = filename
     prefix = f"{mode_key}-"
@@ -116,16 +98,6 @@ class Registry(BaseModel):
         concat_order: Ordered list of (section_label, filename) tuples for output.
         default_ignore_patterns: List of glob patterns for ignore files.
         copilot_apply: Dictionary mapping modes to glob patterns for Copilot.
-
-    Example:
-        >>> from promptosaurus.registry import registry
-        >>> # Get all registered modes
-        >>> print(list(registry.modes.keys()))
-        ['architect', 'test', 'refactor', ...]
-        >>> # Get prompt body
-        >>> body = registry.prompt_body('agents/core/core-system.md')
-        >>> len(body) > 0
-        True
     """
 
     model_config = ConfigDict(
@@ -257,6 +229,7 @@ class Registry(BaseModel):
         ],
         "planning": [
             "agents/project_planning/planning.md",
+            "agents/project_planning/methodology.md",
         ],
     }
 
@@ -297,6 +270,7 @@ class Registry(BaseModel):
         ("META / PROCESS", "agents/orchestrator/subagents/orchestrator-meta.md"),
         ("ENFORCEMENT", "agents/enforcement/enforcement.md"),
         ("PLANNING", "agents/project_planning/planning.md"),
+        ("PLANNING METHODOLOGY", "agents/project_planning/methodology.md"),
     ]
 
     # ── Default ignore patterns for all agents ─────────────────────────────
@@ -370,11 +344,6 @@ class Registry(BaseModel):
 
         Returns:
             Set of all registered filename strings.
-
-        Example:
-            >>> registry = Registry()
-            >>> 'agents/core/core-system.md' in registry.all_registered_files
-            True
         """
         files = set(self.always_on)
         for file_list in self.mode_files.values():
@@ -433,12 +402,6 @@ class Registry(BaseModel):
 
         Returns:
             Absolute Path to the prompt file.
-
-        Example:
-            >>> registry = Registry()
-            >>> path = registry.prompt_path('agents/core/core-system.md')
-            >>> path.exists()
-            True
         """
         return self.prompts_dir / filename
 
@@ -454,12 +417,6 @@ class Registry(BaseModel):
 
         Returns:
             The prompt file content with header comments stripped.
-
-        Example:
-            >>> registry = Registry()
-            >>> body = registry.prompt_body('agents/core/core-system.md')
-            >>> body.startswith('Core System')
-            True
         """
         return _prompt_body_cached(self.prompts_dir, filename)
 
@@ -477,13 +434,6 @@ class Registry(BaseModel):
 
         Returns:
             The filename with mode prefix stripped.
-
-        Example:
-            >>> registry = Registry()
-            >>> registry.dest_name("code", "code-feature.md")
-            'feature.md'
-            >>> registry.dest_name("debug", "debug-root-cause.md", ".mdc")
-            'root-cause.mdc'
         """
         return _dest_name(mode_key, filename, ext)
 
@@ -498,12 +448,6 @@ class Registry(BaseModel):
 
         Returns:
             List of error messages. Empty list if all files are valid.
-
-        Example:
-            >>> registry = Registry()
-            >>> errors = registry.validate_files()
-            >>> len(errors)  # Should be 0 if all files exist
-            0
         """
         errors: list[str] = []
 
@@ -531,14 +475,6 @@ class Registry(BaseModel):
 
         Returns:
             Complete .gitignore file content as a string.
-
-        Example:
-            >>> registry = Registry()
-            >>> content = registry.generate_gitignore()
-            >>> '# Auto-generated' in content
-            True
-            >>> 'node_modules/' in content
-            True
         """
         lines = [
             "# Auto-generated by prompt CLI — edit patterns in registry.py then rebuild",
@@ -580,12 +516,6 @@ class Registry(BaseModel):
 
         Returns:
             Complete .clineignore file content as a string.
-
-        Example:
-            >>> registry = Registry()
-            >>> content = registry.generate_clineignore()
-            >>> '# Auto-generated' in content
-            True
         """
         lines = [
             "# Auto-generated by prompt CLI — edit patterns in registry.py then rebuild",
@@ -603,12 +533,6 @@ class Registry(BaseModel):
 
         Returns:
             Complete .cursorignore file content as a string.
-
-        Example:
-            >>> registry = Registry()
-            >>> content = registry.generate_cursorignore()
-            >>> '# Auto-generated' in content
-            True
         """
         lines = [
             "# Auto-generated by prompt CLI — edit patterns in registry.py then rebuild",
@@ -626,12 +550,6 @@ class Registry(BaseModel):
 
         Returns:
             Complete .kiloignore file content as a string.
-
-        Example:
-            >>> registry = Registry()
-            >>> content = registry.generate_kiloignore()
-            >>> '# Auto-generated' in content
-            True
         """
         lines = [
             "# Auto-generated by prompt CLI — edit patterns in registry.py then rebuild",
@@ -649,12 +567,6 @@ class Registry(BaseModel):
 
         Returns:
             Complete .copilotignore file content as a string.
-
-        Example:
-            >>> registry = Registry()
-            >>> content = registry.generate_copilotignore()
-            >>> '# Auto-generated' in content
-            True
         """
         lines = [
             "# Auto-generated by prompt CLI — edit patterns in registry.py then rebuild",

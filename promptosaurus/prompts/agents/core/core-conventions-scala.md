@@ -1,11 +1,11 @@
 <!-- path: promptosaurus/prompts/agents/core/core-conventions-scala.md -->
 # Core Conventions Scala
 
-Language:             {{LANGUAGE}}           e.g., Scala 3.4
-Runtime:              {{RUNTIME}}            e.g., JVM 21
-Package Manager:      {{PACKAGE_MANAGER}}        e.g., sbt, mill
-Linter:              {{LINTER}}             e.g., Scalafmt, Scalafix
-Formatter:           {{FORMATTER}}          e.g., Scalafmt
+Language:             {{config.language}}           e.g., Scala 3.4
+Runtime:              {{config.runtime}}            e.g., JVM 21
+Package Manager:      {{config.package_manager}}        e.g., sbt, mill
+Linter:              {{config.linter}}             e.g., Scalafmt, Scalafix
+Formatter:           {{config.formatter}}          e.g., Scalafmt
 
 ### Naming Conventions
 
@@ -38,11 +38,11 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           {{LINE_COVERAGE_%}}          e.g., 80%
-Branch:         {{BRANCH_COVERAGE_%}}        e.g., 70%
-Function:       {{FUNCTION_COVERAGE_%}}       e.g., 90%
-Statement:      {{STATEMENT_COVERAGE_%}}      e.g., 85%
-Path:           {{PATH_COVERAGE_%}}           e.g., 60%
+Line:           {{config.coverage.line}}          e.g., 80%
+Branch:         {{config.coverage.branch}}        e.g., 70%
+Function:       {{config.coverage.function}}       e.g., 90%
+Statement:      {{config.coverage.statement}}      e.g., 85%
+Path:           {{config.coverage.path}}           e.g., 60%
 
 #### Test Types
 
@@ -59,10 +59,10 @@ Path:           {{PATH_COVERAGE_%}}           e.g., 60%
 - Use ScalaCheck for property-based testing
 
 #### Framework & Tools
-Framework:       {{TESTING_FRAMEWORK}}        e.g., ScalaTest, MUnit, specs2
-Mocking:        {{MOCKING_LIBRARY}}              e.g., ScalaMock, Mockito
-Property tool:   {{PROPERTY_TOOL}}        e.g., ScalaCheck
-Coverage tool:  {{COVERAGE_TOOL}}              e.g., scoverage
+Framework:       {{config.testing_framework}}        e.g., ScalaTest, MUnit, specs2
+Mocking:        {{config.mocking_library}}              e.g., ScalaMock, Mockito
+Property tool:   {{config.property_tool}}        e.g., ScalaCheck
+Coverage tool:  {{config.coverage_tool}}              e.g., scoverage
 
 #### Scaffolding
 
