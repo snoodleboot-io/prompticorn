@@ -1,4 +1,6 @@
 <!-- path: promptosaurus/prompts/agents/core/core-conventions-ruby.md -->
+{%- import 'macros/testing_sections.jinja2' as testing -%}
+{%- import 'macros/coverage_targets.jinja2' as coverage -%}
 # Core Conventions Ruby
 
 Language:             {{config.language}}           e.g., Ruby 3.3
@@ -35,43 +37,13 @@ Environment vars:   UPPER_SNAKE_CASE always
 
 ### Testing
 
-#### Coverage Targets
-Line:           {{config.coverage.line}}          e.g., 80%
-Branch:         {{config.coverage.branch}}        e.g., 70%
-Method:         {{config.coverage.method}}         e.g., 90%
+{{ testing.render_test_types('ruby') }}
 
-#### Test Types
-
-##### Unit Tests
-- Use RSpec or Minitest
-- Test one class/method in isolation
-- Use doubles/mocks for external dependencies
-
-##### Integration Tests
-- Test at service boundary
-- Use factory_bot for test data
-
-##### System Tests
-- Use Capybara for browser testing
-
-#### Framework & Tools
-Framework:       {{config.testing_framework}}        e.g., RSpec, Minitest
-Mocking:        {{config.mocking_library}}              e.g., RSpec mocks, RR
-Coverage tool:  {{config.coverage_tool}}              e.g., SimpleCov
-
-#### Scaffolding
-
-```bash
-# Install
-gem install rspec simplecov
-
-# Run tests
-rspec                          # Run tests
-rspec --format documentation  # Detailed output
-rspec --coverage             # With coverage
-
-# Configuration (.rspec)
---require spec_helper
---format documentation
---color
-```
+{{ coverage.render_coverage_table(
+  line=config.coverage.line | default('80'),
+  branch=config.coverage.branch | default('70'),
+  function=config.coverage.function | default('90'),
+  statement=config.coverage.statement | default('85'),
+  mutation=config.coverage.mutation | default('80'),
+  path=config.coverage.path | default('60')
+) }}
