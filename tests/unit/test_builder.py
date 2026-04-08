@@ -1139,3 +1139,273 @@ class TestCombinedFeatures:
         assert "def create(self):" in result
         assert "def update(self):" in result
         assert "def delete(self):" in result
+
+    # ========== INTEGRATION TESTS: COMPLEX TEMPLATE COMPOSITIONS ==========
+
+    def test_integration_macros_with_loops_and_filters(self):
+        """Test macros combined with loops and filters."""
+        builder = Builder()
+
+        config = {
+            "spec": {
+                "methods": ["create_user", "update_user", "delete_user"],
+            }
+        }
+
+        # Template with macro definition, loop, and filters
+        template = """
+        {% macro render_method(method_name) %}
+        def {{ method_name | snake_case }}():
+            \"\"\"Auto-generated method.\"\"\"
+            pass
+        {% endmacro %}
+        
+        class UserManager:
+            \"\"\"Manages user operations.\"\"\"
+            
+            {% for method in config.methods %}
+            {{ render_method(method) }}
+            {% endfor %}
+        """
+
+        result = builder._substitute_template_variables(template, config)
+        assert "class UserManager:" in result
+        assert "def create_user():" in result
+        assert "def update_user():" in result
+        assert "def delete_user():" in result
+        assert '"""Auto-generated method."""' in result
+
+    def test_integration_conditionals_loops_and_filters(self):
+        """Test conditionals, loops, and filters working together."""
+        builder = Builder()
+
+        config = {
+            "spec": {
+                "generate_tests": True,
+                "test_methods": ["test_create", "test_update", "test_delete"],
+                "linters": ["ruff", "pyright", "mypy"],
+            }
+        }
+
+        # Template with conditionals, loops, and filters
+        template = """
+        {% if config.generate_tests %}
+        # Test Suite
+        {% for method in config.test_methods %}
+        def {{ method | snake_case }}():
+            \"\"\"{{ method | pascal_case }} test.\"\"\"
+            assert True
+        
+        {% endfor %}
+        {% endif %}
+        
+        # Linters: {{ config.linters | join(", ") | upper }}
+        """
+
+        result = builder._substitute_template_variables(template, config)
+        assert "# Test Suite" in result
+        assert "def test_create():" in result
+        assert "def test_update():" in result
+        assert "def test_delete():" in result
+        assert "RUFF, PYRIGHT, MYPY" in result
+
+    def test_integration_set_tag_with_loops_and_filters(self):
+        """Test {% set %} tag with loops and custom filters."""
+        builder = Builder()
+
+        config = {
+            "spec": {
+                "project_name": "awesome_project",
+                "modules": ["auth", "users", "posts"],
+            }
+        }
+
+        # Template with set tag, loops, and filters
+        template = """
+        {% set class_name = config.project_name | pascal_case %}
+        {% set file_name = config.project_name | snake_case %}
+        
+        # Generated for {{ class_name }} project
+        # File: {{ file_name }}.py
+        
+        class {{ class_name }}:
+            \"\"\"Main application class.\"\"\"
+            
+            MODULES = [
+            {% for module in config.modules %}
+                "{{ module | upper }}",
+            {% endfor %}
+            ]
+        """
+
+        result = builder._substitute_template_variables(template, config)
+        assert "# Generated for AwesomeProject project" in result
+        assert "# File: awesome_project.py" in result
+        assert "class AwesomeProject:" in result
+        assert '"AUTH",' in result
+        assert '"USERS",' in result
+        assert '"POSTS",' in result
+
+    def test_integration_with_blocks_for_variable_scoping(self):
+        """Test {% with %} blocks for variable scoping with filters."""
+        builder = Builder()
+
+        config = {
+            "spec": {
+                "database_url": "postgresql://localhost/mydb",
+                "cache_ttl": 3600,
+            }
+        }
+
+        # Template with with blocks for scoped variables
+        template = """
+        {% with db_host = config.database_url | lower %}
+        Database Host: {{ db_host }}
+        {% endwith %}
+        
+        {% with ttl_seconds = config.cache_ttl %}
+        Cache TTL: {{ ttl_seconds }} seconds
+        {% with ttl_minutes = ttl_seconds // 60 %}
+        Cache TTL: {{ ttl_minutes }} minutes
+        {% endwith %}
+        {% endwith %}
+        """
+
+        result = builder._substitute_template_variables(template, config)
+        assert "Database Host: postgresql://localhost/mydb" in result
+        assert "Cache TTL: 3600 seconds" in result
+        assert "Cache TTL: 60 minutes" in result
+
+    def test_integration_complex_nested_loops_with_conditionals(self):
+        """Test complex nesting of loops and conditionals with filters."""
+        builder = Builder()
+
+        config = {
+            "spec": {
+                "languages": [
+                    {
+                        "name": "python",
+                        "frameworks": ["django", "fastapi", "flask"],
+                        "primary": True,
+                    },
+                    {
+                        "name": "typescript",
+                        "frameworks": ["react", "nextjs"],
+                        "primary": False,
+                    },
+                ],
+            }
+        }
+
+        # Template with nested loops and conditionals
+        template = """
+        # Language Support
+        
+        {% for lang in config.languages %}
+        ## {{ lang.name | pascal_case }}
+        {% if lang.primary %}
+        **Primary Language**
+        {% endif %}
+        
+        Frameworks:
+        {% for framework in lang.frameworks %}
+        - {{ framework | upper }}
+        {% endfor %}
+        
+        {% endfor %}
+        """
+
+        result = builder._substitute_template_variables(template, config)
+        assert "## Python" in result
+        assert "**Primary Language**" in result
+        assert "## Typescript" in result
+        assert "- DJANGO" in result
+        assert "- FASTAPI" in result
+        assert "- FLASK" in result
+        assert "- REACT" in result
+        assert "- NEXTJS" in result
+
+    def test_integration_filters_with_default_values(self):
+        """Test filters with default values for optional config."""
+        builder = Builder()
+
+        config = {
+            "spec": {
+                "project_name": "my_project",
+            }
+        }
+
+        # Template with filters and defaults (accessing undefined field)
+        template = """
+        # Project: {{ config.project_name | pascal_case }}
+        Description: {{ config.missing_field | default("No description provided") }}
+        
+        Indent example:
+        {{ "Hello\\nWorld" | indent(4) }}
+        """
+
+        result = builder._substitute_template_variables(template, config)
+        assert "# Project: MyProject" in result
+        assert "Description: No description provided" in result
+        assert "    Hello" in result  # Indented
+        assert "    World" in result  # Indented
+
+    def test_integration_multiple_filters_chaining(self):
+        """Test chaining multiple filters together."""
+        builder = Builder()
+
+        config = {
+            "spec": {
+                "raw_name": "my awesome project name",
+                "description": "hello world project",
+                "languages": ["python", "typescript"],
+            }
+        }
+
+        # Template with filter chaining
+        template = """
+        {% set name = config.raw_name | upper | replace(" ", "_") %}
+        Processed Name: {{ name }}
+        
+        {% set desc_processed = config.description | snake_case | upper %}
+        Description: {{ desc_processed }}
+        
+        Languages: {{ config.languages | join(", ") | upper }}
+        
+        Combined: {{ config.raw_name | lower | replace(" ", "-") | upper }}
+        """
+
+        result = builder._substitute_template_variables(template, config)
+        assert "Processed Name: MY_AWESOME_PROJECT_NAME" in result
+        assert "Description: HELLO_WORLD_PROJECT" in result
+        assert "Languages: PYTHON, TYPESCRIPT" in result
+        assert "Combined: MY-AWESOME-PROJECT-NAME" in result
+
+    def test_integration_error_handling_with_graceful_fallback(self):
+        """Test error handling with graceful fallback in complex templates."""
+        builder = Builder()
+
+        config = {"spec": {"name": "test"}}
+
+        # Test 1: Using undefined variable with default filter provides fallback
+        template_undefined_with_fallback = '{{ config.missing_field | default("fallback_value") }}'
+        result = builder._substitute_template_variables(template_undefined_with_fallback, config)
+        assert "fallback_value" in result
+
+        # Test 2: Complex template with mixed undefined and defined variables
+        template_mixed = """
+        Project: {{ config.name }}
+        Author: {{ config.author | default("Unknown") }}
+        Status: {{ config.status | default("In Progress") }}
+        """
+        result = builder._substitute_template_variables(template_mixed, config)
+        assert "Project: test" in result
+        assert "Author: Unknown" in result
+        assert "Status: In Progress" in result
+
+        # Test 3: Using default filter with missing config key
+        template_fallback = """
+        Optional Value: {{ config.missing_value | default("fallback_text") }}
+        """
+        result = builder._substitute_template_variables(template_fallback, config)
+        assert "fallback_text" in result

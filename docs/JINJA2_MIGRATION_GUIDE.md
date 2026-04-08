@@ -104,6 +104,8 @@ result = renderer.render(template, variables)
 
 Take advantage of Jinja2's advanced features:
 
+#### Basic Features (Phase 1-2)
+
 ```jinja2
 {# Loops #}
 {% for item in shopping_cart %}
@@ -120,8 +122,32 @@ Take advantage of Jinja2's advanced features:
 {# Filters #}
 {{user.email | lower}}
 {{current_date | strftime('%Y-%m-%d')}}
+```
 
-{# Macros #}
+#### Advanced Features (Phase 3)
+
+**Template Inheritance:**
+```jinja2
+{# base.html #}
+<html>
+  <head>
+    <title>{% block title %}Default Title{% endblock %}</title>
+  </head>
+  <body>
+    {% block content %}{% endblock %}
+  </body>
+</html>
+
+{# child.html #}
+{% extends "base.html" %}
+{% block title %}My Page{% endblock %}
+{% block content %}
+  <h1>Welcome!</h1>
+{% endblock %}
+```
+
+**Macros (Reusable Components):**
+```jinja2
 {% macro render_user(user) %}
   <div class="user">
     <h3>{{user.name}}</h3>
@@ -129,9 +155,60 @@ Take advantage of Jinja2's advanced features:
   </div>
 {% endmacro %}
 
-{# Includes #}
+{# Usage #}
+{% for user in users %}
+  {{ render_user(user) }}
+{% endfor %}
+```
+
+**Includes (Template Composition):**
+```jinja2
 {% include 'header.html' %}
+{% include 'navigation.html' with context %}
 {% include 'footer.html' %}
+```
+
+**Imports (Macro Modules):**
+```jinja2
+{% import 'macros.html' as macros %}
+{{ macros.render_card(item) }}
+```
+
+**Custom Filters (Wave 3):**
+```jinja2
+{{ "hello world" | pascal_case }}       {# HelloWorld #}
+{{ "hello_world" | kebab_case }}        {# hello-world #}
+{{ "HELLO_WORLD" | snake_case }}        {# hello_world #}
+{{ "hello_world" | camel_case }}        {# helloWorld #}
+{{ "hello world" | title_case }}        {# Hello World #}
+{{ "hello\nworld" | indent(4) }}        {# Indents by 4 spaces #}
+{{ "item" | pluralize(count) }}         {# Pluralizes based on count #}
+```
+
+**Variable Assignment (Wave 3):**
+```jinja2
+{% set class_name = module_name | pascal_case %}
+class {{ class_name }}:
+    pass
+```
+
+**Variable Scoping (Wave 3):**
+```jinja2
+{% with title = config.name | upper %}
+  <h1>{{ title }}</h1>
+{% endwith %}
+```
+
+**Complex Composition (All Phases):**
+```jinja2
+{% extends "base_layout" %}
+{% import "form_macros" as forms %}
+
+{% block content %}
+  {% for section in config.sections %}
+    {{ forms.render_section(section) }}
+  {% endfor %}
+{% endblock %}
 ```
 
 ## Validation and Testing
@@ -222,14 +299,34 @@ renderer = Jinja2TemplateRenderer(environment_options={'undefined': jinja2.Debug
 
 ## Migration Checklist
 
+### Phase 1: Foundation (Basic Features)
 - [ ] Convert all `{variable}` to `{{variable}}`
 - [ ] Update filter syntax from `{value|filter}` to `{{value | filter}}`
-- [ ] Replace custom control logic with Jinja2 constructs
+- [ ] Replace custom control logic with Jinja2 constructs (if/else, for loops)
 - [ ] Update code to use new renderer API
+
+### Phase 2: Advanced Core Features
+- [ ] Enable built-in Jinja2 filters (`upper`, `lower`, `join`, `default`, etc.)
+- [ ] Implement conditional blocks with complex operators
+- [ ] Use loop variables (`loop.index`, `loop.first`, `loop.last`)
+- [ ] Test filter chaining
+
+### Phase 3: Advanced Jinja2 Features
+- [ ] Implement template inheritance with `{% extends %}` and `{% block %}`
+- [ ] Create reusable macros with `{% macro %}`
+- [ ] Use template includes with `{% include %}`
+- [ ] Import macro modules with `{% import %}`
+- [ ] Apply custom filters (pascal_case, kebab_case, snake_case, camel_case, title_case, indent, pluralize)
+- [ ] Use variable assignment with `{% set %}`
+- [ ] Implement variable scoping with `{% with %}`
+- [ ] Create complex template compositions combining all features
+
+### Validation and Optimization
 - [ ] Enable appropriate caching and performance optimizations
 - [ ] Validate all templates with validation tools
 - [ ] Test error handling scenarios
 - [ ] Benchmark performance improvements
+- [ ] Test edge cases and error conditions
 
 ## Support
 
