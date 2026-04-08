@@ -44,13 +44,18 @@ class UIFactory:
 
     @staticmethod
     def create_renderer(context: PipelineContext):
-        """Create appropriate renderer based on context."""
+        """Create appropriate renderer based on context.
+
+        Uses column layout for 6+ options (saves screen space),
+        vertical layout for fewer options (cleaner for small lists).
+        """
         factory = AbstractFactory[Renderer]
 
         if context.mode == "explain":
             return factory.create("explain_renderer")
 
         # Choose layout based on option count
-        if len(context.display_options) > 8:
+        # Use columns for 6+ options to save screen space and make layout cleaner
+        if len(context.display_options) >= 6:
             return factory.create("column_layout_renderer")
         return factory.create("vertical_layout_renderer")

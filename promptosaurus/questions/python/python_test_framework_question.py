@@ -15,6 +15,10 @@ class PythonTestFrameworkQuestion(Question):
         return "What testing framework do you want to use?"
 
     @property
+    def options(self) -> list[str]:
+        return ["hybrid", "pytest", "unittest"]
+
+    @property
     def explanation(self) -> str:
         return """Test framework affects how tests are written:
 - hybrid: unittest.TestCase with limited pytest fixtures and mocking
@@ -22,17 +26,9 @@ class PythonTestFrameworkQuestion(Question):
 - unittest: Built-in, simple, no dependencies"""
 
     @property
-    def options(self) -> list[str]:
-        return ["hybrid", "pytest", "unittest"]
-
-    @property
     def option_explanations(self) -> dict[str, str]:
         return {
-            "hybrid": "unittest.TestCase with limited pytest fixtures and mocking",
-            "pytest": "Industry standard - powerful fixtures, great reporting, widely used",
-            "unittest": "Built-in - simple, no dependencies, good for beginners",
+            "hybrid": "Mix unittest.TestCase with some pytest features, transitional approach",
+            "pytest": "Modern framework with powerful fixtures, parametrization, great plugins",
+            "unittest": "Built-in framework, uses class-based tests, no external dependencies",
         }
-
-    @property
-    def default(self) -> str:
-        return "hybrid"

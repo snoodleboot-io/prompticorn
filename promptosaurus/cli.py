@@ -9,10 +9,6 @@ Commands:
     prompt list      - Show all registered modes and their prompt files
     prompt validate  - Check for missing files and unregistered orphans
 
-Example:
-    >>> from promptosaurus.cli import cli
-    >>> # CLI is invoked via: prompt init
-
 Key Functions:
     - cli: Main Click group for the prompt command
     - list_prompts: Display all registered modes and their files
@@ -27,8 +23,10 @@ from pathlib import Path
 from typing import Any, cast
 
 import click
+from sweet_tea.abstract_inverter_factory import AbstractInverterFactory  # type: ignore[import]
 
 from promptosaurus.artifacts import ArtifactManager
+from promptosaurus.builders.builder import Builder
 from promptosaurus.cli_utils import (
     get_supported_tools_display,
     normalize_tool_name,
@@ -469,26 +467,26 @@ def init_prompts():
     click.echo("\n" + "=" * 60)
     click.secho("  Prompt CLI Initialization", bold=True, fg="cyan")
     click.echo("=" * 60)
-    click.echo("\nUse ↑/↓ arrows, numbers, or Enter for defaults.")
+    click.echo("\nUse up/down arrows, numbers, or Enter for defaults.")
 
     try:
         # Step 1: Select which AI assistant to configure
         ai_tool = select_option_with_explain(
             question="Which AI assistant would you like to configure?",
-            options=["kilo-cli", "kilo-ide", "cline", "cursor", "copilot"],
+            options=["Kilo CLI", "Kilo IDE", "Cline", "Cursor", "Copilot"],
             explanations={
-                "kilo-cli": "Kilo Code (CLI) - .opencode/rules/ with collapsed mode files",
-                "kilo-ide": "Kilo Code (IDE) - .kilocode/rules-{mode}/ directory structure",
-                "cline": "Cline - .clinerules file (concatenated rules)",
-                "cursor": "Cursor - .cursor/rules/ directory + .cursorrules",
-                "copilot": "GitHub Copilot - .github/copilot-instructions.md",
+                "Kilo CLI": "Kilo Code (CLI) - .opencode/rules/ with collapsed mode files",
+                "Kilo IDE": "Kilo Code (IDE) - .kilocode/rules-{mode}/ directory structure",
+                "Cline": "Cline - .clinerules file (concatenated rules)",
+                "Cursor": "Cursor - .cursor/rules/ directory + .cursorrules",
+                "Copilot": "GitHub Copilot - .github/copilot-instructions.md",
             },
             question_explanation="Select one AI assistant to configure.",
             default_index=1,
             allow_multiple=False,
         )
-        # Wrap single selection in list for consistent handling
-        ai_tools: list[str] = [cast(str, ai_tool)]
+        # Store the selected AI tool
+        selected_tool: str = cast(str, ai_tool)
 
         # Step 2: Repository type
         click.echo("\n" + "-" * 60)
@@ -551,21 +549,21 @@ def init_prompts():
         click.echo(f"\n  Config file: {ConfigHandler.get_config_path()}")
 
         # Step 5: Generate selected AI assistant configurations
-        if ai_tools:
+        if selected_tool:
             click.echo("\n" + "-" * 60)
             click.secho("  Generating AI assistant configurations...", bold=True)
             click.echo("-" * 60)
 
             output_path = Path(".")
-            for tool in ai_tools:
-                builder_class = _get_builder(tool)  # type: ignore[arg-type]
-                if builder_class:
-                    builder = builder_class()
-                    actions = builder.build(output_path, config=config, dry_run=False)
-                    for action in actions:
-                        click.echo(f"  {action}")
-                else:
-                    click.secho(f"  ✗ Unknown tool: {tool}", fg="yellow")
+            normalized_tool = normalize_tool_name(selected_tool)
+            builder_class = _get_builder(normalized_tool)  # type: ignore[arg-type]
+            if builder_class:
+                builder = builder_class()
+                actions = builder.build(output_path, config=config, dry_run=False)
+                for action in actions:
+                    click.echo(f"  {action}")
+            else:
+                click.secho(f"  ✗ Unknown tool: {selected_tool}", fg="yellow")
 
             click.echo("\n" + "=" * 60)
             click.secho("  Setup complete!", bold=True, fg="green")
@@ -619,18 +617,18 @@ def switch_command(tool_name: str | None):
     else:
         # Show interactive menu
         try:
-            tool_options = ["kilo-cli", "kilo-ide", "cline", "cursor", "copilot"]
+            tool_options = ["Kilo CLI", "Kilo IDE", "Cline", "Cursor", "Copilot"]
             target_tool = cast(
                 str,
                 select_option_with_explain(
                     question="Which AI assistant would you like to switch to?",
                     options=tool_options,
                     explanations={
-                        "kilo-cli": "Kilo Code (CLI) - .opencode/rules/ with collapsed mode files",
-                        "kilo-ide": "Kilo Code (IDE) - .kilocode/rules-{mode}/ directory structure",
-                        "cline": "Cline - .clinerules file (concatenated rules)",
-                        "cursor": "Cursor - .cursor/rules/ directory + .cursorrules",
-                        "copilot": "GitHub Copilot - .github/copilot-instructions.md",
+                        "Kilo CLI": "Kilo Code (CLI) - .opencode/rules/ with collapsed mode files",
+                        "Kilo IDE": "Kilo Code (IDE) - .kilocode/rules-{mode}/ directory structure",
+                        "Cline": "Cline - .clinerules file (concatenated rules)",
+                        "Cursor": "Cursor - .cursor/rules/ directory + .cursorrules",
+                        "Copilot": "GitHub Copilot - .github/copilot-instructions.md",
                     },
                     question_explanation="Select an AI assistant to switch to.",
                     default_index=1,
@@ -739,7 +737,7 @@ def update_command():
                 question="Select an option to modify (or select 'Save & Exit' to save):",
                 options=[opt[0] for opt in display_options] + ["Save & Exit"],
                 explanations={opt[0]: f"{opt[2]}: {opt[1]}" for opt in display_options},
-                question_explanation="Use ↑/↓ arrows to navigate, Enter to select.\nCurrent values are shown in blue, changes in green.",
+                question_explanation="Use up/down arrows to navigate, Enter to select.\nCurrent values are shown in blue, changes in green.",
                 default_index=len(display_options),  # Default to Save & Exit
                 allow_multiple=False,
             )
@@ -803,7 +801,7 @@ def update_command():
             selected_opt.current_value = new_value
 
 
-def _get_builder(tool: str):
+def _get_builder(tool: str) -> type[Builder]:
     """Get the builder class for a given tool.
 
     This function maps a tool name to its corresponding builder class.
@@ -815,25 +813,22 @@ def _get_builder(tool: str):
     Returns:
         The builder class for the given tool, or None if tool is not recognized.
 
-    Example:
-        >>> builder_class = _get_builder('kilo-cli')
-        >>> builder_class is not None
-        True
     """
-    from promptosaurus.builders.cline import ClineBuilder
-    from promptosaurus.builders.copilot import CopilotBuilder
-    from promptosaurus.builders.cursor import CursorBuilder
-    from promptosaurus.builders.kilo.kilo_cli import KiloCLIBuilder
-    from promptosaurus.builders.kilo.kilo_ide import KiloIDEBuilder
-
-    builders = {
-        "kilo-cli": KiloCLIBuilder,
-        "kilo-ide": KiloIDEBuilder,
-        "cline": ClineBuilder,
-        "cursor": CursorBuilder,
-        "copilot": CopilotBuilder,
+    # Map normalized display names to actual class names expected by the factory
+    TOOL_TO_CLASS_MAPPING = {
+        "kilo-cli": "KiloCLIBuilder",
+        "kilo-ide": "KiloIDEBuilder",
+        "cline": "ClineBuilder",
+        "cursor": "CursorBuilder",
+        "copilot": "CopilotBuilder",
     }
-    return builders.get(tool)
+
+    # Get the class name from the mapping
+    class_name = TOOL_TO_CLASS_MAPPING.get(tool)
+    if not class_name:
+        raise ValueError(f"Unknown tool: {tool}")
+
+    return cast(type[Builder], AbstractInverterFactory[Builder].create(key=class_name))
 
 
 # ── validate ───────────────────────────────────────────────────────────────────

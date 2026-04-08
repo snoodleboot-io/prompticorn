@@ -1,0 +1,435 @@
+{#
+  code_examples.jinja2
+  
+  Code example patterns macro library for rendering code with syntax highlighting.
+  Provides reusable macros for code examples, patterns, and anti-patterns.
+  
+  Usage:
+    {% import 'macros/code_examples.jinja2' as examples %}
+    {{ examples.render_code_example('python', code, 'Description of example') }}
+    {{ examples.render_pattern_comparison('python', good_code, bad_code) }}
+    {{ examples.render_code_checklist('python', items) }}
+#}
+
+{% macro render_code_example(language, code, description='') -%}
+{% if description %}### {{ description }}
+{% endif %}
+```{{ language }}
+{{ code }}
+```
+{%- endmacro %}
+
+{% macro render_pattern_comparison(language, good_code, bad_code, title='Good vs Bad') -%}
+#### {{ title }} - {{ language | capitalize }}
+
+**✓ Good:**
+```{{ language }}
+{{ good_code }}
+```
+
+**✗ Bad:**
+```{{ language }}
+{{ bad_code }}
+```
+{%- endmacro %}
+
+{% macro render_python_import_pattern() -%}
+#### Import Organization
+
+**✓ Correct order (stdlib → third-party → local):**
+```python
+# Standard library
+import os
+import sys
+from pathlib import Path
+from typing import TypeAlias
+
+# Third-party
+import pydantic
+from sqlalchemy import create_engine
+
+# Local
+from .models import User
+from .config import settings
+```
+
+**✗ Avoid:**
+```python
+# ❌ Mixed imports without grouping
+import os
+from .models import User
+import pydantic
+from pathlib import Path
+from .config import settings
+
+# ❌ Relative imports (use absolute)
+from ..models import User  # ❌ NOT ALLOWED
+from .models import User   # Use absolute import instead
+```
+{%- endmacro %}
+
+{% macro render_python_type_hints() -%}
+#### Type Hints - Python
+
+**✓ Correct:**
+```python
+from typing import TypeAlias
+from dataclasses import dataclass
+
+# Type aliases for complex types
+UserID: TypeAlias = int
+APIResponse: TypeAlias = dict[str, int | str]
+
+# Function with complete type hints
+def process_user(
+    user_id: UserID,
+    name: str,
+    age: int | None = None,
+) -> dict[str, str]:
+    """Process user data and return result."""
+    return {"user_id": str(user_id), "name": name}
+
+# Using dataclass instead of dict
+@dataclass
+class User:
+    id: int
+    name: str
+    email: str
+    is_active: bool = True
+
+# Use T | None instead of Optional[T]
+def get_user(user_id: int) -> User | None:
+    """Retrieve user by ID."""
+    return database.find_user(user_id)
+```
+
+**✗ Avoid:**
+```python
+# ❌ No type hints
+def process_user(user_id, name, age=None):
+    return {"user_id": user_id, "name": name}
+
+# ❌ Using Any
+def process_data(data: Any) -> Any:  # Too vague
+    return data
+
+# ❌ Using Optional instead of | None
+def get_user(user_id: int) -> Optional[User]:
+    return None
+
+# ❌ Using dict without type parameters
+def process() -> dict:  # Should be dict[str, str]
+    return {}
+```
+{%- endmacro %}
+
+{% macro render_python_error_handling() -%}
+#### Error Handling - Python
+
+**✓ Correct:**
+```python
+# Use exception hierarchies
+class UserError(Exception):
+    """Base exception for user operations."""
+    pass
+
+class UserNotFound(UserError):
+    """Raised when user cannot be found."""
+    pass
+
+class InvalidUserData(UserError):
+    """Raised when user data is invalid."""
+    pass
+
+# Handle with context
+def get_user(user_id: int) -> User:
+    try:
+        user = database.find_user(user_id)
+        if user is None:
+            raise UserNotFound(f"User {user_id} not found")
+        return user
+    except DatabaseError as e:
+        raise UserError(f"Failed to fetch user {user_id}: {e}") from e
+
+# Use context managers for resources
+def process_file(filename: str) -> str:
+    with open(filename, 'r') as f:
+        return f.read()
+
+# Use asynccontextmanager for async resources
+from contextlib import asynccontextmanager
+
+@asynccontextmanager
+async def database_connection():
+    conn = await db.connect()
+    try:
+        yield conn
+    finally:
+        await conn.close()
+```
+
+**✗ Avoid:**
+```python
+# ❌ Catching too broad exceptions
+try:
+    result = expensive_operation()
+except Exception:  # Catches everything!
+    return None
+
+# ❌ Swallowing errors silently
+try:
+    process_data()
+except Exception:
+    pass  # No logging or re-raise
+
+# ❌ Generic exception messages
+raise Exception("Something went wrong")  # Too vague
+
+# ❌ Manual resource management
+f = open('file.txt')
+content = f.read()
+f.close()  # Might not run if exception occurs
+```
+{%- endmacro %}
+
+{% macro render_typescript_pattern() -%}
+#### Type Safety - TypeScript
+
+**✓ Correct:**
+```typescript
+// Strict type definitions
+interface User {
+  id: number;
+  name: string;
+  email: string;
+  isActive: boolean;
+}
+
+// Union types instead of any
+type ApiResponse<T> = 
+  | { success: true; data: T }
+  | { success: false; error: string };
+
+// Type narrowing
+function processUser(input: User | null): string {
+  if (input === null) {
+    return "No user";
+  }
+  return input.name;  // TypeScript knows input is User
+}
+
+// Generics for reusable types
+async function fetchData<T>(url: string): Promise<T> {
+  const response = await fetch(url);
+  return response.json();
+}
+
+const user = await fetchData<User>('/api/users/1');
+```
+
+**✗ Avoid:**
+```typescript
+// ❌ Using any
+function process(data: any): any {
+  return data;
+}
+
+// ❌ Not using union types properly
+function handle(result: any): void {
+  if (result.ok) {
+    console.log(result.value);  // Could be undefined
+  }
+}
+
+// ❌ Not narrowing types
+function getName(user: User | null): string {
+  return user.name;  // Error: user could be null
+}
+```
+{%- endmacro %}
+
+{% macro render_async_patterns(language) -%}
+#### Async Patterns - {{ language | capitalize }}
+
+{% if language == 'python' -%}
+**✓ Correct:**
+```python
+import asyncio
+
+# Async function with proper await
+async def fetch_user(user_id: int) -> User:
+    result = await database.get_user(user_id)
+    return result
+
+# Never use time.sleep in async code
+async def process_with_delay():
+    await asyncio.sleep(1)  # ✓ Correct
+    # NOT: time.sleep(1)  # ❌ Blocks event loop
+
+# Async context managers
+async with database_connection() as conn:
+    user = await conn.get_user(1)
+
+# Using asyncio.gather for concurrency
+async def fetch_multiple():
+    tasks = [
+        fetch_user(1),
+        fetch_user(2),
+        fetch_user(3),
+    ]
+    results = await asyncio.gather(*tasks)
+    return results
+```
+
+**✗ Avoid:**
+```python
+# ❌ Mixing sync and async
+def sync_function():
+    result = await async_function()  # Can't await in sync
+
+# ❌ Using time.sleep in async code
+async def bad_delay():
+    time.sleep(1)  # ❌ Blocks entire event loop
+
+# ❌ Not awaiting async calls
+async def fetch():
+    user = fetch_user(1)  # ❌ Not awaited
+    return user
+```
+
+{% elif language == 'typescript' -%}
+**✓ Correct:**
+```typescript
+// Async/await with proper typing
+async function fetchUser(userId: number): Promise<User> {
+  const response = await fetch(`/api/users/${userId}`);
+  return response.json();
+}
+
+// Async context manager pattern
+async function withConnection<T>(
+  fn: (conn: Connection) => Promise<T>
+): Promise<T> {
+  const conn = await createConnection();
+  try {
+    return await fn(conn);
+  } finally {
+    await conn.close();
+  }
+}
+
+// Concurrent operations
+async function fetchMultiple(): Promise<User[]> {
+  const users = await Promise.all([
+    fetchUser(1),
+    fetchUser(2),
+    fetchUser(3),
+  ]);
+  return users;
+}
+
+// Error handling in async
+async function safeUserFetch(userId: number): Promise<User | null> {
+  try {
+    return await fetchUser(userId);
+  } catch (error) {
+    console.error('Failed to fetch user:', error);
+    return null;
+  }
+}
+```
+
+**✗ Avoid:**
+```typescript
+// ❌ Not awaiting promises
+function fetch() {
+  const user = fetchUser(1);  // Returns promise, not user
+  return user;
+}
+
+// ❌ Fire and forget (if intentional, add comment)
+fetchUser(1);  // Promise never awaited
+
+// ❌ Not handling errors
+async function badErrorHandling() {
+  const user = await fetchUser(1);  // If fails, crashes
+}
+```
+
+{% else -%}
+See language-specific async patterns documentation.
+
+{% endif -%}
+{%- endmacro %}
+
+{% macro render_code_review_checklist(language) -%}
+#### Code Review Checklist - {{ language | capitalize }}
+
+{% if language == 'python' -%}
+**Type Safety:**
+- [ ] All public functions have type hints
+- [ ] No use of `Any` without explicit justification
+- [ ] Complex types use TypeAlias for clarity
+- [ ] Functions return correct types (not loose dicts)
+
+**Imports:**
+- [ ] Imports grouped correctly (stdlib → third-party → local)
+- [ ] No relative imports (use absolute imports)
+- [ ] No unused imports
+- [ ] No import forwarding/re-exports
+
+**Error Handling:**
+- [ ] Uses exception hierarchies, not generic Exception
+- [ ] All external calls wrapped in try/except
+- [ ] Errors include context (not silent swallows)
+- [ ] Resources use context managers
+
+**Code Style:**
+- [ ] Follows PEP 8 (enforced by Ruff)
+- [ ] Uses f-strings for formatting
+- [ ] Function names are descriptive
+- [ ] No hardcoded values (use config)
+
+**Testing:**
+- [ ] Unit tests for new functions
+- [ ] Edge cases covered
+- [ ] Mocks for external dependencies
+- [ ] Coverage targets met
+
+{% elif language == 'typescript' -%}
+**Type Safety:**
+- [ ] No use of `any` (use `unknown` with narrowing)
+- [ ] All function parameters are typed
+- [ ] All return types are explicit
+- [ ] Union types properly used
+- [ ] Type narrowing correct (not casting)
+
+**Imports & Exports:**
+- [ ] Uses path aliases (@/ prefix)
+- [ ] Prefers named exports over default
+- [ ] No circular imports
+- [ ] Imports ordered correctly
+
+**Error Handling:**
+- [ ] Errors typed (not thrown strings)
+- [ ] All promises awaited
+- [ ] Try/catch blocks present for async
+- [ ] Error context preserved
+
+**Code Style:**
+- [ ] Uses ESNext features (optional chaining, nullish coalescing)
+- [ ] Prefers immutable patterns
+- [ ] Uses const/readonly appropriately
+- [ ] Function names are descriptive
+
+**Testing:**
+- [ ] Unit tests for new functions
+- [ ] Mocks for external dependencies
+- [ ] Async properly tested (await)
+- [ ] Edge cases and error paths covered
+
+{% else -%}
+See language-specific code review guidelines.
+
+{% endif -%}
+{%- endmacro %}

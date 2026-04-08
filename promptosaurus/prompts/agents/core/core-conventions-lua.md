@@ -1,11 +1,11 @@
 <!-- path: promptosaurus/prompts/agents/core/core-conventions-lua.md -->
 # Core Conventions Lua
 
-Language:             {{LANGUAGE}}           e.g., Lua 5.4
-Runtime:              {{RUNTIME}}            e.g., LuaJIT, Lua VM
-Package Manager:      {{PACKAGE_MANAGER}}        e.g., LuaRocks
-Linter:              {{LINTER}}             e.g., luacheck
-Formatter:           {{FORMATTER}}          e.g., lua-format
+Language:             {{config.language}}           e.g., Lua 5.4
+Runtime:              {{config.runtime}}            e.g., LuaJIT, Lua VM
+Package Manager:      {{config.package_manager}}        e.g., LuaRocks
+Linter:              {{config.linter}}             e.g., luacheck
+Formatter:           {{config.formatter}}          e.g., lua-format
 
 ### Naming Conventions
 
@@ -32,5 +32,5 @@ Environment vars:   UPPER_SNAKE_CASE always
 - Use meaningful variable names
 
 ### Testing
-Framework:       {{TESTING_FRAMEWORK}}        e.g., busted
-Coverage tool:  {{COVERAGE_TOOL}}              e.g., luacov
+Framework:       {{config.testing_framework}}        e.g., busted
+Coverage tool:  {{config.coverage_tool}}              e.g., luacov

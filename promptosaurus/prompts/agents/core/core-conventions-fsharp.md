@@ -1,11 +1,11 @@
 <!-- path: promptosaurus/prompts/agents/core/core-conventions-fsharp.md -->
 # Core Conventions F
 
-Language:             {{LANGUAGE}}           e.g., F# 7.0
-Runtime:              {{RUNTIME}}            e.g., .NET 8
-Package Manager:      {{PACKAGE_MANAGER}}        e.g., NuGet, dotnet
-Linter:              {{LINTER}}             e.g., Fantomas
-Formatter:           {{FORMATTER}}          e.g., Fantomas
+Language:             {{config.language}}           e.g., F# 7.0
+Runtime:              {{config.runtime}}            e.g., .NET 8
+Package Manager:      {{config.package_manager}}        e.g., NuGet, dotnet
+Linter:              {{config.linter}}             e.g., Fantomas
+Formatter:           {{config.formatter}}          e.g., Fantomas
 
 ### Naming Conventions
 
@@ -33,5 +33,5 @@ Environment vars:   UPPER_SNAKE_CASE always
 - Use pipe operator
 
 ### Testing
-Framework:       {{TESTING_FRAMEWORK}}        e.g., NUnit, xUnit, Expecto
-Coverage tool:  {{COVERAGE_TOOL}}              e.g., Coverlet
+Framework:       {{config.testing_framework}}        e.g., NUnit, xUnit, Expecto
+Coverage tool:  {{config.coverage_tool}}              e.g., Coverlet

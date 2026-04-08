@@ -28,9 +28,9 @@ class PythonMutationToolQuestion(Question):
     @property
     def option_explanations(self) -> dict[str, str]:
         return {
-            "mutmut": "Most popular - fast, comprehensive mutations, CLI-based (recommended)",
-            "pytest-mutmut": "pytest plugin - runs as part of pytest, integrates with pytest ecosystem",
-            "none": "Skip mutation testing - faster CI runs, less thorough test validation",
+            "mutmut": "Standalone mutation tester, fast, comprehensive reports, CLI-driven",
+            "pytest-mutmut": "pytest plugin for mutmut, integrates with pytest, runs as part of test suite",
+            "none": "No mutation testing, faster CI but less thorough test quality verification",
         }
 
     @property
@@ -38,6 +38,5 @@ class PythonMutationToolQuestion(Question):
         return "mutmut"
 
     @property
-    def none_index(self) -> int | None:
-        # 'none' is at index 2
-        return 2
+    def allow_multiple(self) -> bool:
+        return False

@@ -1,11 +1,11 @@
 <!-- path: promptosaurus/prompts/agents/core/core-conventions-dart.md -->
 # Core Conventions Dart
 
-Language:             {{LANGUAGE}}           e.g., Dart 3.2
-Runtime:              {{RUNTIME}}            e.g., Flutter, Dart VM
-Package Manager:      {{PACKAGE_MANAGER}}        e.g., pub
-Linter:               {{LINTER}}             e.g., dart analyze
-Formatter:           {{FORMATTER}}          e.g., dart format
+Language:             {{config.language}}           e.g., Dart 3.2
+Runtime:              {{config.runtime}}            e.g., Flutter, Dart VM
+Package Manager:      {{config.package_manager}}        e.g., pub
+Linter:               {{config.linter}}             e.g., dart analyze
+Formatter:           {{config.formatter}}          e.g., dart format
 
 ### Naming Conventions
 
@@ -35,15 +35,15 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           {{LINE_COVERAGE_%}}          e.g., 80%
-Branch:         {{BRANCH_COVERAGE_%}}        e.g., 70%
-Function:       {{FUNCTION_COVERAGE_%}}       e.g., 90%
+Line:           {{config.coverage.line}}          e.g., 80%
+Branch:         {{config.coverage.branch}}        e.g., 70%
+Function:       {{config.coverage.function}}       e.g., 90%
 
 #### Test Types
 - Use flutter_test or test package
 - Use mockito for mocking
 
 #### Framework & Tools
-Framework:       {{TESTING_FRAMEWORK}}        e.g., flutter_test, test
-Mocking:        {{MOCKING_LIBRARY}}              e.g., mockito
-Coverage tool:  {{COVERAGE_TOOL}}              e.g., coverage
+Framework:       {{config.testing_framework}}        e.g., flutter_test, test
+Mocking:        {{config.mocking_library}}              e.g., mockito
+Coverage tool:  {{config.coverage_tool}}              e.g., coverage

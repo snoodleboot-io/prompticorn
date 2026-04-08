@@ -63,11 +63,6 @@ class SpecHandler(ABC):
 
         Raises:
             ValueError: If repository type is unknown
-
-        Example:
-            >>> handler = SpecHandler.for_repository_type("single-language")
-            >>> isinstance(handler, SingleLanguageSpecHandler)
-            True
         """
         if repo_type == "single-language":
             return SingleLanguageSpecHandler()
@@ -93,23 +88,19 @@ class SingleLanguageSpecHandler(SpecHandler):
 
         Returns:
             Dictionary with language configuration
-
-        Example:
-            >>> handler = SingleLanguageSpecHandler()
-            >>> spec = handler.create_spec("python")
-            >>> spec["language"]
-            'python'
         """
         defaults: dict[str, str] = (
             LANGUAGE_DEFAULTS.get(language.lower()) or LANGUAGE_DEFAULTS.get("python") or {}
         )
 
+        linter = defaults.get("linter", "")
         spec: dict[str, Any] = {
             "language": language,
             "runtime": defaults.get("runtime", ""),
             "package_manager": defaults.get("package_manager", ""),
             "test_framework": defaults.get("test_framework", ""),
-            "linter": defaults.get("linter", ""),
+            "linter": linter,
+            "linters": [linter] if linter else [],  # List version for advanced templating
             "formatter": defaults.get("formatter", ""),
             "coverage": DEFAULT_COVERAGE.copy(),
         }
@@ -129,11 +120,6 @@ class SingleLanguageSpecHandler(SpecHandler):
 
         Returns:
             The language
-
-        Example:
-            >>> handler = SingleLanguageSpecHandler()
-            >>> handler.get_language({"language": "python"})
-            'python'
         """
         if isinstance(spec, list):
             return spec[0].get("language", "") if spec else ""
@@ -183,12 +169,6 @@ class MultiLanguageSpecHandler(SpecHandler):
 
         Raises:
             ValueError: If folder path is empty or duplicate
-
-        Example:
-            >>> handler = MultiLanguageSpecHandler()
-            >>> handler.add_folder_spec("frontend", "frontend", "ui", "typescript")
-            >>> len(handler.get_spec())
-            1
         """
         if not folder or not folder.strip():
             raise ValueError("Folder path cannot be empty")

@@ -1,4 +1,6 @@
 <!-- path: promptosaurus/prompts/agents/core/core-conventions.md -->
+{%- import 'macros/naming_conventions.jinja2' as naming -%}
+{%- import 'macros/checklist.jinja2' as checklist -%}
 # Core Conventions
 
 Project coding standards - base conventions for all projects. 
@@ -9,7 +11,7 @@ All mode-specific rules inherit from this file.
 
 ## Repository Structure
 
-Repository type: {{single-language | multi-language-monorepo | mixed-collocation}}
+Repository type: {{config.repository_type | default('single-language')}}
 
 ### If single-language:
 Include: core-conventions-[LANG].md where [LANG] matches your primary language
@@ -29,7 +31,7 @@ File extension determines which rules apply:
 ## File & Folder Structure
 
 src/
-└── {{your structure here}}
+└── {{config.structure | default('your structure here')}}
 
 Rule: One export per file unless it is a barrel (index.ts).
 Rule: Co-locate tests with source (auth.ts → auth.test.ts).
@@ -81,7 +83,7 @@ All OOP components must follow SOLID principles:
 
 ## Error Handling
 
-Pattern: {{throw | return Result<T, E> | return [data, error]}}
+Pattern: {{config.error_pattern | default('throw')}}
 
 - Never swallow errors silently
 - Always include context: Error("failed to fetch user: " + userId)
@@ -105,20 +107,20 @@ Testing conventions are language-specific. See your language's conventions file 
 
 ## Database
 
-Database:            {{DATABASE}}           e.g., PostgreSQL, DynamoDB
-ORM/Query:           {{ORM}}                e.g., Prisma, SQLAlchemy, GORM
+Database:            {{config.database | default('PostgreSQL')}}           e.g., PostgreSQL, DynamoDB
+ORM/Query:           {{config.orm | default('SQLAlchemy')}}                e.g., Prisma, SQLAlchemy, GORM
 
 ## Git & PR Conventions
 
 Branch naming:       feat|fix|chore|docs / ticket-id - short-description
 MANDATORY WITHOUT EXCEPTION: Ticket IDs MUST be real and obtained from user-provided files, actual project tickets, or the feature request. 
 DO NOT hallucinate, invent, or use fake ticket IDs like "PROJ-123" or "#456" unless they are explicitly provided in the user's request or associated project documentation.
-Commit style:        {{Conventional Commits | free-form}}
-PR size:             {{MAX_LINES}} lines changed (soft limit)
+Commit style:        {{config.commit_style | default('Conventional Commits')}}  e.g., Conventional Commits, free-form
+PR size:             {{config.max_lines | default('400')}} lines changed (soft limit)
 
 ## Deployment
 
-Target:              {{DEPLOYMENT_TARGET}}  e.g., AWS Lambda, Vercel, GKE
+Target:              {{config.deployment_target | default('AWS Lambda')}}  e.g., AWS Lambda, Vercel, GKE
 
 ---
 

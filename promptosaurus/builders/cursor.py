@@ -12,17 +12,6 @@ Output:
 
 Classes:
     CursorBuilder: Generates Cursor rule files in multiple formats.
-
-Example:
-    >>> from pathlib import Path
-    >>> from promptosaurus.builders.cursor import CursorBuilder
-    >>> builder = CursorBuilder()
-    >>> actions = builder.build(Path("./output"))
-    >>> for action in actions[:3]:
-    ...     print(action)
-    ✓ core-system.mdc → .cursor/rules/core-system.mdc
-    ✓ core-conventions.mdc → .cursor/rules/core-conventions.mdc
-    ✓ core-session.mdc → .cursor/rules/core-session.mdc
 """
 
 import shutil
@@ -48,13 +37,6 @@ class CursorBuilder(Builder):
 
     Attributes:
         Inherits _base_files from Builder base class.
-
-    Example:
-        >>> builder = CursorBuilder()
-        >>> # Build all files
-        >>> actions = builder.build(Path("./my-project"))
-        >>> # Check results
-        >>> print(f\"Generated {len(actions)} files\")
     """
 
     def build(
@@ -70,19 +52,11 @@ class CursorBuilder(Builder):
 
         Args:
             output: Directory path where the files will be created.
-            config: Optional configuration dict with template variables (unused for Cursor).
+            config: Optional configuration dict with template variables.
             dry_run: If True, preview what would be written without touching filesystem.
 
         Returns:
             List of action strings describing what was created.
-
-        Example:
-            >>> from pathlib import Path
-            >>> builder = CursorBuilder()
-            >>> # Normal run
-            >>> actions = builder.build(Path("./output"))
-            >>> # Dry run
-            >>> actions = builder.build(Path("./output"), dry_run=True)
         """
         actions: list[str] = []
         rules_base = output / ".cursor" / "rules"
@@ -91,18 +65,20 @@ class CursorBuilder(Builder):
         for filename in registry.always_on:
             mdc_name = filename.replace(".md", ".mdc")
             destination = rules_base / mdc_name
-            actions.append(self._copy(registry.prompt_path(filename), destination, dry_run))
+            actions.append(self._copy(registry.prompt_path(filename), destination, dry_run, config))
 
         # Per-mode rules as .mdc in subdirectories
         for mode_key, files in registry.mode_files.items():
             for filename in files:
                 dname = registry.dest_name(mode_key, filename, ext=".mdc")
                 destination = rules_base / mode_key / dname
-                actions.append(self._copy(registry.prompt_path(filename), destination, dry_run))
+                actions.append(
+                    self._copy(registry.prompt_path(filename), destination, dry_run, config)
+                )
 
         # Legacy .cursorrules fallback
         legacy_dst = output / ".cursorrules"
-        content = self._build_concatenated("# .cursorrules")
+        content = self._build_concatenated_content("# .cursorrules", config)
         if dry_run:
             actions.append(f"[dry-run] .cursorrules ({content.count(chr(10))} lines, legacy)")
         else:
@@ -130,7 +106,13 @@ class CursorBuilder(Builder):
         """
         return CursorIgnoreBuilder().build(output, dry_run)
 
-    def _copy(self, source_path: Path, destination: Path, dry_run: bool) -> str:
+    def _copy(
+        self,
+        source_path: Path,
+        destination: Path,
+        dry_run: bool,
+        config: dict[str, Any] | None = None,
+    ) -> str:
         """Copy a source file to destination.
 
         Internal helper that handles the file copying operation with
@@ -140,14 +122,10 @@ class CursorBuilder(Builder):
             source_path: Source file path to copy from.
             destination: Destination file path to copy to.
             dry_run: If True, return preview string without copying.
+            config: Optional configuration dict for template variable substitution.
 
         Returns:
             Action string describing the copy operation.
-
-        Example:
-            >>> action = self._copy(Path("core-system.md"), Path(".cursor/rules/core-system.mdc"), False)
-            >>> print(action)
-            ✓ core-system.mdc → .cursor/rules/core-system.mdc
         """
         rel = str(destination).split(".cursor/", 1)[-1]
         label = f".cursor/{rel}"

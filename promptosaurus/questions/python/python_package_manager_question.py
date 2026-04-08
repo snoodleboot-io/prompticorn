@@ -24,16 +24,16 @@ class PythonPackageManagerQuestion(Question):
 
     @property
     def options(self) -> list[str]:
-        return ["uv", "poetry", "pip", "conda", "pdm"]
+        return ["pip", "uv", "poetry", "pipenv", "conda"]
 
     @property
     def option_explanations(self) -> dict[str, str]:
         return {
-            "uv": "Extremely fast - Rust-based, recommended for new projects (replaces pip)",
-            "poetry": "Modern, all-in-one - dependency + env + build, widely used",
-            "pip": "Standard - simple, widely compatible, no lock file by default",
-            "conda": "Data science focus - manages non-Python dependencies too",
-            "pdm": "Modern PEP 582 - no virtualenv, good pyproject.toml integration",
+            "pip": "Simplest, built-in package manager for Python",
+            "uv": "Ultra-fast modern replacement for pip, instant installations",
+            "poetry": "Dependency management with lock files, publish to PyPI",
+            "pipenv": "Combines pip and virtualenv, integrates environment management",
+            "conda": "Cross-platform, handles non-Python dependencies",
         }
 
     @property

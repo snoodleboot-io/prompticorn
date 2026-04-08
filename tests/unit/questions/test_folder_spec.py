@@ -1,6 +1,5 @@
 """Tests for promptosaurus.questions.base.folder_spec module."""
 
-import pytest
 from promptosaurus.questions.base.folder_spec import FolderSpec
 
 

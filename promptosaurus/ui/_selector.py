@@ -8,28 +8,10 @@ Functions:
     select_option_with_explain: Interactive selection with number keys and explain option.
     confirm_interactive: Yes/no confirmation dialog.
     prompt_with_default: Input prompt with default value.
-
-Example:
-    >>> from promptosaurus.ui import select_option_with_explain, confirm_interactive
-    >>>
-    >>> # Single selection
-    >>> language = select_option_with_explain(
-    ...     question="Choose a language:",
-    ...     options=["Python", "TypeScript", "Go"],
-    ...     explanations={
-    ...         "Python": "Popular for data science and AI",
-    ...         "TypeScript": "Type-safe JavaScript for web",
-    ...         "Go": "Systems programming by Google"
-    ...     },
-    ...     question_explanation="Select your primary language"
-    ... )
-    >>>
-    >>> # Confirmation
-    >>> if confirm_interactive("Continue with installation?"):
-    ...     print("Proceeding...")
 """
 
 from promptosaurus.ui.domain.context import QuestionContext
+from promptosaurus.ui.input.curses_provider import CursesInputProvider
 from promptosaurus.ui.pipeline.orchestrator import PipelineOrchestrator
 from promptosaurus.ui.pipeline.render_stage import RenderStage
 from promptosaurus.ui.pipeline.state_update_stage import StateUpdateStage
@@ -69,21 +51,6 @@ def select_option_with_explain(
 
     Raises:
         UserCancelledError: If the user presses the quit key (typically 'q' or 'Escape').
-
-    Example:
-        >>> result = select_option_with_explain(
-        ...     question="Choose a language:",
-        ...     options=["Python", "TypeScript", "Go"],
-        ...     explanations={
-        ...         "Python": "Popular for data science",
-        ...         "TypeScript": "Type-safe JavaScript",
-        ...         "Go": "Systems programming"
-        ...     },
-        ...     question_explanation="Select your primary language",
-        ...     default_index=0
-        ... )
-        >>> print(result)
-        Python
     """
     context = QuestionContext(
         question=question,
@@ -96,8 +63,25 @@ def select_option_with_explain(
         none_index=none_index,
     )
 
-    input_provider = UIFactory.create_input_provider()
     render_stage = RenderStage(renderer_selector=UIFactory.create_renderer)
+
+    # Create input provider using curses window from render_stage
+    # First render call initializes curses, so we need to trigger that
+    # Actually, we'll initialize curses inline and create the input provider
+    try:
+        # Initialize curses first to get the window
+        render_stage._init_curses()
+
+        # Now create curses-based input provider
+        if render_stage.stdscr:
+            input_provider = CursesInputProvider(render_stage.stdscr)
+        else:
+            # Fallback if curses init failed
+            input_provider = UIFactory.create_input_provider()
+    except Exception:
+        # Fallback if any error during setup
+        input_provider = UIFactory.create_input_provider()
+
     state_update = StateUpdateStage()
 
     pipeline = PipelineOrchestrator(
@@ -106,7 +90,11 @@ def select_option_with_explain(
         state_update_stage=state_update,
     )
 
-    return pipeline.run(context)
+    try:
+        return pipeline.run(context)
+    finally:
+        # Ensure curses is cleaned up on exit
+        render_stage.cleanup()
 
 
 def confirm_interactive(prompt: str, default: bool = True) -> bool:
@@ -121,13 +109,6 @@ def confirm_interactive(prompt: str, default: bool = True) -> bool:
 
     Returns:
         True if user confirmed ("Yes"), False if they declined ("No").
-
-    Example:
-        >>> if confirm_interactive("Install dependencies?"):
-        ...     print("Installing...")
-        >>> # Or with No as default
-        >>> if not confirm_interactive("Delete files?", default=False):
-        ...     print("Keeping files")
     """
     result = select_option_with_explain(
         question=prompt,
@@ -151,11 +132,6 @@ def prompt_with_default(prompt: str, default: str) -> str:
 
     Returns:
         The user's input if non-empty, otherwise the default value.
-
-    Example:
-        >>> name = prompt_with_default("Enter your name", "Anonymous")
-        >>> # If user presses Enter without typing: returns "Anonymous"
-        >>> # If user types "John": returns "John"
     """
     suffix = f" [{default}]" if default else ""
     response = input(f"{prompt}{suffix}: ").strip()

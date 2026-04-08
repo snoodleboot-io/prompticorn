@@ -6,14 +6,6 @@ as separate subclasses.
 
 Classes:
     SelectionState: Abstract base class for selection state - Strategy pattern.
-
-Example:
-    >>> from promptosaurus.ui.state.selection_state import SelectionState
-    >>> from promptosaurus.ui.state.single_selection_state import SingleSelectionState
-    >>>
-    >>> state = SingleSelectionState(selected=0, max_index=3)
-    >>> print(state.current_selection)
-    0
 """
 
 from __future__ import annotations
@@ -36,12 +28,6 @@ class SelectionState:
         select: Return new state after selection (immutable).
         navigate: Return new state after navigation.
         is_selected: Check if index is selected.
-
-    Example:
-        >>> # Available implementations:
-        >>> from promptosaurus.ui.state.single_selection_state import SingleSelectionState
-        >>> from promptosaurus.ui.state.multi_selection_state import MultiSelectionState
-        >>> from promptosaurus.ui.state.mutual_exclusion_multi_selection_state import MutualExclusionMultiSelectionState
     """
 
     @property

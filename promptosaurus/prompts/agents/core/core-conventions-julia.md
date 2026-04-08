@@ -1,10 +1,10 @@
 <!-- path: promptosaurus/prompts/agents/core/core-conventions-julia.md -->
 # Core Conventions Julia
 
-Language:             {{LANGUAGE}}           e.g., Julia 1.10
-Package Manager:      {{PACKAGE_MANAGER}}        e.g., Pkg
-Linter:              {{LINTER}}             e.g., Jet.jl, Lint.jl
-Formatter:           {{FORMATTER}}          e.g., JuliaFormatter
+Language:             {{config.language}}           e.g., Julia 1.10
+Package Manager:      {{config.package_manager}}        e.g., Pkg
+Linter:              {{config.linter}}             e.g., Jet.jl, Lint.jl
+Formatter:           {{config.formatter}}          e.g., JuliaFormatter
 
 ### Naming Conventions
 
@@ -32,5 +32,5 @@ Environment vars:   UPPER_SNAKE_CASE always
 - Use descriptive function names
 
 ### Testing
-Framework:       {{TESTING_FRAMEWORK}}        e.g., Test.jl
-Coverage tool:  {{COVERAGE_TOOL}}              e.g., Coverage.jl
+Framework:       {{config.testing_framework}}        e.g., Test.jl
+Coverage tool:  {{config.coverage_tool}}              e.g., Coverage.jl

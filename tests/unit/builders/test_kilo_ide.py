@@ -89,7 +89,23 @@ class TestKiloIDETemplateVariables(unittest.TestCase):
         config = {
             "spec": {
                 "language": "python",
-                "test_framework": "pytest",
+                "runtime": "CPython 3.12",
+                "package_manager": "uv",
+                "linter": ["ruff", "pyright"],
+                "formatter": ["ruff"],
+                "testing_framework": "pytest",
+                "mocking_library": "unittest.mock",
+                "coverage_tool": "pytest-cov",
+                "mutation_tool": "mutmut",
+                "abstract_class_style": "interface",
+                "coverage": {
+                    "line": 80,
+                    "branch": 70,
+                    "function": 90,
+                    "statement": 85,
+                    "mutation": 80,
+                    "path": 60,
+                },
             }
         }
         with tempfile.TemporaryDirectory() as tmpdir:

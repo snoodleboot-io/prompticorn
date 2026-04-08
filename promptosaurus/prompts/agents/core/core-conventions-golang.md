@@ -1,11 +1,13 @@
 <!-- path: promptosaurus/prompts/agents/core/core-conventions-golang.md -->
+{%- import 'macros/testing_sections.jinja2' as testing -%}
+{%- import 'macros/coverage_targets.jinja2' as coverage -%}
 # Core Conventions Golang
 
-Language:             {{LANGUAGE}}           e.g., Go 1.22
-Runtime:              {{RUNTIME}}            e.g., Go runtime
-Package Manager:      {{PACKAGE_MANAGER}}        e.g., go mod
-Linter:               {{LINTER}}             e.g., golangci-lint
-Formatter:           {{FORMATTER}}          e.g., gofmt, goimports
+Language:             {{config.language}}           e.g., Go 1.22
+Runtime:              {{config.runtime}}            e.g., Go runtime
+Package Manager:      {{config.package_manager}}        e.g., go mod
+Linter:               {{config.linter}}             e.g., golangci-lint
+Formatter:           {{config.formatter}}          e.g., gofmt, goimports
 
 ### Naming Conventions
 
@@ -37,80 +39,16 @@ Environment vars:   UPPER_SNAKE_CASE always
 
 ### Testing
 
-#### Coverage Targets
-Line:           {{LINE_COVERAGE_%}}          e.g., 80%
-Branch:         {{BRANCH_COVERAGE_%}}        e.g., 70%
-Function:       {{FUNCTION_COVERAGE_%}}       e.g., 90%
-Statement:      {{STATEMENT_COVERAGE_%}}      e.g., 85%
-Mutation:       {{MUTATION_COVERAGE_%}}       e.g., 80%
-Path:           {{PATH_COVERAGE_%}}           e.g., 60%
+{{ testing.render_test_types('golang') }}
 
-#### Test Types
-
-##### Unit Tests
-- One function or method in isolation
-- Use table-driven tests with `testing.T.Run`
-- Use `testify/assert` and `testify/require` for assertions
-- Create test files alongside source: `foo.go` → `foo_test.go`
-- Use `t.Cleanup` for resource teardown
-
-##### Integration Tests
-- Test at service or module boundary
-- Use test databases (testcontainers-go) or in-memory alternatives
-- Test HTTP handlers, database queries, gRPC services
-
-##### E2E Tests
-- Use Go's testing framework with external tools
-- Test critical user flows with real services
-
-##### Fuzz Tests
-- Use `go-fuzz` or built-in fuzzing in Go 1.18+
-- Test input validation and parsing functions
-
-##### Mutation Tests
-- Use `go-mutesting` to verify test quality
-- Run after unit tests pass
-
-#### Framework & Tools
-Framework:       {{TESTING_FRAMEWORK}}        e.g., Go test
-Mocking library: {{MOCKING_LIBRARY}}              e.g., testify, gomock
-Coverage tool:  {{COVERAGE_TOOL}}              e.g., go test -cover, gocov
-Fuzz tool:      {{FUZZ_TOOL}}             e.g., go-fuzz, testing/fuzz
-
-#### Scaffolding
-
-```bash
-# Install
-go get -u github.com/stretchr/testify
-go get -u github.com/testcontainers/testcontainers-go
-go install github.com/go-fuzz/go-fuzz-build@latest
-
-# Run tests
-go test -v ./...                 # Run all tests
-go test -v -cover ./...          # With coverage
-go test -v -coverprofile=coverage.out ./...
-go tool cover -func=coverage.out # View coverage
-
-# Fuzzing
-go test -fuzz=FuzzMyFunction -fuzztime=30s
-
-# Mutation testing
-go install github.com/go-mutesting/go-mutesting@latest
-go-mutesting ./...
-```
-
-##### CI Integration
-```yaml
-# GitHub Actions example
-- name: Run tests
-  run: |
-    go test -v -coverprofile=coverage.out ./...
-    go tool cover -func=coverage.out
-
-- name: Fuzz tests
-  run: |
-    go test -fuzz=Fuzz -fuzztime=60s ./...
-```
+{{ coverage.render_coverage_table(
+  line=config.coverage.line | default('80'),
+  branch=config.coverage.branch | default('70'),
+  function=config.coverage.function | default('90'),
+  statement=config.coverage.statement | default('85'),
+  mutation=config.coverage.mutation | default('80'),
+  path=config.coverage.path | default('60')
+) }}
 
 ### Code Style
 - Follow Go idioms — use `go fmt` / `gofmt`

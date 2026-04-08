@@ -9,16 +9,6 @@ The configuration is loaded from YAML files:
 
 Classes:
     KiloConfig: Configuration loader for Kilo builder settings.
-
-Example:
-    >>> from promptosaurus.builders.config import KiloConfig
-    >>> config = KiloConfig()
-    >>> modes = config.kilo_modes
-    >>> print(len(modes) > 0)
-    True
-    >>> lang_map = config.language_file_map
-    >>> print("python" in lang_map)
-    True
 """
 
 from pathlib import Path
@@ -46,17 +36,6 @@ class KiloConfig:
     Args:
         modes_path: Optional custom path to kilo_modes.yaml
         language_map_path: Optional custom path to kilo_language_file_map.yaml
-
-    Example:
-        >>> # Use default paths
-        >>> config = KiloConfig()
-        >>> modes = config.kilo_modes
-
-        >>> # Use custom paths
-        >>> config = KiloConfig(
-        ...     modes_path=Path("./custom-modes.yaml"),
-        ...     language_map_path=Path("./custom-lang-map.yaml")
-        ... )
     """
 
     def __init__(
@@ -89,11 +68,6 @@ class KiloConfig:
 
         Returns:
             Path to the default kilo_modes.yaml file in the kilo directory.
-
-        Example:
-            >>> path = KiloConfig._default_modes_path()
-            >>> print(path.name)
-            kilo_modes.yaml
         """
         return Path(__file__).parent / "kilo" / "kilo_modes.yaml"
 
@@ -103,11 +77,6 @@ class KiloConfig:
 
         Returns:
             Path to the default kilo_language_file_map.yaml file in the kilo directory.
-
-        Example:
-            >>> path = KiloConfig._default_language_map_path()
-            >>> print(path.name)
-            kilo_language_file_map.yaml
         """
         return Path(__file__).parent / "kilo" / "kilo_language_file_map.yaml"
 
@@ -124,12 +93,6 @@ class KiloConfig:
         Raises:
             FileNotFoundError: If the modes YAML file doesn't exist.
             yaml.YAMLError: If the YAML file is malformed.
-
-        Example:
-            >>> config = KiloConfig()
-            >>> modes = config.kilo_modes
-            >>> print("code" in modes)
-            True
         """
         if self._kilo_modes is None:
             self._kilo_modes = self._load_modes()
@@ -148,12 +111,6 @@ class KiloConfig:
         Raises:
             FileNotFoundError: If the language map YAML file doesn't exist.
             yaml.YAMLError: If the YAML file is malformed.
-
-        Example:
-            >>> config = KiloConfig()
-            >>> lang_map = config.language_file_map
-            >>> print(lang_map.get("python"))
-            core-conventions-python.md
         """
         if self._language_file_map is None:
             self._language_file_map = self._load_language_map()
@@ -168,12 +125,6 @@ class KiloConfig:
 
         Returns:
             Frozenset of core file paths.
-
-        Example:
-            >>> config = KiloConfig()
-            >>> base = config.base_files
-            >>> print("agents/core/core-system.md" in base)
-            True
         """
         return self._base_files
 
@@ -189,13 +140,6 @@ class KiloConfig:
         Raises:
             FileNotFoundError: If the modes YAML file doesn't exist.
             yaml.YAMLError: If the YAML file is malformed.
-
-        Example:
-            >>> config = KiloConfig()
-            >>> modes = config._load_modes()
-            >>> code_mode = modes.get("code")
-            >>> print(code_mode is not None)
-            True
         """
         with self._modes_path.open(encoding="utf-8") as f:
             data = yaml.safe_load(f)
@@ -214,12 +158,6 @@ class KiloConfig:
         Raises:
             FileNotFoundError: If the language map YAML file doesn't exist.
             yaml.YAMLError: If the YAML file is malformed.
-
-        Example:
-            >>> config = KiloConfig()
-            >>> lang_map = config._load_language_map()
-            >>> print(lang_map.get("python", ""))
-            core-conventions-python.md
         """
         with self._language_map_path.open(encoding="utf-8") as f:
             data = yaml.safe_load(f)

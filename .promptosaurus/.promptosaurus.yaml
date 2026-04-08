@@ -1,0 +1,24 @@
+version: '1.0'
+repository:
+  type: single-language
+  mappings: {}
+spec:
+  language: python
+  runtime: '3.14'
+  package_manager: uv
+  test_framework: hybrid
+  linter:
+    - ruff
+    - pyright
+  linters:
+    - ruff
+  formatter:
+    - ruff
+  coverage: standard
+  repo_type: single-language
+  test_runner: pytest
+  abstract_class_style: interface
+  mocking_library:
+    - unittest.mock
+  coverage_tool: pytest-cov
+  mutation_tool: mutmut

@@ -21,12 +21,6 @@ Functions:
     create_default_config: Create default config with language-specific defaults.
     create_multi_language_config: Create config for multi-language monorepo.
     detect_repository_type: Detect repository type from config.
-
-Example:
-    >>> from promptosaurus.config_handler import ConfigHandler, create_default_config
-    >>> config = create_default_config('python', repo_type='single-language')
-    >>> ConfigHandler.save_config(config)
-    >>> loaded = ConfigHandler.load_config()
 """
 
 from pathlib import Path
@@ -166,6 +160,7 @@ DEFAULT_CONFIG_TEMPLATE = {
         "package_manager": "",
         "test_framework": "",
         "linter": "",
+        "linters": [],  # List of linters for advanced templating
         "formatter": "",
         "coverage": {
             "line": 80,
@@ -206,11 +201,6 @@ def create_default_config(language: str, **kwargs) -> dict[str, Any]:
 
     Returns:
         Configuration dictionary with defaults applied.
-
-    Example:
-        >>> config = create_default_config('python', package_manager='pip')
-        >>> config['spec']['package_manager']
-        'pip'
     """
     repo_type = kwargs.get("repo_type", "single-language")
 
@@ -243,17 +233,6 @@ def create_multi_language_config(
 
     Returns:
         Configuration dictionary with folder specs.
-
-    Example:
-        >>> specs = [
-        ...     {"folder": "backend/api", "type": "backend", "subtype": "api", "language": "python"},
-        ...     {"folder": "frontend", "type": "frontend", "subtype": "ui", "language": "typescript"}
-        ... ]
-        >>> config = create_multi_language_config(specs)
-        >>> config['repository']['type']
-        'multi-language-monorepo'
-        >>> len(config['spec'])
-        2
     """
     config: dict[str, Any] = DEFAULT_MULTI_LANGUAGE_CONFIG_TEMPLATE.copy()
 
@@ -280,14 +259,6 @@ def detect_repository_type(config: dict[str, Any]) -> str:
 
     Returns:
         Repository type: 'single-language', 'multi-language-monorepo', or 'unknown'.
-
-    Example:
-        >>> config = {'repository': {'type': 'single-language'}, 'spec': {}}
-        >>> detect_repository_type(config)
-        'single-language'
-        >>> config2 = {'repository': {'type': 'multi-language-monorepo'}, 'spec': []}
-        >>> detect_repository_type(config2)
-        'multi-language-monorepo'
     """
     if not config:
         return "unknown"

@@ -5,16 +5,8 @@ functionality shared between CLI and IDE targets for Kilo Code.
 
 Classes:
     KiloCodeBuilder: Base builder for Kilo Code configurations.
-
-Example:
-    >>> from promptosaurus.builders.kilo.kilo_code_builder import KiloCodeBuilder
-    >>> # Subclass to create a specific builder
-    >>> class MyBuilder(KiloCodeBuilder):
-    ...     def build(self, output, config=None, dry_run=False):
-    ...         return ["Created files"]
 """
 
-import shutil
 from pathlib import Path
 from typing import Any
 
@@ -43,12 +35,6 @@ class KiloCodeBuilder(Builder):
 
     Args:
         config: Optional KiloConfig instance. If not provided, uses default config.
-
-    Example:
-        >>> builder = KiloCodeBuilder()
-        >>> modes = builder.kilo_modes
-        >>> print(len(modes) > 0)
-        True
     """
 
     # Modes that are built-in to Kilo and should not be generated in output
@@ -67,14 +53,8 @@ class KiloCodeBuilder(Builder):
 
         Args:
             config: KiloConfig instance. Uses default if not provided.
-
-        Example:
-            >>> # Use default config
-            >>> builder = KiloCodeBuilder()
-            >>> # Use custom config
-            >>> custom_config = KiloConfig()
-            >>> builder = KiloCodeBuilder(config=custom_config)
         """
+        super().__init__()
         self._config = config or KiloConfig()
 
     @property
@@ -83,12 +63,6 @@ class KiloCodeBuilder(Builder):
 
         Returns:
             Dictionary of mode slug to mode configuration.
-
-        Example:
-            >>> builder = KiloCodeBuilder()
-            >>> modes = builder.kilo_modes
-            >>> print("code" in modes)
-            True
         """
         return self._config.kilo_modes
 
@@ -98,12 +72,6 @@ class KiloCodeBuilder(Builder):
 
         Returns:
             Dictionary mapping language name to conventions file.
-
-        Example:
-            >>> builder = KiloCodeBuilder()
-            >>> lang_map = builder.language_file_map
-            >>> print(lang_map.get("python", ""))
-            core-conventions-python.md
         """
         return self._config.language_file_map
 
@@ -139,164 +107,6 @@ class KiloCodeBuilder(Builder):
         """
         raise NotImplementedError()
 
-    def _copy(
-        self,
-        source_path: Path,
-        destination: Path,
-        dry_run: bool,
-        config: dict[str, Any] | None = None,
-    ) -> str:
-        """Copy a source file to destination with optional template substitution.
-
-        Internal helper that handles file copying with support for
-        template variable substitution in language-specific conventions files.
-
-        Args:
-            source_path: Source file path to copy from.
-            destination: Destination file path to copy to.
-            dry_run: If True, return preview string without copying.
-            config: Optional config dict for template variable substitution.
-
-        Returns:
-            Action string describing the copy operation.
-
-        Example:
-            >>> action = self._copy(
-            ...     Path("core-conventions-python.md"),
-            ...     Path(".kilocode/rules/conventions-python.md"),
-            ...     False,
-            ...     {"spec": {"language": "python"}}
-            ... )
-            >>> print(action)
-            ✓ core-conventions-python.md → .kilocode/rules/conventions-python.md
-        """
-        rel = str(destination).split(".kilocode/", 1)[-1]
-        label = f".kilocode/{rel}"
-        if dry_run:
-            return f"[dry-run] {source_path.name} → {label}"
-        destination.parent.mkdir(parents=True, exist_ok=True)
-
-        # If config is provided and this is a language-specific conventions file,
-        # perform template substitution
-        if config and source_path.name.startswith("core-"):
-            content = source_path.read_text(encoding="utf-8")
-            content = self._substitute_template_variables(content, config)
-            destination.write_text(content, encoding="utf-8")
-        else:
-            shutil.copy2(source_path, destination)
-
-        return f"✓ {source_path.name} → {label}"
-
-    def _substitute_template_variables(self, content: str, config: dict[str, Any]) -> str:
-        """Replace {{VARIABLE}} templates with values from config.
-
-        This method performs template variable substitution on convention
-        files, replacing placeholders like {{LANGUAGE}} with actual values
-        from the configuration.
-
-        Supported variables:
-            - {{LANGUAGE}}: Programming language
-            - {{RUNTIME}}: Runtime version
-            - {{PACKAGE_MANAGER}}: Package manager
-            - {{LINTER}}: Linter tool
-            - {{FORMATTER}}: Formatter tool
-            - {{ABSTRACT_CLASS_STYLE}}: Abstract class style
-            - {{TESTING_FRAMEWORK}}: Testing framework
-            - {{TEST_RUNNER}}: Test runner
-            - {{LINE_COVERAGE_%}}: Line coverage target
-            - {{BRANCH_COVERAGE_%}}: Branch coverage target
-            - {{FUNCTION_COVERAGE_%}}: Function coverage target
-            - {{STATEMENT_COVERAGE_%}}: Statement coverage target
-            - {{MUTATION_COVERAGE_%}}: Mutation coverage target
-            - {{PATH_COVERAGE_%}}: Path coverage target
-
-        Args:
-            content: The template content with {{VARIABLE}} placeholders.
-            config: Configuration dict containing spec values.
-
-        Returns:
-            Content with all template variables replaced.
-
-        Example:
-            >>> content = "Language: {{LANGUAGE}}"
-            >>> config = {"spec": {"language": "python"}}
-            >>> result = self._substitute_template_variables(content, config)
-            >>> print(result)
-            Language: python
-        """
-        defaults = config.get("spec", {}) if config else {}
-        # Handle both single-language (dict) and multi-language (list) configs
-        if isinstance(defaults, list):
-            # Multi-language monorepo: get config from first folder
-            defaults = defaults[0] if defaults else {}
-
-        def format_value(value: Any) -> str:
-            """Format a value for substitution, handling lists."""
-            if isinstance(value, list):
-                return ", ".join(str(v) for v in value)
-            return str(value) if value is not None else ""
-
-        # Build mapping of template variables to config values
-        substitutions: dict[str, str] = {
-            "{{LANGUAGE}}": format_value(defaults.get("language", "")),
-            "{{RUNTIME}}": format_value(defaults.get("runtime", "")),
-            "{{PACKAGE_MANAGER}}": format_value(defaults.get("package_manager", "")),
-            "{{LINTER}}": format_value(defaults.get("linter", "")),
-            "{{FORMATTER}}": format_value(defaults.get("formatter", "")),
-            "{{ABSTRACT_CLASS_STYLE}}": format_value(defaults.get("abstract_class_style", "")),
-            "{{TESTING_FRAMEWORK}}": format_value(defaults.get("test_framework", "")),
-            "{{TEST_RUNNER}}": format_value(defaults.get("test_runner", "")),
-        }
-
-        # Add coverage variables
-        # Coverage can be either a dict (legacy) or a string preset from the question
-        coverage_value = defaults.get("coverage", {})
-
-        # If coverage is a string preset, convert it to a dict
-        if isinstance(coverage_value, str):
-            COVERAGE_PRESETS = {
-                "strict": {
-                    "line": 90,
-                    "branch": 80,
-                    "function": 95,
-                    "statement": 90,
-                    "mutation": 85,
-                    "path": 70,
-                },
-                "standard": {
-                    "line": 80,
-                    "branch": 70,
-                    "function": 90,
-                    "statement": 85,
-                    "mutation": 80,
-                    "path": 60,
-                },
-                "minimal": {
-                    "line": 70,
-                    "branch": 60,
-                    "function": 80,
-                    "statement": 75,
-                    "mutation": 70,
-                    "path": 50,
-                },
-            }
-            coverage = COVERAGE_PRESETS.get(coverage_value, {})
-        else:
-            coverage = coverage_value if isinstance(coverage_value, dict) else {}
-
-        substitutions["{{LINE_COVERAGE_%}}"] = str(coverage.get("line", 80))
-        substitutions["{{BRANCH_COVERAGE_%}}"] = str(coverage.get("branch", 70))
-        substitutions["{{FUNCTION_COVERAGE_%}}"] = str(coverage.get("function", 90))
-        substitutions["{{STATEMENT_COVERAGE_%}}"] = str(coverage.get("statement", 85))
-        substitutions["{{MUTATION_COVERAGE_%}}"] = str(coverage.get("mutation", 80))
-        substitutions["{{PATH_COVERAGE_%}}"] = str(coverage.get("path", 60))
-
-        # Perform substitutions
-        for template_var, value in substitutions.items():
-            content = content.replace(template_var, value)
-
-        return content
-
     def _write_manifest(self, destination: Path, dry_run: bool) -> str:
         """Write the .kilocodemodes manifest file.
 
@@ -308,11 +118,6 @@ class KiloCodeBuilder(Builder):
 
         Returns:
             Action string describing the operation.
-
-        Example:
-            >>> action = self._write_manifest(Path(".kilocodemodes"), False)
-            >>> print(action)
-            ✓ .kilocodemodes
         """
         # Read from the source YAML file to preserve exact formatting
         source_path = Path(__file__).parent / "kilo_modes.yaml"
@@ -360,16 +165,6 @@ class KiloCodeBuilder(Builder):
 
         Returns:
             Action string describing the operation.
-
-        Example:
-            >>> action = self._create_base_md(
-            ...     Path(".opencode/rules"),
-            ...     "core-conventions-python.md",
-            ...     False,
-            ...     {"spec": {"language": "python"}}
-            ... )
-            >>> print(action)
-            ✓ .opencode/rules/_base.md
         """
         destination = rules_dir / "_base.md"
         label = ".opencode/rules/_base.md"
@@ -425,16 +220,6 @@ class KiloCodeBuilder(Builder):
 
         Returns:
             Action string describing the operation.
-
-        Example:
-            >>> action = self._create_collapsed_mode_md(
-            ...     Path(".opencode/rules"),
-            ...     "code",
-            ...     ["code-feature.md", "code-refactor.md"],
-            ...     False
-            ... )
-            >>> print(action)
-            ✓ .opencode/rules/code.md
         """
         destination = rules_dir / f"{mode_key}.md"
         label = f".opencode/rules/{mode_key}.md"
@@ -470,11 +255,6 @@ class KiloCodeBuilder(Builder):
 
         Returns:
             Action string describing the operation.
-
-        Example:
-            >>> action = self._create_agents_md(Path("."), False)
-            >>> print(action)
-            ✓ AGENTS.md
         """
         destination = output / "AGENTS.md"
         label = "AGENTS.md"

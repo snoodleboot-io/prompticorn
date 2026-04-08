@@ -1,10 +1,10 @@
 <!-- path: promptosaurus/prompts/agents/core/core-conventions-haskell.md -->
 # Core Conventions Haskell
 
-Language:             {{LANGUAGE}}           e.g., Haskell 9.8
-Package Manager:      {{PACKAGE_MANAGER}}        e.g., Cabal, Stack
-Linter:              {{LINTER}}             e.g., HLint, Stan
-Formatter:           {{FORMATTER}}          e.g., Brittany, Ormolu
+Language:             {{config.language}}           e.g., Haskell 9.8
+Package Manager:      {{config.package_manager}}        e.g., Cabal, Stack
+Linter:              {{config.linter}}             e.g., HLint, Stan
+Formatter:           {{config.formatter}}          e.g., Brittany, Ormolu
 
 ### Naming Conventions
 
@@ -33,6 +33,6 @@ Environment vars:   UPPER_SNAKE_CASE always
 - Use hlint for linting
 
 ### Testing
-Framework:       {{TESTING_FRAMEWORK}}        e.g., HSpec, QuickCheck
-Property tool:   {{PROPERTY_TOOL}}        e.g., QuickCheck, Hedgehog
-Coverage tool:  {{COVERAGE_TOOL}}              e.g., HPC
+Framework:       {{config.testing_framework}}        e.g., HSpec, QuickCheck
+Property tool:   {{config.property_tool}}        e.g., QuickCheck, Hedgehog
+Coverage tool:  {{config.coverage_tool}}              e.g., HPC

@@ -1,10 +1,10 @@
 <!-- path: promptosaurus/prompts/agents/core/core-conventions-html.md -->
 # Core Conventions HTML
 
-Language:             {{LANGUAGE}}           e.g., HTML5
-Version:              {{VERSION}}            e.g., HTML5, HTML4 Strict, XHTML5
-Formatter:            {{FORMATTER}}          e.g., prettier, html-beautify, djLint
-Linter:               {{LINTER}}             e.g., htmlhint, W3C Validator
+Language:             {{config.language}}           e.g., HTML5
+Version:              {{config.version}}            e.g., HTML5, HTML4 Strict, XHTML5
+Formatter:            {{config.formatter}}          e.g., prettier, html-beautify, djLint
+Linter:               {{config.linter}}             e.g., htmlhint, W3C Validator
 
 ### Naming Conventions
 
@@ -70,7 +70,7 @@ Environment vars:   UPPER_SNAKE_CASE always
 ## Validation
 
 Before committing HTML:
-1. Run through {{LINTER}}
+1. Run through {{config.linter}}
 2. Validate with W3C validator
 3. Check accessibility with axe or similar tool
 4. Test in target browsers

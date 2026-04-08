@@ -1,0 +1,469 @@
+{#
+  error_handling.jinja2
+  
+  Error handling guidance macro library for generating error handling recommendations.
+  Provides reusable macros for error patterns, strategies, and best practices.
+  
+  Usage:
+    {% import 'macros/error_handling.jinja2' as errors %}
+    {{ errors.render_error_section('exception_hierarchy', 'Description') }}
+    {{ errors.render_error_pattern(language, pattern_name) }}
+    {{ errors.render_error_recovery_guide(scenario) }}
+#}
+
+{% macro render_error_section(pattern, description='') -%}
+#### {{ pattern | title }}
+
+{% if description %}{{ description }}
+
+{% endif -%}
+{%- endmacro %}
+
+{% macro render_error_pattern(language, pattern_name) -%}
+{% if language == 'python' and pattern_name == 'exception_hierarchy' -%}
+**Exception Hierarchies - Python**
+
+Define custom exception base class:
+```python
+class AppError(Exception):
+    """Base exception for all application errors."""
+    pass
+
+class ValidationError(AppError):
+    """Raised when input validation fails."""
+    pass
+
+class NotFoundError(AppError):
+    """Raised when requested resource is not found."""
+    pass
+
+class PermissionError(AppError):
+    """Raised when user lacks required permissions."""
+    pass
+
+class ExternalServiceError(AppError):
+    """Raised when external service call fails."""
+    pass
+```
+
+Use in code:
+```python
+def get_user(user_id: int) -> User:
+    if user_id <= 0:
+        raise ValidationError(f"Invalid user_id: {user_id}")
+    
+    user = database.find_user(user_id)
+    if user is None:
+        raise NotFoundError(f"User {user_id} not found")
+    
+    return user
+
+def call_external_api() -> dict:
+    try:
+        response = requests.get(EXTERNAL_API_URL, timeout=5)
+    except requests.RequestException as e:
+        raise ExternalServiceError(f"API call failed: {e}") from e
+```
+
+{% elif language == 'python' and pattern_name == 'context_preservation' -%}
+**Context Preservation - Python**
+
+Preserve error context using `from e`:
+```python
+def process_order(order_id: int) -> Order:
+    try:
+        # Attempt to fetch order
+        order = database.get_order(order_id)
+    except DatabaseError as e:
+        # Preserve original error in exception chain
+        raise OrderProcessingError(
+            f"Failed to fetch order {order_id}"
+        ) from e
+    
+    try:
+        # Attempt to validate
+        order.validate()
+    except ValidationError as e:
+        # Add context about what was being validated
+        raise OrderProcessingError(
+            f"Order {order_id} validation failed: {e}"
+        ) from e
+    
+    return order
+```
+
+Check full error chain:
+```python
+try:
+    process_order(123)
+except OrderProcessingError as e:
+    # Access original cause
+    root_cause = e.__cause__
+    logger.error(f"Processing failed: {e}, root cause: {root_cause}")
+```
+
+{% elif language == 'typescript' and pattern_name == 'typed_errors' -%}
+**Typed Errors - TypeScript**
+
+Define error types:
+```typescript
+// Custom error class
+class AppError extends Error {
+  constructor(
+    message: string,
+    public code: string,
+    public statusCode: number = 500,
+  ) {
+    super(message);
+    this.name = 'AppError';
+  }
+}
+
+class ValidationError extends AppError {
+  constructor(message: string) {
+    super(message, 'VALIDATION_ERROR', 400);
+    this.name = 'ValidationError';
+  }
+}
+
+class NotFoundError extends AppError {
+  constructor(resource: string, id: unknown) {
+    super(`${resource} not found: ${id}`, 'NOT_FOUND', 404);
+    this.name = 'NotFoundError';
+  }
+}
+
+// Use union types for results
+type Result<T, E = Error> = 
+  | { ok: true; value: T }
+  | { ok: false; error: E };
+
+async function getUser(userId: number): Promise<Result<User, AppError>> {
+  if (userId <= 0) {
+    return {
+      ok: false,
+      error: new ValidationError('Invalid user ID'),
+    };
+  }
+
+  try {
+    const user = await database.getUser(userId);
+    if (!user) {
+      return {
+        ok: false,
+        error: new NotFoundError('User', userId),
+      };
+    }
+    return { ok: true, value: user };
+  } catch (err) {
+    return {
+      ok: false,
+      error: new AppError('Database error', 'DB_ERROR', 500),
+    };
+  }
+}
+
+// Use with pattern matching
+const result = await getUser(1);
+if (result.ok) {
+  console.log(result.value.name);
+} else {
+  logger.error(`Error: ${result.error.code} - ${result.error.message}`);
+}
+```
+
+{% elif language == 'python' and pattern_name == 'logging_errors' -%}
+**Logging Errors - Python**
+
+Always log errors at the boundary:
+```python
+import logging
+
+logger = logging.getLogger(__name__)
+
+def fetch_user_data(user_id: int) -> User | None:
+    try:
+        return database.get_user(user_id)
+    except DatabaseError as e:
+        # Log at ERROR level with full context
+        logger.error(
+            "Failed to fetch user",
+            exc_info=True,
+            extra={
+                "user_id": user_id,
+                "operation": "fetch_user_data",
+            },
+        )
+        # Return safe default or re-raise
+        return None
+
+def api_endpoint_handler(request: Request) -> Response:
+    try:
+        user_id = request.params.get("user_id")
+        user = fetch_user_data(user_id)
+        if user is None:
+            logger.warning(f"User not found: {user_id}")
+            return Response(status=404, body="User not found")
+        return Response(status=200, body=user.to_dict())
+    except ValidationError as e:
+        logger.warning(f"Invalid input: {e}")
+        return Response(status=400, body=str(e))
+    except Exception as e:
+        logger.exception("Unexpected error in handler")
+        return Response(status=500, body="Internal server error")
+```
+
+{% elif language == 'typescript' and pattern_name == 'async_error_handling' -%}
+**Async Error Handling - TypeScript**
+
+```typescript
+// Always catch promise errors
+async function processUser(userId: number): Promise<void> {
+  try {
+    const user = await fetchUser(userId);
+    await validateUser(user);
+    await saveUser(user);
+  } catch (error) {
+    if (error instanceof ValidationError) {
+      logger.warn(`Validation failed: ${error.message}`);
+    } else if (error instanceof NotFoundError) {
+      logger.warn(`User not found: ${userId}`);
+    } else {
+      logger.error(`Unexpected error: ${error}`);
+      throw error;  // Re-throw unknown errors
+    }
+  }
+}
+
+// Handle fire-and-forget with explicit comment
+function logEventAsync(event: Event): void {
+  // Intentionally not awaited - logging failure should not block
+  fetchAndLog(event).catch(err => {
+    console.error('Failed to log event:', err);
+  });
+}
+
+// Use Promise.allSettled for multiple operations
+async function processMultiple(ids: number[]): Promise<User[]> {
+  const results = await Promise.allSettled(
+    ids.map(id => fetchUser(id))
+  );
+
+  const users: User[] = [];
+  const errors: Error[] = [];
+
+  for (const result of results) {
+    if (result.status === 'fulfilled') {
+      users.push(result.value);
+    } else {
+      errors.push(result.reason);
+    }
+  }
+
+  if (errors.length > 0) {
+    logger.warn(`Failed to fetch ${errors.length} users`, { errors });
+  }
+
+  return users;
+}
+```
+
+{% else -%}
+See language-specific error handling patterns.
+
+{% endif -%}
+{%- endmacro %}
+
+{% macro render_error_recovery_guide(scenario) -%}
+#### Error Recovery Guide: {{ scenario | title }}
+
+{% if scenario == 'database_failures' -%}
+**Handling Database Failures**
+
+1. **Transient failures (connection timeout):**
+   - Implement exponential backoff retry
+   - Max 3-5 retries with increasing delays
+   - Log each retry attempt
+
+2. **Data integrity errors (unique constraint):**
+   - Log the specific constraint violation
+   - Return appropriate error to caller
+   - Do not retry
+
+3. **Resource exhaustion (connection pool full):**
+   - Wait for available connection with timeout
+   - Fail fast if timeout exceeded
+   - Monitor connection pool metrics
+
+4. **Data consistency errors (stale data):**
+   - Reload data and retry operation
+   - Limit retries to prevent infinite loops
+   - Log inconsistency details
+
+**Implementation example (Python):**
+```python
+from tenacity import retry, stop_after_attempt, wait_exponential
+
+@retry(
+    stop=stop_after_attempt(3),
+    wait=wait_exponential(multiplier=1, min=1, max=10),
+    reraise=True,
+)
+def fetch_with_retry(query: str) -> list[dict]:
+    """Fetch data with automatic retry on transient failures."""
+    return database.execute(query)
+
+def handle_database_error(error: DatabaseError) -> None:
+    if "UNIQUE constraint" in str(error):
+        logger.warning(f"Duplicate data: {error}")
+        raise DuplicateDataError(str(error)) from error
+    elif "connection timeout" in str(error):
+        # Retry handled by @retry decorator
+        raise
+    else:
+        logger.error(f"Unexpected database error: {error}")
+        raise
+```
+
+{% elif scenario == 'external_api_calls' -%}
+**Handling External API Failures**
+
+1. **Network timeouts:**
+   - Implement circuit breaker pattern
+   - Fall back to cached data if available
+   - Return error to caller after retries exhausted
+
+2. **API rate limiting (429):**
+   - Implement backoff with exponential delay
+   - Queue request for later retry
+   - Fallback to degraded functionality
+
+3. **API errors (4xx, 5xx):**
+   - 4xx: Log and return error to caller (don't retry)
+   - 5xx: Retry with exponential backoff
+   - 500+: Consider circuit breaker
+
+4. **Malformed responses:**
+   - Log full response for debugging
+   - Return structured error
+   - Alert monitoring system
+
+**Implementation example (TypeScript):**
+```typescript
+class CircuitBreaker {
+  private failureCount = 0;
+  private lastFailureTime = 0;
+  private isOpen = false;
+
+  async call<T>(fn: () => Promise<T>): Promise<T> {
+    if (this.isOpen) {
+      if (Date.now() - this.lastFailureTime > 60000) {
+        // Try half-open after 1 minute
+        this.isOpen = false;
+      } else {
+        throw new Error('Circuit breaker is open');
+      }
+    }
+
+    try {
+      const result = await fn();
+      this.failureCount = 0;
+      return result;
+    } catch (error) {
+      this.failureCount++;
+      this.lastFailureTime = Date.now();
+      if (this.failureCount >= 3) {
+        this.isOpen = true;
+      }
+      throw error;
+    }
+  }
+}
+
+const apiBreaker = new CircuitBreaker();
+
+async function fetchFromAPI(url: string): Promise<unknown> {
+  return apiBreaker.call(() => 
+    fetch(url, { timeout: 5000 }).then(r => r.json())
+  );
+}
+```
+
+{% elif scenario == 'validation_errors' -%}
+**Handling Validation Errors**
+
+1. **Input validation failures:**
+   - Collect all validation errors before returning
+   - Return detailed error messages to caller
+   - Don't process invalid data
+
+2. **Type mismatches:**
+   - Validate at system boundaries (API endpoints)
+   - Use schema validators (pydantic, zod)
+   - Fail fast before processing
+
+3. **Business logic violations:**
+   - Check preconditions before operations
+   - Return specific error codes
+   - Log validation failures for monitoring
+
+**Implementation example (Python):**
+```python
+from pydantic import BaseModel, field_validator, ValidationError
+
+class UserInput(BaseModel):
+    email: str
+    age: int
+
+    @field_validator('email')
+    def validate_email(cls, v: str) -> str:
+        if '@' not in v:
+            raise ValueError('Invalid email format')
+        return v
+
+    @field_validator('age')
+    def validate_age(cls, v: int) -> int:
+        if v < 0 or v > 150:
+            raise ValueError('Age must be between 0 and 150')
+        return v
+
+def create_user(data: dict) -> User:
+    try:
+        input_data = UserInput(**data)
+    except ValidationError as e:
+        logger.warning(f"Validation failed: {e.errors()}")
+        raise InvalidUserDataError(str(e.errors())) from e
+    
+    # Process valid data
+    return User.create(email=input_data.email, age=input_data.age)
+```
+
+{% else -%}
+See error recovery patterns documentation.
+
+{% endif -%}
+{%- endmacro %}
+
+{% macro render_error_monitoring_checklist() -%}
+#### Error Monitoring Checklist
+
+```
+Error Logging & Monitoring:
+- [ ] All exceptions logged with context (not silent swallows)
+- [ ] Error logging includes request/operation ID for tracing
+- [ ] Sensitive data (passwords, tokens) never logged
+- [ ] Errors include timestamp and logger name
+- [ ] Structured logging for machine-readable errors
+- [ ] Errors are categorized (warn, error, critical)
+- [ ] Retryable errors logged at WARN level
+- [ ] Non-retryable errors logged at ERROR level
+- [ ] System failures logged at CRITICAL level
+- [ ] Error messages are actionable (not cryptic)
+- [ ] Error rates monitored in metrics/dashboards
+- [ ] Alerts configured for error thresholds
+- [ ] Error patterns analyzed weekly
+- [ ] Stack traces included for debugging
+- [ ] User-facing errors are helpful (not technical)
+```
+
+{%- endmacro %}

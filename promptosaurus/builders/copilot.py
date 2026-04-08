@@ -11,17 +11,6 @@ Output:
 
 Classes:
     CopilotBuilder: Generates GitHub Copilot instruction files.
-
-Example:
-    >>> from pathlib import Path
-    >>> from promptosaurus.builders.copilot import CopilotBuilder
-    >>> builder = CopilotBuilder()
-    >>> actions = builder.build(Path("./output"))
-    >>> for action in actions[:3]:
-    ...     print(action)
-    ✓ .github/copilot-instructions.md
-    ✓ .github/instructions/architect.instructions.md
-    ✓ .github/instructions/code.instructions.md
 """
 
 from datetime import datetime
@@ -47,12 +36,6 @@ class CopilotBuilder(Builder):
 
     Attributes:
         Inherits _base_files from Builder base class.
-
-    Example:
-        >>> builder = CopilotBuilder()
-        >>> # Build all files
-        >>> actions = builder.build(Path("./my-project"))
-        >>> print(f\"Generated {len(actions)} files\")
     """
 
     def build(
@@ -68,29 +51,28 @@ class CopilotBuilder(Builder):
 
         Args:
             output: Directory path where the files will be created.
-            config: Optional configuration dict with template variables (unused for Copilot).
+            config: Optional configuration dict with template variables.
             dry_run: If True, preview what would be written without touching filesystem.
 
         Returns:
             List of action strings describing what was created.
-
-        Example:
-            >>> from pathlib import Path
-            >>> builder = CopilotBuilder()
-            >>> # Normal run
-            >>> actions = builder.build(Path("./output"))
-            >>> # Dry run
-            >>> actions = builder.build(Path("./output"), dry_run=True)
         """
+        # Protocol Extensions: Configure and validate handlers
+        validation_errors = self._configure_handlers(config)
+        if validation_errors:
+            # Log validation errors but don't fail build - handlers have default behavior
+            for error in validation_errors:
+                print(f"Warning: Template handler validation error: {error}")
+
         actions: list[str] = []
         github = output / ".github"
 
         # Always-on: copilot-instructions.md
-        actions.extend(self._build_always_on(github, dry_run))
+        actions.extend(self._build_always_on(github, config, dry_run))
 
         # Per-mode instruction files
         for mode_key, files in registry.mode_files.items():
-            actions.extend(self._build_mode(github, mode_key, files, dry_run))
+            actions.extend(self._build_mode(github, mode_key, files, config, dry_run))
 
         # Build .copilotignore
         actions.extend(self._build_copilotignore(output, dry_run))
@@ -100,7 +82,9 @@ class CopilotBuilder(Builder):
 
         return actions
 
-    def _build_always_on(self, github: Path, dry_run: bool) -> list[str]:
+    def _build_always_on(
+        self, github: Path, config: dict[str, Any] | None = None, dry_run: bool = False
+    ) -> list[str]:
         """Build the always-on copilot-instructions.md file.
 
         Creates the main Copilot instructions file that contains all
@@ -108,6 +92,7 @@ class CopilotBuilder(Builder):
 
         Args:
             github: The .github directory path.
+            config: Optional configuration dict with template variables.
             dry_run: If True, return preview without writing.
 
         Returns:
@@ -145,7 +130,8 @@ class CopilotBuilder(Builder):
         github: Path,
         mode_key: str,
         files: list[str],
-        dry_run: bool,
+        config: dict[str, Any] | None = None,
+        dry_run: bool = False,
     ) -> list[str]:
         """Build a per-mode instruction file.
 
@@ -156,15 +142,11 @@ class CopilotBuilder(Builder):
             github: The .github directory path.
             mode_key: The mode identifier (e.g., 'code', 'architect').
             files: List of prompt filenames for this mode.
+            config: Optional configuration dict with template variables.
             dry_run: If True, return preview without writing.
 
         Returns:
             List containing action string for the file.
-
-        Example:
-            >>> actions = self._build_mode(Path(".github"), "code", ["code-feature.md"], False)
-            >>> print(actions)
-            ['✓ .github/instructions/code.instructions.md']
         """
         destination = github / "instructions" / f"{mode_key}.instructions.md"
         label = registry.modes.get(mode_key, mode_key.title())
@@ -180,6 +162,11 @@ class CopilotBuilder(Builder):
         for filename in files:
             try:
                 body = registry.prompt_body(filename)
+                # Apply template substitution if config is provided
+                if config:
+                    # Create a temporary instance to access the instance method
+                    temp_instance = self.__class__()
+                    body = temp_instance._substitute_template_variables(body, config)
             except FileNotFoundError:
                 lines.append(f"<!-- MISSING: {filename} -->")
                 continue

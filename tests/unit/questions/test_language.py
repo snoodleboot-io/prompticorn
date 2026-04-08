@@ -1,4 +1,5 @@
 """Tests for promptosaurus.questions.language module."""
+
 import pytest
 
 from promptosaurus.questions.language import (

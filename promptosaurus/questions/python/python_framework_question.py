@@ -51,16 +51,16 @@ class PythonFrameworkQuestion(Question):
     def option_explanations(self) -> dict[str, str]:
         """Get explanations for each option."""
         return {
-            "none": "No framework - using stdlib only",
-            "fastapi": "FastAPI - modern, async, auto-docs",
-            "flask": "Flask - lightweight, flexible",
-            "django": "Django - full-featured, ORM",
-            "starlette": "Starlette - ASGI minimal",
-            "streamlit": "Streamlit - data apps",
-            "dash": "Dash - Plotly analytical",
-            "celery": "Celery - task queue",
-            "huey": "Huey - lightweight task queue",
-            "dramatiq": "Dramatiq - modern task queue",
+            "none": "No framework - using only Python standard library",
+            "fastapi": "Modern async API framework with automatic OpenAPI documentation and type hints",
+            "flask": "Lightweight and flexible web framework, minimal core with extension ecosystem",
+            "django": "Full-featured web framework with ORM, admin panel, and authentication",
+            "starlette": "Minimal ASGI framework, powers FastAPI, for advanced use cases",
+            "streamlit": "Rapid prototyping for data apps, simple Python script to interactive web app",
+            "dash": "Analytical web apps with Plotly, enterprise-ready dashboards",
+            "celery": "Distributed task queue for background jobs and scheduled tasks",
+            "huey": "Simple lightweight task queue, alternative to Celery",
+            "dramatiq": "Modern task queue with focus on simplicity, distributed job processing",
         }
 
     def format_prompt(self) -> list:

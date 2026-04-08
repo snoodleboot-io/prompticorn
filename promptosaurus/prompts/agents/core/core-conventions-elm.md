@@ -1,11 +1,11 @@
 <!-- path: promptosaurus/prompts/agents/core/core-conventions-elm.md -->
 # Core Conventions Elm
 
-Language:             {{LANGUAGE}}           e.g., Elm 0.19
-Runtime:              {{RUNTIME}}            e.g., Browser, Node.js
-Package Manager:      {{PACKAGE_MANAGER}}        e.g., elm
-Linter:               {{LINTER}}             e.g., elm-format, elm-review
-Formatter:           {{FORMATTER}}          e.g., elm-format
+Language:             {{config.language}}           e.g., Elm 0.19
+Runtime:              {{config.runtime}}            e.g., Browser, Node.js
+Package Manager:      {{config.package_manager}}        e.g., elm
+Linter:               {{config.linter}}             e.g., elm-format, elm-review
+Formatter:           {{config.formatter}}          e.g., elm-format
 
 ### Naming Conventions
 
@@ -39,11 +39,11 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           {{LINE_COVERAGE_%}}          e.g., 80%
-Branch:         {{BRANCH_COVERAGE_%}}        e.g., 70%
-Function:       {{FUNCTION_COVERAGE_%}}       e.g., 90%
-Statement:      {{STATEMENT_COVERAGE_%}}      e.g., 85%
-Path:           {{PATH_COVERAGE_%}}           e.g., 60%
+Line:           {{config.coverage.line}}          e.g., 80%
+Branch:         {{config.coverage.branch}}        e.g., 70%
+Function:       {{config.coverage.function}}       e.g., 90%
+Statement:      {{config.coverage.statement}}      e.g., 85%
+Path:           {{config.coverage.path}}           e.g., 60%
 
 #### Test Types
 
@@ -57,9 +57,9 @@ Path:           {{PATH_COVERAGE_%}}           e.g., 60%
 - Use fuzz testing with elm-test
 
 #### Framework & Tools
-Framework:       {{TESTING_FRAMEWORK}}        e.g., elm-test
-Fuzz tool:      {{FUZZ_TOOL}}            e.g., elm-test (built-in)
-Coverage tool:  {{COVERAGE_TOOL}}              e.g., elm-coverage
+Framework:       {{config.testing_framework}}        e.g., elm-test
+Fuzz tool:      {{config.fuzz_tool}}            e.g., elm-test (built-in)
+Coverage tool:  {{config.coverage_tool}}              e.g., elm-coverage
 
 #### Scaffolding
 

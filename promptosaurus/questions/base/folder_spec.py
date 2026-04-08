@@ -82,19 +82,10 @@ class FolderSpec:
         runtime: The runtime version
         package_manager: The package manager
         test_framework: The testing framework
-        linter: The linter tool
+        linter: The linter tool (single string for backwards compatibility)
+        linters: List of linter tools for advanced templating
         formatter: The formatter tool
         coverage: Coverage targets
-
-    Example:
-        >>> spec = FolderSpec(
-        ...     folder="frontend",
-        ...     type="frontend",
-        ...     subtype="ui",
-        ...     language="typescript",
-        ... )
-        >>> spec.package_manager
-        'npm'
     """
 
     folder: str
@@ -105,6 +96,7 @@ class FolderSpec:
     package_manager: str = ""
     test_framework: str = ""
     linter: str = ""
+    linters: list[str] = field(default_factory=list)  # List of linters for advanced templating
     formatter: str = ""
     coverage: dict[str, int] = field(default_factory=lambda: DEFAULT_COVERAGE.copy())
 
@@ -136,6 +128,8 @@ class FolderSpec:
             self.test_framework = defaults.get("test_framework", "")
         if not self.linter:
             self.linter = defaults.get("linter", "")
+        if not self.linters and self.linter:
+            self.linters = [self.linter]  # Initialize linters list from linter
         if not self.formatter:
             self.formatter = defaults.get("formatter", "")
 
@@ -144,16 +138,6 @@ class FolderSpec:
 
         Returns:
             Dictionary representation of the folder spec.
-
-        Example:
-            >>> spec = FolderSpec(
-            ...     folder="frontend",
-            ...     type="frontend",
-            ...     subtype="ui",
-            ...     language="typescript",
-            ... )
-            >>> spec.to_dict()["folder"]
-            'frontend'
         """
         return {
             "folder": self.folder,
@@ -164,6 +148,7 @@ class FolderSpec:
             "package_manager": self.package_manager,
             "test_framework": self.test_framework,
             "linter": self.linter,
+            "linters": self.linters.copy(),  # List of linters for advanced templating
             "formatter": self.formatter,
             "coverage": self.coverage.copy(),
         }
@@ -177,17 +162,6 @@ class FolderSpec:
 
         Returns:
             FolderSpec instance.
-
-        Example:
-            >>> data = {
-            ...     "folder": "backend",
-            ...     "type": "backend",
-            ...     "subtype": "api",
-            ...     "language": "python",
-            ... }
-            >>> spec = FolderSpec.from_dict(data)
-            >>> spec.folder
-            'backend'
         """
         # Extract coverage if present
         coverage = data.pop("coverage", None)
@@ -227,9 +201,5 @@ def get_preset_defaults(folder_type: str, subtype: str) -> dict[str, str]:
 
     Returns:
         Dictionary with default values for the preset
-
-    Example:
-        >>> get_preset_defaults("backend", "api")
-        {'language': 'python', 'subtype': 'api'}
     """
     return FOLDER_TYPE_PRESETS.get(folder_type, {}).get(subtype, {})

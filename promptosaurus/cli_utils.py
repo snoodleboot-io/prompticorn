@@ -12,13 +12,6 @@ Functions:
     normalize_tool_name: Normalize user input to canonical tool name.
     validate_tool_name: Check if a tool is supported.
     get_supported_tools_display: Get formatted list of supported tools.
-
-Example:
-    >>> from promptosaurus.cli_utils import normalize_tool_name, validate_tool_name
-    >>> normalize_tool_name("Kilo-CLI")
-    'kilo-cli'
-    >>> validate_tool_name("kilo-cli")
-    True
 """
 
 import re
@@ -49,16 +42,6 @@ def normalize_tool_name(input_name: str) -> str:
 
     Returns:
         Normalized tool name in canonical format (e.g., 'kilo-cli').
-
-    Examples:
-        >>> normalize_tool_name("Kilo-CLI")
-        'kilo-cli'
-        >>> normalize_tool_name("kilo_ide")
-        'kilo-ide'
-        >>> normalize_tool_name("Cline")
-        'cline'
-        >>> normalize_tool_name("unknown-tool")
-        'unknown-tool'
     """
     if not input_name:
         return ""
@@ -81,12 +64,6 @@ def validate_tool_name(tool_name: str) -> bool:
 
     Returns:
         True if tool is in SUPPORTED_TOOLS, False otherwise.
-
-    Example:
-        >>> validate_tool_name("kilo-cli")
-        True
-        >>> validate_tool_name("unknown")
-        False
     """
     return tool_name in SUPPORTED_TOOLS
 
@@ -96,9 +73,5 @@ def get_supported_tools_display() -> str:
 
     Returns:
         Formatted string of supported tool names, sorted alphabetically.
-
-    Example:
-        >>> print(get_supported_tools_display())
-        cline, copilot, cursor, kilo-cli, kilo-ide
     """
     return ", ".join(sorted(SUPPORTED_TOOLS))

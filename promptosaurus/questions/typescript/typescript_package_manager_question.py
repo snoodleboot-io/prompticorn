@@ -27,13 +27,5 @@ class TypeScriptPackageManagerQuestion(Question):
         return ["npm", "pnpm", "yarn"]
 
     @property
-    def option_explanations(self) -> dict[str, str]:
-        return {
-            "npm": "Official - largest ecosystem, good for most projects",
-            "pnpm": "Fast, efficient - disk space savings, strict node_modules",
-            "yarn": "Facebook - good features, widely used, npm alternative",
-        }
-
-    @property
     def default(self) -> str:
         return "npm"

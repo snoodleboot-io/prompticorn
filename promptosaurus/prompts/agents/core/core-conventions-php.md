@@ -1,11 +1,11 @@
 <!-- path: promptosaurus/prompts/agents/core/core-conventions-php.md -->
 # Core Conventions PHP
 
-Language:             {{LANGUAGE}}           e.g., PHP 8.3
-Runtime:              {{RUNTIME}}            e.g., PHP-FPM, Laravel Octane
-Package Manager:      {{PACKAGE_MANAGER}}        e.g., Composer
-Linter:               {{LINTER}}             e.g., PHP CS Fixer, Pint
-Formatter:           {{FORMATTER}}          e.g., Pint, PHP CS Fixer
+Language:             {{config.language}}           e.g., PHP 8.3
+Runtime:              {{config.runtime}}            e.g., PHP-FPM, Laravel Octane
+Package Manager:      {{config.package_manager}}        e.g., Composer
+Linter:               {{config.linter}}             e.g., PHP CS Fixer, Pint
+Formatter:           {{config.formatter}}          e.g., Pint, PHP CS Fixer
 
 ### Naming Conventions
 
@@ -38,11 +38,11 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           {{LINE_COVERAGE_%}}          e.g., 80%
-Branch:         {{BRANCH_COVERAGE_%}}        e.g., 70%
-Function:       {{FUNCTION_COVERAGE_%}}       e.g., 90%
-Statement:      {{STATEMENT_COVERAGE_%}}      e.g., 85%
-Path:           {{PATH_COVERAGE_%}}           e.g., 60%
+Line:           {{config.coverage.line}}          e.g., 80%
+Branch:         {{config.coverage.branch}}        e.g., 70%
+Function:       {{config.coverage.function}}       e.g., 90%
+Statement:      {{config.coverage.statement}}      e.g., 85%
+Path:           {{config.coverage.path}}           e.g., 60%
 
 #### Test Types
 
@@ -59,9 +59,9 @@ Path:           {{PATH_COVERAGE_%}}           e.g., 60%
 - Use Pest or Laravel Dusk for browser testing
 
 #### Framework & Tools
-Framework:       {{TESTING_FRAMEWORK}}        e.g., PHPUnit, Pest
-Mocking:        {{MOCKING_LIBRARY}}              e.g., Mockery, PHP-Mock
-Coverage tool:  {{COVERAGE_TOOL}}              e.g., Xdebug, PCOV
+Framework:       {{config.testing_framework}}        e.g., PHPUnit, Pest
+Mocking:        {{config.mocking_library}}              e.g., Mockery, PHP-Mock
+Coverage tool:  {{config.coverage_tool}}              e.g., Xdebug, PCOV
 
 #### Scaffolding
 

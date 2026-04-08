@@ -4,7 +4,7 @@
 class RepositoryTypes:
     SINGLE = "single-language"
     MULTI_MONOREPO = "multi-language-monorepo"
-    MIXED = "mixed"
+    MIXED = "mixed-collocation"
 
     @classmethod
     def all(cls):
