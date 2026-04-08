@@ -31,14 +31,17 @@ class RenderStage:
         Note: We do NOT call curses.noecho(), curses.raw(), or curses.cbreak()
         here. The input provider (UnixInputProvider) handles terminal mode
         configuration. Curses is used only for rendering operations.
+
+        We also do NOT call keypad(True) here. The UnixInputProvider handles
+        arrow key parsing manually by reading raw escape sequences. Curses
+        keypad mode interferes with this by changing how the terminal reports
+        arrow keys, so we let the input provider have full control.
         """
         if self._initialized:
             return
 
         try:
             self._stdscr = curses.initscr()
-            # Enable special key handling (not a terminal mode change)
-            self._stdscr.keypad(True)
             self._initialized = True
         except Exception:
             # Fallback to non-curses mode if initialization fails
@@ -54,7 +57,6 @@ class RenderStage:
         """
         if self._stdscr and self._initialized:
             try:
-                self._stdscr.keypad(False)
                 curses.endwin()
             except Exception:
                 pass  # Curses already cleaned up
