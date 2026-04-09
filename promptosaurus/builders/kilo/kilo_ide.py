@@ -336,8 +336,9 @@ class KiloIDEBuilder(KiloCodeBuilder):
                     # Allow bash commands
                     permission["bash"] = "allow"
                 elif group_entry == "browser":
-                    # Browser access (not directly in permission object)
-                    pass  # Ignore for now, can be added if needed
+                    # Browser access: No direct mapping in current Kilo format
+                    # Deferred to Phase 2 - may map to webfetch/websearch
+                    pass
 
             elif isinstance(group_entry, list) and len(group_entry) >= 2:
                 # Complex permission with restrictions: ["edit", [{fileRegex: "..."}]]
@@ -352,7 +353,7 @@ class KiloIDEBuilder(KiloCodeBuilder):
                             if isinstance(restriction, dict):
                                 file_regex = restriction.get("fileRegex", "")
                                 # Convert regex patterns to glob-like patterns
-                                glob_pattern = self._regex_to_glob(file_regex)
+                                glob_pattern = file_regex  # Use regex as-is for MVP
                                 if glob_pattern:
                                     permission["edit"][glob_pattern] = "allow"
                     # Deny by default
@@ -445,7 +446,76 @@ class KiloIDEBuilder(KiloCodeBuilder):
         yaml_str = yaml.dump(frontmatter_dict, default_flow_style=False, sort_keys=False)
 
         # Return wrapped in --- markers
-        return f"---\n{yaml_str}---"
+        return f"---\n{yaml_str}\n---"
+
+    def _validate_agent_file(self, file_path: Path) -> bool:
+        """Validate that a generated agent file has correct format.
+        
+        Checks:
+        - YAML frontmatter is parseable
+        - Required fields present: description, mode, permission
+        - Permission object has correct structure
+        
+        Args:
+            file_path: Path to the generated .md file
+            
+        Returns:
+            True if valid, False otherwise
+        """
+        try:
+            content = file_path.read_text(encoding="utf-8")
+            
+            # Extract frontmatter
+            if not content.startswith("---"):
+                return False
+            
+            # Find closing ---
+            end_marker = content.find("---", 3)
+            if end_marker == -1:
+                return False
+            
+            frontmatter_str = content[3:end_marker].strip()
+            
+            # Parse YAML
+            import yaml
+            frontmatter = yaml.safe_load(frontmatter_str)
+            
+            # Check required fields
+            required_fields = ["description", "mode", "permission"]
+            for field in required_fields:
+                if field not in frontmatter:
+                    return False
+            
+            # Check permission structure (should be dict)
+            if not isinstance(frontmatter.get("permission"), dict):
+                return False
+            
+            return True
+        except Exception:
+            return False
+
+    def _log_agent_creation(self, slug: str, permission: dict[str, Any]) -> None:
+        """Log agent file creation for debugging.
+        
+        Args:
+            slug: Agent slug/name
+            permission: Permission object
+        """
+        # Build simple permission summary
+        perms = []
+        if "read" in permission:
+            perms.append("read")
+        if "edit" in permission:
+            edit_rules = permission["edit"]
+            if isinstance(edit_rules, dict):
+                restricted = any(k != "*" for k in edit_rules.keys())
+                perms.append(f"edit{'(restricted)' if restricted else ''}")
+        if "bash" in permission:
+            perms.append("bash")
+        
+        # For debugging: could add logging here in future
+        # For now, just silently track that we processed it
+        pass
 
     def _get_agents_md_content(self) -> str:
         """Get the AGENTS.md content for IDE format by reading from template file.

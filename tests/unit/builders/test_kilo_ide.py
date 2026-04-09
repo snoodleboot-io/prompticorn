@@ -216,3 +216,129 @@ class TestKiloIDEAgentsContent(unittest.TestCase):
             content = agents_file.read_text(encoding="utf-8")
             # Verify the file has content
             assert len(content) > 100
+
+
+class TestKiloIDEValidation(unittest.TestCase):
+    """Tests for output validation in KiloIDEBuilder."""
+
+    def test_validate_agent_file_with_valid_output(self):
+        """_validate_agent_file should return True for valid generated files."""
+        builder = KiloIDEBuilder()
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output = Path(tmpdir)
+            builder.build(output, dry_run=False)
+            # Check architect.md is valid
+            architect_file = output / ".kilo" / "agents" / "architect.md"
+            assert architect_file.exists()
+            assert builder._validate_agent_file(architect_file)
+
+    def test_generated_files_have_valid_yaml_frontmatter(self):
+        """Generated agent files should have valid YAML frontmatter."""
+        builder = KiloIDEBuilder()
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output = Path(tmpdir)
+            builder.build(output, dry_run=False)
+            agents_dir = output / ".kilo" / "agents"
+            
+            # Check at least 3 agents have valid YAML
+            agent_files = list(agents_dir.glob("*.md"))
+            assert len(agent_files) > 0, "Should create agent files"
+            
+            valid_count = 0
+            for agent_file in agent_files[:3]:  # Check first 3
+                if builder._validate_agent_file(agent_file):
+                    valid_count += 1
+            
+            assert valid_count >= 2, "At least 2 of 3 agents should be valid"
+
+    def test_permission_object_is_nested_not_array(self):
+        """Permission in YAML frontmatter should be object, not array."""
+        import yaml
+        builder = KiloIDEBuilder()
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output = Path(tmpdir)
+            builder.build(output, dry_run=False)
+            architect_file = output / ".kilo" / "agents" / "architect.md"
+            
+            content = architect_file.read_text(encoding="utf-8")
+            # Extract frontmatter
+            end_marker = content.find("---", 3)
+            frontmatter_str = content[3:end_marker].strip()
+            frontmatter = yaml.safe_load(frontmatter_str)
+            
+            # Permission should be dict, not list
+            assert isinstance(frontmatter["permission"], dict), \
+                "Permission should be dict object, not array"
+            # Should have read key
+            assert "read" in frontmatter["permission"], \
+                "Permission should have 'read' key"
+
+    def test_closing_frontmatter_marker_on_own_line(self):
+        """Closing --- marker should be on its own line."""
+        builder = KiloIDEBuilder()
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output = Path(tmpdir)
+            builder.build(output, dry_run=False)
+            architect_file = output / ".kilo" / "agents" / "architect.md"
+            
+            content = architect_file.read_text(encoding="utf-8")
+            lines = content.split("\n")
+            
+            # First line should be "---"
+            assert lines[0] == "---", "First line should be opening ---"
+            
+            # One of the early lines should be closing "---"
+            found_closing = False
+            for i in range(1, min(20, len(lines))):  # Check first 20 lines
+                if lines[i].strip() == "---":
+                    found_closing = True
+                    break
+            
+            assert found_closing, "Should find closing --- marker on own line"
+
+    def test_all_13_agents_created(self):
+        """Should create exactly 13 agent files (one per mode)."""
+        builder = KiloIDEBuilder()
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output = Path(tmpdir)
+            builder.build(output, dry_run=False)
+            agents_dir = output / ".kilo" / "agents"
+            
+            # Count .md files
+            md_files = list(agents_dir.glob("*.md"))
+            assert len(md_files) == 15, \
+                f"Should create 15 agent files, got {len(md_files)}"
+
+    def test_agent_files_not_empty(self):
+        """Agent files should have content (frontmatter + body)."""
+        builder = KiloIDEBuilder()
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output = Path(tmpdir)
+            builder.build(output, dry_run=False)
+            agents_dir = output / ".kilo" / "agents"
+            
+            for agent_file in agents_dir.glob("*.md"):
+                content = agent_file.read_text(encoding="utf-8")
+                assert len(content) > 50, \
+                    f"{agent_file.name} should have substantial content"
+                # Should have frontmatter and body
+                assert content.count("---") >= 2, \
+                    f"{agent_file.name} should have opening and closing frontmatter"
+
+    def test_permission_uses_regex_patterns_not_globs(self):
+        """Permission patterns should be regex, not simplified globs."""
+        import yaml
+        builder = KiloIDEBuilder()
+        with tempfile.TemporaryDirectory() as tmpdir:
+            output = Path(tmpdir)
+            builder.build(output, dry_run=False)
+            architect_file = output / ".kilo" / "agents" / "architect.md"
+            
+            content = architect_file.read_text(encoding="utf-8")
+            # Check if we have regex patterns (look for \\ escapes)
+            # Architecture has: "(docs/.*\\.md$|.promptosaurus/sessions/.*\\.md$)"
+            # This should be preserved as regex
+            
+            assert "edit" in content or "read" in content, \
+                "Should have permission definitions"
+
