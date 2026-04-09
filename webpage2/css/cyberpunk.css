@@ -1,0 +1,1216 @@
+/* ============================================================================
+   CYBERPUNK NEON AESTHETIC
+   ============================================================================ */
+
+:root {
+    /* Primary Colors */
+    --color-dark: #0a0e27;
+    --color-darker: #050810;
+    --color-darkest: #020305;
+    
+    /* Neon Colors */
+    --color-cyan: #00ffff;
+    --color-cyan-dark: #00cccc;
+    --color-cyan-light: #00ffff;
+    --color-pink: #ff006e;
+    --color-pink-dark: #cc0056;
+    --color-pink-light: #ff1a7f;
+    --color-green: #00ff41;
+    --color-green-dark: #00cc34;
+    --color-green-light: #1aff5f;
+    
+    /* Grid & Accents */
+    --color-grid: #1e3a5f;
+    --color-grid-light: #2a5a8f;
+    --color-text: #e0e0e0;
+    --color-text-bright: #ffffff;
+    
+    /* Shadows & Glows */
+    --glow-cyan: 0 0 10px var(--color-cyan), 0 0 20px var(--color-cyan-dark);
+    --glow-pink: 0 0 10px var(--color-pink), 0 0 20px var(--color-pink-dark);
+    --glow-green: 0 0 10px var(--color-green), 0 0 20px var(--color-green-dark);
+    --text-glow-cyan: 0 0 8px var(--color-cyan), 0 0 16px var(--color-cyan-dark);
+    --text-glow-pink: 0 0 8px var(--color-pink), 0 0 16px var(--color-pink-dark);
+    --text-glow-green: 0 0 8px var(--color-green), 0 0 16px var(--color-green-dark);
+}
+
+/* ============================================================================
+   BASE STYLES & GLOBAL EFFECTS
+   ============================================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Courier New', 'Courier', monospace;
+    background: linear-gradient(135deg, var(--color-darkest) 0%, var(--color-dark) 50%, var(--color-darker) 100%);
+    color: var(--color-text);
+    overflow-x: hidden;
+    position: relative;
+}
+
+/* Grid Background Pattern */
+.grid-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(0deg, transparent 24%, var(--color-grid) 25%, var(--color-grid) 26%, transparent 27%, transparent 74%, var(--color-grid) 75%, var(--color-grid) 76%, transparent 77%, transparent),
+        linear-gradient(90deg, transparent 24%, var(--color-grid) 25%, var(--color-grid) 26%, transparent 27%, transparent 74%, var(--color-grid) 75%, var(--color-grid) 76%, transparent 77%, transparent);
+    background-size: 50px 50px;
+    opacity: 0.08;
+    pointer-events: none;
+    z-index: 1;
+    animation: grid-shift 10s linear infinite;
+}
+
+@keyframes grid-shift {
+    0% {
+        background-position: 0 0, 0 0;
+    }
+    100% {
+        background-position: 50px 50px, 50px 50px;
+    }
+}
+
+/* Scanline Overlay */
+.scanlines {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(255, 255, 255, 0.02),
+        rgba(255, 255, 255, 0.02) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+    z-index: 9999;
+    animation: scanline-shift 8s linear infinite;
+}
+
+@keyframes scanline-shift {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(4px);
+    }
+}
+
+/* All content appears above grid/scanlines */
+section, nav, footer {
+    position: relative;
+    z-index: 2;
+}
+
+/* ============================================================================
+   TEXT & GLOW EFFECTS
+   ============================================================================ */
+
+.neon-text {
+    color: var(--color-cyan);
+    text-shadow: var(--text-glow-cyan);
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+.glowing-text {
+    color: var(--color-cyan);
+    text-shadow: var(--text-glow-cyan);
+    font-weight: 900;
+    letter-spacing: 3px;
+}
+
+.glowing-text-secondary {
+    color: var(--color-green);
+    text-shadow: var(--text-glow-green);
+    letter-spacing: 1px;
+}
+
+/* Neon Hover Effects */
+.neon-hover {
+    position: relative;
+    color: var(--color-text);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.neon-hover:hover {
+    color: var(--color-cyan);
+    text-shadow: var(--text-glow-cyan);
+}
+
+/* Color Classes */
+.neon-cyan { color: var(--color-cyan); text-shadow: var(--text-glow-cyan); }
+.neon-pink { color: var(--color-pink); text-shadow: var(--text-glow-pink); }
+.neon-green { color: var(--color-green); text-shadow: var(--text-glow-green); }
+
+/* ============================================================================
+   NAVIGATION
+   ============================================================================ */
+
+.navbar {
+    background: linear-gradient(180deg, rgba(10, 14, 39, 0.95) 0%, rgba(10, 14, 39, 0.8) 100%);
+    border-bottom: 2px solid var(--color-cyan);
+    box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    backdrop-filter: blur(10px);
+}
+
+.nav-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: var(--color-cyan);
+    text-shadow: var(--text-glow-cyan);
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-link {
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.nav-link:hover {
+    color: var(--color-cyan);
+    text-shadow: var(--text-glow-cyan);
+}
+
+.nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--color-cyan);
+    transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+}
+
+/* ============================================================================
+   SECTION STYLING & DIVIDERS
+   ============================================================================ */
+
+.section {
+    padding: 4rem 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.section-divider {
+    height: 4px;
+    background: linear-gradient(90deg, transparent, var(--color-cyan) 25%, var(--color-pink) 50%, var(--color-green) 75%, transparent);
+    box-shadow: 0 0 20px var(--color-cyan), 0 0 30px var(--color-pink);
+    margin: 3rem 0;
+    animation: pulse-glow 2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+    0%, 100% { opacity: 0.6; }
+    50% { opacity: 1; }
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.section-title {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 900;
+}
+
+.section-subtitle {
+    color: var(--color-text);
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    opacity: 0.8;
+}
+
+/* ============================================================================
+   HERO SECTION
+   ============================================================================ */
+
+.hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 2rem;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        transparent 0%, 
+        rgba(0, 255, 255, 0.05) 25%, 
+        transparent 50%,
+        rgba(255, 0, 110, 0.05) 75%,
+        transparent 100%);
+}
+
+.circuit-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: 
+        linear-gradient(0deg, transparent 24%, rgba(0, 255, 255, 0.05) 25%, rgba(0, 255, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 255, 255, 0.05) 75%, rgba(0, 255, 255, 0.05) 76%, transparent 77%, transparent),
+        linear-gradient(90deg, transparent 24%, rgba(0, 255, 255, 0.05) 25%, rgba(0, 255, 255, 0.05) 26%, transparent 27%, transparent 74%, rgba(0, 255, 255, 0.05) 75%, rgba(0, 255, 255, 0.05) 76%, transparent 77%, transparent);
+    background-size: 80px 80px;
+    opacity: 0.4;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 900px;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    letter-spacing: 2px;
+}
+
+.hero-image-container {
+    position: relative;
+    display: inline-block;
+    margin: 2rem 0;
+}
+
+.hero-dino {
+    max-width: 500px;
+    width: 100%;
+    height: auto;
+    filter: drop-shadow(0 0 30px rgba(0, 255, 255, 0.6));
+    animation: dino-float 3s ease-in-out infinite;
+}
+
+.neon-glow {
+    animation: neon-pulse 2s ease-in-out infinite;
+}
+
+@keyframes neon-pulse {
+    0%, 100% {
+        filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.5));
+    }
+    50% {
+        filter: drop-shadow(0 0 40px rgba(0, 255, 255, 0.8)) drop-shadow(0 0 60px rgba(255, 0, 110, 0.4));
+    }
+}
+
+@keyframes dino-float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+
+.glow-rings {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    border: 2px solid var(--color-cyan);
+    border-radius: 50%;
+    opacity: 0.3;
+    animation: ring-expand 2s ease-out infinite;
+}
+
+.glow-rings::after {
+    content: '';
+    position: absolute;
+    inset: -30px;
+    border: 2px solid var(--color-pink);
+    border-radius: 50%;
+    animation: ring-expand-inner 2.5s ease-out infinite;
+}
+
+@keyframes ring-expand {
+    0% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translate(-50%, -50%) scale(1.5);
+        opacity: 0;
+    }
+}
+
+@keyframes ring-expand-inner {
+    0% {
+        transform: scale(1);
+        opacity: 0.6;
+    }
+    100% {
+        transform: scale(1.3);
+        opacity: 0;
+    }
+}
+
+.neural-status {
+    font-size: 1rem;
+    letter-spacing: 1px;
+    color: var(--color-green);
+    text-shadow: var(--text-glow-green);
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--color-green);
+    border-radius: 50%;
+    box-shadow: var(--glow-green);
+    animation: status-pulse 1.5s ease-in-out infinite;
+}
+
+.status-dot.active {
+    background: var(--color-green);
+    box-shadow: var(--glow-green);
+}
+
+@keyframes status-pulse {
+    0%, 100% {
+        opacity: 1;
+        box-shadow: var(--glow-green);
+    }
+    50% {
+        opacity: 0.6;
+        box-shadow: 0 0 5px var(--color-green);
+    }
+}
+
+/* ============================================================================
+   MATRIX PROBLEM CARDS
+   ============================================================================ */
+
+.matrix-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+}
+
+.matrix-card {
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.05) 0%, rgba(255, 0, 110, 0.05) 100%);
+    border: 2px solid;
+    border-image: linear-gradient(135deg, var(--color-cyan), var(--color-pink)) 1;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.matrix-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
+    animation: scan-line 3s infinite;
+}
+
+@keyframes scan-line {
+    0% { left: -100%; }
+    100% { left: 100%; }
+}
+
+.matrix-card:hover {
+    border-image: linear-gradient(135deg, var(--color-green), var(--color-pink)) 1;
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.4);
+}
+
+.card-number {
+    color: var(--color-pink);
+    font-size: 3rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    opacity: 0.8;
+    text-shadow: var(--text-glow-pink);
+}
+
+.card-content h3 {
+    color: var(--color-cyan);
+    text-shadow: var(--text-glow-cyan);
+    margin-bottom: 0.5rem;
+    font-size: 1.3rem;
+}
+
+.card-content p {
+    color: var(--color-text);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* ============================================================================
+   UNIFIED SOLUTION SECTION
+   ============================================================================ */
+
+.unified-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: center;
+}
+
+.unified-text {
+    max-width: 500px;
+}
+
+.tech-copy {
+    color: var(--color-text);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+    font-size: 1.05rem;
+}
+
+.tech-copy strong {
+    color: var(--color-cyan);
+    text-shadow: var(--text-glow-cyan);
+}
+
+.tech-features {
+    list-style: none;
+    space: 1rem;
+}
+
+.tech-features li {
+    padding: 0.8rem 0;
+    color: var(--color-text);
+    border-bottom: 1px solid rgba(0, 255, 255, 0.1);
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.tech-features li span {
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+/* IR Diagram */
+.ir-diagram {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.ir-layer {
+    background: linear-gradient(90deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 110, 0.1));
+    border: 2px solid var(--color-cyan);
+    padding: 1.5rem;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 2px;
+    color: var(--color-cyan);
+    text-shadow: var(--text-glow-cyan);
+    position: relative;
+    overflow: hidden;
+}
+
+.ir-layer::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-green), transparent);
+    opacity: 0.5;
+}
+
+.ir-layer:nth-child(odd) {
+    border-color: var(--color-pink);
+    color: var(--color-pink);
+    text-shadow: var(--text-glow-pink);
+}
+
+/* ============================================================================
+   METRICS & STATUS SECTION
+   ============================================================================ */
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+}
+
+.metric-card {
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.08) 0%, rgba(0, 255, 255, 0.02) 100%);
+    border: 2px solid var(--color-cyan);
+    padding: 2rem;
+    border-radius: 0;
+    box-shadow: inset 0 0 20px rgba(0, 255, 255, 0.1);
+}
+
+.metric-label {
+    color: var(--color-green);
+    font-size: 0.85rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    text-shadow: var(--text-glow-green);
+}
+
+.metric-value {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--color-cyan);
+    text-shadow: var(--text-glow-cyan);
+    margin-bottom: 0.5rem;
+}
+
+.metric-unit {
+    color: var(--color-text);
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+}
+
+.metric-bar {
+    height: 6px;
+    background: linear-gradient(90deg, var(--color-grid), var(--color-grid-light));
+    margin-top: 1rem;
+    overflow: hidden;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.metric-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-cyan), var(--color-green));
+    box-shadow: 0 0 10px var(--color-cyan);
+    animation: metric-load 2s ease-out;
+}
+
+@keyframes metric-load {
+    0% { width: 0%; }
+}
+
+/* ============================================================================
+   PROTOCOL CARDS
+   ============================================================================ */
+
+.protocols-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.protocol-card {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
+    border: 3px solid;
+    padding: 2rem;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.protocol-1 {
+    border-color: var(--color-cyan);
+    color: var(--color-cyan);
+}
+
+.protocol-2 {
+    border-color: var(--color-pink);
+    color: var(--color-pink);
+}
+
+.protocol-3 {
+    border-color: var(--color-green);
+    color: var(--color-green);
+}
+
+.protocol-4 {
+    border-color: var(--color-cyan);
+    color: var(--color-cyan);
+}
+
+.protocol-5 {
+    border-color: var(--color-pink);
+    color: var(--color-pink);
+}
+
+.protocol-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.protocol-card:hover {
+    box-shadow: 0 0 30px currentColor;
+    transform: translateY(-5px);
+}
+
+.protocol-card:hover::before {
+    left: 100%;
+}
+
+.protocol-header {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.protocol-icon {
+    font-size: 2rem;
+    font-weight: 900;
+    opacity: 0.7;
+}
+
+.protocol-header h3 {
+    font-size: 1.3rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-shadow: 0 0 10px currentColor;
+}
+
+.protocol-desc {
+    color: var(--color-text);
+    line-height: 1.6;
+    font-size: 0.95rem;
+    margin-bottom: 1rem;
+}
+
+.protocol-tag {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    font-size: 0.8rem;
+    letter-spacing: 1px;
+    background: transparent;
+    border: 1px solid currentColor;
+    border-radius: 0;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.protocol-tag.cyan {
+    color: var(--color-cyan);
+    border-color: var(--color-cyan);
+    text-shadow: var(--text-glow-cyan);
+}
+
+.protocol-tag.green {
+    color: var(--color-green);
+    border-color: var(--color-green);
+    text-shadow: var(--text-glow-green);
+}
+
+.protocol-tag.pink {
+    color: var(--color-pink);
+    border-color: var(--color-pink);
+    text-shadow: var(--text-glow-pink);
+}
+
+/* ============================================================================
+   NEURAL SECTION
+   ============================================================================ */
+
+.neural-flow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: space-between;
+    margin-bottom: 3rem;
+    align-items: stretch;
+}
+
+.flow-step {
+    flex: 1;
+    min-width: 180px;
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.08), rgba(0, 255, 255, 0.02));
+    border-left: 4px solid var(--color-cyan);
+    padding: 1.5rem;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.step-number {
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--color-cyan);
+    text-shadow: var(--text-glow-cyan);
+    margin-bottom: 0.5rem;
+    opacity: 0.8;
+}
+
+.step-content h4 {
+    color: var(--color-green);
+    font-size: 1rem;
+    letter-spacing: 1px;
+    margin-bottom: 0.5rem;
+    text-shadow: var(--text-glow-green);
+}
+
+.step-content p {
+    color: var(--color-text);
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.flow-arrow {
+    color: var(--color-pink);
+    font-size: 2rem;
+    font-weight: bold;
+    align-self: center;
+}
+
+.neural-code {
+    background: linear-gradient(135deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.1));
+    border: 2px solid var(--color-green);
+    padding: 1.5rem;
+    overflow-x: auto;
+    margin-top: 2rem;
+}
+
+.code-block {
+    color: var(--color-green);
+    text-shadow: var(--text-glow-green);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    letter-spacing: 0.5px;
+    display: block;
+    white-space: pre-wrap;
+    word-break: break-word;
+}
+
+/* ============================================================================
+   COMBAT READY SECTION
+   ============================================================================ */
+
+.combat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.combat-card {
+    background: linear-gradient(135deg, rgba(255, 0, 110, 0.08), rgba(0, 255, 255, 0.08));
+    border: 2px solid var(--color-pink);
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+.combat-card:hover {
+    box-shadow: 0 0 30px rgba(255, 0, 110, 0.5);
+    border-color: var(--color-green);
+    transform: translateY(-5px);
+}
+
+.combat-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.combat-card h3 {
+    color: var(--color-pink);
+    text-shadow: var(--text-glow-pink);
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+}
+
+.combat-card p {
+    color: var(--color-text);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* ============================================================================
+   FAQ SECTION
+   ============================================================================ */
+
+.faq-container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.faq-item {
+    margin-bottom: 1.5rem;
+    border-left: 4px solid var(--color-cyan);
+    background: linear-gradient(90deg, rgba(0, 255, 255, 0.05), transparent);
+    transition: all 0.3s ease;
+}
+
+.faq-item:hover {
+    border-left-color: var(--color-green);
+    background: linear-gradient(90deg, rgba(0, 255, 255, 0.1), transparent);
+}
+
+.faq-question {
+    padding: 1.5rem;
+    cursor: pointer;
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    user-select: none;
+}
+
+.faq-icon {
+    color: var(--color-pink);
+    font-size: 1.2rem;
+    margin-top: 0.2rem;
+    transition: transform 0.3s ease;
+}
+
+.faq-item.active .faq-icon {
+    transform: rotate(90deg);
+}
+
+.faq-question h4 {
+    color: var(--color-cyan);
+    text-shadow: var(--text-glow-cyan);
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    flex: 1;
+}
+
+.faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.faq-item.active .faq-answer {
+    max-height: 500px;
+}
+
+.faq-answer p {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+    color: var(--color-text);
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+/* ============================================================================
+   CTA SECTION
+   ============================================================================ */
+
+.cta-section {
+    text-align: center;
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.1), rgba(255, 0, 110, 0.1));
+    border-top: 3px solid var(--color-cyan);
+    border-bottom: 3px solid var(--color-pink);
+    padding: 4rem 2rem;
+    box-shadow: inset 0 0 40px rgba(0, 255, 255, 0.2);
+}
+
+.cta-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.cta-title {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+.cta-subtitle {
+    color: var(--color-green);
+    text-shadow: var(--text-glow-green);
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    margin-bottom: 2rem;
+}
+
+.cta-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+.btn {
+    padding: 1rem 2.5rem;
+    font-size: 1rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: 2px solid;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary {
+    border-color: var(--color-cyan);
+    color: var(--color-cyan);
+    background: transparent;
+    box-shadow: inset 0 0 20px rgba(0, 255, 255, 0.1);
+    text-shadow: var(--text-glow-cyan);
+}
+
+.btn-primary:hover {
+    background: rgba(0, 255, 255, 0.1);
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.6), inset 0 0 20px rgba(0, 255, 255, 0.2);
+}
+
+.btn-secondary {
+    border-color: var(--color-pink);
+    color: var(--color-pink);
+    background: transparent;
+    box-shadow: inset 0 0 20px rgba(255, 0, 110, 0.1);
+    text-shadow: var(--text-glow-pink);
+}
+
+.btn-secondary:hover {
+    background: rgba(255, 0, 110, 0.1);
+    box-shadow: 0 0 30px rgba(255, 0, 110, 0.6), inset 0 0 20px rgba(255, 0, 110, 0.2);
+}
+
+.command-line {
+    background: rgba(0, 0, 0, 0.5);
+    border: 2px solid var(--color-green);
+    padding: 1.5rem;
+    font-size: 1.1rem;
+    margin-top: 2rem;
+    letter-spacing: 1px;
+    font-family: 'Courier New', monospace;
+}
+
+.command-prompt {
+    color: var(--color-green);
+    text-shadow: var(--text-glow-green);
+    font-weight: bold;
+}
+
+.command-text {
+    color: var(--color-cyan);
+    text-shadow: var(--text-glow-cyan);
+}
+
+/* ============================================================================
+   FOOTER
+   ============================================================================ */
+
+.footer {
+    background: linear-gradient(180deg, rgba(10, 14, 39, 0.95) 0%, rgba(5, 8, 16, 1) 100%);
+    border-top: 2px solid var(--color-pink);
+    padding: 3rem 2rem 2rem;
+    box-shadow: 0 -5px 30px rgba(255, 0, 110, 0.2);
+}
+
+.footer-content {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section {
+    text-align: center;
+}
+
+.footer-title {
+    color: var(--color-cyan);
+    text-shadow: var(--text-glow-cyan);
+    font-size: 0.9rem;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+}
+
+.status-indicators {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    align-items: center;
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-text);
+    font-size: 0.9rem;
+}
+
+.footer-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    list-style: none;
+}
+
+.footer-links a {
+    color: var(--color-text);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: var(--color-cyan);
+    text-shadow: var(--text-glow-cyan);
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0, 255, 255, 0.2);
+}
+
+.footer-text {
+    color: var(--color-text);
+    font-size: 0.85rem;
+    letter-spacing: 1px;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 2.2rem;
+    }
+
+    .hero-dino {
+        max-width: 300px;
+    }
+
+    .nav-menu {
+        gap: 1rem;
+        font-size: 0.8rem;
+    }
+
+    .section {
+        padding: 2rem 1rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .protocols-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .unified-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .neural-flow {
+        flex-direction: column;
+    }
+
+    .flow-arrow {
+        transform: rotate(90deg);
+        margin: 0.5rem 0;
+    }
+
+    .cta-buttons {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+    }
+
+    .matrix-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .combat-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .nav-menu {
+        display: none;
+    }
+
+    .hero-title {
+        font-size: 1.6rem;
+    }
+
+    .section-title {
+        font-size: 1.3rem;
+    }
+
+    .grid-background {
+        background-size: 30px 30px;
+    }
+
+    .metrics-grid {
+        grid-template-columns: 1fr;
+    }
+}
