@@ -41,7 +41,7 @@ class Phase2ABuilderAdapter:
             tool_name: Tool name ('kilo', 'cline', 'claude', 'copilot', 'cursor')
         """
         self.tool_name = tool_name
-        self.builder = BuilderFactory.create(tool_name)
+        self.builder = BuilderFactory.get_builder(tool_name)
         
         # Load agents from bundled prompts directory
         prompts_dir = Path(__file__).parent / "prompts" / "agents"

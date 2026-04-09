@@ -59,3 +59,10 @@ __all__ = [
     "CopilotBuilder",
     "CursorBuilder",
 ]
+
+# Auto-register all builders when module is imported
+BuilderFactory.register("kilo", KiloBuilder)
+BuilderFactory.register("cline", ClineBuilder)
+BuilderFactory.register("claude", ClaudeBuilder)
+BuilderFactory.register("copilot", CopilotBuilder)
+BuilderFactory.register("cursor", CursorBuilder)
