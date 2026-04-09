@@ -1,7 +1,7 @@
-"""Configuration options management for the prompt update command.
+"""Configuration options management for the promptosaurus update command.
 
 This module provides data structures and functions for managing configuration
-options that can be updated interactively via the `prompt update` command.
+options that can be updated interactively via the `promptosaurus update` command.
 
 The module defines:
     - ConfigOption dataclass: Represents a single updateable configuration option
@@ -86,7 +86,7 @@ class ConfigOption:
     """Represents a single configuration option that can be updated interactively.
 
     This dataclass defines a configuration option that users can modify via the
-    `prompt update` command. Each option has a key (used in the config file),
+    `promptosaurus update` command. Each option has a key (used in the config file),
     a display name (shown to users), a type, and available choices if applicable.
 
     Attributes:
