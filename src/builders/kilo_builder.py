@@ -77,13 +77,12 @@ class KiloBuilder(AbstractBuilder):
         errors = self.validate(agent)
         if errors:
             raise BuilderValidationError(
-                errors=errors,
-                message=f"Invalid agent '{agent.name}': {'; '.join(errors)}"
+                errors=errors, message=f"Invalid agent '{agent.name}': {'; '.join(errors)}"
             )
 
         # Select variant (minimal or verbose)
         variant = Variant.MINIMAL if options.variant == "minimal" else Variant.VERBOSE
-        
+
         # Load components with variant selection
         bundle = self.selector.select(agent, variant=variant)
 
@@ -167,6 +166,94 @@ class KiloBuilder(AbstractBuilder):
         """
         return "kilo"
 
+    def build_subagents(self, agent: Agent, options: BuildOptions) -> dict[str, str]:
+        """Build Kilo subagent configuration files.
+
+        Generates subagent files in a nested directory structure:
+        `.kilo/agents/{agent_name}/{subagent_name}.md`
+
+        Args:
+            agent: The parent Agent IR model
+            options: Build configuration options
+
+        Returns:
+            Dictionary mapping subagent names to their file content
+
+        Raises:
+            BuilderValidationError: If agent or subagents are invalid
+        """
+        if not agent.subagents:
+            return {}
+
+        subagent_files = {}
+
+        for subagent_name in agent.subagents:
+            # Create a minimal Agent IR for the subagent
+            # Subagents inherit some characteristics from parent
+            subagent = Agent(
+                name=subagent_name,
+                description=f"Subagent of {agent.name}",
+                system_prompt=f"You are a {subagent_name} subagent assisting {agent.name}.",
+            )
+
+            # Build subagent content
+            subagent_content = self._build_subagent_file(subagent, agent.name, options)
+            subagent_files[subagent_name] = subagent_content
+
+        return subagent_files
+
+    def _build_subagent_file(self, subagent: Agent, parent_name: str, options: BuildOptions) -> str:
+        """Build a single subagent file with parent reference.
+
+        Args:
+            subagent: The subagent Agent IR model
+            parent_name: Name of the parent agent
+            options: Build configuration options
+
+        Returns:
+            String containing subagent file content with parent reference
+        """
+        # Validate the subagent
+        errors = self.validate(subagent)
+        if errors:
+            raise BuilderValidationError(
+                errors=errors, message=f"Invalid subagent '{subagent.name}': {'; '.join(errors)}"
+            )
+
+        # Build frontmatter with parent reference
+        frontmatter = self._build_frontmatter(subagent)
+        frontmatter["parent_agent"] = parent_name
+
+        # Compose markdown with parent context
+        markdown_sections = []
+
+        # Add parent reference as intro
+        markdown_sections.append("# Parent Agent\n")
+        markdown_sections.append(f"{parent_name}\n")
+        markdown_sections.append("")
+
+        # System Prompt
+        markdown_sections.append("# System Prompt\n")
+        markdown_sections.append(subagent.system_prompt)
+        markdown_sections.append("")
+
+        # Tools (if present)
+        if options.include_tools and subagent.tools:
+            markdown_sections.append("# Tools\n")
+            markdown_sections.append(self._format_tools(subagent.tools))
+            markdown_sections.append("")
+
+        # Skills (if present)
+        if options.include_skills and subagent.skills:
+            markdown_sections.append("# Skills\n")
+            markdown_sections.append("; ".join(subagent.skills))
+            markdown_sections.append("")
+
+        markdown_content = "\n".join(markdown_sections).strip()
+
+        # Compose YAML frontmatter + markdown
+        return self._compose_yaml_markdown(frontmatter, markdown_content)
+
     def _build_frontmatter(self, agent: Agent) -> dict[str, Any]:
         """Build YAML frontmatter for Kilo agent file.
 
@@ -233,9 +320,7 @@ class KiloBuilder(AbstractBuilder):
             lines.append(f"- {subagent}")
         return "\n".join(lines)
 
-    def _compose_yaml_markdown(
-        self, frontmatter: dict[str, Any], markdown_content: str
-    ) -> str:
+    def _compose_yaml_markdown(self, frontmatter: dict[str, Any], markdown_content: str) -> str:
         """Compose YAML frontmatter and markdown content.
 
         Args:
