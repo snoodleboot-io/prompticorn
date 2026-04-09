@@ -1,0 +1,92 @@
+/* Dark Theme Color Palette */
+
+:root {
+    /* Primary Colors */
+    --color-bg-primary: #0f172a;      /* Navy black */
+    --color-bg-secondary: #1a2742;    /* Slightly lighter navy */
+    --color-bg-tertiary: #243556;     /* Even lighter navy */
+    
+    /* Accent Colors */
+    --color-accent-primary: #00d4ff;  /* Electric cyan/blue */
+    --color-accent-secondary: #00a8cc; /* Deeper cyan */
+    --color-accent-tertiary: #0088aa;  /* Ocean blue */
+    
+    /* Text Colors */
+    --color-text-primary: #f0f9ff;    /* Off-white */
+    --color-text-secondary: #cbd5e1;  /* Light gray */
+    --color-text-tertiary: #94a3b8;   /* Medium gray */
+    
+    /* Gradient Colors */
+    --color-gradient-start: #1a2742;
+    --color-gradient-end: #0f172a;
+    
+    /* Status Colors */
+    --color-success: #10b981;
+    --color-warning: #f59e0b;
+    --color-error: #ef4444;
+    
+    /* Border Colors */
+    --color-border: #1e293b;
+    --color-border-light: #334155;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 2px 0 rgba(0, 212, 255, 0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0, 212, 255, 0.1);
+    --shadow-lg: 0 10px 15px -3px rgba(0, 212, 255, 0.15);
+    --shadow-xl: 0 20px 25px -5px rgba(0, 212, 255, 0.2);
+    
+    /* Glow Effects */
+    --glow-cyan: 0 0 20px rgba(0, 212, 255, 0.3);
+    --glow-cyan-strong: 0 0 40px rgba(0, 212, 255, 0.5);
+}
+
+/* Apply dark theme globally */
+body {
+    background-color: var(--color-bg-primary);
+    color: var(--color-text-primary);
+}
+
+/* Links */
+a {
+    color: var(--color-accent-primary);
+}
+
+a:hover {
+    color: var(--color-accent-secondary);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--color-bg-primary);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-accent-primary);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--color-accent-secondary);
+}
+
+/* Selection color */
+::selection {
+    background-color: var(--color-accent-primary);
+    color: var(--color-bg-primary);
+}
+
+/* Placeholder text */
+::placeholder {
+    color: var(--color-text-tertiary);
+}
+
+/* Input focus styles */
+input:focus,
+textarea:focus {
+    border-color: var(--color-accent-primary);
+    box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+}
