@@ -1,0 +1,839 @@
+/* COMBAT SYSTEMS THEME - Complete Tactical Design Overhaul */
+/* Inspired by the cybernetic dinosaur's armor plating and combat readiness */
+
+/* ===== ROOT VARIABLES ===== */
+:root {
+    --color-bg-primary: #0a0a0a;
+    --color-bg-secondary: #141414;
+    --color-bg-tertiary: #1a1a1a;
+    --color-primary: #00ff00;
+    --color-secondary: #ff0055;
+    --color-accent: #00ffff;
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #b0b0b0;
+}
+
+/* ===== TACTICAL BACKGROUND ===== */
+body {
+    background: linear-gradient(to bottom, #0a0a0a 0%, #1a1a2e 50%, #0f0f1e 100%);
+    position: relative;
+    overflow-x: hidden;
+}
+
+.tactical-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(rgba(0, 255, 0, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 255, 0, 0.03) 1px, transparent 1px);
+    background-size: 40px 40px;
+    background-position: 0 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.scanline-effect {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        rgba(0, 0, 0, 0.15),
+        rgba(0, 0, 0, 0.15) 1px,
+        transparent 1px,
+        transparent 2px
+    );
+    pointer-events: none;
+    z-index: 2;
+    animation: scanline-drift 8s linear infinite;
+}
+
+@keyframes scanline-drift {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(10px); }
+}
+
+/* Floating reticles in background */
+.floating-reticles {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.reticle {
+    position: absolute;
+    opacity: 0.1;
+}
+
+.reticle-1 {
+    width: 200px;
+    height: 200px;
+    top: 15%;
+    left: 10%;
+    border: 2px solid var(--color-primary);
+    border-radius: 50%;
+    animation: reticle-pulse 6s ease-in-out infinite;
+}
+
+.reticle-2 {
+    width: 150px;
+    height: 150px;
+    top: 65%;
+    right: 15%;
+    border: 2px solid var(--color-secondary);
+    animation: reticle-pulse 5s ease-in-out infinite 1s;
+}
+
+.reticle-3 {
+    width: 180px;
+    height: 180px;
+    bottom: 20%;
+    left: 50%;
+    border: 2px solid var(--color-accent);
+    transform: translateX(-50%);
+    animation: reticle-pulse 7s ease-in-out infinite 0.5s;
+}
+
+@keyframes reticle-pulse {
+    0%, 100% { opacity: 0.05; transform: scale(1); }
+    50% { opacity: 0.15; transform: scale(1.1); }
+}
+
+/* ===== COMBAT HERO SECTION ===== */
+.combat-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(10, 10, 10, 0.95) 0%, rgba(26, 26, 46, 0.9) 100%);
+    overflow: hidden;
+    z-index: 10;
+    padding: 60px 24px;
+}
+
+/* Main targeting reticle */
+.main-reticle {
+    position: absolute;
+    width: 400px;
+    height: 400px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0.2;
+    animation: reticle-rotate 20s linear infinite;
+}
+
+.reticle-corner {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 3px solid var(--color-primary);
+}
+
+.top-left {
+    top: 0;
+    left: 0;
+    border-right: none;
+    border-bottom: none;
+}
+
+.top-right {
+    top: 0;
+    right: 0;
+    border-left: none;
+    border-bottom: none;
+}
+
+.bottom-left {
+    bottom: 0;
+    left: 0;
+    border-right: none;
+    border-top: none;
+}
+
+.bottom-right {
+    bottom: 0;
+    right: 0;
+    border-left: none;
+    border-top: none;
+}
+
+.reticle-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    border: 2px solid var(--color-primary);
+    border-radius: 50%;
+    box-shadow: inset 0 0 10px var(--color-primary);
+    animation: center-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes reticle-rotate {
+    0% { transform: translate(-50%, -50%) rotate(0deg); }
+    100% { transform: translate(-50%, -50%) rotate(360deg); }
+}
+
+@keyframes center-pulse {
+    0%, 100% { box-shadow: inset 0 0 10px var(--color-primary), 0 0 10px var(--color-primary); }
+    50% { box-shadow: inset 0 0 20px var(--color-primary), 0 0 20px var(--color-primary); }
+}
+
+/* Hero content */
+.hero-content-combat {
+    position: relative;
+    z-index: 11;
+    text-align: center;
+    max-width: 700px;
+}
+
+.power-up-sequence {
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.power-circles {
+    width: 200px;
+    height: 200px;
+    filter: drop-shadow(0 0 20px rgba(0, 255, 0, 0.4));
+}
+
+.power-ring {
+    stroke: var(--color-primary);
+    fill: none;
+    stroke-width: 2;
+    opacity: 0.6;
+}
+
+.ring-1 { animation: ring-expand 2s ease-in-out infinite; }
+.ring-2 { animation: ring-expand 2s ease-in-out infinite 0.3s; }
+.ring-3 { animation: ring-expand 2s ease-in-out infinite 0.6s; }
+.ring-4 { animation: ring-expand 2s ease-in-out infinite 0.9s; }
+
+@keyframes ring-expand {
+    0% {
+        r: 20;
+        opacity: 1;
+    }
+    100% {
+        r: 80;
+        opacity: 0;
+    }
+}
+
+.combat-title {
+    font-size: 3.2rem;
+    font-weight: 900;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.5), 0 0 20px rgba(0, 255, 0, 0.3);
+    line-height: 1.1;
+}
+
+.power-indicator {
+    display: block;
+    font-size: 1rem;
+    margin-top: 12px;
+    color: var(--color-accent);
+    font-family: 'Courier New', monospace;
+    letter-spacing: 2px;
+    text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.combat-subtitle {
+    font-size: 1.2rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 40px;
+    line-height: 1.6;
+    letter-spacing: 1px;
+}
+
+/* Status panel */
+.status-panel {
+    background: rgba(20, 20, 20, 0.7);
+    border: 2px solid var(--color-accent);
+    border-radius: 0;
+    padding: 24px;
+    margin-bottom: 40px;
+    backdrop-filter: blur(10px);
+    box-shadow: inset 0 0 20px rgba(0, 255, 255, 0.1), 0 0 20px rgba(0, 255, 255, 0.1);
+}
+
+.status-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    gap: 16px;
+}
+
+.status-item:last-child {
+    margin-bottom: 0;
+}
+
+.status-label {
+    font-family: 'Courier New', monospace;
+    color: var(--color-primary);
+    font-weight: 700;
+    min-width: 80px;
+    font-size: 0.9rem;
+}
+
+.status-bar {
+    flex: 1;
+    height: 6px;
+    background: rgba(0, 255, 0, 0.1);
+    border: 1px solid var(--color-primary);
+    overflow: hidden;
+    position: relative;
+}
+
+.status-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    animation: status-fill 2s ease-in-out infinite;
+    box-shadow: 0 0 10px var(--color-primary);
+}
+
+.status-fill.combat {
+    animation-delay: 0s;
+}
+
+.status-fill.shields {
+    animation-delay: 0.3s;
+}
+
+.status-fill.weapons {
+    animation-delay: 0.6s;
+}
+
+@keyframes status-fill {
+    0%, 100% { width: 85%; }
+    50% { width: 95%; }
+}
+
+/* Combat CTA buttons */
+.combat-cta {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.btn-tactical {
+    padding: 16px 40px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    color: #000;
+    border: none;
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 20px rgba(0, 255, 0, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.btn-tactical:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0 40px rgba(0, 255, 0, 0.8), 0 0 60px rgba(0, 255, 255, 0.4);
+    letter-spacing: 3px;
+}
+
+.btn-tactical::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: left 0.3s ease;
+    z-index: -1;
+}
+
+.btn-tactical:hover::before {
+    left: 100%;
+}
+
+.btn-secondary-tactical {
+    padding: 16px 40px;
+    background: transparent;
+    color: var(--color-accent);
+    border: 2px solid var(--color-accent);
+    font-weight: 700;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    cursor: pointer;
+    box-shadow: inset 0 0 20px rgba(0, 255, 255, 0.05), 0 0 20px rgba(0, 255, 255, 0.2);
+    transition: all 0.3s ease;
+}
+
+.btn-secondary-tactical:hover {
+    background: rgba(0, 255, 255, 0.1);
+    transform: translateY(-2px);
+    box-shadow: inset 0 0 20px rgba(0, 255, 255, 0.2), 0 0 30px rgba(0, 255, 255, 0.4);
+}
+
+/* ===== ARMOR DIVIDER ===== */
+.armor-divider {
+    display: flex;
+    height: 80px;
+    background: linear-gradient(to right, transparent 0%, rgba(0, 255, 0, 0.2) 25%, rgba(0, 255, 0, 0.2) 75%, transparent 100%);
+    position: relative;
+    z-index: 10;
+    overflow: hidden;
+}
+
+.plate {
+    flex: 1;
+    border-top: 3px solid var(--color-primary);
+    border-bottom: 3px solid var(--color-primary);
+    position: relative;
+    background: linear-gradient(90deg, transparent 0%, rgba(0, 255, 0, 0.1) 50%, transparent 100%);
+    animation: plate-glow 4s ease-in-out infinite;
+}
+
+.plate:nth-child(2) {
+    animation-delay: 1s;
+}
+
+.plate:nth-child(3) {
+    animation-delay: 2s;
+}
+
+@keyframes plate-glow {
+    0%, 100% { box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.2); }
+    50% { box-shadow: inset 0 0 20px rgba(0, 255, 0, 0.4); }
+}
+
+/* ===== COMBAT SYSTEMS SECTION ===== */
+.combat-systems {
+    position: relative;
+    padding: 80px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    z-index: 10;
+}
+
+.section-header-combat {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.system-title {
+    font-size: 2.5rem;
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    margin-bottom: 12px;
+    text-shadow: 0 0 20px rgba(0, 255, 0, 0.4);
+    font-weight: 900;
+}
+
+.system-subtitle {
+    color: var(--color-text-secondary);
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+}
+
+/* Weapon cards */
+.weapons-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+}
+
+.weapon-card {
+    position: relative;
+    background: linear-gradient(135deg, rgba(20, 20, 20, 0.6) 0%, rgba(26, 26, 26, 0.4) 100%);
+    border: 2px solid var(--color-primary);
+    border-radius: 0;
+    padding: 28px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.weapon-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+    animation: scan-line 3s ease-in-out infinite;
+}
+
+@keyframes scan-line {
+    0%, 100% { opacity: 0.3; }
+    50% { opacity: 1; }
+}
+
+.weapon-card:hover {
+    background: linear-gradient(135deg, rgba(20, 20, 20, 0.9) 0%, rgba(26, 26, 26, 0.7) 100%);
+    border-color: var(--color-accent);
+    box-shadow: 0 0 30px rgba(0, 255, 0, 0.3), inset 0 0 20px rgba(0, 255, 0, 0.05);
+    transform: translateY(-4px);
+}
+
+.weapon-designation {
+    font-family: 'Courier New', monospace;
+    color: var(--color-secondary);
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    text-transform: uppercase;
+}
+
+.targeting-box {
+    width: 100%;
+    aspect-ratio: 1;
+    border: 2px solid var(--color-primary);
+    margin-bottom: 16px;
+    position: relative;
+    background: rgba(0, 255, 0, 0.03);
+    overflow: hidden;
+}
+
+.crosshair {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 40px;
+    height: 40px;
+    border: 2px solid var(--color-primary);
+    border-radius: 50%;
+}
+
+.crosshair::before,
+.crosshair::after {
+    content: '';
+    position: absolute;
+    background: var(--color-primary);
+}
+
+.crosshair::before {
+    width: 100%;
+    height: 1px;
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+}
+
+.crosshair::after {
+    width: 1px;
+    height: 100%;
+    left: 50%;
+    top: 0;
+    transform: translateX(-50%);
+}
+
+.weapon-card h3 {
+    color: var(--color-text-primary);
+    font-size: 1.2rem;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.weapon-card p {
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 16px;
+}
+
+.charge-indicator {
+    height: 8px;
+    background: rgba(0, 255, 0, 0.1);
+    border: 1px solid var(--color-primary);
+    overflow: hidden;
+    position: relative;
+}
+
+.charge-level {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    width: 0;
+    animation: charge 3s ease-in-out infinite;
+    box-shadow: 0 0 10px rgba(0, 255, 0, 0.6);
+}
+
+.weapon-card:nth-child(1) .charge-level { animation-delay: 0s; }
+.weapon-card:nth-child(2) .charge-level { animation-delay: 0.5s; }
+.weapon-card:nth-child(3) .charge-level { animation-delay: 1s; }
+.weapon-card:nth-child(4) .charge-level { animation-delay: 1.5s; }
+
+@keyframes charge {
+    0%, 100% { width: 0; }
+    50% { width: 100%; }
+}
+
+/* ===== DEPLOYMENT STEPS ===== */
+.deployment-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 24px;
+    margin-top: 40px;
+}
+
+.step-card {
+    background: linear-gradient(135deg, rgba(20, 20, 20, 0.7) 0%, rgba(26, 26, 26, 0.5) 100%);
+    border: 2px solid var(--color-accent);
+    border-radius: 0;
+    padding: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.step-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(0, 255, 255, 0.05) 0%, transparent 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.step-card:hover::before {
+    opacity: 1;
+}
+
+.step-number {
+    font-family: 'Courier New', monospace;
+    font-size: 2.5rem;
+    font-weight: 900;
+    color: var(--color-primary);
+    margin-bottom: 12px;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.step-card h3 {
+    color: var(--color-text-primary);
+    font-size: 1.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 2;
+}
+
+.step-card p {
+    color: var(--color-text-secondary);
+    margin-bottom: 16px;
+    position: relative;
+    z-index: 2;
+}
+
+.step-card code {
+    background: rgba(0, 255, 0, 0.1);
+    color: var(--color-primary);
+    padding: 8px 12px;
+    border: 1px solid var(--color-primary);
+    border-radius: 0;
+    font-family: 'Courier New', monospace;
+    font-size: 0.85rem;
+    display: block;
+    position: relative;
+    z-index: 2;
+    box-shadow: inset 0 0 10px rgba(0, 255, 0, 0.1);
+}
+
+.step-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 0 30px rgba(0, 255, 255, 0.3), inset 0 0 20px rgba(0, 255, 255, 0.05);
+    border-color: var(--color-primary);
+}
+
+/* ===== COMBAT FOOTER ===== */
+.combat-footer {
+    background: linear-gradient(180deg, rgba(10, 10, 10, 0.9) 0%, rgba(5, 5, 15, 0.95) 100%);
+    border-top: 2px solid var(--color-primary);
+    padding: 40px 24px;
+    position: relative;
+    z-index: 10;
+}
+
+.combat-footer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+    opacity: 0.5;
+}
+
+.footer-tactical {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+.footer-section h4 {
+    color: var(--color-primary);
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.3);
+}
+
+.footer-section p,
+.footer-section ul {
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 8px;
+}
+
+.footer-section ul li a {
+    color: var(--color-accent);
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.footer-section ul li a:hover {
+    color: var(--color-primary);
+    text-shadow: 0 0 10px rgba(0, 255, 0, 0.4);
+}
+
+.status-active {
+    color: var(--color-primary);
+    animation: status-blink 1.5s ease-in-out infinite;
+}
+
+@keyframes status-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.5; }
+}
+
+.footer-bottom-combat {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid rgba(0, 255, 0, 0.2);
+    color: var(--color-text-secondary);
+    font-size: 0.85rem;
+    font-family: 'Courier New', monospace;
+    letter-spacing: 1px;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    .combat-title {
+        font-size: 2rem;
+    }
+
+    .system-title {
+        font-size: 1.8rem;
+    }
+
+    .weapons-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .combat-cta {
+        flex-direction: column;
+    }
+
+    .btn-tactical,
+    .btn-secondary-tactical {
+        width: 100%;
+    }
+
+    .main-reticle {
+        width: 300px;
+        height: 300px;
+    }
+
+    .reticle-corner {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+@media (max-width: 480px) {
+    .combat-hero {
+        padding: 40px 16px;
+        min-height: auto;
+    }
+
+    .combat-title {
+        font-size: 1.6rem;
+        letter-spacing: 2px;
+    }
+
+    .combat-subtitle {
+        font-size: 1rem;
+    }
+
+    .power-circles {
+        width: 150px;
+        height: 150px;
+    }
+
+    .status-panel {
+        padding: 16px;
+    }
+
+    .system-title {
+        font-size: 1.4rem;
+        letter-spacing: 2px;
+    }
+
+    .weapon-card {
+        padding: 16px;
+    }
+
+    .weapon-card h3 {
+        font-size: 1rem;
+    }
+
+    .weapon-card p {
+        font-size: 0.85rem;
+    }
+
+    .btn-tactical,
+    .btn-secondary-tactical {
+        padding: 12px 24px;
+        font-size: 0.85rem;
+    }
+}

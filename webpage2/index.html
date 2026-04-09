@@ -3,16 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Promptosaurus — Unified Prompt Network</title>
-    <link rel="stylesheet" href="css/cyberpunk.css">
+    <title>Promptosaurus Combat System - Tactical Deployment Ready</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/combat-theme.css">
 </head>
 <body>
-    <!-- Scanline Overlay -->
-    <div class="scanlines"></div>
+    <!-- Tactical HUD Background -->
+    <div class="tactical-grid"></div>
+    <div class="scanline-effect"></div>
     
-    <!-- Background Grid -->
-    <div class="grid-background"></div>
+    <!-- Combat targeting reticles (background) -->
+    <div class="floating-reticles">
+        <div class="reticle reticle-1"></div>
+        <div class="reticle reticle-2"></div>
+        <div class="reticle reticle-3"></div>
+    </div>
 
     <!-- Navigation -->
     <nav class="navbar">
@@ -30,507 +35,180 @@
         </div>
     </nav>
 
-    <!-- 1. Hero Section -->
-    <section class="hero">
-        <div class="hero-background">
-            <div class="circuit-overlay"></div>
+    <!-- Hero Section: Combat Ready -->
+    <section class="combat-hero">
+        <div class="targeting-reticle main-reticle">
+            <div class="reticle-corner top-left"></div>
+            <div class="reticle-corner top-right"></div>
+            <div class="reticle-corner bottom-left"></div>
+            <div class="reticle-corner bottom-right"></div>
+            <div class="reticle-center"></div>
         </div>
-        <div class="hero-content">
-            <h1 class="hero-title glowing-text">
-                WELCOME TO THE<br>
-                <span class="neon-cyan">UNIFIED PROMPT NETWORK</span>
-            </h1>
-            <p class="hero-subtitle glowing-text-secondary">
-                System online. Ready for deployment.
-            </p>
-            <div class="hero-image-container">
-                <img src="img/promptosaurs3.png" alt="Cybernetic Dinosaur" class="hero-dino neon-glow">
-                <div class="glow-rings"></div>
+
+        <div class="hero-content-combat">
+            <div class="power-up-sequence">
+                <svg viewBox="0 0 200 200" class="power-circles">
+                    <circle cx="100" cy="100" r="80" class="power-ring ring-1"/>
+                    <circle cx="100" cy="100" r="60" class="power-ring ring-2"/>
+                    <circle cx="100" cy="100" r="40" class="power-ring ring-3"/>
+                    <circle cx="100" cy="100" r="20" class="power-ring ring-4"/>
+                </svg>
             </div>
-            <p class="neural-status">
-                <span class="status-dot"></span> Neural pathways synchronized
-            </p>
+
+            <h1 class="combat-title">
+                SYSTEM ONLINE
+                <span class="power-indicator">█████████ 100%</span>
+            </h1>
+            <p class="combat-subtitle">Ready for deployment. Weapons hot. Standing by for orders.</p>
+            
+            <div class="status-panel">
+                <div class="status-item">
+                    <span class="status-label">ARMOR:</span>
+                    <div class="status-bar">
+                        <div class="status-fill combat"></div>
+                    </div>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">SHIELDS:</span>
+                    <div class="status-bar">
+                        <div class="status-fill shields"></div>
+                    </div>
+                </div>
+                <div class="status-item">
+                    <span class="status-label">WEAPONS:</span>
+                    <div class="status-bar">
+                        <div class="status-fill weapons"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="combat-cta">
+                <button class="btn-tactical">ACTIVATE SYSTEMS</button>
+                <button class="btn-secondary-tactical">DEPLOYMENT GUIDE</button>
+            </div>
         </div>
     </section>
 
-    <!-- Divider -->
-    <div class="section-divider"></div>
+    <!-- Armor Plate Divider -->
+    <div class="armor-divider">
+        <div class="plate"></div>
+        <div class="plate"></div>
+        <div class="plate"></div>
+    </div>
 
-    <!-- 2. The Matrix Problem Section -->
-    <section class="section problem-section" id="problem">
-        <div class="section-header">
-            <h2 class="section-title">
-                <span class="neon-pink">⚠</span> THE MATRIX PROBLEM
-            </h2>
-            <p class="section-subtitle">Decode the prompt architecture</p>
+    <!-- Weapon Systems Section -->
+    <section class="combat-systems" id="systems">
+        <div class="section-header-combat">
+            <h2 class="system-title">⚔ WEAPON SYSTEMS ⚔</h2>
+            <p class="system-subtitle">Five tactical modules. One unified arsenal.</p>
         </div>
         
-        <div class="matrix-grid">
-            <div class="matrix-card">
-                <div class="card-number">CONFIG</div>
-                <div class="card-content">
-                    <h3>Configuration Chaos</h3>
-                    <p>Prompts scattered across your codebase. No unified strategy. Total entropy.</p>
+        <div class="weapons-grid">
+            <div class="weapon-card">
+                <div class="weapon-designation">SYSTEM α</div>
+                <div class="targeting-box">
+                    <div class="crosshair"></div>
+                </div>
+                <h3>Cognitive Arsenal</h3>
+                <p>Advanced weaponized neural systems for tactical problem solving</p>
+                <div class="charge-indicator">
+                    <div class="charge-level"></div>
                 </div>
             </div>
             
-            <div class="matrix-card">
-                <div class="card-number">CONTEXT</div>
-                <div class="card-content">
-                    <h3>Context Fragmentation</h3>
-                    <p>Each model, each use case, isolated. Disconnected. Inefficient.</p>
+            <div class="weapon-card">
+                <div class="weapon-designation">SYSTEM β</div>
+                <div class="targeting-box">
+                    <div class="crosshair"></div>
+                </div>
+                <h3>Pattern Targeting</h3>
+                <p>Identify and neutralize complex threats across massive combat zones</p>
+                <div class="charge-indicator">
+                    <div class="charge-level"></div>
                 </div>
             </div>
             
-            <div class="matrix-card">
-                <div class="card-number">CONTROL</div>
-                <div class="card-content">
-                    <h3>Loss of Control</h3>
-                    <p>No visibility into what's happening. Versions drift. Quality degrades.</p>
+            <div class="weapon-card">
+                <div class="weapon-designation">SYSTEM γ</div>
+                <div class="targeting-box">
+                    <div class="crosshair"></div>
+                </div>
+                <h3>Adaptive Loadout</h3>
+                <p>Self-optimizing systems that learn from every combat engagement</p>
+                <div class="charge-indicator">
+                    <div class="charge-level"></div>
                 </div>
             </div>
             
-            <div class="matrix-card">
-                <div class="card-number">SCALE</div>
-                <div class="card-content">
-                    <h3>Scaling Nightmare</h3>
-                    <p>Adding new models? New use cases? Exponential complexity.</p>
+            <div class="weapon-card">
+                <div class="weapon-designation">SYSTEM δ</div>
+                <div class="targeting-box">
+                    <div class="crosshair"></div>
+                </div>
+                <h3>Distributed Strike</h3>
+                <p>Parallel firepower across interconnected combat nodes</p>
+                <div class="charge-indicator">
+                    <div class="charge-level"></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Divider -->
-    <div class="section-divider"></div>
-
-    <!-- 3. Unified Reality Section -->
-    <section class="section solution-section" id="solution">
-        <div class="section-header">
-            <h2 class="section-title">
-                <span class="neon-green">✓</span> UNIFIED REALITY
-            </h2>
-            <p class="section-subtitle">The IR System explanation (cyberpunk style)</p>
+        <div class="section-header-combat">
+            <h2 class="system-title">⚡ DEPLOYMENT PROTOCOL ⚡</h2>
+            <p class="system-subtitle">Three steps to operational status</p>
         </div>
+        
+        <div class="deployment-steps">
+            <div class="step-card">
+                <div class="step-number">01</div>
+                <h3>INSTALL</h3>
+                <p>Download and integrate the unified system into your arsenal</p>
+                <code>pip install promptosaurus</code>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">02</div>
+                <h3>CONFIGURE</h3>
+                <p>Define your combat parameters and tactical loadouts</p>
+                <code>ir = Promptosaurus(config)</code>
+            </div>
+            
+            <div class="step-card">
+                <div class="step-number">03</div>
+                <h3>DEPLOY</h3>
+                <p>Execute across all five weapon systems simultaneously</p>
+                <code>result = ir.fire()</code>
+            </div>
+        </div>
+    </section>
 
-        <div class="unified-content">
-            <div class="unified-text">
-                <p class="tech-copy">
-                    We've decoded the optimal prompt architecture. <strong>Instruction Rendering (IR)</strong> 
-                    is the bridge between chaos and control.
-                </p>
-                <p class="tech-copy">
-                    5 Core Builders. 1 Unified System. Infinite possibilities.
-                </p>
-                <ul class="tech-features">
-                    <li><span class="neon-cyan">►</span> Centralized prompt management</li>
-                    <li><span class="neon-green">►</span> Context preservation & composition</li>
-                    <li><span class="neon-pink">►</span> Multi-model compatibility</li>
-                    <li><span class="neon-cyan">►</span> Runtime flexibility & adaptation</li>
-                    <li><span class="neon-green">►</span> Version control & rollback</li>
+    <!-- Combat Footer -->
+    <footer class="combat-footer">
+        <div class="footer-tactical">
+            <div class="footer-section">
+                <h4>OPERATIONAL STATUS</h4>
+                <p>All systems nominal. Network synchronized.</p>
+            </div>
+            <div class="footer-section">
+                <h4>ARSENAL</h4>
+                <ul>
+                    <li><a href="https://github.com/Kilo-Org/promptosaurus" target="_blank">GitHub Deployment</a></li>
+                    <li><a href="https://github.com/Kilo-Org/promptosaurus/tree/main/docs" target="_blank">Combat Manual</a></li>
                 </ul>
             </div>
-            <div class="unified-visual">
-                <div class="ir-diagram">
-                    <div class="ir-layer layer-1">INPUT</div>
-                    <div class="ir-layer layer-2">CONTEXT</div>
-                    <div class="ir-layer layer-3">INSTRUCTION</div>
-                    <div class="ir-layer layer-4">RENDER</div>
-                    <div class="ir-layer layer-5">OUTPUT</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Divider -->
-    <div class="section-divider"></div>
-
-    <!-- 4. System Status Section -->
-    <section class="section status-section">
-        <div class="section-header">
-            <h2 class="section-title">
-                <span class="neon-green">●</span> SYSTEM STATUS
-            </h2>
-            <p class="section-subtitle">Control panel metrics</p>
-        </div>
-
-        <div class="metrics-grid">
-            <div class="metric-card">
-                <div class="metric-label">DEPLOYMENT SPEED</div>
-                <div class="metric-value" data-target="87">0%</div>
-                <div class="metric-bar">
-                    <div class="metric-fill" style="width: 87%;"></div>
-                </div>
-            </div>
-
-            <div class="metric-card">
-                <div class="metric-label">COMPATIBILITY</div>
-                <div class="metric-value" data-target="100">0%</div>
-                <div class="metric-bar">
-                    <div class="metric-fill" style="width: 100%;"></div>
-                </div>
-            </div>
-
-            <div class="metric-card">
-                <div class="metric-label">EFFICIENCY GAIN</div>
-                <div class="metric-value" data-target="340">0%</div>
-                <div class="metric-bar">
-                    <div class="metric-fill" style="width: 85%;"></div>
-                </div>
-            </div>
-
-            <div class="metric-card">
-                <div class="metric-label">INTEGRATION TIME</div>
-                <div class="metric-value" data-target="45">0</div>
-                <div class="metric-unit">minutes</div>
-                <div class="metric-bar">
-                    <div class="metric-fill" style="width: 45%;"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Divider -->
-    <div class="section-divider"></div>
-
-    <!-- 5. The 5 Protocols Section -->
-    <section class="section protocols-section" id="protocols">
-        <div class="section-header">
-            <h2 class="section-title">
-                <span class="neon-cyan">⟵</span> EXECUTE ACROSS 5 DIMENSIONS
-            </h2>
-            <p class="section-subtitle">The protocol builders</p>
-        </div>
-
-        <div class="protocols-grid">
-            <div class="protocol-card protocol-1">
-                <div class="protocol-header">
-                    <span class="protocol-icon">01</span>
-                    <h3>SYSTEM Builder</h3>
-                </div>
-                <p class="protocol-desc">Define core system behavior and constraints. The foundation of all interactions.</p>
-                <div class="protocol-tag cyan">CORE</div>
-            </div>
-
-            <div class="protocol-card protocol-2">
-                <div class="protocol-header">
-                    <span class="protocol-icon">02</span>
-                    <h3>CONTEXT Builder</h3>
-                </div>
-                <p class="protocol-desc">Compose multi-source context. Preserve state. Build understanding layers.</p>
-                <div class="protocol-tag green">COMPOSITION</div>
-            </div>
-
-            <div class="protocol-card protocol-3">
-                <div class="protocol-header">
-                    <span class="protocol-icon">03</span>
-                    <h3>INSTRUCTION Builder</h3>
-                </div>
-                <p class="protocol-desc">Craft precise execution directives. Control output format and behavior.</p>
-                <div class="protocol-tag pink">CONTROL</div>
-            </div>
-
-            <div class="protocol-card protocol-4">
-                <div class="protocol-header">
-                    <span class="protocol-icon">04</span>
-                    <h3>EXAMPLE Builder</h3>
-                </div>
-                <p class="protocol-desc">Demonstrate patterns through examples. Few-shot learning at scale.</p>
-                <div class="protocol-tag cyan">LEARNING</div>
-            </div>
-
-            <div class="protocol-card protocol-5">
-                <div class="protocol-header">
-                    <span class="protocol-icon">05</span>
-                    <h3>OUTPUT Builder</h3>
-                </div>
-                <p class="protocol-desc">Define and validate output structure. Parse and transform responses.</p>
-                <div class="protocol-tag green">PARSING</div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Divider -->
-    <div class="section-divider"></div>
-
-    <!-- 6. Neural Network Section -->
-    <section class="section neural-section">
-        <div class="section-header">
-            <h2 class="section-title">
-                <span class="neon-pink">⚡</span> NEURAL PATHWAYS
-            </h2>
-            <p class="section-subtitle">Quick start (brain metaphor)</p>
-        </div>
-
-        <div class="neural-flow">
-            <div class="flow-step">
-                <div class="step-number">1</div>
-                <div class="step-content">
-                    <h4>INITIALIZE</h4>
-                    <p>Import the IR system into your project</p>
-                </div>
-                <div class="flow-arrow">→</div>
-            </div>
-
-            <div class="flow-step">
-                <div class="step-number">2</div>
-                <div class="step-content">
-                    <h4>CONFIGURE</h4>
-                    <p>Define your system prompt and builders</p>
-                </div>
-                <div class="flow-arrow">→</div>
-            </div>
-
-            <div class="flow-step">
-                <div class="step-number">3</div>
-                <div class="step-content">
-                    <h4>COMPOSE</h4>
-                    <p>Build context and instructions dynamically</p>
-                </div>
-                <div class="flow-arrow">→</div>
-            </div>
-
-            <div class="flow-step">
-                <div class="step-number">4</div>
-                <div class="step-content">
-                    <h4>EXECUTE</h4>
-                    <p>Send to your LLM and capture output</p>
-                </div>
-                <div class="flow-arrow">→</div>
-            </div>
-
-            <div class="flow-step">
-                <div class="step-number">5</div>
-                <div class="step-content">
-                    <h4>PARSE</h4>
-                    <p>Transform response into application state</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="neural-code">
-            <pre><code class="code-block">// Five-step integration
-const ir = new InstructionRenderer();
-ir.system(systemPrompt);
-ir.context(userContext);
-ir.instruction(taskDirective);
-ir.examples(demonstrationCases);
-const response = await ir.execute(model);</code></pre>
-        </div>
-    </section>
-
-    <!-- Divider -->
-    <div class="section-divider"></div>
-
-    <!-- 7. Combat Ready Section -->
-    <section class="section combat-section">
-        <div class="section-header">
-            <h2 class="section-title">
-                <span class="neon-green">⚔</span> COMBAT READY
-            </h2>
-            <p class="section-subtitle">Why it matters (combat/power framing)</p>
-        </div>
-
-        <div class="combat-grid">
-            <div class="combat-card">
-                <div class="combat-icon">🎯</div>
-                <h3>Precision Targeting</h3>
-                <p>Every prompt is optimized. No wasted tokens. Maximum impact per request.</p>
-            </div>
-
-            <div class="combat-card">
-                <div class="combat-icon">⚡</div>
-                <h3>Speed of Light</h3>
-                <p>Deploy instantly. Scale to millions of requests. Zero latency overhead.</p>
-            </div>
-
-            <div class="combat-card">
-                <div class="combat-icon">🛡️</div>
-                <h3>Fortress Protection</h3>
-                <p>Type-safe builders. Validation at every layer. No runtime surprises.</p>
-            </div>
-
-            <div class="combat-card">
-                <div class="combat-icon">🔄</div>
-                <h3>Adaptive Evolution</h3>
-                <p>Change prompts without redeploying. A/B test in production. Iterate freely.</p>
-            </div>
-
-            <div class="combat-card">
-                <div class="combat-icon">📊</div>
-                <h3>Battle Analytics</h3>
-                <p>Track every execution. Measure quality. Debug with precision.</p>
-            </div>
-
-            <div class="combat-card">
-                <div class="combat-icon">🚀</div>
-                <h3>Hyperdrive Ready</h3>
-                <p>Built for the future. Upgrade models, builders, and strategies seamlessly.</p>
-            </div>
-        </div>
-    </section>
-
-    <!-- Divider -->
-    <div class="section-divider"></div>
-
-    <!-- 8. Anomalies Detected Section (FAQ) -->
-    <section class="section faq-section" id="faq">
-        <div class="section-header">
-            <h2 class="section-title">
-                <span class="neon-pink">⚠</span> ANOMALIES DETECTED
-            </h2>
-            <p class="section-subtitle">Questions from the field</p>
-        </div>
-
-        <div class="faq-container">
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span class="faq-icon">▶</span>
-                    <h4>Will IR work with my existing stack?</h4>
-                </div>
-                <div class="faq-answer">
-                    <p>Yes. IR is language-agnostic. Works with Python, Node, Go, Rust, and more. 
-                    Drop it into any LLM-powered application.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span class="faq-icon">▶</span>
-                    <h4>How much overhead does this add?</h4>
-                </div>
-                <div class="faq-answer">
-                    <p>Negligible. IR is pure composition—no external calls, no dependencies, 
-                    no runtime magic. Just well-structured code.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span class="faq-icon">▶</span>
-                    <h4>Can I mix and match builders?</h4>
-                </div>
-                <div class="faq-answer">
-                    <p>Absolutely. Use all five. Use three. Compose custom builder chains. 
-                    Full flexibility with optional structure.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span class="faq-icon">▶</span>
-                    <h4>What's the learning curve?</h4>
-                </div>
-                <div class="faq-answer">
-                    <p>Minimal. If you know how to write prompts, you know IR. 
-                    15-minute integration, 45 minutes to mastery.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span class="faq-icon">▶</span>
-                    <h4>Is this enterprise-ready?</h4>
-                </div>
-                <div class="faq-answer">
-                    <p>Yes. Used in production at scale. Open source. Battle-tested. 
-                    Full audit trail and version control built in.</p>
-                </div>
-            </div>
-
-            <div class="faq-item">
-                <div class="faq-question">
-                    <span class="faq-icon">▶</span>
-                    <h4>Where do I start?</h4>
-                </div>
-                <div class="faq-answer">
-                    <p>Read the documentation. Run the examples. Deploy your first IR system 
-                    in 45 minutes. Join the network.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Divider -->
-    <div class="section-divider"></div>
-
-    <!-- 9. Execute Command Section (CTA) -->
-    <section class="section cta-section" id="deploy">
-        <div class="cta-content">
-            <h2 class="cta-title glowing-text">EXECUTE COMMAND</h2>
-            <p class="cta-subtitle">System ready. Awaiting your input.</p>
-            
-            <div class="cta-buttons">
-                <a href="https://github.com/Kilo-Org/promptosaurus" class="btn btn-primary" target="_blank">
-                    DEPLOY TO GITHUB
-                </a>
-                <a href="#" class="btn btn-secondary">
-                    DOCUMENTATION
-                </a>
-            </div>
-
-            <div class="command-line">
-                <span class="command-prompt">$ </span>
-                <span class="command-text">npm install promptosaurus</span>
-            </div>
-        </div>
-    </section>
-
-    <!-- Divider -->
-    <div class="section-divider"></div>
-
-    <!-- 10. Network Status Footer -->
-    <footer class="footer">
-        <div class="footer-content">
             <div class="footer-section">
-                <h4 class="footer-title">NETWORK STATUS</h4>
-                <div class="status-indicators">
-                    <div class="status-item">
-                        <span class="status-dot active"></span>
-                        <span>Core Systems Online</span>
-                    </div>
-                    <div class="status-item">
-                        <span class="status-dot active"></span>
-                        <span>All Protocols Synchronized</span>
-                    </div>
-                    <div class="status-item">
-                        <span class="status-dot active"></span>
-                        <span>Neural Network Active</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer-section">
-                <h4 class="footer-title">RESOURCES</h4>
-                <ul class="footer-links">
-                    <li><a href="#" class="neon-hover">Documentation</a></li>
-                    <li><a href="#" class="neon-hover">API Reference</a></li>
-                    <li><a href="#" class="neon-hover">Examples</a></li>
-                    <li><a href="#" class="neon-hover">GitHub</a></li>
-                </ul>
-            </div>
-
-            <div class="footer-section">
-                <h4 class="footer-title">COMMUNITY</h4>
-                <ul class="footer-links">
-                    <li><a href="#" class="neon-hover">Discord</a></li>
-                    <li><a href="#" class="neon-hover">Twitter</a></li>
-                    <li><a href="#" class="neon-hover">Issues</a></li>
-                    <li><a href="#" class="neon-hover">Discussions</a></li>
-                </ul>
+                <h4>STATUS</h4>
+                <p><span class="status-active">●</span> READY FOR COMBAT</p>
+                <p><span class="status-active">●</span> WEAPONS ARMED</span></p>
             </div>
         </div>
-
-        <div class="footer-bottom">
-            <p class="footer-text">
-                <span class="neon-cyan">◆</span> 
-                Promptosaurus &copy; 2026. All neural pathways synchronized. 
-                <span class="neon-green">✓</span>
-            </p>
+        <div class="footer-bottom-combat">
+            <p>Promptosaurus Combat System &copy; 2026 | Tactical Readiness: MAXIMUM</p>
         </div>
     </footer>
 
-    <script src="js/effects.js"></script>
     <script src="js/main.js"></script>
-    <script src="js/metrics.js"></script>
+    <script src="js/combat-animation.js"></script>
 </body>
 </html>

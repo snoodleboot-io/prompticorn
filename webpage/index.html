@@ -3,13 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Promptosaurus: Single source of truth for every AI tool. Production-ready unified prompt architecture.">
-    <meta name="theme-color" content="#0f172a">
-    <title>Promptosaurus — Unified AI Prompts for Production</title>
-    <link rel="stylesheet" href="css/dark-theme.css">
+    <meta name="description" content="Promptosaurus Neural Network - Unified Intelligence Architecture. Biologically inspired AI infrastructure.">
+    <meta name="theme-color" content="#0a0e27">
+    <title>Promptosaurus Neural Network - Intelligence Unified</title>
     <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/neural-theme.css">
 </head>
 <body>
+    <!-- Neural background grid -->
+    <div class="neural-bg-grid"></div>
+    
+    <!-- Floating nodes in background -->
+    <div class="neural-nodes">
+        <div class="node"></div>
+        <div class="node"></div>
+        <div class="node"></div>
+        <div class="node"></div>
+        <div class="node"></div>
+    </div>
+
     <!-- Navigation -->
     <nav class="navbar">
         <div class="nav-container">
@@ -28,522 +40,320 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="hero-content">
-            <div class="hero-text">
-                <h1 class="hero-title">Single Source of Truth for Every AI Tool</h1>
-                <p class="hero-subtitle">
-                    Ship production-grade AI systems with unified prompt architecture. 
-                    100% test coverage. Zero type errors. Ready now.
-                </p>
-                <div class="hero-ctas">
-                    <a href="#quickstart" class="cta-primary">Get Started</a>
-                    <a href="https://github.com/Kilo-Org/promptosaurus" class="cta-secondary" target="_blank">View on GitHub</a>
-                </div>
-                <div class="hero-badges">
-                    <span class="badge">📊 1,200 Tests (100%)</span>
-                    <span class="badge">🔒 0 Type Errors</span>
-                    <span class="badge">✅ Production Ready</span>
+    <!-- Hero: Dinosaur Neural Network -->
+    <section class="hero neural-hero" id="hero">
+        <div class="hero-container">
+            <div class="neural-pathway-display">
+                <!-- SVG neural pathways through dinosaur -->
+                <svg class="neural-dino-svg" viewBox="0 0 800 600" preserveAspectRatio="xMidYMid meet">
+                    <!-- Dinosaur skeleton outline -->
+                    <g class="dino-outline" opacity="0.3">
+                        <path d="M 100,400 L 150,350 L 180,320 L 200,280 L 220,250 L 240,220 L 260,200 L 300,190 L 350,185 L 400,180 L 450,185 L 500,200 L 550,220 L 580,250 L 600,280 L 620,320 L 650,350 L 700,400" 
+                              stroke="rgba(100, 200, 255, 0.2)" stroke-width="2" fill="none"/>
+                        <circle cx="320" cy="160" r="40" stroke="rgba(100, 200, 255, 0.2)" fill="none" stroke-width="2"/>
+                        <path d="M 140,420 L 120,500 M 180,420 L 160,500 M 600,420 L 620,500 M 560,420 L 580,500" 
+                              stroke="rgba(100, 200, 255, 0.2)" stroke-width="3"/>
+                        <path d="M 700,400 L 780,350 L 800,300" stroke="rgba(100, 200, 255, 0.2)" stroke-width="2"/>
+                    </g>
+
+                    <!-- Neural pathways (animated) -->
+                    <g class="neural-pathways">
+                        <!-- Brain center -->
+                        <circle cx="320" cy="160" r="8" class="neural-node active"/>
+                        
+                        <!-- Spine pathway -->
+                        <path d="M 320,168 L 400,180 L 500,200" class="neural-path"/>
+                        <circle cx="400" cy="180" r="5" class="neural-node"/>
+                        <circle cx="500" cy="200" r="5" class="neural-node"/>
+                        
+                        <!-- Left limb pathways -->
+                        <path d="M 300,300 L 150,350 L 130,420" class="neural-path"/>
+                        <circle cx="150" cy="350" r="5" class="neural-node"/>
+                        <circle cx="130" cy="420" r="5" class="neural-node"/>
+                        
+                        <path d="M 280,350 L 160,480" class="neural-path"/>
+                        <circle cx="160" cy="480" r="5" class="neural-node"/>
+                        
+                        <!-- Right limb pathways -->
+                        <path d="M 550,300 L 650,350 L 670,420" class="neural-path"/>
+                        <circle cx="650" cy="350" r="5" class="neural-node"/>
+                        <circle cx="670" cy="420" r="5" class="neural-node"/>
+                        
+                        <path d="M 570,350 L 620,480" class="neural-path"/>
+                        <circle cx="620" cy="480" r="5" class="neural-node"/>
+                        
+                        <!-- Tail pathway -->
+                        <path d="M 580,250 L 720,350 L 800,300" class="neural-path"/>
+                        <circle cx="720" cy="350" r="5" class="neural-node"/>
+                        <circle cx="800" cy="300" r="5" class="neural-node"/>
+                        
+                        <!-- Head sensor pathways -->
+                        <path d="M 320,152 L 310,110 L 300,70" class="neural-path short"/>
+                        <circle cx="310" cy="110" r="4" class="neural-node"/>
+                        <circle cx="300" cy="70" r="4" class="neural-node"/>
+                        
+                        <path d="M 330,152 L 345,105 L 360,55" class="neural-path short"/>
+                        <circle cx="345" cy="105" r="4" class="neural-node"/>
+                        <circle cx="360" cy="55" r="4" class="neural-node"/>
+                    </g>
+                </svg>
+            </div>
+
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="title-word">Unified</span>
+                    <span class="title-word">Intelligence</span>
+                    <span class="title-word">Network</span>
+                </h1>
+                <p class="hero-subtitle">The neural architecture that learns, adapts, and evolves</p>
+                <div class="hero-cta">
+                    <button class="btn btn-primary">Activate Network</button>
+                    <button class="btn btn-secondary">Explore Architecture</button>
                 </div>
             </div>
-            <div class="hero-visual">
-                <img src="img/promptosaurs3.png" alt="Promptosaurus Mascot" class="hero-image">
-                <div class="glow"></div>
-            </div>
+        </div>
+
+        <!-- Energy divider with flowing pathways -->
+        <div class="energy-divider">
+            <svg viewBox="0 0 1200 100" preserveAspectRatio="none">
+                <path d="M 0,50 Q 300,10 600,50 T 1200,50" class="energy-line"/>
+                <path d="M 0,60 Q 300,20 600,60 T 1200,60" class="energy-line delay-1"/>
+                <path d="M 0,40 Q 300,80 600,40 T 1200,40" class="energy-line delay-2"/>
+            </svg>
         </div>
     </section>
 
-    <!-- The Problem Section -->
-    <section class="section problem">
-        <div class="container">
-            <h2 class="section-title">The Problem You Know Too Well</h2>
-            <p class="section-subtitle">Prompt fatigue. Config drift. Maintenance hell.</p>
-            
-            <div class="problem-grid">
-                <div class="problem-card">
-                    <div class="problem-icon">⚙️</div>
-                    <h3>Prompt Fatigue</h3>
-                    <p>Managing prompts across 5+ different AI tools. Each tool has its own format, versioning, and deployment pipeline.</p>
-                </div>
-                <div class="problem-card">
-                    <div class="problem-icon">🔄</div>
-                    <h3>Config Drift</h3>
-                    <p>Production prompts diverge from staging. Teams ship different versions. Updates get lost in the noise.</p>
-                </div>
-                <div class="problem-card">
-                    <div class="problem-icon">🛠️</div>
-                    <h3>Maintenance Hell</h3>
-                    <p>Change a prompt in one tool, forget to update the others. No single source of truth. No audit trail.</p>
-                </div>
+    <!-- Neural Pathways Section -->
+    <section class="neural-section" id="pathways">
+        <div class="section-header">
+            <h2>Neural Pathways</h2>
+            <div class="pathway-indicator">
+                <span class="pulse-dot"></span>
+                System Active
             </div>
         </div>
-    </section>
 
-    <!-- The Solution Section -->
-    <section class="section solution" id="solution">
-        <div class="container">
-            <h2 class="section-title">The Solution: Unified Architecture</h2>
-            <p class="section-subtitle">One prompt definition. Infinite tools. No more drift.</p>
-            
-            <div class="solution-diagram">
-                <div class="diagram-column">
-                    <div class="diagram-box ir">
-                        <h3>Your Prompts</h3>
-                        <p class="small">YAML-based IR</p>
-                        <div class="ir-content">
-                            <code>system: ...</code><br>
-                            <code>user: ...</code><br>
-                            <code>examples: ...</code>
-                        </div>
-                    </div>
-                </div>
+        <div class="pathway-grid">
+            <!-- Each pathway card represents a capability -->
+            <div class="pathway-card">
+                <div class="port port-tl"></div>
+                <div class="port port-tr"></div>
+                <div class="port port-bl"></div>
+                <div class="port port-br"></div>
                 
-                <div class="diagram-arrow">→</div>
+                <div class="card-neural-line"></div>
+                <h3>Cognitive Processing</h3>
+                <p>Advanced neural networks that think, reason, and solve problems at scale</p>
+                <div class="signal-flow">
+                    <div class="signal-bar"></div>
+                </div>
+            </div>
+
+            <div class="pathway-card">
+                <div class="port port-tl"></div>
+                <div class="port port-tr"></div>
+                <div class="port port-bl"></div>
+                <div class="port port-br"></div>
                 
-                <div class="diagram-column outputs">
-                    <div class="diagram-box output">
-                        <span class="output-icon">🤖</span>
-                        <span>OpenAI</span>
-                    </div>
-                    <div class="diagram-box output">
-                        <span class="output-icon">🧠</span>
-                        <span>Anthropic</span>
-                    </div>
-                    <div class="diagram-box output">
-                        <span class="output-icon">⚡</span>
-                        <span>Bedrock</span>
-                    </div>
-                    <div class="diagram-box output">
-                        <span class="output-icon">🔧</span>
-                        <span>Replicate</span>
-                    </div>
-                    <div class="diagram-box output">
-                        <span class="output-icon">🎯</span>
-                        <span>Custom</span>
-                    </div>
+                <div class="card-neural-line"></div>
+                <h3>Pattern Recognition</h3>
+                <p>Identify complex patterns across massive datasets in real time</p>
+                <div class="signal-flow">
+                    <div class="signal-bar"></div>
                 </div>
             </div>
 
-            <div class="solution-benefits">
-                <div class="benefit-card">
-                    <h4>🎯 Single Definition</h4>
-                    <p>Write once, deploy everywhere. No duplication, no drift.</p>
-                </div>
-                <div class="benefit-card">
-                    <h4>🔄 Consistency</h4>
-                    <p>All 5 tools get the exact same prompt. Always in sync.</p>
-                </div>
-                <div class="benefit-card">
-                    <h4>⚡ Instant Deployment</h4>
-                    <p>Change propagates across all tools in milliseconds.</p>
-                </div>
-                <div class="benefit-card">
-                    <h4>📊 Audit Trail</h4>
-                    <p>Every change tracked, versioned, with full history.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Why It Matters Section -->
-    <section class="section why-matters">
-        <div class="container">
-            <h2 class="section-title">Why This Matters for Technical Leaders</h2>
-            
-            <div class="matters-grid">
-                <div class="matters-card">
-                    <h3>🧠 Intelligence Without Complexity</h3>
-                    <p>
-                        Unified architecture means your team thinks in one language, not five. 
-                        Less cognitive overhead. Better decisions. Faster shipping.
-                    </p>
-                </div>
-                <div class="matters-card">
-                    <h3>📉 Reduced Maintenance Burden</h3>
-                    <p>
-                        No more syncing prompts across systems. One place to change. 
-                        One place to test. One place to deploy. 80% less toil.
-                    </p>
-                </div>
-                <div class="matters-card">
-                    <h3>✅ 100% Backwards Compatible</h3>
-                    <p>
-                        Zero migration work. Drop it in today. Works alongside existing code. 
-                        No breaking changes. Ever.
-                    </p>
-                </div>
-                <div class="matters-card">
-                    <h3>🚀 Production-Ready Day One</h3>
-                    <p>
-                        Not a beta. Not experimental. 1,200 passing tests. 93.7% coverage. 
-                        Zero type errors. Deployed and battle-tested.
-                    </p>
-                </div>
-                <div class="matters-card">
-                    <h3>👥 Team Velocity</h3>
-                    <p>
-                        Engineers ship faster when infrastructure is boring. 
-                        Spend time on features, not plumbing. That's the goal.
-                    </p>
-                </div>
-                <div class="matters-card">
-                    <h3>💡 Built for Scale</h3>
-                    <p>
-                        From startup to enterprise. Works for 1 engineer or 100. 
-                        Scales horizontally. Minimal overhead.
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Proof Section -->
-    <section class="section proof" id="proof">
-        <div class="container">
-            <h2 class="section-title">Built Right. Shipped Right.</h2>
-            <p class="section-subtitle">The metrics that matter to engineers who ship production code daily.</p>
-            
-            <div class="metrics-grid">
-                <div class="metric-card">
-                    <div class="metric-value">
-                        <span class="metric-number" data-target="1200">0</span>
-                        <span class="metric-unit">/1,200</span>
-                    </div>
-                    <h3>Tests Passing</h3>
-                    <p>100% coverage. Zero flaky tests. Zero manual adjustments.</p>
-                </div>
+            <div class="pathway-card">
+                <div class="port port-tl"></div>
+                <div class="port port-tr"></div>
+                <div class="port port-bl"></div>
+                <div class="port port-br"></div>
                 
-                <div class="metric-card">
-                    <div class="metric-value">
-                        <span class="metric-number" data-target="0">0</span>
-                        <span class="metric-unit">Type Errors</span>
-                    </div>
-                    <h3>TypeScript Strict Mode</h3>
-                    <p>Not a single `any`. Not a cast in sight. Fully type-safe.</p>
+                <div class="card-neural-line"></div>
+                <h3>Adaptive Learning</h3>
+                <p>Systems that learn and improve with every interaction and iteration</p>
+                <div class="signal-flow">
+                    <div class="signal-bar"></div>
                 </div>
+            </div>
+
+            <div class="pathway-card">
+                <div class="port port-tl"></div>
+                <div class="port port-tr"></div>
+                <div class="port port-bl"></div>
+                <div class="port port-br"></div>
                 
-                <div class="metric-card">
-                    <div class="metric-value">
-                        <span class="metric-number" data-target="93.7">0</span>
-                        <span class="metric-unit">%</span>
-                    </div>
-                    <h3>Code Coverage</h3>
-                    <p>Every line tested. Every branch covered. No dead code.</p>
-                </div>
-                
-                <div class="metric-card">
-                    <div class="metric-value">
-                        <span class="metric-number" data-target="83.9">0</span>
-                        <span class="metric-unit">% Mutation</span>
-                    </div>
-                    <h3>Mutation Score</h3>
-                    <p>Tests catch real bugs. Not just checking coverage numbers.</p>
-                </div>
-
-                <div class="metric-card">
-                    <div class="metric-value">
-                        <span class="metric-number" data-target="1250">0</span>
-                        <span class="metric-unit">x Faster</span>
-                    </div>
-                    <h3>Performance</h3>
-                    <p>100-1,250x speedup depending on use case. Measurable impact.</p>
-                </div>
-
-                <div class="metric-card">
-                    <div class="metric-value">
-                        <span class="metric-number" data-target="6">0</span>
-                        <span class="metric-unit">Months</span>
-                    </div>
-                    <h3>Development Time</h3>
-                    <p>480+ engineering hours. Battle-tested across production systems.</p>
+                <div class="card-neural-line"></div>
+                <h3>Distributed Processing</h3>
+                <p>Parallel computation across interconnected neural nodes</p>
+                <div class="signal-flow">
+                    <div class="signal-bar"></div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Builders Section -->
-    <section class="section builders" id="builders">
-        <div class="container">
-            <h2 class="section-title">Meet the Builders</h2>
-            <p class="section-subtitle">Five outputs from one unified definition.</p>
-            
-            <div class="builders-grid">
-                <div class="builder-card">
-                    <div class="builder-header openai">
-                        <span class="builder-icon">🤖</span>
-                        <h3>OpenAI</h3>
-                    </div>
-                    <div class="builder-content">
-                        <p class="builder-desc">Native OpenAI format. Optimized for GPT-4, Claude, Gemini compatibility.</p>
-                        <div class="builder-example">
-                            <code>{
-  "system": "...",
-  "messages": [...]
-}</code>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="builder-card">
-                    <div class="builder-header anthropic">
-                        <span class="builder-icon">🧠</span>
-                        <h3>Anthropic</h3>
-                    </div>
-                    <div class="builder-content">
-                        <p class="builder-desc">Anthropic Messages API format. System prompt + messages.</p>
-                        <div class="builder-example">
-                            <code>{
-  "model": "claude-3-opus",
-  "system": "...",
-  "messages": [...]
-}</code>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="builder-card">
-                    <div class="builder-header bedrock">
-                        <span class="builder-icon">⚡</span>
-                        <h3>AWS Bedrock</h3>
-                    </div>
-                    <div class="builder-content">
-                        <p class="builder-desc">Bedrock ConversationXML. Multi-model inference ready.</p>
-                        <div class="builder-example">
-                            <code>&lt;messages&gt;
-  &lt;system&gt;...&lt;/system&gt;
-  &lt;message&gt;...&lt;/message&gt;
-&lt;/messages&gt;</code>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="builder-card">
-                    <div class="builder-header replicate">
-                        <span class="builder-icon">🔧</span>
-                        <h3>Replicate</h3>
-                    </div>
-                    <div class="builder-content">
-                        <p class="builder-desc">Replicate format. Input/output optimized for structured tasks.</p>
-                        <div class="builder-example">
-                            <code>{
-  "prompt": "...",
-  "input_params": {...}
-}</code>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="builder-card full">
-                    <div class="builder-header custom">
-                        <span class="builder-icon">🎯</span>
-                        <h3>Custom</h3>
-                    </div>
-                    <div class="builder-content">
-                        <p class="builder-desc">Roll your own. Extend with custom builders for proprietary tools.</p>
-                        <div class="builder-example">
-                            <code>class MyBuilder(Builder):
-  def build(self, ir):
-    return my_format(ir)</code>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <!-- Energy divider -->
+        <div class="energy-divider">
+            <svg viewBox="0 0 1200 100" preserveAspectRatio="none">
+                <path d="M 0,50 Q 300,10 600,50 T 1200,50" class="energy-line"/>
+                <path d="M 0,60 Q 300,20 600,60 T 1200,60" class="energy-line delay-1"/>
+            </svg>
         </div>
     </section>
 
-    <!-- Quick Start Section -->
-    <section class="section quickstart" id="quickstart">
-        <div class="container">
-            <h2 class="section-title">Up and Running in 2 Minutes</h2>
-            <p class="section-subtitle">Copy. Paste. Ship.</p>
-            
-            <div class="quickstart-content">
-                <div class="quickstart-step">
-                    <h3>1. Install</h3>
-                    <pre><code>pip install promptosaurus</code></pre>
-                </div>
-
-                <div class="quickstart-step">
-                    <h3>2. Define Your Prompt</h3>
-                    <pre><code>system: "You are an AI assistant"
-user: "What is the meaning of life?"
-examples:
-  - role: assistant
-    content: "The meaning of life is..."</code></pre>
-                </div>
-
-                <div class="quickstart-step">
-                    <h3>3. Build All 5 Outputs</h3>
-                    <pre><code>from promptosaurus import Promptosaurus
-
-p = Promptosaurus('prompt.yml')
-
-openai_prompt = p.to_openai()
-anthropic_prompt = p.to_anthropic()
-bedrock_prompt = p.to_bedrock()
-replicate_prompt = p.to_replicate()
-custom_prompt = p.to_custom()</code></pre>
-                </div>
-
-                <div class="quickstart-result">
-                    <h3>Result</h3>
-                    <p>Five different prompt formats. One definition. Zero maintenance.</p>
-                    <div class="result-box">
-                        <code>✓ openai_prompt ready<br>
-✓ anthropic_prompt ready<br>
-✓ bedrock_prompt ready<br>
-✓ replicate_prompt ready<br>
-✓ custom_prompt ready</code>
-                    </div>
-                </div>
-            </div>
-
-            <div class="quickstart-cta">
-                <a href="https://github.com/Kilo-Org/promptosaurus" class="cta-primary" target="_blank">
-                    Full Documentation on GitHub
-                </a>
-            </div>
+    <!-- Evolution Timeline Section -->
+    <section class="evolution-section" id="evolution">
+        <div class="section-header">
+            <h2>Neural Evolution</h2>
+            <p class="section-subtitle">Watch the network power up</p>
         </div>
-    </section>
 
-    <!-- Social Proof Section -->
-    <section class="section proof-social">
-        <div class="container">
-            <h2 class="section-title">Built by Engineers. For Engineers.</h2>
-            
-            <div class="proof-stats">
-                <div class="proof-stat">
-                    <h3>480+</h3>
-                    <p>Engineering Hours</p>
-                </div>
-                <div class="proof-stat">
-                    <h3>6</h3>
-                    <p>Months Development</p>
-                </div>
-                <div class="proof-stat">
-                    <h3>100%</h3>
-                    <p>Battle-Tested</p>
-                </div>
-                <div class="proof-stat">
-                    <h3>∞</h3>
-                    <p>Use Cases</p>
+        <div class="evolution-timeline">
+            <div class="timeline-node active">
+                <div class="node-glow"></div>
+                <div class="node-core"></div>
+                <div class="timeline-content">
+                    <h3>Initial Sync</h3>
+                    <p>Network bootup and baseline calibration</p>
                 </div>
             </div>
 
-            <p class="proof-statement">
-                Not a toy. Not experimental. Not looking for beta testers. 
-                This is production-grade infrastructure. It's ready. It's here. It works.
-            </p>
-        </div>
-    </section>
+            <div class="timeline-connector active">
+                <div class="connector-fill"></div>
+            </div>
 
-    <!-- FAQ Section -->
-    <section class="section faq" id="faq">
-        <div class="container">
-            <h2 class="section-title">Questions? We've Got Answers.</h2>
-            
-            <div class="faq-grid">
-                <div class="faq-item">
-                    <h3>Is this a replacement for my prompt management tool?</h3>
-                    <p>
-                        No, it's better. It's not a platform. It's infrastructure. 
-                        You own your prompts. We just give you the unified IR and builders to deploy them anywhere.
-                    </p>
+            <div class="timeline-node active">
+                <div class="node-glow"></div>
+                <div class="node-core"></div>
+                <div class="timeline-content">
+                    <h3>Learning Phase</h3>
+                    <p>Ingesting knowledge, building neural foundations</p>
                 </div>
+            </div>
 
-                <div class="faq-item">
-                    <h3>What about backwards compatibility?</h3>
-                    <p>
-                        Perfect. 100% backwards compatible. Drop it in today. Works alongside existing code. 
-                        No breaking changes, ever. We don't move fast and break things.
-                    </p>
+            <div class="timeline-connector active">
+                <div class="connector-fill"></div>
+            </div>
+
+            <div class="timeline-node active">
+                <div class="node-glow"></div>
+                <div class="node-core"></div>
+                <div class="timeline-content">
+                    <h3>Optimization</h3>
+                    <p>Fine-tuning pathways, maximizing efficiency</p>
                 </div>
+            </div>
 
-                <div class="faq-item">
-                    <h3>Can we use this in production right now?</h3>
-                    <p>
-                        Yes. 1,200 passing tests. Zero type errors. 93.7% coverage. 
-                        Mutation score of 83.9%. It's already in production. It's already shipping.
-                    </p>
+            <div class="timeline-connector">
+                <div class="connector-fill"></div>
+            </div>
+
+            <div class="timeline-node">
+                <div class="node-glow"></div>
+                <div class="node-core"></div>
+                <div class="timeline-content">
+                    <h3>Full Integration</h3>
+                    <p>Complete network consciousness activated</p>
                 </div>
+            </div>
 
-                <div class="faq-item">
-                    <h3>How do we integrate this into our workflow?</h3>
-                    <p>
-                        Minimal friction. Install the package, define your prompts in YAML, 
-                        use the builders in your code. That's it. No platform lock-in. No vendor dependency.
-                    </p>
-                </div>
+            <div class="timeline-connector">
+                <div class="connector-fill"></div>
+            </div>
 
-                <div class="faq-item">
-                    <h3>What about custom tools or proprietary LLMs?</h3>
-                    <p>
-                        Build your own builder. It's simple. Extend with custom builders for any tool. 
-                        YAML IR is tool-agnostic. You control the output format.
-                    </p>
-                </div>
-
-                <div class="faq-item">
-                    <h3>How much does this cost?</h3>
-                    <p>
-                        Open source. Free. MIT license. 
-                        Use it however you want, wherever you want. No strings. No limits.
-                    </p>
+            <div class="timeline-node">
+                <div class="node-glow"></div>
+                <div class="node-core"></div>
+                <div class="timeline-content">
+                    <h3>Exponential Growth</h3>
+                    <p>Unlimited capability expansion begins</p>
                 </div>
             </div>
         </div>
-    </section>
 
-    <!-- Final CTA Section -->
-    <section class="section cta-final">
-        <div class="container">
-            <div class="cta-box">
-                <h2>Stop Managing Prompts. Start Shipping.</h2>
-                <p>
-                    Promptosaurus gives you the boring infrastructure that lets you do cool shit. 
-                    Unified architecture. Production-grade reliability. Ready now.
-                </p>
-                <div class="cta-buttons">
-                    <a href="https://github.com/Kilo-Org/promptosaurus" class="cta-primary" target="_blank">
-                        View on GitHub
-                    </a>
-                    <a href="https://github.com/Kilo-Org/promptosaurus" class="cta-secondary" target="_blank">
-                        Read the Docs
-                    </a>
-                </div>
-            </div>
+        <!-- Energy divider -->
+        <div class="energy-divider">
+            <svg viewBox="0 0 1200 100" preserveAspectRatio="none">
+                <path d="M 0,50 Q 300,10 600,50 T 1200,50" class="energy-line"/>
+                <path d="M 0,60 Q 300,20 600,60 T 1200,60" class="energy-line delay-1"/>
+            </svg>
         </div>
     </section>
+
+    <!-- Integration Section -->
+    <section class="integration-section" id="integration">
+        <div class="section-header">
+            <h2>System Integration</h2>
+        </div>
+
+        <div class="integration-grid">
+            <div class="integration-node">
+                <div class="node-display">
+                    <svg viewBox="0 0 100 100">
+                        <circle cx="50" cy="50" r="40" class="node-ring"/>
+                        <circle cx="50" cy="50" r="35" class="node-ring"/>
+                        <circle cx="50" cy="50" r="30" class="node-ring"/>
+                        <circle cx="50" cy="50" r="8" class="node-center"/>
+                    </svg>
+                </div>
+                <h3>Modular Architecture</h3>
+                <p>Segmented neural components that work in harmony</p>
+            </div>
+
+            <div class="integration-node">
+                <div class="node-display">
+                    <svg viewBox="0 0 100 100">
+                        <path d="M 20,50 L 40,30 L 60,50 L 40,70 Z" class="flow-path"/>
+                        <path d="M 60,50 L 80,30 L 100,50 L 80,70 Z" class="flow-path"/>
+                        <circle cx="50" cy="50" r="8" class="node-center"/>
+                    </svg>
+                </div>
+                <h3>Energy Distribution</h3>
+                <p>Efficient power delivery through neural conduits</p>
+            </div>
+
+            <div class="integration-node">
+                <div class="node-display">
+                    <svg viewBox="0 0 100 100">
+                        <g class="pulse-ring">
+                            <circle cx="50" cy="50" r="15" opacity="1"/>
+                            <circle cx="50" cy="50" r="25" opacity="0.6"/>
+                            <circle cx="50" cy="50" r="35" opacity="0.3"/>
+                        </g>
+                    </svg>
+                </div>
+                <h3>Resonance Field</h3>
+                <p>Quantum synchronization between all components</p>
+            </div>
+        </div>
+
+        <!-- Energy divider -->
+        <div class="energy-divider">
+            <svg viewBox="0 0 1200 100" preserveAspectRatio="none">
+                <path d="M 0,50 Q 300,10 600,50 T 1200,50" class="energy-line"/>
+            </svg>
+        </div>
+    </section>
+
+
 
     <!-- Footer -->
-    <footer class="footer">
+    <footer class="neural-footer">
         <div class="footer-content">
-            <div class="footer-section">
-                <h4>Promptosaurus</h4>
-                <p>Unified AI prompt architecture for production systems.</p>
-                <p class="version">v2.0.0 — Production Ready</p>
+            <div class="footer-neural-connection">
+                <svg viewBox="0 0 200 50">
+                    <circle cx="20" cy="25" r="4" class="node"/>
+                    <line x1="24" y1="25" x2="76" y2="25" class="connection"/>
+                    <circle cx="100" cy="25" r="4" class="node"/>
+                    <line x1="104" y1="25" x2="176" y2="25" class="connection"/>
+                    <circle cx="200" cy="25" r="4" class="node"/>
+                </svg>
             </div>
-            <div class="footer-section">
-                <h4>Resources</h4>
-                <ul>
-                    <li><a href="https://github.com/Kilo-Org/promptosaurus" target="_blank">GitHub Repository</a></li>
-                    <li><a href="https://github.com/Kilo-Org/promptosaurus/tree/main/docs" target="_blank">Documentation</a></li>
-                    <li><a href="https://github.com/Kilo-Org/promptosaurus/issues" target="_blank">Issues & Feedback</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h4>Built By</h4>
-                <p>A team of engineers who ship production code every day.</p>
-                <p><a href="https://github.com/Kilo-Org/promptosaurus" target="_blank">Contribute →</a></p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 Promptosaurus. MIT License. Built for engineers, by engineers.</p>
+            <p>&copy; 2026 Promptosaurus Neural Network. Intelligence Evolved.</p>
         </div>
     </footer>
 
-    <script src="js/metrics.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/neural-animation.js"></script>
 </body>
 </html>

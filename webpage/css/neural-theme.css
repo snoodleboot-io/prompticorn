@@ -1,0 +1,810 @@
+/* NEURAL NETWORK THEME - Complete Design Overhaul */
+/* Inspired by the cybernetic dinosaur's bio-mechanical fusion and neural pathways */
+
+/* ===== ROOT VARIABLES ===== */
+:root {
+    --color-bg-primary: #0a0e27;
+    --color-bg-secondary: #0f1535;
+    --color-bg-tertiary: #1a1f3a;
+    --color-primary: #00d9ff;
+    --color-secondary: #0099cc;
+    --color-accent: #6b2eff;
+    --color-text-primary: #e0e7ff;
+    --color-text-secondary: #a0aec0;
+    --glow-small: 0 0 10px rgba(0, 217, 255, 0.3);
+    --glow-medium: 0 0 20px rgba(0, 217, 255, 0.5);
+    --glow-large: 0 0 40px rgba(0, 217, 255, 0.3);
+}
+
+/* ===== NEURAL BACKGROUND ===== */
+.neural-bg-grid {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image:
+        linear-gradient(rgba(0, 217, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 217, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+    background-position: 0 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.neural-nodes {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.node {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 217, 255, 0.4);
+    animation: node-pulse 4s ease-in-out infinite;
+}
+
+.node:nth-child(1) { top: 15%; left: 20%; animation-delay: 0s; }
+.node:nth-child(2) { top: 35%; left: 75%; animation-delay: 0.5s; }
+.node:nth-child(3) { top: 60%; left: 10%; animation-delay: 1s; }
+.node:nth-child(4) { top: 80%; left: 85%; animation-delay: 1.5s; }
+.node:nth-child(5) { top: 45%; left: 50%; animation-delay: 2s; }
+
+@keyframes node-pulse {
+    0%, 100% { 
+        opacity: 0.3;
+        box-shadow: 0 0 10px rgba(0, 217, 255, 0.4);
+    }
+    50% { 
+        opacity: 1;
+        box-shadow: 0 0 20px rgba(0, 217, 255, 0.8);
+    }
+}
+
+/* ===== NEURAL HERO SECTION ===== */
+.neural-hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, rgba(10, 14, 39, 0.9) 0%, rgba(15, 21, 53, 0.9) 100%);
+    overflow: hidden;
+    z-index: 10;
+}
+
+.hero-container {
+    max-width: 1200px;
+    width: 100%;
+    padding: 60px 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+    z-index: 10;
+}
+
+/* Neural SVG Visualization */
+.neural-pathway-display {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.neural-dino-svg {
+    width: 100%;
+    max-width: 400px;
+    filter: drop-shadow(0 0 30px rgba(0, 217, 255, 0.3));
+}
+
+/* Dinosaur outline (semi-transparent skeleton) */
+.dino-outline {
+    opacity: 0.25;
+}
+
+/* Neural pathways animation */
+.neural-pathways {
+    opacity: 1;
+}
+
+.neural-path {
+    stroke: url(#pathGradient);
+    stroke-width: 2;
+    fill: none;
+    stroke-dasharray: 1000;
+    stroke-dashoffset: 0;
+    animation: neural-flow 4s ease-in-out infinite;
+}
+
+.neural-path.short {
+    animation-duration: 2s;
+}
+
+@keyframes neural-flow {
+    0% { stroke-dashoffset: 1000; opacity: 0.3; }
+    50% { opacity: 1; }
+    100% { stroke-dashoffset: 0; opacity: 0.3; }
+}
+
+.neural-node {
+    fill: var(--color-primary);
+    opacity: 0.6;
+}
+
+.neural-node.active {
+    opacity: 1;
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.8);
+    animation: node-glow 2s ease-in-out infinite;
+}
+
+@keyframes node-glow {
+    0%, 100% {
+        r: 8;
+        opacity: 1;
+    }
+    50% {
+        r: 12;
+        opacity: 0.6;
+    }
+}
+
+/* Hero content */
+.hero-content {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    z-index: 10;
+}
+
+.hero-title {
+    font-size: 3.5rem;
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--color-text-primary);
+    text-transform: uppercase;
+    letter-spacing: -2px;
+}
+
+.title-word {
+    display: block;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: title-flow 6s ease-in-out infinite;
+}
+
+.title-word:nth-child(1) { animation-delay: 0s; }
+.title-word:nth-child(2) { animation-delay: 0.2s; }
+.title-word:nth-child(3) { animation-delay: 0.4s; }
+
+@keyframes title-flow {
+    0%, 100% { 
+        text-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
+    }
+    50% {
+        text-shadow: 0 0 40px rgba(0, 217, 255, 0.4), 0 0 60px rgba(107, 46, 255, 0.2);
+    }
+}
+
+.hero-subtitle {
+    font-size: 1.3rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+}
+
+/* Hero CTAs */
+.hero-cta {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.btn {
+    padding: 14px 32px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+    color: #000;
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.4);
+}
+
+.btn-primary:hover {
+    box-shadow: 0 0 40px rgba(0, 217, 255, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.1);
+    transform: translateY(-2px);
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--color-primary);
+    border: 2px solid var(--color-primary);
+    box-shadow: inset 0 0 20px rgba(0, 217, 255, 0.1);
+}
+
+.btn-secondary:hover {
+    background: rgba(0, 217, 255, 0.1);
+    box-shadow: 0 0 30px rgba(0, 217, 255, 0.4), inset 0 0 20px rgba(0, 217, 255, 0.2);
+    transform: translateY(-2px);
+}
+
+/* Energy divider with flowing pathways */
+.energy-divider {
+    width: 100%;
+    height: 120px;
+    position: relative;
+    margin: 60px 0;
+    overflow: hidden;
+    z-index: 10;
+}
+
+.energy-divider svg {
+    width: 100%;
+    height: 100%;
+}
+
+.energy-line {
+    stroke: url(#energyGradient);
+    stroke-width: 3;
+    fill: none;
+    filter: drop-shadow(0 0 8px rgba(0, 217, 255, 0.5));
+    animation: energy-flow 6s ease-in-out infinite;
+}
+
+.energy-line.delay-1 {
+    animation-delay: 1s;
+}
+
+.energy-line.delay-2 {
+    animation-delay: 2s;
+}
+
+@keyframes energy-flow {
+    0%, 100% { 
+        stroke-dasharray: 1000;
+        stroke-dashoffset: 0;
+        opacity: 0.4;
+    }
+    50% {
+        opacity: 0.8;
+    }
+}
+
+/* ===== NEURAL SECTIONS ===== */
+.neural-section {
+    position: relative;
+    padding: 80px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+    z-index: 10;
+}
+
+.section-header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.section-header h2 {
+    font-size: 2.8rem;
+    color: var(--color-text-primary);
+    margin-bottom: 16px;
+    text-transform: uppercase;
+    letter-spacing: -1px;
+    background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.section-subtitle {
+    font-size: 1.1rem;
+    color: var(--color-text-secondary);
+}
+
+.pathway-indicator {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--color-primary);
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-top: 12px;
+}
+
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(0, 217, 255, 0.6);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        box-shadow: 0 0 10px rgba(0, 217, 255, 0.6);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(0, 217, 255, 0.8);
+    }
+}
+
+/* ===== PATHWAY GRID ===== */
+.pathway-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+    margin-bottom: 60px;
+}
+
+.pathway-card {
+    position: relative;
+    background: linear-gradient(135deg, rgba(15, 21, 53, 0.6) 0%, rgba(26, 31, 58, 0.4) 100%);
+    border: 1px solid rgba(0, 217, 255, 0.2);
+    border-radius: 12px;
+    padding: 32px 24px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.pathway-card:hover {
+    background: linear-gradient(135deg, rgba(15, 21, 53, 0.8) 0%, rgba(26, 31, 58, 0.6) 100%);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 30px rgba(0, 217, 255, 0.3), inset 0 0 20px rgba(0, 217, 255, 0.05);
+    transform: translateY(-4px);
+}
+
+/* Port indicators (connection points) */
+.port {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    box-shadow: 0 0 12px rgba(0, 217, 255, 0.6);
+    opacity: 0.6;
+    transition: all 0.3s ease;
+}
+
+.pathway-card:hover .port {
+    opacity: 1;
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.8);
+}
+
+.port-tl { top: 10px; left: 10px; }
+.port-tr { top: 10px; right: 10px; }
+.port-bl { bottom: 10px; left: 10px; }
+.port-br { bottom: 10px; right: 10px; }
+
+/* Card neural line animation */
+.card-neural-line {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-primary), transparent);
+    opacity: 0;
+    animation: card-line-flow 3s ease-in-out infinite;
+}
+
+@keyframes card-line-flow {
+    0%, 100% { 
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+.pathway-card:hover .card-neural-line {
+    animation: card-line-flow 1.5s ease-in-out infinite;
+}
+
+.pathway-card h3 {
+    font-size: 1.3rem;
+    color: var(--color-text-primary);
+    margin-bottom: 12px;
+    position: relative;
+    z-index: 2;
+}
+
+.pathway-card p {
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 2;
+}
+
+/* Signal flow bar */
+.signal-flow {
+    position: relative;
+    z-index: 2;
+    height: 4px;
+    background: rgba(0, 217, 255, 0.1);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.signal-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    width: 0;
+    animation: signal-fill 2s ease-in-out infinite;
+}
+
+@keyframes signal-fill {
+    0%, 100% { width: 0; }
+    50% { width: 100%; }
+}
+
+.pathway-card:hover .signal-bar {
+    animation: signal-fill 1s ease-in-out infinite;
+}
+
+/* ===== EVOLUTION TIMELINE ===== */
+.evolution-section {
+    position: relative;
+    padding: 80px 24px;
+    z-index: 10;
+}
+
+.evolution-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.timeline-node {
+    position: relative;
+    display: flex;
+    gap: 24px;
+    align-items: flex-start;
+    padding: 24px 0;
+}
+
+.node-glow {
+    position: absolute;
+    width: 24px;
+    height: 24px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    left: 0;
+    top: 24px;
+    box-shadow: 0 0 20px rgba(0, 217, 255, 0.6);
+    animation: node-glow-pulse 2s ease-in-out infinite;
+    opacity: 0.3;
+}
+
+.timeline-node.active .node-glow {
+    animation: node-glow-pulse 1.5s ease-in-out infinite;
+    opacity: 1;
+}
+
+@keyframes node-glow-pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.4;
+    }
+    50% {
+        transform: scale(1.5);
+        opacity: 0.8;
+    }
+}
+
+.node-core {
+    position: absolute;
+    width: 12px;
+    height: 12px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    left: 6px;
+    top: 30px;
+    z-index: 2;
+}
+
+.timeline-content {
+    margin-left: 40px;
+    padding: 16px;
+    background: rgba(15, 21, 53, 0.4);
+    border-left: 2px solid rgba(0, 217, 255, 0.2);
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.timeline-node.active .timeline-content {
+    background: rgba(15, 21, 53, 0.6);
+    border-left-color: var(--color-primary);
+    box-shadow: inset 0 0 20px rgba(0, 217, 255, 0.1);
+}
+
+.timeline-content h3 {
+    color: var(--color-text-primary);
+    margin-bottom: 8px;
+}
+
+.timeline-content p {
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+}
+
+.timeline-connector {
+    position: relative;
+    height: 60px;
+    margin-left: 12px;
+    border-left: 2px solid rgba(0, 217, 255, 0.1);
+}
+
+.timeline-connector.active {
+    border-left-color: var(--color-primary);
+}
+
+.connector-fill {
+    position: absolute;
+    left: -1px;
+    top: 0;
+    width: 2px;
+    height: 0;
+    background: var(--color-primary);
+    box-shadow: 0 0 10px rgba(0, 217, 255, 0.4);
+}
+
+.timeline-connector.active .connector-fill {
+    animation: connector-fill 1.5s ease-in-out forwards;
+}
+
+@keyframes connector-fill {
+    from { height: 0; }
+    to { height: 100%; }
+}
+
+/* ===== INTEGRATION SECTION ===== */
+.integration-section {
+    position: relative;
+    padding: 80px 24px;
+    z-index: 10;
+}
+
+.integration-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 32px;
+    margin-top: 60px;
+}
+
+.integration-node {
+    text-align: center;
+    padding: 32px;
+    background: linear-gradient(135deg, rgba(15, 21, 53, 0.5) 0%, rgba(26, 31, 58, 0.3) 100%);
+    border: 1px solid rgba(0, 217, 255, 0.15);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+    transition: all 0.3s ease;
+}
+
+.integration-node:hover {
+    background: linear-gradient(135deg, rgba(15, 21, 53, 0.7) 0%, rgba(26, 31, 58, 0.5) 100%);
+    border-color: var(--color-primary);
+    box-shadow: 0 0 30px rgba(0, 217, 255, 0.2);
+    transform: translateY(-4px);
+}
+
+.node-display {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.node-display svg {
+    width: 100%;
+    height: 100%;
+    filter: drop-shadow(0 0 10px rgba(0, 217, 255, 0.3));
+}
+
+.node-ring {
+    stroke: var(--color-primary);
+    fill: none;
+    stroke-width: 1;
+    opacity: 0.6;
+    animation: ring-expand 3s ease-in-out infinite;
+}
+
+@keyframes ring-expand {
+    0%, 100% {
+        r: 40;
+        opacity: 0.2;
+    }
+    50% {
+        r: 50;
+        opacity: 0.6;
+    }
+}
+
+.flow-path {
+    stroke: var(--color-primary);
+    fill: none;
+    stroke-width: 2;
+    opacity: 0.6;
+    animation: path-flow 2s ease-in-out infinite;
+}
+
+@keyframes path-flow {
+    0%, 100% {
+        opacity: 0.4;
+        stroke-dasharray: 100;
+        stroke-dashoffset: 0;
+    }
+    50% {
+        opacity: 1;
+        stroke-dasharray: 100;
+        stroke-dashoffset: 100;
+    }
+}
+
+.node-center {
+    fill: var(--color-primary);
+    opacity: 0.8;
+    animation: center-glow 2s ease-in-out infinite;
+}
+
+@keyframes center-glow {
+    0%, 100% {
+        opacity: 0.6;
+    }
+    50% {
+        opacity: 1;
+    }
+}
+
+.integration-node h3 {
+    color: var(--color-text-primary);
+    margin-bottom: 12px;
+    font-size: 1.2rem;
+}
+
+.integration-node p {
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+}
+
+/* ===== NEURAL FOOTER ===== */
+.neural-footer {
+    position: relative;
+    padding: 40px 24px;
+    text-align: center;
+    background: linear-gradient(180deg, rgba(10, 14, 39, 0.8) 0%, rgba(10, 14, 39, 0.95) 100%);
+    border-top: 1px solid rgba(0, 217, 255, 0.2);
+    z-index: 10;
+}
+
+.footer-neural-connection {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+.footer-neural-connection svg {
+    width: 200px;
+    height: 50px;
+    filter: drop-shadow(0 0 10px rgba(0, 217, 255, 0.3));
+}
+
+.footer-neural-connection .node {
+    fill: var(--color-primary);
+    opacity: 0.8;
+}
+
+.footer-neural-connection .connection {
+    stroke: var(--color-primary);
+    stroke-width: 2;
+    opacity: 0.6;
+    animation: connection-flow 3s ease-in-out infinite;
+    stroke-dasharray: 50;
+    stroke-dashoffset: 0;
+}
+
+@keyframes connection-flow {
+    0%, 100% {
+        stroke-dashoffset: 0;
+    }
+    50% {
+        stroke-dashoffset: -50;
+    }
+}
+
+.neural-footer p {
+    color: var(--color-text-secondary);
+    font-size: 0.95rem;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+    .hero-container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .hero-title {
+        font-size: 2.2rem;
+    }
+
+    .section-header h2 {
+        font-size: 2rem;
+    }
+
+    .pathway-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .integration-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .neural-dino-svg {
+        max-width: 300px;
+    }
+
+    .hero-cta {
+        flex-direction: column;
+    }
+
+    .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .neural-section {
+        padding: 40px 16px;
+    }
+
+    .hero-title {
+        font-size: 1.8rem;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .section-header h2 {
+        font-size: 1.6rem;
+    }
+
+    .pathway-card {
+        padding: 20px 16px;
+    }
+
+    .btn {
+        padding: 12px 24px;
+        font-size: 0.9rem;
+    }
+}
