@@ -1,6 +1,6 @@
-"""Adapter to bridge legacy CLI interface with Phase 2A builders.
+"""Wrapper to build prompts for AI tools from bundled agent configurations.
 
-This module provides an adapter layer that allows the existing CLI commands
+This module provides a builder wrapper that allows the existing CLI commands
 to work with Phase 2A IR-based builders without changing the CLI interface.
 
 The adapter:
@@ -21,7 +21,7 @@ from promptosaurus.builders.base import BuildOptions
 from promptosaurus.ir.models import Agent
 
 
-class Phase2ABuilderAdapter:
+class PromptBuilder:
     """Adapter that mimics legacy builder interface using Phase 2A builders.
     
     This adapter allows the CLI to use Phase 2A builders while maintaining
@@ -174,7 +174,7 @@ class Phase2ABuilderAdapter:
         return written_files
 
 
-def get_phase2a_builder(tool: str) -> Phase2ABuilderAdapter:
+def get_prompt_builder(tool: str) -> PromptBuilder:
     """Get Phase 2A builder adapter for a tool.
     
     This replaces the legacy _get_builder() function, maintaining the
@@ -203,4 +203,4 @@ def get_phase2a_builder(tool: str) -> Phase2ABuilderAdapter:
     if not phase2a_tool:
         raise ValueError(f"Unknown tool: {tool}")
     
-    return Phase2ABuilderAdapter(phase2a_tool)
+    return PromptBuilder(phase2a_tool)

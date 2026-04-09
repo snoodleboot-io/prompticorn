@@ -536,9 +536,8 @@ def init_prompts():
 
             output_path = Path(".")
             normalized_tool = normalize_tool_name(selected_tool)
-            builder_class = _get_builder(normalized_tool)  # type: ignore[arg-type]
-            if builder_class:
-                builder = builder_class()
+            builder = _get_builder(normalized_tool)
+            if builder:
                 actions = builder.build(output_path, config=config, dry_run=False)
                 for action in actions:
                     click.echo(f"  {action}")
@@ -781,20 +780,20 @@ def update_command():
 def _get_builder(tool: str):
     """Get the builder adapter for a given tool.
 
-    This function returns a Phase 2A builder adapter that maintains compatibility
+    This function returns a prompt builder instance that maintains compatibility
     with the legacy builder interface while using the new IR-based system internally.
 
     Args:
         tool: The tool name (e.g., 'kilo-cli', 'kilo-ide', 'cline', 'cursor', 'copilot').
 
     Returns:
-        Phase2ABuilderAdapter instance for the given tool.
+        PromptBuilder instance for the given tool.
 
     Raises:
         ValueError: If tool is unknown.
     """
-    from promptosaurus.cli_adapter import get_phase2a_builder
-    return get_phase2a_builder(tool)
+    from promptosaurus.prompt_builder import get_prompt_builder
+    return get_prompt_builder(tool)
 
 
 # ── validate ───────────────────────────────────────────────────────────────
