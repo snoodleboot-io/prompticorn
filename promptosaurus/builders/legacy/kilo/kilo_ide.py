@@ -25,7 +25,7 @@ import yaml
 from pathlib import Path
 from typing import Any
 
-from promptosaurus.builders.kilo.kilo_code_builder import KiloCodeBuilder
+from promptosaurus.builders.legacy.kilo.kilo_code_builder import KiloCodeBuilder
 from promptosaurus.registry import registry
 
 
