@@ -271,6 +271,9 @@ class RegistryDiscovery:
         workflows = prompt_data.get("workflows", [])
         subagents = prompt_data.get("subagents", [])
 
+        # Extract permissions (tool-specific)
+        permissions = prompt_data.get("permissions", None)
+        
         # Create Agent IR model
         agent = Agent(
             name=name or agent_name,
@@ -280,6 +283,7 @@ class RegistryDiscovery:
             skills=skills if isinstance(skills, list) else [],
             workflows=workflows if isinstance(workflows, list) else [],
             subagents=subagents if isinstance(subagents, list) else [],
+            permissions=permissions if isinstance(permissions, dict) else None,
         )
 
         return agent

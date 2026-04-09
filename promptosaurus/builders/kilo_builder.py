@@ -263,12 +263,17 @@ class KiloBuilder(AbstractBuilder):
         Returns:
             Dictionary of frontmatter fields
         """
-        return {
-            "name": agent.name,
+        frontmatter = {
             "description": agent.description,
-            "model": "anthropic/claude-opus-4-1",
-            "state_management": ".promptosaurus/sessions/",
+            "mode": "primary",
+            "color": "#4B5563",  # Default gray color
         }
+        
+        # Add permissions if present
+        if agent.permissions:
+            frontmatter["permission"] = agent.permissions
+        
+        return frontmatter
 
     def _format_tools(self, tools: list[str]) -> str:
         """Format tools as markdown list.

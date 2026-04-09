@@ -5,7 +5,7 @@ configuration that can be used across different AI tools and frameworks.
 """
 
 from pydantic import BaseModel, Field
-from typing import List
+from typing import List, Dict, Any, Optional
 
 
 class Agent(BaseModel):
@@ -23,6 +23,7 @@ class Agent(BaseModel):
         skills: List of skill names this agent can perform
         workflows: List of workflow names this agent can execute
         subagents: List of subagent names for hierarchical composition
+        permissions: Permission rules for the agent (tool-specific)
     """
 
     name: str = Field(
@@ -47,6 +48,9 @@ class Agent(BaseModel):
     )
     subagents: List[str] = Field(
         default_factory=list, description="List of subagent names for composition"
+    )
+    permissions: Optional[Dict[str, Any]] = Field(
+        default=None, description="Permission rules for the agent (tool-specific)"
     )
 
     class Config:
