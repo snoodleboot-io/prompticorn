@@ -4,7 +4,7 @@ This module defines the Agent model, which represents a tool-agnostic agent
 configuration that can be used across different AI tools and frameworks.
 """
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from typing import List, Dict, Any, Optional
 
 
@@ -25,6 +25,8 @@ class Agent(BaseModel):
         subagents: List of subagent names for hierarchical composition
         permissions: Permission rules for the agent (tool-specific)
     """
+    
+    model_config = ConfigDict(frozen=True)
 
     name: str = Field(
         ...,
@@ -52,8 +54,3 @@ class Agent(BaseModel):
     permissions: Optional[Dict[str, Any]] = Field(
         default=None, description="Permission rules for the agent (tool-specific)"
     )
-
-    class Config:
-        """Pydantic configuration for the Agent model."""
-
-        frozen = True
