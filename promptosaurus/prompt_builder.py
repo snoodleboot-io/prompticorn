@@ -1,16 +1,4 @@
-"""Wrapper to build prompts for AI tools from bundled agent configurations.
-
-This module provides a builder wrapper that allows the existing CLI commands
-to work with Phase 2A IR-based builders without changing the CLI interface.
-
-The adapter:
-1. Loads agents from promptosaurus/prompts/agents/ into IR models
-2. Converts CLI config into build options
-3. Calls Phase 2A builders
-4. Writes output files
-
-This keeps the user-facing CLI unchanged while using the new Phase 2A system internally.
-"""
+"""Builder wrapper to generate tool-specific configs from bundled IR agents."""
 
 from pathlib import Path
 from typing import Any
@@ -18,24 +6,13 @@ from typing import Any
 from promptosaurus.agent_registry.registry import Registry
 from promptosaurus.builders.factory import BuilderFactory
 from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
 
 
 class PromptBuilder:
-    """Adapter that mimics legacy builder interface using Phase 2A builders.
-    
-    This adapter allows the CLI to use Phase 2A builders while maintaining
-    the same interface as legacy builders.
-    
-    Legacy interface:
-        builder.build(output_path: Path, config: dict, dry_run: bool) -> list[str]
-    
-    Phase 2A interface (internal):
-        builder.build(agent: Agent, options: BuildOptions) -> str | dict
-    """
+    """Builder that uses bundled IR-format agents with Phase 2A builders."""
     
     def __init__(self, tool_name: str):
-        """Initialize adapter for a specific tool.
+        """Initialize builder for a specific tool.
         
         Args:
             tool_name: Tool name ('kilo', 'cline', 'claude', 'copilot', 'cursor')
@@ -43,9 +20,9 @@ class PromptBuilder:
         self.tool_name = tool_name
         self.builder = BuilderFactory.get_builder(tool_name)
         
-        # Load agents from bundled prompts directory
-        prompts_dir = Path(__file__).parent / "prompts" / "agents"
-        self.registry = Registry.from_discovery(prompts_dir)
+        # Load agents from bundled IR directory
+        agents_dir = Path(__file__).parent / "agents"
+        self.registry = Registry.from_discovery(agents_dir)
     
     def build(
         self, 
@@ -53,14 +30,11 @@ class PromptBuilder:
         config: dict[str, Any] | None = None, 
         dry_run: bool = False
     ) -> list[str]:
-        """Build tool-specific outputs using Phase 2A builders.
-        
-        This method maintains compatibility with the legacy builder interface
-        while using Phase 2A IR-based builders internally.
+        """Build tool-specific outputs from bundled IR agents.
         
         Args:
             output: Output directory path
-            config: Project configuration (language, runtime, etc.)
+            config: Project configuration (with 'variant' key for minimal/verbose)
             dry_run: If True, don't write files (preview only)
         
         Returns:
@@ -68,29 +42,30 @@ class PromptBuilder:
         """
         actions = []
         
+        # Get variant from config (default to minimal)
+        variant = config.get('variant', 'minimal') if config else 'minimal'
+        
         # Get all agents from registry
         all_agents = self.registry.get_all_agents()
         
-        # Build each agent
+        # Build each top-level agent (skip subagents, they're included in parent)
         for agent_name, agent in all_agents.items():
-            # Skip subagents for now (they're included in parent agent)
-            if "/" in agent_name:
+            if "/" in agent_name:  # Skip subagents
                 continue
             
             try:
-                # Use minimal variant by default
+                # Build with specified variant
                 options = BuildOptions(
-                    variant="minimal",
+                    variant=variant,
                     agent_name=agent_name,
                 )
                 
-                # Build the agent
                 output_content = self.builder.build(agent, options)
                 
-                # Write output based on tool
+                # Write output
                 if not dry_run:
-                    written_files = self._write_output(output, agent_name, output_content)
-                    actions.extend([f"✓ {f}" for f in written_files])
+                    written = self._write_output(output, agent_name, output_content)
+                    actions.extend([f"✓ {f}" for f in written])
                 else:
                     actions.append(f"[dry-run] Would build {agent_name} for {self.tool_name}")
                     
@@ -174,22 +149,19 @@ class PromptBuilder:
         return written_files
 
 
-def get_prompt_builder(tool: str) -> PromptBuilder:
-    """Get Phase 2A builder adapter for a tool.
-    
-    This replaces the legacy _get_builder() function, maintaining the
-    same interface while using Phase 2A builders internally.
+def get_prompt_builder(tool: str):
+    """Get prompt builder for a tool.
     
     Args:
         tool: Tool name (e.g., 'kilo-cli', 'kilo-ide', 'cline', 'cursor', 'copilot')
     
     Returns:
-        Builder adapter instance
+        Builder instance
     
     Raises:
         ValueError: If tool is unknown
     """
-    # Map tool names to Phase 2A builder names
+    # Map tool names to builder names
     tool_mapping = {
         "kilo-cli": "kilo",
         "kilo-ide": "kilo",
@@ -199,8 +171,8 @@ def get_prompt_builder(tool: str) -> PromptBuilder:
         "claude": "claude",
     }
     
-    phase2a_tool = tool_mapping.get(tool)
-    if not phase2a_tool:
+    internal_tool = tool_mapping.get(tool)
+    if not internal_tool:
         raise ValueError(f"Unknown tool: {tool}")
     
-    return PromptBuilder(phase2a_tool)
+    return PromptBuilder(internal_tool)
