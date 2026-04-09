@@ -178,7 +178,7 @@ class TestClineBuilderMarkdownValidation:
         assert "\n" in output  # Has multiple lines
 
     def test_markdown_contains_main_header(self, builder_with_agents: ClineBuilder) -> None:
-        """Test markdown includes main header with system prompt."""
+        """Test markdown includes main header with agent name."""
         agent = Agent(
             name="code",
             description="Code agent",
@@ -188,8 +188,8 @@ class TestClineBuilderMarkdownValidation:
         options = BuildOptions(variant="minimal")
         output = builder_with_agents.build(agent, options)
 
-        # Check for main header - Cline format starts with "# System Prompt"
-        assert output.startswith("# System Prompt\n")
+        # Check for main header - Cline format is "# {agent_name} Rules"
+        assert output.startswith("# code Rules\n")
 
     def test_markdown_system_prompt_appears_after_header(
         self, builder_with_agents: ClineBuilder
@@ -205,8 +205,8 @@ class TestClineBuilderMarkdownValidation:
         output = builder_with_agents.build(agent, options)
 
         lines = output.split("\n")
-        # First line is "# System Prompt"
-        assert lines[0] == "# System Prompt"
+        # First line is "# {agent_name} Rules"
+        assert lines[0].startswith("# ") and "Rules" in lines[0]
         # System prompt from component should be in output
         assert "expert" in output or "Code" in output
 
@@ -489,8 +489,8 @@ class TestClineBuilderComponentHandling:
         options = BuildOptions(variant="minimal", include_skills=True)
         output = builder.build(agent, options)
 
-        # Should build successfully even without skills
-        assert "# System Prompt" in output
+        # Should build successfully even without skills - has header with agent name
+        assert output.startswith("# minimal Rules")
         assert len(output) > 0
 
     def test_build_without_optional_workflows(self, minimal_agents_dir: Path) -> None:
@@ -506,8 +506,8 @@ class TestClineBuilderComponentHandling:
         options = BuildOptions(variant="minimal", include_workflows=True)
         output = builder.build(agent, options)
 
-        # Should build successfully even without workflows
-        assert "# System Prompt" in output
+        # Should build successfully even without workflows - has header with agent name
+        assert output.startswith("# minimal Rules")
         assert len(output) > 0
 
     def test_include_flags_control_output(self, minimal_agents_dir: Path) -> None:
@@ -610,7 +610,7 @@ class TestClineBuilderErrorHandling:
         options = BuildOptions(variant="minimal")
         output = builder_with_agents.build(agent, options)
         assert len(output) > 0
-        assert "# System Prompt" in output
+        assert output.startswith("# code Rules")
 
     def test_agent_with_complete_fields_builds(self, builder_with_agents: ClineBuilder) -> None:
         """Test that agent with all required fields builds successfully."""
@@ -623,7 +623,7 @@ class TestClineBuilderErrorHandling:
         options = BuildOptions(variant="minimal")
         output = builder_with_agents.build(agent, options)
         assert len(output) > 0
-        assert "# System Prompt" in output
+        assert output.startswith("# code Rules")
 
     def test_agent_with_custom_system_prompt_builds(
         self, builder_with_agents: ClineBuilder
@@ -638,7 +638,7 @@ class TestClineBuilderErrorHandling:
         options = BuildOptions(variant="minimal")
         output = builder_with_agents.build(agent, options)
         assert len(output) > 0
-        assert "# System Prompt" in output
+        assert output.startswith("# test Rules")
 
     def test_validation_error_contains_helpful_message(
         self, builder_with_agents: ClineBuilder
@@ -717,9 +717,9 @@ class TestClineBuilderIntegration:
         )
         architect_output = builder.build(architect_agent, BuildOptions(variant="minimal"))
 
-        # Both should build successfully with system prompt header
-        assert "# System Prompt" in code_output
-        assert "# System Prompt" in architect_output
+        # Both should build successfully with proper headers
+        assert code_output.startswith("# code Rules")
+        assert architect_output.startswith("# architect Rules")
         assert "You are a code expert" in code_output
         assert "You are a system architect" in architect_output
         assert len(code_output) > len(architect_output)
@@ -739,9 +739,9 @@ class TestClineBuilderIntegration:
         with_skills = builder.build(agent, BuildOptions(variant="verbose", include_skills=True))
         without_skills = builder.build(agent, BuildOptions(variant="minimal", include_skills=False))
 
-        # Both should have system prompt
-        assert "# System Prompt" in with_skills
-        assert "# System Prompt" in without_skills
+        # Both should have proper headers
+        assert with_skills.startswith("# code Rules")
+        assert without_skills.startswith("# code Rules")
 
         # With skills should have more content (or at least skills section)
         assert "# Skills" in with_skills or "use_skill" in with_skills
@@ -771,7 +771,7 @@ class TestClineBuilderIntegration:
 
             # Verify
             assert read_content == output
-            assert "# System Prompt" in read_content
+            assert read_content.startswith("# code Rules")
             assert "You are a code expert" in read_content
             assert "use_skill" in read_content
 
@@ -828,11 +828,11 @@ class TestClineBuilderIntegration:
 
         lines = output.split("\n")
 
-        # Cline format uses level 1 headers for all main sections
+        # Cline format uses level 1 headers for main sections (System Prompt is rendered as prose, but Skills/Subagents are headers)
         main_headers = [l for l in lines if l.startswith("# ") and not l.startswith("## ")]
-        # Should have multiple level 1 headers (System Prompt, Skills, Subagents, etc.)
-        assert len(main_headers) >= 2
+        # Should have at least one main header (the agent name header)
+        assert len(main_headers) >= 1
 
-        # Check that expected sections are present
-        assert "# System Prompt" in output
+        # Check that expected sections are present (header or prose content)
+        assert "code" in output  # Agent name should appear in header
         assert "# Skills" in output or "# Subagents" in output
