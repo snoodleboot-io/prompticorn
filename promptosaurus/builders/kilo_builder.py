@@ -8,7 +8,6 @@ from pathlib import Path
 from typing import Any
 
 from promptosaurus.builders.base import AbstractBuilder, BuildOptions
-from promptosaurus.builders.component_selector import ComponentSelector, Variant
 from promptosaurus.builders.errors import BuilderValidationError
 from promptosaurus.ir.models import Agent
 
@@ -58,7 +57,6 @@ class KiloBuilder(AbstractBuilder):
             agents_dir: Base directory for agent configurations (default: 'agents')
         """
         self.agents_dir = agents_dir
-        self.selector = ComponentSelector(agents_dir=agents_dir)
 
     def build(self, agent: Agent, options: BuildOptions) -> str:
         """Build a Kilo agent configuration file.
@@ -80,21 +78,15 @@ class KiloBuilder(AbstractBuilder):
                 errors=errors, message=f"Invalid agent '{agent.name}': {'; '.join(errors)}"
             )
 
-        # Select variant (minimal or verbose)
-        variant = Variant.MINIMAL if options.variant == "minimal" else Variant.VERBOSE
-
-        # Load components with variant selection
-        bundle = self.selector.select(agent, variant=variant)
-
         # Prepare YAML frontmatter
         frontmatter = self._build_frontmatter(agent)
 
         # Compose markdown output
         markdown_sections = []
 
-        # 1. System Prompt
+        # 1. System Prompt - use agent.system_prompt directly
         markdown_sections.append("# System Prompt\n")
-        markdown_sections.append(bundle.prompt)
+        markdown_sections.append(agent.system_prompt)
         markdown_sections.append("")
 
         # 2. Tools (if requested)
@@ -104,15 +96,15 @@ class KiloBuilder(AbstractBuilder):
             markdown_sections.append("")
 
         # 3. Skills (if requested)
-        if options.include_skills and bundle.skills:
+        if options.include_skills and agent.skills:
             markdown_sections.append("# Skills\n")
-            markdown_sections.append(self._format_skills(bundle.skills))
+            markdown_sections.append(self._format_skills(agent.skills))
             markdown_sections.append("")
 
         # 4. Workflows (if requested)
-        if options.include_workflows and bundle.workflow:
+        if options.include_workflows and agent.workflows:
             markdown_sections.append("# Workflows\n")
-            markdown_sections.append(self._format_workflows(bundle.workflow))
+            markdown_sections.append(self._format_workflows(agent.workflows))
             markdown_sections.append("")
 
         # 5. Subagents (if requested)
@@ -263,16 +255,17 @@ class KiloBuilder(AbstractBuilder):
         Returns:
             Dictionary of frontmatter fields
         """
-        frontmatter = {
+        frontmatter: dict[str, Any] = {
+            "name": agent.name,
             "description": agent.description,
-            "mode": "primary",
-            "color": "#4B5563",  # Default gray color
+            "model": "anthropic/claude-opus-4-1",
+            "state_management": ".promptosaurus/sessions/",
         }
-        
+
         # Add permissions if present
         if agent.permissions:
             frontmatter["permission"] = agent.permissions
-        
+
         return frontmatter
 
     def _format_tools(self, tools: list[str]) -> str:
@@ -289,27 +282,33 @@ class KiloBuilder(AbstractBuilder):
             lines.append(f"- {tool}")
         return "\n".join(lines)
 
-    def _format_skills(self, skills_content: str) -> str:
-        """Format skills content.
+    def _format_skills(self, skills: list[str]) -> str:
+        """Format skills as markdown list.
 
         Args:
-            skills_content: Raw skills content from component
+            skills: List of skill names
 
         Returns:
             Formatted markdown string
         """
-        return skills_content.strip()
+        lines = []
+        for skill in skills:
+            lines.append(f"- {skill}")
+        return "\n".join(lines)
 
-    def _format_workflows(self, workflow_content: str) -> str:
-        """Format workflows content.
+    def _format_workflows(self, workflows: list[str]) -> str:
+        """Format workflows as markdown list.
 
         Args:
-            workflow_content: Raw workflow content from component
+            workflows: List of workflow names
 
         Returns:
             Formatted markdown string
         """
-        return workflow_content.strip()
+        lines = []
+        for workflow in workflows:
+            lines.append(f"- {workflow}")
+        return "\n".join(lines)
 
     def _format_subagents(self, subagent_names: list[str]) -> str:
         """Format subagents as markdown list.
@@ -348,6 +347,11 @@ class KiloBuilder(AbstractBuilder):
                     yaml_lines.append(f"{key}: {value}")
             elif isinstance(value, (int, float)):
                 yaml_lines.append(f"{key}: {value}")
+            elif isinstance(value, dict):
+                # Handle nested dictionaries (like permissions)
+                yaml_lines.append(f"{key}:")
+                for sub_key, sub_value in value.items():
+                    yaml_lines.append(f"  {sub_key}: {sub_value}")
             else:
                 yaml_lines.append(f"{key}: {value}")
 

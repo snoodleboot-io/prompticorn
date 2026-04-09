@@ -8,7 +8,6 @@ from pathlib import Path
 from typing import Any
 
 from promptosaurus.builders.base import AbstractBuilder, BuildOptions
-from promptosaurus.builders.component_selector import ComponentSelector, Variant
 from promptosaurus.builders.errors import BuilderValidationError
 from promptosaurus.ir.models import Agent
 
@@ -59,7 +58,6 @@ class CopilotBuilder(AbstractBuilder):
             agents_dir: Base directory for agent configurations (default: 'agents')
         """
         self.agents_dir = agents_dir
-        self.selector = ComponentSelector(agents_dir=agents_dir)
 
     def build(self, agent: Agent, options: BuildOptions) -> str:
         """Build a GitHub Copilot instructions file.
@@ -81,12 +79,6 @@ class CopilotBuilder(AbstractBuilder):
                 errors=errors, message=f"Invalid agent '{agent.name}': {'; '.join(errors)}"
             )
 
-        # Select variant (minimal or verbose)
-        variant = Variant.MINIMAL if options.variant == "minimal" else Variant.VERBOSE
-
-        # Load components with variant selection
-        bundle = self.selector.select(agent, variant=variant)
-
         # Prepare YAML frontmatter with applyTo
         frontmatter = self._build_frontmatter(agent)
 
@@ -97,8 +89,8 @@ class CopilotBuilder(AbstractBuilder):
         markdown_sections.append(self._format_header(agent))
         markdown_sections.append("")
 
-        # 2. System prompt as prose
-        markdown_sections.append(bundle.prompt)
+        # 2. System prompt as prose - use agent.system_prompt directly
+        markdown_sections.append(agent.system_prompt)
         markdown_sections.append("")
 
         # 3. Tools (if requested)
@@ -107,13 +99,13 @@ class CopilotBuilder(AbstractBuilder):
             markdown_sections.append("")
 
         # 4. Skills (if requested)
-        if options.include_skills and bundle.skills:
-            markdown_sections.append(self._format_skills_section(bundle.skills, agent.skills or []))
+        if options.include_skills and agent.skills:
+            markdown_sections.append(self._format_skills_section(agent.skills))
             markdown_sections.append("")
 
         # 5. Workflows (if requested)
-        if options.include_workflows and bundle.workflow:
-            markdown_sections.append(self._format_workflows_section(bundle.workflow))
+        if options.include_workflows and agent.workflows:
+            markdown_sections.append(self._format_workflows_section(agent.workflows))
             markdown_sections.append("")
 
         # 6. Subagents (if requested)
@@ -236,31 +228,36 @@ class CopilotBuilder(AbstractBuilder):
 
         return "\n".join(lines)
 
-    def _format_skills_section(self, skills_content: str, skill_names: list[str]) -> str:
+    def _format_skills_section(self, skill_names: list[str]) -> str:
         """Format skills section for Copilot instructions.
 
         Args:
-            skills_content: Raw skills content from component
-            skill_names: List of skill names for reference
+            skill_names: List of skill names from agent
 
         Returns:
             Formatted skills section as markdown
         """
         lines = ["## Skills\n"]
-        lines.append(skills_content.strip())
+
+        for skill in skill_names:
+            lines.append(f"- {skill}")
+
         return "\n".join(lines)
 
-    def _format_workflows_section(self, workflow_content: str) -> str:
+    def _format_workflows_section(self, workflow_names: list[str]) -> str:
         """Format workflows section for Copilot instructions.
 
         Args:
-            workflow_content: Raw workflow content from component
+            workflow_names: List of workflow names from agent
 
         Returns:
             Formatted workflows section as markdown
         """
         lines = ["## Workflows\n"]
-        lines.append(workflow_content.strip())
+
+        for workflow in workflow_names:
+            lines.append(f"- {workflow}")
+
         return "\n".join(lines)
 
     def _format_subagents_section(self, subagent_names: list[str]) -> str:

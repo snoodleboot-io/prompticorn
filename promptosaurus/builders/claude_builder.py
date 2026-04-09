@@ -9,7 +9,6 @@ from pathlib import Path
 from typing import Any
 
 from promptosaurus.builders.base import AbstractBuilder, BuildOptions
-from promptosaurus.builders.component_selector import ComponentSelector, Variant
 from promptosaurus.builders.errors import BuilderValidationError
 from promptosaurus.ir.models import Agent
 
@@ -46,7 +45,6 @@ class ClaudeBuilder(AbstractBuilder):
             agents_dir: Base directory for agent configurations (default: 'agents')
         """
         self.agents_dir = agents_dir
-        self.selector = ComponentSelector(agents_dir=agents_dir)
 
     def build(self, agent: Agent, options: BuildOptions) -> dict[str, Any]:
         """Build Claude Messages API JSON output from an Agent IR model.
@@ -69,21 +67,14 @@ class ClaudeBuilder(AbstractBuilder):
                 errors=errors, message=f"Invalid agent '{agent.name}': {'; '.join(errors)}"
             )
 
-        # Select variant (minimal or verbose)
-        variant = Variant.MINIMAL if options.variant == "minimal" else Variant.VERBOSE
-
-        # Load components with variant selection
-        bundle = self.selector.select(agent, variant=variant)
-
-        # Build system prompt string
-        system_prompt = self._build_system_prompt(bundle.prompt)
+        # Build system prompt string - use agent.system_prompt directly
+        system_prompt = self._build_system_prompt(agent.system_prompt)
 
         # Build tools list with schemas
         tools_list = self._build_tools_list(agent.tools) if options.include_tools else []
 
         # Build instructions string from all sections
         instructions = self._build_instructions(
-            bundle,
             agent,
             options,
         )
@@ -204,7 +195,6 @@ class ClaudeBuilder(AbstractBuilder):
 
     def _build_instructions(
         self,
-        bundle: Any,
         agent: Agent,
         options: BuildOptions,
     ) -> str:
@@ -213,7 +203,6 @@ class ClaudeBuilder(AbstractBuilder):
         Concatenates skills, workflows, subagents, and rules into prose text.
 
         Args:
-            bundle: Component bundle from selector
             agent: Agent IR model
             options: Build configuration options
 
@@ -223,31 +212,26 @@ class ClaudeBuilder(AbstractBuilder):
         sections = []
 
         # Add skills section if requested
-        if options.include_skills and bundle.skills:
-            sections.append(self._format_skills_section(bundle.skills, agent.skills or []))
+        if options.include_skills and agent.skills:
+            sections.append(self._format_skills_section(agent.skills))
 
         # Add workflows section if requested
-        if options.include_workflows and bundle.workflow:
-            sections.append(self._format_workflows_section(bundle.workflow))
+        if options.include_workflows and agent.workflows:
+            sections.append(self._format_workflows_section(agent.workflows))
 
         # Add subagents section if requested
         if options.include_subagents and agent.subagents:
             sections.append(self._format_subagents_section(agent.subagents))
-
-        # Add rules section if requested
-        if options.include_rules and hasattr(bundle, "rules") and bundle.rules:
-            sections.append(self._format_rules_section(bundle.rules))
 
         # Join all sections with double newlines
         instructions = "\n\n".join(sections)
 
         return instructions.strip()
 
-    def _format_skills_section(self, skills_content: str, skill_names: list[str]) -> str:
+    def _format_skills_section(self, skill_names: list[str]) -> str:
         """Format skills section as prose.
 
         Args:
-            skills_content: Raw skills content from component
             skill_names: List of skill names from agent
 
         Returns:
@@ -260,24 +244,22 @@ class ClaudeBuilder(AbstractBuilder):
             skill_key = skill.lower().replace(" ", "_").replace("-", "_")
             lines.append(f"- {skill}: Invoke by use_skill {skill_key}")
 
-        # Add raw content if available
-        if skills_content:
-            lines.append("")
-            lines.append(skills_content.strip())
-
         return "\n".join(lines)
 
-    def _format_workflows_section(self, workflow_content: str) -> str:
+    def _format_workflows_section(self, workflow_names: list[str]) -> str:
         """Format workflows section as prose.
 
         Args:
-            workflow_content: Raw workflow content from component
+            workflow_names: List of workflow names from agent
 
         Returns:
             Formatted workflows section
         """
         lines = ["Workflows:", ""]
-        lines.append(workflow_content.strip())
+
+        for workflow in workflow_names:
+            lines.append(f"- {workflow}")
+
         return "\n".join(lines)
 
     def _format_subagents_section(self, subagent_names: list[str]) -> str:

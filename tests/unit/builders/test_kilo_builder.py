@@ -25,7 +25,6 @@ class TestKiloBuilderInitialization:
         """Test KiloBuilder initializes with default 'agents' directory."""
         builder = KiloBuilder()
         assert builder.agents_dir == "agents"
-        assert builder.selector is not None
 
     def test_init_with_custom_agents_dir(self) -> None:
         """Test KiloBuilder initializes with custom agents directory."""
@@ -126,7 +125,7 @@ class TestKiloBuilderFrontmatter:
         )
         builder = KiloBuilder()
         frontmatter = builder._build_frontmatter(agent)
-        
+
         required_keys = {"name", "description", "model", "state_management"}
         assert set(frontmatter.keys()) == required_keys
 
@@ -161,26 +160,32 @@ class TestKiloBuilderFormatting:
         lines = result.split("\n")
         assert len(lines) == 2
 
-    def test_format_skills_preserves_content(self) -> None:
-        """Test formatting skills preserves content."""
+    def test_format_skills_single(self) -> None:
+        """Test formatting single skill."""
         builder = KiloBuilder()
-        skills_content = "## Skill 1\nContent here"
-        result = builder._format_skills(skills_content)
-        assert result == skills_content
+        result = builder._format_skills(["skill1"])
+        assert result == "- skill1"
 
-    def test_format_skills_strips_whitespace(self) -> None:
-        """Test formatting skills strips leading/trailing whitespace."""
+    def test_format_skills_multiple(self) -> None:
+        """Test formatting multiple skills."""
         builder = KiloBuilder()
-        skills_content = "  \n## Skill 1\nContent here  \n"
-        result = builder._format_skills(skills_content)
-        assert result == "## Skill 1\nContent here"
+        result = builder._format_skills(["skill1", "skill2", "skill3"])
+        assert "- skill1" in result
+        assert "- skill2" in result
+        assert "- skill3" in result
 
-    def test_format_workflows_preserves_content(self) -> None:
-        """Test formatting workflows preserves content."""
+    def test_format_workflows_single(self) -> None:
+        """Test formatting single workflow."""
         builder = KiloBuilder()
-        workflow_content = "## Workflow Steps\n1. First step\n2. Second step"
-        result = builder._format_workflows(workflow_content)
-        assert result == workflow_content
+        result = builder._format_workflows(["workflow1"])
+        assert result == "- workflow1"
+
+    def test_format_workflows_multiple(self) -> None:
+        """Test formatting multiple workflows."""
+        builder = KiloBuilder()
+        result = builder._format_workflows(["workflow1", "workflow2"])
+        assert "- workflow1" in result
+        assert "- workflow2" in result
 
     def test_format_subagents_single(self) -> None:
         """Test formatting single subagent."""
@@ -219,7 +224,7 @@ class TestKiloBuilderYAMLComposition:
         frontmatter = {"name": "test", "description": "Test agent"}
         markdown = "# System Prompt\nTest"
         result = builder._compose_yaml_markdown(frontmatter, markdown)
-        
+
         assert result.startswith("---")
         assert "name: test" in result
         assert result.count("---") == 2
@@ -230,7 +235,7 @@ class TestKiloBuilderYAMLComposition:
         frontmatter = {"name": "test"}
         markdown = "# System Prompt\nTest content"
         result = builder._compose_yaml_markdown(frontmatter, markdown)
-        
+
         assert "# System Prompt" in result
         assert "Test content" in result
 
@@ -240,7 +245,7 @@ class TestKiloBuilderYAMLComposition:
         frontmatter = {"name": "test"}
         markdown = "# System Prompt"
         result = builder._compose_yaml_markdown(frontmatter, markdown)
-        
+
         # Should have YAML frontmatter, blank line, then markdown
         parts = result.split("\n\n")
         assert parts[0].startswith("---")
@@ -252,7 +257,7 @@ class TestKiloBuilderYAMLComposition:
         frontmatter = {"description": "Code with: colons"}
         markdown = "Test"
         result = builder._compose_yaml_markdown(frontmatter, markdown)
-        
+
         assert 'description: "Code with: colons"' in result
 
     def test_compose_yaml_quotes_strings_with_newlines(self) -> None:
@@ -261,7 +266,7 @@ class TestKiloBuilderYAMLComposition:
         frontmatter = {"description": "Line 1\nLine 2"}
         markdown = "Test"
         result = builder._compose_yaml_markdown(frontmatter, markdown)
-        
+
         # Should quote the string
         assert "description:" in result
 
@@ -271,7 +276,7 @@ class TestKiloBuilderYAMLComposition:
         frontmatter = {"name": "test", "priority": 1, "weight": 0.5}
         markdown = "Test"
         result = builder._compose_yaml_markdown(frontmatter, markdown)
-        
+
         assert "priority: 1" in result
         assert "weight: 0.5" in result
 
@@ -281,7 +286,7 @@ class TestKiloBuilderYAMLComposition:
         frontmatter = {"enabled": True, "deprecated": False}
         markdown = "Test"
         result = builder._compose_yaml_markdown(frontmatter, markdown)
-        
+
         assert "enabled: true" in result
         assert "deprecated: false" in result
 
@@ -294,22 +299,22 @@ class TestKiloBuilderIntegration:
         """Create temporary agents directory structure."""
         with TemporaryDirectory() as tmpdir:
             tmppath = Path(tmpdir)
-            
+
             # Create agent directory with minimal variant
             agent_dir = tmppath / "test_agent" / "minimal"
             agent_dir.mkdir(parents=True, exist_ok=True)
-            
+
             # Create required files
             (agent_dir / "prompt.md").write_text("Test system prompt")
             (agent_dir / "skills.md").write_text("## Test Skill\nTest skill content")
             (agent_dir / "workflow.md").write_text("## Test Workflow\nTest workflow content")
-            
+
             yield tmpdir, tmppath
 
     def test_build_with_basic_agent(self, temp_agents_dir: tuple[str, Path]) -> None:
         """Test building output for basic agent."""
         tmpdir, tmppath = temp_agents_dir
-        
+
         builder = KiloBuilder(agents_dir=tmppath)
         agent = Agent(
             name="test_agent",
@@ -318,9 +323,9 @@ class TestKiloBuilderIntegration:
             tools=["read", "write"],
         )
         options = BuildOptions(variant="minimal")
-        
+
         result = builder.build(agent, options)
-        
+
         # Verify structure
         assert result.startswith("---")
         assert "name: test_agent" in result
@@ -333,7 +338,7 @@ class TestKiloBuilderIntegration:
     def test_build_returns_string(self, temp_agents_dir: tuple[str, Path]) -> None:
         """Test build method returns a string."""
         tmpdir, tmppath = temp_agents_dir
-        
+
         builder = KiloBuilder(agents_dir=tmppath)
         agent = Agent(
             name="test_agent",
@@ -341,14 +346,14 @@ class TestKiloBuilderIntegration:
             system_prompt="Test system prompt",
         )
         options = BuildOptions(variant="minimal")
-        
+
         result = builder.build(agent, options)
         assert isinstance(result, str)
 
     def test_build_respects_include_tools_flag(self, temp_agents_dir: tuple[str, Path]) -> None:
         """Test build respects include_tools flag."""
         tmpdir, tmppath = temp_agents_dir
-        
+
         builder = KiloBuilder(agents_dir=tmppath)
         agent = Agent(
             name="test_agent",
@@ -357,16 +362,16 @@ class TestKiloBuilderIntegration:
             tools=["read"],
         )
         options = BuildOptions(variant="minimal", include_tools=False)
-        
+
         result = builder.build(agent, options)
-        
+
         # Tools section should not be included
         assert "# Tools" not in result
 
     def test_build_respects_include_skills_flag(self, temp_agents_dir: tuple[str, Path]) -> None:
         """Test build respects include_skills flag."""
         tmpdir, tmppath = temp_agents_dir
-        
+
         builder = KiloBuilder(agents_dir=tmppath)
         agent = Agent(
             name="test_agent",
@@ -374,16 +379,16 @@ class TestKiloBuilderIntegration:
             system_prompt="Test system prompt",
         )
         options = BuildOptions(variant="minimal", include_skills=False)
-        
+
         result = builder.build(agent, options)
-        
+
         # Skills section should not be included
         assert "# Skills" not in result
 
     def test_build_respects_include_workflows_flag(self, temp_agents_dir: tuple[str, Path]) -> None:
         """Test build respects include_workflows flag."""
         tmpdir, tmppath = temp_agents_dir
-        
+
         builder = KiloBuilder(agents_dir=tmppath)
         agent = Agent(
             name="test_agent",
@@ -391,16 +396,16 @@ class TestKiloBuilderIntegration:
             system_prompt="Test system prompt",
         )
         options = BuildOptions(variant="minimal", include_workflows=False)
-        
+
         result = builder.build(agent, options)
-        
+
         # Workflows section should not be included
         assert "# Workflows" not in result
 
     def test_build_respects_include_subagents_flag(self, temp_agents_dir: tuple[str, Path]) -> None:
         """Test build respects include_subagents flag."""
         tmpdir, tmppath = temp_agents_dir
-        
+
         builder = KiloBuilder(agents_dir=tmppath)
         agent = Agent(
             name="test_agent",
@@ -409,16 +414,16 @@ class TestKiloBuilderIntegration:
             subagents=["sub1", "sub2"],
         )
         options = BuildOptions(variant="minimal", include_subagents=False)
-        
+
         result = builder.build(agent, options)
-        
+
         # Subagents section should not be included
         assert "# Subagents" not in result
 
     def test_build_with_all_sections(self, temp_agents_dir: tuple[str, Path]) -> None:
         """Test building with all sections included."""
         tmpdir, tmppath = temp_agents_dir
-        
+
         builder = KiloBuilder(agents_dir=tmppath)
         agent = Agent(
             name="test_agent",
@@ -436,9 +441,9 @@ class TestKiloBuilderIntegration:
             include_workflows=True,
             include_subagents=True,
         )
-        
+
         result = builder.build(agent, options)
-        
+
         # All sections should be present
         assert "# System Prompt" in result
         assert "# Tools" in result

@@ -26,7 +26,6 @@ class TestCopilotBuilderInitialization:
         """Test CopilotBuilder initializes with default 'agents' directory."""
         builder = CopilotBuilder()
         assert builder.agents_dir == "agents"
-        assert builder.selector is not None
 
     def test_init_with_custom_agents_dir(self) -> None:
         """Test CopilotBuilder initializes with custom agents directory."""
@@ -233,28 +232,26 @@ class TestCopilotBuilderFormatting:
     def test_format_skills_section_header(self) -> None:
         """Test skills section has proper header."""
         builder = CopilotBuilder()
-        result = builder._format_skills_section("skill content here", [])
+        result = builder._format_skills_section(["skill1", "skill2"])
         assert "## Skills" in result
 
     def test_format_skills_section_includes_content(self) -> None:
-        """Test skills section includes provided content."""
+        """Test skills section includes provided skills."""
         builder = CopilotBuilder()
-        skill_content = "This is skill content"
-        result = builder._format_skills_section(skill_content, [])
-        assert skill_content in result
+        result = builder._format_skills_section(["test-skill"])
+        assert "test-skill" in result
 
     def test_format_workflows_section_header(self) -> None:
         """Test workflows section has proper header."""
         builder = CopilotBuilder()
-        result = builder._format_workflows_section("workflow content here")
+        result = builder._format_workflows_section(["workflow1"])
         assert "## Workflows" in result
 
     def test_format_workflows_section_includes_content(self) -> None:
-        """Test workflows section includes provided content."""
+        """Test workflows section includes provided workflows."""
         builder = CopilotBuilder()
-        workflow_content = "This is workflow content"
-        result = builder._format_workflows_section(workflow_content)
-        assert workflow_content in result
+        result = builder._format_workflows_section(["test-workflow"])
+        assert "test-workflow" in result
 
     def test_format_subagents_section_header(self) -> None:
         """Test subagents section has proper header."""
@@ -507,14 +504,14 @@ class TestCopilotBuilderIntegration:
         assert "- read" in tools_result
 
         # Test skills
-        skills_result = builder._format_skills_section("Skill content", [])
+        skills_result = builder._format_skills_section(["test-skill"])
         assert "## Skills" in skills_result
-        assert "Skill content" in skills_result
+        assert "test-skill" in skills_result
 
         # Test workflows
-        workflows_result = builder._format_workflows_section("Workflow content")
+        workflows_result = builder._format_workflows_section(["test-workflow"])
         assert "## Workflows" in workflows_result
-        assert "Workflow content" in workflows_result
+        assert "test-workflow" in workflows_result
 
         # Test subagents
         subagents_result = builder._format_subagents_section(["sub1", "sub2"])

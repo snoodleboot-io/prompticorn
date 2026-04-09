@@ -30,7 +30,6 @@ class TestClineBuilderInitialization:
         """Test ClineBuilder initializes with default 'agents' directory."""
         builder = ClineBuilder()
         assert builder.agents_dir == "agents"
-        assert builder.selector is not None
 
     def test_init_with_custom_agents_dir(self) -> None:
         """Test ClineBuilder initializes with custom agents directory."""
@@ -42,11 +41,6 @@ class TestClineBuilderInitialization:
         path = Path("/custom/agents")
         builder = ClineBuilder(agents_dir=path)
         assert builder.agents_dir == path
-
-    def test_selector_initialized(self) -> None:
-        """Test that ComponentSelector is initialized."""
-        builder = ClineBuilder()
-        assert builder.selector is not None
 
 
 class TestClineBuilderValidation:
@@ -152,54 +146,41 @@ class TestClineBuilderFormatting:
     def test_format_skills_section(self) -> None:
         """Test skills section formatting."""
         builder = ClineBuilder()
-        skills_content = "Available skills for implementation"
         skill_names = ["test-implementation", "code-review"]
-        result = builder._format_skills_section(skills_content, skill_names)
+        result = builder._format_skills_section(skill_names)
         assert "## Skills" in result
         assert "use_skill" in result
 
     def test_format_skills_section_use_skill_invocation(self) -> None:
         """Test skills section includes use_skill invocation pattern."""
         builder = ClineBuilder()
-        skills_content = ""
         skill_names = ["my-skill"]
-        result = builder._format_skills_section(skills_content, skill_names)
+        result = builder._format_skills_section(skill_names)
         assert "use_skill" in result
 
     def test_format_skills_section_empty_names(self) -> None:
         """Test skills section with empty skill names."""
         builder = ClineBuilder()
-        skills_content = "No skills available"
         skill_names = []
-        result = builder._format_skills_section(skills_content, skill_names)
+        result = builder._format_skills_section(skill_names)
         assert "## Skills" in result
-
-    def test_format_skills_section_preserves_content(self) -> None:
-        """Test skills section preserves provided content."""
-        builder = ClineBuilder()
-        skills_content = "### Skill 1\nDo something\n### Skill 2\nDo something else"
-        skill_names = ["skill1"]
-        result = builder._format_skills_section(skills_content, skill_names)
-        assert "Do something" in result
 
     def test_format_workflows_section(self) -> None:
         """Test workflows section formatting."""
         builder = ClineBuilder()
-        workflow_content = (
-            "### Workflow: Feature Implementation\n\n1. Read code\n2. Plan\n3. Implement"
-        )
-        result = builder._format_workflows_section(workflow_content)
+        workflow_names = ["feature-implementation", "code-review"]
+        result = builder._format_workflows_section(workflow_names)
         assert "## Workflows" in result
-        assert "Feature Implementation" in result
-        assert "1. Read code" in result
+        assert "feature-implementation" in result
+        assert "code-review" in result
 
-    def test_format_workflows_section_strips_whitespace(self) -> None:
-        """Test workflows section strips excess whitespace."""
+    def test_format_workflows_section_single(self) -> None:
+        """Test workflows section with single workflow."""
         builder = ClineBuilder()
-        workflow_content = "  \n  Workflow steps  \n  "
-        result = builder._format_workflows_section(workflow_content)
+        workflow_names = ["my-workflow"]
+        result = builder._format_workflows_section(workflow_names)
         assert result.startswith("## Workflows")
-        assert "Workflow steps" in result
+        assert "my-workflow" in result
 
     def test_format_subagents_section_single(self) -> None:
         """Test formatting single subagent."""
@@ -557,7 +538,7 @@ You follow core conventions."""
     def test_skill_name_normalization(self) -> None:
         """Test skill names are normalized for use_skill invocation."""
         builder = ClineBuilder()
-        result = builder._format_skills_section("", ["Test First Implementation", "Code Review"])
+        result = builder._format_skills_section(["Test First Implementation", "Code Review"])
         # Should contain normalized versions
         assert "use_skill" in result
         # Either snake_case or hyphenated forms
@@ -639,7 +620,7 @@ class TestClineBuilderComparison:
     def test_cline_skills_with_use_skill_invocation(self) -> None:
         """Test Cline skills include use_skill invocation pattern."""
         builder = ClineBuilder()
-        result = builder._format_skills_section("", ["test-implementation"])
+        result = builder._format_skills_section(["test-implementation"])
         assert "use_skill" in result
         # This is Cline-specific pattern
         assert "Invoke by: `use_skill" in result

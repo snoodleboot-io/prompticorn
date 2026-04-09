@@ -8,7 +8,6 @@ from pathlib import Path
 from typing import Any
 
 from promptosaurus.builders.base import AbstractBuilder, BuildOptions
-from promptosaurus.builders.component_selector import ComponentSelector, Variant
 from promptosaurus.builders.errors import BuilderValidationError
 from promptosaurus.ir.models import Agent
 
@@ -54,7 +53,6 @@ class ClineBuilder(AbstractBuilder):
             agents_dir: Base directory for agent configurations (default: 'agents')
         """
         self.agents_dir = agents_dir
-        self.selector = ComponentSelector(agents_dir=agents_dir)
 
     def build(self, agent: Agent, options: BuildOptions) -> str:
         """Build a Cline AI configuration file.
@@ -76,12 +74,6 @@ class ClineBuilder(AbstractBuilder):
                 errors=errors, message=f"Invalid agent '{agent.name}': {'; '.join(errors)}"
             )
 
-        # Select variant (minimal or verbose)
-        variant = Variant.MINIMAL if options.variant == "minimal" else Variant.VERBOSE
-
-        # Load components with variant selection
-        bundle = self.selector.select(agent, variant=variant)
-
         # Compose markdown output as prose (no YAML frontmatter)
         sections = []
 
@@ -89,8 +81,8 @@ class ClineBuilder(AbstractBuilder):
         sections.append(self._format_header(agent))
         sections.append("")
 
-        # 2. System prompt as prose (first paragraph)
-        sections.append(self._format_system_prompt_prose(bundle.prompt))
+        # 2. System prompt as prose (first paragraph) - use agent.system_prompt directly
+        sections.append(self._format_system_prompt_prose(agent.system_prompt))
         sections.append("")
 
         # 3. Tools section (if requested)
@@ -99,13 +91,13 @@ class ClineBuilder(AbstractBuilder):
             sections.append("")
 
         # 4. Skills section (if requested)
-        if options.include_skills and bundle.skills:
-            sections.append(self._format_skills_section(bundle.skills, agent.skills or []))
+        if options.include_skills and agent.skills:
+            sections.append(self._format_skills_section(agent.skills))
             sections.append("")
 
         # 5. Workflows section (if requested)
-        if options.include_workflows and bundle.workflow:
-            sections.append(self._format_workflows_section(bundle.workflow))
+        if options.include_workflows and agent.workflows:
+            sections.append(self._format_workflows_section(agent.workflows))
             sections.append("")
 
         # 6. Subagents section (if requested)
@@ -201,11 +193,10 @@ class ClineBuilder(AbstractBuilder):
 
         return "\n".join(lines)
 
-    def _format_skills_section(self, skills_content: str, skill_names: list[str]) -> str:
+    def _format_skills_section(self, skill_names: list[str]) -> str:
         """Format skills section with use_skill invocation pattern.
 
         Args:
-            skills_content: Raw skills content from component
             skill_names: List of skill names from agent
 
         Returns:
@@ -225,23 +216,23 @@ class ClineBuilder(AbstractBuilder):
                 lines.append(f"Invoke by: `use_skill {skill_key}`")
                 lines.append("")
 
-        # Add raw skills content if available
-        if skills_content:
-            lines.append(skills_content.strip())
-
         return "\n".join(lines)
 
-    def _format_workflows_section(self, workflow_content: str) -> str:
+    def _format_workflows_section(self, workflow_names: list[str]) -> str:
         """Format workflows section with step-by-step instructions.
 
         Args:
-            workflow_content: Raw workflow content from component
+            workflow_names: List of workflow names from agent
 
         Returns:
             Formatted markdown section
         """
         lines = ["## Workflows", ""]
-        lines.append(workflow_content.strip())
+
+        # Add each workflow as a list
+        for workflow in workflow_names:
+            lines.append(f"- {workflow}")
+
         return "\n".join(lines)
 
     def _format_subagents_section(self, subagent_names: list[str]) -> str:
