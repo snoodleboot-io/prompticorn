@@ -83,6 +83,22 @@ class PromptBuilder:
                     except Exception as e:
                         actions.append(f"✗ Failed to write skills for {agent_name}: {e}")
 
+        # Write workflows (for tools that use separate workflow files like Kilo)
+        all_workflows_written = set()
+        if not dry_run and self.tool_name == "kilo":
+            for agent_name, agent in all_agents.items():
+                if agent.workflows:
+                    try:
+                        workflow_files = self._write_workflow_files(
+                            output, agent_name, agent, variant
+                        )
+                        for workflow_file in workflow_files:
+                            if workflow_file not in all_workflows_written:
+                                actions.append(f"✓ {workflow_file}")
+                                all_workflows_written.add(workflow_file)
+                    except Exception as e:
+                        actions.append(f"✗ Failed to write workflows for {agent_name}: {e}")
+
         return actions
 
     def _write_output(
@@ -210,6 +226,68 @@ class PromptBuilder:
                 written_files.extend(skill_files)
 
         return written_files
+
+    def _write_workflow_files(
+        self, output: Path, agent_name: str, agent: Any, variant: str
+    ) -> list[str]:
+        """Write workflow files for agent's workflows.
+
+        Loads workflows from top-level workflows/ directory and writes to output.
+        Currently only used for Kilo (separate command files).
+
+        Args:
+            output: Output directory
+            agent_name: Name of the agent
+            agent: Agent IR model
+            variant: Variant (minimal/verbose)
+
+        Returns:
+            List of files written
+        """
+        written_files = []
+
+        if not hasattr(agent, "workflows") or not agent.workflows:
+            return written_files
+
+        # Write each workflow as a command file (Kilo-specific)
+        if self.tool_name == "kilo":
+            commands_dir = output / ".kilo" / "commands"
+            commands_dir.mkdir(parents=True, exist_ok=True)
+
+            for workflow_name in agent.workflows:
+                # Load workflow content
+                workflow_content = self._load_workflow_content(workflow_name, variant)
+
+                if workflow_content:
+                    # Write to .kilo/commands/{workflow-name}.md
+                    command_file = commands_dir / f"{workflow_name}.md"
+                    command_file.write_text(workflow_content, encoding="utf-8")
+                    written_files.append(f".kilo/commands/{workflow_name}.md")
+
+        return written_files
+
+    def _load_workflow_content(self, workflow_name: str, variant: str) -> str | None:
+        """Load workflow content from workflows/ directory.
+
+        Args:
+            workflow_name: Name of the workflow
+            variant: Variant (minimal/verbose)
+
+        Returns:
+            Workflow content as string, or None if not found
+        """
+        workflows_dir = Path(__file__).parent / "workflows"
+        workflow_file = workflows_dir / workflow_name / variant / "workflow.md"
+
+        if not workflow_file.exists():
+            # Try other variant as fallback
+            other_variant = "verbose" if variant == "minimal" else "minimal"
+            workflow_file = workflows_dir / workflow_name / other_variant / "workflow.md"
+
+        if workflow_file.exists():
+            return workflow_file.read_text(encoding="utf-8")
+
+        return None
 
     def _parse_skills_file(self, content: str) -> list[dict[str, str]]:
         """Parse skills.md content into individual skills.

@@ -105,7 +105,9 @@ class CopilotBuilder(AbstractBuilder):
 
         # 5. Workflows (if requested)
         if options.include_workflows and agent.workflows:
-            markdown_sections.append(self._format_workflows_section(agent.workflows))
+            markdown_sections.append(
+                self._format_workflows_section(agent.workflows, options.variant)
+            )
             markdown_sections.append("")
 
         # 6. Subagents (if requested)
@@ -244,19 +246,37 @@ class CopilotBuilder(AbstractBuilder):
 
         return "\n".join(lines)
 
-    def _format_workflows_section(self, workflow_names: list[str]) -> str:
+    def _format_workflows_section(self, workflow_names: list[str], variant: str = "minimal") -> str:
         """Format workflows section for Copilot instructions.
 
         Args:
             workflow_names: List of workflow names from agent
+            variant: Variant to load (minimal/verbose)
 
         Returns:
-            Formatted workflows section as markdown
+            Formatted workflows section with full content
         """
+        from promptosaurus.builders.workflow_loader import WorkflowLoader
+
         lines = ["## Workflows\n"]
 
+        # Load and embed each workflow with full content
         for workflow in workflow_names:
-            lines.append(f"- {workflow}")
+            workflow_content = WorkflowLoader.load_workflow(workflow, variant)
+
+            if workflow_content:
+                # Format workflow content (strip frontmatter)
+                formatted_content = WorkflowLoader.format_workflow_content(
+                    workflow_content, include_frontmatter=False
+                )
+
+                lines.append(f"### {workflow}")
+                lines.append("")
+                lines.append(formatted_content)
+                lines.append("")
+            else:
+                # Fallback to just name if content not found
+                lines.append(f"- {workflow}")
 
         return "\n".join(lines)
 

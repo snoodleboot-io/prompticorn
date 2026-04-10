@@ -105,7 +105,7 @@ class CursorBuilder(AbstractBuilder):
 
         # 5. Workflows section (if requested)
         if options.include_workflows and agent.workflows:
-            sections.append(self._format_workflows_section(agent.workflows))
+            sections.append(self._format_workflows_section(agent.workflows, options.variant))
             sections.append("")
 
         # 6. Subagents section (if requested)
@@ -228,19 +228,37 @@ class CursorBuilder(AbstractBuilder):
 
         return "\n".join(lines).rstrip()
 
-    def _format_workflows_section(self, workflow_names: list[str]) -> str:
+    def _format_workflows_section(self, workflow_names: list[str], variant: str = "minimal") -> str:
         """Format workflows section with step-by-step instructions.
 
         Args:
             workflow_names: List of workflow names from agent
+            variant: Variant to load (minimal/verbose)
 
         Returns:
-            Formatted markdown section
+            Formatted workflows section with full content
         """
+        from promptosaurus.builders.workflow_loader import WorkflowLoader
+
         lines = ["## Workflows", ""]
 
+        # Load and embed each workflow with full content
         for workflow in workflow_names:
-            lines.append(f"- {workflow}")
+            workflow_content = WorkflowLoader.load_workflow(workflow, variant)
+
+            if workflow_content:
+                # Format workflow content (strip frontmatter)
+                formatted_content = WorkflowLoader.format_workflow_content(
+                    workflow_content, include_frontmatter=False
+                )
+
+                lines.append(f"### {workflow}")
+                lines.append("")
+                lines.append(formatted_content)
+                lines.append("")
+            else:
+                # Fallback to just name if content not found
+                lines.append(f"- {workflow}")
 
         return "\n".join(lines)
 
