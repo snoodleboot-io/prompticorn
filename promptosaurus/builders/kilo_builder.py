@@ -9,6 +9,7 @@ from typing import Any
 
 from promptosaurus.builders.base import AbstractBuilder, BuildOptions
 from promptosaurus.builders.errors import BuilderValidationError
+from promptosaurus.ir.loaders import CoreFilesLoader
 from promptosaurus.ir.models import Agent
 
 
@@ -57,13 +58,18 @@ class KiloBuilder(AbstractBuilder):
             agents_dir: Base directory for agent configurations (default: 'agents')
         """
         self.agents_dir = agents_dir
+        self.core_loader = CoreFilesLoader()
 
-    def build(self, agent: Agent, options: BuildOptions) -> str:
+    def build(self, agent: Agent, options: BuildOptions, config: dict | None = None) -> str:
         """Build a Kilo agent configuration file.
+
+        Includes core system, conventions, and language-specific conventions files
+        if language is specified in config.
 
         Args:
             agent: The Agent IR model to build from
             options: Build configuration options
+            config: Optional configuration dict with 'spec' key containing language info
 
         Returns:
             String containing YAML frontmatter + markdown sections
@@ -78,15 +84,22 @@ class KiloBuilder(AbstractBuilder):
                 errors=errors, message=f"Invalid agent '{agent.name}': {'; '.join(errors)}"
             )
 
+        # Use agent system prompt directly (no variants for top-level agents)
+        system_prompt = agent.system_prompt
+
         # Prepare YAML frontmatter
         frontmatter = self._build_frontmatter(agent)
 
         # Compose markdown output
         markdown_sections = []
 
-        # 1. System Prompt - use agent.system_prompt directly
+        # NOTE: Core files (system.md, conventions.md, etc.) are now written to
+        # .kilo/rules/ directory and referenced via kilo.jsonc config file.
+        # They are NOT embedded in agent files anymore.
+
+        # 1. System Prompt - use variant content or agent model
         markdown_sections.append("# System Prompt\n")
-        markdown_sections.append(agent.system_prompt)
+        markdown_sections.append(system_prompt)
         markdown_sections.append("")
 
         # 2. Tools (if requested)
@@ -359,3 +372,71 @@ class KiloBuilder(AbstractBuilder):
         yaml_frontmatter = "\n".join(yaml_lines)
 
         return f"{yaml_frontmatter}\n\n{markdown_content}"
+
+    def write_rules_files(self, output_dir: Path, config: dict | None = None) -> list[str]:
+        """Write core convention files to .kilo/rules/ directory.
+
+        Outputs static core files and language-specific conventions
+        (if language is configured). Jinja2 templates are rendered
+        with user's config values before writing.
+
+        Args:
+            output_dir: Project root directory (e.g., Path("."))
+            config: Optional config dict with 'spec' key containing language, runtime, etc.
+
+        Returns:
+            List of file paths written relative to .kilo directory
+
+        Example:
+            >>> builder = KiloBuilder()
+            >>> config = {"spec": {"language": "python", "runtime": "3.11"}}
+            >>> files = builder.write_rules_files(Path("."), config)
+            >>> files
+            ['rules/system.md', 'rules/session.md', 'rules/conventions.md', 'rules/conventions-python.md']
+        """
+        # Create .kilo/rules/ directory
+        kilo_dir = output_dir / ".kilo"
+        rules_dir = kilo_dir / "rules"
+        rules_dir.mkdir(parents=True, exist_ok=True)
+
+        written_files = []
+
+        # Static core files (no templating needed)
+        static_files = [
+            "system.md",
+            "session.md",
+            "session-troubleshooting.md",
+            "decision-log-template.md",
+        ]
+
+        for filename in static_files:
+            source_path = self.core_loader.core_dir / filename
+            if source_path.exists():
+                content = source_path.read_text(encoding="utf-8")
+                output_path = rules_dir / filename
+                output_path.write_text(content, encoding="utf-8")
+                written_files.append(f"rules/{filename}")
+
+        # Templated conventions.md (always include, render if config available)
+        conventions_source = self.core_loader.core_dir / "conventions.md"
+        if conventions_source.exists():
+            content = conventions_source.read_text(encoding="utf-8")
+            if config:
+                content = self.core_loader._template_content(content, config)
+            output_path = rules_dir / "conventions.md"
+            output_path.write_text(content, encoding="utf-8")
+            written_files.append("rules/conventions.md")
+
+        # Language-specific conventions (only if language configured)
+        if config:
+            language = config.get("spec", {}).get("language")
+            if language:
+                lang_source = self.core_loader.core_dir / f"conventions-{language}.md"
+                if lang_source.exists():
+                    content = lang_source.read_text(encoding="utf-8")
+                    content = self.core_loader._template_content(content, config)
+                    output_path = rules_dir / f"conventions-{language}.md"
+                    output_path.write_text(content, encoding="utf-8")
+                    written_files.append(f"rules/conventions-{language}.md")
+
+        return written_files

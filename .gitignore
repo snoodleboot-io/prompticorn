@@ -75,3 +75,4 @@ build/
 target/
 out/
 /test_output/
+.kilo/

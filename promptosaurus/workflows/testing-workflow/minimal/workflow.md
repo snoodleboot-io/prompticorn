@@ -1,68 +1,50 @@
 ---
-name: testing-workflow
-description: Step-by-step process for testing
-steps:
-- Happy path — expected inputs produce expected outputs
-- Edge cases — empty, zero, null/undefined, boundary values
-- Error cases — invalid inputs, failures, exceptions
-- State interactions — side effects
-- Boundary values — min, max, exactly at limit
-- Empty / null / zero / false
-- Type mismatches
-- Oversized inputs
-- Special characters
-- Injection attempts
-- Missing required fields
-- Logical contradictions
+name: Testing Workflow
+version: 1.0
+languages: [python, typescript, javascript, go, rust, java, csharp, php, ruby]
+subagents: [test/unit, test/integration, code/feature]
 ---
 
-## Steps
+# Testing Workflow (Minimal)
 
-### Step 1: Happy path — expected inputs produce expected outputs
+## Step 1: Happy Path Tests
 
-Detailed instructions for this step.
+- Test primary use case with valid inputs
+- Assert on expected outputs AND side effects
+- Use descriptive test names: `test_user_login_succeeds_with_valid_credentials`
+- Keep tests independent - no shared mutable state
 
-### Step 2: Edge cases — empty, zero, null/undefined, boundary values
+## Step 2: Boundary Values
 
-Detailed instructions for this step.
+- Test min/max values, exactly at limits
+- Empty collections, zero values, single element
+- First and last items in sequences
+- Timestamps at edge of valid ranges
 
-### Step 3: Error cases — invalid inputs, failures, exceptions
+## Step 3: Empty/Null Cases
 
-Detailed instructions for this step.
+- Test with null/undefined/None for nullable parameters
+- Empty strings, empty arrays, empty objects
+- Missing optional fields in request bodies
+- Verify appropriate defaults or error handling
 
-### Step 4: State interactions — side effects
+## Step 4: Error Cases
 
-Detailed instructions for this step.
+- Invalid inputs trigger appropriate exceptions
+- Malformed data returns clear error messages
+- External service failures are handled gracefully
+- Assert on error type AND error message content
 
-### Step 5: Boundary values — min, max, exactly at limit
+## Step 5: Coverage Verification
 
-Detailed instructions for this step.
+- Run coverage tool: `pytest --cov` or `vitest --coverage`
+- Target: 80%+ line coverage, 70%+ branch coverage
+- Identify untested paths in coverage report
+- Add tests for critical uncovered branches
 
-### Step 6: Empty / null / zero / false
+## Step 6: Test Isolation
 
-Detailed instructions for this step.
-
-### Step 7: Type mismatches
-
-Detailed instructions for this step.
-
-### Step 8: Oversized inputs
-
-Detailed instructions for this step.
-
-### Step 9: Special characters
-
-Detailed instructions for this step.
-
-### Step 10: Injection attempts
-
-Detailed instructions for this step.
-
-### Step 11: Missing required fields
-
-Detailed instructions for this step.
-
-### Step 12: Logical contradictions
-
-Detailed instructions for this step.
-
+- Each test cleans up resources (DB transactions, temp files)
+- Tests pass in any order
+- Mock external dependencies (APIs, databases, filesystem)
+- Use fixtures/factories for consistent test data

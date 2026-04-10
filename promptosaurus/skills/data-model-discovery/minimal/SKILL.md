@@ -1,6 +1,8 @@
 ---
 name: data-model-discovery
 description: Essential questions to ask before designing a data model
+languages: [all]
+subagents: [architect/data-model]
 tools_needed: []
 ---
 

@@ -1,33 +1,78 @@
 ---
-name: decision-log-workflow
-description: Step-by-step process for decision-log
-steps:
-- 'If the user has not provided full context, ask:'
-- 'Draft the ADR in this format:'
-- Keep it readable in 3 minutes.
-- Write it for a future reader who was not in the room.
-- Suggest storing it in docs/decisions/ADR-NNN-title.md
+languages: ["markdown"]
+subagents: ["ask", "architect"]
 ---
 
-## Steps
+# Decision Log (ADR) Workflow (Minimal)
 
-### Step 1: If the user has not provided full context, ask:
+## 1. Gather Context
+If not provided, ask for:
+- What decision is being made?
+- What problem does it solve?
+- What alternatives were considered?
+- Why was the chosen option selected?
+- What are the risks or trade-offs?
 
-Detailed instructions for this step.
+## 2. Create ADR File
+Store in `docs/decisions/` or `docs/adr/`:
+```bash
+# Naming: ADR-{number}-{title}.md
+# Example: ADR-001-use-postgresql-over-mongodb.md
+```
 
-### Step 2: Draft the ADR in this format:
+## 3. Write ADR Using Standard Format
+```markdown
+# ADR-{number}: {Title}
 
-Detailed instructions for this step.
+**Date:** YYYY-MM-DD
+**Status:** Accepted | Proposed | Rejected | Superseded
+**Deciders:** {Names or roles}
 
-### Step 3: Keep it readable in 3 minutes.
+## Context
+{Why is this decision needed? What problem exists?}
 
-Detailed instructions for this step.
+## Decision
+{What was decided.}
 
-### Step 4: Write it for a future reader who was not in the room.
+## Alternatives Considered
 
-Detailed instructions for this step.
+### Option A: {Name}
+**Pros:** ...
+**Cons:** ...
 
-### Step 5: Suggest storing it in docs/decisions/ADR-NNN-title.md
+### Option B: {Name}
+**Pros:** ...
+**Cons:** ...
 
-Detailed instructions for this step.
+## Consequences
 
+**Positive:**
+- ...
+
+**Negative:**
+- ...
+
+**Risks:**
+- ...
+
+## Review Date
+{When should this be revisited?}
+```
+
+## 4. Keep It Concise
+- Readable in 3 minutes or less
+- Focus on WHY, not HOW
+- Write for someone who wasn't in the room
+- Use bullet points over paragraphs
+
+## 5. Link Related ADRs
+Reference related decisions:
+- Dependencies (what decisions led to this?)
+- Superseded by (what decision replaced this?)
+- Related (what other decisions are affected?)
+
+## 6. Review and Store
+- Get approval from relevant stakeholders
+- Commit ADR to version control
+- Update decision log index (if maintained)
+- Set calendar reminder for review date

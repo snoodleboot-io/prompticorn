@@ -1,0 +1,446 @@
+# Language-Skill-Workflow Mapping Registry
+# Only includes skills and workflows that exist on filesystem
+# Last updated: 2026-04-10
+#
+# This file has been completely rewritten to remove all references to non-existent
+# skills and workflows. Previous version had 230+ fake entries.
+#
+# Verified Counts:
+# - Skills: 8 total (all real, verified on filesystem)
+# - Workflows: 21 total (all real, verified on filesystem)
+
+# ============================================================================
+# GLOBAL DEFAULTS - Applied to all languages unless overridden
+# ============================================================================
+all:
+  skills:
+    - feature-planning
+    - post-implementation-checklist
+  workflows:
+    - feature-workflow
+    - review-workflow
+    - refactor-workflow
+    - migration-workflow
+
+# ============================================================================
+# PYTHON
+# ============================================================================
+python:
+  skills:
+    - feature-planning
+    - incremental-implementation
+    - post-implementation-checklist
+    - test-aaa-structure
+    - test-coverage-categories
+    - test-mocking-rules
+    - data-model-discovery
+    - mermaid-erd-creation
+  workflows:
+    - feature-workflow
+    - testing-workflow
+    - data-model-workflow
+    - code-workflow
+    - refactor-workflow
+    - review-workflow
+    - migration-workflow
+    - scaffold-workflow
+    - dependency-upgrade-workflow
+    - boilerplate-workflow
+    - decision-log-workflow
+    - docs-workflow
+    - house-style-workflow
+    - log-analysis-workflow
+    - meta-workflow
+    - performance-workflow
+    - root-cause-workflow
+    - strategy-workflow
+    - strategy-for-applications-workflow
+    - task-breakdown-workflow
+    - accessibility-workflow
+
+# Python mode-specific combinations
+python/code:
+  skills:
+    - feature-planning
+    - incremental-implementation
+    - post-implementation-checklist
+  workflows:
+    - feature-workflow
+    - code-workflow
+    - testing-workflow
+    - boilerplate-workflow
+
+python/test:
+  skills:
+    - test-aaa-structure
+    - test-coverage-categories
+    - test-mocking-rules
+  workflows:
+    - testing-workflow
+
+python/architect:
+  skills:
+    - data-model-discovery
+    - mermaid-erd-creation
+    - feature-planning
+  workflows:
+    - data-model-workflow
+    - task-breakdown-workflow
+    - scaffold-workflow
+
+python/debug:
+  skills:
+    - feature-planning
+  workflows:
+    - log-analysis-workflow
+    - root-cause-workflow
+
+python/orchestrator:
+  skills:
+    - feature-planning
+    - post-implementation-checklist
+  workflows:
+    - meta-workflow
+    - strategy-workflow
+    - dependency-upgrade-workflow
+
+python/review:
+  skills:
+    - feature-planning
+    - post-implementation-checklist
+  workflows:
+    - review-workflow
+    - performance-workflow
+
+python/refactor:
+  skills:
+    - feature-planning
+    - post-implementation-checklist
+  workflows:
+    - refactor-workflow
+
+python/document:
+  skills:
+    - feature-planning
+  workflows:
+    - docs-workflow
+
+# ============================================================================
+# TYPESCRIPT
+# ============================================================================
+typescript:
+  skills:
+    - feature-planning
+    - incremental-implementation
+    - post-implementation-checklist
+    - test-aaa-structure
+    - test-coverage-categories
+    - test-mocking-rules
+  workflows:
+    - feature-workflow
+    - testing-workflow
+    - code-workflow
+    - refactor-workflow
+    - review-workflow
+    - migration-workflow
+    - scaffold-workflow
+    - boilerplate-workflow
+    - accessibility-workflow
+    - decision-log-workflow
+    - docs-workflow
+    - house-style-workflow
+    - performance-workflow
+    - task-breakdown-workflow
+    - dependency-upgrade-workflow
+
+# TypeScript mode-specific combinations
+typescript/code:
+  skills:
+    - feature-planning
+    - incremental-implementation
+    - post-implementation-checklist
+  workflows:
+    - feature-workflow
+    - code-workflow
+    - testing-workflow
+    - boilerplate-workflow
+
+typescript/test:
+  skills:
+    - test-aaa-structure
+    - test-coverage-categories
+    - test-mocking-rules
+  workflows:
+    - testing-workflow
+
+typescript/architect:
+  skills:
+    - feature-planning
+  workflows:
+    - task-breakdown-workflow
+    - scaffold-workflow
+
+typescript/review:
+  skills:
+    - feature-planning
+    - post-implementation-checklist
+  workflows:
+    - review-workflow
+    - performance-workflow
+
+typescript/refactor:
+  skills:
+    - feature-planning
+    - post-implementation-checklist
+  workflows:
+    - refactor-workflow
+
+# ============================================================================
+# JAVASCRIPT
+# ============================================================================
+javascript:
+  skills:
+    - feature-planning
+    - incremental-implementation
+    - post-implementation-checklist
+    - test-aaa-structure
+    - test-coverage-categories
+    - test-mocking-rules
+  workflows:
+    - feature-workflow
+    - testing-workflow
+    - code-workflow
+    - refactor-workflow
+    - review-workflow
+    - boilerplate-workflow
+    - accessibility-workflow
+    - scaffold-workflow
+
+javascript/code:
+  skills:
+    - feature-planning
+    - incremental-implementation
+    - post-implementation-checklist
+  workflows:
+    - feature-workflow
+    - code-workflow
+    - testing-workflow
+
+javascript/test:
+  skills:
+    - test-aaa-structure
+    - test-coverage-categories
+    - test-mocking-rules
+  workflows:
+    - testing-workflow
+
+# ============================================================================
+# GO
+# ============================================================================
+go:
+  skills:
+    - feature-planning
+    - incremental-implementation
+    - post-implementation-checklist
+    - test-coverage-categories
+    - test-mocking-rules
+  workflows:
+    - feature-workflow
+    - code-workflow
+    - testing-workflow
+    - refactor-workflow
+    - review-workflow
+    - scaffold-workflow
+
+go/code:
+  skills:
+    - feature-planning
+    - incremental-implementation
+    - post-implementation-checklist
+  workflows:
+    - feature-workflow
+    - code-workflow
+
+go/architect:
+  skills:
+    - data-model-discovery
+    - mermaid-erd-creation
+  workflows:
+    - data-model-workflow
+
+go/test:
+  skills:
+    - test-coverage-categories
+    - test-mocking-rules
+  workflows:
+    - testing-workflow
+
+# ============================================================================
+# RUST
+# ============================================================================
+rust:
+  skills:
+    - feature-planning
+    - incremental-implementation
+    - post-implementation-checklist
+    - test-coverage-categories
+    - test-mocking-rules
+  workflows:
+    - feature-workflow
+    - code-workflow
+    - testing-workflow
+    - refactor-workflow
+    - review-workflow
+
+rust/code:
+  skills:
+    - feature-planning
+    - incremental-implementation
+    - post-implementation-checklist
+  workflows:
+    - feature-workflow
+    - code-workflow
+
+rust/test:
+  skills:
+    - test-coverage-categories
+    - test-mocking-rules
+  workflows:
+    - testing-workflow
+
+# ============================================================================
+# JAVA
+# ============================================================================
+java:
+  skills:
+    - feature-planning
+    - incremental-implementation
+    - post-implementation-checklist
+    - test-coverage-categories
+    - test-mocking-rules
+  workflows:
+    - feature-workflow
+    - code-workflow
+    - testing-workflow
+    - refactor-workflow
+    - review-workflow
+    - scaffold-workflow
+
+java/code:
+  skills:
+    - feature-planning
+    - incremental-implementation
+    - post-implementation-checklist
+  workflows:
+    - feature-workflow
+    - code-workflow
+
+java/architect:
+  skills:
+    - data-model-discovery
+    - mermaid-erd-creation
+  workflows:
+    - data-model-workflow
+
+java/test:
+  skills:
+    - test-coverage-categories
+    - test-mocking-rules
+  workflows:
+    - testing-workflow
+
+# ============================================================================
+# C#
+# ============================================================================
+csharp:
+  skills:
+    - feature-planning
+    - incremental-implementation
+    - post-implementation-checklist
+    - test-coverage-categories
+    - test-mocking-rules
+  workflows:
+    - feature-workflow
+    - code-workflow
+    - testing-workflow
+    - refactor-workflow
+    - review-workflow
+
+csharp/code:
+  skills:
+    - feature-planning
+    - incremental-implementation
+    - post-implementation-checklist
+  workflows:
+    - feature-workflow
+    - code-workflow
+
+csharp/test:
+  skills:
+    - test-coverage-categories
+    - test-mocking-rules
+  workflows:
+    - testing-workflow
+
+# ============================================================================
+# SQL
+# ============================================================================
+sql:
+  skills:
+    - data-model-discovery
+    - mermaid-erd-creation
+  workflows:
+    - data-model-workflow
+
+# ============================================================================
+# NOTES AND REFERENCE
+# ============================================================================
+#
+# Available Skills (8 total - all verified on filesystem):
+# - data-model-discovery
+# - feature-planning
+# - incremental-implementation
+# - mermaid-erd-creation
+# - post-implementation-checklist
+# - test-aaa-structure
+# - test-coverage-categories
+# - test-mocking-rules
+#
+# Available Workflows (21 total - all verified on filesystem):
+# - accessibility-workflow
+# - boilerplate-workflow
+# - code-workflow
+# - data-model-workflow
+# - decision-log-workflow
+# - dependency-upgrade-workflow
+# - docs-workflow
+# - feature-workflow
+# - house-style-workflow
+# - log-analysis-workflow
+# - meta-workflow
+# - migration-workflow
+# - performance-workflow
+# - refactor-workflow
+# - review-workflow
+# - root-cause-workflow
+# - scaffold-workflow
+# - strategy-for-applications-workflow
+# - strategy-workflow
+# - task-breakdown-workflow
+# - testing-workflow
+#
+# Inheritance Model:
+# - Global defaults in 'all' section apply to every language
+# - Language-level mappings (e.g., 'python') override/extend global
+# - Mode-specific mappings (e.g., 'python/code') override/extend language-level
+#
+# Usage:
+# - When processing a task, lookup the most specific mapping available
+# - Example: For Python code task, use 'python/code' if exists, else 'python', else 'all'
+# - Skills and workflows are additive - combine from all applicable levels
+#
+# Maintenance:
+# - Only add skills/workflows that exist on filesystem
+# - Remove entries when skills/workflows are deleted
+# - Verify paths before adding new mappings
+# - Keep this file synchronized with actual filesystem state

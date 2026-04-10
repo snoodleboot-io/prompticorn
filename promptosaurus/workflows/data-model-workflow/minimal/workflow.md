@@ -1,28 +1,53 @@
 ---
 name: data-model-workflow
-description: Step-by-step process for data-model
+description: Design database schema with entities, relationships, and indexes
 steps:
-- 'Ask these questions before producing anything:'
-- 'After answers are collected, produce:'
-- Do NOT generate ORM code — schema design only until the user approves.
-- Use the database specified in Core Conventions.
+- Gather requirements
+- Design schema
+- Document design
+- Get approval
 ---
 
 ## Steps
 
-### Step 1: Ask these questions before producing anything:
+### Step 1: Gather requirements
 
-Detailed instructions for this step.
+Ask before designing:
+- Core entities and relationships?
+- Common read/write patterns?
+- Soft-delete, audit trail, or versioning needs?
+- Scale constraints (rows, request volume, geography)?
 
-### Step 2: After answers are collected, produce:
+### Step 2: Design schema
 
-Detailed instructions for this step.
+Produce:
+- Entity definitions (name, fields, types, nullability, defaults, constraints)
+- Mermaid ERD showing relationships
+- Index recommendations based on query patterns
+- Denormalization/caching suggestions with rationale
+- Migration skeleton (up + down)
+- Open questions or tradeoffs
 
-### Step 3: Do NOT generate ORM code — schema design only until the user approves.
+### Step 3: Document design
 
-Detailed instructions for this step.
+Use Mermaid ERD format:
+```
+erDiagram
+    USER {
+        uuid id PK
+        string email
+        timestamp created_at
+    }
+    ORDER {
+        uuid id PK
+        uuid user_id FK
+        string status
+    }
+    USER ||--o{ ORDER : "places"
+```
 
-### Step 4: Use the database specified in Core Conventions.
+### Step 4: Get approval
 
-Detailed instructions for this step.
-
+- Do NOT generate ORM code until approved
+- Use database from Core Conventions
+- Wait for user sign-off before implementation

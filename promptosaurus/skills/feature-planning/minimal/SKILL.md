@@ -1,6 +1,8 @@
 ---
 name: feature-planning
 description: Plan before implementing - understand scope and approach
+languages: [all]
+subagents: [all]
 tools_needed: [read, glob]
 ---
 

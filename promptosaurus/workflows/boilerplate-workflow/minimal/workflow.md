@@ -1,33 +1,57 @@
 ---
-name: boilerplate-workflow
-description: Step-by-step process for boilerplate
-steps:
-- Before generating, read an existing file from the same layer of the codebase
-- Generate structure and signatures only — do not implement business logic.
-- 'All generated code must:'
-- 'Ask the user for the following if not provided:'
-- Do not implement logic — structure and signatures only.
+languages: ["python", "typescript", "javascript"]
+subagents: ["code"]
 ---
 
-## Steps
+# Boilerplate Generation Workflow (Minimal)
 
-### Step 1: Before generating, read an existing file from the same layer of the codebase
+## 1. Identify Pattern
+Recognize repetitive structure that needs templating:
+- Look for files with similar structure but different names/params
+- Common patterns: models, controllers, services, repositories, tests
+- Document the pattern: What stays the same? What varies?
 
-Detailed instructions for this step.
+## 2. Read Existing Examples
+Before generating, read 2-3 existing files from same layer:
+```bash
+# Find existing files of same type
+find src/ -name "*_controller.py" | head -3
+find src/ -name "*Service.ts" | head -3
+```
+- Note naming conventions (snake_case, PascalCase)
+- Note import patterns and dependencies
+- Note structure (class-based, functional)
 
-### Step 2: Generate structure and signatures only — do not implement business logic.
+## 3. Create Template Structure
+Generate signatures and structure only, NO logic:
+- Class/function definitions with type signatures
+- Method stubs with return types
+- Constructor/initialization patterns
+- Use `# TODO: implement` or `throw new Error('Not implemented')` placeholders
 
-Detailed instructions for this step.
+## 4. Parameterize Variables
+Identify what needs to be replaced:
+- Entity/resource name (User, Product, Order)
+- Field names and types
+- API endpoints or database tables
+- Related entities and foreign keys
 
-### Step 3: All generated code must:
+## 5. Generate Companion Test File
+Create test skeleton alongside implementation:
+- Mirror implementation file structure
+- Generate test stubs for each public method
+- Include setup/teardown patterns from existing tests
+- Add `# TODO: write test` placeholders
 
-Detailed instructions for this step.
+## 6. Verify Against Conventions
+Check generated code matches project standards:
+- Follows Core Conventions naming rules
+- Uses correct file/folder structure
+- Imports follow project patterns
+- All types are properly declared (no `any` or missing types)
 
-### Step 4: Ask the user for the following if not provided:
-
-Detailed instructions for this step.
-
-### Step 5: Do not implement logic — structure and signatures only.
-
-Detailed instructions for this step.
-
+## 7. Document Usage
+Provide brief guide for using the boilerplate:
+- What needs to be filled in (TODOs)
+- What NOT to change (framework hooks, base methods)
+- Related files that may need updates (routers, exports)

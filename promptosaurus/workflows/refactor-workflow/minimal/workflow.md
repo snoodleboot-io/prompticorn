@@ -1,33 +1,43 @@
 ---
-name: refactor-workflow
-description: Step-by-step process for refactor
-steps:
-- 'Before making any changes:'
-- Make the smallest change that achieves the stated goal.
-- Flag any behavior changes — even intentional improvements — explicitly.
-- After refactoring, list the tests that should still pass to confirm
-- Do not refactor outside the stated scope. If you spot related issues
+name: Refactor Workflow
+version: 1.0
+languages: [all]
+subagents: [code/refactor, test/unit, review/code]
 ---
 
-## Steps
+# Refactor Workflow (Minimal)
 
-### Step 1: Before making any changes:
+## Step 1: Define Scope
 
-Detailed instructions for this step.
+- Identify the code smell: long method, duplicate code, god object, magic numbers
+- State the goal: improve readability, reduce duplication, or simplify logic
+- Define what is NOT changing (external behavior, API contracts)
+- Limit scope to smallest change that achieves goal
 
-### Step 2: Make the smallest change that achieves the stated goal.
+## Step 2: Write Tests First
 
-Detailed instructions for this step.
+- Add tests for current behavior if missing
+- Ensure all existing tests pass before refactoring
+- Target: 80%+ coverage on code being refactored
+- Tests act as safety net during changes
 
-### Step 3: Flag any behavior changes — even intentional improvements — explicitly.
+## Step 3: Make Smallest Change
 
-Detailed instructions for this step.
+- Refactor in tiny increments (one method extraction at a time)
+- Run tests after each micro-change
+- Commit after each successful test run
+- Use IDE refactoring tools (Extract Method, Rename, Inline)
 
-### Step 4: After refactoring, list the tests that should still pass to confirm
+## Step 4: Verify Tests Still Pass
 
-Detailed instructions for this step.
+- Run full test suite after each change
+- If tests fail, revert immediately and try smaller step
+- Check that no new warnings or errors appear
+- Verify performance hasn't degraded (if critical path)
 
-### Step 5: Do not refactor outside the stated scope. If you spot related issues
+## Step 5: Document and Review
 
-Detailed instructions for this step.
-
+- Add comments explaining non-obvious decisions
+- Update related documentation if behavior surface changed
+- Self-review changes before requesting team review
+- Note any follow-up refactoring opportunities in TODO comments

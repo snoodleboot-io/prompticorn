@@ -1,6 +1,8 @@
 ---
 name: test-mocking-rules
 description: Guidelines for when and how to use mocks in tests
+languages: [python, typescript, javascript, go, rust, java, csharp, php, ruby]
+subagents: [test/unit, test/integration]
 tools_needed: []
 ---
 

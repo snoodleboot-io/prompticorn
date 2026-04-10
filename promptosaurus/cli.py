@@ -20,6 +20,7 @@ Key Functions:
     - validate_prompts: Validate configuration integrity
 """
 
+import logging
 import sys
 from pathlib import Path
 from typing import Any
@@ -189,16 +190,16 @@ def _setup_monorepo_folders() -> list[dict[str, Any]]:
 
             # Step 2: Ask for subtype
             subtype_choice = select_option_with_explain(
-                    question=f"What {preset_type} subtype?",
-                    options=subtype_options,
-                    explanations={
-                        f"{s} ({FOLDER_TYPE_PRESETS[preset_type][s]['language']})": f"{preset_type.capitalize()} {s} - uses {FOLDER_TYPE_PRESETS[preset_type][s]['language']}"
-                        for s in subtypes
-                    },
-                    question_explanation=f"Select the {preset_type} subtype to create",
-                    default_index=0,
-                    allow_multiple=False,
-                )
+                question=f"What {preset_type} subtype?",
+                options=subtype_options,
+                explanations={
+                    f"{s} ({FOLDER_TYPE_PRESETS[preset_type][s]['language']})": f"{preset_type.capitalize()} {s} - uses {FOLDER_TYPE_PRESETS[preset_type][s]['language']}"
+                    for s in subtypes
+                },
+                question_explanation=f"Select the {preset_type} subtype to create",
+                default_index=0,
+                allow_multiple=False,
+            )
             assert isinstance(subtype_choice, str), "allow_multiple=False should return str"
             # subtype_choice is str when allow_multiple=False
             subtype = subtype_choice.split(" (")[0]  # Extract subtype name
@@ -224,16 +225,16 @@ def _setup_monorepo_folders() -> list[dict[str, Any]]:
                 valid_languages.insert(0, default_language)
 
             language_choice = select_option_with_explain(
-                    question="Programming language?",
-                    options=valid_languages,
-                    explanations={
-                        lang: f"Use {lang} for this {preset_type}/{subtype} folder"
-                        for lang in valid_languages
-                    },
-                    question_explanation=f"Select language for {folder_path}. Default is {default_language} based on preset.",
-                    default_index=0,
-                    allow_multiple=False,
-                )
+                question="Programming language?",
+                options=valid_languages,
+                explanations={
+                    lang: f"Use {lang} for this {preset_type}/{subtype} folder"
+                    for lang in valid_languages
+                },
+                question_explanation=f"Select language for {folder_path}. Default is {default_language} based on preset.",
+                default_index=0,
+                allow_multiple=False,
+            )
             assert isinstance(language_choice, str), "allow_multiple=False should return str"
             # language_choice is str when allow_multiple=False
             language: str = language_choice
@@ -481,7 +482,23 @@ def init_prompts():
             default_index=default_idx,
         )
 
-        # Step 3 & 4: Handle language questions based on repo type
+        # Step 3: Ask for variant (minimal or verbose) - BEFORE language questions
+        click.echo("\n" + "-" * 60)
+        variant_question = select_option_with_explain(
+            question="Which prompt variant would you like to use?",
+            options=["Minimal", "Verbose"],
+            explanations={
+                "Minimal": "Lightweight prompts for faster tokens and lower costs",
+                "Verbose": "Detailed prompts with more examples and explanations",
+            },
+            question_explanation="Choose between minimal (efficient) or verbose (detailed) prompts.",
+            default_index=0,
+            allow_multiple=False,
+        )
+        assert isinstance(variant_question, str), "allow_multiple=False should return str"
+        variant = "minimal" if variant_question == "Minimal" else "verbose"
+
+        # Step 4: Handle language questions based on repo type
         # Use isinstance() for proper type narrowing from str | list[str] to str
         if isinstance(repo_type, str) and repo_type == RepositoryTypes.SINGLE:
             from promptosaurus.questions.handlers.handle_single_language_questions import (
@@ -490,12 +507,14 @@ def init_prompts():
 
             handler = HandleSingleLanguageQuestions(select_option_with_explain)
             config: dict[str, Any] = handler.handle(repo_type)
+            config["variant"] = variant  # Add variant to config
         else:
             # Multi-folder or mixed - just save repo type for now
             if repo_type == RepositoryTypes.MULTI_MONOREPO:
                 # Interactive folder setup for multi-language monorepo
                 config = DEFAULT_MULTI_LANGUAGE_CONFIG_TEMPLATE.copy()
                 config["repository"]["type"] = repo_type
+                config["variant"] = variant  # Add variant to config
 
                 # Run interactive folder setup
                 # (language questions are now asked inline for each folder)
@@ -519,8 +538,9 @@ def init_prompts():
                 # Mixed or other repo types - use default template
                 config = DEFAULT_CONFIG_TEMPLATE.copy()
                 config["repository"]["type"] = repo_type
+                config["variant"] = variant  # Add variant to config
 
-        # Save configuration
+        # Save configuration (now includes variant from Step 3)
         ConfigHandler.save_config(config)
 
         click.echo("\n\n" + "=" * 60)
@@ -528,23 +548,7 @@ def init_prompts():
         click.echo("=" * 60)
         click.echo(f"\n  Config file: {ConfigHandler.get_config_path()}")
 
-        # Step 5: Ask for variant (minimal or verbose)
-        variant_question = select_option_with_explain(
-            question="Which prompt variant would you like to use?",
-            options=["Minimal", "Verbose"],
-            explanations={
-                "Minimal": "Lightweight prompts for faster tokens and lower costs",
-                "Verbose": "Detailed prompts with more examples and explanations",
-            },
-            question_explanation="Choose between minimal (efficient) or verbose (detailed) prompts.",
-            default_index=0,
-            allow_multiple=False,
-        )
-        assert isinstance(variant_question, str), "allow_multiple=False should return str"
-        variant = "minimal" if variant_question == "Minimal" else "verbose"
-        config["variant"] = variant
-
-        # Step 6: Generate selected AI assistant configurations
+        # Step 5: Generate selected AI assistant configurations
         if selected_tool:
             click.echo("\n" + "-" * 60)
             click.secho(f"  Generating AI assistant configurations ({variant})...", bold=True)
@@ -614,19 +618,19 @@ def switch_command(tool_name: str | None):
         try:
             tool_options = ["Kilo CLI", "Kilo IDE", "Cline", "Cursor", "Copilot"]
             target_tool = select_option_with_explain(
-                    question="Which AI assistant would you like to switch to?",
-                    options=tool_options,
-                    explanations={
-                        "Kilo CLI": "Kilo Code (CLI) - .opencode/rules/ with collapsed mode files",
-                        "Kilo IDE": "Kilo Code (IDE) - .kilo/agents/ individual agent files",
-                        "Cline": "Cline - .clinerules file (concatenated rules)",
-                        "Cursor": "Cursor - .cursor/rules/ directory + .cursorrules",
-                        "Copilot": "GitHub Copilot - .github/copilot-instructions.md",
-                    },
-                    question_explanation="Select an AI assistant to switch to.",
-                    default_index=1,
-                    allow_multiple=False,
-                )
+                question="Which AI assistant would you like to switch to?",
+                options=tool_options,
+                explanations={
+                    "Kilo CLI": "Kilo Code (CLI) - .opencode/rules/ with collapsed mode files",
+                    "Kilo IDE": "Kilo Code (IDE) - .kilo/agents/ individual agent files",
+                    "Cline": "Cline - .clinerules file (concatenated rules)",
+                    "Cursor": "Cursor - .cursor/rules/ directory + .cursorrules",
+                    "Copilot": "GitHub Copilot - .github/copilot-instructions.md",
+                },
+                question_explanation="Select an AI assistant to switch to.",
+                default_index=1,
+                allow_multiple=False,
+            )
             assert isinstance(target_tool, str), "allow_multiple=False should return str"
         except UserCancelledError:
             click.echo("\nOperation cancelled.")
@@ -758,15 +762,13 @@ def update_command():
             # Single-select option
             try:
                 new_value = select_option_with_explain(
-                        question=f"Select {selected_opt.display_name}:",
-                        options=selected_opt.available_options,
-                        explanations={
-                            opt: f"Select {opt}" for opt in selected_opt.available_options
-                        },
-                        question_explanation=f"Choose a {selected_opt.display_name.lower()} for your project.",
-                        default_index=0,
-                        allow_multiple=False,
-                    )
+                    question=f"Select {selected_opt.display_name}:",
+                    options=selected_opt.available_options,
+                    explanations={opt: f"Select {opt}" for opt in selected_opt.available_options},
+                    question_explanation=f"Choose a {selected_opt.display_name.lower()} for your project.",
+                    default_index=0,
+                    allow_multiple=False,
+                )
                 assert isinstance(new_value, str), "allow_multiple=False should return str"
             except UserCancelledError:
                 continue
@@ -809,6 +811,7 @@ def _get_builder(tool: str):
         ValueError: If tool is unknown.
     """
     from promptosaurus.prompt_builder import get_prompt_builder
+
     return get_prompt_builder(tool)
 
 

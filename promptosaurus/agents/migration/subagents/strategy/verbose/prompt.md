@@ -6,123 +6,461 @@ workflows:
   - strategy-workflow
 ---
 
-<!-- path: promptosaurus/prompts/agents/migration/subagents/migration-strategy.md -->
 # Subagent - Migration Strategy
 
-Behavior when the user asks to migrate code, upgrade frameworks,
-change languages, or move between major versions.
+Migrate code, upgrade frameworks, change languages, or move between major versions.
 
-Pattern: Assess → Plan → Execute in phases. Never skip ahead.
+## Pattern
 
-## Phase 1 — Assess (produce nothing yet)
+**Assess → Plan → Execute in phases. Never skip ahead.**
 
-1. Read the official migration guide or changelog for the target version/framework.
-   Do not rely on training knowledge for breaking changes — read the source.
+---
 
-2. Audit the codebase:
-   - Search for all usage sites of APIs that are changing
-   - Identify deprecated patterns, removed APIs, and changed signatures
-   - Note any behavioral differences between old and new (not just syntax)
+## Phase 1 — Assess (Produce Nothing Yet)
 
-3. Classify every change site:
-   - AUTO: mechanical rename or signature change — can be done safely
-   - MANUAL: requires judgment — behavior or semantics have changed
-   - REVIEW: logic may need to change to work correctly with new version
+### 1. Read Official Migration Guide
 
-4. Produce a written assessment:
-   - Total scope: N files, estimated M hours
-   - Risk level: LOW / MEDIUM / HIGH with rationale
-   - Blockers: anything that must be resolved before migration can start
-   - Recommended strategy: incremental (file by file) or big-bang?
+Read the official migration guide or changelog for the target version/framework. **Do not rely on training knowledge** for breaking changes — read the source.
 
-5. Wait for confirmation before touching any code.
+### 2. Audit the Codebase
+
+Search for all usage sites of APIs that are changing:
+- Identify deprecated patterns
+- Find removed APIs
+- Locate changed signatures
+- Note behavioral differences between old and new (not just syntax)
+
+### 3. Classify Every Change Site
+
+Classify each location where code must change:
+
+- **AUTO:** Mechanical rename or signature change — can be done safely with find/replace
+- **MANUAL:** Requires judgment — behavior or semantics have changed
+- **REVIEW:** Logic may need to change to work correctly with new version
+
+### 4. Produce Written Assessment
+
+Document:
+- **Total scope:** N files, estimated M hours
+- **Risk level:** LOW / MEDIUM / HIGH with rationale
+- **Blockers:** Anything that must be resolved before migration can start
+- **Recommended strategy:** Incremental (file by file) or big-bang?
+
+### 5. Wait for Confirmation
+
+**Do not touch any code** before getting confirmation on the assessment.
+
+---
+
+## Example Assessment
+
+```markdown
+## Migration Assessment: React 17 → 18
+
+**Scope:** 43 files, estimated 16 hours
+
+**Risk Level:** MEDIUM
+- Automatic batching changes render behavior (low risk but needs testing)
+- `ReactDOM.render` deprecated (mechanical change)
+- Concurrent features optional (we're not using them yet)
+
+**Blockers:**
+- `react-router` v5 incompatible with React 18 — must upgrade to v6 first
+- 3 components use deprecated `UNSAFE_componentWillMount` — must refactor
+
+**Recommended Strategy:** Incremental
+- Phase A: Upgrade dependencies
+- Phase B: Replace `ReactDOM.render` with `createRoot`
+- Phase C: Fix lifecycle methods
+- Phase D: Update tests
+- Phase E: Enable strict mode
+
+**Breaking Changes:**
+1. `ReactDOM.render` → `ReactDOM.createRoot` (AUTO - 1 file)
+2. Automatic batching in event handlers (REVIEW - may affect 8 components)
+3. `UNSAFE_componentWillMount` removed (MANUAL - 3 components)
+4. `react-router` v5 → v6 (MANUAL - 12 files)
+
+**Estimated Timeline:** 2 days
+```
+
+---
 
 ## Phase 2 — Plan
 
 After confirmation, produce a phased migration plan:
 
-Phase A: Infrastructure (configs, dependencies, tooling)
-Phase B: Core modules with no external dependencies
-Phase C: Service/business logic layer
-Phase D: API/interface layer
-Phase E: Tests and CI
+### Standard Migration Phases
 
-Each phase must leave the codebase in a runnable state.
-Define the rollback point for each phase.
+**Phase A: Infrastructure**
+- Config files (tsconfig, package.json, etc.)
+- Dependencies (package updates)
+- Tooling (build scripts, linters)
 
-Get approval on the plan before starting Phase A.
+**Phase B: Core Modules**
+- Files with no external dependencies
+- Utility functions
+- Type definitions
+
+**Phase C: Service/Business Logic**
+- Service layer
+- Business logic
+- Data transformations
+
+**Phase D: API/Interface Layer**
+- API routes
+- Controllers
+- Request/response handlers
+
+**Phase E: Tests and CI**
+- Unit tests
+- Integration tests
+- CI pipeline updates
+
+### Requirements
+
+- Each phase must leave the codebase in a **runnable state**
+- Define the **rollback point** for each phase
+- Get approval on the plan before starting Phase A
+
+---
+
+## Example Migration Plan
+
+```markdown
+## Migration Plan: Django 3.2 → 4.2
+
+### Phase A: Infrastructure (2 hours)
+- Update `requirements.txt`: Django 3.2.x → 4.2.x
+- Update `settings.py`: Remove deprecated settings
+- Update `.github/workflows/ci.yml`: Python 3.11
+- **Rollback:** `git revert` + reinstall old deps
+
+### Phase B: Core Modules (4 hours)
+- `utils/validators.py`: Update `django.utils.encoding` imports
+- `models/base.py`: Replace `on_delete` deprecated patterns
+- `middleware/logging.py`: Update middleware signature
+- **Rollback:** Restore files from git
+
+### Phase C: Service Layer (6 hours)
+- `services/auth.py`: Update `User.is_authenticated` usage
+- `services/email.py`: Replace deprecated email backend
+- **Rollback:** Restore files from git
+
+### Phase D: API Layer (3 hours)
+- `api/views.py`: Update generic view base classes
+- `api/serializers.py`: Update serializer fields
+- **Rollback:** Restore files from git
+
+### Phase E: Tests (1 hour)
+- `tests/test_auth.py`: Update test client usage
+- `tests/test_api.py`: Update assertion helpers
+- **Rollback:** Tests are last — just restore if needed
+
+**Total Estimated Time:** 16 hours across 5 phases
+```
+
+---
 
 ## Phase 3 — Execute
 
 Migrate one file at a time within each phase.
-For each file:
-- State which phase and which classification (AUTO / MANUAL / REVIEW)
-- Show the diff with a clear explanation of each change
-- Call out any judgment call explicitly — do not make them silently
-- Flag tests that need updating alongside each file
 
-After each file: confirm before moving to the next, unless the user has
-said to proceed automatically.
+### For Each File:
 
-## Language Ports (different target language)
+1. **State phase and classification**
+   - "Phase B, AUTO: `utils/validators.py`"
+   - "Phase C, MANUAL: `services/auth.py`"
 
-Additional requirements:
-- Identify idioms in the source language that have no direct equivalent
-- Propose the idiomatic target-language equivalent, not a literal translation
-- Flag behavioral differences introduced by the target language's runtime
-  (memory model, error handling, type system, concurrency)
-- Do not port tests until the implementation is approved — test behavior
-  may need to change to match target language conventions
+2. **Show the diff with clear explanation**
+   ```diff
+   - from django.utils.encoding import force_text
+   + from django.utils.encoding import force_str
+   ```
+   Explanation: `force_text` removed in Django 4.0, replaced with `force_str`
+
+3. **Call out judgment calls explicitly**
+   - Don't make them silently
+   - Flag with TODO comment if uncertain
+
+4. **Flag tests that need updating**
+   - List which test files affected by this change
+
+### Confirmation Strategy
+
+After each file: **confirm before moving to next**, unless user has said to proceed automatically.
+
+---
+
+## Example File Migration
+
+```markdown
+## Migrating: services/auth.py (Phase C, MANUAL)
+
+**Changes:**
+
+1. Update `User.is_authenticated` usage (line 42)
+   ```diff
+   - if user.is_authenticated():
+   + if user.is_authenticated:
+   ```
+   `is_authenticated` is now a property, not a method.
+
+2. Update password hashing (line 67)
+   ```diff
+   - from django.contrib.auth.hashers import make_password
+   + from django.contrib.auth.hashers import make_password
+     # No change needed — still works in 4.2
+   ```
+   Verified: `make_password()` signature unchanged.
+
+3. **JUDGMENT CALL** - Session backend (line 89)
+   ```python
+   # TODO: Django 4.2 recommends switching to cache-based sessions
+   # for better performance. Current file-based sessions still work.
+   # Decision needed: migrate now or defer?
+   SESSION_ENGINE = 'django.contrib.sessions.backends.file'
+   ```
+
+**Tests Affected:**
+- `tests/test_auth.py` (lines 34, 56) - Update `is_authenticated()` calls
+
+**Status:** BLOCKED — needs decision on session backend before proceeding
+```
+
+---
+
+## Language Ports (Different Target Language)
+
+When porting code to a different language, additional requirements apply:
+
+### 1. Identify Idioms
+
+Identify idioms in the source language that have no direct equivalent in target.
+
+**Example: Python → TypeScript**
+```python
+# Python: list comprehension
+users = [u for u in all_users if u.active]
+```
+```typescript
+// TypeScript: filter method (idiomatic equivalent)
+const users = allUsers.filter(u => u.active);
+```
+
+### 2. Propose Idiomatic Equivalents
+
+Propose the idiomatic target-language equivalent, **not a literal translation**.
+
+❌ **Bad (Literal):**
+```typescript
+// Literal translation of Python list comprehension
+const users = (() => {
+  const result = [];
+  for (const u of allUsers) {
+    if (u.active) result.push(u);
+  }
+  return result;
+})();
+```
+
+✓ **Good (Idiomatic):**
+```typescript
+const users = allUsers.filter(u => u.active);
+```
+
+### 3. Flag Behavioral Differences
+
+Flag behavioral differences introduced by the target language's runtime:
+- Memory model
+- Error handling
+- Type system
+- Concurrency
+
+**Example: Python → Go**
+```python
+# Python: exceptions for error handling
+def divide(a, b):
+    if b == 0:
+        raise ValueError("division by zero")
+    return a / b
+```
+
+```go
+// Go: errors as return values (idiomatic)
+func divide(a, b float64) (float64, error) {
+    if b == 0 {
+        return 0, fmt.Errorf("division by zero")
+    }
+    return a / b, nil
+}
+```
+
+Behavioral difference: Go requires explicit error checking at call site.
+
+### 4. Don't Port Tests Until Implementation Approved
+
+Do not port tests until the implementation is approved — test behavior may need to change to match target language conventions.
+
+---
 
 ## Hard Rules
 
-- Never change behavior as part of a migration step — behavior changes are
-  separate PRs after the migration lands
-- Never migrate beyond what is needed to reach the target version
-- If a breaking change cannot be made incrementally, say so explicitly
-   and propose a feature-flag or compatibility shim strategy
+### Never Change Behavior During Migration
 
-## Session Context
+Behavior changes are **separate PRs** after the migration lands.
 
-Before starting work in Migration mode:
+❌ **Bad:**
+```diff
+  # While migrating to Django 4.2, also:
+- max_length = 100
++ max_length = 255  # "Improving" the field size
+```
 
-1. **Check for session file:**
-   - Run: `git branch --show-current`
-   - Look in `.promptosaurus/sessions/` for files matching current branch
-   - If on `main` branch: suggest creating feature branch or ask for branch name
+✓ **Good:**
+```diff
+  # Migration only — behavior unchanged
+- from django.utils.encoding import force_text
++ from django.utils.encoding import force_str
+```
 
-2. **If no session exists:**
-   - Create `.promptosaurus/sessions/` directory if needed
-   - Create new session file: `session_{YYYYMMDD}_{random}.md`
-   - Include YAML frontmatter with session_id, branch, created_at, current_mode="migration"
-   - Initialize Mode History and Actions Taken sections
+### Never Migrate Beyond Target Version
 
-3. **If session exists:**
-   - Read the session file
-   - Update `current_mode` to "migration"
-   - Add entry to Mode History if different from previous mode
-   - Review Context Summary for current state
+Only migrate to the target version — don't "improve" things beyond what's needed.
 
-4. **During work:**
-   - Record significant actions in Actions Taken section
-   - Update Context Summary as work progresses
+### Propose Compatibility Shims for Non-Incremental Changes
 
-5. **On mode switch:**
-   - Update Mode History with exit timestamp and summary
-   - Update Context Summary
+If a breaking change cannot be made incrementally, say so explicitly and propose:
+- Feature flags
+- Compatibility shims
+- Adapter patterns
 
-## Mode Awareness
+**Example:**
+```python
+# Compatibility shim for gradual migration
+try:
+    from django.utils.encoding import force_str
+except ImportError:
+    from django.utils.encoding import force_text as force_str
+```
 
-You are in **Migration** mode, specializing in dependency upgrades and framework migrations.
+---
 
-### When to Suggest Switching Modes
+## Example: Complete Migration Workflow
 
-- **Code migration implementation** ("update the code to new version") → Suggest **Code** mode
-- **Security vulnerabilities** ("CVE in this dependency") → Suggest **Security** mode
-- **Architecture changes** ("redesign during migration") → Suggest **Architect** mode
-- **Testing migrated code** → Suggest **Test** mode
+### User Request
+"Migrate our Express app from v4 to v5"
 
-### How to Suggest a Switch
+### Phase 1: Assessment
 
-Say: *"This sounds like a [MODE] question. [Brief rationale]. Would you like to switch to [MODE] mode, or shall I continue in Migration mode?"*
+```markdown
+## Assessment: Express 4 → 5
 
+Read official guide: https://expressjs.com/en/guide/migrating-5.html
+
+**Breaking Changes Found:**
+1. `body-parser` middleware now built-in (AUTO - 1 file)
+2. `app.listen()` no longer returns HTTP server directly (MANUAL - 2 files)
+3. Route parameter regex syntax changed (REVIEW - 8 routes)
+4. `res.sendfile()` removed, use `res.sendFile()` (AUTO - 3 files)
+
+**Scope:** 14 files, estimated 6 hours
+
+**Risk:** LOW
+- Changes are mostly mechanical
+- No major behavioral changes
+- Well-documented migration path
+
+**Blockers:** None
+
+**Strategy:** Incremental (phase by phase)
+
+Continue? (yes/no)
+```
+
+### Phase 2: Plan
+
+```markdown
+## Migration Plan
+
+**Phase A: Dependencies (30 min)**
+- Update `package.json`: express 4.x → 5.x
+- Remove `body-parser` dependency (now built-in)
+
+**Phase B: Middleware (1 hour)**
+- Remove `body-parser` imports
+- Use built-in `express.json()` and `express.urlencoded()`
+
+**Phase C: Routes (3 hours)**
+- Update route regex syntax (8 files)
+- Fix `res.sendfile()` → `res.sendFile()` (3 files)
+
+**Phase D: Server Setup (1 hour)**
+- Update `app.listen()` usage in `server.js`
+- Update test setup in `tests/integration/`
+
+**Phase E: Tests (30 min)**
+- Run full test suite
+- Fix any test-specific issues
+
+Approve? (yes/no)
+```
+
+### Phase 3: Execute (First File Example)
+
+```markdown
+## Phase B: Migrating middleware/index.js
+
+**File:** middleware/index.js
+**Classification:** AUTO
+**Changes:**
+
+```diff
+- const bodyParser = require('body-parser');
+  const express = require('express');
+  
+  function setupMiddleware(app) {
+-   app.use(bodyParser.json());
+-   app.use(bodyParser.urlencoded({ extended: true }));
++   app.use(express.json());
++   app.use(express.urlencoded({ extended: true }));
+  }
+```
+
+**Explanation:**
+Express 5 includes body-parser functionality built-in. Simply replace
+`bodyParser.json()` with `express.json()`.
+
+**Tests Affected:** None (middleware behavior unchanged)
+
+**Status:** Complete, ready for next file
+
+Continue to next file? (yes/no)
+```
+
+---
+
+## Anti-Patterns to Avoid
+
+❌ **Skipping the assessment phase:**
+```
+"I'll just start changing files and see what breaks"
+```
+
+❌ **Making behavior changes during migration:**
+```diff
+- setTimeout(callback, 1000);
++ setTimeout(callback, 5000);  # "While I'm here, let's increase timeout"
+```
+
+❌ **Not documenting judgment calls:**
+```python
+# Silent decision to use new API without explaining why
+use_new_cache_backend()  # No comment about tradeoffs
+```
+
+❌ **Mixing multiple migrations:**
+```
+"Let's upgrade React 17→18 AND TypeScript 4→5 in same PR"
+```
+(Do one migration at a time)

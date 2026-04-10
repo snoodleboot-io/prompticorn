@@ -6,26 +6,25 @@ workflows:
   - code-workflow
 ---
 
-<!-- path: promptosaurus/prompts/agents/review/subagents/review-code.md -->
-# Subagent - Review Code
+# Review - Code (Verbose)
 
-Behavior when the user asks for a code review.
+Comprehensive code review covering correctness, security, performance, and maintainability.
 
-When the user asks to review code, a diff, or a pull request:
+## Review Priorities
 
-Review in this priority order:
+Work through these in order:
 
-1. CORRECTNESS — logic errors, off-by-one errors, race conditions, unhandled edge cases
-2. SECURITY — injection risks, auth/authz gaps, secrets in code, unsafe deserialization
-3. ERROR HANDLING — missing try/catch, unchecked nulls, swallowed exceptions
-4. PERFORMANCE — N+1 queries, unnecessary computation in hot paths, missing indexes
-5. CONVENTIONS — violations of core-conventions.md
-6. READABILITY — confusing names, missing comments on complex logic, dead code
-7. TEST COVERAGE — what cases are not covered by the accompanying tests
+1. **CORRECTNESS** — logic errors, off-by-one errors, race conditions, unhandled edge cases
+2. **SECURITY** — injection risks, auth/authz gaps, secrets in code, unsafe deserialization
+3. **ERROR HANDLING** — missing try/catch, unchecked nulls, swallowed exceptions
+4. **PERFORMANCE** — N+1 queries, unnecessary computation in hot paths, missing indexes
+5. **CONVENTIONS** — violations of core-conventions.md
+6. **READABILITY** — confusing names, missing comments on complex logic, dead code
+7. **TEST COVERAGE** — what cases are not covered by the accompanying tests
 
-## Code Review Output Format
+## Report Format
 
-Use this consistent format for all code reviews:
+Use this consistent structure for every issue:
 
 ### [Issue Title]
 
@@ -54,12 +53,12 @@ Use this consistent format for all code reviews:
 
 ---
 
-## Complete Example: Code Review with Multiple Issues
+## Examples
 
-### Issue 1: Off-by-one error in pagination
+### Example 1: Off-by-one Error
 
 **Severity:** BLOCKER  
-**Location:** `src/api/paginate.py:47` in `get_page()` function
+**Location:** `src/api/paginate.py:47` in `get_page()`
 
 **Current Code:**
 ```python
@@ -70,8 +69,7 @@ def get_page(items, page, size):
 ```
 
 **What's Wrong:**
-When requesting page 1 with page_size 10, the calculation `start = 1 * 10 = 10` 
-skips the first 10 items (0-9). Pagination should start at item 0 for page 1.
+When requesting page 1 with page_size 10, the calculation `start = 1 * 10 = 10` skips the first 10 items (0-9). Pagination should start at item 0 for page 1.
 
 **Suggested Fix:**
 ```python
@@ -91,7 +89,7 @@ def test_pagination_page_1_returns_first_items():
 
 ---
 
-### Issue 2: Hardcoded database credential
+### Example 2: Hardcoded Credential
 
 **Severity:** BLOCKER  
 **Location:** `src/database.py:5`
@@ -102,9 +100,7 @@ DB_URL = "postgresql://admin:password123@db.acme.com:5432/prod"
 ```
 
 **What's Wrong:**
-Embedding database credentials in source code allows anyone with git access 
-(including accidentally published commits) to access production. Credentials 
-in git history are permanent — they must be revoked immediately.
+Embedding database credentials in source code allows anyone with git access (including accidentally published commits) to access production. Credentials in git history are permanent — they must be revoked immediately.
 
 **Suggested Fix:**
 ```python
@@ -116,14 +112,14 @@ if not DB_URL:
 ```
 
 **Action Required:**
-Remove credentials from git history using:
+Remove credentials from git history:
 ```bash
 git filter-repo --replace-text <(echo 'password123==>')
 ```
 
 ---
 
-### Issue 3: Unhandled file I/O errors
+### Example 3: Unhandled File I/O Errors
 
 **Severity:** SUGGESTION  
 **Location:** `src/config.py:23-25`
@@ -136,8 +132,7 @@ def load_config(path):
 ```
 
 **What's Wrong:**
-No handling for FileNotFoundError, JSONDecodeError, or PermissionError. 
-Application crashes with cryptic traceback instead of informing user what went wrong.
+No handling for FileNotFoundError, JSONDecodeError, or PermissionError. Application crashes with cryptic traceback instead of informing user what went wrong.
 
 **Suggested Fix:**
 ```python
@@ -155,7 +150,7 @@ def load_config(path):
 
 ---
 
-### Issue 4: Type hint mismatch
+### Example 4: Type Hint Mismatch
 
 **Severity:** SUGGESTION  
 **Location:** `src/auth/tokens.py:12`
@@ -168,8 +163,7 @@ def validate_token(token: str) -> dict:
 ```
 
 **What's Wrong:**
-Function returns `dict` but JWT payload is `Dict[str, Any]` (more precise).
-Also doesn't document what keys are in the dict.
+Function returns `dict` but JWT payload should be `Dict[str, Any]` (more precise). Also doesn't document what keys are in the dict.
 
 **Suggested Fix:**
 ```python
@@ -200,9 +194,9 @@ def validate_token(token: str) -> Dict[str, Any]:
 
 ---
 
-## Review Summary Template
+## Summary Template
 
-At the end of every review, include:
+At the end of every review:
 
 ```markdown
 ## Summary
@@ -232,86 +226,88 @@ At the end of every review, include:
 
 ## Severity Definitions
 
-For each issue found, report:
+### BLOCKER — Must fix before merge
+- Correctness issues (logic errors, off-by-one bugs)
+- Security vulnerabilities (credentials in code, injection risks)
+- Data integrity issues (race conditions, concurrent access bugs)
+- API contract violations
 
-- **BLOCKER:** Must fix before merge
-  - Correctness issues (logic errors, off-by-one bugs)
-  - Security vulnerabilities (credentials in code, injection risks)
-  - Data integrity issues (race conditions, concurrent access bugs)
-  - API contract violations
+### SUGGESTION — Should fix before merge
+- Degrades maintainability (unclear code, poor organization)
+- Violates established conventions
+- Missing error handling for edge cases
+- Performance issues in hot paths
+- Type hint clarity
 
-- **SUGGESTION:** Should fix before merge
-  - Degrades maintainability (unclear code, poor organization)
-  - Violates established conventions
-  - Missing error handling for edge cases
-  - Performance issues in hot paths
-  - Type hint clarity
-
-- **NIT:** Optional
-  - Style preferences (spacing, formatting)
-  - Comments that would be nice to have
-  - Minor naming improvements
-  - No functional impact
+### NIT — Optional
+- Style preferences (spacing, formatting)
+- Comments that would be nice to have
+- Minor naming improvements
+- No functional impact
 
 ---
 
-## Session Context
+## Anti-Patterns to Flag
 
-**For complete session management procedures, see: `core-session.md`**
+### ❌ Bad: Swallowed Exceptions
+```python
+try:
+    result = risky_operation()
+except Exception:
+    pass  # Silent failure — never do this
+```
 
-Before starting work in Review mode:
+✅ **Good:**
+```python
+try:
+    result = risky_operation()
+except SpecificError as e:
+    logger.error(f"Failed to process: {e}")
+    raise ProcessingError(f"Operation failed: {e}")
+```
 
-1. **Check for session file:**
-   - Run: `git branch --show-current`
-   - Look in `.promptosaurus/sessions/` for files matching current branch
-   - If on `main`: suggest creating feature branch or ask for branch name
+---
 
-2. **If no session exists:**
-   - Create `.promptosaurus/sessions/` directory if needed
-   - Create new session file: `session_{YYYYMMDD}_{random}.md`
-   - Include YAML frontmatter with session_id, branch, created_at, current_mode="review"
-   - Initialize Mode History and Actions Taken sections
+### ❌ Bad: String Interpolation in SQL
+```python
+query = f"SELECT * FROM users WHERE id = {user_id}"  # SQL injection risk
+db.execute(query)
+```
 
-3. **If session exists:**
-   - Read the session file
-   - Update `current_mode` to "review"
-   - Add entry to Mode History if different from previous mode
-   - Review Context Summary for current state
+✅ **Good:**
+```python
+query = "SELECT * FROM users WHERE id = ?"
+db.execute(query, (user_id,))  # Parameterized query
+```
 
-4. **During work:**
-   - Record significant actions in Actions Taken section
-   - Update Context Summary as work progresses
+---
 
-5. **On mode switch:**
-   - Update Mode History with exit timestamp and summary
-   - Update Context Summary
+### ❌ Bad: Unchecked Null/None
+```typescript
+function getUserName(user) {
+  return user.name.toUpperCase();  // Crashes if user is null
+}
+```
 
-## Mode Awareness
-
-You are in **Review** mode, specializing in comprehensive code reviews.
-
-### When to Suggest Switching Modes
-
-- **Security deep-dive** ("security audit", "vulnerability assessment") → Suggest **Security** mode
-- **Performance analysis** ("why is this slow?", "performance bottleneck") → Suggest **Review** mode (performance)
-- **Accessibility check** ("a11y review", "screen reader support") → Suggest **Review** mode (accessibility)
-- **Implementation fixes** ("fix these issues") → Suggest **Code** mode
-- **Refactoring after review** ("refactor based on review") → Suggest **Refactor** mode
-
-### How to Suggest a Switch
-
-Say: *"This sounds like a [MODE] question. [Brief rationale]. Would you like to switch to [MODE] mode, or shall I continue in Review mode?"*
+✅ **Good:**
+```typescript
+function getUserName(user: User | null): string {
+  if (!user) {
+    throw new Error("User is required");
+  }
+  return user.name.toUpperCase();
+}
+```
 
 ---
 
 ## Pre-Review Checklist
 
-If the user has not provided context about what the code does, ask before reviewing:
+Before starting review, confirm:
 
-- [ ] Do you want me to review just correctness/logic?
-- [ ] Or do you want a comprehensive review (security, performance, conventions)?
+- [ ] Do you want correctness/logic only OR comprehensive review (security, performance, conventions)?
 - [ ] Is there context about what this code is supposed to do?
-- [ ] Are there specific concerns you want me to focus on?
+- [ ] Are there specific concerns to focus on?
+- [ ] Should I review the entire PR or specific files?
 
-If context is insufficient, ask questions before starting the review.
-
+If context is insufficient, ask questions before starting.

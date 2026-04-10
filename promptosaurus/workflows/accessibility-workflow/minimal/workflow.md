@@ -1,118 +1,62 @@
 ---
-name: accessibility-workflow
-description: Step-by-step process for accessibility
-steps:
-- SEMANTIC HTML — correct elements used (button vs div, nav, main, h1-h6 hierarchy)
-- KEYBOARD NAVIGATION — all interactive elements reachable and activatable by keyboard
-- FOCUS MANAGEMENT — focus trapped in modals, restored after dialogs close
-- ARIA — roles, labels, descriptions present and correct; no redundant ARIA
-- COLOR CONTRAST — flag text or UI elements likely to fail 4.5:1 ratio
-- IMAGES — meaningful images have descriptive alt text; decorative images have alt=""
-- FORMS — all inputs labeled; errors associated with the correct field
-- MOTION — animations respect prefers-reduced-motion
-- SCREEN READER ANNOUNCEMENTS — dynamic updates announced via live regions
-- NAMING CLARITY — endpoints, parameters, and fields named intuitively
-- CONSISTENCY — similar operations follow the same pattern
-- ERROR RESPONSES — descriptive errors with error code and human message
-- VERSIONING — breaking changes can be made safely
-- INPUT VALIDATION — inputs validated before processing, limits documented
-- RESPONSE SHAPE — consistent envelope, nullable fields marked
-- BREAKING CHANGES — would any of these changes break existing callers?
-- DOCUMENTATION GAPS — what is unclear that a consumer would need to know?
-- '**Check for session file:**'
-- '**If no session exists:**'
-- '**If session exists:**'
-- '**During work:**'
-- '**On mode switch:**'
+languages: ["python", "typescript", "javascript", "html"]
+subagents: ["review", "test"]
 ---
 
-## Steps
+# Accessibility Testing Workflow (Minimal)
 
-### Step 1: SEMANTIC HTML — correct elements used (button vs div, nav, main, h1-h6 hierarchy)
+## 1. Identify Compliance Level
+Determine target WCAG level (A, AA, AAA) based on requirements.
+- Level A: Basic web accessibility (minimum)
+- Level AA: Industry standard (recommended)
+- Level AAA: Enhanced accessibility (specialized needs)
 
-Detailed instructions for this step.
+## 2. Automated Testing
+Run automated accessibility checks using tools:
+```bash
+# Lighthouse CI for web apps
+lighthouse --only-categories=accessibility https://your-app.com
 
-### Step 2: KEYBOARD NAVIGATION — all interactive elements reachable and activatable by keyboard
+# axe-core for component testing
+npm install -D @axe-core/cli
+axe https://your-app.com --tags wcag2a,wcag2aa
 
-Detailed instructions for this step.
+# Pa11y for automated scanning
+npm install -g pa11y
+pa11y https://your-app.com
+```
 
-### Step 3: FOCUS MANAGEMENT — focus trapped in modals, restored after dialogs close
+## 3. Keyboard Navigation Testing
+Test all interactive elements without mouse:
+- Tab through all focusable elements (forms, buttons, links)
+- Verify focus indicators are visible (outline, background change)
+- Test keyboard shortcuts (Enter, Space, Escape, Arrow keys)
+- Ensure no keyboard traps (can Tab out of all elements)
 
-Detailed instructions for this step.
+## 4. Screen Reader Testing
+Test with at least one screen reader:
+- NVDA (Windows, free), JAWS (Windows, paid), VoiceOver (macOS/iOS)
+- Verify all images have alt text describing content
+- Check form labels are properly associated with inputs
+- Test heading hierarchy (h1 → h2 → h3, no skips)
+- Verify ARIA labels on interactive components
 
-### Step 4: ARIA — roles, labels, descriptions present and correct; no redundant ARIA
+## 5. Color Contrast Analysis
+Check text contrast ratios meet WCAG standards:
+- Normal text: 4.5:1 minimum (AA), 7:1 (AAA)
+- Large text (18pt+): 3:1 minimum (AA), 4.5:1 (AAA)
+- Use tools: WebAIM Contrast Checker, Chrome DevTools
 
-Detailed instructions for this step.
+## 6. Semantic HTML Review
+Audit markup for proper semantic structure:
+- Use semantic tags: `<nav>`, `<main>`, `<article>`, `<section>`, `<aside>`
+- Buttons use `<button>`, links use `<a>` (not div with onClick)
+- Forms use proper `<label>` elements with for/id association
+- Tables use `<th>` with scope attributes for headers
 
-### Step 5: COLOR CONTRAST — flag text or UI elements likely to fail 4.5:1 ratio
-
-Detailed instructions for this step.
-
-### Step 6: IMAGES — meaningful images have descriptive alt text; decorative images have alt=""
-
-Detailed instructions for this step.
-
-### Step 7: FORMS — all inputs labeled; errors associated with the correct field
-
-Detailed instructions for this step.
-
-### Step 8: MOTION — animations respect prefers-reduced-motion
-
-Detailed instructions for this step.
-
-### Step 9: SCREEN READER ANNOUNCEMENTS — dynamic updates announced via live regions
-
-Detailed instructions for this step.
-
-### Step 10: NAMING CLARITY — endpoints, parameters, and fields named intuitively
-
-Detailed instructions for this step.
-
-### Step 11: CONSISTENCY — similar operations follow the same pattern
-
-Detailed instructions for this step.
-
-### Step 12: ERROR RESPONSES — descriptive errors with error code and human message
-
-Detailed instructions for this step.
-
-### Step 13: VERSIONING — breaking changes can be made safely
-
-Detailed instructions for this step.
-
-### Step 14: INPUT VALIDATION — inputs validated before processing, limits documented
-
-Detailed instructions for this step.
-
-### Step 15: RESPONSE SHAPE — consistent envelope, nullable fields marked
-
-Detailed instructions for this step.
-
-### Step 16: BREAKING CHANGES — would any of these changes break existing callers?
-
-Detailed instructions for this step.
-
-### Step 17: DOCUMENTATION GAPS — what is unclear that a consumer would need to know?
-
-Detailed instructions for this step.
-
-### Step 18: **Check for session file:**
-
-Detailed instructions for this step.
-
-### Step 19: **If no session exists:**
-
-Detailed instructions for this step.
-
-### Step 20: **If session exists:**
-
-Detailed instructions for this step.
-
-### Step 21: **During work:**
-
-Detailed instructions for this step.
-
-### Step 22: **On mode switch:**
-
-Detailed instructions for this step.
-
+## 7. Document Findings
+Create accessibility audit report:
+- List all violations with WCAG criterion reference
+- Categorize by severity (blocker, major, minor)
+- Provide remediation steps for each issue
+- Include screenshots and code examples

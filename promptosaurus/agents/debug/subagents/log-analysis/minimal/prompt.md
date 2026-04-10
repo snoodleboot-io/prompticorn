@@ -1,34 +1,64 @@
 ---
-name: log-analysis
-description: Debug - log-analysis
-workflows:
-  - log-analysis-workflow
+name: debug-log-analysis-minimal
+version: 1.0.0
+description: Minimal log analysis debugging instructions
+tags: [debug, logs, minimal]
 ---
 
-<!-- path: promptosaurus/prompts/agents/debug/subagents/debug-log-analysis.md -->
-# Subagent - Debug Log Analysis
+# Debug Log Analysis (Minimal)
 
-Behavior when analyzing logs and traces.
+Analyze logs and traces to identify issues.
 
-When analyzing logs, traces, or telemetry:
+## Process
 
-1. Identify the root error (not just the last failure in the chain).
+1. **Identify root error**
+   - Find the original failure, not cascading errors
+   - Look for first exception in chain
+   - Ignore secondary failures
 
-2. Trace the execution path:
-   - Follow the request/transaction from entry to failure
-   - Note timing gaps or unusually long spans
-   - Identify any retries, circuit breakers, or fallback behavior
+2. **Trace execution path**
+   - Follow request from entry to failure
+   - Note timing gaps or slow spans
+   - Identify retries or circuit breaker triggers
 
-3. Highlight anomalies:
-   - Swallowed errors (caught but not properly handled)
+3. **Highlight anomalies**
+   - Swallowed errors (caught but not handled)
    - Unexpected retry patterns
    - Missing spans or gaps in traces
    - Timing anomalies (too fast = cached, too slow = blocking)
 
-4. Correlate with other signals:
-   - Do errors correlate with deployments?
-   - Do they correlate with load patterns?
-   - Are there related logs from other services?
+4. **Correlate with other signals**
+   - Recent deployments
+   - Load patterns
+   - Related logs from other services
 
-5. Produce a timeline of what happened in the failing request.
+5. **Produce timeline**
+   - Chronological sequence of what happened
+   - Timestamp each event
+   - Mark the failure point
 
+## Output Format
+
+```
+Timeline:
+00:00.000 - Request received: POST /api/users
+00:00.123 - Database query started
+00:05.678 - Database timeout (FAILURE)
+00:05.680 - Retry attempt 1
+00:10.890 - Database timeout (FAILURE)
+00:10.892 - Circuit breaker opened
+
+Root Cause:
+Database connection pool exhausted
+
+Evidence:
+- 5 second timeout on every query
+- Circuit breaker triggered after 2 failures
+- No other services affected
+```
+
+## Anti-Patterns
+
+❌ Focusing on last error instead of root cause
+❌ Ignoring timing information
+❌ Not correlating with deployment history

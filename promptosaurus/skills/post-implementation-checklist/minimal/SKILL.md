@@ -1,6 +1,8 @@
 ---
 name: post-implementation-checklist
 description: Document follow-up work and testing needs after implementation
+languages: [all]
+subagents: [all]
 tools_needed: []
 ---
 

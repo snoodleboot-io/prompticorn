@@ -1,27 +1,29 @@
 ---
 name: test-aaa-structure
-description: Apply Arrange-Act-Assert pattern for clear, maintainable tests
+description: Apply Arrange-Act-Assert pattern for clear tests
+languages: [python, typescript, javascript, go, rust, java, csharp, php, ruby]
+subagents: [test/unit, test/integration, code/feature]
 tools_needed: [read, write]
 ---
 
-## AAA Test Structure
+## Instructions
 
-Always structure tests using the Arrange-Act-Assert pattern:
+Structure tests using **Arrange-Act-Assert** (AAA):
 
-**Arrange:** Set up state and inputs
-**Act:** Call the thing under test
-**Assert:** Verify outputs and side effects
+1. **Arrange:** Set up state and inputs
+2. **Act:** Call the function/method under test
+3. **Assert:** Verify outputs and side effects
 
-### Rules
+### Key Rules
+
 - One logical assertion per test
-- One behavior per test name
-- Test names must be descriptive sentences:
-  - `it("returns null when the user ID does not exist")`
-  - `it("throws AuthError when the token is expired")`
+- Descriptive test names (read like sentences)
+- Separate AAA sections with blank lines or comments
 
 ### Example
+
 ```python
-def test_user_get_by_id_returns_user_when_found():
+def test_get_user_returns_user_when_found():
     # Arrange
     user = User(id="123", name="Alice")
     db.save(user)

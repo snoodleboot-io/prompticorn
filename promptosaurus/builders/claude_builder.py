@@ -6,10 +6,11 @@ into JSON output compatible with Claude's Messages API format.
 
 import json
 from pathlib import Path
-from typing import Any
+from typing import Any, Optional
 
 from promptosaurus.builders.base import AbstractBuilder, BuildOptions
 from promptosaurus.builders.errors import BuilderValidationError
+from promptosaurus.ir.loaders import CoreFilesLoader
 from promptosaurus.ir.models import Agent
 
 
@@ -45,13 +46,20 @@ class ClaudeBuilder(AbstractBuilder):
             agents_dir: Base directory for agent configurations (default: 'agents')
         """
         self.agents_dir = agents_dir
+        self.core_loader = CoreFilesLoader()
 
-    def build(self, agent: Agent, options: BuildOptions) -> dict[str, Any]:
+    def build(
+        self, agent: Agent, options: BuildOptions, config: Optional[dict] = None
+    ) -> dict[str, Any]:
         """Build Claude Messages API JSON output from an Agent IR model.
+
+        Includes core system, conventions, and language-specific conventions if
+        language is specified in config.
 
         Args:
             agent: The Agent IR model to build from
             options: Build configuration options
+            config: Optional configuration dict with 'spec' key containing language info
 
         Returns:
             Dictionary with system, tools, and instructions keys
@@ -67,8 +75,11 @@ class ClaudeBuilder(AbstractBuilder):
                 errors=errors, message=f"Invalid agent '{agent.name}': {'; '.join(errors)}"
             )
 
-        # Build system prompt string - use agent.system_prompt directly
-        system_prompt = self._build_system_prompt(agent.system_prompt)
+        # Use agent system prompt directly (no variants for top-level agents)
+        base_prompt = agent.system_prompt
+
+        # Build system prompt with core files if language is available
+        system_prompt = self._build_system_prompt_with_core(base_prompt, config)
 
         # Build tools list with schemas
         tools_list = self._build_tools_list(agent.tools) if options.include_tools else []
@@ -147,6 +158,39 @@ class ClaudeBuilder(AbstractBuilder):
             System prompt as string (stripped)
         """
         return prompt.strip()
+
+    def _build_system_prompt_with_core(self, prompt: str, config: Optional[dict] = None) -> str:
+        """Build system prompt with core files included if language is available.
+
+        Args:
+            prompt: System prompt from agent
+            config: Optional configuration dict with 'spec' key containing language info
+
+        Returns:
+            System prompt with core files prepended, or original prompt if no language
+        """
+        sections = []
+
+        # Load and include core files if language is available
+        if config:
+            language = config.get("spec", {}).get("language")
+            if language:
+                core_files = self.core_loader.get_core_files(language, config)
+                # Order: system, conventions, session, language-specific
+                for key in ["system", "conventions", "session"]:
+                    if key in core_files:
+                        sections.append(core_files[key])
+
+                # Add language conventions if available
+                lang_key = f"conventions_{language}"
+                if lang_key in core_files:
+                    sections.append(core_files[lang_key])
+
+        # Add the agent's system prompt
+        sections.append(prompt.strip())
+
+        # Join all sections with double newlines
+        return "\n\n".join(sections)
 
     def _build_tools_list(self, tool_names: list[str]) -> list[dict[str, Any]]:
         """Build tools list with JSON schemas.

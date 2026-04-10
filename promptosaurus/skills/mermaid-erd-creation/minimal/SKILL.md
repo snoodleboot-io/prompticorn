@@ -1,6 +1,8 @@
 ---
 name: mermaid-erd-creation
 description: Create entity relationship diagrams using Mermaid syntax
+languages: [all]
+subagents: [architect/data-model, architect/scaffold]
 tools_needed: [write]
 ---
 

@@ -1,33 +1,29 @@
 ---
 name: review-workflow
-description: Step-by-step process for review
+description: Streamlined code review process
+languages: [all]
+subagents: [review/code, review/security, review/compliance]
 steps:
-- '**Check for session file:**'
-- '**If no session exists:**'
-- '**If session exists:**'
-- '**During work:**'
-- '**On mode switch:**'
+  - Review code against patterns
+  - Check test coverage
+  - Verify error handling
+  - Validate security
+  - Approve or request changes
 ---
 
-## Steps
+## Code Review Workflow
 
-### Step 1: **Check for session file:**
+### Step 1: Review code against patterns
+Check code follows core-conventions.md and matches existing patterns in the codebase.
 
-Detailed instructions for this step.
+### Step 2: Check test coverage
+Verify test coverage targets are met and tests properly validate behavior.
 
-### Step 2: **If no session exists:**
+### Step 3: Verify error handling
+Ensure errors are properly caught, logged, and handled with appropriate context.
 
-Detailed instructions for this step.
+### Step 4: Validate security
+Check for security vulnerabilities, secrets management, and access control.
 
-### Step 3: **If session exists:**
-
-Detailed instructions for this step.
-
-### Step 4: **During work:**
-
-Detailed instructions for this step.
-
-### Step 5: **On mode switch:**
-
-Detailed instructions for this step.
-
+### Step 5: Approve or request changes
+Provide feedback: approve for merge or request specific changes before approval.

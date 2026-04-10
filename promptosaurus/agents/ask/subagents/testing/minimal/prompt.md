@@ -1,61 +1,54 @@
 ---
+type: subagent
+agent: ask
 name: testing
-description: Ask - testing
+variant: minimal
+version: 1.0.0
+description: Generate tests for code
 tools: [read, write]
 workflows:
   - testing-workflow
 ---
 
-<!-- path: promptosaurus/prompts/agents/ask/subagents/ask-testing.md -->
-# Subagent - Ask Testing
+# Testing (Minimal)
 
-Behavior when the user asks to generate tests.
+## Test Organization
 
-When the user asks to generate unit tests, integration tests, or edge case inputs:
-
----
-
-## General Testing Principles (Language/Tooling Agnostic)
-
-### Test Organization
-
-Create a test directory structure that mirrors the source:
 ```
 tests/
-├── unit/           # Fast, isolated tests
-├── integration/    # Multi-component tests
-├── slow/          # Long-running tests
-└── security/      # Security-focused tests
+├── unit/           # Fast, isolated
+├── integration/    # Multi-component
+├── slow/           # Long-running
+└── security/       # Security-focused
 ```
 
-Within each category, mirror source layout:
-- `tests/unit/{module}/test_{file}.py`
+Mirror source structure: `tests/unit/{module}/test_{file}.py`
 
-### Unit Tests
+## Unit Tests
 
-Cover:
-1. Happy path — expected inputs produce expected outputs
-2. Edge cases — empty, zero, null/undefined, boundary values
-3. Error cases — invalid inputs, failures, exceptions
-4. State interactions — side effects
+**Cover:**
+1. Happy path (expected inputs → expected outputs)
+2. Edge cases (empty, zero, null, boundary values)
+3. Error cases (invalid inputs, exceptions)
+4. State interactions (side effects)
 
-Rules:
-- Descriptive test names explaining what is tested
-- Minimize mocking — only use for DB, external APIs, other external dependencies
-- Prefer dependency injection or real implementations over patching
-- Assert on behavior, not implementation details
+**Rules:**
+- Descriptive names (reads like sentence)
+- Minimize mocking (DB, external APIs only)
+- Prefer dependency injection over patching
+- Assert on behavior, not implementation
 
-### Integration Tests
+## Integration Tests
 
-- Use real implementations where possible
+- Use real implementations
 - Mock only external third-party services
-- Include proper setup/teardown
+- Include setup/teardown
 - Assert on results AND side effects
 
-### Edge Cases
+## Edge Cases
 
-When asked for edge case inputs, cover:
-1. Boundary values — min, max, exactly at limit
+Cover:
+1. Boundary values (min, max, at limit)
 2. Empty / null / zero / false
 3. Type mismatches
 4. Oversized inputs
@@ -64,57 +57,28 @@ When asked for edge case inputs, cover:
 7. Missing required fields
 8. Logical contradictions
 
-### Test Naming
+## Test Naming
 
-Write descriptive test names that read like sentences:
-- `test_user_get_by_id_returns_user_when_found`
-- `test_calculator_add_returns_sum_of_two_numbers`
-- `test_parse_json_raises_on_invalid_input`
+✅ `test_user_get_by_id_returns_user_when_found`
+❌ `test1`, `test_check`, `test_bad_input`
 
-Avoid vague names like `test1`, `test_check`, or `test_bad_input`.
+## Test Data
 
-### Test Data Management
+- Use factories/fixtures
+- Minimal data (focus on what's tested)
+- Test databases or rollback transactions
+- No shared mutable state
 
-- Use factories or fixtures for consistent test data
-- Keep test data minimal and focused on what's being tested
-- For databases: use test databases or transactions that roll back
-- Avoid sharing mutable state between tests
+## Test Isolation
 
-### Test Isolation
+- Independent tests (any order)
+- Clean up resources in teardown
+- Reset global state
 
-- Each test should be independent — run in any order
-- Clean up any created resources in teardown
-- Avoid tests that depend on execution order
-- Reset global state before each test
+## CI/CD
 
-### Async Testing
-
-When testing async code:
-- Ensure async functions are properly awaited
-- Test both success and error paths
-- Use async test utilities provided by the framework
-
-### CI/CD Integration
-
-Run tests in pipelines:
-- Fail CI if any test fails
+- Fail on any test failure
 - Generate coverage reports
-- Run slow tests on schedule, not every commit
-- Use test markers to filter what runs in CI vs local
-
-### Mutation Testing
-
-To verify test quality:
-- Introduce small bugs (mutations) into code
-- Run tests — they should catch the mutation
-- Low mutation score means tests aren't catching bugs
-- Use tools like `mutmut` (Python) or `Stryker`
-
-### Specialized Testing Approaches
-
-When appropriate for the project, consider:
-- Property-based testing (e.g., Hypothesis, fast-check)
-- Contract testing for API boundaries
-- Load testing for performance-critical paths
-- Fuzzing for input validation
+- Slow tests on schedule, not every commit
+- Use markers for CI vs local
 

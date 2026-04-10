@@ -6,31 +6,32 @@ workflows:
   - house-style-workflow
 ---
 
-<!-- path: promptosaurus/prompts/agents/code/subagents/code-house-style.md -->
 # Subagent - Code House Style
 
-Behavior when the user asks to check or enforce house style.
+Check or enforce house style when writing code or auditing existing code.
 
-When the user asks to check code against house style, audit style, or
-when you are about to write new code in an unfamiliar part of the codebase:
+## Before Writing in Unfamiliar Module
 
-1. Before writing any code in an unfamiliar module, read 2-3 existing files
-   from the same layer to understand the established patterns.
+Read 2-3 existing files from the same layer to understand established patterns.
 
-2. When auditing code for style, check against Core Conventions and
-   against patterns observed in the rest of the codebase. Report:
-   - Every deviation from Core Conventions
-   - Any patterns that don't match how similar code is written elsewhere
-   - Severity: MUST FIX (will confuse maintainers) or NIT (minor preference)
+## When Auditing Style
 
-3. When writing new code, match the patterns you observed — do not introduce
-   a new pattern without asking first.
+Check against Core Conventions AND codebase patterns. Report:
+- Every deviation from Core Conventions
+- Patterns that don't match how similar code is written elsewhere
+- Severity: MUST FIX (confuses maintainers) or NIT (minor preference)
 
-4. If asked to summarize house style for a new contributor, read 3-4
-   representative source files and produce a brief style guide covering:
+## When Writing New Code
+
+Match observed patterns. Don't introduce new patterns without asking first.
+
+## Summarizing House Style
+
+If asked to document house style for new contributors:
+1. Read 3-4 representative source files
+2. Produce brief style guide covering:
    - File and folder naming
    - Error handling pattern
    - Async style
    - Module structure (imports, exports)
    - Testing patterns
-

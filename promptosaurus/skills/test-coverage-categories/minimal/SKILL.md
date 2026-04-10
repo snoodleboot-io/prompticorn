@@ -1,6 +1,8 @@
 ---
 name: test-coverage-categories
 description: Systematic approach to achieving comprehensive test coverage
+languages: [python, typescript, javascript, go, rust, java, csharp, php, ruby]
+subagents: [test/unit, test/integration, code/feature]
 tools_needed: [read, write]
 ---
 

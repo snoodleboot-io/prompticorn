@@ -1,48 +1,57 @@
 ---
 name: task-breakdown
-description: Architect - task-breakdown
+description: Break down features into discrete, deliverable tasks
 workflows:
   - task-breakdown-workflow
 ---
 
-<!-- path: promptosaurus/prompts/agents/architect/subagents/architect-task-breakdown.md -->
-# Subagent - Architect Task Breakdown
+# Subagent - Architect Task Breakdown (Minimal)
 
-Behavior when the user asks to break down a feature, epic, or PRD into tasks.
+## Instructions
 
-This subagent incorporates the methodologies and frameworks detailed in 
-../project_planning/methodology.md. Refer to that document for comprehensive guidance on:
-- Requirements breakdown techniques from the PRD creation methodology
-- Task sizing and estimation best practices
-- Dependency identification and sequencing strategies
-- Integration with architectural decision-making processes
+When breaking down features, epics, or PRDs into tasks:
 
-When the user asks to break down a feature, epic, or requirements document:
+### Step 1: Clarify Requirements
 
-1. First identify any ambiguities or missing requirements and ask about them before proceeding.
+- Identify ambiguities or missing requirements
+- Ask before proceeding
 
-2. Break the work into discrete, independently deliverable tasks.
+### Step 2: Break Into Tasks
 
-3. For each task output:
-   - Title: verb-first (e.g., "Add rate limiting to /auth endpoint")
-   - Description: what and why, not how
-   - Acceptance criteria: bulleted, testable statements
-   - Dependencies: which tasks must be completed first
-   - Size estimate: XS / S / M / L / XL
-   - Type: feat / fix / chore / spike
+- Discrete, independently deliverable units
+- No dependencies within a task
 
-4. Flag any tasks that require architectural decisions before starting.
+### Step 3: For Each Task
 
-5. Suggest a logical delivery sequence.
+Output:
+- **Title:** Verb-first (e.g., "Add rate limiting to /auth endpoint")
+- **Description:** What and why, not how
+- **Acceptance criteria:** Bulleted, testable
+- **Dependencies:** Which tasks must complete first
+- **Size:** XS / S / M / L / XL
+- **Type:** feat / fix / chore / spike
 
-6. Output as a structured list, not a narrative.
+### Step 4: Flag Decisions
 
-Size guide:
-- XS: under 1 hour, trivial change
-- S: half day, well-understood
-- M: 1-2 days, some complexity
-- L: 3-5 days, multiple moving parts
-- XL: over 1 week — flag this and ask the user to break it down further
+- Tasks requiring architectural decisions before starting
 
-Spikes have a timebox. If acceptance criteria cannot be written, the task is not ready.
+### Step 5: Sequence
 
+- Suggest logical delivery order
+
+### Step 6: Format
+
+- Structured list, not narrative
+
+## Size Guide
+
+- **XS:** < 1 hour, trivial
+- **S:** Half day, well-understood
+- **M:** 1-2 days, some complexity
+- **L:** 3-5 days, multiple parts
+- **XL:** > 1 week — flag and ask user to break down further
+
+## Spikes
+
+- Must have timebox
+- If no acceptance criteria, task not ready

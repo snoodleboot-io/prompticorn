@@ -1,15 +1,23 @@
 """Builder wrapper to generate tool-specific configs from bundled IR agents."""
 
 from pathlib import Path
-from typing import Any
+from typing import Any, Optional
 
 from promptosaurus.agent_registry.registry import Registry
 from promptosaurus.builders.factory import BuilderFactory
 from promptosaurus.builders.base import BuildOptions
+from promptosaurus.builders.kilo_builder import KiloBuilder
+from promptosaurus.ir.models.agent import Agent
+from promptosaurus.ir.loaders.language_skill_mapping_loader import LanguageSkillMappingLoader
 
 
 class PromptBuilder:
-    """Builder that uses bundled IR-format agents with Phase 2A builders."""
+    """Builder that uses bundled IR-format agents with Phase 2A builders.
+
+    Supports language-based filtering of skills and workflows via the
+    language_skill_mapping.yaml registry. Skills and workflows are filtered
+    based on the project's language and the agent/subagent combination.
+    """
 
     def __init__(self, tool_name: str):
         """Initialize builder for a specific tool.
@@ -24,14 +32,26 @@ class PromptBuilder:
         agents_dir = Path(__file__).parent / "agents"
         self.registry = Registry.from_discovery(agents_dir)
 
+        # Initialize language skill mapping loader
+        mapping_file = Path(__file__).parent.parent / "language_skill_mapping.yaml"
+        try:
+            self.language_skill_loader = LanguageSkillMappingLoader(mapping_file)
+        except FileNotFoundError:
+            self.language_skill_loader = None
+
     def build(
         self, output: Path, config: dict[str, Any] | None = None, dry_run: bool = False
     ) -> list[str]:
         """Build tool-specific outputs from bundled IR agents.
 
+        Filters skills and workflows based on the project's language (if specified
+        in config) using the language_skill_mapping.yaml registry.
+
         Args:
             output: Output directory path
-            config: Project configuration (with 'variant' key for minimal/verbose)
+            config: Project configuration with optional keys:
+                - 'variant': 'minimal' or 'verbose' (default: 'minimal')
+                - 'spec': dict with optional 'language' key
             dry_run: If True, don't write files (preview only)
 
         Returns:
@@ -39,8 +59,9 @@ class PromptBuilder:
         """
         actions = []
 
-        # Get variant from config (default to minimal)
+        # Get variant and language from config
         variant = config.get("variant", "minimal") if config else "minimal"
+        language = config.get("spec", {}).get("language") if config else None
 
         # Get all agents from registry
         all_agents = self.registry.get_all_agents()
@@ -48,24 +69,70 @@ class PromptBuilder:
         # Collect all unique skills from all agents (including subagents)
         all_skills_written = set()
 
+        # For Kilo, write core convention files to .kilo/rules/ before building agents
+        rules_files_written = []
+        if isinstance(self.builder, KiloBuilder) and not dry_run:
+            try:
+                rules_files_written = self.builder.write_rules_files(output, config)
+                actions.extend([f"✓ {f}" for f in rules_files_written])
+            except Exception as e:
+                actions.append(f"✗ Failed to write rules files: {e}")
+
         # Build each top-level agent (skip subagents, they're included in parent)
         for agent_name, agent in all_agents.items():
             if "/" in agent_name:  # Skip subagents for agent file generation
                 continue
 
             try:
+                # Filter agent for language before building
+                filtered_agent = self._filter_agent_for_language(agent, language)
+
                 # Build with specified variant
                 options = BuildOptions(
                     variant=variant,
                     agent_name=agent_name,
                 )
 
-                output_content = self.builder.build(agent, options)
+                output_content = self.builder.build(filtered_agent, options)
 
                 # Write output
                 if not dry_run:
                     written = self._write_output(output, agent_name, output_content)
                     actions.extend([f"✓ {f}" for f in written])
+
+                # Build subagents as separate files under .kilo/agents/{agent_name}/{subagent}.md
+                if agent.subagents and not dry_run:
+                    for subagent_name in agent.subagents:
+                        try:
+                            # Load actual subagent from registry
+                            subagent_key = f"{agent_name}/{subagent_name}"
+                            if subagent_key in all_agents:
+                                subagent = all_agents[subagent_key]
+
+                                # Filter subagent for language
+                                filtered_subagent = self._filter_agent_for_language(
+                                    subagent, language
+                                )
+
+                                # Build subagent with variant
+                                subagent_options = BuildOptions(
+                                    variant=variant,
+                                    agent_name=subagent_key,
+                                )
+
+                                subagent_output = self.builder.build(
+                                    filtered_subagent, subagent_options
+                                )
+
+                                # Write to .kilo/agents/{agent_name}/{subagent_name}.md
+                                subagent_files = self._write_subagent_output(
+                                    output, agent_name, subagent_name, subagent_output
+                                )
+                                actions.extend([f"✓ {f}" for f in subagent_files])
+                        except Exception as e:
+                            actions.append(
+                                f"✗ Failed to build subagent {agent_name}/{subagent_name}: {e}"
+                            )
 
             except Exception as e:
                 actions.append(f"✗ Failed to build {agent_name}: {e}")
@@ -75,7 +142,11 @@ class PromptBuilder:
             for agent_name, agent in all_agents.items():
                 if agent.skills:
                     try:
-                        skill_files = self._write_skill_files(output, agent_name, agent, variant)
+                        # Filter agent for language before writing skills
+                        filtered_agent = self._filter_agent_for_language(agent, language)
+                        skill_files = self._write_skill_files(
+                            output, agent_name, filtered_agent, variant
+                        )
                         for skill_file in skill_files:
                             if skill_file not in all_skills_written:
                                 actions.append(f"✓ {skill_file}")
@@ -89,8 +160,10 @@ class PromptBuilder:
             for agent_name, agent in all_agents.items():
                 if agent.workflows:
                     try:
+                        # Filter agent for language before writing workflows
+                        filtered_agent = self._filter_agent_for_language(agent, language)
                         workflow_files = self._write_workflow_files(
-                            output, agent_name, agent, variant
+                            output, agent_name, filtered_agent, variant
                         )
                         for workflow_file in workflow_files:
                             if workflow_file not in all_workflows_written:
@@ -100,6 +173,103 @@ class PromptBuilder:
                         actions.append(f"✗ Failed to write workflows for {agent_name}: {e}")
 
         return actions
+
+    def _filter_agent_for_language(self, agent: Agent, language: Optional[str]) -> Agent:
+        """Filter agent skills/workflows based on language.
+
+        Uses LanguageSkillMappingLoader to resolve which skills/workflows apply
+        to this language. For top-level agents, no subagent path is used.
+
+        Priority resolution:
+        1. {language}/{agent_name} - agent-level language-specific
+        2. {language} - language-level defaults
+        3. all - global defaults
+        4. No filtering if language is None
+
+        Args:
+            agent: Agent to filter
+            language: Language code (e.g., 'python', 'typescript'), or None
+
+        Returns:
+            New Agent instance with filtered skills and workflows, or original
+            if no language specified or mapping loader unavailable
+        """
+        # If no language or no loader, return agent unchanged
+        if not language or not self.language_skill_loader:
+            return agent
+
+        # Get filtered skills and workflows for this language
+        skills = self.language_skill_loader.get_skills_for_language(language)
+        workflows = self.language_skill_loader.get_workflows_for_language(language)
+
+        # Create filtered copy of agent
+        # Convert skills and workflows to sets for efficient filtering
+        skills_set = set(skills)
+        workflows_set = set(workflows)
+
+        filtered = Agent(
+            name=agent.name,
+            description=agent.description,
+            system_prompt=agent.system_prompt,
+            tools=agent.tools,  # Tools never filtered (language-agnostic)
+            skills=list(skills_set),  # ASSIGN all skills from mapping
+            workflows=list(workflows_set),  # ASSIGN all workflows from mapping
+            subagents=agent.subagents,  # Subagents preserved (used as-is)
+            permissions=agent.permissions,
+        )
+
+        return filtered
+
+    def _filter_subagent_for_language(
+        self, agent_name: str, subagent_name: str, language: str
+    ) -> Agent:
+        """Filter subagent by language and subagent combination.
+
+        Loads subagent from registry and filters using {language}/{agent_name}/{subagent_name}
+        path for maximum specificity.
+
+        Args:
+            agent_name: Name of parent agent (e.g., 'code')
+            subagent_name: Name of subagent (e.g., 'feature')
+            language: Language code (e.g., 'python')
+
+        Returns:
+            New Agent instance with filtered skills and workflows
+
+        Raises:
+            KeyError: If subagent not found in registry
+        """
+        # Build full subagent path
+        full_subagent_path = f"{agent_name}/{subagent_name}"
+        subagent = self.registry.get_agent(full_subagent_path)
+
+        if not self.language_skill_loader:
+            return subagent
+
+        # Get skills/workflows for this language and subagent combination
+        skills = self.language_skill_loader.get_skills_for_language(
+            language, subagent=subagent_name
+        )
+        workflows = self.language_skill_loader.get_workflows_for_language(
+            language, subagent=subagent_name
+        )
+
+        # Create filtered copy
+        skills_set = set(skills)
+        workflows_set = set(workflows)
+
+        filtered = Agent(
+            name=subagent.name,
+            description=subagent.description,
+            system_prompt=subagent.system_prompt,
+            tools=subagent.tools,
+            skills=[s for s in subagent.skills if s in skills_set],
+            workflows=[w for w in subagent.workflows if w in workflows_set],
+            subagents=subagent.subagents,
+            permissions=subagent.permissions,
+        )
+
+        return filtered
 
     def _write_output(
         self, output: Path, agent_name: str, content: str | dict[str, Any]
@@ -172,6 +342,28 @@ class PromptBuilder:
             written_files.append(".cursorrules")
 
         return written_files
+
+    def _write_subagent_output(
+        self, output: Path, agent_name: str, subagent_name: str, content: str | dict[str, Any]
+    ) -> list[str]:
+        """Write subagent file to .kilo/agents/{agent}/{subagent}.md.
+
+        Args:
+            output: Output directory path
+            agent_name: Parent agent name
+            subagent_name: Subagent name
+            content: File content (string or dict)
+
+        Returns:
+            List of written file paths
+        """
+        subagent_dir = output / ".kilo" / "agents" / agent_name
+        subagent_dir.mkdir(parents=True, exist_ok=True)
+
+        subagent_file = subagent_dir / f"{subagent_name}.md"
+        subagent_file.write_text(str(content), encoding="utf-8")
+
+        return [str(subagent_file.relative_to(output))]
 
     def _write_skill_files(
         self, output: Path, agent_name: str, agent: Any, variant: str

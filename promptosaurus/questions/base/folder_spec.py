@@ -6,7 +6,7 @@ from typing import Any
 # Language-specific defaults
 LANGUAGE_DEFAULTS: dict[str, dict[str, str]] = {
     "python": {
-        "runtime": "3.12",
+        "runtime": "3.14",
         "package_manager": "poetry",
         "test_framework": "pytest",
         "linter": "ruff",

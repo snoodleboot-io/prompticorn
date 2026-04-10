@@ -1,6 +1,8 @@
 ---
 name: incremental-implementation
 description: Implement code one file at a time following conventions
+languages: [python, typescript, javascript, go, rust, java, csharp, php, ruby]
+subagents: [code/feature, code/bug-fix, code/refactor]
 tools_needed: [edit, write, read]
 ---
 

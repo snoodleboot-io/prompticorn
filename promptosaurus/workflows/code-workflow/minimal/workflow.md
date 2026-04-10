@@ -1,88 +1,48 @@
 ---
-name: code-workflow
-description: Step-by-step process for code
-steps:
-- CORRECTNESS — logic errors, off-by-one errors, race conditions, unhandled edge cases
-- SECURITY — injection risks, auth/authz gaps, secrets in code, unsafe deserialization
-- ERROR HANDLING — missing try/catch, unchecked nulls, swallowed exceptions
-- PERFORMANCE — N+1 queries, unnecessary computation in hot paths, missing indexes
-- CONVENTIONS — violations of core-conventions.md
-- READABILITY — confusing names, missing comments on complex logic, dead code
-- TEST COVERAGE — what cases are not covered by the accompanying tests
-- '[blocker 1]'
-- '[blocker 2]'
-- '[suggestion 1]'
-- '[suggestion 2]'
-- '**Check for session file:**'
-- '**If no session exists:**'
-- '**If session exists:**'
-- '**During work:**'
-- '**On mode switch:**'
+name: Code Implementation Workflow
+version: 1.0
+languages: [all]
+subagents: [code/feature, code/bug-fix, test/unit]
 ---
 
-## Steps
+# Code Implementation Workflow (Minimal)
 
-### Step 1: CORRECTNESS — logic errors, off-by-one errors, race conditions, unhandled edge cases
+## Step 1: Plan Before Coding
 
-Detailed instructions for this step.
+- Restate the goal in your own words
+- List all files that will need changes
+- Identify external dependencies or API changes
+- Flag assumptions you're making
+- Get confirmation before writing code
 
-### Step 2: SECURITY — injection risks, auth/authz gaps, secrets in code, unsafe deserialization
+## Step 2: Read Existing Code
 
-Detailed instructions for this step.
+- Read the relevant source files first
+- Understand existing patterns in the same layer
+- Check conventions documentation
+- Identify similar implementations to follow
+- Never assume file contents without reading
 
-### Step 3: ERROR HANDLING — missing try/catch, unchecked nulls, swallowed exceptions
+## Step 3: Follow Conventions
 
-Detailed instructions for this step.
+- Match naming patterns from existing code
+- Use error handling style from conventions
+- Follow file structure and organization rules
+- Type all function signatures explicitly
+- Use language idioms (not patterns from other languages)
 
-### Step 4: PERFORMANCE — N+1 queries, unnecessary computation in hot paths, missing indexes
+## Step 4: Implement Incrementally
 
-Detailed instructions for this step.
+- Write one file at a time
+- Run tests after each file
+- Commit small working changes
+- Add inline comments for WHY, not WHAT
+- Use TODO comments for judgment calls
 
-### Step 5: CONVENTIONS — violations of core-conventions.md
+## Step 5: Verify and Document
 
-Detailed instructions for this step.
-
-### Step 6: READABILITY — confusing names, missing comments on complex logic, dead code
-
-Detailed instructions for this step.
-
-### Step 7: TEST COVERAGE — what cases are not covered by the accompanying tests
-
-Detailed instructions for this step.
-
-### Step 8: [blocker 1]
-
-Detailed instructions for this step.
-
-### Step 9: [blocker 2]
-
-Detailed instructions for this step.
-
-### Step 10: [suggestion 1]
-
-Detailed instructions for this step.
-
-### Step 11: [suggestion 2]
-
-Detailed instructions for this step.
-
-### Step 12: **Check for session file:**
-
-Detailed instructions for this step.
-
-### Step 13: **If no session exists:**
-
-Detailed instructions for this step.
-
-### Step 14: **If session exists:**
-
-Detailed instructions for this step.
-
-### Step 15: **During work:**
-
-Detailed instructions for this step.
-
-### Step 16: **On mode switch:**
-
-Detailed instructions for this step.
-
+- Run full test suite
+- Check for new warnings or linter errors
+- List any follow-up work created
+- Document any tech debt introduced
+- Note tests that should be added

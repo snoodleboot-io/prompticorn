@@ -1,33 +1,44 @@
 ---
-name: meta-workflow
-description: Step-by-step process for meta
-steps:
-- 'Before starting complex multi-step work:'
-- 'Create a clear execution plan:'
-- 'Communication:'
-- 'State management:'
-- 'Completion:'
+name: "meta-workflow"
+description: "Create and manage workflows using meta-workflow patterns"
+version: "1.0"
+languages: ["python", "typescript", "markdown"]
+subagents: ["orchestrator"]
 ---
+
+# Meta-Workflow (Minimal)
+
+## Purpose
+Define systematic approaches to creating, documenting, testing, and iterating on workflows themselves.
 
 ## Steps
 
-### Step 1: Before starting complex multi-step work:
+### 1. Define Workflow Scope
+- Identify the problem the workflow solves
+- Define entry conditions (when to use this workflow)
+- Define exit conditions (success criteria)
+- List prerequisites (tools, permissions, knowledge required)
 
-Detailed instructions for this step.
+### 2. Identify Workflow Steps
+- Break the process into discrete, actionable steps
+- Order steps by dependency (what must happen first)
+- Identify decision points and branching logic
+- Note which steps can be parallelized
 
-### Step 2: Create a clear execution plan:
+### 3. Document Workflow
+- Write minimal version (25-50 lines, essential steps only)
+- Write verbose version (200-400 lines, full detail with examples)
+- Include YAML frontmatter with metadata
+- Add real examples (not placeholders)
 
-Detailed instructions for this step.
+### 4. Test Workflow
+- Walk through workflow with real scenario
+- Identify unclear steps or missing information
+- Test all decision branches
+- Verify exit conditions are achievable
 
-### Step 3: Communication:
-
-Detailed instructions for this step.
-
-### Step 4: State management:
-
-Detailed instructions for this step.
-
-### Step 5: Completion:
-
-Detailed instructions for this step.
-
+### 5. Iterate and Improve
+- Gather feedback from workflow users
+- Identify common failure points
+- Add clarifications or missing steps
+- Version the workflow (increment version field)

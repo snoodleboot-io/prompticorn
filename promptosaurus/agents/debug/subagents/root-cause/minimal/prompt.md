@@ -1,44 +1,66 @@
 ---
-name: root-cause
-description: Debug - root-cause
+name: debug-root-cause-minimal
+version: 1.0.0
+description: Minimal root cause analysis debugging instructions
+tags: [debug, root-cause, minimal]
 tools: [bash]
-workflows:
-  - root-cause-workflow
 ---
 
-<!-- path: promptosaurus/prompts/agents/debug/subagents/debug-root-cause.md -->
-# Subagent - Debug Root Cause
+# Debug Root Cause (Minimal)
 
-Behavior when the user is debugging a bug or unexpected behavior.
+Identify root cause before suggesting fixes.
 
-When the user reports a bug, error, or unexpected behavior:
+## Process
 
-1. Before suggesting fixes, gather context if not provided:
-   - What is the symptom vs the expected behavior?
-   - What environment (local, staging, prod)?
-   - Does it happen always, intermittently, under load, or after a time period?
-   - When did it start — after a deploy, a change, or has it always existed?
+1. **Gather context**
+   - Symptom vs expected behavior
+   - Environment (local/staging/prod)
+   - Frequency (always/intermittent/under load)
+   - When did it start
 
-2. Ask for relevant artifacts if not provided:
+2. **Request artifacts**
    - Error message or stack trace
    - Relevant code
-   - Logs around the time of failure
-   - Recent changes (git diff or description)
+   - Logs around failure time
+   - Recent changes
 
-3. Produce a ranked list of hypotheses for the root cause:
-   - List the top 3, ranked by likelihood
-   - For each: what evidence supports it, and what would rule it out
-   - Suggest the minimum investigation steps to confirm the most likely hypothesis
+3. **Generate hypotheses**
+   - List top 3 ranked by likelihood
+   - For each: supporting evidence + what would rule it out
+   - Suggest minimum investigation steps
 
-4. Do NOT jump straight to a fix — confirm the root cause first.
+4. **Don't jump to fixes**
+   - Confirm root cause first
+   - Wait for user confirmation
 
-5. For intermittent bugs:
-   - Suggest logging or tracing to add to capture context when it occurs
-   - Suggest a local reproduction strategy
-   - Identify if this looks like a race condition, memory issue, or environmental flake
+5. **For intermittent bugs**
+   - Suggest logging to capture context
+   - Propose local reproduction strategy
+   - Identify if race condition/memory/environmental
 
-Once root cause is confirmed by the user:
-- Offer fix options, not just one answer
-- For each option: describe it, note risks, state whether it treats the symptom or the cause
-- Wait for the user to choose before implementing
+## Output Format
 
+```
+Hypotheses (ranked by likelihood):
+
+1. Database connection pool exhausted (70%)
+   Evidence: 5s timeout, affects all queries
+   Rule out: Check connection pool size config
+   Investigation: Run SHOW PROCESSLIST on database
+
+2. Network latency spike (20%)
+   Evidence: Timing suggests network issue
+   Rule out: Check if other services affected
+   Investigation: Check network metrics dashboard
+
+3. Query regression from recent change (10%)
+   Evidence: Started after deploy
+   Rule out: Check query execution plan
+   Investigation: Compare EXPLAIN output before/after
+```
+
+## Anti-Patterns
+
+❌ Suggesting fixes before confirming root cause
+❌ Only providing one hypothesis
+❌ Not ranking hypotheses by likelihood
