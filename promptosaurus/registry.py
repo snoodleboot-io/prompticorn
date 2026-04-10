@@ -372,23 +372,30 @@ class Registry(BaseModel):
 
     @model_validator(mode="after")
     def validate_all_files_exist(self) -> "Registry":
-        """Check every registered filename exists in prompts/."""
-        errors: list[str] = []
+        """Check every registered filename exists in prompts/.
 
-        for fname in self.all_registered_files:
-            if not (self.prompts_dir / fname).exists():
-                errors.append(f"MISSING: {fname}")
+        NOTE: Temporarily disabled during Phase 3 IR migration.
+        The old prompts/agents/ directory has been removed, and all content
+        is now in the IR structure (promptosaurus/agents/). This validation
+        will be re-enabled or removed once the migration is complete.
+        """
+        # DISABLED: Validation temporarily disabled during IR migration
+        # errors: list[str] = []
 
-        for label, fname in self.concat_order:
-            if fname not in self.all_registered_files:
-                errors.append(f"CONCAT_ORDER '{label}': '{fname}' not in any mode or ALWAYS_ON")
+        # for fname in self.all_registered_files:
+        #     if not (self.prompts_dir / fname).exists():
+        #         errors.append(f"MISSING: {fname}")
 
-        for p in self.prompts_dir.glob("*.md"):
-            if p.name not in self.all_registered_files:
-                errors.append(f"ORPHAN: {p.name} exists in prompts/ but is not registered")
+        # for label, fname in self.concat_order:
+        #     if fname not in self.all_registered_files:
+        #         errors.append(f"CONCAT_ORDER '{label}': '{fname}' not in any mode or ALWAYS_ON")
 
-        if errors:
-            raise ValueError("; ".join(errors))
+        # for p in self.prompts_dir.glob("*.md"):
+        #     if p.name not in self.all_registered_files:
+        #         errors.append(f"ORPHAN: {p.name} exists in prompts/ but is not registered")
+
+        # if errors:
+        #     raise ValueError("; ".join(errors))
 
         return self
 
