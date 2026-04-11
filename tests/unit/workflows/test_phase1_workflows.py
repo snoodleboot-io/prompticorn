@@ -21,11 +21,11 @@ class TestDataPipelineWorkflow:
         """Test that workflow has some content."""
         # Check if any variant exists
         has_content = False
-        for variant in ["minimal", "verbose", "prompt.md"]:
+        for variant in ["minimal", "verbose", "workflow.md"]:
             file_path = (
                 workflow_dir / variant
                 if variant.endswith(".md")
-                else workflow_dir / variant / "prompt.md"
+                else workflow_dir / variant / "workflow.md"
             )
             if file_path.exists():
                 has_content = True
@@ -45,7 +45,7 @@ class TestDataQualityWorkflow:
     @pytest.mark.parametrize("variant", ["minimal", "verbose"])
     def test_workflow_variant_exists(self, workflow_dir, variant):
         """Test that workflow variant exists."""
-        file_path = workflow_dir / variant / "prompt.md"
+        file_path = workflow_dir / variant / "workflow.md"
         assert file_path.exists(), f"Missing {variant} variant for data-quality-workflow"
 
 
@@ -61,7 +61,7 @@ class TestSchemaMigrationWorkflow:
     @pytest.mark.parametrize("variant", ["minimal", "verbose"])
     def test_workflow_variant_exists(self, workflow_dir, variant):
         """Test that workflow variant exists."""
-        file_path = workflow_dir / variant / "prompt.md"
+        file_path = workflow_dir / variant / "workflow.md"
         assert file_path.exists(), f"Missing {variant} variant for schema-migration-workflow"
 
 
@@ -77,7 +77,7 @@ class TestObservabilityWorkflow:
     @pytest.mark.parametrize("variant", ["minimal", "verbose"])
     def test_workflow_variant_exists(self, workflow_dir, variant):
         """Test that workflow variant exists."""
-        file_path = workflow_dir / variant / "prompt.md"
+        file_path = workflow_dir / variant / "workflow.md"
         assert file_path.exists(), f"Missing {variant} variant for observability-workflow"
 
 
@@ -93,7 +93,7 @@ class TestSLOSLIWorkflow:
     @pytest.mark.parametrize("variant", ["minimal", "verbose"])
     def test_workflow_variant_exists(self, workflow_dir, variant):
         """Test that workflow variant exists."""
-        file_path = workflow_dir / variant / "prompt.md"
+        file_path = workflow_dir / variant / "workflow.md"
         assert file_path.exists(), f"Missing {variant} variant for slo-sli-workflow"
 
 
@@ -109,7 +109,7 @@ class TestCapacityPlanningWorkflow:
     @pytest.mark.parametrize("variant", ["minimal", "verbose"])
     def test_workflow_variant_exists(self, workflow_dir, variant):
         """Test that workflow variant exists."""
-        file_path = workflow_dir / variant / "prompt.md"
+        file_path = workflow_dir / variant / "workflow.md"
         assert file_path.exists(), f"Missing {variant} variant for capacity-planning-workflow"
 
 
@@ -125,7 +125,7 @@ class TestIncidentResponseWorkflow:
     @pytest.mark.parametrize("variant", ["minimal", "verbose"])
     def test_workflow_variant_exists(self, workflow_dir, variant):
         """Test that workflow variant exists."""
-        file_path = workflow_dir / variant / "prompt.md"
+        file_path = workflow_dir / variant / "workflow.md"
         assert file_path.exists(), f"Missing {variant} variant for incident-response-workflow"
 
 
@@ -141,5 +141,5 @@ class TestPostmortemWorkflow:
     @pytest.mark.parametrize("variant", ["minimal", "verbose"])
     def test_workflow_variant_exists(self, workflow_dir, variant):
         """Test that workflow variant exists."""
-        file_path = workflow_dir / variant / "prompt.md"
+        file_path = workflow_dir / variant / "workflow.md"
         assert file_path.exists(), f"Missing {variant} variant for postmortem-workflow"

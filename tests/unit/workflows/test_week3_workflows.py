@@ -24,7 +24,7 @@ class TestBackendArchitectureWorkflows:
     @pytest.mark.parametrize("variant", ["minimal", "verbose"])
     def test_backend_workflow_exists(self, workflows_dir, workflow_name, variant):
         """Test that backend architecture workflows exist."""
-        file_path = workflows_dir / workflow_name / variant / "prompt.md"
+        file_path = workflows_dir / workflow_name / variant / "workflow.md"
         assert file_path.exists(), f"Missing {workflow_name}/{variant}"
 
 
@@ -49,7 +49,7 @@ class TestFrontendWorkflows:
     @pytest.mark.parametrize("variant", ["minimal", "verbose"])
     def test_frontend_workflow_exists(self, workflows_dir, workflow_name, variant):
         """Test that frontend workflows exist."""
-        file_path = workflows_dir / workflow_name / variant / "prompt.md"
+        file_path = workflows_dir / workflow_name / variant / "workflow.md"
         assert file_path.exists(), f"Missing {workflow_name}/{variant}"
 
 
@@ -74,7 +74,7 @@ class TestDevOpsWorkflows:
     @pytest.mark.parametrize("variant", ["minimal", "verbose"])
     def test_devops_workflow_exists(self, workflows_dir, workflow_name, variant):
         """Test that DevOps workflows exist."""
-        file_path = workflows_dir / workflow_name / variant / "prompt.md"
+        file_path = workflows_dir / workflow_name / variant / "workflow.md"
         assert file_path.exists(), f"Missing {workflow_name}/{variant}"
 
 
@@ -99,7 +99,7 @@ class TestTestingWorkflows:
     @pytest.mark.parametrize("variant", ["minimal", "verbose"])
     def test_testing_workflow_exists(self, workflows_dir, workflow_name, variant):
         """Test that testing workflows exist."""
-        file_path = workflows_dir / workflow_name / variant / "prompt.md"
+        file_path = workflows_dir / workflow_name / variant / "workflow.md"
         assert file_path.exists(), f"Missing {workflow_name}/{variant}"
 
 
@@ -124,7 +124,7 @@ class TestSecurityWorkflows:
     @pytest.mark.parametrize("variant", ["minimal", "verbose"])
     def test_security_workflow_exists(self, workflows_dir, workflow_name, variant):
         """Test that security workflows exist."""
-        file_path = workflows_dir / workflow_name / variant / "prompt.md"
+        file_path = workflows_dir / workflow_name / variant / "workflow.md"
         assert file_path.exists(), f"Missing {workflow_name}/{variant}"
 
 

@@ -24,7 +24,7 @@ class TestBackendSkills:
     @pytest.mark.parametrize("variant", ["minimal", "verbose"])
     def test_backend_skill_exists(self, skills_dir, skill_name, variant):
         """Test that backend skills exist."""
-        file_path = skills_dir / skill_name / variant / "prompt.md"
+        file_path = skills_dir / skill_name / variant / "skill.md"
         assert file_path.exists(), f"Missing {skill_name}/{variant}"
 
 
@@ -49,7 +49,7 @@ class TestFrontendSkills:
     @pytest.mark.parametrize("variant", ["minimal", "verbose"])
     def test_frontend_skill_exists(self, skills_dir, skill_name, variant):
         """Test that frontend skills exist."""
-        file_path = skills_dir / skill_name / variant / "prompt.md"
+        file_path = skills_dir / skill_name / variant / "skill.md"
         assert file_path.exists(), f"Missing {skill_name}/{variant}"
 
 
@@ -75,7 +75,7 @@ class TestDevOpsSkills:
     @pytest.mark.parametrize("variant", ["minimal", "verbose"])
     def test_devops_skill_exists(self, skills_dir, skill_name, variant):
         """Test that DevOps skills exist."""
-        file_path = skills_dir / skill_name / variant / "prompt.md"
+        file_path = skills_dir / skill_name / variant / "skill.md"
         assert file_path.exists(), f"Missing {skill_name}/{variant}"
 
 
@@ -100,7 +100,7 @@ class TestTestingSkills:
     @pytest.mark.parametrize("variant", ["minimal", "verbose"])
     def test_testing_skill_exists(self, skills_dir, skill_name, variant):
         """Test that testing skills exist."""
-        file_path = skills_dir / skill_name / variant / "prompt.md"
+        file_path = skills_dir / skill_name / variant / "skill.md"
         assert file_path.exists(), f"Missing {skill_name}/{variant}"
 
 
@@ -125,7 +125,7 @@ class TestMLAISkills:
     @pytest.mark.parametrize("variant", ["minimal", "verbose"])
     def test_mlai_skill_exists(self, skills_dir, skill_name, variant):
         """Test that ML/AI skills exist."""
-        file_path = skills_dir / skill_name / variant / "prompt.md"
+        file_path = skills_dir / skill_name / variant / "skill.md"
         assert file_path.exists(), f"Missing {skill_name}/{variant}"
 
 
@@ -151,7 +151,7 @@ class TestSecuritySkills:
     @pytest.mark.parametrize("variant", ["minimal", "verbose"])
     def test_security_skill_exists(self, skills_dir, skill_name, variant):
         """Test that security skills exist."""
-        file_path = skills_dir / skill_name / variant / "prompt.md"
+        file_path = skills_dir / skill_name / variant / "skill.md"
         assert file_path.exists(), f"Missing {skill_name}/{variant}"
 
 

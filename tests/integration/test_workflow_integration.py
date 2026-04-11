@@ -11,19 +11,19 @@ class TestWorkflowCompleteness:
     @pytest.fixture
     def data_pipeline_workflow(self, workflows_dir, read_file):
         """Get data pipeline workflow content."""
-        path = workflows_dir / "data-pipeline-workflow" / "verbose" / "prompt.md"
+        path = workflows_dir / "data-pipeline-workflow" / "verbose" / "workflow.md"
         return read_file(path) if path.exists() else ""
 
     @pytest.fixture
     def observability_workflow(self, workflows_dir, read_file):
         """Get observability workflow content."""
-        path = workflows_dir / "observability-workflow" / "verbose" / "prompt.md"
+        path = workflows_dir / "observability-workflow" / "verbose" / "workflow.md"
         return read_file(path) if path.exists() else ""
 
     @pytest.fixture
     def incident_response_workflow(self, workflows_dir, read_file):
         """Get incident response workflow content."""
-        path = workflows_dir / "incident-response-workflow" / "verbose" / "prompt.md"
+        path = workflows_dir / "incident-response-workflow" / "verbose" / "workflow.md"
         return read_file(path) if path.exists() else ""
 
     def test_data_pipeline_references_data_agent(self, data_pipeline_workflow):
