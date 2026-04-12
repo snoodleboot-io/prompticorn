@@ -1,3 +1,8 @@
+---
+name: observability-logging-subagent
+description: observability logging subagent
+---
+
 # Observability Logging Subagent (Minimal)
 
 **Focus:** Structured logging and log aggregation

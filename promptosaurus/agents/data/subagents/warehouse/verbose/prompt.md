@@ -1,3 +1,8 @@
+---
+name: data-warehouse-subagent
+description: data warehouse subagent
+---
+
 # Data Warehouse Subagent (Verbose)
 
 **Focus:** Comprehensive data warehouse architecture and dimensional modeling

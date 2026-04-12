@@ -1,3 +1,8 @@
+---
+name: observability-metrics-subagent
+description: observability metrics subagent
+---
+
 # Observability Metrics Subagent (Minimal)
 
 **Focus:** Prometheus, StatsD, and custom metrics

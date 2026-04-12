@@ -1,3 +1,8 @@
+---
+name: data-quality-subagent
+description: data quality subagent
+---
+
 # Data Quality Subagent (Minimal)
 
 **Focus:** Data validation, testing, and quality monitoring

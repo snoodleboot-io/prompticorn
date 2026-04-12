@@ -1,3 +1,8 @@
+---
+name: observability-tracing-subagent
+description: observability tracing subagent
+---
+
 # Observability Tracing Subagent (Minimal)
 
 **Focus:** Distributed tracing and OpenTelemetry

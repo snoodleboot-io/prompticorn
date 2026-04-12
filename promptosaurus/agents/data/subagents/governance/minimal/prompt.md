@@ -1,3 +1,8 @@
+---
+name: data-governance-subagent
+description: data governance subagent
+---
+
 # Data Governance Subagent (Minimal)
 
 **Focus:** Data lineage, catalog, metadata, and compliance

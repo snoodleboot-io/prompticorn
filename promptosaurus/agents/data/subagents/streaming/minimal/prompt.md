@@ -1,3 +1,8 @@
+---
+name: data-streaming-subagent
+description: data streaming subagent
+---
+
 # Data Streaming Subagent (Minimal)
 
 **Focus:** Real-time data processing and stream architectures

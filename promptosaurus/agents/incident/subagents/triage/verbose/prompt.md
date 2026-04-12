@@ -1,3 +1,8 @@
+---
+name: incident-triage-subagent
+description: incident triage subagent
+---
+
 # Incident Triage Subagent (Verbose)
 
 **Focus:** Comprehensive incident detection, assessment, and initial response

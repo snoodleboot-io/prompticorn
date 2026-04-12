@@ -1,3 +1,8 @@
+---
+name: incident-runbook-subagent
+description: incident runbook subagent
+---
+
 # Incident Runbook Subagent (Verbose)
 
 **Focus:** Comprehensive runbook creation and operational procedures

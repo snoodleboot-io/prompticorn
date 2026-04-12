@@ -22,4 +22,4 @@ spec:
     - unittest.mock
   coverage_tool: pytest-cov
   mutation_tool: mutmut
-variant: minimal
+variant: verbose

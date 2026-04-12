@@ -1,3 +1,8 @@
+---
+name: data-quality-subagent
+description: data quality subagent
+---
+
 # Data Quality Subagent (Verbose)
 
 **Focus:** Comprehensive data quality, validation, testing, and monitoring

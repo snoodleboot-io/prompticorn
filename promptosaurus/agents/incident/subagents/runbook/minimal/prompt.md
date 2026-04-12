@@ -1,3 +1,8 @@
+---
+name: incident-runbook-subagent
+description: incident runbook subagent
+---
+
 # Incident Runbook Subagent (Minimal)
 
 **Focus:** Operational procedure creation and documentation

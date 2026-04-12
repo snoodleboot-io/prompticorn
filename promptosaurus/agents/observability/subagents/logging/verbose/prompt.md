@@ -1,3 +1,8 @@
+---
+name: observability-logging-subagent
+description: observability logging subagent
+---
+
 # Observability Logging Subagent (Verbose)
 
 **Focus:** Comprehensive structured logging and log aggregation architecture

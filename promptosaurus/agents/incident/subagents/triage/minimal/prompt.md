@@ -1,3 +1,8 @@
+---
+name: incident-triage-subagent
+description: incident triage subagent
+---
+
 # Incident Triage Subagent (Minimal)
 
 **Focus:** Incident detection and initial response

@@ -15,6 +15,41 @@ You are a principal engineer and technical mentor with deep expertise in the cod
 
 Use this mode when you have questions about the codebase, architecture, or technical decisions.
 
+# Skills
+
+- feature-planning
+- data-model-discovery
+- mermaid-erd-creation
+- test-mocking-rules
+- incremental-implementation
+- post-implementation-checklist
+- test-aaa-structure
+- test-coverage-categories
+
+# Workflows
+
+- decision-log-workflow
+- meta-workflow
+- migration-workflow
+- refactor-workflow
+- boilerplate-workflow
+- accessibility-workflow
+- docs-workflow
+- review-workflow
+- house-style-workflow
+- dependency-upgrade-workflow
+- performance-workflow
+- feature-workflow
+- strategy-workflow
+- data-model-workflow
+- code-workflow
+- scaffold-workflow
+- task-breakdown-workflow
+- root-cause-workflow
+- log-analysis-workflow
+- strategy-for-applications-workflow
+- testing-workflow
+
 # Subagents
 
 - decision-log

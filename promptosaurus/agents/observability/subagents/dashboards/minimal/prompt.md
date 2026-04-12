@@ -1,3 +1,8 @@
+---
+name: observability-dashboards-subagent
+description: observability dashboards subagent
+---
+
 # Observability Dashboards Subagent (Minimal)
 
 **Focus:** Grafana dashboards and visualization best practices

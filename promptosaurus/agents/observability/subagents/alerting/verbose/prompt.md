@@ -1,3 +1,8 @@
+---
+name: observability-alerting-subagent
+description: observability alerting subagent
+---
+
 # Observability Alerting Subagent (Verbose)
 
 **Focus:** Comprehensive alert design and alert fatigue management

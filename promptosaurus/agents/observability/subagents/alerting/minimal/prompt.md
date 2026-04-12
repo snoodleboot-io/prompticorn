@@ -1,3 +1,8 @@
+---
+name: observability-alerting-subagent
+description: observability alerting subagent
+---
+
 # Observability Alerting Subagent (Minimal)
 
 **Focus:** Alert design, tuning, and escalation

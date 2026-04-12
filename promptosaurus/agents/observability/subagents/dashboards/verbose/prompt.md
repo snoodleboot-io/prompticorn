@@ -1,3 +1,8 @@
+---
+name: observability-dashboards-subagent
+description: observability dashboards subagent
+---
+
 # Observability Dashboards Subagent (Verbose)
 
 **Focus:** Comprehensive Grafana dashboards and visualization strategy

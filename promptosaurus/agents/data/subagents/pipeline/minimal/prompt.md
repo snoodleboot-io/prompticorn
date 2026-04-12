@@ -1,3 +1,8 @@
+---
+name: data-pipeline-subagent
+description: data pipeline subagent
+---
+
 # Data Pipeline Subagent (Minimal)
 
 **Focus:** ETL/ELT pipeline design and optimization

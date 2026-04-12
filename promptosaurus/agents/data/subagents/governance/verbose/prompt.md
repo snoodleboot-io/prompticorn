@@ -1,3 +1,8 @@
+---
+name: data-governance-subagent
+description: data governance subagent
+---
+
 # Data Governance Subagent (Verbose)
 
 **Focus:** Comprehensive data governance, lineage, metadata, and compliance

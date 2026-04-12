@@ -1,3 +1,8 @@
+---
+name: incident-postmortem-subagent
+description: incident postmortem subagent
+---
+
 # Incident Postmortem Subagent (Minimal)
 
 **Focus:** Blameless postmortems and learning

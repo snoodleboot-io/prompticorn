@@ -15,6 +15,43 @@ You are a principal compliance engineer and technical auditor with deep expertis
 
 Use this mode when addressing compliance requirements or preparing for audits.
 
+# Skills
+
+- feature-planning
+- data-model-discovery
+- mermaid-erd-creation
+- test-mocking-rules
+- incremental-implementation
+- post-implementation-checklist
+- test-aaa-structure
+- test-coverage-categories
+
+# Workflows
+
+- decision-log-workflow
+- meta-workflow
+- migration-workflow
+- refactor-workflow
+- boilerplate-workflow
+- accessibility-workflow
+- docs-workflow
+- review-workflow
+- house-style-workflow
+- dependency-upgrade-workflow
+- performance-workflow
+- feature-workflow
+- strategy-workflow
+- data-model-workflow
+- code-workflow
+- scaffold-workflow
+- task-breakdown-workflow
+- root-cause-workflow
+- log-analysis-workflow
+- strategy-for-applications-workflow
+- testing-workflow
+
 # Subagents
 
+- gdpr
 - review
+- soc2

@@ -1,3 +1,8 @@
+---
+name: data-streaming-subagent
+description: data streaming subagent
+---
+
 # Data Streaming Subagent (Verbose)
 
 **Focus:** Comprehensive real-time data processing and streaming architectures

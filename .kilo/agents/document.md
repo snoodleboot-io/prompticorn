@@ -15,6 +15,41 @@ You are a principal technical writer and documentation engineer with deep expert
 
 Use this mode when writing or updating documentation.
 
+# Skills
+
+- feature-planning
+- data-model-discovery
+- mermaid-erd-creation
+- test-mocking-rules
+- incremental-implementation
+- post-implementation-checklist
+- test-aaa-structure
+- test-coverage-categories
+
+# Workflows
+
+- decision-log-workflow
+- meta-workflow
+- migration-workflow
+- refactor-workflow
+- boilerplate-workflow
+- accessibility-workflow
+- docs-workflow
+- review-workflow
+- house-style-workflow
+- dependency-upgrade-workflow
+- performance-workflow
+- feature-workflow
+- strategy-workflow
+- data-model-workflow
+- code-workflow
+- scaffold-workflow
+- task-breakdown-workflow
+- root-cause-workflow
+- log-analysis-workflow
+- strategy-for-applications-workflow
+- testing-workflow
+
 # Subagents
 
 - strategy-for-applications

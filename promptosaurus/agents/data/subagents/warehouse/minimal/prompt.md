@@ -1,3 +1,8 @@
+---
+name: data-warehouse-subagent
+description: data warehouse subagent
+---
+
 # Data Warehouse Subagent (Minimal)
 
 **Focus:** Data warehouse design and dimensional modeling

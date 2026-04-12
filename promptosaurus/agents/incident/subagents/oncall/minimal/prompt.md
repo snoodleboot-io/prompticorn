@@ -1,3 +1,8 @@
+---
+name: incident-on-call-subagent
+description: incident on call subagent
+---
+
 # Incident On-Call Subagent (Minimal)
 
 **Focus:** On-call rotations, escalation policies, and availability management

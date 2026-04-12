@@ -1,3 +1,8 @@
+---
+name: observability-metrics-subagent
+description: observability metrics subagent
+---
+
 # Observability Metrics Subagent (Verbose)
 
 **Focus:** Comprehensive metrics strategy and Prometheus implementation

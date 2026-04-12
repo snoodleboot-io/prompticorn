@@ -1,3 +1,8 @@
+---
+name: incident-postmortem-subagent
+description: incident postmortem subagent
+---
+
 # Incident Postmortem Subagent (Verbose)
 
 **Focus:** Comprehensive blameless postmortems and organizational learning

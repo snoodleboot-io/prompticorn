@@ -1,3 +1,8 @@
+---
+name: incident-on-call-subagent
+description: incident on call subagent
+---
+
 # Incident On-Call Subagent (Verbose)
 
 **Focus:** Comprehensive on-call management and escalation strategy
