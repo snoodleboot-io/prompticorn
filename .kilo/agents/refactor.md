@@ -17,38 +17,38 @@ Use this mode when improving code structure, eliminating technical debt, or simp
 
 # Skills
 
+- data-model-discovery
 - feature-planning
+- test-coverage-categories
+- test-aaa-structure
 - post-implementation-checklist
 - test-mocking-rules
-- incremental-implementation
 - mermaid-erd-creation
-- data-model-discovery
-- test-aaa-structure
-- test-coverage-categories
+- incremental-implementation
 
 # Workflows
 
-- boilerplate-workflow
-- migration-workflow
-- testing-workflow
-- review-workflow
-- root-cause-workflow
-- docs-workflow
-- scaffold-workflow
-- meta-workflow
-- decision-log-workflow
-- performance-workflow
-- accessibility-workflow
-- task-breakdown-workflow
-- log-analysis-workflow
-- house-style-workflow
-- feature-workflow
-- strategy-for-applications-workflow
-- refactor-workflow
 - code-workflow
-- strategy-workflow
-- dependency-upgrade-workflow
+- log-analysis-workflow
+- strategy-for-applications-workflow
+- migration-workflow
+- meta-workflow
+- boilerplate-workflow
+- task-breakdown-workflow
+- performance-workflow
+- testing-workflow
+- accessibility-workflow
+- house-style-workflow
 - data-model-workflow
+- scaffold-workflow
+- decision-log-workflow
+- dependency-upgrade-workflow
+- review-workflow
+- docs-workflow
+- strategy-workflow
+- feature-workflow
+- refactor-workflow
+- root-cause-workflow
 
 # Subagents
 

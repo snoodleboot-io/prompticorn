@@ -143,7 +143,7 @@ class PromptBuilder:
                 if agent.skills:
                     try:
                         # Filter agent for language before writing skills
-                        filtered_agent = self._filter_agent_for_language(agent, language)
+                        filtered_agent = self._filter_agent_for_language(agent, language, agent_name=agent_name)
                         skill_files = self._write_skill_files(
                             output, agent_name, filtered_agent, variant
                         )
@@ -161,7 +161,7 @@ class PromptBuilder:
                 if agent.workflows:
                     try:
                         # Filter agent for language before writing workflows
-                        filtered_agent = self._filter_agent_for_language(agent, language)
+                        filtered_agent = self._filter_agent_for_language(agent, language, agent_name=agent_name)
                         workflow_files = self._write_workflow_files(
                             output, agent_name, filtered_agent, variant
                         )
@@ -190,7 +190,7 @@ class PromptBuilder:
             agent: Agent to filter
             language: Language code (e.g., 'python', 'typescript'), or None
 
-        Returns:
+            agent_name: Full agent name (e.g., 'orchestrator/maintenance'), optional
             New Agent instance with filtered skills and workflows, or original
             if no language specified or mapping loader unavailable
         """
