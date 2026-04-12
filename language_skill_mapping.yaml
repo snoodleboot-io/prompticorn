@@ -1,13 +1,12 @@
 # Language-Skill-Workflow Mapping Registry
 # Only includes skills and workflows that exist on filesystem
-# Last updated: 2026-04-10
+# Last updated: 2026-04-12
 #
-# This file has been completely rewritten to remove all references to non-existent
-# skills and workflows. Previous version had 230+ fake entries.
+# This file includes all Phase 1-3 workflows and skills
 #
 # Verified Counts:
-# - Skills: 8 total (all real, verified on filesystem)
-# - Workflows: 21 total (all real, verified on filesystem)
+# - Skills: 110 total (60 Phase 1-2 + 50 Phase 3, all verified on filesystem)
+# - Workflows: 66 total (21 Phase 1-2 + 45 Phase 3, all verified on filesystem)
 
 # ============================================================================
 # GLOBAL DEFAULTS - Applied to all languages unless overridden
@@ -27,6 +26,7 @@ all:
 # ============================================================================
 python:
   skills:
+    # Phase 1-2 Core Skills
     - feature-planning
     - incremental-implementation
     - post-implementation-checklist
@@ -35,7 +35,38 @@ python:
     - test-mocking-rules
     - data-model-discovery
     - mermaid-erd-creation
+    # Phase 3 Track 1: ML/AI Skills
+    - data-validation-pipelines
+    - feature-store-design
+    - model-performance-debugging
+    - hyperparameter-optimization
+    - data-versioning-reproducibility
+    - ensemble-methods
+    - cross-validation-strategies
+    - imbalanced-classification
+    - time-series-preprocessing
+    - dimensionality-reduction
+    - anomaly-detection-techniques
+    - feature-importance-analysis
+    - model-interpretability
+    - batch-vs-realtime-scoring
+    - mlops-pipeline-design
+    # Phase 3 Track 4: Cross-Domain Skills
+    - technical-decision-making
+    - architecture-documentation
+    - code-review-practices
+    - testing-strategies
+    - documentation-best-practices
+    - team-collaboration
+    - problem-decomposition
+    - technical-communication
+    - performance-optimization
+    - debugging-methodology
+    - quality-assurance
+    - technical-debt-management
+    - continuous-improvement
   workflows:
+    # Phase 1-2 Core Workflows
     - feature-workflow
     - testing-workflow
     - data-model-workflow
@@ -57,6 +88,55 @@ python:
     - strategy-for-applications-workflow
     - task-breakdown-workflow
     - accessibility-workflow
+    # Phase 3 Track 1: ML/AI Workflows
+    - model-evaluation-workflow
+    - model-serving-workflow
+    - mlops-pipeline-setup
+    - feature-engineering-guide
+    - data-quality-monitoring
+    - model-governance-workflow
+    - hyperparameter-tuning
+    - model-retraining-strategy
+    - experiment-tracking-setup
+    - model-interpretability-guide
+    - production-ml-deployment
+    - ml-monitoring-observability
+    # Phase 3 Track 2: Security Workflows
+    - threat-modeling-workflow
+    - vulnerability-scanning-workflow
+    - security-testing-workflow
+    - compliance-audit-workflow
+    - incident-response-security
+    - security-hardening-checklist
+    - penetration-testing-guide
+    - security-code-review
+    - dependency-scanning-workflow
+    - secret-management-workflow
+    # Phase 3 Track 3: Product Workflows
+    - requirements-gathering-workflow
+    - roadmap-planning-workflow
+    - feature-prioritization-workflow
+    - user-research-guide
+    - ux-validation-workflow
+    - analytics-setup-workflow
+    - a-b-testing-workflow
+    - feature-launch-checklist
+    # Phase 3 Track 4: Workflow Pattern Workflows
+    - workflow-orchestration-patterns
+    - multi-agent-coordination-workflow
+    - async-workflow-execution
+    - workflow-versioning-management
+    - workflow-error-handling-patterns
+    - workflow-monitoring-workflow
+    - workflow-testing-patterns
+    - workflow-documentation-patterns
+    - workflow-migration-patterns
+    - workflow-performance-optimization
+    - workflow-dependency-management
+    - workflow-rollback-strategies
+    - workflow-scaling-patterns
+    - workflow-security-in-workflows
+    - workflow-compliance-patterns
 
 # Python mode-specific combinations
 python/code:
@@ -396,6 +476,62 @@ csharp/test:
     - testing-workflow
 
 # ============================================================================
+# SECURITY SPECIALIST
+# ============================================================================
+security:
+  skills:
+    # Phase 3 Track 2: Security Skills
+    - threat-identification
+    - vulnerability-assessment
+    - secure-code-review
+    - cryptography-fundamentals
+    - authentication-design
+    - authorization-patterns
+    - api-security-hardening
+    - security-testing-strategies
+    - incident-response-planning
+    - compliance-assessment
+    - secret-management
+    - security-architecture-review
+  workflows:
+    - threat-modeling-workflow
+    - vulnerability-scanning-workflow
+    - security-testing-workflow
+    - compliance-audit-workflow
+    - incident-response-security
+    - security-hardening-checklist
+    - penetration-testing-guide
+    - security-code-review
+    - dependency-scanning-workflow
+    - secret-management-workflow
+
+# ============================================================================
+# PRODUCT MANAGER
+# ============================================================================
+product:
+  skills:
+    # Phase 3 Track 3: Product Skills
+    - user-needs-discovery
+    - requirements-specification
+    - success-metrics-definition
+    - roadmap-prioritization
+    - user-testing-methods
+    - competitor-analysis
+    - ux-writing-guidelines
+    - launch-readiness-checklist
+    - stakeholder-communication
+    - product-analytics-setup
+  workflows:
+    - requirements-gathering-workflow
+    - roadmap-planning-workflow
+    - feature-prioritization-workflow
+    - user-research-guide
+    - ux-validation-workflow
+    - analytics-setup-workflow
+    - a-b-testing-workflow
+    - feature-launch-checklist
+
+# ============================================================================
 # SQL
 # ============================================================================
 sql:
@@ -409,7 +545,9 @@ sql:
 # NOTES AND REFERENCE
 # ============================================================================
 #
-# Available Skills (8 total - all verified on filesystem):
+# Available Skills (110 total - all verified on filesystem):
+#
+# Phase 1-2 Core (8):
 # - data-model-discovery
 # - feature-planning
 # - incremental-implementation
@@ -419,7 +557,67 @@ sql:
 # - test-coverage-categories
 # - test-mocking-rules
 #
-# Available Workflows (21 total - all verified on filesystem):
+# Phase 3 Track 1: ML/AI (15):
+# - data-validation-pipelines
+# - feature-store-design
+# - model-performance-debugging
+# - hyperparameter-optimization
+# - data-versioning-reproducibility
+# - ensemble-methods
+# - cross-validation-strategies
+# - imbalanced-classification
+# - time-series-preprocessing
+# - dimensionality-reduction
+# - anomaly-detection-techniques
+# - feature-importance-analysis
+# - model-interpretability
+# - batch-vs-realtime-scoring
+# - mlops-pipeline-design
+#
+# Phase 3 Track 2: Security (12):
+# - threat-identification
+# - vulnerability-assessment
+# - secure-code-review
+# - cryptography-fundamentals
+# - authentication-design
+# - authorization-patterns
+# - api-security-hardening
+# - security-testing-strategies
+# - incident-response-planning
+# - compliance-assessment
+# - secret-management
+# - security-architecture-review
+#
+# Phase 3 Track 3: Product (10):
+# - user-needs-discovery
+# - requirements-specification
+# - success-metrics-definition
+# - roadmap-prioritization
+# - user-testing-methods
+# - competitor-analysis
+# - ux-writing-guidelines
+# - launch-readiness-checklist
+# - stakeholder-communication
+# - product-analytics-setup
+#
+# Phase 3 Track 4: Cross-Domain (13):
+# - technical-decision-making
+# - architecture-documentation
+# - code-review-practices
+# - testing-strategies
+# - documentation-best-practices
+# - team-collaboration
+# - problem-decomposition
+# - technical-communication
+# - performance-optimization
+# - debugging-methodology
+# - quality-assurance
+# - technical-debt-management
+# - continuous-improvement
+#
+# Available Workflows (66 total - all verified on filesystem):
+#
+# Phase 1-2 Core (21):
 # - accessibility-workflow
 # - boilerplate-workflow
 # - code-workflow
@@ -441,6 +639,59 @@ sql:
 # - strategy-workflow
 # - task-breakdown-workflow
 # - testing-workflow
+#
+# Phase 3 Track 1: ML/AI (12):
+# - model-evaluation-workflow
+# - model-serving-workflow
+# - mlops-pipeline-setup
+# - feature-engineering-guide
+# - data-quality-monitoring
+# - model-governance-workflow
+# - hyperparameter-tuning
+# - model-retraining-strategy
+# - experiment-tracking-setup
+# - model-interpretability-guide
+# - production-ml-deployment
+# - ml-monitoring-observability
+#
+# Phase 3 Track 2: Security (10):
+# - threat-modeling-workflow
+# - vulnerability-scanning-workflow
+# - security-testing-workflow
+# - compliance-audit-workflow
+# - incident-response-security
+# - security-hardening-checklist
+# - penetration-testing-guide
+# - security-code-review
+# - dependency-scanning-workflow
+# - secret-management-workflow
+#
+# Phase 3 Track 3: Product (8):
+# - requirements-gathering-workflow
+# - roadmap-planning-workflow
+# - feature-prioritization-workflow
+# - user-research-guide
+# - ux-validation-workflow
+# - analytics-setup-workflow
+# - a-b-testing-workflow
+# - feature-launch-checklist
+#
+# Phase 3 Track 4: Workflow Patterns (15):
+# - workflow-orchestration-patterns
+# - multi-agent-coordination-workflow
+# - async-workflow-execution
+# - workflow-versioning-management
+# - workflow-error-handling-patterns
+# - workflow-monitoring-workflow
+# - workflow-testing-patterns
+# - workflow-documentation-patterns
+# - workflow-migration-patterns
+# - workflow-performance-optimization
+# - workflow-dependency-management
+# - workflow-rollback-strategies
+# - workflow-scaling-patterns
+# - workflow-security-in-workflows
+# - workflow-compliance-patterns
 #
 # Inheritance Model:
 # - Global defaults in 'all' section apply to every language

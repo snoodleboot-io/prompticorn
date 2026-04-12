@@ -23,4 +23,3 @@ spec:
   coverage_tool: pytest-cov
   mutation_tool: mutmut
 variant: verbose
-ai_tool: kilo-ide

@@ -17,37 +17,37 @@ Use this mode when addressing compliance requirements or preparing for audits.
 
 # Skills
 
-- mermaid-erd-creation
-- post-implementation-checklist
-- feature-planning
+- test-coverage-categories
 - test-mocking-rules
+- feature-planning
+- mermaid-erd-creation
 - test-aaa-structure
 - data-model-discovery
+- post-implementation-checklist
 - incremental-implementation
-- test-coverage-categories
 
 # Workflows
 
-- task-breakdown-workflow
-- refactor-workflow
-- code-workflow
-- performance-workflow
-- data-model-workflow
+- boilerplate-workflow
 - log-analysis-workflow
+- data-model-workflow
 - meta-workflow
-- dependency-upgrade-workflow
+- refactor-workflow
+- migration-workflow
 - root-cause-workflow
+- task-breakdown-workflow
+- accessibility-workflow
 - review-workflow
-- feature-workflow
+- code-workflow
 - docs-workflow
+- decision-log-workflow
 - strategy-workflow
+- performance-workflow
+- feature-workflow
 - house-style-workflow
 - testing-workflow
+- dependency-upgrade-workflow
 - scaffold-workflow
-- accessibility-workflow
-- migration-workflow
-- boilerplate-workflow
-- decision-log-workflow
 - strategy-for-applications-workflow
 
 # Subagents
