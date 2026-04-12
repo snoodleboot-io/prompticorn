@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from promptosaurus.builders.base import AbstractBuilder, BuildOptions
+from promptosaurus.builders.builder import Builder
 from promptosaurus.builders.errors import BuilderValidationError
 from promptosaurus.ir.loaders import CoreFilesLoader
 from promptosaurus.ir.models import Agent
@@ -24,7 +25,6 @@ class KiloBuilder(AbstractBuilder):
         ---
         name: "agent_name"
         description: "Agent description"
-        model: "anthropic/claude-opus-4-1"
         state_management: ".promptosaurus/sessions/"
         ---
 
@@ -59,6 +59,8 @@ class KiloBuilder(AbstractBuilder):
         """
         self.agents_dir = agents_dir
         self.core_loader = CoreFilesLoader()
+        # Initialize Builder for template variable substitution
+        self._builder = Builder()
 
     def build(self, agent: Agent, options: BuildOptions, config: dict | None = None) -> str:
         """Build a Kilo agent configuration file.
@@ -86,6 +88,10 @@ class KiloBuilder(AbstractBuilder):
 
         # Use agent system prompt directly (no variants for top-level agents)
         system_prompt = agent.system_prompt
+        
+        # Apply template variable substitution if config is provided
+        if config:
+            system_prompt = self._builder._substitute_template_variables(system_prompt, config)
 
         # Prepare YAML frontmatter
         frontmatter = self._build_frontmatter(agent)
@@ -130,7 +136,6 @@ class KiloBuilder(AbstractBuilder):
 
         # Compose YAML frontmatter + markdown
         return self._compose_yaml_markdown(frontmatter, markdown_content)
-
     def validate(self, agent: Agent) -> list[str]:
         """Validate an Agent IR model for Kilo.
 
@@ -271,9 +276,14 @@ class KiloBuilder(AbstractBuilder):
         frontmatter: dict[str, Any] = {
             "name": agent.name,
             "description": agent.description,
-            "model": "anthropic/claude-opus-4-1",
-            "state_management": ".promptosaurus/sessions/",
         }
+
+        # Add mode if present
+        if hasattr(agent, "mode") and agent.mode:
+            frontmatter["mode"] = agent.mode
+
+        # Add state management
+        frontmatter["state_management"] = ".promptosaurus/sessions/"
 
         # Add permissions if present
         if agent.permissions:

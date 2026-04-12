@@ -437,6 +437,11 @@ mkdir -p .github/workflows docker config
 mkdir -p src/{api,domain,infrastructure,shared}
 mkdir -p tests/{unit,integration,e2e,fixtures}
 mkdir -p docs/{architecture,guides,api}
+
+# Development planning structure
+mkdir -p planning/{current,complete,backlog}/{adrs,execution-plans,features,prds}
+mkdir -p planning/research
+mkdir -p _temp
 ```
 
 **Verification:**

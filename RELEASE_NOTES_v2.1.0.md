@@ -146,7 +146,7 @@ No breaking changes in v2.1.0. All previous agent definitions, workflows, and sk
 - `docs/INDEX.md` - Reordered for better discoverability
 - `docs/QUICKSTART.md` - NEW
 - `docs/PERSONA_GUIDES.md` - NEW
-- `docs/planning/current/PHASE3_ROADMAP.plan.md` - NEW
+- `planning/current/PHASE3_ROADMAP.plan.md` - NEW
 
 No updates to agent, workflow, or skill files in production code.
 

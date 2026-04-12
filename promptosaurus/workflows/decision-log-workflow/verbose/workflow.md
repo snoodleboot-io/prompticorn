@@ -100,7 +100,7 @@ Impact:
 **Directory structure:**
 ```
 docs/
-├── decisions/           # OR docs/adr/
+├── decisions/           # OR planning/current/adrs/
 │   ├── ADR-001-use-postgresql.md
 │   ├── ADR-002-implement-caching.md
 │   ├── ADR-003-migrate-to-kubernetes.md
@@ -502,7 +502,7 @@ trade-off because data consistency is critical for inventory.
 
 ### 5.1 ADR Index
 
-**Maintain a README.md in docs/decisions/:**
+**Maintain a README.md in planning/current/adrs/:**
 
 ```markdown
 # Architecture Decision Records
@@ -578,7 +578,7 @@ adr new "Use PostgreSQL for primary database"
 adr list
 
 # Generate website
-adr generate toc > docs/decisions/README.md
+adr generate toc > planning/current/adrs/README.md
 ```
 
 **log4brains (web UI):**
@@ -611,7 +611,7 @@ jobs:
       - name: Check ADR format
         run: |
           # Verify all ADRs have required sections
-          for file in docs/decisions/ADR-*.md; do
+          for file in planning/current/adrs/ADR-*.md; do
             grep -q "## Context" "$file" || echo "Missing Context: $file"
             grep -q "## Decision" "$file" || echo "Missing Decision: $file"
             grep -q "## Consequences" "$file" || echo "Missing Consequences: $file"

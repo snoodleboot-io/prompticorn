@@ -1,11 +1,12 @@
 ---
 name: architect
 description: System design, architecture planning, and technical decision making
+mode: primary
 permissions:
   read:
     '*': allow
   edit:
-    (docs/.*\.md$|\.promptosaurus/sessions/.*\.md$): allow
+    (docs/.*\.md$|planning/.*\.md$|\.promptosaurus/sessions/.*\.md$): allow
     '*': deny
 ---
 

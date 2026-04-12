@@ -7,8 +7,20 @@ Decision logs record important decisions made during development. They provide c
 
 Decision logs can be kept in:
 1. **Session files** - For decisions within a single branch/work session
-2. **Separate document** - `docs/DECISIONS.md` for project-wide decisions
-3. **ADR format** - Architecture Decision Records in `docs/adr/` directory
+2. **Planning ADRs** - Architecture Decision Records in `planning/current/adrs/`
+3. **Final docs** - Important decisions in `docs/decisions/` (finalized, stable)
+Decision logs can be kept in:
+1. **Session files** - For decisions within a single branch/work session
+2. **Planning ADRs** - Architecture Decision Records in `planning/current/adrs/`
+3. **Final docs** - Important decisions in `docs/decisions/` (finalized, stable)
+Decision logs can be kept in:
+1. **Session files** - For decisions within a single branch/work session
+2. **Planning ADRs** - Architecture Decision Records in `planning/current/adrs/`
+3. **Final docs** - Important decisions in `docs/decisions/` (finalized, stable)
+Decision logs can be kept in:
+1. **Session files** - For decisions within a single branch/work session
+2. **Planning ADRs** - Architecture Decision Records in `planning/current/adrs/`
+3. **Final docs** - Important decisions in `docs/decisions/` (finalized, stable)
 
 ---
 
@@ -342,11 +354,17 @@ For session-specific decisions:
 **Status:** Approved
 ```
 
-### In Separate Document
+### In Planning Directory
 
-For project-wide decisions:
-- File: `docs/DECISIONS.md` (high-level) 
-- OR `docs/adr/` (individual ADR files for major decisions)
+For development planning decisions:
+- Active work: `planning/current/adrs/ADR-NNN-title.md`
+- Completed work: `planning/complete/adrs/ADR-NNN-title.md`
+- Future exploration: `planning/backlog/adrs/DRAFT_ADR-NNN-title.md`
+
+### In Docs Directory (Finalized Only)
+
+For stable, user-facing architectural decisions:
+- Finalized decisions: `docs/decisions/ADR-NNN-title.md`
 - Format: Same as template above
 - Review: Required from team leads
 - Update: When decision status changes

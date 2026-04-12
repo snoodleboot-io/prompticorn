@@ -1,6 +1,6 @@
 # Phase 1 Execution Guide
 
-**Master Document:** `docs/planning/current/PHASE1_TASK_CHECKLIST.md`
+**Master Document:** `planning/current/PHASE1_TASK_CHECKLIST.md`
 
 ---
 
@@ -29,7 +29,7 @@ Step 2: Check off in checklist
         NEW: - [x] Create `promptosaurus/agents/data/prompt.md` (agent definition)
 
 Step 3: Commit with checklist update
-        git add promptosaurus/agents/data/prompt.md docs/planning/current/PHASE1_TASK_CHECKLIST.md
+        git add promptosaurus/agents/data/prompt.md planning/current/PHASE1_TASK_CHECKLIST.md
         git commit -m "feat: Create data agent scaffolding
         
         - Created agents/data/prompt.md
@@ -309,16 +309,16 @@ git status
 ### Track Checklist Progress
 ```bash
 # Count checked items in Week 1
-grep -c "^- \[x\]" docs/planning/current/PHASE1_TASK_CHECKLIST.md | head -50
+grep -c "^- \[x\]" planning/current/PHASE1_TASK_CHECKLIST.md | head -50
 
 # Show all checked items
-grep "^- \[x\]" docs/planning/current/PHASE1_TASK_CHECKLIST.md
+grep "^- \[x\]" planning/current/PHASE1_TASK_CHECKLIST.md
 ```
 
 ### Update and Commit
 ```bash
 # Stage checklist and new files
-git add docs/planning/current/PHASE1_TASK_CHECKLIST.md promptosaurus/agents/
+git add planning/current/PHASE1_TASK_CHECKLIST.md promptosaurus/agents/
 
 # Commit with message
 git commit -m "feat: [description]"
@@ -358,7 +358,7 @@ git status
 
 When you are ready:
 
-1. Open `docs/planning/current/PHASE1_TASK_CHECKLIST.md`
+1. Open `planning/current/PHASE1_TASK_CHECKLIST.md`
 2. Start with Week 1, Days 1-2
 3. Create the 3 agent files
 4. Check off each item in the checklist

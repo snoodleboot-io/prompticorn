@@ -55,6 +55,11 @@ credentials/
 .promptosaurus/sessions/
 !.promptosaurus/sessions/.gitkeep
 
+# --- Actionable Reports (active) ---
+.promptosaurus/reports/
+!.promptosaurus/reports/.gitkeep
+!.promptosaurus/reports/README.md
+
 # --- Logs ---
 *.log
 
@@ -86,6 +91,10 @@ coverage_builders/
 
 # --- Examples (generated from builders) ---
 examples/
+
+# --- Ephemeral Working Files (NOT COMMITTED) ---
+_temp/
+!_temp/.gitkeep
 
 # --- Temporary Files ---
 *.tmp

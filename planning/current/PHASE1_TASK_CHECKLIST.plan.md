@@ -546,14 +546,14 @@ Days 8-9: 4 incident management workflow files ✅
 
 ### Documentation Updates
 
-- [ ] Move Phase 1 planning from `docs/planning/current/` to `docs/planning/finished/`
+- [ ] Move Phase 1 planning from `planning/current/` to `planning/complete/`
   - Move PHASE1_EXECUTION_PLAN.md to finished/execution-plans/
   - Move COVERAGE_GAP_ANALYSIS.md to finished/execution-plans/
   - Move this checklist to finished/execution-plans/
   - Status: Not started
 
 - [ ] Create Phase 1 completion summary
-  - File: `docs/planning/finished/execution-plans/PHASE1_COMPLETION_SUMMARY.md`
+  - File: `planning/complete/execution-plans/PHASE1_COMPLETION_SUMMARY.md`
   - Document all deliverables, files created, and status
   - Status: Not started
 

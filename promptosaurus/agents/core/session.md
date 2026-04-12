@@ -130,11 +130,11 @@ version: "1.0"
   - `PROJ-123-4`: Integration tests for token flow (M)
   - `PROJ-123-5`: Security audit of implementation (S)
 - **Status:** User approved all 5 tasks
-- **File:** `docs/AUTH_DESIGN.md` created with full design
+- **File:** `planning/current/execution-plans/AUTH_DESIGN.md` created with full design
 
 ### 2026-03-02 15:30 - architect mode
 - **Deliverable:** Sequence diagram for refresh token flow
-- **File:** `docs/AUTH_SEQUENCE.md`
+- **File:** `docs/design/AUTH_ARCHITECTURE.md`
 - **Review:** Ready for Code mode
 
 ## Context Summary
@@ -142,8 +142,8 @@ version: "1.0"
 Completed architecture phase for JWT refresh token redesign. Designed new token rotation system to address security gaps in current implementation. Identified 5 implementation tasks (total ~1.5 weeks). User approved architecture. Ready to implement Task 1 (JWT validation refactor).
 
 **Deliverables Created:**
-- `docs/AUTH_DESIGN.md` - Full design specification
-- `docs/AUTH_SEQUENCE.md` - Sequence diagrams
+- `planning/current/execution-plans/AUTH_DESIGN.md` - Full design specification
+- `docs/design/AUTH_ARCHITECTURE.md` - Sequence diagrams
 
 **Next Steps:**
 - Switch to Code mode

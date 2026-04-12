@@ -30,32 +30,21 @@ See: `docs/design/`
 - VARIANT_DIFFERENTIATION_STRATEGY.design.md
 - WORKFLOW_HANDLING_ANALYSIS.design.md
 
-### 📋 Planning & Execution
-See: `docs/planning/`
-- **current/** - Active phase plans
-  - PHASE1_EXECUTION_GUIDE.plan.md
-  - PHASE1_TASK_CHECKLIST.plan.md
-  - PHASE2_OUTLINE.plan.md
-  - PHASE2_TASK_CHECKLIST.plan.md
-  - PHASE2_EXECUTION_STATUS.plan.md
-- **finished/** - Completed phases
-
-### ✅ Validation & Quality Reports
-See: `docs/validation/`
-- COVERAGE_REPORT.validation.md - Line/branch/mutation coverage
-- MUTATION_TESTING_RESULTS.validation.md - Mutation test results
-- PERFORMANCE_REPORT.validation.md - Performance benchmarks
-- EXTRACTION_STATUS.validation.md - Content extraction validation
-- VARIANT_REWRITE_CHECKLIST.validation.md - Variant quality checklist
-- subagent-variant-audit-2026-04-10.validation.md - Audit report
-
-### 🔬 Research & Investigation
-See: `docs/research/`
-- Investigation reports and research findings
-
 ### 🛠️ Builder Documentation
 See: `docs/builders/`
 - Builder implementation guides and patterns
+
+---
+
+## Development Planning (Internal)
+
+For internal development planning, see: `../planning/`
+- **current/** - Active phase plans and execution
+- **complete/** - Finished phases and delivered features
+- **backlog/** - Future work and ideas
+- **research/** - Research findings and investigations
+
+Note: Planning directory contains AI-generated and internal development artifacts. This documentation (docs/) is user-facing.
 
 ## File Naming Conventions
 

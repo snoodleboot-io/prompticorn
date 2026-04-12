@@ -1,6 +1,7 @@
 ---
 name: strategy-for-applications
 description: Document - strategy-for-applications
+mode: subagent
 tools: [bash, read, write]
 workflows:
   - strategy-for-applications-workflow

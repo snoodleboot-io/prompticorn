@@ -70,11 +70,11 @@
 - ✅ skill.md standardization (52 files, intent-clear naming)
 - ✅ Documentation reorganization (intent-based suffixes)
   - docs/design/ (4 .design.md files)
-  - docs/planning/ (5 .plan.md files)
-  - docs/validation/ (6 .validation.md files)
+  - planning/ (5 .plan.md files)
+  - _temp/validation/ (6 .validation.md files)
   - docs/reference/ (5 .reference.md files)
   - docs/builders/ (9 .builder.md files)
-  - docs/research/ (6 .research.md files)
+  - planning/research/ (6 .research.md files)
 - ✅ Test file updates (4 files, all references updated)
 - **Commit:** 78c47b6
 - **Tests:** 216 passing (100%)
@@ -149,11 +149,11 @@ docs/INDEX.md:
   
 ✓ Directory location encodes purpose:
   - docs/design/ = Architecture decisions
-  - docs/planning/ = Execution plans
-  - docs/validation/ = Quality reports
+  - planning/ = Execution plans
+  - _temp/validation/ = Quality reports
   - docs/reference/ = User guides
   - docs/builders/ = Builder tools
-  - docs/research/ = Investigation findings
+  - planning/research/ = Investigation findings
   
 ✓ Suffix convention clarifies scope:
   - .design.md, .plan.md, .validation.md, etc.

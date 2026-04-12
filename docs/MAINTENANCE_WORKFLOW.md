@@ -259,7 +259,7 @@ When updating docs, verify:
 
 1. Ensure test file has comprehensive docstrings
 2. Add example test cases as documentation
-3. Update test coverage report: `docs/validation/COVERAGE_REPORT.validation.md`
+3. Update test coverage report: `_temp/validation/COVERAGE_REPORT.validation.md`
 
 ---
 

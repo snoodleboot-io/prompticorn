@@ -5,6 +5,7 @@ name: decision-log
 variant: verbose
 version: 1.0.0
 description: Record architectural and technical decisions with detailed examples
+mode: subagent
 tools: [write]
 workflows:
   - decision-log-workflow
@@ -315,7 +316,10 @@ PostgreSQL was chosen because:
 
 ## Storage and Naming
 
-**Location:** `docs/decisions/` or `docs/adr/`
+**Location:** 
+- Planning (active): `planning/current/adrs/`
+- Planning (complete): `planning/complete/adrs/`
+- Documentation (finalized): `docs/decisions/`
 
 **Filename format:** `ADR-NNN-title-in-kebab-case.md`
 

@@ -14,7 +14,7 @@ If not provided, ask for:
 - What are the risks or trade-offs?
 
 ## 2. Create ADR File
-Store in `docs/decisions/` or `docs/adr/`:
+Store in `planning/current/adrs/` or `planning/current/adrs/`:
 ```bash
 # Naming: ADR-{number}-{title}.md
 # Example: ADR-001-use-postgresql-over-mongodb.md

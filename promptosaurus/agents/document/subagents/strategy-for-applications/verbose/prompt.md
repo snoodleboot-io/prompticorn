@@ -1,6 +1,7 @@
 ---
 name: strategy-for-applications
 description: Document - strategy-for-applications
+mode: subagent
 tools: [bash, read, write]
 workflows:
   - strategy-for-applications-workflow
@@ -208,7 +209,7 @@ Deployed via GitHub Actions on push to `main` branch. See `.github/workflows/dep
 
 ## Architecture Decisions
 
-See [docs/decisions/](docs/decisions/) for ADRs.
+See [planning/current/adrs/](planning/current/adrs/) for active decisions or [docs/decisions/](docs/decisions/) for finalized architectural decisions.
 ```
 
 ### When Updating Existing README

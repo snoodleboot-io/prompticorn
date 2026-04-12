@@ -9,12 +9,12 @@ Find the right resources for your role.
 **Start here:**
 1. [RELATIONSHIPS_MATRIX.md](./RELATIONSHIPS_MATRIX.md) - See how all components fit together
 2. [ADVANCED_PATTERNS.design.md](./design/ADVANCED_PATTERNS.design.md) - Architecture decisions
-3. [PHASE2_OUTLINE.plan.md](./planning/current/PHASE2_OUTLINE.plan.md) - Expansion strategy
+3. [PHASE2_OUTLINE.plan.md](../../planning/current/PHASE2_OUTLINE.plan.md) - Expansion strategy
 
 **Key documents:**
 - Design decisions: `docs/design/*.design.md`
-- Planning docs: `docs/planning/current/*.plan.md`
-- Execution guides: `docs/planning/current/PHASE*_EXECUTION_GUIDE.plan.md`
+- Planning docs: `planning/current/*.plan.md`
+- Execution guides: `planning/current/PHASE*_EXECUTION_GUIDE.plan.md`
 
 **Questions answered:**
 - What agents exist and why? → LIBRARY_INDEX.md
@@ -178,10 +178,10 @@ Find the right resources for your role.
 4. [LIBRARY_INDEX.md](./LIBRARY_INDEX.md) - Feature catalog
 
 **Key documents:**
-- Progress tracking: `docs/planning/current/PHASE*_EXECUTION_STATUS.plan.md`
+- Progress tracking: `planning/current/PHASE*_EXECUTION_STATUS.plan.md`
 - Quality metrics: QUALITY_METRICS.md
 - Technical debt: TECHNICAL_DEBT.md
-- Roadmap: `docs/planning/current/PHASE*_OUTLINE.plan.md`
+- Roadmap: `planning/current/PHASE*_OUTLINE.plan.md`
 
 **Questions answered:**
 - What's been completed? → PHASE2_EXECUTION_STATUS.plan.md
@@ -237,18 +237,18 @@ Find the right resources for your role.
 **Start here:**
 1. [QUALITY_METRICS.md](./QUALITY_METRICS.md) - Quality dashboard
 2. [TECHNICAL_DEBT.md](./TECHNICAL_DEBT.md) - Known issues
-3. `docs/validation/` - Validation reports
+3. `_temp/validation/` - Validation reports
 
 **Key documents:**
 - Test coverage: QUALITY_METRICS.md
 - Known issues: TECHNICAL_DEBT.md
-- Validation reports: `docs/validation/`
+- Validation reports: `_temp/validation/`
 - Code structure: [DIRECTORY_STRUCTURE.reference.md](./reference/DIRECTORY_STRUCTURE.reference.md)
 
 **Questions answered:**
 - What's the test coverage? → QUALITY_METRICS.md
 - Are there known issues? → TECHNICAL_DEBT.md
-- How's the code quality? → docs/validation/
+- How's the code quality? → _temp/validation/
 - Is everything documented? → LIBRARY_INDEX.md
 
 ---

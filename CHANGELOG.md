@@ -78,11 +78,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - prompt.md - Agent instructions (164 files)
 - **Documentation reorganization** by intent
   - docs/design/ - Architecture decisions (.design.md)
-  - docs/planning/ - Execution plans (.plan.md)
-  - docs/validation/ - Quality reports (.validation.md)
+  - planning/ - Execution plans (.plan.md)
+  - _temp/validation/ - Quality reports (.validation.md)
   - docs/reference/ - User guides (.reference.md)
   - docs/builders/ - Builder tools (.builder.md)
-  - docs/research/ - Investigation findings (.research.md)
+  - planning/research/ - Investigation findings (.research.md)
 - **Directory README files** explaining purpose
 - **Single INDEX.md** for navigation
 

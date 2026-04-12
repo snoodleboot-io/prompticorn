@@ -277,7 +277,7 @@ Phase 2 Polish fixed all 28 subagent files (14 incident, 5 data, 5 observability
 - **Coverage target:** 85%+ overall (Phase 3), 90% per-class (Phase 4)
 - **Timeline:** 2-3 weeks (3 weeks for critical files, parallel with Phase 3 feature work)
 - **Focus areas:** UI components (32-62% coverage) and critical paths (orchestrator, registry)
-- **Plan:** See docs/TEST_CONVENTIONS.md and docs/planning/PHASE3_TASK_BREAKDOWN.plan.md
+- **Plan:** See docs/TEST_CONVENTIONS.md and planning/current/PHASE3_TASK_BREAKDOWN.plan.md
 
 ### Ongoing Maintenance
 - Weekly quality reports (automation scripted in MAINTENANCE_WORKFLOW.md)

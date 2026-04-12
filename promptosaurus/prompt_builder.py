@@ -93,7 +93,7 @@ class PromptBuilder:
                     agent_name=agent_name,
                 )
 
-                output_content = self.builder.build(filtered_agent, options)
+                output_content = self.builder.build(filtered_agent, options, config)
 
                 # Write output
                 if not dry_run:
@@ -121,7 +121,7 @@ class PromptBuilder:
                                 )
 
                                 subagent_output = self.builder.build(
-                                    filtered_subagent, subagent_options
+                                    filtered_subagent, subagent_options, config
                                 )
 
                                 # Write to .kilo/agents/{agent_name}/{subagent_name}.md
@@ -225,11 +225,12 @@ class PromptBuilder:
         filtered = Agent(
             name=agent.name,
             description=agent.description,
+            mode=agent.mode,
             system_prompt=agent.system_prompt,
             tools=agent.tools,  # Tools never filtered (language-agnostic)
             skills=list(skills_set),  # ASSIGN all skills from mapping
             workflows=list(workflows_set),  # ASSIGN all workflows from mapping
-            subagents=agent.subagents,  # Subagents preserved (used as-is)
+            subagents=agent.subagents,  # Subagents preserved (used-as-is)
             permissions=agent.permissions,
         )
 
@@ -276,6 +277,7 @@ class PromptBuilder:
         filtered = Agent(
             name=subagent.name,
             description=subagent.description,
+            mode=subagent.mode,
             system_prompt=subagent.system_prompt,
             tools=subagent.tools,
             skills=[s for s in subagent.skills if s in skills_set],

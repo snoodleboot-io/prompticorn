@@ -5,6 +5,7 @@ name: decision-log
 variant: minimal
 version: 1.0.0
 description: Record architectural and technical decisions
+mode: subagent
 tools: [write]
 workflows:
   - decision-log-workflow
@@ -59,5 +60,7 @@ When to revisit?
 
 - Readable in 3 minutes
 - Write for future reader (not in the room)
-- Store: `docs/decisions/ADR-NNN-title.md`
+- Active work: `planning/current/adrs/ADR-NNN-title.md`
+- Completed: `planning/complete/adrs/ADR-NNN-title.md`
+- Finalized (user-facing): `docs/decisions/ADR-NNN-title.md`
 
