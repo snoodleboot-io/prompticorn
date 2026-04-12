@@ -17,38 +17,38 @@ Use this mode when you have questions about the codebase, architecture, or techn
 
 # Skills
 
-- feature-planning
-- data-model-discovery
-- mermaid-erd-creation
-- test-mocking-rules
 - incremental-implementation
-- post-implementation-checklist
+- test-mocking-rules
+- data-model-discovery
+- feature-planning
 - test-aaa-structure
+- post-implementation-checklist
 - test-coverage-categories
+- mermaid-erd-creation
 
 # Workflows
 
-- decision-log-workflow
-- meta-workflow
+- data-model-workflow
 - migration-workflow
-- refactor-workflow
-- boilerplate-workflow
-- accessibility-workflow
-- docs-workflow
-- review-workflow
 - house-style-workflow
 - dependency-upgrade-workflow
 - performance-workflow
-- feature-workflow
-- strategy-workflow
-- data-model-workflow
-- code-workflow
-- scaffold-workflow
-- task-breakdown-workflow
-- root-cause-workflow
-- log-analysis-workflow
 - strategy-for-applications-workflow
+- docs-workflow
+- root-cause-workflow
+- task-breakdown-workflow
+- log-analysis-workflow
+- meta-workflow
 - testing-workflow
+- strategy-workflow
+- feature-workflow
+- boilerplate-workflow
+- code-workflow
+- refactor-workflow
+- accessibility-workflow
+- scaffold-workflow
+- review-workflow
+- decision-log-workflow
 
 # Subagents
 
