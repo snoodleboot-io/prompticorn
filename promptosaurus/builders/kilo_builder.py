@@ -283,6 +283,9 @@ class KiloBuilder(AbstractBuilder):
         if hasattr(agent, "mode") and agent.mode:
             frontmatter["mode"] = agent.mode
 
+        # Add model
+        frontmatter["model"] = "anthropic/claude-sonnet-4-5"
+
         # Add state management
         frontmatter["state_management"] = ".promptosaurus/sessions/"
 
