@@ -497,7 +497,7 @@ def init_prompts():
         assert isinstance(variant_question, str), "allow_multiple=False should return str"
         variant = "minimal" if variant_question == "Minimal" else "verbose"
 
-        # Step 3.5: Ask for personas (SDLC roles)
+        # Step 3.5: Ask for personas
         click.echo("\n" + "-" * 60)
         try:
             from promptosaurus.personas import PersonaRegistry
@@ -516,7 +516,7 @@ def init_prompts():
             }
             
             selected_personas_display = select_option_with_explain(
-                question="Which personas (SDLC roles) will be working on this codebase?",
+                question="Which personas will be working on this codebase?",
                 options=persona_options,
                 explanations=persona_explanations,
                 question_explanation="Select one or more roles. Only agents/workflows for selected personas will be generated.",
