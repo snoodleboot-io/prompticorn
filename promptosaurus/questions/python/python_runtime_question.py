@@ -24,7 +24,7 @@ class PythonRuntimeQuestion(Question):
 
     @property
     def options(self) -> list[str]:
-        return ["3.11", "3.12", "3.13", "3.14", "pypy"]
+        return ["3.14", "3.13", "3.12", "3.11", "pypy"]
 
     @property
     def default(self) -> str:
@@ -33,9 +33,9 @@ class PythonRuntimeQuestion(Question):
     @property
     def option_explanations(self) -> dict[str, str]:
         return {
-            "3.11": "Python 3.11 - Older stable release, good for maximum compatibility",
-            "3.12": "Python 3.12 - Stable release with improved performance",
+            "3.14": "Python 3.14 - Latest release with cutting-edge features and performance (recommended)",
             "3.13": "Python 3.13 - Recent release with modern features",
-            "3.14": "Python 3.14 - Latest release with cutting-edge features and performance (Recommended)",
+            "3.12": "Python 3.12 - Stable release with improved performance",
+            "3.11": "Python 3.11 - Older stable release, good for maximum compatibility",
             "pypy": "PyPy - Alternative Python implementation with JIT for faster execution",
         }

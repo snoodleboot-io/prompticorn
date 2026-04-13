@@ -7,21 +7,21 @@ from typing import Any
 LANGUAGE_DEFAULTS: dict[str, dict[str, str]] = {
     "python": {
         "runtime": "3.14",
-        "package_manager": "poetry",
+        "package_manager": "uv",
         "test_framework": "pytest",
         "linter": "ruff",
         "formatter": "ruff",
     },
     "typescript": {
-        "runtime": "5.4",
-        "package_manager": "npm",
+        "runtime": "v6.0",
+        "package_manager": "pnpm",
         "test_framework": "vitest",
         "linter": "eslint",
         "formatter": "prettier",
     },
     "javascript": {
-        "runtime": "5.4",
-        "package_manager": "npm",
+        "runtime": "v6.0",
+        "package_manager": "pnpm",
         "test_framework": "vitest",
         "linter": "eslint",
         "formatter": "prettier",

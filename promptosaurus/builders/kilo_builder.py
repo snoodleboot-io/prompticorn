@@ -439,7 +439,14 @@ class KiloBuilder(AbstractBuilder):
 
         # Language-specific conventions (only if language configured)
         if config:
-            language = config.get("spec", {}).get("language")
+            # Extract language (handles both single-language dict and multi-language-monorepo list)
+            spec = config.get("spec")
+            if isinstance(spec, dict):
+                language = spec.get("language")
+            elif isinstance(spec, list) and len(spec) > 0:
+                language = spec[0].get("language")
+            else:
+                language = None
             if language:
                 lang_source = self.core_loader.core_dir / f"conventions-{language}.md"
                 if lang_source.exists():

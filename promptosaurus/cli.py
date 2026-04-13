@@ -114,15 +114,17 @@ def _setup_monorepo_folders() -> list[dict[str, Any]]:
     Returns:
         List of folder specifications.
     """
+    import os
     from promptosaurus.ui._selector import select_option_with_explain
 
     folder_specs: list[dict[str, Any]] = []
     add_more = True
 
     while add_more:
-        click.echo("\n" + "-" * 60)
-        click.secho("  Add Folder", bold=True)
-        click.echo("-" * 60)
+        # Removed: Headers not needed - select_option_with_explain clears screen
+        # click.echo("\n" + "-" * 60)
+        # click.secho("  Add Folder", bold=True)
+        # click.echo("-" * 60)
 
         # Step 1: Ask for folder type (preset or custom)
         folder_type = select_option_with_explain(
@@ -146,6 +148,7 @@ def _setup_monorepo_folders() -> list[dict[str, Any]]:
 
         if folder_type == "custom":
             # Custom folder: prompt for folder path
+            os.system('clear' if os.name != 'nt' else 'cls')  # Clear screen after curses
             folder_path = click.prompt(
                 "\nFolder path (e.g., services/auth/api)",
                 default="",
@@ -156,6 +159,7 @@ def _setup_monorepo_folders() -> list[dict[str, Any]]:
                 continue
 
             # Prompt for language
+            os.system('clear' if os.name != 'nt' else 'cls')  # Clear screen
             language = click.prompt(
                 "\nProgramming language",
                 type=click.Choice(LANGUAGE_KEYS),
@@ -204,6 +208,7 @@ def _setup_monorepo_folders() -> list[dict[str, Any]]:
             subtype = subtype_choice.split(" (")[0]  # Extract subtype name
 
             # Step 3: Ask for folder path
+            os.system('clear' if os.name != 'nt' else 'cls')  # Clear screen after curses
             folder_path = click.prompt(
                 f"\nFolder path (e.g., {preset_type}/{subtype})",
                 default=f"{preset_type}/{subtype}",
@@ -296,9 +301,10 @@ def _ask_language_questions_for_folder(spec: dict[str, Any]) -> dict[str, Any]:
     if not language:
         return spec
 
-    click.echo("\n" + "-" * 60)
-    click.secho(f"  Configuring: {folder_path} ({language})", bold=True)
-    click.echo("-" * 60)
+    # Removed: headers before curses (gets cleared anyway)
+    # click.echo("\n" + "-" * 60)
+    # click.secho(f"  Configuring: {folder_path} ({language})", bold=True)
+    # click.echo("-" * 60)
 
     # Get language-specific questions
     try:
@@ -353,9 +359,12 @@ def _ask_folder_questions(folder_specs: list[dict[str, Any]]) -> list[dict[str, 
             updated_specs.append(spec)
             continue
 
-        click.echo("\n" + "-" * 60)
-        click.secho(f"  Configuring: {folder_path} ({language})", bold=True)
-        click.echo("-" * 60)
+        # Removed: separator not needed before curses UI
+        # click.echo("\n" + "-" * 60)
+        # Removed: header before curses (gets cleared anyway)
+        # click.secho(f"  Configuring: {folder_path} ({language})", bold=True)
+        # Removed: separator not needed before curses UI
+        # click.echo("-" * 60)
 
         # Get language-specific questions - this will raise if there are issues
         questions = get_language_questions(language)
@@ -443,10 +452,14 @@ def init_prompts():
     from promptosaurus.ui._selector import select_option_with_explain
     from promptosaurus.ui.exceptions import UserCancelledError
 
-    click.echo("\n" + "=" * 60)
-    click.secho("  promptosaurus Initialization", bold=True, fg="cyan")
-    click.echo("=" * 60)
-    click.echo("\nUse up/down arrows, numbers, or Enter for defaults.")
+    # Removed: header stays in buffer when curses exits
+    # click.echo("\n" + "=" * 60)
+    # Removed: header stays in main buffer after curses exits, causes confusion
+    # click.secho("  promptosaurus Initialization", bold=True, fg="cyan")
+    # Removed: header stays in buffer when curses exits
+    # click.echo("=" * 60)
+    # Removed: message stays in main buffer after curses exits
+    # click.echo("\nUse up/down arrows, numbers, or Enter for defaults.")
 
     try:
         # Step 1: Select which AI assistant to configure
@@ -469,7 +482,8 @@ def init_prompts():
         selected_tool: str = ai_tool
 
         # Step 2: Repository type
-        click.echo("\n" + "-" * 60)
+        # Removed: separator not needed before curses UI
+        # click.echo("\n" + "-" * 60)
         repo_question = RepositoryTypeQuestion()
         default_idx = repo_question.options.index(repo_question.default)
 
@@ -482,7 +496,8 @@ def init_prompts():
         )
 
         # Step 3: Ask for variant (minimal or verbose) - BEFORE language questions
-        click.echo("\n" + "-" * 60)
+        # Removed: separator not needed before curses UI
+        # click.echo("\n" + "-" * 60)
         variant_question = select_option_with_explain(
             question="Which prompt variant would you like to use?",
             options=["Minimal", "Verbose"],
@@ -498,7 +513,8 @@ def init_prompts():
         variant = "minimal" if variant_question == "Minimal" else "verbose"
 
         # Step 3.5: Ask for personas
-        click.echo("\n" + "-" * 60)
+        # Removed: separator not needed before curses UI
+        # click.echo("\n" + "-" * 60)
         try:
             from promptosaurus.personas import PersonaRegistry
             from pathlib import Path
@@ -561,7 +577,7 @@ def init_prompts():
                 config["variant"] = variant  # Add variant to config
                 config["active_personas"] = active_personas  # Add selected personas
 
-                # Run interactive folder setup
+                # Run interactive folder setup for multi-language monorepo
                 # (language questions are now asked inline for each folder)
                 folder_specs = _setup_monorepo_folders()
 

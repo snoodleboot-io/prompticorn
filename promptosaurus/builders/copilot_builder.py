@@ -96,7 +96,14 @@ class CopilotBuilder(AbstractBuilder):
 
         # Load and include core files if language is available
         if config:
-            language = config.get("spec", {}).get("language")
+            # Extract language (handles both single-language dict and multi-language-monorepo list)
+            spec = config.get("spec")
+            if isinstance(spec, dict):
+                language = spec.get("language")
+            elif isinstance(spec, list) and len(spec) > 0:
+                language = spec[0].get("language")
+            else:
+                language = None
             if language:
                 core_files = self.core_loader.get_core_files(language, config)
                 # Order: system, conventions, session, language-specific

@@ -52,6 +52,35 @@ class PromptBuilder:
         except FileNotFoundError:
             self.agent_skill_loader = None
 
+    @staticmethod
+    def _extract_language_from_config(config: dict[str, Any] | None) -> str | None:
+        """Extract primary language from config.
+        
+        Handles both single-language and multi-language-monorepo configurations.
+        
+        Args:
+            config: Project configuration
+            
+        Returns:
+            Primary language string, or None if not found
+        """
+        if not config:
+            return None
+            
+        spec = config.get("spec")
+        
+        if spec is None:
+            return None
+        elif isinstance(spec, dict):
+            # Single-language repo: spec is a dict with 'language' key
+            return spec.get("language")
+        elif isinstance(spec, list) and len(spec) > 0:
+            # Multi-language-monorepo: spec is a list of folder specs
+            # Use first folder's language as primary language
+            return spec[0].get("language")
+        else:
+            return None
+
     def build(
         self, output: Path, config: dict[str, Any] | None = None, dry_run: bool = False
     ) -> list[str]:
@@ -74,7 +103,7 @@ class PromptBuilder:
 
         # Get variant and language from config
         variant = config.get("variant", "minimal") if config else "minimal"
-        language = config.get("spec", {}).get("language") if config else None
+        language = self._extract_language_from_config(config)
 
         # Get all agents from registry
         all_agents = self.registry.get_all_agents()
