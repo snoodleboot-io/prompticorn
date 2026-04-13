@@ -31,7 +31,7 @@ Some agents are **always available** regardless of which personas you select:
 - **ask** - General Q&A and research
 - **debug** - Troubleshooting and error resolution  
 - **explain** - Code walkthroughs and onboarding
-- **plan** - Strategic planning and work planning
+- **planning** - Strategic planning and work planning
 - **orchestrator** - Multi-step workflow coordination
 
 These agents are fundamental and useful across all roles.
@@ -65,7 +65,7 @@ Select one or more roles. Only agents/workflows for selected personas will be ge
 - Software Engineer
 
 **Generated Agents (~14 agents):**
-- Universal agents (5): ask, debug, explain, plan, orchestrator
+- Universal agents (5): ask, debug, explain, planning, orchestrator
 - Software Engineer agents (9): code, test, refactor, migration, review, backend, frontend, performance, enforcement
 
 **What's Filtered Out:**
@@ -80,7 +80,7 @@ Select one or more roles. Only agents/workflows for selected personas will be ge
 - QA/Tester
 
 **Generated Agents (~15 agents):**
-- Universal agents (5): ask, debug, explain, plan, orchestrator
+- Universal agents (5): ask, debug, explain, planning, orchestrator
 - Software Engineer agents (9): code, test, refactor, migration, review, backend, frontend, performance, enforcement
 - QA/Tester additional agents (1): qa-tester
 - **Note:** test agent is shared by both personas (no duplication)
@@ -101,7 +101,7 @@ Select one or more roles. Only agents/workflows for selected personas will be ge
 - Security Engineer
 
 **Generated Agents (~18 agents):**
-- Universal agents (5): ask, debug, explain, plan, orchestrator
+- Universal agents (5): ask, debug, explain, planning, orchestrator
 - Software Engineer agents (9): code, test, refactor, migration, review, backend, frontend, performance, enforcement
 - DevOps additional agents (1): devops
 - Security additional agents (2): security, compliance
@@ -193,7 +193,7 @@ promptosaurus init --force  # (if --force flag exists)
 
 ### Q: What if I select no personas?
 
-**A:** You'll only get the 5 universal agents (ask, debug, explain, plan, orchestrator). Not recommended unless you have a very specific use case.
+**A:** You'll only get the 5 universal agents (ask, debug, explain, planning, orchestrator). Not recommended unless you have a very specific use case.
 
 ### Q: Can I add custom personas?
 
@@ -208,6 +208,53 @@ promptosaurus init --force  # (if --force flag exists)
 **A:** Yes. If you select only "Software Engineer", agents like `devops`, `security`, and `mlai` will not be generated. To use them, you must select the corresponding personas.
 
 ---
+
+## Changing Personas
+
+If your team's roles change over time, you can swap which personas are active:
+
+### Using the swap command
+
+```bash
+promptosaurus swap
+```
+
+This interactive command will:
+1. Show all available personas with your current selections marked
+2. Let you change which personas are active (multi-select)
+3. Show a diff of what changed (added/removed personas)
+4. Remove old AI assistant configurations
+5. Regenerate configurations with only the newly selected personas
+6. Save the updated configuration
+
+**Example output:**
+
+```
+Persona Changes
+────────────────────────────────────────────────────────────
+  Removed: DevOps Engineer
+  Added: Data Scientist, Data Engineer
+
+Removing old artifacts...
+    Removed directory: .kilo/
+
+Regenerating kilo-ide configuration...
+    ✓ .kilo/agents/data.md
+    ✓ .kilo/agents/mlai.md
+    ...
+
+Personas swapped successfully!
+
+  Active personas: Software Engineer, Data Scientist, Data Engineer
+```
+
+**When to use swap:**
+- Your team adds or removes roles (e.g., hired a DevOps engineer)
+- Project focus shifts (e.g., adding ML/data science work)
+- Reducing scope (e.g., removing unused personas to declutter)
+
+---
+
 
 ## Reference
 

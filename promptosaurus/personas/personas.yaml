@@ -10,7 +10,7 @@ universal_agents:
   - ask        # General Q&A and research
   - debug      # Troubleshooting and error resolution
   - explain    # Code walkthroughs and onboarding
-  - plan       # Strategic planning and work planning
+  - planning  # Strategic planning and work planning
   - orchestrator  # Multi-step workflow coordination
 
 # Persona definitions

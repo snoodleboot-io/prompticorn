@@ -130,7 +130,7 @@ Personas represent software development roles. Instead of generating all 25 agen
 
 **Available Personas:** Software Engineer, Architect, QA/Tester, DevOps Engineer, Security Engineer, Product Manager, Data Engineer, Data Scientist, Technical Writer
 
-**Universal Agents (Always Available):** ask, debug, explain, plan, orchestrator
+**Universal Agents (Always Available):** ask, debug, explain, planning, orchestrator
 
 ### Example: Small Startup
 
@@ -208,6 +208,7 @@ spec:
 | `promptosaurus init` | Interactively initialize prompt configuration for your project |
 | `promptosaurus list` | List all registered modes and their prompt files |
 | `promptosaurus switch` | Switch to a different AI assistant tool |
+| `promptosaurus swap` | Swap active personas and regenerate AI assistant configurations |
 | `promptosaurus update` | Update configuration options interactively |
 | `promptosaurus validate` | Check that all registered prompt files exist and no files are missing |
 

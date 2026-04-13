@@ -9,6 +9,7 @@ Commands:
     promptosaurus list      - Show all registered modes and their prompt files
     promptosaurus validate  - Check for missing files and unregistered orphans
     promptosaurus switch    - Switch between AI assistant tools
+    promptosaurus swap      - Swap active personas and regenerate configurations
     promptosaurus update    - Update configuration options
 
 Key Functions:
@@ -17,6 +18,7 @@ Key Functions:
     - init_prompts: Interactive initialization workflow
     - update_command: Update configuration options
     - switch_command: Switch between AI tools
+    - swap_command: Swap active personas
     - validate_prompts: Validate configuration integrity
 """
 
@@ -49,6 +51,7 @@ from promptosaurus.questions.base.folder_spec import (
 from promptosaurus.questions.base.repository_type_question import RepositoryTypeQuestion
 from promptosaurus.questions.language import LANGUAGE_KEYS
 from promptosaurus.registry import registry
+from promptosaurus.personas import PersonaRegistry
 
 # Valid languages for each preset type/subtype
 
@@ -721,6 +724,184 @@ def switch_command(tool_name: str | None):
     click.secho(f"  Switched to {target_tool}!", bold=True, fg="green")
     click.echo("=" * 60)
 
+
+# ══ swap ═════════════════════════════════════════════════════════════════════════
+
+
+@cli.command("swap")
+def swap_command():
+    """Swap active personas and regenerate AI assistant configurations.
+    
+    Usage:
+        promptosaurus swap    # Interactive persona selection
+    """
+    from promptosaurus.ui._selector import select_option_with_explain
+    from promptosaurus.ui.exceptions import UserCancelledError
+    
+    # Check if config exists
+    if not ConfigHandler.config_exists():
+        click.secho(
+            "Error: No configuration found. Run 'promptosaurus init' first.",
+            fg="red",
+        )
+        raise click.Abort()
+    
+    config = ConfigHandler.load_config()
+    
+    # Get current tool
+    artifact_manager = ArtifactManager()
+    current_tool = artifact_manager.current_tool
+    
+    if not current_tool:
+        click.secho(
+            "Error: No AI tool configured. Run 'promptosaurus init' first.",
+            fg="red",
+        )
+        raise click.Abort()
+    
+    # Load persona registry
+    try:
+        personas_yaml_path = Path(__file__).parent / "personas" / "personas.yaml"
+        persona_registry = PersonaRegistry.from_yaml(personas_yaml_path)
+    except Exception as e:
+        click.secho(f"Error: Could not load personas ({e})", fg="red")
+        raise click.Abort() from e
+    
+    # Get current active personas
+    current_personas = config.get("active_personas", [])
+    
+    # Build options and explanations for persona selection
+    persona_ids = persona_registry.list_personas()
+    persona_options = [persona_registry.get_display_name(pid) for pid in persona_ids]
+    persona_explanations = {
+        persona_registry.get_display_name(pid): persona_registry.get_description(pid)
+        for pid in persona_ids
+    }
+    
+    # Map display names to IDs
+    display_to_id = {persona_registry.get_display_name(pid): pid for pid in persona_ids}
+    id_to_display = {pid: persona_registry.get_display_name(pid) for pid in persona_ids}
+    
+    # Calculate default indices (currently selected personas)
+    default_indices = []
+    for idx, persona_id in enumerate(persona_ids):
+        if persona_id in current_personas:
+            default_indices.append(idx)
+    
+    click.echo("\n" + "=" * 60)
+    click.secho("  Swap Personas", bold=True, fg="cyan")
+    click.echo("=" * 60)
+    
+    if current_personas:
+        current_display = [id_to_display[pid] for pid in current_personas]
+        click.echo(f"\n  Current personas: {', '.join(current_display)}")
+    else:
+        click.echo("\n  Current personas: (none selected)")
+    
+    # Show interactive persona selection
+    try:
+        selected_personas_display = select_option_with_explain(
+            question="Which personas will be working on this codebase?",
+            options=persona_options,
+            explanations=persona_explanations,
+            question_explanation="Select one or more roles. Only agents/workflows for selected personas will be generated.",
+            default_indices=set(default_indices),
+            allow_multiple=True,
+        )
+        
+        # Convert display names back to persona IDs
+        if isinstance(selected_personas_display, list):
+            selected_persona_ids = [display_to_id[display_name] for display_name in selected_personas_display]
+        else:
+            # Single selection (shouldn't happen with allow_multiple=True, but handle it)
+            selected_persona_ids = [display_to_id[selected_personas_display]]
+        
+    except UserCancelledError:
+        click.echo("\nOperation cancelled.")
+        raise click.Abort() from None
+    
+    # Check if selection changed
+    if set(selected_persona_ids) == set(current_personas):
+        click.echo("\n" + "=" * 60)
+        click.secho("  No changes made - personas unchanged", bold=True, fg="yellow")
+        click.echo("=" * 60)
+        return
+    
+    # Update config with new personas
+    config["active_personas"] = selected_persona_ids
+    
+    # Show what's changing
+    click.echo("\n" + "-" * 60)
+    click.secho("  Persona Changes", bold=True)
+    click.echo("-" * 60)
+    
+    removed = set(current_personas) - set(selected_persona_ids)
+    added = set(selected_persona_ids) - set(current_personas)
+    
+    if removed:
+        removed_display = [id_to_display.get(pid, pid) for pid in removed]
+        click.echo(f"  Removed: {', '.join(removed_display)}")
+    
+    if added:
+        added_display = [id_to_display.get(pid, pid) for pid in added]
+        click.echo(f"  Added: {', '.join(added_display)}")
+    
+    # Remove old artifacts and regenerate
+    click.echo("\n" + "-" * 60)
+    click.secho("  Removing old artifacts...", bold=True)
+    
+    # Remove current tool's CREATE artifacts (the .kilo/ directory itself)
+    # NOT the artifacts from other tools
+    import shutil
+    artifacts_to_remove = artifact_manager.get_artifacts_to_create(current_tool)
+    removal_actions = []
+    for artifact in artifacts_to_remove:
+        artifact_path = Path(artifact)
+        if artifact_path.exists():
+            if artifact_path.is_dir():
+                shutil.rmtree(artifact_path)
+                removal_actions.append(f"Removed directory: {artifact}")
+            else:
+                artifact_path.unlink()
+                removal_actions.append(f"Removed file: {artifact}")
+    
+    for action in removal_actions:
+        click.echo(f"    {action}")
+    
+    # Build new artifacts with updated persona filtering
+    click.echo("\n" + "-" * 60)
+    click.secho(f"  Regenerating {current_tool} configuration...", bold=True)
+    
+    builder = _get_builder(current_tool)
+    if builder:
+        output_path = Path(".")
+        try:
+            actions = builder.build(output_path, config=config, dry_run=False)
+            for action in actions:
+                click.echo(f"    {action}")
+        except Exception as e:
+            click.secho(f"\n  Error regenerating configuration: {e}", fg="red", err=True)
+            click.secho(
+                "  Note: Old artifacts were removed. Run 'promptosaurus init' to restore.",
+                fg="yellow",
+                err=True,
+            )
+            raise click.Abort() from e
+        
+        # Save updated config
+        ConfigHandler.save_config(config)
+    else:
+        click.secho(f"  Error: Unknown tool: {current_tool}", fg="red")
+        raise click.Abort()
+    
+    click.echo("\n" + "=" * 60)
+    click.secho("  Personas swapped successfully!", bold=True, fg="green")
+    click.echo("=" * 60)
+    
+    # Show summary
+    new_display = [id_to_display[pid] for pid in selected_persona_ids]
+    click.echo(f"\n  Active personas: {', '.join(new_display)}")
+    click.echo()
 
 # ══ update ═══════════════════════════════════════════════════════════════════════
 

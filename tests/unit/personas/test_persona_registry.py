@@ -112,7 +112,7 @@ class TestPersonaRegistry:
         assert len(universal) == 5
         
         # Check expected universal agents
-        expected_universal = ["ask", "debug", "explain", "plan", "orchestrator"]
+        expected_universal = ["ask", "debug", "explain", "planning", "orchestrator"]
         for expected in expected_universal:
             assert expected in universal, f"Missing universal agent: {expected}"
     
