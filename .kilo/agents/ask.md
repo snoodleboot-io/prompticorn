@@ -2,6 +2,7 @@
 name: ask
 description: Answer questions and provide explanations
 mode: primary
+model: anthropic/claude-sonnet-4-5
 state_management: .promptosaurus/sessions/
 permission:
   read: {'*': 'allow'}
@@ -19,6 +20,9 @@ Use this mode when you have questions about the codebase, architecture, or techn
 
 - feature-planning
 - post-implementation-checklist
+- data-validation-pipelines
+- ensemble-methods
+- mlops-pipeline-design
 
 # Workflows
 
@@ -26,6 +30,9 @@ Use this mode when you have questions about the codebase, architecture, or techn
 - review
 - refactor
 - migration
+- model-evaluation
+- mlops-pipeline-setup
+- production-ml-deployment
 
 # Subagents
 

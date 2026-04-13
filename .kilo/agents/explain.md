@@ -2,6 +2,7 @@
 name: explain
 description: Code walkthroughs and onboarding assistance
 mode: all
+model: anthropic/claude-sonnet-4-5
 state_management: .promptosaurus/sessions/
 permission:
   read: {'*': 'allow'}
@@ -18,6 +19,9 @@ Use this mode when explaining code or helping onboard developers.
 
 - feature-planning
 - post-implementation-checklist
+- data-validation-pipelines
+- ensemble-methods
+- mlops-pipeline-design
 
 # Workflows
 
@@ -25,6 +29,9 @@ Use this mode when explaining code or helping onboard developers.
 - review
 - refactor
 - migration
+- model-evaluation
+- mlops-pipeline-setup
+- production-ml-deployment
 
 # Subagents
 
