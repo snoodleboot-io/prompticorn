@@ -23,18 +23,21 @@ class TestTypeScriptVersionQuestion:
         """Options should include recent TypeScript versions."""
         q = TypeScriptVersionQuestion()
 
-        # Updated to match new options: ["5.x", "5.4", "5.3", "5.0", "4.x"]
-        assert "5.x" in q.options
+        # Updated to match new real versions: 6.0, 5.9, 5.8, ..., 5.0
+        assert "6.0" in q.options
+        assert "5.9" in q.options
+        assert "5.8" in q.options
         assert "5.4" in q.options
-        assert "5.3" in q.options
         assert "5.0" in q.options
-        assert "4.x" in q.options
+        # Should NOT have placeholder versions
+        assert "5.x" not in q.options
+        assert "4.x" not in q.options
 
     def test_default_is_latest(self):
         """Default should be latest stable version."""
         q = TypeScriptVersionQuestion()
 
-        assert q.default == "5.x"
+        assert q.default == "6.0"
 
 
 class TestTypeScriptPackageManagerQuestion:
