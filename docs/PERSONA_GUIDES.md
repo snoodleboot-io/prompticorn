@@ -1,262 +1,372 @@
 # Quick Reference by Persona
 
-Find the right resources for your role.
-
-## 🏗️ Architect / Tech Lead
-
-**Goal:** Understand system design and plan implementation
-
-**Start here:**
-1. [RELATIONSHIPS_MATRIX.md](./RELATIONSHIPS_MATRIX.md) - See how all components fit together
-2. [ADVANCED_PATTERNS.design.md](./design/ADVANCED_PATTERNS.design.md) - Architecture decisions
-3. Check the LIBRARY_INDEX.md for all available resources
-
-**Key documents:**
-- Design decisions: `docs/design/*.design.md`
-- Planning docs: `planning/current/*.plan.md`
-- Execution guides: `planning/current/PHASE*_EXECUTION_GUIDE.plan.md`
-
-**Questions answered:**
-- What agents exist and why? → LIBRARY_INDEX.md
-- How do they work together? → RELATIONSHIPS_MATRIX.md
-- What was the design thinking? → docs/design/
-- What resources are available? → LIBRARY_INDEX.md
+Find the right resources for your role based on your actual persona configuration.
 
 ---
 
-## 👨‍💻 Backend Developer
+## 🏗️ Architect
 
-**Goal:** Get backend-specific guidance and patterns
+**Display Name:** Architect  
+**Focus:** Designing scalable systems and making architectural trade-offs
 
 **Start here:**
-1. Find "backend" in [LIBRARY_INDEX.md](./LIBRARY_INDEX.md)
-2. Read `promptosaurus/agents/backend-engineer/` for full context
-3. Explore related workflows: database design, API development, performance optimization
+1. [PERSONAS.md](./PERSONAS.md) - Understand persona-based filtering
+2. [LIBRARY_INDEX.md](./LIBRARY_INDEX.md) - Search for architecture-related content
 
-**Key agents:**
-- **Backend Engineer** - Main backend role
-- **Database Engineer** - Schema design, query optimization
-- **Performance Engineer** - Optimization and benchmarking
-- **DevOps Engineer** - Infrastructure and deployment
+**Primary Agents:**
+- `architect` - System design and architecture planning
+- `backend` - Backend systems and APIs
+- `frontend` - Frontend architecture
+- `data` - Data architecture and pipelines
 
-**Key workflows:**
-- Search LIBRARY_INDEX.md for: "backend", "database", "API", "performance"
-- Read minimal variants first (quick reference)
-- Deep dive with verbose variants when needed
+**Secondary Agents:**
+- `performance` - Performance optimization
 
-**Key skills:**
-- SQL optimization
-- Database design patterns
-- API design principles
-- Performance tuning
+**Key Workflows:**
+Search LIBRARY_INDEX.md for:
+- scaffold, data-model, strategy, decision-log
+- component-architecture, microservices-architecture
+- api-design, database-selection, caching-strategy
+- capacity-planning
+
+**Key Skills:**
+- architecture-documentation
+- technical-decision-making
+- problem-decomposition
+- mermaid-erd-creation
+- data-model-discovery
+
+**Agent Locations:**
+- `promptosaurus/agents/architect/`
+- `promptosaurus/agents/backend/`
+- `promptosaurus/agents/frontend/`
+- `promptosaurus/agents/data/`
 
 ---
 
-## 🎨 Frontend Developer
+## 👨‍💻 Software Engineer
 
-**Goal:** Get frontend-specific guidance and component patterns
+**Display Name:** Software Engineer  
+**Focus:** Writing, maintaining, and testing application code
 
 **Start here:**
-1. Find "frontend" in [LIBRARY_INDEX.md](./LIBRARY_INDEX.md)
-2. Read `promptosaurus/agents/frontend-engineer/` for full context
-3. Explore related workflows: component design, testing, accessibility
+1. [QUICKSTART.md](./QUICKSTART.md) - Get started quickly
+2. [LIBRARY_INDEX.md](./LIBRARY_INDEX.md) - Find code/test/refactor resources
 
-**Key agents:**
-- **Frontend Engineer** - Main frontend role
-- **Testing Engineer** - QA and test automation
-- **Performance Engineer** - Frontend optimization
-- **UI/UX Specialist** - Design system guidance
+**Primary Agents:**
+- `code` - Code implementation
+- `test` - Testing and QA
+- `refactor` - Code refactoring
+- `migration` - Dependency upgrades and migrations
 
-**Key workflows:**
-- Search LIBRARY_INDEX.md for: "frontend", "component", "testing", "accessibility"
-- Read workflow guides for common patterns
-- Check skills for deep dives into specific technologies
+**Secondary Agents:**
+- `review` - Code review
+- `backend` - Backend development
+- `frontend` - Frontend development
+- `performance` - Performance optimization
+- `enforcement` - Code quality enforcement
 
-**Key skills:**
-- React/Vue patterns
-- CSS methodologies
-- Testing strategies
-- Accessibility (a11y)
+**Key Workflows:**
+Search LIBRARY_INDEX.md for:
+- code, testing, feature, refactor
+- dependency-upgrade, boilerplate
+- code-quality-maintenance, coverage-improvement-maintenance
+- automated-testing
+
+**Key Skills:**
+- incremental-implementation
+- code-review-practices
+- testing-strategies
+- debugging-methodology
+- technical-debt-management
+- test-aaa-structure, test-mocking-rules, test-coverage-categories
+
+**Agent Locations:**
+- `promptosaurus/agents/code/`
+- `promptosaurus/agents/test/`
+- `promptosaurus/agents/refactor/`
+- `promptosaurus/agents/migration/`
 
 ---
 
-## 🔧 DevOps / SRE
+## 🧪 QA / Tester
 
-**Goal:** Get infrastructure and operations guidance
+**Display Name:** QA / Tester  
+**Focus:** Ensuring quality through comprehensive testing
 
 **Start here:**
-1. Find "devops" in [LIBRARY_INDEX.md](./LIBRARY_INDEX.md)
-2. Read `promptosaurus/agents/devops-engineer/` for full context
-3. Explore infrastructure workflows
+2. [LIBRARY_INDEX.md](./LIBRARY_INDEX.md) - Find testing resources
 
-**Key agents:**
-- **DevOps Engineer** - Main DevOps role
-- **Incident Response Engineer** - Emergency procedures
-- **Observability Engineer** - Monitoring and logging
-- **Performance Engineer** - Capacity planning
+**Primary Agents:**
+- `test` - Testing and QA
+- `review` - Code review
 
-**Key workflows:**
-- Search LIBRARY_INDEX.md for: "devops", "kubernetes", "monitoring", "incident", "deployment"
-- Read infrastructure setup guides
-- Check incident response procedures
+**Secondary Agents:**
+- `performance` - Performance testing
+- `enforcement` - Quality enforcement
 
-**Key skills:**
-- Kubernetes operations
-- CI/CD pipeline design
-- Infrastructure as Code (Terraform)
-- Monitoring and alerting
-- Incident response
+**Key Workflows:**
+Search LIBRARY_INDEX.md for:
+- testing, testing-strategy, performance-testing
+- automated-testing, coverage-improvement-maintenance
+- review, accessibility
+
+**Key Skills:**
+- testing-strategies
+- test-coverage-categories
+- test-aaa-structure
+- test-mocking-rules
+- code-review-practices
+- quality-assurance
+
+**Agent Locations:**
+- `promptosaurus/agents/test/`
+- `promptosaurus/agents/review/`
+- `promptosaurus/agents/qa-tester/` (specialized QA agent)
 
 ---
 
-## 🧪 QA / Test Engineer
+## 🔧 DevOps Engineer
 
-**Goal:** Get testing strategies and QA patterns
+**Display Name:** DevOps Engineer  
+**Focus:** Building infrastructure as code and maintaining systems
 
 **Start here:**
-1. Find "testing" in [LIBRARY_INDEX.md](./LIBRARY_INDEX.md)
-2. Read `promptosaurus/agents/testing-engineer/` for full context
-3. Explore testing workflows
+1. [LIBRARY_INDEX.md](./LIBRARY_INDEX.md) - Find DevOps/infrastructure resources
+2. [ARCHITECTURE.md](./ARCHITECTURE.md) - Understand system architecture
 
-**Key agents:**
-- **Testing Engineer** - Main QA role
-- **Backend Developer** - Integration testing
-- **Frontend Developer** - E2E testing
-- **Performance Engineer** - Load testing
+**Primary Agents:**
+- `code` - Infrastructure-as-Code
+- `devops` - DevOps practices and automation
+- `observability` - Monitoring, logging, tracing
+- `incident` - Incident response and management
 
-**Key workflows:**
-- Search LIBRARY_INDEX.md for: "testing", "test", "automation", "coverage", "quality"
-- Read testing strategy guides
-- Check test automation patterns
+**Secondary Agents:**
+- `security` - Security practices
+- `mlai` - ML infrastructure
+- `data` - Data infrastructure
 
-**Key skills:**
-- Unit testing patterns
-- Integration testing
-- E2E testing strategies
-- Test automation frameworks
-- Coverage analysis
+**Key Workflows:**
+Search LIBRARY_INDEX.md for:
+- cicd-pipeline, secret-management, infrastructure-as-code
+- disaster-recovery, container-orchestration
+- observability, incident-response, postmortem
+- capacity-planning, deployment-automation
+
+**Key Skills:**
+- performance-optimization
+- debugging-methodology
+- technical-communication
+- continuous-improvement
+
+**Agent Locations:**
+- `promptosaurus/agents/devops/`
+- `promptosaurus/agents/observability/`
+- `promptosaurus/agents/incident/`
 
 ---
 
-## 📊 Data / ML Engineer
+## 🔐 Security Engineer
 
-**Goal:** Get data pipeline and ML guidance
+**Display Name:** Security Engineer  
+**Focus:** Securing systems and meeting compliance requirements
 
 **Start here:**
-1. Find "data" in [LIBRARY_INDEX.md](./LIBRARY_INDEX.md)
-2. Read `promptosaurus/agents/data-engineer/` for full context
-3. Explore data workflow guides
+1. [LIBRARY_INDEX.md](./LIBRARY_INDEX.md) - Find security/compliance resources
 
-**Key agents:**
-- **Data Engineer** - Main data role
-- **ML Engineer** - Machine learning guidance
-- **Database Engineer** - Data storage patterns
-- **Observability Engineer** - Data quality monitoring
+**Primary Agents:**
+- `security` - Security reviews and threat modeling
+- `compliance` - Compliance audits (SOC2, GDPR, etc.)
 
-**Key workflows:**
-- Search LIBRARY_INDEX.md for: "data", "pipeline", "warehouse", "ml", "analytics"
-- Read pipeline design guides
-- Check data quality patterns
+**Secondary Agents:**
+- `incident` - Incident response
+- `review` - Security code review
+- `enforcement` - Security policy enforcement
 
-**Key skills:**
-- Data pipeline design
-- SQL optimization
-- Data warehouse patterns
-- ML model serving
-- Data quality frameworks
+**Key Workflows:**
+Search LIBRARY_INDEX.md for:
+- security-code-review, security-testing
+- vulnerability-scanning, vulnerability-assessment
+- threat-modeling, compliance-audit
+- penetration-testing-guide
+- data-encryption, authentication-authorization
+- incident-response-security
+
+**Key Skills:**
+- technical-communication
+- code-review-practices
+- problem-decomposition
+
+**Agent Locations:**
+- `promptosaurus/agents/security/`
+- `promptosaurus/agents/compliance/`
 
 ---
 
-## 📈 Product / Manager Role
+## 📊 Product Manager
 
-**Goal:** Understand project status and planning
+**Display Name:** Product Manager  
+**Focus:** Defining what to build and why
 
 **Start here:**
-1. [QUICKSTART.md](./QUICKSTART.md) - Overview of what exists
-2. [QUALITY_METRICS.md](./QUALITY_METRICS.md) - Project quality dashboard
-3. 4. [LIBRARY_INDEX.md](./LIBRARY_INDEX.md) - Feature catalog
+1. [LIBRARY_INDEX.md](./LIBRARY_INDEX.md) - Find product/planning resources
 
-**Key documents:**
-- Progress tracking: `planning/current/PHASE*_EXECUTION_STATUS.plan.md`
-- Quality metrics: QUALITY_METRICS.md
-- Technical debt: TECHNICAL_DEBT.md
-- Roadmap: `planning/current/PHASE*_OUTLINE.plan.md`
+**Primary Agents:**
+- `product` - Product strategy and requirements
 
-**Questions answered:**
-- What's been completed? → PHASE2_EXECUTION_STATUS.plan.md
-- What's the roadmap? → PHASE*_OUTLINE.plan.md
-- What's the quality level? → QUALITY_METRICS.md
-- What's left to do? → TECHNICAL_DEBT.md
+**Key Workflows:**
+Search LIBRARY_INDEX.md for:
+- requirements-gathering, feature-prioritization
+- roadmap-planning, user-research-guide
+- feature-launch-checklist
+- a-b-testing, analytics-setup, ux-validation
+
+**Key Skills:**
+- feature-planning
+- technical-communication
+- problem-decomposition
+- feature-prioritization-workflow
+
+**Agent Locations:**
+- `promptosaurus/agents/product/`
 
 ---
 
-## 🚀 DevOps / Infrastructure Lead
+## 📊 Data Engineer
 
-**Goal:** Deploy and maintain the system
+**Display Name:** Data Engineer  
+**Focus:** Building reliable data systems and ETL pipelines
 
 **Start here:**
-1. [TOOL_CONFIGURATION_EXAMPLES.reference.md](./reference/TOOL_CONFIGURATION_EXAMPLES.reference.md) - Deployment options
-2. `docs/design/ADVANCED_PATTERNS.design.md` - System architecture
-3. `promptosaurus/agents/devops-engineer/` - DevOps guidance
+1. [LIBRARY_INDEX.md](./LIBRARY_INDEX.md) - Find data pipeline resources
 
-**Key resources:**
-- Deployment guides: `docs/reference/TOOL_CONFIGURATION_EXAMPLES.reference.md`
-- Infrastructure code: `docs/design/`
-- Monitoring setup: Search LIBRARY_INDEX.md for "observability"
-- Incident response: Search for "incident-response"
+**Primary Agents:**
+- `code` - ETL and pipeline code
+- `data` - Data pipelines, quality, infrastructure
+
+**Secondary Agents:**
+- `mlai` - ML data infrastructure
+- `devops` - Data infrastructure ops
+- `observability` - Data monitoring
+- `performance` - Data performance
+
+**Key Workflows:**
+Search LIBRARY_INDEX.md for:
+- data-pipeline, data-quality, data-quality-monitoring
+- data-model, database-selection, schema-migration
+- observability, performance-testing
+
+**Key Skills:**
+- data-validation-pipelines
+- data-versioning-reproducibility
+- technical-decision-making
+- performance-optimization
+- debugging-methodology
+
+**Agent Locations:**
+- `promptosaurus/agents/data/`
 
 ---
 
-## 🤖 AI Tool Developer
+## 🤖 Data Scientist
 
-**Goal:** Integrate Promptosaurus into your AI tool
+**Display Name:** Data Scientist  
+**Focus:** Building and improving ML/AI systems
 
 **Start here:**
-1. [GETTING_STARTED.reference.md](./reference/GETTING_STARTED.reference.md) - Setup guide
-2. [TOOL_CONFIGURATION_EXAMPLES.reference.md](./reference/TOOL_CONFIGURATION_EXAMPLES.reference.md) - Tool-specific setup
-3. [API_REFERENCE.reference.md](./reference/API_REFERENCE.reference.md) - Technical reference
+1. [LIBRARY_INDEX.md](./LIBRARY_INDEX.md) - Find ML/AI resources
 
-**Integration points:**
-- Kilo (CLI): `promptosaurus/agents/` directory structure
-- Cline: `.clinerules` file generation
-- Cursor: `.cursor/rules/` directory
-- Copilot: `.github/copilot-instructions.md` format
+**Primary Agents:**
+- `code` - ML model code
+- `mlai` - ML/AI agent for model development
 
-**Key resources:**
-- Reference guides: `docs/reference/*.reference.md`
-- Design decisions: `docs/design/TOOL_INTEGRATION_GUIDE.design.md`
-- Examples: `docs/builders/*.builder.md`
+**Secondary Agents:**
+- `data` - Data pipelines for ML
+- `test` - ML testing
+- `performance` - ML performance
+- `devops` - MLOps
+- `observability` - ML monitoring
+
+**Key Workflows:**
+Search LIBRARY_INDEX.md for:
+- model-evaluation, hyperparameter-tuning
+- model-retraining-strategy, model-serving
+- production-ml-deployment
+- ml-monitoring-observability, mlops-pipeline-setup
+- experiment-tracking-setup
+- feature-engineering-guide
+- model-interpretability-guide, model-governance
+
+**Key Skills:**
+- feature-importance-analysis
+- mlops-pipeline-design
+- model-interpretability
+- batch-vs-realtime-scoring
+- hyperparameter-optimization
+- cross-validation-strategies
+- imbalanced-classification
+- ensemble-methods, dimensionality-reduction
+- anomaly-detection-techniques
+- model-performance-debugging
+- feature-engineering-guide, feature-store-design
+- data-validation-pipelines, time-series-preprocessing
+
+**Agent Locations:**
+- `promptosaurus/agents/mlai/`
+- `promptosaurus/agents/data/`
 
 ---
 
-## 🔍 Code Reviewer / QA Lead
+## ✍️ Technical Writer
 
-**Goal:** Validate quality and completeness
+**Display Name:** Technical Writer  
+**Focus:** Creating clear, comprehensive documentation
 
 **Start here:**
-1. [QUALITY_METRICS.md](./QUALITY_METRICS.md) - Quality dashboard
-2. [TECHNICAL_DEBT.md](./TECHNICAL_DEBT.md) - Known issues
-3. `_temp/validation/` - Validation reports
+1. [LIBRARY_INDEX.md](./LIBRARY_INDEX.md) - Find documentation resources
 
-**Key documents:**
-- Test coverage: QUALITY_METRICS.md
-- Known issues: TECHNICAL_DEBT.md
-- Validation reports: `_temp/validation/`
-- Code structure: [DIRECTORY_STRUCTURE.reference.md](./reference/DIRECTORY_STRUCTURE.reference.md)
+**Primary Agents:**
+- `document` - Documentation generation and improvement
 
-**Questions answered:**
-- What's the test coverage? → QUALITY_METRICS.md
-- Are there known issues? → TECHNICAL_DEBT.md
-- How's the code quality? → _temp/validation/
-- Is everything documented? → LIBRARY_INDEX.md
+**Key Workflows:**
+Search LIBRARY_INDEX.md for:
+- docs, decision-log
+
+**Key Skills:**
+- documentation-best-practices
+- technical-communication
+
+**Agent Locations:**
+- `promptosaurus/agents/document/`
+
+---
+
+## 🌍 Universal Agents (Available to All Personas)
+
+These agents are **always available** regardless of selected personas:
+
+- **ask** - General Q&A and research
+- **debug** - Troubleshooting and error resolution
+- **explain** - Code walkthroughs and onboarding
+- **plan** - Strategic planning and work planning
+- **orchestrator** - Multi-step workflow coordination
+
+**Agent Locations:**
+- `promptosaurus/agents/ask/`
+- `promptosaurus/agents/debug/`
+- `promptosaurus/agents/explain/`
+- `promptosaurus/agents/plan/`
+- `promptosaurus/agents/orchestrator/`
 
 ---
 
 ## How to Use This Guide
 
-1. **Find your role** in the list above
-2. **Follow the "Start here" links** in order
-3. **Use "Key documents"** as reference during work
-4. **Check "Questions answered"** when stuck
+1. **Find your persona** above (Architect, Software Engineer, etc.)
+2. **Check which agents are available** to your role
+3. **Search LIBRARY_INDEX.md** for specific workflows/skills you need
+4. **Browse agent directories** at `promptosaurus/agents/{agent-name}/` for detailed prompts
 
-All guides link back to the central [LIBRARY_INDEX.md](./LIBRARY_INDEX.md), which is searchable and comprehensive.
+For complete persona configuration, see: `promptosaurus/personas/personas.yaml`
+
+For persona-based filtering design, see: `planning/current/adrs/ADR-001-persona-based-filtering.md`

@@ -162,7 +162,6 @@ class TestKiloSubagentContent:
 
         assert "name: child" in content
         assert "description:" in content
-        assert "model:" in content
         assert "state_management:" in content
         assert "parent_agent: parent" in content
 
@@ -538,20 +537,6 @@ class TestKiloSubagentCoverage:
         # Subagent description should reference parent
         assert "Subagent of boss" in content
 
-    def test_subagent_frontmatter_model_field(self) -> None:
-        """Test that subagent frontmatter includes model field."""
-        builder = KiloBuilder()
-        subagent = Agent(
-            name="test",
-            description="Test",
-            system_prompt="Test",
-        )
-        options = BuildOptions()
-
-        content = builder._build_subagent_file(subagent, "parent", options)
-
-        assert "model:" in content
-        assert "anthropic/claude" in content
 
     def test_subagent_frontmatter_state_management(self) -> None:
         """Test that subagent frontmatter includes state_management."""
@@ -622,7 +607,6 @@ class TestKiloSubagentCoverage:
         # All required frontmatter fields
         assert "name: complete" in content
         assert "description:" in content
-        assert "model:" in content
         assert "state_management:" in content
         assert "parent_agent: parent" in content
 

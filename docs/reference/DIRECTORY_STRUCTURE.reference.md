@@ -1,17 +1,16 @@
 # Directory Structure
 
-This document explains the organization of the repository after the docs/planning/_temp restructuring.
+This document explains the organization of the Promptosaurus repository.
 
 ## Overall Structure
 
 ```
 .
-├── docs/                    # User-facing documentation (PUBLISHED)
-├── planning/                # Development planning (INTERNAL)
-├── _temp/                   # Ephemeral working files (GITIGNORED)
+├── docs/                    # User-facing documentation
+├── planning/                # Development planning (internal)
 ├── promptosaurus/           # Source code
 ├── tests/                   # Tests
-├── examples/                # Examples
+├── examples/                # Example configurations
 └── [root config files]
 ```
 
@@ -19,7 +18,7 @@ This document explains the organization of the repository after the docs/plannin
 
 ## docs/ - User-Facing Documentation
 
-Contains documentation meant for users, developers, and operators using Promptosaurus.
+Contains documentation for users, developers, and operators using Promptosaurus.
 
 ```
 docs/
@@ -27,19 +26,21 @@ docs/
 ├── INDEX.md                 # Navigation guide
 ├── QUICKSTART.md            # 5-minute quick start
 ├── PERSONA_GUIDES.md        # Guides by role (dev, architect, QA)
+├── PERSONAS.md              # Persona-based filtering system
 ├── LIBRARY_INDEX.md         # Complete catalog of agents/workflows/skills
-├── RELATIONSHIPS_MATRIX.md  # How agents relate to workflows and skills
-│
-├── TECHNICAL_DEBT.md        # Known issues and debt
-├── TEST_CONVENTIONS.md      # Testing patterns and conventions
-├── MAINTENANCE_WORKFLOW.md  # Operations and maintenance guide
-├── QUALITY_METRICS.md       # Code quality and coverage metrics
+├── RELATIONSHIPS_MATRIX.md  # Agent → subagent mappings
+├── ARCHITECTURE.md          # System architecture overview
+├── TEMPLATE_SYSTEM.md       # Template substitution system
+├── TROUBLESHOOTING.md       # Common issues and solutions
+├── DIAGRAMS_GUIDE.md        # Visual diagrams and flows
+├── INTEGRATION_GUIDES.md    # Integration with IDEs and tools
+├── INTERACTIVE_WALKTHROUGH.md
+├── ADVANCED_CONFIGURATION.md
 │
 ├── reference/               # How-to guides and reference materials
 │   ├── DIRECTORY_STRUCTURE.reference.md  # This file
 │   ├── GETTING_STARTED.reference.md
 │   ├── API_REFERENCE.reference.md
-│   ├── MIGRATION_GUIDE.reference.md
 │   └── TOOL_CONFIGURATION_EXAMPLES.reference.md
 │
 ├── design/                  # Architecture and design decisions
@@ -48,13 +49,32 @@ docs/
 │   ├── VARIANT_DIFFERENTIATION_STRATEGY.design.md
 │   └── WORKFLOW_HANDLING_ANALYSIS.design.md
 │
-├── decisions/               # Final approved architecture decision records
-│   └── [ADR files]
+├── architecture/            # Architecture documentation
+│   └── ARCHITECTURE_OVERVIEW.md
 │
-├── builders/                # Builder implementation and patterns
-│   ├── BUILDER_API_REFERENCE.md
-│   ├── BUILDER_IMPLEMENTATION_GUIDE.md
-│   └── INTEGRATION_GUIDE.md
+├── components/              # Component documentation
+│   ├── BUILDER_ARCHITECTURE.md
+│   ├── IR_SYSTEM.md
+│   ├── LOADER_PARSER.md
+│   ├── PERSONA_FILTERING.md
+│   ├── REGISTRY_SYSTEM.md
+│   └── TEMPLATE_SUBSTITUTION.md
+│
+├── builders/                # Builder implementation guides
+│   ├── README.builder.md
+│   ├── BUILDER_API_REFERENCE.builder.md
+│   ├── BUILDER_IMPLEMENTATION_GUIDE.builder.md
+│   ├── INTEGRATION_GUIDE.builder.md
+│   ├── KILO_BUILDER_GUIDE.builder.md
+│   ├── CLINE_BUILDER_GUIDE.builder.md
+│   ├── CURSOR_BUILDER_GUIDE.builder.md
+│   ├── COPILOT_BUILDER_GUIDE.builder.md
+│   └── CLAUDE_BUILDER_GUIDE.builder.md
+│
+├── user-guide/              # End-user guides
+│   ├── CLI_REFERENCE.md
+│   ├── COMMON_USE_CASES.md
+│   └── GETTING_STARTED.md
 │
 └── misc/                    # Images and assets
     ├── promptosaurs 1.png
@@ -72,20 +92,23 @@ docs/
 **User Guides:**
 - PERSONA_GUIDES.md - By role (architect, developer, QA engineer)
 - LIBRARY_INDEX.md - Searchable catalog of all agents, workflows, skills
+- PERSONAS.md - Understanding persona-based filtering
 
 **Reference Materials:**
 - reference/ - How-to guides, getting started, configuration examples
-- RELATIONSHIPS_MATRIX.md - Understanding connections between components
-- TECHNICAL_DEBT.md - Known issues and technical debt
-- TEST_CONVENTIONS.md - Testing standards and patterns
-- MAINTENANCE_WORKFLOW.md - Operations procedures
+- RELATIONSHIPS_MATRIX.md - Understanding agent → subagent relationships
 
 **Architecture & Design:**
-- design/ - Architecture diagrams, design patterns, system design documents
-- decisions/ - Approved architectural decision records (ADRs)
+- ARCHITECTURE.md - High-level system architecture
+- design/ - Architecture patterns, design decisions
+- architecture/ - Detailed architecture documentation
+- components/ - Component-level documentation
 
 **Builders:**
-- builders/ - Documentation for building custom builders
+- builders/ - Documentation for creating custom builders for IDEs
+
+**User Guides:**
+- user-guide/ - CLI reference, common use cases, getting started
 
 **Assets:**
 - misc/ - Images, logos, and diagrams
@@ -94,141 +117,66 @@ docs/
 
 ## planning/ - Development Planning (INTERNAL)
 
-Contains all AI-generated and user-added development planning. **NOT user-facing.**
+Contains AI-generated and internal development planning. **NOT user-facing.**
 
 ```
 planning/
-├── README.md                # Explains planning directory
+├── current/                 # Active development plans
+│   ├── adrs/               # Architecture Decision Records (in progress)
+│   ├── execution-plans/    # Task breakdowns and execution plans
+│   └── [planning docs]
 │
-├── current/                 # Active, in-scope work
-│   ├── README.md
-│   ├── adrs/                # Architecture decisions for current work
-│   │   └── README.md
-│   ├── execution-plans/     # Task breakdowns and phase plans
-│   │   └── README.md
-│   ├── features/            # Feature specifications being implemented
-│   │   └── README.md
-│   ├── prds/                # Product requirements documents
-│   │   └── README.md
-│   ├── PHASE1_EXECUTION_GUIDE.plan.md
-│   ├── PHASE2_EXECUTION_STATUS.plan.md
-│   ├── PHASE3_ROADMAP.plan.md
-│   └── [other phase execution plans]
+├── complete/               # Finished work
+│   └── [completed plans]
 │
-├── complete/                # Finished work and delivered phases
-│   ├── README.md
-│   ├── adrs/                # ADRs from completed phases
-│   │   └── README.md
-│   ├── execution-plans/     # Completed phase execution plans
-│   │   └── README.md
-│   ├── features/            # Specifications of shipped features
-│   │   └── README.md
-│   ├── prds/                # Completed project requirements
-│   │   └── README.md
-│   ├── PHASE3_SKILLS_QUICK_REFERENCE.md
-│   └── PHASE3_WORKFLOWS_QUICK_REFERENCE.md
+├── backlog/                # Future work and ideas
+│   └── [backlog items]
 │
-├── backlog/                 # Future work (not in current scope)
-│   ├── README.md
-│   ├── adrs/                # Exploratory ADRs for future work
-│   │   └── README.md
-│   ├── execution-plans/     # Rough execution plans for future phases
-│   │   └── README.md
-│   ├── features/            # Feature ideas and specifications
-│   │   └── README.md
-│   └── prds/                # Future project requirements
-│       └── README.md
-│
-└── research/                # Research and investigation findings
-    ├── README.md
-    ├── AI_TOOL_CAPABILITY_MATRIX.research.md
-    ├── EXECUTION_INFERENCE.research.md
-    ├── EXECUTION_MODELS_KILO_VERIFIED.research.md
-    ├── EXECUTION_MODELS.research.md
-    ├── EXECUTION_MODELS_VERIFIED.research.md
-    └── EXECUTION_RESEARCH.research.md
+└── research/               # Research and investigations
+    └── [research notes]
 ```
 
-### Content Organization
+### Purpose
 
-**current/** - Active work in progress:
-- ADRs (architecture decisions)
-- Execution plans (task breakdowns)
-- Features (specifications)
-- PRDs (project requirements)
+The `planning/` directory is for internal development work:
+- Architecture Decision Records (ADRs) - before finalization
+- Execution plans and task breakdowns
+- Research findings and investigations
+- Backlog and future work
 
-**complete/** - Finished phases:
-- Historical ADRs
-- Completed execution plans
-- Shipped feature specifications
-- Archived project requirements
-- Phase deliverables (skills/workflows references)
-
-**backlog/** - Future planning:
-- Exploratory ADRs
-- Rough execution plans
-- Feature ideas
-- Future project requirements
-
-**research/** - Research documents:
-- Tool evaluations
-- Capability analysis
-- Technology research
-- Findings that inform planning
-
----
-
-## _temp/ - Ephemeral Working Files
-
-Contains temporary working files with no long-term value. **NOT committed to git.**
-
-```
-_temp/
-├── .gitkeep               # Ensures directory exists
-├── README.md              # Explains ephemeral nature
-├── PHASE2_CLEANUP_NOTES.md
-├── PHASE3_RELEASE_NOTES.md
-└── validation/            # Test validation reports
-    ├── README.md
-    ├── COVERAGE_REPORT.validation.md
-    ├── MUTATION_TESTING_RESULTS.validation.md
-    ├── PERFORMANCE_REPORT.validation.md
-    ├── EXTRACTION_STATUS.validation.md
-    ├── PHASE2_FINAL_AUDIT.validation.md
-    ├── VARIANT_REWRITE_CHECKLIST.validation.md
-    └── subagent-variant-audit-2026-04-10.validation.md
-```
-
-### Contents
-
-- Validation reports (generated, reviewed, then obsolete)
-- Cleanup notes (relevant during work, not after)
-- Release notes (working copies)
-- Temporary analysis outputs
-- Build artifacts
-
-### Guidelines
-
-- Delete files once work completes
-- Archive important findings to `planning/research/`
-- Keep directory lean—it's a workspace, not an archive
+**Note:** This is NOT user-facing documentation. Users should refer to `docs/` for all documentation needs.
 
 ---
 
 ## promptosaurus/ - Source Code
 
-Main Python package for Promptosaurus CLI.
-
 ```
 promptosaurus/
-├── __init__.py
-├── cli.py                   # Command-line interface
+├── agents/                  # Agent prompt files (25 primary agents)
+│   ├── architect/
+│   ├── ask/
+│   ├── backend/
+│   └── [22 more agents]
+│
 ├── builders/                # Builder implementations
-├── agents/                  # Agent definitions
-├── workflows/               # Workflow definitions
-├── skills/                  # Skill definitions
-├── registry.py              # Central registry
-└── [other modules]
+│   ├── base.py
+│   ├── kilo_builder.py
+│   ├── cline_builder.py
+│   └── [more builders]
+│
+├── configurations/          # Configuration files
+│   ├── agent_skill_mapping.yaml
+│   └── [config files]
+│
+├── personas/                # Persona definitions
+│   ├── personas.yaml
+│   └── registry.py
+│
+├── agent_registry/          # Agent discovery and loading
+│   ├── discovery.py
+│   └── registry.py
+│
+└── cli.py                   # CLI entry point
 ```
 
 ---
@@ -237,76 +185,66 @@ promptosaurus/
 
 ```
 tests/
-├── unit/                    # Unit tests
-├── integration/             # Integration tests
-└── [test files]
+├── unit/                    # Unit tests (fast, isolated)
+│   ├── agents/             # Agent tests
+│   ├── builders/           # Builder tests
+│   ├── personas/           # Persona system tests
+│   ├── registry/           # Registry tests
+│   └── [more test directories]
+│
+├── integration/            # Integration tests (multi-component)
+└── conftest.py            # Shared test fixtures
 ```
 
 ---
 
-## Directory Lifecycle
+## examples/ - Example Configurations
 
-### Document Lifecycle
+```
+examples/
+└── [example project configurations]
+```
 
-1. **Research** → Start in `planning/research/`
-2. **Design** → Document in `docs/design/`
-3. **Planning** → Create PRD/ADR/Features in `planning/current/`
-4. **Execution** → Execution plan in `planning/current/execution-plans/`
-5. **Implementation** → Build based on planning
-6. **Completion** → Move to `planning/complete/`
-7. **Reference** → User-facing documentation in `docs/`
-
-### File Movement Guidelines
-
-**When to move to planning/complete/**
-- Phase/feature work is finished
-- All ADRs, execution plans, and features are done
-- Ready to archive current phase
-
-**When to move to planning/backlog/**
-- Feature is deprioritized
-- Deferred to future work
-- No longer in current scope
-
-**When to delete from _temp/**
-- Validation complete
-- Report reviewed
-- No longer need for reference
-- Can be regenerated if needed
-
-**When to add to docs/**
-- Information is final and stable
-- Useful for ongoing reference
-- Intended for users or developers
-- Ready to potentially publish
+Example configurations showing how to use Promptosaurus in different scenarios.
 
 ---
 
-## Key Principles
+## Root Configuration Files
 
-**docs/** is for:
-- ✓ User-facing documentation
-- ✓ Reference guides
-- ✓ Final design and architecture
-- ✗ Work in progress
-- ✗ Phase-specific artifacts
-
-**planning/** is for:
-- ✓ Development planning
-- ✓ Phase-specific work
-- ✓ Internal decision-making
-- ✗ User-facing content
-
-**_temp/** is for:
-- ✓ Ephemeral working files
-- ✓ Generated reports (temporary)
-- ✓ Scratch work
-- ✗ Anything that needs to persist
+```
+.
+├── pyproject.toml          # Python project configuration
+├── README.md               # Repository README
+├── .promptosaurus.yaml     # Promptosaurus configuration
+└── [other config files]
+```
 
 ---
 
-## Maintenance
+## File Naming Conventions
 
-- **Weekly:** Archive completed _temp/ files to planning/
-- **Monthly:** Move completed planning/current/ to planning/complete/
-- **As needed:** Update docs/ with stable, final documentation
+Intent is encoded in filename suffixes:
+
+- `.design.md` - Architecture and design decisions
+- `.reference.md` - Reference guides and how-to documentation
+- `.builder.md` - Builder tool documentation
+- `.plan.md` - Execution plans (planning/ directory only)
+- `.research.md` - Research findings (planning/ directory only)
+
+---
+
+## Navigation
+
+- **For users:** Start with `docs/README.md` or `docs/QUICKSTART.md`
+- **For developers:** See `docs/builders/` for building custom integrations
+- **For architecture:** See `docs/ARCHITECTURE.md` and `docs/design/`
+- **For source code:** Navigate `promptosaurus/` directory
+
+---
+
+## Version History
+
+| Version | Date | Changes |
+|---------|------|---------|
+| 2.0 | 2026-04-13 | Updated to reflect actual structure, removed deleted files |
+| 1.0 | 2026-04-09 | Initial directory structure documentation |

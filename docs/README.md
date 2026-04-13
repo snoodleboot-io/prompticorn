@@ -77,7 +77,6 @@ Development planning and architectural decisions:
 ## Quality & Metrics
 
 Project quality and status:
-- **[QUALITY_METRICS.md](./QUALITY_METRICS.md)** — Test coverage and quality gates
 - **[RELATIONSHIPS_MATRIX.md](./RELATIONSHIPS_MATRIX.md)** — Agent and workflow relationships
 - **[LIBRARY_INDEX.md](./LIBRARY_INDEX.md)** — Searchable catalog of all agents
 
@@ -144,11 +143,8 @@ docs/
 ├── PERSONAS.md                      → Agent personas and roles
 ├── PERSONA_GUIDES.md                → Resources by role
 ├── LIBRARY_INDEX.md                 → Searchable agent catalog
-├── QUALITY_METRICS.md               → Test coverage and metrics
 ├── RELATIONSHIPS_MATRIX.md          → Agent/workflow relationships
 ├── MIGRATION_GUIDE.md               → Upgrade instructions
-├── TEST_CONVENTIONS.md              → Testing guidelines
-├── TECHNICAL_DEBT.md                → Known issues and debt
 ├── MAINTENANCE_WORKFLOW.md          → Operational procedures
 └── INDEX.md                         → Documentation index
 ```
