@@ -14,15 +14,38 @@ class ColumnLayoutRenderer(Renderer):
     - Arrow keys and number keys work across columns
     """
 
-    def __init__(self, items_per_column: int = 6, column_width: int = 20):
+    def __init__(self, items_per_column: int = 6, column_width: int | None = None):
         """Initialize column renderer.
 
         Args:
             items_per_column: Number of items per column (default 6).
-            column_width: Width of each column (default 20).
+            column_width: Width of each column. If None, auto-calculated from options.
         """
         self.items_per_column = items_per_column
-        self.column_width = column_width
+        self.column_width = column_width  # None means auto-calculate
+
+    def _calculate_column_width(self, options: list[str], allow_multiple: bool) -> int:
+        """Calculate appropriate column width based on longest option.
+
+        Args:
+            options: List of option strings.
+            allow_multiple: Whether multi-select is enabled.
+
+        Returns:
+            Calculated column width in characters.
+        """
+        # Marker takes 4 chars for multi-select "[*] " or 2 for single " " or "→ "
+        marker_width = 4 if allow_multiple else 2
+
+        # Number takes up to 3 chars for "99." (supports up to 99 options)
+        num_width = 3
+
+        # Find longest option text
+        max_option_len = max(len(opt) for opt in options) if options else 0
+
+        # Total width: marker + num + space + option text + padding
+        # Add 2 extra chars for spacing between columns
+        return marker_width + num_width + 1 + max_option_len + 2
 
     def render(self, context: PipelineContext) -> str:
         """Render options in column layout with selection markers.
@@ -41,6 +64,12 @@ class ColumnLayoutRenderer(Renderer):
         num_items = len(options)
         num_columns = (num_items + self.items_per_column - 1) // self.items_per_column
 
+        # Auto-calculate column width if not specified
+        if self.column_width is None:
+            col_width = self._calculate_column_width(options, question.allow_multiple)
+        else:
+            col_width = self.column_width
+
         # Render column grid
         for row in range(self.items_per_column):
             line_parts = []
@@ -55,7 +84,7 @@ class ColumnLayoutRenderer(Renderer):
 
                     num_str = f"{idx + 1}."
                     content = f"{marker} {num_str:>2} {options[idx]}"
-                    part = content.ljust(self.column_width)
+                    part = content.ljust(col_width)
                     line_parts.append(part)
             if line_parts:
                 lines.append("".join(line_parts))

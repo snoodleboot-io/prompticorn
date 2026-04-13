@@ -1,0 +1,176 @@
+{
+  "architect": [
+    "architecture-documentation",
+    "data-model-discovery",
+    "mermaid-erd-creation",
+    "technical-decision-making",
+    "problem-decomposition",
+    "feature-planning",
+    "technical-communication",
+    "post-implementation-checklist"
+  ],
+  "ask": [
+    "documentation-best-practices",
+    "technical-communication",
+    "testing-strategies",
+    "test-aaa-structure",
+    "test-mocking-rules"
+  ],
+  "backend": [
+    "architecture-documentation",
+    "data-model-discovery",
+    "data-validation-pipelines",
+    "performance-optimization",
+    "code-review-practices",
+    "incremental-implementation"
+  ],
+  "code": [
+    "feature-planning",
+    "incremental-implementation",
+    "code-review-practices",
+    "test-coverage-categories",
+    "post-implementation-checklist",
+    "technical-debt-management",
+    "quality-assurance"
+  ],
+  "compliance": [
+    "quality-assurance",
+    "documentation-best-practices",
+    "technical-communication"
+  ],
+  "data": [
+    "data-model-discovery",
+    "data-validation-pipelines",
+    "data-versioning-reproducibility",
+    "feature-store-design",
+    "architecture-documentation"
+  ],
+  "debug": [
+    "debugging-methodology",
+    "problem-decomposition",
+    "technical-communication"
+  ],
+  "devops": [
+    "continuous-improvement",
+    "technical-decision-making",
+    "documentation-best-practices"
+  ],
+  "document": [
+    "documentation-best-practices",
+    "technical-communication",
+    "architecture-documentation",
+    "mermaid-erd-creation"
+  ],
+  "enforcement": [
+    "code-review-practices",
+    "quality-assurance",
+    "technical-debt-management"
+  ],
+  "explain": [
+    "technical-communication",
+    "documentation-best-practices",
+    "architecture-documentation"
+  ],
+  "frontend": [
+    "code-review-practices",
+    "incremental-implementation",
+    "performance-optimization",
+    "testing-strategies"
+  ],
+  "incident": [
+    "problem-decomposition",
+    "debugging-methodology",
+    "technical-communication",
+    "continuous-improvement"
+  ],
+  "migration": [
+    "technical-decision-making",
+    "incremental-implementation",
+    "technical-debt-management",
+    "problem-decomposition"
+  ],
+  "mlai": [
+    "imbalanced-classification",
+    "feature-importance-analysis",
+    "mlops-pipeline-design",
+    "anomaly-detection-techniques",
+    "feature-store-design",
+    "ensemble-methods",
+    "model-interpretability",
+    "batch-vs-realtime-scoring",
+    "cross-validation-strategies",
+    "hyperparameter-optimization",
+    "data-versioning-reproducibility",
+    "model-performance-debugging",
+    "dimensionality-reduction",
+    "time-series-preprocessing",
+    "data-validation-pipelines"
+  ],
+  "observability": [
+    "performance-optimization",
+    "debugging-methodology",
+    "anomaly-detection-techniques",
+    "continuous-improvement"
+  ],
+  "orchestrator": [
+    "problem-decomposition",
+    "technical-decision-making",
+    "team-collaboration",
+    "feature-planning"
+  ],
+  "performance": [
+    "performance-optimization",
+    "debugging-methodology",
+    "problem-decomposition",
+    "continuous-improvement"
+  ],
+  "planning": [
+    "feature-planning",
+    "problem-decomposition",
+    "technical-decision-making",
+    "architecture-documentation",
+    "technical-communication"
+  ],
+  "product": [
+    "feature-planning",
+    "technical-communication",
+    "problem-decomposition",
+    "team-collaboration"
+  ],
+  "qa-tester": [
+    "testing-strategies",
+    "test-aaa-structure",
+    "test-mocking-rules",
+    "test-coverage-categories",
+    "quality-assurance",
+    "code-review-practices"
+  ],
+  "refactor": [
+    "code-review-practices",
+    "technical-debt-management",
+    "incremental-implementation",
+    "quality-assurance",
+    "continuous-improvement"
+  ],
+  "review": [
+    "code-review-practices",
+    "quality-assurance",
+    "performance-optimization",
+    "technical-communication",
+    "technical-debt-management"
+  ],
+  "security": [
+    "code-review-practices",
+    "quality-assurance",
+    "technical-decision-making",
+    "problem-decomposition"
+  ],
+  "test": [
+    "testing-strategies",
+    "test-aaa-structure",
+    "test-mocking-rules",
+    "test-coverage-categories",
+    "quality-assurance",
+    "incremental-implementation"
+  ]
+}

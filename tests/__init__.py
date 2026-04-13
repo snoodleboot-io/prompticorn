@@ -1,1 +1,7 @@
-"""Test suite for promptosaurus."""
+"""
+Promptosaurus test suite.
+
+Tests for agents, subagents, workflows, and skills.
+"""
+
+__version__ = "2.0"

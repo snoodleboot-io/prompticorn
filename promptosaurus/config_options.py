@@ -1,84 +1,97 @@
-"""Configuration options management for the prompt update command.
+"""Configuration options management for the promptosaurus update command.
 
 This module provides data structures and functions for managing configuration
-options that can be updated interactively via the `prompt update` command.
+options that can be updated interactively via the `promptosaurus update` command.
 
 The module defines:
     - ConfigOption dataclass: Represents a single updateable configuration option
     - CONFIG_OPTIONS: List of all available options
     - Helper functions for loading, getting, and setting nested config values
 
-Constants:
-    REPO_TYPE_OPTIONS: Available repository type options
-    PACKAGE_MANAGER_OPTIONS: Available package manager options
-    TEST_FRAMEWORK_OPTIONS: Available test framework options
-    LINTER_OPTIONS: Available linter options
-    FORMATTER_OPTIONS: Available formatter options
-
-Classes:
-    ConfigOption: Dataclass representing a single configuration option
-
-Functions:
-    load_current_values: Load current config values into ConfigOption objects
-    get_nested_value: Get value from nested dict using dot notation
-    set_nested_value: Set value in nested dict using dot notation
+Configuration is loaded from YAML files in promptosaurus/configurations/
 """
 
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any
 
-from promptosaurus.questions.language import LANGUAGE_KEYS
+import yaml
 
-# Available options for single-select config fields
-REPO_TYPE_OPTIONS = ["single-language", "multi-language-monorepo", "mixed-collocation"]
+from promptosaurus.questions.language import LanguageRegistry
 
-PACKAGE_MANAGER_OPTIONS = [
-    "poetry",
-    "npm",
-    "pip",
-    "yarn",
-    "pnpm",
-    "bun",
-    "cargo",
-    "gradle",
-    "maven",
-    "dotnet",
-]
 
-TEST_FRAMEWORK_OPTIONS = [
-    "pytest",
-    "vitest",
-    "jest",
-    "go test",
-    "junit",
-    "rspec",
-    "phpunit",
-    "swift testing",
-    "kotest",
-    "xctest",
-]
+class ConfigOptionsRegistry:
+    """Registry for loading configuration options from YAML files.
 
-LINTER_OPTIONS = [
-    "ruff",
-    "eslint",
-    "pylint",
-    "golangci-lint",
-    "checkstyle",
-    "rubocop",
-    "phpcs",
-    "swiftlint",
-    "detekt",
-]
+    Loads configuration options once and caches them for reuse.
+    Configuration is loaded from promptosaurus/configurations/config_options.yaml
+    """
 
-FORMATTER_OPTIONS = [
-    "ruff",
-    "prettier",
-    "black",
-    "gofmt",
-    "dotnet format",
-    "rubocop",
-    "php-cs-fixer",
-]
+    _config: dict[str, list[str]] | None = None
+
+    @classmethod
+    def _load_config(cls) -> dict[str, list[str]]:
+        """Load configuration options from YAML file.
+
+        Returns:
+            Dictionary with option lists for repo_type, package_manager, etc.
+        """
+        if cls._config is None:
+            config_file = Path(__file__).parent / "configurations" / "config_options.yaml"
+            with open(config_file, encoding="utf-8") as f:
+                cls._config = yaml.safe_load(f)
+        assert cls._config is not None
+        return cls._config
+
+    @classmethod
+    def get_repo_type_options(cls) -> list[str]:
+        """Get available repository type options.
+
+        Returns:
+            List of valid repository type strings.
+        """
+        config = cls._load_config()
+        return config["repo_type_options"].copy()
+
+    @classmethod
+    def get_package_manager_options(cls) -> list[str]:
+        """Get available package manager options.
+
+        Returns:
+            List of valid package manager strings.
+        """
+        config = cls._load_config()
+        return config["package_manager_options"].copy()
+
+    @classmethod
+    def get_test_framework_options(cls) -> list[str]:
+        """Get available test framework options.
+
+        Returns:
+            List of valid test framework strings.
+        """
+        config = cls._load_config()
+        return config["test_framework_options"].copy()
+
+    @classmethod
+    def get_linter_options(cls) -> list[str]:
+        """Get available linter options.
+
+        Returns:
+            List of valid linter strings.
+        """
+        config = cls._load_config()
+        return config["linter_options"].copy()
+
+    @classmethod
+    def get_formatter_options(cls) -> list[str]:
+        """Get available formatter options.
+
+        Returns:
+            List of valid formatter strings.
+        """
+        config = cls._load_config()
+        return config["formatter_options"].copy()
 
 
 @dataclass
@@ -86,7 +99,7 @@ class ConfigOption:
     """Represents a single configuration option that can be updated interactively.
 
     This dataclass defines a configuration option that users can modify via the
-    `prompt update` command. Each option has a key (used in the config file),
+    `promptosaurus update` command. Each option has a key (used in the config file),
     a display name (shown to users), a type, and available choices if applicable.
 
     Attributes:
@@ -104,55 +117,67 @@ class ConfigOption:
     available_options: list[str] | None = None
 
 
+def _get_config_options() -> list[ConfigOption]:
+    """Get the list of all updateable configuration options.
+
+    Options are loaded dynamically from the ConfigOptionsRegistry.
+
+    Returns:
+        List of ConfigOption instances.
+    """
+    return [
+        ConfigOption(
+            key="repository.type",
+            display_name="Repository Type",
+            option_type="single-select",
+            available_options=ConfigOptionsRegistry.get_repo_type_options(),
+        ),
+        ConfigOption(
+            key="spec.language",
+            display_name="Language",
+            option_type="single-select",
+            available_options=LanguageRegistry.get_supported_languages(),
+        ),
+        ConfigOption(
+            key="spec.runtime",
+            display_name="Runtime",
+            option_type="text",
+        ),
+        ConfigOption(
+            key="spec.package_manager",
+            display_name="Package Manager",
+            option_type="single-select",
+            available_options=ConfigOptionsRegistry.get_package_manager_options(),
+        ),
+        ConfigOption(
+            key="spec.test_framework",
+            display_name="Test Framework",
+            option_type="single-select",
+            available_options=ConfigOptionsRegistry.get_test_framework_options(),
+        ),
+        ConfigOption(
+            key="spec.linter",
+            display_name="Linter",
+            option_type="single-select",
+            available_options=ConfigOptionsRegistry.get_linter_options(),
+        ),
+        ConfigOption(
+            key="spec.formatter",
+            display_name="Formatter",
+            option_type="single-select",
+            available_options=ConfigOptionsRegistry.get_formatter_options(),
+        ),
+        ConfigOption(
+            key="spec.coverage",
+            display_name="Coverage Targets",
+            option_type="composite",
+        ),
+    ]
+
+
 # Define all updateable options (excluding AI tool which is handled by switch)
-CONFIG_OPTIONS: list[ConfigOption] = [
-    ConfigOption(
-        key="repository.type",
-        display_name="Repository Type",
-        option_type="single-select",
-        available_options=REPO_TYPE_OPTIONS,
-    ),
-    ConfigOption(
-        key="spec.language",
-        display_name="Language",
-        option_type="single-select",
-        available_options=LANGUAGE_KEYS,
-    ),
-    ConfigOption(
-        key="spec.runtime",
-        display_name="Runtime",
-        option_type="text",
-    ),
-    ConfigOption(
-        key="spec.package_manager",
-        display_name="Package Manager",
-        option_type="single-select",
-        available_options=PACKAGE_MANAGER_OPTIONS,
-    ),
-    ConfigOption(
-        key="spec.test_framework",
-        display_name="Test Framework",
-        option_type="single-select",
-        available_options=TEST_FRAMEWORK_OPTIONS,
-    ),
-    ConfigOption(
-        key="spec.linter",
-        display_name="Linter",
-        option_type="single-select",
-        available_options=LINTER_OPTIONS,
-    ),
-    ConfigOption(
-        key="spec.formatter",
-        display_name="Formatter",
-        option_type="single-select",
-        available_options=FORMATTER_OPTIONS,
-    ),
-    ConfigOption(
-        key="spec.coverage",
-        display_name="Coverage Targets",
-        option_type="composite",
-    ),
-]
+# This is a function call now, not a module-level constant
+CONFIG_OPTIONS = _get_config_options()
 
 
 def load_current_values(
@@ -171,7 +196,7 @@ def load_current_values(
         List of ConfigOption objects with current values populated.
     """
     if options is None:
-        options = CONFIG_OPTIONS.copy()
+        options = _get_config_options()
 
     for opt in options:
         # Get value from nested config using dot notation

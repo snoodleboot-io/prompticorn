@@ -89,6 +89,7 @@ class SafeAccessor:
                 current = current.get(part)
             elif hasattr(current, part):
                 try:
+                    # design-decision-override: Error recovery must handle dynamic attribute access
                     current = getattr(current, part)
                 except AttributeError:
                     return None

@@ -30,8 +30,8 @@ class TestFolderSpec:
         )
 
         # Defaults should be set
-        assert spec.runtime == "3.12"
-        assert spec.package_manager == "poetry"
+        assert spec.runtime == "3.14"
+        assert spec.package_manager == "uv"
         assert spec.test_framework == "pytest"
         assert spec.linter == "ruff"
         assert spec.formatter == "ruff"
@@ -81,7 +81,7 @@ class TestFolderSpec:
         )
 
         assert spec.language == "typescript"
-        assert spec.package_manager == "npm"
+        assert spec.package_manager == "pnpm"
         assert spec.test_framework == "vitest"
         assert spec.linter == "eslint"
         assert spec.formatter == "prettier"
@@ -96,8 +96,8 @@ class TestFolderSpec:
         )
 
         assert spec.language == "python"
-        assert spec.runtime == "3.12"
-        assert spec.package_manager == "poetry"
+        assert spec.runtime == "3.14"
+        assert spec.package_manager == "uv"
         assert spec.test_framework == "pytest"
         assert spec.linter == "ruff"
         assert spec.formatter == "ruff"
@@ -159,8 +159,8 @@ class TestFolderSpecDefaults:
             language="python",
         )
 
-        assert spec.runtime == "3.12"
-        assert spec.package_manager == "poetry"
+        assert spec.runtime == "3.14"
+        assert spec.package_manager == "uv"
         assert spec.test_framework == "pytest"
         assert spec.linter == "ruff"
         assert spec.formatter == "ruff"
@@ -174,8 +174,8 @@ class TestFolderSpecDefaults:
             language="typescript",
         )
 
-        assert spec.runtime == "5.4"
-        assert spec.package_manager == "npm"
+        assert spec.runtime == "v6.0"
+        assert spec.package_manager == "pnpm"
         assert spec.test_framework == "vitest"
         assert spec.linter == "eslint"
         assert spec.formatter == "prettier"
@@ -189,8 +189,8 @@ class TestFolderSpecDefaults:
             language="javascript",
         )
 
-        assert spec.runtime == "5.4"
-        assert spec.package_manager == "npm"
+        assert spec.runtime == "v6.0"
+        assert spec.package_manager == "pnpm"
         assert spec.test_framework == "vitest"
         assert spec.linter == "eslint"
         assert spec.formatter == "prettier"

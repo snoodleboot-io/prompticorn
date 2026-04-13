@@ -1,0 +1,48 @@
+# Valid languages for each preset type/subtype
+# Used by CLI for language validation when adding folders
+
+backend:
+  api:
+    - python
+    - typescript
+    - javascript
+    - go
+    - java
+    - rust
+    - csharp
+    - ruby
+    - php
+  library:
+    - python
+    - typescript
+    - javascript
+    - go
+    - java
+    - rust
+    - csharp
+    - ruby
+    - php
+  worker:
+    - python
+    - go
+    - rust
+    - java
+  cli:
+    - python
+    - go
+    - rust
+    - csharp
+    - ruby
+    - php
+
+frontend:
+  ui:
+    - typescript
+    - javascript
+  library:
+    - typescript
+    - javascript
+  e2e:
+    - typescript
+    - javascript
+    - python

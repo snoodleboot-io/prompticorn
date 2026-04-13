@@ -1,0 +1,161 @@
+{
+  "architect": [
+    "scaffold-workflow",
+    "data-model-workflow",
+    "decision-log-workflow",
+    "architecture-documentation",
+    "task-breakdown-workflow",
+    "strategy-workflow"
+  ],
+  "ask": [
+    "docs-workflow",
+    "testing-workflow",
+    "decision-log-workflow"
+  ],
+  "backend": [
+    "code-workflow",
+    "data-model-workflow",
+    "api-design",
+    "performance-workflow",
+    "review-workflow"
+  ],
+  "code": [
+    "code-workflow",
+    "feature-workflow",
+    "boilerplate-workflow",
+    "house-style-workflow",
+    "refactor-workflow",
+    "testing-workflow"
+  ],
+  "compliance": [
+    "compliance-audit-workflow",
+    "workflow-compliance-patterns",
+    "security-hardening-checklist"
+  ],
+  "data": [
+    "data-model-workflow",
+    "data-quality-monitoring",
+    "workflow-versioning-management",
+    "experiment-tracking-setup"
+  ],
+  "debug": [
+    "root-cause-workflow",
+    "log-analysis-workflow",
+    "debugging-methodology"
+  ],
+  "devops": [
+    "workflow-orchestration-patterns",
+    "workflow-monitoring-workflow",
+    "secret-management-workflow",
+    "dependency-scanning-workflow",
+    "workflow-rollback-strategies"
+  ],
+  "document": [
+    "docs-workflow",
+    "workflow-documentation-patterns",
+    "strategy-for-applications-workflow"
+  ],
+  "enforcement": [
+    "house-style-workflow",
+    "review-workflow",
+    "code-workflow"
+  ],
+  "explain": [
+    "docs-workflow",
+    "strategy-workflow"
+  ],
+  "frontend": [
+    "code-workflow",
+    "accessibility-workflow",
+    "ux-validation-workflow",
+    "testing-workflow"
+  ],
+  "incident": [
+    "incident-response-security",
+    "root-cause-workflow",
+    "log-analysis-workflow"
+  ],
+  "migration": [
+    "migration-workflow",
+    "dependency-upgrade-workflow",
+    "workflow-migration-patterns",
+    "strategy-workflow"
+  ],
+  "mlai": [
+    "mlops-pipeline-setup",
+    "experiment-tracking-setup",
+    "hyperparameter-tuning",
+    "model-evaluation-workflow",
+    "model-retraining-strategy",
+    "ml-monitoring-observability",
+    "production-ml-deployment",
+    "model-serving-workflow",
+    "model-governance-workflow",
+    "feature-engineering-guide",
+    "model-interpretability-guide"
+  ],
+  "observability": [
+    "workflow-monitoring-workflow",
+    "ml-monitoring-observability",
+    "log-analysis-workflow",
+    "performance-workflow",
+    "analytics-setup-workflow"
+  ],
+  "orchestrator": [
+    "multi-agent-coordination-workflow",
+    "meta-workflow",
+    "task-breakdown-workflow",
+    "workflow-orchestration-patterns"
+  ],
+  "performance": [
+    "performance-workflow",
+    "workflow-performance-optimization",
+    "workflow-scaling-patterns"
+  ],
+  "planning": [
+    "task-breakdown-workflow",
+    "feature-prioritization-workflow",
+    "roadmap-planning-workflow",
+    "requirements-gathering-workflow",
+    "decision-log-workflow"
+  ],
+  "product": [
+    "roadmap-planning-workflow",
+    "feature-prioritization-workflow",
+    "requirements-gathering-workflow",
+    "user-research-guide",
+    "a-b-testing-workflow",
+    "analytics-setup-workflow",
+    "feature-launch-checklist"
+  ],
+  "qa-tester": [
+    "testing-workflow",
+    "workflow-testing-patterns",
+    "review-workflow"
+  ],
+  "refactor": [
+    "refactor-workflow",
+    "strategy-workflow",
+    "code-workflow"
+  ],
+  "review": [
+    "review-workflow",
+    "accessibility-workflow",
+    "performance-workflow",
+    "security-code-review"
+  ],
+  "security": [
+    "security-hardening-checklist",
+    "threat-modeling-workflow",
+    "vulnerability-scanning-workflow",
+    "security-testing-workflow",
+    "security-code-review",
+    "penetration-testing-guide",
+    "workflow-security-in-workflows"
+  ],
+  "test": [
+    "testing-workflow",
+    "workflow-testing-patterns",
+    "strategy-workflow"
+  ]
+}

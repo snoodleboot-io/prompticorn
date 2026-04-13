@@ -27,6 +27,52 @@ from sweet_tea.sweet_tea_error import SweetTeaError
 from promptosaurus.questions.base.question import Question
 
 
+class LanguageRegistry:
+    """Registry for supported languages.
+
+    Loads supported languages from YAML configuration file and provides
+    methods for language validation and lookup.
+    """
+
+    _languages: list[str] | None = None
+
+    @classmethod
+    def _load_languages(cls) -> list[str]:
+        """Load supported languages from YAML file.
+
+        Returns:
+            List of supported language keys.
+        """
+        if cls._languages is None:
+            config_file = Path(__file__).parent.parent / "configurations" / "languages.yaml"
+            with open(config_file, encoding="utf-8") as f:
+                data = yaml.safe_load(f)
+                cls._languages = data["supported_languages"]
+        assert cls._languages is not None
+        return cls._languages
+
+    @classmethod
+    def get_supported_languages(cls) -> list[str]:
+        """Get list of all supported languages.
+
+        Returns:
+            Copy of supported languages list.
+        """
+        return cls._load_languages().copy()
+
+    @classmethod
+    def is_supported(cls, language: str) -> bool:
+        """Check if a language is supported.
+
+        Args:
+            language: Language key to check.
+
+        Returns:
+            True if language is supported, False otherwise.
+        """
+        return language.lower() in cls._load_languages()
+
+
 class QuestionPipelineError(Exception):
     """Raised when a question cannot be loaded from the pipeline.
 
@@ -56,34 +102,8 @@ class QuestionPipelineError(Exception):
 
 
 # Registry of available language keys for dynamic lookup
-LANGUAGE_KEYS = [
-    "python",
-    "typescript",
-    "javascript",
-    "java",
-    "csharp",
-    "go",
-    "rust",
-    "ruby",
-    "php",
-    "swift",
-    "kotlin",
-    "scala",
-    "elixir",
-    "elm",
-    "haskell",
-    "clojure",
-    "fsharp",
-    "dart",
-    "julia",
-    "lua",
-    "r",
-    "shell",
-    "groovy",
-    "terraform",
-    "sql",
-    "html",
-]
+# Registry of available language keys for dynamic lookup (loaded from YAML)
+LANGUAGE_KEYS = LanguageRegistry.get_supported_languages()
 
 
 def _load_pipelines() -> dict[str, Any]:

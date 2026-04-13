@@ -33,12 +33,6 @@ from promptosaurus.questions.base.spec_handler import (
 )
 
 # Module-level YAML instance with proper indentation for lists
-# indent(mapping=2, sequence=4, offset=2) gives us:
-# folders:
-#   - folder: backend/api
-#     language: python
-_ruamel_yaml = YAML()
-_ruamel_yaml.indent(mapping=2, sequence=4, offset=2)
 
 
 class ConfigHandler:
@@ -54,6 +48,23 @@ class ConfigHandler:
 
     DEFAULT_CONFIG_DIR = Path(".promptosaurus")
     DEFAULT_CONFIG_FILE = ".promptosaurus.yaml"
+
+    _yaml_instance: YAML | None = None
+
+    @classmethod
+    def _get_yaml(cls) -> YAML:
+        """Get configured YAML instance for reading and writing config files.
+
+        Uses ruamel.yaml with proper indentation for lists. The instance
+        is created once and cached for reuse.
+
+        Returns:
+            Configured YAML instance.
+        """
+        if cls._yaml_instance is None:
+            cls._yaml_instance = YAML()
+            cls._yaml_instance.indent(mapping=2, sequence=4, offset=2)
+        return cls._yaml_instance
 
     @classmethod
     def get_config_path(cls, config_dir: Path | None = None) -> Path:
@@ -109,7 +120,7 @@ class ConfigHandler:
             return {}
 
         with open(config_path, encoding="utf-8") as f:
-            return _ruamel_yaml.load(f) or {}
+            return cls._get_yaml().load(f) or {}
 
     @classmethod
     def save_config(cls, config: dict[str, Any], config_path: Path | None = None) -> None:
@@ -130,7 +141,7 @@ class ConfigHandler:
 
         with open(config_path, "w", encoding="utf-8") as f:
             # Use ruamel.yaml with proper list indentation
-            _ruamel_yaml.dump(config, f)
+            cls._get_yaml().dump(config, f)
 
     @classmethod
     def config_exists(cls, config_path: Path | None = None) -> bool:
@@ -146,42 +157,55 @@ class ConfigHandler:
             config_path = cls.get_config_path()
         return config_path.exists()
 
+    # Template for default configuration (single-language)
 
-# Template for default configuration (single-language)
-DEFAULT_CONFIG_TEMPLATE = {
-    "version": "1.0",
-    "repository": {
-        "type": "single-language",
-        "mappings": {},
-    },
-    "spec": {
-        "language": "",
-        "runtime": "",
-        "package_manager": "",
-        "test_framework": "",
-        "linter": "",
-        "linters": [],  # List of linters for advanced templating
-        "formatter": "",
-        "coverage": {
-            "line": 80,
-            "branch": 70,
-            "function": 90,
-            "statement": 85,
-            "mutation": 80,
-            "path": 60,
-        },
-    },
-}
+    @classmethod
+    def get_default_single_language_template(cls) -> dict[str, Any]:
+        """Get default configuration template for single-language repositories.
 
-# Template for multi-language-monorepo configuration
-DEFAULT_MULTI_LANGUAGE_CONFIG_TEMPLATE = {
-    "version": "1.0",
-    "repository": {
-        "type": "multi-language-monorepo",
-        "mappings": {},
-    },
-    "spec": [],  # List of folder specs for multi-language-monorepo
-}
+        Returns:
+            Dictionary with default single-language configuration structure.
+        """
+        return {
+            "version": "1.0",
+            "repository": {
+                "type": "single-language",
+                "mappings": {},
+            },
+            "spec": {
+                "language": "",
+                "runtime": "",
+                "package_manager": "",
+                "test_framework": "",
+                "linter": "",
+                "linters": [],  # List of linters for advanced templating
+                "formatter": "",
+                "coverage": {
+                    "line": 80,
+                    "branch": 70,
+                    "function": 90,
+                    "statement": 85,
+                    "mutation": 80,
+                    "path": 60,
+                },
+            },
+        }
+
+    @classmethod
+    def get_default_multi_language_template(cls) -> dict[str, Any]:
+        """Get default configuration template for multi-language monorepo.
+
+        Returns:
+            Dictionary with default multi-language-monorepo configuration structure.
+        """
+        return {
+            "version": "1.0",
+            "repository": {
+                "type": "multi-language-monorepo",
+                "mappings": {},
+            },
+            "spec": [],  # List of folder specs for multi-language-monorepo
+        }
 
 
 def create_default_config(language: str, **kwargs) -> dict[str, Any]:
@@ -209,13 +233,13 @@ def create_default_config(language: str, **kwargs) -> dict[str, Any]:
 
     if repo_type == "single-language":
         # For single-language, use the handler to create spec
-        config: dict[str, Any] = DEFAULT_CONFIG_TEMPLATE.copy()
+        config: dict[str, Any] = ConfigHandler.get_default_single_language_template()
         config["repository"]["type"] = repo_type
         config["spec"] = handler.create_spec(language, **kwargs)
         return config
     else:
         # For multi-language-monorepo, create empty config with spec as list
-        config = DEFAULT_MULTI_LANGUAGE_CONFIG_TEMPLATE.copy()
+        config = ConfigHandler.get_default_multi_language_template()
         config["repository"]["type"] = repo_type
         config["spec"] = handler.create_spec()
         return config
@@ -234,7 +258,7 @@ def create_multi_language_config(
     Returns:
         Configuration dictionary with folder specs.
     """
-    config: dict[str, Any] = DEFAULT_MULTI_LANGUAGE_CONFIG_TEMPLATE.copy()
+    config: dict[str, Any] = ConfigHandler.get_default_multi_language_template()
 
     # Apply any kwargs to the config
     for key, value in kwargs.items():
