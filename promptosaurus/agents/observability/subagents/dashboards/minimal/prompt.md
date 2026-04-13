@@ -1,6 +1,7 @@
 ---
 name: observability-dashboards-subagent
 description: observability dashboards subagent
+mode: subagent
 ---
 
 # Observability Dashboards Subagent (Minimal)

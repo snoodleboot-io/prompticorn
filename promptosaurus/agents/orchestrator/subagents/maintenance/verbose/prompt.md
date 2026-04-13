@@ -5,6 +5,7 @@ name: maintenance
 variant: verbose
 version: 1.0.0
 description: Comprehensive maintenance workflow coordination for production-ready systems
+mode: subagent
 workflows:
   - code-quality-maintenance-workflow
   - coverage-improvement-maintenance-workflow

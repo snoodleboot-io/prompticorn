@@ -1,6 +1,7 @@
 ---
 name: data-model
 description: Design database schema and data models
+mode: subagent
 tools: [read, write]
 workflows:
   - data-model-workflow

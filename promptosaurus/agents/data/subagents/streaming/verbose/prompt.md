@@ -1,6 +1,7 @@
 ---
 name: data-streaming-subagent
 description: data streaming subagent
+mode: subagent
 ---
 
 # Data Streaming Subagent (Verbose)

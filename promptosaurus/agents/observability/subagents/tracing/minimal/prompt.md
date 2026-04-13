@@ -1,6 +1,7 @@
 ---
 name: observability-tracing-subagent
 description: observability tracing subagent
+mode: subagent
 ---
 
 # Observability Tracing Subagent (Minimal)

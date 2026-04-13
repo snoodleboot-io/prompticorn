@@ -1,6 +1,7 @@
 ---
 name: terraform-&-iac
 description: terraform & iac
+mode: subagent
 ---
 
 ## Purpose

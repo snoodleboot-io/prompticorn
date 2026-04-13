@@ -1,6 +1,7 @@
 ---
 name: ml-evaluation-expert-minimal
 description: Quick guide for ML model evaluation and validation
+mode: subagent
 permissions:
   read:
     '*': allow

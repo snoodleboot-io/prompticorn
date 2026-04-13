@@ -1,6 +1,7 @@
 ---
 name: model-deployment-&-serving
 description: model deployment & serving
+mode: subagent
 ---
 
 ## Purpose

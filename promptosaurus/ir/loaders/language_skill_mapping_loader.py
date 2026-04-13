@@ -23,7 +23,7 @@ class LanguageSkillMappingLoader:
         True
     """
 
-    def __init__(self, mapping_file: Path | str = "language_skill_mapping.yaml"):
+    def __init__(self, mapping_file: Path | str = "promptosaurus/configurations/language_skill_mapping.yaml"):
         """Initialize with path to mapping file.
 
         Args:

@@ -5,6 +5,7 @@ name: devops
 variant: verbose
 version: 1.0.0
 description: CI/CD, Docker, env config, deployment automation with examples
+mode: subagent
 tools: [read]
 ---
 

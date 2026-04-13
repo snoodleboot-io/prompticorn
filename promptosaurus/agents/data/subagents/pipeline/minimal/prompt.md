@@ -1,6 +1,7 @@
 ---
 name: data-pipeline-subagent
 description: data pipeline subagent
+mode: subagent
 ---
 
 # Data Pipeline Subagent (Minimal)

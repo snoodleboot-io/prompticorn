@@ -1,6 +1,7 @@
 ---
 name: migration
 description: Code - migration
+mode: subagent
 workflows:
   - migration-workflow
 ---

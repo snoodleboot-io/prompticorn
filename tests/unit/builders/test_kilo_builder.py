@@ -94,17 +94,6 @@ class TestKiloBuilderFrontmatter:
         frontmatter = builder._build_frontmatter(agent)
         assert frontmatter["description"] == "My Code Agent"
 
-    def test_frontmatter_contains_model(self) -> None:
-        """Test frontmatter includes default model."""
-        agent = Agent(
-            name="code",
-            description="Code agent",
-            system_prompt="You are a code assistant",
-        )
-        builder = KiloBuilder()
-        frontmatter = builder._build_frontmatter(agent)
-        assert frontmatter["model"] == "anthropic/claude-opus-4-1"
-
     def test_frontmatter_contains_state_management(self) -> None:
         """Test frontmatter includes state management path."""
         agent = Agent(
@@ -126,7 +115,7 @@ class TestKiloBuilderFrontmatter:
         builder = KiloBuilder()
         frontmatter = builder._build_frontmatter(agent)
 
-        required_keys = {"name", "description", "model", "state_management"}
+        required_keys = {"name", "description", "state_management"}
         assert set(frontmatter.keys()) == required_keys
 
 

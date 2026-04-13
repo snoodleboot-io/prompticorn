@@ -1,6 +1,7 @@
 ---
 name: product
 description: Drive product strategy, requirements, roadmap planning, and metrics
+mode: primary
 permissions:
   read:
     '*': allow

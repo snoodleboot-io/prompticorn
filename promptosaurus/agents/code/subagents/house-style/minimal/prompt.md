@@ -1,6 +1,7 @@
 ---
 name: house-style
 description: Code - house-style
+mode: subagent
 tools: [read, write]
 workflows:
   - house-style-workflow

@@ -1,12 +1,12 @@
 ---
 name: review
 description: Code, performance, and accessibility reviews
+mode: all
 permissions:
   read:
     '*': allow
-  bash: allow
   edit:
-    \.promptosaurus/sessions/.*\.md$: allow
+    \.promptosaurus/reports/review/.*\.md$: allow
     '*': deny
 ---
 

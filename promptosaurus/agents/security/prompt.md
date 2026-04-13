@@ -1,12 +1,14 @@
 ---
 name: security
 description: Design secure systems, threat modeling, vulnerability assessment, and compliance
+mode: all
 permissions:
   read:
     '*': allow
-  edit:
-    '*': allow
   bash: allow
+  edit:
+    (\.promptosaurus/sessions/.*\.md$|\.promptosaurus/reports/security/.*\.md$): allow
+    '*': deny
 ---
 
 # Security Engineer Agent

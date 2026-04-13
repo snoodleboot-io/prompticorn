@@ -1,6 +1,7 @@
 ---
 name: data
 description: Design data pipelines, warehouses, and data quality systems
+mode: primary
 permissions:
   read:
     '*': allow

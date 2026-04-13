@@ -5,6 +5,7 @@ name: docs
 variant: verbose
 version: 1.0.0
 description: Generate and improve documentation with detailed examples
+mode: subagent
 tools: [write]
 workflows:
   - docs-workflow

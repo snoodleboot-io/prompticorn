@@ -1,7 +1,8 @@
 ---
 name: review
 description: Compliance - review
-tools: [bash, read, write]
+mode: subagent
+tools: [read]
 workflows:
   - review-workflow
 ---

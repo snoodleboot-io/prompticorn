@@ -1,6 +1,7 @@
 ---
 name: compliance-auditor-verbose
 description: Comprehensive compliance framework and audit procedures
+mode: subagent
 permissions:
   read:
     '*': allow

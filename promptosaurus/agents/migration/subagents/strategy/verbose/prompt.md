@@ -1,6 +1,7 @@
 ---
 name: strategy
 description: Migration - strategy
+mode: subagent
 tools: [bash, read]
 workflows:
   - strategy-workflow

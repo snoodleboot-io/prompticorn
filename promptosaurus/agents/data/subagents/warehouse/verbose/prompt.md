@@ -1,6 +1,7 @@
 ---
 name: data-warehouse-subagent
 description: data warehouse subagent
+mode: subagent
 ---
 
 # Data Warehouse Subagent (Verbose)

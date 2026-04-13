@@ -5,6 +5,7 @@ name: meta
 variant: verbose
 version: 1.0.0
 description: Multi-step task coordination and workflow management with examples
+mode: subagent
 workflows:
   - meta-workflow
 ---

@@ -1,6 +1,7 @@
 ---
 name: incident-on-call-subagent
 description: incident on call subagent
+mode: subagent
 ---
 
 # Incident On-Call Subagent (Minimal)

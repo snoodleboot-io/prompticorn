@@ -2,6 +2,7 @@
 name: code-boilerplate-verbose
 version: 1.0.0
 description: Detailed boilerplate generation with examples and templates
+mode: subagent
 tags: [code, boilerplate, verbose]
 tools: [read]
 ---

@@ -1,6 +1,7 @@
 ---
 name: security-architecture-reviewer-verbose
 description: Deep security architecture analysis with best practices
+mode: subagent
 permissions:
   read:
     '*': allow

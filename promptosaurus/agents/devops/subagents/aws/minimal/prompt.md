@@ -1,6 +1,7 @@
 ---
 name: aws-infrastructure
 description: aws infrastructure
+mode: subagent
 ---
 
 ## Purpose

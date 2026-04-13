@@ -2,6 +2,7 @@
 name: code-feature-minimal
 version: 1.0.0
 description: Minimal feature implementation instructions
+mode: subagent
 tags: [code, feature, minimal]
 tools: [read]
 ---

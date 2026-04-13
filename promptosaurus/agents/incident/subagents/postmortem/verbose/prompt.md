@@ -1,6 +1,7 @@
 ---
 name: incident-postmortem-subagent
 description: incident postmortem subagent
+mode: subagent
 ---
 
 # Incident Postmortem Subagent (Verbose)

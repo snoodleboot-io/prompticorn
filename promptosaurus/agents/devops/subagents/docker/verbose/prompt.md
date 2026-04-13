@@ -1,6 +1,7 @@
 ---
 name: docker-&-containerization
 description: docker & containerization
+mode: subagent
 ---
 
 ## Purpose

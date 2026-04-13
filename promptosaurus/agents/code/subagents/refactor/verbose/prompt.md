@@ -1,6 +1,7 @@
 ---
 name: refactor
 description: Code - refactor
+mode: subagent
 workflows:
   - refactor-workflow
 ---

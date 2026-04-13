@@ -1,6 +1,7 @@
 ---
 name: web-accessibility
 description: web accessibility
+mode: subagent
 ---
 
 ## Purpose

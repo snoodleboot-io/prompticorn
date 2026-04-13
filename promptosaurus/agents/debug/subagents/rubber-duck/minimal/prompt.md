@@ -2,6 +2,7 @@
 name: debug-rubber-duck-minimal
 version: 1.0.0
 description: Minimal rubber duck debugging instructions
+mode: subagent
 tags: [debug, rubber-duck, minimal]
 ---
 

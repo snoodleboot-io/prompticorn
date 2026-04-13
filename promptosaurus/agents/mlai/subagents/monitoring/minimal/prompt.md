@@ -1,6 +1,7 @@
 ---
 name: model-monitoring-&-drift-detection
 description: model monitoring & drift detection
+mode: subagent
 ---
 
 ## Purpose

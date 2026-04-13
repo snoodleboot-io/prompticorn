@@ -1,6 +1,7 @@
 ---
 name: incident-triage-subagent
 description: incident triage subagent
+mode: subagent
 ---
 
 # Incident Triage Subagent (Verbose)

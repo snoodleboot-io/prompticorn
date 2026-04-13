@@ -1,12 +1,12 @@
 ---
 name: debug
 description: Diagnose and fix bugs, issues, and errors
-model: anthropic/claude-opus-4-1
+mode: all
 state_management: .promptosaurus/sessions/
 permission:
   read: {'*': 'allow'}
-  edit: {'*': 'allow'}
   bash: allow
+  edit: {'(\\.promptosaurus/sessions/.*\\.md$|\\.promptosaurus/reports/debug/.*\\.md$)': 'allow', '*': 'deny'}
 ---
 
 # System Prompt
@@ -17,38 +17,15 @@ Use this mode when diagnosing bugs, crashes, or unexpected behavior.
 
 # Skills
 
-- test-coverage-categories
-- test-mocking-rules
 - feature-planning
-- mermaid-erd-creation
-- test-aaa-structure
-- data-model-discovery
 - post-implementation-checklist
-- incremental-implementation
 
 # Workflows
 
-- boilerplate-workflow
-- log-analysis-workflow
-- data-model-workflow
-- meta-workflow
+- feature-workflow
+- review-workflow
 - refactor-workflow
 - migration-workflow
-- root-cause-workflow
-- task-breakdown-workflow
-- accessibility-workflow
-- review-workflow
-- code-workflow
-- docs-workflow
-- decision-log-workflow
-- strategy-workflow
-- performance-workflow
-- feature-workflow
-- house-style-workflow
-- testing-workflow
-- dependency-upgrade-workflow
-- scaffold-workflow
-- strategy-for-applications-workflow
 
 # Subagents
 

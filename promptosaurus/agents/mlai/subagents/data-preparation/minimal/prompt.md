@@ -1,6 +1,7 @@
 ---
 name: data-preparation-&-feature-engineering
 description: data preparation & feature engineering
+mode: subagent
 ---
 
 ## Purpose

@@ -1,7 +1,8 @@
 ---
 name: review
 description: Security - review
-tools: [bash, read, write]
+mode: subagent
+tools: [bash, read]
 workflows:
   - review-workflow
 ---

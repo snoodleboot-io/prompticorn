@@ -1,6 +1,7 @@
 ---
 name: mlai
 description: Design machine learning pipelines, model training, deployment, and inference systems with specialized expertise
+mode: primary
 permissions:
   read:
     '*': allow

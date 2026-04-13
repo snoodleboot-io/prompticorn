@@ -1,6 +1,7 @@
 ---
 name: optimization-strategies
 description: optimization strategies
+mode: subagent
 ---
 
 ## Purpose

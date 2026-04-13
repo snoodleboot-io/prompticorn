@@ -1,6 +1,7 @@
 ---
 name: observability-alerting-subagent
 description: observability alerting subagent
+mode: subagent
 ---
 
 # Observability Alerting Subagent (Minimal)

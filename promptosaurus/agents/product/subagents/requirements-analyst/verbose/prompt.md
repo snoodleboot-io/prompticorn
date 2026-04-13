@@ -1,6 +1,7 @@
 ---
 name: requirements-analyst-verbose
 description: Comprehensive requirements analysis with detailed frameworks and methodologies
+mode: subagent
 permissions:
   read:
     '*': allow

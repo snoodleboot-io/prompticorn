@@ -1,6 +1,7 @@
 ---
 name: observability-metrics-subagent
 description: observability metrics subagent
+mode: subagent
 ---
 
 # Observability Metrics Subagent (Verbose)

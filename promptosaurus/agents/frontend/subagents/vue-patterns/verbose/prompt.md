@@ -1,6 +1,7 @@
 ---
 name: vue.js-patterns
 description: vue.js patterns
+mode: subagent
 ---
 
 ## Purpose

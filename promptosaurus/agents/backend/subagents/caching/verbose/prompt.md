@@ -1,6 +1,7 @@
 ---
 name: caching-strategies
 description: caching strategies
+mode: subagent
 ---
 
 ## Purpose

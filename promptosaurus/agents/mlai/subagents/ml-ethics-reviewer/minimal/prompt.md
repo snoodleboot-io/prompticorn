@@ -1,6 +1,7 @@
 ---
 name: ml-ethics-reviewer-minimal
 description: Quick guide for ethical ML and responsible AI practices
+mode: subagent
 permissions:
   read:
     '*': allow

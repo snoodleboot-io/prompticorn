@@ -18,6 +18,7 @@ class Agent(BaseModel):
     Attributes:
         name: Unique identifier for the agent (e.g., 'code', 'architect')
         description: One-sentence description of the agent's purpose
+        mode: Agent mode - 'primary' (user-selectable), 'subagent' (delegable only), or 'all' (both)
         system_prompt: The system prompt that defines the agent's behavior
         tools: List of tool names this agent can use
         skills: List of skill names this agent can perform
@@ -25,7 +26,7 @@ class Agent(BaseModel):
         subagents: List of subagent names for hierarchical composition
         permissions: Permission rules for the agent (tool-specific)
     """
-    
+
     model_config = ConfigDict(frozen=True)
 
     name: str = Field(
@@ -35,6 +36,10 @@ class Agent(BaseModel):
     )
     description: str = Field(
         ..., min_length=1, description="One-sentence description of agent's purpose"
+    )
+    mode: str = Field(
+        default="all",
+        description="Agent mode: 'primary' (user-selectable), 'subagent' (delegable only), or 'all' (both)",
     )
     system_prompt: str = Field(
         ..., min_length=1, description="System prompt defining agent behavior"

@@ -1,7 +1,8 @@
 ---
 name: threat-model
 description: Security - threat model
-tools: [bash, read, write]
+mode: subagent
+tools: [bash, read]
 workflows:
   - threat-model-workflow
 ---

@@ -1,6 +1,7 @@
 ---
 name: roadmap-planner-verbose
 description: Comprehensive roadmap planning with advanced prioritization frameworks
+mode: subagent
 permissions:
   read:
     '*': allow

@@ -1,6 +1,7 @@
 ---
 name: microservices-architecture
 description: microservices architecture
+mode: subagent
 ---
 
 ## Purpose

@@ -1,6 +1,7 @@
 ---
 name: metrics-analytics-lead-verbose
 description: Comprehensive metrics framework with analytics strategy and implementation
+mode: subagent
 permissions:
   read:
     '*': allow

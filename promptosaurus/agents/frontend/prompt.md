@@ -1,6 +1,7 @@
 ---
 name: frontend
 description: Build accessible, performant user interfaces for web and mobile platforms
+mode: primary
 permissions:
   read:
     '*': allow

@@ -5,6 +5,7 @@ name: testing
 variant: minimal
 version: 1.0.0
 description: Generate tests for code
+mode: subagent
 tools: [read, write]
 workflows:
   - testing-workflow

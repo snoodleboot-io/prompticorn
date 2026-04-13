@@ -2,6 +2,7 @@
 name: debug-root-cause-verbose
 version: 1.0.0
 description: Detailed root cause analysis methodology with examples
+mode: subagent
 tags: [debug, root-cause, verbose]
 tools: [bash]
 ---

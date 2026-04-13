@@ -1,7 +1,8 @@
 ---
 name: code
 description: Review - code
-tools: [bash, read]
+mode: subagent
+tools: [read]
 workflows:
   - code-workflow
 ---

@@ -1,6 +1,7 @@
 ---
 name: mlops-engineer-minimal
 description: Quick MLOps guidance for deployment and infrastructure
+mode: subagent
 permissions:
   read:
     '*': allow

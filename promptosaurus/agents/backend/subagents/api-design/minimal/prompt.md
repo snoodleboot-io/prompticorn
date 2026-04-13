@@ -1,6 +1,7 @@
 ---
 name: api-design-patterns
 description: api design patterns
+mode: subagent
 ---
 
 ## Purpose

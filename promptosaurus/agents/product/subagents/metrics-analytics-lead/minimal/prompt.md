@@ -1,6 +1,7 @@
 ---
 name: metrics-analytics-lead-minimal
 description: KPIs, OKRs, and analytics implementation
+mode: subagent
 permissions:
   read:
     '*': allow

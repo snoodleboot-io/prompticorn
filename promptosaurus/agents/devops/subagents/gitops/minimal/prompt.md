@@ -1,6 +1,7 @@
 ---
 name: gitops-&-deployment-automation
 description: gitops & deployment automation
+mode: subagent
 ---
 
 ## Purpose

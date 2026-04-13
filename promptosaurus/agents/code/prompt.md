@@ -1,6 +1,7 @@
 ---
 name: code
 description: Implement features and make direct code changes
+mode: all
 permissions:
   read:
     '*': allow

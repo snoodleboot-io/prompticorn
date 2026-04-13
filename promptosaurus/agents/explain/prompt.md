@@ -1,10 +1,10 @@
 ---
 name: explain
 description: Code walkthroughs and onboarding assistance
+mode: all
 permissions:
   read:
     '*': allow
-  bash: allow
   edit:
     \.promptosaurus/sessions/.*\.md$: allow
     '*': deny

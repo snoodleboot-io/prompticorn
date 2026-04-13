@@ -1,6 +1,7 @@
 ---
 name: incident
 description: Manage incident response, triage, postmortems, and on-call processes
+mode: primary
 permissions:
   read:
     '*': allow

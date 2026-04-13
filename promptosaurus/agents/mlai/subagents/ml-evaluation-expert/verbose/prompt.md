@@ -1,6 +1,7 @@
 ---
 name: ml-evaluation-expert-verbose
 description: Comprehensive ML evaluation frameworks, metrics, and validation strategies
+mode: subagent
 permissions:
   read:
     '*': allow

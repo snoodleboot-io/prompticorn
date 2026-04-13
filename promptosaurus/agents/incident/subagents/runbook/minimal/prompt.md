@@ -1,6 +1,7 @@
 ---
 name: incident-runbook-subagent
 description: incident runbook subagent
+mode: subagent
 ---
 
 # Incident Runbook Subagent (Minimal)

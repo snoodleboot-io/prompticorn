@@ -1,6 +1,7 @@
 ---
 name: migration
 description: Handle dependency upgrades and framework migrations
+mode: primary
 permissions:
   read:
     '*': allow

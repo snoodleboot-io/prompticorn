@@ -1,6 +1,7 @@
 ---
 name: bottleneck-identification
 description: bottleneck identification
+mode: subagent
 ---
 
 ## Purpose

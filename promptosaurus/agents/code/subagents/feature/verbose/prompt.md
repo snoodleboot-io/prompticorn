@@ -2,6 +2,7 @@
 name: code-feature-verbose
 version: 1.0.0
 description: Detailed feature implementation guide with examples
+mode: subagent
 tags: [code, feature, verbose]
 tools: [read]
 ---

@@ -1,7 +1,8 @@
 ---
 name: accessibility
 description: Review - accessibility
-tools: [bash, read]
+mode: subagent
+tools: [read]
 workflows:
   - accessibility-workflow
 ---

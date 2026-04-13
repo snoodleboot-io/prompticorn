@@ -5,6 +5,7 @@ name: maintenance
 variant: minimal
 version: 1.0.0
 description: Coordinate routine maintenance workflows for code quality and operational excellence
+mode: subagent
 workflows:
   - code-quality-maintenance-workflow
   - coverage-improvement-maintenance-workflow

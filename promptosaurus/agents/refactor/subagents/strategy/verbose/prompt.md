@@ -1,6 +1,7 @@
 ---
 name: strategy
 description: Refactor - strategy
+mode: subagent
 tools: [bash, read, write]
 workflows:
   - strategy-workflow

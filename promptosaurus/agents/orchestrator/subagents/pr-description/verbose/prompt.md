@@ -5,6 +5,7 @@ name: pr-description
 variant: verbose
 version: 1.0.0
 description: Generate PR descriptions from git context with detailed examples
+mode: subagent
 tools: [bash]
 ---
 

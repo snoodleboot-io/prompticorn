@@ -1,6 +1,7 @@
 ---
 name: application-profiling-tools
 description: application profiling tools
+mode: subagent
 ---
 
 ## Purpose

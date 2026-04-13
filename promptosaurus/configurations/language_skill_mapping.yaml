@@ -1,0 +1,296 @@
+# Language-Skill-Workflow Mapping Registry
+# Language-specific overrides for skills and workflows
+# Last updated: 2026-04-12
+#
+# IMPORTANT: Most skills/workflows are defined in agent_skill_mapping.yaml
+# This file is ONLY for language-specific overrides (rare cases)
+#
+# Default Resolution Priority:
+# 1. agent_skill_mapping.yaml - Base skills for agent (language-agnostic)
+# 2. language_skill_mapping.yaml - Language+agent overrides (THIS FILE)
+# 3. Fallback - Original agent skills/workflows
+#
+# Example of when to use language overrides:
+# rust/architect:
+#   skills:
+#     - architecture-documentation
+#     - rust-specific-ownership-skill  # ONLY added for Rust
+#
+# For most cases, agent_skill_mapping.yaml is sufficient.
+
+all:
+  skills:
+  - feature-planning
+  - post-implementation-checklist
+  workflows:
+  - feature-workflow
+  - review-workflow
+  - refactor-workflow
+  - migration-workflow
+csharp:
+  skills:
+  - feature-planning
+  - incremental-implementation
+  - post-implementation-checklist
+  - test-coverage-categories
+  - test-mocking-rules
+  workflows:
+  - feature-workflow
+  - code-workflow
+  - testing-workflow
+  - refactor-workflow
+  - review-workflow
+csharp/code:
+  skills:
+  - feature-planning
+  - incremental-implementation
+  - post-implementation-checklist
+  workflows:
+  - feature-workflow
+  - code-workflow
+csharp/test:
+  skills:
+  - test-coverage-categories
+  - test-mocking-rules
+  workflows:
+  - testing-workflow
+go:
+  skills:
+  - feature-planning
+  - incremental-implementation
+  - post-implementation-checklist
+  - test-coverage-categories
+  - test-mocking-rules
+  workflows:
+  - feature-workflow
+  - code-workflow
+  - testing-workflow
+  - refactor-workflow
+  - review-workflow
+  - scaffold-workflow
+go/architect:
+  skills:
+  - data-model-discovery
+  - mermaid-erd-creation
+  workflows:
+  - data-model-workflow
+go/code:
+  skills:
+  - feature-planning
+  - incremental-implementation
+  - post-implementation-checklist
+  workflows:
+  - feature-workflow
+  - code-workflow
+go/test:
+  skills:
+  - test-coverage-categories
+  - test-mocking-rules
+  workflows:
+  - testing-workflow
+java:
+  skills:
+  - feature-planning
+  - incremental-implementation
+  - post-implementation-checklist
+  - test-coverage-categories
+  - test-mocking-rules
+  workflows:
+  - feature-workflow
+  - code-workflow
+  - testing-workflow
+  - refactor-workflow
+  - review-workflow
+  - scaffold-workflow
+java/architect:
+  skills:
+  - data-model-discovery
+  - mermaid-erd-creation
+  workflows:
+  - data-model-workflow
+java/code:
+  skills:
+  - feature-planning
+  - incremental-implementation
+  - post-implementation-checklist
+  workflows:
+  - feature-workflow
+  - code-workflow
+java/test:
+  skills:
+  - test-coverage-categories
+  - test-mocking-rules
+  workflows:
+  - testing-workflow
+javascript:
+  skills:
+  - feature-planning
+  - incremental-implementation
+  - post-implementation-checklist
+  - test-aaa-structure
+  - test-coverage-categories
+  - test-mocking-rules
+  workflows:
+  - feature-workflow
+  - testing-workflow
+  - code-workflow
+  - refactor-workflow
+  - review-workflow
+  - boilerplate-workflow
+  - accessibility-workflow
+  - scaffold-workflow
+javascript/code:
+  skills:
+  - feature-planning
+  - incremental-implementation
+  - post-implementation-checklist
+  workflows:
+  - feature-workflow
+  - code-workflow
+  - testing-workflow
+javascript/test:
+  skills:
+  - test-aaa-structure
+  - test-coverage-categories
+  - test-mocking-rules
+  workflows:
+  - testing-workflow
+product:
+  skills:
+  - user-needs-discovery
+  - requirements-specification
+  - success-metrics-definition
+  - roadmap-prioritization
+  - user-testing-methods
+  - competitor-analysis
+  - ux-writing-guidelines
+  - launch-readiness-checklist
+  - stakeholder-communication
+  - product-analytics-setup
+  workflows:
+  - requirements-gathering-workflow
+  - roadmap-planning-workflow
+  - feature-prioritization-workflow
+  - user-research-guide
+  - ux-validation-workflow
+  - analytics-setup-workflow
+  - a-b-testing-workflow
+  - feature-launch-checklist
+rust:
+  skills:
+  - feature-planning
+  - incremental-implementation
+  - post-implementation-checklist
+  - test-coverage-categories
+  - test-mocking-rules
+  workflows:
+  - feature-workflow
+  - code-workflow
+  - testing-workflow
+  - refactor-workflow
+  - review-workflow
+rust/code:
+  skills:
+  - feature-planning
+  - incremental-implementation
+  - post-implementation-checklist
+  workflows:
+  - feature-workflow
+  - code-workflow
+rust/test:
+  skills:
+  - test-coverage-categories
+  - test-mocking-rules
+  workflows:
+  - testing-workflow
+security:
+  skills:
+  - threat-identification
+  - vulnerability-assessment
+  - secure-code-review
+  - cryptography-fundamentals
+  - authentication-design
+  - authorization-patterns
+  - api-security-hardening
+  - security-testing-strategies
+  - incident-response-planning
+  - compliance-assessment
+  - secret-management
+  - security-architecture-review
+  workflows:
+  - threat-modeling-workflow
+  - vulnerability-scanning-workflow
+  - security-testing-workflow
+  - compliance-audit-workflow
+  - incident-response-security
+  - security-hardening-checklist
+  - penetration-testing-guide
+  - security-code-review
+  - dependency-scanning-workflow
+  - secret-management-workflow
+sql:
+  skills:
+  - data-model-discovery
+  - mermaid-erd-creation
+  workflows:
+  - data-model-workflow
+typescript:
+  skills:
+  - feature-planning
+  - incremental-implementation
+  - post-implementation-checklist
+  - test-aaa-structure
+  - test-coverage-categories
+  - test-mocking-rules
+  workflows:
+  - feature-workflow
+  - testing-workflow
+  - code-workflow
+  - refactor-workflow
+  - review-workflow
+  - migration-workflow
+  - scaffold-workflow
+  - boilerplate-workflow
+  - accessibility-workflow
+  - decision-log-workflow
+  - docs-workflow
+  - house-style-workflow
+  - performance-workflow
+  - task-breakdown-workflow
+  - dependency-upgrade-workflow
+typescript/architect:
+  skills:
+  - feature-planning
+  workflows:
+  - task-breakdown-workflow
+  - scaffold-workflow
+typescript/code:
+  skills:
+  - feature-planning
+  - incremental-implementation
+  - post-implementation-checklist
+  workflows:
+  - feature-workflow
+  - code-workflow
+  - testing-workflow
+  - boilerplate-workflow
+typescript/refactor:
+  skills:
+  - feature-planning
+  - post-implementation-checklist
+  workflows:
+  - refactor-workflow
+typescript/review:
+  skills:
+  - feature-planning
+  - post-implementation-checklist
+  workflows:
+  - review-workflow
+  - performance-workflow
+typescript/test:
+  skills:
+  - test-aaa-structure
+  - test-coverage-categories
+  - test-mocking-rules
+  workflows:
+  - testing-workflow

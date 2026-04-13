@@ -1,6 +1,7 @@
 ---
 name: storage-solutions
 description: storage solutions
+mode: subagent
 ---
 
 ## Purpose

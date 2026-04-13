@@ -1,13 +1,12 @@
 ---
 name: enforcement
-description: Reviews code against established coding standards and creates change
-  requests
+description: Reviews code against established coding standards and creates change requests
+mode: primary
 permissions:
   read:
     '*': allow
-  bash: allow
   edit:
-    (docs/.*\.md$|\.promptosaurus/sessions/.*\.md$): allow
+    (\.promptosaurus/sessions/.*\.md$|\.promptosaurus/reports/enforcement/.*\.md$): allow
     '*': deny
 ---
 

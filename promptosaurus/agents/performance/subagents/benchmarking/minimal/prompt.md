@@ -1,6 +1,7 @@
 ---
 name: benchmarking-&-comparison
 description: benchmarking & comparison
+mode: subagent
 ---
 
 ## Purpose

@@ -1,6 +1,7 @@
 ---
 name: mlops-engineer-verbose
 description: Comprehensive MLOps engineering for production ML systems
+mode: subagent
 permissions:
   read:
     '*': allow

@@ -1,6 +1,7 @@
 ---
 name: refactor
 description: Improve code structure while preserving behavior
+mode: all
 permissions:
   read:
     '*': allow

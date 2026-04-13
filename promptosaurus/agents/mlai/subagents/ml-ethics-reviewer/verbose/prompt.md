@@ -1,6 +1,7 @@
 ---
 name: ml-ethics-reviewer-verbose
 description: Comprehensive ethical ML frameworks, bias detection, and responsible AI governance
+mode: subagent
 permissions:
   read:
     '*': allow

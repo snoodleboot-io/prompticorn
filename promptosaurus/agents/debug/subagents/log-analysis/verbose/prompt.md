@@ -2,6 +2,7 @@
 name: debug-log-analysis-verbose
 version: 1.0.0
 description: Detailed log analysis methodology with examples
+mode: subagent
 tags: [debug, logs, verbose]
 ---
 

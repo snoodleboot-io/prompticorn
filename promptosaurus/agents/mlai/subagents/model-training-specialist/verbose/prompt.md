@@ -1,6 +1,7 @@
 ---
 name: model-training-specialist-verbose
 description: Comprehensive ML model training, optimization, and advanced techniques
+mode: subagent
 permissions:
   read:
     '*': allow

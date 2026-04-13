@@ -5,6 +5,7 @@ name: docs
 variant: minimal
 version: 1.0.0
 description: Generate and improve documentation
+mode: subagent
 tools: [write]
 workflows:
   - docs-workflow

@@ -1,6 +1,7 @@
 ---
 name: task-breakdown
 description: Break down features into discrete, deliverable tasks
+mode: subagent
 workflows:
   - task-breakdown-workflow
 ---

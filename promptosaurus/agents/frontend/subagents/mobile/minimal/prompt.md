@@ -1,6 +1,7 @@
 ---
 name: mobile-app-development
 description: mobile app development
+mode: subagent
 ---
 
 ## Purpose

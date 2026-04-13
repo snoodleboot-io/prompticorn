@@ -1,6 +1,7 @@
 ---
 name: requirements-analyst-minimal
 description: Concise requirements gathering and user story creation
+mode: subagent
 permissions:
   read:
     '*': allow

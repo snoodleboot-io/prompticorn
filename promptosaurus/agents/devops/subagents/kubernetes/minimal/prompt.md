@@ -1,6 +1,7 @@
 ---
 name: kubernetes-orchestration
 description: kubernetes orchestration
+mode: subagent
 ---
 
 ## Purpose

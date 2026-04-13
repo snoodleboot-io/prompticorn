@@ -1,7 +1,8 @@
 ---
 name: performance
 description: Review - performance
-tools: [bash, read]
+mode: subagent
+tools: [read]
 workflows:
   - performance-workflow
 ---

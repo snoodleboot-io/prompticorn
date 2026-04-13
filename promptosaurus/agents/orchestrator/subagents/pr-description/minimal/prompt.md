@@ -5,6 +5,7 @@ name: pr-description
 variant: minimal
 version: 1.0.0
 description: Generate PR descriptions from git context
+mode: subagent
 tools: [bash]
 ---
 

@@ -2,6 +2,7 @@
 name: code-boilerplate-minimal
 version: 1.0.0
 description: Minimal boilerplate generation instructions
+mode: subagent
 tags: [code, boilerplate, minimal]
 tools: [read]
 ---

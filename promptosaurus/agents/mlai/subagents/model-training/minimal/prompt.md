@@ -1,6 +1,7 @@
 ---
 name: model-training-&-tuning
 description: model training & tuning
+mode: subagent
 ---
 
 ## Purpose

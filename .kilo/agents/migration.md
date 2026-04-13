@@ -1,7 +1,7 @@
 ---
 name: migration
 description: Handle dependency upgrades and framework migrations
-model: anthropic/claude-opus-4-1
+mode: primary
 state_management: .promptosaurus/sessions/
 permission:
   read: {'*': 'allow'}
@@ -17,38 +17,15 @@ Use this mode when upgrading dependencies or migrating between frameworks.
 
 # Skills
 
-- test-coverage-categories
-- test-mocking-rules
 - feature-planning
-- mermaid-erd-creation
-- test-aaa-structure
-- data-model-discovery
 - post-implementation-checklist
-- incremental-implementation
 
 # Workflows
 
-- boilerplate-workflow
-- log-analysis-workflow
-- data-model-workflow
-- meta-workflow
+- feature-workflow
+- review-workflow
 - refactor-workflow
 - migration-workflow
-- root-cause-workflow
-- task-breakdown-workflow
-- accessibility-workflow
-- review-workflow
-- code-workflow
-- docs-workflow
-- decision-log-workflow
-- strategy-workflow
-- performance-workflow
-- feature-workflow
-- house-style-workflow
-- testing-workflow
-- dependency-upgrade-workflow
-- scaffold-workflow
-- strategy-for-applications-workflow
 
 # Subagents
 

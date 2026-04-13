@@ -1,6 +1,7 @@
 ---
 name: threat-modeling-expert-minimal
 description: STRIDE methodology, threat trees, attack surfaces
+mode: subagent
 permissions:
   read:
     '*': allow

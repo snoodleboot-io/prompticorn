@@ -1,6 +1,7 @@
 ---
 name: threat-modeling-expert-verbose
 description: Comprehensive threat modeling with examples and frameworks
+mode: subagent
 permissions:
   read:
     '*': allow

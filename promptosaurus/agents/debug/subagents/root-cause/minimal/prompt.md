@@ -2,6 +2,7 @@
 name: debug-root-cause-minimal
 version: 1.0.0
 description: Minimal root cause analysis debugging instructions
+mode: subagent
 tags: [debug, root-cause, minimal]
 tools: [bash]
 ---

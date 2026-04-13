@@ -1,6 +1,7 @@
 ---
 name: roadmap-planner-minimal
 description: Strategic roadmap planning and prioritization
+mode: subagent
 permissions:
   read:
     '*': allow

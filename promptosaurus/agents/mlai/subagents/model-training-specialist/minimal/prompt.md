@@ -1,6 +1,7 @@
 ---
 name: model-training-specialist-minimal
 description: Quick guide for ML model training and optimization
+mode: subagent
 permissions:
   read:
     '*': allow

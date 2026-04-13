@@ -1,6 +1,7 @@
 ---
 name: observability
 description: Design monitoring, logging, tracing, and alerting systems
+mode: primary
 permissions:
   read:
     '*': allow

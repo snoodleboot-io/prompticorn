@@ -1,6 +1,7 @@
 ---
 name: scaffold
 description: Architect - scaffold
+mode: subagent
 workflows:
   - scaffold-workflow
 ---

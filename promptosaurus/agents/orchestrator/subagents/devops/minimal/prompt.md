@@ -5,6 +5,7 @@ name: devops
 variant: minimal
 version: 1.0.0
 description: CI/CD, Docker, env config, deployment automation
+mode: subagent
 tools: [read]
 ---
 

@@ -278,6 +278,7 @@ class RegistryDiscovery:
 
         name = prompt_data.get("name") or agent_name
         description = prompt_data.get("description", "")
+        mode = prompt_data.get("mode", "all")
         system_prompt = prompt_data.get("system_prompt", "")
         tools = prompt_data.get("tools", [])
         skills = prompt_data.get("skills", [])
@@ -300,6 +301,7 @@ class RegistryDiscovery:
         agent = Agent(
             name=name or agent_name,
             description=description or f"Agent: {agent_name}",
+            mode=mode,
             system_prompt=system_prompt or "",
             tools=tools if isinstance(tools, list) else [],
             skills=skills if isinstance(skills, list) else [],
@@ -334,29 +336,21 @@ class RegistryDiscovery:
 
         name = prompt_data.get("name") or agent_name
         description = prompt_data.get("description", "")
+        mode = prompt_data.get("mode", "all")
         system_prompt = prompt_data.get("system_prompt", "")
         tools = prompt_data.get("tools", [])
         skills = prompt_data.get("skills", [])
         workflows = prompt_data.get("workflows", [])
         subagents = prompt_data.get("subagents", [])
 
-        # Extract permissions (tool-specific)
+        # Extract permissions
         permissions = prompt_data.get("permissions", None)
-
-        # Auto-discover subagents from filesystem if not in frontmatter
-        agent_dir = variant_dir.parent  # Go from variant up to agent dir
-        subagents_dir = agent_dir / "subagents"
-        if subagents_dir.is_dir():
-            discovered_subagents = set(subagents)  # Start with what's in frontmatter
-            for subagent_path in sorted(subagents_dir.iterdir()):
-                if subagent_path.is_dir() and not subagent_path.name.startswith("."):
-                    discovered_subagents.add(subagent_path.name)
-            subagents = sorted(list(discovered_subagents))
 
         # Create Agent IR model
         agent = Agent(
             name=name or agent_name,
             description=description or f"Agent: {agent_name}",
+            mode=mode,
             system_prompt=system_prompt or "",
             tools=tools if isinstance(tools, list) else [],
             skills=skills if isinstance(skills, list) else [],

@@ -2,6 +2,7 @@
 name: debug-rubber-duck-verbose
 version: 1.0.0
 description: Complete rubber duck debugging guide with Socratic questioning
+mode: subagent
 tags: [debug, rubber-duck, verbose]
 ---
 

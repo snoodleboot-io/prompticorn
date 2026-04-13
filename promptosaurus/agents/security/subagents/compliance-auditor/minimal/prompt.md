@@ -1,6 +1,7 @@
 ---
 name: compliance-auditor-minimal
 description: OWASP, GDPR, HIPAA, PCI-DSS, SOC 2 requirements
+mode: subagent
 permissions:
   read:
     '*': allow

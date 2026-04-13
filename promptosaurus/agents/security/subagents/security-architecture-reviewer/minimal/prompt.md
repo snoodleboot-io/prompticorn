@@ -1,6 +1,7 @@
 ---
 name: security-architecture-reviewer-minimal
 description: Architecture review checklist, design patterns, secure by default
+mode: subagent
 permissions:
   read:
     '*': allow

@@ -1,6 +1,7 @@
 ---
 name: data-quality-subagent
 description: data quality subagent
+mode: subagent
 ---
 
 # Data Quality Subagent (Verbose)

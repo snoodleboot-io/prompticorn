@@ -1,6 +1,7 @@
 ---
 name: devops
 description: Automate deployment, infrastructure, CI/CD pipelines, and cloud operations
+mode: primary
 permissions:
   read:
     '*': allow

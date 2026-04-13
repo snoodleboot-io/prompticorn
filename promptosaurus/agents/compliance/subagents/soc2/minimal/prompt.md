@@ -1,7 +1,8 @@
 ---
 name: soc2
 description: Compliance - soc2
-tools: [bash, read, write]
+mode: subagent
+tools: [read]
 workflows:
   - soc2-workflow
 ---

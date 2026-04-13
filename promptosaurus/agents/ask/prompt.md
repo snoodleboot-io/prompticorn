@@ -1,6 +1,7 @@
 ---
 name: ask
 description: Answer questions and provide explanations
+mode: primary
 permissions:
   read:
     '*': allow

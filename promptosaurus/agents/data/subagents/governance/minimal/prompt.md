@@ -1,6 +1,7 @@
 ---
 name: data-governance-subagent
 description: data governance subagent
+mode: subagent
 ---
 
 # Data Governance Subagent (Minimal)

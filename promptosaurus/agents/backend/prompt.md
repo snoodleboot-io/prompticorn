@@ -1,6 +1,7 @@
 ---
 name: backend
 description: Design scalable backend systems, APIs, microservices, and distributed architectures
+mode: primary
 permissions:
   read:
     '*': allow

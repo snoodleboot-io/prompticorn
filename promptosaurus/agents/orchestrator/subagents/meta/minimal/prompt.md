@@ -5,6 +5,7 @@ name: meta
 variant: minimal
 version: 1.0.0
 description: Multi-step task coordination and workflow management
+mode: subagent
 workflows:
   - meta-workflow
 ---

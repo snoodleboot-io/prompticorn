@@ -1,7 +1,8 @@
 ---
 name: gdpr
 description: Compliance - gdpr
-tools: [bash, read, write]
+mode: subagent
+tools: [read]
 workflows:
   - gdpr-workflow
 ---

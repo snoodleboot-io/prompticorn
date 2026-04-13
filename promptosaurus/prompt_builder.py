@@ -9,6 +9,7 @@ from promptosaurus.builders.base import BuildOptions
 from promptosaurus.builders.kilo_builder import KiloBuilder
 from promptosaurus.ir.models.agent import Agent
 from promptosaurus.ir.loaders.language_skill_mapping_loader import LanguageSkillMappingLoader
+from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
 
 
 class PromptBuilder:
@@ -33,11 +34,22 @@ class PromptBuilder:
         self.registry = Registry.from_discovery(agents_dir)
 
         # Initialize language skill mapping loader
-        mapping_file = Path(__file__).parent.parent / "language_skill_mapping.yaml"
+        language_mapping_file = (
+            Path(__file__).parent / "configurations" / "language_skill_mapping.yaml"
+        )
         try:
-            self.language_skill_loader = LanguageSkillMappingLoader(mapping_file)
+            self.language_skill_loader = LanguageSkillMappingLoader(language_mapping_file)
         except FileNotFoundError:
             self.language_skill_loader = None
+
+        # Initialize agent skill mapping loader (language-agnostic)
+        agent_mapping_file = (
+            Path(__file__).parent / "configurations" / "agent_skill_mapping.yaml"
+        )
+        try:
+            self.agent_skill_loader = AgentSkillMappingLoader(agent_mapping_file)
+        except FileNotFoundError:
+            self.agent_skill_loader = None
 
     def build(
         self, output: Path, config: dict[str, Any] | None = None, dry_run: bool = False
@@ -181,55 +193,70 @@ class PromptBuilder:
     def _filter_agent_for_language(
         self, agent: Agent, language: Optional[str], agent_name: Optional[str] = None
     ) -> Agent:
-        """Filter agent skills/workflows based on language.
+        """Filter agent skills/workflows based on agent and language.
 
-        Uses LanguageSkillMappingLoader to resolve which skills/workflows apply
-        to this language. For top-level agents, no subagent path is used.
+        Uses two-tier resolution system:
+        1. AgentSkillMappingLoader - language-agnostic skills/workflows for agent
+        2. LanguageSkillMappingLoader - language-specific overrides (if exist)
 
         Priority resolution:
-        1. {language}/{agent_name} - agent-level language-specific
-        2. {language} - language-level defaults
-        3. all - global defaults
-        4. No filtering if language is None
+        1. agent_skill_mapping.yaml - Base skills for agent (language-agnostic)
+        2. language_skill_mapping.yaml - Language+agent overrides (rare)
+        3. Fallback - Original agent skills/workflows (if no mappings)
 
         Args:
             agent: Agent to filter
             language: Language code (e.g., 'python', 'typescript'), or None
-
             agent_name: Full agent name (e.g., 'orchestrator/maintenance'), optional
+
+        Returns:
             New Agent instance with filtered skills and workflows, or original
-            if no language specified or mapping loader unavailable
+            if no loaders available
         """
-        # If no language or no loader, return agent unchanged
-        if not language or not self.language_skill_loader:
-            return agent
+        # Get agent-level skills/workflows (language-agnostic)
+        agent_skills = []
+        agent_workflows = []
+        
+        if self.agent_skill_loader:
+            agent_skills = self.agent_skill_loader.get_skills_for_agent(agent.name)
+            agent_workflows = self.agent_skill_loader.get_workflows_for_agent(agent.name)
 
-        # Use full agent_name as subagent path for mapping lookup (format: agent/subagent)
-        # The language mapping keys use format: {language}/{agent}/{subagent}
-        # e.g., "python/orchestrator/maintenance", so we pass the full path
-        subagent_path = agent_name if agent_name and "/" in agent_name else None
+        # Get language-specific overrides (if any)
+        language_skills = []
+        language_workflows = []
+        
+        if language and self.language_skill_loader:
+            # Use full agent_name as subagent path for mapping lookup
+            # e.g., "python/orchestrator/maintenance"
+            subagent_path = agent_name if agent_name and "/" in agent_name else None
+            
+            language_skills = self.language_skill_loader.get_skills_for_language(
+                language, subagent=subagent_path
+            )
+            language_workflows = self.language_skill_loader.get_workflows_for_language(
+                language, subagent=subagent_path
+            )
 
-        # Get filtered skills and workflows for this language
-        skills = self.language_skill_loader.get_skills_for_language(
-            language, subagent=subagent_path
-        )
-        workflows = self.language_skill_loader.get_workflows_for_language(
-            language, subagent=subagent_path
-        )
+        # Priority: language overrides > agent mapping > original
+        # Language overrides take precedence if they exist (non-empty)
+        final_skills = language_skills if language_skills else agent_skills
+        final_workflows = language_workflows if language_workflows else agent_workflows
+        
+        # If no mappings found at all, use original agent skills/workflows
+        if not final_skills:
+            final_skills = agent.skills or []
+        if not final_workflows:
+            final_workflows = agent.workflows or []
 
         # Create filtered copy of agent
-        # Convert skills and workflows to sets for efficient filtering
-        skills_set = set(skills)
-        workflows_set = set(workflows)
-
         filtered = Agent(
             name=agent.name,
             description=agent.description,
             mode=agent.mode,
             system_prompt=agent.system_prompt,
             tools=agent.tools,  # Tools never filtered (language-agnostic)
-            skills=list(skills_set),  # ASSIGN all skills from mapping
-            workflows=list(workflows_set),  # ASSIGN all workflows from mapping
+            skills=final_skills,
+            workflows=final_workflows,
             subagents=agent.subagents,  # Subagents preserved (used-as-is)
             permissions=agent.permissions,
         )

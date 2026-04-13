@@ -1,6 +1,7 @@
 ---
 name: dependency-upgrade
 description: Code - dependency-upgrade
+mode: subagent
 workflows:
   - dependency-upgrade-workflow
 ---

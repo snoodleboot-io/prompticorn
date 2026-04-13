@@ -1,6 +1,7 @@
 ---
 name: observability-logging-subagent
 description: observability logging subagent
+mode: subagent
 ---
 
 # Observability Logging Subagent (Verbose)

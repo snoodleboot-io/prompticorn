@@ -2,6 +2,7 @@
 name: debug-log-analysis-minimal
 version: 1.0.0
 description: Minimal log analysis debugging instructions
+mode: subagent
 tags: [debug, logs, minimal]
 ---
 

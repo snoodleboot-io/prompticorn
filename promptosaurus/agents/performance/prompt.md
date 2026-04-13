@@ -1,6 +1,7 @@
 ---
 name: performance
 description: Optimize application performance, identify bottlenecks, and implement benchmarking
+mode: primary
 permissions:
   read:
     '*': allow

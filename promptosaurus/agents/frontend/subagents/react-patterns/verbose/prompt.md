@@ -1,6 +1,7 @@
 ---
 name: react-patterns-&-best-practices
 description: react patterns & best practices
+mode: subagent
 ---
 
 ## Purpose

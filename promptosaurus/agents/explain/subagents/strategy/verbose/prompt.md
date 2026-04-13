@@ -1,7 +1,8 @@
 ---
 name: strategy
 description: Explain - strategy
-tools: [bash, read]
+mode: subagent
+tools: [read]
 workflows:
   - strategy-workflow
 ---

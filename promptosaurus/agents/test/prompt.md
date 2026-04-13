@@ -1,6 +1,7 @@
 ---
 name: test
 description: Write comprehensive tests with coverage-first approach
+mode: all
 permissions:
   read:
     '*': allow
