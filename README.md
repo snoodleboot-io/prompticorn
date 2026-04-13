@@ -130,7 +130,7 @@ Personas represent software development roles. Instead of generating all 25 agen
 
 **Available Personas:** Software Engineer, Architect, QA/Tester, DevOps Engineer, Security Engineer, Product Manager, Data Engineer, Data Scientist, Technical Writer
 
-**Universal Agents (Always Available):** ask, debug, explain, planning, orchestrator
+**Universal Agents (Always Available):** ask, debug, explain, plan, orchestrator
 
 ### Example: Small Startup
 

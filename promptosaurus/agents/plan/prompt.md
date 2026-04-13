@@ -1,5 +1,5 @@
 ---
-name: planning
+name: plan
 description: Develops PRDs and works with architects to create ARDs
 mode: primary
 permissions:

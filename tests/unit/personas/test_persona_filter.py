@@ -30,7 +30,7 @@ class TestPersonaFilter:
         assert "test" in enabled
         
         # Should have all universal agents
-        for universal in ["ask", "debug", "explain", "planning", "orchestrator"]:
+        for universal in ["ask", "debug", "explain", "plan", "orchestrator"]:
             assert universal in enabled, f"Missing universal agent: {universal}"
     
     def test_single_persona_qa_tester(self, registry):
@@ -45,7 +45,7 @@ class TestPersonaFilter:
         assert "code" not in enabled
         
         # Should have all universal agents
-        for universal in ["ask", "debug", "explain", "planning", "orchestrator"]:
+        for universal in ["ask", "debug", "explain", "plan", "orchestrator"]:
             assert universal in enabled, f"Missing universal agent: {universal}"
     
     def test_multiple_personas_union(self, registry):
@@ -60,7 +60,7 @@ class TestPersonaFilter:
         assert "test" in enabled
         
         # Should have all universal agents
-        for universal in ["ask", "debug", "explain", "planning", "orchestrator"]:
+        for universal in ["ask", "debug", "explain", "plan", "orchestrator"]:
             assert universal in enabled, f"Missing universal agent: {universal}"
     
     def test_architect_persona(self, registry):
@@ -72,7 +72,7 @@ class TestPersonaFilter:
         assert "architect" in enabled
         
         # Should have all universal agents
-        for universal in ["ask", "debug", "explain", "planning", "orchestrator"]:
+        for universal in ["ask", "debug", "explain", "plan", "orchestrator"]:
             assert universal in enabled
     
     def test_devops_persona_has_code(self, registry):
@@ -103,7 +103,7 @@ class TestPersonaFilter:
         enabled = pfilter.get_enabled_agents()
         
         # Should only have universal agents
-        expected_universal = {"ask", "debug", "explain", "planning", "orchestrator"}
+        expected_universal = {"ask", "debug", "explain", "plan", "orchestrator"}
         assert set(enabled) == expected_universal
     
     def test_invalid_persona_id(self, registry):

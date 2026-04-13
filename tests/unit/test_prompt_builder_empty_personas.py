@@ -33,7 +33,7 @@ class TestPromptBuilderEmptyPersonas:
                         agent_files.append(item.stem)
             
             # Expected universal agents (from personas.yaml)
-            expected_universal = {"ask", "debug", "explain", "planning", "orchestrator"}
+            expected_universal = {"ask", "debug", "explain", "plan", "orchestrator"}
             
             # Assert - Should only have universal agents
             actual_agents = set(agent_files)
