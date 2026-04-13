@@ -70,3 +70,10 @@ class PythonRuntimeQuestion(Question):
             "3.14": "Python 3.14 - Latest release with cutting-edge features and performance (recommended)",
             "pypy": "PyPy - Alternative Python implementation with JIT for faster execution",
         }
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "3.14"
+
+    config_key = "runtime"

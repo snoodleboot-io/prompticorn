@@ -65,8 +65,8 @@ class TestMonorepoConfig:
             ConfigHandler,
         )
 
-        assert "repository" in DEFAULT_MULTI_LANGUAGE_CONFIG_TEMPLATE
-        assert "spec" in DEFAULT_MULTI_LANGUAGE_CONFIG_TEMPLATE
+        assert "repository" in ConfigHandler.get_default_multi_language_template()
+        assert "spec" in ConfigHandler.get_default_multi_language_template()
         assert (
             ConfigHandler.get_default_multi_language_template()["repository"]["type"]
             == "multi-language-monorepo"

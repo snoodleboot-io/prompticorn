@@ -40,6 +40,7 @@ class PythonPackageManagerQuestion(Question):
     def option_explanations(self) -> dict[str, str]:
         """Explanations for each option."""
         return {
+            "uv": "Ultra-fast modern replacement for pip, instant installations (recommended)",
             "pip": "Simplest, built-in package manager for Python",
             "uv": "Ultra-fast modern replacement for pip, instant installations (recommended)",
             "poetry": "Dependency management with lock files, publish to PyPI",
