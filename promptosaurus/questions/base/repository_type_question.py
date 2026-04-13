@@ -1,41 +1,44 @@
-"""Question for repository structure type selection."""
+"""Question for determining repository structure type."""
 
 from promptosaurus.questions.base.question import Question
+from promptosaurus.questions.base.constants import RepositoryTypes
 
 
 class RepositoryTypeQuestion(Question):
-    """Question about repository structure."""
+    """Question for determining repository structure type.
 
-    @property
-    def key(self) -> str:
-        return "repository_type"
+    This question helps configure how language conventions are applied
+    based on whether the project uses a single language, multi-language
+    monorepo, or mixed collocation structure. The answer affects which
+    convention files are included in the prompts and how language-specific
+    settings are applied across the codebase.
 
-    @property
-    def question_text(self) -> str:
-        return "What is your repository structure?"
+    Repository structure determines:
+    - Which convention files are loaded (single vs multiple language configs)
+    - How folder-specific questions are handled
+    - Whether language settings apply globally or per-folder
 
-    @property
-    def explanation(self) -> str:
-        return """This determines how language conventions are applied.
+    Attributes:
+        question_text: The question presented to the user
+        explanation: Detailed explanation of repository types
+        options: Available repository types
+        option_explanations: Details for each option
+        default: Default selection
+        config_key: Configuration key where answer is stored
+    """
 
-Single language: One codebase (e.g., pure Python project)
-Multi-language folder: Separate folders with different languages (e.g., /frontend, /backend)
-Mixed: Multiple languages in the same folder
+    question_text = "What type of repository is this?"
+    explanation = "Choose how your codebase is structured linguistically."
 
-This affects which convention files are included in your prompts."""
+    options = [
+        RepositoryTypes.SINGLE,
+        RepositoryTypes.MULTI_MONOREPO,
+    ]
 
-    @property
-    def options(self) -> list[str]:
-        return ["single-language", "multi-language-monorepo", "mixed-collocation"]
+    option_explanations = {
+        RepositoryTypes.SINGLE: "Single language for the entire project",
+        RepositoryTypes.MULTI_MONOREPO: "Multiple languages in different folders (monorepo)",
+    }
 
-    @property
-    def option_explanations(self) -> dict[str, str]:
-        return {
-            "single-language": "Single language: One codebase (e.g., pure Python project)",
-            "multi-language-monorepo": "Multi-language folder: Separate folders with different languages (e.g., /frontend, /backend)",
-            "mixed-collocation": "Mixed: Multiple languages in the same folder",
-        }
-
-    @property
-    def default(self) -> str:
-        return "single-language"
+    default = RepositoryTypes.SINGLE
+    config_key = "repository.type"

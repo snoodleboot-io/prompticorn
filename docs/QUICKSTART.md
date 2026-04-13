@@ -93,4 +93,4 @@ promptosaurus/
 - **How do I use this?** → [GETTING_STARTED.reference.md](./reference/GETTING_STARTED.reference.md)
 - **What can I do with it?** → [LIBRARY_INDEX.md](./LIBRARY_INDEX.md)
 - **How does it work?** → [ADVANCED_PATTERNS.design.md](./design/ADVANCED_PATTERNS.design.md)
-- **What's been done?** → [PHASE2_EXECUTION_STATUS.plan.md](./planning/current/PHASE2_EXECUTION_STATUS.plan.md)
+

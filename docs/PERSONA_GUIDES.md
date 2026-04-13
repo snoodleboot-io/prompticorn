@@ -9,7 +9,7 @@ Find the right resources for your role.
 **Start here:**
 1. [RELATIONSHIPS_MATRIX.md](./RELATIONSHIPS_MATRIX.md) - See how all components fit together
 2. [ADVANCED_PATTERNS.design.md](./design/ADVANCED_PATTERNS.design.md) - Architecture decisions
-3. [PHASE2_OUTLINE.plan.md](../../planning/current/PHASE2_OUTLINE.plan.md) - Expansion strategy
+3. Check the LIBRARY_INDEX.md for all available resources
 
 **Key documents:**
 - Design decisions: `docs/design/*.design.md`
@@ -20,7 +20,7 @@ Find the right resources for your role.
 - What agents exist and why? → LIBRARY_INDEX.md
 - How do they work together? → RELATIONSHIPS_MATRIX.md
 - What was the design thinking? → docs/design/
-- What's next in roadmap? → PHASE2_OUTLINE.plan.md
+- What resources are available? → LIBRARY_INDEX.md
 
 ---
 
@@ -174,8 +174,7 @@ Find the right resources for your role.
 **Start here:**
 1. [QUICKSTART.md](./QUICKSTART.md) - Overview of what exists
 2. [QUALITY_METRICS.md](./QUALITY_METRICS.md) - Project quality dashboard
-3. [PHASE2_EXECUTION_STATUS.plan.md](./planning/current/PHASE2_EXECUTION_STATUS.plan.md) - Current progress
-4. [LIBRARY_INDEX.md](./LIBRARY_INDEX.md) - Feature catalog
+3. 4. [LIBRARY_INDEX.md](./LIBRARY_INDEX.md) - Feature catalog
 
 **Key documents:**
 - Progress tracking: `planning/current/PHASE*_EXECUTION_STATUS.plan.md`

@@ -1,41 +1,37 @@
-# Python runtime question
+"""Question for selecting Python runtime version.
+
+This module defines the PythonRuntimeQuestion class which prompts
+users to select their desired Python runtime version. This affects
+package compatibility, available language features, and performance
+characteristics of the project.
+"""
 
 from promptosaurus.questions.base.question import Question
 
 
 class PythonRuntimeQuestion(Question):
-    """Question handler for Python runtime/version."""
+    """Question handler for Python runtime/version selection.
 
-    @property
-    def key(self) -> str:
-        return "python_runtime"
+    This question asks users to select their preferred Python runtime
+    version, which determines language feature availability, package
+    compatibility, and performance characteristics. The selection affects
+    which Python-specific conventions and best practices are applied
+    to the project configuration.
 
-    @property
-    def question_text(self) -> str:
-        return "What Python runtime version do you want to use?"
+    Available options include recent CPython versions and PyPy, each
+    with different trade-offs between cutting-edge features, stability,
+    and performance.
 
-    @property
-    def explanation(self) -> str:
-        return """Python runtime affects package compatibility, performance, and available features.
+    Attributes:
+        question_text: The question presented to the user
+        explanation: Detailed explanation of Python versions
+        options: Available Python runtime versions
+        default: Default version selection
+        config_key: Configuration key where answer is stored
+    """
 
-- Newer versions have better performance but may have compatibility issues
-- Some packages only support specific versions
-- match statements require 3.10+, walrus operator requires 3.8+"""
-
-    @property
-    def options(self) -> list[str]:
-        return ["3.14", "3.13", "3.12", "3.11", "pypy"]
-
-    @property
-    def default(self) -> str:
-        return "3.14"
-
-    @property
-    def option_explanations(self) -> dict[str, str]:
-        return {
-            "3.14": "Python 3.14 - Latest release with cutting-edge features and performance (recommended)",
-            "3.13": "Python 3.13 - Recent release with modern features",
-            "3.12": "Python 3.12 - Stable release with improved performance",
-            "3.11": "Python 3.11 - Older stable release, good for maximum compatibility",
-            "pypy": "PyPy - Alternative Python implementation with JIT for faster execution",
-        }
+    question_text = "What Python runtime version?"
+    explanation = "Select the Python version your project targets."
+    options = ["3.10", "3.11", "3.12", "3.13", "3.14"]
+    default = "3.12"
+    config_key = "runtime"

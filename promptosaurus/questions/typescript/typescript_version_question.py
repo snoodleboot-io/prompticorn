@@ -1,46 +1,36 @@
-# TypeScript version question
+"""Question for selecting TypeScript version.
+
+This module defines the TypeScriptVersionQuestion class which prompts
+users to select their desired TypeScript version. This affects
+available language features, type system capabilities, and
+ecosystem compatibility.
+"""
 
 from promptosaurus.questions.base.question import Question
 
 
 class TypeScriptVersionQuestion(Question):
-    """Question handler for TypeScript version."""
+    """Question handler for TypeScript version selection.
 
-    @property
-    def key(self) -> str:
-        return "typescript_version"
+    This question asks users to select their preferred TypeScript
+    version, which determines available language features, type system
+    capabilities, and compiler behavior. The selection affects which
+    TypeScript-specific conventions and best practices are applied
+    to the project configuration.
 
-    @property
-    def question_text(self) -> str:
-        return "What TypeScript version do you want to use?"
+    Options range from the latest TypeScript 6.x to earlier 5.x releases,
+    balancing modern features against ecosystem compatibility.
 
-    @property
-    def explanation(self) -> str:
-        return """TypeScript version affects available features and type system capabilities.
+    Attributes:
+        question_text: The question presented to the user
+        explanation: Detailed explanation of TypeScript versions
+        options: Available TypeScript versions
+        default: Default version selection
+        config_key: Configuration key where answer is stored
+    """
 
-- Newer versions have better inference and more features
-- Older versions have better ecosystem compatibility"""
-
-    @property
-    def options(self) -> list[str]:
-        return ["v6.0", "v5.9", "v5.8", "v5.7", "v5.6", "v5.5", "v5.4", "v5.3", "v5.2", "v5.1", "v5.0"]
-
-    @property
-    def default(self) -> str:
-        return "v6.0"
-
-    @property
-    def option_explanations(self) -> dict[str, str]:
-        return {
-            "v6.0": "TypeScript 6.0 - Latest major release (recommended)",
-            "v5.9": "TypeScript 5.9 - Latest 5.x release",
-            "v5.8": "TypeScript 5.8 - Stable 5.x release",
-            "v5.7": "TypeScript 5.7 - Stable 5.x release",
-            "v5.6": "TypeScript 5.6 - Stable 5.x release",
-            "v5.5": "TypeScript 5.5 - Stable 5.x release",
-            "v5.4": "TypeScript 5.4 - Stable 5.x release",
-            "v5.3": "TypeScript 5.3 - Stable 5.x release",
-            "v5.2": "TypeScript 5.2 - Older 5.x release",
-            "v5.1": "TypeScript 5.1 - Older 5.x release",
-            "v5.0": "TypeScript 5.0 - First 5.x release",
-        }
+    question_text = "What TypeScript version?"
+    explanation = "Select the TypeScript version your project targets."
+    options = ["5.0", "5.1", "5.2", "5.3", "5.4"]
+    default = "5.4"
+    config_key = "runtime"

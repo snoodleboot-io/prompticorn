@@ -385,7 +385,19 @@ def cli():
 
 @cli.command("list")
 def list_prompts():
-    """List all registered modes and their prompt files."""
+    """
+    List all registered modes and their prompt files.
+
+    Displays a formatted list of all registered prompt files, organized by mode.
+    Files marked with ✓ exist on disk, files marked with ✗ MISSING are registered
+    but not found.
+
+    Always-on files are displayed first (files included in all modes), followed
+    by mode-specific files grouped by mode name.
+
+    Usage:
+        promptosaurus list
+    """
     always_header = click.style("ALWAYS ON (all modes)", bold=True)
     click.echo(f"\n{always_header}")
     for fname in registry.always_on:
@@ -420,10 +432,30 @@ def init_prompts():
     """
     Interactively initialize prompt configuration for your project.
 
-    Walks through questions to set up .promptosaurus/.promptosaurus.yaml with
-    your language, runtime, package manager, testing framework, and more.
-    Then generates AI assistant configurations for selected tools.
+    This is the main setup command that walks users through configuration:
+    1. Select which AI assistant to configure (Kilo, Cline, Cursor, Copilot)
+    2. Choose repository type (single-language or multi-language-monorepo)
+    3. Select prompt variant (minimal for efficiency, verbose for detail)
+    4. Choose active personas/roles (filters which agents are generated)
+    5. Answer language-specific questions
+    6. Generate configuration files for the selected AI tool
+
+    Creates or updates .promptosaurus.yaml with the configuration and
+    generates tool-specific configuration files in appropriate directories.
+
+    Usage:
+        promptosaurus init
+
+    Interactive flow:
+        ✓ Select AI tool
+        ✓ Choose repository type
+        ✓ Select prompt variant
+        ✓ Select personas
+        ✓ Answer language questions
+        ✓ Configuration saved
+        ✓ Tool configs generated
     """
+
 
     from promptosaurus.ui._selector import select_option_with_explain
     from promptosaurus.ui.exceptions import UserCancelledError
@@ -619,12 +651,30 @@ def init_prompts():
 @cli.command("switch")
 @click.argument("tool_name", required=False)
 def switch_command(tool_name: str | None):
-    """Switch to a different AI assistant tool.
+    """
+    Switch to a different AI assistant tool.
+
+    Allows changing which AI coding assistant to configure. Regenerates
+    configurations for the selected tool using the existing .promptosaurus.yaml
+    configuration.
+
+    The selected tool determines the output format and location:
+    - Kilo Code IDE: .kilo/agents/ directory
+    - Kilo Code CLI: .opencode/rules/ directory
+    - Cline: .clinerules file
+    - Cursor: .cursor/rules/ directory
+    - GitHub Copilot: .github/copilot-instructions.md
+
+    Args:
+        tool_name: Name of the tool to switch to (optional; if not provided,
+                  will prompt interactively for selection)
 
     Usage:
-        promptosaurus switch kilo-ide    # Switch directly
-        promptosaurus switch             # Interactive menu
+        promptosaurus switch                  # Interactive menu
+        promptosaurus switch kilo-ide        # Switch directly to Kilo IDE
+        promptosaurus switch cline           # Switch directly to Cline
     """
+
     from promptosaurus.ui._selector import select_option_with_explain
     from promptosaurus.ui.exceptions import UserCancelledError
 
@@ -730,11 +780,31 @@ def switch_command(tool_name: str | None):
 
 @cli.command("swap")
 def swap_command():
-    """Swap active personas and regenerate AI assistant configurations.
-    
-    Usage:
-        promptosaurus swap    # Interactive persona selection
     """
+    Swap active personas and regenerate configurations.
+
+    Changes which personas (roles) are active, filtering which agents are
+    generated. This allows switching between different team configurations
+    or filtering agents for different workflows.
+
+    After swapping, all registered configuration files are regenerated with
+    only the agents relevant to the selected personas.
+
+    Personas determine which agents are included:
+    - software_engineer: code, test, refactor, review, document
+    - qa_tester: test, review
+    - devops_engineer: deployment, ci-cd, monitoring
+    - And more based on configured personas
+
+    Universal agents (ask, debug, explain, plan, orchestrator) are always
+    generated regardless of persona selection.
+
+    Usage:
+        promptosaurus swap
+
+    Allows selecting multiple personas to combine agent sets.
+    """
+
     from promptosaurus.ui._selector import select_option_with_explain
     from promptosaurus.ui.exceptions import UserCancelledError
     
@@ -908,11 +978,31 @@ def swap_command():
 
 @cli.command("update")
 def update_command():
-    """Update configuration options interactively.
+    """
+    Update configuration options interactively.
+
+    Allows modifying existing configuration values without re-running the
+    full initialization flow. Updates .promptosaurus.yaml with new values
+    and shows which options have changed.
+
+    You can update:
+    - Language
+    - Runtime version
+    - Package manager
+    - Testing framework
+    - And other language-specific settings
+
+    Changes are only saved when you explicitly select "Save & Exit".
 
     Usage:
         promptosaurus update
+
+    Interactive menu shows:
+    - Current value for each option
+    - Options marked as [changed] in green if modified
+    - "Save & Exit" option to save and exit
     """
+
     from promptosaurus.ui._selector import select_option_with_explain
     from promptosaurus.ui.exceptions import UserCancelledError
 
@@ -1037,8 +1127,24 @@ def _get_builder(tool: str):
 @cli.command("validate")
 def validate_prompts():
     """
-    Check that all registered prompt files exist and no files in prompts/
-    are unregistered (orphans).
+    Validate configuration integrity.
+
+    Checks that:
+    1. All registered prompt files exist on disk
+    2. No unregistered prompt files (orphans) exist in the prompts/ directory
+    3. Configuration format is valid
+
+    Reports missing files (registered but not found) and orphans
+    (files that exist but aren't registered).
+
+    Usage:
+        promptosaurus validate
+
+    Output:
+        ✓ All good — no missing or orphaned files.
+        or
+        ✗ MISSING: path/to/file.md
+        ✗ ORPHAN: path/to/unregistered/file.md
     """
     click.echo("\n▶ Validating prompt registry...\n")
     errors = registry.validate_files()

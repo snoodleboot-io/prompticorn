@@ -23,4 +23,5 @@ spec:
   coverage_tool: pytest-cov
   mutation_tool: mutmut
 variant: verbose
-active_personas: []
+active_personas:
+  - technical_writer

@@ -98,9 +98,9 @@ state_management: ".promptosaurus/sessions/"
 #### Example
 
 ```python
-from src.builders.kilo_builder import KiloBuilder
-from src.builders.base import BuildOptions
-from src.ir.models import Agent
+from promptosaurus.builders.kilo_builder import KiloBuilder
+from promptosaurus.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
 
 builder = KiloBuilder(agents_dir="agents")
 agent = Agent(
@@ -183,9 +183,9 @@ Invoke by: `use_skill subagent_name` or request 'subagent-name subagent'
 #### Example
 
 ```python
-from src.builders.cline_builder import ClineBuilder
-from src.builders.base import BuildOptions
-from src.ir.models import Agent
+from promptosaurus.builders.cline_builder import ClineBuilder
+from promptosaurus.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
 
 builder = ClineBuilder()
 agent = Agent(
@@ -258,9 +258,9 @@ Builder for Claude Messages API JSON output. Generates JSON dictionary with syst
 #### Example
 
 ```python
-from src.builders.claude_builder import ClaudeBuilder
-from src.builders.base import BuildOptions
-from src.ir.models import Agent
+from promptosaurus.builders.claude_builder import ClaudeBuilder
+from promptosaurus.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
 import json
 
 builder = ClaudeBuilder()
@@ -347,9 +347,9 @@ Specializes in test tasks.
 #### Example
 
 ```python
-from src.builders.copilot_builder import CopilotBuilder
-from src.builders.base import BuildOptions
-from src.ir.models import Agent
+from promptosaurus.builders.copilot_builder import CopilotBuilder
+from promptosaurus.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
 
 builder = CopilotBuilder()
 agent = Agent(
@@ -438,9 +438,9 @@ Usage: Call with appropriate parameters
 #### Example
 
 ```python
-from src.builders.cursor_builder import CursorBuilder
-from src.builders.base import BuildOptions
-from src.ir.models import Agent
+from promptosaurus.builders.cursor_builder import CursorBuilder
+from promptosaurus.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
 
 builder = CursorBuilder()
 agent = Agent(
@@ -494,7 +494,7 @@ class BuildOptions:
 #### Example
 
 ```python
-from src.builders.base import BuildOptions
+from promptosaurus.builders.base import BuildOptions
 
 options = BuildOptions(
     variant="minimal",
@@ -548,8 +548,8 @@ class AbstractBuilder(ABC):
 #### Example
 
 ```python
-from src.builders.base import AbstractBuilder, BuildOptions
-from src.ir.models import Agent
+from promptosaurus.builders.base import AbstractBuilder, BuildOptions
+from promptosaurus.ir.models import Agent
 
 class CustomBuilder(AbstractBuilder):
     def build(self, agent: Agent, options: BuildOptions) -> str:
@@ -616,8 +616,8 @@ class BuilderFactory:
 #### Example
 
 ```python
-from src.builders.factory import BuilderFactory
-from src.builders.kilo_builder import KiloBuilder
+from promptosaurus.builders.factory import BuilderFactory
+from promptosaurus.builders.kilo_builder import KiloBuilder
 
 # Register
 BuilderFactory.register("kilo", KiloBuilder)
@@ -700,8 +700,8 @@ class ComponentSelector:
 #### Example
 
 ```python
-from src.builders.component_selector import ComponentSelector, Variant
-from src.ir.models import Agent
+from promptosaurus.builders.component_selector import ComponentSelector, Variant
+from promptosaurus.ir.models import Agent
 
 selector = ComponentSelector(agents_dir="agents")
 agent = Agent(
@@ -766,9 +766,9 @@ class ComponentComposer:
 #### Example
 
 ```python
-from src.builders.component_composer import ComponentComposer
-from src.builders.component_selector import ComponentSelector, Variant
-from src.ir.models import Agent
+from promptosaurus.builders.component_composer import ComponentComposer
+from promptosaurus.builders.component_selector import ComponentSelector, Variant
+from promptosaurus.ir.models import Agent
 
 selector = ComponentSelector()
 agent = Agent(
@@ -843,7 +843,7 @@ class Agent(BaseModel):
 #### Example
 
 ```python
-from src.ir.models import Agent
+from promptosaurus.ir.models import Agent
 
 agent = Agent(
     name="code",
@@ -889,7 +889,7 @@ class Skill(BaseModel):
 #### Example
 
 ```python
-from src.ir.models import Skill
+from promptosaurus.ir.models import Skill
 
 skill = Skill(
     name="code_analysis",
@@ -934,7 +934,7 @@ class Workflow(BaseModel):
 #### Example
 
 ```python
-from src.ir.models import Workflow
+from promptosaurus.ir.models import Workflow
 
 workflow = Workflow(
     name="code_review",
@@ -983,7 +983,7 @@ class Tool(BaseModel):
 #### Example
 
 ```python
-from src.ir.models import Tool
+from promptosaurus.ir.models import Tool
 
 tool = Tool(
     name="read",
@@ -1030,7 +1030,7 @@ class Rules(BaseModel):
 #### Example
 
 ```python
-from src.ir.models import Rules
+from promptosaurus.ir.models import Rules
 
 rules = Rules(
     constraints=[
@@ -1082,7 +1082,7 @@ class Project(BaseModel):
 #### Example
 
 ```python
-from src.ir.models import Project
+from promptosaurus.ir.models import Project
 
 project = Project(
     registry_settings={"cache_enabled": True},
@@ -1145,18 +1145,18 @@ directory/
 #### Example
 
 ```python
-from src.ir.loaders.component_loader import ComponentLoader
+from promptosaurus.ir.loaders.component_loader import ComponentLoader
 
 loader = ComponentLoader()
 
 # Load as bundle
-bundle = loader.load("src/prompts/code-agent/")
+bundle = loader.load("promptosaurus/prompts/code-agent/")
 print(bundle.prompt_content)
 print(bundle.skills_content)
 print(bundle.workflow_content)
 
 # Load as dict
-components = loader.load_as_dict("src/prompts/code-agent/")
+components = loader.load_as_dict("promptosaurus/prompts/code-agent/")
 print(components["prompt"])
 print(components.get("skills"))
 ```
@@ -1205,10 +1205,10 @@ Detailed instructions here.
 #### Example
 
 ```python
-from src.ir.loaders.skill_loader import SkillLoader
+from promptosaurus.ir.loaders.skill_loader import SkillLoader
 
 loader = SkillLoader()
-skill = loader.load("src/skills/code_analysis.md")
+skill = loader.load("promptosaurus/skills/code_analysis.md")
 
 print(skill.name)
 print(skill.description)
@@ -1263,10 +1263,10 @@ Detailed step information.
 #### Example
 
 ```python
-from src.ir.loaders.workflow_loader import WorkflowLoader
+from promptosaurus.ir.loaders.workflow_loader import WorkflowLoader
 
 loader = WorkflowLoader()
-workflow = loader.load("src/workflows/code_review.md")
+workflow = loader.load("promptosaurus/workflows/code_review.md")
 
 print(workflow.name)
 print(workflow.description)
@@ -1323,7 +1323,7 @@ class Registry:
 #### Example
 
 ```python
-from src.registry.registry import Registry
+from promptosaurus.registry.registry import Registry
 
 # Create from filesystem discovery
 registry = Registry.from_discovery("./agents")
@@ -1359,37 +1359,37 @@ all_agents = registry.get_all_agents()
 Quick reference of all types and their modules:
 
 ### Builders
-- `AbstractBuilder` - src.builders.base
-- `BuildOptions` - src.builders.base
-- `KiloBuilder` - src.builders.kilo_builder
-- `ClineBuilder` - src.builders.cline_builder
-- `ClaudeBuilder` - src.builders.claude_builder
-- `CopilotBuilder` - src.builders.copilot_builder
-- `CursorBuilder` - src.builders.cursor_builder
-- `BuilderFactory` - src.builders.factory
+- `AbstractBuilder` - promptosaurus.builders.base
+- `BuildOptions` - promptosaurus.builders.base
+- `KiloBuilder` - promptosaurus.builders.kilo_builder
+- `ClineBuilder` - promptosaurus.builders.cline_builder
+- `ClaudeBuilder` - promptosaurus.builders.claude_builder
+- `CopilotBuilder` - promptosaurus.builders.copilot_builder
+- `CursorBuilder` - promptosaurus.builders.cursor_builder
+- `BuilderFactory` - promptosaurus.builders.factory
 
 ### Components
-- `ComponentSelector` - src.builders.component_selector
-- `Variant` - src.builders.component_selector
-- `ComponentBundle` (selector) - src.builders.component_selector
-- `ComponentComposer` - src.builders.component_composer
+- `ComponentSelector` - promptosaurus.builders.component_selector
+- `Variant` - promptosaurus.builders.component_selector
+- `ComponentBundle` (selector) - promptosaurus.builders.component_selector
+- `ComponentComposer` - promptosaurus.builders.component_composer
 
 ### IR Models
-- `Agent` - src.ir.models
-- `Skill` - src.ir.models
-- `Workflow` - src.ir.models
-- `Tool` - src.ir.models
-- `Rules` - src.ir.models
-- `Project` - src.ir.models
+- `Agent` - promptosaurus.ir.models
+- `Skill` - promptosaurus.ir.models
+- `Workflow` - promptosaurus.ir.models
+- `Tool` - promptosaurus.ir.models
+- `Rules` - promptosaurus.ir.models
+- `Project` - promptosaurus.ir.models
 
 ### Loaders
-- `ComponentLoader` - src.ir.loaders
-- `ComponentBundle` (loader) - src.ir.loaders
-- `SkillLoader` - src.ir.loaders
-- `WorkflowLoader` - src.ir.loaders
+- `ComponentLoader` - promptosaurus.ir.loaders
+- `ComponentBundle` (loader) - promptosaurus.ir.loaders
+- `SkillLoader` - promptosaurus.ir.loaders
+- `WorkflowLoader` - promptosaurus.ir.loaders
 
 ### Registry
-- `Registry` - src.registry.registry
+- `Registry` - promptosaurus.registry.registry
 
 ---
 
@@ -1398,9 +1398,9 @@ Quick reference of all types and their modules:
 ### Building an Agent for a Specific Tool
 
 ```python
-from src.builders.factory import BuilderFactory
-from src.builders.base import BuildOptions
-from src.ir.models import Agent
+from promptosaurus.builders.factory import BuilderFactory
+from promptosaurus.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
 
 # Create agent
 agent = Agent(
@@ -1427,9 +1427,9 @@ cline_output = cline_builder.build(agent, BuildOptions())
 ### Loading Components and Building Output
 
 ```python
-from src.builders.component_selector import ComponentSelector, Variant
-from src.builders.component_composer import ComponentComposer
-from src.ir.models import Agent
+from promptosaurus.builders.component_selector import ComponentSelector, Variant
+from promptosaurus.builders.component_composer import ComponentComposer
+from promptosaurus.ir.models import Agent
 
 selector = ComponentSelector(agents_dir="agents")
 agent = Agent(
@@ -1450,7 +1450,7 @@ json_out = ComponentComposer.compose_json(bundle, agent)
 ### Discovering and Retrieving Agents
 
 ```python
-from src.registry.registry import Registry
+from promptosaurus.registry.registry import Registry
 
 # Discover agents from filesystem
 registry = Registry.from_discovery("./agents")
@@ -1474,7 +1474,7 @@ test_agent = registry.get_agent("code/test")
 
 ## Error Handling
 
-All components use typed exceptions from `src.builders.errors` and `src.ir.exceptions`:
+All components use typed exceptions from `promptosaurus.builders.errors` and `promptosaurus.ir.exceptions`:
 
 - `BuilderValidationError` - Raised when agent validation fails
 - `BuilderNotFoundError` - Raised when builder not registered
@@ -1485,10 +1485,10 @@ All components use typed exceptions from `src.builders.errors` and `src.ir.excep
 - `ValidationError` - Raised when model validation fails
 
 ```python
-from src.builders.errors import BuilderValidationError
-from src.builders.kilo_builder import KiloBuilder
-from src.builders.base import BuildOptions
-from src.ir.models import Agent
+from promptosaurus.builders.errors import BuilderValidationError
+from promptosaurus.builders.kilo_builder import KiloBuilder
+from promptosaurus.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
 
 builder = KiloBuilder()
 try:
