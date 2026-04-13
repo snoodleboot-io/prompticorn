@@ -114,6 +114,7 @@ def _setup_monorepo_folders() -> list[dict[str, Any]]:
     Returns:
         List of folder specifications.
     """
+    import os
     from promptosaurus.ui._selector import select_option_with_explain
 
     folder_specs: list[dict[str, Any]] = []
@@ -147,6 +148,7 @@ def _setup_monorepo_folders() -> list[dict[str, Any]]:
 
         if folder_type == "custom":
             # Custom folder: prompt for folder path
+            os.system('clear' if os.name != 'nt' else 'cls')  # Clear screen after curses
             folder_path = click.prompt(
                 "\nFolder path (e.g., services/auth/api)",
                 default="",
@@ -157,6 +159,7 @@ def _setup_monorepo_folders() -> list[dict[str, Any]]:
                 continue
 
             # Prompt for language
+            os.system('clear' if os.name != 'nt' else 'cls')  # Clear screen
             language = click.prompt(
                 "\nProgramming language",
                 type=click.Choice(LANGUAGE_KEYS),
@@ -205,6 +208,7 @@ def _setup_monorepo_folders() -> list[dict[str, Any]]:
             subtype = subtype_choice.split(" (")[0]  # Extract subtype name
 
             # Step 3: Ask for folder path
+            os.system('clear' if os.name != 'nt' else 'cls')  # Clear screen after curses
             folder_path = click.prompt(
                 f"\nFolder path (e.g., {preset_type}/{subtype})",
                 default=f"{preset_type}/{subtype}",
