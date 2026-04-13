@@ -10,12 +10,9 @@ Tests cover:
 - Output format and tool name metadata
 """
 
-import pytest
 from pathlib import Path
 
 from promptosaurus.builders.copilot_builder import CopilotBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.builders.errors import BuilderValidationError
 from promptosaurus.ir.models import Agent
 
 
@@ -398,19 +395,19 @@ class TestCopilotBuilderBuild:
         """Test that build method is defined."""
         builder = CopilotBuilder()
         assert hasattr(builder, "build")
-        assert callable(getattr(builder, "build"))
+        assert callable(builder.build)
 
     def test_build_method_signature(self) -> None:
         """Test build method has correct signature."""
         builder = CopilotBuilder()
-        agent = Agent(
+        Agent(
             name="code",
             description="Code agent",
             system_prompt="You are a code assistant",
         )
         # Just verify the method exists and accepts these parameters
         assert hasattr(builder, "build")
-        method = getattr(builder, "build")
+        method = builder.build
         # Check it's callable with agent and options
         assert callable(method)
 

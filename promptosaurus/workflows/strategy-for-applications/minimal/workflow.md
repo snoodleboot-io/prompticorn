@@ -1,4 +1,5 @@
 ---
+name: "strategy-for-applications"
 description: "Strategic planning for application architecture and implementation"
 version: "1.0"
 languages: ["python", "typescript", "architecture"]

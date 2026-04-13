@@ -11,16 +11,9 @@ Tests cover:
 - JSON serializability verification
 """
 
-import json
-import pytest
 from pathlib import Path
-from tempfile import TemporaryDirectory
-from typing import Any, Generator
 
 from promptosaurus.builders.claude_builder import ClaudeBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.builders.errors import BuilderValidationError
-from promptosaurus.ir.models import Agent
 
 
 class TestClaudeBuilderInitialization:

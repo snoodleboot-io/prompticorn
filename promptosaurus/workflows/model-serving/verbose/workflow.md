@@ -1,4 +1,5 @@
 ---
+name: "model-serving"
 description: "Deploy and serve ML models in production environments"
 agent: "mlai"
 category: "ml"

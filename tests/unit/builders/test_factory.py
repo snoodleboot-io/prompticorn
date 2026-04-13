@@ -2,9 +2,9 @@
 
 import pytest
 
-from promptosaurus.builders.factory import BuilderFactory
 from promptosaurus.builders.base import AbstractBuilder, BuildOptions
-from promptosaurus.builders.errors import BuilderException, BuilderNotFoundError
+from promptosaurus.builders.errors import BuilderNotFoundError
+from promptosaurus.builders.factory import BuilderFactory
 from promptosaurus.ir.models import Agent
 
 
@@ -12,7 +12,7 @@ class TestBuilder(AbstractBuilder):
     """Test builder for factory testing."""
 
     def build(self, agent: Agent, options: BuildOptions) -> str:
-        return f"Built with TestBuilder"
+        return "Built with TestBuilder"
 
     def validate(self, agent: Agent) -> list[str]:
         return []
@@ -28,7 +28,7 @@ class AnotherTestBuilder(AbstractBuilder):
     """Another test builder."""
 
     def build(self, agent: Agent, options: BuildOptions) -> str:
-        return f"Built with AnotherTestBuilder"
+        return "Built with AnotherTestBuilder"
 
     def validate(self, agent: Agent) -> list[str]:
         return []
@@ -119,9 +119,9 @@ class TestBuilderFactoryListBuilders:
     def teardown_method(self):
         """Restore builtin builders after each test."""
         # Register builtin builders back for other tests
-        from promptosaurus.builders.kilo_builder import KiloBuilder
-        from promptosaurus.builders.cline_builder import ClineBuilder
         from promptosaurus.builders.claude_builder import ClaudeBuilder
+        from promptosaurus.builders.cline_builder import ClineBuilder
+        from promptosaurus.builders.kilo_builder import KiloBuilder
 
         BuilderFactory.clear()
         BuilderFactory.register("kilo", KiloBuilder)
@@ -216,9 +216,9 @@ class TestBuilderFactoryIntegration:
     def teardown_method(self):
         """Restore builtin builders after each test."""
         # Register builtin builders back for other tests
-        from promptosaurus.builders.kilo_builder import KiloBuilder
-        from promptosaurus.builders.cline_builder import ClineBuilder
         from promptosaurus.builders.claude_builder import ClaudeBuilder
+        from promptosaurus.builders.cline_builder import ClineBuilder
+        from promptosaurus.builders.kilo_builder import KiloBuilder
 
         BuilderFactory.clear()
         BuilderFactory.register("kilo", KiloBuilder)

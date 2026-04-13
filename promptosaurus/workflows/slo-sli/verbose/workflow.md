@@ -1,4 +1,5 @@
 ---
+name: "slo-sli"
 description: "Comprehensive SLO/SLI framework for defining reliability targets, measuring performance, and managing error budgets"
 version: "1.0"
 languages: ["promql", "sql"]

@@ -1,4 +1,5 @@
 ---
+name: "capacity-planning"
 description: "Forecast resource needs and plan infrastructure scaling"
 version: "1.0"
 languages: ["sql", "python"]

@@ -1,4 +1,5 @@
 ---
+name: "analytics-setup"
 description: "Implementation guide for product analytics and measurement"
 agent: "product"
 category: "product"

@@ -7,13 +7,13 @@ rendering pipeline to verify that:
 3. The multi-line explanation fix works properly
 """
 
-from promptosaurus.questions.python.python_runtime_question import PythonRuntimeQuestion
 from promptosaurus.questions.python.python_package_manager_question import (
     PythonPackageManagerQuestion,
 )
-from promptosaurus.ui.domain.context import QuestionContext, PipelineContext
-from promptosaurus.ui.render.vertical import VerticalLayoutRenderer
+from promptosaurus.questions.python.python_runtime_question import PythonRuntimeQuestion
+from promptosaurus.ui.domain.context import PipelineContext, QuestionContext
 from promptosaurus.ui.render.columns import ColumnLayoutRenderer
+from promptosaurus.ui.render.vertical import VerticalLayoutRenderer
 from promptosaurus.ui.state.single_selection_state import SingleSelectionState
 
 
@@ -312,7 +312,6 @@ class TestExplanationDisplay:
         assert "3.13" in output
 
         # Should include the explanation for 3.13
-        expected_explanation = "Python 3.13 - Recent release with modern features"
 
         print("\n=== Selected Runtime Option with Explanation ===")
         print(output)

@@ -1,4 +1,5 @@
 ---
+name: "compliance-audit"
 description: Ensure regulatory compliance
 ---
 

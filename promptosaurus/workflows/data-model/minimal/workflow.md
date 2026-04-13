@@ -1,4 +1,5 @@
 ---
+name: "data-model"
 description: Design database schema with entities, relationships, and indexes
 steps:
 - Gather requirements

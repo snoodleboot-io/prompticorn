@@ -1,4 +1,5 @@
 ---
+name: "workflow-documentation-patterns"
 description: Document workflows for understanding and maintenance
 type: workflow
 category: workflow-patterns

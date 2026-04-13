@@ -176,6 +176,15 @@ product:
   - analytics-setup
   - a-b-testing
   - feature-launch-checklist
+python:
+  skills:
+  - data-validation-pipelines
+  - ensemble-methods
+  - mlops-pipeline-design
+  workflows:
+  - model-evaluation
+  - mlops-pipeline-setup
+  - production-ml-deployment
 rust:
   skills:
   - feature-planning

@@ -1,4 +1,5 @@
 ---
+name: "observability"
 description: "Complete monitoring stack design covering metrics, logging, tracing, and alerting with dashboards and runbooks"
 version: "1.0"
 languages: ["python", "promql"]

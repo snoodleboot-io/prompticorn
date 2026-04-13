@@ -1,4 +1,5 @@
 ---
+name: "migration"
 description: Execute planned migrations safely with rollback capability
 languages: [all]
 subagents: [migration, test, code, review]

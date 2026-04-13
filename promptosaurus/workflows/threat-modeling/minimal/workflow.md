@@ -1,4 +1,5 @@
 ---
+name: "threat-modeling"
 description: "Systematic identification and analysis of security threats"
 agent: "security"
 category: "security"

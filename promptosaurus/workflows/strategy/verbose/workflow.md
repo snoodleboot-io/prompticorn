@@ -1,4 +1,5 @@
 ---
+name: "strategy"
 description: Comprehensive strategy planning process
 languages: [all]
 subagents: [planning/strategy, architect/scaffold, code/feature, code/boilerplate]

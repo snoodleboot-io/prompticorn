@@ -1,4 +1,5 @@
 ---
+name: "penetration-testing-guide"
 description: "Ethical hacking methodology to identify exploitable vulnerabilities"
 agent: "security"
 category: "security"

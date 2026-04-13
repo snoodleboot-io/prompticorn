@@ -1,4 +1,5 @@
 ---
+name: "root-cause"
 description: "Comprehensive root cause analysis using 5 Whys, Fishbone diagrams, and systematic investigation"
 version: "1.0"
 languages: ["python", "typescript", "sql"]

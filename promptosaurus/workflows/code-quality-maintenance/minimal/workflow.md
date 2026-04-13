@@ -1,4 +1,5 @@
 # Code Quality Workflow
+name: "code-quality-maintenance"
 
 **Version:** 1.0
 

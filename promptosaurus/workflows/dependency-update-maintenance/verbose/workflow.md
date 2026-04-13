@@ -1,4 +1,5 @@
 # Dependency Update Workflow
+name: "dependency-update-maintenance"
 
 **Version:** 1.0  
 **Cadence:** Weekly (Monday)  

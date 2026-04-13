@@ -9,9 +9,8 @@ Tests cover:
 
 import pytest
 
-from promptosaurus.ir.parsers import YAMLParser, MarkdownParser
 from promptosaurus.ir.exceptions import ParseError
-
+from promptosaurus.ir.parsers import MarkdownParser, YAMLParser
 
 # ============================================================================
 # FIXTURES - YAMLParser test data
@@ -201,7 +200,7 @@ Content
         content = """---
 name: test
 description: null
-tags: 
+tags:
 ---
 Content
 """

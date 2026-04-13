@@ -1,4 +1,5 @@
 ---
+name: "slo-sli"
 description: "Define and track service level objectives and indicators"
 version: "1.0"
 languages: ["promql", "sql"]

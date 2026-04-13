@@ -1,4 +1,5 @@
 ---
+name: "performance"
 description: "Systematic performance optimization workflow"
 version: "1.0"
 languages: ["python", "typescript", "sql"]

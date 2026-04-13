@@ -2,8 +2,6 @@
 
 from unittest.mock import MagicMock, Mock
 
-import pytest
-
 from promptosaurus.ui.domain.context import PipelineContext, QuestionContext
 from promptosaurus.ui.pipeline.render_stage import RenderStage
 from promptosaurus.ui.state.single_selection_state import SingleSelectionState

@@ -1,4 +1,5 @@
 ---
+name: "ux-validation"
 description: "Process to validate user experience designs before development"
 agent: "product"
 category: "product"

@@ -1,4 +1,5 @@
 # Technical Debt Cleanup Workflow
+name: "tech-debt-cleanup-maintenance"
 
 **Version:** 1.0  
 **Cadence:** Monthly (Second Thursday)  

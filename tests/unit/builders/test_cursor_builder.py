@@ -13,14 +13,9 @@ Tests cover:
 - Output format verification
 """
 
-import pytest
 from pathlib import Path
-from tempfile import TemporaryDirectory
 
 from promptosaurus.builders.cursor_builder import CursorBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.builders.errors import BuilderValidationError
-from promptosaurus.ir.models import Agent
 
 
 class TestCursorBuilderInitialization:

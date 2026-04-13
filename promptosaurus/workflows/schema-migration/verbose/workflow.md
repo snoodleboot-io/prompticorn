@@ -1,4 +1,5 @@
 ---
+name: "schema-migration"
 description: "Comprehensive guide to zero-downtime schema migrations with backward compatibility and rollback planning"
 version: "1.0"
 languages: ["sql"]

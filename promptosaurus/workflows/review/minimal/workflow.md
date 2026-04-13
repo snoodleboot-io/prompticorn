@@ -1,4 +1,5 @@
 ---
+name: "review"
 description: Streamlined code review process
 languages: [all]
 subagents: [review/code, review/security, review/compliance]

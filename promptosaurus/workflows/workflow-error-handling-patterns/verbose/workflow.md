@@ -1,4 +1,5 @@
 ---
+name: "workflow-error-handling-patterns"
 description: Handle errors in workflows with retries and compensation
 type: workflow
 category: workflow-patterns

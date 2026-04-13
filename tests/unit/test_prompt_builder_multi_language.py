@@ -1,7 +1,8 @@
 """Tests for PromptBuilder with multi-language-monorepo configurations."""
 
+
 import pytest
-from pathlib import Path
+
 from promptosaurus.prompt_builder import PromptBuilder
 
 
@@ -18,9 +19,9 @@ class TestLanguageExtraction:
                 "package_manager": "uv",
             },
         }
-        
+
         language = PromptBuilder._extract_language_from_config(config)
-        
+
         assert language == "python"
 
     def test_extract_language_multi_language_config(self):
@@ -45,9 +46,9 @@ class TestLanguageExtraction:
                 },
             ],
         }
-        
+
         language = PromptBuilder._extract_language_from_config(config)
-        
+
         # Should use first folder's language as primary
         assert language == "python"
 
@@ -133,10 +134,10 @@ class TestPromptBuilderMultiLanguage:
             "spec": {"language": "python"},
             "active_personas": [],
         }
-        
+
         # This should not raise an exception
         actions = builder.build(tmp_path, config=config, dry_run=True)
-        
+
         assert isinstance(actions, list)
         # dry_run=True may return empty list, just verify no exception
 
@@ -151,10 +152,10 @@ class TestPromptBuilderMultiLanguage:
             ],
             "active_personas": [],
         }
-        
+
         # This should not raise an exception (the bug fix)
         actions = builder.build(tmp_path, config=config, dry_run=True)
-        
+
         assert isinstance(actions, list)
         # dry_run=True may return empty list, just verify no exception
 
@@ -169,10 +170,10 @@ class TestPromptBuilderMultiLanguage:
             ],
             "active_personas": ["software_engineer", "architect"],
         }
-        
+
         # This tests the combination of persona filtering + multi-language
         actions = builder.build(tmp_path, config=config, dry_run=True)
-        
+
         assert isinstance(actions, list)
         # Should have built some agents
         assert len(actions) > 0
@@ -184,7 +185,7 @@ class TestPromptBuilderMultiLanguage:
         """Should handle None config gracefully."""
         # This should not raise an exception
         actions = builder.build(tmp_path, config=None, dry_run=True)
-        
+
         assert isinstance(actions, list)
         # dry_run=True may return empty list, just verify no exception
 
@@ -196,8 +197,8 @@ class TestPromptBuilderMultiLanguage:
             "spec": [],  # Empty list
             "active_personas": [],
         }
-        
+
         # This should not raise an exception
         actions = builder.build(tmp_path, config=config, dry_run=True)
-        
+
         assert isinstance(actions, list)

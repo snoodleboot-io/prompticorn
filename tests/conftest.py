@@ -1,8 +1,8 @@
 """Test configuration and fixtures."""
 
-import os
-import pytest
 from pathlib import Path
+
+import pytest
 
 
 @pytest.fixture
@@ -33,7 +33,7 @@ def skills_dir(project_root):
 def read_file():
     """Fixture to read file contents."""
     def _read(path):
-        with open(path, 'r') as f:
+        with open(path) as f:
             return f.read()
     return _read
 

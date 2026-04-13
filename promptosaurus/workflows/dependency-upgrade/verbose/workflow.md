@@ -1,4 +1,5 @@
 ---
+name: "dependency-upgrade"
 description: Comprehensive process for safe dependency upgrades with breaking change detection and rollback procedures
 languages: [python, typescript, go, rust, java]
 subagents: [migration, test, security]

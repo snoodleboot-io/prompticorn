@@ -1,4 +1,5 @@
 ---
+name: "schema-migration"
 description: "Safely evolve database schema without downtime"
 version: "1.0"
 languages: ["sql"]

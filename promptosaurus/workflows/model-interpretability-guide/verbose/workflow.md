@@ -1,4 +1,5 @@
 ---
+name: "model-interpretability-guide"
 description: Make ML models interpretable and explainable for stakeholders and debugging
 type: workflow
 category: workflow-patterns

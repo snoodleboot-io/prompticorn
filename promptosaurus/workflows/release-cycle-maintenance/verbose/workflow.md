@@ -1,4 +1,5 @@
 # Release Cycle Workflow
+name: "release-cycle-maintenance"
 
 **Version:** 1.0  
 **Cadence:** Monthly (Last Friday of Month)  

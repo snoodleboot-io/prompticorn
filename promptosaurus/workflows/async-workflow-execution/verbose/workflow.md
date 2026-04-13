@@ -1,4 +1,5 @@
 ---
+name: "async-workflow-execution"
 description: Execute workflow steps asynchronously with callbacks and futures
 type: workflow
 category: workflow-patterns

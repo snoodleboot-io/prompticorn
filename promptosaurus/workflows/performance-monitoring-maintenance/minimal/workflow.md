@@ -1,4 +1,5 @@
 # Performance Monitoring Workflow
+name: "performance-monitoring-maintenance"
 
 **Version:** 1.0
 

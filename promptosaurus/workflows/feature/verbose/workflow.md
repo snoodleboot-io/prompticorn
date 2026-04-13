@@ -1,4 +1,5 @@
 ---
+name: "feature"
 description: Comprehensive step-by-step feature implementation process
 steps:
 - Before writing code

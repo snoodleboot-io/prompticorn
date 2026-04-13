@@ -1,4 +1,5 @@
 # Code Quality Review Workflow
+name: "code-quality-maintenance"
 
 **Version:** 1.0  
 **Cadence:** Per PR + Weekly Summary  

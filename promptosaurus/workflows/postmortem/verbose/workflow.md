@@ -1,4 +1,5 @@
 ---
+name: "postmortem"
 description: "Blameless incident postmortems with root cause analysis, action items, and learning capture"
 version: "1.0"
 languages: ["python"]

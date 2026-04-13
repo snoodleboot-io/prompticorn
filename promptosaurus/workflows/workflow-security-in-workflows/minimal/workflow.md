@@ -1,4 +1,5 @@
 ---
+name: "workflow-security-in-workflows"
 description: Implement security controls in workflow execution
 type: workflow
 category: workflow-patterns

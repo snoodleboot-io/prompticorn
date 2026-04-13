@@ -1,4 +1,5 @@
 ---
+name: "model-evaluation"
 description: "Evaluate model performance with comprehensive metrics"
 agent: "mlai"
 category: "ml"

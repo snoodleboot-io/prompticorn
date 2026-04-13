@@ -1,4 +1,5 @@
 ---
+name: "container-orchestration"
 description: Orchestrate containerized applications
 ---
 

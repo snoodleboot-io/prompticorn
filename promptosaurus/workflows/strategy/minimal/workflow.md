@@ -1,4 +1,5 @@
 ---
+name: "strategy"
 description: Streamlined strategy planning process
 languages: [all]
 subagents: [planning/strategy, architect/scaffold]

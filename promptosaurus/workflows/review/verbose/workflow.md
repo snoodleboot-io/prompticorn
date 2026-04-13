@@ -1,4 +1,5 @@
 ---
+name: "review"
 description: Comprehensive code review process
 languages: [all]
 subagents: [review/code, review/security, review/compliance, enforcement/code-style, architecture/design]

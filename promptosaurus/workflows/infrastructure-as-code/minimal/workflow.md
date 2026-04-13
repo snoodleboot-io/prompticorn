@@ -1,4 +1,5 @@
 ---
+name: "infrastructure-as-code"
 description: Manage infrastructure programmatically
 ---
 

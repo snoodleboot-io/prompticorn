@@ -1,4 +1,5 @@
 ---
+name: "frontend-performance"
 description: Optimize frontend applications
 ---
 

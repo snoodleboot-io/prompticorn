@@ -1,4 +1,5 @@
 # Coverage Improvement Workflow
+name: "coverage-improvement-maintenance"
 
 **Version:** 1.0
 

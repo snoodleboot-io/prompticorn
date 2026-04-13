@@ -1,4 +1,5 @@
 # Test Coverage Improvement Workflow
+name: "coverage-improvement-maintenance"
 
 **Version:** 1.0  
 **Cadence:** Weekly (Friday) + Quarterly Deep-Dive  

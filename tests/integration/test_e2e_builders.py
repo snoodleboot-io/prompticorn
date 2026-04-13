@@ -14,23 +14,23 @@ complete builder pipeline.
 """
 
 import json
-import pytest
 import re
-import yaml
+from collections.abc import Generator
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Any, Generator, Tuple
+from typing import Any
+
+import pytest
+import yaml
 
 from promptosaurus.builders.base import BuildOptions
-from promptosaurus.builders.cline_builder import ClineBuilder
 from promptosaurus.builders.claude_builder import ClaudeBuilder
+from promptosaurus.builders.cline_builder import ClineBuilder
 from promptosaurus.builders.copilot_builder import CopilotBuilder
 from promptosaurus.builders.cursor_builder import CursorBuilder
-from promptosaurus.builders.errors import BuilderValidationError
 from promptosaurus.builders.factory import BuilderFactory
 from promptosaurus.builders.kilo_builder import KiloBuilder
 from promptosaurus.ir.models import Agent
-
 
 # ============================================================================
 # Fixtures for test setup and agent loading
@@ -92,7 +92,7 @@ def create_test_agents_dir(temp_dir: Path) -> Path:
     ]
 
     # Create directory structure for each agent
-    for name, desc, prompt, tools, skills, workflows, subagents in agents_config:
+    for name, _desc, prompt, _tools, skills, workflows, subagents in agents_config:
         # Create minimal variant
         minimal_dir = agents_dir / name / "minimal"
         minimal_dir.mkdir(parents=True, exist_ok=True)
@@ -129,13 +129,13 @@ def create_test_agents_dir(temp_dir: Path) -> Path:
         # Write workflows if specified
         if workflows:
             (verbose_dir / "workflows.md").write_text(
-                f"## Workflows\n\n" + "\n".join(f"- {w}" for w in workflows)
+                "## Workflows\n\n" + "\n".join(f"- {w}" for w in workflows)
             )
 
         # Write subagents if specified
         if subagents:
             (verbose_dir / "subagents.md").write_text(
-                f"## Subagents\n\n" + "\n".join(f"- {sa}" for sa in subagents)
+                "## Subagents\n\n" + "\n".join(f"- {sa}" for sa in subagents)
             )
 
     return agents_dir
@@ -439,7 +439,7 @@ class TestVariantTesting:
         """Verify all tools support minimal variant."""
         options = BuildOptions(variant="minimal")
 
-        for tool_name, builder in all_builders.items():
+        for _tool_name, builder in all_builders.items():
             output = builder.build(sample_agent, options)
             assert output is not None
             assert len(output) > 0
@@ -450,7 +450,7 @@ class TestVariantTesting:
         """Verify all tools support verbose variant."""
         options = BuildOptions(variant="verbose")
 
-        for tool_name, builder in all_builders.items():
+        for _tool_name, builder in all_builders.items():
             output = builder.build(sample_agent, options)
             assert output is not None
             assert len(output) > 0
@@ -564,7 +564,7 @@ class TestMultipleAgents:
         options = BuildOptions(variant="verbose")
 
         for agent in multi_agents:
-            for tool_name, builder in all_builders.items():
+            for _tool_name, builder in all_builders.items():
                 output = builder.build(agent, options)
                 assert output is not None
                 assert len(output) > 0
@@ -648,7 +648,7 @@ class TestCrosToolConsistency:
 
         agent_name_lower = sample_agent.name.lower()
 
-        for tool_name, builder in all_builders.items():
+        for _tool_name, builder in all_builders.items():
             output = builder.build(sample_agent, options)
             output_str = (
                 json.dumps(output).lower() if isinstance(output, dict) else str(output).lower()
@@ -683,7 +683,7 @@ class TestCrosToolConsistency:
             "cursor": CursorBuilder(agents_dir=temp_agents_dir),
         }
 
-        for tool_name, builder in builders.items():
+        for _tool_name, builder in builders.items():
             output = builder.build(agent, options)
             output_str = (
                 json.dumps(output).lower() if isinstance(output, dict) else str(output).lower()
@@ -759,7 +759,7 @@ class TestErrorHandling:
             "cursor": CursorBuilder(agents_dir=temp_agents_dir),
         }
 
-        for tool_name, builder in builders.items():
+        for _tool_name, builder in builders.items():
             output = builder.build(minimal_agent, options)
             assert output is not None
             assert len(output) > 0
@@ -798,7 +798,7 @@ class TestErrorHandling:
             "cursor": CursorBuilder(agents_dir=temp_agents_dir),
         }
 
-        for tool_name, builder in builders.items():
+        for _tool_name, builder in builders.items():
             output = builder.build(full_agent, options)
             assert output is not None
             assert len(output) > 0
@@ -834,7 +834,7 @@ class TestErrorHandling:
             "cursor": CursorBuilder(agents_dir=temp_agents_dir),
         }
 
-        for tool_name, builder in builders.items():
+        for _tool_name, builder in builders.items():
             output = builder.build(unicode_agent, options)
             assert output is not None
             assert len(output) > 0
@@ -871,7 +871,7 @@ class TestErrorHandling:
             "cursor": CursorBuilder(agents_dir=temp_agents_dir),
         }
 
-        for tool_name, builder in builders.items():
+        for _tool_name, builder in builders.items():
             output = builder.build(long_agent, options)
             assert output is not None
             assert len(output) > 0

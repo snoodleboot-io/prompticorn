@@ -1,4 +1,5 @@
 # Security Audit Workflow
+name: "security-audit-maintenance"
 
 **Version:** 1.0
 

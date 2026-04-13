@@ -1,4 +1,5 @@
 ---
+name: "automated-testing"
 description: Implement automated testing suites
 ---
 

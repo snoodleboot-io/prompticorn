@@ -12,11 +12,10 @@ from pathlib import Path
 
 import pytest
 
+from promptosaurus.ir.exceptions import MissingFileError, ParseError, ValidationError
 from promptosaurus.ir.loaders import ComponentLoader, SkillLoader, WorkflowLoader
 from promptosaurus.ir.loaders.component_loader import ComponentBundle
 from promptosaurus.ir.models import Skill, Workflow
-from promptosaurus.ir.exceptions import ParseError, MissingFileError, ValidationError
-
 
 # ============================================================================
 # FIXTURES - Sample files for testing
@@ -797,7 +796,7 @@ class TestLoadersIntegration:
         bundle = component_loader.load(str(complete_agent_dir))
 
         # Load prompt individually
-        prompt_file = Path(complete_agent_dir) / "prompt.md"
+        Path(complete_agent_dir) / "prompt.md"
         # Note: We don't have a direct prompt loader, but we can verify structure
         assert bundle.prompt_content["name"] == "test-agent"
 
@@ -859,7 +858,7 @@ partial-agent:
     def test_init_success(self, temp_mapping_file):
         """Test successful initialization with valid mapping file."""
         from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
-        
+
         loader = AgentSkillMappingLoader(temp_mapping_file)
         assert loader.mapping_file == temp_mapping_file
         assert loader._mapping is None  # Lazy loading
@@ -867,19 +866,19 @@ partial-agent:
     def test_init_file_not_found(self, tmp_path):
         """Test initialization with non-existent file raises error."""
         from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
-        
+
         non_existent = tmp_path / "does_not_exist.yaml"
-        
+
         with pytest.raises(FileNotFoundError, match="Mapping file not found"):
             AgentSkillMappingLoader(non_existent)
 
     def test_mapping_lazy_load(self, temp_mapping_file):
         """Test that mapping is lazy-loaded on first access."""
         from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
-        
+
         loader = AgentSkillMappingLoader(temp_mapping_file)
         assert loader._mapping is None
-        
+
         # Access mapping property
         mapping = loader.mapping
         assert loader._mapping is not None
@@ -890,9 +889,9 @@ partial-agent:
     def test_get_skills_for_agent_success(self, temp_mapping_file):
         """Test getting skills for an agent."""
         from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
-        
+
         loader = AgentSkillMappingLoader(temp_mapping_file)
-        
+
         # Test architect skills
         skills = loader.get_skills_for_agent("architect")
         assert isinstance(skills, list)
@@ -900,7 +899,7 @@ partial-agent:
         assert "architecture-documentation" in skills
         assert "data-model-discovery" in skills
         assert "mermaid-erd-creation" in skills
-        
+
         # Test code skills
         skills = loader.get_skills_for_agent("code")
         assert len(skills) == 2
@@ -910,7 +909,7 @@ partial-agent:
     def test_get_skills_for_nonexistent_agent(self, temp_mapping_file):
         """Test getting skills for non-existent agent returns empty list."""
         from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
-        
+
         loader = AgentSkillMappingLoader(temp_mapping_file)
         skills = loader.get_skills_for_agent("nonexistent")
         assert skills == []
@@ -918,7 +917,7 @@ partial-agent:
     def test_get_skills_for_empty_agent(self, temp_mapping_file):
         """Test getting skills for agent with empty skills list."""
         from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
-        
+
         loader = AgentSkillMappingLoader(temp_mapping_file)
         skills = loader.get_skills_for_agent("empty-agent")
         assert skills == []
@@ -926,9 +925,9 @@ partial-agent:
     def test_get_workflows_for_agent_success(self, temp_mapping_file):
         """Test getting workflows for an agent."""
         from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
-        
+
         loader = AgentSkillMappingLoader(temp_mapping_file)
-        
+
         # Test architect workflows
         workflows = loader.get_workflows_for_agent("architect")
         assert isinstance(workflows, list)
@@ -936,7 +935,7 @@ partial-agent:
         assert "scaffold" in workflows
         assert "data-model" in workflows
         assert "task-breakdown" in workflows
-        
+
         # Test code workflows
         workflows = loader.get_workflows_for_agent("code")
         assert len(workflows) == 2
@@ -946,7 +945,7 @@ partial-agent:
     def test_get_workflows_for_nonexistent_agent(self, temp_mapping_file):
         """Test getting workflows for non-existent agent returns empty list."""
         from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
-        
+
         loader = AgentSkillMappingLoader(temp_mapping_file)
         workflows = loader.get_workflows_for_agent("nonexistent")
         assert workflows == []
@@ -954,7 +953,7 @@ partial-agent:
     def test_get_workflows_for_empty_agent(self, temp_mapping_file):
         """Test getting workflows for agent with empty workflows list."""
         from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
-        
+
         loader = AgentSkillMappingLoader(temp_mapping_file)
         workflows = loader.get_workflows_for_agent("empty-agent")
         assert workflows == []
@@ -962,16 +961,16 @@ partial-agent:
     def test_get_all_mappings(self, temp_mapping_file):
         """Test getting all mappings."""
         from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
-        
+
         loader = AgentSkillMappingLoader(temp_mapping_file)
         mappings = loader.get_all_mappings()
-        
+
         assert isinstance(mappings, dict)
         assert "architect" in mappings
         assert "code" in mappings
         assert "test" in mappings
         assert "empty-agent" in mappings
-        
+
         # Verify it's a copy (not reference)
         mappings["new-key"] = "new-value"
         assert "new-key" not in loader.mapping
@@ -979,9 +978,9 @@ partial-agent:
     def test_has_agent(self, temp_mapping_file):
         """Test checking if agent has mappings."""
         from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
-        
+
         loader = AgentSkillMappingLoader(temp_mapping_file)
-        
+
         assert loader.has_agent("architect") is True
         assert loader.has_agent("code") is True
         assert loader.has_agent("nonexistent") is False
@@ -989,10 +988,10 @@ partial-agent:
     def test_list_agents(self, temp_mapping_file):
         """Test listing all agents."""
         from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
-        
+
         loader = AgentSkillMappingLoader(temp_mapping_file)
         agents = loader.list_agents()
-        
+
         assert isinstance(agents, list)
         assert len(agents) == 5  # architect, code, test, empty-agent, partial-agent
         assert agents == sorted(agents)  # Should be sorted
@@ -1003,20 +1002,20 @@ partial-agent:
     def test_validate_completeness_all_complete(self, temp_mapping_file):
         """Test validation when all required agents are complete."""
         from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
-        
+
         loader = AgentSkillMappingLoader(temp_mapping_file)
         result = loader.validate_completeness(["architect", "code", "test"])
-        
+
         assert result["missing"] == []
         assert result["incomplete"] == []
 
     def test_validate_completeness_missing_agents(self, temp_mapping_file):
         """Test validation detects missing agents."""
         from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
-        
+
         loader = AgentSkillMappingLoader(temp_mapping_file)
         result = loader.validate_completeness(["architect", "missing1", "missing2"])
-        
+
         assert "missing1" in result["missing"]
         assert "missing2" in result["missing"]
         assert len(result["missing"]) == 2
@@ -1024,10 +1023,10 @@ partial-agent:
     def test_validate_completeness_incomplete_agents(self, temp_mapping_file):
         """Test validation detects incomplete agents (missing skills or workflows)."""
         from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
-        
+
         loader = AgentSkillMappingLoader(temp_mapping_file)
         result = loader.validate_completeness(["architect", "empty-agent", "partial-agent"])
-        
+
         # empty-agent has empty skills and workflows
         # partial-agent has skills but missing workflows
         incomplete_agents = [item["agent"] for item in result["incomplete"]]
@@ -1037,29 +1036,29 @@ partial-agent:
     def test_validate_completeness_mixed(self, temp_mapping_file):
         """Test validation with mix of complete, incomplete, and missing agents."""
         from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
-        
+
         loader = AgentSkillMappingLoader(temp_mapping_file)
         result = loader.validate_completeness([
             "architect",  # complete
             "empty-agent",  # incomplete (empty lists)
             "nonexistent"  # missing
         ])
-        
+
         assert len(result["missing"]) == 1
         assert "nonexistent" in result["missing"]
-        
+
         incomplete_agents = [item["agent"] for item in result["incomplete"]]
         assert "empty-agent" in incomplete_agents
 
     def test_malformed_yaml(self, tmp_path):
         """Test handling of malformed YAML file."""
         from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
-        
+
         bad_file = tmp_path / "bad.yaml"
         bad_file.write_text("architect:\n  skills: [unclosed list", encoding="utf-8")
-        
+
         loader = AgentSkillMappingLoader(bad_file)
-        
+
         # Should raise error when accessing mapping
         with pytest.raises(Exception):  # yaml.YAMLError or similar
             _ = loader.mapping
@@ -1067,13 +1066,13 @@ partial-agent:
     def test_empty_yaml_file(self, tmp_path):
         """Test handling of empty YAML file."""
         from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
-        
+
         empty_file = tmp_path / "empty.yaml"
         empty_file.write_text("", encoding="utf-8")
-        
+
         loader = AgentSkillMappingLoader(empty_file)
         mapping = loader.mapping
-        
+
         assert mapping == {}
         assert loader.get_skills_for_agent("anything") == []
         assert loader.get_workflows_for_agent("anything") == []
@@ -1081,13 +1080,13 @@ partial-agent:
     def test_caching(self, temp_mapping_file):
         """Test that mapping is cached after first load."""
         from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
-        
+
         loader = AgentSkillMappingLoader(temp_mapping_file)
-        
+
         # First access loads and caches
         mapping1 = loader.mapping
         assert loader._mapping is not None
-        
+
         # Second access returns cached version
         mapping2 = loader.mapping
         assert mapping1 is mapping2  # Same object reference
@@ -1095,31 +1094,31 @@ partial-agent:
     def test_agent_with_no_skills_field(self, tmp_path):
         """Test agent entry that has workflows but no skills field."""
         from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
-        
+
         mapping_file = tmp_path / "test.yaml"
         content = """agent-no-skills:
   workflows:
     - some-workflow
 """
         mapping_file.write_text(content, encoding="utf-8")
-        
+
         loader = AgentSkillMappingLoader(mapping_file)
         skills = loader.get_skills_for_agent("agent-no-skills")
-        
+
         assert skills == []
 
     def test_agent_with_no_workflows_field(self, tmp_path):
         """Test agent entry that has skills but no workflows field."""
         from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
-        
+
         mapping_file = tmp_path / "test.yaml"
         content = """agent-no-workflows:
   skills:
     - some-skill
 """
         mapping_file.write_text(content, encoding="utf-8")
-        
+
         loader = AgentSkillMappingLoader(mapping_file)
         workflows = loader.get_workflows_for_agent("agent-no-workflows")
-        
+
         assert workflows == []

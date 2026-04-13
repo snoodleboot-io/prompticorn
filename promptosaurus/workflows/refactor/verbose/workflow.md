@@ -1,4 +1,5 @@
 ---
+name: "refactor"
 version: 1.0
 languages: [all]
 subagents: [code/refactor, test/unit, review/code]

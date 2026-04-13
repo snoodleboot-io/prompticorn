@@ -1,4 +1,5 @@
 ---
+name: "model-governance"
 description: "Establish governance processes for ML model lifecycle"
 agent: "mlai"
 category: "ml"

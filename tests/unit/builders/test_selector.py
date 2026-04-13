@@ -2,12 +2,11 @@
 
 import tempfile
 from pathlib import Path
-from enum import Enum
 
 import pytest
 
-from promptosaurus.builders.component_selector import ComponentSelector, Variant, ComponentBundle
-from promptosaurus.builders.errors import ComponentNotFoundError, VariantNotFoundError
+from promptosaurus.builders.component_selector import ComponentBundle, ComponentSelector, Variant
+from promptosaurus.builders.errors import ComponentNotFoundError
 
 
 @pytest.fixture
@@ -141,7 +140,6 @@ class TestComponentSelectorSelectVariant:
     def test_select_nonexistent_variant_falls_back(self, test_agent_with_variants):
         """Test selecting minimal when not available falls back to verbose."""
         from promptosaurus.ir.models import Agent
-        from promptosaurus.builders.errors import VariantNotFoundError
 
         selector = ComponentSelector(str(test_agent_with_variants))
 

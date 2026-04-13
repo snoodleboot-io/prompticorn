@@ -1,4 +1,5 @@
 ---
+name: "caching-strategy"
 description: Implement effective caching layers
 ---
 

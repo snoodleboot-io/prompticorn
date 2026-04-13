@@ -6,13 +6,11 @@ Tests cover:
 - Builder protocol implementations
 """
 
+
 import pytest
-from abc import ABC, abstractmethod
 
 from promptosaurus.builders.base import AbstractBuilder, BuildOptions
-from promptosaurus.builders.errors import BuilderException
 from promptosaurus.ir.models import Agent
-
 
 # ============================================================================
 # FIXTURES - Test builders and agents

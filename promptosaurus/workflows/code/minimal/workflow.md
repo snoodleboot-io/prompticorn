@@ -1,4 +1,5 @@
 ---
+name: "code"
 version: 1.0
 languages: [all]
 subagents: [code/feature, code/bug-fix, test/unit]

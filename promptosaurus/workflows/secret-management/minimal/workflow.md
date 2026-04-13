@@ -1,4 +1,5 @@
 ---
+name: "secret-management"
 description: "Secure handling of sensitive credentials and cryptographic keys"
 agent: "security"
 category: "security"

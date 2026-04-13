@@ -1,4 +1,5 @@
 ---
+name: "security-testing"
 description: Integrate security testing
 ---
 

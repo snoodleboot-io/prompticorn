@@ -1,4 +1,5 @@
 ---
+name: "incident-response"
 description: "Complete incident response including detection, triage, escalation, mitigation, and communication"
 version: "1.0"
 languages: ["python"]

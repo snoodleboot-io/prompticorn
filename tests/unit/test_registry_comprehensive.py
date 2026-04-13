@@ -4,13 +4,13 @@ This module provides extensive test coverage for the Registry class,
 testing all methods, validators, and edge cases.
 """
 
-import pytest
-from pathlib import Path
-from unittest.mock import Mock, patch, MagicMock
-import tempfile
 import shutil
+import tempfile
+from pathlib import Path
 
-from promptosaurus.registry import Registry, _prompt_body_cached, _dest_name
+import pytest
+
+from promptosaurus.registry import Registry, _dest_name, _prompt_body_cached
 
 
 class TestModuleLevelFunctions:

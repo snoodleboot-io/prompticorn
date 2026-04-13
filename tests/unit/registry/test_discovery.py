@@ -15,7 +15,6 @@ from promptosaurus.agent_registry.discovery import RegistryDiscovery
 from promptosaurus.agent_registry.errors import RegistryLoadError
 from promptosaurus.ir.models import Agent
 
-
 # ============================================================================
 # FIXTURES - Test agent directory structures
 # ============================================================================
