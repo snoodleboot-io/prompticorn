@@ -4,7 +4,6 @@ import tempfile
 from pathlib import Path
 
 from promptosaurus.config_handler import (
-    DEFAULT_CONFIG_TEMPLATE,
     ConfigHandler,
     create_default_config,
 )
@@ -119,23 +118,23 @@ class TestConfigHandler:
 
 
 class TestDefaultConfigTemplate:
-    """Tests for DEFAULT_CONFIG_TEMPLATE."""
+    """Tests for ConfigHandler default template methods."""
 
     def test_template_has_version(self):
         """Template should have version key."""
-        assert "version" in DEFAULT_CONFIG_TEMPLATE
+        assert "version" in ConfigHandler.get_default_single_language_template()
 
     def test_template_has_repository(self):
         """Template should have repository key."""
-        assert "repository" in DEFAULT_CONFIG_TEMPLATE
+        assert "repository" in ConfigHandler.get_default_single_language_template()
 
     def test_template_has_defaults(self):
         """Template should have defaults key."""
-        assert "spec" in DEFAULT_CONFIG_TEMPLATE
+        assert "spec" in ConfigHandler.get_default_single_language_template()
 
     def test_template_has_coverage(self):
         """Template should have coverage in defaults."""
-        assert "coverage" in DEFAULT_CONFIG_TEMPLATE["spec"]
+        assert "coverage" in ConfigHandler.get_default_single_language_template()["spec"]
 
 
 class TestCreateDefaultConfig:
@@ -146,8 +145,8 @@ class TestCreateDefaultConfig:
         config = create_default_config("python")
 
         assert config["spec"]["language"] == "python"
-        assert config["spec"]["runtime"] == "3.12"
-        assert config["spec"]["package_manager"] == "poetry"
+        assert config["spec"]["runtime"] == "3.14"
+        assert config["spec"]["package_manager"] == "uv"
         assert config["spec"]["test_framework"] == "pytest"
         assert config["spec"]["linter"] == "ruff"
         assert config["spec"]["formatter"] == "ruff"
@@ -157,8 +156,8 @@ class TestCreateDefaultConfig:
         config = create_default_config("typescript")
 
         assert config["spec"]["language"] == "typescript"
-        assert config["spec"]["runtime"] == "5.4"
-        assert config["spec"]["package_manager"] == "npm"
+        assert config["spec"]["runtime"] == "v6.0"
+        assert config["spec"]["package_manager"] == "pnpm"
         assert config["spec"]["test_framework"] == "vitest"
 
     def test_creates_javascript_config(self):
@@ -166,7 +165,7 @@ class TestCreateDefaultConfig:
         config = create_default_config("javascript")
 
         assert config["spec"]["language"] == "javascript"
-        assert config["spec"]["package_manager"] == "npm"
+        assert config["spec"]["package_manager"] == "pnpm"
 
     def test_sets_repo_type(self):
         """Should set repository type."""
@@ -190,8 +189,8 @@ class TestCreateDefaultConfig:
         config = create_default_config("python", runtime="", package_manager=None)
 
         # Should still have defaults
-        assert config["spec"]["runtime"] == "3.12"
-        assert config["spec"]["package_manager"] == "poetry"
+        assert config["spec"]["runtime"] == "3.14"
+        assert config["spec"]["package_manager"] == "uv"
 
     def test_unknown_language_keeps_defaults(self):
         """Unknown language should still have defaults from first match."""

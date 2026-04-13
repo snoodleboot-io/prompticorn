@@ -8,9 +8,8 @@ from abc import ABC, abstractmethod
 from typing import Any
 
 from promptosaurus.questions.base.folder_spec import (
-    DEFAULT_COVERAGE,
-    LANGUAGE_DEFAULTS,
     FolderSpec,
+    FolderSpecRegistry,
 )
 
 
@@ -76,7 +75,7 @@ class SingleLanguageSpecHandler(SpecHandler):
     """Handler for single-language repository configuration.
 
     This handles the case where there's one language for the entire repository.
-    Uses LANGUAGE_DEFAULTS and DEFAULT_COVERAGE from folder_spec module.
+    Uses FolderSpecRegistry to load language defaults and coverage targets.
     """
 
     def create_spec(self, language: str, **overrides: Any) -> dict[str, Any]:
@@ -89,8 +88,10 @@ class SingleLanguageSpecHandler(SpecHandler):
         Returns:
             Dictionary with language configuration
         """
+        # Get language defaults from registry
+        language_defaults = FolderSpecRegistry.get_language_defaults()
         defaults: dict[str, str] = (
-            LANGUAGE_DEFAULTS.get(language.lower()) or LANGUAGE_DEFAULTS.get("python") or {}
+            language_defaults.get(language.lower()) or language_defaults.get("python") or {}
         )
 
         linter = defaults.get("linter", "")
@@ -102,7 +103,7 @@ class SingleLanguageSpecHandler(SpecHandler):
             "linter": linter,
             "linters": [linter] if linter else [],  # List version for advanced templating
             "formatter": defaults.get("formatter", ""),
-            "coverage": DEFAULT_COVERAGE.copy(),
+            "coverage": FolderSpecRegistry.get_default_coverage(),
         }
 
         # Apply overrides

@@ -53,6 +53,7 @@ def safe_get(obj: Any, path: str, default: Any = None) -> Any:
             if isinstance(current, dict):
                 current = current.get(part)
             elif hasattr(current, part):
+                # design-decision-override: Template framework must handle dynamic attribute access
                 current = getattr(current, part)
             else:
                 logger.debug(

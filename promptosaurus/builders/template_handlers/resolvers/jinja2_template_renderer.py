@@ -94,7 +94,14 @@ class Jinja2TemplateRenderer:
         self._error_log.append(error_record)
 
         # Log with appropriate level
-        log_func = getattr(logger, severity, logger.warning)
+        # Type-safe log level mapping
+        log_level_map = {
+            "debug": logger.debug,
+            "info": logger.info,
+            "warning": logger.warning,
+            "error": logger.error,
+        }
+        log_func = log_level_map.get(severity, logger.warning)
         log_func(f"[{error_type}] {message} (template: {template_name})")
 
     def _detect_inheritance(self, template_content: str) -> str | None:

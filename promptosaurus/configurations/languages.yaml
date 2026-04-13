@@ -1,0 +1,30 @@
+# Supported programming languages
+# Used for language validation and dynamic lookup
+
+supported_languages:
+  - python
+  - typescript
+  - javascript
+  - java
+  - csharp
+  - go
+  - rust
+  - ruby
+  - php
+  - swift
+  - kotlin
+  - scala
+  - elixir
+  - elm
+  - haskell
+  - clojure
+  - fsharp
+  - dart
+  - julia
+  - lua
+  - r
+  - shell
+  - groovy
+  - terraform
+  - sql
+  - html

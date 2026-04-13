@@ -1,0 +1,305 @@
+# Language-Skill-Workflow Mapping Registry
+# Language-specific overrides for skills and workflows
+# Last updated: 2026-04-12
+#
+# IMPORTANT: Most skills/workflows are defined in agent_skill_mapping.yaml
+# This file is ONLY for language-specific overrides (rare cases)
+#
+# Default Resolution Priority:
+# 1. agent_skill_mapping.yaml - Base skills for agent (language-agnostic)
+# 2. language_skill_mapping.yaml - Language+agent overrides (THIS FILE)
+# 3. Fallback - Original agent skills/workflows
+#
+# Example of when to use language overrides:
+# rust/architect:
+#   skills:
+#     - architecture-documentation
+#     - rust-specific-ownership-skill  # ONLY added for Rust
+#
+# For most cases, agent_skill_mapping.yaml is sufficient.
+
+all:
+  skills:
+  - feature-planning
+  - post-implementation-checklist
+  workflows:
+  - feature
+  - review
+  - refactor
+  - migration
+csharp:
+  skills:
+  - feature-planning
+  - incremental-implementation
+  - post-implementation-checklist
+  - test-coverage-categories
+  - test-mocking-rules
+  workflows:
+  - feature
+  - code
+  - testing
+  - refactor
+  - review
+csharp/code:
+  skills:
+  - feature-planning
+  - incremental-implementation
+  - post-implementation-checklist
+  workflows:
+  - feature
+  - code
+csharp/test:
+  skills:
+  - test-coverage-categories
+  - test-mocking-rules
+  workflows:
+  - testing
+go:
+  skills:
+  - feature-planning
+  - incremental-implementation
+  - post-implementation-checklist
+  - test-coverage-categories
+  - test-mocking-rules
+  workflows:
+  - feature
+  - code
+  - testing
+  - refactor
+  - review
+  - scaffold
+go/architect:
+  skills:
+  - data-model-discovery
+  - mermaid-erd-creation
+  workflows:
+  - data-model
+go/code:
+  skills:
+  - feature-planning
+  - incremental-implementation
+  - post-implementation-checklist
+  workflows:
+  - feature
+  - code
+go/test:
+  skills:
+  - test-coverage-categories
+  - test-mocking-rules
+  workflows:
+  - testing
+java:
+  skills:
+  - feature-planning
+  - incremental-implementation
+  - post-implementation-checklist
+  - test-coverage-categories
+  - test-mocking-rules
+  workflows:
+  - feature
+  - code
+  - testing
+  - refactor
+  - review
+  - scaffold
+java/architect:
+  skills:
+  - data-model-discovery
+  - mermaid-erd-creation
+  workflows:
+  - data-model
+java/code:
+  skills:
+  - feature-planning
+  - incremental-implementation
+  - post-implementation-checklist
+  workflows:
+  - feature
+  - code
+java/test:
+  skills:
+  - test-coverage-categories
+  - test-mocking-rules
+  workflows:
+  - testing
+javascript:
+  skills:
+  - feature-planning
+  - incremental-implementation
+  - post-implementation-checklist
+  - test-aaa-structure
+  - test-coverage-categories
+  - test-mocking-rules
+  workflows:
+  - feature
+  - testing
+  - code
+  - refactor
+  - review
+  - boilerplate
+  - accessibility
+  - scaffold
+javascript/code:
+  skills:
+  - feature-planning
+  - incremental-implementation
+  - post-implementation-checklist
+  workflows:
+  - feature
+  - code
+  - testing
+javascript/test:
+  skills:
+  - test-aaa-structure
+  - test-coverage-categories
+  - test-mocking-rules
+  workflows:
+  - testing
+product:
+  skills:
+  - user-needs-discovery
+  - requirements-specification
+  - success-metrics-definition
+  - roadmap-prioritization
+  - user-testing-methods
+  - competitor-analysis
+  - ux-writing-guidelines
+  - launch-readiness-checklist
+  - stakeholder-communication
+  - product-analytics-setup
+  workflows:
+  - requirements-gathering
+  - roadmap-planning
+  - feature-prioritization
+  - user-research-guide
+  - ux-validation
+  - analytics-setup
+  - a-b-testing
+  - feature-launch-checklist
+python:
+  skills:
+  - data-validation-pipelines
+  - ensemble-methods
+  - mlops-pipeline-design
+  workflows:
+  - model-evaluation
+  - mlops-pipeline-setup
+  - production-ml-deployment
+rust:
+  skills:
+  - feature-planning
+  - incremental-implementation
+  - post-implementation-checklist
+  - test-coverage-categories
+  - test-mocking-rules
+  workflows:
+  - feature
+  - code
+  - testing
+  - refactor
+  - review
+rust/code:
+  skills:
+  - feature-planning
+  - incremental-implementation
+  - post-implementation-checklist
+  workflows:
+  - feature
+  - code
+rust/test:
+  skills:
+  - test-coverage-categories
+  - test-mocking-rules
+  workflows:
+  - testing
+security:
+  skills:
+  - threat-identification
+  - vulnerability-assessment
+  - secure-code-review
+  - cryptography-fundamentals
+  - authentication-design
+  - authorization-patterns
+  - api-security-hardening
+  - security-testing-strategies
+  - incident-response-planning
+  - compliance-assessment
+  - secret-management
+  - security-architecture-review
+  workflows:
+  - threat-modeling
+  - vulnerability-scanning
+  - security-testing
+  - compliance-audit
+  - incident-response-security
+  - security-hardening-checklist
+  - penetration-testing-guide
+  - security-code-review
+  - dependency-scanning
+  - secret-management
+sql:
+  skills:
+  - data-model-discovery
+  - mermaid-erd-creation
+  workflows:
+  - data-model
+typescript:
+  skills:
+  - feature-planning
+  - incremental-implementation
+  - post-implementation-checklist
+  - test-aaa-structure
+  - test-coverage-categories
+  - test-mocking-rules
+  workflows:
+  - feature
+  - testing
+  - code
+  - refactor
+  - review
+  - migration
+  - scaffold
+  - boilerplate
+  - accessibility
+  - decision-log
+  - docs
+  - house-style
+  - performance
+  - task-breakdown
+  - dependency-upgrade
+typescript/architect:
+  skills:
+  - feature-planning
+  workflows:
+  - task-breakdown
+  - scaffold
+typescript/code:
+  skills:
+  - feature-planning
+  - incremental-implementation
+  - post-implementation-checklist
+  workflows:
+  - feature
+  - code
+  - testing
+  - boilerplate
+typescript/refactor:
+  skills:
+  - feature-planning
+  - post-implementation-checklist
+  workflows:
+  - refactor
+typescript/review:
+  skills:
+  - feature-planning
+  - post-implementation-checklist
+  workflows:
+  - review
+  - performance
+typescript/test:
+  skills:
+  - test-aaa-structure
+  - test-coverage-categories
+  - test-mocking-rules
+  workflows:
+  - testing

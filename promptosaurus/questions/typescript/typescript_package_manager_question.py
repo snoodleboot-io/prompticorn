@@ -24,8 +24,16 @@ class TypeScriptPackageManagerQuestion(Question):
 
     @property
     def options(self) -> list[str]:
-        return ["npm", "pnpm", "yarn"]
+        return ["pnpm", "npm", "yarn"]
 
     @property
     def default(self) -> str:
-        return "npm"
+        return "pnpm"
+
+    @property
+    def option_explanations(self) -> dict[str, str]:
+        return {
+            "pnpm": "Fast, disk-efficient, strict (recommended)",
+            "npm": "Standard Node.js package manager",
+            "yarn": "Fast, deterministic, workspace support",
+        }

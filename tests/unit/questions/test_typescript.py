@@ -1,11 +1,10 @@
-"""Tests for promptosaurus.questions.typescript module."""
+"""Tests for TypeScript-specific questions."""
+
 
 from promptosaurus.questions.typescript.typescript_package_manager_question import (
     TypeScriptPackageManagerQuestion,
 )
-from promptosaurus.questions.typescript.typescript_version_question import (
-    TypeScriptVersionQuestion,
-)
+from promptosaurus.questions.typescript.typescript_version_question import TypeScriptVersionQuestion
 
 
 class TestTypeScriptVersionQuestion:
@@ -19,20 +18,24 @@ class TestTypeScriptVersionQuestion:
         assert q.options
 
     def test_options_include_recent_versions(self):
-        """Options should include recent TypeScript versions."""
+        """Options should include recent TypeScript versions with v prefix."""
         q = TypeScriptVersionQuestion()
 
-        assert "5.x" in q.options
-        assert "4.x" in q.options
-        assert "3.x" in q.options
-        assert "5.3" in q.options
-        assert "5.0" in q.options
+        # Should have versions with 'v' prefix for clarity
+        assert "v6.0" in q.options
+        assert "v5.9" in q.options
+        assert "v5.8" in q.options
+        assert "v5.4" in q.options
+        assert "v5.0" in q.options
+        # Should NOT have placeholder versions or unprefixed versions
+        assert "5.x" not in q.options
+        assert "6.0" not in q.options  # Should be v6.0
 
     def test_default_is_latest(self):
         """Default should be latest stable version."""
         q = TypeScriptVersionQuestion()
 
-        assert q.default == "5.x"
+        assert q.default == "v6.0"
 
 
 class TestTypeScriptPackageManagerQuestion:
@@ -46,9 +49,10 @@ class TestTypeScriptPackageManagerQuestion:
         assert q.options
 
     def test_options_include_common_managers(self):
-        """Options should include common JS package managers."""
+        """Options should include common package managers."""
         q = TypeScriptPackageManagerQuestion()
 
-        assert "npm" in q.options
+        # Updated to match new options: ["pnpm", "npm", "yarn"]
         assert "pnpm" in q.options
+        assert "npm" in q.options
         assert "yarn" in q.options

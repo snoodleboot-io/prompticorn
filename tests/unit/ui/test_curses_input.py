@@ -1,9 +1,7 @@
 """Tests for curses-based input provider."""
 
 import curses
-from unittest.mock import MagicMock, Mock
-
-import pytest
+from unittest.mock import Mock
 
 from promptosaurus.ui.domain.events import InputEventType
 from promptosaurus.ui.input.curses_provider import CursesInputProvider

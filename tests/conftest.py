@@ -1,19 +1,93 @@
-"""Pytest configuration for promptosaurus tests."""
+"""Test configuration and fixtures."""
+
+from pathlib import Path
 
 import pytest
 
 
+@pytest.fixture
+def project_root():
+    """Get project root directory."""
+    return Path(__file__).parent.parent
+
+
+@pytest.fixture
+def agents_dir(project_root):
+    """Get agents directory."""
+    return project_root / "promptosaurus" / "agents"
+
+
+@pytest.fixture
+def workflows_dir(project_root):
+    """Get workflows directory."""
+    return project_root / "promptosaurus" / "workflows"
+
+
+@pytest.fixture
+def skills_dir(project_root):
+    """Get skills directory."""
+    return project_root / "promptosaurus" / "skills"
+
+
+@pytest.fixture
+def read_file():
+    """Fixture to read file contents."""
+    def _read(path):
+        with open(path) as f:
+            return f.read()
+    return _read
+
+
+@pytest.fixture
+def agent_structure():
+    """Expected structure for agent files."""
+    return {
+        'required_sections': [
+            '# ', 'Purpose', 'Responsibilities', 'Capabilities'
+        ],
+        'min_lines': 20,
+    }
+
+
+@pytest.fixture
+def subagent_structure():
+    """Expected structure for subagent files."""
+    return {
+        'required_sections': [
+            '# ', 'Purpose', 'Key Concepts', 'Examples',
+        ],
+        'min_lines': 40,
+        'has_variants': True,  # minimal and verbose
+    }
+
+
+@pytest.fixture
+def workflow_structure():
+    """Expected structure for workflow files."""
+    return {
+        'required_sections': [
+            '# ', 'Purpose', 'Steps', 'Success Criteria'
+        ],
+        'min_lines': 50,
+        'has_variants': True,  # minimal and verbose
+    }
+
+
+@pytest.fixture
+def skill_structure():
+    """Expected structure for skill files."""
+    return {
+        'required_sections': [
+            '# ', 'Purpose', 'Core Concepts', 'Examples', 'Best Practices'
+        ],
+        'min_lines': 40,
+        'has_variants': True,  # minimal and verbose
+    }
+
+
+# Markers
 def pytest_configure(config):
     """Register custom markers."""
-    config.addinivalue_line("markers", "unit: marks tests as unit tests (fast, isolated)")
-    config.addinivalue_line("markers", "integration: marks tests as integration tests")
-    config.addinivalue_line("markers", "slow: marks tests as slow running")
-    config.addinivalue_line("markers", "security: marks tests as security focused")
-
-
-# Mark all tests in tests/unit/ as unit tests by default
-def pytest_collection_modifyitems(config, items):
-    """Automatically mark unit tests."""
-    for item in items:
-        if "unit" in item.nodeid:
-            item.add_marker(pytest.mark.unit)
+    config.addinivalue_line("markers", "unit: unit tests")
+    config.addinivalue_line("markers", "integration: integration tests")
+    config.addinivalue_line("markers", "validation: validation tests")
