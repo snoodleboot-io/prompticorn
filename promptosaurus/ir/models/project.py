@@ -4,7 +4,7 @@ This module defines the Project model, which represents the configuration
 for a project containing agents, skills, workflows, and tools.
 """
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from typing import Dict, Any, Literal
 
 
@@ -20,6 +20,8 @@ class Project(BaseModel):
         builder_configs: Dictionary of builder-specific configurations
     """
 
+    model_config = ConfigDict(frozen=True)
+
     registry_settings: Dict[str, Any] = Field(
         default_factory=dict,
         description="Dictionary of registry configuration settings",
@@ -32,8 +34,3 @@ class Project(BaseModel):
         default_factory=dict,
         description="Dictionary of builder-specific configurations",
     )
-
-    class Config:
-        """Pydantic configuration for the Project model."""
-
-        frozen = True

@@ -1,43 +1,47 @@
-"""Question for Python code formatter selection."""
+"""Question for selecting Python formatter."""
 
 from promptosaurus.questions.base.question import Question
 
 
 class PythonFormatterQuestion(Question):
-    """Question for Python formatter - supports multiple selection."""
+    """Question handler for Python formatter selection."""
 
     @property
     def key(self) -> str:
+        """Unique identifier for this question."""
         return "python_formatter"
 
     @property
     def question_text(self) -> str:
-        return "What code formatter(s) do you want to use?"
+        """What to ask the user."""
+        return "What formatter?"
 
     @property
     def explanation(self) -> str:
-        return """Formatters ensure consistent code style. You can select multiple:
-- ruff: Fastest (Rust), format + lint in one tool
-- black: Most popular, opinionated style
-- yapf: Google style, configurable"""
+        """Why we're asking this."""
+        return "Select your preferred code formatter for consistent style."
 
     @property
     def options(self) -> list[str]:
-        return ["ruff", "black", "yapf"]
-
-    @property
-    def option_explanations(self) -> dict[str, str]:
-        return {
-            "ruff": "Fastest (Rust) - format + lint in one, recommended",
-            "black": "Most popular - opinionated, consistent, widely adopted",
-            "yapf": "Google style - configurable, good for existing codebases",
-        }
+        """Available formatters."""
+        return ["ruff", "black", "yapf", "autopep8"]
 
     @property
     def default(self) -> str:
+        """Default selection."""
         return "ruff"
 
     @property
     def allow_multiple(self) -> bool:
-        """Allow selecting multiple formatters."""
+        """Allow multiple formatters."""
         return True
+
+    @property
+    def option_explanations(self) -> dict[str, str]:
+        """Explanations for each option."""
+        return {
+            "ruff": "Fast, opinionated, Rust-based",
+            "black": "Uncompromising, deterministic formatting",
+            "yapf": "Knobs for customization",
+            "autopep8": "Auto-fix PEP 8 violations",
+        }

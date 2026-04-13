@@ -199,18 +199,20 @@ class TestTypeScriptVersionQuestion:
         assert q.options
 
     def test_options_include_recent_versions(self):
-        """Options should include recent TypeScript versions."""
+        """Options should include recent TypeScript versions with v prefix."""
         q = TypeScriptVersionQuestion()
 
-        assert "5.4" in q.options
-        assert "5.3" in q.options
-        assert "5.0" in q.options
+        assert "v6.0" in q.options
+        assert "v5.9" in q.options
+        assert "v5.8" in q.options
+        assert "v5.4" in q.options
+        assert "v5.0" in q.options
 
     def test_default_is_latest(self):
         """Default should be latest stable version."""
         q = TypeScriptVersionQuestion()
 
-        assert q.default == "5.x"
+        assert q.default == "v6.0"
 
 
 class TestTypeScriptPackageManagerQuestion:

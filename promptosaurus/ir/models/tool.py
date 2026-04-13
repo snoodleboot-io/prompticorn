@@ -4,7 +4,7 @@ This module defines the Tool model, which represents a capability that
 agents can invoke to perform actions.
 """
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from typing import Dict, Any
 
 
@@ -20,6 +20,8 @@ class Tool(BaseModel):
         parameters: JSON schema describing the tool's parameters
     """
 
+    model_config = ConfigDict(frozen=True)
+
     name: str = Field(..., min_length=1, description="Unique identifier for the tool")
     description: str = Field(
         ...,
@@ -30,8 +32,3 @@ class Tool(BaseModel):
         default_factory=dict,
         description="JSON schema describing the tool's parameters",
     )
-
-    class Config:
-        """Pydantic configuration for the Tool model."""
-
-        frozen = True

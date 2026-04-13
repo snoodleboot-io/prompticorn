@@ -4,7 +4,7 @@ This module defines the Skill model, which represents a reusable capability
 that can be composed into agents and workflows.
 """
 
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, Field, ConfigDict
 from typing import List
 
 
@@ -21,6 +21,8 @@ class Skill(BaseModel):
         tools_needed: List of tool names required by this skill
     """
 
+    model_config = ConfigDict(frozen=True)
+
     name: str = Field(..., min_length=1, description="Unique identifier for the skill")
     description: str = Field(
         ...,
@@ -36,8 +38,3 @@ class Skill(BaseModel):
         default_factory=list,
         description="List of tool names required by this skill",
     )
-
-    class Config:
-        """Pydantic configuration for the Skill model."""
-
-        frozen = True

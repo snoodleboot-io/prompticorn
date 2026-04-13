@@ -4,7 +4,7 @@ This module defines the Workflow model, which represents a sequence of
 steps that an agent can execute in a defined order.
 """
 
-from pydantic import BaseModel, Field, field_validator
+from pydantic import BaseModel, Field, field_validator, ConfigDict
 from typing import List
 
 
@@ -19,6 +19,8 @@ class Workflow(BaseModel):
         description: One-sentence description of the workflow's purpose
         steps: List of step descriptions (non-empty)
     """
+
+    model_config = ConfigDict(frozen=True)
 
     name: str = Field(..., min_length=1, description="Unique identifier for the workflow")
     description: str = Field(
@@ -35,8 +37,3 @@ class Workflow(BaseModel):
         if not v:
             raise ValueError("Workflow must have at least one step")
         return v
-
-    class Config:
-        """Pydantic configuration for the Workflow model."""
-
-        frozen = True

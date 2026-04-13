@@ -827,9 +827,9 @@ architect:
     - data-model-discovery
     - mermaid-erd-creation
   workflows:
-    - scaffold-workflow
-    - data-model-workflow
-    - task-breakdown-workflow
+    - scaffold
+    - data-model
+    - task-breakdown
 
 code:
   skills:

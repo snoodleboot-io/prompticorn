@@ -23,15 +23,50 @@ class PythonRuntimeQuestion(Question):
     and performance.
 
     Attributes:
+        key: Unique identifier for this question
         question_text: The question presented to the user
         explanation: Detailed explanation of Python versions
         options: Available Python runtime versions
         default: Default version selection
-        config_key: Configuration key where answer is stored
     """
 
-    question_text = "What Python runtime version?"
-    explanation = "Select the Python version your project targets."
-    options = ["3.10", "3.11", "3.12", "3.13", "3.14"]
-    default = "3.12"
-    config_key = "runtime"
+    @property
+    def key(self) -> str:
+        """Unique identifier for this question."""
+        return "python_runtime"
+
+    @property
+    def question_text(self) -> str:
+        """What to ask the user."""
+        return "What Python runtime version?"
+
+    @property
+    def explanation(self) -> str:
+        """Why we're asking this."""
+        return (
+            "Select the Python version and runtime your project targets.\n"
+            "Different Python versions offer different features, performance characteristics,\n"
+            "and compatibility with third-party libraries. CPython is the standard implementation,\n"
+            "while PyPy offers performance improvements through JIT compilation."
+        )
+
+    @property
+    def options(self) -> list[str]:
+        """Available Python runtime versions."""
+        return ["3.14", "3.13", "3.12", "3.11", "pypy"]
+
+    @property
+    def default(self) -> str:
+        """Default version selection."""
+        return "3.14"
+
+    @property
+    def option_explanations(self) -> dict[str, str]:
+        """Explanations for each option."""
+        return {
+            "3.11": "Python 3.11 - Older stable release, good for maximum compatibility",
+            "3.12": "Python 3.12 - Stable release with improved performance",
+            "3.13": "Python 3.13 - Recent release with modern features",
+            "3.14": "Python 3.14 - Latest release with cutting-edge features and performance (recommended)",
+            "pypy": "PyPy - Alternative Python implementation with JIT for faster execution",
+        }

@@ -17,28 +17,42 @@ class RepositoryTypeQuestion(Question):
     - Which convention files are loaded (single vs multiple language configs)
     - How folder-specific questions are handled
     - Whether language settings apply globally or per-folder
-
-    Attributes:
-        question_text: The question presented to the user
-        explanation: Detailed explanation of repository types
-        options: Available repository types
-        option_explanations: Details for each option
-        default: Default selection
-        config_key: Configuration key where answer is stored
     """
 
-    question_text = "What type of repository is this?"
-    explanation = "Choose how your codebase is structured linguistically."
+    @property
+    def key(self) -> str:
+        """Unique identifier for this question."""
+        return "repository_type"
 
-    options = [
-        RepositoryTypes.SINGLE,
-        RepositoryTypes.MULTI_MONOREPO,
-    ]
+    @property
+    def question_text(self) -> str:
+        """What to ask the user."""
+        return "What type of repository is this?"
 
-    option_explanations = {
-        RepositoryTypes.SINGLE: "Single language for the entire project",
-        RepositoryTypes.MULTI_MONOREPO: "Multiple languages in different folders (monorepo)",
-    }
+    @property
+    def explanation(self) -> str:
+        """Why we're asking this."""
+        return "Choose how your codebase is structured linguistically."
 
-    default = RepositoryTypes.SINGLE
-    config_key = "repository.type"
+    @property
+    def options(self) -> list[str]:
+        """Available repository types."""
+        return [
+            RepositoryTypes.SINGLE,
+            RepositoryTypes.MULTI_MONOREPO,
+            RepositoryTypes.MIXED,
+        ]
+
+    @property
+    def option_explanations(self) -> dict[str, str]:
+        """Explanations for each option."""
+        return {
+            RepositoryTypes.SINGLE: "Single language for the entire project",
+            RepositoryTypes.MULTI_MONOREPO: "Multiple languages in different folders (monorepo)",
+            RepositoryTypes.MIXED: "Mixed language files throughout (collocation)",
+        }
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return RepositoryTypes.SINGLE

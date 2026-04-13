@@ -16,7 +16,7 @@ class TestingFrameworkHandler(TemplateHandler):
         >>> handler = TestingFrameworkHandler()
         >>> handler.can_handle("TESTING_FRAMEWORK")
         True
-        >>> handler.handle("TESTING_FRAMEWORK", {"testing_framework": "pytest"})
+        >>> handler.handle("TESTING_FRAMEWORK", {"test_framework": "pytest"})
         'pytest'
         >>> handler.handle("TESTING_FRAMEWORK", {})
         ''
@@ -43,9 +43,9 @@ class TestingFrameworkHandler(TemplateHandler):
     def handle(self, variable_name: str, config: dict[str, Any]) -> str:
         """Handle substitution of the TESTING_FRAMEWORK template variable.
         
-        Extracts the 'testing_framework' value from the configuration dictionary
+        Extracts the 'test_framework' value from the configuration dictionary
         and returns it as a string. If no testing framework is configured, returns
-        an empty string.
+        an empty string. If the value is None, returns "None".
         
         Args:
             variable_name: The name of the template variable (should be 'TESTING_FRAMEWORK')
@@ -56,11 +56,11 @@ class TestingFrameworkHandler(TemplateHandler):
             
         Example:
             >>> handler = TestingFrameworkHandler()
-            >>> handler.handle("TESTING_FRAMEWORK", {"testing_framework": "pytest"})
+            >>> handler.handle("TESTING_FRAMEWORK", {"test_framework": "pytest"})
             'pytest'
-            >>> handler.handle("TESTING_FRAMEWORK", {"testing_framework": "vitest"})
+            >>> handler.handle("TESTING_FRAMEWORK", {"test_framework": "vitest"})
             'vitest'
             >>> handler.handle("TESTING_FRAMEWORK", {})
             ''
         """
-        return str(config.get("testing_framework", ""))
+        return str(config.get("test_framework", ""))

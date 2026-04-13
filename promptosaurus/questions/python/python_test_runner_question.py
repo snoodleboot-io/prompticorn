@@ -1,38 +1,41 @@
-# Python test runner question
+"""Question for selecting Python test runner."""
 
 from promptosaurus.questions.base.question import Question
 
 
 class PythonTestRunnerQuestion(Question):
-    """Question for Python test runner (how tests are executed)."""
+    """Question handler for Python test runner selection."""
 
     @property
     def key(self) -> str:
+        """Unique identifier for this question."""
         return "python_test_runner"
 
     @property
     def question_text(self) -> str:
-        return "What test runner do you want to use?"
-
-    @property
-    def options(self) -> list[str]:
-        return ["pytest", "nose2", "unittest"]
+        """What to ask the user."""
+        return "What test runner?"
 
     @property
     def explanation(self) -> str:
-        return """Test runner affects how tests are executed:
-- pytest: Recommended, runs pytest/unittest/doctest/nose2
-- nose2: Runs unittest and pytest-compatible tests
-- unittest: Built-in test runner"""
+        """Why we're asking this."""
+        return "Select your preferred test runner for executing tests."
+
+    @property
+    def options(self) -> list[str]:
+        """Available test runners."""
+        return ["pytest", "nose2", "unittest"]
 
     @property
     def default(self) -> str:
+        """Default selection."""
         return "pytest"
 
     @property
     def option_explanations(self) -> dict[str, str]:
+        """Explanations for each option."""
         return {
-            "pytest": "Industry standard, runs pytest/unittest/doctest/nose2, powerful plugins",
-            "nose2": "Test runner compatible with unittest and pytest-style tests",
-            "unittest": "Built-in Python test runner, no external dependencies needed",
+            "pytest": "Powerful, plugin ecosystem, excellent output",
+            "nose2": "Automatic discovery, plugin support",
+            "unittest": "Standard library, simple, built-in",
         }

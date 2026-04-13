@@ -1,50 +1,47 @@
-"""Question for Python linter configuration."""
+"""Question for selecting Python linter."""
 
 from promptosaurus.questions.base.question import Question
 
 
 class PythonLinterQuestion(Question):
-    """Question for Python linter - supports multiple selection."""
+    """Question handler for Python linter selection."""
 
     @property
     def key(self) -> str:
+        """Unique identifier for this question."""
         return "python_linter"
 
     @property
     def question_text(self) -> str:
-        return "What linter(s) do you want to use?"
+        """What to ask the user."""
+        return "What linter?"
 
     @property
     def explanation(self) -> str:
-        return """Linters check code quality, style, and bugs. You can select multiple:
-- ruff: Ultra-fast (Rust), modern, replaces flake8+isort
-- flake8: Classic, simple, stable rules
-- pylint: Comprehensive deep analysis, very strict
-- pyright: Microsoft's static type checker, VS Code integration"""
+        """Why we're asking this."""
+        return "Select your preferred linter for code quality analysis."
 
     @property
     def options(self) -> list[str]:
+        """Available linters."""
         return ["ruff", "flake8", "pylint", "pyright"]
 
     @property
-    def option_explanations(self) -> dict[str, str]:
-        return {
-            "ruff": "Ultra-fast (Rust) - modern, replaces flake8+isort, recommended",
-            "flake8": "Classic - simple, stable, good default rules",
-            "pylint": "Comprehensive - deep analysis, strict, many rules",
-            "pyright": "Type checker - Microsoft's static analysis, great VS Code support",
-        }
-
-    @property
     def default(self) -> str:
+        """Default selection."""
         return "ruff"
 
     @property
-    def default_indices(self) -> set[int]:
-        """Default selections for multi-select: ruff (0) and pyright (3)."""
-        return {0, 3}
+    def allow_multiple(self) -> bool:
+        """Allow multiple linters."""
+        return True
 
     @property
-    def allow_multiple(self) -> bool:
-        """Allow selecting multiple linters."""
-        return True
+    def option_explanations(self) -> dict[str, str]:
+        """Explanations for each option."""
+        return {
+            "ruff": "Fast, Rust-based, replaces many tools",
+            "flake8": "Extensible, community plugins",
+            "pylint": "Comprehensive, highly configurable",
+            "pyright": "Static type checker, strict mode available",
+        }
