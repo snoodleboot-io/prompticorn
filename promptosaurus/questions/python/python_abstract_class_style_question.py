@@ -16,13 +16,13 @@ class PythonAbstractClassStyleQuestion(Question):
 
     @property
     def options(self) -> list[str]:
-        return ["abc", "interface"]
+        return ["interface", "abc"]
 
     @property
     def explanation(self) -> str:
         return """Abstract class style affects how you define interfaces and abstract base classes:
-- abc: Formal abstract base classes using the abc module (explicit, type-checker friendly)
-- interface: Informal interfaces using NotImplementedError (simpler, duck-typing friendly)"""
+- interface: Informal interfaces using NotImplementedError (simpler, duck-typing friendly, recommended)
+- abc: Formal abstract base classes using the abc module (explicit, type-checker friendly)"""
 
     @property
     def default(self) -> str:
@@ -31,6 +31,6 @@ class PythonAbstractClassStyleQuestion(Question):
     @property
     def option_explanations(self) -> dict[str, str]:
         return {
+            "interface": "Informal interfaces using NotImplementedError (simpler, duck-typing friendly, recommended)",
             "abc": "Formal abstract base classes using the abc module (explicit, type-checker friendly)",
-            "interface": "Informal interfaces using NotImplementedError (simpler, duck-typing friendly)",
         }

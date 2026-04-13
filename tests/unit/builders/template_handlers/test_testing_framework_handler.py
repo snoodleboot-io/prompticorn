@@ -23,20 +23,20 @@ class TestTestingFrameworkHandler(unittest.TestCase):
         self.assertFalse(self.handler.can_handle(""))
 
     def test_handle_with_value(self):
-        """Test that handle returns the test_framework value when present."""
-        config = {"test_framework": "pytest"}
+        """Test that handle returns the testing_framework value when present."""
+        config = {"testing_framework": "pytest"}
         result = self.handler.handle("TESTING_FRAMEWORK", config)
         self.assertEqual(result, "pytest")
 
     def test_handle_without_value(self):
-        """Test that handle returns empty string when test_framework is not present."""
+        """Test that handle returns empty string when testing_framework is not present."""
         config = {}
         result = self.handler.handle("TESTING_FRAMEWORK", config)
         self.assertEqual(result, "")
 
     def test_handle_with_none_value(self):
-        """Test that handle returns empty string when test_framework is None."""
-        config = {"test_framework": None}
+        """Test that handle returns string 'None' when testing_framework is None."""
+        config = {"testing_framework": None}
         result = self.handler.handle("TESTING_FRAMEWORK", config)
         self.assertEqual(result, "None")
 

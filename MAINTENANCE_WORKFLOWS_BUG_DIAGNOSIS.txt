@@ -1,0 +1,266 @@
+╔════════════════════════════════════════════════════════════════════════════════════════════════╗
+║              MAINTENANCE WORKFLOWS EXPORT BUG - ROOT CAUSE DIAGNOSIS                          ║
+╚════════════════════════════════════════════════════════════════════════════════════════════════╝
+
+█ DIAGNOSIS SUMMARY
+═══════════════════════════════════════════════════════════════════════════════════════════════════
+
+The 8 maintenance workflows are NOT being exported to `.kilo/commands/` because the 
+_filter_agent_for_language() function extracts only the LAST component of the agent name
+instead of preserving the FULL agent name when passing it to the language skill loader.
+
+Expected export: 29 workflows (21 Python + 8 maintenance)
+Actual export:   21 workflows (Python only)
+Missing:         8 maintenance workflows
+
+
+█ ROOT CAUSE - EXACT LOCATION
+═══════════════════════════════════════════════════════════════════════════════════════════════════
+
+File:     promptosaurus/prompt_builder.py
+Function: _filter_agent_for_language()
+Lines:    201-209
+
+BUGGY CODE:
+───────────────────────────────────────────────────────────────────────────────────────────────────
+201:  # Extract subagent path if this is a subagent (format: agent/subagent)
+202:  subagent_path = None
+203:  if agent_name and "/" in agent_name:
+204:      parts = agent_name.split("/", 1)
+205:      subagent_path = parts[1]  # ← BUG: Only takes SECOND part after split
+206:
+207:  # Get filtered skills and workflows for this language
+208:  skills = self.language_skill_loader.get_skills_for_language(language, subagent=subagent_path)
+209:  workflows = self.language_skill_loader.get_workflows_for_language(language, subagent=subagent_path)
+
+EXECUTION EXAMPLE WITH AGENT_NAME="orchestrator/maintenance":
+───────────────────────────────────────────────────────────────────────────────────────────────────
+Line 204:  parts = "orchestrator/maintenance".split("/", 1)
+           → parts = ["orchestrator", "maintenance"]
+
+Line 205:  subagent_path = parts[1]
+           → subagent_path = "maintenance"  ✗ WRONG
+           → Should be: subagent_path = "orchestrator/maintenance"  ✓ CORRECT
+
+Line 208-209: loader.get_workflows_for_language("python", subagent="maintenance")
+              Calls loader with WRONG subagent path
+
+
+█ THE LOOKUP FAILURE CHAIN
+═══════════════════════════════════════════════════════════════════════════════════════════════════
+
+Step 1: _filter_agent_for_language receives:
+        agent_name = "orchestrator/maintenance"
+        
+Step 2: Code extracts: subagent_path = "maintenance" (just last part)
+        
+Step 3: Calls loader with: subagent="maintenance"
+        
+Step 4: LanguageSkillMappingLoader._resolve() constructs:
+        full_key = f"python/{subagent}" = "python/maintenance"
+        
+Step 5: Lookup in YAML:
+        ✗ Looking for: "python/maintenance"
+        ✓ Actually exists: "python/orchestrator/maintenance"
+        
+Step 6: Key not found, falls back to language level:
+        Returns: 21 Python workflows (not 8 maintenance)
+        
+Step 7: YAML mapping never consulted:
+        python/orchestrator/maintenance: [8 workflows] ← IGNORED
+
+
+█ EVIDENCE & VERIFICATION
+═══════════════════════════════════════════════════════════════════════════════════════════════════
+
+VERIFICATION 1: Agent Registry
+────────────────────────────────────────────────────────────────────────────────────────────────
+✓ Agent loaded: "orchestrator/maintenance" found in registry
+✓ Workflows populated: 8 workflows loaded from YAML frontmatter
+  - code-quality-maintenance-workflow
+  - coverage-improvement-maintenance-workflow
+  - dependency-update-maintenance-workflow
+  - metrics-tracking-maintenance-workflow
+  - performance-monitoring-maintenance-workflow
+  - release-cycle-maintenance-workflow
+  - security-audit-maintenance-workflow
+  - tech-debt-cleanup-maintenance-workflow
+
+VERIFICATION 2: YAML Mapping
+────────────────────────────────────────────────────────────────────────────────────────────────
+File: language_skill_mapping.yaml, lines 107-118
+
+python/orchestrator/maintenance:
+  skills:
+    - feature-planning
+  workflows:
+    - code-quality-maintenance-workflow
+    - coverage-improvement-maintenance-workflow
+    - dependency-update-maintenance-workflow
+    - metrics-tracking-maintenance-workflow
+    - performance-monitoring-maintenance-workflow
+    - release-cycle-maintenance-workflow
+    - security-audit-maintenance-workflow
+    - tech-debt-cleanup-maintenance-workflow
+
+✓ Entry exists with ALL 8 workflows
+
+VERIFICATION 3: Test with Correct Path
+────────────────────────────────────────────────────────────────────────────────────────────────
+When calling with CORRECT path:
+  loader.get_workflows_for_language("python", subagent="orchestrator/maintenance")
+  
+Returns: 8 workflows ✓ CORRECT
+
+When calling with BUGGY path:
+  loader.get_workflows_for_language("python", subagent="maintenance")
+  
+Returns: 21 workflows ✗ WRONG (falls back to Python level)
+
+
+█ WHY THE BUG EXISTS
+═══════════════════════════════════════════════════════════════════════════════════════════════════
+
+The code was designed for TWO-LEVEL AGENT HIERARCHY:
+  - Format: agent/subagent (e.g., "code/feature")
+  - YAML key: language/subagent (e.g., "python/feature")
+  - Extraction: parts[1] works fine for two levels
+
+But MAINTENANCE uses THREE-LEVEL HIERARCHY:
+  - Format: agent/subagent where agent="orchestrator/maintenance"
+  - YAML key: language/agent/subagent (e.g., "python/orchestrator/maintenance")
+  - Extraction: parts[1] breaks for three levels - gives "maintenance" instead of "orchestrator/maintenance"
+
+The split("/" 1) creates:
+  ["orchestrator", "maintenance"] - two parts
+  
+Taking parts[1] loses the "orchestrator" prefix needed for YAML lookup.
+
+
+█ WHERE WORKFLOWS ARE LOST
+═══════════════════════════════════════════════════════════════════════════════════════════════════
+
+In prompt_builder.py line 159-173 (Write workflows section):
+
+```python
+if not dry_run and self.tool_name == "kilo":
+    for agent_name, agent in all_agents.items():
+        if agent.workflows:
+            try:
+                # Filter agent for language before writing workflows
+                filtered_agent = self._filter_agent_for_language(agent, language, agent_name=agent_name)
+                                                                                    ↑
+                                                                          Passes "orchestrator/maintenance"
+                
+                workflow_files = self._write_workflow_files(output, agent_name, filtered_agent, variant)
+                                                                                           ↑
+                                                             filtered_agent has 21 workflows (WRONG)
+                                                             Should have 8 workflows (RIGHT)
+```
+
+The filtered_agent gets the WRONG workflows, so _write_workflow_files writes 21 instead of 8.
+
+
+█ AFFECTED AGENTS & IMPACT
+═══════════════════════════════════════════════════════════════════════════════════════════════════
+
+Directly affected:
+  - orchestrator/maintenance (8 workflows missing)
+
+Potentially affected (if similar hierarchy exists):
+  - Any agent with nested subagent structure (agent/subagent/sub-subagent)
+  - None currently exist, but this pattern could break them
+
+Export count impact:
+  - Current:  21 workflows exported
+  - Expected: 29 workflows exported (21 + 8)
+  - Missing:  8 maintenance workflows
+
+
+█ FILES INVOLVED IN THE BUG
+═══════════════════════════════════════════════════════════════════════════════════════════════════
+
+PRIMARY (THE BUG):
+  📄 promptosaurus/prompt_builder.py, lines 201-209
+     _filter_agent_for_language()
+     Action needed: FIX THIS
+
+INVOLVED IN THE CHAIN (working correctly):
+  📄 promptosaurus/ir/loaders/language_skill_mapping_loader.py
+     _resolve() function - correctly builds "python/subagent" key
+     No changes needed - bug is upstream
+
+  📄 language_skill_mapping.yaml, lines 107-118
+     "python/orchestrator/maintenance" entry exists with correct workflows
+     No changes needed
+
+  📄 promptosaurus/agents/orchestrator/subagents/maintenance/minimal/prompt.md
+     YAML frontmatter has all 8 workflows defined
+     No changes needed
+
+
+█ EXECUTION TRACE WITH ACTUAL VALUES
+═══════════════════════════════════════════════════════════════════════════════════════════════════
+
+Input:
+  agent_name = "orchestrator/maintenance"
+  language = "python"
+
+Line 204:
+  parts = ["orchestrator", "maintenance"]
+  
+Line 205 (BUG):
+  subagent_path = parts[1]
+  subagent_path = "maintenance"  ✗ WRONG VALUE
+
+Line 208-209:
+  Call: loader.get_workflows_for_language("python", subagent="maintenance")
+
+Inside loader._resolve():
+  full_key = "python/maintenance"
+  Key exists? FALSE
+  Fallback to "python" level
+  Return: 21 workflows (Python defaults)
+
+Result:
+  ✗ Got: 21 workflows (feature-workflow, testing-workflow, etc.)
+  ✓ Expected: 8 workflows (code-quality-maintenance-workflow, etc.)
+
+
+█ WHAT SHOULD HAPPEN
+═══════════════════════════════════════════════════════════════════════════════════════════════════
+
+Input:
+  agent_name = "orchestrator/maintenance"
+  language = "python"
+
+CORRECT Line 205:
+  subagent_path = agent_name  (or agent_name itself)
+  subagent_path = "orchestrator/maintenance"  ✓ CORRECT VALUE
+
+Line 208-209:
+  Call: loader.get_workflows_for_language("python", subagent="orchestrator/maintenance")
+
+Inside loader._resolve():
+  full_key = "python/orchestrator/maintenance"
+  Key exists? TRUE ✓
+  Return: 8 workflows (from python/orchestrator/maintenance in YAML)
+
+Result:
+  ✓ Got: 8 workflows (code-quality-maintenance-workflow, coverage-improvement-maintenance-workflow, etc.)
+  ✓ Expected: 8 workflows ✓ MATCH
+
+
+█ CONCLUSION
+═══════════════════════════════════════════════════════════════════════════════════════════════════
+
+Issue:       Maintenance workflows not exported
+Root cause:  _filter_agent_for_language() extracts only "maintenance" instead of "orchestrator/maintenance"
+Impact:      8 maintenance workflows missing from export (21 exported instead of 29)
+Severity:    HIGH - Core functionality broken for maintenance mode
+Fix effort:  TRIVIAL - Change 1 line of code
+Location:    promptosaurus/prompt_builder.py, line 205
+
+The maintenance subagent, YAML mapping, and workflow files are all correct.
+The bug is purely in how the prompt builder extracts and uses the agent_name parameter.
+

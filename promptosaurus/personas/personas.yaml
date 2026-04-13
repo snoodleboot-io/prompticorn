@@ -1,0 +1,313 @@
+# Persona-Based Agent, Workflow, and Skill Mappings
+# Reference: planning/current/adrs/ADR-001-persona-based-filtering.md
+#
+# This file defines which agents, workflows, and skills are available
+# to each persona (SDLC role). Users select personas during initialization,
+# and the system enables only the content mapped to those personas.
+
+# Universal agents - always available to all personas
+universal_agents:
+  - ask        # General Q&A and research
+  - debug      # Troubleshooting and error resolution
+  - explain    # Code walkthroughs and onboarding
+  - plan       # Strategic planning and work planning
+  - orchestrator  # Multi-step workflow coordination
+
+# Persona definitions
+personas:
+  software_engineer:
+    display_name: "Software Engineer"
+    description: "Software development, implementation, and coding"
+    focus: "Writing, maintaining, and testing application code"
+    
+    # PRIMARY agents (core to this role)
+    primary_agents:
+      - code
+      - test
+      - refactor
+      - migration
+    
+    # Secondary agents (supportive/cross-cutting)
+    secondary_agents:
+      - review
+      - backend
+      - frontend
+      - performance
+      - enforcement
+    
+    # Key workflows for this persona
+    workflows:
+      - code
+      - testing
+      - feature
+      - refactor
+      - dependency-upgrade
+      - boilerplate
+      - code-quality-maintenance
+      - coverage-improvement-maintenance
+      - automated-testing
+    
+    # Key skills for this persona
+    skills:
+      - incremental-implementation
+      - code-review-practices
+      - testing-strategies
+      - debugging-methodology
+      - technical-debt-management
+      - test-aaa-structure
+      - test-mocking-rules
+      - test-coverage-categories
+
+  architect:
+    display_name: "Architect"
+    description: "System design, architecture planning, and technical decisions"
+    focus: "Designing scalable systems and making architectural trade-offs"
+    
+    primary_agents:
+      - architect
+      - backend
+      - frontend
+      - data
+    
+    secondary_agents:
+      - performance
+    
+    workflows:
+      - scaffold
+      - data-model
+      - strategy
+      - decision-log
+      - component-architecture
+      - microservices-architecture
+      - api-design
+      - database-selection
+      - caching-strategy
+      - capacity-planning
+    
+    skills:
+      - architecture-documentation
+      - technical-decision-making
+      - problem-decomposition
+      - mermaid-erd-creation
+      - data-model-discovery
+
+  qa_tester:
+    display_name: "QA / Tester"
+    description: "Quality assurance, testing strategy, and test automation"
+    focus: "Ensuring quality through comprehensive testing"
+    
+    primary_agents:
+      - test
+      - review
+    
+    secondary_agents:
+      - performance
+      - enforcement
+    
+    workflows:
+      - testing
+      - testing-strategy
+      - performance-testing
+      - automated-testing
+      - coverage-improvement-maintenance
+      - review
+      - accessibility
+    
+    skills:
+      - testing-strategies
+      - test-coverage-categories
+      - test-aaa-structure
+      - test-mocking-rules
+      - code-review-practices
+      - quality-assurance
+
+  devops_engineer:
+    display_name: "DevOps Engineer"
+    description: "Infrastructure, deployment, operations, and CI/CD"
+    focus: "Building infrastructure as code and maintaining systems"
+    
+    primary_agents:
+      - code         # Infrastructure-as-Code
+      - devops
+      - observability
+      - incident
+    
+    secondary_agents:
+      - security
+      - mlai
+      - data
+    
+    workflows:
+      - cicd-pipeline
+      - secret-management
+      - infrastructure-as-code
+      - disaster-recovery
+      - container-orchestration
+      - observability
+      - incident-response
+      - postmortem
+      - capacity-planning
+      - deployment-automation
+    
+    skills:
+      - performance-optimization
+      - debugging-methodology
+      - technical-communication
+      - continuous-improvement
+
+  security_engineer:
+    display_name: "Security Engineer"
+    description: "Security hardening, threat modeling, and compliance"
+    focus: "Securing systems and meeting compliance requirements"
+    
+    primary_agents:
+      - security
+      - compliance
+    
+    secondary_agents:
+      - incident
+      - review
+      - enforcement
+    
+    workflows:
+      - security-code-review
+      - security-testing
+      - vulnerability-scanning
+      - vulnerability-assessment
+      - threat-modeling
+      - compliance-audit
+      - penetration-testing-guide
+      - data-encryption
+      - authentication-authorization
+      - incident-response-security
+    
+    skills:
+      - technical-communication
+      - code-review-practices
+      - problem-decomposition
+
+  product_manager:
+    display_name: "Product Manager"
+    description: "Requirements, prioritization, and roadmap planning"
+    focus: "Defining what to build and why"
+    
+    primary_agents:
+      - product
+    
+    secondary_agents: []
+    
+    workflows:
+      - requirements-gathering
+      - feature-prioritization
+      - roadmap-planning
+      - user-research-guide
+      - feature-launch-checklist
+      - a-b-testing
+      - analytics-setup
+      - ux-validation
+    
+    skills:
+      - feature-planning
+      - technical-communication
+      - problem-decomposition
+      - feature-prioritization-workflow
+
+  data_engineer:
+    display_name: "Data Engineer"
+    description: "Data pipelines, data quality, and data infrastructure"
+    focus: "Building reliable data systems and ETL pipelines"
+    
+    primary_agents:
+      - code         # ETL and pipeline code
+      - data
+    
+    secondary_agents:
+      - mlai
+      - devops
+      - observability
+      - performance
+    
+    workflows:
+      - data-pipeline
+      - data-quality
+      - data-quality-monitoring
+      - data-model
+      - database-selection
+      - schema-migration
+      - observability
+      - performance-testing
+    
+    skills:
+      - data-validation-pipelines
+      - data-versioning-reproducibility
+      - technical-decision-making
+      - performance-optimization
+      - debugging-methodology
+
+  data_scientist:
+    display_name: "Data Scientist"
+    description: "Machine learning, model development, and optimization"
+    focus: "Building and improving ML/AI systems"
+    
+    primary_agents:
+      - code         # ML model code
+      - mlai
+    
+    secondary_agents:
+      - data
+      - test
+      - performance
+      - devops
+      - observability
+    
+    workflows:
+      - model-evaluation
+      - hyperparameter-tuning
+      - model-retraining-strategy
+      - model-serving
+      - production-ml-deployment
+      - ml-monitoring-observability
+      - mlops-pipeline-setup
+      - experiment-tracking-setup
+      - feature-engineering-guide
+      - model-interpretability-guide
+      - model-governance
+    
+    skills:
+      - feature-importance-analysis
+      - mlops-pipeline-design
+      - model-interpretability
+      - batch-vs-realtime-scoring
+      - hyperparameter-optimization
+      - cross-validation-strategies
+      - imbalanced-classification
+      - ensemble-methods
+      - dimensionality-reduction
+      - anomaly-detection-techniques
+      - model-performance-debugging
+      - feature-engineering-guide
+      - feature-store-design
+      - data-validation-pipelines
+      - time-series-preprocessing
+
+  technical_writer:
+    display_name: "Technical Writer"
+    description: "Documentation and technical communication"
+    focus: "Creating clear, comprehensive documentation"
+    
+    primary_agents:
+      - document
+    
+    secondary_agents: []
+    
+    workflows:
+      - docs
+      - decision-log
+    
+    skills:
+      - documentation-best-practices
+      - technical-communication
+
+# Metadata
+version: "1.0"
+last_updated: "2026-04-12"

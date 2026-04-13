@@ -77,7 +77,11 @@ class PipelineOrchestrator:
         initial_state: SelectionState
         if question.allow_multiple:
             # Use default_indices for multi-select, fall back to default_index
-            default_selections = question.default_indices or {question.default_index}
+            default_selections: set[int] = (
+                question.default_indices
+                if question.default_indices is not None
+                else {question.default_index}
+            )
 
             # Choose the appropriate multi-selection state class
             if question.none_index is not None:

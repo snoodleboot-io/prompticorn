@@ -27,7 +27,8 @@ ARTIFACT_FILES: Final[dict[str, dict[str, set[str]]]] = {
     "kilo-cli": {
         "create": {".opencode/"},
         "remove": {
-            ".kilocode/",
+            ".kilo/",  # Remove new kilo-ide output
+            ".kilocode/",  # Remove legacy
             ".clinerules",
             ".cursor/",
             ".cursorrules",
@@ -35,9 +36,10 @@ ARTIFACT_FILES: Final[dict[str, dict[str, set[str]]]] = {
         },
     },
     "kilo-ide": {
-        "create": {".kilocode/"},
+        "create": {".kilo/"},
         "remove": {
             ".opencode/",
+            ".kilocode/",  # Remove legacy if present
             ".clinerules",
             ".cursor/",
             ".cursorrules",
@@ -48,6 +50,7 @@ ARTIFACT_FILES: Final[dict[str, dict[str, set[str]]]] = {
         "create": {".clinerules"},
         "remove": {
             ".opencode/",
+            ".kilo/",
             ".kilocode/",
             ".cursor/",
             ".cursorrules",
@@ -58,6 +61,7 @@ ARTIFACT_FILES: Final[dict[str, dict[str, set[str]]]] = {
         "create": {".cursor/", ".cursorrules"},
         "remove": {
             ".opencode/",
+            ".kilo/",
             ".kilocode/",
             ".clinerules",
             ".github/copilot-instructions.md",
@@ -67,6 +71,7 @@ ARTIFACT_FILES: Final[dict[str, dict[str, set[str]]]] = {
         "create": {".github/copilot-instructions.md"},
         "remove": {
             ".opencode/",
+            ".kilo/",
             ".kilocode/",
             ".clinerules",
             ".cursor/",

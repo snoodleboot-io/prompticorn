@@ -3,7 +3,6 @@
 from promptosaurus.ui.commands.command import Command
 from promptosaurus.ui.commands.result import CommandResult
 from promptosaurus.ui.domain.context import PipelineContext
-from promptosaurus.ui.state.single_selection_state import SingleSelectionState
 
 
 class NavigateCommand(Command):

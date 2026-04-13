@@ -60,12 +60,12 @@ class TestMonorepoConfig:
 
     def test_multi_language_config_template(self):
         """Verify multi-language config template exists."""
-        from promptosaurus.config_handler import DEFAULT_MULTI_LANGUAGE_CONFIG_TEMPLATE
+        from promptosaurus.config_handler import ConfigHandler
 
-        assert "repository" in DEFAULT_MULTI_LANGUAGE_CONFIG_TEMPLATE
-        assert "spec" in DEFAULT_MULTI_LANGUAGE_CONFIG_TEMPLATE
+        assert "repository" in ConfigHandler.get_default_multi_language_template()
+        assert "spec" in ConfigHandler.get_default_multi_language_template()
         assert (
-            DEFAULT_MULTI_LANGUAGE_CONFIG_TEMPLATE["repository"]["type"]
+            ConfigHandler.get_default_multi_language_template()["repository"]["type"]
             == "multi-language-monorepo"
         )
 
@@ -95,28 +95,28 @@ class TestMonorepoPresetTypes:
 
     def test_backend_preset_types(self):
         """Verify backend preset types are defined."""
-        from promptosaurus.questions.base.folder_spec import FOLDER_TYPE_PRESETS
+        from promptosaurus.questions.base.folder_spec import FolderSpecRegistry
 
-        assert "backend" in FOLDER_TYPE_PRESETS
-        assert "api" in FOLDER_TYPE_PRESETS["backend"]
-        assert "library" in FOLDER_TYPE_PRESETS["backend"]
-        assert "worker" in FOLDER_TYPE_PRESETS["backend"]
-        assert "cli" in FOLDER_TYPE_PRESETS["backend"]
+        assert "backend" in FolderSpecRegistry.get_folder_type_presets()
+        assert "api" in FolderSpecRegistry.get_folder_type_presets()["backend"]
+        assert "library" in FolderSpecRegistry.get_folder_type_presets()["backend"]
+        assert "worker" in FolderSpecRegistry.get_folder_type_presets()["backend"]
+        assert "cli" in FolderSpecRegistry.get_folder_type_presets()["backend"]
 
     def test_frontend_preset_types(self):
         """Verify frontend preset types are defined."""
-        from promptosaurus.questions.base.folder_spec import FOLDER_TYPE_PRESETS
+        from promptosaurus.questions.base.folder_spec import FolderSpecRegistry
 
-        assert "frontend" in FOLDER_TYPE_PRESETS
-        assert "ui" in FOLDER_TYPE_PRESETS["frontend"]
-        assert "library" in FOLDER_TYPE_PRESETS["frontend"]
-        assert "e2e" in FOLDER_TYPE_PRESETS["frontend"]
+        assert "frontend" in FolderSpecRegistry.get_folder_type_presets()
+        assert "ui" in FolderSpecRegistry.get_folder_type_presets()["frontend"]
+        assert "library" in FolderSpecRegistry.get_folder_type_presets()["frontend"]
+        assert "e2e" in FolderSpecRegistry.get_folder_type_presets()["frontend"]
 
     def test_preset_languages(self):
         """Verify preset languages are correct."""
-        from promptosaurus.questions.base.folder_spec import FOLDER_TYPE_PRESETS
+        from promptosaurus.questions.base.folder_spec import FolderSpecRegistry
 
         # Backend defaults to Python
-        assert FOLDER_TYPE_PRESETS["backend"]["api"]["language"] == "python"
+        assert FolderSpecRegistry.get_folder_type_presets()["backend"]["api"]["language"] == "python"
         # Frontend defaults to TypeScript
-        assert FOLDER_TYPE_PRESETS["frontend"]["ui"]["language"] == "typescript"
+        assert FolderSpecRegistry.get_folder_type_presets()["frontend"]["ui"]["language"] == "typescript"

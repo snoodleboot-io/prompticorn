@@ -40,7 +40,7 @@ class TestPythonRuntimeQuestion:
         """Default should be latest stable version."""
         q = PythonRuntimeQuestion()
 
-        assert q.default == "3.12"
+        assert q.default == "3.14"
 
     def test_option_explanations_for_all_options(self):
         """Each option should have an explanation."""

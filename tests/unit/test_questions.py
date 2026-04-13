@@ -129,7 +129,7 @@ class TestPythonRuntimeQuestion:
         """Default should be latest stable version."""
         q = PythonRuntimeQuestion()
 
-        assert q.default == "3.12"
+        assert q.default == "3.14"
 
     def test_option_explanations_for_all_options(self):
         """Each option should have an explanation."""
@@ -202,15 +202,15 @@ class TestTypeScriptVersionQuestion:
         """Options should include recent TypeScript versions."""
         q = TypeScriptVersionQuestion()
 
-        assert "5.4" in q.options
-        assert "5.3" in q.options
-        assert "5.0" in q.options
+        assert "v5.4" in q.options
+        assert "v5.8" in q.options
+        assert "v5.0" in q.options
 
     def test_default_is_latest(self):
         """Default should be latest stable version."""
         q = TypeScriptVersionQuestion()
 
-        assert q.default == "5.x"
+        assert q.default == "v6.0"
 
 
 class TestTypeScriptPackageManagerQuestion:
