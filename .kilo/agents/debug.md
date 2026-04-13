@@ -19,6 +19,9 @@ Use this mode when diagnosing bugs, crashes, or unexpected behavior.
 
 - feature-planning
 - post-implementation-checklist
+- data-validation-pipelines
+- ensemble-methods
+- mlops-pipeline-design
 
 # Workflows
 
@@ -26,6 +29,9 @@ Use this mode when diagnosing bugs, crashes, or unexpected behavior.
 - review
 - refactor
 - migration
+- model-evaluation
+- mlops-pipeline-setup
+- production-ml-deployment
 
 # Subagents
 

@@ -18,6 +18,9 @@ Use this mode when explaining code or helping onboard developers.
 
 - feature-planning
 - post-implementation-checklist
+- data-validation-pipelines
+- ensemble-methods
+- mlops-pipeline-design
 
 # Workflows
 
@@ -25,6 +28,9 @@ Use this mode when explaining code or helping onboard developers.
 - review
 - refactor
 - migration
+- model-evaluation
+- mlops-pipeline-setup
+- production-ml-deployment
 
 # Subagents
 

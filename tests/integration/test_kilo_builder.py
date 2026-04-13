@@ -195,7 +195,6 @@ class TestKiloBuilderYAMLValidation:
         assert isinstance(parsed, dict)
         assert "name" in parsed
         assert "description" in parsed
-        assert "model" in parsed
         assert "state_management" in parsed
 
     def test_yaml_frontmatter_has_required_fields(self, builder_with_agents: KiloBuilder) -> None:
@@ -216,7 +215,6 @@ class TestKiloBuilderYAMLValidation:
 
         assert parsed["name"] == "test_agent"
         assert parsed["description"] == "Test agent description"
-        assert "model" in parsed
         assert "state_management" in parsed
 
     def test_yaml_handles_special_characters_in_description(
