@@ -13,6 +13,7 @@ class FolderSpecRegistry:
     Loads language defaults, coverage targets, and folder type presets
     from YAML configuration file.
     """
+
     _config: dict[str, Any] | None = None
 
     @classmethod
@@ -23,7 +24,9 @@ class FolderSpecRegistry:
             Dictionary with language_defaults, default_coverage, and folder_type_presets.
         """
         if cls._config is None:
-            config_file = Path(__file__).parent.parent.parent / "configurations" / "language_defaults.yaml"
+            config_file = (
+                Path(__file__).parent.parent.parent / "configurations" / "language_defaults.yaml"
+            )
             with open(config_file, encoding="utf-8") as f:
                 cls._config = yaml.safe_load(f)
         return cls._config
@@ -38,8 +41,7 @@ class FolderSpecRegistry:
         config = cls._load_config()
         # Return all keys except default_coverage and folder_type_presets
         return {
-            k: v for k, v in config.items()
-            if k not in ("default_coverage", "folder_type_presets")
+            k: v for k, v in config.items() if k not in ("default_coverage", "folder_type_presets")
         }
 
     @classmethod
@@ -107,7 +109,9 @@ class FolderSpec:
     linter: str = ""
     linters: list[str] = field(default_factory=list)  # List of linters for advanced templating
     formatter: str = ""
-    coverage: dict[str, int] = field(default_factory=lambda: FolderSpecRegistry.get_default_coverage())
+    coverage: dict[str, int] = field(
+        default_factory=lambda: FolderSpecRegistry.get_default_coverage()
+    )
 
     def __post_init__(self) -> None:
         """Apply language-specific defaults after initialization."""

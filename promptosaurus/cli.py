@@ -54,6 +54,7 @@ from promptosaurus.registry import registry
 
 # Valid languages for each preset type/subtype
 
+
 def _get_valid_languages(preset_type: str, subtype: str) -> list[str]:
     """Get valid languages for a preset type/subtype.
 
@@ -125,7 +126,7 @@ def _setup_monorepo_folders() -> list[dict[str, Any]]:
 
         if folder_type == "custom":
             # Custom folder: prompt for folder path
-            os.system('clear' if os.name != 'nt' else 'cls')  # Clear screen after curses
+            os.system("clear" if os.name != "nt" else "cls")  # Clear screen after curses
             folder_path = click.prompt(
                 "\nFolder path (e.g., services/auth/api)",
                 default="",
@@ -136,7 +137,7 @@ def _setup_monorepo_folders() -> list[dict[str, Any]]:
                 continue
 
             # Prompt for language
-            os.system('clear' if os.name != 'nt' else 'cls')  # Clear screen
+            os.system("clear" if os.name != "nt" else "cls")  # Clear screen
             language = click.prompt(
                 "\nProgramming language",
                 type=click.Choice(LANGUAGE_KEYS),
@@ -165,7 +166,8 @@ def _setup_monorepo_folders() -> list[dict[str, Any]]:
             # Get subtypes for this preset
             subtypes = list(FolderSpecRegistry.get_folder_type_presets()[preset_type].keys())
             subtype_options = [
-                f"{s} ({FolderSpecRegistry.get_folder_type_presets()[preset_type][s]['language']})" for s in subtypes
+                f"{s} ({FolderSpecRegistry.get_folder_type_presets()[preset_type][s]['language']})"
+                for s in subtypes
             ]
 
             # Step 2: Ask for subtype
@@ -185,7 +187,7 @@ def _setup_monorepo_folders() -> list[dict[str, Any]]:
             subtype = subtype_choice.split(" (")[0]  # Extract subtype name
 
             # Step 3: Ask for folder path
-            os.system('clear' if os.name != 'nt' else 'cls')  # Clear screen after curses
+            os.system("clear" if os.name != "nt" else "cls")  # Clear screen after curses
             folder_path = click.prompt(
                 f"\nFolder path (e.g., {preset_type}/{subtype})",
                 default=f"{preset_type}/{subtype}",
@@ -457,7 +459,6 @@ def init_prompts():
         ✓ Tool configs generated
     """
 
-
     from promptosaurus.ui._selector import select_option_with_explain
     from promptosaurus.ui.exceptions import UserCancelledError
 
@@ -553,7 +554,9 @@ def init_prompts():
             # Convert display names back to persona IDs
             if isinstance(selected_personas_display, list):
                 display_to_id = {persona_registry.get_display_name(pid): pid for pid in persona_ids}
-                selected_persona_ids = [display_to_id[display_name] for display_name in selected_personas_display]
+                selected_persona_ids = [
+                    display_to_id[display_name] for display_name in selected_personas_display
+                ]
             else:
                 # Single selection (shouldn't happen with allow_multiple=True, but handle it)
                 display_to_id = {persona_registry.get_display_name(pid): pid for pid in persona_ids}
@@ -564,7 +567,10 @@ def init_prompts():
 
         except Exception as e:
             # Fallback if persona loading fails - log warning and continue
-            click.secho(f"  Warning: Could not load personas ({e}). Skipping persona selection.", fg="yellow")
+            click.secho(
+                f"  Warning: Could not load personas ({e}). Skipping persona selection.",
+                fg="yellow",
+            )
             active_personas = []  # Empty list = no filtering
 
         # Step 4: Handle language questions based on repo type
@@ -883,7 +889,9 @@ def swap_command():
 
         # Convert display names back to persona IDs
         if isinstance(selected_personas_display, list):
-            selected_persona_ids = [display_to_id[display_name] for display_name in selected_personas_display]
+            selected_persona_ids = [
+                display_to_id[display_name] for display_name in selected_personas_display
+            ]
         else:
             # Single selection (shouldn't happen with allow_multiple=True, but handle it)
             selected_persona_ids = [display_to_id[selected_personas_display]]
@@ -925,6 +933,7 @@ def swap_command():
     # Remove current tool's CREATE artifacts (the .kilo/ directory itself)
     # NOT the artifacts from other tools
     import shutil
+
     artifacts_to_remove = artifact_manager.get_artifacts_to_create(current_tool)
     removal_actions = []
     for artifact in artifacts_to_remove:
@@ -974,6 +983,7 @@ def swap_command():
     new_display = [id_to_display[pid] for pid in selected_persona_ids]
     click.echo(f"\n  Active personas: {', '.join(new_display)}")
     click.echo()
+
 
 # ══ update ═══════════════════════════════════════════════════════════════════════
 

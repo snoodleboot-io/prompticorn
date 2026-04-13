@@ -156,9 +156,7 @@ class CoreFilesLoader:
             raise FileNotFoundError(f"session.md not found at {session_file}")
         return session_file.read_text(encoding="utf-8")
 
-    def get_language_conventions(
-        self, language: str, config: dict | None = None
-    ) -> str | None:
+    def get_language_conventions(self, language: str, config: dict | None = None) -> str | None:
         """Get language-specific conventions, optionally templated.
 
         Args:

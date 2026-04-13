@@ -6,21 +6,19 @@ from pathlib import Path
 class SchemaValidator:
     """Validates document schema and structure."""
 
-    AGENT_REQUIRED_SECTIONS = [
-        'Purpose', 'Responsibilities', 'Capabilities', 'Subagent'
-    ]
+    AGENT_REQUIRED_SECTIONS = ["Purpose", "Responsibilities", "Capabilities", "Subagent"]
 
     SUBAGENT_REQUIRED_SECTIONS = [
-        'Purpose', 'Key Concepts', 'Example', 'Patterns', 'Best Practices'
+        "Purpose",
+        "Key Concepts",
+        "Example",
+        "Patterns",
+        "Best Practices",
     ]
 
-    WORKFLOW_REQUIRED_SECTIONS = [
-        'Purpose', 'Steps', 'Success Criteria'
-    ]
+    WORKFLOW_REQUIRED_SECTIONS = ["Purpose", "Steps", "Success Criteria"]
 
-    SKILL_REQUIRED_SECTIONS = [
-        'Purpose', 'Core Concepts', 'Example', 'Best Practices'
-    ]
+    SKILL_REQUIRED_SECTIONS = ["Purpose", "Core Concepts", "Example", "Best Practices"]
 
     def __init__(self, project_root: Path):
         """Initialize validator."""
@@ -38,7 +36,7 @@ class SchemaValidator:
             self.errors.append(f"{file_path}: Missing sections: {missing}")
             return False
 
-        if len(content.strip().split('\n')) < 20:
+        if len(content.strip().split("\n")) < 20:
             self.warnings.append(f"{file_path}: Too short (<20 lines)")
 
         return True
@@ -49,10 +47,10 @@ class SchemaValidator:
             content = f.read()
 
         # Check for minimal vs verbose
-        lines = len(content.strip().split('\n'))
-        if 'minimal' in str(file_path) and lines < 40:
+        lines = len(content.strip().split("\n"))
+        if "minimal" in str(file_path) and lines < 40:
             self.warnings.append(f"{file_path}: Minimal variant too short (<40 lines)")
-        elif 'verbose' in str(file_path) and lines < 200:
+        elif "verbose" in str(file_path) and lines < 200:
             self.warnings.append(f"{file_path}: Verbose variant too short (<200 lines)")
 
         return True
@@ -67,7 +65,7 @@ class SchemaValidator:
             self.errors.append(f"{file_path}: Missing sections: {missing}")
             return False
 
-        if len(content.strip().split('\n')) < 50:
+        if len(content.strip().split("\n")) < 50:
             self.warnings.append(f"{file_path}: Too short (<50 lines)")
 
         return True
@@ -77,7 +75,7 @@ class SchemaValidator:
         with open(file_path) as f:
             content = f.read()
 
-        if len(content.strip().split('\n')) < 40:
+        if len(content.strip().split("\n")) < 40:
             self.warnings.append(f"{file_path}: Too short (<40 lines)")
 
         return True
@@ -137,7 +135,7 @@ class SchemaValidator:
             for warning in self.warnings[:5]:
                 lines.append(f"  - {warning}")
 
-        return '\n'.join(lines)
+        return "\n".join(lines)
 
 
 if __name__ == "__main__":

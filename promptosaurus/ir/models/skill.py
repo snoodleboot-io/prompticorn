@@ -4,7 +4,6 @@ This module defines the Skill model, which represents a reusable capability
 that can be composed into agents and workflows.
 """
 
-
 from pydantic import BaseModel, ConfigDict, Field
 
 

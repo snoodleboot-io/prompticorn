@@ -26,6 +26,7 @@ class ConfigOptionsRegistry:
     Loads configuration options once and caches them for reuse.
     Configuration is loaded from promptosaurus/configurations/config_options.yaml
     """
+
     _config: dict[str, list[str]] | None = None
 
     @classmethod

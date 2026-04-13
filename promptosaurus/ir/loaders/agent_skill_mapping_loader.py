@@ -154,12 +154,14 @@ class AgentSkillMappingLoader:
                 has_workflows = "workflows" in agent_data and len(agent_data["workflows"]) > 0
 
                 if not has_skills or not has_workflows:
-                    incomplete.append({
-                        "agent": agent,
-                        "has_skills": has_skills,
-                        "has_workflows": has_workflows,
-                        "skill_count": len(agent_data.get("skills", [])),
-                        "workflow_count": len(agent_data.get("workflows", []))
-                    })
+                    incomplete.append(
+                        {
+                            "agent": agent,
+                            "has_skills": has_skills,
+                            "has_workflows": has_workflows,
+                            "skill_count": len(agent_data.get("skills", [])),
+                            "workflow_count": len(agent_data.get("workflows", [])),
+                        }
+                    )
 
         return {"missing": missing, "incomplete": incomplete}

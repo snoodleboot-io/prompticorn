@@ -33,6 +33,7 @@ class LanguageRegistry:
     Loads supported languages from YAML configuration file and provides
     methods for language validation and lookup.
     """
+
     _languages: list[str] | None = None
 
     @classmethod

@@ -157,8 +157,7 @@ class ConfigHandler:
             config_path = cls.get_config_path()
         return config_path.exists()
 
-
-# Template for default configuration (single-language)
+    # Template for default configuration (single-language)
 
     @classmethod
     def get_default_single_language_template(cls) -> dict[str, Any]:

@@ -38,9 +38,9 @@ class PrimaryAgentsHandler(TemplateHandler):
 
         # Try multiple possible paths for agents directory
         possible_paths = [
-            Path("agents"),                                    # Relative from CWD
-            Path("promptosaurus/agents"),                       # Relative from project root
-            Path(__file__).parent.parent.parent / "agents",    # Relative from this file
+            Path("agents"),  # Relative from CWD
+            Path("promptosaurus/agents"),  # Relative from project root
+            Path(__file__).parent.parent.parent / "agents",  # Relative from this file
         ]
 
         registry = None
@@ -66,10 +66,10 @@ class PrimaryAgentsHandler(TemplateHandler):
         for _agent_name, agent in all_agents_dict.items():
             # Include agents that have mode='primary'
             # Exclude subagents and special modes
-            if hasattr(agent, 'mode') and agent.mode == 'primary':
+            if hasattr(agent, "mode") and agent.mode == "primary":
                 primary_agents.append(agent)
             # Also include agents without explicit mode if they're top-level
-            elif not hasattr(agent, 'mode') and not hasattr(agent, 'parent_agent'):
+            elif not hasattr(agent, "mode") and not hasattr(agent, "parent_agent"):
                 primary_agents.append(agent)
 
         # Sort alphabetically by name

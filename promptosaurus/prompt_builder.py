@@ -44,9 +44,7 @@ class PromptBuilder:
             self.language_skill_loader = None
 
         # Initialize agent skill mapping loader (language-agnostic)
-        agent_mapping_file = (
-            Path(__file__).parent / "configurations" / "agent_skill_mapping.yaml"
-        )
+        agent_mapping_file = Path(__file__).parent / "configurations" / "agent_skill_mapping.yaml"
         try:
             self.agent_skill_loader = AgentSkillMappingLoader(agent_mapping_file)
         except FileNotFoundError:
@@ -139,7 +137,9 @@ class PromptBuilder:
 
                 # Log persona filtering info
                 actions.append(f"ℹ Persona filtering: {len(active_personas)} persona(s) selected")
-                actions.append(f"ℹ Building {len([k for k in all_agents.keys() if '/' not in k])} primary agents (from {len(enabled_agent_names)} enabled)")
+                actions.append(
+                    f"ℹ Building {len([k for k in all_agents.keys() if '/' not in k])} primary agents (from {len(enabled_agent_names)} enabled)"
+                )
             except Exception as e:
                 # If persona filtering fails, log warning and continue without filtering
                 actions.append(f"⚠ Persona filtering failed ({e}), building all agents")

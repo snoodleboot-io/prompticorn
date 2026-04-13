@@ -4,7 +4,6 @@ This module defines the Workflow model, which represents a sequence of
 steps that an agent can execute in a defined order.
 """
 
-
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 

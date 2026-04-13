@@ -136,6 +136,7 @@ class KiloBuilder(AbstractBuilder):
 
         # Compose YAML frontmatter + markdown
         return self._compose_yaml_markdown(frontmatter, markdown_content)
+
     def validate(self, agent: Agent) -> list[str]:
         """Validate an Agent IR model for Kilo.
 

@@ -14,6 +14,7 @@ class RepositoryTypes(str, Enum):
         if repo_type == "single-language":  # Still works due to str inheritance
             ...
     """
+
     SINGLE = "single-language"
     MULTI_MONOREPO = "multi-language-monorepo"
     MIXED = "mixed-collocation"
@@ -44,7 +45,9 @@ class RepositoryTypes(str, Enum):
             return cls(value)
         except ValueError as err:
             valid_values = ", ".join([t.value for t in cls])
-            raise ValueError(f"Invalid repository type: {value}. Valid types: {valid_values}") from err
+            raise ValueError(
+                f"Invalid repository type: {value}. Valid types: {valid_values}"
+            ) from err
 
     @classmethod
     def is_valid(cls, value: str) -> bool:

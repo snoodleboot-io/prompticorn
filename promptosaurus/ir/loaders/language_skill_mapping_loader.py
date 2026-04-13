@@ -22,7 +22,9 @@ class LanguageSkillMappingLoader:
         True
     """
 
-    def __init__(self, mapping_file: Path | str = "promptosaurus/configurations/language_skill_mapping.yaml"):
+    def __init__(
+        self, mapping_file: Path | str = "promptosaurus/configurations/language_skill_mapping.yaml"
+    ):
         """Initialize with path to mapping file.
 
         Args:
@@ -72,9 +74,7 @@ class LanguageSkillMappingLoader:
         """
         return self._resolve(language, subagent, "skills")
 
-    def get_workflows_for_language(
-        self, language: str, subagent: str | None = None
-    ) -> list[str]:
+    def get_workflows_for_language(self, language: str, subagent: str | None = None) -> list[str]:
         """Get workflows for a language and optional subagent.
 
         Uses the same resolution priority as get_skills_for_language.
