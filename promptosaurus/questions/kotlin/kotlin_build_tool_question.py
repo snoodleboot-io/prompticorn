@@ -20,3 +20,15 @@ class KotlinBuildToolQuestion(Question):
 
 - Gradle is the modern standard with excellent Kotlin DSL support
 - Maven is mature, widely used in enterprise environments"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["Gradle", "Maven", "Bazel"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "Gradle"
+
+    config_key = "build_tool"

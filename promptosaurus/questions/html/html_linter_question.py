@@ -21,3 +21,15 @@ class HtmlLinterQuestion(Question):
 - htmlhint is fast and configurable
 - W3C validator is the official spec checker
 - ESLint with html plugin for JS-heavy projects"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["htmlhint", "W3C Validator", "ESLint (html plugin)"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "htmlhint"
+
+    config_key = "linter"

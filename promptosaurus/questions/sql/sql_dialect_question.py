@@ -21,3 +21,15 @@ class SqlDialectQuestion(Question):
 - Different databases support different SQL features and syntax
 - Dialect affects query syntax, functions, and data types
 - Choose the dialect matching your target database"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["PostgreSQL", "MySQL", "SQLite", "SQL Server", "Oracle"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "PostgreSQL"
+
+    config_key = "sql_dialect"

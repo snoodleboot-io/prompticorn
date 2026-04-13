@@ -20,3 +20,15 @@ class GoTestFrameworkQuestion(Question):
 - standard: Built-in testing package, simple table-driven tests
 - testify: Popular assertion library with mocks and test suites
 - ginkgo: BDD-style testing framework with descriptive test structure"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["testing (stdlib)", "testify", "ginkgo"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "testing (stdlib)"
+
+    config_key = "test_framework"

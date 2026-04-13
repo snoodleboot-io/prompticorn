@@ -21,3 +21,15 @@ class JavaBuildToolQuestion(Question):
 - Maven: XML-based, convention over configuration, large ecosystem
 - Gradle: Groovy/Kotlin DSL, flexible, incremental builds, modern
 - Ant: XML-based, imperative, low-level control, older projects"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["Maven", "Gradle", "Ant"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "Maven"
+
+    config_key = "build_tool"

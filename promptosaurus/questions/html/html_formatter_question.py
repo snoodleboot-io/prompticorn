@@ -21,3 +21,15 @@ class HtmlFormatterQuestion(Question):
 - Prettier is the most popular, handles HTML + embedded CSS/JS
 - html-beautify is lightweight and HTML-focused
 - djLint adds template language support (Django, Jinja2, etc.)"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["Prettier", "html-beautify", "djLint"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "Prettier"
+
+    config_key = "formatter"

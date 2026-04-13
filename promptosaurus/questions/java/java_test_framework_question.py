@@ -20,3 +20,15 @@ class JavaTestFrameworkQuestion(Question):
 - junit5: Modern, extensible, parameterized tests, modern Java features
 - junit4: Classic, stable, widely used, mature ecosystem
 - testng: Flexible, powerful annotations, parallel execution, data providers"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["JUnit 5", "JUnit 4", "TestNG", "Spock"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "JUnit 5"
+
+    config_key = "test_framework"

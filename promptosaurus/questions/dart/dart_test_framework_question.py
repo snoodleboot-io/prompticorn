@@ -21,3 +21,15 @@ class DartTestFrameworkQuestion(Question):
 - The built-in test package provides comprehensive testing capabilities
 - Supports unit tests, widget tests (for Flutter), and integration tests
 - No additional configuration needed as it's included with Dart SDK"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["test", "flutter_test", "mockito"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "test"
+
+    config_key = "test_framework"

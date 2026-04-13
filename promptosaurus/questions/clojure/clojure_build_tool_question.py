@@ -21,3 +21,15 @@ class ClojureBuildToolQuestion(Question):
 - deps.edn is the modern, official tooling with CLI tools
 - Leiningen is the traditional build tool with extensive plugin ecosystem
 - Boot is a programmable build tool for complex workflows"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["Leiningen", "tools.deps", "Boot"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "Leiningen"
+
+    config_key = "build_tool"

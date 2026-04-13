@@ -20,3 +20,15 @@ class PhpPackageManagerQuestion(Question):
 
 - Composer is the de facto standard for PHP dependency management
 - It handles PSR-4 autoloading, version constraints, and package discovery"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["Composer", "PEAR"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "Composer"
+
+    config_key = "package_manager"

@@ -21,3 +21,15 @@ class HaskellCompilerQuestion(Question):
 - GHC (Glasgow Haskell Compiler) is the standard and most widely used compiler
 - It provides advanced optimizations and language extensions
 - GHC is the de facto standard for Haskell development"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["GHC", "GHCJS", "Hugs"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "GHC"
+
+    config_key = "compiler"
