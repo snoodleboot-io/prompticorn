@@ -5,10 +5,10 @@ This module provides utilities for loading a complete set of component files
 """
 
 from pathlib import Path
-from typing import Dict, Any, Optional, NamedTuple
+from typing import Any, NamedTuple
 
-from promptosaurus.ir.exceptions import ParseError, MissingFileError
-from promptosaurus.ir.parsers import YAMLParser, MarkdownParser
+from promptosaurus.ir.exceptions import MissingFileError, ParseError
+from promptosaurus.ir.parsers import MarkdownParser, YAMLParser
 
 
 class ComponentBundle(NamedTuple):
@@ -20,9 +20,9 @@ class ComponentBundle(NamedTuple):
         workflow_content: Content of workflow.md (optional)
     """
 
-    prompt_content: Dict[str, Any]
-    skills_content: Optional[Dict[str, Any]] = None
-    workflow_content: Optional[Dict[str, Any]] = None
+    prompt_content: dict[str, Any]
+    skills_content: dict[str, Any] | None = None
+    workflow_content: dict[str, Any] | None = None
 
 
 class ComponentLoader:
@@ -107,7 +107,7 @@ class ComponentLoader:
         except Exception as e:
             raise ParseError(f"Failed to load components from {directory}: {str(e)}") from e
 
-    def load_as_dict(self, directory: str) -> Dict[str, Any]:
+    def load_as_dict(self, directory: str) -> dict[str, Any]:
         """Load all component files as a flat dictionary.
 
         Loads all component files and returns them as a single dictionary
@@ -144,7 +144,7 @@ class ComponentLoader:
 
         return result
 
-    def _load_file(self, file_path: Path) -> Dict[str, Any]:
+    def _load_file(self, file_path: Path) -> dict[str, Any]:
         """Load and parse a single component file.
 
         Tries YAML parsing first, then falls back to markdown parsing.
@@ -159,7 +159,7 @@ class ComponentLoader:
             ParseError: If parsing fails.
         """
         try:
-            with open(file_path, "r", encoding="utf-8") as f:
+            with open(file_path, encoding="utf-8") as f:
                 content = f.read()
 
             # Try YAML parsing first (for files with frontmatter)

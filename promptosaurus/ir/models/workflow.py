@@ -4,8 +4,8 @@ This module defines the Workflow model, which represents a sequence of
 steps that an agent can execute in a defined order.
 """
 
-from pydantic import BaseModel, Field, field_validator, ConfigDict
-from typing import List
+
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 
 class Workflow(BaseModel):
@@ -28,11 +28,11 @@ class Workflow(BaseModel):
         min_length=1,
         description="One-sentence description of the workflow's purpose",
     )
-    steps: List[str] = Field(..., description="List of steps in the workflow (must be non-empty)")
+    steps: list[str] = Field(..., description="List of steps in the workflow (must be non-empty)")
 
     @field_validator("steps")
     @classmethod
-    def validate_steps(cls, v: List[str]) -> List[str]:
+    def validate_steps(cls, v: list[str]) -> list[str]:
         """Ensure steps list is non-empty."""
         if not v:
             raise ValueError("Workflow must have at least one step")

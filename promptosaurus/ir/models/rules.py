@@ -4,8 +4,9 @@ This module defines the Rules model, which represents constraints and
 guidelines that govern behavior across agents and workflows.
 """
 
-from pydantic import BaseModel, Field, ConfigDict
-from typing import Dict, Any, List
+from typing import Any
+
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class Rules(BaseModel):
@@ -22,11 +23,11 @@ class Rules(BaseModel):
 
     model_config = ConfigDict(frozen=True)
 
-    constraints: List[str] = Field(
+    constraints: list[str] = Field(
         default_factory=list,
         description="List of constraints that must be enforced",
     )
-    guidelines: Dict[str, Any] = Field(
+    guidelines: dict[str, Any] = Field(
         default_factory=dict,
         description="Dictionary of guidelines organized by category",
     )

@@ -13,13 +13,13 @@ Tests cover:
 - Output format verification
 """
 
-import pytest
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from promptosaurus.builders.cline_builder import ClineBuilder
+import pytest
+
 from promptosaurus.builders.base import BuildOptions
-from promptosaurus.builders.errors import BuilderValidationError
+from promptosaurus.builders.cline_builder import ClineBuilder
 from promptosaurus.ir.models import Agent
 
 

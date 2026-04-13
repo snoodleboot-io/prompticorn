@@ -4,15 +4,15 @@ Tests the public UI API functions for interactive selection, confirmation,
 and prompting with default values.
 """
 
+from unittest.mock import MagicMock, patch
+
 import pytest
-from unittest.mock import Mock, MagicMock, patch
 
 from promptosaurus.ui._selector import (
-    select_option_with_explain,
     confirm_interactive,
     prompt_with_default,
+    select_option_with_explain,
 )
-from promptosaurus.ui.domain.context import QuestionContext
 
 
 class TestSelectOptionWithExplain:
@@ -22,7 +22,7 @@ class TestSelectOptionWithExplain:
         """Test that QuestionContext is created with correct parameters."""
         with (
             patch("promptosaurus.ui._selector.RenderStage") as mock_render,
-            patch("promptosaurus.ui._selector.StateUpdateStage") as mock_state,
+            patch("promptosaurus.ui._selector.StateUpdateStage"),
             patch("promptosaurus.ui._selector.PipelineOrchestrator") as mock_pipeline,
         ):
             mock_pipeline_instance = MagicMock()
@@ -172,7 +172,7 @@ class TestSelectOptionWithExplain:
             mock_pipeline_instance.run.return_value = "option1"
             mock_pipeline.return_value = mock_pipeline_instance
 
-            result = select_option_with_explain(
+            select_option_with_explain(
                 question="Q",
                 options=["opt1"],
                 explanations={"opt1": "E1"},
@@ -203,7 +203,7 @@ class TestSelectOptionWithExplain:
             mock_pipeline_instance.run.return_value = "option1"
             mock_pipeline.return_value = mock_pipeline_instance
 
-            result = select_option_with_explain(
+            select_option_with_explain(
                 question="Q",
                 options=["opt1"],
                 explanations={"opt1": "E1"},

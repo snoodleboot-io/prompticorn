@@ -1,7 +1,6 @@
 """Consistency checker for Phase 1 deliverables."""
 
 from pathlib import Path
-from typing import Dict, List, Set, Tuple
 
 
 class ConsistencyChecker:
@@ -13,9 +12,9 @@ class ConsistencyChecker:
         self.agents_dir = project_root / "promptosaurus" / "agents"
         self.workflows_dir = project_root / "promptosaurus" / "workflows"
         self.skills_dir = project_root / "promptosaurus" / "skills"
-        self.issues: List[str] = []
+        self.issues: list[str] = []
 
-    def check_all(self) -> Tuple[int, List[str]]:
+    def check_all(self) -> tuple[int, list[str]]:
         """Run all consistency checks."""
         self.issues = []
 

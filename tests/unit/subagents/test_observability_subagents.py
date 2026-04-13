@@ -1,7 +1,7 @@
 """Unit tests for Observability Agent subagents."""
 
+
 import pytest
-from pathlib import Path
 
 
 @pytest.mark.unit

@@ -1,7 +1,8 @@
 """Unit tests for schema validators."""
 
+
 import pytest
-from pathlib import Path
+
 from validation.schema_validator import SchemaValidator
 
 

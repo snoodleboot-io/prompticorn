@@ -11,8 +11,7 @@ Tests cover:
 import pytest
 from pydantic import ValidationError
 
-from promptosaurus.ir.models import Agent, Skill, Workflow, Tool, Rules, Project
-
+from promptosaurus.ir.models import Agent, Project, Rules, Skill, Tool, Workflow
 
 # ============================================================================
 # FIXTURES - Common test data
@@ -1015,6 +1014,6 @@ class TestModelIntegration:
             "rules": valid_rules.model_dump_json(),
             "project": valid_project.model_dump_json(),
         }
-        for key, json_str in models.items():
+        for _key, json_str in models.items():
             assert isinstance(json_str, str)
             assert len(json_str) > 0

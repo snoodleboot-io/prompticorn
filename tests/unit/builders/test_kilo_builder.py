@@ -8,13 +8,13 @@ Tests cover:
 - Error handling
 """
 
-import pytest
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-from promptosaurus.builders.kilo_builder import KiloBuilder
+import pytest
+
 from promptosaurus.builders.base import BuildOptions
-from promptosaurus.builders.errors import BuilderValidationError
+from promptosaurus.builders.kilo_builder import KiloBuilder
 from promptosaurus.ir.models import Agent
 
 

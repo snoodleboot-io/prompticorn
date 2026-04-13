@@ -5,12 +5,11 @@ agents and subagents from a directory structure, building Agent IR models.
 """
 
 from pathlib import Path
-from typing import Dict
 
-from promptosaurus.ir.models import Agent
-from promptosaurus.ir.loaders import ComponentLoader
-from promptosaurus.ir.exceptions import MissingFileError, ParseError
 from promptosaurus.agent_registry.errors import RegistryLoadError
+from promptosaurus.ir.exceptions import MissingFileError, ParseError
+from promptosaurus.ir.loaders import ComponentLoader
+from promptosaurus.ir.models import Agent
 
 
 class RegistryDiscovery:
@@ -53,7 +52,7 @@ class RegistryDiscovery:
         self.agents_dir = Path(agents_dir)
         self._component_loader = ComponentLoader()
 
-    def discover(self) -> Dict[str, Agent]:
+    def discover(self) -> dict[str, Agent]:
         """Scan filesystem and auto-discover all agents.
 
         Returns:
@@ -65,7 +64,7 @@ class RegistryDiscovery:
             RegistryLoadError: If discovery fails.
         """
         try:
-            all_agents: Dict[str, Agent] = {}
+            all_agents: dict[str, Agent] = {}
 
             # Discover top-level agents
             agents = self.discover_agents()
@@ -81,7 +80,7 @@ class RegistryDiscovery:
         except Exception as e:
             raise RegistryLoadError(f"Failed to discover agents: {str(e)}") from e
 
-    def discover_agents(self) -> Dict[str, Agent]:
+    def discover_agents(self) -> dict[str, Agent]:
         """Discover top-level agents (not subagents).
 
         Returns:
@@ -90,7 +89,7 @@ class RegistryDiscovery:
         Raises:
             RegistryLoadError: If discovery fails.
         """
-        agents: Dict[str, Agent] = {}
+        agents: dict[str, Agent] = {}
 
         if not self.agents_dir.is_dir():
             raise RegistryLoadError(f"Agents directory not found: {self.agents_dir}")
@@ -115,7 +114,7 @@ class RegistryDiscovery:
 
         return agents
 
-    def discover_subagents(self, agent_name: str) -> Dict[str, Agent]:
+    def discover_subagents(self, agent_name: str) -> dict[str, Agent]:
         """Discover subagents for a specific agent.
 
         Returns:
@@ -124,7 +123,7 @@ class RegistryDiscovery:
         Raises:
             RegistryLoadError: If discovery fails.
         """
-        subagents: Dict[str, Agent] = {}
+        subagents: dict[str, Agent] = {}
 
         agent_dir = self.agents_dir / agent_name
         subagents_dir = agent_dir / "subagents"
@@ -295,7 +294,7 @@ class RegistryDiscovery:
             for subagent_path in sorted(subagents_dir.iterdir()):
                 if subagent_path.is_dir() and not subagent_path.name.startswith("."):
                     discovered_subagents.add(subagent_path.name)
-            subagents = sorted(list(discovered_subagents))
+            subagents = sorted(discovered_subagents)
 
         # Create Agent IR model
         agent = Agent(

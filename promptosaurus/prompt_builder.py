@@ -1,16 +1,16 @@
 """Builder wrapper to generate tool-specific configs from bundled IR agents."""
 
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 from promptosaurus.agent_registry.registry import Registry
-from promptosaurus.builders.factory import BuilderFactory
 from promptosaurus.builders.base import BuildOptions
+from promptosaurus.builders.factory import BuilderFactory
 from promptosaurus.builders.kilo_builder import KiloBuilder
-from promptosaurus.ir.models.agent import Agent
-from promptosaurus.ir.loaders.language_skill_mapping_loader import LanguageSkillMappingLoader
 from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
-from promptosaurus.personas import PersonaRegistry, PersonaFilter
+from promptosaurus.ir.loaders.language_skill_mapping_loader import LanguageSkillMappingLoader
+from promptosaurus.ir.models.agent import Agent
+from promptosaurus.personas import PersonaFilter, PersonaRegistry
 
 
 class PromptBuilder:
@@ -55,20 +55,20 @@ class PromptBuilder:
     @staticmethod
     def _extract_language_from_config(config: dict[str, Any] | None) -> str | None:
         """Extract primary language from config.
-        
+
         Handles both single-language and multi-language-monorepo configurations.
-        
+
         Args:
             config: Project configuration
-            
+
         Returns:
             Primary language string, or None if not found
         """
         if not config:
             return None
-            
+
         spec = config.get("spec")
-        
+
         if spec is None:
             return None
         elif isinstance(spec, dict):
@@ -110,17 +110,17 @@ class PromptBuilder:
 
         # Persona-based filtering: Only build agents for selected personas
         active_personas = config.get("active_personas", []) if config else []
-        
+
         if active_personas is not None:
             # Load persona registry and filter agents
             try:
                 personas_yaml_path = Path(__file__).parent / "personas" / "personas.yaml"
                 persona_registry = PersonaRegistry.from_yaml(personas_yaml_path)
                 persona_filter = PersonaFilter(persona_registry, active_personas)
-                
+
                 # Get enabled agents for selected personas
                 enabled_agent_names = persona_filter.get_enabled_agents()
-                
+
                 # Filter all_agents to only include enabled agents
                 # Keep only top-level agents that are enabled (subagents inherit parent status)
                 filtered_agents = {}
@@ -134,9 +134,9 @@ class PromptBuilder:
                         # Top-level agent - check if enabled
                         if agent_key in enabled_agent_names:
                             filtered_agents[agent_key] = agent
-                
+
                 all_agents = filtered_agents
-                
+
                 # Log persona filtering info
                 actions.append(f"ℹ Persona filtering: {len(active_personas)} persona(s) selected")
                 actions.append(f"ℹ Building {len([k for k in all_agents.keys() if '/' not in k])} primary agents (from {len(enabled_agent_names)} enabled)")
@@ -257,7 +257,7 @@ class PromptBuilder:
         return actions
 
     def _filter_agent_for_language(
-        self, agent: Agent, language: Optional[str], agent_name: Optional[str] = None
+        self, agent: Agent, language: str | None, agent_name: str | None = None
     ) -> Agent:
         """Filter agent skills/workflows based on agent and language.
 
@@ -282,7 +282,7 @@ class PromptBuilder:
         # Get agent-level skills/workflows (language-agnostic)
         agent_skills = []
         agent_workflows = []
-        
+
         if self.agent_skill_loader:
             agent_skills = self.agent_skill_loader.get_skills_for_agent(agent.name)
             agent_workflows = self.agent_skill_loader.get_workflows_for_agent(agent.name)
@@ -290,12 +290,12 @@ class PromptBuilder:
         # Get language-specific overrides (if any)
         language_skills = []
         language_workflows = []
-        
+
         if language and self.language_skill_loader:
             # Use full agent_name as subagent path for mapping lookup
             # e.g., "python/orchestrator/maintenance"
             subagent_path = agent_name if agent_name and "/" in agent_name else None
-            
+
             language_skills = self.language_skill_loader.get_skills_for_language(
                 language, subagent=subagent_path
             )
@@ -307,7 +307,7 @@ class PromptBuilder:
         # Language overrides take precedence if they exist (non-empty)
         final_skills = language_skills if language_skills else agent_skills
         final_workflows = language_workflows if language_workflows else agent_workflows
-        
+
         # If no mappings found at all, use original agent skills/workflows
         if not final_skills:
             final_skills = agent.skills or []

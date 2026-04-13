@@ -36,13 +36,13 @@ class ColumnLayoutRenderer(Renderer):
         """
         # Marker takes 4 chars for multi-select "[*] " or 2 for single " " or "→ "
         marker_width = 4 if allow_multiple else 2
-        
+
         # Number takes up to 3 chars for "99." (supports up to 99 options)
         num_width = 3
-        
+
         # Find longest option text
         max_option_len = max(len(opt) for opt in options) if options else 0
-        
+
         # Total width: marker + num + space + option text + padding
         # Add 2 extra chars for spacing between columns
         return marker_width + num_width + 1 + max_option_len + 2

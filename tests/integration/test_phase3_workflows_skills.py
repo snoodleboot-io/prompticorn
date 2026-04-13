@@ -10,10 +10,10 @@ Validates:
 - Cross-references are valid
 """
 
-import os
+from pathlib import Path
+
 import pytest
 import yaml
-from pathlib import Path
 
 
 class TestPhase3Workflows:
@@ -385,8 +385,7 @@ class TestPhase3Totals:
         phase3_workflows = {
             wf.parent.parent.name
             for wf in workflow_files
-            if not wf.parent.parent.name
-            in {
+            if wf.parent.parent.name not in {
                 "feature",
                 "testing",
                 "code",
@@ -406,8 +405,7 @@ class TestPhase3Totals:
         phase3_skills = {
             sk.parent.parent.name
             for sk in skill_files
-            if not sk.parent.parent.name
-            in {
+            if sk.parent.parent.name not in {
                 "feature-planning",
                 "post-implementation-checklist",
                 "incremental-implementation",

@@ -11,20 +11,19 @@ Benchmarks establish performance baselines and identify bottlenecks.
 
 import time
 import tracemalloc
+from collections.abc import Generator
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Generator
 
 import pytest
 
 from promptosaurus.builders.base import AbstractBuilder, BuildOptions
-from promptosaurus.builders.cline_builder import ClineBuilder
 from promptosaurus.builders.claude_builder import ClaudeBuilder
+from promptosaurus.builders.cline_builder import ClineBuilder
 from promptosaurus.builders.copilot_builder import CopilotBuilder
 from promptosaurus.builders.cursor_builder import CursorBuilder
 from promptosaurus.builders.kilo_builder import KiloBuilder
 from promptosaurus.ir.models import Agent
-
 
 # Performance targets (in seconds)
 TARGET_SINGLE_TOOL = 2.0  # <2 seconds per tool

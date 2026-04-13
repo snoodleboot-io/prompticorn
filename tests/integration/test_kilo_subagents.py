@@ -8,12 +8,11 @@ Tests cover:
 - File content validation
 """
 
-import pytest
-from pathlib import Path
-from tempfile import TemporaryDirectory
 
-from promptosaurus.builders.kilo_builder import KiloBuilder
+import pytest
+
 from promptosaurus.builders.base import BuildOptions
+from promptosaurus.builders.kilo_builder import KiloBuilder
 from promptosaurus.ir.models import Agent
 
 
@@ -189,7 +188,7 @@ class TestKiloSubagentContent:
     def test_subagent_with_tools_included(self) -> None:
         """Test subagent file includes tools when requested."""
         builder = KiloBuilder()
-        agent = Agent(
+        Agent(
             name="parent",
             description="Parent",
             system_prompt="Parent prompt",
@@ -441,7 +440,7 @@ class TestKiloSubagentIntegration:
 
         # Check no orphaned section markers
         lines = content.split("\n")
-        markdown_headers = [l for l in lines if l.startswith("#")]
+        markdown_headers = [line for line in lines if line.startswith("#")]
         assert len(markdown_headers) >= 2  # Parent Agent + System Prompt
 
 
@@ -583,7 +582,7 @@ class TestKiloSubagentCoverage:
         subagents = builder.build_subagents(agent, options)
 
         # Each should have valid YAML and markdown
-        for name, content in subagents.items():
+        for _name, content in subagents.items():
             # Check YAML frontmatter
             assert content.startswith("---")
             assert "---\n\n" in content

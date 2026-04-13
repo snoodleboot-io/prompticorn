@@ -1,7 +1,7 @@
 """Unit tests for Data Agent."""
 
+
 import pytest
-from pathlib import Path
 
 
 @pytest.mark.unit

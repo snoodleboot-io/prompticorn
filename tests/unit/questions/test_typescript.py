@@ -1,12 +1,10 @@
 """Tests for TypeScript-specific questions."""
 
-import pytest
 
-from promptosaurus.questions.typescript.typescript_framework_question import (
-    TypeScriptFrameworkQuestion,
+from promptosaurus.questions.typescript.typescript_package_manager_question import (
+    TypeScriptPackageManagerQuestion,
 )
 from promptosaurus.questions.typescript.typescript_version_question import TypeScriptVersionQuestion
-from promptosaurus.questions.typescript.typescript_package_manager_question import TypeScriptPackageManagerQuestion
 
 
 class TestTypeScriptVersionQuestion:

@@ -4,8 +4,9 @@ This module defines the Project model, which represents the configuration
 for a project containing agents, skills, workflows, and tools.
 """
 
-from pydantic import BaseModel, Field, ConfigDict
-from typing import Dict, Any, Literal
+from typing import Any, Literal
+
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class Project(BaseModel):
@@ -22,7 +23,7 @@ class Project(BaseModel):
 
     model_config = ConfigDict(frozen=True)
 
-    registry_settings: Dict[str, Any] = Field(
+    registry_settings: dict[str, Any] = Field(
         default_factory=dict,
         description="Dictionary of registry configuration settings",
     )
@@ -30,7 +31,7 @@ class Project(BaseModel):
         default="minimal",
         description="Logging verbosity level",
     )
-    builder_configs: Dict[str, Any] = Field(
+    builder_configs: dict[str, Any] = Field(
         default_factory=dict,
         description="Dictionary of builder-specific configurations",
     )

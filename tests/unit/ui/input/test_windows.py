@@ -3,11 +3,12 @@
 Tests the Windows-specific input provider using msvcrt for raw input.
 """
 
-import pytest
-from unittest.mock import Mock, MagicMock, patch
+from unittest.mock import MagicMock, Mock
 
-from promptosaurus.ui.input.windows import WindowsInputProvider
+import pytest
+
 from promptosaurus.ui.domain.events import InputEvent, InputEventType
+from promptosaurus.ui.input.windows import WindowsInputProvider
 
 
 class TestWindowsInputProvider:

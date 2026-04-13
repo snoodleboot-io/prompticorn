@@ -1,8 +1,6 @@
 """Content validator for all Phase 1 agents, workflows, and skills."""
 
 from pathlib import Path
-from typing import Dict, List, Tuple, Set
-import re
 
 
 class ContentValidator:
@@ -11,13 +9,13 @@ class ContentValidator:
     def __init__(self, project_root: Path):
         """Initialize validator."""
         self.project_root = project_root
-        self.errors: List[str] = []
-        self.warnings: List[str] = []
+        self.errors: list[str] = []
+        self.warnings: list[str] = []
         self.agents_dir = project_root / "promptosaurus" / "agents"
         self.workflows_dir = project_root / "promptosaurus" / "workflows"
         self.skills_dir = project_root / "promptosaurus" / "skills"
 
-    def validate_all(self) -> Tuple[int, int]:
+    def validate_all(self) -> tuple[int, int]:
         """Run all validations."""
         self.errors = []
         self.warnings = []
@@ -40,7 +38,7 @@ class ContentValidator:
 
         return len(self.errors), len(self.warnings)
 
-    def _validate_agents(self, agent_names: List[str]) -> None:
+    def _validate_agents(self, agent_names: list[str]) -> None:
         """Validate agent files."""
         for agent_name in agent_names:
             agent_file = self.agents_dir / agent_name / "prompt.md"
@@ -62,7 +60,7 @@ class ContentValidator:
             if lines < 20:
                 self.errors.append(f"{agent_name}: Too short ({lines} lines, min 20)")
 
-    def _validate_workflows(self, workflow_names: List[str]) -> None:
+    def _validate_workflows(self, workflow_names: list[str]) -> None:
         """Validate workflow files."""
         for workflow_name in workflow_names:
             workflow_dir = self.workflows_dir / workflow_name
@@ -92,7 +90,7 @@ class ContentValidator:
                 if "purpose" not in content.lower():
                     self.warnings.append(f"{workflow_name}/{variant}: Missing purpose section")
 
-    def validate_subagent_coverage(self) -> Dict[str, Set[str]]:
+    def validate_subagent_coverage(self) -> dict[str, set[str]]:
         """Validate that all subagents exist."""
         expected = {
             "data": ["pipeline", "warehouse", "quality", "governance", "streaming"],

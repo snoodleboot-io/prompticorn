@@ -5,7 +5,7 @@ into GitHub Copilot instructions files with YAML frontmatter and markdown sectio
 """
 
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 from promptosaurus.builders.base import AbstractBuilder, BuildOptions
 from promptosaurus.builders.errors import BuilderValidationError
@@ -61,7 +61,7 @@ class CopilotBuilder(AbstractBuilder):
         self.agents_dir = agents_dir
         self.core_loader = CoreFilesLoader()
 
-    def build(self, agent: Agent, options: BuildOptions, config: Optional[dict] = None) -> str:
+    def build(self, agent: Agent, options: BuildOptions, config: dict | None = None) -> str:
         """Build a GitHub Copilot instructions file.
 
         Includes core system, conventions, and language-specific conventions files

@@ -4,10 +4,10 @@ This module provides utilities for composing loaded components into
 structured output formats (markdown, JSON, YAML+markdown).
 """
 
-from typing import Any, Dict, List, Optional
+from typing import Any
 
-from promptosaurus.ir.models import Agent
 from promptosaurus.builders.component_selector import ComponentBundle
+from promptosaurus.ir.models import Agent
 
 
 class ComponentComposer:
@@ -17,7 +17,7 @@ class ComponentComposer:
     def compose_markdown(
         bundle: ComponentBundle,
         agent: Agent,
-        include_sections: Optional[List[str]] = None,
+        include_sections: list[str] | None = None,
     ) -> str:
         """Compose components into markdown format.
 
@@ -47,7 +47,7 @@ class ComponentComposer:
                 "subagents",
             ]
 
-        sections: List[str] = []
+        sections: list[str] = []
 
         # 1. System Prompt (always included if requested)
         if "prompt" in include_sections:
@@ -85,7 +85,7 @@ class ComponentComposer:
     def compose_yaml_markdown(
         bundle: ComponentBundle,
         agent: Agent,
-        frontmatter: Optional[Dict[str, Any]] = None,
+        frontmatter: dict[str, Any] | None = None,
     ) -> str:
         """Compose into YAML frontmatter + markdown format.
 
@@ -147,7 +147,7 @@ class ComponentComposer:
     def compose_json(
         bundle: ComponentBundle,
         agent: Agent,
-    ) -> Dict[str, Any]:
+    ) -> dict[str, Any]:
         """Compose into JSON format for APIs.
 
         Args:
@@ -176,7 +176,7 @@ class ComponentComposer:
         }
 
     @staticmethod
-    def _format_tools_section(tools: List[str]) -> str:
+    def _format_tools_section(tools: list[str]) -> str:
         """Format tools section as markdown.
 
         Args:
@@ -219,7 +219,7 @@ class ComponentComposer:
         return workflow_content.strip()
 
     @staticmethod
-    def _format_subagents_section(subagent_names: List[str]) -> str:
+    def _format_subagents_section(subagent_names: list[str]) -> str:
         """Format subagents section as markdown list.
 
         Args:

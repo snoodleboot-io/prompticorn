@@ -5,13 +5,13 @@ from markdown files with YAML frontmatter.
 """
 
 from pathlib import Path
-from typing import Dict, Any
+from typing import Any
 
 from pydantic import ValidationError as PydanticValidationError
 
-from promptosaurus.ir.exceptions import ParseError, ValidationError, MissingFileError
+from promptosaurus.ir.exceptions import MissingFileError, ParseError, ValidationError
 from promptosaurus.ir.models import Workflow
-from promptosaurus.ir.parsers import YAMLParser, MarkdownParser
+from promptosaurus.ir.parsers import MarkdownParser, YAMLParser
 
 
 class WorkflowLoader:
@@ -75,7 +75,7 @@ class WorkflowLoader:
 
         try:
             # Read the file content
-            with open(file_path_obj, "r", encoding="utf-8") as f:
+            with open(file_path_obj, encoding="utf-8") as f:
                 content = f.read()
 
             # Parse YAML frontmatter for metadata
@@ -98,7 +98,7 @@ class WorkflowLoader:
         except Exception as e:
             raise ParseError(f"Failed to load workflow from {file_path}: {str(e)}") from e
 
-    def _build_workflow_data(self, metadata: Dict[str, Any], file_path: str) -> Dict[str, Any]:
+    def _build_workflow_data(self, metadata: dict[str, Any], file_path: str) -> dict[str, Any]:
         """Build workflow data from parsed metadata.
 
         Combines YAML metadata to create complete workflow data suitable

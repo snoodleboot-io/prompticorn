@@ -5,7 +5,6 @@ into Cursor AI configuration files (.cursorrules) with markdown formatting.
 """
 
 from pathlib import Path
-from typing import Optional
 
 from promptosaurus.builders.base import AbstractBuilder, BuildOptions
 from promptosaurus.builders.errors import BuilderValidationError
@@ -64,7 +63,7 @@ class CursorBuilder(AbstractBuilder):
         self.agents_dir = agents_dir
         self.core_loader = CoreFilesLoader()
 
-    def build(self, agent: Agent, options: BuildOptions, config: Optional[dict] = None) -> str:
+    def build(self, agent: Agent, options: BuildOptions, config: dict | None = None) -> str:
         """Build a Cursor AI configuration file.
 
         Includes core system, conventions, and language-specific conventions files
@@ -258,7 +257,7 @@ class CursorBuilder(AbstractBuilder):
             lines.append(f"### {tool}")
             lines.append("")
             lines.append(f"Purpose: [Description of {tool}]")
-            lines.append(f"Usage: Call with appropriate parameters")
+            lines.append("Usage: Call with appropriate parameters")
             lines.append("")
 
         return "\n".join(lines).rstrip()

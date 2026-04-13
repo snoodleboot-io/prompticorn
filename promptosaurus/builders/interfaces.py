@@ -14,7 +14,7 @@ Using protocols instead of traditional mixins provides:
 
 from typing import Any, Protocol
 
-from promptosaurus.ir.models import Agent, Skill, Workflow, Rules
+from promptosaurus.ir.models import Agent, Rules, Skill, Workflow
 
 
 class SupportsSkills(Protocol):

@@ -88,7 +88,7 @@ class KiloBuilder(AbstractBuilder):
 
         # Use agent system prompt directly (no variants for top-level agents)
         system_prompt = agent.system_prompt
-        
+
         # Apply template variable substitution if config is provided
         if config:
             system_prompt = self._builder._substitute_template_variables(system_prompt, config)

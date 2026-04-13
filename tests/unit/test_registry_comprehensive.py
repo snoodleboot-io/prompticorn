@@ -4,13 +4,14 @@ This module provides extensive test coverage for the Registry class,
 testing all methods, validators, and edge cases.
 """
 
-import pytest
-from pathlib import Path
-from unittest.mock import Mock, patch, MagicMock
-import tempfile
 import shutil
+import tempfile
+from pathlib import Path
 
-from promptosaurus.registry import Registry, _prompt_body_cached, _dest_name
+import pytest
+from pydantic import ValidationError
+
+from promptosaurus.registry import Registry, _dest_name, _prompt_body_cached
 
 
 class TestModuleLevelFunctions:
@@ -89,7 +90,7 @@ class TestRegistryInitialization:
     def test_registry_is_frozen(self):
         """Registry should be frozen (immutable)."""
         registry = Registry()
-        with pytest.raises(Exception):  # Pydantic raises validation error for frozen models
+        with pytest.raises(ValidationError):
             registry.modes = {}  # Should not be able to modify
 
     def test_prompts_dir_default_path(self):

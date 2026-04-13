@@ -8,10 +8,9 @@ Tests cover:
 
 import pytest
 
-from promptosaurus.ir.models import Agent
+from promptosaurus.agent_registry.errors import AgentNotFoundError
 from promptosaurus.agent_registry.registry import Registry
-from promptosaurus.agent_registry.errors import AgentNotFoundError, InvalidVariantError
-
+from promptosaurus.ir.models import Agent
 
 # ============================================================================
 # FIXTURES - Test agents
@@ -390,7 +389,7 @@ class TestRegistryCaching:
 
     def test_no_variant_cache_when_disabled(self, sample_agents_dict):
         """Test variant cache not built when caching disabled."""
-        registry = Registry(sample_agents_dict, cache=False)
+        Registry(sample_agents_dict, cache=False)
 
         # Cache might not be built
         # This depends on implementation details

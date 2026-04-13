@@ -5,7 +5,6 @@ content organized by headers (## Section Name format).
 """
 
 import re
-from typing import Dict
 
 from promptosaurus.ir.exceptions import ParseError
 
@@ -28,7 +27,7 @@ class MarkdownParser:
         True
     """
 
-    def parse(self, content: str) -> Dict[str, str]:
+    def parse(self, content: str) -> dict[str, str]:
         """Parse markdown sections by header.
 
         Extracts all ## header sections from markdown content and returns
@@ -78,7 +77,7 @@ class MarkdownParser:
         except Exception as e:
             raise ParseError(f"Failed to parse markdown sections: {str(e)}") from e
 
-    def parse_file(self, file_path: str) -> Dict[str, str]:
+    def parse_file(self, file_path: str) -> dict[str, str]:
         """Parse markdown sections from a file.
 
         Args:
@@ -92,7 +91,7 @@ class MarkdownParser:
             FileNotFoundError: If the file does not exist.
         """
         try:
-            with open(file_path, "r", encoding="utf-8") as f:
+            with open(file_path, encoding="utf-8") as f:
                 content = f.read()
             return self.parse(content)
         except FileNotFoundError:

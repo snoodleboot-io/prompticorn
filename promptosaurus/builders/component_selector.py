@@ -8,11 +8,10 @@ unavailable.
 import logging
 from enum import Enum
 from pathlib import Path
-from typing import NamedTuple, Optional, List
+from typing import NamedTuple
 
-from promptosaurus.ir.models import Agent
 from promptosaurus.builders.errors import ComponentNotFoundError, VariantNotFoundError
-
+from promptosaurus.ir.models import Agent
 
 logger = logging.getLogger(__name__)
 
@@ -37,8 +36,8 @@ class ComponentBundle(NamedTuple):
 
     variant: Variant
     prompt: str
-    skills: Optional[str] = None
-    workflow: Optional[str] = None
+    skills: str | None = None
+    workflow: str | None = None
     fallback_used: bool = False
 
 
@@ -120,7 +119,7 @@ class ComponentSelector:
         variant_path = self.get_variant_path(agent_name, variant)
         return (variant_path / "prompt.md").exists()
 
-    def list_available_variants(self, agent_name: str) -> List[Variant]:
+    def list_available_variants(self, agent_name: str) -> list[Variant]:
         """List available variants for an agent.
 
         Args:
@@ -167,21 +166,21 @@ class ComponentSelector:
 
         try:
             # Load prompt content (required)
-            with open(prompt_file, "r", encoding="utf-8") as f:
+            with open(prompt_file, encoding="utf-8") as f:
                 prompt_content = f.read()
 
             # Load skills content (optional)
-            skills_content: Optional[str] = None
+            skills_content: str | None = None
             skills_file = variant_path / "skills.md"
             if skills_file.exists():
-                with open(skills_file, "r", encoding="utf-8") as f:
+                with open(skills_file, encoding="utf-8") as f:
                     skills_content = f.read()
 
             # Load workflow content (optional)
-            workflow_content: Optional[str] = None
+            workflow_content: str | None = None
             workflow_file = variant_path / "workflow.md"
             if workflow_file.exists():
-                with open(workflow_file, "r", encoding="utf-8") as f:
+                with open(workflow_file, encoding="utf-8") as f:
                     workflow_content = f.read()
 
             return ComponentBundle(

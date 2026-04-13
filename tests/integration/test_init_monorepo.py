@@ -60,7 +60,10 @@ class TestMonorepoConfig:
 
     def test_multi_language_config_template(self):
         """Verify multi-language config template exists."""
-        from promptosaurus.config_handler import ConfigHandler
+        from promptosaurus.config_handler import (
+            DEFAULT_MULTI_LANGUAGE_CONFIG_TEMPLATE,
+            ConfigHandler,
+        )
 
         assert "repository" in DEFAULT_MULTI_LANGUAGE_CONFIG_TEMPLATE
         assert "spec" in DEFAULT_MULTI_LANGUAGE_CONFIG_TEMPLATE

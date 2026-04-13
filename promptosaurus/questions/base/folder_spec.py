@@ -9,16 +9,16 @@ import yaml
 
 class FolderSpecRegistry:
     """Registry for folder specification defaults and presets.
-    
+
     Loads language defaults, coverage targets, and folder type presets
     from YAML configuration file.
     """
     _config: dict[str, Any] | None = None
-    
+
     @classmethod
     def _load_config(cls) -> dict[str, Any]:
         """Load folder spec configuration from YAML file.
-        
+
         Returns:
             Dictionary with language_defaults, default_coverage, and folder_type_presets.
         """
@@ -27,49 +27,49 @@ class FolderSpecRegistry:
             with open(config_file, encoding="utf-8") as f:
                 cls._config = yaml.safe_load(f)
         return cls._config
-    
+
     @classmethod
     def get_language_defaults(cls) -> dict[str, dict[str, str]]:
         """Get language-specific defaults.
-        
+
         Returns:
             Dictionary mapping language keys to their default configurations.
         """
         config = cls._load_config()
         # Return all keys except default_coverage and folder_type_presets
         return {
-            k: v for k, v in config.items() 
+            k: v for k, v in config.items()
             if k not in ("default_coverage", "folder_type_presets")
         }
-    
+
     @classmethod
     def get_default_coverage(cls) -> dict[str, int]:
         """Get default coverage targets.
-        
+
         Returns:
             Dictionary with coverage target percentages.
         """
         config = cls._load_config()
         return config["default_coverage"].copy()
-    
+
     @classmethod
     def get_folder_type_presets(cls) -> dict[str, dict[str, dict[str, str]]]:
         """Get folder type presets.
-        
+
         Returns:
             Dictionary mapping folder types to their preset configurations.
         """
         config = cls._load_config()
         return config["folder_type_presets"]
-    
+
     @classmethod
     def get_preset_defaults(cls, folder_type: str, subtype: str) -> dict[str, str]:
         """Get default values for a specific preset.
-        
+
         Args:
             folder_type: The folder type ("backend" or "frontend")
             subtype: The folder subtype
-            
+
         Returns:
             Dictionary with default values for the preset.
         """

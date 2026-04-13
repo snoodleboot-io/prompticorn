@@ -27,19 +27,18 @@ from sweet_tea.sweet_tea_error import SweetTeaError
 from promptosaurus.questions.base.question import Question
 
 
-
 class LanguageRegistry:
     """Registry for supported languages.
-    
+
     Loads supported languages from YAML configuration file and provides
     methods for language validation and lookup.
     """
     _languages: list[str] | None = None
-    
+
     @classmethod
     def _load_languages(cls) -> list[str]:
         """Load supported languages from YAML file.
-        
+
         Returns:
             List of supported language keys.
         """
@@ -49,23 +48,23 @@ class LanguageRegistry:
                 data = yaml.safe_load(f)
                 cls._languages = data["supported_languages"]
         return cls._languages
-    
+
     @classmethod
     def get_supported_languages(cls) -> list[str]:
         """Get list of all supported languages.
-        
+
         Returns:
             Copy of supported languages list.
         """
         return cls._load_languages().copy()
-    
+
     @classmethod
     def is_supported(cls, language: str) -> bool:
         """Check if a language is supported.
-        
+
         Args:
             language: Language key to check.
-            
+
         Returns:
             True if language is supported, False otherwise.
         """

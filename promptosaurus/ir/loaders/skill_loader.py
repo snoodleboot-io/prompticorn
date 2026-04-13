@@ -5,13 +5,13 @@ from markdown files with YAML frontmatter.
 """
 
 from pathlib import Path
-from typing import Dict, Any
+from typing import Any
 
 from pydantic import ValidationError as PydanticValidationError
 
-from promptosaurus.ir.exceptions import ParseError, ValidationError, MissingFileError
+from promptosaurus.ir.exceptions import MissingFileError, ParseError, ValidationError
 from promptosaurus.ir.models import Skill
-from promptosaurus.ir.parsers import YAMLParser, MarkdownParser
+from promptosaurus.ir.parsers import MarkdownParser, YAMLParser
 
 
 class SkillLoader:
@@ -73,7 +73,7 @@ class SkillLoader:
 
         try:
             # Read the file content
-            with open(file_path_obj, "r", encoding="utf-8") as f:
+            with open(file_path_obj, encoding="utf-8") as f:
                 content = f.read()
 
             # Parse YAML frontmatter for metadata
@@ -98,8 +98,8 @@ class SkillLoader:
             raise ParseError(f"Failed to load skill from {file_path}: {str(e)}") from e
 
     def _build_skill_data(
-        self, metadata: Dict[str, Any], sections: Dict[str, str], file_path: str
-    ) -> Dict[str, Any]:
+        self, metadata: dict[str, Any], sections: dict[str, str], file_path: str
+    ) -> dict[str, Any]:
         """Build skill data from parsed metadata and sections.
 
         Combines YAML metadata with markdown sections to create complete skill

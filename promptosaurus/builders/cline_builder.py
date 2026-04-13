@@ -5,7 +5,6 @@ into Cline AI configuration files (.clinerules) with markdown formatting.
 """
 
 from pathlib import Path
-from typing import Optional
 
 from promptosaurus.builders.base import AbstractBuilder, BuildOptions
 from promptosaurus.builders.errors import BuilderValidationError
@@ -56,7 +55,7 @@ class ClineBuilder(AbstractBuilder):
         self.agents_dir = agents_dir
         self.core_loader = CoreFilesLoader()
 
-    def build(self, agent: Agent, options: BuildOptions, config: Optional[dict] = None) -> str:
+    def build(self, agent: Agent, options: BuildOptions, config: dict | None = None) -> str:
         """Build a Cline AI configuration file.
 
         Includes core system, conventions, and language-specific conventions files

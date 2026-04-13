@@ -1,10 +1,9 @@
 #!/usr/bin/env python3
 """Test script to generate agent files and verify mode field."""
 
-from pathlib import Path
 from promptosaurus.agent_registry.registry import Registry
-from promptosaurus.builders.kilo_builder import KiloBuilder
 from promptosaurus.builders.base import BuildOptions
+from promptosaurus.builders.kilo_builder import KiloBuilder
 
 
 def main():
@@ -16,18 +15,18 @@ def main():
     )
 
     # Try to get enforcement agent
-    print(f"Looking for enforcement agent...")
+    print("Looking for enforcement agent...")
     enforcement = registry.get_agent("enforcement")
 
     if enforcement:
-        print(f"\n=== Enforcement Agent ===")
+        print("\n=== Enforcement Agent ===")
         print(f"Name: {enforcement.name}")
         print(f"Description: {enforcement.description}")
         print(f"Mode: {enforcement.mode}")
         print(f"Has system_prompt: {bool(enforcement.system_prompt)}")
 
         # Try to build it
-        print(f"\nBuilding enforcement agent...")
+        print("\nBuilding enforcement agent...")
         try:
             output = builder.build(enforcement, options)
             print("Build successful!")
@@ -35,7 +34,7 @@ def main():
             # Extract frontmatter
             parts = output.split("---")
             if len(parts) >= 2:
-                print(f"\nGenerated frontmatter:")
+                print("\nGenerated frontmatter:")
                 print(parts[1])
         except Exception as e:
             print(f"Build failed: {e}")

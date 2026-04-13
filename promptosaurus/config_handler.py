@@ -54,10 +54,10 @@ class ConfigHandler:
     @classmethod
     def _get_yaml(cls) -> YAML:
         """Get configured YAML instance for reading and writing config files.
-        
+
         Uses ruamel.yaml with proper indentation for lists. The instance
         is created once and cached for reuse.
-        
+
         Returns:
             Configured YAML instance.
         """
@@ -163,7 +163,7 @@ class ConfigHandler:
     @classmethod
     def get_default_single_language_template(cls) -> dict[str, Any]:
         """Get default configuration template for single-language repositories.
-        
+
         Returns:
             Dictionary with default single-language configuration structure.
         """
@@ -191,11 +191,11 @@ class ConfigHandler:
                 },
             },
         }
-    
+
     @classmethod
     def get_default_multi_language_template(cls) -> dict[str, Any]:
         """Get default configuration template for multi-language monorepo.
-        
+
         Returns:
             Dictionary with default multi-language-monorepo configuration structure.
         """

@@ -1,8 +1,6 @@
 """Coverage analyzer for Phase 1 content."""
 
 from pathlib import Path
-from typing import Dict, Tuple
-import re
 
 
 class CoverageAnalyzer:
@@ -15,7 +13,7 @@ class CoverageAnalyzer:
         self.workflows_dir = project_root / "promptosaurus" / "workflows"
         self.skills_dir = project_root / "promptosaurus" / "skills"
 
-    def analyze_all(self) -> Dict[str, Dict]:
+    def analyze_all(self) -> dict[str, dict]:
         """Analyze coverage of all Phase 1 content."""
         return {
             "agents": self._analyze_agents(),
@@ -24,7 +22,7 @@ class CoverageAnalyzer:
             "skills": self._analyze_skills(),
         }
 
-    def _analyze_agents(self) -> Dict[str, int]:
+    def _analyze_agents(self) -> dict[str, int]:
         """Analyze agent coverage."""
         phase1_agents = ["data", "observability", "incident"]
         coverage = {}
@@ -35,7 +33,7 @@ class CoverageAnalyzer:
 
         return coverage
 
-    def _analyze_subagents(self) -> Dict[str, Dict[str, int]]:
+    def _analyze_subagents(self) -> dict[str, dict[str, int]]:
         """Analyze subagent coverage."""
         expected = {
             "data": ["pipeline", "warehouse", "quality", "governance", "streaming"],
@@ -60,7 +58,7 @@ class CoverageAnalyzer:
 
         return coverage
 
-    def _analyze_workflows(self) -> Dict[str, int]:
+    def _analyze_workflows(self) -> dict[str, int]:
         """Analyze workflow coverage."""
         phase1_workflows = {
             "data-pipeline": 2,
@@ -74,7 +72,7 @@ class CoverageAnalyzer:
         }
 
         coverage = {}
-        for workflow_name, expected_variants in phase1_workflows.items():
+        for workflow_name, _expected_variants in phase1_workflows.items():
             workflow_dir = self.workflows_dir / workflow_name
             found_variants = 0
 
@@ -86,7 +84,7 @@ class CoverageAnalyzer:
 
         return coverage
 
-    def _analyze_skills(self) -> Dict[str, int]:
+    def _analyze_skills(self) -> dict[str, int]:
         """Analyze skill coverage."""
         phase1_skills = [
             "sql-optimization",
@@ -117,7 +115,7 @@ class CoverageAnalyzer:
 
         return coverage
 
-    def calculate_coverage_percentage(self, coverage_data: Dict) -> Dict[str, float]:
+    def calculate_coverage_percentage(self, coverage_data: dict) -> dict[str, float]:
         """Calculate coverage percentages."""
         percentages = {}
 

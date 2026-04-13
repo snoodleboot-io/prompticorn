@@ -1,7 +1,6 @@
 """Loader for agent-skill-workflow mappings."""
 
 from pathlib import Path
-from typing import Optional
 
 import yaml
 

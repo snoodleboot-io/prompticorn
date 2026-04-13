@@ -5,17 +5,17 @@ the entire UI interaction flow. Tests focus on state transitions,
 event handling, and proper pipeline execution.
 """
 
-import pytest
-from unittest.mock import Mock, MagicMock, call, patch
+from unittest.mock import Mock
 
-from promptosaurus.ui.domain.context import PipelineContext, QuestionContext
-from promptosaurus.ui.exceptions import UserCancelledError
+import pytest
+
+from promptosaurus.ui.domain.context import QuestionContext
 from promptosaurus.ui.pipeline.orchestrator import PipelineOrchestrator
-from promptosaurus.ui.state.single_selection_state import SingleSelectionState
 from promptosaurus.ui.state.multi_selection_state import MultiSelectionState
 from promptosaurus.ui.state.mutual_exclusion_multi_selection_state import (
     MutualExclusionMultiSelectionState,
 )
+from promptosaurus.ui.state.single_selection_state import SingleSelectionState
 
 
 class TestPipelineOrchestratorInit:

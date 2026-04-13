@@ -3,11 +3,12 @@
 Tests the Unix-specific input provider using termios/tty for raw input.
 """
 
-import pytest
-from unittest.mock import Mock, MagicMock, patch, mock_open
+from unittest.mock import MagicMock, Mock, patch
 
-from promptosaurus.ui.input.unix import UnixInputProvider
+import pytest
+
 from promptosaurus.ui.domain.events import InputEvent, InputEventType
+from promptosaurus.ui.input.unix import UnixInputProvider
 
 
 class TestUnixInputProvider:

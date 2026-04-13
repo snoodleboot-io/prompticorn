@@ -4,8 +4,9 @@ This module defines the Agent model, which represents a tool-agnostic agent
 configuration that can be used across different AI tools and frameworks.
 """
 
-from pydantic import BaseModel, Field, ConfigDict
-from typing import List, Dict, Any, Optional
+from typing import Any
+
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class Agent(BaseModel):
@@ -44,18 +45,18 @@ class Agent(BaseModel):
     system_prompt: str = Field(
         ..., min_length=1, description="System prompt defining agent behavior"
     )
-    tools: List[str] = Field(
+    tools: list[str] = Field(
         default_factory=list, description="List of tool names this agent can use"
     )
-    skills: List[str] = Field(
+    skills: list[str] = Field(
         default_factory=list, description="List of skill names this agent can perform"
     )
-    workflows: List[str] = Field(
+    workflows: list[str] = Field(
         default_factory=list, description="List of workflow names this agent can execute"
     )
-    subagents: List[str] = Field(
+    subagents: list[str] = Field(
         default_factory=list, description="List of subagent names for composition"
     )
-    permissions: Optional[Dict[str, Any]] = Field(
+    permissions: dict[str, Any] | None = Field(
         default=None, description="Permission rules for the agent (tool-specific)"
     )

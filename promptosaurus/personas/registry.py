@@ -7,7 +7,7 @@ Reference: planning/current/adrs/ADR-001-persona-based-filtering.md
 """
 
 from pathlib import Path
-from typing import Dict, List, Set
+
 import yaml
 
 
@@ -23,7 +23,7 @@ class PersonaRegistry:
         >>> agents = registry.get_agents_for_persona("software_engineer")
     """
 
-    def __init__(self, personas_data: Dict) -> None:
+    def __init__(self, personas_data: dict) -> None:
         """Initialize registry with persona data.
 
         Args:
@@ -59,7 +59,7 @@ class PersonaRegistry:
 
         return cls(personas_data)
 
-    def list_personas(self) -> List[str]:
+    def list_personas(self) -> list[str]:
         """Get list of all persona identifiers.
 
         Returns:
@@ -67,7 +67,7 @@ class PersonaRegistry:
         """
         return list(self._personas.keys())
 
-    def get_persona_info(self, persona_name: str) -> Dict:
+    def get_persona_info(self, persona_name: str) -> dict:
         """Get full persona definition.
 
         Args:
@@ -86,7 +86,7 @@ class PersonaRegistry:
 
         return self._personas[persona_name]
 
-    def get_agents_for_persona(self, persona_name: str) -> List[str]:
+    def get_agents_for_persona(self, persona_name: str) -> list[str]:
         """Get all agents (primary + secondary) for a persona.
 
         Args:
@@ -100,7 +100,7 @@ class PersonaRegistry:
         secondary = persona.get("secondary_agents", [])
         return primary + secondary
 
-    def get_workflows_for_persona(self, persona_name: str) -> List[str]:
+    def get_workflows_for_persona(self, persona_name: str) -> list[str]:
         """Get workflows mapped to a persona.
 
         Args:
@@ -112,7 +112,7 @@ class PersonaRegistry:
         persona = self.get_persona_info(persona_name)
         return persona.get("workflows", [])
 
-    def get_skills_for_persona(self, persona_name: str) -> List[str]:
+    def get_skills_for_persona(self, persona_name: str) -> list[str]:
         """Get skills mapped to a persona.
 
         Args:
@@ -124,7 +124,7 @@ class PersonaRegistry:
         persona = self.get_persona_info(persona_name)
         return persona.get("skills", [])
 
-    def get_universal_agents(self) -> List[str]:
+    def get_universal_agents(self) -> list[str]:
         """Get list of universal agents (always enabled).
 
         Returns:
@@ -170,7 +170,7 @@ class PersonaFilter:
         >>> enabled_workflows = filter.get_enabled_workflows()
     """
 
-    def __init__(self, registry: PersonaRegistry, selected_personas: List[str]) -> None:
+    def __init__(self, registry: PersonaRegistry, selected_personas: list[str]) -> None:
         """Initialize filter with registry and selected personas.
 
         Args:
@@ -190,7 +190,7 @@ class PersonaFilter:
                 msg = f"Invalid persona: '{persona}'. Available: {available}"
                 raise KeyError(msg)
 
-    def get_enabled_agents(self) -> Set[str]:
+    def get_enabled_agents(self) -> set[str]:
         """Get all agents that should be enabled for selected personas.
 
         Implements the dynamic enabling/disabling algorithm from ADR-001:
@@ -208,7 +208,7 @@ class PersonaFilter:
             >>> "test" in enabled  # True - QA/Tester has test
             >>> "ask" in enabled   # True - ask is universal
         """
-        enabled_agents: Set[str] = set()
+        enabled_agents: set[str] = set()
 
         # Add universal agents (always enabled)
         enabled_agents.update(self._registry.get_universal_agents())
@@ -220,13 +220,13 @@ class PersonaFilter:
 
         return enabled_agents
 
-    def get_enabled_workflows(self) -> Set[str]:
+    def get_enabled_workflows(self) -> set[str]:
         """Get all workflows that should be enabled for selected personas.
 
         Returns:
             Set of workflow names to enable.
         """
-        enabled_workflows: Set[str] = set()
+        enabled_workflows: set[str] = set()
 
         for persona_name in self._selected_personas:
             persona_workflows = self._registry.get_workflows_for_persona(persona_name)
@@ -234,13 +234,13 @@ class PersonaFilter:
 
         return enabled_workflows
 
-    def get_enabled_skills(self) -> Set[str]:
+    def get_enabled_skills(self) -> set[str]:
         """Get all skills that should be enabled for selected personas.
 
         Returns:
             Set of skill names to enable.
         """
-        enabled_skills: Set[str] = set()
+        enabled_skills: set[str] = set()
 
         for persona_name in self._selected_personas:
             persona_skills = self._registry.get_skills_for_persona(persona_name)
@@ -281,7 +281,7 @@ class PersonaFilter:
         """
         return skill_name in self.get_enabled_skills()
 
-    def get_selected_personas(self) -> List[str]:
+    def get_selected_personas(self) -> list[str]:
         """Get list of currently selected personas.
 
         Returns:

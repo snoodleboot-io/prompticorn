@@ -10,13 +10,13 @@ Components:
 """
 
 from promptosaurus.agent_registry.discovery import RegistryDiscovery
-from promptosaurus.agent_registry.registry import Registry
 from promptosaurus.agent_registry.errors import (
-    RegistryException,
     AgentNotFoundError,
     InvalidVariantError,
+    RegistryException,
     RegistryLoadError,
 )
+from promptosaurus.agent_registry.registry import Registry
 
 __all__ = [
     "RegistryDiscovery",

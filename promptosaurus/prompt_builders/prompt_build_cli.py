@@ -18,11 +18,11 @@ import sys
 from pathlib import Path
 from typing import Any, NoReturn
 
-from promptosaurus.builders.base import AbstractBuilder, BuildOptions
-from promptosaurus.builders.factory import BuilderFactory
-from promptosaurus.builders.errors import BuilderException, BuilderNotFoundError
-from promptosaurus.agent_registry.registry import Registry
 from promptosaurus.agent_registry.errors import AgentNotFoundError
+from promptosaurus.agent_registry.registry import Registry
+from promptosaurus.builders.base import AbstractBuilder, BuildOptions
+from promptosaurus.builders.errors import BuilderException, BuilderNotFoundError
+from promptosaurus.builders.factory import BuilderFactory
 from promptosaurus.ir.models import Agent
 
 
@@ -242,7 +242,7 @@ class PromptBuildCLI:
 
             print(f"✓ Built {tool} agent: {output_path}")
 
-        except IOError as e:
+        except OSError as e:
             self._error(
                 f"Failed to write output file: {e}",
                 exit_code=1,

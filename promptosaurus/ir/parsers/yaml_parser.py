@@ -5,7 +5,7 @@ from markdown files and returning structured dictionaries.
 """
 
 import re
-from typing import Dict, Any
+from typing import Any
 
 import yaml
 
@@ -31,7 +31,7 @@ class YAMLParser:
         'example'
     """
 
-    def parse(self, content: str) -> Dict[str, Any]:
+    def parse(self, content: str) -> dict[str, Any]:
         """Parse YAML frontmatter from markdown content.
 
         Extracts the YAML content between the first set of --- delimiters
@@ -95,7 +95,7 @@ class YAMLParser:
         except Exception as e:
             raise ParseError(f"Failed to parse YAML frontmatter: {str(e)}") from e
 
-    def parse_file(self, file_path: str) -> Dict[str, Any]:
+    def parse_file(self, file_path: str) -> dict[str, Any]:
         """Parse YAML frontmatter from a file.
 
         Args:
@@ -109,7 +109,7 @@ class YAMLParser:
             FileNotFoundError: If the file does not exist.
         """
         try:
-            with open(file_path, "r", encoding="utf-8") as f:
+            with open(file_path, encoding="utf-8") as f:
                 content = f.read()
             return self.parse(content)
         except FileNotFoundError:

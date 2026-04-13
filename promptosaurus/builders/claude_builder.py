@@ -6,7 +6,7 @@ into JSON output compatible with Claude's Messages API format.
 
 import json
 from pathlib import Path
-from typing import Any, Optional
+from typing import Any
 
 from promptosaurus.builders.base import AbstractBuilder, BuildOptions
 from promptosaurus.builders.errors import BuilderValidationError
@@ -49,7 +49,7 @@ class ClaudeBuilder(AbstractBuilder):
         self.core_loader = CoreFilesLoader()
 
     def build(
-        self, agent: Agent, options: BuildOptions, config: Optional[dict] = None
+        self, agent: Agent, options: BuildOptions, config: dict | None = None
     ) -> dict[str, Any]:
         """Build Claude Messages API JSON output from an Agent IR model.
 
@@ -104,7 +104,7 @@ class ClaudeBuilder(AbstractBuilder):
             raise BuilderValidationError(
                 errors=[f"Output is not JSON serializable: {str(e)}"],
                 message=f"Invalid output from Claude builder: {str(e)}",
-            )
+            ) from e
 
         return output
 
@@ -159,7 +159,7 @@ class ClaudeBuilder(AbstractBuilder):
         """
         return prompt.strip()
 
-    def _build_system_prompt_with_core(self, prompt: str, config: Optional[dict] = None) -> str:
+    def _build_system_prompt_with_core(self, prompt: str, config: dict | None = None) -> str:
         """Build system prompt with core files included if language is available.
 
         Args:

@@ -118,7 +118,7 @@ class HandleSingleLanguageQuestions:
         default_idx = (
             question.options.index(question.default) if question.default in question.options else 0
         )
-        
+
         # Use properties directly - they're defined in Question base class
         allow_multiple = question.allow_multiple
         default_indices = question.default_indices

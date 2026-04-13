@@ -5,10 +5,10 @@ discovered agents by name and variant.
 """
 
 from pathlib import Path
-from typing import Dict
-from promptosaurus.ir.models import Agent
+
 from promptosaurus.agent_registry.discovery import RegistryDiscovery
 from promptosaurus.agent_registry.errors import AgentNotFoundError
+from promptosaurus.ir.models import Agent
 
 
 class Registry:
@@ -24,7 +24,7 @@ class Registry:
         >>> agent_names = registry.list_agents()
     """
 
-    def __init__(self, agents: Dict[str, Agent], cache: bool = True) -> None:
+    def __init__(self, agents: dict[str, Agent], cache: bool = True) -> None:
         """Initialize registry with discovered agents.
 
         Args:
@@ -34,7 +34,7 @@ class Registry:
         """
         self._agents = agents
         self._cache_enabled = cache
-        self._variant_cache: Dict[str, Dict[str, Agent]] = {}
+        self._variant_cache: dict[str, dict[str, Agent]] = {}
 
         # Build variant index if cache is enabled
         if self._cache_enabled:
@@ -95,7 +95,7 @@ class Registry:
 
         return agent
 
-    def get_all_agents(self) -> Dict[str, Agent]:
+    def get_all_agents(self) -> dict[str, Agent]:
         """Get all agents.
 
         Returns:

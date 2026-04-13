@@ -10,15 +10,16 @@ Tests cover:
 - Error cases with proper recovery
 """
 
-import pytest
-import yaml
+from collections.abc import Generator
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Generator
 
-from promptosaurus.builders.kilo_builder import KiloBuilder
+import pytest
+import yaml
+
 from promptosaurus.builders.base import BuildOptions
-from promptosaurus.builders.errors import BuilderValidationError, VariantNotFoundError
+from promptosaurus.builders.errors import VariantNotFoundError
+from promptosaurus.builders.kilo_builder import KiloBuilder
 from promptosaurus.ir.models import Agent
 
 
@@ -366,7 +367,7 @@ class TestKiloBuilderMarkdownFormatting:
 
         # Count level 1 headings
         lines = output.split("\n")
-        level1_headings = [l for l in lines if l.startswith("# ")]
+        level1_headings = [line for line in lines if line.startswith("# ")]
 
         assert len(level1_headings) >= 2  # At least "System Prompt" and "Tools"
 

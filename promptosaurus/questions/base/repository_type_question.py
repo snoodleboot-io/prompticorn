@@ -1,7 +1,7 @@
 """Question for determining repository structure type."""
 
-from promptosaurus.questions.base.question import Question
 from promptosaurus.questions.base.constants import RepositoryTypes
+from promptosaurus.questions.base.question import Question
 
 
 class RepositoryTypeQuestion(Question):

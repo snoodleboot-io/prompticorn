@@ -3,8 +3,8 @@
 import sys
 from pathlib import Path
 
-from content_validator import ContentValidator
 from consistency_checker import ConsistencyChecker
+from content_validator import ContentValidator
 from coverage_analyzer import CoverageAnalyzer
 
 
@@ -20,7 +20,7 @@ def main():
     print("1. Running Content Validation...")
     content_validator = ContentValidator(project_root)
     error_count, warning_count = content_validator.validate_all()
-    subagent_missing = content_validator.validate_subagent_coverage()
+    content_validator.validate_subagent_coverage()
     print(content_validator.report())
 
     # Run consistency checks
@@ -40,7 +40,7 @@ def main():
     print("=" * 60)
     print(f"Content Validation:  {error_count} errors, {warning_count} warnings")
     print(f"Consistency Checks:  {issue_count} issues")
-    print(f"Coverage:            See analysis above")
+    print("Coverage:            See analysis above")
 
     # Exit code
     if error_count > 0:

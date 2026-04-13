@@ -22,16 +22,16 @@ from promptosaurus.questions.language import LanguageRegistry
 
 class ConfigOptionsRegistry:
     """Registry for loading configuration options from YAML files.
-    
+
     Loads configuration options once and caches them for reuse.
     Configuration is loaded from promptosaurus/configurations/config_options.yaml
     """
     _config: dict[str, list[str]] | None = None
-    
+
     @classmethod
     def _load_config(cls) -> dict[str, list[str]]:
         """Load configuration options from YAML file.
-        
+
         Returns:
             Dictionary with option lists for repo_type, package_manager, etc.
         """
@@ -40,51 +40,51 @@ class ConfigOptionsRegistry:
             with open(config_file, encoding="utf-8") as f:
                 cls._config = yaml.safe_load(f)
         return cls._config
-    
+
     @classmethod
     def get_repo_type_options(cls) -> list[str]:
         """Get available repository type options.
-        
+
         Returns:
             List of valid repository type strings.
         """
         config = cls._load_config()
         return config["repo_type_options"].copy()
-    
+
     @classmethod
     def get_package_manager_options(cls) -> list[str]:
         """Get available package manager options.
-        
+
         Returns:
             List of valid package manager strings.
         """
         config = cls._load_config()
         return config["package_manager_options"].copy()
-    
+
     @classmethod
     def get_test_framework_options(cls) -> list[str]:
         """Get available test framework options.
-        
+
         Returns:
             List of valid test framework strings.
         """
         config = cls._load_config()
         return config["test_framework_options"].copy()
-    
+
     @classmethod
     def get_linter_options(cls) -> list[str]:
         """Get available linter options.
-        
+
         Returns:
             List of valid linter strings.
         """
         config = cls._load_config()
         return config["linter_options"].copy()
-    
+
     @classmethod
     def get_formatter_options(cls) -> list[str]:
         """Get available formatter options.
-        
+
         Returns:
             List of valid formatter strings.
         """
@@ -117,9 +117,9 @@ class ConfigOption:
 
 def _get_config_options() -> list[ConfigOption]:
     """Get the list of all updateable configuration options.
-    
+
     Options are loaded dynamically from the ConfigOptionsRegistry.
-    
+
     Returns:
         List of ConfigOption instances.
     """

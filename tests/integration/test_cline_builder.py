@@ -10,15 +10,15 @@ Tests cover:
 - Error cases with proper recovery
 """
 
-import pytest
+import re
+from collections.abc import Generator
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Generator
-import re
 
-from promptosaurus.builders.cline_builder import ClineBuilder
+import pytest
+
 from promptosaurus.builders.base import BuildOptions
-from promptosaurus.builders.errors import BuilderValidationError, VariantNotFoundError
+from promptosaurus.builders.cline_builder import ClineBuilder
 from promptosaurus.ir.models import Agent
 
 
@@ -589,7 +589,7 @@ class TestClineBuilderComponentHandling:
         prose_lines = output.split("\n")
         # First line is "# minimal Rules"
         # Next meaningful line should be prose prompt
-        for i, line in enumerate(prose_lines[1:5]):
+        for _i, line in enumerate(prose_lines[1:5]):
             if line.strip() and not line.startswith("#"):
                 # This is prose line - should not have markdown formatting
                 assert not line.startswith("*")

@@ -11,17 +11,18 @@ Tests cover:
 """
 
 import json
-import pytest
+from collections.abc import Generator
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from typing import Generator
-
-from promptosaurus.prompt_builders.prompt_build_cli import PromptBuildCLI
-from promptosaurus.ir.models import Agent
 from typing import TYPE_CHECKING
 
+import pytest
+
+from promptosaurus.ir.models import Agent
+from promptosaurus.prompt_builders.prompt_build_cli import PromptBuildCLI
+
 if TYPE_CHECKING:
-    from typing import Generator as GeneratorType
+    from collections.abc import Generator as GeneratorType
 else:
     GeneratorType = Generator
 

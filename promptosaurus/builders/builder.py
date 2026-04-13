@@ -27,8 +27,8 @@ from promptosaurus.builders.template_handlers.language_handler import LanguageHa
 from promptosaurus.builders.template_handlers.linter_handler import LinterHandler
 from promptosaurus.builders.template_handlers.mocking_library_handler import MockingLibraryHandler
 from promptosaurus.builders.template_handlers.mutation_tool_handler import MutationToolHandler
-from promptosaurus.builders.template_handlers.primary_agents_handler import PrimaryAgentsHandler
 from promptosaurus.builders.template_handlers.package_manager_handler import PackageManagerHandler
+from promptosaurus.builders.template_handlers.primary_agents_handler import PrimaryAgentsHandler
 from promptosaurus.builders.template_handlers.resolvers.custom_filters import (
     register_custom_filters,
 )
