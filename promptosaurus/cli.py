@@ -357,7 +357,8 @@ def _ask_folder_questions(folder_specs: list[dict[str, Any]]) -> list[dict[str, 
 
         # Removed: separator not needed before curses UI
         # click.echo("\n" + "-" * 60)
-        click.secho(f"  Configuring: {folder_path} ({language})", bold=True)
+        # Removed: header before curses (gets cleared anyway)
+        # click.secho(f"  Configuring: {folder_path} ({language})", bold=True)
         # Removed: separator not needed before curses UI
         # click.echo("-" * 60)
 
