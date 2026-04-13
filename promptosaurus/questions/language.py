@@ -44,7 +44,7 @@ class LanguageRegistry:
             List of supported language keys.
         """
         if cls._languages is None:
-            config_file = Path(__file__).parent / "configurations" / "languages.yaml"
+            config_file = Path(__file__).parent.parent / "configurations" / "languages.yaml"
             with open(config_file, encoding="utf-8") as f:
                 data = yaml.safe_load(f)
                 cls._languages = data["supported_languages"]
