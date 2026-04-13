@@ -72,11 +72,11 @@ class HandleSingleLanguageQuestions:
         default_idx = (
             question.options.index(question.default) if question.default in question.options else 0
         )
-        allow_multiple = getattr(question, "allow_multiple", False)
-        default_indices = (
-            question.default_indices if hasattr(question, "default_indices") else {default_idx}
-        )
-        none_index = getattr(question, "none_index", None)
+        
+        # Use properties directly - they're defined in Question base class
+        allow_multiple = question.allow_multiple
+        default_indices = question.default_indices
+        none_index = question.none_index
 
         return self.select_option(
             question=question.question_text,

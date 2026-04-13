@@ -33,12 +33,6 @@ from promptosaurus.questions.base.spec_handler import (
 )
 
 # Module-level YAML instance with proper indentation for lists
-# indent(mapping=2, sequence=4, offset=2) gives us:
-# folders:
-#   - folder: backend/api
-#     language: python
-_ruamel_yaml = YAML()
-_ruamel_yaml.indent(mapping=2, sequence=4, offset=2)
 
 
 class ConfigHandler:
@@ -54,6 +48,23 @@ class ConfigHandler:
 
     DEFAULT_CONFIG_DIR = Path(".promptosaurus")
     DEFAULT_CONFIG_FILE = ".promptosaurus.yaml"
+
+    _yaml_instance: YAML | None = None
+
+    @classmethod
+    def _get_yaml(cls) -> YAML:
+        """Get configured YAML instance for reading and writing config files.
+        
+        Uses ruamel.yaml with proper indentation for lists. The instance
+        is created once and cached for reuse.
+        
+        Returns:
+            Configured YAML instance.
+        """
+        if cls._yaml_instance is None:
+            cls._yaml_instance = YAML()
+            cls._yaml_instance.indent(mapping=2, sequence=4, offset=2)
+        return cls._yaml_instance
 
     @classmethod
     def get_config_path(cls, config_dir: Path | None = None) -> Path:
@@ -109,7 +120,7 @@ class ConfigHandler:
             return {}
 
         with open(config_path, encoding="utf-8") as f:
-            return _ruamel_yaml.load(f) or {}
+            return cls._get_yaml().load(f) or {}
 
     @classmethod
     def save_config(cls, config: dict[str, Any], config_path: Path | None = None) -> None:
@@ -130,7 +141,7 @@ class ConfigHandler:
 
         with open(config_path, "w", encoding="utf-8") as f:
             # Use ruamel.yaml with proper list indentation
-            _ruamel_yaml.dump(config, f)
+            cls._get_yaml().dump(config, f)
 
     @classmethod
     def config_exists(cls, config_path: Path | None = None) -> bool:
