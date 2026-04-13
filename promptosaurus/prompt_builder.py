@@ -111,7 +111,7 @@ class PromptBuilder:
         # Persona-based filtering: Only build agents for selected personas
         active_personas = config.get("active_personas", []) if config else []
         
-        if active_personas:
+        if active_personas is not None:
             # Load persona registry and filter agents
             try:
                 personas_yaml_path = Path(__file__).parent / "personas" / "personas.yaml"
