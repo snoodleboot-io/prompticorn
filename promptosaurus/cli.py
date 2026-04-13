@@ -34,8 +34,6 @@ from promptosaurus.cli_utils import (
     validate_tool_name,
 )
 from promptosaurus.config_handler import (
-    DEFAULT_CONFIG_TEMPLATE,
-    DEFAULT_MULTI_LANGUAGE_CONFIG_TEMPLATE,
     ConfigHandler,
 )
 from promptosaurus.config_options import (
@@ -45,8 +43,8 @@ from promptosaurus.config_options import (
 )
 from promptosaurus.questions.base.constants import RepositoryTypes
 from promptosaurus.questions.base.folder_spec import (
-    FOLDER_TYPE_PRESETS,
     FolderSpec,
+    FolderSpecRegistry,
 )
 from promptosaurus.questions.base.repository_type_question import RepositoryTypeQuestion
 from promptosaurus.questions.language import LANGUAGE_KEYS
@@ -161,9 +159,9 @@ def _setup_monorepo_folders() -> list[dict[str, Any]]:
             preset_type = folder_type.split(" (")[0]  # "backend" or "frontend"
 
             # Get subtypes for this preset
-            subtypes = list(FOLDER_TYPE_PRESETS[preset_type].keys())
+            subtypes = list(FolderSpecRegistry.get_folder_type_presets()[preset_type].keys())
             subtype_options = [
-                f"{s} ({FOLDER_TYPE_PRESETS[preset_type][s]['language']})" for s in subtypes
+                f"{s} ({FolderSpecRegistry.get_folder_type_presets()[preset_type][s]['language']})" for s in subtypes
             ]
 
             # Step 2: Ask for subtype
@@ -171,7 +169,7 @@ def _setup_monorepo_folders() -> list[dict[str, Any]]:
                 question=f"What {preset_type} subtype?",
                 options=subtype_options,
                 explanations={
-                    f"{s} ({FOLDER_TYPE_PRESETS[preset_type][s]['language']})": f"{preset_type.capitalize()} {s} - uses {FOLDER_TYPE_PRESETS[preset_type][s]['language']}"
+                    f"{s} ({FolderSpecRegistry.get_folder_type_presets()[preset_type][s]['language']})": f"{preset_type.capitalize()} {s} - uses {FolderSpecRegistry.get_folder_type_presets()[preset_type][s]['language']}"
                     for s in subtypes
                 },
                 question_explanation=f"Select the {preset_type} subtype to create",
@@ -193,7 +191,7 @@ def _setup_monorepo_folders() -> list[dict[str, Any]]:
                 folder_path = f"{preset_type}/{subtype}"
 
             # Get preset defaults
-            preset_defaults = FOLDER_TYPE_PRESETS[preset_type][subtype]
+            preset_defaults = FolderSpecRegistry.get_folder_type_presets()[preset_type][subtype]
             default_language = preset_defaults["language"]
 
             # Step 4: Ask for language - filter to valid languages for this preset
@@ -547,7 +545,7 @@ def init_prompts():
             # Multi-folder or mixed - just save repo type for now
             if repo_type == RepositoryTypes.MULTI_MONOREPO:
                 # Interactive folder setup for multi-language monorepo
-                config = DEFAULT_MULTI_LANGUAGE_CONFIG_TEMPLATE.copy()
+                config = ConfigHandler.get_default_multi_language_template()
                 config["repository"]["type"] = repo_type
                 config["variant"] = variant  # Add variant to config
                 config["active_personas"] = active_personas  # Add selected personas
@@ -572,7 +570,7 @@ def init_prompts():
                             click.echo(f"  Exists: {spec['folder']}")
             else:
                 # Mixed or other repo types - use default template
-                config = DEFAULT_CONFIG_TEMPLATE.copy()
+                config = ConfigHandler.get_default_single_language_template()
                 config["repository"]["type"] = repo_type
                 config["variant"] = variant  # Add variant to config
                 config["active_personas"] = active_personas  # Add selected personas
