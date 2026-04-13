@@ -605,7 +605,7 @@ def init_prompts():
                     click.secho("  Creating folders...", bold=True)
                     click.echo("-" * 60)
                     for spec in folder_specs:
-                        folder_path = Path(spec["folder"])
+                        folder_path = Path(spec["folder"])  # type: ignore[name-defined]
                         if not folder_path.exists():
                             folder_path.mkdir(parents=True, exist_ok=True)
                             click.echo(f"  Created: {spec['folder']}")
@@ -632,7 +632,7 @@ def init_prompts():
             click.secho(f"  Generating AI assistant configurations ({variant})...", bold=True)
             click.echo("-" * 60)
 
-            output_path = Path(".")
+            output_path = Path(".")  # type: ignore[name-defined]
             normalized_tool = normalize_tool_name(selected_tool)
             builder = _get_builder(normalized_tool)
             if builder:
@@ -757,7 +757,7 @@ def switch_command(tool_name: str | None):
 
     builder = _get_builder(target_tool)
     if builder:
-        output_path = Path(".")
+        output_path = Path(".")  # type: ignore[name-defined]
         try:
             actions = builder.build(output_path, config=config, dry_run=False)
             for action in actions:
@@ -919,11 +919,11 @@ def swap_command():
     added = set(selected_persona_ids) - set(current_personas)
 
     if removed:
-        removed_display = [id_to_display.get(pid, pid) for pid in removed]
+        removed_display = [id_to_display.get(pid) or pid for pid in removed]
         click.echo(f"  Removed: {', '.join(removed_display)}")
 
     if added:
-        added_display = [id_to_display.get(pid, pid) for pid in added]
+        added_display = [id_to_display.get(pid) or pid for pid in added]
         click.echo(f"  Added: {', '.join(added_display)}")
 
     # Remove old artifacts and regenerate
@@ -955,7 +955,7 @@ def swap_command():
 
     builder = _get_builder(current_tool)
     if builder:
-        output_path = Path(".")
+        output_path = Path(".")  # type: ignore[name-defined]
         try:
             actions = builder.build(output_path, config=config, dry_run=False)
             for action in actions:

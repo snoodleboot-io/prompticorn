@@ -51,12 +51,13 @@ class AbstractBuilder(ABC):
     """
 
     @abstractmethod
-    def build(self, agent: Agent, options: BuildOptions) -> str | dict[str, Any]:
+    def build(self, agent: Agent, options: BuildOptions, config: dict | None = None) -> str | dict[str, Any]:
         """Build tool-specific output from an Agent IR model.
 
         Args:
             agent: The Agent IR model to build from
             options: Build configuration options
+            config: Optional configuration dictionary for the builder
 
         Returns:
             str or dict depending on the tool's output format.

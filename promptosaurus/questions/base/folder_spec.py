@@ -28,7 +28,8 @@ class FolderSpecRegistry:
                 Path(__file__).parent.parent.parent / "configurations" / "language_defaults.yaml"
             )
             with open(config_file, encoding="utf-8") as f:
-                cls._config = yaml.safe_load(f)
+                cls._config = yaml.safe_load(f) or {}
+        assert cls._config is not None
         return cls._config
 
     @classmethod

@@ -13,7 +13,7 @@ Configuration is loaded from YAML files in promptosaurus/configurations/
 
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Any
+from typing import Any, cast
 
 import yaml
 
@@ -39,8 +39,8 @@ class ConfigOptionsRegistry:
         if cls._config is None:
             config_file = Path(__file__).parent / "configurations" / "config_options.yaml"
             with open(config_file, encoding="utf-8") as f:
-                cls._config = yaml.safe_load(f)
-        return cls._config
+                cls._config = yaml.safe_load(f) or {}
+        return cast(dict[str, list[str]], cls._config)
 
     @classmethod
     def get_repo_type_options(cls) -> list[str]:
@@ -50,6 +50,7 @@ class ConfigOptionsRegistry:
             List of valid repository type strings.
         """
         config = cls._load_config()
+        assert config is not None
         return config["repo_type_options"].copy()
 
     @classmethod
@@ -60,6 +61,7 @@ class ConfigOptionsRegistry:
             List of valid package manager strings.
         """
         config = cls._load_config()
+        assert config is not None
         return config["package_manager_options"].copy()
 
     @classmethod
@@ -70,6 +72,7 @@ class ConfigOptionsRegistry:
             List of valid test framework strings.
         """
         config = cls._load_config()
+        assert config is not None
         return config["test_framework_options"].copy()
 
     @classmethod
@@ -80,6 +83,7 @@ class ConfigOptionsRegistry:
             List of valid linter strings.
         """
         config = cls._load_config()
+        assert config is not None
         return config["linter_options"].copy()
 
     @classmethod
@@ -90,6 +94,7 @@ class ConfigOptionsRegistry:
             List of valid formatter strings.
         """
         config = cls._load_config()
+        assert config is not None
         return config["formatter_options"].copy()
 
 

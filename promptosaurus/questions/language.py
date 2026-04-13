@@ -47,7 +47,8 @@ class LanguageRegistry:
             config_file = Path(__file__).parent.parent / "configurations" / "languages.yaml"
             with open(config_file, encoding="utf-8") as f:
                 data = yaml.safe_load(f)
-                cls._languages = data["supported_languages"]
+                cls._languages = data.get("supported_languages", []) if data else []
+        assert cls._languages is not None
         return cls._languages
 
     @classmethod
