@@ -148,40 +148,54 @@ class ConfigHandler:
 
 
 # Template for default configuration (single-language)
-DEFAULT_CONFIG_TEMPLATE = {
-    "version": "1.0",
-    "repository": {
-        "type": "single-language",
-        "mappings": {},
-    },
-    "spec": {
-        "language": "",
-        "runtime": "",
-        "package_manager": "",
-        "test_framework": "",
-        "linter": "",
-        "linters": [],  # List of linters for advanced templating
-        "formatter": "",
-        "coverage": {
-            "line": 80,
-            "branch": 70,
-            "function": 90,
-            "statement": 85,
-            "mutation": 80,
-            "path": 60,
-        },
-    },
-}
 
-# Template for multi-language-monorepo configuration
-DEFAULT_MULTI_LANGUAGE_CONFIG_TEMPLATE = {
-    "version": "1.0",
-    "repository": {
-        "type": "multi-language-monorepo",
-        "mappings": {},
-    },
-    "spec": [],  # List of folder specs for multi-language-monorepo
-}
+    @classmethod
+    def get_default_single_language_template(cls) -> dict[str, Any]:
+        """Get default configuration template for single-language repositories.
+        
+        Returns:
+            Dictionary with default single-language configuration structure.
+        """
+        return {
+            "version": "1.0",
+            "repository": {
+                "type": "single-language",
+                "mappings": {},
+            },
+            "spec": {
+                "language": "",
+                "runtime": "",
+                "package_manager": "",
+                "test_framework": "",
+                "linter": "",
+                "linters": [],  # List of linters for advanced templating
+                "formatter": "",
+                "coverage": {
+                    "line": 80,
+                    "branch": 70,
+                    "function": 90,
+                    "statement": 85,
+                    "mutation": 80,
+                    "path": 60,
+                },
+            },
+        }
+    
+    @classmethod
+    def get_default_multi_language_template(cls) -> dict[str, Any]:
+        """Get default configuration template for multi-language monorepo.
+        
+        Returns:
+            Dictionary with default multi-language-monorepo configuration structure.
+        """
+        return {
+            "version": "1.0",
+            "repository": {
+                "type": "multi-language-monorepo",
+                "mappings": {},
+            },
+            "spec": [],  # List of folder specs for multi-language-monorepo
+        }
 
 
 def create_default_config(language: str, **kwargs) -> dict[str, Any]:
@@ -209,7 +223,7 @@ def create_default_config(language: str, **kwargs) -> dict[str, Any]:
 
     if repo_type == "single-language":
         # For single-language, use the handler to create spec
-        config: dict[str, Any] = DEFAULT_CONFIG_TEMPLATE.copy()
+        config: dict[str, Any] = ConfigHandler.get_default_single_language_template()
         config["repository"]["type"] = repo_type
         config["spec"] = handler.create_spec(language, **kwargs)
         return config
@@ -234,7 +248,7 @@ def create_multi_language_config(
     Returns:
         Configuration dictionary with folder specs.
     """
-    config: dict[str, Any] = DEFAULT_MULTI_LANGUAGE_CONFIG_TEMPLATE.copy()
+    config: dict[str, Any] = ConfigHandler.get_default_multi_language_template()
 
     # Apply any kwargs to the config
     for key, value in kwargs.items():

@@ -53,43 +53,11 @@ from promptosaurus.questions.language import LANGUAGE_KEYS
 from promptosaurus.registry import registry
 
 # Valid languages for each preset type/subtype
-PRESET_VALID_LANGUAGES: dict[str, dict[str, list[str]]] = {
-    "backend": {
-        "api": [
-            "python",
-            "typescript",
-            "javascript",
-            "go",
-            "java",
-            "rust",
-            "csharp",
-            "ruby",
-            "php",
-        ],
-        "library": [
-            "python",
-            "typescript",
-            "javascript",
-            "go",
-            "java",
-            "rust",
-            "csharp",
-            "ruby",
-            "php",
-        ],
-        "worker": ["python", "go", "rust", "java"],
-        "cli": ["python", "go", "rust", "csharp", "ruby", "php"],
-    },
-    "frontend": {
-        "ui": ["typescript", "javascript"],
-        "library": ["typescript", "javascript"],
-        "e2e": ["typescript", "javascript", "python"],
-    },
-}
-
 
 def _get_valid_languages(preset_type: str, subtype: str) -> list[str]:
     """Get valid languages for a preset type/subtype.
+    
+    Loads preset language mappings from YAML configuration file.
 
     Args:
         preset_type: The folder type (backend or frontend)
@@ -98,9 +66,16 @@ def _get_valid_languages(preset_type: str, subtype: str) -> list[str]:
     Returns:
         List of valid language keys
     """
-    if preset_type in PRESET_VALID_LANGUAGES:
-        if subtype in PRESET_VALID_LANGUAGES[preset_type]:
-            return PRESET_VALID_LANGUAGES[preset_type][subtype]
+    from pathlib import Path
+    import yaml
+    
+    config_file = Path(__file__).parent / "configurations" / "preset_languages.yaml"
+    with open(config_file, encoding="utf-8") as f:
+        preset_languages = yaml.safe_load(f)
+    
+    if preset_type in preset_languages:
+        if subtype in preset_languages[preset_type]:
+            return preset_languages[preset_type][subtype]
     # Fallback to common languages if not found
     return ["python", "typescript", "javascript", "go", "java", "rust"]
 

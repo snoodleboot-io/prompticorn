@@ -1,71 +1,80 @@
 """Folder specification for multi-language monorepo configuration."""
 
 from dataclasses import dataclass, field
+from pathlib import Path
 from typing import Any
 
-# Language-specific defaults
-LANGUAGE_DEFAULTS: dict[str, dict[str, str]] = {
-    "python": {
-        "runtime": "3.14",
-        "package_manager": "uv",
-        "test_framework": "pytest",
-        "linter": "ruff",
-        "formatter": "ruff",
-    },
-    "typescript": {
-        "runtime": "v6.0",
-        "package_manager": "pnpm",
-        "test_framework": "vitest",
-        "linter": "eslint",
-        "formatter": "prettier",
-    },
-    "javascript": {
-        "runtime": "v6.0",
-        "package_manager": "pnpm",
-        "test_framework": "vitest",
-        "linter": "eslint",
-        "formatter": "prettier",
-    },
-    "go": {
-        "runtime": "1.21",
-        "package_manager": "go mod",
-        "test_framework": "go test",
-        "linter": "golangci-lint",
-        "formatter": "gofmt",
-    },
-    "java": {
-        "runtime": "21",
-        "package_manager": "maven",
-        "test_framework": "junit",
-        "linter": "checkstyle",
-        "formatter": "google-java-format",
-    },
-    "rust": {
-        "runtime": "1.75",
-        "package_manager": "cargo",
-        "test_framework": "cargo test",
-        "linter": "clippy",
-        "formatter": "rustfmt",
-    },
-    "csharp": {
-        "runtime": "8.0",
-        "package_manager": "nuget",
-        "test_framework": "xunit",
-        "linter": "roslynator",
-        "formatter": "dotnet format",
-    },
-}
+import yaml
 
 
-# Default coverage targets
-DEFAULT_COVERAGE = {
-    "line": 80,
-    "branch": 70,
-    "function": 90,
-    "statement": 85,
-    "mutation": 80,
-    "path": 60,
-}
+class FolderSpecRegistry:
+    """Registry for folder specification defaults and presets.
+    
+    Loads language defaults, coverage targets, and folder type presets
+    from YAML configuration file.
+    """
+    _config: dict[str, Any] | None = None
+    
+    @classmethod
+    def _load_config(cls) -> dict[str, Any]:
+        """Load folder spec configuration from YAML file.
+        
+        Returns:
+            Dictionary with language_defaults, default_coverage, and folder_type_presets.
+        """
+        if cls._config is None:
+            config_file = Path(__file__).parent.parent / "configurations" / "language_defaults.yaml"
+            with open(config_file, encoding="utf-8") as f:
+                cls._config = yaml.safe_load(f)
+        return cls._config
+    
+    @classmethod
+    def get_language_defaults(cls) -> dict[str, dict[str, str]]:
+        """Get language-specific defaults.
+        
+        Returns:
+            Dictionary mapping language keys to their default configurations.
+        """
+        config = cls._load_config()
+        # Return all keys except default_coverage and folder_type_presets
+        return {
+            k: v for k, v in config.items() 
+            if k not in ("default_coverage", "folder_type_presets")
+        }
+    
+    @classmethod
+    def get_default_coverage(cls) -> dict[str, int]:
+        """Get default coverage targets.
+        
+        Returns:
+            Dictionary with coverage target percentages.
+        """
+        config = cls._load_config()
+        return config["default_coverage"].copy()
+    
+    @classmethod
+    def get_folder_type_presets(cls) -> dict[str, dict[str, dict[str, str]]]:
+        """Get folder type presets.
+        
+        Returns:
+            Dictionary mapping folder types to their preset configurations.
+        """
+        config = cls._load_config()
+        return config["folder_type_presets"]
+    
+    @classmethod
+    def get_preset_defaults(cls, folder_type: str, subtype: str) -> dict[str, str]:
+        """Get default values for a specific preset.
+        
+        Args:
+            folder_type: The folder type ("backend" or "frontend")
+            subtype: The folder subtype
+            
+        Returns:
+            Dictionary with default values for the preset.
+        """
+        presets = cls.get_folder_type_presets()
+        return presets.get(folder_type, {}).get(subtype, {})
 
 
 @dataclass
@@ -98,13 +107,13 @@ class FolderSpec:
     linter: str = ""
     linters: list[str] = field(default_factory=list)  # List of linters for advanced templating
     formatter: str = ""
-    coverage: dict[str, int] = field(default_factory=lambda: DEFAULT_COVERAGE.copy())
+    coverage: dict[str, int] = field(default_factory=lambda: FolderSpecRegistry.get_default_coverage())
 
     def __post_init__(self) -> None:
         """Apply language-specific defaults after initialization."""
         # If language is not provided, try to derive from preset
         if not self.language and self.type and self.subtype:
-            preset_defaults = get_preset_defaults(self.type, self.subtype)
+            preset_defaults = FolderSpecRegistry.get_preset_defaults(self.type, self.subtype)
             if preset_defaults and "language" in preset_defaults:
                 self.language = preset_defaults["language"]
 
@@ -115,8 +124,9 @@ class FolderSpec:
         lang_key = self.language.lower()
 
         # Get defaults for this language
+        all_language_defaults = FolderSpecRegistry.get_language_defaults()
         defaults: dict[str, str] = (
-            LANGUAGE_DEFAULTS.get(lang_key) or LANGUAGE_DEFAULTS.get("python") or {}
+            all_language_defaults.get(lang_key) or all_language_defaults.get("python") or {}
         )
 
         # Apply defaults if not specified
@@ -176,22 +186,6 @@ class FolderSpec:
         return instance
 
 
-# Standard folder type presets
-FOLDER_TYPE_PRESETS = {
-    "backend": {
-        "api": {"language": "python", "subtype": "api"},
-        "library": {"language": "python", "subtype": "library"},
-        "worker": {"language": "python", "subtype": "worker"},
-        "cli": {"language": "python", "subtype": "cli"},
-    },
-    "frontend": {
-        "ui": {"language": "typescript", "subtype": "ui"},
-        "library": {"language": "typescript", "subtype": "library"},
-        "e2e": {"language": "typescript", "subtype": "e2e"},
-    },
-}
-
-
 def get_preset_defaults(folder_type: str, subtype: str) -> dict[str, str]:
     """Get default values for a preset.
 
@@ -202,4 +196,4 @@ def get_preset_defaults(folder_type: str, subtype: str) -> dict[str, str]:
     Returns:
         Dictionary with default values for the preset
     """
-    return FOLDER_TYPE_PRESETS.get(folder_type, {}).get(subtype, {})
+    return FolderSpecRegistry.get_preset_defaults(folder_type, subtype)
