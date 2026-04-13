@@ -17,7 +17,7 @@ The promptosaurus system has undergone significant expansion (Phase 3 completed)
 - 50+ skills
 - Multiple subagents per primary agent
 
-Users initializing a new promptosaurus instance now face overwhelming choice and discovery. A developer building web applications doesn't need ML/AI agents and workflows. A security engineer doesn't need DevOps workflows. Yet the system generates everything by default, creating noise and reducing focus.
+Users initializing a new promptosaurus instance now face overwhelming choice and discovery. A developer building web applications doesn't need ML/AI agents and workflows. A security engineer doesn't need DevOps Engineer workflows. Yet the system generates everything by default, creating noise and reducing focus.
 
 The problem is acute because:
 1. **Discovery overload** - Users can't easily understand what's available and relevant
@@ -49,7 +49,7 @@ We need a way to **reduce generated content scope by filtering based on the user
 ### Option 1: Persona-Based Filtering with Explicit Mapping (RECOMMENDED)
 
 **Approach:**
-- Define "personas" as SDLC roles (Developer, Architect, QA, DevOps, Security, Product Manager, etc.)
+- Define "personas" as SDLC roles (Software Engineer, Architect, QA, DevOps Engineer, Security, Product Manager, etc.)
 - Create explicit mapping file (`personas/personas.yaml`) that defines:
   - Each persona
   - Which agents belong to it
@@ -65,7 +65,7 @@ We need a way to **reduce generated content scope by filtering based on the user
 ```yaml
 personas:
   developer:
-    display_name: "Developer"
+    display_name: "Software Engineer"
     description: "Software development and implementation"
     agents: [code, test, refactor, migration, debug]
     workflows: [code, testing, feature, refactor, dependency-upgrade]
@@ -212,11 +212,11 @@ We chose persona-based filtering because:
 
 3. **Scales with growth** - As we add more agents/workflows (Phase 4, 5, etc.), we can simply add them to the relevant personas. The init experience doesn't degrade.
 
-4. **Supports team variance** - One user might select [Developer, DevOps]. Another might select [Architect, Product Manager]. The system accommodates both without special casing.
+4. **Supports team variance** - One user might select [Software Engineer, DevOps Engineer]. Another might select [Architect, Product Manager]. The system accommodates both without special casing.
 
-5. **Reduces noise** - A junior developer sees only Developer-relevant tools, not Security or ML/AI tools they don't need yet. This improves focus.
+5. **Reduces noise** - A junior developer sees only Software Engineer-relevant tools, not Security or ML/AI tools they don't need yet. This improves focus.
 
-6. **Better onboarding** - New users can read a simple persona description to decide which apply to them. ("Are you writing code? You're probably Developer. Also need to manage infrastructure? Add DevOps.")
+6. **Better onboarding** - New users can read a simple persona description to decide which apply to them. ("Are you writing code? You're probably Software Engineer. Also need to manage infrastructure? Add DevOps Engineer.")
 
 ---
 
@@ -226,7 +226,7 @@ We chose persona-based filtering because:
 
 - **Reduced cognitive load** - Init experience shows ~6-8 personas instead of 28 agents
 - **Better discovery** - Users understand what's available because it's organized by role
-- **Improved focus** - Sessions have clear context (we're doing Developer + QA work)
+- **Improved focus** - Sessions have clear context (we're doing Software Engineer + QA work)
 - **Scalable curation** - As Phase 4+ adds content, we just map to personas
 - **Team alignment** - Multi-persona selection reflects actual team composition
 - **Foundation for future features** - Personas can enable role-based recommendations, session profiles, etc.
@@ -239,7 +239,7 @@ We chose persona-based filtering because:
 - **Maintenance burden** - Mapping must stay in sync with actual agents/workflows
   - *Mitigation:* Add validation tests; require mapping updates in code review
   
-- **User might feel restricted** - "I want the DevOps agent but only selected Developer"
+- **User might feel restricted** - "I want the DevOps Engineer agent but only selected Software Engineer"
   - *Mitigation:* Always allow multi-persona selection; make it easy to change personas later
   
 - **Incomplete coverage** - Some agents might not fit cleanly into personas
@@ -275,7 +275,7 @@ We chose persona-based filtering because:
 
 **Deliverables:**
 1. Create `promptosaurus/personas/personas.yaml` with:
-   - 8-10 core personas (Developer, Architect, QA, DevOps, Security, Product, etc.)
+   - 8-10 core personas (Software Engineer, Architect, QA, DevOps Engineer, Security, Product, etc.)
    - Complete mappings for all 28 agents
    - Complete mappings for all 100+ workflows
    - Complete mappings for all 50+ skills
@@ -444,133 +444,155 @@ We chose persona-based filtering because:
 
 This matrix shows which primary agents are included in each persona. Agents can belong to multiple personas.
 
-| Agent | Developer | Architect | QA/Tester | DevOps | Security | Product | Data | ML/AI | Tech Writer | Universal |
-|-------|-----------|-----------|-----------|--------|----------|---------|------|-------|-------------|-----------|
-| **ask** | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | ✓ | **✓** ALWAYS |
-| **code** | **✓** PRIMARY | | | | | | | | | |
-| **test** | **✓** PRIMARY | | **✓** PRIMARY | | | | | **✓** | | |
-| **refactor** | **✓** PRIMARY | | | | | | | | | |
-| **debug** | **✓** PRIMARY | | | | | | | | | **✓** ALWAYS |
-| **migration** | **✓** PRIMARY | | | | | | | | | |
-| **review** | ✓ | | **✓** PRIMARY | | **✓** | | | | | |
-| **architect** | | **✓** PRIMARY | | | | | | | | |
-| **backend** | ✓ | **✓** PRIMARY | | | | | | | | |
-| **frontend** | ✓ | **✓** PRIMARY | | | | | | | | |
-| **data** | | **✓** | | | | | **✓** PRIMARY | **✓** | | |
-| **planning** | | **✓** | | | | **✓** PRIMARY | | | | |
-| **product** | | | | | | **✓** PRIMARY | | | | |
-| **devops** | | | | **✓** PRIMARY | | | ✓ | | | |
-| **observability** | | | | **✓** PRIMARY | | | ✓ | | | |
-| **incident** | | | | **✓** PRIMARY | **✓** | | | | | |
-| **security** | | | | | **✓** PRIMARY | | | | | |
-| **compliance** | | | | | **✓** PRIMARY | | | | | |
-| **mlai** | | | | ✓ | | | **✓** | **✓** PRIMARY | | |
-| **performance** | ✓ | ✓ | ✓ | | | | | **✓** | | |
-| **document** | | | | | | | | | **✓** PRIMARY | |
-| **explain** | ✓ | ✓ | | | | | | | **✓** | **✓** ALWAYS |
-| **enforcement** | **✓** | | **✓** | | **✓** | | | | | |
-| **orchestrator** | | | | | | | | | | **✓** ALWAYS |
-| **migration** | ✓ | | | | | | | | | |
-
-### Legend
-
+**Legend:**
 - **✓ PRIMARY** = Primary focus area for this persona
 - **✓** = Useful/included in this persona
+- **⭐** = Universal agent (always available to all personas)
 - **(blank)** = Not included in this persona
-- **ALWAYS** = Universal agents available to all personas
+
+### Main Mapping
+
+| Agent | Software Engineer | Architect | QA/Tester | DevOps Engineer | Security Engineer | Product Manager | Data Engineer | Data Scientist | Technical Writer |
+|-------|---|---|---|---|---|---|---|---|---|
+| **ask** | ⭐ | ⭐ | ⭐ | ⭐ | ⭐ | ⭐ | ⭐ | ⭐ | ⭐ |
+| **code** | **✓ PRIMARY** | | | | | | | | |
+| **test** | **✓ PRIMARY** | | **✓ PRIMARY** | | | | | **✓** | |
+| **refactor** | **✓ PRIMARY** | | | | | | | | |
+| **debug** | **✓ PRIMARY** | | | | | | | | ⭐ |
+| **migration** | **✓ PRIMARY** | | | | | | | | |
+| **review** | ✓ | | **✓ PRIMARY** | | **✓** | | | | |
+| **architect** | | **✓ PRIMARY** | | | | | | | |
+| **backend** | ✓ | **✓ PRIMARY** | | | | | | | |
+| **frontend** | ✓ | **✓ PRIMARY** | | | | | | | |
+| **data** | | **✓** | | | | | **✓ PRIMARY** | **✓** | |
+| **planning** | | **✓** | | | | **✓ PRIMARY** | | | |
+| **product** | | | | | | **✓ PRIMARY** | | | |
+| **devops** | | | | **✓ PRIMARY** | | | ✓ | | |
+| **observability** | | | | **✓ PRIMARY** | | | ✓ | | |
+| **incident** | | | | **✓ PRIMARY** | **✓** | | | | |
+| **security** | | | | | **✓ PRIMARY** | | | | |
+| **compliance** | | | | | **✓ PRIMARY** | | | | |
+| **mlai** | | | | ✓ | | | **✓** | **✓ PRIMARY** | |
+| **performance** | ✓ | ✓ | ✓ | | | | | **✓** | |
+| **document** | | | | | | | | | **✓ PRIMARY** |
+| **explain** | ✓ | ✓ | | | | | | | **✓** ⭐ |
+| **enforcement** | **✓** | | **✓** | | **✓** | | | | |
+| **orchestrator** | | | | | | | | | ⭐ |
+
+### Universal Agents (⭐ - Always Available)
+
+The following agents are always available to all personas:
+- **ask** - General Q&A and explanations
+- **debug** - Troubleshooting and debugging (shown separately for Technical Writer)
+- **explain** - Code walkthroughs and onboarding (shown separately for Technical Writer)
+- **orchestrator** - Workflow coordination (shown separately for Technical Writer)
+
+These agents are not tied to specific personas and are accessible regardless of which personas are selected.
 
 ### Agent Coverage Summary
 
 | Agent | Personas | Notes |
 |-------|----------|-------|
-| ask | All + Universal | General Q&A available to everyone |
-| code | Developer | Core implementation agent |
-| test | Developer, QA/Tester, ML/AI | Testing is cross-cutting |
-| refactor | Developer | Code improvement |
-| debug | Developer + Universal | Troubleshooting available to everyone |
-| migration | Developer | Dependency/framework updates |
-| review | Developer, QA/Tester, Security | Quality reviews across roles |
+| ask | All (Universal) | General Q&A available to everyone |
+| code | Software Engineer | Core implementation agent |
+| test | Software Engineer, QA/Tester, Data Scientist | Testing is cross-cutting |
+| refactor | Software Engineer | Code improvement |
+| debug | Software Engineer (Universal) | Troubleshooting available to everyone |
+| migration | Software Engineer | Dependency/framework updates |
+| review | Software Engineer, QA/Tester, Security Engineer | Quality reviews across roles |
 | architect | Architect | System design focus |
-| backend | Developer, Architect | Backend-specific work |
-| frontend | Developer, Architect | Frontend-specific work |
-| data | Architect, Data Engineer, ML/AI | Data infrastructure |
+| backend | Software Engineer, Architect | Backend-specific work |
+| frontend | Software Engineer, Architect | Frontend-specific work |
+| data | Architect, Data Engineer, Data Scientist | Data infrastructure |
 | planning | Architect, Product Manager | Strategic planning |
 | product | Product Manager | Product-focused decisions |
-| devops | DevOps (Primary), Data/ML/AI | Infrastructure and operations |
-| observability | DevOps (Primary), Data/ML/AI | Monitoring and observability |
-| incident | DevOps, Security | Incident management |
-| security | Security (Primary), DevOps | Security and threat management |
-| compliance | Security | Compliance standards |
-| mlai | ML/AI (Primary), Data Engineer, DevOps | Machine learning systems |
-| performance | Developer, Architect, QA/Tester, ML/AI | Cross-cutting performance concerns |
-| document | Tech Writer (Primary), all others | Documentation support |
-| explain | Tech Writer, Developer, Architect | Code walkthroughs and onboarding |
-| enforcement | Developer, QA/Tester, Security | Code standards and quality |
-| orchestrator | All + Universal | Multi-step workflows for everyone |
+| devops | DevOps Engineer (Primary), Data Engineer, Data Scientist | Infrastructure and operations |
+| observability | DevOps Engineer (Primary), Data Engineer, Data Scientist | Monitoring and observability |
+| incident | DevOps Engineer, Security Engineer | Incident management |
+| security | Security Engineer (Primary), DevOps Engineer | Security and threat management |
+| compliance | Security Engineer | Compliance standards |
+| mlai | Data Scientist (Primary), Data Engineer, DevOps Engineer | Machine learning systems |
+| performance | Software Engineer, Architect, QA/Tester, Data Scientist | Cross-cutting performance concerns |
+| document | Technical Writer (Primary) | Documentation support |
+| explain | Technical Writer, Software Engineer, Architect (Universal) | Code walkthroughs and onboarding |
+| enforcement | Software Engineer, QA/Tester, Security Engineer | Code standards and quality |
+| orchestrator | All (Universal) | Multi-step workflows for everyone |
 
 ### Personas Represented
 
 | Persona | Primary Agents | Secondary Agents | Total Coverage |
 |---------|---|---|---|
-| **Developer** | code, test, refactor, debug, migration | review, backend, frontend, performance, explain, enforcement | 11 agents |
+| **Software Engineer** | code, test, refactor, debug, migration | review, backend, frontend, performance, explain, enforcement | 11 agents |
 | **Architect** | architect, backend, frontend, data | planning, performance, explain | 7 agents |
-| **QA/Tester** | qa-tester (test), review | test, performance, enforcement | 5 agents |
-| **DevOps** | devops, observability, incident | security, mlai | 5 agents |
-| **Security** | security, compliance | incident, review, enforcement | 5 agents |
+| **QA/Tester** | test, review | test, performance, enforcement | 5 agents |
+| **DevOps Engineer** | devops, observability, incident | mlai, data | 5 agents |
+| **Security Engineer** | security, compliance | incident, review, enforcement | 5 agents |
 | **Product Manager** | product, planning | (none) | 2 agents |
 | **Data Engineer** | data | mlai, devops, observability, performance | 5 agents |
-| **ML/AI Engineer** | mlai | data, test, performance, devops, observability | 5 agents |
-| **Tech Writer** | document | explain | 2 agents |
+| **Data Scientist** | mlai | data, test, performance, devops, observability | 5 agents |
+| **Technical Writer** | document, explain | (none) | 2 agents |
 
 ---
 
----
 
-## Appendix: Draft Persona Definitions
+## Appendix: Persona Definitions
 
+### Core Personas (Final)
 
-1. **Developer** - Software development, implementation, coding
-   - Agents: code, test, refactor, migration, debug
-   - Focus: Writing and maintaining code
+1. **Software Engineer** - Software development, implementation, coding
+   - Primary Agents: code, test, refactor, migration, debug
+   - Secondary Agents: review, backend, frontend, performance, explain, enforcement
+   - Focus: Writing, maintaining, and testing code
 
-2. **Architect** - System design, architecture, technical decisions
-   - Agents: architect, scaffold, data-model, task-breakdown
-   - Focus: Designing systems and making technical trade-offs
+2. **Architect** - System design, architecture planning, technical decisions
+   - Primary Agents: architect, backend, frontend, data
+   - Secondary Agents: planning, performance, explain
+   - Focus: Designing scalable systems and making trade-offs
 
-3. **QA / Tester** - Quality assurance, testing, quality metrics
-   - Agents: qa-tester, test, review (partial)
-   - Focus: Ensuring quality through testing
+3. **QA/Tester** - Quality assurance, testing strategy, test automation
+   - Primary Agents: test, review
+   - Secondary Agents: performance, enforcement
+   - Focus: Ensuring quality through comprehensive testing
 
-4. **DevOps Engineer** - Infrastructure, deployment, operations
-   - Agents: devops, observability
+4. **DevOps Engineer** - Infrastructure, deployment, operations, CI/CD
+   - Primary Agents: devops, observability, incident
+   - Secondary Agents: security, mlai, data
    - Focus: Building and maintaining infrastructure
 
-5. **Security Engineer** - Security, threat modeling, compliance
-   - Agents: security, compliance
+5. **Security Engineer** - Security hardening, threat modeling, compliance
+   - Primary Agents: security, compliance
+   - Secondary Agents: incident, review, enforcement
    - Focus: Securing systems and meeting compliance requirements
 
-6. **Product Manager** - Requirements, prioritization, roadmapping
-   - Agents: product, planning
+6. **Product Manager** - Requirements, prioritization, roadmap planning
+   - Primary Agents: product, planning
+   - Secondary Agents: (none)
    - Focus: Defining what to build and why
 
-7. **Data Engineer** - Data pipelines, data quality, ETL
-   - (Potential - might need dedicated agent)
-   - Focus: Building data infrastructure
+7. **Data Engineer** - Data pipelines, data quality, data infrastructure
+   - Primary Agents: data
+   - Secondary Agents: mlai, devops, observability, performance
+   - Focus: Building reliable data systems
 
-8. **ML/AI Engineer** - Machine learning, model development, optimization
-   - Agents: mlai subagents
-   - Focus: Building and improving ML systems
+8. **Data Scientist** - Machine learning, model development, optimization
+   - Primary Agents: mlai
+   - Secondary Agents: data, test, performance, devops, observability
+   - Focus: Building and improving ML/AI systems
 
 9. **Technical Writer** - Documentation, technical communication
-   - Agents: document
-   - Focus: Creating clear documentation
+   - Primary Agents: document, explain
+   - Secondary Agents: (none)
+   - Focus: Creating clear, comprehensive documentation
 
-### Universal Agents (Always Available)
+### Universal Agents (Always Available Across All Personas)
 
-- **ask** - General Q&A
-- **orchestrator** - Workflow coordination
-- **debug** - Troubleshooting and debugging
-- **core** utilities - Foundational functionality
+The following agents are **always available** to all personas and do not need to be specifically selected:
+
+- **ask** - General Q&A, explanations, and research assistance
+- **debug** - Troubleshooting, diagnosis, and error resolution
+- **explain** - Code walkthroughs, onboarding assistance, and clarifications
+- **orchestrator** - Multi-step workflow coordination and task management
+
+These universal agents are foundational tools that support all SDLC roles and are accessible regardless of which personas are selected during initialization.
 
 ---
-
