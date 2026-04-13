@@ -14,7 +14,6 @@ Find the right resources for your role.
 **Key documents:**
 - Design decisions: `docs/design/*.design.md`
 - Planning docs: `planning/current/*.plan.md`
-- Execution guides: `planning/current/PHASE*_EXECUTION_GUIDE.plan.md`
 
 **Questions answered:**
 - What agents exist and why? → LIBRARY_INDEX.md
@@ -30,7 +29,7 @@ Find the right resources for your role.
 
 **Start here:**
 1. Find "backend" in [LIBRARY_INDEX.md](./LIBRARY_INDEX.md)
-2. Read `promptosaurus/agents/backend-engineer/` for full context
+2. Read `promptosaurus/agents/backend/` for full context
 3. Explore related workflows: database design, API development, performance optimization
 
 **Key agents:**
@@ -58,7 +57,7 @@ Find the right resources for your role.
 
 **Start here:**
 1. Find "frontend" in [LIBRARY_INDEX.md](./LIBRARY_INDEX.md)
-2. Read `promptosaurus/agents/frontend-engineer/` for full context
+2. Read `promptosaurus/agents/frontend/` for full context
 3. Explore related workflows: component design, testing, accessibility
 
 **Key agents:**
@@ -115,7 +114,7 @@ Find the right resources for your role.
 
 **Start here:**
 1. Find "testing" in [LIBRARY_INDEX.md](./LIBRARY_INDEX.md)
-2. Read `promptosaurus/agents/testing-engineer/` for full context
+2. Read `promptosaurus/agents/qa-tester/` for full context
 3. Explore testing workflows
 
 **Key agents:**
@@ -177,14 +176,10 @@ Find the right resources for your role.
 3. 4. [LIBRARY_INDEX.md](./LIBRARY_INDEX.md) - Feature catalog
 
 **Key documents:**
-- Progress tracking: `planning/current/PHASE*_EXECUTION_STATUS.plan.md`
 - Quality metrics: QUALITY_METRICS.md
 - Technical debt: TECHNICAL_DEBT.md
-- Roadmap: `planning/current/PHASE*_OUTLINE.plan.md`
 
 **Questions answered:**
-- What's been completed? → PHASE2_EXECUTION_STATUS.plan.md
-- What's the roadmap? → PHASE*_OUTLINE.plan.md
 - What's the quality level? → QUALITY_METRICS.md
 - What's left to do? → TECHNICAL_DEBT.md
 

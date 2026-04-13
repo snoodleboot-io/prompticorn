@@ -71,16 +71,16 @@ prompt build --tool kilo --personas software_engineer refactor --agent code --in
 ### Kilo Code
 ```bash
 # Create Kilo Code agent configurations
-prompt build --tool kilo --agent code --output-dir .kilocode/agents/
-prompt build --tool kilo --agent architect --output-dir .kilocode/agents/
-prompt build --tool kilo --agent test --output-dir .kilocode/agents/
+prompt build --tool kilo --agent code --output-dir .kilo/agents/
+prompt build --tool kilo --agent architect --output-dir .kilo/agents/
+prompt build --tool kilo --agent test --output-dir .kilo/agents/
 
 # Create Kilo Code skills
-prompt build --tool kilo --skill debugging --output-dir .kilocode/skills/
-prompt build --tool kilo --skill testing --output-dir .kilocode/skills/
+prompt build --tool kilo --skill debugging --output-dir .kilo/skills/
+prompt build --tool kilo --skill testing --output-dir .kilo/skills/
 
 # Create Kilo Code workflows
-prompt build --tool kilo --workflow feature-development --output-dir .kilocode/workflows/
+prompt build --tool kilo --workflow feature-development --output-dir .kilo/workflows/
 ```
 
 ### Cline
@@ -182,24 +182,24 @@ jobs:
     
     - name: Generate Agent Configurations
       run: |
-        mkdir -p .kilocode/agents
-        prompt build --tool kilo --agent code --output-dir .kilocode/agents/
-        prompt build --tool kilo --agent test --output-dir .kilocode/agents/
-        prompt build --tool kilo --agent debug --output-dir .kilocode/agents/
+        mkdir -p .kilo/agents
+        prompt build --tool kilo --agent code --output-dir .kilo/agents/
+        prompt build --tool kilo --agent test --output-dir .kilo/agents/
+        prompt build --tool kilo --agent debug --output-dir .kilo/agents/
     
     - name: Generate Skill Configurations
       run: |
-        mkdir -p .kilocode/skills
-        prompt build --tool kilo --skill debugging --output-dir .kilocode/skills/
-        prompt build --tool kilo --skill testing --output-dir .kilocode/skills/
-        prompt build --tool kilo --skill documentation --output-dir .kilocode/skills/
+        mkdir -p .kilo/skills
+        prompt build --tool kilo --skill debugging --output-dir .kilo/skills/
+        prompt build --tool kilo --skill testing --output-dir .kilo/skills/
+        prompt build --tool kilo --skill documentation --output-dir .kilo/skills/
     
     - name: Upload Configuration Artifacts
       uses: actions/upload-artifact@v3
       with:
         name: promptosaurus-config
         path: |
-          .kilocode/
+          .kilo/
           .clinerules/
           .claude/
           .github/copilot/

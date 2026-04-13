@@ -1,4 +1,4 @@
-# Getting Started with Phase 2A
+# Getting Started
 
 **Version:** 2.0.0  
 **Last Updated:** April 9, 2026

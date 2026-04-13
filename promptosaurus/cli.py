@@ -27,7 +27,6 @@ from pathlib import Path
 from typing import Any
 
 import click
-# Legacy sweet_tea import removed - using Phase 2A builders
 
 from promptosaurus.artifacts import ArtifactManager
 from promptosaurus.cli_utils import (

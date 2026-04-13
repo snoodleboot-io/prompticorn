@@ -20,15 +20,15 @@ This document maps how agents, subagents, workflows, and skills relate to each o
   - react-patterns → Skill: state-management-architecture
   - vue-patterns → Skill: state-management-architecture
   - mobile → Skill: responsive-design-patterns
-  - accessibility → Skill: accessibility (Phase 1)
+  - accessibility → Skill: accessibility
 
 ### DevOps Agent
 - **Subagents:**
   - docker → Skill: container-security-hardening
   - kubernetes → Skill: kubernetes-resource-management
-  - aws → Skill: aws (Phase 1)
+  - aws → Skill: aws
   - terraform-deployment → Skill: iac-best-practices
-  - gitops → Skill: gitops (Phase 1)
+  - gitops → Skill: gitops
 
 ### Data Agent
 - **Subagents:**
@@ -118,7 +118,7 @@ This document maps how agents, subagents, workflows, and skills relate to each o
 | vulnerability-assessment-workflow | Security | threat-modeling | - |
 | compliance-audit-workflow | Security | compliance-automation | - |
 
-### Phase 1 Workflows
+### Workflows
 | Workflow | Agent | Skills | Related Subagents |
 |----------|-------|--------|-------------------|
 | data-pipeline-workflow | Data | sql-optimization | pipeline |
@@ -387,7 +387,7 @@ incident-automation
 
 | Version | Date | Changes |
 |---------|------|---------|
-| 1.0 | April 10, 2026 | Initial relationships matrix for Phase 1 + Phase 2 |
+| 1.0 | April 10, 2026 | Initial relationships matrix for Development 1 + Development 2 |
 
 ---
 

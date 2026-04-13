@@ -43,12 +43,12 @@ docs/
 │   └── TOOL_CONFIGURATION_EXAMPLES.reference.md
 │
 ├── design/                  # Architecture and design decisions
+├── decisions/               # Final approved architecture decision records
 │   ├── ADVANCED_PATTERNS.design.md
 │   ├── LANGUAGE_INTEGRATION_DESIGN.design.md
 │   ├── VARIANT_DIFFERENTIATION_STRATEGY.design.md
 │   └── WORKFLOW_HANDLING_ANALYSIS.design.md
 │
-├── decisions/               # Final approved architecture decision records
 │   └── [ADR files]
 │
 ├── builders/                # Builder implementation and patterns
@@ -110,9 +110,7 @@ planning/
 │   │   └── README.md
 │   ├── prds/                # Product requirements documents
 │   │   └── README.md
-│   ├── PHASE1_EXECUTION_GUIDE.plan.md
-│   ├── PHASE2_EXECUTION_STATUS.plan.md
-│   ├── PHASE3_ROADMAP.plan.md
+│   ├── (internal planning files)
 │   └── [other phase execution plans]
 │
 ├── complete/                # Finished work and delivered phases
@@ -125,8 +123,7 @@ planning/
 │   │   └── README.md
 │   ├── prds/                # Completed project requirements
 │   │   └── README.md
-│   ├── PHASE3_SKILLS_QUICK_REFERENCE.md
-│   └── PHASE3_WORKFLOWS_QUICK_REFERENCE.md
+│   ├── (internal reference)
 │
 ├── backlog/                 # Future work (not in current scope)
 │   ├── README.md

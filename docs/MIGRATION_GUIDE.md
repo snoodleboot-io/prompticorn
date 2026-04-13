@@ -249,7 +249,7 @@ Output from workflows and skills may change:
 For each supported IDE integration:
 
 #### Kilo
-- Configuration lives in `.kilocode/` directory
+- Configuration lives in `.kilo/` directory
 - Watch for changes to rule file locations or formats
 - Mode-specific rule updates may occur
 
