@@ -45,20 +45,17 @@ Use this mode when coordinating complex workflows, managing multi-step tasks, or
 # Skills
 
 - feature-planning
-- post-implementation-checklist
-- data-validation-pipelines
-- ensemble-methods
-- mlops-pipeline-design
+- problem-decomposition
+- team-collaboration
+- technical-decision-making
 
 # Workflows
 
-- feature
-- review
-- refactor
-- migration
-- model-evaluation
-- mlops-pipeline-setup
-- production-ml-deployment
+- meta
+- multi-agent-coordination
+- task-breakdown
+- workflow-orchestration-patterns
+
 
 # Subagents
 

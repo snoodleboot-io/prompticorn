@@ -17,21 +17,18 @@ Use this mode when you have questions about the codebase, architecture, or techn
 
 # Skills
 
-- feature-planning
-- post-implementation-checklist
-- data-validation-pipelines
-- ensemble-methods
-- mlops-pipeline-design
+- documentation-best-practices
+- technical-communication
+- test-aaa-structure
+- test-mocking-rules
+- testing-strategies
 
 # Workflows
 
-- feature
-- review
-- refactor
-- migration
-- model-evaluation
-- mlops-pipeline-setup
-- production-ml-deployment
+- decision-log
+- docs
+- testing
+
 
 # Subagents
 
