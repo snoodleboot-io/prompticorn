@@ -1,0 +1,421 @@
+# Agent-Skill-Workflow Mapping Registry
+# Maps agents to their skills and workflows (language-agnostic)
+# Language-specific overrides can be added in language_skill_mapping.yaml
+#
+# Last updated: 2026-04-12
+#
+# This file defines which skills and workflows each agent has access to.
+# These mappings apply regardless of programming language.
+#
+# Priority Resolution:
+# 1. agent_skill_mapping.yaml - Base skills for agent (this file)
+# 2. language_skill_mapping.yaml - Language+agent overrides (rare)
+# 3. Fallback - Original agent skills/workflows (if no mappings)
+
+# ============================================================================
+# ARCHITECT
+# ============================================================================
+architect:
+  skills:
+    - architecture-documentation
+    - data-model-discovery
+    - feature-planning
+    - mermaid-erd-creation
+    - post-implementation-checklist
+    - problem-decomposition
+    - technical-communication
+    - technical-decision-making
+  workflows:
+    - architecture-documentation
+    - data-model
+    - decision-log
+    - scaffold
+    - strategy
+    - task-breakdown
+
+# ============================================================================
+# ASK
+# ============================================================================
+ask:
+  skills:
+    - documentation-best-practices
+    - technical-communication
+    - test-aaa-structure
+    - test-mocking-rules
+    - testing-strategies
+  workflows:
+    - decision-log
+    - docs
+    - testing
+
+# ============================================================================
+# BACKEND
+# ============================================================================
+backend:
+  skills:
+    - architecture-documentation
+    - code-review-practices
+    - data-model-discovery
+    - data-validation-pipelines
+    - incremental-implementation
+    - performance-optimization
+  workflows:
+    - api-design
+    - code
+    - data-model
+    - performance
+    - review
+
+# ============================================================================
+# CODE
+# ============================================================================
+code:
+  skills:
+    - code-review-practices
+    - feature-planning
+    - incremental-implementation
+    - post-implementation-checklist
+    - quality-assurance
+    - technical-debt-management
+    - test-coverage-categories
+  workflows:
+    - boilerplate
+    - code
+    - feature
+    - house-style
+    - refactor
+    - testing
+
+# ============================================================================
+# COMPLIANCE
+# ============================================================================
+compliance:
+  skills:
+    - documentation-best-practices
+    - quality-assurance
+    - technical-communication
+  workflows:
+    - compliance-audit
+    - security-hardening-checklist
+    - workflow-compliance-patterns
+
+# ============================================================================
+# DATA
+# ============================================================================
+data:
+  skills:
+    - architecture-documentation
+    - data-model-discovery
+    - data-validation-pipelines
+    - data-versioning-reproducibility
+    - feature-store-design
+  workflows:
+    - data-model
+    - data-quality-monitoring
+    - experiment-tracking-setup
+    - workflow-versioning-management
+
+# ============================================================================
+# DEBUG
+# ============================================================================
+debug:
+  skills:
+    - debugging-methodology
+    - problem-decomposition
+    - technical-communication
+  workflows:
+    - debugging-methodology
+    - log-analysis
+    - root-cause
+
+# ============================================================================
+# DEVOPS
+# ============================================================================
+devops:
+  skills:
+    - continuous-improvement
+    - documentation-best-practices
+    - technical-decision-making
+  workflows:
+    - dependency-scanning
+    - secret-management
+    - workflow-monitoring
+    - workflow-orchestration-patterns
+    - workflow-rollback-strategies
+
+# ============================================================================
+# DOCUMENT
+# ============================================================================
+document:
+  skills:
+    - architecture-documentation
+    - documentation-best-practices
+    - mermaid-erd-creation
+    - technical-communication
+  workflows:
+    - docs
+    - strategy-for-applications
+    - workflow-documentation-patterns
+
+# ============================================================================
+# ENFORCEMENT
+# ============================================================================
+enforcement:
+  skills:
+    - code-review-practices
+    - quality-assurance
+    - technical-debt-management
+  workflows:
+    - code
+    - house-style
+    - review
+
+# ============================================================================
+# EXPLAIN
+# ============================================================================
+explain:
+  skills:
+    - architecture-documentation
+    - documentation-best-practices
+    - technical-communication
+  workflows:
+    - docs
+    - strategy
+
+# ============================================================================
+# FRONTEND
+# ============================================================================
+frontend:
+  skills:
+    - code-review-practices
+    - incremental-implementation
+    - performance-optimization
+    - testing-strategies
+  workflows:
+    - accessibility
+    - code
+    - testing
+    - ux-validation
+
+# ============================================================================
+# INCIDENT
+# ============================================================================
+incident:
+  skills:
+    - continuous-improvement
+    - debugging-methodology
+    - problem-decomposition
+    - technical-communication
+  workflows:
+    - incident-response-security
+    - log-analysis
+    - root-cause
+
+# ============================================================================
+# MIGRATION
+# ============================================================================
+migration:
+  skills:
+    - incremental-implementation
+    - problem-decomposition
+    - technical-debt-management
+    - technical-decision-making
+  workflows:
+    - dependency-upgrade
+    - migration
+    - strategy
+    - workflow-migration-patterns
+
+# ============================================================================
+# MLAI
+# ============================================================================
+mlai:
+  skills:
+    - anomaly-detection-techniques
+    - batch-vs-realtime-scoring
+    - cross-validation-strategies
+    - data-validation-pipelines
+    - data-versioning-reproducibility
+    - dimensionality-reduction
+    - ensemble-methods
+    - feature-importance-analysis
+    - feature-store-design
+    - hyperparameter-optimization
+    - imbalanced-classification
+    - mlops-pipeline-design
+    - model-interpretability
+    - model-performance-debugging
+    - time-series-preprocessing
+  workflows:
+    - experiment-tracking-setup
+    - feature-engineering-guide
+    - hyperparameter-tuning
+    - ml-monitoring-observability
+    - mlops-pipeline-setup
+    - model-evaluation
+    - model-governance
+    - model-interpretability-guide
+    - model-retraining-strategy
+    - model-serving
+    - production-ml-deployment
+
+# ============================================================================
+# OBSERVABILITY
+# ============================================================================
+observability:
+  skills:
+    - anomaly-detection-techniques
+    - continuous-improvement
+    - debugging-methodology
+    - performance-optimization
+  workflows:
+    - analytics-setup
+    - log-analysis
+    - ml-monitoring-observability
+    - performance
+    - workflow-monitoring
+
+# ============================================================================
+# ORCHESTRATOR
+# ============================================================================
+orchestrator:
+  skills:
+    - feature-planning
+    - problem-decomposition
+    - team-collaboration
+    - technical-decision-making
+  workflows:
+    - meta
+    - multi-agent-coordination
+    - task-breakdown
+    - workflow-orchestration-patterns
+
+# ============================================================================
+# PERFORMANCE
+# ============================================================================
+performance:
+  skills:
+    - continuous-improvement
+    - debugging-methodology
+    - performance-optimization
+    - problem-decomposition
+  workflows:
+    - performance
+    - workflow-performance-optimization
+    - workflow-scaling-patterns
+
+# ============================================================================
+# PLANNING
+# ============================================================================
+planning:
+  skills:
+    - architecture-documentation
+    - feature-planning
+    - problem-decomposition
+    - technical-communication
+    - technical-decision-making
+  workflows:
+    - decision-log
+    - feature-prioritization
+    - requirements-gathering
+    - roadmap-planning
+    - task-breakdown
+
+# ============================================================================
+# PRODUCT
+# ============================================================================
+product:
+  skills:
+    - feature-planning
+    - problem-decomposition
+    - team-collaboration
+    - technical-communication
+  workflows:
+    - a-b-testing
+    - analytics-setup
+    - feature-launch-checklist
+    - feature-prioritization
+    - requirements-gathering
+    - roadmap-planning
+    - user-research-guide
+
+# ============================================================================
+# QA-TESTER
+# ============================================================================
+qa-tester:
+  skills:
+    - code-review-practices
+    - quality-assurance
+    - test-aaa-structure
+    - test-coverage-categories
+    - test-mocking-rules
+    - testing-strategies
+  workflows:
+    - review
+    - testing
+    - workflow-testing-patterns
+
+# ============================================================================
+# REFACTOR
+# ============================================================================
+refactor:
+  skills:
+    - code-review-practices
+    - continuous-improvement
+    - incremental-implementation
+    - quality-assurance
+    - technical-debt-management
+  workflows:
+    - code
+    - refactor
+    - strategy
+
+# ============================================================================
+# REVIEW
+# ============================================================================
+review:
+  skills:
+    - code-review-practices
+    - performance-optimization
+    - quality-assurance
+    - technical-communication
+    - technical-debt-management
+  workflows:
+    - accessibility
+    - performance
+    - review
+    - security-code-review
+
+# ============================================================================
+# SECURITY
+# ============================================================================
+security:
+  skills:
+    - code-review-practices
+    - problem-decomposition
+    - quality-assurance
+    - technical-decision-making
+  workflows:
+    - penetration-testing-guide
+    - security-code-review
+    - security-hardening-checklist
+    - security-testing
+    - threat-modeling
+    - vulnerability-scanning
+    - workflow-security-in-workflows
+
+# ============================================================================
+# TEST
+# ============================================================================
+test:
+  skills:
+    - incremental-implementation
+    - quality-assurance
+    - test-aaa-structure
+    - test-coverage-categories
+    - test-mocking-rules
+    - testing-strategies
+  workflows:
+    - strategy
+    - testing
+    - workflow-testing-patterns

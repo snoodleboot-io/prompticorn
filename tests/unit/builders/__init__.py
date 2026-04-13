@@ -1,1 +1,1 @@
-"""Unit tests for promptosaurus.builders."""
+"""Unit tests for builders module."""

@@ -2,7 +2,7 @@
 
 import pytest
 
-from promptosaurus.questions.base.constants import REPO_TYPES, RepositoryTypes
+from promptosaurus.questions.base.constants import RepositoryTypes
 from promptosaurus.questions.base.folder_mapping_question import FolderMappingQuestion
 from promptosaurus.questions.base.question import Question
 from promptosaurus.questions.base.repository_type_question import RepositoryTypeQuestion
@@ -115,8 +115,9 @@ class TestConstants:
         assert RepositoryTypes.MIXED == "mixed-collocation"
 
     def test_repo_types_list(self):
-        """REPO_TYPES should include all repo types."""
-        assert RepositoryTypes.SINGLE in REPO_TYPES
-        assert RepositoryTypes.MULTI_MONOREPO in REPO_TYPES
-        assert RepositoryTypes.MIXED in REPO_TYPES
-        assert len(REPO_TYPES) == 3
+        """RepositoryTypes.all() should include all repo types."""
+        repo_types = RepositoryTypes.all()
+        assert RepositoryTypes.SINGLE in repo_types
+        assert RepositoryTypes.MULTI_MONOREPO in repo_types
+        assert RepositoryTypes.MIXED in repo_types
+        assert len(repo_types) == 3

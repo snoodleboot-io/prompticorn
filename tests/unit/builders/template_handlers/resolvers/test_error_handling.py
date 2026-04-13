@@ -9,7 +9,7 @@ This test module validates:
 - Error logging and recovery strategies
 """
 
-from unittest.mock import MagicMock, patch
+from unittest.mock import patch
 
 import jinja2
 import pytest
@@ -28,9 +28,7 @@ from promptosaurus.builders.template_handlers.resolvers.registry_template_loader
 from promptosaurus.builders.template_handlers.resolvers.safe_filters import (
     safe_get,
     safe_int,
-    safe_json,
     safe_list,
-    safe_str,
 )
 from promptosaurus.builders.template_handlers.resolvers.template_rendering_error import (
     TemplateRenderingError,
@@ -188,7 +186,7 @@ class TestUndefinedVariableHandling:
         {% if user.name %}
             Hello {{ user.name }}
         {% endif %}
-        
+
         Email: {{ user.email }}
         """
 
@@ -293,7 +291,7 @@ class TestMacroErrorHandling:
         {% macro greeting(name, age) %}
             Hello {{ name }}, age {{ age }}
         {% endmacro %}
-        
+
         {{ greeting("John") }}
         """
 
@@ -312,7 +310,7 @@ class TestMacroErrorHandling:
         {% macro sum_numbers(a, b) %}
             {{ a + b }}
         {% endmacro %}
-        
+
         {{ sum_numbers("text", 5) }}
         """
 

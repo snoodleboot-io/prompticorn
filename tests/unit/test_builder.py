@@ -1147,7 +1147,7 @@ class TestCombinedFeatures:
         {% set py_file = config.class_name | snake_case %}
         class {{ py_class }}:
             \"\"\"Managing {{ config.class_name }}.\"\"\"
-            
+
             {% for method in config.methods %}
             {% with method_name = method | camel_case %}
             def {{ method_name }}(self):
@@ -1155,7 +1155,7 @@ class TestCombinedFeatures:
                 pass
             {% endwith %}
             {% endfor %}
-        
+
         # File: {{ py_file }}.py
         """
         result = builder._substitute_template_variables(content, config)
@@ -1184,10 +1184,10 @@ class TestCombinedFeatures:
             \"\"\"Auto-generated method.\"\"\"
             pass
         {% endmacro %}
-        
+
         class UserManager:
             \"\"\"Manages user operations.\"\"\"
-            
+
             {% for method in config.methods %}
             {{ render_method(method) }}
             {% endfor %}
@@ -1220,10 +1220,10 @@ class TestCombinedFeatures:
         def {{ method | snake_case }}():
             \"\"\"{{ method | pascal_case }} test.\"\"\"
             assert True
-        
+
         {% endfor %}
         {% endif %}
-        
+
         # Linters: {{ config.linters | join(", ") | upper }}
         """
 
@@ -1249,13 +1249,13 @@ class TestCombinedFeatures:
         template = """
         {% set class_name = config.project_name | pascal_case %}
         {% set file_name = config.project_name | snake_case %}
-        
+
         # Generated for {{ class_name }} project
         # File: {{ file_name }}.py
-        
+
         class {{ class_name }}:
             \"\"\"Main application class.\"\"\"
-            
+
             MODULES = [
             {% for module in config.modules %}
                 "{{ module | upper }}",
@@ -1287,7 +1287,7 @@ class TestCombinedFeatures:
         {% with db_host = config.database_url | lower %}
         Database Host: {{ db_host }}
         {% endwith %}
-        
+
         {% with ttl_seconds = config.cache_ttl %}
         Cache TTL: {{ ttl_seconds }} seconds
         {% with ttl_minutes = ttl_seconds // 60 %}
@@ -1325,18 +1325,18 @@ class TestCombinedFeatures:
         # Template with nested loops and conditionals
         template = """
         # Language Support
-        
+
         {% for lang in config.languages %}
         ## {{ lang.name | pascal_case }}
         {% if lang.primary %}
         **Primary Language**
         {% endif %}
-        
+
         Frameworks:
         {% for framework in lang.frameworks %}
         - {{ framework | upper }}
         {% endfor %}
-        
+
         {% endfor %}
         """
 
@@ -1364,7 +1364,7 @@ class TestCombinedFeatures:
         template = """
         # Project: {{ config.project_name | pascal_case }}
         Description: {{ config.missing_field | default("No description provided") }}
-        
+
         Indent example:
         {{ "Hello\\nWorld" | indent(4) }}
         """
@@ -1391,12 +1391,12 @@ class TestCombinedFeatures:
         template = """
         {% set name = config.raw_name | upper | replace(" ", "_") %}
         Processed Name: {{ name }}
-        
+
         {% set desc_processed = config.description | snake_case | upper %}
         Description: {{ desc_processed }}
-        
+
         Languages: {{ config.languages | join(", ") | upper }}
-        
+
         Combined: {{ config.raw_name | lower | replace(" ", "-") | upper }}
         """
 

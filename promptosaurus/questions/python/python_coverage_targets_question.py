@@ -7,8 +7,8 @@ class PythonCoverageTargetsQuestion(Question):
     """Question for Python code coverage targets."""
 
     _coverage_presets = {
-        "strict": '{"line": 90, "branch": 80, "function": 95, "statement": 90, "mutation": 85, "path": 70}',
         "standard": '{"line": 80, "branch": 70, "function": 90, "statement": 85, "mutation": 80, "path": 60}',
+        "strict": '{"line": 90, "branch": 80, "function": 95, "statement": 90, "mutation": 85, "path": 70}',
         "minimal": '{"line": 70, "branch": 60, "function": 80, "statement": 75, "mutation": 70, "path": 50}',
     }
 
@@ -33,8 +33,8 @@ These targets are used by pytest-cov and enforced in CI/CD pipelines."""
     @property
     def option_explanations(self) -> dict[str, str]:
         return {
-            "strict": "Production libraries: 90% line, 80% branch, 95% function, 90% statement, 85% mutation, 70% path",
             "standard": "General projects: 80% line, 70% branch, 90% function, 85% statement, 80% mutation, 60% path (recommended)",
+            "strict": "Production libraries: 90% line, 80% branch, 95% function, 90% statement, 85% mutation, 70% path",
             "minimal": "Prototypes/legacy: 70% line, 60% branch, 80% function, 75% statement, 70% mutation, 50% path",
         }
 
