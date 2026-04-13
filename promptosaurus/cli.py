@@ -297,9 +297,10 @@ def _ask_language_questions_for_folder(spec: dict[str, Any]) -> dict[str, Any]:
     if not language:
         return spec
 
-    click.echo("\n" + "-" * 60)
-    click.secho(f"  Configuring: {folder_path} ({language})", bold=True)
-    click.echo("-" * 60)
+    # Removed: headers before curses (gets cleared anyway)
+    # click.echo("\n" + "-" * 60)
+    # click.secho(f"  Configuring: {folder_path} ({language})", bold=True)
+    # click.echo("-" * 60)
 
     # Get language-specific questions
     try:
@@ -567,15 +568,7 @@ def init_prompts():
                 config["variant"] = variant  # Add variant to config
                 config["active_personas"] = active_personas  # Add selected personas
 
-                # Step 4: Configure monorepo folders
-                # Removed: separator not needed
-                # click.echo("\n" + "-" * 60)
-                click.secho("  Step 4: Configure Monorepo Folders", bold=True)
-                # Removed: separator not needed
-                # click.echo("-" * 60)
-                click.echo("\nAdd folders to your monorepo. Each folder can have its own language and configuration.\n")
-                
-                # Run interactive folder setup
+                # Run interactive folder setup for multi-language monorepo
                 # (language questions are now asked inline for each folder)
                 folder_specs = _setup_monorepo_folders()
 
