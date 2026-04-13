@@ -21,3 +21,15 @@ class ClojureVersionQuestion(Question):
 - Newer versions have improved performance and new features
 - Clojure runs on the JVM for excellent interoperability with Java
 - Version affects which Java versions are supported"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["1.12", "1.11", "1.10", "1.9"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "1.12"
+
+    config_key = "runtime"

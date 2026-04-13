@@ -21,3 +21,15 @@ class TerraformVersionQuestion(Question):
 - Newer versions have improved language features and bug fixes
 - Terraform manages infrastructure as code across multiple providers
 - Version affects available providers and module compatibility"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["1.7", "1.6", "1.5", "1.4"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "1.7"
+
+    config_key = "runtime"

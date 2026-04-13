@@ -21,3 +21,15 @@ class FSharpVersionQuestion(Question):
 - Newer versions have improved type inference and language features
 - F# runs on .NET for excellent performance and library access
 - Version is typically aligned with .NET releases"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["8.0", "7.0", "6.0", "5.0"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "8.0"
+
+    config_key = "runtime"

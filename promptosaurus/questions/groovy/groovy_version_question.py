@@ -21,3 +21,15 @@ class GroovyVersionQuestion(Question):
 - Groovy 4.x has modern features and improved performance
 - Groovy runs on the JVM with Java interoperability
 - Version affects available language features and libraries"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["4.0", "3.0", "2.5"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "4.0"
+
+    config_key = "runtime"

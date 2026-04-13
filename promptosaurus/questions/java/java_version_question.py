@@ -22,3 +22,15 @@ class JavaVersionQuestion(Question):
 - LTS (Long Term Support) versions receive updates for many years
 - Some libraries require minimum Java versions
 - Java 21 is the latest LTS with virtual threads and improved pattern matching"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["21 (LTS)", "17 (LTS)", "11 (LTS)", "8 (LTS)"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "21 (LTS)"
+
+    config_key = "runtime"

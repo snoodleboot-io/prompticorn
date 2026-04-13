@@ -21,3 +21,15 @@ class ElmVersionQuestion(Question):
 - Elm 0.19 is the current major version with significant improvements
 - It features a smaller runtime, faster compilation, and better error messages
 - The Elm architecture provides a reliable frontend development experience"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["0.19.1", "0.19.0"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "0.19.1"
+
+    config_key = "runtime"
