@@ -1,3 +1,9 @@
+---
+name: incident-timeline-creation
+type: skill
+category: technical-skill
+minimal: true
+---
 # Incident Timeline Creation (Minimal)
 
 ## Timeline Structure

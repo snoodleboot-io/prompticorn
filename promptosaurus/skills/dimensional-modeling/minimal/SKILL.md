@@ -1,3 +1,9 @@
+---
+name: dimensional-modeling
+type: skill
+category: technical-skill
+minimal: true
+---
 # Dimensional Modeling (Minimal)
 
 ## Core Concepts

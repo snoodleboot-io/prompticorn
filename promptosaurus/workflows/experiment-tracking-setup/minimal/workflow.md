@@ -1,4 +1,5 @@
 ---
+name: experiment-tracking-setup
 description: "Configure comprehensive experiment tracking for ML projects"
 agent: "mlai"
 category: "ml"

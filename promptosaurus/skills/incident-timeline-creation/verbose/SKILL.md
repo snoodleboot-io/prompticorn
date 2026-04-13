@@ -1,3 +1,9 @@
+---
+name: incident-timeline-creation
+type: skill
+category: technical-skill
+minimal: false
+---
 # Incident Timeline Creation (Verbose)
 
 ## Timeline Reconstruction Process

@@ -1,4 +1,5 @@
 ---
+name: task-breakdown
 description: "Comprehensive task breakdown with estimation techniques, dependency mapping, and work breakdown structures"
 version: "1.0"
 languages: ["agile", "project-management"]

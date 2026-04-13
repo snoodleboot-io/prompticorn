@@ -1,4 +1,5 @@
 ---
+name: model-interpretability-guide
 description: "Make ML model decisions explainable and interpretable"
 agent: "mlai"
 category: "ml"

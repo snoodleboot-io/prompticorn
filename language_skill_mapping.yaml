@@ -1,0 +1,155 @@
+---
+version: "1.0"
+description: "Language-specific skill and workflow mappings for promptosaurus"
+
+# Supported languages
+languages:
+  python:
+    name: "Python"
+    version: "3.11+"
+    package_manager: "uv"
+    test_framework: "pytest"
+    linter: "ruff"
+    formatter: "ruff"
+  
+  typescript:
+    name: "TypeScript"
+    version: "5.0+"
+    package_manager: "npm"
+    test_framework: "vitest"
+    linter: "eslint"
+    formatter: "prettier"
+  
+  go:
+    name: "Go"
+    version: "1.21+"
+    package_manager: "go"
+    test_framework: "testing"
+    linter: "golangci-lint"
+    formatter: "goimports"
+  
+  rust:
+    name: "Rust"
+    version: "1.70+"
+    package_manager: "cargo"
+    test_framework: "cargo test"
+    linter: "clippy"
+    formatter: "rustfmt"
+  
+  java:
+    name: "Java"
+    version: "17+"
+    package_manager: "maven"
+    test_framework: "junit"
+    linter: "checkstyle"
+    formatter: "google-java-format"
+
+# Universal workflows (apply to all languages)
+universal_workflows:
+  - code-quality-maintenance
+  - feature
+  - refactor
+  - review
+  - testing
+  - migration
+  - performance
+  - code
+  - meta
+  - decision-log
+  - task-breakdown
+  - scaffold
+  - boilerplate
+  - house-style
+  - dependency-upgrade
+
+# Language-specific workflows
+language_workflows:
+  python:
+    - data-pipeline
+    - ml-monitoring-observability
+    - mlops-pipeline-setup
+    - data-model
+    - data-quality
+  
+  typescript:
+    - frontend-performance
+    - responsive-design
+    - accessibility
+    - component-architecture
+    - state-management
+  
+  go:
+    - infrastructure-as-code
+    - cicd-pipeline
+    - container-orchestration
+  
+  rust:
+    - performance
+    - security-code-review
+  
+  java:
+    - dependency-scanning
+
+# Universal skills (apply to all languages)
+universal_skills:
+  - root-cause-five-whys
+  - incident-timeline-creation
+
+# Language-specific skills
+language_skills:
+  python:
+    - sql-optimization
+    - data-partitioning
+    - dimensional-modeling
+    - slowly-changing-dimensions
+  
+  typescript:
+    - grafana-dashboard-design
+  
+  all:
+    - slo-sli-definition
+    - idempotency-patterns
+    - prometheus-query-patterns
+    - distributed-tracing-instrumentation
+
+# Security workflows and skills
+security:
+  workflows:
+    - threat-modeling
+    - vulnerability-assessment
+    - vulnerability-scanning
+    - penetration-testing-guide
+    - security-audit-maintenance
+    - security-hardening-checklist
+    - secret-management
+    - authentication-authorization
+    - security-code-review
+    - security-testing
+  
+  skills:
+    - sql-optimization
+    - distributed-tracing-instrumentation
+
+# Product workflows and skills
+product:
+  workflows:
+    - feature
+    - feature-prioritization
+    - feature-launch-checklist
+    - requirements-gathering
+    - roadmap-planning
+    - a-b-testing
+    - ux-validation
+    - user-research-guide
+  
+  skills: []
+
+# Compliance and governance
+compliance:
+  workflows:
+    - compliance-audit
+    - incident-response
+    - postmortem
+    - disaster-recovery
+  
+  skills: []

@@ -1,3 +1,9 @@
+---
+name: security-audit-maintenance
+type: workflow
+category: workflow-patterns
+minimal: true
+---
 # Security Audit Workflow
 
 **Version:** 1.0

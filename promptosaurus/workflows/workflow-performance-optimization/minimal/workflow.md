@@ -1,4 +1,5 @@
 ---
+name: workflow-performance-optimization
 description: Optimize workflow execution for speed and efficiency
 type: workflow
 category: workflow-patterns

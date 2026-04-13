@@ -1,4 +1,5 @@
 ---
+name: meta
 description: "Create and manage workflows using meta-workflow patterns"
 version: "1.0"
 languages: ["python", "typescript", "markdown"]

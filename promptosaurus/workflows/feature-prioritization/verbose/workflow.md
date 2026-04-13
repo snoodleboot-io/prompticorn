@@ -1,4 +1,5 @@
 ---
+name: feature-prioritization
 description: "Data-driven process to prioritize features based on value and effort"
 agent: "product"
 category: "product"

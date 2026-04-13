@@ -1,4 +1,5 @@
 ---
+name: mlops-pipeline-setup
 description: "Establish end-to-end MLOps pipeline for continuous model delivery"
 agent: "mlai"
 category: "ml"

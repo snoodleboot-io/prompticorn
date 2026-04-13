@@ -1,3 +1,9 @@
+---
+name: root-cause-five-whys
+type: skill
+category: technical-skill
+minimal: true
+---
 # Root Cause Analysis: Five Whys (Minimal)
 
 ## Process

@@ -1,3 +1,9 @@
+---
+name: code-quality-maintenance
+type: workflow
+category: workflow-patterns
+minimal: false
+---
 # Code Quality Review Workflow
 
 **Version:** 1.0  

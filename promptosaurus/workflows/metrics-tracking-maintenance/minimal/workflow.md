@@ -1,3 +1,9 @@
+---
+name: metrics-tracking-maintenance
+type: workflow
+category: workflow-patterns
+minimal: true
+---
 # Metrics Tracking Workflow
 
 **Version:** 1.0

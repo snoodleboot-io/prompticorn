@@ -1,4 +1,5 @@
 ---
+name: data-model
 description: Comprehensive database schema design process with requirements gathering, entity modeling, relationship mapping, and performance optimization
 steps:
 - Gather requirements with targeted questions

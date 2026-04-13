@@ -1,4 +1,5 @@
 ---
+name: workflow-compliance-patterns
 description: Ensure workflows meet compliance and regulatory requirements
 type: workflow
 category: workflow-patterns

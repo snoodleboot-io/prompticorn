@@ -1,4 +1,5 @@
 ---
+name: boilerplate
 languages: ["python", "typescript", "javascript"]
 subagents: ["code"]
 ---

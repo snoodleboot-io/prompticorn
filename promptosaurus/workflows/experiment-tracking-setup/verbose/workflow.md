@@ -1,4 +1,5 @@
 ---
+name: experiment-tracking-setup
 description: Set up experiment tracking infrastructure for ML model development and hyperparameter optimization
 type: workflow
 category: workflow-patterns

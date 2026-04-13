@@ -1,3 +1,9 @@
+---
+name: data-partitioning
+type: skill
+category: technical-skill
+minimal: true
+---
 # Data Partitioning (Minimal)
 
 ## Key Strategies

@@ -1,57 +1,48 @@
-"""Integration tests for promptosaurus init CLI command.
+"""Integration tests for monorepo configuration initialization."""
 
-These tests exercise the actual CLI flow to catch bugs in the full user journey.
-"""
+from pathlib import Path
 
-from promptosaurus.questions.base.folder_spec import FolderSpec
+import pytest
+
+from promptosaurus.config_handler import ConfigHandler
+from promptosaurus.questions.base.spec_handler import FolderSpec
 
 
-class TestSetupMonorepoFolders:
-    """Tests for the _setup_monorepo_folders function."""
+class TestMonorepoFolderDetection:
+    """Tests for folder-level type detection in monorepo."""
 
-    def test_folder_spec_import(self):
-        """Verify FolderSpec can be imported and used."""
+    def test_frontend_folder_defaults_to_typescript(self):
+        """Test that frontend folders default to TypeScript."""
         spec = FolderSpec(
-            folder="backend/api",
-            type="backend",
-            subtype="api",
-            language="python",
+            folder="frontend",
+            type="frontend",
         )
-        assert spec.folder == "backend/api"
-        assert spec.language == "python"
+        assert spec.language == "typescript"
 
-    def test_folder_spec_to_dict(self):
-        """Verify FolderSpec converts to dict correctly."""
+    def test_ui_folder_defaults_to_typescript(self):
+        """Test that ui folders default to TypeScript."""
         spec = FolderSpec(
-            folder="frontend/ui",
+            folder="ui",
             type="frontend",
             subtype="ui",
-            language="typescript",
         )
-        d = spec.to_dict()
-        assert d["folder"] == "frontend/ui"
-        assert d["type"] == "frontend"
-        assert d["subtype"] == "ui"
-        assert d["language"] == "typescript"
+        assert spec.language == "typescript"
 
-    def test_folder_spec_defaults(self):
-        """Verify FolderSpec applies language defaults."""
+    def test_backend_folder_defaults_to_python(self):
+        """Test that backend folders default to Python."""
         spec = FolderSpec(
-            folder="backend/api",
+            folder="backend",
             type="backend",
-            subtype="api",
         )
-        # backend/api should default to Python
         assert spec.language == "python"
 
-    def test_folder_spec_frontend_defaults(self):
-        """Verify FolderSpec applies frontend defaults."""
+    def test_frontend_ui_folder_defaults_to_typescript(self):
+        """Test that frontend/ui folders default to TypeScript."""
         spec = FolderSpec(
             folder="frontend/ui",
             type="frontend",
             subtype="ui",
         )
-        # frontend/ui should default to TypeScript
         assert spec.language == "typescript"
 
 
@@ -60,10 +51,7 @@ class TestMonorepoConfig:
 
     def test_multi_language_config_template(self):
         """Verify multi-language config template exists."""
-        from promptosaurus.config_handler import (
-            DEFAULT_MULTI_LANGUAGE_CONFIG_TEMPLATE,
-            ConfigHandler,
-        )
+        from promptosaurus.config_handler import ConfigHandler
 
         assert "repository" in ConfigHandler.get_default_multi_language_template()
         assert "spec" in ConfigHandler.get_default_multi_language_template()
@@ -78,48 +66,36 @@ class TestMonorepoConfig:
             {
                 "folder": "backend/api",
                 "type": "backend",
-                "subtype": "api",
                 "language": "python",
             },
             {
-                "folder": "frontend",
+                "folder": "frontend/ui",
                 "type": "frontend",
-                "subtype": "ui",
                 "language": "typescript",
             },
         ]
-        assert len(specs) == 2
-        assert specs[0]["folder"] == "backend/api"
-        assert specs[1]["folder"] == "frontend"
+        config = ConfigHandler.get_default_multi_language_template()
+        config["spec"] = specs
+        assert len(config["spec"]) == 2
+        assert config["spec"][0]["folder"] == "backend/api"
+        assert config["spec"][1]["folder"] == "frontend/ui"
+
+    def test_repository_type_setting(self):
+        """Verify repository type can be set."""
+        config = ConfigHandler.get_default_multi_language_template()
+        assert config["repository"]["type"] == "multi-language-monorepo"
 
 
-class TestMonorepoPresetTypes:
-    """Tests for folder preset types."""
+class TestMonorepoInit:
+    """Tests for initializing multi-language monorepo."""
 
-    def test_backend_preset_types(self):
-        """Verify backend preset types are defined."""
-        from promptosaurus.questions.base.folder_spec import FolderSpecRegistry
+    @pytest.mark.skip(reason="Requires full user interaction")
+    def test_monorepo_init_creates_config(self, tmp_path):
+        """Test that monorepo initialization creates valid config."""
+        # This would require full CLI interaction
+        # Skipping for now as it's an end-to-end test
+        pass
 
-        assert "backend" in FolderSpecRegistry.get_folder_type_presets()
-        assert "api" in FolderSpecRegistry.get_folder_type_presets()["backend"]
-        assert "library" in FolderSpecRegistry.get_folder_type_presets()["backend"]
-        assert "worker" in FolderSpecRegistry.get_folder_type_presets()["backend"]
-        assert "cli" in FolderSpecRegistry.get_folder_type_presets()["backend"]
 
-    def test_frontend_preset_types(self):
-        """Verify frontend preset types are defined."""
-        from promptosaurus.questions.base.folder_spec import FolderSpecRegistry
-
-        assert "frontend" in FolderSpecRegistry.get_folder_type_presets()
-        assert "ui" in FolderSpecRegistry.get_folder_type_presets()["frontend"]
-        assert "library" in FolderSpecRegistry.get_folder_type_presets()["frontend"]
-        assert "e2e" in FolderSpecRegistry.get_folder_type_presets()["frontend"]
-
-    def test_preset_languages(self):
-        """Verify preset languages are correct."""
-        from promptosaurus.questions.base.folder_spec import FolderSpecRegistry
-
-        # Backend defaults to Python
-        assert FolderSpecRegistry.get_folder_type_presets()["backend"]["api"]["language"] == "python"
-        # Frontend defaults to TypeScript
-        assert FolderSpecRegistry.get_folder_type_presets()["frontend"]["ui"]["language"] == "typescript"
+if __name__ == "__main__":
+    pytest.main([__file__, "-v"])

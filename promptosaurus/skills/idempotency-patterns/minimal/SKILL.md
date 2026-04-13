@@ -1,3 +1,9 @@
+---
+name: idempotency-patterns
+type: skill
+category: technical-skill
+minimal: true
+---
 # Idempotency Patterns (Minimal)
 
 ## Definition

@@ -1,3 +1,9 @@
+---
+name: distributed-tracing-instrumentation
+type: skill
+category: technical-skill
+minimal: false
+---
 # Distributed Tracing Instrumentation (Verbose)
 
 ## End-to-End Request Flow

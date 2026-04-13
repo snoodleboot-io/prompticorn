@@ -1,3 +1,9 @@
+---
+name: prometheus-query-patterns
+type: skill
+category: technical-skill
+minimal: true
+---
 # Prometheus Query Patterns (Minimal)
 
 ## Core Queries

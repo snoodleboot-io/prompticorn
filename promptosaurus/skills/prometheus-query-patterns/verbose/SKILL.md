@@ -1,3 +1,9 @@
+---
+name: prometheus-query-patterns
+type: skill
+category: technical-skill
+minimal: false
+---
 # Prometheus Query Patterns (Verbose)
 
 ## Fundamental Operators

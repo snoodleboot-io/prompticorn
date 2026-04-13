@@ -1,4 +1,5 @@
 ---
+name: house-style
 languages: ["python", "typescript", "javascript"]
 subagents: ["review", "code"]
 ---

@@ -1,3 +1,9 @@
+---
+name: performance-monitoring-maintenance
+type: workflow
+category: workflow-patterns
+minimal: false
+---
 # Performance Monitoring Workflow
 
 **Version:** 1.0  

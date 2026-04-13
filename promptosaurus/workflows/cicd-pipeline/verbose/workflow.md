@@ -1,4 +1,5 @@
 ---
+name: cicd-pipeline
 description: Build automated deployment pipelines
 ---
 

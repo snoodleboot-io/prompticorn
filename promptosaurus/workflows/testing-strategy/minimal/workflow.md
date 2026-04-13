@@ -1,4 +1,5 @@
 ---
+name: testing-strategy
 description: Design comprehensive testing approach
 ---
 

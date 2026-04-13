@@ -1,4 +1,5 @@
 ---
+name: data-pipeline
 description: "Design and implement ETL/ELT data pipelines"
 version: "1.0"
 languages: ["python", "sql", "hcl"]

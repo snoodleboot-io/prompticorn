@@ -1,4 +1,5 @@
 ---
+name: requirements-gathering
 description: "Structured approach to collect and validate product requirements"
 agent: "product"
 category: "product"

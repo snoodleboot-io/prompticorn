@@ -1,4 +1,5 @@
 ---
+name: dependency-upgrade
 description: Safely upgrade project dependencies with minimal risk
 languages: [python, typescript, go, rust]
 subagents: [migration, test]

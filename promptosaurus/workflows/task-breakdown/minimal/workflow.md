@@ -1,4 +1,5 @@
 ---
+name: task-breakdown
 description: "Break features and epics into implementable tasks"
 version: "1.0"
 languages: ["agile", "project-management"]

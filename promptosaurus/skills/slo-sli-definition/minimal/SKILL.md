@@ -1,3 +1,9 @@
+---
+name: slo-sli-definition
+type: skill
+category: technical-skill
+minimal: true
+---
 # SLO/SLI Definition (Minimal)
 
 ## Key Terms

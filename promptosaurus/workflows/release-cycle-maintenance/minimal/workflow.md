@@ -1,3 +1,9 @@
+---
+name: release-cycle-maintenance
+type: workflow
+category: workflow-patterns
+minimal: true
+---
 # Release Cycle Workflow
 
 **Version:** 1.0

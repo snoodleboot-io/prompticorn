@@ -1,3 +1,9 @@
+---
+name: slo-sli-definition
+type: skill
+category: technical-skill
+minimal: false
+---
 # SLO/SLI Definition (Verbose)
 
 ## Relationship Between SLO and SLI

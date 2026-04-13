@@ -1,3 +1,9 @@
+---
+name: data-partitioning
+type: skill
+category: technical-skill
+minimal: false
+---
 # Data Partitioning (Verbose)
 
 ## Time-Based Partitioning

@@ -1,4 +1,5 @@
 ---
+name: feature-engineering-guide
 description: "Transform raw data into meaningful features for ML models"
 agent: "mlai"
 category: "ml"

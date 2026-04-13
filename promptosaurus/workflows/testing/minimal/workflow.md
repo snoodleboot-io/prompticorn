@@ -1,4 +1,5 @@
 ---
+name: testing
 version: 1.0
 languages: [python, typescript, javascript, go, rust, java, csharp, php, ruby]
 subagents: [test/unit, test/integration, code/feature]

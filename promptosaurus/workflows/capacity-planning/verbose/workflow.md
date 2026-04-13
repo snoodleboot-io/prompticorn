@@ -1,4 +1,5 @@
 ---
+name: capacity-planning
 description: "Comprehensive capacity forecasting, growth modeling, and infrastructure scaling strategy"
 version: "1.0"
 languages: ["sql", "python"]

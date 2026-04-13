@@ -1,4 +1,5 @@
 ---
+name: observability
 description: "Design and implement comprehensive monitoring stack"
 version: "1.0"
 languages: ["python", "promql"]

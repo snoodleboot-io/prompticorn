@@ -1,3 +1,9 @@
+---
+name: slowly-changing-dimensions
+type: skill
+category: technical-skill
+minimal: true
+---
 # Slowly Changing Dimensions (Minimal)
 
 ## Types

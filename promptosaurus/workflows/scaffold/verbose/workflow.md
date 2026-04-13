@@ -1,4 +1,5 @@
 ---
+name: scaffold
 description: Comprehensive project scaffolding with language-specific setup, testing infrastructure, CI/CD templates, and best practices
 languages: [python, typescript, go, rust, java]
 subagents: [architect/scaffold, code/boilerplate, orchestrator/devops]

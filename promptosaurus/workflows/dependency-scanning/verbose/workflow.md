@@ -1,4 +1,5 @@
 ---
+name: dependency-scanning
 description: "Identify and manage vulnerabilities in third-party dependencies"
 agent: "security"
 category: "security"

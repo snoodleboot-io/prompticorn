@@ -1,3 +1,9 @@
+---
+name: code-quality-maintenance
+type: workflow
+category: workflow-patterns
+minimal: true
+---
 # Code Quality Workflow
 
 **Version:** 1.0

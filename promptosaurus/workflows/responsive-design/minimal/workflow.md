@@ -1,4 +1,5 @@
 ---
+name: responsive-design
 description: Build responsive user interfaces
 ---
 

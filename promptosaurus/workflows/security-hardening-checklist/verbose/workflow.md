@@ -1,4 +1,5 @@
 ---
+name: security-hardening-checklist
 description: "Comprehensive checklist for hardening systems against attacks"
 agent: "security"
 category: "security"

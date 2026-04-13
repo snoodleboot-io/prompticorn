@@ -1,3 +1,9 @@
+---
+name: dependency-update-maintenance
+type: workflow
+category: workflow-patterns
+minimal: true
+---
 # Dependency Update Workflow
 
 **Version:** 1.0

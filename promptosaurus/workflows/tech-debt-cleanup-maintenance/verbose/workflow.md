@@ -1,3 +1,9 @@
+---
+name: tech-debt-cleanup-maintenance
+type: workflow
+category: workflow-patterns
+minimal: false
+---
 # Technical Debt Cleanup Workflow
 
 **Version:** 1.0  

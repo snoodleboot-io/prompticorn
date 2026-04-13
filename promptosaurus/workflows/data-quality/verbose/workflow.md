@@ -1,4 +1,5 @@
 ---
+name: data-quality
 description: "Comprehensive data quality framework including validation rules, testing, monitoring, and governance"
 version: "1.0"
 languages: ["python", "sql"]

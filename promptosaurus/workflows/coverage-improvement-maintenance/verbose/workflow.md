@@ -1,3 +1,9 @@
+---
+name: coverage-improvement-maintenance
+type: workflow
+category: workflow-patterns
+minimal: false
+---
 # Test Coverage Improvement Workflow
 
 **Version:** 1.0  

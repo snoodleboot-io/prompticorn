@@ -1,4 +1,5 @@
 ---
+name: root-cause
 description: "Root cause analysis for bugs and incidents"
 version: "1.0"
 languages: ["python", "typescript"]

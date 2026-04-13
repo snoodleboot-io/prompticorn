@@ -1,4 +1,5 @@
 ---
+name: data-pipeline
 description: "Comprehensive guide to designing, implementing, and optimizing data pipelines with idempotency, incremental processing, and monitoring"
 version: "1.0"
 languages: ["python", "sql", "hcl"]

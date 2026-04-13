@@ -1,3 +1,9 @@
+---
+name: sql-optimization
+type: skill
+category: technical-skill
+minimal: true
+---
 # SQL Optimization (Minimal)
 
 ## Purpose

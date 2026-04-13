@@ -1,4 +1,5 @@
 ---
+name: production-ml-deployment
 description: Deploy ML models to production with monitoring, versioning, and safety guardrails
 type: workflow
 category: workflow-patterns

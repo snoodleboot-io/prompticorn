@@ -1,3 +1,9 @@
+---
+name: dimensional-modeling
+type: skill
+category: technical-skill
+minimal: false
+---
 # Dimensional Modeling (Verbose)
 
 ## Star Schema Design

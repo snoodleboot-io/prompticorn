@@ -1,4 +1,5 @@
 ---
+name: roadmap-planning
 description: "Strategic planning process for product roadmap development"
 agent: "product"
 category: "product"

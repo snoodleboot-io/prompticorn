@@ -1,4 +1,5 @@
 ---
+name: data-quality
 description: "Implement data validation, testing, and quality monitoring"
 version: "1.0"
 languages: ["python", "sql"]

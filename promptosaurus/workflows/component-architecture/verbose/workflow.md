@@ -1,4 +1,5 @@
 ---
+name: component-architecture
 description: Design scalable component systems
 ---
 

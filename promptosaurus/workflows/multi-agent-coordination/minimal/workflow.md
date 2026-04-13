@@ -1,4 +1,5 @@
 ---
+name: multi-agent-coordination
 description: Coordinate multiple agents working together on shared tasks with clear communication and state management
 type: workflow
 category: workflow-patterns

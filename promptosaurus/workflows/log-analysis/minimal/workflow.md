@@ -1,4 +1,5 @@
 ---
+name: log-analysis
 languages: ["bash", "python", "typescript"]
 subagents: ["debug", "ask"]
 ---

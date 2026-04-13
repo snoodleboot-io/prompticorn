@@ -1,4 +1,5 @@
 ---
+name: performance
 description: "Comprehensive performance optimization workflow with profiling tools, strategies, and examples"
 version: "1.0"
 languages: ["python", "typescript", "sql"]

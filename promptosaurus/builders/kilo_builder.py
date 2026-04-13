@@ -86,6 +86,14 @@ class KiloBuilder(AbstractBuilder):
                 errors=errors, message=f"Invalid agent '{agent.name}': {'; '.join(errors)}"
             )
 
+        # Check if agents directory exists
+        if not self.agents_dir.exists():
+            from promptosaurus.builders.errors import VariantNotFoundError
+            raise VariantNotFoundError(
+                variant=options.variant,
+                message=f"Agents directory not found: {self.agents_dir}",
+            )
+
         # Use agent system prompt directly (no variants for top-level agents)
         system_prompt = agent.system_prompt
 
@@ -282,6 +290,9 @@ class KiloBuilder(AbstractBuilder):
         # Add mode if present
         if hasattr(agent, "mode") and agent.mode:
             frontmatter["mode"] = agent.mode
+
+        # Add model - default to Claude if not specified
+        frontmatter["model"] = "anthropic/claude-haiku-4-5"
 
         # Add state management
         frontmatter["state_management"] = ".promptosaurus/sessions/"

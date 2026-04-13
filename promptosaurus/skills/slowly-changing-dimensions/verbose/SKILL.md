@@ -1,3 +1,9 @@
+---
+name: slowly-changing-dimensions
+type: skill
+category: technical-skill
+minimal: false
+---
 # Slowly Changing Dimensions (Verbose)
 
 ## Type 1: Overwrite History

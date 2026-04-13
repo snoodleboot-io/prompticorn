@@ -1,4 +1,5 @@
 ---
+name: migration
 description: Step-by-step process for migration
 steps:
 - 'Before making any changes:'

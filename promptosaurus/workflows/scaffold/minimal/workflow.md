@@ -1,4 +1,5 @@
 ---
+name: scaffold
 description: Generate project boilerplate structure with proper organization and configuration
 languages: [all]
 subagents: [architect/scaffold, code/boilerplate]

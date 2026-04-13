@@ -1,3 +1,9 @@
+---
+name: grafana-dashboard-design
+type: skill
+category: technical-skill
+minimal: false
+---
 # Grafana Dashboard Design (Verbose)
 
 ## Dashboard Hierarchy

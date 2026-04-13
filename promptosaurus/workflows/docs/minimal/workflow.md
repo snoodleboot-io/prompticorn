@@ -1,4 +1,5 @@
 ---
+name: docs
 description: Step-by-step process for docs
 steps:
 - Purpose — what it does in one sentence (not how)

@@ -1,4 +1,5 @@
 ---
+name: accessibility
 languages: ["python", "typescript", "javascript", "html"]
 subagents: ["review", "test"]
 ---

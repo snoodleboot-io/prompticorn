@@ -1,4 +1,5 @@
 ---
+name: decision-log
 languages: ["markdown"]
 subagents: ["ask", "architect"]
 ---

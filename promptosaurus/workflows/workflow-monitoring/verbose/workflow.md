@@ -1,4 +1,5 @@
 ---
+name: workflow-monitoring
 description: Monitor workflow execution with metrics and alerting
 type: workflow
 category: workflow-patterns

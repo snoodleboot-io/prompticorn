@@ -1,3 +1,9 @@
+---
+name: distributed-tracing-instrumentation
+type: skill
+category: technical-skill
+minimal: true
+---
 # Distributed Tracing Instrumentation (Minimal)
 
 ## Basic Setup

@@ -1,3 +1,9 @@
+---
+name: idempotency-patterns
+type: skill
+category: technical-skill
+minimal: false
+---
 # Idempotency Patterns (Verbose)
 
 ## Natural Keys (Database Level)

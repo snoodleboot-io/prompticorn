@@ -1,4 +1,5 @@
 ---
+name: api-design
 description: Design REST, GraphQL, and gRPC APIs
 ---
 

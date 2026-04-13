@@ -1,4 +1,5 @@
 ---
+name: a-b-testing
 description: "Structured experimentation process for data-driven decisions"
 agent: "product"
 category: "product"

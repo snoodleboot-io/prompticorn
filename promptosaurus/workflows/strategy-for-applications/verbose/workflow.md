@@ -1,4 +1,5 @@
 ---
+name: strategy-for-applications
 description: "Comprehensive strategic planning for applications with architecture decisions, tech stack selection, and scalability planning"
 version: "1.0"
 languages: ["python", "typescript", "architecture"]

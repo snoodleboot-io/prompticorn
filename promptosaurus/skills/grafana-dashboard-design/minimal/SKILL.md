@@ -1,3 +1,9 @@
+---
+name: grafana-dashboard-design
+type: skill
+category: technical-skill
+minimal: true
+---
 # Grafana Dashboard Design (Minimal)
 
 ## Dashboard Layout
