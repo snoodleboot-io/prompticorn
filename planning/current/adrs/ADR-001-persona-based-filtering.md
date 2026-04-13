@@ -459,7 +459,7 @@ This matrix shows which primary agents are included in each persona. Agents can 
 | **explain** | ⭐ | ⭐ | ⭐ | ⭐ | ⭐ | ⭐ | ⭐ | ⭐ | ⭐ |
 | **plan** | ⭐ | ⭐ | ⭐ | ⭐ | ⭐ | ⭐ | ⭐ | ⭐ | ⭐ |
 | **orchestrator** | ⭐ | ⭐ | ⭐ | ⭐ | ⭐ | ⭐ | ⭐ | ⭐ | ⭐ |
-| **code** | **✓ PRIMARY** | | | | | | | | |
+| **code** | **✓ PRIMARY** | | | **✓ PRIMARY** | | | **✓ PRIMARY** | **✓ PRIMARY** | |
 | **test** | **✓ PRIMARY** | | **✓ PRIMARY** | | | | | **✓** | |
 | **refactor** | **✓ PRIMARY** | | | | | | | | |
 | **migration** | **✓ PRIMARY** | | | | | | | | |
@@ -499,9 +499,9 @@ These agents are foundational tools that support all SDLC roles and are accessib
 | explain | All (Universal) | Code walkthroughs and onboarding for all |
 | plan | All (Universal) | Strategic planning for all roles |
 | orchestrator | All (Universal) | Workflow coordination for all |
-| code | Software Engineer | Core implementation agent |
+| code | Software Engineer, DevOps Engineer, Data Engineer, Data Scientist | Implementation and automation code across multiple roles |
 | test | Software Engineer, QA/Tester, Data Scientist | Testing is cross-cutting |
-| refactor | Software Engineer | Code improvement |
+| refactor | Software Engineer | Code improvement and maintenance |
 | migration | Software Engineer | Dependency/framework updates |
 | review | Software Engineer, QA/Tester, Security Engineer | Quality reviews across roles |
 | architect | Architect | System design focus |
@@ -526,11 +526,11 @@ These agents are foundational tools that support all SDLC roles and are accessib
 | **Software Engineer** | code, test, refactor, migration | review, backend, frontend, performance, enforcement | 9 agents |
 | **Architect** | architect, backend, frontend, data | performance | 5 agents |
 | **QA/Tester** | test, review | performance, enforcement | 4 agents |
-| **DevOps Engineer** | devops, observability, incident | security, mlai, data | 6 agents |
+| **DevOps Engineer** | code, devops, observability, incident | security, mlai, data | 7 agents |
 | **Security Engineer** | security, compliance | incident, review, enforcement | 5 agents |
 | **Product Manager** | product | (none) | 1 agent |
-| **Data Engineer** | data | mlai, devops, observability, performance | 5 agents |
-| **Data Scientist** | mlai | data, test, performance, devops, observability | 5 agents |
+| **Data Engineer** | code, data | mlai, devops, observability, performance | 6 agents |
+| **Data Scientist** | code, mlai | data, test, performance, devops, observability | 7 agents |
 | **Technical Writer** | document | (none) | 1 agent |
 
 **Note:** All personas also have access to 5 universal agents: ask, debug, explain, plan, orchestrator
@@ -557,9 +557,9 @@ These agents are foundational tools that support all SDLC roles and are accessib
    - Focus: Ensuring quality through comprehensive testing
 
 4. **DevOps Engineer** - Infrastructure, deployment, operations, CI/CD
-   - Primary Agents: devops, observability, incident
+   - Primary Agents: code, devops, observability, incident
    - Secondary Agents: security, mlai, data
-   - Focus: Building and maintaining infrastructure
+   - Focus: Building infrastructure as code and maintaining systems
 
 5. **Security Engineer** - Security hardening, threat modeling, compliance
    - Primary Agents: security, compliance
@@ -572,12 +572,12 @@ These agents are foundational tools that support all SDLC roles and are accessib
    - Focus: Defining what to build and why
 
 7. **Data Engineer** - Data pipelines, data quality, data infrastructure
-   - Primary Agents: data
+   - Primary Agents: code, data
    - Secondary Agents: mlai, devops, observability, performance
-   - Focus: Building reliable data systems
+   - Focus: Building reliable data systems and ETL pipelines
 
 8. **Data Scientist** - Machine learning, model development, optimization
-   - Primary Agents: mlai
+   - Primary Agents: code, mlai
    - Secondary Agents: data, test, performance, devops, observability
    - Focus: Building and improving ML/AI systems
 
