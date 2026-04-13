@@ -115,7 +115,7 @@ class TestKiloBuilderFrontmatter:
         builder = KiloBuilder()
         frontmatter = builder._build_frontmatter(agent)
 
-        required_keys = {"name", "description", "state_management"}
+        required_keys = {"name", "description", "mode", "state_management"}
         assert set(frontmatter.keys()) == required_keys
 
 

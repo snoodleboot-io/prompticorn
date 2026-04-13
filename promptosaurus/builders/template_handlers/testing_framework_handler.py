@@ -63,4 +63,7 @@ class TestingFrameworkHandler(TemplateHandler):
             >>> handler.handle("TESTING_FRAMEWORK", {})
             ''
         """
-        return str(config.get("testing_framework", ""))
+        value = config.get("testing_framework", "")
+        if value is None:
+            return "None"
+        return str(value)

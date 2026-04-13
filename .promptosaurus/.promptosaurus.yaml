@@ -24,4 +24,9 @@ spec:
   mutation_tool: mutmut
 variant: verbose
 active_personas:
+  - software_engineer
+  - architect
+  - qa_tester
+  - devops_engineer
+  - product_manager
   - technical_writer

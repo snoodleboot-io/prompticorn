@@ -22,6 +22,7 @@ class TypeScriptVersionQuestion(Question):
     balancing modern features against ecosystem compatibility.
 
     Attributes:
+        key: Unique identifier for this question
         question_text: The question presented to the user
         explanation: Detailed explanation of TypeScript versions
         options: Available TypeScript versions
@@ -29,8 +30,29 @@ class TypeScriptVersionQuestion(Question):
         config_key: Configuration key where answer is stored
     """
 
-    question_text = "What TypeScript version?"
-    explanation = "Select the TypeScript version your project targets."
-    options = ["5.0", "5.1", "5.2", "5.3", "5.4"]
-    default = "5.4"
+    @property
+    def key(self) -> str:
+        """Unique identifier for this question."""
+        return "typescript_version"
+
+    @property
+    def question_text(self) -> str:
+        """The question text to display."""
+        return "What TypeScript version?"
+
+    @property
+    def explanation(self) -> str:
+        """Explanation of why this question matters."""
+        return "Select the TypeScript version your project targets."
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["v6.0", "v5.9", "v5.8", "v5.4", "v5.0"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "v6.0"
+
     config_key = "runtime"

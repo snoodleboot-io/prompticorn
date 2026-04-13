@@ -1,30 +1,30 @@
-"""Unit tests for Testing Agent."""
+"""Unit tests for QA-Tester Agent (formerly Testing Agent)."""
 
 import pytest
 
 
 @pytest.mark.unit
 class TestTestingAgent:
-    """Test suite for testing agent."""
+    """Test suite for qa-tester agent."""
 
     @pytest.fixture
     def agent_file(self, agents_dir):
-        """Get testing agent file."""
-        return agents_dir / "testing" / "prompt.md"
+        """Get qa-tester agent file."""
+        return agents_dir / "qa-tester" / "prompt.md"
 
     def test_agent_exists(self, agent_file):
         """Test that agent file exists."""
-        assert agent_file.exists(), "testing/prompt.md not found"
+        assert agent_file.exists(), "qa-tester/prompt.md not found"
 
 
 @pytest.mark.unit
 class TestTestingAgentSubagents:
-    """Test suite for testing agent subagents."""
+    """Test suite for qa-tester agent subagents."""
 
     @pytest.fixture
     def subagents_dir(self, agents_dir):
-        """Get testing subagents directory."""
-        return agents_dir / "testing" / "subagents"
+        """Get qa-tester subagents directory."""
+        return agents_dir / "qa-tester" / "subagents"
 
     @pytest.mark.parametrize(
         "subagent_name", ["unit-testing", "integration-testing", "e2e-testing", "load-testing"]

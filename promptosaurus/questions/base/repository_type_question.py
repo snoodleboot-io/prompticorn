@@ -19,6 +19,7 @@ class RepositoryTypeQuestion(Question):
     - Whether language settings apply globally or per-folder
 
     Attributes:
+        key: Unique identifier for this question
         question_text: The question presented to the user
         explanation: Detailed explanation of repository types
         options: Available repository types
@@ -27,18 +28,42 @@ class RepositoryTypeQuestion(Question):
         config_key: Configuration key where answer is stored
     """
 
-    question_text = "What type of repository is this?"
-    explanation = "Choose how your codebase is structured linguistically."
+    @property
+    def key(self) -> str:
+        """Unique identifier for this question."""
+        return "repository_type"
 
-    options = [
-        RepositoryTypes.SINGLE,
-        RepositoryTypes.MULTI_MONOREPO,
-    ]
+    @property
+    def question_text(self) -> str:
+        """The question text to display."""
+        return "What type of repository is this?"
 
-    option_explanations = {
-        RepositoryTypes.SINGLE: "Single language for the entire project",
-        RepositoryTypes.MULTI_MONOREPO: "Multiple languages in different folders (monorepo)",
-    }
+    @property
+    def explanation(self) -> str:
+        """Explanation of why this question matters."""
+        return "Choose how your codebase is structured linguistically."
 
-    default = RepositoryTypes.SINGLE
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return [
+            RepositoryTypes.SINGLE,
+            RepositoryTypes.MULTI_MONOREPO,
+            RepositoryTypes.MIXED,
+        ]
+
+    @property
+    def option_explanations(self) -> dict[str, str]:
+        """Details for each option."""
+        return {
+            RepositoryTypes.SINGLE: "Single language for the entire project",
+            RepositoryTypes.MULTI_MONOREPO: "Multiple languages in different folders (monorepo)",
+            RepositoryTypes.MIXED: "Mixed collocation - multiple languages in the same directories",
+        }
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return RepositoryTypes.SINGLE
+
     config_key = "repository.type"
