@@ -262,13 +262,13 @@ Just list workflow names and let tools figure it out.
 
 ## 4. Recommended Implementation Plan
 
-### Phase 1: Add Workflow Loader
+### Step 1: Add Workflow Loader
 ```python
 # promptosaurus/ir/loaders/workflow_loader.py - already exists!
 # Just need to use it in builders
 ```
 
-### Phase 2: Update Each Builder
+### Step 2: Update Each Builder
 
 **KiloBuilder:**
 - Write workflow content to `.kilo/commands/{workflow-name}.md`
@@ -290,7 +290,7 @@ Just list workflow names and let tools figure it out.
 - Embed workflow content in rules output
 - Include with skill references
 
-### Phase 3: Test & Verify
+### Step 3: Test & Verify
 - Verify workflow files are generated correctly
 - Test with each tool to ensure workflows are recognized
 - Update tests to check for workflow content (not just names)

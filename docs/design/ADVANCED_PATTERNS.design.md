@@ -1,4 +1,4 @@
-# Phase 2A Advanced Patterns Guide
+# Promptosaurus Advanced Patterns Guide
 
 **Version:** 2.0.0  
 **Date:** April 9, 2026  
@@ -1192,4 +1192,4 @@ benchmark.print_report()
 
 ---
 
-*This guide covers advanced patterns for extending and customizing Phase 2A. For standard usage, see the Integration Guide.*
+*This guide covers advanced patterns for extending and customizing Promptosaurus. For standard usage, see the Integration Guide.*

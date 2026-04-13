@@ -139,7 +139,7 @@ sequenceDiagram
     participant Template
     participant Output
     
-    User->>CLI: prompt build --tool kilo --agent code
+    User->>CLI: promptosaurus build --tool kilo --agent code
     CLI->>Registry: Get mode configuration and file mappings
     Registry-->>CLI: Return registered files and modes
     CLI->>Factory: Request builder for tool 'kilo'

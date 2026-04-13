@@ -1,8 +1,8 @@
-# Phase 2A Integration Guide
+# Promptosaurus Integration Guide
 
 **Version:** 2.0.0  
 **Date:** April 9, 2026  
-**Target Audience:** Developers integrating Phase 2A IR models into existing projects
+**Target Audience:** Developers integrating Promptosaurus IR models into existing projects
 
 ---
 
@@ -22,7 +22,7 @@
 
 ## Overview
 
-Phase 2A provides a **tool-agnostic Intermediate Representation (IR)** system that you can integrate into your existing projects. This guide shows you how to:
+Promptosaurus provides a **tool-agnostic Intermediate Representation (IR)** system that you can integrate into your existing projects. This guide shows you how to:
 
 - Use IR models as a foundation for your own applications
 - Build custom builders for new tools or platforms
@@ -989,4 +989,4 @@ def build_in_batches(agents: list[Agent], batch_size: int = 100):
 
 ---
 
-*This guide covers practical integration patterns for Phase 2A. For questions or issues, refer to the troubleshooting section or consult the main documentation.*
+*This guide covers practical integration patterns for Promptosaurus. For questions or issues, refer to the troubleshooting section or consult the main documentation.*

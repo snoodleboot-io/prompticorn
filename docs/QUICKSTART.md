@@ -23,7 +23,6 @@ Promptosaurus is a comprehensive AI agent library with:
 → Read **[ADVANCED_PATTERNS.design.md](./design/ADVANCED_PATTERNS.design.md)** for design decisions
 
 ### I want to see test coverage & quality metrics
-→ Check **[QUALITY_METRICS.md](./QUALITY_METRICS.md)** for current test results
 
 ### I want to understand how components relate
 → Review **[RELATIONSHIPS_MATRIX.md](./RELATIONSHIPS_MATRIX.md)** for dependency mapping
@@ -43,12 +42,11 @@ Specialized knowledge domains that agents leverage (SQL optimization, Kubernetes
 
 ```
 promptosaurus/
-├── agents/              # All agent definitions (9 agents, 38 subagents)
+├── agents/              # All agent definitions (25 agents, 82 subagents)
 ├── workflows/           # Task workflows (49 total, minimal/verbose variants)
 ├── skills/              # Specialized knowledge (58 total, minimal/verbose variants)
 ├── docs/
 │   ├── LIBRARY_INDEX.md           # Complete searchable catalog ⭐
-│   ├── QUALITY_METRICS.md         # Test coverage dashboard
 │   ├── RELATIONSHIPS_MATRIX.md    # Component dependency map
 │   ├── reference/                 # How-to guides
 │   ├── design/                    # Architecture decisions
@@ -77,8 +75,6 @@ promptosaurus/
 3. Copy the appropriate rules to your project
 
 ### Understand content quality
-1. Check [QUALITY_METRICS.md](./QUALITY_METRICS.md) for overall health
-2. Review [TECHNICAL_DEBT.md](./TECHNICAL_DEBT.md) for known issues
 3. See [RELATIONSHIPS_MATRIX.md](./RELATIONSHIPS_MATRIX.md) for dependencies
 
 ## What's Next?

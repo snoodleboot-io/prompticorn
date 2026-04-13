@@ -179,16 +179,16 @@ While the main workflow uses `init` -> `switch` -> `swap`, you can also build co
 
 ```bash
 # Build a specific agent
-prompt build --tool kilo --agent code --output-dir .kilocode/agents/
+promptosaurus build --tool kilo --agent code --output-dir .kilocode/agents/
 
 # Build a specific workflow
-prompt build --tool kilo --workflow feature-development --output-dir .kilocode/workflows/
+promptosaurus build --tool kilo --workflow feature-development --output-dir .kilocode/workflows/
 
 # Build a specific skill
-prompt build --tool kilo --skill debugging --output-dir .kilocode/skills/
+promptosaurus build --tool kilo --skill debugging --output-dir .kilocode/skills/
 
 # Build with specific options
-prompt build --tool kilo --agent code --variant verbose --include-skills --no-tools
+promptosaurus build --tool kilo --agent code --variant verbose --include-skills --no-tools
 ```
 
 ### Direct Builder Access

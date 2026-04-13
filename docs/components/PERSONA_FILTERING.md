@@ -89,7 +89,7 @@ sequenceDiagram
     participant PersonaFilter
     participant IR
     
-    User->>CLI: prompt build --personas software_engineer qa_tester
+    User->>CLI: promptosaurus build --personas software_engineer qa_tester
     CLI->>PersonaRegistry: Load persona definitions
     PersonaRegistry-->>CLI: Return persona registry
     CLI->>PersonaFilter: Create filter with selected personas

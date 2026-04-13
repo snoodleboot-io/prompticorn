@@ -1,4 +1,4 @@
-# Phase 2: Tool Configuration Examples
+# Tool Configuration Examples
 
 ## Overview
 

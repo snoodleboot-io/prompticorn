@@ -237,7 +237,7 @@ Plus always included:
 - Core language conventions (conventions-java.md)
 - Core system files
 
-#### Phase 1 Revision
+#### Initial Revision
 
 When adding language metadata to skills/workflows, ALSO add subagent compatibility:
 
@@ -303,32 +303,32 @@ During build, render with actual config values from CLI questions.
 
 ## Implementation Plan
 
-### Phase 1: Add Language Metadata
+### Step 1: Add Language Metadata
 - Add `languages: [...]` to all skills YAML frontmatter
 - Add `languages: [...]` to all workflows YAML frontmatter
 - Add `subagents: [...]` to all skills and workflows YAML frontmatter
 - Create language_skill_mapping.yaml registry with language + subagent combinations
 
-### Phase 1.5: Add Subagent Language Support
+### Step 1.5: Add Subagent Language Support
 - Add `languages: [...]` to all subagent frontmatter
 - Update language_skill_mapping.yaml to include subagent-specific paths
 - Create resolution priority rules for skill/workflow lookup
 
-### Phase 2: Create CoreFilesLoader
+### Step 2: Create CoreFilesLoader
 - Implement loader class
 - Load core files by language
 - Integrate with registry
 
-### Phase 3: Convert to Templates
+### Step 3: Convert to Templates
 - Update all conventions-{language}.md files to Jinja2
 - Add template variables: language, runtime, package_manager, test_framework, linter, formatter, coverage_tool
 
-### Phase 4: Update Builders
+### Step 4: Update Builders
 - KiloBuilder includes core files + language-specific skills
 - PromptBuilder filters skills by language
 - Other builders follow same pattern
 
-### Phase 5: Update Prompt Build Logic
+### Step 5: Update Prompt Build Logic
 - Load language skill mapping
 - Include "all" skills + language-specific skills
 - Render core convention templates with config values
