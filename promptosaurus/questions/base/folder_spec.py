@@ -13,14 +13,14 @@ LANGUAGE_DEFAULTS: dict[str, dict[str, str]] = {
         "formatter": "ruff",
     },
     "typescript": {
-        "runtime": "5.4",
+        "runtime": "6.0",
         "package_manager": "pnpm",
         "test_framework": "vitest",
         "linter": "eslint",
         "formatter": "prettier",
     },
     "javascript": {
-        "runtime": "5.4",
+        "runtime": "6.0",
         "package_manager": "pnpm",
         "test_framework": "vitest",
         "linter": "eslint",
