@@ -23,7 +23,7 @@ class FolderSpecRegistry:
             Dictionary with language_defaults, default_coverage, and folder_type_presets.
         """
         if cls._config is None:
-            config_file = Path(__file__).parent.parent / "configurations" / "language_defaults.yaml"
+            config_file = Path(__file__).parent.parent.parent / "configurations" / "language_defaults.yaml"
             with open(config_file, encoding="utf-8") as f:
                 cls._config = yaml.safe_load(f)
         return cls._config

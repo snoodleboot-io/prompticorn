@@ -240,7 +240,7 @@ def create_default_config(language: str, **kwargs) -> dict[str, Any]:
         return config
     else:
         # For multi-language-monorepo, create empty config with spec as list
-        config = DEFAULT_MULTI_LANGUAGE_CONFIG_TEMPLATE.copy()
+        config = ConfigHandler.get_default_multi_language_template()
         config["repository"]["type"] = repo_type
         config["spec"] = handler.create_spec()
         return config
