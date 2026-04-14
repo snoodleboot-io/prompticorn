@@ -20,3 +20,15 @@ class RubyTestFrameworkQuestion(Question):
 
 - RSpec is behavior-driven with expressive syntax
 - Minitest is simpler, built into Ruby stdlib"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["RSpec", "Minitest", "Cucumber"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "RSpec"
+
+    config_key = "test_framework"

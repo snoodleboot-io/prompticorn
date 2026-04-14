@@ -22,3 +22,15 @@ class RustPackageManagerQuestion(Question):
 - It handles dependency resolution, building, testing, and publishing to crates.io
 - Cargo.toml defines project metadata and dependencies
 - Cargo.lock ensures reproducible builds"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["Cargo"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "Cargo"
+
+    config_key = "package_manager"

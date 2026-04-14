@@ -21,3 +21,15 @@ class SwiftPackageManagerQuestion(Question):
 - SPM is the official Swift Package Manager, integrated with Xcode
 - CocoaPods has extensive library support for iOS/macOS
 - Carthage is decentralized and builds dependencies as frameworks"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["Swift Package Manager", "CocoaPods", "Carthage"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "Swift Package Manager"
+
+    config_key = "package_manager"

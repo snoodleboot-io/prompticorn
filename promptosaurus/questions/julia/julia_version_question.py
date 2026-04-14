@@ -21,3 +21,15 @@ class JuliaVersionQuestion(Question):
 - Newer versions have improved JIT compilation and optimizations
 - Julia is designed for high-performance scientific computing
 - Version affects package compatibility and language features"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["1.10", "1.9", "1.8 (LTS)", "1.7"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "1.10"
+
+    config_key = "runtime"

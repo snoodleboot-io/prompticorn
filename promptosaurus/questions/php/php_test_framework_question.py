@@ -20,3 +20,15 @@ class PhpTestFrameworkQuestion(Question):
 
 - PHPUnit is the industry standard with extensive features
 - Pest is a modern alternative with elegant syntax built on PHPUnit"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["PHPUnit", "Pest", "Codeception", "Behat"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "PHPUnit"
+
+    config_key = "test_framework"

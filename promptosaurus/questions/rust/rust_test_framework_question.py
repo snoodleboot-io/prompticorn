@@ -19,3 +19,15 @@ class RustTestFrameworkQuestion(Question):
         return """Test framework affects how tests are written and organized:
 - built-in: Rust's native test framework with `#[test]` attribute, no dependencies
 - criterion: Statistics-driven benchmarking and testing library for thorough performance tests"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["built-in", "criterion", "quickcheck"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "built-in"
+
+    config_key = "test_framework"

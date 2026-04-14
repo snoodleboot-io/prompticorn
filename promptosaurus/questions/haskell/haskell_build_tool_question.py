@@ -21,3 +21,15 @@ class HaskellBuildToolQuestion(Question):
 - Stack provides reproducible builds and isolated environments
 - Cabal is the traditional build tool with direct package management
 - Stack is generally recommended for new projects"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["Cabal", "Stack", "Nix"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "Cabal"
+
+    config_key = "build_tool"

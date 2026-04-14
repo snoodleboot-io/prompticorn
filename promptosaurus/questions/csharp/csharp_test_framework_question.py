@@ -20,3 +20,15 @@ class CSharpTestFrameworkQuestion(Question):
 - xunit: Modern, extensible, community-driven, default for .NET Core
 - nunit: Mature, flexible, strong constraint model, widely used
 - mstest: Microsoft's framework, integrates well with Visual Studio"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["xUnit", "NUnit", "MSTest"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "xUnit"
+
+    config_key = "test_framework"

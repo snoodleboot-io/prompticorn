@@ -21,3 +21,15 @@ class ShellLinterQuestion(Question):
 - ShellCheck is the industry standard for shell script analysis
 - It catches common mistakes and security issues
 - Highly recommended for all shell scripting"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["shellcheck", "shfmt", "bashate"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "shellcheck"
+
+    config_key = "linter"

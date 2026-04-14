@@ -21,3 +21,15 @@ class ElixirTestFrameworkQuestion(Question):
 - ExUnit is the built-in testing framework for Elixir
 - It provides expressive assertions and test organization
 - No additional dependencies needed as it's included with Elixir"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["ExUnit", "Wallaby", "Hound"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "ExUnit"
+
+    config_key = "test_framework"

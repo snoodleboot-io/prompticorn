@@ -21,3 +21,15 @@ class ScalaTestFrameworkQuestion(Question):
 - ScalaTest is the most comprehensive with multiple testing styles
 - MUnit is lightweight and fast
 - Specs2 focuses on BDD-style specifications"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["ScalaTest", "Specs2", "µTest"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "ScalaTest"
+
+    config_key = "test_framework"

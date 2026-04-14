@@ -21,3 +21,15 @@ class SwiftVersionQuestion(Question):
 - Newer versions have improved performance and language features
 - Swift 5.9+ includes macros and improved C++ interoperability
 - Version affects minimum iOS/macOS deployment targets"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["5.9", "5.8", "5.7", "5.6"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "5.9"
+
+    config_key = "runtime"
