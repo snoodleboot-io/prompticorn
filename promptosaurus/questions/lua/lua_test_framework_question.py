@@ -21,3 +21,15 @@ class LuaTestFrameworkQuestion(Question):
 - Busted is the most popular testing framework for Lua
 - It provides expressive assertions and test organization
 - Works with Lua 5.1+ and LuaJIT"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["busted", "luaunit", "telescope"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "busted"
+
+    config_key = "test_framework"

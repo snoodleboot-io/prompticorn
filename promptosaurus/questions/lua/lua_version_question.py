@@ -21,3 +21,15 @@ class LuaVersionQuestion(Question):
 - Lua 5.4 has significant performance improvements and new features
 - Lua is lightweight and embeddable, popular for game scripting
 - Version affects compatibility with libraries and LuaJIT"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["5.4", "5.3", "5.2", "5.1", "LuaJIT 2.1"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "5.4"
+
+    config_key = "runtime"

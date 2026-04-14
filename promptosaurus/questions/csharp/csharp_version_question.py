@@ -21,3 +21,15 @@ class CSharpVersionQuestion(Question):
 - Newer versions have more concise syntax and powerful features
 - Features like records, pattern matching, and nullability were added recently
 - Match your C# version to your .NET version for best compatibility"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["12.0", "11.0", "10.0", "9.0"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "12.0"
+
+    config_key = "runtime"

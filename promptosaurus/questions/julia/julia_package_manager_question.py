@@ -21,3 +21,15 @@ class JuliaPackageManagerQuestion(Question):
 - Pkg is the built-in package manager for Julia
 - It uses project-specific environments for reproducibility
 - No additional tools needed as Pkg is included with Julia"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["Pkg (built-in)", "PkgTemplates"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "Pkg (built-in)"
+
+    config_key = "package_manager"

@@ -22,3 +22,15 @@ class RustVersionQuestion(Question):
 - Edition 2021 is the current standard (enabled by default in 1.56+)
 - Async/await has been stable since 1.39
 - Const generics have improved significantly in recent versions"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["1.76", "1.75", "1.74", "1.73"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "1.76"
+
+    config_key = "runtime"

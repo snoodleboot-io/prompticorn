@@ -22,3 +22,15 @@ class RustFormatterQuestion(Question):
 - It automatically reformats code to follow Rust style guidelines
 - Can be configured via rustfmt.toml for project-specific preferences
 - Integrated with Cargo via `cargo fmt`"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["rustfmt"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "rustfmt"
+
+    config_key = "formatter"

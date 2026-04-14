@@ -20,3 +20,15 @@ class SwiftTestFrameworkQuestion(Question):
 
 - XCTest is Apple's official testing framework, integrated with Xcode
 - Quick is a BDD-style framework inspired by RSpec"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["XCTest", "Quick/Nimble", "Spectre"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "XCTest"
+
+    config_key = "test_framework"

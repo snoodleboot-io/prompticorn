@@ -21,3 +21,15 @@ class CSharpFrameworkQuestion(Question):
 - .NET 8 is the latest LTS with significant performance improvements
 - .NET versions ship annually with even-numbered versions being LTS
 - Match your target framework to your deployment environment"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return [".NET 8", ".NET 7", ".NET Framework 4.8", "Mono"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return ".NET 8"
+
+    config_key = "framework"

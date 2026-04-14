@@ -21,3 +21,15 @@ class KotlinVersionQuestion(Question):
 - Newer versions have improved performance and new language features
 - Kotlin 1.9+ includes improved K2 compiler and better Java interoperability
 - Version affects coroutines stability and compiler optimizations"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["1.9", "1.8", "1.7", "1.6"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "1.9"
+
+    config_key = "runtime"

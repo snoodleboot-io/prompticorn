@@ -21,3 +21,15 @@ class TypeScriptFrameworkQuestion(Question):
 - State management patterns
 - Build configuration
 - Type definitions needed"""
+
+    @property
+    def options(self) -> list[str]:
+        """Available options."""
+        return ["React", "Vue", "Angular", "Svelte", "None"]
+
+    @property
+    def default(self) -> str:
+        """Default selection."""
+        return "React"
+
+    config_key = "framework"

@@ -16,21 +16,15 @@ Use this mode when explaining code or helping onboard developers.
 
 # Skills
 
-- feature-planning
-- post-implementation-checklist
-- data-validation-pipelines
-- ensemble-methods
-- mlops-pipeline-design
+- architecture-documentation
+- documentation-best-practices
+- technical-communication
 
 # Workflows
 
-- feature
-- review
-- refactor
-- migration
-- model-evaluation
-- mlops-pipeline-setup
-- production-ml-deployment
+- docs
+- strategy
+
 
 # Subagents
 
