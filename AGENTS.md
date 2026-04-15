@@ -4,12 +4,11 @@ This directory contains the agent instructions and system configuration for your
 
 ## In-Scope Agents
 
-This configuration includes the following 14 primary agent(s):
+This configuration includes the following 13 primary agent(s):
 
 | Agent | Purpose |
 |-------|---------|
 | **refactor** | Improve code structure while preserving behavior |
-| **frontend** | Build accessible, performant user interfaces for web and mobile platforms |
 | **code** | Implement features and make direct code changes |
 | **migration** | Handle dependency upgrades and framework migrations |
 | **review** | Code, performance, and accessibility reviews |
