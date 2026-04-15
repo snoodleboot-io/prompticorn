@@ -1,7 +1,7 @@
 # Claude Configuration
 
-**Last Updated:** 2026-04-14  
-**Agent Count:** 14 primary agents  
+**Last Updated:** 2026-04-15  
+**Agent Count:** 13 primary agents  
 **Persona:** Software Engineer
 
 ## Core Conventions
@@ -37,7 +37,6 @@ Match the user's request to **ONE** agent and load **ONLY** that file.
 | ask-agent | Answer questions and provide explanations | .claude/agents/ask-agent.md |
 | plan-agent | Develops PRDs and works with architects to create ARDs | .claude/agents/plan-agent.md |
 | enforcement-agent | Reviews code against established coding standards and creates change requests | .claude/agents/enforcement-agent.md |
-| backend-agent | Design scalable backend systems, APIs, microservices, and distributed architectures | .claude/agents/backend-agent.md |
 | debug-agent | Diagnose and fix bugs, issues, and errors | .claude/agents/debug-agent.md |
 
 ## Routing Rules
