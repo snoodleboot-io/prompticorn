@@ -481,7 +481,7 @@ def init_prompts():
             explanations={
                 "Kilo CLI": "Kilo Code (CLI) - .opencode/rules/ with collapsed mode files",
                 "Kilo IDE": "Kilo Code (IDE) - .kilo/agents/ individual agent files",
-                "Claude": "Claude - uses .clinerules format for the Claude API",
+                "Claude": "Claude - generates .claude/ directory with Markdown agent files and CLAUDE.md",
                 "Cline": "Cline - .clinerules file (concatenated rules)",
                 "Cursor": "Cursor - .cursor/rules/ directory + .cursorrules",
                 "Copilot": "GitHub Copilot - .github/copilot-instructions.md",
@@ -733,7 +733,7 @@ def switch_command(tool_name: str | None):
                 explanations={
                     "Kilo CLI": "Kilo Code (CLI) - .opencode/rules/ with collapsed mode files",
                     "Kilo IDE": "Kilo Code (IDE) - .kilo/agents/ individual agent files",
-                    "Claude": "Claude - uses .clinerules format for the Claude API",
+                    "Claude": "Claude - generates .claude/ directory with Markdown agent files and CLAUDE.md",
                     "Cline": "Cline - .clinerules file (concatenated rules)",
                     "Cursor": "Cursor - .cursor/rules/ directory + .cursorrules",
                     "Copilot": "GitHub Copilot - .github/copilot-instructions.md",
@@ -814,9 +814,10 @@ def swap_command():
     only the agents relevant to the selected personas.
 
     Personas determine which agents are included:
-    - software_engineer: code, test, refactor, review, document
+    - software_engineer: code, test, refactor, migration
     - qa_tester: test, review
-    - devops_engineer: deployment, ci-cd, monitoring
+    - devops_engineer: devops, observability, incident
+    - backend_software_engineer, frontend_software_engineer, fullstack_software_engineer
     - And more based on configured personas
 
     Universal agents (ask, debug, explain, plan, orchestrator) are always

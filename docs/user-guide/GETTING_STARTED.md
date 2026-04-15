@@ -440,11 +440,11 @@ Promptosaurus uses **personas** to filter which agents are generated, reducing c
 
 | Persona | Primary Agents | Description |
 |---------|---------------|-------------|
-| Software Engineer | code, test, refactor, review, document | Core development work |
+| Software Engineer | code, test, refactor, review | Core development work |
 | QA/Tester | test, review | Testing and quality assurance |
-| DevOps Engineer | deployment, ci-cd, monitoring | Operations and infrastructure |
+| DevOps Engineer | code, devops, observability, incident | Operations and infrastructure |
 | Security Engineer | security, compliance | Security reviews and compliance |
-| Architect | architect, design, plan | System design and architecture |
+| Architect | architect, backend, frontend, data | System design and architecture |
 | Data Engineer | data-pipeline, etl | Data engineering workflows |
 | Data Scientist | mlai, experiment | ML/AI and experimentation |
 | Technical Writer | document, explain | Documentation and education |

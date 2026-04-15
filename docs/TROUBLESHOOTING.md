@@ -82,7 +82,7 @@ pip install windows-curses  # Only on Windows
 
 ## Configuration Issues
 
-### .promptosaurus.yaml Not Found
+### .promptosaurus/.promptosaurus.yaml Not Found
 
 **Problem:** Commands fail with "Configuration file not found"
 
@@ -91,10 +91,10 @@ pip install windows-curses  # Only on Windows
 # Initialize configuration first
 promptosaurus init
 
-# This creates .promptosaurus.yaml in your project root
+# This creates .promptosaurus/.promptosaurus.yaml in your project root
 ```
 
-**Expected location:** `./.promptosaurus.yaml` (current directory)
+**Expected location:** `./.promptosaurus/.promptosaurus.yaml` (current directory)
 
 ### Invalid YAML Syntax
 
@@ -103,7 +103,7 @@ promptosaurus init
 **Solution:**
 ```bash
 # Validate your YAML
-cat .promptosaurus.yaml
+cat .promptosaurus/.promptosaurus.yaml
 
 # Common issues:
 # - Tabs instead of spaces (use spaces only)
@@ -131,7 +131,7 @@ spec:
 # Re-run init and manually select language
 promptosaurus init
 
-# Or edit .promptosaurus.yaml directly
+# Or edit .promptosaurus/.promptosaurus.yaml directly
 # Update spec.language and spec.runtime fields
 ```
 
@@ -141,8 +141,8 @@ promptosaurus init
 
 **Solution:**
 ```bash
-# Check your persona selection in .promptosaurus.yaml
-cat .promptosaurus.yaml | grep -A 5 personas
+# Check your persona selection in .promptosaurus/.promptosaurus.yaml
+cat .promptosaurus/.promptosaurus.yaml | grep -A 5 personas
 
 # Ensure at least one persona is selected
 # Universal agents (ask, debug, explain) are always available
@@ -161,8 +161,8 @@ cat .promptosaurus.yaml | grep -A 5 personas
 # List available builders
 promptosaurus list
 
-# Supported builders: kilo, cline, claude, cursor, copilot
-# Check spelling in .promptosaurus.yaml or command
+# Supported builders: kilo-cli, kilo-ide, claude, cline, cursor, copilot
+# Check spelling in .promptosaurus/.promptosaurus.yaml or command
 ```
 
 ### Validation Failures
@@ -175,7 +175,7 @@ promptosaurus list
 ls -la promptosaurus/agents/
 
 # Ensure each agent has:
-# - minimal/prompt.md or verbose/prompt.md
+# - prompt.md (top-level agent)
 # - Valid YAML frontmatter
 # - Required fields: name, description
 ```
@@ -202,9 +202,8 @@ df -h .
 
 **Solution:**
 ```bash
-# Check if variant exists
-ls promptosaurus/agents/*/minimal/prompt.md
-ls promptosaurus/agents/*/verbose/prompt.md
+# Check if agent prompt files exist
+ls promptosaurus/agents/*/prompt.md
 
 # Fallback: System will try verbose if minimal missing
 # Check logs for warnings
@@ -224,15 +223,12 @@ ls promptosaurus/agents/*/verbose/prompt.md
 ls -la promptosaurus/agents/
 
 # Verify agent structure
-ls promptosaurus/agents/code/minimal/prompt.md
+        ls promptosaurus/agents/code/prompt.md
 
-# Expected structure:
-# agents/
-#   agent_name/
-#     minimal/
-#       prompt.md
-#     verbose/
-#       prompt.md
+        # Expected structure:
+        # agents/
+        #   agent_name/
+        #     prompt.md
 ```
 
 ### Missing prompt.md Files
@@ -296,18 +292,18 @@ promptosaurus validate
 
 **Solution:**
 ```bash
-# Check if .promptosaurus.yaml already exists
-ls -la .promptosaurus.yaml
+# Check if .promptosaurus/.promptosaurus.yaml already exists
+        ls -la .promptosaurus/.promptosaurus.yaml
 
-# Backup and remove old config
-mv .promptosaurus.yaml .promptosaurus.yaml.backup
+        # Backup and remove old config
+        mv .promptosaurus/.promptosaurus.yaml .promptosaurus/.promptosaurus.yaml.backup
 
-# Re-run init
-promptosaurus init
+        # Re-run init
+        promptosaurus init
 
-# If interactive UI fails, check terminal compatibility
-export TERM=xterm-256color
-promptosaurus init
+        # If interactive UI fails, check terminal compatibility
+        export TERM=xterm-256color
+        promptosaurus init
 ```
 
 ### `list` Command Empty Results
@@ -317,7 +313,7 @@ promptosaurus init
 **Solution:**
 ```bash
 # Check configuration exists
-cat .promptosaurus.yaml
+cat .promptosaurus/.promptosaurus.yaml
 
 # Verify agents directory
 ls promptosaurus/agents/
@@ -350,7 +346,7 @@ promptosaurus validate
 # Check valid tool names
 promptosaurus switch --help
 
-# Valid tools: kilo, cline, claude, cursor, copilot
+        # Valid tools: kilo-cli, kilo-ide, claude, cline, cursor, copilot
 
 # Check persona names
 cat promptosaurus/personas/personas.yaml
@@ -372,7 +368,7 @@ promptosaurus --help
 # Valid commands: init, list, validate, switch, swap, update
 ```
 
-### `FileNotFoundError: .promptosaurus.yaml`
+### `FileNotFoundError: .promptosaurus/.promptosaurus.yaml`
 
 **Cause:** Configuration not initialized
 
@@ -413,9 +409,8 @@ ls promptosaurus/agents/
 ### Enable Verbose Mode
 
 ```bash
-# Most commands support -v or --verbose
-promptosaurus init --verbose
-promptosaurus validate --verbose
+# Check stderr output for diagnostic information
+promptosaurus init 2> debug.log
 ```
 
 ### Check Logs
@@ -457,19 +452,19 @@ promptosaurus init
 
 ```bash
 # Ensure files are readable
-ls -la .promptosaurus.yaml
-ls -la promptosaurus/agents/
+        ls -la .promptosaurus/.promptosaurus.yaml
+        ls -la promptosaurus/agents/
 
-# Fix permissions if needed
-chmod 644 .promptosaurus.yaml
-chmod -R 755 promptosaurus/
+        # Fix permissions if needed
+        chmod 644 .promptosaurus/.promptosaurus.yaml
+        chmod -R 755 promptosaurus/
 ```
 
 ### Validate YAML
 
 ```bash
 # Use Python to validate YAML
-python -c "import yaml; yaml.safe_load(open('.promptosaurus.yaml'))"
+python -c "import yaml; yaml.safe_load(open('.promptosaurus/.promptosaurus.yaml'))"
 
 # Or use online YAML validator
 ```
@@ -501,13 +496,13 @@ Report bugs or request help: [GitHub Issues](https://github.com/snoodleboot-io/p
 - [ ] Python 3.10+ installed
 - [ ] Virtual environment activated
 - [ ] `promptosaurus init` run successfully
-- [ ] `.promptosaurus.yaml` exists and valid
+- [ ] `.promptosaurus/.promptosaurus.yaml` exists and valid
 - [ ] Agents directory exists with proper structure
 - [ ] File permissions correct
 - [ ] No YAML syntax errors
 
 If all checks pass and issue persists, please file a GitHub issue with:
 - Error message
-- `promptosaurus --version` output
-- `.promptosaurus.yaml` content (redact sensitive info)
+- `pip show promptosaurus` output
+- `.promptosaurus/.promptosaurus.yaml` content (redact sensitive info)
 - Output of `promptosaurus validate`

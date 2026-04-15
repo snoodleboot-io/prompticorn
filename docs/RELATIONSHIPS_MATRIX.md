@@ -52,8 +52,10 @@ This document maps actual agent-to-subagent relationships in the codebase.
 - **warehouse** - Data warehouse architecture
 
 ### debug
-**Location:** `promptosaurus/agents/debug/`
-- **No subagents** - Core agent only
+**Location:** `promptosaurus/agents/debug/subagents/`
+- **log-analysis** - Log parsing and analysis
+- **root-cause** - Root cause analysis
+- **rubber-duck** - Guided problem articulation
 
 ### devops
 **Location:** `promptosaurus/agents/devops/subagents/`
@@ -141,6 +143,7 @@ This document maps actual agent-to-subagent relationships in the codebase.
 - **e2e-testing** - End-to-end user journey testing
 - **integration-testing** - Multi-component testing
 - **load-testing** - Performance and stress testing
+- **unit-testing** - Unit test strategies and patterns
 
 ### refactor
 **Location:** `promptosaurus/agents/refactor/subagents/`
@@ -177,7 +180,7 @@ This document maps actual agent-to-subagent relationships in the codebase.
 | code | 6 |
 | compliance | 3 |
 | data | 5 |
-| debug | 0 |
+| debug | 3 |
 | devops | 5 |
 | document | 1 |
 | enforcement | 0 |
@@ -191,7 +194,7 @@ This document maps actual agent-to-subagent relationships in the codebase.
 | performance | 4 |
 | plan | 0 |
 | product | 3 |
-| qa-tester | 3 |
+| qa-tester | 4 |
 | refactor | 1 |
 | review | 3 |
 | security | 6 |
@@ -256,5 +259,5 @@ find promptosaurus/agents -type d -mindepth 3 -maxdepth 3 -path "*/subagents/*" 
 
 | Version | Date | Agents | Subagents | Notes |
 |---------|------|--------|-----------|-------|
-| 0.1.0 | 2026-04-13 | 25 | 82 | Initial baseline with accurate counts |
+| 0.1.0 | 2026-04-13 | 25 | 86 | Initial baseline with accurate counts |
 

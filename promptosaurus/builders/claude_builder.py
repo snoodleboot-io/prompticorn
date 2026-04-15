@@ -28,9 +28,10 @@ class ClaudeBuilder(Builder):
     - .claude/agents/{agent-name}.md
     - .claude/subagents/{subagent-name}.md
     - .claude/workflows/{workflow-name}.md
-    - .claude/conventions/core/general.md
-    - .claude/conventions/languages/{language}.md
     - CLAUDE.md (routing file)
+
+    Note: Convention files are generated separately by `generate_all_conventions()`
+    called from `PromptBuilder`, not by `ClaudeBuilder.build()`.
 
     Output Format:
         Markdown files with Jinja2 template rendering

@@ -5,7 +5,7 @@
 Define your agent once in a simple IR format, automatically generate outputs for:
 - **Kilo** IDE (YAML + Markdown)
 - **Cline** (Markdown with skill directives)
-- **Claude** (JSON Messages API)
+- **Claude** (Markdown `.claude/` directory)
 - **Cursor** (Markdown rules)
 - **GitHub Copilot** (GitHub instructions)
 
@@ -91,7 +91,7 @@ To contribute or develop locally:
 
 ```bash
 # Clone the repository
-git clone https://github.com/snoodleboot-io/promptosaurus.git
+git clone https://github.com/johna/promptosaurus.git
 cd promptosaurus
 
 # Install in development mode

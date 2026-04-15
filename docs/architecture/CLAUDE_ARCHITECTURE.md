@@ -511,7 +511,7 @@ This ensures builds never fail due to missing content.
 ### Adding New Languages
 
 1. Add `conventions-{language}.md` to `promptosaurus/agents/core/`
-2. Rebuild: `promptosaurus switch --tool claude`
+2. Rebuild: `promptosaurus switch claude`
 3. New file appears in `.claude/conventions/languages/{language}.md`
 
 ### Adding Custom Agents
@@ -519,14 +519,14 @@ This ensures builds never fail due to missing content.
 1. Add agent directory to `promptosaurus/agents/{agent}/`
 2. Create `prompt.md` with agent definition
 3. Optionally add subagents in `subagents/` subdirectory
-4. Rebuild: `promptosaurus switch --tool claude`
+4. Rebuild: `promptosaurus switch claude`
 
 ### Adding Custom Workflows
 
 1. Add workflow directory to `promptosaurus/workflows/{workflow}/`
 2. Create `minimal/workflow.md` and/or `verbose/workflow.md`
 3. Reference from agent configuration
-4. Rebuild: `promptosaurus switch --tool claude`
+4. Rebuild: `promptosaurus switch claude`
 
 ---
 
@@ -601,7 +601,7 @@ cat .claude/conventions/languages/python.md
 test ! -d custom_instructions/ && echo "✓ No custom_instructions/"
 
 # Switch tools
-promptosaurus switch --tool kilo-ide
+promptosaurus switch kilo-ide
 test ! -d .claude/ && echo "✓ .claude/ removed"
 test ! -f CLAUDE.md && echo "✓ CLAUDE.md removed"
 ```

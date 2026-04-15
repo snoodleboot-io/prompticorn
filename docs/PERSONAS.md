@@ -14,12 +14,15 @@ Personas represent common software development roles (SDLC personas). Each perso
 
 | Persona | Focus | Key Agents |
 |---------|-------|------------|
-| **Software Engineer** | Writing, maintaining, and testing application code | code, test, refactor, migration |
-| **Architect** | System design, architecture planning, technical decisions | architect, planning, document |
+| **Software Engineer** _(deprecated, use a specific variant below)_ | Writing, maintaining, and testing application code | code, test, refactor, migration |
+| **Backend Software Engineer** | Backend systems, APIs, and server-side development | code, test, refactor, migration |
+| **Frontend Software Engineer** | Frontend development, UI, and client-side code | code, test, refactor, migration |
+| **Fullstack Software Engineer** | Full-stack development across backend and frontend | code, test, refactor, migration |
+| **Architect** | System design, architecture planning, technical decisions | architect, backend, frontend, data |
 | **QA/Tester** | Quality assurance, testing strategies, test automation | test, review, qa-tester |
-| **DevOps Engineer** | CI/CD, infrastructure, deployment automation | devops, code (IaC), security |
+| **DevOps Engineer** | CI/CD, infrastructure, deployment automation | code, devops, observability, incident |
 | **Security Engineer** | Security reviews, threat modeling, compliance | security, review, compliance |
-| **Product Manager** | Product strategy, requirements, roadmap planning | product, planning, document |
+| **Product Manager** | Product strategy, requirements, roadmap planning | product, plan, document |
 | **Data Engineer** | Data pipelines, warehouses, data quality | data, code (ETL), performance |
 | **Data Scientist** | ML model training, evaluation, experimentation | mlai, code (ML), data |
 | **Technical Writer** | Documentation, READMEs, user guides | document, explain |
@@ -180,7 +183,7 @@ promptosaurus init
 # Edit .promptosaurus/.promptosaurus.yaml
 # Change the active_personas list
 # Then regenerate agents:
-promptosaurus init --force  # (if --force flag exists)
+promptosaurus init
 ```
 
 ---

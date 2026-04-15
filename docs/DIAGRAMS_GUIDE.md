@@ -61,7 +61,7 @@ flowchart TD
     F2 --> F3["✓ All answers collected"]
     
     F3 --> G["Save Configuration"]
-    G --> G1["✓ .promptosaurus.yaml created"]
+    G --> G1["✓ .promptosaurus/.promptosaurus.yaml created"]
     
     G1 --> H["Generate Tool Outputs"]
     H --> H1[".kilo/agents/code.md<br/>.kilo/agents/test.md<br/>.kilo/agents/review.md<br/>..."]
@@ -75,7 +75,7 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    A["Current State: .promptosaurus.yaml exists"] --> B["promptosaurus switch"]
+    A["Current State: .promptosaurus/.promptosaurus.yaml exists"] --> B["promptosaurus switch"]
     B --> C["Check Configuration ✓"]
     C --> D["Select New Tool<br/>(interactive menu)"]
     D --> D1["Options: Kilo IDE, Kilo CLI, Cline, Cursor, Copilot"]
@@ -84,7 +84,7 @@ flowchart TD
     D2 --> E["Generate Cline Configuration"]
     E --> E1["✓ .clinerules created"]
     
-    E1 --> F["✓ Tool switch complete!<br/>(Keep existing .promptosaurus.yaml,<br/>now have both .kilo/ and .clinerules)"]
+    E1 --> F["✓ Tool switch complete!<br/>(Keep existing .promptosaurus/.promptosaurus.yaml,<br/>now have both .kilo/ and .clinerules)"]
     
     style A fill:#fff3e0
     style F fill:#c8e6c9
@@ -94,14 +94,14 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    A["Current State: .promptosaurus.yaml exists with personas"] --> B["promptosaurus swap"]
+    A["Current State: .promptosaurus/.promptosaurus.yaml exists with personas"] --> B["promptosaurus swap"]
     B --> C["Check Configuration ✓"]
     C --> D["Select New Personas<br/>(interactive menu)"]
     D --> D1["Current: software_engineer, qa_tester<br/>Available: All personas"]
     D1 --> D2["✓ Selected: software_engineer, devops_engineer, architect"]
     
     D2 --> E["Update Configuration"]
-    E --> E1[".promptosaurus.yaml:<br/>active_personas = [...]"]
+    E --> E1[".promptosaurus/.promptosaurus.yaml:<br/>active_personas = [...]"]
     E1 --> E2["✓ Configuration updated"]
     
     E2 --> F["Regenerate All Outputs<br/>(with new persona filter applied)"]

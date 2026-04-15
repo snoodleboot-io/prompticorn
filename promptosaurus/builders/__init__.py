@@ -1,7 +1,7 @@
 """Builders module for tool-specific output generation.
 
-This module provides abstract builder base classes, factory patterns, and
-mixin interfaces for generating tool-specific configurations from the
+This module provides builder base classes, factory patterns, and
+interface classes for generating tool-specific configurations from the
 Intermediate Representation (IR) Agent models.
 """
 

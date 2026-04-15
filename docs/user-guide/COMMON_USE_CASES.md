@@ -4,40 +4,32 @@
 
 ### Software Development Teams
 
-#### Backend Developer
+#### Backend Software Engineer
 ```bash
-# Get backend-focused agent configuration
-prompt build --tool kilo --personas backend_developer --agent code
-
-# Include debugging and testing skills
-prompt build --tool kilo --personas backend_developer --agent code --include-skills debugging testing
+# Initialize configuration and select backend_software_engineer persona
+promptosaurus init
+# Select: backend_software_engineer persona (includes code, backend agents)
 ```
 
-#### Frontend Developer
+#### Frontend Software Engineer
 ```bash
-# Get frontend-focused agent configuration
-prompt build --tool kilo --personas frontend_developer --agent code
-
-# Include UI/UX and accessibility skills
-prompt build --tool kilo --personas frontend_developer --agent code --include-skills ui_design accessibility
+# Initialize configuration and select frontend_software_engineer persona
+promptosaurus init
+# Select: frontend_software_engineer persona (includes code, frontend agents)
 ```
 
 #### DevOps Engineer
 ```bash
-# Get DevOps-focused agent configuration
-prompt build --tool kilo --personas devops_engineer --agent orchestator
-
-# Include infrastructure and deployment skills
-prompt build --tool kilo --personas devops_engineer --agent orchestrator --include-skills kubernetes docker ci_cd
+# Initialize configuration and select devops_engineer persona
+promptosaurus init
+# Select: devops_engineer persona (includes code, devops, observability, incident agents)
 ```
 
 #### QA/Test Engineer
 ```bash
-# Get QA-focused agent configuration
-prompt build --tool kilo --personas qa_engineer --agent test
-
-# Include testing and quality assurance skills
-prompt build --tool kilo --personas qa_engineer --agent test --include-skills test_automation quality_assurance
+# Initialize configuration and select qa_tester persona
+promptosaurus init
+# Select: qa_tester persona (includes test, review agents)
 ```
 
 ### Project-Specific Configuration
@@ -45,77 +37,78 @@ prompt build --tool kilo --personas qa_engineer --agent test --include-skills te
 #### New Project Setup
 ```bash
 # Create base configuration for new project
-prompt init --project-name my-new-project --project-type web_application
+promptosaurus init
+# Select: desired AI tool, repo type, variant, and personas interactively
 
-# Generate agent configurations for team roles
-prompt build --tool kilo --personas software_engineer devops_engineer qa_engineer --output-dir .promptosaurus/
-
-# Set up CI/CD pipelines
-prompt build --tool kilo --agent orchestrator --include-workflows deployment --output-dir .github/workflows/
+# Verify configuration
+promptosaurus validate
 ```
 
 #### Legacy System Modernization
 ```bash
-# Analyze legacy system
-prompt build --tool kilo --agent architect --include-workflows legacy_analysis --output-dir docs/
+# Initialize with architect persona for analysis and planning
+promptosaurus init
+# Select: architect persona (includes architect, backend, frontend, data agents)
 
-# Plan migration strategy
-prompt build --tool kilo --agent migration --include-workflows migration_planning --output-dir docs/
-
-# Generate refactoring agents
-prompt build --tool kilo --personas software_engineer refactor --agent code --include-workflows refactoring --output-dir .promptosaurus/
+# Switch tools if needed
+promptosaurus switch kilo-ide
 ```
 
 ## Tool-Specific Use Cases
 
-### Kilo Code
+### Kilo Code IDE
 ```bash
-# Create Kilo Code agent configurations
-prompt build --tool kilo --agent code --output-dir .kilocode/agents/
-prompt build --tool kilo --agent architect --output-dir .kilocode/agents/
-prompt build --tool kilo --agent test --output-dir .kilocode/agents/
+# Initialize for Kilo Code IDE
+promptosaurus init
+# Select "Kilo IDE" when prompted
+# Files generated in .kilo/agents/
 
-# Create Kilo Code skills
-prompt build --tool kilo --skill debugging --output-dir .kilocode/skills/
-prompt build --tool kilo --skill testing --output-dir .kilocode/skills/
+# Switch to Kilo IDE from another tool
+promptosaurus switch kilo-ide
+```
 
-# Create Kilo Code workflows
-prompt build --tool kilo --workflow feature-development --output-dir .kilocode/workflows/
+### Kilo Code CLI
+```bash
+# Initialize for Kilo Code CLI
+promptosaurus init
+# Select "Kilo CLI" when prompted
+# Files generated in .opencode/rules/
+
+# Switch to Kilo CLI from another tool
+promptosaurus switch kilo-cli
 ```
 
 ### Cline
 ```bash
-# Create Cline agent configurations
-prompt build --tool cline --agent code --output-dir .clinerules/
-prompt build --tool cline --agent debug --output-dir .clinerules/
-prompt build --tool cline --agent review --output-dir .clinerules/
+# Initialize for Cline
+promptosaurus init
+# Select "Cline" when prompted
+# Single file generated: .clinerules
 
-# Create Cline workflows
-prompt build --tool cline --workflow debugging --output-dir .clinerules/workflows/
+# Switch to Cline from another tool
+promptosaurus switch cline
 ```
 
 ### Claude
 ```bash
-# Create Claude agent configurations
-prompt build --tool claude --agent code --output-dir .claude/agents/
-prompt build --tool claude --agent architect --output-dir .claude/agents/
-prompt build --tool claude --agent explanation --output-dir .claude/agents/
+# Initialize for Claude
+promptosaurus init
+# Select "claude" when prompted
+# Files generated in .claude/
 
-# Create Claude skills
-prompt build --tool claude --skill documentation --output-dir .claude/skills/
-prompt build --tool claude --skill code_review --output-dir .claude/skills/
+# Switch to Claude from another tool
+promptosaurus switch claude
 ```
 
 ### GitHub Copilot
 ```bash
-# Create GitHub Copilot agent configurations
-prompt build --tool copilot --agent code --output-dir .github/copilot/agents/
-prompt build --tool copilot --agent test --output-dir .github/copilot/agents/
-prompt build --tool copilot --agent security --output-dir .github/copilot/agents/
+# Initialize for GitHub Copilot
+promptosaurus init
+# Select "Copilot" when prompted
+# File generated: .github/copilot-instructions.md
 
-# Create GitHub Copilot skills
-prompt build --tool copilot --skill security_audit --output-dir .github/copilot/skills/
-prompt build --tool copilot --skill performance_optimization --output-dir .github/copilot/skills/
+# Switch to Copilot from another tool
+promptosaurus switch copilot
 ```
 
 ## Workflow Automation
@@ -124,9 +117,9 @@ prompt build --tool copilot --skill performance_optimization --output-dir .githu
 ```mermaid
 graph TD
     A[Start] --> B{Feature Request}
-    B -->|New Feature| C[Build Feature Agent]
-    B -->|Bug Fix| D[Build Debug Agent]
-    B -->|Refactor| E[Build Refactor Agent]
+    B -->|New Feature| C[Use Code Agent]
+    B -->|Bug Fix| D[Use Debug Agent]
+    B -->|Refactor| E[Use Refactor Agent]
     C --> F[Implement Feature]
     D --> G[Fix Bug]
     E --> H[Refactor Code]
@@ -141,21 +134,6 @@ graph TD
     L --> N[Deploy]
 ```
 
-#### Automated Workflow Execution
-```bash
-# Feature development workflow
-prompt build --tool kilo --agent code --include-workflows feature-development --variant verbose
-
-# Debugging workflow
-prompt build --tool kilo --agent debug --include-workflows debugging --variant verbose
-
-# Code review workflow
-prompt build --tool kilo --agent review --include-workflows code_review --variant verbose
-
-# Deployment workflow
-prompt build --tool kilo --agent orchestrator --include-workflows deployment --variant verbose
-```
-
 ### CI/CD Integration
 ```yaml
 # .github/workflows/promptosaurus.yml
@@ -167,7 +145,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build-configurations:
+  validate-configurations:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
@@ -180,29 +158,19 @@ jobs:
     - name: Install Promptosaurus
       run: pip install -e .
     
-    - name: Generate Agent Configurations
+    - name: Validate Configuration
       run: |
-        mkdir -p .kilocode/agents
-        prompt build --tool kilo --agent code --output-dir .kilocode/agents/
-        prompt build --tool kilo --agent test --output-dir .kilocode/agents/
-        prompt build --tool kilo --agent debug --output-dir .kilocode/agents/
-    
-    - name: Generate Skill Configurations
-      run: |
-        mkdir -p .kilocode/skills
-        prompt build --tool kilo --skill debugging --output-dir .kilocode/skills/
-        prompt build --tool kilo --skill testing --output-dir .kilocode/skills/
-        prompt build --tool kilo --skill documentation --output-dir .kilocode/skills/
+        promptosaurus validate
     
     - name: Upload Configuration Artifacts
       uses: actions/upload-artifact@v3
       with:
         name: promptosaurus-config
         path: |
-          .kilocode/
-          .clinerules/
+          .kilo/
+          .clinerules
           .claude/
-          .github/copilot/
+          .github/copilot-instructions.md
 ```
 
 ## Troubleshooting Common Issues
@@ -216,48 +184,45 @@ jobs:
 4. Confirm tool is reloaded/restarted after configuration change
 5. Check for syntax errors in generated configuration
 
-### Missing Skills or Workflows
-**Symptoms:** Expected skills or workflows not appearing in output
+### Missing Agents
+**Symptoms:** Expected agents not appearing in output
 **Solutions:**
-1. Verify you included the correct component flags (--include-skills, etc.)
-2. Check that the skill/workflow actually exists in the library
+1. Verify correct personas were selected during `init` or `swap`
+2. Check that the persona exists in the configuration
 3. Ensure persona filtering isn't excluding the component
-4. Verify build options are set correctly
-5. Check for typos in skill/workflow names
+4. Run `promptosaurus swap` to change active personas
+5. Run `promptosaurus validate` to check configuration integrity
 
 ### Performance Issues
 **Symptoms:** Slow generation times
 **Solutions:**
 1. Use minimal variant for faster generation
-2. Limit the number of components being built
-3. Check if caching is enabled and working
-4. Consider building only what you need rather than everything
-5. Verify you're not accidentally triggering rebuilds unnecessarily
+2. Limit the number of personas selected
+3. Consider switching to a different tool variant
 
 ### Persona Filtering Not Working
 **Symptoms:** Agents not being filtered correctly by persona
 **Solutions:**
-1. Verify persona names are spelled correctly
-2. Check that personas exist in the personas.yaml file
+1. Verify persona names are spelled correctly (e.g., `qa_tester`, `backend_software_engineer`, `frontend_software_engineer`)
+2. Check that personas exist in the configuration
 3. Ensure universal agents are working as expected
-4. Validate that agent definitions include proper persona mappings
+4. Run `promptosaurus swap` to reselect personas interactively
 5. Test with simple persona combinations first
 
 ## Best Practices
 
 ### For Individual Developers
 1. **Start Small:** Begin with just the agents you need for your current task
-2. **Use Minimal Variant:** Unless you need detailed comments, use minimal builds
+2. **Use Minimal Variant:** Unless you need detailed comments, use the minimal variant
 3. **Leverage Personas:** Use role-based filtering to reduce noise
-4. **Cache Results:** Save frequently used configurations to avoid rebuilding
-5. **Keep Updated:** Regularly pull updates to get latest agents and skills
+4. **Keep Updated:** Regularly pull updates to get latest agents and skills
 
 ### For Teams
 1. **Standardize Configurations:** Commit generated configurations to version control
-2. **Create Templates:** Store commonly used build commands in team documentation
-3. **Automate Generation:** Use CI/CD to generate configurations automatically
+2. **Validate in CI:** Use `promptosaurus validate` in your CI pipeline
+3. **Document Personas:** Record which personas are used for different team roles
 4. **Version Control:** Tag configurations with application versions
-5. **Share Knowledge:** Document which agents/skills/workflows work best for different tasks
+5. **Share Knowledge:** Document which agents work best for different tasks
 
 ### For Advanced Users
 1. **Extend IR Models:** Create custom agent models for specialized needs

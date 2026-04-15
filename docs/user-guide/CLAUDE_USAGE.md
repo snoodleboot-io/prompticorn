@@ -310,7 +310,7 @@ Skills are reusable capabilities stored in directories:
 ### From Another Tool to Claude
 
 ```bash
-promptosaurus switch --tool claude
+promptosaurus switch claude
 ```
 
 This will:
@@ -325,7 +325,7 @@ This will:
 ### From Claude to Another Tool
 
 ```bash
-promptosaurus switch --tool kilo-ide
+promptosaurus switch kilo-ide
 ```
 
 This will:
@@ -394,7 +394,7 @@ Don't try to load everything at once.
 **Solution:** Run:
 ```bash
 rm -rf custom_instructions/
-promptosaurus switch --tool claude
+promptosaurus switch claude
 ```
 
 The new system doesn't use custom_instructions/.
@@ -440,7 +440,7 @@ Commit the entire `.claude/` directory and CLAUDE.md. These are project artifact
 **A:** No. Claude should use one agent per task. If you need coordination between tasks, use the orchestrator agent.
 
 ### Q: How do I update to the latest version?
-**A:** Run `promptosaurus switch --tool claude` to regenerate all files with the latest templates and conventions.
+**A:** Run `promptosaurus switch claude` to regenerate all files with the latest templates and conventions.
 
 ---
 

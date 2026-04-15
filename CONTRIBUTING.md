@@ -47,7 +47,7 @@ We are committed to providing a welcoming and inclusive environment. Please:
 
 3. Add upstream remote:
    ```bash
-   git remote add upstream https://github.com/snoodleboot-io/promptosaurus.git
+   git remote add upstream https://github.com/johna/promptosaurus.git
    ```
 
 ### Install Development Environment
@@ -209,7 +209,7 @@ promptosaurus/
 │   │   └── discovery.py
 │   │
 │   ├── builders/          # Tool-specific builders
-│   │   ├── base.py        # AbstractBuilder
+│   │   ├── base.py        # Builder
 │   │   ├── factory.py     # BuilderFactory
 │   │   ├── kilo_builder.py
 │   │   ├── cline_builder.py
@@ -281,10 +281,10 @@ Create `promptosaurus/builders/mytool_builder.py`:
 """Builder for MyTool AI assistant."""
 
 from typing import Any
-from promptosaurus.builders.base import AbstractBuilder, BuildOptions
+from promptosaurus.builders.base import Builder, BuildOptions
 from promptosaurus.ir.models.agent import Agent
 
-class MyToolBuilder(AbstractBuilder):
+class MyToolBuilder(Builder):
     """Builder for MyTool configurations."""
     
     def get_tool_name(self) -> str:
@@ -476,17 +476,17 @@ class MyLangRuntimeQuestion(Question):
 In `promptosaurus/questions/language.py`:
 
 ```python
-LANGUAGE_KEYS = {
-    "python": "Python",
-    "typescript": "TypeScript",
-    "javascript": "JavaScript",
-    "mylang": "MyLang",  # Add this
-}
+LANGUAGE_KEYS = [
+    "python",
+    "typescript",
+    "javascript",
+    "mylang",  # Add this
+]
 ```
 
 #### Step 3: Create Conventions File
 
-Create `promptosaurus/configurations/core/core-conventions-mylang.md`:
+Create `promptosaurus/configurations/core-conventions-mylang.md`:
 
 ```markdown
 # Core Conventions MyLang
