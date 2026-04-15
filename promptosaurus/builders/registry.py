@@ -9,7 +9,7 @@ making it suitable for stateful builders or builders with
 initialization parameters.
 """
 
-from promptosaurus.builders.base import AbstractBuilder
+from promptosaurus.builders.base import Builder
 from promptosaurus.builders.errors import BuilderNotFoundError
 
 
@@ -41,31 +41,29 @@ class BuilderRegistry:
 
     def __init__(self) -> None:
         """Initialize an empty builder registry."""
-        self._builders: dict[str, AbstractBuilder] = {}
+        self._builders: dict[str, Builder] = {}
 
-    def register(self, tool_name: str, builder: AbstractBuilder) -> None:
+    def register(self, tool_name: str, builder: Builder) -> None:
         """Register a builder instance for a tool.
 
         Args:
             tool_name: The name of the tool (e.g., 'kilo', 'claude', 'cline')
-            builder: The builder instance to register. Must be an instance of AbstractBuilder.
+            builder: The builder instance to register. Must be an instance of Builder.
 
         Raises:
-            TypeError: If builder is not an instance of AbstractBuilder
+            TypeError: If builder is not an instance of Builder
             ValueError: If tool_name is empty
         """
         if not tool_name or not tool_name.strip():
             raise ValueError("tool_name cannot be empty")
 
-        if not isinstance(builder, AbstractBuilder):
-            raise TypeError(
-                f"builder must be an instance of AbstractBuilder, got {type(builder).__name__}"
-            )
+        if not isinstance(builder, Builder):
+            raise TypeError(f"builder must be an instance of Builder, got {type(builder).__name__}")
 
         tool_key = tool_name.lower().strip()
         self._builders[tool_key] = builder
 
-    def get(self, tool_name: str) -> AbstractBuilder:
+    def get(self, tool_name: str) -> Builder:
         """Get a builder instance for the specified tool.
 
         Args:
@@ -135,7 +133,7 @@ class BuilderRegistry:
         """
         self._builders.clear()
 
-    def get_all(self) -> dict[str, AbstractBuilder]:
+    def get_all(self) -> dict[str, Builder]:
         """Get all registered builders.
 
         Returns:

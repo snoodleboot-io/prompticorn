@@ -4,7 +4,7 @@
 
 1. [Introduction](#introduction)
 2. [Quick Start: Create Your First Builder](#quick-start-create-your-first-builder)
-3. [Understanding the AbstractBuilder Interface](#understanding-the-abstractbuilder-interface)
+3. [Understanding the Builder Interface](#understanding-the-builder-interface)
 4. [Component System](#component-system)
 5. [Output Format Patterns](#output-format-patterns)
 6. [Real Example: ClineBuilder Walkthrough](#real-example-clinebuilder-walkthrough)
@@ -53,7 +53,7 @@ The system includes builders for five tools:
 |------|---------------|---------------|
 | **Kilo** | YAML frontmatter + Markdown | `KiloBuilder` |
 | **Cline** | Pure Markdown | `ClineBuilder` |
-| **Claude** | JSON (Messages API format) | `ClaudeBuilder` |
+| **Claude** | Markdown files (dict[str, str]) | `ClaudeBuilder` |
 | **Copilot** | YAML frontmatter + Markdown | `CopilotBuilder` |
 | **Cursor** | JSON configuration | `CursorBuilder` |
 
@@ -61,17 +61,17 @@ The system includes builders for five tools:
 
 ## Quick Start: Create Your First Builder
 
-### Step 1: Extend AbstractBuilder
+### Step 1: Extend Builder
 
-Create a new file in `src/builders/`:
+Create a new file in `promptosaurus/builders/`:
 
 ```python
-# src/builders/my_tool_builder.py
+# promptosaurus/builders/my_tool_builder.py
 
-from src.builders.base import AbstractBuilder, BuildOptions
-from src.ir.models import Agent
+from promptosaurus.builders.base import Builder, BuildOptions
+from promptosaurus.ir.models import Agent
 
-class MyToolBuilder(AbstractBuilder):
+class MyToolBuilder(Builder):
     """Builder for MyTool agent configurations."""
 
     def build(self, agent: Agent, options: BuildOptions) -> str | dict:
@@ -111,7 +111,7 @@ def build(self, agent: Agent, options: BuildOptions) -> str:
         raise BuilderValidationError(errors=errors, message=f"Invalid agent: {errors}")
 
     # 2. Load components (using ComponentSelector)
-    from src.builders.component_selector import ComponentSelector, Variant
+    from promptosaurus.builders.component_selector import ComponentSelector, Variant
     selector = ComponentSelector()
     variant = Variant.MINIMAL if options.variant == "minimal" else Variant.VERBOSE
     bundle = selector.select(agent, variant=variant)
@@ -154,11 +154,11 @@ def validate(self, agent: Agent) -> list[str]:
 
 ### Step 4: Register with BuilderFactory
 
-In `src/builders/__init__.py`:
+In `promptosaurus/builders/__init__.py`:
 
 ```python
-from src.builders.factory import BuilderFactory
-from src.builders.my_tool_builder import MyToolBuilder
+from promptosaurus.builders.factory import BuilderFactory
+from promptosaurus.builders.my_tool_builder import MyToolBuilder
 
 # Register the builder
 BuilderFactory.register('mytool', MyToolBuilder)
@@ -167,7 +167,7 @@ BuilderFactory.register('mytool', MyToolBuilder)
 Now you can use it:
 
 ```python
-from src.builders.factory import BuilderFactory
+from promptosaurus.builders.factory import BuilderFactory
 
 builder = BuilderFactory.get_builder('mytool')
 output = builder.build(agent, BuildOptions())
@@ -179,9 +179,9 @@ Create `tests/unit/builders/test_my_tool_builder.py`:
 
 ```python
 import pytest
-from src.builders.my_tool_builder import MyToolBuilder
-from src.builders.base import BuildOptions
-from src.ir.models import Agent
+from promptosaurus.builders.my_tool_builder import MyToolBuilder
+from promptosaurus.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
 
 class TestMyToolBuilder:
     """Tests for MyToolBuilder."""
@@ -236,21 +236,19 @@ class TestMyToolBuilder:
 
 ---
 
-## Understanding the AbstractBuilder Interface
+## Understanding the Builder Interface
 
 ### Overview
 
-All builders inherit from `AbstractBuilder`, which defines three key methods:
+All builders inherit from `Builder`, which defines three key methods:
 
 ```python
-class AbstractBuilder(ABC):
-    """Abstract base class for all tool-specific builders."""
+class Builder:
+    """Base class for all tool-specific builders."""
 
-    @abstractmethod
     def build(self, agent: Agent, options: BuildOptions) -> str | dict[str, Any]:
         """Build tool-specific output from Agent IR model."""
 
-    @abstractmethod
     def validate(self, agent: Agent) -> list[str]:
         """Validate that agent meets tool's requirements."""
 
@@ -292,12 +290,12 @@ class BuildOptions:
 def build(self, agent: Agent, options: BuildOptions) -> str:
     return "---\nname: agent\n---\n# System Prompt\n..."
 
-# Structured (ClaudeBuilder returns dict)
-def build(self, agent: Agent, options: BuildOptions) -> dict[str, Any]:
+# Structured (ClaudeBuilder returns dict[str, str])
+def build(self, agent: Agent, options: BuildOptions) -> dict[str, str]:
     return {
-        "system": "...",
-        "tools": [...],
-        "instructions": "..."
+        ".claude/agents/code-agent.md": "# Code Agent\n...",
+        ".claude/subagents/feature.md": "# Feature\n...",
+        "CLAUDE.md": "# Claude Configuration\n..."
     }
 ```
 
@@ -330,7 +328,7 @@ The component system separates:
 `ComponentSelector` loads components for a given agent and variant:
 
 ```python
-from src.builders.component_selector import ComponentSelector, Variant, ComponentBundle
+from promptosaurus.builders.component_selector import ComponentSelector, Variant, ComponentBundle
 
 selector = ComponentSelector(agents_dir="agents")
 
@@ -350,7 +348,7 @@ bundle = selector.select(agent, variant=Variant.MINIMAL)
 `ComponentComposer` takes a bundle and assembles it into formatted output:
 
 ```python
-from src.builders.component_composer import ComponentComposer
+from promptosaurus.builders.component_composer import ComponentComposer
 
 # Compose into plain markdown
 markdown = ComponentComposer.compose_markdown(
@@ -370,7 +368,7 @@ yaml_markdown = ComponentComposer.compose_yaml_markdown(
 ### Full Pattern Example
 
 ```python
-class MyToolBuilder(AbstractBuilder):
+class MyToolBuilder(Builder):
     def build(self, agent: Agent, options: BuildOptions) -> str:
         # Validate
         errors = self.validate(agent)
@@ -405,7 +403,7 @@ class MyToolBuilder(AbstractBuilder):
 Text-based formats output plain text strings (Markdown, YAML, plain text):
 
 ```python
-class TextBasedBuilder(AbstractBuilder):
+class TextBasedBuilder(Builder):
     def build(self, agent: Agent, options: BuildOptions) -> str:
         """Return a string."""
         sections = []
@@ -430,18 +428,17 @@ class TextBasedBuilder(AbstractBuilder):
 - Configuration files
 - Human-readable formats
 
-### Pattern 2: Structured Formats (Claude, JSON)
+### Pattern 2: Structured Formats (Claude, file path → content)
 
-Structured formats output dictionaries that are JSON-serializable:
+Structured formats output dictionaries mapping file paths to Markdown content:
 
 ```python
-class StructuredBuilder(AbstractBuilder):
-    def build(self, agent: Agent, options: BuildOptions) -> dict[str, Any]:
-        """Return a JSON-serializable dict."""
+class StructuredBuilder(Builder):
+    def build(self, agent: Agent, options: BuildOptions) -> dict[str, str]:
+        """Return a dict mapping file paths to Markdown content."""
         return {
-            "system": agent.system_prompt,
-            "tools": self._build_tools(agent.tools) if options.include_tools else [],
-            "instructions": self._build_instructions(agent)
+            ".claude/agents/code-agent.md": "# Code Agent\n...",
+            "CLAUDE.md": "# Claude Configuration\n..."
         }
 ```
 
@@ -460,7 +457,7 @@ class StructuredBuilder(AbstractBuilder):
 Hybrid formats combine YAML metadata with Markdown content:
 
 ```python
-class HybridBuilder(AbstractBuilder):
+class HybridBuilder(Builder):
     def build(self, agent: Agent, options: BuildOptions) -> str:
         """Return YAML frontmatter + markdown."""
         frontmatter = {
@@ -513,7 +510,7 @@ ClineBuilder generates `.clinerules` files (pure Markdown) for Cline IDE. It's s
 ```
 src/builders/
 ├── cline_builder.py         # Main builder class
-├── base.py                  # AbstractBuilder base class
+├── base.py                  # Builder base class
 ├── component_selector.py    # Component loading
 └── component_composer.py    # Component assembly
 
@@ -526,7 +523,7 @@ tests/unit/builders/
 ### Step 1: Class Definition and Initialization
 
 ```python
-class ClineBuilder(AbstractBuilder):
+class ClineBuilder(Builder):
     """Builder for Cline IDE agent rules.
 
     Generates `.clinerules` files (pure Markdown format) with
@@ -779,10 +776,10 @@ Unit tests are fast and isolated. Mock the ComponentSelector:
 ```python
 import pytest
 from unittest.mock import Mock
-from src.builders.my_tool_builder import MyToolBuilder
-from src.builders.base import BuildOptions
-from src.builders.component_selector import ComponentBundle, Variant
-from src.ir.models import Agent
+from promptosaurus.builders.my_tool_builder import MyToolBuilder
+from promptosaurus.builders.base import BuildOptions
+from promptosaurus.builders.component_selector import ComponentBundle, Variant
+from promptosaurus.ir.models import Agent
 
 class TestMyToolBuilder:
     """Unit tests for MyToolBuilder."""
@@ -855,9 +852,9 @@ Integration tests use real file I/O:
 import pytest
 import tempfile
 from pathlib import Path
-from src.builders.my_tool_builder import MyToolBuilder
-from src.builders.base import BuildOptions
-from src.ir.models import Agent
+from promptosaurus.builders.my_tool_builder import MyToolBuilder
+from promptosaurus.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
 
 class TestMyToolBuilderIntegration:
     """Integration tests with real filesystem I/O."""
@@ -973,7 +970,7 @@ class SupportsSkills(Protocol):
 A builder that implements `build_skills` automatically satisfies `SupportsSkills`:
 
 ```python
-class MyBuilder(AbstractBuilder):
+class MyBuilder(Builder):
     def build_skills(self, skills: list[Skill]) -> str:
         """This method makes MyBuilder satisfy SupportsSkills."""
         return "\n".join(skill.name for skill in skills)
@@ -998,10 +995,10 @@ Example: Adding `SupportsSkills` to your builder
 
 ```python
 from typing import Any
-from src.ir.models import Skill
-from src.builders.interfaces import SupportsSkills
+from promptosaurus.ir.models import Skill
+from promptosaurus.builders.interfaces import SupportsSkills
 
-class MyToolBuilder(AbstractBuilder):
+class MyToolBuilder(Builder):
     """Builder with skill support."""
 
     # Implement the protocol method
@@ -1033,7 +1030,7 @@ output = use_skills_builder(builder)
 Beyond protocols, you can add custom builder methods for tool-specific features:
 
 ```python
-class MyToolBuilder(AbstractBuilder):
+class MyToolBuilder(Builder):
     """Builder with custom features."""
 
     def build(self, agent: Agent, options: BuildOptions) -> str:
@@ -1072,11 +1069,11 @@ Your builder must follow `core-conventions-python.md`:
 ```python
 # ✓ Good
 from typing import Any
-from src.ir.models import Agent
-from src.builders.base import AbstractBuilder, BuildOptions
-from src.builders.errors import BuilderValidationError
+from promptosaurus.ir.models import Agent
+from promptosaurus.builders.base import Builder, BuildOptions
+from promptosaurus.builders.errors import BuilderValidationError
 
-class MyBuilder(AbstractBuilder):
+class MyBuilder(Builder):
     """Builder for MyTool."""
 
     def build(self, agent: Agent, options: BuildOptions) -> str:
@@ -1096,9 +1093,9 @@ class MyBuilder(AbstractBuilder):
         pass
 
 # ✗ Bad
-from src.builders.base import *
+from promptosaurus.builders.base import *
 
-class MyBuilder(AbstractBuilder):
+class MyBuilder(Builder):
     def build(self, agent, options):  # No type hints
         # No docstring
         return "output"
@@ -1259,7 +1256,7 @@ def test_build_full_agent(self):
 Explain what makes your builder unique:
 
 ```python
-class MyToolBuilder(AbstractBuilder):
+class MyToolBuilder(Builder):
     """Builder for MyTool agent configurations.
     
     MyTool-specific behaviors:
@@ -1284,7 +1281,7 @@ class MyToolBuilder(AbstractBuilder):
 ### Q: How do I add a new builder?
 
 **A:** Follow the Quick Start section:
-1. Create a class extending `AbstractBuilder`
+1. Create a class extending `Builder`
 2. Implement `build()`, `validate()`, `get_tool_name()`, `get_output_format()`
 3. Register with `BuilderFactory.register('toolname', MyBuilder)`
 4. Write unit and integration tests
@@ -1303,7 +1300,7 @@ class MyToolBuilder(AbstractBuilder):
 **A:** Yes, but follow these patterns:
 - **Shared components**: Use `ComponentSelector` and `ComponentComposer`
 - **Shared validation logic**: Create a base class or utility function
-- **Avoid inheritance hell**: Keep `AbstractBuilder` simple; compose instead
+- **Avoid inheritance hell**: Keep `Builder` simple; compose instead
 
 ```python
 # ✓ Good: Shared validation helper
@@ -1316,12 +1313,12 @@ def validate_common_fields(agent: Agent) -> list[str]:
         errors.append("System prompt required")
     return errors
 
-class Builder1(AbstractBuilder):
+class Builder1(Builder):
     def validate(self, agent: Agent) -> list[str]:
         return validate_common_fields(agent) + self._validate_specific(agent)
 
 # ✓ Good: Use composition
-class MyBuilder(AbstractBuilder):
+class MyBuilder(Builder):
     def __init__(self):
         self.selector = ComponentSelector()
         self.composer = ComponentComposer()
@@ -1376,7 +1373,7 @@ def test_complex_agent(self, complex_agent):
 **A:** Always validate first, then use specific exceptions:
 
 ```python
-from src.builders.errors import BuilderValidationError, BuilderException
+from promptosaurus.builders.errors import BuilderValidationError, BuilderException
 
 def build(self, agent: Agent, options: BuildOptions) -> str:
     # 1. Validate first
@@ -1405,7 +1402,7 @@ def build(self, agent: Agent, options: BuildOptions) -> str:
 **A:** Use `ComponentSelector` with fallback:
 
 ```python
-from src.builders.component_selector import ComponentSelector, Variant
+from promptosaurus.builders.component_selector import ComponentSelector, Variant
 
 def build(self, agent: Agent, options: BuildOptions) -> str:
     # Select variant
@@ -1427,7 +1424,7 @@ def build(self, agent: Agent, options: BuildOptions) -> str:
 **A:** Yes, add `__init__` parameters:
 
 ```python
-class MyBuilder(AbstractBuilder):
+class MyBuilder(Builder):
     def __init__(
         self,
         agents_dir: Path | str = "agents",
@@ -1476,4 +1473,4 @@ Creating a new builder means:
 
 Use the pattern established by existing builders (Kilo, Cline, Claude, Copilot, Cursor) as templates. Follow core-conventions-python.md for code quality. Write tests first, then implementation.
 
-For questions or issues, refer to the existing builders in `src/builders/` or the test suite in `tests/unit/builders/` and `tests/integration/`.
+For questions or issues, refer to the existing builders in `promptosaurus/builders/` or the test suite in `tests/unit/builders/` and `tests/integration/`.

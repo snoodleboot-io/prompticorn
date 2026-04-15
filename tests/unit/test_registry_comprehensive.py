@@ -88,8 +88,10 @@ class TestRegistryInitialization:
 
     def test_registry_is_frozen(self):
         """Registry should be frozen (immutable)."""
+        from pydantic import ValidationError
+
         registry = Registry()
-        with pytest.raises(Exception):  # Pydantic raises validation error for frozen models
+        with pytest.raises(ValidationError):  # Pydantic raises validation error for frozen models
             registry.modes = {}  # Should not be able to modify
 
     def test_prompts_dir_default_path(self):

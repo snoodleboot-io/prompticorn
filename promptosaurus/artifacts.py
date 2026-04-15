@@ -27,48 +27,79 @@ ARTIFACT_FILES: Final[dict[str, dict[str, set[str]]]] = {
     "kilo-cli": {
         "create": {".opencode/"},
         "remove": {
+            "CLAUDE.md",
             ".kilo/",  # Remove new kilo-ide output
             ".kilocode/",  # Remove legacy
             ".clinerules",
             ".cursor/",
             ".cursorrules",
             ".github/copilot-instructions.md",
+            ".claude/",
+            "custom_instructions/",
+            "rules/",  # Ensure root rules/ never exists
         },
     },
     "kilo-ide": {
         "create": {".kilo/"},
         "remove": {
+            "CLAUDE.md",
             ".opencode/",
             ".kilocode/",  # Remove legacy if present
             ".clinerules",
             ".cursor/",
             ".cursorrules",
             ".github/copilot-instructions.md",
+            ".claude/",
+            "custom_instructions/",
+            "rules/",  # Ensure root rules/ never exists
         },
     },
     "cline": {
         "create": {".clinerules"},
         "remove": {
+            "CLAUDE.md",
             ".opencode/",
             ".kilo/",
             ".kilocode/",
             ".cursor/",
             ".cursorrules",
             ".github/copilot-instructions.md",
+            ".claude/",
+            "custom_instructions/",
+            "rules/",  # Ensure root rules/ never exists
         },
     },
     "cursor": {
         "create": {".cursor/", ".cursorrules"},
         "remove": {
+            "CLAUDE.md",
             ".opencode/",
             ".kilo/",
             ".kilocode/",
             ".clinerules",
             ".github/copilot-instructions.md",
+            ".claude/",
+            "custom_instructions/",
+            "rules/",  # Ensure root rules/ never exists
         },
     },
     "copilot": {
         "create": {".github/copilot-instructions.md"},
+        "remove": {
+            "CLAUDE.md",
+            ".opencode/",
+            ".kilo/",
+            ".kilocode/",
+            ".clinerules",
+            ".cursor/",
+            ".cursorrules",
+            ".claude/",
+            "custom_instructions/",
+            "rules/",  # Ensure root rules/ never exists
+        },
+    },
+    "claude": {
+        "create": {".claude/", "CLAUDE.md"},  # .claude/ directory + CLAUDE.md routing file
         "remove": {
             ".opencode/",
             ".kilo/",
@@ -76,6 +107,9 @@ ARTIFACT_FILES: Final[dict[str, dict[str, set[str]]]] = {
             ".clinerules",
             ".cursor/",
             ".cursorrules",
+            ".github/copilot-instructions.md",
+            "custom_instructions/",  # Now removable (old format)
+            "rules/",  # Ensure root rules/ never exists
         },
     },
 }
@@ -98,6 +132,46 @@ class ArtifactManager:
             base_path: Base path for artifact operations. Defaults to current directory.
         """
         self.base_path = base_path if base_path is not None else Path(".")
+
+    def remove_artifacts_created_by(self, tool: str) -> list[str]:
+        """Remove artifacts created by a specific tool.
+
+        When switching FROM a tool, remove what that tool CREATED.
+        Use this when switching TO a new tool.
+
+        Args:
+            tool: The AI tool name to clean up after (e.g., 'kilo-ide', 'claude').
+
+        Returns:
+            List of action messages describing what was removed.
+            Empty list if tool is not recognized.
+
+        Raises:
+            OSError: If file/directory removal fails.
+        """
+        if tool not in ARTIFACT_FILES:
+            return []
+
+        to_remove = ARTIFACT_FILES[tool]["create"]
+        actions: list[str] = []
+
+        for artifact in to_remove:
+            artifact_path = self.base_path / artifact
+
+            if artifact_path.exists():
+                try:
+                    if artifact_path.is_dir():
+                        import shutil
+
+                        shutil.rmtree(artifact_path)
+                        actions.append(f"Removed directory: {artifact}")
+                    else:
+                        artifact_path.unlink()
+                        actions.append(f"Removed file: {artifact}")
+                except Exception as e:
+                    actions.append(f"Failed to remove {artifact}: {e}")
+
+        return actions
 
     def remove_artifacts(self, tool: str) -> list[str]:
         """Remove artifacts for a specific tool.

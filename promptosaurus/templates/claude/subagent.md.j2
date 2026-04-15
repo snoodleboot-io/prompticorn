@@ -1,0 +1,25 @@
+# {{ subagent.name | title }}
+
+**Purpose:** {{ subagent.description }}  
+**Delegation Context:** Called by {{ parent_agent }} agent
+
+## Role
+
+{{ subagent.instructions | trim }}
+
+## Instructions
+
+{{ subagent.detailed_instructions | trim }}
+
+## Return to Parent
+
+After completing the task:
+1. Report findings/results to the parent workflow
+2. Do not continue with unrelated tasks
+3. Return control to {{ parent_agent }} agent
+
+{% if notes %}
+## Notes
+
+{{ notes }}
+{% endif %}

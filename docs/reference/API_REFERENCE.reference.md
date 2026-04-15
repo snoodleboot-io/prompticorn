@@ -13,7 +13,7 @@ Complete API documentation for Promptosaurus builders, IR models, loaders, and r
 
 ## Builders
 
-All builders inherit from `AbstractBuilder` and transform Agent IR models into tool-specific output formats.
+All builders inherit from `Builder` and transform Agent IR models into tool-specific output formats.
 
 ### Overview
 
@@ -23,7 +23,7 @@ The builder system provides a unified interface for generating configurations fo
 |---------|---------------|-------------|-----------------|
 | KiloBuilder | YAML + Markdown | Kilo IDE | `.md` |
 | ClineBuilder | Markdown | Cline AI | `.clinerules` |
-| ClaudeBuilder | JSON Dict | Claude API | `.json` |
+| ClaudeBuilder | Markdown files (dict[str, str]) | Claude agent config | `.md` |
 | CopilotBuilder | YAML + Markdown | GitHub Copilot | `.md` |
 | CursorBuilder | Markdown | Cursor AI | `.cursorrules` |
 
@@ -34,7 +34,7 @@ Generates `.kilo/agents/{name}.md` files with YAML frontmatter and markdown sect
 #### Signature
 
 ```python
-class KiloBuilder(AbstractBuilder):
+class KiloBuilder(Builder):
     def __init__(self, agents_dir: Path | str = "agents") -> None
     def build(self, agent: Agent, options: BuildOptions) -> str
     def validate(self, agent: Agent) -> list[str]
@@ -122,7 +122,7 @@ Generates `.clinerules` files with markdown formatting.
 #### Signature
 
 ```python
-class ClineBuilder(AbstractBuilder):
+class ClineBuilder(Builder):
     def __init__(self, agents_dir: Path | str = "agents") -> None
     def build(self, agent: Agent, options: BuildOptions) -> str
     def validate(self, agent: Agent) -> list[str]
@@ -202,14 +202,14 @@ output = builder.build(agent, options)
 
 ### ClaudeBuilder
 
-Generates JSON output compatible with Claude's Messages API.
+Generates Markdown files written to the `.claude/` directory.
 
 #### Signature
 
 ```python
-class ClaudeBuilder(AbstractBuilder):
+class ClaudeBuilder(Builder):
     def __init__(self, agents_dir: Path | str = "agents") -> None
-    def build(self, agent: Agent, options: BuildOptions) -> dict[str, Any]
+    def build(self, agent: Agent, options: BuildOptions) -> dict[str, str]
     def validate(self, agent: Agent) -> list[str]
     def get_output_format(self) -> str
     def get_tool_name(self) -> str
@@ -217,43 +217,31 @@ class ClaudeBuilder(AbstractBuilder):
 
 #### Class Description
 
-Builder for Claude Messages API JSON output. Generates JSON dictionary with system prompt, tools, and instructions suitable for use with Claude's API.
+Builder for Claude agent configuration files. Generates a `dict[str, str]` mapping file paths to Markdown content, suitable for writing to the `.claude/` directory structure.
 
 #### Methods
 
 | Method | Parameters | Returns | Description |
 |--------|-----------|---------|-------------|
 | `__init__` | `agents_dir: Path \| str = "agents"` | - | Initialize builder |
-| `build` | `agent: Agent`, `options: BuildOptions` | `dict[str, Any]` | Build JSON-serializable dict for Claude API |
+| `build` | `agent: Agent`, `options: BuildOptions` | `dict[str, str]` | Build Markdown files mapping file paths to content |
 | `validate` | `agent: Agent` | `list[str]` | Validate agent model |
-| `get_output_format` | - | `str` | Returns "Claude Messages API JSON (dict)" |
+| `get_output_format` | - | `str` | Returns "Claude Markdown files (dict[str, str])" |
 | `get_tool_name` | - | `str` | Returns "claude" |
 
 #### Output Format
 
 ```python
 {
-    "system": "You are an expert software engineer...",
-    "tools": [
-        {
-            "name": "read",
-            "description": "Tool: read",
-            "input_schema": {
-                "type": "object",
-                "properties": {
-                    "param": {"type": "string", "description": "Parameter for the tool"}
-                },
-                "required": ["param"]
-            }
-        }
-    ],
-    "instructions": "Skills:\n- skill1\n\nWorkflows:\n[workflow content]\n\nSubagents:\n- subagent1"
+    ".claude/agents/code-agent.md": "# Code Agent\n...",
+    ".claude/subagents/feature.md": "# Feature\n...",
+    "CLAUDE.md": "# Claude Configuration\n..."
 }
 ```
 
 #### Raises
 
-- `BuilderValidationError`: If agent model is invalid or output is not JSON serializable
+- `BuilderValidationError`: If agent model is invalid
 
 #### Example
 
@@ -261,7 +249,7 @@ Builder for Claude Messages API JSON output. Generates JSON dictionary with syst
 from promptosaurus.builders.claude_builder import ClaudeBuilder
 from promptosaurus.builders.base import BuildOptions
 from promptosaurus.ir.models import Agent
-import json
+from pathlib import Path
 
 builder = ClaudeBuilder()
 agent = Agent(
@@ -272,7 +260,11 @@ agent = Agent(
 )
 options = BuildOptions(include_tools=True)
 output = builder.build(agent, options)
-json_str = json.dumps(output)  # JSON serializable
+# Write Markdown files to disk
+for file_path, content in output.items():
+    path = Path(file_path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content)
 ```
 
 ---
@@ -284,7 +276,7 @@ Generates GitHub Copilot instructions files with YAML frontmatter.
 #### Signature
 
 ```python
-class CopilotBuilder(AbstractBuilder):
+class CopilotBuilder(Builder):
     def __init__(self, agents_dir: Path | str = "agents") -> None
     def build(self, agent: Agent, options: BuildOptions) -> str
     def validate(self, agent: Agent) -> list[str]
@@ -371,7 +363,7 @@ Generates Cursor AI rules files with markdown formatting.
 #### Signature
 
 ```python
-class CursorBuilder(AbstractBuilder):
+class CursorBuilder(Builder):
     def __init__(self, agents_dir: Path | str = "agents") -> None
     def build(self, agent: Agent, options: BuildOptions) -> str
     def validate(self, agent: Agent) -> list[str]
@@ -509,18 +501,16 @@ invalid = BuildOptions(variant="full")  # Raises ValueError
 
 ---
 
-### AbstractBuilder
+### Builder
 
-Abstract base class for all tool-specific builders.
+Base class for all tool-specific builders.
 
 #### Signature
 
 ```python
-class AbstractBuilder(ABC):
-    @abstractmethod
+class Builder:
     def build(self, agent: Agent, options: BuildOptions) -> str | dict[str, Any]
     
-    @abstractmethod
     def validate(self, agent: Agent) -> list[str]
     
     def supports_feature(self, feature_name: str) -> bool
@@ -530,14 +520,14 @@ class AbstractBuilder(ABC):
     def get_tool_name(self) -> str
 ```
 
-#### Abstract Methods
+#### Methods
 
 | Method | Parameters | Returns | Description |
 |--------|-----------|---------|-------------|
-| `build` | `agent: Agent`, `options: BuildOptions` | `str \| dict[str, Any]` | **Must override.** Transform Agent IR to tool-specific output |
-| `validate` | `agent: Agent` | `list[str]` | **Must override.** Validate agent; return error messages (empty if valid) |
+| `build` | `agent: Agent`, `options: BuildOptions` | `str \| dict[str, Any]` | Transform Agent IR to tool-specific output |
+| `validate` | `agent: Agent` | `list[str]` | Validate agent; return error messages (empty if valid) |
 
-#### Concrete Methods
+#### Utility Methods
 
 | Method | Parameters | Returns | Description |
 |--------|-----------|---------|-------------|
@@ -548,10 +538,10 @@ class AbstractBuilder(ABC):
 #### Example
 
 ```python
-from promptosaurus.builders.base import AbstractBuilder, BuildOptions
+from promptosaurus.builders.base import Builder, BuildOptions
 from promptosaurus.ir.models import Agent
 
-class CustomBuilder(AbstractBuilder):
+class CustomBuilder(Builder):
     def build(self, agent: Agent, options: BuildOptions) -> str:
         # Implementation
         return f"Custom: {agent.name}"
@@ -578,10 +568,10 @@ Factory for creating and managing builder instances.
 ```python
 class BuilderFactory:
     @classmethod
-    def register(cls, tool_name: str, builder_class: type[AbstractBuilder]) -> None
+    def register(cls, tool_name: str, builder_class: type[Builder]) -> None
     
     @classmethod
-    def get_builder(cls, tool_name: str) -> AbstractBuilder
+    def get_builder(cls, tool_name: str) -> Builder
     
     @classmethod
     def list_builders(cls) -> list[str]
@@ -600,8 +590,8 @@ class BuilderFactory:
 
 | Method | Parameters | Returns | Description |
 |--------|-----------|---------|-------------|
-| `register` | `tool_name: str`, `builder_class: type[AbstractBuilder]` | `None` | Register a builder class for a tool |
-| `get_builder` | `tool_name: str` | `AbstractBuilder` | Get builder instance for tool (creates new instance) |
+| `register` | `tool_name: str`, `builder_class: type[Builder]` | `None` | Register a builder class for a tool |
+| `get_builder` | `tool_name: str` | `Builder` | Get builder instance for tool (creates new instance) |
 | `list_builders` | - | `list[str]` | List all registered tool names (sorted) |
 | `has_builder` | `tool_name: str` | `bool` | Check if builder registered for tool |
 | `clear` | - | `None` | Clear all registered builders (for testing) |
@@ -610,7 +600,7 @@ class BuilderFactory:
 #### Raises
 
 - `BuilderNotFoundError`: If builder not registered for tool
-- `TypeError`: If builder_class is not subclass of AbstractBuilder
+- `TypeError`: If builder_class is not subclass of Builder
 - `ValueError`: If tool_name is empty
 
 #### Example
@@ -1359,7 +1349,7 @@ all_agents = registry.get_all_agents()
 Quick reference of all types and their modules:
 
 ### Builders
-- `AbstractBuilder` - promptosaurus.builders.base
+- `Builder` - promptosaurus.builders.base
 - `BuildOptions` - promptosaurus.builders.base
 - `KiloBuilder` - promptosaurus.builders.kilo_builder
 - `ClineBuilder` - promptosaurus.builders.cline_builder

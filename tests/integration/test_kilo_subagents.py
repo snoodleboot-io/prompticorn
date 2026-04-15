@@ -8,7 +8,6 @@ Tests cover:
 - File content validation
 """
 
-
 import pytest
 
 from promptosaurus.builders.base import BuildOptions
@@ -439,7 +438,7 @@ class TestKiloSubagentIntegration:
 
         # Check no orphaned section markers
         lines = content.split("\n")
-        markdown_headers = [l for l in lines if l.startswith("#")]
+        markdown_headers = [line for line in lines if line.startswith("#")]
         assert len(markdown_headers) >= 2  # Parent Agent + System Prompt
 
 
@@ -536,7 +535,6 @@ class TestKiloSubagentCoverage:
 
         # Subagent description should reference parent
         assert "Subagent of boss" in content
-
 
     def test_subagent_frontmatter_state_management(self) -> None:
         """Test that subagent frontmatter includes state_management."""

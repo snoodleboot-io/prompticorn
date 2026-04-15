@@ -5,7 +5,7 @@ Get up to speed with Promptosaurus in 5 minutes.
 ## What is Promptosaurus?
 
 Promptosaurus is a comprehensive AI agent library with:
-- **9 specialized agents** across different domains (data, DevOps, testing, backend, frontend, etc.)
+- **25 primary agents** across different domains (data, DevOps, testing, backend, frontend, etc.)
 - **49 workflows** for common development tasks
 - **58 specialized skills** for domain-specific expertise
 - **220+ test suite** validating all content

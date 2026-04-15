@@ -1,6 +1,5 @@
 """Unit tests for Data Agent."""
 
-
 import pytest
 
 

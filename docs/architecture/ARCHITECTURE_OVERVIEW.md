@@ -81,7 +81,7 @@ graph TD
 **Location:** `promptosaurus/builders/`
 **Purpose:** Transforms IR models into tool-specific output formats
 **Components:**
-- **AbstractBuilder:** Base class defining builder interface
+- **Builder:** Base class defining builder interface
 - **BuilderFactory:** Registry and instantiation mechanism for builders
 - **Tool-Specific Builders:** KiloBuilder, ClaudeBuilder, ClineBuilder, CopilotBuilder
 - **Template Handlers:** Process different template sections (skills, workflows, etc.)
@@ -139,7 +139,7 @@ sequenceDiagram
     participant Template
     participant Output
     
-    User->>CLI: promptosaurus build --tool kilo --agent code
+    User->>CLI: promptosaurus init
     CLI->>Registry: Get mode configuration and file mappings
     Registry-->>CLI: Return registered files and modes
     CLI->>Factory: Request builder for tool 'kilo'

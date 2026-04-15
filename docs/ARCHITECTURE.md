@@ -270,13 +270,11 @@ personas:
 #### Abstract Base Class (`builders/base.py`)
 
 ```python
-class AbstractBuilder(ABC):
-    @abstractmethod
+class Builder:
     def build(self, agent: Agent, options: BuildOptions) -> str | dict:
         """Build tool-specific output from agent IR"""
         pass
     
-    @abstractmethod
     def validate(self, agent: Agent) -> list[str]:
         """Validate agent compatibility"""
         pass
@@ -492,13 +490,12 @@ builder = factory.get_builder("kilo")
 - Easy to add new builders
 - Centralized builder management
 
-### 2. Abstract Base Class (ABC)
+### 2. Builder Base Class
 
-**AbstractBuilder** defines interface:
+**Builder** defines interface:
 
 ```python
-class AbstractBuilder(ABC):
-    @abstractmethod
+class Builder:
     def build(self, agent: Agent, options: BuildOptions) -> str | dict:
         pass
 ```
@@ -582,9 +579,9 @@ Each class has one reason to change:
 
 ### Liskov Substitution Principle (LSP)
 
-All builders substitute `AbstractBuilder`:
+All builders substitute `Builder`:
 ```python
-def process(builder: AbstractBuilder):
+def process(builder: Builder):
     result = builder.build(agent, options)  # Works for any builder
 ```
 
@@ -597,7 +594,7 @@ Protocols allow optional features:
 ### Dependency Inversion Principle (DIP)
 
 Depend on abstractions:
-- `PromptBuilder` depends on `AbstractBuilder` (not concrete builders)
+- `PromptBuilder` depends on `Builder` (not concrete builders)
 - Factory returns abstractions, not concrete types
 
 ---
@@ -608,7 +605,7 @@ Depend on abstractions:
 
 1. **Create builder class:**
 ```python
-class MyToolBuilder(AbstractBuilder):
+class MyToolBuilder(Builder):
     def build(self, agent: Agent, options: BuildOptions) -> str:
         # Implementation
         pass

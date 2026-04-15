@@ -1,6 +1,5 @@
 """Unit tests for schema validators."""
 
-
 import pytest
 
 from validation.schema_validator import SchemaValidator

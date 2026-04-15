@@ -47,6 +47,6 @@ Intent is encoded in filename suffixes:
 ## Content Types
 
 ### In promptosaurus/
-- `agents/**/*.prompt.md` - Agent instructions
+- `agents/*/prompt.md` - Agent instructions
 - `workflows/**/minimal|verbose/workflow.md` - Workflow guides
-- `skills/**/minimal|verbose/skill.md` - Specialized skills
+- `skills/**/minimal/SKILL.md` - Specialized skills

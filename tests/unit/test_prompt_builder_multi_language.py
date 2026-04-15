@@ -1,6 +1,5 @@
 """Tests for PromptBuilder with multi-language-monorepo configurations."""
 
-
 import pytest
 
 from promptosaurus.prompt_builder import PromptBuilder

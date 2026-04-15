@@ -7,14 +7,14 @@ into Kilo IDE agent files with YAML frontmatter and markdown sections.
 from pathlib import Path
 from typing import Any
 
-from promptosaurus.builders.base import AbstractBuilder, BuildOptions
-from promptosaurus.builders.builder import Builder
+from promptosaurus.builders.base import Builder, BuildOptions
+from promptosaurus.builders.builder import Builder as LegacyBuilder
 from promptosaurus.builders.errors import BuilderValidationError
 from promptosaurus.ir.loaders import CoreFilesLoader
 from promptosaurus.ir.models import Agent
 
 
-class KiloBuilder(AbstractBuilder):
+class KiloBuilder(Builder):
     """Builder for Kilo IDE agent configurations.
 
     Generates `.kilo/agents/{name}.md` files with YAML frontmatter and
@@ -60,7 +60,7 @@ class KiloBuilder(AbstractBuilder):
         self.agents_dir = agents_dir
         self.core_loader = CoreFilesLoader()
         # Initialize Builder for template variable substitution
-        self._builder = Builder()
+        self._builder = LegacyBuilder()
 
     def build(self, agent: Agent, options: BuildOptions, config: dict | None = None) -> str:
         """Build a Kilo agent configuration file.

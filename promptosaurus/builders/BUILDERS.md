@@ -15,9 +15,6 @@ The following diagram shows the class hierarchy of all builders. The base Builde
 ```mermaid
 classDiagram
     class Builder {
-        +output_dir: Path
-        +registry: PromptRegistry
-        +base_files: list[str]
         +build(output, config, dry_run) list[str]
         +_build_concatenated(tool_comment) str
     }
@@ -34,33 +31,24 @@ classDiagram
         +build(output, config, dry_run)
     }
     
-    class KiloCodeBuilder {
-        +_copy(src, dest, apply_substitutions)
-        +_substitute_template_variables(content)
+    class ClaudeBuilder {
+        +build(output, config, dry_run)
     }
     
-    class KiloCLIBuilder {
+    class KiloBuilder {
         +build(output, config, dry_run)
-        +_create_base_md()
-        +_create_collapsed_mode_md(mode)
-    }
-    
-    class KiloIDEBuilder {
-        +build(output, config, dry_run)
-        +_make_dest_filename(src_path)
     }
     
     Builder <|-- ClineBuilder
     Builder <|-- CursorBuilder
     Builder <|-- CopilotBuilder
-    Builder <|-- KiloCodeBuilder
-    KiloCodeBuilder <|-- KiloCLIBuilder
-    KiloCodeBuilder <|-- KiloIDEBuilder
+    Builder <|-- ClaudeBuilder
+    Builder <|-- KiloBuilder
 ```
 
 ## Understanding the Base Builder
 
-Every builder inherits from the [`Builder`](builder.py) class, which establishes the common interface. This isn't an abstract base class in the traditional sense - it uses the Interface Pattern with NotImplementedError instead. This approach was chosen to keep the code simpler while still providing runtime protection against missing implementations.
+Every builder inherits from the [`Builder`](base.py) class, which establishes the common interface. This isn't an abstract base class in the traditional sense - it uses the Interface Pattern with NotImplementedError instead. This approach was chosen to keep the code simpler while still providing runtime protection against missing implementations.
 
 The base class establishes two key concepts. First, there's a set of "base files" - these are the core prompt files that should always be included regardless of which mode you're building for. Second, there's the `_build_concatenated` method, which handles the common task of combining multiple prompt files into a single output with clear section headers.
 
@@ -110,14 +98,14 @@ Here's a detailed comparison table:
 | ClineBuilder | `.clinerules` | Single concatenated file | CLI tools |
 | CursorBuilder | `.cursor/rules/*.mdc` | Per-mode directories | VSCode extension |
 | CopilotBuilder | `.github/copilot-instructions.md` | YAML frontmatter | GitHub integration |
-| KiloCLIBuilder | `.opencode/rules/*.md` | Collapsed mode files | OpenCode, Continue |
-| KiloIDEBuilder | `.kilocode/rules-*/` | Mode directories | VSCode, JetBrains |
+| ClaudeBuilder | `.claude/agents/*.md` | Individual agent files | Claude API |
+| KiloBuilder | `.kilo/agents/*.md` | Individual agent files | VSCode, JetBrains |
 
 ## Tool-Specific Builders
 
 ### Cline Builder
 
-The [ClineBuilder](cline.py) is the simplest of the bunch, perfect for understanding how builders work. Cline (formerly known as Claude Dev) expects a single file called `.clinerules` that contains all prompts concatenated together, plus a `.clineignore` file for patterns to exclude.
+The [ClineBuilder](cline_builder.py) is the simplest of the bunch, perfect for understanding how builders work. Cline (formerly known as Claude Dev) expects a single file called `.clinerules` that contains all prompts concatenated together, plus a `.clineignore` file for patterns to exclude.
 
 What makes this builder interesting is its simplicity. It doesn't need to worry about directory structures or multiple files - it just concatenates everything and writes it out. The ignore file is handled by delegating to a `ClineIgnoreBuilder` that knows what patterns Cline cares about.
 
@@ -130,7 +118,7 @@ my-project/
 
 ### Cursor Builder
 
-The [CursorBuilder](cursor.py) is more sophisticated because Cursor has a more complex structure. It wants individual `.mdc` files (Markdown Cursor files) organized in a specific way. Core system prompts go in the root `.cursor/rules/` directory, while mode-specific prompts go into subdirectories like `.cursor/rules/code/`.
+The [CursorBuilder](cursor_builder.py) is more sophisticated because Cursor has a more complex structure. It wants individual `.mdc` files (Markdown Cursor files) organized in a specific way. Core system prompts go in the root `.cursor/rules/` directory, while mode-specific prompts go into subdirectories like `.cursor/rules/code/`.
 
 The builder handles this complexity by iterating through the registry's mode files and creating the appropriate directory structure. It also maintains a legacy `.cursorrules` file as a fallback, which is useful for older versions of Cursor that don't support the directory structure.
 
@@ -151,7 +139,7 @@ my-project/
 
 ### Copilot Builder
 
-The [CopilotBuilder](copilot.py) works with GitHub Copilot, which has yet another format requirement. Copilot expects files in the `.github/` directory with a specific naming convention. The builder creates `copilot-instructions.md` for always-on rules and individual files in the `instructions/` subdirectory for mode-specific rules.
+The [CopilotBuilder](copilot_builder.py) works with GitHub Copilot, which has yet another format requirement. Copilot expects files in the `.github/` directory with a specific naming convention. The builder creates `copilot-instructions.md` for always-on rules and individual files in the `instructions/` subdirectory for mode-specific rules.
 
 What makes Copilot interesting is its use of YAML frontmatter. Each instruction file starts with a `---` block that includes an `applyTo` field. This tells Copilot which files the instructions should apply to - for example, you might have instructions that only apply to Python files, or only to test files.
 
@@ -201,7 +189,7 @@ classDiagram
     }
     
     class CopilotIgnoreBuilder {
-        +filename = ".github/copilotignore"
+        +filename = ".copilotignore"
     }
     
     IgnoreFileBuilder <|-- KiloIgnoreBuilder
@@ -232,15 +220,14 @@ Here's how you might use a builder in your code:
 
 ```python
 from pathlib import Path
-from promptosaurus.builders.cline import ClineBuilder
-from promptosaurus.registry import PromptRegistry
+from promptosaurus.builders.cline_builder import ClineBuilder
+from promptosaurus.registry import Registry
 
 # Set up the registry
-registry = PromptRegistry()
-registry.load_from_directory(Path("./prompts"))
+registry = Registry()
 
 # Create and run the builder
-builder = ClineBuilder(registry=registry)
+builder = ClineBuilder()
 actions = builder.build(
     output=Path("./my-project"),
     config=None,  # Optional configuration
@@ -254,4 +241,4 @@ for action in actions:
 
 ## See Also
 
-This documentation covers the general builder system. For details on Kilo-specific builders, see the [KILO](kilo/KILO.md) submodule documentation. For the main PROMPTOSAURUS package overview, see the parent [PROMPTOSAURUS](../PROMPTOSAURUS.md) documentation.
+For the main PROMPTOSAURUS package overview, see the parent [PROMPTOSAURUS](../PROMPTOSAURUS.md) documentation.

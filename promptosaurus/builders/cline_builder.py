@@ -6,13 +6,13 @@ into Cline AI configuration files (.clinerules) with markdown formatting.
 
 from pathlib import Path
 
-from promptosaurus.builders.base import AbstractBuilder, BuildOptions
+from promptosaurus.builders.base import Builder, BuildOptions
 from promptosaurus.builders.errors import BuilderValidationError
 from promptosaurus.ir.loaders import CoreFilesLoader
 from promptosaurus.ir.models import Agent
 
 
-class ClineBuilder(AbstractBuilder):
+class ClineBuilder(Builder):
     """Builder for Cline AI configuration files.
 
     Generates `.clinerules` files (single markdown file) with system prompt,
