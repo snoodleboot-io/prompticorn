@@ -18,15 +18,6 @@
 #
 # For most cases, agent_skill_mapping.yaml is sufficient.
 
-all:
-  skills:
-  - feature-planning
-  - post-implementation-checklist
-  workflows:
-  - feature
-  - review
-  - refactor
-  - migration
 csharp:
   skills:
   - feature-planning
@@ -176,15 +167,6 @@ product:
   - analytics-setup
   - a-b-testing
   - feature-launch-checklist
-python:
-  skills:
-  - data-validation-pipelines
-  - ensemble-methods
-  - mlops-pipeline-design
-  workflows:
-  - model-evaluation
-  - mlops-pipeline-setup
-  - production-ml-deployment
 rust:
   skills:
   - feature-planning

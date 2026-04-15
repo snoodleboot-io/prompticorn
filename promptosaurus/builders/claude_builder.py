@@ -1,42 +1,41 @@
-"""ClaudeBuilder for generating Claude Messages API JSON output.
+"""ClaudeBuilder for generating Claude Markdown artifacts.
 
 This module implements the ClaudeBuilder class that translates Agent IR models
-into JSON output compatible with Claude's Messages API format.
+into Markdown files for the .claude/ directory structure.
 """
 
-import json
+from datetime import datetime
 from pathlib import Path
 from typing import Any
 
+from jinja2 import Environment, FileSystemLoader, Template
+
 from promptosaurus.builders.base import AbstractBuilder, BuildOptions
 from promptosaurus.builders.errors import BuilderValidationError
+from promptosaurus.builders.naming_utils import (
+    agent_to_file_name,
+    subagent_to_file_name,
+    workflow_to_file_name,
+    skill_to_directory_name,
+)
+from promptosaurus.builders.workflow_loader import WorkflowLoader
 from promptosaurus.ir.loaders import CoreFilesLoader
 from promptosaurus.ir.models import Agent
 
 
 class ClaudeBuilder(AbstractBuilder):
-    """Builder for Claude Messages API JSON output.
+    """Builder for Claude Markdown artifacts.
 
-    Generates JSON dictionary with system prompt, tools, and instructions
-    suitable for use with Claude's Messages API.
+    Generates Markdown files in .claude/ directory structure:
+    - .claude/agents/{agent-name}.md
+    - .claude/subagents/{subagent-name}.md
+    - .claude/workflows/{workflow-name}.md
+    - .claude/conventions/core/general.md
+    - .claude/conventions/languages/{language}.md
+    - CLAUDE.md (routing file)
 
     Output Format:
-        {
-          "system": "You are an expert software engineer...",
-          "tools": [
-            {
-              "name": "read",
-              "description": "Read files and directories",
-              "input_schema": {
-                "type": "object",
-                "properties": {
-                  "filePath": {"type": "string"}
-                }
-              }
-            }
-          ],
-          "instructions": "Follow these principles:\n- Read code before writing\n- Match existing patterns"
-        }
+        Markdown files with Jinja2 template rendering
     """
 
     def __init__(self, agents_dir: Path | str = "agents") -> None:
@@ -48,13 +47,18 @@ class ClaudeBuilder(AbstractBuilder):
         self.agents_dir = agents_dir
         self.core_loader = CoreFilesLoader()
 
+        # Setup Jinja2 template environment
+        template_dir = Path(__file__).parent.parent / "templates" / "claude"
+        self.jinja_env = Environment(
+            loader=FileSystemLoader(str(template_dir)),
+            trim_blocks=True,
+            lstrip_blocks=True,
+        )
+
     def build(
         self, agent: Agent, options: BuildOptions, config: dict | None = None
-    ) -> dict[str, Any]:
-        """Build Claude Messages API JSON output from an Agent IR model.
-
-        Includes core system, conventions, and language-specific conventions if
-        language is specified in config.
+    ) -> dict[str, str]:
+        """Build Claude Markdown artifacts from an Agent IR model.
 
         Args:
             agent: The Agent IR model to build from
@@ -62,8 +66,13 @@ class ClaudeBuilder(AbstractBuilder):
             config: Optional configuration dict with 'spec' key containing language info
 
         Returns:
-            Dictionary with system, tools, and instructions keys
-            All values are JSON-serializable
+            Dictionary mapping file paths to Markdown content
+            Example:
+            {
+                ".claude/agents/code-agent.md": "# Code Agent\n...",
+                ".claude/subagents/code-reviewer.md": "# Code Reviewer\n...",
+                ".claude/workflows/feature-implementation.md": "# Feature Implementation\n..."
+            }
 
         Raises:
             BuilderValidationError: If the agent model is invalid
@@ -75,36 +84,27 @@ class ClaudeBuilder(AbstractBuilder):
                 errors=errors, message=f"Invalid agent '{agent.name}': {'; '.join(errors)}"
             )
 
-        # Use agent system prompt directly (no variants for top-level agents)
-        base_prompt = agent.system_prompt
+        # Build output dictionary with all artifact files
+        output: dict[str, str] = {}
 
-        # Build system prompt with core files if language is available
-        system_prompt = self._build_system_prompt_with_core(base_prompt, config)
+        # 1. Render agent file
+        agent_file_name = agent_to_file_name(agent.name)
+        agent_content = self._render_agent_file(agent, options, config)
+        output[f".claude/agents/{agent_file_name}.md"] = agent_content
 
-        # Build tools list with schemas
-        tools_list = self._build_tools_list(agent.tools) if options.include_tools else []
+        # 2. Render subagent files (if any)
+        if options.include_subagents and agent.subagents:
+            for subagent_name in agent.subagents:
+                subagent_file_name = subagent_to_file_name(subagent_name)
+                subagent_content = self._render_subagent_file(subagent_name, agent.name, options)
+                output[f".claude/subagents/{subagent_file_name}.md"] = subagent_content
 
-        # Build instructions string from all sections
-        instructions = self._build_instructions(
-            agent,
-            options,
-        )
-
-        # Return JSON-serializable dict
-        output: dict[str, Any] = {
-            "system": system_prompt,
-            "tools": tools_list,
-            "instructions": instructions,
-        }
-
-        # Verify JSON serializability
-        try:
-            json.dumps(output)
-        except (TypeError, ValueError) as e:
-            raise BuilderValidationError(
-                errors=[f"Output is not JSON serializable: {str(e)}"],
-                message=f"Invalid output from Claude builder: {str(e)}",
-            ) from e
+        # 3. Render workflow files (if any)
+        if options.include_workflows and agent.workflows:
+            for workflow_name in agent.workflows:
+                workflow_file_name = workflow_to_file_name(workflow_name)
+                workflow_content = self._render_workflow_file(workflow_name, options)
+                output[f".claude/workflows/{workflow_file_name}.md"] = workflow_content
 
         return output
 
@@ -138,7 +138,7 @@ class ClaudeBuilder(AbstractBuilder):
         Returns:
             Description of Claude format
         """
-        return "Claude Messages API JSON (dict)"
+        return "Claude Markdown artifacts (dict[str, str])"
 
     def get_tool_name(self) -> str:
         """Get the tool name.
@@ -148,214 +148,289 @@ class ClaudeBuilder(AbstractBuilder):
         """
         return "claude"
 
-    def _build_system_prompt(self, prompt: str) -> str:
-        """Get system prompt string from component bundle.
-
-        Args:
-            prompt: System prompt from component bundle
-
-        Returns:
-            System prompt as string (stripped)
-        """
-        return prompt.strip()
-
-    def _build_system_prompt_with_core(self, prompt: str, config: dict | None = None) -> str:
-        """Build system prompt with core files included if language is available.
-
-        Args:
-            prompt: System prompt from agent
-            config: Optional configuration dict with 'spec' key containing language info
-
-        Returns:
-            System prompt with core files prepended, or original prompt if no language
-        """
-        sections = []
-
-        # Load and include core files if language is available
-        if config:
-            # Extract language (handles both single-language dict and multi-language-monorepo list)
-            spec = config.get("spec")
-            if isinstance(spec, dict):
-                language = spec.get("language")
-            elif isinstance(spec, list) and len(spec) > 0:
-                language = spec[0].get("language")
-            else:
-                language = None
-            if language:
-                core_files = self.core_loader.get_core_files(language, config)
-                # Order: system, conventions, session, language-specific
-                for key in ["system", "conventions", "session"]:
-                    if key in core_files:
-                        sections.append(core_files[key])
-
-                # Add language conventions if available
-                lang_key = f"conventions_{language}"
-                if lang_key in core_files:
-                    sections.append(core_files[lang_key])
-
-        # Add the agent's system prompt
-        sections.append(prompt.strip())
-
-        # Join all sections with double newlines
-        return "\n\n".join(sections)
-
-    def _build_tools_list(self, tool_names: list[str]) -> list[dict[str, Any]]:
-        """Build tools list with JSON schemas.
-
-        Each tool gets a name, description, and input_schema (JSON schema).
-
-        Args:
-            tool_names: List of tool names from agent
-
-        Returns:
-            List of tool dictionaries with schemas
-        """
-        tools = []
-
-        for tool_name in tool_names:
-            tool_dict = self._build_tool_schema(tool_name)
-            tools.append(tool_dict)
-
-        return tools
-
-    def _build_tool_schema(self, tool_name: str) -> dict[str, Any]:
-        """Build JSON schema for a single tool.
-
-        Creates a basic schema structure with name, description, and input_schema.
-
-        Args:
-            tool_name: Name of the tool
-
-        Returns:
-            Dictionary with tool metadata and schema
-        """
-        # Build basic tool schema
-        tool: dict[str, Any] = {
-            "name": tool_name,
-            "description": f"Tool: {tool_name}",
-            "input_schema": {
-                "type": "object",
-                "properties": {
-                    "param": {"type": "string", "description": "Parameter for the tool"}
-                },
-                "required": ["param"],
-            },
-        }
-
-        return tool
-
-    def _build_instructions(
-        self,
-        agent: Agent,
-        options: BuildOptions,
+    def _render_agent_file(
+        self, agent: Agent, options: BuildOptions, config: dict | None = None
     ) -> str:
-        """Build instructions string from all sections.
-
-        Concatenates skills, workflows, subagents, and rules into prose text.
+        """Render agent Markdown file from template.
 
         Args:
             agent: Agent IR model
-            options: Build configuration options
+            options: Build options
+            config: Optional configuration
 
         Returns:
-            Instructions as concatenated prose text
+            Rendered Markdown content
         """
-        sections = []
+        template = self.jinja_env.get_template("agent.md.j2")
 
-        # Add skills section if requested
-        if options.include_skills and agent.skills:
-            sections.append(self._format_skills_section(agent.skills))
+        prepared_skills = self._prepare_skills_data(agent.skills) if agent.skills else []
 
-        # Add workflows section if requested
-        if options.include_workflows and agent.workflows:
-            sections.append(self._format_workflows_section(agent.workflows, options.variant))
+        # Prepare template data
+        template_data = {
+            "agent": {
+                "name": agent.name.title(),
+                "description": agent.description,
+                "system_prompt": agent.system_prompt,
+            },
+            "when_to_use": self._generate_when_to_use(agent),
+            "workflow": agent.workflows[0] if agent.workflows else None,
+            "workflow_steps": self._extract_workflow_steps(agent.workflows[0], options.variant)
+            if agent.workflows
+            else [],
+            "subagents": self._prepare_subagents_data(agent.subagents) if agent.subagents else [],
+            "skills": prepared_skills,
+            "notes": self._generate_agent_notes(agent),
+        }
 
-        # Add subagents section if requested
-        if options.include_subagents and agent.subagents:
-            sections.append(self._format_subagents_section(agent.subagents))
+        return template.render(**template_data)
 
-        # Join all sections with double newlines
-        instructions = "\n\n".join(sections)
-
-        return instructions.strip()
-
-    def _format_skills_section(self, skill_names: list[str]) -> str:
-        """Format skills section as prose.
+    def _render_subagent_file(
+        self, subagent_name: str, parent_agent: str, options: BuildOptions
+    ) -> str:
+        """Render subagent Markdown file from template.
 
         Args:
-            skill_names: List of skill names from agent
+            subagent_name: Name of the subagent
+            parent_agent: Name of the parent agent
+            options: Build options
 
         Returns:
-            Formatted skills section as prose
+            Rendered Markdown content
         """
-        lines = ["Skills:", ""]
+        # Load actual subagent content
+        subagent_content = self._load_subagent_content(parent_agent, subagent_name, options.variant)
 
-        # Add each skill with invocation info
-        for skill in skill_names:
-            skill_key = skill.lower().replace(" ", "_").replace("-", "_")
-            lines.append(f"- {skill}: Invoke by use_skill {skill_key}")
+        if subagent_content:
+            # Return the actual subagent content directly (it's already markdown)
+            return subagent_content
 
-        return "\n".join(lines)
+        # Fallback to template if content not found
+        template = self.jinja_env.get_template("subagent.md.j2")
 
-    def _format_workflows_section(self, workflow_names: list[str], variant: str = "minimal") -> str:
-        """Format workflows section as prose with full content.
+        template_data = {
+            "subagent": {
+                "name": subagent_name.replace("-", " ").title(),
+                "description": f"Specialized agent for {subagent_name} tasks",
+                "instructions": f"Provide focused assistance for {subagent_name}.",
+                "detailed_instructions": "Follow the parent agent's context and requirements.",
+            },
+            "parent_agent": parent_agent,
+            "notes": None,
+        }
+
+        return template.render(**template_data)
+
+    def _render_workflow_file(self, workflow_name: str, options: BuildOptions) -> str:
+        """Render workflow Markdown file from template.
 
         Args:
-            workflow_names: List of workflow names from agent
-            variant: Variant to load (minimal/verbose)
+            workflow_name: Name of the workflow
+            options: Build options
 
         Returns:
-            Formatted workflows section with full content
+            Rendered Markdown content
         """
-        from promptosaurus.builders.workflow_loader import WorkflowLoader
+        # Load actual workflow content
+        workflow_content = WorkflowLoader.load_workflow(workflow_name, options.variant)
 
-        lines = ["Workflows:", ""]
+        if workflow_content:
+            # Return the actual workflow content (already formatted)
+            return WorkflowLoader.format_workflow_content(
+                workflow_content, include_frontmatter=False
+            )
 
-        # Load and embed each workflow with full content
-        for workflow in workflow_names:
-            workflow_content = WorkflowLoader.load_workflow(workflow, variant)
+        # Fallback to template if workflow not found
+        template = self.jinja_env.get_template("workflow.md.j2")
 
-            if workflow_content:
-                # Format workflow content (strip frontmatter)
-                formatted_content = WorkflowLoader.format_workflow_content(
-                    workflow_content, include_frontmatter=False
-                )
+        template_data = {
+            "workflow": {
+                "name": workflow_name.replace("-", " ").title(),
+                "description": f"Execute {workflow_name} workflow",
+                "duration": "Variable",
+                "prerequisites": "None",
+                "overview": f"This workflow guides you through {workflow_name}.",
+                "steps": [
+                    {
+                        "name": "Example Step",
+                        "description": "Perform the task",
+                        "actions": ["Action 1", "Action 2"],
+                        "resources": [],
+                    }
+                ],
+                "completion_criteria": [
+                    "Task completed successfully",
+                    "All tests passing",
+                ],
+            },
+            "notes": None,
+        }
 
-                lines.append(f"**{workflow}:**")
-                lines.append("")
-                lines.append(formatted_content)
-                lines.append("")
-            else:
-                # Fallback to just name if content not found
-                lines.append(f"- {workflow}")
+        return template.render(**template_data)
 
-        return "\n".join(lines)
+    def _load_subagent_content(
+        self, parent_agent: str, subagent_name: str, variant: str = "minimal"
+    ) -> str | None:
+        """Load subagent content from agents directory.
 
-    def _format_subagents_section(self, subagent_names: list[str]) -> str:
-        """Format subagents section as prose.
+        Args:
+            parent_agent: Name of the parent agent
+            subagent_name: Name of the subagent
+            variant: Variant (minimal/verbose)
+
+        Returns:
+            Subagent content as string, or None if not found
+        """
+        # Subagents are stored in promptosaurus/agents/{agent}/subagents/{subagent}/{variant}/prompt.md
+        agents_dir = Path(__file__).parent.parent / "agents"
+
+        # Try exact path match first
+        subagent_path = (
+            agents_dir / parent_agent / "subagents" / subagent_name / variant / "prompt.md"
+        )
+
+        if not subagent_path.exists():
+            # Try other variant as fallback
+            other_variant = "verbose" if variant == "minimal" else "minimal"
+            subagent_path = (
+                agents_dir
+                / parent_agent
+                / "subagents"
+                / subagent_name
+                / other_variant
+                / "prompt.md"
+            )
+
+        if subagent_path.exists():
+            return subagent_path.read_text(encoding="utf-8")
+
+        return None
+
+    def _generate_when_to_use(self, agent: Agent) -> str:
+        """Generate 'when to use' description for agent.
+
+        Args:
+            agent: Agent IR model
+
+        Returns:
+            Description of when to use this agent
+        """
+        # Map agent names to usage scenarios
+        scenarios = {
+            "code": "Implementing features, fixing bugs, refactoring existing code",
+            "architect": "Designing system architecture, planning technical solutions",
+            "debug": "Diagnosing issues, analyzing errors, fixing bugs",
+            "review": "Reviewing code quality, checking for issues, auditing changes",
+            "test": "Writing tests, improving coverage, testing strategies",
+            "refactor": "Improving code structure, optimizing design patterns",
+            "performance": "Optimizing performance, identifying bottlenecks",
+            "frontend": "Building user interfaces, accessibility, responsive design",
+            "backend": "Designing APIs, microservices, backend systems",
+            "orchestrator": "Coordinating multi-step workflows, managing complex tasks",
+            "plan": "Developing PRDs, working with architects on ARDs",
+            "explain": "Code walkthroughs, documentation, onboarding",
+            "ask": "Answering questions, providing explanations",
+            "enforcement": "Reviewing code against coding standards",
+            "migration": "Handling dependency upgrades, framework migrations",
+        }
+        return scenarios.get(agent.name, f"Working on {agent.name} tasks")
+
+    def _extract_workflow_steps(self, workflow_name: str, variant: str = "minimal") -> list[str]:
+        """Extract high-level workflow steps for display in agent file.
+
+        Args:
+            workflow_name: Name of the workflow
+            variant: Workflow variant (minimal/verbose)
+
+        Returns:
+            List of workflow step descriptions
+        """
+        # Load actual workflow to extract steps
+        workflow_content = WorkflowLoader.load_workflow(workflow_name, variant)
+
+        if workflow_content:
+            # Extract headers (## Step X: ...) from workflow
+            steps = []
+            for line in workflow_content.split("\n"):
+                if line.startswith("## Step ") or line.startswith("## "):
+                    # Extract step description
+                    step_text = line.lstrip("#").strip()
+                    if step_text and not step_text.startswith("---"):
+                        # Remove "Step X:" prefix if present
+                        if ":" in step_text:
+                            step_text = step_text.split(":", 1)[1].strip()
+                        steps.append(step_text)
+
+            if steps:
+                return steps[:5]  # Return first 5 steps
+
+        # Default fallback steps
+        return [
+            "Understand requirements",
+            "Plan implementation",
+            "Execute incrementally",
+            "Test as you go",
+            "Review and complete",
+        ]
+
+    def _prepare_subagents_data(self, subagent_names: list[str]) -> list[dict[str, str]]:
+        """Prepare subagent data for template rendering.
 
         Args:
             subagent_names: List of subagent names
 
         Returns:
-            Formatted subagents section
+            List of subagent dictionaries with metadata
         """
-        lines = ["Subagents:", ""]
+        subagents = []
+        for name in subagent_names:
+            file_name = subagent_to_file_name(name)
+            # Clean up the name for display
+            display_name = name.replace("-", " ").replace("/", " - ").title()
+            subagents.append(
+                {
+                    "name": display_name,
+                    "purpose": f"Specialized for {name.replace('/', ' ')} tasks",
+                    "file_name": file_name,
+                    "when_to_use": f"When you need focused {name.replace('/', ' ')} assistance",
+                }
+            )
+        return subagents
 
-        for subagent in subagent_names:
-            lines.append(f"- {subagent}: Specialized agent for {subagent} tasks")
-
-        return "\n".join(lines)
-
-    def _format_rules_section(self, rules_content: str) -> str:
-        """Format rules section as prose.
+    def _prepare_skills_data(self, skill_names: list[str]) -> list[dict[str, str]]:
+        """Prepare skills data for template rendering.
 
         Args:
-            rules_content: Raw rules content from component
+            skill_names: List of skill names
 
         Returns:
-            Formatted rules section
+            List of skill dictionaries with metadata
         """
-        lines = ["Rules:", ""]
-        lines.append(rules_content.strip())
-        return "\n".join(lines)
+        skills = []
+        for name in skill_names:
+            dir_name = skill_to_directory_name(name)
+            skills.append(
+                {
+                    "name": name.replace("-", " ").title(),
+                    "purpose": f"Capability for {name}",
+                    "directory": dir_name,
+                    "when_to_use": f"When workflow requires {name}",
+                }
+            )
+        return skills
+
+    def _generate_agent_notes(self, agent: Agent) -> str | None:
+        """Generate agent-specific notes.
+
+        Args:
+            agent: Agent IR model
+
+        Returns:
+            Notes string or None
+        """
+        # Agent-specific notes
+        notes_map = {
+            "code": "Always run tests before marking work complete. Follow project's feature branch naming convention.",
+            "test": "Focus on coverage first, then edge cases. Use the project's test framework.",
+            "debug": "Start with rubber duck debugging for complex issues. Check logs before diving deep.",
+        }
+        return notes_map.get(agent.name)
