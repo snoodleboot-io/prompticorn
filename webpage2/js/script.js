@@ -135,6 +135,9 @@ function initD3Graph() {
     .attr('width', W)
     .attr('height', H)
     .attr('viewBox', `0 0 ${W} ${H}`)
+    .attr('preserveAspectRatio', 'xMidYMid meet')
+    .style('width', '100%')
+    .style('height', 'auto')
     .style('background', 'transparent');
 
   const sim = d3.forceSimulation(nodes)
@@ -181,6 +184,16 @@ function initD3Graph() {
       .attr('x2', d => d.target.x).attr('y2', d => d.target.y);
     node.attr('transform', d => `translate(${d.x},${d.y})`);
   });
+
+  // Reflow viewBox on container resize
+  const ro = new ResizeObserver(() => {
+    const w = container.clientWidth;
+    if (w > 0) {
+      svg.attr('viewBox', `0 0 ${w} ${H}`);
+      sim.force('center', d3.forceCenter(w / 2, H / 2)).alpha(0.15).restart();
+    }
+  });
+  ro.observe(container);
 }
 
 /* ── Mermaid init ── */

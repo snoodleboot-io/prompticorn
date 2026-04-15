@@ -239,7 +239,7 @@ def create_handler(config: dict):
 
 ### Abstract Classes and Interfaces
 
-Selected Style: **[Template variable]**
+Selected Style: **{{ abstract_class_style }}**
 
 {% if config.abstract_class_style == "abc" %}
 #### Using Abstract Base Classes (abc module)

@@ -844,6 +844,7 @@ code[class*="language-"] {
 
 /* ── Mermaid override ── */
 .mermaid { background: transparent !important; }
+.mermaid svg { max-width: 100%; height: auto; }
 
 /* ── D3 Graph styles ── */
 .d3-node circle {
