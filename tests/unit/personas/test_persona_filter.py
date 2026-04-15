@@ -152,5 +152,6 @@ class TestPersonaFilter:
             enabled = set(pfilter.get_enabled_agents())
 
             # Universal agents should always be in enabled set
-            assert universal_agents.issubset(enabled), \
+            assert universal_agents.issubset(enabled), (
                 f"Universal agents not all enabled for {persona_id}"
+            )

@@ -1,15 +1,14 @@
 """Comprehensive unit tests for Builder base classes.
 
 Tests cover:
-- AbstractBuilder interface enforcement
+- Builder interface enforcement
 - BuildOptions validation
 - Builder protocol implementations
 """
 
-
 import pytest
 
-from promptosaurus.builders.base import AbstractBuilder, BuildOptions
+from promptosaurus.builders.base import Builder, BuildOptions
 from promptosaurus.ir.models import Agent
 
 # ============================================================================
@@ -43,10 +42,10 @@ def verbose_build_options() -> BuildOptions:
     return BuildOptions(variant="verbose", agent_name="test-agent")
 
 
-class ConcreteBuilder(AbstractBuilder):
-    """Concrete implementation of AbstractBuilder for testing."""
+class ConcreteBuilder(Builder):
+    """Concrete implementation of Builder for testing."""
 
-    def build(self, agent: Agent, options: BuildOptions) -> str:
+    def build(self, agent: Agent, options: BuildOptions, config: dict | None = None) -> str:
         """Build tool-specific output."""
         return f"Building {agent.name} in {options.variant} mode"
 
@@ -151,17 +150,17 @@ class TestBuildOptionsValidation:
 
 
 # ============================================================================
-# AbstractBuilder Tests
+# Builder Tests
 # ============================================================================
 
 
-class TestAbstractBuilderInterface:
-    """Test AbstractBuilder interface."""
+class TestBuilderInterface:
+    """Test Builder interface."""
 
-    def test_concrete_builder_implements_abstract_methods(
+    def test_concrete_builder_implements_interface_methods(
         self, sample_agent, verbose_build_options
     ):
-        """Test concrete builder implements all abstract methods."""
+        """Test concrete builder implements all interface methods."""
         builder = ConcreteBuilder()
 
         # Should be able to call build
@@ -172,15 +171,27 @@ class TestAbstractBuilderInterface:
         errors = builder.validate(sample_agent)
         assert isinstance(errors, list)
 
-    def test_abstract_builder_cannot_be_instantiated(self):
-        """Test AbstractBuilder cannot be directly instantiated."""
-        with pytest.raises(TypeError):
-            AbstractBuilder()  # type: ignore
+    def test_builder_raises_not_implemented_on_build(self):
+        """Test Builder raises NotImplementedError when build is called."""
+        builder = Builder()
+        agent = Agent(
+            name="test",
+            description="Test agent",
+            system_prompt="Test prompt",
+            tools=[],
+            skills=[],
+            workflows=[],
+            subagents=[],
+        )
+        options = BuildOptions()
+
+        with pytest.raises(NotImplementedError, match="Builder must implement build"):
+            builder.build(agent, options)
 
     def test_builder_must_implement_build(self):
         """Test builder must implement build method."""
 
-        class IncompleteBuilder(AbstractBuilder):
+        class IncompleteBuilder(Builder):
             def validate(self, agent: Agent) -> list[str]:
                 return []
 
@@ -190,14 +201,26 @@ class TestAbstractBuilderInterface:
             def get_output_format(self) -> str:
                 return "test"
 
-        with pytest.raises(TypeError):
-            IncompleteBuilder()  # type: ignore
+        builder = IncompleteBuilder()
+        agent = Agent(
+            name="test",
+            description="Test agent",
+            system_prompt="Test prompt",
+            tools=[],
+            skills=[],
+            workflows=[],
+            subagents=[],
+        )
+        options = BuildOptions()
+
+        with pytest.raises(NotImplementedError, match="must implement build"):
+            builder.build(agent, options)
 
     def test_builder_must_implement_validate(self):
         """Test builder must implement validate method."""
 
-        class IncompleteBuilder(AbstractBuilder):
-            def build(self, agent: Agent, options: BuildOptions) -> str:
+        class IncompleteBuilder(Builder):
+            def build(self, agent: Agent, options: BuildOptions, config: dict | None = None) -> str:
                 return ""
 
             def get_tool_name(self) -> str:
@@ -206,8 +229,19 @@ class TestAbstractBuilderInterface:
             def get_output_format(self) -> str:
                 return "test"
 
-        with pytest.raises(TypeError):
-            IncompleteBuilder()  # type: ignore
+        builder = IncompleteBuilder()
+        agent = Agent(
+            name="test",
+            description="Test agent",
+            system_prompt="Test prompt",
+            tools=[],
+            skills=[],
+            workflows=[],
+            subagents=[],
+        )
+
+        with pytest.raises(NotImplementedError, match="must implement validate"):
+            builder.validate(agent)
 
 
 # ============================================================================
@@ -304,8 +338,8 @@ class TestBuilderSupportsFeature:
     def test_supports_feature_accepts_feature_name(self):
         """Test supports_feature accepts any feature name."""
 
-        class FeatureBuilder(AbstractBuilder):
-            def build(self, agent: Agent, options: BuildOptions) -> str:
+        class FeatureBuilder(Builder):
+            def build(self, agent: Agent, options: BuildOptions, config: dict | None = None) -> str:
                 return ""
 
             def validate(self, agent: Agent) -> list[str]:

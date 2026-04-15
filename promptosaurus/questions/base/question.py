@@ -1,20 +1,18 @@
 """Base question class for prompt init CLI.
 
-This module defines the Question abstract base class that all question
+This module defines the Question interface class that all question
 implementations must inherit from. Each question represents a single
 configuration choice in the prompt init flow.
 
 Classes:
-    Question: Abstract base class for all questions.
+    Question: Interface class for all questions.
 """
 
-from abc import ABC, abstractmethod
 
+class Question:
+    """Base interface class for all questions in the prompt init flow.
 
-class Question(ABC):
-    """Base class for all questions in the prompt init flow.
-
-    This abstract base class defines the interface that all question
+    This interface class defines the interface that all question
     implementations must follow. Each question represents a single
     configuration choice that the user needs to make.
 
@@ -34,27 +32,26 @@ class Question(ABC):
     """
 
     @property
-    @abstractmethod
     def key(self) -> str:
         """Unique identifier for this question.
 
         Returns:
             A unique string key that identifies this question.
         """
-        pass
+        raise NotImplementedError(f"{self.__class__.__name__} must implement key property")
 
     @property
-    @abstractmethod
     def question_text(self) -> str:
         """What to ask the user.
 
         Returns:
             The question text to display to the user.
         """
-        pass
+        raise NotImplementedError(
+            f"{self.__class__.__name__} must implement question_text property"
+        )
 
     @property
-    @abstractmethod
     def explanation(self) -> str:
         """Why we're asking this - what problem it solves.
 
@@ -62,17 +59,16 @@ class Question(ABC):
             Explanation of why this question matters and what
             configuration problem it solves.
         """
-        pass
+        raise NotImplementedError(f"{self.__class__.__name__} must implement explanation property")
 
     @property
-    @abstractmethod
     def options(self) -> list[str]:
         """Available options.
 
         Returns:
             List of option strings that the user can choose from.
         """
-        pass
+        raise NotImplementedError(f"{self.__class__.__name__} must implement options property")
 
     @property
     def option_explanations(self) -> dict[str, str]:

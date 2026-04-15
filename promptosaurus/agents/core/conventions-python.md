@@ -239,7 +239,7 @@ def create_handler(config: dict):
 
 ### Abstract Classes and Interfaces
 
-Selected Style: **[Template variable]**
+Selected Style: **{{ abstract_class_style }}**
 
 {% if config.abstract_class_style == "abc" %}
 #### Using Abstract Base Classes (abc module)
@@ -265,21 +265,77 @@ class SqlRepository(Repository):
 {% endif %}
 
 {% if config.abstract_class_style == "interface" %}
-#### Using NotImplementedError (Informal Interfaces)
-- Raise `NotImplementedError` in methods that must be overridden
-- Document expected behavior in docstrings
-- Rely on runtime checks and duck typing
-- Simpler for cases where strict enforcement isn't needed
+#### Using Interface Pattern (Traditional OOP Interfaces)
+- Interfaces are base classes with standard `__init__` containing base details repeated across classes
+- Interface methods raise `NotImplementedError` for methods that must be implemented by subclasses
+- Used as roots of inheritance trees to define contracts through inheritance
+- Provides clear inheritance hierarchies and explicit contracts
+- Better for internal APIs where inheritance is expected
 
 ```python
 class Repository:
+    """Interface for repository implementations.
+    
+    Base class providing common initialization and defining the interface
+    that all repository implementations must follow.
+    """
+    
+    def __init__(self, connection_string: str, timeout: int = 30):
+        """Initialize repository with connection details.
+        
+        Args:
+            connection_string: Database connection string
+            timeout: Connection timeout in seconds
+        """
+        self.connection_string = connection_string
+        self.timeout = timeout
+    
     def get(self, id: str) -> Entity | None:
         """Retrieve entity by ID. Must be overridden by subclasses."""
         raise NotImplementedError(f"{self.__class__.__name__} must implement get()")
+    
+    def save(self, entity: Entity) -> None:
+        """Save entity to storage. Must be overridden by subclasses."""
+        raise NotImplementedError(f"{self.__class__.__name__} must implement save()")
+    
+    def delete(self, id: str) -> bool:
+        """Delete entity by ID. Must be overridden by subclasses.""" 
+        raise NotImplementedError(f"{self.__class__.__name__} must implement delete()")
 
+# Implementation - explicit inheritance required
 class SqlRepository(Repository):
+    def __init__(self, connection_string: str, timeout: int = 30):
+        super().__init__(connection_string, timeout)
+        # Additional SQL-specific initialization
+        self._engine = create_engine(connection_string)
+    
     def get(self, id: str) -> Entity | None:
-        # Concrete implementation
-        return self.session.query(Entity).get(id)
+        return self._session.query(Entity).get(id)
+    
+    def save(self, entity: Entity) -> None:
+        self._session.add(entity)
+        self._session.commit()
+    
+    def delete(self, id: str) -> bool:
+        entity = self.get(id)
+        if entity:
+            self._session.delete(entity)
+            self._session.commit()
+            return True
+        return False
+
+# Usage - inheritance provides the interface
+def process_data(repo: Repository) -> None:
+    entity = repo.get("123")
+    if entity:
+        repo.save(entity)
 ```
+
+**When to use Interface pattern:**
+- Creating base classes with shared initialization logic
+- Building inheritance hierarchies for internal APIs
+- When you want explicit contracts through inheritance
+- For classes that will be instantiated and need base behavior
+- When runtime type checking with inheritance is important
+
 {% endif %}

@@ -52,12 +52,11 @@ Use the Promptosaurus CLI to generate custom outputs:
 # Install promptosaurus
 pip install promptosaurus
 
-# Build for your tool
-promptosaurus build --agent code --format kilo
-promptosaurus build --agent code --format cline
-promptosaurus build --agent code --format claude
-promptosaurus build --agent code --format copilot
-promptosaurus build --agent code --format cursor
+# Initialize configuration (runs setup wizard)
+promptosaurus init
+
+# Switch to a different tool output
+promptosaurus switch
 ```
 
 ### Option 3: Use as Templates

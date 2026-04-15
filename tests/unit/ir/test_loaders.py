@@ -1038,11 +1038,13 @@ partial-agent:
         from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
 
         loader = AgentSkillMappingLoader(temp_mapping_file)
-        result = loader.validate_completeness([
-            "architect",  # complete
-            "empty-agent",  # incomplete (empty lists)
-            "nonexistent"  # missing
-        ])
+        result = loader.validate_completeness(
+            [
+                "architect",  # complete
+                "empty-agent",  # incomplete (empty lists)
+                "nonexistent",  # missing
+            ]
+        )
 
         assert len(result["missing"]) == 1
         assert "nonexistent" in result["missing"]
@@ -1060,7 +1062,9 @@ partial-agent:
         loader = AgentSkillMappingLoader(bad_file)
 
         # Should raise error when accessing mapping
-        with pytest.raises(Exception):  # yaml.YAMLError or similar
+        import yaml
+
+        with pytest.raises(yaml.YAMLError):  # yaml.YAMLError or similar
             _ = loader.mapping
 
     def test_empty_yaml_file(self, tmp_path):

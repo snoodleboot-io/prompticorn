@@ -11,7 +11,7 @@ Complete searchable catalog of all Promptosaurus agents, workflows, and skills.
 ## Quick Navigation
 
 - [Agents](#agents) - 25 primary agents
-- [Personas](#personas) - 9 role-based personas
+- [Personas](#personas) - 12 personas (including 3 software engineer specializations)
 - [Universal Agents](#universal-agents) - Always available
 - [By Domain](#by-domain) - Organized by technical domain
 
@@ -67,11 +67,14 @@ Located in `promptosaurus/agents/[agent-name]/`
 
 ## Personas
 
-**9 role-based personas** for agent filtering:
+**12 personas (including 3 new software engineer specializations)** for agent filtering:
 
 | Persona | Focus | Primary Agents |
 |---------|-------|----------------|
-| **Software Engineer** | Writing, maintaining, testing code | code, test, refactor, migration |
+| **Software Engineer** _(deprecated)_ | Writing, maintaining, testing code | code, test, refactor, migration |
+| **Backend Software Engineer** | Backend systems, APIs, server-side development | code, test, refactor, migration |
+| **Frontend Software Engineer** | Frontend development, UI, client-side code | code, test, refactor, migration |
+| **Fullstack Software Engineer** | Full-stack development across backend and frontend | code, test, refactor, migration |
 | **Architect** | System design, architecture | architect, backend, frontend, data |
 | **QA/Tester** | Quality assurance, testing | test, review, qa-tester |
 | **DevOps Engineer** | Infrastructure, deployment, ops | devops, observability, incident |
@@ -131,7 +134,7 @@ For persona-based filtering, see: [PERSONA_GUIDES.md](./PERSONA_GUIDES.md)
 | **Subagents** | 82 | ✅ |
 | **Workflows** | 100 | ✅ |
 | **Skills** | 108 | ✅ |
-| **Personas** | 9 | ✅ |
+| **Personas** | 12 | ✅ |
 
 ---
 

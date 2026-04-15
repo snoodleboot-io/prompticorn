@@ -1,6 +1,5 @@
 """Unit tests for Data Agent subagents."""
 
-
 import pytest
 
 

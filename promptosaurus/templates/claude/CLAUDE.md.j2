@@ -1,0 +1,70 @@
+# Claude Configuration
+
+**Last Updated:** {{ last_updated }}  
+**Agent Count:** {{ agent_count }} primary agents  
+**Persona:** {{ persona_name }}
+
+## Core Conventions
+
+**ALWAYS load first, before any agent:**
+
+```
+.claude/conventions/core/general.md
+```
+
+This file contains:
+- System startup checklist (branch check, session management)
+- Feature branch naming conventions
+- General development rules
+- Session management protocol
+- Core conventions (repository structure, error handling, imports)
+
+## Agent Registry
+
+Match the user's request to **ONE** agent and load **ONLY** that file.
+
+| Agent | Purpose | File Path |
+|-------|---------|-----------|
+{% for agent in agents %}
+| {{ agent.name }}-agent | {{ agent.description }} | .claude/agents/{{ agent.file_name }}.md |
+{% endfor %}
+
+## Routing Rules
+
+Match the user's request to the appropriate agent:
+
+{% for category in routing_categories %}
+### {{ category.name }}
+- **Keywords:** {{ category.keywords }}
+- **Agent:** {{ category.agent }}
+
+{% endfor %}
+
+## Instructions
+
+1. **Load core conventions:**
+   ```
+   Read: .claude/conventions/core/general.md
+   ```
+
+2. **Analyze the user's request** and match to ONE agent using the routing rules above
+
+3. **Load that agent's file:**
+   ```
+   Read: .claude/agents/{selected-agent}.md
+   ```
+
+4. **Follow the agent's instructions** - The agent file will tell you:
+   - What workflow to load
+   - What language conventions to load
+   - What subagents to load
+   - What skills to load
+   
+5. **Do NOT load anything else** until the agent file explicitly instructs you to
+
+## Notes
+
+- Each agent file is self-contained with all necessary references
+- Language conventions are loaded by workflows, not upfront
+- Skills are loaded on-demand when workflows require them
+- Subagents are loaded only when the primary agent delegates to them

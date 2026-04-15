@@ -23,8 +23,8 @@ Builders transform Agent IR (Intermediate Representation) models into tool-speci
 
 **Quick Example:**
 ```python
-from src.builders.kilo_builder import KiloBuilder
-from src.ir.models import Agent
+from promptosaurus.builders.kilo_builder import KiloBuilder
+from promptosaurus.ir.models import Agent
 
 builder = KiloBuilder()
 agent = Agent(name="code", description="Code expert", system_prompt="...")
@@ -50,7 +50,7 @@ output = builder.build(agent, BuildOptions(variant="verbose"))
 
 **Quick Example:**
 ```python
-from src.builders.cline_builder import ClineBuilder
+from promptosaurus.builders.cline_builder import ClineBuilder
 
 builder = ClineBuilder()
 agent = Agent(name="code", description="...", system_prompt="...")
@@ -63,27 +63,29 @@ rules = builder.build(agent, BuildOptions(variant="verbose"))
 ---
 
 ### 3. 🤖 [ClaudeBuilder](./CLAUDE_BUILDER_GUIDE.md)
-**For:** Claude Messages API JSON  
-**Output Format:** JSON dictionary (Python dict)  
-**Target:** Claude API system configuration  
-**Use When:** Integrating with Anthropic's Claude API
+**For:** Claude agent configuration files  
+**Output Format:** Markdown files (dict[str, str])  
+**Target:** `.claude/` directory with Markdown files  
+**Use When:** Building Claude agent configuration files
 
 **Key Features:**
-- JSON-serializable output
-- Tool schema generation
-- Claude Messages API compatible
+- File path → Markdown content mapping
+- `.claude/` directory structure
+- Agents, subagents, and workflows support
 - Programmatic integration
-- Skills and workflows in instructions
+- Skills and workflows support
 
 **Quick Example:**
 ```python
-from src.builders.claude_builder import ClaudeBuilder
-import json
+from promptosaurus.builders.claude_builder import ClaudeBuilder
+from pathlib import Path
 
 builder = ClaudeBuilder()
 agent = Agent(name="code", description="...", system_prompt="...")
 config = builder.build(agent, BuildOptions(variant="verbose"))
-json_str = json.dumps(config)
+for file_path, content in config.items():
+    Path(file_path).parent.mkdir(parents=True, exist_ok=True)
+    Path(file_path).write_text(content)
 ```
 
 [📖 Full ClaudeBuilder Guide](./CLAUDE_BUILDER_GUIDE.md)
@@ -105,7 +107,7 @@ json_str = json.dumps(config)
 
 **Quick Example:**
 ```python
-from src.builders.copilot_builder import CopilotBuilder
+from promptosaurus.builders.copilot_builder import CopilotBuilder
 
 builder = CopilotBuilder(agents_dir=".github/instructions")
 agent = Agent(name="code", description="...", system_prompt="...")
@@ -132,7 +134,7 @@ instructions = builder.build(agent, BuildOptions(variant="verbose"))
 
 **Quick Example:**
 ```python
-from src.builders.cursor_builder import CursorBuilder
+from promptosaurus.builders.cursor_builder import CursorBuilder
 
 builder = CursorBuilder()
 agent = Agent(name="dev", description="...", system_prompt="...")
@@ -148,9 +150,9 @@ rules = builder.build(agent, BuildOptions(variant="verbose"))
 
 | Feature | Kilo | Cline | Claude | Copilot | Cursor |
 |---------|------|-------|--------|---------|--------|
-| **Output Format** | YAML + MD | Markdown | JSON | YAML + MD | Markdown |
+| **Output Format** | YAML + MD | Markdown | Markdown files (dict[str, str]) | YAML + MD | Markdown |
 | **Has Frontmatter** | ✅ Yes | ❌ No | N/A | ✅ Yes | ❌ No |
-| **JSON Serializable** | ❌ No | ❌ No | ✅ Yes | ❌ No | ❌ No |
+| **JSON Serializable** | ❌ No | ❌ No | ❌ No | ❌ No | ❌ No |
 | **Subagents** | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | **Skills** | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
 | **Workflows** | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes | ✅ Yes |
@@ -294,7 +296,7 @@ class BuildOptions:
 ### Task: Create a New Builder
 
 1. Read [KiloBuilder Guide](./KILO_BUILDER_GUIDE.md) for complete structure
-2. Implement `AbstractBuilder` from `src/builders/base.py`
+2. Extend `Builder` from `promptosaurus/builders/base.py`
 3. Implement `build()` and `validate()` methods
 4. Register in builder factory
 5. Create documentation following guide format
@@ -337,7 +339,7 @@ output = builder.build(agent, options)
 ### Class Hierarchy
 
 ```
-AbstractBuilder (base.py)
+Builder (base.py)
 ├── KiloBuilder
 ├── ClineBuilder
 ├── ClaudeBuilder
@@ -364,15 +366,13 @@ Save to File / Use with API
 
 ## API Reference
 
-### AbstractBuilder Interface
+### Builder Interface
 
 ```python
-class AbstractBuilder(ABC):
-    @abstractmethod
+class Builder:
     def build(self, agent: Agent, options: BuildOptions) -> str | dict:
         """Build tool-specific output."""
         
-    @abstractmethod
     def validate(self, agent: Agent) -> list[str]:
         """Validate agent model."""
         
@@ -407,7 +407,7 @@ class Agent:
 All builders raise `BuilderValidationError` on validation failure:
 
 ```python
-from src.builders.errors import BuilderValidationError
+from promptosaurus.builders.errors import BuilderValidationError
 
 try:
     config = builder.build(agent, options)
@@ -444,15 +444,15 @@ except BuilderValidationError as e:
 
 ## Source Code References
 
-- **Base Classes:** `src/builders/base.py`
-- **Kilo Implementation:** `src/builders/kilo_builder.py`
-- **Cline Implementation:** `src/builders/cline_builder.py`
-- **Claude Implementation:** `src/builders/claude_builder.py`
-- **Copilot Implementation:** `src/builders/copilot_builder.py`
-- **Cursor Implementation:** `src/builders/cursor_builder.py`
-- **Errors:** `src/builders/errors.py`
-- **Examples:** `src/builders/examples_usage.py`
-- **IR Models:** `src/ir/models.py`
+- **Base Classes:** `promptosaurus/builders/base.py`
+- **Kilo Implementation:** `promptosaurus/builders/kilo_builder.py`
+- **Cline Implementation:** `promptosaurus/builders/cline_builder.py`
+- **Claude Implementation:** `promptosaurus/builders/claude_builder.py`
+- **Copilot Implementation:** `promptosaurus/builders/copilot_builder.py`
+- **Cursor Implementation:** `promptosaurus/builders/cursor_builder.py`
+- **Errors:** `promptosaurus/builders/errors.py`
+- **Examples:** `promptosaurus/builders/examples_usage.py`
+- **IR Models:** `promptosaurus/ir/models.py`
 
 ---
 
@@ -461,7 +461,7 @@ except BuilderValidationError as e:
 For detailed information on any builder:
 - Read the comprehensive guide for that builder
 - Check the docstrings in source code
-- Review examples in `src/builders/examples_usage.py`
+- Review examples in `promptosaurus/builders/examples_usage.py`
 - Look at test files in `tests/unit/builders/`
 
 For issues or questions:

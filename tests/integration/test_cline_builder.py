@@ -225,7 +225,9 @@ class TestClineBuilderMarkdownValidation:
         lines = output.split("\n")
 
         # Main headers should be level 1 (# System Prompt, # Tools, etc.)
-        main_headers = [l for l in lines if l.startswith("# ") and not l.startswith("## ")]
+        main_headers = [
+            line for line in lines if line.startswith("# ") and not line.startswith("## ")
+        ]
         assert len(main_headers) > 0
 
         # All main headers should be level 1 only
@@ -847,7 +849,9 @@ class TestClineBuilderIntegration:
         lines = output.split("\n")
 
         # Cline format uses level 1 headers for main sections (System Prompt is rendered as prose, but Skills/Subagents are headers)
-        main_headers = [l for l in lines if l.startswith("# ") and not l.startswith("## ")]
+        main_headers = [
+            line for line in lines if line.startswith("# ") and not line.startswith("## ")
+        ]
         # Should have at least one main header (the agent name header)
         assert len(main_headers) >= 1
 

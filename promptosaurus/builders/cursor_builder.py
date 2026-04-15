@@ -6,13 +6,13 @@ into Cursor AI configuration files (.cursorrules) with markdown formatting.
 
 from pathlib import Path
 
-from promptosaurus.builders.base import AbstractBuilder, BuildOptions
+from promptosaurus.builders.base import Builder, BuildOptions
 from promptosaurus.builders.errors import BuilderValidationError
 from promptosaurus.ir.loaders import CoreFilesLoader
 from promptosaurus.ir.models import Agent
 
 
-class CursorBuilder(AbstractBuilder):
+class CursorBuilder(Builder):
     """Builder for Cursor AI configuration files.
 
     Generates `.cursorrules` files (single markdown file) with system prompt,

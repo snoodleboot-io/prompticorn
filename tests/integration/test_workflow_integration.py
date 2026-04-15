@@ -1,6 +1,5 @@
 """Integration tests for workflows."""
 
-
 import pytest
 
 

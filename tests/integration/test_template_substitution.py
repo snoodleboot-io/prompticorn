@@ -18,7 +18,7 @@ class TestTemplateSubstitution:
         agent = Agent(
             name="test-agent",
             description="Test agent with template",
-            system_prompt="Agents: {{PRIMARY_AGENTS_LIST}}"
+            system_prompt="Agents: {{PRIMARY_AGENTS_LIST}}",
         )
         builder = KiloBuilder()
         options = BuildOptions(variant="minimal")
@@ -28,8 +28,9 @@ class TestTemplateSubstitution:
         result = builder.build(agent, options, config)
 
         # Assert
-        assert "{{PRIMARY_AGENTS_LIST}}" not in result, \
+        assert "{{PRIMARY_AGENTS_LIST}}" not in result, (
             "Template variable should be substituted, not left as-is"
+        )
 
     def test_template_variable_not_substituted_without_config(self):
         """Template variables should remain if no config is provided."""
@@ -37,7 +38,7 @@ class TestTemplateSubstitution:
         agent = Agent(
             name="test-agent",
             description="Test agent",
-            system_prompt="Agents: {{PRIMARY_AGENTS_LIST}}"
+            system_prompt="Agents: {{PRIMARY_AGENTS_LIST}}",
         )
         builder = KiloBuilder()
         options = BuildOptions(variant="minimal")
@@ -46,8 +47,9 @@ class TestTemplateSubstitution:
         result = builder.build(agent, options, config=None)
 
         # Assert
-        assert "{{PRIMARY_AGENTS_LIST}}" in result, \
+        assert "{{PRIMARY_AGENTS_LIST}}" in result, (
             "Template variable should remain unchanged when config is None"
+        )
 
     def test_primary_agents_list_contains_agent_entries(self):
         """PRIMARY_AGENTS_LIST should be replaced with actual agent list."""
@@ -55,7 +57,7 @@ class TestTemplateSubstitution:
         agent = Agent(
             name="test-orchestrator",
             description="Test orchestrator",
-            system_prompt="Available:\n{{PRIMARY_AGENTS_LIST}}\nEnd"
+            system_prompt="Available:\n{{PRIMARY_AGENTS_LIST}}\nEnd",
         )
         builder = KiloBuilder()
         options = BuildOptions(variant="minimal")
@@ -65,8 +67,9 @@ class TestTemplateSubstitution:
         result = builder.build(agent, options, config)
 
         # Assert - should have markdown list items OR "No agents" message
-        assert ("- **" in result) or ("No agents" in result), \
+        assert ("- **" in result) or ("No agents" in result), (
             "PRIMARY_AGENTS_LIST should be replaced with agent list or 'No agents' message"
+        )
 
         # Should NOT have the template variable
         assert "{{PRIMARY_AGENTS_LIST}}" not in result
@@ -84,8 +87,9 @@ class TestTemplateSubstitution:
         orchestrator = registry.get_agent("orchestrator")
 
         # Verify source has template variable
-        assert "{{PRIMARY_AGENTS_LIST}}" in orchestrator.system_prompt, \
+        assert "{{PRIMARY_AGENTS_LIST}}" in orchestrator.system_prompt, (
             "Orchestrator source should contain PRIMARY_AGENTS_LIST template variable"
+        )
 
         # Act - build the agent
         builder = KiloBuilder()
@@ -94,20 +98,20 @@ class TestTemplateSubstitution:
         result = builder.build(orchestrator, options, config)
 
         # Assert - template should be replaced
-        assert "{{PRIMARY_AGENTS_LIST}}" not in result, \
+        assert "{{PRIMARY_AGENTS_LIST}}" not in result, (
             "Built orchestrator should NOT contain unreplaced template variable"
+        )
 
         # Should have actual agent entries
-        assert "- **architect**" in result or "- **code**" in result, \
+        assert "- **architect**" in result or "- **code**" in result, (
             "Built orchestrator should contain actual agent list entries"
+        )
 
     def test_template_substitution_works_in_system_prompt_section(self):
         """Substituted content should appear in System Prompt section."""
         # Arrange
         agent = Agent(
-            name="test",
-            description="Test",
-            system_prompt="Before\n{{PRIMARY_AGENTS_LIST}}\nAfter"
+            name="test", description="Test", system_prompt="Before\n{{PRIMARY_AGENTS_LIST}}\nAfter"
         )
         builder = KiloBuilder()
         options = BuildOptions(variant="minimal")
@@ -117,7 +121,7 @@ class TestTemplateSubstitution:
         result = builder.build(agent, options, config)
 
         # Assert
-        lines = result.split('\n')
+        lines = result.split("\n")
         in_system_prompt = False
         found_substitution = False
 
@@ -131,8 +135,7 @@ class TestTemplateSubstitution:
                 if "Before" in line or "After" in line or "- **" in line or "No agents" in line:
                     found_substitution = True
 
-        assert found_substitution, \
-            "Template substitution should appear in System Prompt section"
+        assert found_substitution, "Template substitution should appear in System Prompt section"
         assert "{{PRIMARY_AGENTS_LIST}}" not in result
 
 

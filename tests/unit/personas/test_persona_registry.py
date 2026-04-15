@@ -31,12 +31,15 @@ class TestPersonaRegistry:
         """Test listing all persona IDs"""
         personas = registry.list_personas()
 
-        # Should have 9 personas as defined in ADR-001
-        assert len(personas) == 9
+        # Should have 12 personas
+        assert len(personas) == 12
 
         # Check expected personas exist
         expected_personas = [
             "software_engineer",
+            "backend_software_engineer",
+            "frontend_software_engineer",
+            "fullstack_software_engineer",
             "architect",
             "qa_tester",
             "devops_engineer",
@@ -53,7 +56,7 @@ class TestPersonaRegistry:
     def test_get_display_name(self, registry):
         """Test getting display names for personas"""
         display_name = registry.get_display_name("software_engineer")
-        assert display_name == "Software Engineer"
+        assert display_name == "Software Engineer (Fullstack)"
 
         display_name2 = registry.get_display_name("qa_tester")
         # Note: YAML has "QA / Tester" with spaces

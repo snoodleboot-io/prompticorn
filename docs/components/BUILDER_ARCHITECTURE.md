@@ -6,10 +6,10 @@ The Builder architecture in Promptosaurus is responsible for transforming Interm
 
 ## Core Components
 
-### AbstractBuilder Base Class
+### Builder Base Class
 **File:** `promptosaurus/builders/base.py`
 
-The AbstractBuilder base class defines the interface that all tool-specific builders must implement. It ensures consistent behavior across different tool targets while providing common functionality.
+The Builder base class defines the interface that all tool-specific builders must implement. It ensures consistent behavior across different tool targets while providing common functionality.
 
 **Key Methods:**
 - `build(agent, options)`: Abstract method to transform Agent IR to tool-specific output
@@ -90,21 +90,21 @@ Builds output for Kilo Code AI tool. Generates configuration files for Kilo's ag
 
 Builds output for Claude AI tool. Generates prompt files and configuration for Claude's agent system.
 
-**Output Format:** Markdown files with specific frontmatter and sections.
+**Output Format:** Markdown files, returns `dict[str, str]` mapping file paths to content.
 
 ### ClineBuilder
 **File:** `promptosaurus/builders/cline_builder.py`
 
 Builds output for Cline AI tool. Generates configuration files for Cline's agent system.
 
-**Output Format:** JSON-based configuration with specific sections.
+**Output Format:** Markdown (`.clinerules`) files.
 
 ### CopilotBuilder
 **File:** `promptosaurus/builders/copilot_builder.py`
 
 Builds output for GitHub Copilot. Generates configuration files for Copilot's agent system.
 
-**Output Format:** JSON-based configuration with specific sections.
+**Output Format:** YAML frontmatter + Markdown.
 
 ## Template System Integration
 
@@ -130,13 +130,13 @@ sequenceDiagram
 
 To create a new builder for an unsupported tool:
 
-1. **Inherit from AbstractBuilder:**
+1. **Inherit from Builder:**
 ```python
-from promptosaurus.builders.base import AbstractBuilder, BuildOptions
+from promptosaurus.builders.base import Builder, BuildOptions
 from promptosaurus.ir.models import Agent
 from typing import Any
 
-class MyToolBuilder(AbstractBuilder):
+class MyToolBuilder(Builder):
     def build(self, agent: Agent, options: BuildOptions) -> str | dict[str, Any]:
         # Implement tool-specific build logic
         pass

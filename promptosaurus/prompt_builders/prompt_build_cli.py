@@ -20,7 +20,7 @@ from typing import Any, NoReturn
 
 from promptosaurus.agent_registry.errors import AgentNotFoundError
 from promptosaurus.agent_registry.registry import Registry
-from promptosaurus.builders.base import AbstractBuilder, BuildOptions
+from promptosaurus.builders.base import Builder, BuildOptions
 from promptosaurus.builders.errors import BuilderException, BuilderNotFoundError
 from promptosaurus.builders.factory import BuilderFactory
 from promptosaurus.ir.models import Agent
@@ -108,7 +108,7 @@ class PromptBuildCLI:
 
         return parser
 
-    def get_builder(self, tool: str) -> AbstractBuilder:
+    def get_builder(self, tool: str) -> Builder:
         """Get builder instance for the specified tool.
 
         Args:
@@ -157,7 +157,7 @@ class PromptBuildCLI:
                 )
 
     def build_output(
-        self, builder: AbstractBuilder, agent: Agent, tool: str, variant: str
+        self, builder: Builder, agent: Agent, tool: str, variant: str
     ) -> str | dict[str, Any]:
         """Build output using the specified builder.
 

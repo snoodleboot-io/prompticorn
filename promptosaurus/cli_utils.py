@@ -17,7 +17,7 @@ Functions:
 import re
 from typing import Final
 
-SUPPORTED_TOOLS: Final[set[str]] = {"kilo-cli", "kilo-ide", "cline", "cursor", "copilot"}
+SUPPORTED_TOOLS: Final[set[str]] = {"kilo-cli", "kilo-ide", "claude", "cline", "cursor", "copilot"}
 
 # Mapping from normalized input (without special chars) to canonical tool name
 TOOL_MAPPINGS: Final[dict[str, str]] = {
@@ -26,6 +26,7 @@ TOOL_MAPPINGS: Final[dict[str, str]] = {
     "cline": "cline",
     "cursor": "cursor",
     "copilot": "copilot",
+    "claude": "claude",
 }
 
 

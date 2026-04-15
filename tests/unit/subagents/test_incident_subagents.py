@@ -1,6 +1,5 @@
 """Unit tests for Incident Agent subagents."""
 
-
 import pytest
 
 

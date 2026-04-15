@@ -1,10 +1,9 @@
-"""Abstract base class and configuration for all builders.
+"""Base class and configuration for all builders.
 
-This module defines the AbstractBuilder base class that all tool-specific
+This module defines the Builder interface class that all tool-specific
 builders must implement, as well as the BuildOptions configuration class.
 """
 
-from abc import ABC, abstractmethod
 from dataclasses import dataclass
 from typing import Any
 
@@ -39,18 +38,17 @@ class BuildOptions:
             raise ValueError(f"Invalid variant: {self.variant}. Must be 'minimal' or 'verbose'")
 
 
-class AbstractBuilder(ABC):
-    """Abstract base class for tool-specific builders.
+class Builder:
+    """Interface class for tool-specific builders.
 
     All tool-specific builders (Kilo, Claude, Cline, etc.) must inherit
-    from this class and implement the abstract methods. The builder is
+    from this class and implement the interface methods. The builder is
     responsible for transforming Agent IR models into tool-specific output.
 
     This class defines the interface that all builders must follow,
     ensuring consistent behavior across different tool targets.
     """
 
-    @abstractmethod
     def build(
         self, agent: Agent, options: BuildOptions, config: dict | None = None
     ) -> str | dict[str, Any]:
@@ -69,9 +67,8 @@ class AbstractBuilder(ABC):
             BuilderValidationError: If the agent model fails validation
             BuilderException: For other builder-specific errors
         """
-        pass
+        raise NotImplementedError(f"{self.__class__.__name__} must implement build()")
 
-    @abstractmethod
     def validate(self, agent: Agent) -> list[str]:
         """Validate an Agent IR model for this builder.
 
@@ -86,7 +83,7 @@ class AbstractBuilder(ABC):
         Returns:
             List of validation error messages. Empty list if valid.
         """
-        pass
+        raise NotImplementedError(f"{self.__class__.__name__} must implement validate()")
 
     def supports_feature(self, feature_name: str) -> bool:
         """Check if this builder supports a specific feature.

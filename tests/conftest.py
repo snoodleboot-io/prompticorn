@@ -32,9 +32,11 @@ def skills_dir(project_root):
 @pytest.fixture
 def read_file():
     """Fixture to read file contents."""
+
     def _read(path):
         with open(path) as f:
             return f.read()
+
     return _read
 
 
@@ -42,10 +44,8 @@ def read_file():
 def agent_structure():
     """Expected structure for agent files."""
     return {
-        'required_sections': [
-            '# ', 'Purpose', 'Responsibilities', 'Capabilities'
-        ],
-        'min_lines': 20,
+        "required_sections": ["# ", "Purpose", "Responsibilities", "Capabilities"],
+        "min_lines": 20,
     }
 
 
@@ -53,11 +53,14 @@ def agent_structure():
 def subagent_structure():
     """Expected structure for subagent files."""
     return {
-        'required_sections': [
-            '# ', 'Purpose', 'Key Concepts', 'Examples',
+        "required_sections": [
+            "# ",
+            "Purpose",
+            "Key Concepts",
+            "Examples",
         ],
-        'min_lines': 40,
-        'has_variants': True,  # minimal and verbose
+        "min_lines": 40,
+        "has_variants": True,  # minimal and verbose
     }
 
 
@@ -65,11 +68,9 @@ def subagent_structure():
 def workflow_structure():
     """Expected structure for workflow files."""
     return {
-        'required_sections': [
-            '# ', 'Purpose', 'Steps', 'Success Criteria'
-        ],
-        'min_lines': 50,
-        'has_variants': True,  # minimal and verbose
+        "required_sections": ["# ", "Purpose", "Steps", "Success Criteria"],
+        "min_lines": 50,
+        "has_variants": True,  # minimal and verbose
     }
 
 
@@ -77,11 +78,9 @@ def workflow_structure():
 def skill_structure():
     """Expected structure for skill files."""
     return {
-        'required_sections': [
-            '# ', 'Purpose', 'Core Concepts', 'Examples', 'Best Practices'
-        ],
-        'min_lines': 40,
-        'has_variants': True,  # minimal and verbose
+        "required_sections": ["# ", "Purpose", "Core Concepts", "Examples", "Best Practices"],
+        "min_lines": 40,
+        "has_variants": True,  # minimal and verbose
     }
 
 

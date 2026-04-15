@@ -1,6 +1,5 @@
 """Base class for template variable handlers."""
 
-from abc import ABC, abstractmethod
 from typing import Any, Protocol, runtime_checkable
 
 
@@ -296,14 +295,12 @@ class TemplateVariableHandler(Protocol):
         return []
 
 
-class TemplateHandler(ABC, TemplateVariableHandler):
+class TemplateHandler(TemplateVariableHandler):
     """Base class for template variable handlers."""
 
-    @abstractmethod
     def can_handle(self, variable_name: str) -> bool:
         raise NotImplementedError("Subclasses must implement can_handle method")
 
-    @abstractmethod
     def handle(self, variable_name: str, config: dict[str, Any]) -> str:
         raise NotImplementedError("Subclasses must implement handle method")
 

@@ -19,7 +19,7 @@ Complete documentation for all 5 tool-specific builders: Kilo, Cline, Claude, Co
 
 ## Overview
 
-The Builder system provides a unified interface for generating tool-specific configuration files from Agent IR models. Each builder extends `AbstractBuilder` and implements a specific output format for its target tool.
+The Builder system provides a unified interface for generating tool-specific configuration files from Agent IR models. Each builder extends `Builder` and implements a specific output format for its target tool.
 
 ### Key Concepts
 
@@ -34,7 +34,7 @@ The Builder system provides a unified interface for generating tool-specific con
 |----------|---------|--------|
 | Kilo IDE agent configuration | KiloBuilder | `.kilo/agents/{name}.md` (YAML+Markdown) |
 | Cline AI rules | ClineBuilder | `.clinerules` (Markdown) |
-| Claude Messages API | ClaudeBuilder | JSON dict (system, tools, instructions) |
+| Claude agent configuration | ClaudeBuilder | `.claude/` directory with Markdown files (dict[str, str]) |
 | GitHub Copilot instructions | CopilotBuilder | `.github/instructions/{mode}.md` (YAML+Markdown) |
 | Cursor IDE rules | CursorBuilder | `.cursorrules` (Markdown) |
 
@@ -70,7 +70,7 @@ Builder for Kilo IDE agent configurations. Generates `.kilo/agents/{name}.md` fi
 ### API Signature
 
 ```python
-class KiloBuilder(AbstractBuilder):
+class KiloBuilder(Builder):
     def __init__(self, agents_dir: Path | str = "agents") -> None: ...
     
     def build(self, agent: Agent, options: BuildOptions) -> str: ...
@@ -151,9 +151,9 @@ state_management: ".promptosaurus/sessions/"
 ### Usage Example
 
 ```python
-from src.builders.kilo_builder import KiloBuilder
-from src.builders.base import BuildOptions
-from src.ir.models import Agent
+from promptosaurus.builders.kilo_builder import KiloBuilder
+from promptosaurus.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
 
 # Create an agent
 agent = Agent(
@@ -274,7 +274,7 @@ Builder for Cline AI configuration files. Generates `.clinerules` files with mar
 ### API Signature
 
 ```python
-class ClineBuilder(AbstractBuilder):
+class ClineBuilder(Builder):
     def __init__(self, agents_dir: Path | str = "agents") -> None: ...
     
     def build(self, agent: Agent, options: BuildOptions) -> str: ...
@@ -332,9 +332,9 @@ Invoke by: `use_skill subagent_name` or request 'subagent-name subagent'
 ### Usage Example
 
 ```python
-from src.builders.cline_builder import ClineBuilder
-from src.builders.base import BuildOptions
-from src.ir.models import Agent
+from promptosaurus.builders.cline_builder import ClineBuilder
+from promptosaurus.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
 
 # Create agent
 agent = Agent(
@@ -433,22 +433,22 @@ This pattern allows Cline to understand how to invoke specialized capabilities.
 
 ## ClaudeBuilder
 
-Builder for Claude Messages API JSON output. Generates JSON-compatible dictionaries for Claude's tool use and instruction features.
+Builder for Claude agent configuration files. Generates Markdown files written to the `.claude/` directory.
 
 ### Overview
 
-- **Target Tool**: Claude API (Messages API)
-- **Output Format**: JSON dict with system, tools, and instructions
-- **Return Type**: `dict[str, Any]` (JSON-serializable)
-- **Purpose**: Create Claude-compatible configuration for use with Claude's tool use and system prompt features
+- **Target Tool**: Claude (agent configuration files)
+- **Output Format**: Markdown files (dict[str, str] mapping file paths → content)
+- **Return Type**: `dict[str, str]`
+- **Purpose**: Create Claude agent Markdown configuration files for `.claude/` directory
 
 ### API Signature
 
 ```python
-class ClaudeBuilder(AbstractBuilder):
+class ClaudeBuilder(Builder):
     def __init__(self, agents_dir: Path | str = "agents") -> None: ...
     
-    def build(self, agent: Agent, options: BuildOptions) -> dict[str, Any]: ...
+    def build(self, agent: Agent, options: BuildOptions) -> dict[str, str]: ...
     
     def validate(self, agent: Agent) -> list[str]: ...
     
@@ -459,40 +459,27 @@ class ClaudeBuilder(AbstractBuilder):
 
 ### Parameters
 
-Same as KiloBuilder. Note that `build()` returns a dict instead of string.
+Same as KiloBuilder. Note that `build()` returns a `dict[str, str]` instead of string.
 
 ### Returns
 
-**build()** returns a `dict[str, Any]` with three keys:
+**build()** returns a `dict[str, str]` mapping file paths to Markdown content:
 
 ```python
 {
-    "system": "You are an expert software engineer...",
-    "tools": [
-        {
-            "name": "read",
-            "description": "Tool: read",
-            "input_schema": {
-                "type": "object",
-                "properties": {
-                    "param": {"type": "string", "description": "Parameter for the tool"}
-                },
-                "required": ["param"]
-            }
-        },
-        ...
-    ],
-    "instructions": "Skills:\n- refactoring: ...\n\nWorkflows:\n..."
+    ".claude/agents/code-agent.md": "# Code Agent\n...",
+    ".claude/subagents/feature.md": "# Feature\n...",
+    "CLAUDE.md": "# Claude Configuration\n..."
 }
 ```
 
 ### Usage Example
 
 ```python
-from src.builders.claude_builder import ClaudeBuilder
-from src.builders.base import BuildOptions
-from src.ir.models import Agent
-import json
+from promptosaurus.builders.claude_builder import ClaudeBuilder
+from promptosaurus.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
+from pathlib import Path
 
 # Create agent
 agent = Agent(
@@ -501,14 +488,13 @@ agent = Agent(
     system_prompt="You are an expert software engineer...",
     tools=["read", "write", "bash"],
     skills=["analysis", "refactoring"],
-    workflow="Code improvement workflow",
     subagents=["test"]
 )
 
 # Create builder
 builder = ClaudeBuilder(agents_dir="agents")
 
-# Build Claude output
+# Build Markdown file configuration
 options = BuildOptions(
     variant="verbose",
     include_tools=True,
@@ -516,80 +502,51 @@ options = BuildOptions(
 )
 output = builder.build(agent, options)
 
-# JSON serialize
-json_str = json.dumps(output, indent=2)
-
-# Use with Claude API
-import anthropic
-
-client = anthropic.Anthropic()
-message = client.messages.create(
-    model="claude-opus-4-1",
-    max_tokens=2048,
-    system=output["system"],
-    tools=output["tools"],
-    messages=[
-        {"role": "user", "content": "Review this code..."}
-    ]
-)
+# Write Markdown files to disk
+for file_path, content in output.items():
+    path = Path(file_path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content)
 ```
 
 ### Output Example
 
-```json
+```python
 {
-  "system": "You are an expert software engineer responsible for analyzing and improving code while following best practices.",
-  "tools": [
-    {
-      "name": "read",
-      "description": "Tool: read",
-      "input_schema": {
-        "type": "object",
-        "properties": {
-          "param": {"type": "string", "description": "Parameter for the tool"}
-        },
-        "required": ["param"]
-      }
-    },
-    {
-      "name": "write",
-      "description": "Tool: write",
-      "input_schema": {
-        "type": "object",
-        "properties": {
-          "param": {"type": "string", "description": "Parameter for the tool"}
-        },
-        "required": ["param"]
-      }
-    },
-    {
-      "name": "bash",
-      "description": "Tool: bash",
-      "input_schema": {
-        "type": "object",
-        "properties": {
-          "param": {"type": "string", "description": "Parameter for the tool"}
-        },
-        "required": ["param"]
-      }
-    }
-  ],
-  "instructions": "Skills:\n- analysis: Analyze code for improvements\n- refactoring: Refactor code for clarity\n\nWorkflows:\nCode improvement workflow instructions...\n\nSubagents:\n- test: Specialized agent for test tasks"
+    ".claude/agents/code-assistant.md": "# Code Assistant\n\nYou are an expert software engineer...\n",
+    "CLAUDE.md": "# Claude Configuration\n\n## Agents\n\n- code-assistant\n"
+}
+
+# The Markdown files are written to disk at these paths:
+# .claude/agents/code-assistant.md
+# CLAUDE.md
+```
+
+#### Previously (incorrect, now removed):
+```json
+# DO NOT reference this format - it was wrong
+{
+  "system": "...",
+  "tools": [...],
+  "instructions": "..."
 }
 ```
 
-### Key Feature: JSON Serialization
+### Key Feature: Markdown File Generation
 
-Claude builder validates that output is JSON-serializable:
+Claude builder generates Markdown files for the `.claude/` directory structure:
 
 ```python
-try:
-    json.dumps(output)  # Validates JSON serializability
-except (TypeError, ValueError) as e:
-    raise BuilderValidationError(...)
+from pathlib import Path
+
+output = builder.build(agent, options)
+for file_path, content in output.items():
+    path = Path(file_path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content)
 ```
 
-This ensures compatibility with Claude's Messages API.
+Each key is a file path relative to the project root, and each value is the Markdown content for that file.
 
 ---
 
@@ -607,7 +564,7 @@ Builder for GitHub Copilot instructions files. Generates `.github/instructions/{
 ### API Signature
 
 ```python
-class CopilotBuilder(AbstractBuilder):
+class CopilotBuilder(Builder):
     def __init__(self, agents_dir: Path | str = "agents") -> None: ...
     
     def build(self, agent: Agent, options: BuildOptions) -> str: ...
@@ -661,9 +618,9 @@ Specializes in subagent-name tasks.
 ### Usage Example
 
 ```python
-from src.builders.copilot_builder import CopilotBuilder
-from src.builders.base import BuildOptions
-from src.ir.models import Agent
+from promptosaurus.builders.copilot_builder import CopilotBuilder
+from promptosaurus.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
 
 # Create agent
 agent = Agent(
@@ -761,7 +718,7 @@ Builder for Cursor IDE configuration files. Generates `.cursorrules` files with 
 ### API Signature
 
 ```python
-class CursorBuilder(AbstractBuilder):
+class CursorBuilder(Builder):
     def __init__(self, agents_dir: Path | str = "agents") -> None: ...
     
     def build(self, agent: Agent, options: BuildOptions) -> str: ...
@@ -815,9 +772,9 @@ Usage: [Usage information]
 ### Usage Example
 
 ```python
-from src.builders.cursor_builder import CursorBuilder
-from src.builders.base import BuildOptions
-from src.ir.models import Agent
+from promptosaurus.builders.cursor_builder import CursorBuilder
+from promptosaurus.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
 
 # Create agent
 agent = Agent(
@@ -908,16 +865,14 @@ These constraints guide Cursor's behavior.
 
 ## Common API
 
-All builders implement the `AbstractBuilder` interface.
+All builders implement the `Builder` interface.
 
-### AbstractBuilder Interface
+### Builder Interface
 
 ```python
-class AbstractBuilder(ABC):
-    @abstractmethod
+class Builder:
     def build(self, agent: Agent, options: BuildOptions) -> str | dict[str, Any]: ...
     
-    @abstractmethod
     def validate(self, agent: Agent) -> list[str]: ...
     
     def supports_feature(self, feature_name: str) -> bool: ...
@@ -952,7 +907,7 @@ Checks if builder supports a feature. Supported features:
 Returns human-readable description:
 - KiloBuilder: "Kilo IDE Agent File (YAML frontmatter + Markdown)"
 - ClineBuilder: "Cline AI Rules File (Markdown)"
-- ClaudeBuilder: "Claude Messages API JSON (dict)"
+- ClaudeBuilder: "Claude Markdown files (dict[str, str])"
 - CopilotBuilder: "GitHub Copilot Instructions File (YAML frontmatter + Markdown)"
 - CursorBuilder: "Cursor AI Rules File (Markdown)"
 
@@ -990,7 +945,7 @@ All builders raise `BuilderValidationError` for invalid inputs.
 ### BuilderValidationError
 
 ```python
-from src.builders.errors import BuilderValidationError
+from promptosaurus.builders.errors import BuilderValidationError
 
 try:
     builder.build(invalid_agent, options)
@@ -1029,13 +984,14 @@ BuilderValidationError: Invalid output from Claude builder: Output is not JSON s
 
 ```python
 from pathlib import Path
-from src.builders.factory import BuilderFactory
-from src.builders.base import BuildOptions
-from src.ir.registry import AgentRegistry
+from promptosaurus.builders.factory import BuilderFactory
+from promptosaurus.builders.base import BuildOptions
+from promptosaurus.registry.registry import Registry
+from promptosaurus.ir.models import Agent
 
 # Load agent
-registry = AgentRegistry(base_path="agents")
-agent = registry.load("code")
+registry = Registry.from_discovery("./agents")
+agent = registry.get_agent("code")
 
 # Create options
 options = BuildOptions(variant="verbose")
@@ -1053,7 +1009,7 @@ for tool_name in tools:
 # Write outputs to appropriate locations
 # Kilo -> .kilo/agents/code.md
 # Cline -> .clinerules
-# Claude -> code.json (JSON)
+# Claude -> .claude/agents/code.md (Markdown files)
 # Copilot -> .github/instructions/code.md
 # Cursor -> .cursorrules
 ```
@@ -1084,7 +1040,7 @@ verbose_output = builder.build(agent, verbose_options)
 ### Error Handling Pattern
 
 ```python
-from src.builders.errors import BuilderValidationError
+from promptosaurus.builders.errors import BuilderValidationError
 
 try:
     # Validate first (optional but recommended)

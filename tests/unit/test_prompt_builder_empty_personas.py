@@ -16,7 +16,7 @@ class TestPromptBuilderEmptyPersonas:
         config = {
             "variant": "minimal",
             "spec": {"language": "python"},
-            "active_personas": []  # Empty list - no personas selected
+            "active_personas": [],  # Empty list - no personas selected
         }
 
         # Act - Build to temporary directory
@@ -37,22 +37,20 @@ class TestPromptBuilderEmptyPersonas:
 
             # Assert - Should only have universal agents
             actual_agents = set(agent_files)
-            assert actual_agents == expected_universal, \
+            assert actual_agents == expected_universal, (
                 f"Expected only universal agents {expected_universal}, but got {actual_agents}"
+            )
 
             # Verify count
-            assert len(actual_agents) == 5, \
+            assert len(actual_agents) == 5, (
                 f"Expected 5 universal agents, but got {len(actual_agents)}"
+            )
 
     def test_empty_personas_action_message(self):
         """Verify action message shows 0 personas selected."""
         # Arrange
         builder = PromptBuilder("kilo")
-        config = {
-            "variant": "minimal",
-            "spec": {},
-            "active_personas": []
-        }
+        config = {"variant": "minimal", "spec": {}, "active_personas": []}
 
         # Act
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -62,5 +60,6 @@ class TestPromptBuilderEmptyPersonas:
             # Assert - Should show persona filtering with 0 personas
             persona_action = [a for a in actions if "Persona filtering" in a]
             assert len(persona_action) > 0, "Should have persona filtering action message"
-            assert "0 persona(s) selected" in persona_action[0], \
+            assert "0 persona(s) selected" in persona_action[0], (
                 f"Should show 0 personas selected, got: {persona_action[0]}"
+            )

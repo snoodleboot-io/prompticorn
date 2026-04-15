@@ -173,7 +173,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Permission mapping from agent rules
   - 97.4% test coverage, 40+ tests
   
-- **ClaudeBuilder** - JSON for Claude Messages API
+- **ClaudeBuilder** - Markdown files for `.claude/` directory
   - System message generation
   - Tool/function definitions
   - Minimal/verbose variants (20x token reduction)
@@ -201,7 +201,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - 95.0% test coverage, 47+ tests
 
 #### CLI Tool
-- `prompt-build` command for all 5 builders
+- `prompt-build` internal tool for all 5 builders (public CLI is `promptosaurus`)
 - Builder selection: `--builder kilo,cline,claude,copilot,cursor`
 - Agent selection: `--agent <name>`
 - Variant selection: `--variant minimal|verbose`
@@ -323,17 +323,6 @@ See `docs/MIGRATION_GUIDE.md` for step-by-step instructions.
 - **Release Notes:** `GITHUB_RELEASE_NOTES.md`
 
 ---
-
-## [1.0.0] - 2024-01-01
-
-### Added
-
-- Initial release of Promptosaurus
-- Support for single-language repositories
-- CLI commands: init, list, validate
-- Builder support for: Kilo CLI, Kilo IDE, Cline, Cursor, Copilot
-- Question pipeline system for interactive configuration
-- Mode system for different agent types (architect, code, test, etc.)
 
 ## [1.0.0] - 2024-01-01
 

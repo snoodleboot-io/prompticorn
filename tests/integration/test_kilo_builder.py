@@ -365,7 +365,7 @@ class TestKiloBuilderMarkdownFormatting:
 
         # Count level 1 headings
         lines = output.split("\n")
-        level1_headings = [l for l in lines if l.startswith("# ")]
+        level1_headings = [line for line in lines if line.startswith("# ")]
 
         assert len(level1_headings) >= 2  # At least "System Prompt" and "Tools"
 

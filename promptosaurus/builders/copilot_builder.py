@@ -7,13 +7,13 @@ into GitHub Copilot instructions files with YAML frontmatter and markdown sectio
 from pathlib import Path
 from typing import Any
 
-from promptosaurus.builders.base import AbstractBuilder, BuildOptions
+from promptosaurus.builders.base import Builder, BuildOptions
 from promptosaurus.builders.errors import BuilderValidationError
 from promptosaurus.ir.loaders import CoreFilesLoader
 from promptosaurus.ir.models import Agent
 
 
-class CopilotBuilder(AbstractBuilder):
+class CopilotBuilder(Builder):
     """Builder for GitHub Copilot instructions files.
 
     Generates `.github/instructions/{mode}.md` files with YAML frontmatter

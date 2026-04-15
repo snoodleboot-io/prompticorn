@@ -68,9 +68,10 @@ Which AI assistant would you like to configure?
 Options:
   1) Kilo CLI      - Kilo Code (CLI) - .opencode/rules/
   2) Kilo IDE      - Kilo Code (IDE) - .kilo/agents/
-  3) Cline         - Cline - .clinerules file
-  4) Cursor        - Cursor - .cursor/rules/
-  5) Copilot       - GitHub Copilot - .github/copilot-instructions.md
+  3) Claude        - Claude - .claude/ + CLAUDE.md
+  4) Cline         - Cline - .clinerules file
+  5) Cursor        - Cursor - .cursor/rules/
+  6) Copilot       - GitHub Copilot - .github/copilot-instructions.md
 
 Select (default: 2): 2
 ```
@@ -214,7 +215,7 @@ Select (default: 1): 1
   Configuration saved!
 =========================================================
 
-  Config file: /Users/you/my-python-project/.promptosaurus.yaml
+  Config file: /Users/you/my-python-project/.promptosaurus/.promptosaurus.yaml
 
 ------------------------------------------------------------
   Generating AI assistant configurations (minimal)...
@@ -311,11 +312,12 @@ Which AI assistant would you like to configure?
 Options:
   1) Kilo CLI
   2) Kilo IDE
-  3) Cline
-  4) Cursor
-  5) Copilot
+  3) Claude
+  4) Cline
+  5) Cursor
+  6) Copilot
 
-Select: 3
+Select: 4
 ```
 
 **Choice:** `3` (Cline)

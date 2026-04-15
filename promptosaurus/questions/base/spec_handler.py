@@ -4,7 +4,6 @@ This module provides abstractions for handling spec configuration
 differently based on repository type (single-language vs multi-language-monorepo).
 """
 
-from abc import ABC, abstractmethod
 from typing import Any
 
 from promptosaurus.questions.base.folder_spec import (
@@ -13,23 +12,21 @@ from promptosaurus.questions.base.folder_spec import (
 )
 
 
-class SpecHandler(ABC):
-    """Abstract base class for spec handlers.
+class SpecHandler:
+    """Interface class for spec handlers.
 
     This follows the Interface Segregation Principle from SOLID,
     providing a clean abstraction for handling different spec formats.
     """
 
-    @abstractmethod
     def create_spec(self, *args: Any, **kwargs: Any) -> dict[str, Any] | list[dict[str, Any]]:
         """Create a new spec.
 
         Returns:
             Either a dict (single-language) or list (multi-language-monorepo)
         """
-        pass
+        raise NotImplementedError(f"{self.__class__.__name__} must implement create_spec()")
 
-    @abstractmethod
     def get_language(self, spec: dict[str, Any] | list[dict[str, Any]]) -> str:
         """Get the primary language from spec.
 
@@ -39,16 +36,15 @@ class SpecHandler(ABC):
         Returns:
             The primary language
         """
-        pass
+        raise NotImplementedError(f"{self.__class__.__name__} must implement get_language()")
 
-    @abstractmethod
     def is_multi_language(self) -> bool:
         """Check if this handler manages multi-language specs.
 
         Returns:
             True if this is a multi-language handler
         """
-        pass
+        raise NotImplementedError(f"{self.__class__.__name__} must implement is_multi_language()")
 
     @staticmethod
     def for_repository_type(repo_type: str) -> "SpecHandler":

@@ -23,24 +23,21 @@
 
 ### Step-by-Step: Create a Builder for Your Tool
 
-#### Step 1: Understand the AbstractBuilder Interface
+#### Step 1: Understand the Builder Interface
 
 ```python
-from abc import ABC, abstractmethod
-from src.ir.models import Agent
-from src.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
+from promptosaurus.builders.base import BuildOptions
 from typing import Any
 
 
-class AbstractBuilder(ABC):
+class Builder:
     """Base class all builders must implement."""
     
-    @abstractmethod
     def build(self, agent: Agent, options: BuildOptions) -> str | dict[str, Any]:
         """Transform Agent IR to tool-specific output."""
         pass
     
-    @abstractmethod
     def validate(self, agent: Agent) -> list[str]:
         """Return list of validation errors (empty if valid)."""
         pass
@@ -63,13 +60,13 @@ class AbstractBuilder(ABC):
 #### Step 2: Implement Your Builder
 
 ```python
-from src.builders.base import AbstractBuilder, BuildOptions
-from src.ir.models import Agent
+from promptosaurus.builders.base import Builder, BuildOptions
+from promptosaurus.ir.models import Agent
 from typing import Any
 import json
 
 
-class SlackBuilder(AbstractBuilder):
+class SlackBuilder(Builder):
     """Builder for Slack bot configuration.
     
     Generates Slack bot manifest and configuration for
@@ -174,7 +171,7 @@ class SlackBuilder(AbstractBuilder):
 
 
 # Register the builder
-from src.builders.factory import BuilderFactory
+from promptosaurus.builders.factory import BuilderFactory
 BuilderFactory.register("slack", SlackBuilder)
 
 # Use it
@@ -193,12 +190,12 @@ print(json.dumps(manifest, indent=2))
 #### Step 3: Support Optional Features
 
 ```python
-from src.builders.base import AbstractBuilder, BuildOptions
-from src.ir.models import Agent, Skill, Workflow, Rules
+from promptosaurus.builders.base import Builder, BuildOptions
+from promptosaurus.ir.models import Agent, Skill, Workflow, Rules
 from typing import Any
 
 
-class EnhancedSlackBuilder(AbstractBuilder):
+class EnhancedSlackBuilder(Builder):
     """Extended Slack builder with optional feature support."""
     
     def build(self, agent: Agent, options: BuildOptions) -> dict[str, Any]:
@@ -241,8 +238,8 @@ class EnhancedSlackBuilder(AbstractBuilder):
 
 ```python
 import pytest
-from src.builders.base import BuildOptions
-from src.ir.models import Agent
+from promptosaurus.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
 
 
 class TestSlackBuilder:
@@ -325,7 +322,7 @@ class TestSlackBuilder:
 ```python
 from pydantic import BaseModel, Field
 from typing import List, Optional, Dict, Any
-from src.ir.models import Agent
+from promptosaurus.ir.models import Agent
 
 
 class ExtendedAgent(Agent):
@@ -432,7 +429,7 @@ except Exception as e:
 ```python
 from dataclasses import dataclass
 from typing import List, Dict
-from src.ir.models import Agent, Skill, Workflow
+from promptosaurus.ir.models import Agent, Skill, Workflow
 
 
 @dataclass
@@ -507,23 +504,20 @@ print(team.get_all_skills())  # All skills across team
 ### Basic Plugin System
 
 ```python
-from abc import ABC, abstractmethod
 from typing import Dict, Type, Any
-from src.builders.base import AbstractBuilder
+from promptosaurus.builders.base import Builder
 
 
-class BuilderPlugin(ABC):
+class BuilderPlugin:
     """Base class for builder plugins."""
     
     @property
-    @abstractmethod
     def name(self) -> str:
         """Plugin name."""
         pass
     
     @property
-    @abstractmethod
-    def builder_class(self) -> Type[AbstractBuilder]:
+    def builder_class(self) -> Type[Builder]:
         """Builder class to register."""
         pass
     
@@ -555,7 +549,7 @@ class PluginRegistry:
         self._plugins[plugin.name] = plugin
         
         # Register builder with main factory
-        from src.builders.factory import BuilderFactory
+        from promptosaurus.builders.factory import BuilderFactory
         BuilderFactory.register(plugin.name, plugin.builder_class)
     
     def unregister(self, name: str) -> None:
@@ -581,7 +575,7 @@ class SlackBuilderPlugin(BuilderPlugin):
         return "slack"
     
     @property
-    def builder_class(self) -> Type[AbstractBuilder]:
+    def builder_class(self) -> Type[Builder]:
         from slack_builder import SlackBuilder
         return SlackBuilder
     
@@ -689,7 +683,7 @@ print(registry.list_plugins())
 
 ```python
 from typing import Dict, List, Optional
-from src.ir.models import Agent
+from promptosaurus.ir.models import Agent
 from pathlib import Path
 import json
 
@@ -793,9 +787,9 @@ print(registry.get_metadata("architect"))
 ```python
 from functools import cached_property
 from typing import Dict
-from src.ir.models import Agent
-from src.builders.factory import BuilderFactory
-from src.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
+from promptosaurus.builders.factory import BuilderFactory
+from promptosaurus.builders.base import BuildOptions
 
 
 class CachedBuilderSession:
@@ -853,9 +847,9 @@ print(session.get_cache_stats())
 ```python
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
-from src.ir.models import Agent
-from src.builders.factory import BuilderFactory
-from src.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
+from promptosaurus.builders.factory import BuilderFactory
+from promptosaurus.builders.base import BuildOptions
 
 
 async def build_for_all_tools_async(
@@ -948,8 +942,8 @@ print(f"Parallel builds: {config.max_parallel_builds}")
 
 ```python
 from dataclasses import dataclass
-from src.builders.factory import BuilderFactory
-from src.ir.models import Agent
+from promptosaurus.builders.factory import BuilderFactory
+from promptosaurus.ir.models import Agent
 
 
 @dataclass
@@ -1030,7 +1024,7 @@ else:
 from enum import Enum
 from datetime import datetime, timedelta
 from typing import Callable, Any
-from src.builders.errors import BuilderException
+from promptosaurus.builders.errors import BuilderException
 
 
 class CircuitState(Enum):
@@ -1112,9 +1106,9 @@ for i in range(10):
 ```python
 import time
 from typing import Dict, List
-from src.ir.models import Agent
-from src.builders.factory import BuilderFactory
-from src.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
+from promptosaurus.builders.factory import BuilderFactory
+from promptosaurus.builders.base import BuildOptions
 
 
 class BuilderBenchmark:

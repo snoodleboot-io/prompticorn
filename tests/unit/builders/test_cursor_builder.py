@@ -36,4 +36,3 @@ class TestCursorBuilderInitialization:
         path = Path("/custom/agents")
         builder = CursorBuilder(agents_dir=path)
         assert builder.agents_dir == path
-

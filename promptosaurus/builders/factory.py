@@ -7,7 +7,7 @@ available builders and provides a clean API for getting builder instances.
 
 from typing import Any
 
-from promptosaurus.builders.base import AbstractBuilder
+from promptosaurus.builders.base import Builder
 from promptosaurus.builders.errors import BuilderNotFoundError
 
 
@@ -28,33 +28,33 @@ class BuilderFactory:
         tools = BuilderFactory.list_builders()
     """
 
-    _builders: dict[str, type[AbstractBuilder]] = {}
+    _builders: dict[str, type[Builder]] = {}
 
     @classmethod
-    def register(cls, tool_name: str, builder_class: type[AbstractBuilder]) -> None:
+    def register(cls, tool_name: str, builder_class: type[Builder]) -> None:
         """Register a builder class for a tool.
 
         Args:
             tool_name: The name of the tool (e.g., 'kilo', 'claude', 'cline')
-            builder_class: The builder class to register. Must be a subclass of AbstractBuilder.
+            builder_class: The builder class to register. Must be a subclass of Builder.
 
         Raises:
-            TypeError: If builder_class is not a subclass of AbstractBuilder
+            TypeError: If builder_class is not a subclass of Builder
             ValueError: If tool_name is empty
         """
         if not tool_name or not tool_name.strip():
             raise ValueError("tool_name cannot be empty")
 
-        if not issubclass(builder_class, AbstractBuilder):
+        if not issubclass(builder_class, Builder):
             raise TypeError(
-                f"builder_class must be a subclass of AbstractBuilder, got {builder_class.__name__}"
+                f"builder_class must be a subclass of Builder, got {builder_class.__name__}"
             )
 
         tool_key = tool_name.lower().strip()
         cls._builders[tool_key] = builder_class
 
     @classmethod
-    def get_builder(cls, tool_name: str) -> AbstractBuilder:
+    def get_builder(cls, tool_name: str) -> Builder:
         """Get a builder instance for the specified tool.
 
         Args:
