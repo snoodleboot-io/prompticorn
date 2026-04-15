@@ -58,9 +58,7 @@ class BuilderRegistry:
             raise ValueError("tool_name cannot be empty")
 
         if not isinstance(builder, Builder):
-            raise TypeError(
-                f"builder must be an instance of Builder, got {type(builder).__name__}"
-            )
+            raise TypeError(f"builder must be an instance of Builder, got {type(builder).__name__}")
 
         tool_key = tool_name.lower().strip()
         self._builders[tool_key] = builder
