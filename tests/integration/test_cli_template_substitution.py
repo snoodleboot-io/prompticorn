@@ -13,10 +13,7 @@ class TestCLITemplateSubstitution:
         """PromptBuilder should pass config to underlying builder for template substitution."""
         # Arrange
         builder = PromptBuilder("kilo")
-        config = {
-            "variant": "minimal",
-            "spec": {"language": "python"}
-        }
+        config = {"variant": "minimal", "spec": {"language": "python"}}
 
         # Act - Build to temporary directory
         with tempfile.TemporaryDirectory() as tmpdir:
@@ -31,12 +28,14 @@ class TestCLITemplateSubstitution:
             content = orchestrator_file.read_text()
 
             # Template variable should be replaced
-            assert "{{PRIMARY_AGENTS_LIST}}" not in content, \
+            assert "{{PRIMARY_AGENTS_LIST}}" not in content, (
                 "Template variable should be substituted in generated file"
+            )
 
             # Should contain actual agent entries
-            assert ("- **architect**" in content or "- **code**" in content), \
+            assert "- **architect**" in content or "- **code**" in content, (
                 "Should contain actual agent list entries"
+            )
 
     def test_orchestrator_output_has_complete_agent_list(self):
         """Orchestrator should have a complete list of primary agents."""
@@ -55,8 +54,7 @@ class TestCLITemplateSubstitution:
             # Assert - Check for several expected agents
             expected_agents = ["architect", "ask", "orchestrator", "backend"]
             for agent in expected_agents:
-                assert f"- **{agent}**" in content, \
-                    f"Agent list should include {agent}"
+                assert f"- **{agent}**" in content, f"Agent list should include {agent}"
 
     def test_config_none_does_not_crash(self):
         """Builder should handle config=None gracefully."""

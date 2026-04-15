@@ -117,6 +117,11 @@ class TestMonorepoPresetTypes:
         from promptosaurus.questions.base.folder_spec import FolderSpecRegistry
 
         # Backend defaults to Python
-        assert FolderSpecRegistry.get_folder_type_presets()["backend"]["api"]["language"] == "python"
+        assert (
+            FolderSpecRegistry.get_folder_type_presets()["backend"]["api"]["language"] == "python"
+        )
         # Frontend defaults to TypeScript
-        assert FolderSpecRegistry.get_folder_type_presets()["frontend"]["ui"]["language"] == "typescript"
+        assert (
+            FolderSpecRegistry.get_folder_type_presets()["frontend"]["ui"]["language"]
+            == "typescript"
+        )

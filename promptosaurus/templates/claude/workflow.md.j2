@@ -1,0 +1,66 @@
+# {{ workflow.name | title }}
+
+**Purpose:** {{ workflow.description }}  
+**Typical Duration:** {{ workflow.duration | default("Variable") }}  
+**Prerequisites:** {{ workflow.prerequisites | default("None") }}
+
+## Overview
+
+{{ workflow.overview | trim }}
+
+## Step 1: Language Detection
+
+**Detect the language** being used:
+
+```bash
+# Check file extensions in scope
+# OR ask user if unclear
+```
+
+**Load the appropriate language convention:**
+
+```
+IF language = python:
+    Read: .claude/conventions/languages/python.md
+ELSE IF language = typescript:
+    Read: .claude/conventions/languages/typescript.md
+ELSE IF language = rust:
+    Read: .claude/conventions/languages/rust.md
+ELSE IF language = golang:
+    Read: .claude/conventions/languages/golang.md
+```
+
+**Do NOT proceed until language convention is loaded.**
+
+{% for step in workflow.steps %}
+## Step {{ loop.index + 1 }}: {{ step.name }}
+
+{{ step.description | trim }}
+
+**Actions:**
+{% for action in step.actions %}
+- {{ action }}
+{% endfor %}
+
+{% if step.resources %}
+**Load resources if needed:**
+```
+{% for resource in step.resources %}
+{{ resource }}
+{% endfor %}
+```
+{% endif %}
+
+{% endfor %}
+
+## Completion Criteria
+
+{% for criterion in workflow.completion_criteria %}
+- [ ] {{ criterion }}
+{% endfor %}
+
+{% if notes %}
+## Notes
+
+{{ notes }}
+{% endif %}

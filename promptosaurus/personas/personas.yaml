@@ -15,10 +15,137 @@ universal_agents:
 
 # Persona definitions
 personas:
+  backend_software_engineer:
+    display_name: "Backend Software Engineer"
+    description: "Backend development, APIs, microservices, and distributed systems"
+    focus: "Building scalable backend systems, APIs, and data persistence layers"
+    
+    # PRIMARY agents (core to this role)
+    primary_agents:
+      - code
+      - test
+      - refactor
+      - migration
+    
+    # Secondary agents (supportive/cross-cutting)
+    secondary_agents:
+      - review
+      - backend
+      - performance
+      - enforcement
+    
+    # Key workflows for this persona
+    workflows:
+      - code
+      - testing
+      - feature
+      - refactor
+      - dependency-upgrade
+      - boilerplate
+      - code-quality-maintenance
+      - coverage-improvement-maintenance
+      - automated-testing
+    
+    # Key skills for this persona
+    skills:
+      - incremental-implementation
+      - code-review-practices
+      - testing-strategies
+      - debugging-methodology
+      - technical-debt-management
+      - test-aaa-structure
+      - test-mocking-rules
+      - test-coverage-categories
+
+  frontend_software_engineer:
+    display_name: "Frontend Software Engineer"
+    description: "Frontend development, UI/UX, and accessible web experiences"
+    focus: "Building performant, accessible user interfaces for web and mobile"
+    
+    # PRIMARY agents (core to this role)
+    primary_agents:
+      - code
+      - test
+      - refactor
+      - migration
+    
+    # Secondary agents (supportive/cross-cutting)
+    secondary_agents:
+      - review
+      - frontend
+      - performance
+      - enforcement
+    
+    # Key workflows for this persona
+    workflows:
+      - code
+      - testing
+      - feature
+      - refactor
+      - dependency-upgrade
+      - boilerplate
+      - code-quality-maintenance
+      - coverage-improvement-maintenance
+      - automated-testing
+    
+    # Key skills for this persona
+    skills:
+      - incremental-implementation
+      - code-review-practices
+      - testing-strategies
+      - debugging-methodology
+      - technical-debt-management
+      - test-aaa-structure
+      - test-mocking-rules
+      - test-coverage-categories
+
+  fullstack_software_engineer:
+    display_name: "Fullstack Software Engineer"
+    description: "Full-stack development across frontend and backend"
+    focus: "Building complete applications from UI to API to database"
+    
+    # PRIMARY agents (core to this role)
+    primary_agents:
+      - code
+      - test
+      - refactor
+      - migration
+    
+    # Secondary agents (supportive/cross-cutting)
+    secondary_agents:
+      - review
+      - backend
+      - frontend
+      - performance
+      - enforcement
+    
+    # Key workflows for this persona
+    workflows:
+      - code
+      - testing
+      - feature
+      - refactor
+      - dependency-upgrade
+      - boilerplate
+      - code-quality-maintenance
+      - coverage-improvement-maintenance
+      - automated-testing
+    
+    # Key skills for this persona
+    skills:
+      - incremental-implementation
+      - code-review-practices
+      - testing-strategies
+      - debugging-methodology
+      - technical-debt-management
+      - test-aaa-structure
+      - test-mocking-rules
+      - test-coverage-categories
+
   software_engineer:
-    display_name: "Software Engineer"
-    description: "Software development, implementation, and coding"
-    focus: "Writing, maintaining, and testing application code"
+    display_name: "Software Engineer (Fullstack)"
+    description: "Alias for Fullstack Software Engineer - deprecated, use fullstack_software_engineer"
+    focus: "Building complete applications from UI to API to database"
     
     # PRIMARY agents (core to this role)
     primary_agents:

@@ -18,7 +18,7 @@ Comprehensive guide to advanced configuration options in Promptosaurus.
 
 ## Configuration File Schema
 
-The `.promptosaurus.yaml` file is your project's configuration source.
+The `.promptosaurus/.promptosaurus.yaml` file is your project's configuration source.
 
 ### Required Fields
 
@@ -66,7 +66,7 @@ spec:
     # ... (all language-specific fields above)
 
 variant: string              # "minimal" | "verbose" (optional, default: "minimal")
-active_personas: list[string]  # ["software_engineer", "qa_tester", ...] (optional)
+active_personas: list[string]  # ["fullstack_software_engineer", "qa_tester", ...] (optional)
 ```
 
 ---
@@ -111,7 +111,7 @@ spec:
   abstract_class_style: "abc"
 variant: "minimal"
 active_personas:
-  - "software_engineer"
+  - "software_engineer"  # deprecated, use fullstack_software_engineer
   - "qa_tester"
 ```
 
@@ -137,7 +137,7 @@ spec:
   abstract_class_style: "interface"
 variant: "verbose"
 active_personas:
-  - "software_engineer"
+  - "software_engineer"  # deprecated, use fullstack_software_engineer
   - "devops_engineer"
 ```
 
@@ -221,7 +221,7 @@ spec:
 
 variant: "minimal"
 active_personas:
-  - "software_engineer"
+  - "software_engineer"  # deprecated, use fullstack_software_engineer
   - "devops_engineer"
 ```
 
@@ -331,9 +331,9 @@ active_personas:
 
 **Generated agents:**
 - Universal: ask, debug, explain, plan, orchestrator
-- Software Engineer: code, test, refactor, review, document
+- Software Engineer: code, test, refactor, migration, review, backend, frontend, performance, enforcement
 
-**Total:** ~10 agents
+**Total:** ~14 agents
 
 #### Example 2: Full-Stack Team
 
@@ -346,9 +346,9 @@ active_personas:
 
 **Generated agents:**
 - Universal: ask, debug, explain, plan, orchestrator
-- Software Engineer: code, test, refactor, review, document
+- Software Engineer: code, test, refactor, migration, review, backend, frontend, performance, enforcement
 - QA/Tester: test, review (overlap with Software Engineer)
-- DevOps: deployment, ci-cd, monitoring
+- DevOps: devops, observability, incident
 
 **Total:** ~15 agents (with overlap)
 
@@ -517,7 +517,7 @@ See [TEMPLATE_SYSTEM.md](./TEMPLATE_SYSTEM.md) for complete documentation.
 
 ### Quick Reference
 
-All variables in `.promptosaurus.yaml` `spec` section are available as templates:
+All variables in `.promptosaurus/.promptosaurus.yaml` `spec` section are available as templates:
 
 ```yaml
 spec:
@@ -570,7 +570,7 @@ Promptosaurus respects existing `.gitignore` and can generate additional pattern
 
 ```gitignore
 # Promptosaurus
-.promptosaurus.yaml
+.promptosaurus/
 .kilo/
 .clinerules
 .cursor/
@@ -578,7 +578,7 @@ Promptosaurus respects existing `.gitignore` and can generate additional pattern
 
 ### Custom Ignore Patterns
 
-Add custom patterns to `.promptosaurus.yaml`:
+Add custom patterns to `.promptosaurus/.promptosaurus.yaml`:
 
 ```yaml
 ignore_patterns:
@@ -641,7 +641,7 @@ variant: "minimal"  # Efficient for production
 
 **Switch configs:**
 ```bash
-cp .promptosaurus.dev.yaml .promptosaurus.yaml
+cp .promptosaurus.dev.yaml .promptosaurus/.promptosaurus.yaml
 promptosaurus init
 ```
 
@@ -687,7 +687,7 @@ jobs:
           python-version: '3.12'
       - run: pip install promptosaurus
       - run: promptosaurus validate
-      - run: promptosaurus init --non-interactive
+      - run: promptosaurus init
 ```
 
 ### Use Case 5: Monorepo with Shared Config
@@ -724,7 +724,7 @@ spec:
 
 ```bash
 # Check YAML syntax
-python -c "import yaml; yaml.safe_load(open('.promptosaurus.yaml'))"
+python -c "import yaml; yaml.safe_load(open('.promptosaurus/.promptosaurus.yaml'))"
 ```
 
 ### Validate with Promptosaurus
@@ -805,10 +805,10 @@ When upgrading:
 
 ### 1. Use Version Control
 
-**Commit** `.promptosaurus.yaml` to git:
+**Commit** `.promptosaurus/.promptosaurus.yaml` to git:
 
 ```bash
-git add .promptosaurus.yaml
+git add .promptosaurus/.promptosaurus.yaml
 git commit -m "Add promptosaurus config"
 ```
 
@@ -876,13 +876,13 @@ Always run validation after editing config:
 
 ```bash
 # Edit config
-vim .promptosaurus.yaml
+vim .promptosaurus/.promptosaurus.yaml
 
-# Validate
-promptosaurus validate
+        # Validate
+        promptosaurus validate
 
-# Regenerate if valid
-promptosaurus init
+        # Regenerate if valid
+        promptosaurus init
 ```
 
 ---

@@ -1,6 +1,5 @@
 """Tests for TypeScript-specific questions."""
 
-
 from promptosaurus.questions.typescript.typescript_package_manager_question import (
     TypeScriptPackageManagerQuestion,
 )

@@ -4,7 +4,10 @@ from pathlib import Path
 from typing import Any
 
 from promptosaurus.agent_registry.registry import Registry
+from promptosaurus.builders.agents_md import generate_agents_md
 from promptosaurus.builders.base import BuildOptions
+from promptosaurus.builders.claude_md import generate_claude_md
+from promptosaurus.builders.convention_generator import generate_all_conventions
 from promptosaurus.builders.factory import BuilderFactory
 from promptosaurus.builders.kilo_builder import KiloBuilder
 from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
@@ -146,6 +149,10 @@ class PromptBuilder:
 
         # Collect all unique skills from all agents (including subagents)
         all_skills_written = set()
+        all_files_written = set()  # Track unique files for Claude deduplication
+
+        # Track primary agents being built (for AGENTS.md)
+        primary_agents_built = []
 
         # For Kilo, write core convention files to .kilo/rules/ before building agents
         rules_files_written = []
@@ -160,6 +167,11 @@ class PromptBuilder:
         for agent_name, agent in all_agents.items():
             if "/" in agent_name:  # Skip subagents for agent file generation
                 continue
+
+            # Track this primary agent for AGENTS.md
+            primary_agents_built.append(
+                {"name": agent_name, "description": agent.description or f"Agent: {agent_name}"}
+            )
 
             try:
                 # Filter agent for language before building
@@ -176,10 +188,13 @@ class PromptBuilder:
                 # Write output
                 if not dry_run:
                     written = self._write_output(output, agent_name, output_content)
-                    actions.extend([f"✓ {f}" for f in written])
+                    # Deduplicate file reports (especially for Claude workflows)
+                    new_files = [f for f in written if f not in all_files_written]
+                    all_files_written.update(written)
+                    actions.extend([f"✓ {f}" for f in new_files])
 
                 # Build subagents as separate files under .kilo/agents/{agent_name}/{subagent}.md
-                if agent.subagents and not dry_run:
+                if agent.subagents and not dry_run and self.tool_name == "kilo":
                     for subagent_name in agent.subagents:
                         try:
                             # Load actual subagent from registry
@@ -253,6 +268,41 @@ class PromptBuilder:
                                 all_workflows_written.add(workflow_file)
                     except Exception as e:
                         actions.append(f"✗ Failed to write workflows for {agent_name}: {e}")
+
+        # Generate root AGENTS.md or CLAUDE.md file (only for primary agents in scope)
+        if not dry_run:
+            try:
+                if self.tool_name == "claude":
+                    # Generate CLAUDE.md for Claude
+                    persona_name = (
+                        config.get("persona", "software_engineer")
+                        if config
+                        else "software_engineer"
+                    )
+                    claude_md_content = generate_claude_md(primary_agents_built, persona_name)
+                    claude_md_path = output / "CLAUDE.md"
+                    claude_md_path.write_text(claude_md_content, encoding="utf-8")
+                    actions.append("✓ CLAUDE.md")
+
+                    # Generate convention files for Claude
+                    try:
+                        conventions = generate_all_conventions()
+                        for file_path_str, content_str in conventions.items():
+                            full_path = output / file_path_str
+                            full_path.parent.mkdir(parents=True, exist_ok=True)
+                            full_path.write_text(content_str, encoding="utf-8")
+                        actions.append(f"✓ {len(conventions)} convention files")
+                    except Exception as conv_error:
+                        actions.append(f"⚠ Failed to generate conventions: {conv_error}")
+                else:
+                    # Generate AGENTS.md for other tools
+                    agents_md_content = generate_agents_md(primary_agents_built)
+                    agents_md_path = output / "AGENTS.md"
+                    agents_md_path.write_text(agents_md_content, encoding="utf-8")
+                    actions.append("✓ AGENTS.md")
+            except Exception as e:
+                file_name = "CLAUDE.md" if self.tool_name == "claude" else "AGENTS.md"
+                actions.append(f"⚠ Failed to generate {file_name}: {e}")
 
         return actions
 
@@ -418,15 +468,26 @@ class PromptBuilder:
             written_files.append(".clinerules")
 
         elif self.tool_name == "claude":
-            # Claude: custom_instructions/{agent_name}.json
-            instructions_dir = output / "custom_instructions"
-            instructions_dir.mkdir(parents=True, exist_ok=True)
+            # Claude: .claude/ directory structure with Markdown files
+            # Content is dict[str, str] mapping file paths to markdown content
+            if isinstance(content, dict) and all(
+                isinstance(k, str) and isinstance(v, str) for k, v in content.items()
+            ):
+                # New format: dict with file paths as keys
+                for file_path_str, markdown_content in content.items():
+                    full_path = output / file_path_str
+                    full_path.parent.mkdir(parents=True, exist_ok=True)
+                    full_path.write_text(markdown_content, encoding="utf-8")
+                    written_files.append(file_path_str)
+            else:
+                # Old format (fallback): JSON dict to custom_instructions/
+                import json
 
-            import json
-
-            file_path = instructions_dir / f"{agent_name}.json"
-            file_path.write_text(json.dumps(content, indent=2), encoding="utf-8")
-            written_files.append(f"custom_instructions/{agent_name}.json")
+                instructions_dir = output / "custom_instructions"
+                instructions_dir.mkdir(parents=True, exist_ok=True)
+                file_path = instructions_dir / f"{agent_name}.json"
+                file_path.write_text(json.dumps(content, indent=2), encoding="utf-8")
+                written_files.append(f"custom_instructions/{agent_name}.json")
 
         elif self.tool_name == "copilot":
             # Copilot: .github/copilot-instructions.md (concatenated)

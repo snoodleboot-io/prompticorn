@@ -215,10 +215,13 @@ class TestSingleAgentAllTools:
 
         for tool_name, builder in all_builders.items():
             output = builder.build(sample_agent, options)
-            # Claude returns dict, others return strings
+            # Claude returns dict[str, str] with file path keys, others return strings
             if tool_name == "claude":
                 assert isinstance(output, dict)
-                assert "system" in output
+                assert len(output) > 0
+                assert any(k.startswith(".claude/") or k == "CLAUDE.md" for k in output), (
+                    f"Claude output keys {list(output.keys())} should contain .claude/ or CLAUDE.md paths"
+                )
             else:
                 assert isinstance(output, str)
                 assert len(output) > 50  # Reasonable minimum size
@@ -263,15 +266,15 @@ class TestSingleAgentAllTools:
     def test_claude_output_contains_required_keys(
         self, sample_agent: Agent, all_builders: dict[str, Any]
     ) -> None:
-        """Verify Claude output contains required JSON keys."""
+        """Verify Claude output contains file path keys for .claude/ or CLAUDE.md."""
         options = BuildOptions(variant="verbose")
         output = all_builders["claude"].build(sample_agent, options)
 
         assert isinstance(output, dict)
-        assert "system" in output
-        assert "tools" in output
-        assert isinstance(output["system"], str)
-        assert len(output["system"]) > 0
+        assert len(output) > 0
+        assert any(k.startswith(".claude/") or k == "CLAUDE.md" for k in output), (
+            f"Expected .claude/ or CLAUDE.md keys, got: {list(output.keys())}"
+        )
 
     def test_cline_output_is_markdown(
         self, sample_agent: Agent, all_builders: dict[str, Any]
@@ -372,18 +375,19 @@ class TestFormatValidation:
     def test_claude_has_required_fields(
         self, sample_agent: Agent, all_builders: dict[str, Any]
     ) -> None:
-        """Verify Claude output has required fields."""
+        """Verify Claude output has file path keys for generated Markdown files."""
         options = BuildOptions(variant="verbose")
         output = all_builders["claude"].build(sample_agent, options)
 
         assert isinstance(output, dict)
-        assert "system" in output
-        assert isinstance(output["system"], str)
-        assert len(output["system"]) > 0
-
-        # Tools should be a list or missing
-        if "tools" in output:
-            assert isinstance(output["tools"], list)
+        assert len(output) > 0
+        assert any(k.startswith(".claude/") or k == "CLAUDE.md" for k in output), (
+            f"Expected .claude/ or CLAUDE.md keys, got: {list(output.keys())}"
+        )
+        # All values should be non-empty strings (file contents)
+        for path_key, content in output.items():
+            assert isinstance(content, str)
+            assert len(content) > 0, f"Claude output file {path_key!r} has empty content"
 
     def test_copilot_yaml_frontmatter_valid(
         self, sample_agent: Agent, all_builders: dict[str, Any]
@@ -726,7 +730,9 @@ class TestErrorHandling:
     def test_invalid_agent_raises_error(self) -> None:
         """Verify invalid agent raises appropriate error."""
         # Agent with empty required field - Pydantic will reject before builder
-        with pytest.raises(Exception):  # Pydantic ValidationError
+        from pydantic import ValidationError
+
+        with pytest.raises(ValidationError):  # Pydantic ValidationError
             Agent(
                 name="invalid",
                 description="",  # Invalid: empty description

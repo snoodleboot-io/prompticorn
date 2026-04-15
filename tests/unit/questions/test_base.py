@@ -12,10 +12,16 @@ class TestQuestion:
     """Tests for Question abstract base class."""
 
     def test_question_is_abstract(self):
-        """Question should be an abstract base class."""
-        # Cannot instantiate directly
-        with pytest.raises(TypeError):
-            Question()
+        """Question should raise NotImplementedError on unimplemented methods."""
+        q = Question()
+        with pytest.raises(NotImplementedError):
+            _ = q.key
+        with pytest.raises(NotImplementedError):
+            _ = q.question_text
+        with pytest.raises(NotImplementedError):
+            _ = q.explanation
+        with pytest.raises(NotImplementedError):
+            _ = q.options
 
     def test_question_has_abstract_properties(self):
         """Question should define abstract properties."""

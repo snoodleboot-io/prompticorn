@@ -1,6 +1,6 @@
 # ClaudeBuilder Comprehensive Guide
 
-A detailed guide for building Claude Messages API JSON configurations from Agent IR models.
+A detailed guide for building Claude Markdown agent configuration files from Agent IR models.
 
 ## Table of Contents
 
@@ -19,45 +19,34 @@ A detailed guide for building Claude Messages API JSON configurations from Agent
 
 ## Overview
 
-**ClaudeBuilder** is the builder for the [Claude Messages API](https://docs.anthropic.com/messages/overview). It transforms Agent IR models into JSON dictionaries that can be directly used with Claude's API for programmatic agent definitions.
+**ClaudeBuilder** is the builder for [Claude](https://claude.ai) agent configurations. It transforms Agent IR models into Markdown files written to the `.claude/` directory, following the Claude agent file format.
 
 ### What ClaudeBuilder Does
 
 - **Input:** Agent IR models (Python dataclasses with agent definitions)
-- **Output:** JSON-serializable Python dictionaries
-- **Target:** Claude API system prompts and tool definitions
-- **Supports:** System prompts, tool schemas, instructions, workflows, and subagents
+- **Output:** Markdown files written to `.claude/` directory
+- **Target:** `.claude/agents/`, `.claude/subagents/`, `.claude/workflows/`, and `CLAUDE.md`
+- **Supports:** System prompts, tools, skills, workflows, and subagents
 
 ### Output Format
 
-ClaudeBuilder generates JSON-compatible dictionaries:
+ClaudeBuilder generates a `dict[str, str]` mapping file paths to Markdown content:
 
 ```python
 {
-    "system": "You are an expert software engineer...",
-    "tools": [
-        {
-            "name": "bash",
-            "description": "Tool: bash",
-            "input_schema": {
-                "type": "object",
-                "properties": {
-                    "param": {"type": "string", "description": "Parameter"}
-                },
-                "required": ["param"]
-            }
-        }
-    ],
-    "instructions": "Follow these principles:\n- Read code before writing\n- Match existing patterns\n..."
+    ".claude/agents/code-agent.md": "# Code Agent\n...",
+    ".claude/subagents/feature.md": "# Feature\n...",
+    ".claude/workflows/feature.md": "# Feature Workflow\n...",
+    "CLAUDE.md": "# Claude Configuration\n..."
 }
 ```
 
 ### Key Features
 
-✅ JSON-serializable output
-✅ Claude Messages API compatible
-✅ Tool schema generation
-✅ Instructions as prose
+✅ Markdown files output
+✅ File path → content mapping
+✅ `.claude/` directory structure
+✅ Agents, subagents, and workflows support
 ✅ Skills and workflows support
 ✅ Programmatic integration
 
@@ -68,10 +57,9 @@ ClaudeBuilder generates JSON-compatible dictionaries:
 ### Most Basic Example
 
 ```python
-from src.builders.claude_builder import ClaudeBuilder
-from src.builders.base import BuildOptions
-from src.ir.models import Agent
-import json
+from promptosaurus.builders.claude_builder import ClaudeBuilder
+from promptosaurus.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
 
 # Create a builder
 builder = ClaudeBuilder()
@@ -84,45 +72,22 @@ agent = Agent(
     tools=["bash", "python"],
 )
 
-# Build JSON configuration
+# Build Markdown file configuration
 options = BuildOptions(variant="minimal", agent_name="code_expert")
 config = builder.build(agent, options)
 
-# config is a dict, JSON-serializable
-json_str = json.dumps(config, indent=2)
-print(json_str)
+# config is a dict[str, str] mapping file paths to Markdown content
+for file_path, content in config.items():
+    print(f"File: {file_path}")
+    print(content[:100])
 ```
 
 ### Expected Output
 
-```json
+```python
 {
-  "system": "You are an expert code writer with deep knowledge of Python.",
-  "tools": [
-    {
-      "name": "bash",
-      "description": "Tool: bash",
-      "input_schema": {
-        "type": "object",
-        "properties": {
-          "param": {"type": "string", "description": "Parameter for the tool"}
-        },
-        "required": ["param"]
-      }
-    },
-    {
-      "name": "python",
-      "description": "Tool: python",
-      "input_schema": {
-        "type": "object",
-        "properties": {
-          "param": {"type": "string", "description": "Parameter for the tool"}
-        },
-        "required": ["param"]
-      }
-    }
-  ],
-  "instructions": ""
+    ".claude/agents/code_expert.md": "# Code Expert\n\nYou are an expert code writer...",
+    "CLAUDE.md": "# Claude Configuration\n..."
 }
 ```
 
@@ -139,10 +104,9 @@ print(json_str)
 ### Import
 
 ```python
-from src.builders.claude_builder import ClaudeBuilder
-from src.builders.base import BuildOptions, BuilderValidationError
-from src.ir.models import Agent
-import json
+from promptosaurus.builders.claude_builder import ClaudeBuilder
+from promptosaurus.builders.base import BuildOptions, BuilderValidationError
+from promptosaurus.ir.models import Agent
 ```
 
 ### Initialize
@@ -179,7 +143,7 @@ print(builder.supports_feature("tools"))       # True
 ### 1. Create Agent Model
 
 ```python
-from src.ir.models import Agent
+from promptosaurus.ir.models import Agent
 
 agent = Agent(
     name="research_assistant",
@@ -212,7 +176,7 @@ if errors:
 ### 3. Configure Build Options
 
 ```python
-from src.builders.base import BuildOptions
+from promptosaurus.builders.base import BuildOptions
 
 # For API integration
 options = BuildOptions(
@@ -224,17 +188,16 @@ options = BuildOptions(
 )
 ```
 
-### 4. Build JSON Configuration
+### 4. Build Markdown File Configuration
 
 ```python
-import json
-
 try:
     config = builder.build(agent, options)
     
-    # Verify it's JSON-serializable
-    json_str = json.dumps(config, indent=2)
-    print(json_str)
+    # config is a dict[str, str] mapping file paths to Markdown content
+    for file_path, content in config.items():
+        print(f"File: {file_path}")
+        print(content[:100])
     
 except BuilderValidationError as e:
     print(f"Build failed: {e.message}")
@@ -242,40 +205,13 @@ except BuilderValidationError as e:
         print(f"  - {error}")
 ```
 
-### 5. Use with Claude API
-
-```python
-from anthropic import Anthropic
-
-# Build configuration
-config = builder.build(agent, options)
-
-# Use with Claude API
-client = Anthropic()
-
-response = client.messages.create(
-    model="claude-3-5-sonnet-20241022",
-    max_tokens=1024,
-    system=config["system"],
-    tools=config["tools"],
-    messages=[
-        {
-            "role": "user",
-            "content": "Your query here"
-        }
-    ]
-)
-
-print(response.content)
-```
-
 ---
 
 ## Advanced Usage Patterns
 
-### Pattern 1: Building Tool Schemas
+### Pattern 1: Building Multiple Agents
 
-ClaudeBuilder generates tool schemas automatically for the Claude API.
+ClaudeBuilder can generate file configurations for multiple agents.
 
 ```python
 # Agent with multiple tools
@@ -293,13 +229,13 @@ options = BuildOptions(
 
 config = builder.build(agent, options)
 
-# tools list has full JSON schemas
-for tool in config["tools"]:
-    print(f"Tool: {tool['name']}")
-    print(f"  Schema: {tool['input_schema']}")
+# config is a dict[str, str] with file paths as keys
+for file_path, content in config.items():
+    print(f"File: {file_path}")
+    print(content[:200])
 ```
 
-### Pattern 2: Instructions from Skills and Workflows
+### Pattern 2: Skills and Workflows in Output
 
 ```python
 # Agent with skills and workflows
@@ -320,14 +256,10 @@ options = BuildOptions(
 
 config = builder.build(agent, options)
 
-# Instructions will contain skills and workflow info
-print("System prompt:")
-print(config["system"])
-print("\nTools:")
-for tool in config["tools"]:
-    print(f"  - {tool['name']}")
-print("\nInstructions:")
-print(config["instructions"])
+# Output is file paths → Markdown content
+for file_path, content in config.items():
+    print(f"File: {file_path}")
+    print(content[:200])
 ```
 
 ### Pattern 3: Building from Configuration Files
@@ -478,26 +410,24 @@ class BuildOptions:
 
 | Key | Type | Description |
 |-----|------|-------------|
-| `system` | string | System prompt for Claude |
-| `tools` | list[dict] | Tool definitions with schemas |
-| `instructions` | string | Additional instructions from skills/workflows |
+| `.claude/agents/{name}.md` | string | Agent Markdown file |
+| `.claude/subagents/{name}.md` | string | Subagent Markdown file |
+| `CLAUDE.md` | string | Claude configuration file |
 
 ---
 
 ## Common Patterns & Best Practices
 
-### ✅ DO: Always Serialize to JSON
+### ✅ DO: Write Output Files to Disk
 
 ```python
-# GOOD - Verify JSON compatibility
+# GOOD - Write each Markdown file to its path
+from pathlib import Path
 config = builder.build(agent, options)
-json_str = json.dumps(config)  # Verify it works
-```
-
-```python
-# BAD - Don't assume it's JSON-compatible
-config = builder.build(agent, options)
-# Don't use without verifying serialization
+for file_path, content in config.items():
+    path = Path(file_path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content)
 ```
 
 ### ✅ DO: Validate Before Using with API
@@ -559,26 +489,25 @@ config = builder.build(agent, options)
 
 ## Troubleshooting
 
-### Issue: "Output is not JSON serializable"
+### Issue: "Output files not written to disk"
 
 **Problem:**
 ```python
 config = builder.build(agent, options)
-json.dumps(config)  # Raises TypeError
+# Files not created on disk
 ```
 
-**Cause:** Non-JSON-serializable objects in config (dates, custom objects, etc.)
+**Cause:** `build()` returns a `dict[str, str]`; you must write the files yourself.
 
 **Solution:**
 ```python
-# Ensure all values are JSON-compatible types:
-# strings, numbers, booleans, lists, dicts, null
-try:
-    config = builder.build(agent, options)
-    json_str = json.dumps(config)
-    print("✓ JSON serialization successful")
-except TypeError as e:
-    print(f"✗ Serialization error: {e}")
+from pathlib import Path
+config = builder.build(agent, options)
+for file_path, content in config.items():
+    path = Path(file_path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content)
+    print(f"✓ Written: {file_path}")
 ```
 
 ### Issue: "Agent name is required"
@@ -593,32 +522,25 @@ agent = Agent(name="", ...)  # Empty name
 agent = Agent(name="meaningful_name", ...)
 ```
 
-### Issue: Tool schemas are placeholder text
+### Issue: Agent content not appearing in Markdown output
 
 **Problem:**
 ```python
-# The tool schemas contain:
-# "input_schema": {
-#     "properties": {
-#         "param": {"type": "string"}
-#     }
-# }
+config = builder.build(agent, options)
+# Content seems incomplete
 ```
 
-**Why:** ClaudeBuilder generates basic schemas. For production, customize them.
+**Why:** Check that `BuildOptions` flags are set correctly.
 
 **Solution:**
 ```python
+options = BuildOptions(
+    variant="verbose",
+    include_tools=True,
+    include_skills=True,
+    include_workflows=True,
+)
 config = builder.build(agent, options)
-
-# Customize tool schemas if needed
-for tool in config["tools"]:
-    if tool["name"] == "bash":
-        tool["input_schema"]["properties"] = {
-            "command": {"type": "string", "description": "Shell command"},
-            "timeout": {"type": "number", "description": "Timeout in seconds"},
-        }
-        tool["input_schema"]["required"] = ["command"]
 ```
 
 ---
@@ -651,16 +573,15 @@ def __init__(self, agents_dir: Path | str = "agents") -> None:
 #### Main Build Method
 
 ```python
-def build(self, agent: Agent, options: BuildOptions) -> dict[str, Any]:
-    """Build Claude Messages API JSON output from an Agent IR model.
+def build(self, agent: Agent, options: BuildOptions) -> dict[str, str]:
+    """Build Markdown files written to `.claude/` directory from an Agent IR model.
     
     Args:
         agent: The Agent IR model to build from
         options: Build configuration options
     
     Returns:
-        Dictionary with system, tools, and instructions keys
-        All values are JSON-serializable
+        Dictionary mapping file paths to Markdown content
     
     Raises:
         BuilderValidationError: If the agent model is invalid
@@ -671,20 +592,9 @@ def build(self, agent: Agent, options: BuildOptions) -> dict[str, Any]:
 
 ```python
 {
-    "system": str,              # System prompt
-    "tools": list[dict],        # Tool definitions with schemas
-    "instructions": str,        # Additional instructions
-}
-
-# Each tool in tools list:
-{
-    "name": str,                # Tool name
-    "description": str,         # Tool description
-    "input_schema": {           # JSON schema for inputs
-        "type": "object",
-        "properties": dict,     # Parameter definitions
-        "required": list,       # Required parameters
-    }
+    ".claude/agents/code-agent.md": "# Code Agent\n...",
+    ".claude/subagents/feature.md": "# Feature\n...",
+    "CLAUDE.md": "# Claude Configuration\n..."
 }
 ```
 
@@ -695,10 +605,10 @@ def build(self, agent: Agent, options: BuildOptions) -> dict[str, Any]:
 ### Example 1: Simple Code Agent
 
 ```python
-from src.builders.claude_builder import ClaudeBuilder
-from src.builders.base import BuildOptions
-from src.ir.models import Agent
-import json
+from promptosaurus.builders.claude_builder import ClaudeBuilder
+from promptosaurus.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
+from pathlib import Path
 
 def build_code_agent():
     """Build a simple code generation agent."""
@@ -727,20 +637,27 @@ Your role is to:
     
     config = builder.build(agent, options)
     
-    return json.dumps(config, indent=2)
+    # Write each file to disk
+    for file_path, content in config.items():
+        path = Path(file_path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(content)
+    
+    return config
 
 if __name__ == "__main__":
-    json_output = build_code_agent()
-    print(json_output)
+    config = build_code_agent()
+    for file_path in config:
+        print(f"Written: {file_path}")
 ```
 
 ### Example 2: Multi-Tool System
 
 ```python
-from src.builders.claude_builder import ClaudeBuilder
-from src.builders.base import BuildOptions
-from src.ir.models import Agent
-import json
+from promptosaurus.builders.claude_builder import ClaudeBuilder
+from promptosaurus.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
+from pathlib import Path
 
 def build_devops_agent():
     """Build a DevOps automation agent."""
@@ -770,9 +687,11 @@ Responsibilities:
     
     config = builder.build(agent, options)
     
-    # Save configuration
-    with open("devops-agent.json", "w") as f:
-        json.dump(config, f, indent=2)
+    # Write each Markdown file to disk
+    for file_path, content in config.items():
+        path = Path(file_path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(content)
     
     return config
 
@@ -781,17 +700,16 @@ if __name__ == "__main__":
     print("✓ DevOps agent built and saved")
 ```
 
-### Example 3: API Integration
+### Example 3: Writing Files to Disk
 
 ```python
-from src.builders.claude_builder import ClaudeBuilder
-from src.builders.base import BuildOptions
-from src.ir.models import Agent
-from anthropic import Anthropic
-import json
+from promptosaurus.builders.claude_builder import ClaudeBuilder
+from promptosaurus.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
+from pathlib import Path
 
-def use_claude_builder_with_api():
-    """Use ClaudeBuilder to configure Claude API."""
+def write_claude_agent_files():
+    """Use ClaudeBuilder to generate Markdown files."""
     
     builder = ClaudeBuilder()
     
@@ -816,38 +734,23 @@ Help users by:
     # Build configuration
     config = builder.build(agent, options)
     
-    # Use with Claude API
-    client = Anthropic()
-    
-    response = client.messages.create(
-        model="claude-3-5-sonnet-20241022",
-        max_tokens=1024,
-        system=config["system"],
-        tools=config["tools"],
-        messages=[
-            {
-                "role": "user",
-                "content": "What are the key trends in AI in 2024?"
-            }
-        ]
-    )
-    
-    print("Claude Response:")
-    for block in response.content:
-        if hasattr(block, "text"):
-            print(block.text)
+    # Write each Markdown file
+    for file_path, content in config.items():
+        path = Path(file_path)
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_text(content)
+        print(f"Written: {file_path}")
 
 if __name__ == "__main__":
-    use_claude_builder_with_api()
+    write_claude_agent_files()
 ```
 
 ### Example 4: Configuration Management
 
 ```python
-from src.builders.claude_builder import ClaudeBuilder
-from src.builders.base import BuildOptions
-from src.ir.models import Agent
-import json
+from promptosaurus.builders.claude_builder import ClaudeBuilder
+from promptosaurus.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
 from pathlib import Path
 
 def manage_agent_configurations():
@@ -877,23 +780,24 @@ def manage_agent_configurations():
     ]
     
     options = BuildOptions(variant="verbose", include_tools=True)
-    configs = {}
+    all_configs = {}
     
     for agent in agents:
         try:
             config = builder.build(agent, options)
-            configs[agent.name] = config
+            all_configs[agent.name] = config
+            # Write each Markdown file to disk
+            for file_path, content in config.items():
+                path = Path(file_path)
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text(content)
             print(f"✓ Built {agent.name}")
         except Exception as e:
             print(f"✗ Failed {agent.name}: {e}")
     
-    # Save all configurations
-    output_path = Path("agent_configs.json")
-    output_path.write_text(json.dumps(configs, indent=2))
+    print(f"\n✓ Built {len(all_configs)} agent configurations")
     
-    print(f"\n✓ Saved {len(configs)} configurations to {output_path}")
-    
-    return configs
+    return all_configs
 
 if __name__ == "__main__":
     configs = manage_agent_configurations()
@@ -913,10 +817,10 @@ For building other tools, see:
 
 ## Support & Resources
 
-- **Source Code:** `src/builders/claude_builder.py`
-- **Base Class:** `src/builders/base.py` (AbstractBuilder)
-- **IR Models:** `src/ir/models.py` (Agent dataclass)
-- **Examples:** `src/builders/examples_usage.py`
+- **Source Code:** `promptosaurus/builders/claude_builder.py`
+- **Base Class:** `promptosaurus/builders/base.py` (Builder)
+- **IR Models:** `promptosaurus/ir/models.py` (Agent dataclass)
+- **Examples:** `promptosaurus/builders/examples_usage.py`
 - **Claude API Docs:** [api.anthropic.com](https://api.anthropic.com)
 - **Messages API:** [docs.anthropic.com/messages](https://docs.anthropic.com/messages/overview)
 

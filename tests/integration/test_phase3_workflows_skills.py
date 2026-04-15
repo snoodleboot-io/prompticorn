@@ -285,28 +285,28 @@ class TestPhase3Registration:
         assert parsed is not None, "language_skill_mapping.yaml is not valid YAML"
 
     def test_workflows_registered_in_python(self):
-        """Verify Phase 3 workflows registered in python section"""
+        """Verify Python-appropriate workflows registered in python section"""
         content = self.MAPPING_FILE.read_text()
         parsed = yaml.safe_load(content)
 
         python_workflows = parsed.get("python", {}).get("workflows", [])
 
-        # Check Track 1 workflows
-        assert "model-evaluation" in python_workflows
-        assert "mlops-pipeline-setup" in python_workflows
-        assert "production-ml-deployment" in python_workflows
+        # Check general-purpose Python workflows (ML workflows intentionally excluded)
+        assert "code" in python_workflows
+        assert "feature" in python_workflows
+        assert "testing" in python_workflows
 
     def test_skills_registered_in_python(self):
-        """Verify Phase 3 skills registered in python section"""
+        """Verify Python-appropriate skills registered in python section"""
         content = self.MAPPING_FILE.read_text()
         parsed = yaml.safe_load(content)
 
         python_skills = parsed.get("python", {}).get("skills", [])
 
-        # Check Track 1 skills
-        assert "data-validation-pipelines" in python_skills
-        assert "ensemble-methods" in python_skills
-        assert "mlops-pipeline-design" in python_skills
+        # Check general-purpose Python skills (ML skills intentionally excluded)
+        assert "test-aaa-structure" in python_skills
+        assert "test-coverage-categories" in python_skills
+        assert "test-mocking-rules" in python_skills
 
     def test_security_section_exists(self):
         """Verify new 'security' section exists"""
@@ -385,7 +385,8 @@ class TestPhase3Totals:
         phase3_workflows = {
             wf.parent.parent.name
             for wf in workflow_files
-            if wf.parent.parent.name not in {
+            if wf.parent.parent.name
+            not in {
                 "feature",
                 "testing",
                 "code",
@@ -405,7 +406,8 @@ class TestPhase3Totals:
         phase3_skills = {
             sk.parent.parent.name
             for sk in skill_files
-            if sk.parent.parent.name not in {
+            if sk.parent.parent.name
+            not in {
                 "feature-planning",
                 "post-implementation-checklist",
                 "incremental-implementation",

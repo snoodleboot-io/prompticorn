@@ -1,6 +1,5 @@
 """Unit tests for Observability Agent subagents."""
 
-
 import pytest
 
 

@@ -26,8 +26,9 @@ class TestEmptyDefaultIndices:
         state = MultiSelectionState(set(), max_index=5)
 
         # Assert - should have no selections
-        assert state.current_selection == set(), \
+        assert state.current_selection == set(), (
             f"Expected no selections, got {state.current_selection}"
+        )
 
     def test_multi_selection_state_populated_set(self):
         """MultiSelectionState should work with populated set."""
@@ -35,5 +36,6 @@ class TestEmptyDefaultIndices:
         state = MultiSelectionState({1, 3}, max_index=5)
 
         # Assert
-        assert state.current_selection == {1, 3}, \
+        assert state.current_selection == {1, 3}, (
             f"Expected {{1, 3}}, got {state.current_selection}"
+        )

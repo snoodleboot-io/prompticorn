@@ -41,8 +41,8 @@ poetry add promptosaurus
 ### Verify Installation
 
 ```bash
-promptosaurus --version
-# Output: promptosaurus 2.0.0
+promptosaurus --help
+# Output: Usage: promptosaurus [OPTIONS] COMMAND [ARGS]...
 ```
 
 ---
@@ -107,20 +107,20 @@ Your responsibilities include:
 Focus on clarity, scalability, and maintainability.
 ```
 
-### 4. Build for All Tools
+### 4. Set Up Initial Configuration
 
 ```bash
-promptosaurus build
+promptosaurus init
 ```
 
-**Output:**
-```
-✓ Built KiloBuilder (1.2ms)
-✓ Built ClineBuilder (1.1ms)
-✓ Built ClaudeBuilder (1.3ms)
-✓ Built CursorBuilder (1.0ms)
-✓ Built CopilotBuilder (0.9ms)
-✓ Total: 5 tools in 5.5ms
+**Then switch to the tool you want to use:**
+
+```bash
+promptosaurus switch kilo
+# or
+promptosaurus switch cline
+# or
+promptosaurus switch claude
 ```
 
 ### 5. Verify Files
@@ -130,13 +130,13 @@ promptosaurus build
 ls -la .kilo/agents/architect.md
 
 # Check Cline output
-grep -A5 "^# architect" .clinerules
+cat .clinerules | head -20
 
 # Check Claude output
-jq '.[] | select(.name=="architect")' claude-agents.json | head -20
+ls -la .claude/agents/
 ```
 
-**Done!** 🎉 Your agent is now configured for all 5 tools.
+**Done!** Your agent is now configured for all 5 tools.
 
 ---
 
@@ -148,31 +148,21 @@ jq '.[] | select(.name=="architect")' claude-agents.json | head -20
 |------|--------|----------|--------|
 | **Kilo** | YAML + Markdown | Primary IDE agent framework | `.kilo/agents/*.md` |
 | **Cline** | Markdown with `use_skill` | AI coding assistant with skills | `.clinerules` |
-| **Claude** | JSON (Messages API) | Claude API integration | `claude-agents.json` |
+| **Claude** | Markdown files | Claude agent configuration | `.claude/` directory with Markdown files |
 | **Cursor** | Markdown rules | IDE rules file | `.cursorrules` |
 | **Copilot** | YAML + Markdown | GitHub Copilot integration | `.github/instructions/*.md` |
 
-### Build Specific Tool
+### Switch to a Specific Tool
 
 ```bash
-# Build only for Kilo
-promptosaurus build --tool kilo --agent architect
+# Switch to Kilo
+promptosaurus switch kilo
 
-# Build only for Claude
-promptosaurus build --tool claude --agent architect
+# Switch to Claude
+promptosaurus switch claude
 
-# Build all agents for one tool
-promptosaurus build --tool cline
-```
-
-### Build with Variant
-
-```bash
-# Build minimal variant (small, efficient)
-promptosaurus build --variant minimal
-
-# Build verbose variant (detailed, comprehensive)
-promptosaurus build --variant verbose
+# Switch to Cline
+promptosaurus switch cline
 ```
 
 ### List Available Agents
@@ -258,9 +248,10 @@ You are an expert software architect with 15+ years of experience. You specializ
 Focus on creating systems that are scalable, maintainable, and cost-effective.
 ```
 
-**Build:**
+**Setup:**
 ```bash
-promptosaurus build --tool kilo --agent architect
+promptosaurus init
+promptosaurus switch kilo
 ```
 
 **Generated File: `.kilo/agents/architect.md`**
@@ -361,9 +352,9 @@ skills: ["unit-testing", "edge-case-analysis", "mutation-testing", "property-bas
 4. **property-based-testing** - Generative testing with Hypothesis
 ```
 
-**Build:**
+**Setup:**
 ```bash
-promptosaurus build --tool cline --agent test
+promptosaurus switch cline
 ```
 
 **Generated Section: `.clinerules`**
@@ -408,47 +399,42 @@ You are a software engineer. Your role:
 - Write clean, tested code
 ```
 
-**Build:**
+**Setup:**
 ```bash
-promptosaurus build --tool claude --agent code
+promptosaurus switch claude
 ```
 
-**Generated File: `claude-agents.json`**
-```json
-[
-  {
-    "name": "code",
-    "description": "Implement features and fix bugs",
-    "system": "You are a software engineer. Your role:\n- Implement new features\n- Fix bugs and defects\n- Write clean, tested code",
-    "tools": [],
-    "instructions": ""
-  }
-]
+**Generated Files in `.claude/` directory:**
+```markdown
+# .claude/agents/code.md
+
+You are a software engineer. Your role:
+- Implement new features
+- Fix bugs and defects
+- Write clean, tested code
 ```
 
-**Use with Claude API:**
+**Use ClaudeBuilder programmatically:**
 ```python
-import anthropic
-import json
+from promptosaurus.builders.claude_builder import ClaudeBuilder
+from promptosaurus.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
+from pathlib import Path
 
-# Load agent configuration
-with open("claude-agents.json") as f:
-    agents = json.load(f)
-
-code_agent = agents[0]  # First agent
-
-# Use with Claude
-client = anthropic.Anthropic()
-response = client.messages.create(
-    model="claude-3-5-sonnet-20241022",
-    max_tokens=2048,
-    system=code_agent["system"],
-    messages=[
-        {"role": "user", "content": "Implement a user authentication system"}
-    ]
+builder = ClaudeBuilder()
+agent = Agent(
+    name="code",
+    description="Implement features and fix bugs",
+    system_prompt="You are a software engineer. Your role:\n- Implement new features\n- Fix bugs and defects\n- Write clean, tested code"
 )
+options = BuildOptions(variant="minimal")
+output = builder.build(agent, options)
 
-print(response.content[0].text)
+# Write Markdown files to disk
+for file_path, content in output.items():
+    path = Path(file_path)
+    path.parent.mkdir(parents=True, exist_ok=True)
+    path.write_text(content)
 ```
 
 ---
@@ -479,9 +465,9 @@ You are a security engineer. Review code for:
 - OWASP Top 10 violations
 ```
 
-**Build:**
+**Setup:**
 ```bash
-promptosaurus build --tool cursor --agent security
+promptosaurus switch cursor
 ```
 
 **Generated File: `.cursorrules`**
@@ -523,9 +509,9 @@ You are a code reviewer. Focus on:
 - SOLID principles
 ```
 
-**Build:**
+**Setup:**
 ```bash
-promptosaurus build --tool copilot --agent review
+promptosaurus switch copilot
 ```
 
 **Generated File: `.github/instructions/review.md`**
@@ -574,23 +560,23 @@ promptosaurus list --verbose
 promptosaurus list architect
 ```
 
-### Build Agents
+### Switch Tools
 
 ```bash
-# Build all agents for all tools
-promptosaurus build
+# Switch to Kilo IDE
+promptosaurus switch kilo
 
-# Build specific agent
-promptosaurus build --agent architect
+# Switch to Cline
+promptosaurus switch cline
 
-# Build for specific tool
-promptosaurus build --tool kilo
+# Switch to Claude
+promptosaurus switch claude
 
-# Build with specific variant
-promptosaurus build --variant minimal
+# Switch to Cursor
+promptosaurus switch cursor
 
-# Build to specific output directory
-promptosaurus build --output ./output/
+# Switch to Copilot
+promptosaurus switch copilot
 ```
 
 ### Validate Configuration
@@ -681,8 +667,8 @@ cat .clinerules | head -20
 
 **For Claude:**
 ```bash
-# Verify JSON is valid
-python -c "import json; json.load(open('claude-agents.json'))"
+# Check .claude/ directory has Markdown files
+ls -la .claude/agents/
 ```
 
 **For Cursor:**
@@ -697,12 +683,9 @@ cat .cursorrules | head -10
 cat .github/instructions/architect.md | head -20
 ```
 
-### Problem: Build Slow or Stuck
+### Problem: Command Runs Slowly
 
 ```bash
-# Run with verbose output
-promptosaurus build --verbose
-
 # Check for file system issues
 ls -la agents/
 du -sh agents/
@@ -714,11 +697,12 @@ du -sh agents/
 # Search for generated files
 find . -name "*.md" -path "./.kilo/*"
 find . -name "*.rules" -path "./.cursor/*"
-find . -name "*.json" -name "*agent*"
+find . -name "*.md" -path "./.claude/*"
 
 # Check all possible locations
 ls -la .kilo/agents/
 cat .clinerules | head -5
+ls -la .claude/agents/
 ls -la .github/instructions/
 ```
 
@@ -746,8 +730,8 @@ After getting started:
    - Architect agent (for system design)
 
 4. **Integrate with Your Workflow**
-   - Add `promptosaurus build` to your CI/CD
-   - Generate agents on pre-commit hook
+   - Add `promptosaurus init` to new project setup
+   - Use `promptosaurus switch <tool>` when changing tools
    - Commit generated files for reproducibility
 
 ---
@@ -757,9 +741,10 @@ After getting started:
 | Task | Command |
 |------|---------|
 | Install | `pip install promptosaurus` |
+| Initialize | `promptosaurus init` |
 | List agents | `promptosaurus list` |
-| Build all | `promptosaurus build` |
-| Build Kilo | `promptosaurus build --tool kilo` |
+| Switch to Kilo | `promptosaurus switch kilo` |
+| Switch to Claude | `promptosaurus switch claude` |
 | Validate | `promptosaurus validate` |
 | Get help | `promptosaurus --help` |
 
@@ -774,4 +759,4 @@ After getting started:
 
 ---
 
-**Ready to get started? Create your first agent directory and run `promptosaurus build`!** 🚀
+**Ready to get started? Run `promptosaurus init` to set up your project!**

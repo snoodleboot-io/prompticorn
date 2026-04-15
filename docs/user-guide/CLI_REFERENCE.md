@@ -9,13 +9,10 @@ The Promptosaurus CLI provides commands for initializing, configuring, and manag
 All commands support these global options:
 
 - `--help`: Show help message and exit
-- `--verbose`: Enable verbose output
-- `--quiet`: Suppress non-essential output
 
 ## Commands
 
 ### `promptosaurus list`
-**Alias:** `promptosaurus ls`
 
 List all registered modes and their associated prompt files.
 
@@ -53,6 +50,8 @@ Interactively initialize prompt configuration for your project.
 promptosaurus init
 ```
 
+**Note:** `init` is interactive only. It prompts you through all configuration steps.
+
 **Workflow:**
 1. Select AI assistant to configure (Kilo CLI, Kilo IDE, Cline, Cursor, Copilot)
 2. Select repository type (single language, multi-language monorepo, mixed)
@@ -65,9 +64,6 @@ promptosaurus init
 ```bash
 # Interactive initialization
 promptosaurus init
-
-# Non-interactive (uses defaults)
-promptosaurus init --non-interactive
 ```
 
 ### `promptosaurus switch`
@@ -100,48 +96,31 @@ Swap active personas and regenerate configurations.
 
 **Usage:**
 ```bash
-promptosaurus swap [PERSONA...]
+promptosaurus swap
 ```
 
-**Arguments:**
-- `PERSONA`: Persona identifiers to activate
-
-**If no personas provided:** Shows interactive menu to select personas.
+**Note:** `swap` is interactive only. It shows a menu to select personas.
 
 **Examples:**
 ```bash
-# Swap to software engineer and QA tester personas
-promptosaurus swap software_engineer qa_tester
-
 # Interactive persona selection
 promptosaurus swap
-
-# Activate single persona
-promptosaurus swap devops_engineer
 ```
 
 ### `promptosaurus update`
-Update configuration options.
+Update configuration options interactively.
 
 **Usage:**
 ```bash
-promptosaurus update [OPTION] [VALUE]
+promptosaurus update
 ```
 
-**Arguments:**
-- `OPTION`: Configuration option to update (in dot notation)
-- `VALUE`: New value for the option
+**Note:** `update` is interactive only. It shows a menu to change specific options.
 
 **If no arguments provided:** Shows interactive menu to update configuration.
 
 **Examples:**
 ```bash
-# Update variant to verbose
-promptosaurus update variant verbose
-
-# Update active personas
-promptosaurus update active_personas '[\"software_engineer\", \"devops_engineer\"]'
-
 # Interactive configuration update
 promptosaurus update
 ```
@@ -166,30 +145,9 @@ promptosaurus validate
 ```bash
 # Validate current configuration
 promptosaurus validate
-
-# Validate with detailed output
-promptosaurus validate --verbose
 ```
 
 ## Advanced Usage
-
-### Building Specific Components
-
-While the main workflow uses `init` -> `switch` -> `swap`, you can also build components directly using the underlying builder system:
-
-```bash
-# Build a specific agent
-promptosaurus build --tool kilo --agent code --output-dir .kilocode/agents/
-
-# Build a specific workflow
-promptosaurus build --tool kilo --workflow feature-development --output-dir .kilocode/workflows/
-
-# Build a specific skill
-promptosaurus build --tool kilo --skill debugging --output-dir .kilocode/skills/
-
-# Build with specific options
-promptosaurus build --tool kilo --agent code --variant verbose --include-skills --no-tools
-```
 
 ### Direct Builder Access
 
@@ -240,7 +198,6 @@ ai_tool: kilo-ide  # currently selected AI tool
 
 The CLI respects these environment variables:
 
-- `PROMPTOSAURUS_CONFIG_PATH`: Path to configuration file (default: `.promptosaurus/.promptosaurus.yaml`)
 - `PROMPTOSAURUS_PROMPTS_PATH`: Path to prompts directory (default: `promptosaurus/prompts`)
 - `PROMPTOSAURUS_LOG_LEVEL`: Logging level (DEBUG, INFO, WARNING, ERROR)
 
@@ -274,7 +231,7 @@ promptosaurus validate
 promptosaurus switch cline
 
 # 4. Update personas for different task
-promptosaurus swap qa_engineer security_engineer
+promptosaurus swap
 
 # 5. Regenerate configurations
 promptosaurus init  # will reuse existing config and regenerate

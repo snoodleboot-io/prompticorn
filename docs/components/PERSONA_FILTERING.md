@@ -45,6 +45,9 @@ Personas are defined in `promptosaurus/personas/personas.yaml` with the followin
 version: "1.0.0"
 universal_agents:
   - "ask"
+  - "debug"
+  - "explain"
+  - "plan"
   - "orchestrator"
 
 personas:
@@ -55,10 +58,14 @@ personas:
     primary_agents:
       - "code"
       - "test"
-      - "debug"
+      - "refactor"
+      - "migration"
     secondary_agents:
-      - "architect"
       - "review"
+      - "backend"
+      - "frontend"
+      - "performance"
+      - "enforcement"
     workflows:
       - "feature-development"
       - "bug-fixing"
@@ -89,7 +96,7 @@ sequenceDiagram
     participant PersonaFilter
     participant IR
     
-    User->>CLI: promptosaurus build --personas software_engineer qa_tester
+    User->>CLI: promptosaurus init (select persona) or promptosaurus swap
     CLI->>PersonaRegistry: Load persona definitions
     PersonaRegistry-->>CLI: Return persona registry
     CLI->>PersonaFilter: Create filter with selected personas
@@ -112,10 +119,10 @@ The PersonaFilter implements the following algorithm for determining enabled age
 
 **Example:**
 - Selected personas: `["software_engineer", "qa_tester"]`
-- Universal agents: `["ask", "orchestrator"]`
-- Software engineer agents: `["code", "test", "debug", "architect", "review"]`
-- QA tester agents: `["test", "review", "debug"]`
-- **Enabled agents:** `["ask", "orchestrator", "code", "test", "debug", "architect", "review"]`
+- Universal agents: `["ask", "debug", "explain", "plan", "orchestrator"]`
+- Software engineer agents: `["code", "test", "refactor", "migration", "review", "backend", "frontend", "performance", "enforcement"]`
+- QA tester agents: `["test", "review"]`
+- **Enabled agents:** `["ask", "debug", "explain", "plan", "orchestrator", "code", "test", "refactor", "migration", "review", "backend", "frontend", "performance", "enforcement"]`
 
 ## Integration with Builder System
 

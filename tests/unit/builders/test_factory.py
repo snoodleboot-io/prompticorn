@@ -2,13 +2,13 @@
 
 import pytest
 
-from promptosaurus.builders.base import AbstractBuilder, BuildOptions
+from promptosaurus.builders.base import Builder, BuildOptions
 from promptosaurus.builders.errors import BuilderNotFoundError
 from promptosaurus.builders.factory import BuilderFactory
 from promptosaurus.ir.models import Agent
 
 
-class TestBuilder(AbstractBuilder):
+class TestBuilder(Builder):
     """Test builder for factory testing."""
 
     def build(self, agent: Agent, options: BuildOptions) -> str:
@@ -24,7 +24,7 @@ class TestBuilder(AbstractBuilder):
         return "test output"
 
 
-class AnotherTestBuilder(AbstractBuilder):
+class AnotherTestBuilder(Builder):
     """Another test builder."""
 
     def build(self, agent: Agent, options: BuildOptions) -> str:

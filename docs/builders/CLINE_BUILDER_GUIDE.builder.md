@@ -86,9 +86,9 @@ Invoke by: `use_skill architect` or request 'architect subagent'
 ### Most Basic Example
 
 ```python
-from src.builders.cline_builder import ClineBuilder
-from src.builders.base import BuildOptions
-from src.ir.models import Agent
+from promptosaurus.builders.cline_builder import ClineBuilder
+from promptosaurus.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
 
 # Create a builder
 builder = ClineBuilder(agents_dir=".cline")
@@ -149,9 +149,9 @@ Available tools:
 ### Import
 
 ```python
-from src.builders.cline_builder import ClineBuilder
-from src.builders.base import BuildOptions, BuilderValidationError
-from src.ir.models import Agent
+from promptosaurus.builders.cline_builder import ClineBuilder
+from promptosaurus.builders.base import BuildOptions, BuilderValidationError
+from promptosaurus.ir.models import Agent
 ```
 
 ### Initialize
@@ -188,7 +188,7 @@ print(builder.supports_feature("subagents"))   # True
 ### 1. Create an Agent Model
 
 ```python
-from src.ir.models import Agent
+from promptosaurus.ir.models import Agent
 
 agent = Agent(
     name="code_reviewer",
@@ -226,7 +226,7 @@ else:
 ### 3. Configure Build Options
 
 ```python
-from src.builders.base import BuildOptions
+from promptosaurus.builders.base import BuildOptions
 
 # Create options for Cline rules
 options = BuildOptions(
@@ -690,9 +690,9 @@ def validate(self, agent: Agent) -> list[str]:
 ### Example 1: Simple Cline Rules
 
 ```python
-from src.builders.cline_builder import ClineBuilder
-from src.builders.base import BuildOptions
-from src.ir.models import Agent
+from promptosaurus.builders.cline_builder import ClineBuilder
+from promptosaurus.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
 
 def create_simple_cline_rules():
     """Create a simple .clinerules file."""
@@ -734,9 +734,9 @@ if __name__ == "__main__":
 ### Example 2: Comprehensive Development Rules
 
 ```python
-from src.builders.cline_builder import ClineBuilder
-from src.builders.base import BuildOptions
-from src.ir.models import Agent
+from promptosaurus.builders.cline_builder import ClineBuilder
+from promptosaurus.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
 
 def create_development_rules():
     """Create comprehensive development rules for Cline."""
@@ -789,9 +789,9 @@ if __name__ == "__main__":
 ### Example 3: Delegating Multi-Specialist System
 
 ```python
-from src.builders.cline_builder import ClineBuilder
-from src.builders.base import BuildOptions
-from src.ir.models import Agent
+from promptosaurus.builders.cline_builder import ClineBuilder
+from promptosaurus.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
 
 def create_specialist_delegator():
     """Create rules for delegating to specialists."""
@@ -847,9 +847,9 @@ if __name__ == "__main__":
 ### Example 4: Domain-Specific Rules Generator
 
 ```python
-from src.builders.cline_builder import ClineBuilder
-from src.builders.base import BuildOptions
-from src.ir.models import Agent
+from promptosaurus.builders.cline_builder import ClineBuilder
+from promptosaurus.builders.base import BuildOptions
+from promptosaurus.ir.models import Agent
 from pathlib import Path
 
 def create_domain_rules(domain: str) -> str:
@@ -933,9 +933,9 @@ For building other tools, see:
 
 ## Support & Resources
 
-- **Source Code:** `src/builders/cline_builder.py`
-- **Base Class:** `src/builders/base.py` (AbstractBuilder)
-- **IR Models:** `src/ir/models.py` (Agent dataclass)
-- **Examples:** `src/builders/examples_usage.py`
+- **Source Code:** `promptosaurus/builders/cline_builder.py`
+- **Base Class:** `promptosaurus/builders/base.py` (Builder)
+- **IR Models:** `promptosaurus/ir/models.py` (Agent dataclass)
+- **Examples:** `promptosaurus/builders/examples_usage.py`
 - **Cline Docs:** [cline.ai](https://cline.ai)
 

@@ -30,7 +30,8 @@ flowchart TB
         Cline[".clinerules"]
         Cursor[".cursor/rules/"]
         Copilot[".github/"]
-        Kilo[".kilocode/"]
+        Kilo[".kilo/"]
+        Claude[".claude/"]
     end
     
     CLI --> Questions
@@ -42,6 +43,7 @@ flowchart TB
     Builders --> Cursor
     Builders --> Copilot
     Builders --> Kilo
+    Builders --> Claude
 ```
 
 The registry doesn't just store files; it understands the relationships between them. It knows which prompts are "always-on" (like core system instructions that apply to every interaction), and which are mode-specific. This organization allows PROMPTOSAURUS to build exactly the configuration each tool needs.
@@ -83,7 +85,7 @@ sequenceDiagram
     Files->>User: Configuration files created
 ```
 
-Once the prompts are loaded, the builder system takes over. Builders are specialized classes that transform the central prompt registry into formats specific to each AI tool. There are builders for Cline (formerly Claude Dev), for Cursor, for GitHub Copilot, and for Kilo Code in both CLI and IDE formats. Each builder understands the nuances of its target tool and generates the appropriate file structure.
+Once the prompts are loaded, the builder system takes over. Builders are specialized classes that transform the central prompt registry into formats specific to each AI tool. There are builders for Cline (formerly Claude Dev), for Cursor, for GitHub Copilot, for Claude, and for Kilo Code. Each builder understands the nuances of its target tool and generates the appropriate file structure.
 
 ## The Three Main Components
 
@@ -93,12 +95,11 @@ The registry is the heart of the system. It's a Pydantic-based data model that m
 
 ```mermaid
 classDiagram
-    class PromptRegistry {
+    class Registry {
         +modes: dict[str, ModeConfig]
         +always_on: list[str]
         +mode_files: dict[str, list[str]]
         +concat_order: list[tuple[str, str]]
-        +load_from_directory(path)
         +get_concatenated(mode, tool_comment)
         +get_mode_files(mode)
     }
@@ -109,7 +110,7 @@ classDiagram
         +prompts: list[str]
     }
     
-    PromptRegistry --> ModeConfig
+    Registry --> ModeConfig
 ```
 
 The registry also handles the crucial task of reading and processing prompt files. When a prompt file is loaded, the registry strips away metadata headers (like the filename comment and path comment that appear in the source files) to produce clean content for the output files.
@@ -137,19 +138,19 @@ classDiagram
         +build(output, config, dry_run)
     }
     
-    class KiloCodeBuilder {
+    class KiloBuilder {
         +build(output, config, dry_run)
     }
     
     Builder <|-- ClineBuilder
     Builder <|-- CursorBuilder
     Builder <|-- CopilotBuilder
-    Builder <|-- KiloCodeBuilder
+    Builder <|-- KiloBuilder
 ```
 
 Consider the difference between Cline and Cursor outputs. Cline wants a single .clinerules file with all prompts concatenated together - simple and straightforward. Cursor, on the other hand, wants individual .mdc files organized in a specific directory structure, with legacy support through a fallback .cursorrules file. Copilot wants files in the .github directory with YAML frontmatter specifying which files each instruction applies to. Each of these is quite different, and the builder pattern accommodates them all cleanly.
 
-The Kilo builders are particularly interesting because they support two different output formats. The CLI format produces a collapsed structure suitable for OpenCode and Continue, while the IDE format produces a structure optimized for the KiloCode VSCode and JetBrains extensions. Both formats are generated from the same source prompts, demonstrating the flexibility of the builder approach.
+The Kilo builder produces a structure optimized for the Kilo VSCode and JetBrains extensions, outputting agent files into the `.kilo/` directory. This demonstrates the flexibility of the builder approach - the same source prompts can be transformed into completely different output formats.
 
 ### The Questions System
 
@@ -225,7 +226,7 @@ Selection states use the Strategy pattern to support different selection behavio
 Here's how you might use PROMPTOSAURUS in practice:
 
 ```python
-from promptosaurus.builders.cline import ClineBuilder
+from promptosaurus.builders.cline_builder import ClineBuilder
 from pathlib import Path
 
 # Create the builder
@@ -247,10 +248,10 @@ Here's a more comprehensive example that generates configurations for multiple A
 
 ```python
 from pathlib import Path
-from promptosaurus.builders.cline import ClineBuilder
-from promptosaurus.builders.cursor import CursorBuilder
-from promptosaurus.builders.copilot import CopilotBuilder
-from promptosaurus.builders.kilo.kilo_cli import KiloCLIBuilder
+from promptosaurus.builders.cline_builder import ClineBuilder
+from promptosaurus.builders.cursor_builder import CursorBuilder
+from promptosaurus.builders.copilot_builder import CopilotBuilder
+from promptosaurus.builders.kilo_builder import KiloBuilder
 
 output_dir = Path("./my-project")
 
@@ -259,7 +260,7 @@ tools = [
     ("Cline", ClineBuilder()),
     ("Cursor", CursorBuilder()),
     ("Copilot", CopilotBuilder()),
-    ("Kilo CLI", KiloCLIBuilder()),
+    ("Kilo", KiloBuilder()),
 ]
 
 for name, builder in tools:

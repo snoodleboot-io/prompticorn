@@ -22,6 +22,7 @@ New to Promptosaurus? Start here:
 Located in [`user-guide/`](./user-guide/):
 - **GETTING_STARTED.md** — Installation, configuration, and first steps
 - **CLI_REFERENCE.md** — Complete command reference
+- **CLAUDE_USAGE.md** — Claude configuration and lazy loading guide
 - **TOOL_CONFIGURATION_EXAMPLES.md** — Setup for different AI tools
 
 ### Reference Documentation
@@ -34,6 +35,7 @@ Located in [`reference/`](./reference/):
 - **[ARCHITECTURE.md](./ARCHITECTURE.md)** — Complete system design with diagrams
 - **[TEMPLATE_SYSTEM.md](./TEMPLATE_SYSTEM.md)** — How templates and substitution work
 - **[ADVANCED_CONFIGURATION.md](./ADVANCED_CONFIGURATION.md)** — Power user configuration
+- **[architecture/CLAUDE_ARCHITECTURE.md](./architecture/CLAUDE_ARCHITECTURE.md)** — Claude artifact architecture (v2.0)
 
 ### Developer Guides
 Located in [`developer-guide/`](./developer-guide/):
@@ -102,6 +104,9 @@ Start with [QUICKSTART.md](./QUICKSTART.md) then [user-guide/GETTING_STARTED.md]
 
 ### I want to understand the architecture
 Read [ARCHITECTURE.md](./ARCHITECTURE.md) and [TEMPLATE_SYSTEM.md](./TEMPLATE_SYSTEM.md)
+
+### I'm using Claude as my AI assistant
+Read [user-guide/CLAUDE_USAGE.md](./user-guide/CLAUDE_USAGE.md) and [architecture/CLAUDE_ARCHITECTURE.md](./architecture/CLAUDE_ARCHITECTURE.md)
 
 ### I'm implementing a builder
 See [builders/](./builders/) and [reference/API_REFERENCE.reference.md](./reference/API_REFERENCE.reference.md)

@@ -1,0 +1,103 @@
+# {{ agent.name | title }}
+
+**Purpose:** {{ agent.description }}  
+**When to Use:** {{ when_to_use }}
+
+## Role
+
+{{ agent.system_prompt | trim }}
+
+{% if workflow %}
+## Workflow
+
+**Read and follow this workflow file:**
+
+```
+.claude/workflows/{{ workflow }}.md
+```
+
+This workflow will guide you through:
+{% for step in workflow_steps %}
+- {{ step }}
+{% endfor %}
+
+{% endif %}
+{% if subagents %}
+## Subagents
+
+This agent can delegate to the following subagents when needed:
+
+| Subagent | Purpose | File Path | When to Use |
+|----------|---------|-----------|-------------|
+{% for subagent in subagents %}
+| {{ subagent.name }} | {{ subagent.purpose }} | .claude/subagents/{{ subagent.file_name }}.md | {{ subagent.when_to_use }} |
+{% endfor %}
+
+**Loading Instructions:**
+- Do NOT load subagents upfront
+- Load each subagent only when the workflow step requires it
+- Each subagent file contains specific instructions for that capability
+
+{% endif %}
+{% if skills %}
+## Skills
+
+Skills are reusable capabilities. Load only when workflow requires:
+
+| Skill | Purpose | File Path | When to Use |
+|-------|---------|-----------|-------------|
+{% for skill in skills %}
+| {{ skill.name }} | {{ skill.purpose }} | .claude/skills/{{ skill.directory }}/SKILL.md | {{ skill.when_to_use }} |
+{% endfor %}
+
+**Loading Instructions:**
+- Skills are loaded on-demand
+- The workflow will specify which skill to use at each step
+- Read the skill file when the workflow references it
+
+{% endif %}
+## Instructions
+
+### Startup Sequence
+
+{% if workflow %}
+1. **Read the workflow file now:**
+   ```
+   Read: .claude/workflows/{{ workflow }}.md
+   ```
+
+2. **Follow the workflow steps sequentially**
+
+3. **Load resources as the workflow directs:**
+   - Language conventions (when workflow detects language)
+   - Subagents (when workflow delegates)
+   - Skills (when workflow requires capability)
+
+### Language Convention Loading
+
+The workflow will detect the language being used and instruct you to load:
+
+```
+.claude/conventions/languages/{detected-language}.md
+```
+
+Only load the convention for the language in use. Do not load other languages.
+
+### Delegation Pattern
+
+When the workflow instructs you to delegate to a subagent:
+
+1. Read the subagent file
+2. Follow its instructions
+3. Return results to the primary workflow
+4. Continue with the next workflow step
+{% else %}
+1. **Follow the role description above**
+2. **Load resources as needed**
+{% endif %}
+
+{% if notes %}
+## Notes
+
+{{ notes }}
+{% endif %}

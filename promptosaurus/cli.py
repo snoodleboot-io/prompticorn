@@ -437,12 +437,13 @@ def init_prompts():
     Interactively initialize prompt configuration for your project.
 
     This is the main setup command that walks users through configuration:
-    1. Select which AI assistant to configure (Kilo, Cline, Cursor, Copilot)
+    1. Select which AI assistant to configure (Kilo, Claude, Cline, Cursor, Copilot)
     2. Choose repository type (single-language or multi-language-monorepo)
     3. Select prompt variant (minimal for efficiency, verbose for detail)
     4. Choose active personas/roles (filters which agents are generated)
     5. Answer language-specific questions
-    6. Generate configuration files for the selected AI tool
+     6. Clean up old artifacts if switching tools
+    7. Generate configuration files for the selected AI tool
 
     Creates or updates .promptosaurus.yaml with the configuration and
     generates tool-specific configuration files in appropriate directories.
@@ -476,10 +477,11 @@ def init_prompts():
         # Step 1: Select which AI assistant to configure
         ai_tool = select_option_with_explain(
             question="Which AI assistant would you like to configure?",
-            options=["Kilo CLI", "Kilo IDE", "Cline", "Cursor", "Copilot"],
+            options=["Kilo CLI", "Kilo IDE", "Claude", "Cline", "Cursor", "Copilot"],
             explanations={
                 "Kilo CLI": "Kilo Code (CLI) - .opencode/rules/ with collapsed mode files",
                 "Kilo IDE": "Kilo Code (IDE) - .kilo/agents/ individual agent files",
+                "Claude": "Claude - generates .claude/ directory with Markdown agent files and CLAUDE.md",
                 "Cline": "Cline - .clinerules file (concatenated rules)",
                 "Cursor": "Cursor - .cursor/rules/ directory + .cursorrules",
                 "Copilot": "GitHub Copilot - .github/copilot-instructions.md",
@@ -627,7 +629,18 @@ def init_prompts():
         click.echo("=" * 60)
         click.echo(f"\n  Config file: {ConfigHandler.get_config_path()}")
 
-        # Step 5: Generate selected AI assistant configurations
+        # Step 5: Clean up old artifacts if switching tools
+        artifact_manager = ArtifactManager()
+        current_tool = artifact_manager.current_tool
+        if selected_tool and current_tool and current_tool != selected_tool:
+            click.echo("\n" + "-" * 60)
+            click.secho("  Removing old artifacts...", bold=True)
+            click.echo("-" * 60)
+            removal_actions = artifact_manager.remove_artifacts_created_by(current_tool)
+            for action in removal_actions:
+                click.echo(f"    {action}")
+
+        # Step 6: Generate selected AI assistant configurations
         if selected_tool:
             click.echo("\n" + "-" * 60)
             click.secho(f"  Generating AI assistant configurations ({variant})...", bold=True)
@@ -713,13 +726,14 @@ def switch_command(tool_name: str | None):
     else:
         # Show interactive menu
         try:
-            tool_options = ["Kilo CLI", "Kilo IDE", "Cline", "Cursor", "Copilot"]
+            tool_options = ["Kilo CLI", "Kilo IDE", "Claude", "Cline", "Cursor", "Copilot"]
             target_tool_result = select_option_with_explain(
                 question="Which AI assistant would you like to switch to?",
                 options=tool_options,
                 explanations={
                     "Kilo CLI": "Kilo Code (CLI) - .opencode/rules/ with collapsed mode files",
                     "Kilo IDE": "Kilo Code (IDE) - .kilo/agents/ individual agent files",
+                    "Claude": "Claude - generates .claude/ directory with Markdown agent files and CLAUDE.md",
                     "Cline": "Cline - .clinerules file (concatenated rules)",
                     "Cursor": "Cursor - .cursor/rules/ directory + .cursorrules",
                     "Copilot": "GitHub Copilot - .github/copilot-instructions.md",
@@ -748,7 +762,7 @@ def switch_command(tool_name: str | None):
     if current_tool and current_tool != target_tool:
         click.echo("\n" + "-" * 60)
         click.secho("  Removing old artifacts...", bold=True)
-        removal_actions = artifact_manager.remove_artifacts(current_tool)
+        removal_actions = artifact_manager.remove_artifacts_created_by(current_tool)
         for action in removal_actions:
             click.echo(f"    {action}")
 
@@ -800,9 +814,10 @@ def swap_command():
     only the agents relevant to the selected personas.
 
     Personas determine which agents are included:
-    - software_engineer: code, test, refactor, review, document
+    - software_engineer: code, test, refactor, migration
     - qa_tester: test, review
-    - devops_engineer: deployment, ci-cd, monitoring
+    - devops_engineer: devops, observability, incident
+    - backend_software_engineer, frontend_software_engineer, fullstack_software_engineer
     - And more based on configured personas
 
     Universal agents (ask, debug, explain, plan, orchestrator) are always

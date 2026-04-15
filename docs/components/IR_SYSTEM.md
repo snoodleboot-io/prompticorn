@@ -197,7 +197,7 @@ agent_dict = agent.model_dump()
 agent_json = agent.model_dump_json()
 
 # Create from dictionary
-agent = Agent.model_load(agent_dict)
+agent = Agent.model_validate(agent_dict)
 
 # Create from JSON
 agent = Agent.model_validate_json(agent_json)
