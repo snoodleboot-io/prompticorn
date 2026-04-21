@@ -13,7 +13,7 @@ class FallbackInputProvider(InputProvider):
     def events(self) -> Iterator[InputEvent]:
         """Yield input events from standard input."""
         user_input = input(
-            "Enter number(s) or letter (a-d), comma-separated (or 'e' for explain): "
+            "Enter number(s) or letter (a-d), separated by comma or space (e.g. 1,2 or 1 2) (or 'e' for explain): "
         ).strip()
 
         # Check for explain mode first
@@ -25,9 +25,9 @@ class FallbackInputProvider(InputProvider):
         # Map letters to numbers
         letter_to_index = {"a": 0, "b": 1, "c": 2, "d": 3}
 
-        # Parse comma-separated numbers or letters
+        # Parse comma- or space-separated numbers or letters
         try:
-            for part in user_input.split(","):
+            for part in user_input.replace(",", " ").split():
                 part = part.strip().lower()
                 if part in letter_to_index:
                     yield InputEvent(event_type=InputEventType.NUMBER, value=letter_to_index[part])
