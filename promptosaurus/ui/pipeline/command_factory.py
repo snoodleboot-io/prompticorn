@@ -12,20 +12,29 @@ from promptosaurus.ui.domain.events import InputEvent, InputEventType
 class CommandFactory:
     """Factory for creating commands from input events."""
 
-    @staticmethod
-    def create_command(event: InputEvent) -> object:
+    def __init__(self) -> None:
+        self._digit_buffer = ""
+
+    def create_command(self, event: InputEvent, allow_multiple: bool = False) -> object:
         """Create command from input event."""
         if event.event_type == InputEventType.NUMBER and event.value is not None:
-            return SelectCommand(event.value)
-        elif event.event_type == InputEventType.UP:
-            return NavigateCommand(-1)
-        elif event.event_type == InputEventType.DOWN:
-            return NavigateCommand(1)
-        elif event.event_type == InputEventType.ENTER:
-            return ConfirmCommand()
-        elif event.event_type == InputEventType.QUIT:
-            return QuitCommand()
-        elif event.event_type == InputEventType.EXPLAIN:
-            return ExplainCommand()
+            if allow_multiple:
+                # Multi-select: each digit press targets that item independently
+                self._digit_buffer = ""
+                return SelectCommand(event.value)
+            self._digit_buffer += str(event.value)
+            return SelectCommand(int(self._digit_buffer))
         else:
-            return NoOpCommand()
+            self._digit_buffer = ""
+            if event.event_type == InputEventType.UP:
+                return NavigateCommand(-1)
+            elif event.event_type == InputEventType.DOWN:
+                return NavigateCommand(1)
+            elif event.event_type == InputEventType.ENTER:
+                return ConfirmCommand()
+            elif event.event_type == InputEventType.QUIT:
+                return QuitCommand()
+            elif event.event_type == InputEventType.EXPLAIN:
+                return ExplainCommand()
+            else:
+                return NoOpCommand()

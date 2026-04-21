@@ -110,7 +110,7 @@ class PipelineOrchestrator:
 
             # Get next event and convert to command
             event = next(events)
-            command = self.command_factory.create_command(event)
+            command = self.command_factory.create_command(event, context.question.allow_multiple)
 
             # Execute command
             result = self.state_update_stage.apply(command, context)
