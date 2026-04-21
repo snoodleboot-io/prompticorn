@@ -162,9 +162,7 @@ class RenderStage:
 
                 y += 1  # Blank line
 
-                controls_line = (
-                    "Controls: Numbers to select, Enter to confirm, q to quit, ? for help"
-                )
+                controls_line = self._format_controls(context.question.allow_multiple, raw=True)
                 self._stdscr.addstr(y, 0, controls_line)
 
             # Refresh to update display
@@ -201,7 +199,7 @@ class RenderStage:
             # Show current selection at bottom
             selection_text = self._format_current_selection(context)
             print(f"\nCurrent selection: {selection_text}")
-            print("\nControls: Numbers to select, Enter to confirm, q to quit, ? for help")
+            print(f"\n{self._format_controls(context.question.allow_multiple, raw=False)}")
 
     def cleanup(self) -> None:
         """Clean up curses on pipeline exit.
@@ -210,6 +208,19 @@ class RenderStage:
         the terminal to normal state.
         """
         self._cleanup_curses()
+
+    @staticmethod
+    def _format_controls(allow_multiple: bool, raw: bool) -> str:
+        if allow_multiple:
+            if raw:
+                return "Controls: numbers to toggle items, ↑↓ navigate, Enter confirm, q quit"
+            return (
+                "Controls: type numbers separated by comma or space (e.g. 1,2 or 1 2), "
+                "Enter to confirm, q to quit"
+            )
+        if raw:
+            return "Controls: type number to jump (multi-digit ok, e.g. 12), ↑↓ navigate, Enter confirm, q quit"
+        return "Controls: type a number and press Enter to confirm, q to quit"
 
     @staticmethod
     def _format_current_selection(context: PipelineContext) -> str:
