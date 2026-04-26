@@ -1,7 +1,7 @@
 # Claude Configuration
 
 **Last Updated:** 2026-04-26  
-**Agent Count:** 17 primary agents  
+**Agent Count:** 18 primary agents  
 **Persona:** Software Engineer
 
 ## Core Conventions
@@ -28,6 +28,7 @@ Match the user's request to **ONE** agent and load **ONLY** that file.
 | architect-agent | System design, architecture planning, and technical decision making | .claude/agents/architect-agent.md |
 | performance-agent | Optimize application performance, identify bottlenecks, and implement benchmarking | .claude/agents/performance-agent.md |
 | frontend-agent | Build accessible, performant user interfaces for web and mobile platforms | .claude/agents/frontend-agent.md |
+| document-agent | Generate documentation, READMEs, and changelogs | .claude/agents/document-agent.md |
 | data-agent | Design data pipelines, warehouses, and data quality systems | .claude/agents/data-agent.md |
 | ask-agent | Answer questions and provide explanations | .claude/agents/ask-agent.md |
 | debug-agent | Diagnose and fix bugs, issues, and errors | .claude/agents/debug-agent.md |

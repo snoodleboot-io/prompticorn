@@ -35,6 +35,8 @@ class InputEventType(Enum):
     ENTER = auto()
     QUIT = auto()
     EXPLAIN = auto()  # Direct trigger for explain mode
+    SEPARATOR = auto()  # Space or comma — commits buffered digit(s) in multi-select
+    TIMEOUT = auto()  # getch() timed out with no input — auto-commits buffered digit(s)
     UNKNOWN = auto()
 
 

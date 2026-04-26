@@ -28,6 +28,7 @@ class CursesInputProvider(InputProvider):
             stdscr: The curses window (from curses.initscr() or render_stage.stdscr).
         """
         self.stdscr = stdscr
+        self.stdscr.timeout(500)  # 500ms getch() timeout for digit auto-commit
 
     @property
     def events(self) -> Iterator[InputEvent]:
@@ -44,7 +45,10 @@ class CursesInputProvider(InputProvider):
         while True:
             try:
                 key = self.stdscr.getch()
-                yield self._parse_key(key)
+                if key == -1:
+                    yield InputEvent(event_type=InputEventType.TIMEOUT)
+                else:
+                    yield self._parse_key(key)
             except KeyboardInterrupt:
                 yield InputEvent(event_type=InputEventType.QUIT)
                 break
@@ -87,6 +91,8 @@ class CursesInputProvider(InputProvider):
         elif key == ord("?"):
             # Help - for future use
             return InputEvent(event_type=InputEventType.EXPLAIN)
+        elif key == ord(" ") or key == ord(","):
+            return InputEvent(event_type=InputEventType.SEPARATOR)
 
         # Unknown key
         return InputEvent(event_type=InputEventType.UNKNOWN, raw_key=str(key))

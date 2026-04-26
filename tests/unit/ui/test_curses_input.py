@@ -97,6 +97,16 @@ class TestCursesInputProvider:
         event = CursesInputProvider._parse_key(999)
         assert event.event_type == InputEventType.UNKNOWN
 
+    def test_parse_key_space_separator(self):
+        """Test parsing space key as SEPARATOR."""
+        event = CursesInputProvider._parse_key(ord(" "))
+        assert event.event_type == InputEventType.SEPARATOR
+
+    def test_parse_key_comma_separator(self):
+        """Test parsing comma key as SEPARATOR."""
+        event = CursesInputProvider._parse_key(ord(","))
+        assert event.event_type == InputEventType.SEPARATOR
+
     def test_supports_raw(self):
         """Test that raw input is supported."""
         mock_stdscr = Mock()
@@ -108,6 +118,21 @@ class TestCursesInputProvider:
         mock_stdscr = Mock()
         provider = CursesInputProvider(mock_stdscr)
         assert provider.stdscr is mock_stdscr
+
+    def test_init_sets_timeout(self):
+        """Test that CursesInputProvider sets a 1-second getch() timeout."""
+        mock_stdscr = Mock()
+        CursesInputProvider(mock_stdscr)
+        mock_stdscr.timeout.assert_called_once_with(500)
+
+    def test_events_generator_yields_timeout_on_minus_one(self):
+        """Test that getch() returning -1 yields a TIMEOUT event."""
+        mock_stdscr = Mock()
+        mock_stdscr.getch.side_effect = [-1, KeyboardInterrupt()]
+
+        provider = CursesInputProvider(mock_stdscr)
+        event = next(provider.events)
+        assert event.event_type == InputEventType.TIMEOUT
 
     def test_events_generator_yields_input_events(self):
         """Test that events property yields input events."""
