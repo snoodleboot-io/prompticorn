@@ -14,15 +14,11 @@ Use this mode when implementing new features, making code changes, or fixing bug
 **Read and follow this workflow file:**
 
 ```
-.claude/workflows/boilerplate.md
+.claude/workflows/feature.md
 ```
 
 This workflow will guide you through:
-- 1. Identify Pattern
-- 2. Read Existing Examples
-- 3. Create Template Structure
-- 4. Parameterize Variables
-- 5. Generate Companion Test File
+- Steps
 
 ## Subagents
 
@@ -48,13 +44,12 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 | Skill | Purpose | File Path | When to Use |
 |-------|---------|-----------|-------------|
-| Code Review Practices | Capability for code-review-practices | .claude/skills/code-review-practices/SKILL.md | When workflow requires code-review-practices |
 | Feature Planning | Capability for feature-planning | .claude/skills/feature-planning/SKILL.md | When workflow requires feature-planning |
 | Incremental Implementation | Capability for incremental-implementation | .claude/skills/incremental-implementation/SKILL.md | When workflow requires incremental-implementation |
 | Post Implementation Checklist | Capability for post-implementation-checklist | .claude/skills/post-implementation-checklist/SKILL.md | When workflow requires post-implementation-checklist |
-| Quality Assurance | Capability for quality-assurance | .claude/skills/quality-assurance/SKILL.md | When workflow requires quality-assurance |
-| Technical Debt Management | Capability for technical-debt-management | .claude/skills/technical-debt-management/SKILL.md | When workflow requires technical-debt-management |
+| Test Aaa Structure | Capability for test-aaa-structure | .claude/skills/test-aaa-structure/SKILL.md | When workflow requires test-aaa-structure |
 | Test Coverage Categories | Capability for test-coverage-categories | .claude/skills/test-coverage-categories/SKILL.md | When workflow requires test-coverage-categories |
+| Test Mocking Rules | Capability for test-mocking-rules | .claude/skills/test-mocking-rules/SKILL.md | When workflow requires test-mocking-rules |
 
 **Loading Instructions:**
 - Skills are loaded on-demand
@@ -67,7 +62,7 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 1. **Read the workflow file now:**
    ```
-   Read: .claude/workflows/boilerplate.md
+   Read: .claude/workflows/feature.md
    ```
 
 2. **Follow the workflow steps sequentially**

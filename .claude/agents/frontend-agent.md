@@ -14,15 +14,11 @@ Use this mode when designing component architectures, optimizing frontend perfor
 **Read and follow this workflow file:**
 
 ```
-.claude/workflows/accessibility.md
+.claude/workflows/feature.md
 ```
 
 This workflow will guide you through:
-- 1. Identify Compliance Level
-- 2. Automated Testing
-- 3. Keyboard Navigation Testing
-- 4. Screen Reader Testing
-- 5. Color Contrast Analysis
+- Steps
 
 ## Subagents
 
@@ -46,10 +42,12 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 | Skill | Purpose | File Path | When to Use |
 |-------|---------|-----------|-------------|
-| Code Review Practices | Capability for code-review-practices | .claude/skills/code-review-practices/SKILL.md | When workflow requires code-review-practices |
+| Feature Planning | Capability for feature-planning | .claude/skills/feature-planning/SKILL.md | When workflow requires feature-planning |
 | Incremental Implementation | Capability for incremental-implementation | .claude/skills/incremental-implementation/SKILL.md | When workflow requires incremental-implementation |
-| Performance Optimization | Capability for performance-optimization | .claude/skills/performance-optimization/SKILL.md | When workflow requires performance-optimization |
-| Testing Strategies | Capability for testing-strategies | .claude/skills/testing-strategies/SKILL.md | When workflow requires testing-strategies |
+| Post Implementation Checklist | Capability for post-implementation-checklist | .claude/skills/post-implementation-checklist/SKILL.md | When workflow requires post-implementation-checklist |
+| Test Aaa Structure | Capability for test-aaa-structure | .claude/skills/test-aaa-structure/SKILL.md | When workflow requires test-aaa-structure |
+| Test Coverage Categories | Capability for test-coverage-categories | .claude/skills/test-coverage-categories/SKILL.md | When workflow requires test-coverage-categories |
+| Test Mocking Rules | Capability for test-mocking-rules | .claude/skills/test-mocking-rules/SKILL.md | When workflow requires test-mocking-rules |
 
 **Loading Instructions:**
 - Skills are loaded on-demand
@@ -62,7 +60,7 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 1. **Read the workflow file now:**
    ```
-   Read: .claude/workflows/accessibility.md
+   Read: .claude/workflows/feature.md
    ```
 
 2. **Follow the workflow steps sequentially**

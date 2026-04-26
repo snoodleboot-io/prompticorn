@@ -3,23 +3,26 @@ repository:
   type: single-language
   mappings: {}
 spec:
-  language: html
+  language: python
   runtime: '3.14'
   package_manager: uv
-  test_framework: pytest
-  linter: htmlhint
+  test_framework: hybrid
+  linter:
+    - ruff
+    - pyright
   linters:
     - ruff
-  formatter: Prettier
-  coverage:
-    line: 80
-    branch: 70
-    function: 90
-    statement: 85
-    mutation: 80
-    path: 60
+  formatter:
+    - ruff
+  coverage: standard
   repo_type: single-language
-  version: HTML5
+  test_runner: pytest
+  abstract_class_style: interface
+  mocking_library:
+    - unittest.mock
+  coverage_tool: pytest-cov
+  mutation_tool: mutmut
 variant: minimal
 active_personas:
-  - frontend_software_engineer
+  - backend_software_engineer
+  - architect
