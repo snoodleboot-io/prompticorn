@@ -1,7 +1,7 @@
 # Claude Configuration
 
-**Last Updated:** 2026-04-15  
-**Agent Count:** 13 primary agents  
+**Last Updated:** 2026-04-26  
+**Agent Count:** 16 primary agents  
 **Persona:** Software Engineer
 
 ## Core Conventions
@@ -25,19 +25,22 @@ Match the user's request to **ONE** agent and load **ONLY** that file.
 
 | Agent | Purpose | File Path |
 |-------|---------|-----------|
-| refactor-agent | Improve code structure while preserving behavior | .claude/agents/refactor-agent.md |
+| architect-agent | System design, architecture planning, and technical decision making | .claude/agents/architect-agent.md |
+| performance-agent | Optimize application performance, identify bottlenecks, and implement benchmarking | .claude/agents/performance-agent.md |
 | frontend-agent | Build accessible, performant user interfaces for web and mobile platforms | .claude/agents/frontend-agent.md |
-| code-agent | Implement features and make direct code changes | .claude/agents/code-agent.md |
+| data-agent | Design data pipelines, warehouses, and data quality systems | .claude/agents/data-agent.md |
+| ask-agent | Answer questions and provide explanations | .claude/agents/ask-agent.md |
+| debug-agent | Diagnose and fix bugs, issues, and errors | .claude/agents/debug-agent.md |
+| backend-agent | Design scalable backend systems, APIs, microservices, and distributed architectures | .claude/agents/backend-agent.md |
+| enforcement-agent | Reviews code against established coding standards and creates change requests | .claude/agents/enforcement-agent.md |
+| refactor-agent | Improve code structure while preserving behavior | .claude/agents/refactor-agent.md |
 | migration-agent | Handle dependency upgrades and framework migrations | .claude/agents/migration-agent.md |
+| plan-agent | Develops PRDs and works with architects to create ARDs | .claude/agents/plan-agent.md |
 | review-agent | Code, performance, and accessibility reviews | .claude/agents/review-agent.md |
 | orchestrator-agent | Coordinate multi-step workflows and manage complex tasks | .claude/agents/orchestrator-agent.md |
+| code-agent | Implement features and make direct code changes | .claude/agents/code-agent.md |
 | test-agent | Write comprehensive tests with coverage-first approach | .claude/agents/test-agent.md |
-| performance-agent | Optimize application performance, identify bottlenecks, and implement benchmarking | .claude/agents/performance-agent.md |
 | explain-agent | Code walkthroughs and onboarding assistance | .claude/agents/explain-agent.md |
-| ask-agent | Answer questions and provide explanations | .claude/agents/ask-agent.md |
-| plan-agent | Develops PRDs and works with architects to create ARDs | .claude/agents/plan-agent.md |
-| enforcement-agent | Reviews code against established coding standards and creates change requests | .claude/agents/enforcement-agent.md |
-| debug-agent | Diagnose and fix bugs, issues, and errors | .claude/agents/debug-agent.md |
 
 ## Routing Rules
 
