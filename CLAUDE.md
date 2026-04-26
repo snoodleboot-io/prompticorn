@@ -1,7 +1,7 @@
 # Claude Configuration
 
 **Last Updated:** 2026-04-26  
-**Agent Count:** 16 primary agents  
+**Agent Count:** 17 primary agents  
 **Persona:** Software Engineer
 
 ## Core Conventions
@@ -40,6 +40,7 @@ Match the user's request to **ONE** agent and load **ONLY** that file.
 | orchestrator-agent | Coordinate multi-step workflows and manage complex tasks | .claude/agents/orchestrator-agent.md |
 | code-agent | Implement features and make direct code changes | .claude/agents/code-agent.md |
 | test-agent | Write comprehensive tests with coverage-first approach | .claude/agents/test-agent.md |
+| product-agent | Drive product strategy, requirements, roadmap planning, and metrics | .claude/agents/product-agent.md |
 | explain-agent | Code walkthroughs and onboarding assistance | .claude/agents/explain-agent.md |
 
 ## Routing Rules

@@ -26,3 +26,5 @@ variant: minimal
 active_personas:
   - backend_software_engineer
   - architect
+  - qa_tester
+  - product_manager
