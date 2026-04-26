@@ -7,6 +7,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Fixed
+- **Multi-select menus now support items 10 and above** — digit keypresses are buffered and committed when you press space, comma, or after a 500ms pause. Previously each digit fired immediately, making it impossible to reach items 10+.
+
 ### Planned for v2.1
 - Direct module registration (no filesystem discovery required)
 - JSON schema validation for custom agents

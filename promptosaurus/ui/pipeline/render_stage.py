@@ -213,7 +213,10 @@ class RenderStage:
     def _format_controls(allow_multiple: bool, raw: bool) -> str:
         if allow_multiple:
             if raw:
-                return "Controls: numbers to toggle items, ↑↓ navigate, Enter confirm, q quit"
+                return (
+                    "Controls: type number + space/comma to toggle (or wait 1s), "
+                    "↑↓ navigate, Enter confirm, q quit"
+                )
             return (
                 "Controls: type numbers separated by comma or space (e.g. 1,2 or 1 2), "
                 "Enter to confirm, q to quit"
