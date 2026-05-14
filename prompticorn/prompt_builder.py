@@ -82,6 +82,32 @@ class PromptBuilder:
         else:
             return None
 
+    @staticmethod
+    def _extract_all_languages_from_config(config: dict[str, Any] | None) -> list[str] | None:
+        """Extract all selected languages from config.
+
+        Args:
+            config: Project configuration
+
+        Returns:
+            List of language strings, or None if not found
+        """
+        if not config:
+            return None
+
+        spec = config.get("spec")
+
+        if spec is None:
+            return None
+        elif isinstance(spec, dict):
+            lang = spec.get("language")
+            return [lang] if lang else None
+        elif isinstance(spec, list) and len(spec) > 0:
+            langs = [folder.get("language") for folder in spec if folder.get("language")]
+            return langs if langs else None
+        else:
+            return None
+
     def build(
         self, output: Path, config: dict[str, Any] | None = None, dry_run: bool = False
     ) -> list[str]:
@@ -284,9 +310,10 @@ class PromptBuilder:
                     claude_md_path.write_text(claude_md_content, encoding="utf-8")
                     actions.append("✓ CLAUDE.md")
 
-                    # Generate convention files for Claude
+                    # Generate convention files for Claude (only selected languages)
                     try:
-                        conventions = generate_all_conventions()
+                        selected_languages = self._extract_all_languages_from_config(config)
+                        conventions = generate_all_conventions(selected_languages)
                         for file_path_str, content_str in conventions.items():
                             full_path = output / file_path_str
                             full_path.parent.mkdir(parents=True, exist_ok=True)

@@ -68,8 +68,12 @@ def get_all_languages() -> list[str]:
     return sorted(languages)
 
 
-def generate_all_conventions() -> dict[str, str]:
-    """Generate all convention files for Claude.
+def generate_all_conventions(languages: list[str] | None = None) -> dict[str, str]:
+    """Generate convention files for Claude.
+
+    Args:
+        languages: List of language names to generate conventions for.
+            If None, generates conventions for all available languages.
 
     Returns:
         Dictionary mapping file paths to content
@@ -77,7 +81,6 @@ def generate_all_conventions() -> dict[str, str]:
         {
             ".claude/conventions/core/general.md": "# System Instructions\n...",
             ".claude/conventions/languages/python.md": "# Python Conventions\n...",
-            ".claude/conventions/languages/typescript.md": "# TypeScript Conventions\n...",
         }
     """
     output = {}
@@ -86,8 +89,9 @@ def generate_all_conventions() -> dict[str, str]:
     core_content = generate_core_convention()
     output[".claude/conventions/core/general.md"] = core_content
 
-    # Generate all language conventions
-    for language in get_all_languages():
+    # Generate only the requested language conventions
+    target_languages = languages if languages is not None else get_all_languages()
+    for language in target_languages:
         lang_content = generate_language_convention(language)
         if lang_content:
             output[f".claude/conventions/languages/{language}.md"] = lang_content
