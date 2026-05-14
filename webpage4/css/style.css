@@ -61,6 +61,17 @@
 
 /* ── Content mode switching ── */
 [data-show-mode] { display: none !important; }
+/* Hero mode containers: flex column so children inherit centering */
+#hero [data-mode="startup"]  [data-show-mode="startup"],
+#hero [data-mode="enterprise"] [data-show-mode="enterprise"],
+#hero [data-mode="engineer"] [data-show-mode="engineer"],
+.hero-content [data-show-mode] {
+  display: flex !important;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+}
 [data-mode="startup"]    [data-show-mode="startup"]    { display: block !important; }
 [data-mode="enterprise"] [data-show-mode="enterprise"] { display: block !important; }
 [data-mode="engineer"]   [data-show-mode="engineer"]   { display: block !important; }
