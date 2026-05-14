@@ -14,15 +14,11 @@ Use this mode when diagnosing bugs, crashes, or unexpected behavior.
 **Read and follow this workflow file:**
 
 ```
-.claude/workflows/debugging-methodology.md
+.claude/workflows/feature.md
 ```
 
 This workflow will guide you through:
-- Understand requirements
-- Plan implementation
-- Execute incrementally
-- Test as you go
-- Review and complete
+- Steps
 
 ## Subagents
 
@@ -45,9 +41,12 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 | Skill | Purpose | File Path | When to Use |
 |-------|---------|-----------|-------------|
-| Debugging Methodology | Capability for debugging-methodology | .claude/skills/debugging-methodology/SKILL.md | When workflow requires debugging-methodology |
-| Problem Decomposition | Capability for problem-decomposition | .claude/skills/problem-decomposition/SKILL.md | When workflow requires problem-decomposition |
-| Technical Communication | Capability for technical-communication | .claude/skills/technical-communication/SKILL.md | When workflow requires technical-communication |
+| Feature Planning | Capability for feature-planning | .claude/skills/feature-planning/SKILL.md | When workflow requires feature-planning |
+| Incremental Implementation | Capability for incremental-implementation | .claude/skills/incremental-implementation/SKILL.md | When workflow requires incremental-implementation |
+| Post Implementation Checklist | Capability for post-implementation-checklist | .claude/skills/post-implementation-checklist/SKILL.md | When workflow requires post-implementation-checklist |
+| Test Aaa Structure | Capability for test-aaa-structure | .claude/skills/test-aaa-structure/SKILL.md | When workflow requires test-aaa-structure |
+| Test Coverage Categories | Capability for test-coverage-categories | .claude/skills/test-coverage-categories/SKILL.md | When workflow requires test-coverage-categories |
+| Test Mocking Rules | Capability for test-mocking-rules | .claude/skills/test-mocking-rules/SKILL.md | When workflow requires test-mocking-rules |
 
 **Loading Instructions:**
 - Skills are loaded on-demand
@@ -60,7 +59,7 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 1. **Read the workflow file now:**
    ```
-   Read: .claude/workflows/debugging-methodology.md
+   Read: .claude/workflows/feature.md
    ```
 
 2. **Follow the workflow steps sequentially**

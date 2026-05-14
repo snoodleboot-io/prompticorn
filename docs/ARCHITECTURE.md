@@ -379,10 +379,11 @@ Terminal-based interactive UI for configuration.
 
 **Components:**
 - **Input Providers** (`ui/input/`) - curses, Unix, Windows, fallback
+- **Events** (`ui/domain/events.py`) - NUMBER, UP, DOWN, ENTER, QUIT, EXPLAIN, SEPARATOR, TIMEOUT
 - **Commands** (`ui/commands/`) - Navigate, Select, Confirm, Quit
 - **Render** (`ui/render/`) - Vertical, Columns, Explain
 - **State** (`ui/state/`) - Selection state management
-- **Pipeline** (`ui/pipeline/`) - Orchestration
+- **Pipeline** (`ui/pipeline/`) - Orchestration, digit buffering for multi-select
 
 ### 8. Questions System
 

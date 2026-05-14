@@ -12,12 +12,34 @@ from promptosaurus.ui.domain.events import InputEvent, InputEventType
 class CommandFactory:
     """Factory for creating commands from input events."""
 
-    @staticmethod
-    def create_command(event: InputEvent) -> object:
+    def __init__(self) -> None:
+        self._digit_buffer = ""
+
+    def create_command(self, event: InputEvent, allow_multiple: bool = False) -> object:
         """Create command from input event."""
         if event.event_type == InputEventType.NUMBER and event.value is not None:
-            return SelectCommand(event.value)
-        elif event.event_type == InputEventType.UP:
+            if allow_multiple and event.value <= 9:
+                # Multi-select raw: buffer single digits; commit on separator/timeout
+                self._digit_buffer += str(event.value)
+                return NoOpCommand()
+            if allow_multiple:
+                # Multi-select fallback: value already a full integer (e.g. 10, 12)
+                self._digit_buffer = ""
+                return SelectCommand(event.value)
+            # Single-select: accumulate digits and jump cursor immediately
+            self._digit_buffer += str(event.value)
+            return SelectCommand(int(self._digit_buffer))
+
+        if event.event_type in (InputEventType.SEPARATOR, InputEventType.TIMEOUT):
+            if self._digit_buffer:
+                value = int(self._digit_buffer)
+                self._digit_buffer = ""
+                return SelectCommand(value)
+            return NoOpCommand()
+
+        # Non-digit, non-separator: clear buffer and process event normally
+        self._digit_buffer = ""
+        if event.event_type == InputEventType.UP:
             return NavigateCommand(-1)
         elif event.event_type == InputEventType.DOWN:
             return NavigateCommand(1)

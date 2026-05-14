@@ -117,28 +117,25 @@ Select (default: 1): 1
 ```
 Which personas will be working on this codebase?
 
-Available personas:
-  [ ] Software Engineer
-  [ ] QA/Tester
-  [ ] DevOps Engineer
-  [ ] Security Engineer
-  [ ] Architect
-  [ ] Data Engineer
-  [ ] Data Scientist
-  [ ] Technical Writer
-  [ ] Product Manager
+  1) Software Engineer
+  2) QA/Tester
+  3) DevOps Engineer
+  4) Security Engineer
+  5) Architect
+  6) Data Engineer
+  7) Data Scientist
+  8) Technical Writer
+  9) Product Manager
 
-Select (use space to select, enter when done):
-  [X] Software Engineer
-  [X] QA/Tester
-
-Selected: Software Engineer, QA/Tester
+Controls: type number + space/comma to toggle (or wait 0.5s), ↑↓ navigate, Enter confirm, q quit
+Current selection: Software Engineer, QA/Tester
 ```
 
-**Choices:** 
-- `[X] Software Engineer` (select with space)
-- `[X] QA/Tester` (select with space)
-- `Enter` when done
+**How to select:**
+- Type a number then press **space** or **comma** to toggle that item (e.g. `1 ` toggles Software Engineer)
+- For items 10+, type the full number then space/comma (e.g. `1`, `0`, space)
+- Or type the number and wait **0.5 seconds** — it commits automatically
+- Press **Enter** when done
 
 **✓ Selected Software Engineer and QA/Tester**
 

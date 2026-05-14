@@ -20,7 +20,7 @@ class InputEventType(Enum):
     types can be added without modifying existing code.
 
     Attributes:
-        NUMBER: Number key pressed (0-9) for option selection.
+        NUMBER: Number key(s) pressed for option selection.
         UP: Up arrow key for navigation.
         DOWN: Down arrow key for navigation.
         ENTER: Enter key to confirm selection.
@@ -35,6 +35,8 @@ class InputEventType(Enum):
     ENTER = auto()
     QUIT = auto()
     EXPLAIN = auto()  # Direct trigger for explain mode
+    SEPARATOR = auto()  # Space or comma — commits buffered digit(s) in multi-select
+    TIMEOUT = auto()  # getch() timed out with no input — auto-commits buffered digit(s)
     UNKNOWN = auto()
 
 
@@ -47,7 +49,7 @@ class InputEvent(BaseModel):
 
     Attributes:
         event_type: The type of input event.
-        value: Optional integer value for NUMBER events (0-9).
+        value: Optional integer value for NUMBER events.
         raw_key: The raw key representation as string or bytes.
 
     Config:
@@ -57,5 +59,5 @@ class InputEvent(BaseModel):
     model_config = ConfigDict(frozen=True)
 
     event_type: InputEventType
-    value: int | None = None  # For NUMBER events
+    value: int | None = None
     raw_key: str | bytes = ""

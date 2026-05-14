@@ -8,41 +8,73 @@ backend:
     - javascript
     - go
     - java
+    - kotlin
+    - scala
     - rust
     - csharp
     - ruby
     - php
+    - elixir
   library:
     - python
     - typescript
     - javascript
     - go
     - java
+    - kotlin
+    - scala
     - rust
     - csharp
     - ruby
     - php
+    - elixir
+    - swift
   worker:
     - python
+    - typescript
+    - javascript
     - go
     - rust
     - java
+    - kotlin
+    - elixir
   cli:
     - python
     - go
     - rust
+    - java
+    - kotlin
+    - typescript
+    - javascript
     - csharp
     - ruby
     - php
+    - swift
+    - shell
 
 frontend:
   ui:
     - typescript
     - javascript
+    - dart
+    - swift
+    - kotlin
+    - elm
+    - html
   library:
     - typescript
     - javascript
+    - dart
+    - swift
+    - kotlin
+    - elm
+    - html
   e2e:
     - typescript
     - javascript
     - python
+    - java
+    - csharp
+    - ruby
+    - kotlin
+    - dart
