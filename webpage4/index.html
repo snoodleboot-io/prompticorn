@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Promptosaurus — One Config. Every Developer. Zero Drift.</title>
+  <meta name="description" content="Promptosaurus gives every developer on your team the right AI agents, configured consistently, for whatever tool they use. Cursor, Claude Code, Cline, Copilot, or Kilo. One setup. Zero drift." />
+  <meta property="og:title" content="Promptosaurus — One Config. Every Developer. Zero Drift." />
+  <meta property="og:description" content="Stop managing five separate AI tool configs. One .promptosaurus.yaml, shared across your team." />
+  <meta property="og:image" content="assets/logo.png" />
+  <meta name="theme-color" content="#050508" />
+
+  <!-- Fonts (all three modes) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet" />
+
+  <!-- Syntax highlighting -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-yaml.min.js" defer></script>
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-mode="startup">
+
+<!-- ====================================================
+     NAVIGATION
+==================================================== -->
+<nav id="nav" role="navigation" aria-label="Main navigation">
+  <div class="container">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">
+        <img src="assets/logo.png" alt="Promptosaurus logo" />
+        <span class="nav-logo-text">Promptosaurus</span>
+      </a>
+
+      <div class="nav-links" role="list">
+        <!-- startup nav -->
+        <a href="#features" role="listitem" data-show-mode="startup">Problem</a>
+        <a href="#how-it-works" role="listitem" data-show-mode="startup">How It Works</a>
+        <a href="#personas" role="listitem" data-show-mode="startup">Personas</a>
+        <a href="#tools" role="listitem" data-show-mode="startup">Tools</a>
+        <a href="#getting-started" role="listitem" data-show-mode="startup">Get Started</a>
+        <!-- enterprise nav -->
+        <a href="#features" role="listitem" data-show-mode="enterprise">Capabilities</a>
+        <a href="#how-it-works" role="listitem" data-show-mode="enterprise">Architecture</a>
+        <a href="#tools" role="listitem" data-show-mode="enterprise">AI Tools</a>
+        <a href="#getting-started" role="listitem" data-show-mode="enterprise">Deploy</a>
+        <!-- engineer nav -->
+        <a href="#features" role="listitem" data-show-mode="engineer">Features</a>
+        <a href="#how-it-works" role="listitem" data-show-mode="engineer">How It Works</a>
+        <a href="#tools" role="listitem" data-show-mode="engineer">AI Tools</a>
+        <a href="#getting-started" role="listitem" data-show-mode="engineer">Get Started</a>
+
+        <!-- Mode switcher pill -->
+        <div class="mode-switcher" role="tablist" aria-label="Site mode">
+          <button class="mode-btn active" data-mode="startup" role="tab" aria-selected="true">Teams</button>
+          <button class="mode-btn" data-mode="enterprise" role="tab" aria-selected="false">Enterprise</button>
+          <button class="mode-btn" data-mode="engineer" role="tab" aria-selected="false">Engineers</button>
+        </div>
+
+        <a href="https://github.com/snoodleboot-io/promptosaurus" target="_blank" rel="noopener" class="nav-cta btn btn-ghost" role="listitem">GitHub ↗</a>
+      </div>
+
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Toggle mobile menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div class="nav-mobile" id="nav-mobile" role="list">
+    <a href="#features" role="listitem" data-show-mode="startup">Problem</a>
+    <a href="#how-it-works" role="listitem" data-show-mode="startup">How It Works</a>
+    <a href="#personas" role="listitem" data-show-mode="startup">Personas</a>
+    <a href="#tools" role="listitem" data-show-mode="startup">Tools</a>
+    <a href="#getting-started" role="listitem" data-show-mode="startup">Get Started</a>
+    <a href="#features" role="listitem" data-show-mode="enterprise">Capabilities</a>
+    <a href="#how-it-works" role="listitem" data-show-mode="enterprise">Architecture</a>
+    <a href="#tools" role="listitem" data-show-mode="enterprise">AI Tools</a>
+    <a href="#getting-started" role="listitem" data-show-mode="enterprise">Deploy</a>
+    <a href="#features" role="listitem" data-show-mode="engineer">Features</a>
+    <a href="#how-it-works" role="listitem" data-show-mode="engineer">How It Works</a>
+    <a href="#tools" role="listitem" data-show-mode="engineer">AI Tools</a>
+    <a href="#getting-started" role="listitem" data-show-mode="engineer">Get Started</a>
+    <div class="mode-switcher" role="tablist" aria-label="Site mode">
+      <button class="mode-btn active" data-mode="startup" role="tab" aria-selected="true">Teams</button>
+      <button class="mode-btn" data-mode="enterprise" role="tab" aria-selected="false">Enterprise</button>
+      <button class="mode-btn" data-mode="engineer" role="tab" aria-selected="false">Engineers</button>
+    </div>
+    <a href="https://github.com/snoodleboot-io/promptosaurus" target="_blank" rel="noopener">GitHub ↗</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ====================================================
+     HERO
+==================================================== -->
+<section id="hero">
+  <div class="hero-grid-bg" aria-hidden="true"></div>
+  <div class="hero-glow" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-content">
+      <img src="assets/logo.png" alt="Promptosaurus" class="hero-logo" />
+
+      <!-- STARTUP HERO -->
+      <div data-show-mode="startup">
+        <div class="hero-eyebrow">Built for AI-Enabled Engineering Teams</div>
+        <h1 class="hero-title reveal">
+          Every developer configured<br>
+          <em>their own way.</em><br>
+          That ends today.
+        </h1>
+        <p class="hero-subtitle reveal reveal-delay-1">
+          Your developers are using different AI tools, configured differently,
+          with no shared standards and no visibility into what anyone else is doing.
+          <span style="color:#e05555;font-weight:600;">New hires start from scratch.&nbsp; Configs drift.&nbsp; Velocity suffers.</span>
+          Promptosaurus gives your whole team consistent, role-aware AI agents —
+          <strong style="color:var(--accent);font-weight:700;">one config system, committed to the repo, works for every tool.</strong>
+        </p>
+        <div class="hero-actions reveal reveal-delay-2">
+          <a href="#getting-started" class="btn btn-primary">Set Up Your Team</a>
+          <a href="#how-it-works" class="btn btn-ghost">See How It Works →</a>
+        </div>
+        <div class="hero-stats reveal reveal-delay-3">
+          <div class="hero-stat">
+            <div class="hero-stat-num"><span>5</span></div>
+            <div class="hero-stat-label">AI Tools Supported</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">1</div>
+            <div class="hero-stat-label">Config Per Project</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num"><span>0</span></div>
+            <div class="hero-stat-label">Config Drift</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num"><span>∞</span></div>
+            <div class="hero-stat-label">Team Scale</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ENTERPRISE HERO -->
+      <div data-show-mode="enterprise">
+        <div class="hero-eyebrow">Unified Prompt Architecture</div>
+        <h1 class="hero-title reveal">
+          One Prompt Architecture.<br>
+          <em>Five Tools.</em><br>
+          Zero Compromise.
+        </h1>
+        <p class="hero-subtitle reveal reveal-delay-1">
+          Run <code>promptosaurus init</code> once. Promptosaurus generates production-grade configurations for Kilo, Cline, Claude, Copilot, and Cursor — automatically. Switch tools, swap personas, change variants. Your agents travel with you.
+        </p>
+        <div class="hero-actions reveal reveal-delay-2">
+          <a href="#getting-started" class="btn btn-primary">Deploy Now</a>
+          <a href="#how-it-works" class="btn btn-ghost">Architecture →</a>
+        </div>
+        <div class="hero-stats reveal reveal-delay-3">
+          <div class="hero-stat">
+            <div class="hero-stat-num"><span>5</span></div>
+            <div class="hero-stat-label">Tools</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num">1<span>×</span></div>
+            <div class="hero-stat-label">Definition</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num"><span>0</span></div>
+            <div class="hero-stat-label">Config Drift</div>
+          </div>
+          <div class="hero-stat">
+            <div class="hero-stat-num"><span>∞</span></div>
+            <div class="hero-stat-label">Scale</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ENGINEER HERO -->
+      <div data-show-mode="engineer">
+        <div class="hero-badge">
+          <span class="badge-dot"></span>
+          One config. Five AI tools. Zero drift.
+        </div>
+        <h1 class="hero-title reveal">
+          Define once.<br>
+          <span class="gradient-text">Deploy everywhere.</span>
+        </h1>
+        <p class="hero-subtitle reveal reveal-delay-1">
+          Stop maintaining five separate agent configs. Run <code>promptosaurus init</code> once — Promptosaurus generates production-ready configurations for <strong>Kilo, Cline, Claude, Cursor,</strong> and <strong>GitHub Copilot</strong> automatically.
+        </p>
+        <div class="hero-actions reveal reveal-delay-2">
+          <a href="#getting-started" class="btn btn-primary">Get Started</a>
+          <a href="https://github.com/snoodleboot-io/promptosaurus" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">View on GitHub</a>
+        </div>
+        <div class="hero-callouts reveal reveal-delay-3">
+          <div class="hero-callout">
+            <div class="hero-callout-icon">⚡</div>
+            <h4>5 AI Tools</h4>
+            <p>Kilo, Cline, Claude, Cursor, Copilot</p>
+          </div>
+          <div class="hero-callout">
+            <div class="hero-callout-icon">⚙️</div>
+            <h4>Zero Config</h4>
+            <p>Auto-discovery registry</p>
+          </div>
+          <div class="hero-callout">
+            <div class="hero-callout-icon">🎯</div>
+            <h4>Persona Filtering</h4>
+            <p>Team-role aware generation</p>
+          </div>
+          <div class="hero-callout">
+            <div class="hero-callout-icon">🗜️</div>
+            <h4>Token Efficient</h4>
+            <p>Minimal/verbose variants</p>
+          </div>
+        </div>
+        <div class="hero-install-strip reveal">
+          <span class="install-label">Install:</span>
+          <code class="install-cmd">pip install promptosaurus</code>
+          <button class="copy-btn" aria-label="Copy install command">Copy</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ====================================================
+     PROBLEM / FEATURES
+==================================================== -->
+<section id="features" class="section">
+  <div class="container">
+
+    <!-- STARTUP: Problem + Before/After -->
+    <div data-show-mode="startup">
+      <div class="section-label">The Problem</div>
+      <h2 class="section-title reveal">The AI tooling mess <span>your team is living in</span></h2>
+      <p class="section-desc reveal reveal-delay-1">
+        Whether your team has embraced AI agents or is still figuring it out, the same pattern emerges. Fragmentation, drift, and wasted hours nobody planned for.
+      </p>
+      <div class="scenario-grid reveal">
+        <div class="scenario-card">
+          <div class="scenario-header">
+            <span class="scenario-label">Scenario A</span>
+            <h3>Not using agents yet</h3>
+          </div>
+          <p>Developers are using ChatGPT, Copilot autocomplete, or nothing structured. No shared AI workflow — each developer improvises. Onboarding new engineers means passing around <code>.md</code> files in Slack. Nobody knows what "the right way" to use AI in your codebase actually is. You're leaving serious velocity on the table.</p>
+        </div>
+        <div class="scenario-card">
+          <div class="scenario-header">
+            <span class="scenario-label">Scenario B</span>
+            <h3>Already using agents — but it's chaos</h3>
+          </div>
+          <p>One dev uses Cursor, another uses Cline, another uses Claude Code. Each has their own agent config — written differently, named differently, maintained in isolation. When someone new joins, they start from scratch. Config drift is invisible until something breaks.</p>
+        </div>
+      </div>
+      <div class="compare-grid reveal">
+        <div class="compare-col compare-bad">
+          <div class="compare-col-header">
+            <span class="compare-col-label compare-col-label--bad">Without Promptosaurus</span>
+          </div>
+          <ul class="compare-list">
+            <li class="compare-item compare-item--bad">Each developer configures their own AI agents from scratch</li>
+            <li class="compare-item compare-item--bad">No shared standards — "code review" means something different to everyone</li>
+            <li class="compare-item compare-item--bad">New hires spend days figuring out how the team uses AI</li>
+            <li class="compare-item compare-item--bad">Switching tools means rewriting every config</li>
+            <li class="compare-item compare-item--bad">Frontend and backend devs get the same bloated agent set</li>
+            <li class="compare-item compare-item--bad">Configs drift silently — nobody knows what's current</li>
+          </ul>
+        </div>
+        <div class="compare-col compare-good">
+          <div class="compare-col-header">
+            <span class="compare-col-label compare-col-label--good">With Promptosaurus</span>
+          </div>
+          <ul class="compare-list">
+            <li class="compare-item compare-item--good">One config file, shared across the whole team</li>
+            <li class="compare-item compare-item--good">Consistent agent behavior for everyone, every tool</li>
+            <li class="compare-item compare-item--good">New hires run one command and they're ready</li>
+            <li class="compare-item compare-item--good">Switch tools in seconds — configs regenerate automatically</li>
+            <li class="compare-item compare-item--good">Persona filtering: each role gets exactly what they need</li>
+            <li class="compare-item compare-item--good"><code>promptosaurus validate</code> catches drift before it ships</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- ENTERPRISE: Features grid 9-card -->
+    <div data-show-mode="enterprise">
+      <div class="section-label">Capabilities</div>
+      <h2 class="section-title reveal">Built for <span>production teams</span></h2>
+      <p class="section-desc reveal reveal-delay-1">Every component engineered for serious engineering organizations. No toy features, no dead weight.</p>
+      <div class="features-grid">
+        <div class="feature-card reveal"><div class="feature-icon">📐</div><h4>Configure Once, Deploy Anywhere</h4><p>Tool-agnostic configuration for Agent, Skill, Workflow, Tool, Rules, and Project. The single source of truth for your entire AI configuration estate.</p></div>
+        <div class="feature-card reveal reveal-delay-1"><div class="feature-icon">🏗️</div><h4>Builder Architecture</h4><p>Five purpose-built builders transform your configuration into tool-specific outputs. BuilderFactory handles instantiation with a clean, extensible API surface.</p></div>
+        <div class="feature-card reveal reveal-delay-2"><div class="feature-icon">🔍</div><h4>Auto-Discovery Registry</h4><p>Zero-config agent registration. The central Registry manages modes, files, and output ordering. Drop in an agent — it's automatically indexed.</p></div>
+        <div class="feature-card reveal"><div class="feature-icon">👤</div><h4>Persona-Based Filtering</h4><p>Select your team's roles — Frontend, Backend, DevOps, QA/Tester, Data Scientist — and get only the relevant agents. Universal agents always included.</p></div>
+        <div class="feature-card reveal reveal-delay-1"><div class="feature-icon">✂️</div><h4>Minimal / Verbose Variants</h4><p>Choose output verbosity at build time. Minimal variants cut token overhead. Verbose variants retain full context for complex workflows.</p></div>
+        <div class="feature-card reveal reveal-delay-2"><div class="feature-icon">🧩</div><h4>Jinja2 Template Engine</h4><p>Custom filters, resolvers, and template handlers built on Jinja2. Full programmatic control over rendering logic with composable template components.</p></div>
+        <div class="feature-card reveal"><div class="feature-icon">⌨️</div><h4>CLI Toolchain</h4><p>Six production commands: <code>init</code>, <code>list</code>, <code>switch</code>, <code>swap</code>, <code>update</code>, <code>validate</code>. Complete lifecycle management.</p></div>
+        <div class="feature-card reveal reveal-delay-1"><div class="feature-icon">📦</div><h4>Markdown / YAML Loader</h4><p>Loader and Parser subsystems handle Markdown and YAML ingestion. Handles both legacy and current configuration formats without breakage.</p></div>
+        <div class="feature-card reveal reveal-delay-2"><div class="feature-icon">🔄</div><h4>Backwards Compatibility</h4><p>Existing configurations continue to operate without modification. Adopt Promptosaurus incrementally — no forced rewrites, no big bang migrations.</p></div>
+      </div>
+    </div>
+
+    <!-- ENGINEER: Features grid, technical tone -->
+    <div data-show-mode="engineer">
+      <div class="section-label">Core Capabilities</div>
+      <h2 class="section-title reveal">Everything your team needs.<br><span class="gradient-text">Nothing you don't.</span></h2>
+      <p class="section-desc reveal reveal-delay-1">Built for engineering teams that take AI tooling seriously. Promptosaurus eliminates configuration drift and boilerplate sprawl.</p>
+      <div class="features-grid">
+        <div class="feature-card reveal"><div class="feature-icon">📐</div><h4>Configure Once, Deploy Anywhere</h4><p>A tool-agnostic configuration layer. Define <code>Agent</code>, <code>Skill</code>, <code>Workflow</code>, <code>Tool</code>, <code>Rules</code>, and <code>Project</code> models once — Promptosaurus handles translation to each tool's native format.</p></div>
+        <div class="feature-card reveal reveal-delay-1"><div class="feature-icon">👤</div><h4>Persona-Based Filtering</h4><p>Select team roles — Frontend, Backend, DevOps, QA/Tester — and get only relevant agents. Universal agents (ask, debug, explain, plan, orchestrator) always included.</p></div>
+        <div class="feature-card reveal reveal-delay-2"><div class="feature-icon">✂️</div><h4>Minimal / Verbose Variants</h4><p>Every builder supports output verbosity selection at build time. Choose <code>minimal</code> to save tokens, or <code>verbose</code> for rich, self-documenting configurations.</p></div>
+        <div class="feature-card reveal"><div class="feature-icon">🔍</div><h4>Auto-Discovery Registry</h4><p>Zero-config agent registration. The <code>BuilderFactory</code> and <code>Registry</code> automatically discover and register builders. Edit <code>.promptosaurus.yaml</code> directly or use <code>promptosaurus update</code>.</p></div>
+        <div class="feature-card reveal reveal-delay-1"><div class="feature-icon">🧩</div><h4>Jinja2 Template Engine</h4><p>A full Jinja2-powered rendering pipeline with custom filters, resolvers, and template handlers. Deterministic, testable, extensible output generation.</p></div>
+        <div class="feature-card reveal reveal-delay-2"><div class="feature-icon">🔄</div><h4>Backwards Compatible</h4><p>Existing configurations continue to work. The Loader and Parser subsystems handle both legacy Markdown/YAML and the new config format.</p></div>
+        <div class="feature-card reveal"><div class="feature-icon">⌨️</div><h4>CLI First</h4><p>Rich CLI covering full lifecycle: <code>init</code>, <code>list</code>, <code>switch</code>, <code>swap</code>, <code>update</code>, and <code>validate</code>. Integrate into onboarding scripts or CI pipelines.</p></div>
+        <div class="feature-card reveal reveal-delay-1"><div class="feature-icon">✅</div><h4>Validate Before You Ship</h4><p>Built-in validation with <code>promptosaurus validate</code> checks for correctness, missing references, and schema compliance before any output is generated.</p></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ====================================================
+     HOW IT WORKS
+==================================================== -->
+<section id="how-it-works" class="section">
+  <div class="container">
+
+    <!-- STARTUP: 3-step plain language -->
+    <div data-show-mode="startup">
+      <div class="section-label">How It Works</div>
+      <h2 class="section-title reveal">Three steps. <span>Your whole team, aligned.</span></h2>
+      <p class="section-desc reveal reveal-delay-1">No build step. No CI pipeline changes. No DevOps work. Two minutes to set up. Done.</p>
+      <div class="flow-steps">
+        <div class="flow-step reveal">
+          <div class="flow-step-num">01</div>
+          <div class="flow-step-content">
+            <h4>Initialize</h4>
+            <p>Run <code>promptosaurus init</code> in your project. Answer a few questions about your team's tools, roles, and preferences. Takes two minutes. Promptosaurus generates a <code>.promptosaurus.yaml</code> config file.</p>
+          </div>
+        </div>
+        <div class="flow-step reveal">
+          <div class="flow-step-num">02</div>
+          <div class="flow-step-content">
+            <h4>Commit</h4>
+            <p>Commit <code>.promptosaurus.yaml</code> to your repository. Now every developer on your team — current and future — has access to the same agent configuration. One file. Source of truth.</p>
+          </div>
+        </div>
+        <div class="flow-step reveal">
+          <div class="flow-step-num">03</div>
+          <div class="flow-step-content">
+            <h4>Generate</h4>
+            <p>Each developer runs <code>promptosaurus init</code> locally. Their AI tool (Cursor, Cline, Claude Code, Copilot, Kilo) gets configured automatically — tailored to their role. Zero noise.</p>
+          </div>
+        </div>
+      </div>
+      <div class="reveal" style="margin-top: 2rem;">
+        <div class="callout-box">
+          <div class="callout-box-title">What <code>promptosaurus init</code> asks</div>
+          <ol class="callout-steps">
+            <li>Which AI tools does your team use?</li>
+            <li>What is your primary programming language?</li>
+            <li>Which team roles (personas) need to be supported?</li>
+          </ol>
+          <p style="margin-top: 1rem; font-size: 0.9rem; color: var(--white-dim);">Output: configs generated for every selected tool, personas defined, <code>.promptosaurus.yaml</code> committed and ready to share.</p>
+        </div>
+      </div>
+      <div style="margin-top: 5rem;">
+        <div class="section-label reveal">Under the Hood</div>
+        <h3 class="reveal" style="margin-bottom: 0.75rem;">How it works technically</h3>
+        <p class="reveal reveal-delay-1" style="color: var(--white-dim); max-width: 600px; margin-bottom: 3rem;">Optional reading — but it's here to satisfy the engineers on your team who want to verify the design is solid.</p>
+        <div class="arch-grid">
+          <div class="arch-card reveal">
+            <div class="arch-card-header"><h4>Component Graph</h4><span class="tag">Interactive · D3.js</span></div>
+            <div class="arch-card-body"><div id="d3-graph"></div></div>
+          </div>
+          <div class="arch-card reveal reveal-delay-1">
+            <div class="arch-card-header"><h4>Build Pipeline</h4><span class="tag">Mermaid</span></div>
+            <div class="arch-card-body">
+              <div class="mermaid-wrap">
+                <div class="mermaid" data-content="flowchart TD
+    A[.promptosaurus.yaml] --> B[Registry Query]
+    B --> C{Persona Filter}
+    C --> D[BuilderFactory]
+    D --> E[KiloBuilder]
+    D --> F[ClineBuilder]
+    D --> G[ClaudeBuilder]
+    D --> H[CopilotBuilder]
+    D --> I[CursorBuilder]
+    E --> J[.kilo/agents/]
+    F --> K[.clinerules]
+    G --> L[.claude/]
+    H --> M[.github/instructions/]
+    I --> N[.cursor/rules/]"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ENTERPRISE: 6-step + full diagrams -->
+    <div data-show-mode="enterprise">
+      <div class="section-label">Architecture</div>
+      <h2 class="section-title reveal">Precision-engineered <span>data flow</span></h2>
+      <p class="section-desc reveal reveal-delay-1">From a single definition to five tool-specific outputs. Every step deterministic, auditable, and reproducible.</p>
+      <div class="flow-steps">
+        <div class="flow-step reveal"><div class="flow-step-num">01</div><div class="flow-step-content"><h4>Configure Your Agents</h4><p>Run <code>promptosaurus init</code> or edit <code>.promptosaurus.yaml</code> to define your agents, skills, and workflows. YAML or Markdown — both supported. One definition, no duplication.</p></div></div>
+        <div class="flow-step reveal"><div class="flow-step-num">02</div><div class="flow-step-content"><h4>CLI Invocation</h4><p>Run <code>promptosaurus init</code>. The CLI queries the Registry to determine active mode, target tools, and persona configuration. No magic, no black boxes.</p></div></div>
+        <div class="flow-step reveal"><div class="flow-step-num">03</div><div class="flow-step-content"><h4>Persona Filtering</h4><p>PersonaFilter applies team-role rules against your config. Irrelevant agents are excluded. Each persona receives a precisely scoped agent set — no noise, no bloat.</p></div></div>
+        <div class="flow-step reveal"><div class="flow-step-num">04</div><div class="flow-step-content"><h4>Builder Factory Dispatch</h4><p>BuilderFactory instantiates the correct builder for each target tool. Kilo, Cline, Claude, Copilot, Cursor — each builder encapsulates its tool's specific output contract.</p></div></div>
+        <div class="flow-step reveal"><div class="flow-step-num">05</div><div class="flow-step-content"><h4>Template Engine Rendering</h4><p>Jinja2 templates with custom filters and resolvers transform your config into final text. Minimal or verbose variant applied. Output is deterministic.</p></div></div>
+        <div class="flow-step reveal"><div class="flow-step-num">06</div><div class="flow-step-content"><h4>Files Written to Disk</h4><p>Builders write to canonical locations: <code>.kilo/agents/</code>, <code>.clinerules</code>, <code>.claude/</code>, <code>.github/instructions/</code>, and <code>.cursor/rules/</code>.</p></div></div>
+      </div>
+      <div class="arch-grid">
+        <div class="arch-card reveal"><div class="arch-card-header"><h4>Component Graph</h4><span class="tag">Interactive · D3.js</span></div><div class="arch-card-body"><div id="d3-graph"></div></div></div>
+        <div class="arch-card reveal reveal-delay-1">
+          <div class="arch-card-header"><h4>Build Pipeline</h4><span class="tag">Mermaid</span></div>
+          <div class="arch-card-body"><div class="mermaid-wrap"><div class="mermaid" data-content="flowchart TD
+    A[Your Config] --> B[Registry Query]
+    B --> C{Persona Filter}
+    C --> D[BuilderFactory]
+    D --> E[KiloBuilder]
+    D --> F[ClineBuilder]
+    D --> G[ClaudeBuilder]
+    D --> H[CopilotBuilder]
+    D --> I[CursorBuilder]
+    E --> J[.kilo/agents/]
+    F --> K[.clinerules]
+    G --> L[.claude/]
+    H --> M[.github/instructions/]
+    I --> N[.cursor/rules/]"></div></div></div>
+        </div>
+        <div class="arch-card reveal">
+          <div class="arch-card-header"><h4>Data Model (ERD)</h4><span class="tag">Mermaid</span></div>
+          <div class="arch-card-body"><div class="mermaid-wrap"><div class="mermaid" data-content="erDiagram
+    AGENT {
+        string name
+        string description
+        string system_prompt
+        string variant
+    }
+    SKILL { string name }
+    WORKFLOW { string name }
+    AGENT ||--o{ SKILL : uses
+    AGENT ||--o{ WORKFLOW : defines"></div></div></div>
+        </div>
+        <div class="arch-card reveal reveal-delay-1">
+          <div class="arch-card-header"><h4>CLI State Machine</h4><span class="tag">Mermaid</span></div>
+          <div class="arch-card-body"><div class="mermaid-wrap"><div class="mermaid" data-content="stateDiagram-v2
+    [*] --> Uninitialized
+    Uninitialized --> Initialized : promptosaurus init
+    Initialized --> Validated : promptosaurus validate
+    Validated --> Active : Registry loaded
+    Active --> Switched : promptosaurus switch
+    Active --> Updated : promptosaurus update
+    Active --> PersonaSwapped : promptosaurus swap
+    Switched --> Validated
+    Updated --> Validated
+    PersonaSwapped --> Active"></div></div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ENGINEER: 5-step + full diagrams -->
+    <div data-show-mode="engineer">
+      <div class="section-label">Architecture</div>
+      <h2 class="section-title reveal">Under the hood.<br><span class="gradient-text">Elegantly simple.</span></h2>
+      <p class="section-desc reveal reveal-delay-1">A clean pipeline from your configuration to tool-specific output. No magic — just a well-structured transformation layer.</p>
+      <div class="flow-steps">
+        <div class="flow-step reveal"><div class="flow-step-num">01</div><div class="flow-step-content"><h4>Configure Your Agents</h4><p>Run <code>promptosaurus init</code> or edit <code>.promptosaurus.yaml</code> to define your agents, skills, and workflows. YAML or Markdown — the loader handles both.</p></div></div>
+        <div class="flow-step reveal"><div class="flow-step-num">02</div><div class="flow-step-content"><h4>Registry Lookup</h4><p>The CLI queries the central Registry for available modes, output ordering, and builder configuration. <code>BuilderFactory</code> instantiates the correct builder.</p></div></div>
+        <div class="flow-step reveal"><div class="flow-step-num">03</div><div class="flow-step-content"><h4>Persona Filter</h4><p>If a persona is active, <code>PersonaFilter</code> selects only the agents relevant to that team role. Irrelevant agents are excluded from the build pass.</p></div></div>
+        <div class="flow-step reveal"><div class="flow-step-num">04</div><div class="flow-step-content"><h4>Template Render</h4><p>Each Builder passes your config through Jinja2 template handlers. Custom filters and resolvers produce tool-specific syntax — YAML frontmatter, pure Markdown, or structured files.</p></div></div>
+        <div class="flow-step reveal"><div class="flow-step-num">05</div><div class="flow-step-content"><h4>Write to Disk</h4><p>Builders write to canonical locations: <code>.kilo/agents/</code>, <code>.clinerules</code>, <code>.claude/</code>, <code>.github/instructions/</code>, <code>.cursor/rules/</code>.</p></div></div>
+      </div>
+      <div class="arch-grid">
+        <div class="arch-card reveal"><div class="arch-card-header"><h4>Component Graph</h4><span class="tag">Interactive · D3.js</span></div><div class="arch-card-body"><div id="d3-graph"></div></div></div>
+        <div class="arch-card reveal reveal-delay-1">
+          <div class="arch-card-header"><h4>Build Pipeline</h4><span class="tag">Mermaid</span></div>
+          <div class="arch-card-body"><div class="mermaid-wrap"><div class="mermaid" data-content="flowchart LR
+    A([.promptosaurus.yaml]) --> B[Loader]
+    B --> C[Config]
+    C --> D{PersonaFilter}
+    D -->|active| E[Filtered Agents]
+    D -->|none| C
+    E --> F[BuilderFactory]
+    C --> F
+    F --> G1[KiloBuilder]
+    F --> G2[ClineBuilder]
+    F --> G3[ClaudeBuilder]
+    F --> G4[CopilotBuilder]
+    F --> G5[CursorBuilder]"></div></div></div>
+        </div>
+        <div class="arch-card reveal">
+          <div class="arch-card-header"><h4>Execution State Machine</h4><span class="tag">Mermaid</span></div>
+          <div class="arch-card-body"><div class="mermaid-wrap"><div class="mermaid" data-content="stateDiagram-v2
+    [*] --> Idle
+    Idle --> Loading : promptosaurus init
+    Loading --> Validating : Config loaded
+    Validating --> Error : schema violation
+    Validating --> Filtering : valid
+    Error --> Idle : user fixes config
+    Filtering --> Building : persona applied
+    Building --> Writing : build() complete
+    Writing --> Done : files written
+    Done --> Idle : next run"></div></div></div>
+        </div>
+        <div class="arch-card reveal reveal-delay-1">
+          <div class="arch-card-header"><h4>Sequence Diagram</h4><span class="tag">Mermaid</span></div>
+          <div class="arch-card-body"><div class="mermaid-wrap"><div class="mermaid" data-content="sequenceDiagram
+    actor User
+    participant CLI
+    participant Registry
+    participant Factory as BuilderFactory
+    participant Builder
+    participant Template as TemplateHandler
+    participant FS as FileSystem
+    User->>CLI: promptosaurus init
+    CLI->>Registry: query modes
+    Registry-->>CLI: builder config
+    CLI->>Factory: create_builder(mode)
+    Factory-->>CLI: builder instance
+    CLI->>Builder: build(agent, opts)
+    Builder->>Template: render(ir, variant)
+    Template-->>Builder: rendered content
+    Builder->>FS: write output files
+    FS-->>User: tool-specific configs"></div></div></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ====================================================
+     PERSONAS (startup only)
+==================================================== -->
+<section id="personas" class="section" data-show-mode="startup">
+  <div class="container">
+    <div class="section-label">Personas</div>
+    <h2 class="section-title reveal">The right agents <span>for the right people</span></h2>
+    <p class="section-desc reveal reveal-delay-1">Not every developer needs every AI agent. A frontend engineer doesn't need Kubernetes debugging agents. Personas solve this.</p>
+    <p class="reveal" style="color: var(--white-dim); max-width: 700px; margin-bottom: 3rem;">When you set up Promptosaurus, you define which roles exist on your team. Each developer declares their persona and gets a focused, relevant agent set. Universal agents (ask, debug, explain) are always included for everyone.</p>
+    <div class="persona-grid">
+      <div class="persona-card reveal"><div class="persona-icon">⚛️</div><h4>Frontend Engineer</h4><p>React patterns, accessibility, CSS architecture, browser performance, component design systems, UI testing.</p><div class="persona-tag">persona: frontend-software-engineer</div></div>
+      <div class="persona-card reveal reveal-delay-1"><div class="persona-icon">⚙️</div><h4>Backend Engineer</h4><p>API design, database optimization, error handling, service architecture, background workers, data modeling.</p><div class="persona-tag">persona: backend-software-engineer</div></div>
+      <div class="persona-card reveal"><div class="persona-icon">🔧</div><h4>DevOps / Platform</h4><p>CI/CD pipelines, Kubernetes, infrastructure as code, security hardening, observability, incident response.</p><div class="persona-tag">persona: devops-engineer</div></div>
+      <div class="persona-card reveal reveal-delay-1"><div class="persona-icon">🧪</div><h4>QA / Testing</h4><p>Test strategy, coverage analysis, regression patterns, test automation, integration testing, quality gates.</p><div class="persona-tag">persona: qa-tester</div></div>
+    </div>
+    <div class="reveal" style="margin-top: 2.5rem;">
+      <div class="callout-box">
+        <div class="callout-box-title">Personas are defined in <code>.promptosaurus.yaml</code></div>
+        <p>Add roles, remove roles, or create custom ones. Each developer runs <code>promptosaurus swap</code> to change their active persona without re-running the full setup.</p>
+        <div class="code-wrap" style="margin-top: 1.25rem;">
+          <div class="code-header"><span class="code-lang">YAML — .promptosaurus.yaml</span><button class="copy-btn" aria-label="Copy code">Copy</button></div>
+<pre><code class="language-yaml">tool: claude
+variant: minimal
+language: typescript
+
+personas:
+  - frontend-software-engineer
+  - backend-software-engineer
+  - devops-engineer
+  - qa-tester</code></pre>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====================================================
+     TOOLS / BUILDERS
+==================================================== -->
+<div class="divider"></div>
+<section id="tools" class="section" id="builders">
+  <div class="container">
+
+    <!-- STARTUP: Tool cards -->
+    <div data-show-mode="startup">
+      <div class="section-label">Supported Tools</div>
+      <h2 class="section-title reveal">Works with the tools <span>your team already uses</span></h2>
+      <p class="section-desc reveal reveal-delay-1">Select the tools your team uses during <code>promptosaurus init</code>. Promptosaurus generates the correct config files — automatically, in the right format, at the right paths.</p>
+      <div class="tools-grid">
+        <div class="tool-card reveal"><div class="tool-card-header"><div class="tool-name">Kilo</div><span class="tag red">Kilo IDE</span></div><p class="tool-desc">An AI-native IDE built for agentic development workflows.</p><div class="tool-output"><span class="tool-output-label">Generates</span><code>.kilo/agents/{agent}.md</code> — YAML frontmatter + Markdown agent files.</div></div>
+        <div class="tool-card reveal reveal-delay-1"><div class="tool-card-header"><div class="tool-name">Cline</div><span class="tag red">VS Code Extension</span></div><p class="tool-desc">An autonomous AI coding agent that runs inside VS Code.</p><div class="tool-output"><span class="tool-output-label">Generates</span><code>.clinerules</code> — a single drop-in Markdown rules file.</div></div>
+        <div class="tool-card reveal"><div class="tool-card-header"><div class="tool-name">Claude Code</div><span class="tag red">CLI</span></div><p class="tool-desc">Anthropic's agentic coding CLI, used directly from the terminal.</p><div class="tool-output"><span class="tool-output-label">Generates</span><code>.claude/</code> — full directory of agents, workflows, and skills.</div></div>
+        <div class="tool-card reveal reveal-delay-1"><div class="tool-card-header"><div class="tool-name">GitHub Copilot</div><span class="tag red">GitHub</span></div><p class="tool-desc">GitHub's AI pair programmer, integrated across VS Code, JetBrains, and more.</p><div class="tool-output"><span class="tool-output-label">Generates</span><code>.github/instructions/{agent}.md</code> — version-controlled instruction files.</div></div>
+        <div class="tool-card reveal"><div class="tool-card-header"><div class="tool-name">Cursor</div><span class="tag red">AI Editor</span></div><p class="tool-desc">An AI-first code editor built on VS Code with deep agent integration.</p><div class="tool-output"><span class="tool-output-label">Generates</span><code>.cursor/rules/</code> + <code>.cursorrules</code> — rules files scoped per agent.</div></div>
+      </div>
+      <div class="reveal" style="margin-top: 2rem;">
+        <div class="callout-box">
+          <div class="callout-box-title">Switching tools</div>
+          <p>Already set up on Cursor but your team is moving to Claude Code? Run <code>promptosaurus switch</code>. Your config is preserved. New files are generated instantly for the new target.</p>
+          <div class="code-wrap" style="margin-top: 1.25rem;">
+            <div class="code-header"><span class="code-lang">Bash</span><button class="copy-btn" aria-label="Copy code">Copy</button></div>
+<pre><code class="language-bash">promptosaurus switch
+# ? Which AI tool do you want to switch to?
+#   > Claude Code
+# Regenerating for Claude Code...
+# Written: .claude/agents/code.md
+# Written: .claude/agents/debug.md
+# Done.</code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ENTERPRISE: tabbed builder panels -->
+    <div data-show-mode="enterprise">
+      <div class="section-label">Supported AI Tools</div>
+      <h2 class="section-title reveal">Five tools. <span>One config.</span></h2>
+      <p class="section-desc reveal reveal-delay-1">Pick your AI coding assistant during <code>promptosaurus init</code> — Promptosaurus writes the right files to the right locations automatically.</p>
+      <div class="builders-nav reveal">
+        <button class="builder-tab active" data-target="bkilo-ent">Kilo</button>
+        <button class="builder-tab" data-target="bcline-ent">Cline</button>
+        <button class="builder-tab" data-target="bclaude-ent">Claude</button>
+        <button class="builder-tab" data-target="bcopilot-ent">Copilot</button>
+        <button class="builder-tab" data-target="bcursor-ent">Cursor</button>
+      </div>
+      <div id="bkilo-ent" class="builder-panel active reveal">
+        <div class="builder-info"><div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Kilo IDE</span></div><h3>Kilo IDE</h3><p>Generates YAML frontmatter plus Markdown agent files for Kilo IDE.</p><div class="builder-specs"><div class="builder-spec">Output: <code>.kilo/agents/{agent_name}.md</code></div><div class="builder-spec">YAML frontmatter + Markdown body</div><div class="builder-spec">Minimal and verbose variants</div><div class="builder-spec">Persona-filtered</div></div></div>
+        <div class="code-wrap"><div class="code-header"><span class="code-lang">Output Preview</span></div><pre><code class="language-yaml">---
+name: code
+description: Code implementation expert
+variant: verbose
+---
+
+# Code Agent
+
+You are a senior software engineer...</code></pre></div>
+      </div>
+      <div id="bcline-ent" class="builder-panel reveal">
+        <div class="builder-info"><div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Cline</span></div><h3>Cline</h3><p>Generates a pure Markdown <code>.clinerules</code> file rendered into Cline's natural-language rule format.</p><div class="builder-specs"><div class="builder-spec">Output: <code>.clinerules</code></div><div class="builder-spec">Pure Markdown, prose-based</div><div class="builder-spec">Minimal and verbose variants</div></div></div>
+        <div class="code-wrap"><div class="code-header"><span class="code-lang">Output Preview</span></div><pre><code class="language-markdown"># Code Agent Rules
+
+You are a code implementation expert.
+
+When writing tests, use_skill: testing-strategies</code></pre></div>
+      </div>
+      <div id="bclaude-ent" class="builder-panel reveal">
+        <div class="builder-info"><div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Claude</span></div><h3>Claude</h3><p>Generates the full <code>.claude/</code> directory with agents, workflows, and skills as Markdown files.</p><div class="builder-specs"><div class="builder-spec">Output: <code>.claude/</code> directory</div><div class="builder-spec">Agents, workflows, skills</div><div class="builder-spec">Minimal and verbose variants</div></div></div>
+        <div class="code-wrap"><div class="code-header"><span class="code-lang">Output Preview</span></div><pre><code class="language-markdown">.claude/
+  agents/
+    code.md
+    debug.md
+  workflows/
+    code.md
+  skills/
+    testing-strategies.md</code></pre></div>
+      </div>
+      <div id="bcopilot-ent" class="builder-panel reveal">
+        <div class="builder-info"><div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">GitHub Copilot</span></div><h3>GitHub Copilot</h3><p>Generates YAML frontmatter + Markdown instruction files for GitHub Copilot in <code>.github/instructions/</code>.</p><div class="builder-specs"><div class="builder-spec">Output: <code>.github/instructions/{agent}.md</code></div><div class="builder-spec">GitHub-native, version-controlled</div><div class="builder-spec">Minimal and verbose variants</div></div></div>
+        <div class="code-wrap"><div class="code-header"><span class="code-lang">Output Preview</span></div><pre><code class="language-yaml">---
+applyTo: "**"
+---
+
+# Code Agent
+
+Apply these instructions when writing code...</code></pre></div>
+      </div>
+      <div id="bcursor-ent" class="builder-panel reveal">
+        <div class="builder-info"><div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Cursor</span></div><h3>Cursor</h3><p>Generates Markdown rules files for Cursor, written to both <code>.cursor/rules/</code> and <code>.cursorrules</code>.</p><div class="builder-specs"><div class="builder-spec">Output: <code>.cursor/rules/</code> + <code>.cursorrules</code></div><div class="builder-spec">Cursor rules format compliant</div><div class="builder-spec">Minimal and verbose variants</div></div></div>
+        <div class="code-wrap"><div class="code-header"><span class="code-lang">Output Preview</span></div><pre><code class="language-markdown">---
+description: Code implementation
+globs: ["**/*.py", "**/*.ts"]
+---
+
+# Code Agent
+
+You are a senior software engineer...</code></pre></div>
+      </div>
+    </div>
+
+    <!-- ENGINEER: tabbed builder panels -->
+    <div data-show-mode="engineer">
+      <div class="section-label">Supported AI Tools</div>
+      <h2 class="section-title reveal">One config.<br><span class="gradient-text">Five native outputs.</span></h2>
+      <p class="section-desc reveal reveal-delay-1">Pick your AI coding assistant and Promptosaurus generates the right config files in the right format. No lowest-common-denominator compromises.</p>
+      <div class="builders-nav reveal">
+        <button class="builder-tab active" data-target="bkilo-eng">Kilo</button>
+        <button class="builder-tab" data-target="bcline-eng">Cline</button>
+        <button class="builder-tab" data-target="bclaude-eng">Claude</button>
+        <button class="builder-tab" data-target="bcopilot-eng">Copilot</button>
+        <button class="builder-tab" data-target="bcursor-eng">Cursor</button>
+      </div>
+      <div id="bkilo-eng" class="builder-panel active reveal">
+        <div class="builder-info"><div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Kilo IDE</span></div><h3>Kilo IDE</h3><p>Generates YAML frontmatter + Markdown agent files for Kilo IDE. Files written to <code>.kilo/agents/</code> automatically.</p><div class="builder-specs"><div class="builder-spec">Output: <code>.kilo/agents/{agent_name}.md</code></div><div class="builder-spec">YAML frontmatter generation</div><div class="builder-spec">Subagent support</div><div class="builder-spec">Minimal &amp; verbose variants</div></div></div>
+        <div class="code-wrap"><div class="code-header"><span class="code-lang">Output Preview</span></div><pre><code class="language-yaml">---
+name: code
+description: Code implementation expert
+subagents:
+  - test
+  - review
+variant: verbose
+---
+
+# Code Agent
+
+You are a senior software engineer...</code></pre></div>
+      </div>
+      <div id="bcline-eng" class="builder-panel reveal">
+        <div class="builder-info"><div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Cline</span></div><h3>Cline</h3><p>Generates a pure Markdown <code>.clinerules</code> file. Rendered into Cline's natural-language rule format.</p><div class="builder-specs"><div class="builder-spec">Output: <code>.clinerules</code></div><div class="builder-spec">Pure Markdown output</div><div class="builder-spec"><code>use_skill</code> invocation pattern</div><div class="builder-spec">Prose-based rules</div></div></div>
+        <div class="code-wrap"><div class="code-header"><span class="code-lang">Output Preview</span></div><pre><code class="language-markdown"># Code Agent Rules
+
+You are a code implementation expert.
+
+When writing tests, use_skill: testing-strategies
+
+## Conventions
+Follow the project's established patterns...</code></pre></div>
+      </div>
+      <div id="bclaude-eng" class="builder-panel reveal">
+        <div class="builder-info"><div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Claude</span></div><h3>Claude</h3><p>Generates the full <code>.claude/</code> directory with agents, workflows, and skills. Populates your entire Claude Code configuration tree.</p><div class="builder-specs"><div class="builder-spec">Output: <code>.claude/</code> directory</div><div class="builder-spec">Agents, workflows, skills</div><div class="builder-spec">Minimal &amp; verbose variants</div><div class="builder-spec">Persona-filtered output</div></div></div>
+        <div class="code-wrap"><div class="code-header"><span class="code-lang">Output Preview</span></div><pre><code class="language-markdown">.claude/
+  agents/
+    code.md
+    debug.md
+  workflows/
+    code.md
+  skills/
+    testing-strategies.md</code></pre></div>
+      </div>
+      <div id="bcopilot-eng" class="builder-panel reveal">
+        <div class="builder-info"><div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">GitHub Copilot</span></div><h3>GitHub Copilot</h3><p>Generates YAML frontmatter + Markdown instruction files for GitHub Copilot, version-controlled in <code>.github/instructions/</code>.</p><div class="builder-specs"><div class="builder-spec">Output: <code>.github/instructions/{agent}.md</code></div><div class="builder-spec">GitHub-native format</div><div class="builder-spec">Version-controlled with repo</div><div class="builder-spec">Minimal &amp; verbose variants</div></div></div>
+        <div class="code-wrap"><div class="code-header"><span class="code-lang">Output Preview</span></div><pre><code class="language-yaml">---
+applyTo: "**/*.py"
+---
+
+# Code Agent
+
+Apply these instructions when writing
+Python code in this repository...</code></pre></div>
+      </div>
+      <div id="bcursor-eng" class="builder-panel reveal">
+        <div class="builder-info"><div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Cursor</span></div><h3>Cursor</h3><p>Generates Markdown rules files for Cursor. Configuration written to both <code>.cursor/rules/</code> and <code>.cursorrules</code>.</p><div class="builder-specs"><div class="builder-spec">Output: <code>.cursor/rules/</code> + <code>.cursorrules</code></div><div class="builder-spec">Cursor rules format</div><div class="builder-spec">Per-agent file scoping</div><div class="builder-spec">Minimal &amp; verbose variants</div></div></div>
+        <div class="code-wrap"><div class="code-header"><span class="code-lang">Output Preview</span></div><pre><code class="language-markdown">---
+description: Code implementation
+globs: ["**/*.py", "**/*.ts"]
+---
+
+# Code Agent
+
+You are a senior software engineer.
+Follow project conventions strictly...</code></pre></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ====================================================
+     GETTING STARTED (shared)
+==================================================== -->
+<section id="getting-started" class="section">
+  <div class="container">
+
+    <div data-show-mode="startup">
+      <div class="section-label">Get Started</div>
+      <h2 class="section-title reveal">From chaos to aligned <span>in under 5 minutes</span></h2>
+      <p class="section-desc reveal reveal-delay-1">Install. Initialize. Commit. Your team is set up.</p>
+    </div>
+    <div data-show-mode="enterprise">
+      <div class="section-label">Deployment</div>
+      <h2 class="section-title reveal">Up and running <span>in minutes</span></h2>
+      <p class="section-desc reveal reveal-delay-1">One install command. One init. Production-grade AI agent configuration across five tools, immediately.</p>
+    </div>
+    <div data-show-mode="engineer">
+      <div class="section-label">Getting Started</div>
+      <h2 class="section-title reveal">Up and running<br><span class="gradient-text">in minutes.</span></h2>
+    </div>
+
+    <!-- Install -->
+    <div class="reveal">
+      <div class="install-tabs">
+        <button class="install-tab active" data-target="install-pip">pip</button>
+        <button class="install-tab" data-target="install-uv">uv (recommended)</button>
+      </div>
+      <div id="install-pip" class="install-panel active">
+        <div class="code-wrap" style="border-top:none;border-radius:0 0 4px 4px;">
+          <div class="code-header"><span class="code-lang">Bash</span><button class="copy-btn" aria-label="Copy code">Copy</button></div>
+          <pre><code class="language-bash">pip install promptosaurus</code></pre>
+        </div>
+      </div>
+      <div id="install-uv" class="install-panel">
+        <div class="code-wrap" style="border-top:none;border-radius:0 0 4px 4px;">
+          <div class="code-header"><span class="code-lang">Bash</span><button class="copy-btn" aria-label="Copy code">Copy</button></div>
+          <pre><code class="language-bash">uv add promptosaurus</code></pre>
+        </div>
+      </div>
+    </div>
+
+    <!-- Init wizard -->
+    <div style="margin-top: 3rem;" class="reveal">
+      <h3 style="margin-bottom: 0.5rem;">The Init Wizard</h3>
+      <p style="margin-bottom: 1.5rem; color: var(--white-dim);">Run <code>promptosaurus init</code> in your project root. The interactive wizard guides you through every choice:</p>
+      <div class="code-wrap">
+        <div class="code-header"><span class="code-lang">Bash</span><button class="copy-btn" aria-label="Copy code">Copy</button></div>
+<pre><code class="language-bash">$ promptosaurus init
+
+? Which AI tools does your team use?
+  [x] Claude Code
+  [x] Cursor
+  [ ] Cline
+  [ ] Kilo IDE
+  [ ] GitHub Copilot
+
+? Primary programming language?  > TypeScript
+
+? Which team roles need to be supported?
+  [x] Backend Software Engineer
+  [x] Frontend Software Engineer
+  [x] DevOps Engineer
+  [ ] QA/Tester
+
+Generating configuration...
+Written: .claude/agents/code.md
+Written: .claude/agents/debug.md
+Written: .claude/agents/backend.md
+Written: .claude/agents/frontend.md
+Written: .cursor/rules/code.mdc
+Written: .cursor/rules/debug.mdc
+Written: .promptosaurus.yaml
+
+Done. Commit .promptosaurus.yaml — your team is ready.</code></pre>
+      </div>
+    </div>
+
+    <!-- Config file -->
+    <div style="margin-top: 3rem;" class="reveal">
+      <h3 style="margin-bottom: 0.5rem;">Config File</h3>
+      <p style="margin-bottom: 1rem; color: var(--white-dim);">Auto-generated by <code>promptosaurus init</code>. Edit directly and run <code>promptosaurus update</code> to regenerate.</p>
+      <div class="code-wrap">
+        <div class="code-header"><span class="code-lang">YAML</span><button class="copy-btn" aria-label="Copy code">Copy</button></div>
+<pre><code class="language-yaml"># .promptosaurus.yaml — auto-generated by `promptosaurus init`
+# Edit manually and run `promptosaurus update` to regenerate
+
+tool: kilo-ide          # kilo-ide | kilo-cli | cline | claude | cursor | copilot
+variant: minimal        # minimal | verbose
+repo_type: single       # single | monorepo
+language: python
+
+personas:
+  - backend-software-engineer
+  - qa-tester
+
+# Run `promptosaurus update` after editing this file</code></pre>
+      </div>
+    </div>
+
+    <!-- Startup share callout -->
+    <div data-show-mode="startup" style="margin-top: 2rem;" class="reveal">
+      <div class="callout-box">
+        <div class="callout-box-title">Already set up? Share it with your team.</div>
+        <p>Commit <code>.promptosaurus.yaml</code>. Each developer runs <code>promptosaurus init</code> locally to generate their tool-specific configs, tailored to their role. New joiner? Productive in minutes.</p>
+      </div>
+    </div>
+
+    <!-- CLI Reference -->
+    <div style="margin-top: 4rem;">
+      <h3 class="reveal" style="margin-bottom: 0.5rem;">CLI Reference</h3>
+      <p class="reveal reveal-delay-1" style="margin-bottom: 2rem; color: var(--white-dim);">Six commands. Complete lifecycle coverage.</p>
+      <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;" class="reveal">
+        <table class="cli-table" aria-label="CLI commands">
+          <thead><tr><th>Command</th><th>What it does</th></tr></thead>
+          <tbody>
+            <tr><td><code class="cli-cmd">promptosaurus init</code></td><td class="cli-desc">Interactive setup. Configures target tools, active persona, and output paths. Safe to re-run.</td></tr>
+            <tr><td><code class="cli-cmd">promptosaurus list</code></td><td class="cli-desc">Lists all registered agents available in the current project configuration.</td></tr>
+            <tr><td><code class="cli-cmd">promptosaurus switch</code></td><td class="cli-desc">Switches the active AI tool target. Rebuilds all output files for the new tool.</td></tr>
+            <tr><td><code class="cli-cmd">promptosaurus swap</code></td><td class="cli-desc">Swaps the active persona. Re-filters the agent set and regenerates tool-specific configs.</td></tr>
+            <tr><td><code class="cli-cmd">promptosaurus update</code></td><td class="cli-desc">Regenerates configs from the current <code>.promptosaurus.yaml</code>. Non-destructive.</td></tr>
+            <tr><td><code class="cli-cmd">promptosaurus validate</code></td><td class="cli-desc">Validates the config and reports drift, missing files, or integrity issues before they ship.</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ====================================================
+     TESTIMONIALS (startup only)
+==================================================== -->
+<section id="testimonials" class="section" data-show-mode="startup">
+  <div class="container">
+    <div class="section-label">Teams</div>
+    <h2 class="section-title reveal">Built for teams <span>that take AI seriously</span></h2>
+    <p class="section-desc reveal reveal-delay-1">Engineering organizations using Promptosaurus to align their AI tooling across every developer, every tool, every day.</p>
+    <div class="testimonial-grid">
+      <div class="testimonial-card reveal"><div class="testimonial-quote">[Your quote here]</div><div class="testimonial-attribution"><div class="testimonial-name">[Name]</div><div class="testimonial-role">CTO, Series A startup</div></div></div>
+      <div class="testimonial-card reveal reveal-delay-1"><div class="testimonial-quote">[Your quote here]</div><div class="testimonial-attribution"><div class="testimonial-name">[Name]</div><div class="testimonial-role">VP Engineering, B2B SaaS</div></div></div>
+      <div class="testimonial-card reveal"><div class="testimonial-quote">[Your quote here]</div><div class="testimonial-attribution"><div class="testimonial-name">[Name]</div><div class="testimonial-role">Tech Lead, Scale-up</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA (startup only) -->
+<div class="divider" data-show-mode="startup"></div>
+<section id="cta-section" class="section cta-section" data-show-mode="startup">
+  <div class="container">
+    <div class="cta-inner reveal">
+      <div class="cta-eyebrow">Ready?</div>
+      <h2 class="cta-headline">Stop configuring.<br><span>Start shipping.</span></h2>
+      <p class="cta-sub">One setup. Every tool. Every developer. Aligned.</p>
+      <div class="cta-actions">
+        <a href="#getting-started" class="btn btn-primary">Get Started Free</a>
+        <a href="https://github.com/snoodleboot-io/promptosaurus" target="_blank" rel="noopener" class="btn btn-ghost">View on GitHub ↗</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ====================================================
+     FOOTER (shared)
+==================================================== -->
+<footer id="footer" role="contentinfo">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="#hero" class="nav-logo">
+          <img src="assets/logo.png" alt="Promptosaurus" />
+          <span class="nav-logo-text">Promptosaurus</span>
+        </a>
+        <p>Unified AI agent configuration architecture. Define once, deploy to five tools. No compromise.</p>
+      </div>
+      <div class="footer-col">
+        <h5>Product</h5>
+        <ul>
+          <li><a href="#features">Features</a></li>
+          <li><a href="#tools">AI Tools</a></li>
+          <li><a href="#how-it-works">How It Works</a></li>
+          <li><a href="#getting-started">Get Started</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Developers</h5>
+        <ul>
+          <li><a href="#getting-started">Quick Start</a></li>
+          <li><a href="#getting-started">CLI Reference</a></li>
+          <li><a href="https://github.com/snoodleboot-io/promptosaurus" target="_blank" rel="noopener">GitHub ↗</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h5>Install</h5>
+        <ul>
+          <li><a href="#getting-started"><code style="font-size:0.8rem;">pip install promptosaurus</code></a></li>
+          <li><a href="#getting-started"><code style="font-size:0.8rem;">uv add promptosaurus</code></a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Promptosaurus. One config. Every developer. Zero drift.</p>
+      <div class="footer-links">
+        <a href="https://github.com/snoodleboot-io/promptosaurus" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://github.com/snoodleboot-io/promptosaurus/blob/main/LICENSE" target="_blank" rel="noopener">License</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</main>
+
+<script src="js/script.js" defer></script>
+</body>
+</html>
