@@ -55,13 +55,6 @@
         <a href="#tools" role="listitem" data-show-mode="engineer">AI Tools</a>
         <a href="#getting-started" role="listitem" data-show-mode="engineer">Get Started</a>
 
-        <!-- Mode switcher pill -->
-        <div class="mode-switcher" role="tablist" aria-label="Site mode">
-          <button class="mode-btn active" data-mode="startup" role="tab" aria-selected="true">Teams</button>
-          <button class="mode-btn" data-mode="enterprise" role="tab" aria-selected="false">Enterprise</button>
-          <button class="mode-btn" data-mode="engineer" role="tab" aria-selected="false">Engineers</button>
-        </div>
-
         <a href="https://github.com/snoodleboot-io/promptosaurus" target="_blank" rel="noopener" class="nav-cta btn btn-ghost" role="listitem">GitHub ↗</a>
       </div>
 
@@ -94,6 +87,15 @@
     <a href="https://github.com/snoodleboot-io/promptosaurus" target="_blank" rel="noopener">GitHub ↗</a>
   </div>
 </nav>
+
+<!-- Mode bar — sits flush below navbar -->
+<div id="mode-bar" role="tablist" aria-label="Site mode">
+  <div class="mode-bar-inner">
+    <button class="mode-btn active" data-mode="startup" role="tab" aria-selected="true">Teams</button>
+    <button class="mode-btn" data-mode="enterprise" role="tab" aria-selected="false">Enterprise</button>
+    <button class="mode-btn" data-mode="engineer" role="tab" aria-selected="false">Engineers</button>
+  </div>
+</div>
 
 <main>
 

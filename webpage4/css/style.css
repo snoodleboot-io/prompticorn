@@ -67,7 +67,7 @@
 
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; font-size: 16px; }
+html { scroll-behavior: smooth; font-size: 16px; scroll-padding-top: 120px; }
 body {
   background: var(--bg);
   color: var(--white);
@@ -240,25 +240,34 @@ p { color: var(--white-dim); }
 .nav-links a.active { color: var(--red-bright); }
 .nav-cta { margin-left: 0.25rem; }
 
-/* ── Mode Switcher Pill ── */
-.mode-switcher {
+/* ── Mode Bar (below navbar) ── */
+#mode-bar {
+  position: sticky;
+  top: 64px;
+  z-index: 99;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: center;
+  padding: 8px 0;
+}
+.mode-bar-inner {
   display: flex;
   align-items: center;
-  gap: 0;
   background: var(--bg-card);
   border: 1px solid var(--border);
   border-radius: 100px;
   padding: 3px;
-  flex-shrink: 0;
+  gap: 0;
 }
 .mode-btn {
-  padding: 0.32rem 0.8rem;
+  padding: 0.38rem 1.1rem;
   background: transparent;
   border: none;
   border-radius: 100px;
   color: var(--white-muted);
-  font-family: var(--font-body);
-  font-size: 0.7rem;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.06em;
   text-transform: uppercase;
@@ -267,7 +276,7 @@ p { color: var(--white-dim); }
   white-space: nowrap;
   line-height: 1;
 }
-.mode-btn:hover { color: var(--white-dim); }
+.mode-btn:hover { color: var(--white); }
 .mode-btn.active {
   background: var(--accent);
   color: #fff;
