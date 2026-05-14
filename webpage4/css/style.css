@@ -61,17 +61,6 @@
 
 /* ── Content mode switching ── */
 [data-show-mode] { display: none !important; }
-/* Hero mode containers: flex column so children inherit centering */
-#hero [data-mode="startup"]  [data-show-mode="startup"],
-#hero [data-mode="enterprise"] [data-show-mode="enterprise"],
-#hero [data-mode="engineer"] [data-show-mode="engineer"],
-.hero-content [data-show-mode] {
-  display: flex !important;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  text-align: center;
-}
 [data-mode="startup"]    [data-show-mode="startup"]    { display: block !important; }
 [data-mode="enterprise"] [data-show-mode="enterprise"] { display: block !important; }
 [data-mode="engineer"]   [data-show-mode="engineer"]   { display: block !important; }
@@ -392,12 +381,14 @@ p { color: var(--white-dim); }
 .hero-eyebrow {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--accent);
+  width: 100%;
 }
 .hero-eyebrow::before,
 .hero-eyebrow::after {
@@ -433,7 +424,7 @@ p { color: var(--white-dim); }
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.6; transform: scale(1.2); }
 }
-.hero-title { max-width: 900px; }
+.hero-title { max-width: 900px; margin: 0 auto; text-align: center; }
 .hero-title em {
   font-style: normal;
   color: var(--accent);
@@ -443,6 +434,8 @@ p { color: var(--white-dim); }
   color: var(--white-dim);
   max-width: 640px;
   line-height: 1.7;
+  margin: 0 auto;
+  text-align: center;
 }
 .hero-actions {
   display: flex;
