@@ -195,10 +195,10 @@ p { color: var(--white-dim); }
 .nav-inner {
   display: flex;
   align-items: center;
-  justify-content: space-between;
   height: 64px;
   gap: 1rem;
 }
+.nav-links { margin-left: auto; }
 .nav-logo {
   display: flex;
   align-items: center;
@@ -225,8 +225,7 @@ p { color: var(--white-dim); }
   display: flex;
   align-items: center;
   gap: 1.75rem;
-  flex: 1;
-  justify-content: flex-end;
+  /* don't flex-grow — keeps right edge stable regardless of visible link count */
 }
 .nav-links a {
   font-size: 0.82rem;
@@ -234,11 +233,17 @@ p { color: var(--white-dim); }
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--white-muted);
+  text-decoration: none;
   transition: color var(--transition);
+  white-space: nowrap;
 }
 .nav-links a:hover { color: var(--white); }
 .nav-links a.active { color: var(--red-bright); }
-.nav-cta { margin-left: 0.25rem; }
+.nav-cta {
+  padding-left: 1.25rem;
+  border-left: 1px solid var(--border);
+  color: var(--white-muted) !important;
+}
 
 /* ── Mode Bar (below navbar) ── */
 #mode-bar {
