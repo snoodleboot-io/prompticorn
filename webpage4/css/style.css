@@ -364,6 +364,7 @@ p { color: var(--white-dim); }
   align-items: center;
   text-align: center;
   gap: 1.5rem;
+  width: 100%;
 }
 .hero-logo {
   display: block;
@@ -421,7 +422,7 @@ p { color: var(--white-dim); }
   0%, 100% { opacity: 1; transform: scale(1); }
   50% { opacity: 0.6; transform: scale(1.2); }
 }
-.hero-title { max-width: 900px; margin: 0 auto; text-align: center; }
+.hero-title { max-width: 900px; }
 .hero-title em {
   font-style: normal;
   color: var(--accent);
@@ -429,10 +430,8 @@ p { color: var(--white-dim); }
 .hero-subtitle {
   font-size: 1.15rem;
   color: var(--white-dim);
-  max-width: 640px;
+  max-width: 620px;
   line-height: 1.7;
-  margin: 0 auto;
-  text-align: center;
 }
 .hero-actions {
   display: flex;
