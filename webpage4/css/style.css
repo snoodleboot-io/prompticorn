@@ -364,9 +364,6 @@ p { color: var(--white-dim); }
   align-items: center;
   text-align: center;
   gap: 1.5rem;
-  width: 100%;
-  max-width: 860px;
-  margin: 0 auto;
 }
 .hero-logo {
   display: block;
