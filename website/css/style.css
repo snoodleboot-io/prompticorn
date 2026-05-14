@@ -60,10 +60,22 @@
 }
 
 /* ── Content mode switching ── */
-[data-show-mode] { display: none !important; }
-[data-mode="startup"]    [data-show-mode="startup"]    { display: block !important; }
-[data-mode="enterprise"] [data-show-mode="enterprise"] { display: block !important; }
-[data-mode="engineer"]   [data-show-mode="engineer"]   { display: block !important; }
+[data-show-mode] { display: none; }
+[data-mode="startup"]    [data-show-mode="startup"]    { display: block; }
+[data-mode="enterprise"] [data-show-mode="enterprise"] { display: block; }
+[data-mode="engineer"]   [data-show-mode="engineer"]   { display: block; }
+
+/* Hero wrapper divs must mirror .hero-content's flex layout so children center correctly */
+[data-mode="startup"]    .hero-content [data-show-mode="startup"],
+[data-mode="enterprise"] .hero-content [data-show-mode="enterprise"],
+[data-mode="engineer"]   .hero-content [data-show-mode="engineer"] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  width: 100%;
+}
 
 /* ── Reset ── */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
