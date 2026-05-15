@@ -19,6 +19,7 @@ Use this mode when improving code structure, eliminating technical debt, or simp
 
 This workflow will guide you through:
 - Steps
+- Complete Flow Summary
 
 ## Subagents
 

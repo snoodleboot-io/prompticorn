@@ -19,6 +19,7 @@ Use this mode when diagnosing bugs, crashes, or unexpected behavior.
 
 This workflow will guide you through:
 - Steps
+- Complete Flow Summary
 
 ## Subagents
 

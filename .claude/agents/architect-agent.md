@@ -19,6 +19,7 @@ Use this mode for system design, architecture planning, or making technical deci
 
 This workflow will guide you through:
 - Steps
+- Complete Flow Summary
 
 ## Subagents
 

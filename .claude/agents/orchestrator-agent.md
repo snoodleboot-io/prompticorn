@@ -30,6 +30,7 @@ Use this mode when coordinating complex workflows, managing multi-step tasks, or
 
 This workflow will guide you through:
 - Steps
+- Complete Flow Summary
 
 ## Subagents
 
