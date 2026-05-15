@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-Phase 1 addresses the **most critical gaps** in Prompticorn coverage:
+Phase 1 addresses the **most critical gaps** in prompticorn coverage:
 1. **Data Engineering** (completely missing)
 2. **SRE/Observability** (limited coverage)
 3. **Incident Management** (missing)

@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Builder architecture in Prompticorn is responsible for transforming Intermediate Representation (IR) models into tool-specific output formats. It uses a factory pattern for builder instantiation and a protocol-based system for optional feature support.
+The Builder architecture in prompticorn is responsible for transforming Intermediate Representation (IR) models into tool-specific output formats. It uses a factory pattern for builder instantiation and a protocol-based system for optional feature support.
 
 ## Core Components
 
@@ -44,7 +44,7 @@ The BuilderFactory implements the factory pattern for creating and managing buil
 ### Protocol-Based Feature Support
 **File:** `prompticorn/builders/interfaces.py`
 
-Instead of traditional inheritance, Prompticorn uses typing.Protocol for optional builder features. This provides structural subtyping without runtime overhead or tight coupling.
+Instead of traditional inheritance, prompticorn uses typing.Protocol for optional builder features. This provides structural subtyping without runtime overhead or tight coupling.
 
 **Available Protocols:**
 - `SupportsSkills`: For builders that support building skills

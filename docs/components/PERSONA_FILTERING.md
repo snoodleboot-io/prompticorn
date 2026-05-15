@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Persona filtering system enables role-based selection of agents, workflows, and skills in Prompticorn. It implements dynamic agent enabling/disabling based on selected personas, allowing users to tailor the available functionality to their specific role or context.
+The Persona filtering system enables role-based selection of agents, workflows, and skills in prompticorn. It implements dynamic agent enabling/disabling based on selected personas, allowing users to tailor the available functionality to their specific role or context.
 
 ## Core Components
 

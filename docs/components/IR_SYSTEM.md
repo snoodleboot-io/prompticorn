@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Intermediate Representation (IR) system is the core data modeling layer of Prompticorn. It provides tool-agnostic data models that represent all components of the prompt architecture system, enabling builders to transform these models into tool-specific outputs.
+The Intermediate Representation (IR) system is the core data modeling layer of prompticorn. It provides tool-agnostic data models that represent all components of the prompt architecture system, enabling builders to transform these models into tool-specific outputs.
 
 ## Core Models
 

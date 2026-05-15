@@ -106,7 +106,7 @@ pip list | grep -v "^-" | wc -l >> metrics-log.csv
 ## Code Volume
 
 ### Lines of Code
-- Prompticorn: X LOC
+- prompticorn: X LOC
 - Tests: Y LOC
 - Docs: Z LOC
 - Trend: [+100 / Stable / -50]

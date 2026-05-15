@@ -1,4 +1,4 @@
-# Prompticorn Advanced Patterns Guide
+# prompticorn Advanced Patterns Guide
 
 **Version:** 2.0.0  
 **Date:** April 9, 2026  
@@ -1186,4 +1186,4 @@ benchmark.print_report()
 
 ---
 
-*This guide covers advanced patterns for extending and customizing Prompticorn. For standard usage, see the Integration Guide.*
+*This guide covers advanced patterns for extending and customizing prompticorn. For standard usage, see the Integration Guide.*

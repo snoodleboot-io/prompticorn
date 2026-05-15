@@ -1,10 +1,10 @@
-# Prompticorn Library Index
+# prompticorn Library Index
 
 **Version:** 0.1.0  
 **Last Updated:** April 13, 2026  
 **Status:** Current
 
-Complete searchable catalog of all Prompticorn agents, workflows, and skills.
+Complete searchable catalog of all prompticorn agents, workflows, and skills.
 
 ---
 

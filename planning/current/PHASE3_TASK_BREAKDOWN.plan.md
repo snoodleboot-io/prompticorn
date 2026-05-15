@@ -439,7 +439,7 @@
 - [ ] Tests (12+ cases)
 
 #### Acceptance Criteria
-- [ ] Desktop app can load Prompticorn configurations
+- [ ] Desktop app can load prompticorn configurations
 - [ ] All agents/workflows supported
 - [ ] Tests passing
 - [ ] Documentation complete

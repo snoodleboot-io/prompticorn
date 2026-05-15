@@ -2,9 +2,9 @@
 
 ## Overview
 
-Prompticorn uses a **persona-based filtering system** to reduce cognitive overload by showing only the agents, workflows, and skills relevant to your team's roles.
+prompticorn uses a **persona-based filtering system** to reduce cognitive overload by showing only the agents, workflows, and skills relevant to your team's roles.
 
-Instead of generating all 25 primary agents, you select which **personas** (SDLC roles) your team uses, and Prompticorn generates only the agents needed for those roles.
+Instead of generating all 25 primary agents, you select which **personas** (SDLC roles) your team uses, and prompticorn generates only the agents needed for those roles.
 
 ## What Are Personas?
 

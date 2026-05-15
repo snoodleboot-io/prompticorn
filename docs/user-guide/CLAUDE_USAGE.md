@@ -7,7 +7,7 @@
 
 ## Overview
 
-Prompticorn generates a clean, organized `.claude/` directory structure for Claude AI assistant usage. The system uses lazy loading, where Claude only loads what it needs when it needs it.
+prompticorn generates a clean, organized `.claude/` directory structure for Claude AI assistant usage. The system uses lazy loading, where Claude only loads what it needs when it needs it.
 
 ---
 
@@ -431,7 +431,7 @@ Commit the entire `.claude/` directory and CLAUDE.md. These are project artifact
 **A:** Yes, but be aware they'll be regenerated on next build. For project-specific changes, add to `general.md` rather than editing agent files.
 
 ### Q: How do I add a new language?
-**A:** Language conventions are bundled with Prompticorn. If your language isn't supported, the workflow will use general conventions.
+**A:** Language conventions are bundled with prompticorn. If your language isn't supported, the workflow will use general conventions.
 
 ### Q: What's the difference between a workflow and a skill?
 **A:** Workflows are multi-step processes that agents follow. Skills are reusable capabilities that workflows can invoke.

@@ -1,4 +1,4 @@
-# Prompticorn Builder Examples
+# prompticorn Builder Examples
 
 This directory contains comprehensive examples of builder outputs for all 5 supported tools: **Kilo**, **Cline**, **Claude**, **GitHub Copilot**, and **Cursor**.
 
@@ -44,9 +44,9 @@ Model:       anthropic/claude-opus-4-1
 3. **Customize the content**: Edit the system prompt, tools, and descriptions
 4. **Deploy**: Follow the "Installation" section in each tool's README
 
-### Option 2: Generate from Prompticorn
+### Option 2: Generate from prompticorn
 
-Use the Prompticorn CLI to generate custom outputs:
+Use the prompticorn CLI to generate custom outputs:
 
 ```bash
 # Install prompticorn
@@ -65,7 +65,7 @@ These examples serve as templates for creating new agents:
 
 1. Study the structure in your chosen tool's example
 2. Create a new agent with different name/description
-3. Generate output using Prompticorn
+3. Generate output using prompticorn
 4. Deploy following the tool-specific installation guide
 
 ## What's Included in Each Example
@@ -195,7 +195,7 @@ your-project/
 
 ## For More Information
 
-- [Prompticorn Documentation](../docs/README.md)
+- [prompticorn Documentation](../docs/README.md)
 - [Builder API Reference](../docs/BUILDERS.md)
 - [Agent Configuration Guide](../docs/AGENT_CONFIG.md)
 

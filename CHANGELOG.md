@@ -331,7 +331,7 @@ See `docs/MIGRATION_GUIDE.md` for step-by-step instructions.
 
 ### Added
 
-- Initial release of Prompticorn
+- Initial release of prompticorn
 - Support for single-language repositories
 - CLI commands: init, list, validate
 - Builder support for: Kilo CLI, Kilo IDE, Cline, Cursor, Copilot

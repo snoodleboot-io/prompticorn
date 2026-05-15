@@ -1,4 +1,4 @@
-# Prompticorn Agent → Subagent Relationships
+# prompticorn Agent → Subagent Relationships
 
 **Updated:** April 13, 2026  
 **Version:** 0.1.0

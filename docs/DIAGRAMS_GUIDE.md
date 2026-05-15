@@ -1,6 +1,6 @@
 # Visual Diagrams & Flows
 
-Comprehensive visual documentation for Prompticorn workflows using Mermaid diagrams.
+Comprehensive visual documentation for prompticorn workflows using Mermaid diagrams.
 
 ## Table of Contents
 
@@ -15,7 +15,7 @@ Comprehensive visual documentation for Prompticorn workflows using Mermaid diagr
 
 ## Workflow Diagrams
 
-### Complete Prompticorn Setup Workflow
+### Complete prompticorn Setup Workflow
 
 ```mermaid
 flowchart TD

@@ -1,6 +1,6 @@
-# Contributing to Prompticorn
+# Contributing to prompticorn
 
-Thank you for your interest in contributing to Prompticorn! This guide will help you get started.
+Thank you for your interest in contributing to prompticorn! This guide will help you get started.
 
 ## Table of Contents
 
@@ -917,7 +917,7 @@ All must pass before merge.
 
 Include:
 - Python version
-- Prompticorn version
+- prompticorn version
 - Operating system
 - Steps to reproduce
 - Expected vs actual behavior
@@ -943,4 +943,4 @@ Include:
 
 ---
 
-Thank you for contributing to Prompticorn! 🦖
+Thank you for contributing to prompticorn! 🦖

@@ -1,4 +1,4 @@
-# Prompticorn
+# prompticorn
 
 **Version 0.1.0** - A unified, tool-agnostic prompt architecture for managing AI agent configurations across 5 coding assistants.
 

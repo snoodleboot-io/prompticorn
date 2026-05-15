@@ -137,7 +137,7 @@ graph TD
 ### CI/CD Integration
 ```yaml
 # .github/workflows/prompticorn.yml
-name: Prompticorn Configuration
+name: prompticorn Configuration
 on:
   push:
     branches: [ main ]
@@ -155,7 +155,7 @@ jobs:
       with:
         python-version: '3.11'
     
-    - name: Install Prompticorn
+    - name: Install prompticorn
       run: pip install -e .
     
     - name: Validate Configuration

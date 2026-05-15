@@ -1,8 +1,8 @@
-# Getting Started with Prompticorn
+# Getting Started with prompticorn
 
 ## Quick 5-Minute Guide
 
-This guide will help you get up and running with Prompticorn in just 5 minutes.
+This guide will help you get up and running with prompticorn in just 5 minutes.
 
 ### Prerequisites
 
@@ -434,7 +434,7 @@ active_personas:
 
 ## Persona-Based Filtering
 
-Prompticorn uses **personas** to filter which agents are generated, reducing cognitive load.
+prompticorn uses **personas** to filter which agents are generated, reducing cognitive load.
 
 ### Available Personas
 

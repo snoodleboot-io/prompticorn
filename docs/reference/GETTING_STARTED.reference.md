@@ -1,9 +1,9 @@
-# Getting Started with Prompticorn
+# Getting Started with prompticorn
 
 **Version:** 2.0.0  
 **Last Updated:** April 9, 2026
 
-A quick guide to using Prompticorn Prompticorn for unified AI agent prompt management across 5 coding assistants.
+A quick guide to using prompticorn prompticorn for unified AI agent prompt management across 5 coding assistants.
 
 ---
 
@@ -713,7 +713,7 @@ ls -la .github/instructions/
 After getting started:
 
 1. **Read the Full Documentation**
-   - [PHASE2A_RELEASE_NOTES.md](./PHASE2A_RELEASE_NOTES.md) - What's new in Prompticorn
+   - [PHASE2A_RELEASE_NOTES.md](./PHASE2A_RELEASE_NOTES.md) - What's new in prompticorn
    - [BUILDER_API_REFERENCE.md](./BUILDER_API_REFERENCE.md) - API documentation
    - [MIGRATION_GUIDE.md](./MIGRATION_GUIDE.md) - Migrate from old system
 

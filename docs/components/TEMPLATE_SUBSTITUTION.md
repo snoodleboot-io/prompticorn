@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Template Substitution System in Prompticorn processes Jinja2 templates with custom filters, resolvers, and error handling to generate tool-specific output from Intermediate Representation (IR) models. It provides a flexible and powerful templating engine with built-in error recovery and extensibility.
+The Template Substitution System in prompticorn processes Jinja2 templates with custom filters, resolvers, and error handling to generate tool-specific output from Intermediate Representation (IR) models. It provides a flexible and powerful templating engine with built-in error recovery and extensibility.
 
 ## Core Components
 

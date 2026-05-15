@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Prompticorn CLI provides commands for initializing, configuring, and managing AI assistant configurations. Built with Click, it offers an intuitive interface for generating tool-specific configurations from the Intermediate Representation (IR) models.
+The prompticorn CLI provides commands for initializing, configuring, and managing AI assistant configurations. Built with Click, it offers an intuitive interface for generating tool-specific configurations from the Intermediate Representation (IR) models.
 
 ## Global Options
 

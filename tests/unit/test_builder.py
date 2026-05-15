@@ -254,7 +254,7 @@ Default boolean: {{ config.optional_setting | default(false) }}
     config = {
         "spec": {
             "linters": ["ruff", "flake8"],
-            "project_name": "Prompticorn",
+            "project_name": "prompticorn",
             "database": {"host": "db.example.com"},
             # optional_setting is missing
         }

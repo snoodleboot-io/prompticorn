@@ -1,6 +1,6 @@
 # Template Substitution System
 
-Prompticorn uses a powerful template substitution system to customize agent prompts based on your project configuration.
+prompticorn uses a powerful template substitution system to customize agent prompts based on your project configuration.
 
 ## Table of Contents
 

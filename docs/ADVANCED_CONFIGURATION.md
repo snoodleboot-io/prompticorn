@@ -1,6 +1,6 @@
 # Advanced Configuration Guide
 
-Comprehensive guide to advanced configuration options in Prompticorn.
+Comprehensive guide to advanced configuration options in prompticorn.
 
 ## Table of Contents
 
@@ -549,7 +549,7 @@ Test with {{TESTING_FRAMEWORK}}.
 
 ## Ignore Files
 
-Prompticorn can generate ignore files for various tools.
+prompticorn can generate ignore files for various tools.
 
 ### .kiloignore
 
@@ -566,10 +566,10 @@ __pycache__/
 
 ### .gitignore Integration
 
-Prompticorn respects existing `.gitignore` and can generate additional patterns:
+prompticorn respects existing `.gitignore` and can generate additional patterns:
 
 ```gitignore
-# Prompticorn
+# prompticorn
 .prompticorn/
 .kilo/
 .clinerules
@@ -727,7 +727,7 @@ spec:
 python -c "import yaml; yaml.safe_load(open('.prompticorn/.prompticorn.yaml'))"
 ```
 
-### Validate with Prompticorn
+### Validate with prompticorn
 
 ```bash
 prompticorn validate

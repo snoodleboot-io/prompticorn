@@ -1,8 +1,8 @@
-# Prompticorn Integration Guide
+# prompticorn Integration Guide
 
 **Version:** 2.0.0  
 **Date:** April 9, 2026  
-**Target Audience:** Developers integrating Prompticorn IR models into existing projects
+**Target Audience:** Developers integrating prompticorn IR models into existing projects
 
 ---
 
@@ -22,7 +22,7 @@
 
 ## Overview
 
-Prompticorn provides a **tool-agnostic Intermediate Representation (IR)** system that you can integrate into your existing projects. This guide shows you how to:
+prompticorn provides a **tool-agnostic Intermediate Representation (IR)** system that you can integrate into your existing projects. This guide shows you how to:
 
 - Use IR models as a foundation for your own applications
 - Build custom builders for new tools or platforms
@@ -775,7 +775,7 @@ from prompticorn.builders.errors import BuilderException
 
 @click.group()
 def cli():
-    """Prompticorn CLI."""
+    """prompticorn CLI."""
     pass
 
 
@@ -990,4 +990,4 @@ def build_in_batches(agents: list[Agent], batch_size: int = 100):
 
 ---
 
-*This guide covers practical integration patterns for Prompticorn. For questions or issues, refer to the troubleshooting section or consult the main documentation.*
+*This guide covers practical integration patterns for prompticorn. For questions or issues, refer to the troubleshooting section or consult the main documentation.*

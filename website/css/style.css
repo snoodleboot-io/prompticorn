@@ -52,6 +52,60 @@
   --font-body: 'JetBrains Mono', 'Fira Code', monospace;
 }
 
+/* ── Accessible colours overlay ── */
+[data-accessible-colors] {
+  --accent:       #0077bb;
+  --red:          #0077bb;
+  --red-bright:   #0099dd;
+  --red-dim:      #005588;
+  --border-glow:  #0077bb44;
+}
+[data-accessible-colors][data-mode="engineer"] {
+  --accent:       #ee7733;
+  --red:          #ee7733;
+  --red-bright:   #ff9944;
+  --red-dim:      #aa5500;
+  --border-glow:  #ee773344;
+}
+
+/* ── Accessible colours toggle button ── */
+.accessible-colors-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.3rem 0.75rem;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  color: var(--white-muted);
+  font-family: 'Inter', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  margin-left: 1rem;
+  flex-shrink: 0;
+}
+.accessible-colors-btn:hover { border-color: var(--white-muted); color: var(--white); }
+.accessible-colors-btn.active {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: rgba(0,119,187,0.08);
+}
+[data-mode="engineer"] .accessible-colors-btn.active {
+  background: rgba(238,119,51,0.08);
+}
+.accessible-colors-btn-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: currentColor;
+  flex-shrink: 0;
+}
+
 /* ── Transitions ── */
 .mode-transition { animation: modeFade 0.25s ease; }
 @keyframes modeFade {

@@ -1,6 +1,6 @@
 # Integration Guides
 
-How to integrate Prompticorn with your development workflow and CI/CD pipelines.
+How to integrate prompticorn with your development workflow and CI/CD pipelines.
 
 ## Table of Contents
 
@@ -19,7 +19,7 @@ How to integrate Prompticorn with your development workflow and CI/CD pipelines.
 ```yaml
 # .github/workflows/prompticorn-validate.yml
 
-name: Validate Prompticorn Configuration
+name: Validate prompticorn Configuration
 
 on:
   push:
@@ -202,7 +202,7 @@ repos:
   - repo: local
     hooks:
       - id: prompticorn-validate
-        name: Validate Prompticorn Config
+        name: Validate prompticorn Config
         entry: prompticorn validate
         language: system
         files: ^\.prompticorn\.yaml$
@@ -211,7 +211,7 @@ repos:
         stages: [commit]
       
       - id: prompticorn-list
-        name: List Prompticorn Agents
+        name: List prompticorn Agents
         entry: bash -c 'prompticorn list'
         language: system
         files: ^(\.prompticorn\.yaml|prompticorn/.*)$
@@ -260,7 +260,7 @@ pre-commit run -a
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Validate Prompticorn",
+      "label": "Validate prompticorn",
       "type": "shell",
       "command": "prompticorn",
       "args": ["validate"],
@@ -271,7 +271,7 @@ pre-commit run -a
       }
     },
     {
-      "label": "List Prompticorn Agents",
+      "label": "List prompticorn Agents",
       "type": "shell",
       "command": "prompticorn",
       "args": ["list"],
@@ -282,7 +282,7 @@ pre-commit run -a
       }
     },
     {
-      "label": "Initialize Prompticorn",
+      "label": "Initialize prompticorn",
       "type": "shell",
       "command": "prompticorn",
       "args": ["init"],
@@ -299,7 +299,7 @@ pre-commit run -a
 #### Usage
 
 - Press `Ctrl+Shift+B` to run tasks
-- Select "Validate Prompticorn" or other tasks
+- Select "Validate prompticorn" or other tasks
 
 ### JetBrains IDEs (IntelliJ, PyCharm, WebStorm)
 
@@ -309,7 +309,7 @@ pre-commit run -a
 2. **+ Add new tool** → Configure:
 
 ```
-Name:       Prompticorn Validate
+Name:       prompticorn Validate
 Program:    prompticorn
 Arguments:  validate
 Working directory: $ProjectFileDir$
@@ -321,7 +321,7 @@ Working directory: $ProjectFileDir$
 
 #### Usage
 
-- **Tools** → **Prompticorn Validate**
+- **Tools** → **prompticorn Validate**
 - Or create keyboard shortcuts in Keymap settings
 
 ---
@@ -454,7 +454,7 @@ unset PROMPTICORN_PACKAGE_MANAGER
 
 ```yaml
 # GitHub Actions example
-- name: Setup Prompticorn Config
+- name: Setup prompticorn Config
   env:
     LANGUAGE: ${{ secrets.LANGUAGE }}
     RUNTIME: ${{ secrets.RUNTIME }}

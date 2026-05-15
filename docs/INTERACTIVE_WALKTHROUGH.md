@@ -1,6 +1,6 @@
 # Interactive Walkthroughs
 
-Step-by-step guided walkthroughs for common Prompticorn tasks.
+Step-by-step guided walkthroughs for common prompticorn tasks.
 
 ## Table of Contents
 
@@ -20,7 +20,7 @@ You're starting a new Python project and want to use Kilo Code IDE as your AI as
 ### Duration
 **5-10 minutes**
 
-### Step 1: Install Prompticorn
+### Step 1: Install prompticorn
 
 ```bash
 # Install the package

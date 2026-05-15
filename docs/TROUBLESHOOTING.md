@@ -25,7 +25,7 @@ This guide helps you diagnose and fix common issues with prompticorn.
 # Check your Python version
 python --version
 
-# Prompticorn requires Python 3.10+
+# prompticorn requires Python 3.10+
 # If you have an older version, upgrade Python or use pyenv
 ```
 

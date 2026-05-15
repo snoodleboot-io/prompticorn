@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Registry system serves as the single source of truth for all modes, their associated prompt files, and output ordering in Prompticorn. It validates that all registered files exist and provides methods for generating various ignore files.
+The Registry system serves as the single source of truth for all modes, their associated prompt files, and output ordering in prompticorn. It validates that all registered files exist and provides methods for generating various ignore files.
 
 ## Core Components
 

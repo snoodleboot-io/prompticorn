@@ -1,6 +1,6 @@
 # Documentation Index
 
-Prompticorn documentation is organized by intent and purpose.
+prompticorn documentation is organized by intent and purpose.
 
 ## Getting Started (Pick Your Path)
 

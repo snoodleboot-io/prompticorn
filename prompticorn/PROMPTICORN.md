@@ -20,7 +20,7 @@ flowchart TB
         Config["Project Configuration"]
     end
     
-    subgraph Prompticorn["PROMPTICORN System"]
+    subgraph prompticorn["PROMPTICORN System"]
         Registry["Prompt Registry"]
         Prompts["Prompt Templates"]
         Builders["Builders"]

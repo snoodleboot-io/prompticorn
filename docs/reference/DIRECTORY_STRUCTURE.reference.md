@@ -1,6 +1,6 @@
 # Directory Structure
 
-This document explains the organization of the Prompticorn repository.
+This document explains the organization of the prompticorn repository.
 
 ## Overall Structure
 
@@ -18,7 +18,7 @@ This document explains the organization of the Prompticorn repository.
 
 ## docs/ - User-Facing Documentation
 
-Contains documentation for users, developers, and operators using Prompticorn.
+Contains documentation for users, developers, and operators using prompticorn.
 
 ```
 docs/
@@ -205,7 +205,7 @@ examples/
 └── [example project configurations]
 ```
 
-Example configurations showing how to use Prompticorn in different scenarios.
+Example configurations showing how to use prompticorn in different scenarios.
 
 ---
 
@@ -215,7 +215,7 @@ Example configurations showing how to use Prompticorn in different scenarios.
 .
 ├── pyproject.toml          # Python project configuration
 ├── README.md               # Repository README
-├── .prompticorn.yaml     # Prompticorn configuration
+├── .prompticorn.yaml     # prompticorn configuration
 └── [other config files]
 ```
 

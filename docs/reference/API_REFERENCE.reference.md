@@ -1,6 +1,6 @@
 # API Reference
 
-Complete API documentation for Prompticorn builders, IR models, loaders, and registry.
+Complete API documentation for prompticorn builders, IR models, loaders, and registry.
 
 **Table of Contents:**
 - [Builders](#builders)

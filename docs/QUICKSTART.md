@@ -1,10 +1,10 @@
 # Quick Start Guide
 
-Get up to speed with Prompticorn in 5 minutes.
+Get up to speed with prompticorn in 5 minutes.
 
-## What is Prompticorn?
+## What is prompticorn?
 
-Prompticorn is a comprehensive AI agent library with:
+prompticorn is a comprehensive AI agent library with:
 - **25 primary agents** across different domains (data, DevOps, testing, backend, frontend, etc.)
 - **49 workflows** for common development tasks
 - **58 specialized skills** for domain-specific expertise
@@ -69,7 +69,7 @@ prompticorn/
 3. Get workflow path
 4. Read `minimal/workflow.md` for quick reference or `verbose/workflow.md` for detailed guide
 
-### Set up Prompticorn in your IDE
+### Set up prompticorn in your IDE
 1. Read [TOOL_CONFIGURATION_EXAMPLES.reference.md](./reference/TOOL_CONFIGURATION_EXAMPLES.reference.md)
 2. Choose your tool (Kilo, Cline, Cursor, Copilot)
 3. Copy the appropriate rules to your project

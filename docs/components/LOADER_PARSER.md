@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Loader and Parser architecture in Prompticorn is responsible for loading prompt source files and parsing them into Intermediate Representation (IR) models. This system separates the concerns of file loading (locating and reading files) from content parsing (converting raw content into structured data).
+The Loader and Parser architecture in prompticorn is responsible for loading prompt source files and parsing them into Intermediate Representation (IR) models. This system separates the concerns of file loading (locating and reading files) from content parsing (converting raw content into structured data).
 
 ## Core Components
 

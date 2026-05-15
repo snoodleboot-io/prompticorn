@@ -1,4 +1,4 @@
-# Prompticorn Architecture
+# prompticorn Architecture
 
 Comprehensive architectural documentation for the prompticorn system.
 
@@ -18,7 +18,7 @@ Comprehensive architectural documentation for the prompticorn system.
 
 ### Purpose
 
-Prompticorn is a **tool-agnostic prompt architecture system** that enables you to:
+prompticorn is a **tool-agnostic prompt architecture system** that enables you to:
 - Define AI agents once in a unified Intermediate Representation (IR) format
 - Generate configurations for 5 different AI coding assistants (Kilo, Cline, Claude, Cursor, Copilot)
 - Manage agent complexity with minimal/verbose variants
