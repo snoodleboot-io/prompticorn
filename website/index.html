@@ -194,7 +194,7 @@
           <span class="gradient-text">Deploy everywhere.</span>
         </h1>
         <p class="hero-subtitle reveal reveal-delay-1">
-          Stop maintaining five separate agent configs. Run <code>prompticorn init</code> once — Prompticorn generates production-ready configurations for <strong>Kilo, Cline, Claude, Cursor,</strong> and <strong>GitHub Copilot</strong> automatically.
+          Stop maintaining five separate agent configs. Run <code>prompticorn init</code> once — Prompticorn generates production-ready configurations for <strong>Kilo, Cline, Claude, Cursor,</strong> and <strong>Copilot</strong> automatically.
         </p>
         <div class="hero-actions reveal reveal-delay-2">
           <a href="#getting-started" class="btn btn-primary">Get Started</a>
@@ -404,7 +404,7 @@
     E --> J[.kilo/agents/]
     F --> K[.clinerules]
     G --> L[.claude/]
-    H --> M[.github/instructions/]
+    H --> M[.github/copilot-instructions.md]
     I --> N[.cursor/rules/]"></div>
               </div>
             </div>
@@ -442,7 +442,7 @@
     E --> J[.kilo/agents/]
     F --> K[.clinerules]
     G --> L[.claude/]
-    H --> M[.github/instructions/]
+    H --> M[.github/copilot-instructions.md]
     I --> N[.cursor/rules/]"></div></div></div>
         </div>
         <div class="arch-card reveal">
@@ -601,7 +601,7 @@ personas:
         <div class="tool-card reveal"><div class="tool-card-header"><div class="tool-name">Kilo</div><span class="tag red">Kilo IDE</span></div><p class="tool-desc">An AI-native IDE built for agentic development workflows.</p><div class="tool-output"><span class="tool-output-label">Generates</span><code>.kilo/agents/{agent}.md</code> — YAML frontmatter + Markdown agent files.</div></div>
         <div class="tool-card reveal reveal-delay-1"><div class="tool-card-header"><div class="tool-name">Cline</div><span class="tag red">VS Code Extension</span></div><p class="tool-desc">An autonomous AI coding agent that runs inside VS Code.</p><div class="tool-output"><span class="tool-output-label">Generates</span><code>.clinerules</code> — a single drop-in Markdown rules file.</div></div>
         <div class="tool-card reveal"><div class="tool-card-header"><div class="tool-name">Claude Code</div><span class="tag red">CLI</span></div><p class="tool-desc">Anthropic's agentic coding CLI, used directly from the terminal.</p><div class="tool-output"><span class="tool-output-label">Generates</span><code>.claude/</code> — full directory of agents, workflows, and skills.</div></div>
-        <div class="tool-card reveal reveal-delay-1"><div class="tool-card-header"><div class="tool-name">GitHub Copilot</div><span class="tag red">GitHub</span></div><p class="tool-desc">GitHub's AI pair programmer, integrated across VS Code, JetBrains, and more.</p><div class="tool-output"><span class="tool-output-label">Generates</span><code>.github/instructions/{agent}.md</code> — version-controlled instruction files.</div></div>
+        <div class="tool-card reveal reveal-delay-1"><div class="tool-card-header"><div class="tool-name">Copilot</div><span class="tag red">GitHub Copilot</span></div><p class="tool-desc">GitHub Copilot's agentic coding tool, configured via a single instructions file.</p><div class="tool-output"><span class="tool-output-label">Generates</span><code>.github/copilot-instructions.md</code> — a single concatenated instructions file.</div></div>
         <div class="tool-card reveal"><div class="tool-card-header"><div class="tool-name">Cursor</div><span class="tag red">AI Editor</span></div><p class="tool-desc">An AI-first code editor built on VS Code with deep agent integration.</p><div class="tool-output"><span class="tool-output-label">Generates</span><code>.cursor/rules/</code> + <code>.cursorrules</code> — rules files scoped per agent.</div></div>
       </div>
       <div class="reveal" style="margin-top: 2rem;">
@@ -666,7 +666,7 @@ When writing tests, use_skill: testing-strategies</code></pre></div>
     testing-strategies.md</code></pre></div>
       </div>
       <div id="bcopilot-ent" class="builder-panel reveal">
-        <div class="builder-info"><div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">GitHub Copilot</span></div><h3>GitHub Copilot</h3><p>Generates YAML frontmatter + Markdown instruction files for GitHub Copilot in <code>.github/instructions/</code>.</p><div class="builder-specs"><div class="builder-spec">Output: <code>.github/instructions/{agent}.md</code></div><div class="builder-spec">GitHub-native, version-controlled</div><div class="builder-spec">Minimal and verbose variants</div></div></div>
+        <div class="builder-info"><div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">GitHub Copilot</span></div><h3>Copilot</h3><p>Generates a single concatenated instructions file for GitHub Copilot's agentic coding tool.</p><div class="builder-specs"><div class="builder-spec">Output: <code>.github/copilot-instructions.md</code></div><div class="builder-spec">Single concatenated file</div><div class="builder-spec">Minimal and verbose variants</div></div></div>
         <div class="code-wrap"><div class="code-header"><span class="code-lang">Output Preview</span></div><pre><code class="language-yaml">---
 applyTo: "**"
 ---
@@ -738,7 +738,7 @@ Follow the project's established patterns...</code></pre></div>
     testing-strategies.md</code></pre></div>
       </div>
       <div id="bcopilot-eng" class="builder-panel reveal">
-        <div class="builder-info"><div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">GitHub Copilot</span></div><h3>GitHub Copilot</h3><p>Generates YAML frontmatter + Markdown instruction files for GitHub Copilot, version-controlled in <code>.github/instructions/</code>.</p><div class="builder-specs"><div class="builder-spec">Output: <code>.github/instructions/{agent}.md</code></div><div class="builder-spec">GitHub-native format</div><div class="builder-spec">Version-controlled with repo</div><div class="builder-spec">Minimal &amp; verbose variants</div></div></div>
+        <div class="builder-info"><div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">GitHub Copilot</span></div><h3>Copilot</h3><p>Generates a single concatenated instructions file for GitHub Copilot's agentic coding tool.</p><div class="builder-specs"><div class="builder-spec">Output: <code>.github/copilot-instructions.md</code></div><div class="builder-spec">Single concatenated file</div><div class="builder-spec">Version-controlled with repo</div><div class="builder-spec">Minimal &amp; verbose variants</div></div></div>
         <div class="code-wrap"><div class="code-header"><span class="code-lang">Output Preview</span></div><pre><code class="language-yaml">---
 applyTo: "**/*.py"
 ---
@@ -821,7 +821,7 @@ Follow project conventions strictly...</code></pre></div>
   [x] Cursor
   [ ] Cline
   [ ] Kilo IDE
-  [ ] GitHub Copilot
+  [ ] Copilot
 
 ? Primary programming language?  > TypeScript
 
