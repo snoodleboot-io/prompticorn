@@ -1,4 +1,4 @@
-# Promptosaurus
+# prompticorn
 
 **Version 0.1.0** - A unified, tool-agnostic prompt architecture for managing AI agent configurations across 5 coding assistants.
 
@@ -14,16 +14,16 @@ Define your agent once in a simple IR format, automatically generate outputs for
 Install via pip:
 
 ```bash
-pip install promptosaurus
+pip install prompticorn
 ```
 
 Or with uv:
 
 ```bash
-uv add promptosaurus
+uv add prompticorn
 ```
 
-This installs the `promptosaurus` CLI command.
+This installs the `prompticorn` CLI command.
 
 ## Quick Start
 
@@ -36,19 +36,19 @@ See [QUICKSTART.md](./docs/QUICKSTART.md) for a 5-minute guide.
 - **Minimal/Verbose Variants** - Save tokens by choosing variant at build time
 - **Persona-Based Filtering** - Select your team\'s roles, get only relevant agents
 - **Auto-Discovery Registry** - Zero-config agent registration
-- **CLI Tool** - Interactive `promptosaurus init` command
+- **CLI Tool** - Interactive `prompticorn init` command
 - **Backwards Compatible** - Existing configurations still work
 
 ## Commands Reference
 
 | Command | Description |
 |---------|-------------|
-| `promptosaurus init` | Interactively initialize prompt configuration for your project |
-| `promptosaurus list` | List all registered modes and their prompt files |
-| `promptosaurus switch` | Switch to a different AI assistant tool |
-| `promptosaurus swap` | Swap active personas and regenerate AI assistant configurations |
-| `promptosaurus update` | Update configuration options interactively |
-| `promptosaurus validate` | Check that all registered prompt files exist and no files are missing |
+| `prompticorn init` | Interactively initialize prompt configuration for your project |
+| `prompticorn list` | List all registered modes and their prompt files |
+| `prompticorn switch` | Switch to a different AI assistant tool |
+| `prompticorn swap` | Swap active personas and regenerate AI assistant configurations |
+| `prompticorn update` | Update configuration options interactively |
+| `prompticorn validate` | Check that all registered prompt files exist and no files are missing |
 
 ## Documentation
 
@@ -65,8 +65,8 @@ See [QUICKSTART.md](./docs/QUICKSTART.md) for a 5-minute guide.
 - **[INDEX.md](./docs/INDEX.md)** - Documentation navigation hub
 
 ### Workflow
-- **Adding prompts**: Run `promptosaurus init` to generate configurations, then edit files in generated directories (e.g., `.kilo/rules/`)
-- **Updating prompts**: Edit source prompts, then re-run `promptosaurus init` to regenerate
+- **Adding prompts**: Run `prompticorn init` to generate configurations, then edit files in generated directories (e.g., `.kilo/rules/`)
+- **Updating prompts**: Edit source prompts, then re-run `prompticorn init` to regenerate
 
 ### Mode Reference
 | Mode | Key | Purpose |
@@ -91,8 +91,8 @@ To contribute or develop locally:
 
 ```bash
 # Clone the repository
-git clone https://github.com/johna/promptosaurus.git
-cd promptosaurus
+git clone https://github.com/snoodleboot-io/prompticorn.git
+cd prompticorn
 
 # Install in development mode
 pip install -e .

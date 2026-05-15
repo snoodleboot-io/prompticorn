@@ -17,13 +17,13 @@ from tempfile import TemporaryDirectory
 
 import pytest
 
-from promptosaurus.builders.base import Builder, BuildOptions
-from promptosaurus.builders.claude_builder import ClaudeBuilder
-from promptosaurus.builders.cline_builder import ClineBuilder
-from promptosaurus.builders.copilot_builder import CopilotBuilder
-from promptosaurus.builders.cursor_builder import CursorBuilder
-from promptosaurus.builders.kilo_builder import KiloBuilder
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.base import Builder, BuildOptions
+from prompticorn.builders.claude_builder import ClaudeBuilder
+from prompticorn.builders.cline_builder import ClineBuilder
+from prompticorn.builders.copilot_builder import CopilotBuilder
+from prompticorn.builders.cursor_builder import CursorBuilder
+from prompticorn.builders.kilo_builder import KiloBuilder
+from prompticorn.ir.models import Agent
 
 # Performance targets (in seconds)
 TARGET_SINGLE_TOOL = 2.0  # <2 seconds per tool

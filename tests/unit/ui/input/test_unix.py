@@ -1,4 +1,4 @@
-"""Unit tests for promptosaurus.ui.input.unix module.
+"""Unit tests for prompticorn.ui.input.unix module.
 
 Tests the Unix-specific input provider using termios/tty for raw input.
 """
@@ -7,8 +7,8 @@ from unittest.mock import MagicMock, Mock, patch
 
 import pytest
 
-from promptosaurus.ui.domain.events import InputEvent, InputEventType
-from promptosaurus.ui.input.unix import UnixInputProvider
+from prompticorn.ui.domain.events import InputEvent, InputEventType
+from prompticorn.ui.input.unix import UnixInputProvider
 
 
 class TestUnixInputProvider:

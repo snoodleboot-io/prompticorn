@@ -172,55 +172,55 @@ Each task has a checkbox `- [ ]`. When you complete a task:
 **Goal:** Create 7 new agents with ~30 subagents (~90 files)
 
 ### Day 6: Backend/Architecture Agent (4 subagents)
-- [ ] promptosaurus/agents/backend/prompt.md (agent definition)
-- [ ] promptosaurus/agents/backend/subagents/api-design/{minimal,verbose}/prompt.md
-- [ ] promptosaurus/agents/backend/subagents/microservices/{minimal,verbose}/prompt.md
-- [ ] promptosaurus/agents/backend/subagents/caching/{minimal,verbose}/prompt.md
-- [ ] promptosaurus/agents/backend/subagents/storage/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/backend/prompt.md (agent definition)
+- [ ] prompticorn/agents/backend/subagents/api-design/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/backend/subagents/microservices/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/backend/subagents/caching/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/backend/subagents/storage/{minimal,verbose}/prompt.md
 
 ### Day 6: Frontend Agent (4 subagents)
-- [ ] promptosaurus/agents/frontend/prompt.md (agent definition)
-- [ ] promptosaurus/agents/frontend/subagents/react-patterns/{minimal,verbose}/prompt.md
-- [ ] promptosaurus/agents/frontend/subagents/vue-patterns/{minimal,verbose}/prompt.md
-- [ ] promptosaurus/agents/frontend/subagents/mobile/{minimal,verbose}/prompt.md
-- [ ] promptosaurus/agents/frontend/subagents/accessibility/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/frontend/prompt.md (agent definition)
+- [ ] prompticorn/agents/frontend/subagents/react-patterns/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/frontend/subagents/vue-patterns/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/frontend/subagents/mobile/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/frontend/subagents/accessibility/{minimal,verbose}/prompt.md
 
 ### Day 7: DevOps Agent (5 subagents)
-- [ ] promptosaurus/agents/devops/prompt.md (agent definition)
-- [ ] promptosaurus/agents/devops/subagents/docker/{minimal,verbose}/prompt.md
-- [ ] promptosaurus/agents/devops/subagents/kubernetes/{minimal,verbose}/prompt.md
-- [ ] promptosaurus/agents/devops/subagents/aws/{minimal,verbose}/prompt.md
-- [ ] promptosaurus/agents/devops/subagents/terraform/{minimal,verbose}/prompt.md
-- [ ] promptosaurus/agents/devops/subagents/monitoring/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/devops/prompt.md (agent definition)
+- [ ] prompticorn/agents/devops/subagents/docker/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/devops/subagents/kubernetes/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/devops/subagents/aws/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/devops/subagents/terraform/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/devops/subagents/monitoring/{minimal,verbose}/prompt.md
 
 ### Day 8: Testing Agent (4 subagents)
-- [ ] promptosaurus/agents/testing/prompt.md (agent definition)
-- [ ] promptosaurus/agents/testing/subagents/unit-testing/{minimal,verbose}/prompt.md
-- [ ] promptosaurus/agents/testing/subagents/integration-testing/{minimal,verbose}/prompt.md
-- [ ] promptosaurus/agents/testing/subagents/e2e-testing/{minimal,verbose}/prompt.md
-- [ ] promptosaurus/agents/testing/subagents/load-testing/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/testing/prompt.md (agent definition)
+- [ ] prompticorn/agents/testing/subagents/unit-testing/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/testing/subagents/integration-testing/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/testing/subagents/e2e-testing/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/testing/subagents/load-testing/{minimal,verbose}/prompt.md
 
 ### Day 8: Security Agent (5 subagents)
-- [ ] promptosaurus/agents/security/prompt.md (agent definition)
-- [ ] promptosaurus/agents/security/subagents/authentication/{minimal,verbose}/prompt.md
-- [ ] promptosaurus/agents/security/subagents/encryption/{minimal,verbose}/prompt.md
-- [ ] promptosaurus/agents/security/subagents/vulnerability/{minimal,verbose}/prompt.md
-- [ ] promptosaurus/agents/security/subagents/compliance/{minimal,verbose}/prompt.md
-- [ ] promptosaurus/agents/security/subagents/secrets/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/security/prompt.md (agent definition)
+- [ ] prompticorn/agents/security/subagents/authentication/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/security/subagents/encryption/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/security/subagents/vulnerability/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/security/subagents/compliance/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/security/subagents/secrets/{minimal,verbose}/prompt.md
 
 ### Day 9: ML/AI Agent (4 subagents)
-- [ ] promptosaurus/agents/ml/prompt.md (agent definition)
-- [ ] promptosaurus/agents/ml/subagents/data-preparation/{minimal,verbose}/prompt.md
-- [ ] promptosaurus/agents/ml/subagents/model-training/{minimal,verbose}/prompt.md
-- [ ] promptosaurus/agents/ml/subagents/deployment/{minimal,verbose}/prompt.md
-- [ ] promptosaurus/agents/ml/subagents/monitoring/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/ml/prompt.md (agent definition)
+- [ ] prompticorn/agents/ml/subagents/data-preparation/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/ml/subagents/model-training/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/ml/subagents/deployment/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/ml/subagents/monitoring/{minimal,verbose}/prompt.md
 
 ### Day 10: Performance Agent (4 subagents)
-- [ ] promptosaurus/agents/performance/prompt.md (agent definition)
-- [ ] promptosaurus/agents/performance/subagents/profiling/{minimal,verbose}/prompt.md
-- [ ] promptosaurus/agents/performance/subagents/bottleneck/{minimal,verbose}/prompt.md
-- [ ] promptosaurus/agents/performance/subagents/optimization/{minimal,verbose}/prompt.md
-- [ ] promptosaurus/agents/performance/subagents/benchmarking/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/performance/prompt.md (agent definition)
+- [ ] prompticorn/agents/performance/subagents/profiling/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/performance/subagents/bottleneck/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/performance/subagents/optimization/{minimal,verbose}/prompt.md
+- [ ] prompticorn/agents/performance/subagents/benchmarking/{minimal,verbose}/prompt.md
 
 **WEEK 2 SUMMARY**
 

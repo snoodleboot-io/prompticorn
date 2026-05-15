@@ -82,9 +82,9 @@ Invoke by: `use_skill test_writer` or request 'test-writer subagent'
 ### Most Basic Example
 
 ```python
-from promptosaurus.builders.copilot_builder import CopilotBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.copilot_builder import CopilotBuilder
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 
 # Create a builder
 builder = CopilotBuilder(agents_dir=".github/instructions")
@@ -136,9 +136,9 @@ You are an expert software engineer skilled in clean code principles.
 ### Import
 
 ```python
-from promptosaurus.builders.copilot_builder import CopilotBuilder
-from promptosaurus.builders.base import BuildOptions, BuilderValidationError
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.copilot_builder import CopilotBuilder
+from prompticorn.builders.base import BuildOptions, BuilderValidationError
+from prompticorn.ir.models import Agent
 ```
 
 ### Initialize
@@ -175,7 +175,7 @@ print(builder.supports_feature("tools"))       # True
 ### 1. Create Agent Model
 
 ```python
-from promptosaurus.ir.models import Agent
+from prompticorn.ir.models import Agent
 
 agent = Agent(
     name="refactor",
@@ -210,7 +210,7 @@ else:
 ### 3. Create Build Options
 
 ```python
-from promptosaurus.builders.base import BuildOptions
+from prompticorn.builders.base import BuildOptions
 
 options = BuildOptions(
     variant="verbose",
@@ -673,9 +673,9 @@ def _format_subagents_section(self, subagent_names: list[str]) -> str:
 ### Example 1: Simple Code Mode
 
 ```python
-from promptosaurus.builders.copilot_builder import CopilotBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.copilot_builder import CopilotBuilder
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 from pathlib import Path
 
 def build_code_mode_instructions():
@@ -720,9 +720,9 @@ if __name__ == "__main__":
 ### Example 2: Complete Multi-Mode Setup
 
 ```python
-from promptosaurus.builders.copilot_builder import CopilotBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.copilot_builder import CopilotBuilder
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 from pathlib import Path
 
 def build_all_copilot_modes():
@@ -779,9 +779,9 @@ if __name__ == "__main__":
 ### Example 3: Skill-Based Orchestration
 
 ```python
-from promptosaurus.builders.copilot_builder import CopilotBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.copilot_builder import CopilotBuilder
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 from pathlib import Path
 
 def build_skill_orchestrator():
@@ -836,9 +836,9 @@ if __name__ == "__main__":
 ### Example 4: Project-Specific Configuration
 
 ```python
-from promptosaurus.builders.copilot_builder import CopilotBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.copilot_builder import CopilotBuilder
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 from pathlib import Path
 import json
 
@@ -899,10 +899,10 @@ For building other tools, see:
 
 ## Support & Resources
 
-- **Source Code:** `promptosaurus/builders/copilot_builder.py`
-- **Base Class:** `promptosaurus/builders/base.py` (Builder)
-- **IR Models:** `promptosaurus/ir/models.py` (Agent dataclass)
-- **Examples:** `promptosaurus/builders/examples_usage.py`
+- **Source Code:** `prompticorn/builders/copilot_builder.py`
+- **Base Class:** `prompticorn/builders/base.py` (Builder)
+- **IR Models:** `prompticorn/ir/models.py` (Agent dataclass)
+- **Examples:** `prompticorn/builders/examples_usage.py`
 - **Copilot Docs:** [github.com/features/copilot](https://github.com/features/copilot)
 - **Copilot Instructions:** [docs.github.com/en/copilot](https://docs.github.com/en/copilot)
 

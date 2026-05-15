@@ -1,8 +1,8 @@
-# Getting Started with Promptosaurus
+# Getting Started with prompticorn
 
 ## Quick 5-Minute Guide
 
-This guide will help you get up and running with Promptosaurus in just 5 minutes.
+This guide will help you get up and running with prompticorn in just 5 minutes.
 
 ### Prerequisites
 
@@ -19,24 +19,24 @@ This guide will help you get up and running with Promptosaurus in just 5 minutes
 Install from pip:
 
 ```bash
-pip install promptosaurus
+pip install prompticorn
 ```
 
 Or with uv (recommended):
 
 ```bash
-uv pip install promptosaurus
+uv pip install prompticorn
 ```
 
 Verify installation:
 
 ```bash
-promptosaurus --help
+prompticorn --help
 ```
 
 You should see:
 ```
-Usage: promptosaurus [OPTIONS] COMMAND [ARGS]...
+Usage: prompticorn [OPTIONS] COMMAND [ARGS]...
 
   Prompt library CLI — manage and validate your prompt configurations.
 
@@ -61,7 +61,7 @@ Commands:
 Run the interactive setup wizard:
 
 ```bash
-promptosaurus init
+prompticorn init
 ```
 
 This will ask you a series of questions:
@@ -177,7 +177,7 @@ After answering all questions:
   Configuration saved!
 =========================================================
 
-  Config file: /home/you/project/.promptosaurus.yaml
+  Config file: /home/you/project/.prompticorn.yaml
 
 ------------------------------------------------------------
   Generating AI assistant configurations (minimal)...
@@ -201,7 +201,7 @@ After answering all questions:
 List all registered agents:
 
 ```bash
-promptosaurus list
+prompticorn list
 ```
 
 Output:
@@ -223,7 +223,7 @@ review:
 Validate configuration:
 
 ```bash
-promptosaurus validate
+prompticorn validate
 ```
 
 Output:
@@ -281,7 +281,7 @@ File generated: `.github/copilot-instructions.md`
 If you want to generate configs for a different tool:
 
 ```bash
-promptosaurus switch
+prompticorn switch
 ```
 
 This will ask which tool you want to configure and regenerate the configs.
@@ -291,7 +291,7 @@ This will ask which tool you want to configure and regenerate the configs.
 If you want to change which roles/personas are active:
 
 ```bash
-promptosaurus swap
+prompticorn swap
 ```
 
 Select different personas, and configs will be regenerated with only those persona's agents.
@@ -301,7 +301,7 @@ Select different personas, and configs will be regenerated with only those perso
 Update language, runtime, package manager, etc. without re-running `init`:
 
 ```bash
-promptosaurus update
+prompticorn update
 ```
 
 Interactive menu to change specific options:
@@ -319,7 +319,7 @@ Interactive menu to change specific options:
 
 ```bash
 # Initialize
-promptosaurus init
+prompticorn init
 
 # Select:
 #   - AI Tool: Kilo IDE
@@ -336,14 +336,14 @@ promptosaurus init
 #   (Plus universal: ask.md, debug.md, explain.md)
 
 # Validate
-promptosaurus validate
+prompticorn validate
 ```
 
 ### Workflow 2: Multi-Language Monorepo
 
 ```bash
 # Initialize
-promptosaurus init
+prompticorn init
 
 # Select:
 #   - AI Tool: Cline
@@ -360,17 +360,17 @@ promptosaurus init
 #   - Language-specific configurations for Python and TypeScript
 
 # Validate
-promptosaurus validate
+prompticorn validate
 ```
 
 ### Workflow 3: Switching Tools
 
 ```bash
 # Started with Kilo, now want Cursor
-promptosaurus switch
+prompticorn switch
 
 # Select: Cursor
-# Result: Generates .cursor/rules/ from existing .promptosaurus.yaml
+# Result: Generates .cursor/rules/ from existing .prompticorn.yaml
 
 # Both .kilo/ and .cursor/ now exist
 # You can use either tool
@@ -380,7 +380,7 @@ promptosaurus switch
 
 ## Configuration File
 
-The `.promptosaurus.yaml` file stores your project configuration.
+The `.prompticorn.yaml` file stores your project configuration.
 
 ### Single-Language Example
 
@@ -434,7 +434,7 @@ active_personas:
 
 ## Persona-Based Filtering
 
-Promptosaurus uses **personas** to filter which agents are generated, reducing cognitive load.
+prompticorn uses **personas** to filter which agents are generated, reducing cognitive load.
 
 ### Available Personas
 
@@ -463,29 +463,29 @@ These agents are always generated regardless of personas:
 
 ## Troubleshooting
 
-### Command not found: promptosaurus
+### Command not found: prompticorn
 
 **Cause:** Not installed or not in PATH
 
 **Solution:**
 ```bash
 # Check if installed
-pip show promptosaurus
+pip show prompticorn
 
 # If not installed
-pip install promptosaurus
+pip install prompticorn
 
 # If installed but not in PATH, use:
-python -m promptosaurus.cli --help
+python -m prompticorn.cli --help
 ```
 
 ### Configuration file not found
 
-**Cause:** Haven't run `promptosaurus init` yet
+**Cause:** Haven't run `prompticorn init` yet
 
 **Solution:**
 ```bash
-promptosaurus init
+prompticorn init
 ```
 
 ### No agents generated
@@ -495,20 +495,20 @@ promptosaurus init
 **Solution:**
 - Select at least one persona during `init`
 - Universal agents (ask, debug, explain) are always generated
-- Run `promptosaurus swap` to change persona selection
+- Run `prompticorn swap` to change persona selection
 
 ### YAML syntax error
 
-**Cause:** Manually edited `.promptosaurus.yaml` with invalid syntax
+**Cause:** Manually edited `.prompticorn.yaml` with invalid syntax
 
 **Solution:**
 ```bash
 # Validate YAML syntax
-python -c "import yaml; yaml.safe_load(open('.promptosaurus.yaml'))"
+python -c "import yaml; yaml.safe_load(open('.prompticorn.yaml'))"
 
 # Or delete and re-run init
-rm .promptosaurus.yaml
-promptosaurus init
+rm .prompticorn.yaml
+prompticorn init
 ```
 
 ---
@@ -527,12 +527,12 @@ promptosaurus init
 
 | Command | Description |
 |---------|-------------|
-| `promptosaurus init` | Initialize configuration (interactive) |
-| `promptosaurus list` | List all registered agents/modes |
-| `promptosaurus validate` | Validate configuration integrity |
-| `promptosaurus switch` | Switch to different AI tool |
-| `promptosaurus swap` | Swap active personas |
-| `promptosaurus update` | Update configuration options |
+| `prompticorn init` | Initialize configuration (interactive) |
+| `prompticorn list` | List all registered agents/modes |
+| `prompticorn validate` | Validate configuration integrity |
+| `prompticorn switch` | Switch to different AI tool |
+| `prompticorn swap` | Swap active personas |
+| `prompticorn update` | Update configuration options |
 
 ---
 

@@ -1,4 +1,4 @@
-# Promptosaurus Documentation
+# prompticorn Documentation
 
 **Version:** 0.1.0  
 **Status:** Active Development  
@@ -8,7 +8,7 @@
 
 ## Getting Started
 
-New to Promptosaurus? Start here:
+New to prompticorn? Start here:
 
 1. **[QUICKSTART.md](./QUICKSTART.md)** — 5-minute overview of core concepts
 2. **[user-guide/GETTING_STARTED.md](./user-guide/GETTING_STARTED.md)** — Installation and setup
@@ -99,7 +99,7 @@ Documentation is organized by intent, with filename suffixes indicating content 
 
 ## For Different Audiences
 
-### I'm new to Promptosaurus
+### I'm new to prompticorn
 Start with [QUICKSTART.md](./QUICKSTART.md) then [user-guide/GETTING_STARTED.md](./user-guide/GETTING_STARTED.md)
 
 ### I want to understand the architecture

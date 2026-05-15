@@ -19,24 +19,24 @@ This pattern MUST be followed for every task:
 ### Example Workflow
 
 ```
-Task: Create promptosaurus/agents/data/prompt.md
+Task: Create prompticorn/agents/data/prompt.md
 
 Step 1: Create the file
         (implement file content following existing patterns)
 
 Step 2: Check off in checklist
-        OLD: - [ ] Create `promptosaurus/agents/data/prompt.md` (agent definition)
-        NEW: - [x] Create `promptosaurus/agents/data/prompt.md` (agent definition)
+        OLD: - [ ] Create `prompticorn/agents/data/prompt.md` (agent definition)
+        NEW: - [x] Create `prompticorn/agents/data/prompt.md` (agent definition)
 
 Step 3: Commit with checklist update
-        git add promptosaurus/agents/data/prompt.md planning/current/PHASE1_TASK_CHECKLIST.md
+        git add prompticorn/agents/data/prompt.md planning/current/PHASE1_TASK_CHECKLIST.md
         git commit -m "feat: Create data agent scaffolding
         
         - Created agents/data/prompt.md
         - Checked off checklist item"
 
 Step 4: Update session with progress
-        Open .promptosaurus/sessions/session_20260410_phase1_implementation.md
+        Open .prompticorn/sessions/session_20260410_phase1_implementation.md
         Add new action entry with completed task
 ```
 
@@ -102,19 +102,19 @@ All files must follow this structure exactly:
 
 ```
 Agents:
-  promptosaurus/agents/{name}/prompt.md
+  prompticorn/agents/{name}/prompt.md
   
 Subagents (with variants):
-  promptosaurus/agents/{agent}/subagents/{name}/minimal/prompt.md
-  promptosaurus/agents/{agent}/subagents/{name}/verbose/prompt.md
+  prompticorn/agents/{agent}/subagents/{name}/minimal/prompt.md
+  prompticorn/agents/{agent}/subagents/{name}/verbose/prompt.md
   
 Workflows (with variants):
-  promptosaurus/workflows/{name}/minimal/workflow.md
-  promptosaurus/workflows/{name}/verbose/workflow.md
+  prompticorn/workflows/{name}/minimal/workflow.md
+  prompticorn/workflows/{name}/verbose/workflow.md
   
 Skills (with variants):
-  promptosaurus/skills/{name}/minimal/SKILL.md
-  promptosaurus/skills/{name}/verbose/SKILL.md
+  prompticorn/skills/{name}/minimal/SKILL.md
+  prompticorn/skills/{name}/verbose/SKILL.md
 ```
 
 ---
@@ -176,16 +176,16 @@ The checklist uses this format:
 
 **OLD (not done):**
 ```markdown
-- [ ] Create `promptosaurus/agents/data/prompt.md` (agent definition)
-  - File: `promptosaurus/agents/data/prompt.md`
+- [ ] Create `prompticorn/agents/data/prompt.md` (agent definition)
+  - File: `prompticorn/agents/data/prompt.md`
   - Content: Agent overview, responsibilities, capabilities
   - Status: Not started
 ```
 
 **NEW (completed):**
 ```markdown
-- [x] Create `promptosaurus/agents/data/prompt.md` (agent definition)
-  - File: `promptosaurus/agents/data/prompt.md`
+- [x] Create `prompticorn/agents/data/prompt.md` (agent definition)
+  - File: `prompticorn/agents/data/prompt.md`
   - Content: Agent overview, responsibilities, capabilities
   - Status: COMPLETED
 ```
@@ -255,9 +255,9 @@ After each day's work, update the session file with:
 ### 2026-04-11 14:30 - code mode
 - **Task:** Phase 1 Week 1, Day 1-2 - Create agents scaffolding
 - **Files created:**
-  - promptosaurus/agents/data/prompt.md
-  - promptosaurus/agents/observability/prompt.md
-  - promptosaurus/agents/incident/prompt.md
+  - prompticorn/agents/data/prompt.md
+  - prompticorn/agents/observability/prompt.md
+  - prompticorn/agents/incident/prompt.md
 - **Checklist updated:** 3 items checked off (lines 51-68)
 - **Files committed:** 3 agent files + updated checklist
 - **Status:** 3/31 Week 1 deliverables complete
@@ -318,7 +318,7 @@ grep "^- \[x\]" planning/current/PHASE1_TASK_CHECKLIST.md
 ### Update and Commit
 ```bash
 # Stage checklist and new files
-git add planning/current/PHASE1_TASK_CHECKLIST.md promptosaurus/agents/
+git add planning/current/PHASE1_TASK_CHECKLIST.md prompticorn/agents/
 
 # Commit with message
 git commit -m "feat: [description]"

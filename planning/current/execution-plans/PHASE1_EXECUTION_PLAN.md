@@ -10,7 +10,7 @@
 
 ## Executive Summary
 
-Phase 1 addresses the **most critical gaps** in Promptosaurus coverage:
+Phase 1 addresses the **most critical gaps** in prompticorn coverage:
 1. **Data Engineering** (completely missing)
 2. **SRE/Observability** (limited coverage)
 3. **Incident Management** (missing)
@@ -109,48 +109,48 @@ These additions will unlock massive value for data teams, SRE teams, and product
 **Deliverable:** Agent directory structure and base prompt files
 
 #### 1.1 Data Agent Structure
-- [ ] Create `promptosaurus/agents/data/prompt.md`
-- [ ] Create `promptosaurus/agents/data/subagents/pipeline/minimal/prompt.md`
-- [ ] Create `promptosaurus/agents/data/subagents/pipeline/verbose/prompt.md`
-- [ ] Create `promptosaurus/agents/data/subagents/warehouse/minimal/prompt.md`
-- [ ] Create `promptosaurus/agents/data/subagents/warehouse/verbose/prompt.md`
-- [ ] Create `promptosaurus/agents/data/subagents/quality/minimal/prompt.md`
-- [ ] Create `promptosaurus/agents/data/subagents/quality/verbose/prompt.md`
-- [ ] Create `promptosaurus/agents/data/subagents/governance/minimal/prompt.md`
-- [ ] Create `promptosaurus/agents/data/subagents/governance/verbose/prompt.md`
-- [ ] Create `promptosaurus/agents/data/subagents/streaming/minimal/prompt.md`
-- [ ] Create `promptosaurus/agents/data/subagents/streaming/verbose/prompt.md`
+- [ ] Create `prompticorn/agents/data/prompt.md`
+- [ ] Create `prompticorn/agents/data/subagents/pipeline/minimal/prompt.md`
+- [ ] Create `prompticorn/agents/data/subagents/pipeline/verbose/prompt.md`
+- [ ] Create `prompticorn/agents/data/subagents/warehouse/minimal/prompt.md`
+- [ ] Create `prompticorn/agents/data/subagents/warehouse/verbose/prompt.md`
+- [ ] Create `prompticorn/agents/data/subagents/quality/minimal/prompt.md`
+- [ ] Create `prompticorn/agents/data/subagents/quality/verbose/prompt.md`
+- [ ] Create `prompticorn/agents/data/subagents/governance/minimal/prompt.md`
+- [ ] Create `prompticorn/agents/data/subagents/governance/verbose/prompt.md`
+- [ ] Create `prompticorn/agents/data/subagents/streaming/minimal/prompt.md`
+- [ ] Create `prompticorn/agents/data/subagents/streaming/verbose/prompt.md`
 
 #### 1.2 Observability Agent Structure
-- [ ] Create `promptosaurus/agents/observability/prompt.md`
-- [ ] Create `promptosaurus/agents/observability/subagents/metrics/minimal/prompt.md`
-- [ ] Create `promptosaurus/agents/observability/subagents/metrics/verbose/prompt.md`
-- [ ] Create `promptosaurus/agents/observability/subagents/logging/minimal/prompt.md`
-- [ ] Create `promptosaurus/agents/observability/subagents/logging/verbose/prompt.md`
-- [ ] Create `promptosaurus/agents/observability/subagents/tracing/minimal/prompt.md`
-- [ ] Create `promptosaurus/agents/observability/subagents/tracing/verbose/prompt.md`
-- [ ] Create `promptosaurus/agents/observability/subagents/alerting/minimal/prompt.md`
-- [ ] Create `promptosaurus/agents/observability/subagents/alerting/verbose/prompt.md`
-- [ ] Create `promptosaurus/agents/observability/subagents/dashboards/minimal/prompt.md`
-- [ ] Create `promptosaurus/agents/observability/subagents/dashboards/verbose/prompt.md`
+- [ ] Create `prompticorn/agents/observability/prompt.md`
+- [ ] Create `prompticorn/agents/observability/subagents/metrics/minimal/prompt.md`
+- [ ] Create `prompticorn/agents/observability/subagents/metrics/verbose/prompt.md`
+- [ ] Create `prompticorn/agents/observability/subagents/logging/minimal/prompt.md`
+- [ ] Create `prompticorn/agents/observability/subagents/logging/verbose/prompt.md`
+- [ ] Create `prompticorn/agents/observability/subagents/tracing/minimal/prompt.md`
+- [ ] Create `prompticorn/agents/observability/subagents/tracing/verbose/prompt.md`
+- [ ] Create `prompticorn/agents/observability/subagents/alerting/minimal/prompt.md`
+- [ ] Create `prompticorn/agents/observability/subagents/alerting/verbose/prompt.md`
+- [ ] Create `prompticorn/agents/observability/subagents/dashboards/minimal/prompt.md`
+- [ ] Create `prompticorn/agents/observability/subagents/dashboards/verbose/prompt.md`
 
 #### 1.3 Incident Agent Structure
-- [ ] Create `promptosaurus/agents/incident/prompt.md`
-- [ ] Create `promptosaurus/agents/incident/subagents/triage/minimal/prompt.md`
-- [ ] Create `promptosaurus/agents/incident/subagents/triage/verbose/prompt.md`
-- [ ] Create `promptosaurus/agents/incident/subagents/postmortem/minimal/prompt.md`
-- [ ] Create `promptosaurus/agents/incident/subagents/postmortem/verbose/prompt.md`
-- [ ] Create `promptosaurus/agents/incident/subagents/runbook/minimal/prompt.md`
-- [ ] Create `promptosaurus/agents/incident/subagents/runbook/verbose/prompt.md`
-- [ ] Create `promptosaurus/agents/incident/subagents/oncall/minimal/prompt.md`
-- [ ] Create `promptosaurus/agents/incident/subagents/oncall/verbose/prompt.md`
+- [ ] Create `prompticorn/agents/incident/prompt.md`
+- [ ] Create `prompticorn/agents/incident/subagents/triage/minimal/prompt.md`
+- [ ] Create `prompticorn/agents/incident/subagents/triage/verbose/prompt.md`
+- [ ] Create `prompticorn/agents/incident/subagents/postmortem/minimal/prompt.md`
+- [ ] Create `prompticorn/agents/incident/subagents/postmortem/verbose/prompt.md`
+- [ ] Create `prompticorn/agents/incident/subagents/runbook/minimal/prompt.md`
+- [ ] Create `prompticorn/agents/incident/subagents/runbook/verbose/prompt.md`
+- [ ] Create `prompticorn/agents/incident/subagents/oncall/minimal/prompt.md`
+- [ ] Create `prompticorn/agents/incident/subagents/oncall/verbose/prompt.md`
 
 **Verification:**
 ```bash
 # Count agent files created
-find promptosaurus/agents/data -name "prompt.md" | wc -l  # Should be 11 (1 agent + 10 subagent variants)
-find promptosaurus/agents/observability -name "prompt.md" | wc -l  # Should be 11
-find promptosaurus/agents/incident -name "prompt.md" | wc -l  # Should be 9
+find prompticorn/agents/data -name "prompt.md" | wc -l  # Should be 11 (1 agent + 10 subagent variants)
+find prompticorn/agents/observability -name "prompt.md" | wc -l  # Should be 11
+find prompticorn/agents/incident -name "prompt.md" | wc -l  # Should be 9
 
 # Total should be 31 new agent/subagent files
 ```
@@ -203,26 +203,26 @@ find promptosaurus/agents/incident -name "prompt.md" | wc -l  # Should be 9
 **Deliverable:** 8 new workflows with minimal/verbose variants
 
 #### 3.1 Data Engineering Workflows
-- [ ] Create `promptosaurus/workflows/data-pipeline-workflow/minimal/workflow.md`
-- [ ] Create `promptosaurus/workflows/data-pipeline-workflow/verbose/workflow.md`
-- [ ] Create `promptosaurus/workflows/data-quality-workflow/minimal/workflow.md`
-- [ ] Create `promptosaurus/workflows/data-quality-workflow/verbose/workflow.md`
-- [ ] Create `promptosaurus/workflows/schema-migration-workflow/minimal/workflow.md`
-- [ ] Create `promptosaurus/workflows/schema-migration-workflow/verbose/workflow.md`
+- [ ] Create `prompticorn/workflows/data-pipeline-workflow/minimal/workflow.md`
+- [ ] Create `prompticorn/workflows/data-pipeline-workflow/verbose/workflow.md`
+- [ ] Create `prompticorn/workflows/data-quality-workflow/minimal/workflow.md`
+- [ ] Create `prompticorn/workflows/data-quality-workflow/verbose/workflow.md`
+- [ ] Create `prompticorn/workflows/schema-migration-workflow/minimal/workflow.md`
+- [ ] Create `prompticorn/workflows/schema-migration-workflow/verbose/workflow.md`
 
 #### 3.2 SRE/Observability Workflows
-- [ ] Create `promptosaurus/workflows/observability-workflow/minimal/workflow.md`
-- [ ] Create `promptosaurus/workflows/observability-workflow/verbose/workflow.md`
-- [ ] Create `promptosaurus/workflows/slo-sli-workflow/minimal/workflow.md`
-- [ ] Create `promptosaurus/workflows/slo-sli-workflow/verbose/workflow.md`
-- [ ] Create `promptosaurus/workflows/capacity-planning-workflow/minimal/workflow.md`
-- [ ] Create `promptosaurus/workflows/capacity-planning-workflow/verbose/workflow.md`
+- [ ] Create `prompticorn/workflows/observability-workflow/minimal/workflow.md`
+- [ ] Create `prompticorn/workflows/observability-workflow/verbose/workflow.md`
+- [ ] Create `prompticorn/workflows/slo-sli-workflow/minimal/workflow.md`
+- [ ] Create `prompticorn/workflows/slo-sli-workflow/verbose/workflow.md`
+- [ ] Create `prompticorn/workflows/capacity-planning-workflow/minimal/workflow.md`
+- [ ] Create `prompticorn/workflows/capacity-planning-workflow/verbose/workflow.md`
 
 #### 3.3 Incident Management Workflows
-- [ ] Create `promptosaurus/workflows/incident-response-workflow/minimal/workflow.md`
-- [ ] Create `promptosaurus/workflows/incident-response-workflow/verbose/workflow.md`
-- [ ] Create `promptosaurus/workflows/postmortem-workflow/minimal/workflow.md`
-- [ ] Create `promptosaurus/workflows/postmortem-workflow/verbose/workflow.md`
+- [ ] Create `prompticorn/workflows/incident-response-workflow/minimal/workflow.md`
+- [ ] Create `prompticorn/workflows/incident-response-workflow/verbose/workflow.md`
+- [ ] Create `prompticorn/workflows/postmortem-workflow/minimal/workflow.md`
+- [ ] Create `prompticorn/workflows/postmortem-workflow/verbose/workflow.md`
 
 **Content Guidelines:**
 - Step-by-step procedures
@@ -233,7 +233,7 @@ find promptosaurus/agents/incident -name "prompt.md" | wc -l  # Should be 9
 **Verification:**
 ```bash
 # Count workflow files created
-find promptosaurus/workflows/*-workflow -name "workflow.md" | grep -E "(data-pipeline|data-quality|schema-migration|observability|slo-sli|capacity-planning|incident-response|postmortem)" | wc -l
+find prompticorn/workflows/*-workflow -name "workflow.md" | grep -E "(data-pipeline|data-quality|schema-migration|observability|slo-sli|capacity-planning|incident-response|postmortem)" | wc -l
 # Should be 16 files (8 workflows × 2 variants)
 ```
 
@@ -244,32 +244,32 @@ find promptosaurus/workflows/*-workflow -name "workflow.md" | grep -E "(data-pip
 **Deliverable:** 11 new skills with minimal/verbose variants
 
 #### 4.1 Data Engineering Skills
-- [ ] Create `promptosaurus/skills/sql-optimization/minimal/SKILL.md`
-- [ ] Create `promptosaurus/skills/sql-optimization/verbose/SKILL.md`
-- [ ] Create `promptosaurus/skills/dimensional-modeling/minimal/SKILL.md`
-- [ ] Create `promptosaurus/skills/dimensional-modeling/verbose/SKILL.md`
-- [ ] Create `promptosaurus/skills/data-partitioning/minimal/SKILL.md`
-- [ ] Create `promptosaurus/skills/data-partitioning/verbose/SKILL.md`
-- [ ] Create `promptosaurus/skills/idempotency-patterns/minimal/SKILL.md`
-- [ ] Create `promptosaurus/skills/idempotency-patterns/verbose/SKILL.md`
-- [ ] Create `promptosaurus/skills/slowly-changing-dimensions/minimal/SKILL.md`
-- [ ] Create `promptosaurus/skills/slowly-changing-dimensions/verbose/SKILL.md`
+- [ ] Create `prompticorn/skills/sql-optimization/minimal/SKILL.md`
+- [ ] Create `prompticorn/skills/sql-optimization/verbose/SKILL.md`
+- [ ] Create `prompticorn/skills/dimensional-modeling/minimal/SKILL.md`
+- [ ] Create `prompticorn/skills/dimensional-modeling/verbose/SKILL.md`
+- [ ] Create `prompticorn/skills/data-partitioning/minimal/SKILL.md`
+- [ ] Create `prompticorn/skills/data-partitioning/verbose/SKILL.md`
+- [ ] Create `prompticorn/skills/idempotency-patterns/minimal/SKILL.md`
+- [ ] Create `prompticorn/skills/idempotency-patterns/verbose/SKILL.md`
+- [ ] Create `prompticorn/skills/slowly-changing-dimensions/minimal/SKILL.md`
+- [ ] Create `prompticorn/skills/slowly-changing-dimensions/verbose/SKILL.md`
 
 #### 4.2 SRE/Observability Skills
-- [ ] Create `promptosaurus/skills/prometheus-query-patterns/minimal/SKILL.md`
-- [ ] Create `promptosaurus/skills/prometheus-query-patterns/verbose/SKILL.md`
-- [ ] Create `promptosaurus/skills/distributed-tracing-instrumentation/minimal/SKILL.md`
-- [ ] Create `promptosaurus/skills/distributed-tracing-instrumentation/verbose/SKILL.md`
-- [ ] Create `promptosaurus/skills/slo-sli-definition/minimal/SKILL.md`
-- [ ] Create `promptosaurus/skills/slo-sli-definition/verbose/SKILL.md`
-- [ ] Create `promptosaurus/skills/grafana-dashboard-design/minimal/SKILL.md`
-- [ ] Create `promptosaurus/skills/grafana-dashboard-design/verbose/SKILL.md`
+- [ ] Create `prompticorn/skills/prometheus-query-patterns/minimal/SKILL.md`
+- [ ] Create `prompticorn/skills/prometheus-query-patterns/verbose/SKILL.md`
+- [ ] Create `prompticorn/skills/distributed-tracing-instrumentation/minimal/SKILL.md`
+- [ ] Create `prompticorn/skills/distributed-tracing-instrumentation/verbose/SKILL.md`
+- [ ] Create `prompticorn/skills/slo-sli-definition/minimal/SKILL.md`
+- [ ] Create `prompticorn/skills/slo-sli-definition/verbose/SKILL.md`
+- [ ] Create `prompticorn/skills/grafana-dashboard-design/minimal/SKILL.md`
+- [ ] Create `prompticorn/skills/grafana-dashboard-design/verbose/SKILL.md`
 
 #### 4.3 Incident Management Skills
-- [ ] Create `promptosaurus/skills/incident-timeline-creation/minimal/SKILL.md`
-- [ ] Create `promptosaurus/skills/incident-timeline-creation/verbose/SKILL.md`
-- [ ] Create `promptosaurus/skills/root-cause-five-whys/minimal/SKILL.md`
-- [ ] Create `promptosaurus/skills/root-cause-five-whys/verbose/SKILL.md`
+- [ ] Create `prompticorn/skills/incident-timeline-creation/minimal/SKILL.md`
+- [ ] Create `prompticorn/skills/incident-timeline-creation/verbose/SKILL.md`
+- [ ] Create `prompticorn/skills/root-cause-five-whys/minimal/SKILL.md`
+- [ ] Create `prompticorn/skills/root-cause-five-whys/verbose/SKILL.md`
 
 **Content Focus:**
 - Reusable techniques and patterns
@@ -280,7 +280,7 @@ find promptosaurus/workflows/*-workflow -name "workflow.md" | grep -E "(data-pip
 **Verification:**
 ```bash
 # Count skill files created
-find promptosaurus/skills -name "SKILL.md" | grep -E "(sql-optimization|dimensional-modeling|data-partitioning|idempotency-patterns|slowly-changing-dimensions|prometheus-query|distributed-tracing|slo-sli|grafana-dashboard|incident-timeline|root-cause-five)" | wc -l
+find prompticorn/skills -name "SKILL.md" | grep -E "(sql-optimization|dimensional-modeling|data-partitioning|idempotency-patterns|slowly-changing-dimensions|prometheus-query|distributed-tracing|slo-sli|grafana-dashboard|incident-timeline|root-cause-five)" | wc -l
 # Should be 22 files (11 skills × 2 variants)
 ```
 
@@ -291,25 +291,25 @@ find promptosaurus/skills -name "SKILL.md" | grep -E "(sql-optimization|dimensio
 **Deliverable:** 4 new language convention files
 
 #### 5.1 SQL Dialect Conventions
-- [ ] Create `promptosaurus/agents/core/conventions-postgresql.md`
+- [ ] Create `prompticorn/agents/core/conventions-postgresql.md`
   - PostgreSQL-specific features (CTEs, window functions, JSONB)
   - Performance optimization (EXPLAIN ANALYZE, indexes)
   - Best practices (transactions, constraints)
 
-- [ ] Create `promptosaurus/agents/core/conventions-bigquery.md`
+- [ ] Create `prompticorn/agents/core/conventions-bigquery.md`
   - BigQuery SQL dialect differences
   - Partitioning and clustering strategies
   - Cost optimization techniques
   - Best practices for large-scale analytics
 
-- [ ] Create `promptosaurus/agents/core/conventions-snowflake.md`
+- [ ] Create `prompticorn/agents/core/conventions-snowflake.md`
   - Snowflake SQL features and syntax
   - Virtual warehouse sizing
   - Time travel and cloning
   - Performance optimization
 
 #### 5.2 Data Tools Conventions
-- [ ] Create `promptosaurus/agents/core/conventions-dbt.md`
+- [ ] Create `prompticorn/agents/core/conventions-dbt.md`
   - dbt project structure
   - Model organization (staging, intermediate, marts)
   - Testing strategies
@@ -319,7 +319,7 @@ find promptosaurus/skills -name "SKILL.md" | grep -E "(sql-optimization|dimensio
 **Verification:**
 ```bash
 # Verify new language files
-ls -la promptosaurus/agents/core/ | grep -E "(postgresql|bigquery|snowflake|dbt)"
+ls -la prompticorn/agents/core/ | grep -E "(postgresql|bigquery|snowflake|dbt)"
 # Should show 4 new files
 ```
 
@@ -381,7 +381,7 @@ all:
 **Deliverable:** Verified build output and quality checks
 
 #### 7.1 Build Verification
-- [ ] Run `rm -rf .kilo/ && uv run promptosaurus init --language python`
+- [ ] Run `rm -rf .kilo/ && uv run prompticorn init --language python`
 - [ ] Verify all 3 new agents appear in `.kilo/agents/`
 - [ ] Verify all 14 new subagents appear in `.kilo/agents/{agent}/{subagent}.md`
 - [ ] Verify all 8 new workflows appear in `.kilo/commands/`
@@ -406,25 +406,25 @@ all:
 ```bash
 # Test PostgreSQL build
 rm -rf .kilo/
-uv run promptosaurus init
+uv run prompticorn init
 # Select language: postgresql
 # Verify .kilo/rules/conventions-postgresql.md exists
 # Verify data skills appear in .kilo/skills/
 
 # Test Python build with data skills
 rm -rf .kilo/
-uv run promptosaurus init
+uv run prompticorn init
 # Select language: python
 # Verify data agent has data skills assigned
 # Verify observability agent has SRE skills
 
 # Test minimal vs verbose
 rm -rf .kilo/
-uv run promptosaurus init --variant minimal
+uv run prompticorn init --variant minimal
 wc -l .kilo/agents/data/pipeline.md  # Should be ~20-50 lines
 
 rm -rf .kilo/
-uv run promptosaurus init --variant verbose
+uv run prompticorn init --variant verbose
 wc -l .kilo/agents/data/pipeline.md  # Should be ~150-350 lines
 ```
 
@@ -603,7 +603,7 @@ After Phase 1 completion, the next priorities are:
 ## Notes
 
 - All file paths are relative to repository root
-- Follow existing patterns in `promptosaurus/agents/code/subagents/` for examples
+- Follow existing patterns in `prompticorn/agents/code/subagents/` for examples
 - Use `docs/VARIANT_DIFFERENTIATION_STRATEGY.md` as guide for content length
 - Test builds frequently to catch issues early
 - Commit after each major component completion

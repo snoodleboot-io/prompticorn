@@ -12,10 +12,10 @@ from pathlib import Path
 
 import pytest
 
-from promptosaurus.ir.exceptions import MissingFileError, ParseError, ValidationError
-from promptosaurus.ir.loaders import ComponentLoader, SkillLoader, WorkflowLoader
-from promptosaurus.ir.loaders.component_loader import ComponentBundle
-from promptosaurus.ir.models import Skill, Workflow
+from prompticorn.ir.exceptions import MissingFileError, ParseError, ValidationError
+from prompticorn.ir.loaders import ComponentLoader, SkillLoader, WorkflowLoader
+from prompticorn.ir.loaders.component_loader import ComponentBundle
+from prompticorn.ir.models import Skill, Workflow
 
 # ============================================================================
 # FIXTURES - Sample files for testing
@@ -857,7 +857,7 @@ partial-agent:
 
     def test_init_success(self, temp_mapping_file):
         """Test successful initialization with valid mapping file."""
-        from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
+        from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
 
         loader = AgentSkillMappingLoader(temp_mapping_file)
         assert loader.mapping_file == temp_mapping_file
@@ -865,7 +865,7 @@ partial-agent:
 
     def test_init_file_not_found(self, tmp_path):
         """Test initialization with non-existent file raises error."""
-        from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
+        from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
 
         non_existent = tmp_path / "does_not_exist.yaml"
 
@@ -874,7 +874,7 @@ partial-agent:
 
     def test_mapping_lazy_load(self, temp_mapping_file):
         """Test that mapping is lazy-loaded on first access."""
-        from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
+        from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
 
         loader = AgentSkillMappingLoader(temp_mapping_file)
         assert loader._mapping is None
@@ -888,7 +888,7 @@ partial-agent:
 
     def test_get_skills_for_agent_success(self, temp_mapping_file):
         """Test getting skills for an agent."""
-        from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
+        from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
 
         loader = AgentSkillMappingLoader(temp_mapping_file)
 
@@ -908,7 +908,7 @@ partial-agent:
 
     def test_get_skills_for_nonexistent_agent(self, temp_mapping_file):
         """Test getting skills for non-existent agent returns empty list."""
-        from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
+        from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
 
         loader = AgentSkillMappingLoader(temp_mapping_file)
         skills = loader.get_skills_for_agent("nonexistent")
@@ -916,7 +916,7 @@ partial-agent:
 
     def test_get_skills_for_empty_agent(self, temp_mapping_file):
         """Test getting skills for agent with empty skills list."""
-        from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
+        from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
 
         loader = AgentSkillMappingLoader(temp_mapping_file)
         skills = loader.get_skills_for_agent("empty-agent")
@@ -924,7 +924,7 @@ partial-agent:
 
     def test_get_workflows_for_agent_success(self, temp_mapping_file):
         """Test getting workflows for an agent."""
-        from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
+        from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
 
         loader = AgentSkillMappingLoader(temp_mapping_file)
 
@@ -944,7 +944,7 @@ partial-agent:
 
     def test_get_workflows_for_nonexistent_agent(self, temp_mapping_file):
         """Test getting workflows for non-existent agent returns empty list."""
-        from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
+        from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
 
         loader = AgentSkillMappingLoader(temp_mapping_file)
         workflows = loader.get_workflows_for_agent("nonexistent")
@@ -952,7 +952,7 @@ partial-agent:
 
     def test_get_workflows_for_empty_agent(self, temp_mapping_file):
         """Test getting workflows for agent with empty workflows list."""
-        from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
+        from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
 
         loader = AgentSkillMappingLoader(temp_mapping_file)
         workflows = loader.get_workflows_for_agent("empty-agent")
@@ -960,7 +960,7 @@ partial-agent:
 
     def test_get_all_mappings(self, temp_mapping_file):
         """Test getting all mappings."""
-        from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
+        from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
 
         loader = AgentSkillMappingLoader(temp_mapping_file)
         mappings = loader.get_all_mappings()
@@ -977,7 +977,7 @@ partial-agent:
 
     def test_has_agent(self, temp_mapping_file):
         """Test checking if agent has mappings."""
-        from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
+        from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
 
         loader = AgentSkillMappingLoader(temp_mapping_file)
 
@@ -987,7 +987,7 @@ partial-agent:
 
     def test_list_agents(self, temp_mapping_file):
         """Test listing all agents."""
-        from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
+        from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
 
         loader = AgentSkillMappingLoader(temp_mapping_file)
         agents = loader.list_agents()
@@ -1001,7 +1001,7 @@ partial-agent:
 
     def test_validate_completeness_all_complete(self, temp_mapping_file):
         """Test validation when all required agents are complete."""
-        from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
+        from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
 
         loader = AgentSkillMappingLoader(temp_mapping_file)
         result = loader.validate_completeness(["architect", "code", "test"])
@@ -1011,7 +1011,7 @@ partial-agent:
 
     def test_validate_completeness_missing_agents(self, temp_mapping_file):
         """Test validation detects missing agents."""
-        from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
+        from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
 
         loader = AgentSkillMappingLoader(temp_mapping_file)
         result = loader.validate_completeness(["architect", "missing1", "missing2"])
@@ -1022,7 +1022,7 @@ partial-agent:
 
     def test_validate_completeness_incomplete_agents(self, temp_mapping_file):
         """Test validation detects incomplete agents (missing skills or workflows)."""
-        from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
+        from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
 
         loader = AgentSkillMappingLoader(temp_mapping_file)
         result = loader.validate_completeness(["architect", "empty-agent", "partial-agent"])
@@ -1035,7 +1035,7 @@ partial-agent:
 
     def test_validate_completeness_mixed(self, temp_mapping_file):
         """Test validation with mix of complete, incomplete, and missing agents."""
-        from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
+        from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
 
         loader = AgentSkillMappingLoader(temp_mapping_file)
         result = loader.validate_completeness(
@@ -1054,7 +1054,7 @@ partial-agent:
 
     def test_malformed_yaml(self, tmp_path):
         """Test handling of malformed YAML file."""
-        from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
+        from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
 
         bad_file = tmp_path / "bad.yaml"
         bad_file.write_text("architect:\n  skills: [unclosed list", encoding="utf-8")
@@ -1069,7 +1069,7 @@ partial-agent:
 
     def test_empty_yaml_file(self, tmp_path):
         """Test handling of empty YAML file."""
-        from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
+        from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
 
         empty_file = tmp_path / "empty.yaml"
         empty_file.write_text("", encoding="utf-8")
@@ -1083,7 +1083,7 @@ partial-agent:
 
     def test_caching(self, temp_mapping_file):
         """Test that mapping is cached after first load."""
-        from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
+        from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
 
         loader = AgentSkillMappingLoader(temp_mapping_file)
 
@@ -1097,7 +1097,7 @@ partial-agent:
 
     def test_agent_with_no_skills_field(self, tmp_path):
         """Test agent entry that has workflows but no skills field."""
-        from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
+        from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
 
         mapping_file = tmp_path / "test.yaml"
         content = """agent-no-skills:
@@ -1113,7 +1113,7 @@ partial-agent:
 
     def test_agent_with_no_workflows_field(self, tmp_path):
         """Test agent entry that has skills but no workflows field."""
-        from promptosaurus.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
+        from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
 
         mapping_file = tmp_path / "test.yaml"
         content = """agent-no-workflows:

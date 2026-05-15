@@ -63,13 +63,13 @@ The system includes builders for five tools:
 
 ### Step 1: Extend Builder
 
-Create a new file in `promptosaurus/builders/`:
+Create a new file in `prompticorn/builders/`:
 
 ```python
-# promptosaurus/builders/my_tool_builder.py
+# prompticorn/builders/my_tool_builder.py
 
-from promptosaurus.builders.base import Builder, BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.base import Builder, BuildOptions
+from prompticorn.ir.models import Agent
 
 class MyToolBuilder(Builder):
     """Builder for MyTool agent configurations."""
@@ -111,7 +111,7 @@ def build(self, agent: Agent, options: BuildOptions) -> str:
         raise BuilderValidationError(errors=errors, message=f"Invalid agent: {errors}")
 
     # 2. Load components (using ComponentSelector)
-    from promptosaurus.builders.component_selector import ComponentSelector, Variant
+    from prompticorn.builders.component_selector import ComponentSelector, Variant
     selector = ComponentSelector()
     variant = Variant.MINIMAL if options.variant == "minimal" else Variant.VERBOSE
     bundle = selector.select(agent, variant=variant)
@@ -154,11 +154,11 @@ def validate(self, agent: Agent) -> list[str]:
 
 ### Step 4: Register with BuilderFactory
 
-In `promptosaurus/builders/__init__.py`:
+In `prompticorn/builders/__init__.py`:
 
 ```python
-from promptosaurus.builders.factory import BuilderFactory
-from promptosaurus.builders.my_tool_builder import MyToolBuilder
+from prompticorn.builders.factory import BuilderFactory
+from prompticorn.builders.my_tool_builder import MyToolBuilder
 
 # Register the builder
 BuilderFactory.register('mytool', MyToolBuilder)
@@ -167,7 +167,7 @@ BuilderFactory.register('mytool', MyToolBuilder)
 Now you can use it:
 
 ```python
-from promptosaurus.builders.factory import BuilderFactory
+from prompticorn.builders.factory import BuilderFactory
 
 builder = BuilderFactory.get_builder('mytool')
 output = builder.build(agent, BuildOptions())
@@ -179,9 +179,9 @@ Create `tests/unit/builders/test_my_tool_builder.py`:
 
 ```python
 import pytest
-from promptosaurus.builders.my_tool_builder import MyToolBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.my_tool_builder import MyToolBuilder
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 
 class TestMyToolBuilder:
     """Tests for MyToolBuilder."""
@@ -328,7 +328,7 @@ The component system separates:
 `ComponentSelector` loads components for a given agent and variant:
 
 ```python
-from promptosaurus.builders.component_selector import ComponentSelector, Variant, ComponentBundle
+from prompticorn.builders.component_selector import ComponentSelector, Variant, ComponentBundle
 
 selector = ComponentSelector(agents_dir="agents")
 
@@ -348,7 +348,7 @@ bundle = selector.select(agent, variant=Variant.MINIMAL)
 `ComponentComposer` takes a bundle and assembles it into formatted output:
 
 ```python
-from promptosaurus.builders.component_composer import ComponentComposer
+from prompticorn.builders.component_composer import ComponentComposer
 
 # Compose into plain markdown
 markdown = ComponentComposer.compose_markdown(
@@ -776,10 +776,10 @@ Unit tests are fast and isolated. Mock the ComponentSelector:
 ```python
 import pytest
 from unittest.mock import Mock
-from promptosaurus.builders.my_tool_builder import MyToolBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.builders.component_selector import ComponentBundle, Variant
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.my_tool_builder import MyToolBuilder
+from prompticorn.builders.base import BuildOptions
+from prompticorn.builders.component_selector import ComponentBundle, Variant
+from prompticorn.ir.models import Agent
 
 class TestMyToolBuilder:
     """Unit tests for MyToolBuilder."""
@@ -852,9 +852,9 @@ Integration tests use real file I/O:
 import pytest
 import tempfile
 from pathlib import Path
-from promptosaurus.builders.my_tool_builder import MyToolBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.my_tool_builder import MyToolBuilder
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 
 class TestMyToolBuilderIntegration:
     """Integration tests with real filesystem I/O."""
@@ -995,8 +995,8 @@ Example: Adding `SupportsSkills` to your builder
 
 ```python
 from typing import Any
-from promptosaurus.ir.models import Skill
-from promptosaurus.builders.interfaces import SupportsSkills
+from prompticorn.ir.models import Skill
+from prompticorn.builders.interfaces import SupportsSkills
 
 class MyToolBuilder(Builder):
     """Builder with skill support."""
@@ -1069,9 +1069,9 @@ Your builder must follow `core-conventions-python.md`:
 ```python
 # ✓ Good
 from typing import Any
-from promptosaurus.ir.models import Agent
-from promptosaurus.builders.base import Builder, BuildOptions
-from promptosaurus.builders.errors import BuilderValidationError
+from prompticorn.ir.models import Agent
+from prompticorn.builders.base import Builder, BuildOptions
+from prompticorn.builders.errors import BuilderValidationError
 
 class MyBuilder(Builder):
     """Builder for MyTool."""
@@ -1093,7 +1093,7 @@ class MyBuilder(Builder):
         pass
 
 # ✗ Bad
-from promptosaurus.builders.base import *
+from prompticorn.builders.base import *
 
 class MyBuilder(Builder):
     def build(self, agent, options):  # No type hints
@@ -1373,7 +1373,7 @@ def test_complex_agent(self, complex_agent):
 **A:** Always validate first, then use specific exceptions:
 
 ```python
-from promptosaurus.builders.errors import BuilderValidationError, BuilderException
+from prompticorn.builders.errors import BuilderValidationError, BuilderException
 
 def build(self, agent: Agent, options: BuildOptions) -> str:
     # 1. Validate first
@@ -1402,7 +1402,7 @@ def build(self, agent: Agent, options: BuildOptions) -> str:
 **A:** Use `ComponentSelector` with fallback:
 
 ```python
-from promptosaurus.builders.component_selector import ComponentSelector, Variant
+from prompticorn.builders.component_selector import ComponentSelector, Variant
 
 def build(self, agent: Agent, options: BuildOptions) -> str:
     # Select variant
@@ -1473,4 +1473,4 @@ Creating a new builder means:
 
 Use the pattern established by existing builders (Kilo, Cline, Claude, Copilot, Cursor) as templates. Follow core-conventions-python.md for code quality. Write tests first, then implementation.
 
-For questions or issues, refer to the existing builders in `promptosaurus/builders/` or the test suite in `tests/unit/builders/` and `tests/integration/`.
+For questions or issues, refer to the existing builders in `prompticorn/builders/` or the test suite in `tests/unit/builders/` and `tests/integration/`.

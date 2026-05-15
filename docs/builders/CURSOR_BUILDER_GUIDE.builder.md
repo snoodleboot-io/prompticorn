@@ -89,9 +89,9 @@ When implementing features:
 ### Most Basic Example
 
 ```python
-from promptosaurus.builders.cursor_builder import CursorBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.cursor_builder import CursorBuilder
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 
 # Create a builder
 builder = CursorBuilder()
@@ -149,9 +149,9 @@ Usage: Call with appropriate parameters
 ### Import
 
 ```python
-from promptosaurus.builders.cursor_builder import CursorBuilder
-from promptosaurus.builders.base import BuildOptions, BuilderValidationError
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.cursor_builder import CursorBuilder
+from prompticorn.builders.base import BuildOptions, BuilderValidationError
+from prompticorn.ir.models import Agent
 ```
 
 ### Initialize
@@ -188,7 +188,7 @@ print(builder.supports_feature("rules"))       # True
 ### 1. Create Agent Model
 
 ```python
-from promptosaurus.ir.models import Agent
+from prompticorn.ir.models import Agent
 
 agent = Agent(
     name="feature_builder",
@@ -224,7 +224,7 @@ else:
 ### 3. Create Build Options
 
 ```python
-from promptosaurus.builders.base import BuildOptions
+from prompticorn.builders.base import BuildOptions
 
 # Configure for Cursor
 options = BuildOptions(
@@ -733,9 +733,9 @@ def validate(self, agent: Agent) -> list[str]:
 ### Example 1: Simple Developer Rules
 
 ```python
-from promptosaurus.builders.cursor_builder import CursorBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.cursor_builder import CursorBuilder
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 from pathlib import Path
 
 def create_developer_rules():
@@ -782,9 +782,9 @@ if __name__ == "__main__":
 ### Example 2: Type-Safe Python Development
 
 ```python
-from promptosaurus.builders.cursor_builder import CursorBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.cursor_builder import CursorBuilder
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 from pathlib import Path
 
 def create_python_rules():
@@ -834,9 +834,9 @@ if __name__ == "__main__":
 ### Example 3: Full-Stack Web Development
 
 ```python
-from promptosaurus.builders.cursor_builder import CursorBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.cursor_builder import CursorBuilder
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 from pathlib import Path
 
 def create_fullstack_rules():
@@ -892,9 +892,9 @@ if __name__ == "__main__":
 ### Example 4: Specialized Domain Rules
 
 ```python
-from promptosaurus.builders.cursor_builder import CursorBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.cursor_builder import CursorBuilder
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 from pathlib import Path
 import json
 
@@ -961,10 +961,10 @@ For building other tools, see:
 
 ## Support & Resources
 
-- **Source Code:** `promptosaurus/builders/cursor_builder.py`
-- **Base Class:** `promptosaurus/builders/base.py` (Builder)
-- **IR Models:** `promptosaurus/ir/models.py` (Agent dataclass)
-- **Examples:** `promptosaurus/builders/examples_usage.py`
+- **Source Code:** `prompticorn/builders/cursor_builder.py`
+- **Base Class:** `prompticorn/builders/base.py` (Builder)
+- **IR Models:** `prompticorn/ir/models.py` (Agent dataclass)
+- **Examples:** `prompticorn/builders/examples_usage.py`
 - **Cursor Docs:** [cursor.sh](https://cursor.sh)
 - **Cursor Rules Guide:** [cursor.sh/docs/.cursorrules](https://cursor.sh/docs/.cursorrules)
 

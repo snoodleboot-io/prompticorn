@@ -8,9 +8,9 @@ Tests cover:
 
 import pytest
 
-from promptosaurus.agent_registry.errors import AgentNotFoundError
-from promptosaurus.agent_registry.registry import Registry
-from promptosaurus.ir.models import Agent
+from prompticorn.agent_registry.errors import AgentNotFoundError
+from prompticorn.agent_registry.registry import Registry
+from prompticorn.ir.models import Agent
 
 # ============================================================================
 # FIXTURES - Test agents

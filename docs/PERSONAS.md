@@ -2,9 +2,9 @@
 
 ## Overview
 
-Promptosaurus uses a **persona-based filtering system** to reduce cognitive overload by showing only the agents, workflows, and skills relevant to your team's roles.
+prompticorn uses a **persona-based filtering system** to reduce cognitive overload by showing only the agents, workflows, and skills relevant to your team's roles.
 
-Instead of generating all 25 primary agents, you select which **personas** (SDLC roles) your team uses, and Promptosaurus generates only the agents needed for those roles.
+Instead of generating all 25 primary agents, you select which **personas** (SDLC roles) your team uses, and prompticorn generates only the agents needed for those roles.
 
 ## What Are Personas?
 
@@ -41,7 +41,7 @@ These agents are fundamental and useful across all roles.
 
 ## How to Select Personas
 
-During `promptosaurus init`, you'll see this step:
+During `prompticorn init`, you'll see this step:
 
 ```
 Step 3.5: Select Personas
@@ -152,7 +152,7 @@ If an agent is in multiple personas (e.g., `test` is in both Software Engineer a
 
 ## Configuration File
 
-Your selected personas are stored in `.promptosaurus/.promptosaurus.yaml`:
+Your selected personas are stored in `.prompticorn/.prompticorn.yaml`:
 
 ```yaml
 version: "1.0"
@@ -172,18 +172,18 @@ active_personas:
 **Option 1: Re-initialize**
 ```bash
 # Back up your existing config
-cp .promptosaurus/.promptosaurus.yaml .promptosaurus/.promptosaurus.yaml.backup
+cp .prompticorn/.prompticorn.yaml .prompticorn/.prompticorn.yaml.backup
 
 # Re-run init (will regenerate agents based on new persona selection)
-promptosaurus init
+prompticorn init
 ```
 
 **Option 2: Manual Edit**
 ```bash
-# Edit .promptosaurus/.promptosaurus.yaml
+# Edit .prompticorn/.prompticorn.yaml
 # Change the active_personas list
 # Then regenerate agents:
-promptosaurus init
+prompticorn init
 ```
 
 ---
@@ -200,7 +200,7 @@ promptosaurus init
 
 ### Q: Can I add custom personas?
 
-**A:** Not currently. Personas are defined in `promptosaurus/personas/personas.yaml`. Custom personas may be supported in a future release.
+**A:** Not currently. Personas are defined in `prompticorn/personas/personas.yaml`. Custom personas may be supported in a future release.
 
 ### Q: Do personas affect workflows and skills too?
 
@@ -219,7 +219,7 @@ If your team's roles change over time, you can swap which personas are active:
 ### Using the swap command
 
 ```bash
-promptosaurus swap
+prompticorn swap
 ```
 
 This interactive command will:
@@ -263,7 +263,7 @@ Personas swapped successfully!
 
 For the complete agent-to-persona mapping matrix and design rationale, see:
 - **ADR-001:** `planning/current/adrs/ADR-001-persona-based-filtering.md`
-- **Personas YAML:** `promptosaurus/personas/personas.yaml`
+- **Personas YAML:** `prompticorn/personas/personas.yaml`
 
 ---
 

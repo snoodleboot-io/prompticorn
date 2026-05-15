@@ -1,9 +1,9 @@
 """Tests for TypeScript-specific questions."""
 
-from promptosaurus.questions.typescript.typescript_package_manager_question import (
+from prompticorn.questions.typescript.typescript_package_manager_question import (
     TypeScriptPackageManagerQuestion,
 )
-from promptosaurus.questions.typescript.typescript_version_question import TypeScriptVersionQuestion
+from prompticorn.questions.typescript.typescript_version_question import TypeScriptVersionQuestion
 
 
 class TestTypeScriptVersionQuestion:

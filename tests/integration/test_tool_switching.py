@@ -4,8 +4,8 @@ import shutil
 import unittest
 from pathlib import Path
 
-from promptosaurus.artifacts import ArtifactManager
-from promptosaurus.prompt_builder import get_prompt_builder
+from prompticorn.artifacts import ArtifactManager
+from prompticorn.prompt_builder import get_prompt_builder
 
 
 class TestToolSwitching(unittest.TestCase):

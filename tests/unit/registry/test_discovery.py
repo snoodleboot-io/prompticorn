@@ -11,9 +11,9 @@ from pathlib import Path
 
 import pytest
 
-from promptosaurus.agent_registry.discovery import RegistryDiscovery
-from promptosaurus.agent_registry.errors import RegistryLoadError
-from promptosaurus.ir.models import Agent
+from prompticorn.agent_registry.discovery import RegistryDiscovery
+from prompticorn.agent_registry.errors import RegistryLoadError
+from prompticorn.ir.models import Agent
 
 # ============================================================================
 # FIXTURES - Test agent directory structures

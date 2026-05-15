@@ -2,8 +2,8 @@
 
 import unittest
 
-from promptosaurus.ui.state.multi_selection_state import MultiSelectionState
-from promptosaurus.ui.state.single_selection_state import SingleSelectionState
+from prompticorn.ui.state.multi_selection_state import MultiSelectionState
+from prompticorn.ui.state.single_selection_state import SingleSelectionState
 
 
 class TestSingleSelectState(unittest.TestCase):

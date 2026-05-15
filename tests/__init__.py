@@ -1,5 +1,5 @@
 """
-Promptosaurus test suite.
+prompticorn test suite.
 
 Tests for agents, subagents, workflows, and skills.
 """

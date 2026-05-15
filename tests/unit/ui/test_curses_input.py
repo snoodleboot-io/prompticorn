@@ -3,8 +3,8 @@
 import curses
 from unittest.mock import Mock
 
-from promptosaurus.ui.domain.events import InputEventType
-from promptosaurus.ui.input.curses_provider import CursesInputProvider
+from prompticorn.ui.domain.events import InputEventType
+from prompticorn.ui.input.curses_provider import CursesInputProvider
 
 
 class TestCursesInputProvider:

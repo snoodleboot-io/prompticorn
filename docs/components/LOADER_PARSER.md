@@ -2,12 +2,12 @@
 
 ## Overview
 
-The Loader and Parser architecture in Promptosaurus is responsible for loading prompt source files and parsing them into Intermediate Representation (IR) models. This system separates the concerns of file loading (locating and reading files) from content parsing (converting raw content into structured data).
+The Loader and Parser architecture in prompticorn is responsible for loading prompt source files and parsing them into Intermediate Representation (IR) models. This system separates the concerns of file loading (locating and reading files) from content parsing (converting raw content into structured data).
 
 ## Core Components
 
 ### Loader Base Classes
-**Location:** `promptosaurus/ir/loaders/`
+**Location:** `prompticorn/ir/loaders/`
 
 The loader system consists of specialized loader classes, each responsible for loading a specific type of component:
 
@@ -20,7 +20,7 @@ The loader system consists of specialized loader classes, each responsible for l
 - **CoreFilesLoader:** Loads always-on core configuration files
 
 ### Parser Base Classes
-**Location:** `promptosaurus/ir/parsers/`
+**Location:** `prompticorn/ir/parsers/`
 
 The parser system consists of specialized parser classes, each responsible for parsing a specific file format:
 
@@ -50,7 +50,7 @@ sequenceDiagram
 ```
 
 ### ComponentLoader Base Class
-**File:** `promptosaurus/ir/loaders/component_loader.py`
+**File:** `prompticorn/ir/loaders/component_loader.py`
 
 The ComponentLoader base class provides common functionality for all component loaders:
 
@@ -65,7 +65,7 @@ The ComponentLoader base class provides common functionality for all component l
 ### Specialized Loaders
 
 #### SkillLoader
-**File:** `promptosaurus/ir/loaders/skill_loader.py`
+**File:** `prompticorn/ir/loaders/skill_loader.py`
 
 Loads skill definitions from YAML files in the skills directory.
 
@@ -77,7 +77,7 @@ Loads skill definitions from YAML files in the skills directory.
 5. Register skills in the skill repository
 
 #### WorkflowLoader
-**File:** `promptosaurus/ir/loaders/workflow_loader.py`
+**File:** `prompticorn/ir/loaders/workflow_loader.py`
 
 Loads workflow definitions from YAML files in the workflows directory.
 
@@ -89,7 +89,7 @@ Loads workflow definitions from YAML files in the workflows directory.
 5. Register workflows in the workflow repository
 
 #### AgentLoader
-**File:** `promptosaurus/ir/loaders/agent_loader.py` (conceptual - may be part of component loader)
+**File:** `prompticorn/ir/loaders/agent_loader.py` (conceptual - may be part of component loader)
 
 Loads agent definitions from YAML files in the agents directory.
 
@@ -110,7 +110,7 @@ Load various mapping files that define relationships between components:
 ### Parser System
 
 #### BaseParser
-**File:** `promptosaurus/ir/parsers/__init__.py`
+**File:** `prompticorn/ir/parsers/__init__.py`
 
 Abstract base class defining the parser interface:
 
@@ -120,7 +120,7 @@ Abstract base class defining the parser interface:
 - `get_supported_extensions()`: Get list of supported file extensions
 
 #### MarkdownParser
-**File:** `promptosaurus/ir/parsers/markdown_parser.py`
+**File:** `prompticorn/ir/parsers/markdown_parser.py`
 
 Parses markdown files with YAML frontmatter:
 
@@ -144,7 +144,7 @@ This is the main content of the component.
 ```
 
 #### YAMLParser
-**File:** `promptosaurus/ir/parsers/yaml_parser.py`
+**File:** `prompticorn/ir/parsers/yaml_parser.py`
 
 Parses plain YAML files:
 
@@ -206,8 +206,8 @@ To add support for a new component type:
 
 1. **Create New Loader Class:**
 ```python
-from promptosaurus.ir.loaders.component_loader import ComponentLoader
-from promptosaurus.ir.models import MyComponentModel
+from prompticorn.ir.loaders.component_loader import ComponentLoader
+from prompticorn.ir.models import MyComponentModel
 from typing import List, Optional
 
 class MyComponentLoader(ComponentLoader):
@@ -226,14 +226,14 @@ class MyComponentLoader(ComponentLoader):
 
 2. **Register Loader:**
 ```python
-from promptosaurus.ir.loaders import LOADER_REGISTRY
+from prompticorn.ir.loaders import LOADER_REGISTRY
 
 LOADER_REGISTRY.register("my_component", MyComponentLoader())
 ```
 
 3. **Use Loader:**
 ```python
-from promptosaurus.ir.loaders import get_loader
+from prompticorn.ir.loaders import get_loader
 
 loader = get_loader("my_component")
 components = loader.load_all()
@@ -245,7 +245,7 @@ To add support for a new file format:
 
 1. **Create New Parser Class:**
 ```python
-from promptosaurus.ir.parsers import BaseParser
+from prompticorn.ir.parsers import BaseParser
 from typing import Any
 
 class MyFormatParser(BaseParser):
@@ -262,7 +262,7 @@ class MyFormatParser(BaseParser):
 
 2. **Register Parser:**
 ```python
-from promptosaurus.ir.parsers import PARSER_REGISTRY
+from prompticorn.ir.parsers import PARSER_REGISTRY
 
 PARSER_REGISTRY.register(".myext", MyFormatParser())
 ```

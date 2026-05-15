@@ -4,7 +4,7 @@
 
 ### Current System Architecture
 
-1. **Agent Source Files** (`promptosaurus/agents/{agent}/prompt.md`):
+1. **Agent Source Files** (`prompticorn/agents/{agent}/prompt.md`):
    - Contain ONLY: name, description, mode, permissions
    - Do NOT contain: skills or workflows
 
@@ -13,7 +13,7 @@
    - Has some language+agent combinations (e.g., `python/code`, `python/test`)
    - The `python` entry currently lists ALL 36 skills and ALL 66 workflows
 
-3. **Build Process** (`promptosaurus/prompt_builder.py`):
+3. **Build Process** (`prompticorn/prompt_builder.py`):
    - Method `_filter_agent_for_language()` loads language_skill_mapping.yaml
    - Creates a FILTERED Agent IR model with skills/workflows from the mapping
    - Passes filtered Agent to builder (KiloBuilder, ClaudeBuilder, etc.)
@@ -166,7 +166,7 @@ security:
 
 #### 2. Create new loader `AgentSkillMappingLoader`:
 
-Location: `promptosaurus/ir/loaders/agent_skill_mapping_loader.py`
+Location: `prompticorn/ir/loaders/agent_skill_mapping_loader.py`
 
 ```python
 class AgentSkillMappingLoader:
@@ -332,10 +332,10 @@ Using the mappings from `planning/current/skill_mappings.json` and `planning/cur
 
 ### Step 2: Create AgentSkillMappingLoader
 
-1. Create `promptosaurus/ir/loaders/agent_skill_mapping_loader.py`
+1. Create `prompticorn/ir/loaders/agent_skill_mapping_loader.py`
 2. Implement loader class (similar to LanguageSkillMappingLoader)
 3. Add unit tests in `tests/unit/ir/test_agent_skill_mapping_loader.py`
-4. Update `promptosaurus/ir/loaders/__init__.py` to export new loader
+4. Update `prompticorn/ir/loaders/__init__.py` to export new loader
 
 ### Step 3: Update prompt_builder.py
 
@@ -401,8 +401,8 @@ rust/architect:
 ## Questions for User
 
 1. **Approve Option 2?** Creating `agent_skill_mapping.yaml` as the primary mapping system?
-2. **Loader location**: `promptosaurus/ir/loaders/agent_skill_mapping_loader.py` - correct?
-3. **File location**: `agent_skill_mapping.yaml` at project root (promptosaurus/configurations/ directory) - correct?
+2. **Loader location**: `prompticorn/ir/loaders/agent_skill_mapping_loader.py` - correct?
+3. **File location**: `agent_skill_mapping.yaml` at project root (prompticorn/configurations/ directory) - correct?
 4. **Backwards compatibility**: The existing `python/code`, `python/test` entries in language_skill_mapping.yaml will be removed. Is this acceptable?
 5. **Validation**: Should we add validation to ensure every agent (all 25) has an entry in agent_skill_mapping.yaml?
 6. **Language overrides**: Can you think of any cases where a language WOULD need different skills for the same agent? (If not, we can remove language-specific agent entries entirely)
@@ -413,14 +413,14 @@ rust/architect:
 
 ### New Files:
 1. **`agent_skill_mapping.yaml`** - 25 agent entries with skills/workflows
-2. **`promptosaurus/ir/loaders/agent_skill_mapping_loader.py`** - Loader class
+2. **`prompticorn/ir/loaders/agent_skill_mapping_loader.py`** - Loader class
 3. **`tests/unit/ir/test_agent_skill_mapping_loader.py`** - Unit tests
 4. **`scripts/generate_agent_mapping.py`** - Generator script
 5. **`scripts/validate_agent_mappings.py`** - Validation script
 
 ### Modified Files:
-1. **`promptosaurus/prompt_builder.py`** - Add agent_skill_loader, update filtering logic
-2. **`promptosaurus/ir/loaders/__init__.py`** - Export new loader
+1. **`prompticorn/prompt_builder.py`** - Add agent_skill_loader, update filtering logic
+2. **`prompticorn/ir/loaders/__init__.py`** - Export new loader
 3. **`language_skill_mapping.yaml`** - Remove python section, clean up redundant entries
 4. **`README.md`** - Document the two-tier mapping system
 

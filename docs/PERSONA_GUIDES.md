@@ -37,10 +37,10 @@ Search LIBRARY_INDEX.md for:
 - data-model-discovery
 
 **Agent Locations:**
-- `promptosaurus/agents/architect/`
-- `promptosaurus/agents/backend/`
-- `promptosaurus/agents/frontend/`
-- `promptosaurus/agents/data/`
+- `prompticorn/agents/architect/`
+- `prompticorn/agents/backend/`
+- `prompticorn/agents/frontend/`
+- `prompticorn/agents/data/`
 
 ---
 
@@ -82,10 +82,10 @@ Search LIBRARY_INDEX.md for:
 - test-aaa-structure, test-mocking-rules, test-coverage-categories
 
 **Agent Locations:**
-- `promptosaurus/agents/code/`
-- `promptosaurus/agents/test/`
-- `promptosaurus/agents/refactor/`
-- `promptosaurus/agents/migration/`
+- `prompticorn/agents/code/`
+- `prompticorn/agents/test/`
+- `prompticorn/agents/refactor/`
+- `prompticorn/agents/migration/`
 
 ---
 
@@ -120,9 +120,9 @@ Search LIBRARY_INDEX.md for:
 - quality-assurance
 
 **Agent Locations:**
-- `promptosaurus/agents/test/`
-- `promptosaurus/agents/review/`
-- `promptosaurus/agents/qa-tester/` (specialized QA agent)
+- `prompticorn/agents/test/`
+- `prompticorn/agents/review/`
+- `prompticorn/agents/qa-tester/` (specialized QA agent)
 
 ---
 
@@ -160,9 +160,9 @@ Search LIBRARY_INDEX.md for:
 - continuous-improvement
 
 **Agent Locations:**
-- `promptosaurus/agents/devops/`
-- `promptosaurus/agents/observability/`
-- `promptosaurus/agents/incident/`
+- `prompticorn/agents/devops/`
+- `prompticorn/agents/observability/`
+- `prompticorn/agents/incident/`
 
 ---
 
@@ -198,8 +198,8 @@ Search LIBRARY_INDEX.md for:
 - problem-decomposition
 
 **Agent Locations:**
-- `promptosaurus/agents/security/`
-- `promptosaurus/agents/compliance/`
+- `prompticorn/agents/security/`
+- `prompticorn/agents/compliance/`
 
 ---
 
@@ -228,7 +228,7 @@ Search LIBRARY_INDEX.md for:
 - feature-prioritization-workflow
 
 **Agent Locations:**
-- `promptosaurus/agents/product/`
+- `prompticorn/agents/product/`
 
 ---
 
@@ -264,7 +264,7 @@ Search LIBRARY_INDEX.md for:
 - debugging-methodology
 
 **Agent Locations:**
-- `promptosaurus/agents/data/`
+- `prompticorn/agents/data/`
 
 ---
 
@@ -312,8 +312,8 @@ Search LIBRARY_INDEX.md for:
 - data-validation-pipelines, time-series-preprocessing
 
 **Agent Locations:**
-- `promptosaurus/agents/mlai/`
-- `promptosaurus/agents/data/`
+- `prompticorn/agents/mlai/`
+- `prompticorn/agents/data/`
 
 ---
 
@@ -337,7 +337,7 @@ Search LIBRARY_INDEX.md for:
 - technical-communication
 
 **Agent Locations:**
-- `promptosaurus/agents/document/`
+- `prompticorn/agents/document/`
 
 ---
 
@@ -352,11 +352,11 @@ These agents are **always available** regardless of selected personas:
 - **orchestrator** - Multi-step workflow coordination
 
 **Agent Locations:**
-- `promptosaurus/agents/ask/`
-- `promptosaurus/agents/debug/`
-- `promptosaurus/agents/explain/`
-- `promptosaurus/agents/plan/`
-- `promptosaurus/agents/orchestrator/`
+- `prompticorn/agents/ask/`
+- `prompticorn/agents/debug/`
+- `prompticorn/agents/explain/`
+- `prompticorn/agents/plan/`
+- `prompticorn/agents/orchestrator/`
 
 ---
 
@@ -365,8 +365,8 @@ These agents are **always available** regardless of selected personas:
 1. **Find your persona** above (Architect, Software Engineer, etc.)
 2. **Check which agents are available** to your role
 3. **Search LIBRARY_INDEX.md** for specific workflows/skills you need
-4. **Browse agent directories** at `promptosaurus/agents/{agent-name}/` for detailed prompts
+4. **Browse agent directories** at `prompticorn/agents/{agent-name}/` for detailed prompts
 
-For complete persona configuration, see: `promptosaurus/personas/personas.yaml`
+For complete persona configuration, see: `prompticorn/personas/personas.yaml`
 
 For persona-based filtering design, see: `planning/current/adrs/ADR-001-persona-based-filtering.md`

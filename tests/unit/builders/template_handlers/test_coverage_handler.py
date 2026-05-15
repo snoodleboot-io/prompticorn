@@ -1,6 +1,6 @@
 import unittest
 
-from promptosaurus.builders.template_handlers.coverage_handler import CoverageHandler
+from prompticorn.builders.template_handlers.coverage_handler import CoverageHandler
 
 
 class TestCoverageHandler(unittest.TestCase):

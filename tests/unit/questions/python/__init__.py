@@ -1,1 +1,1 @@
-# Tests for promptosaurus.questions.python module
+# Tests for prompticorn.questions.python module

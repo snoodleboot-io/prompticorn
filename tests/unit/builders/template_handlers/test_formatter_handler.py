@@ -1,6 +1,6 @@
 import unittest
 
-from promptosaurus.builders.template_handlers.formatter_handler import FormatterHandler
+from prompticorn.builders.template_handlers.formatter_handler import FormatterHandler
 
 
 class TestFormatterHandler(unittest.TestCase):

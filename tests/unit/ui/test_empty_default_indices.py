@@ -1,6 +1,6 @@
 """Test that empty default_indices doesn't select first option."""
 
-from promptosaurus.ui.state.multi_selection_state import MultiSelectionState
+from prompticorn.ui.state.multi_selection_state import MultiSelectionState
 
 
 class TestEmptyDefaultIndices:

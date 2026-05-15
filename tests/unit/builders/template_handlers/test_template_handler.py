@@ -1,6 +1,6 @@
 import unittest
 
-from promptosaurus.builders.template_handlers.template_handler import TemplateHandler
+from prompticorn.builders.template_handlers.template_handler import TemplateHandler
 
 
 class ConcreteHandlerForTesting(TemplateHandler):

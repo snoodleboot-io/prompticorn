@@ -2,12 +2,12 @@
 
 ## Overview
 
-The Template Substitution System in Promptosaurus processes Jinja2 templates with custom filters, resolvers, and error handling to generate tool-specific output from Intermediate Representation (IR) models. It provides a flexible and powerful templating engine with built-in error recovery and extensibility.
+The Template Substitution System in prompticorn processes Jinja2 templates with custom filters, resolvers, and error handling to generate tool-specific output from Intermediate Representation (IR) models. It provides a flexible and powerful templating engine with built-in error recovery and extensibility.
 
 ## Core Components
 
 ### Template Handler Base Class
-**File:** `promptosaurus/builders/template_handlers/template_handler.py`
+**File:** `prompticorn/builders/template_handlers/template_handler.py`
 
 The TemplateHandler base class defines the interface for all template handlers. Each handler is responsible for processing a specific section of the agent configuration (e.g., skills, workflows, tools).
 
@@ -17,7 +17,7 @@ The TemplateHandler base class defines the interface for all template handlers. 
 - `get_context(agent, options)`: Get the template context data for rendering
 
 ### Specialized Template Handlers
-Located in `promptosaurus/builders/template_handlers/`, each handler processes a specific aspect of agent configuration:
+Located in `prompticorn/builders/template_handlers/`, each handler processes a specific aspect of agent configuration:
 
 - **SkillsHandler:** Processes skills section
 - **WorkflowsHandler:** Processes workflows section
@@ -36,7 +36,7 @@ Located in `promptosaurus/builders/template_handlers/`, each handler processes a
 - **E2EToolHandler:** Processes end-to-end tool configuration
 
 ### Template Resolvers
-Located in `promptosaurus/builders/template_handlers/resolvers/`, resolvers provide additional functionality to the template system:
+Located in `prompticorn/builders/template_handlers/resolvers/`, resolvers provide additional functionality to the template system:
 
 - **Jinja2TemplateRenderer:** Custom Jinja2 environment with safe filters and error handling
 - **CustomFilters:** Project-specific Jinja2 filters (e.g., for string manipulation, formatting)
@@ -159,9 +159,9 @@ To create a new template handler:
 
 1. **Inherit from TemplateHandler:**
 ```python
-from promptosaurus.builders.template_handlers.template_handler import TemplateHandler
-from promptosaurus.ir.models import Agent
-from promptosaurus.builders.base import BuildOptions
+from prompticorn.builders.template_handlers.template_handler import TemplateHandler
+from prompticorn.ir.models import Agent
+from prompticorn.builders.base import BuildOptions
 from typing import Any
 
 class MySectionHandler(TemplateHandler):
@@ -180,7 +180,7 @@ class MySectionHandler(TemplateHandler):
 2. **Register the Handler:**
 ```python
 # In builder or template handler registry
-from promptosaurus.builders.template_handlers import TEMPLATE_HANDLERS
+from prompticorn.builders.template_handlers import TEMPLATE_HANDLERS
 
 TEMPLATE_HANDLERS["my-section"] = MySectionHandler()
 ```
@@ -199,7 +199,7 @@ def my_custom_filter(value, arg1=None, arg2=None):
 
 2. **Register Filter:**
 ```python
-from promptosaurus.builders.template_handlers.resolvers.custom_filters import register_filter
+from prompticorn.builders.template_handlers.resolvers.custom_filters import register_filter
 
 register_filter("my_custom_filter", my_custom_filter)
 ```
@@ -215,7 +215,7 @@ To create a custom template loader:
 
 1. **Inherit from TemplateLoader:**
 ```python
-from promptosaurus.builders.template_handlers.resolvers.registry_template_loader import TemplateLoader
+from prompticorn.builders.template_handlers.resolvers.registry_template_loader import TemplateLoader
 
 class MyTemplateLoader(TemplateLoader):
     def load_template(self, template_name: str) -> str:
@@ -225,7 +225,7 @@ class MyTemplateLoader(TemplateLoader):
 
 2. **Register Loader:**
 ```python
-from promptosaurus.builders.template_handlers.resolvers.registry_template_loader import set_template_loader
+from prompticorn.builders.template_handlers.resolvers.registry_template_loader import set_template_loader
 
 set_template_loader(MyTemplateLoader())
 ```

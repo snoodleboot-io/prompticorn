@@ -2,13 +2,13 @@
 
 import pytest
 
-from promptosaurus.ui.domain.context import PipelineContext, QuestionContext
-from promptosaurus.ui.domain.renderer import Renderer
-from promptosaurus.ui.render.columns import ColumnLayoutRenderer
-from promptosaurus.ui.render.explain import ExplainRenderer
-from promptosaurus.ui.render.vertical import VerticalLayoutRenderer
-from promptosaurus.ui.state.multi_selection_state import MultiSelectionState
-from promptosaurus.ui.state.single_selection_state import SingleSelectionState
+from prompticorn.ui.domain.context import PipelineContext, QuestionContext
+from prompticorn.ui.domain.renderer import Renderer
+from prompticorn.ui.render.columns import ColumnLayoutRenderer
+from prompticorn.ui.render.explain import ExplainRenderer
+from prompticorn.ui.render.vertical import VerticalLayoutRenderer
+from prompticorn.ui.state.multi_selection_state import MultiSelectionState
+from prompticorn.ui.state.single_selection_state import SingleSelectionState
 
 
 class TestRendererBaseClass:

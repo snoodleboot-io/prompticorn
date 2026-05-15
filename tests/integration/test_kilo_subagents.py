@@ -10,9 +10,9 @@ Tests cover:
 
 import pytest
 
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.builders.kilo_builder import KiloBuilder
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.base import BuildOptions
+from prompticorn.builders.kilo_builder import KiloBuilder
+from prompticorn.ir.models import Agent
 
 
 class TestKiloSubagentDetection:
@@ -549,7 +549,7 @@ class TestKiloSubagentCoverage:
         content = builder._build_subagent_file(subagent, "parent", options)
 
         assert "state_management:" in content
-        assert ".promptosaurus/sessions" in content
+        assert ".prompticorn/sessions" in content
 
     def test_build_subagents_each_creates_valid_file(self) -> None:
         """Test that each subagent gets its own valid file."""

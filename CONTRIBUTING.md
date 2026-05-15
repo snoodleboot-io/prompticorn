@@ -1,6 +1,6 @@
-# Contributing to Promptosaurus
+# Contributing to prompticorn
 
-Thank you for your interest in contributing to Promptosaurus! This guide will help you get started.
+Thank you for your interest in contributing to prompticorn! This guide will help you get started.
 
 ## Table of Contents
 
@@ -41,13 +41,13 @@ We are committed to providing a welcoming and inclusive environment. Please:
 1. Fork the repository on GitHub
 2. Clone your fork:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/promptosaurus.git
-   cd promptosaurus
+   git clone https://github.com/YOUR_USERNAME/prompticorn.git
+   cd prompticorn
    ```
 
 3. Add upstream remote:
    ```bash
-   git remote add upstream https://github.com/johna/promptosaurus.git
+   git remote add upstream https://github.com/johna/prompticorn.git
    ```
 
 ### Install Development Environment
@@ -79,7 +79,7 @@ pip install -e ".[dev]"
 
 ```bash
 # Check CLI works
-promptosaurus --help
+prompticorn --help
 
 # Run tests
 pytest
@@ -128,7 +128,7 @@ pytest tests/unit
 pytest tests/integration
 
 # With coverage
-pytest --cov=promptosaurus --cov-report=html
+pytest --cov=prompticorn --cov-report=html
 
 # View coverage report
 open htmlcov/index.html  # macOS
@@ -192,8 +192,8 @@ git push origin feat/your-feature-name
 ### Directory Layout
 
 ```
-promptosaurus/
-├── promptosaurus/          # Main package
+prompticorn/
+├── prompticorn/          # Main package
 │   ├── __init__.py
 │   ├── cli.py             # CLI entry point
 │   ├── config_handler.py  # Configuration management
@@ -258,7 +258,7 @@ promptosaurus/
 | File | Purpose |
 |------|---------|
 | `cli.py` | CLI commands (init, list, validate, etc.) |
-| `config_handler.py` | Read/write `.promptosaurus.yaml` |
+| `config_handler.py` | Read/write `.prompticorn.yaml` |
 | `prompt_builder.py` | Main builder wrapper (Phase 2A) |
 | `ir/models/agent.py` | Agent IR model (immutable Pydantic) |
 | `agent_registry/discovery.py` | Auto-discover agents from filesystem |
@@ -275,14 +275,14 @@ Implement support for a new AI coding assistant.
 
 #### Step 1: Create Builder Class
 
-Create `promptosaurus/builders/mytool_builder.py`:
+Create `prompticorn/builders/mytool_builder.py`:
 
 ```python
 """Builder for MyTool AI assistant."""
 
 from typing import Any
-from promptosaurus.builders.base import Builder, BuildOptions
-from promptosaurus.ir.models.agent import Agent
+from prompticorn.builders.base import Builder, BuildOptions
+from prompticorn.ir.models.agent import Agent
 
 class MyToolBuilder(Builder):
     """Builder for MyTool configurations."""
@@ -347,7 +347,7 @@ class MyToolBuilder(Builder):
 
 #### Step 2: Register Builder
 
-In `promptosaurus/builders/factory.py`, add to `_register_default_builders()`:
+In `prompticorn/builders/factory.py`, add to `_register_default_builders()`:
 
 ```python
 def _register_default_builders():
@@ -361,7 +361,7 @@ def _register_default_builders():
 
 #### Step 3: Add to CLI
 
-In `promptosaurus/cli.py`, add to tool selection:
+In `prompticorn/cli.py`, add to tool selection:
 
 ```python
 ai_tool = select_option_with_explain(
@@ -383,9 +383,9 @@ Create `tests/unit/builders/test_mytool_builder.py`:
 """Tests for MyToolBuilder."""
 
 import pytest
-from promptosaurus.builders.mytool_builder import MyToolBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models.agent import Agent
+from prompticorn.builders.mytool_builder import MyToolBuilder
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models.agent import Agent
 
 def test_mytool_builder_basic():
     """Test basic MyTool builder functionality."""
@@ -432,7 +432,7 @@ pytest
 pyright
 
 # Try it manually
-promptosaurus init
+prompticorn init
 # Select "MyTool"
 # Verify output files generated
 ```
@@ -445,7 +445,7 @@ Add support for a new programming language.
 
 #### Step 1: Create Question Modules
 
-Create `promptosaurus/questions/mylang/`:
+Create `prompticorn/questions/mylang/`:
 
 ```
 questions/mylang/
@@ -459,7 +459,7 @@ questions/mylang/
 ```python
 """MyLang runtime version question."""
 
-from promptosaurus.questions.base.question import Question
+from prompticorn.questions.base.question import Question
 
 class MyLangRuntimeQuestion(Question):
     """Ask for MyLang runtime version."""
@@ -473,7 +473,7 @@ class MyLangRuntimeQuestion(Question):
 
 #### Step 2: Register Language
 
-In `promptosaurus/questions/language.py`:
+In `prompticorn/questions/language.py`:
 
 ```python
 LANGUAGE_KEYS = [
@@ -486,7 +486,7 @@ LANGUAGE_KEYS = [
 
 #### Step 3: Create Conventions File
 
-Create `promptosaurus/configurations/core-conventions-mylang.md`:
+Create `prompticorn/configurations/core-conventions-mylang.md`:
 
 ```markdown
 # Core Conventions MyLang
@@ -500,7 +500,7 @@ Formatter:       mylang-fmt
 
 #### Step 4: Add Template Handlers
 
-If needed, create language-specific template handlers in `promptosaurus/builders/template_handlers/`.
+If needed, create language-specific template handlers in `prompticorn/builders/template_handlers/`.
 
 #### Step 5: Add Tests
 
@@ -514,7 +514,7 @@ Define a new role for persona-based filtering.
 
 #### Step 1: Edit `personas.yaml`
 
-Edit `promptosaurus/personas/personas.yaml`:
+Edit `prompticorn/personas/personas.yaml`:
 
 ```yaml
 personas:
@@ -540,7 +540,7 @@ personas:
 
 ```bash
 # Re-run init
-promptosaurus init
+prompticorn init
 
 # Select "My New Role" persona
 # Verify correct agents generated
@@ -559,13 +559,13 @@ Create a new agent for a specific task.
 #### Step 1: Create Directory Structure
 
 ```bash
-mkdir -p promptosaurus/agents/my-agent/minimal
-mkdir -p promptosaurus/agents/my-agent/verbose
+mkdir -p prompticorn/agents/my-agent/minimal
+mkdir -p prompticorn/agents/my-agent/verbose
 ```
 
 #### Step 2: Create Minimal Prompt
 
-Create `promptosaurus/agents/my-agent/minimal/prompt.md`:
+Create `prompticorn/agents/my-agent/minimal/prompt.md`:
 
 ```markdown
 ---
@@ -591,7 +591,7 @@ You are a specialized assistant for [specific task].
 
 #### Step 3: Create Verbose Prompt
 
-Create `promptosaurus/agents/my-agent/verbose/prompt.md`:
+Create `prompticorn/agents/my-agent/verbose/prompt.md`:
 
 ```markdown
 ---
@@ -629,7 +629,7 @@ You are a specialized assistant for [specific task].
 
 #### Step 4: Add Optional Skills/Workflows
 
-Create `promptosaurus/agents/my-agent/minimal/skills.md` (optional):
+Create `prompticorn/agents/my-agent/minimal/skills.md` (optional):
 
 ```markdown
 # Skills
@@ -638,7 +638,7 @@ Create `promptosaurus/agents/my-agent/minimal/skills.md` (optional):
 - skill2
 ```
 
-Create `promptosaurus/agents/my-agent/minimal/workflow.md` (optional):
+Create `prompticorn/agents/my-agent/minimal/workflow.md` (optional):
 
 ```markdown
 # Workflow
@@ -654,7 +654,7 @@ Create `promptosaurus/agents/my-agent/minimal/workflow.md` (optional):
 
 ```bash
 # Validate agent discovered
-promptosaurus list
+prompticorn list
 
 # Should show "my-agent" in output
 ```
@@ -683,7 +683,7 @@ tests/
 def test_agent_loader_loads_valid_agent():
     """Test that AgentLoader loads a valid agent correctly."""
     # Arrange
-    agent_dir = Path("promptosaurus/agents/code/minimal")
+    agent_dir = Path("prompticorn/agents/code/minimal")
     loader = ComponentLoader(agent_dir)
     
     # Act
@@ -917,7 +917,7 @@ All must pass before merge.
 
 Include:
 - Python version
-- Promptosaurus version
+- prompticorn version
 - Operating system
 - Steps to reproduce
 - Expected vs actual behavior
@@ -943,4 +943,4 @@ Include:
 
 ---
 
-Thank you for contributing to Promptosaurus! 🦖
+Thank you for contributing to prompticorn! 🦖

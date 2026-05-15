@@ -1,9 +1,9 @@
-"""Integration tests for promptosaurus init CLI command.
+"""Integration tests for prompticorn init CLI command.
 
 These tests exercise the actual CLI flow to catch bugs in the full user journey.
 """
 
-from promptosaurus.questions.base.folder_spec import FolderSpec
+from prompticorn.questions.base.folder_spec import FolderSpec
 
 
 class TestSetupMonorepoFolders:
@@ -60,7 +60,7 @@ class TestMonorepoConfig:
 
     def test_multi_language_config_template(self):
         """Verify multi-language config template exists."""
-        from promptosaurus.config_handler import ConfigHandler
+        from prompticorn.config_handler import ConfigHandler
 
         assert "repository" in ConfigHandler.get_default_multi_language_template()
         assert "spec" in ConfigHandler.get_default_multi_language_template()
@@ -95,7 +95,7 @@ class TestMonorepoPresetTypes:
 
     def test_backend_preset_types(self):
         """Verify backend preset types are defined."""
-        from promptosaurus.questions.base.folder_spec import FolderSpecRegistry
+        from prompticorn.questions.base.folder_spec import FolderSpecRegistry
 
         assert "backend" in FolderSpecRegistry.get_folder_type_presets()
         assert "api" in FolderSpecRegistry.get_folder_type_presets()["backend"]
@@ -105,7 +105,7 @@ class TestMonorepoPresetTypes:
 
     def test_frontend_preset_types(self):
         """Verify frontend preset types are defined."""
-        from promptosaurus.questions.base.folder_spec import FolderSpecRegistry
+        from prompticorn.questions.base.folder_spec import FolderSpecRegistry
 
         assert "frontend" in FolderSpecRegistry.get_folder_type_presets()
         assert "ui" in FolderSpecRegistry.get_folder_type_presets()["frontend"]
@@ -114,7 +114,7 @@ class TestMonorepoPresetTypes:
 
     def test_preset_languages(self):
         """Verify preset languages are correct."""
-        from promptosaurus.questions.base.folder_spec import FolderSpecRegistry
+        from prompticorn.questions.base.folder_spec import FolderSpecRegistry
 
         # Backend defaults to Python
         assert (

@@ -245,7 +245,7 @@ Properties **merge** (not replace), so you can override just model without redef
 
 **1. Agent Definitions** (`.kilo/agents/{name}.md`)
 ```
-PromptosaurusAgent →
+PrompticornAgent →
   .kilo/agents/{agent.slug}.md
   
 File content:
@@ -261,13 +261,13 @@ permission: {tool permissions}
 
 **2. Subagents** (same as agents, mode=subagent)
 ```
-PromptosaurusSubagent →
+PrompticornSubagent →
   .kilo/agents/{name}.md (mode: subagent)
 ```
 
 **3. Workflows** (`.kilo/commands/{name}.md`)
 ```
-PromptosaurusWorkflow →
+PrompticornWorkflow →
   .kilo/commands/{workflow.name}.md
   
 File content:
@@ -280,7 +280,7 @@ agent: {recommended agent}
 
 **4. Skills** (`.kilo/skills/{name}/SKILL.md`)
 ```
-PromptosaurusSkill →
+PrompticornSkill →
   .kilo/skills/{skill.name}/SKILL.md
   
 File content:

@@ -1,1 +1,1 @@
-"""Unit tests for promptosaurus."""
+"""Unit tests for prompticorn."""

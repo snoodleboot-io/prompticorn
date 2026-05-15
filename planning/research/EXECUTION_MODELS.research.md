@@ -38,9 +38,9 @@ Claude uses a **turn-based tool calling loop**:
 ### IR Mapping
 
 For Claude builders:
-- `PromptosaurusAgent` → Tool definition with `name` + `description` + `input_schema`
-- `PromptosaurusSkill` → Tool definition (nested in agent)
-- `PromptosaurusWorkflow` → Multiple tools; workflow = sequence Claude decides to invoke
+- `PrompticornAgent` → Tool definition with `name` + `description` + `input_schema`
+- `PrompticornSkill` → Tool definition (nested in agent)
+- `PrompticornWorkflow` → Multiple tools; workflow = sequence Claude decides to invoke
 - Builder output: OpenAI/Anthropic `Tool` objects with JSON schemas
 
 ---
@@ -95,9 +95,9 @@ Cline uses an **extended tool calling loop with progress tracking**:
 ### IR Mapping
 
 For Cline builders:
-- `PromptosaurusAgent` → Agent definition + tools + focus chain settings
-- `PromptosaurusSkill` → Skill markdown file + metadata
-- `PromptosaurusWorkflow` → Workflow markdown + step toggles
+- `PrompticornAgent` → Agent definition + tools + focus chain settings
+- `PrompticornSkill` → Skill markdown file + metadata
+- `PrompticornWorkflow` → Workflow markdown + step toggles
 - Builder output:
   - Agent: System prompt with tools + focus chain instructions
   - Skill: `.agents/skills/{name}/SKILL.md` file
@@ -133,7 +133,7 @@ Kilo uses an **agent loading + session management** model:
 ```
 1. User selects agent/mode in IDE
 2. Kilo loads agent definition from .kilo/
-3. Kilo initializes session context (.promptosaurus/sessions/)
+3. Kilo initializes session context (.prompticorn/sessions/)
 4. IDE invokes Claude with loaded agent system prompt
 5. Claude returns tool calls
 6. Kilo executes tools → updates session
@@ -145,7 +145,7 @@ Kilo uses an **agent loading + session management** model:
 - Agents defined in: `.kilo/agents/` directory
 - Agent definition: YAML + markdown instructions
 - Agent discovery: IDE scans `.kilo/agents/` at startup
-- Session management: `.promptosaurus/sessions/session_*.md` files
+- Session management: `.prompticorn/sessions/session_*.md` files
 - Session tracking: Persists context across mode switches
 
 ### How Agents Work
@@ -172,9 +172,9 @@ Kilo uses an **agent loading + session management** model:
 ### IR Mapping
 
 For KiloBuilder:
-- `PromptosaurusAgent` → `.kilo/agents/{name}/` directory
-- `PromptosaurusSkill` → Extract from `.kilo/rules-{mode}/` → write to `.kilo/skills/`
-- `PromptosaurusWorkflow` → Session-based workflow definitions
+- `PrompticornAgent` → `.kilo/agents/{name}/` directory
+- `PrompticornSkill` → Extract from `.kilo/rules-{mode}/` → write to `.kilo/skills/`
+- `PrompticornWorkflow` → Session-based workflow definitions
 - Builder output:
   - Agent: Directory structure + instructions.md + metadata.yaml
   - Skill: `.kilo/skills/{name}/` directory
@@ -183,7 +183,7 @@ For KiloBuilder:
 ### Key Integration Points
 
 1. **Session Management:**
-   - Create `.promptosaurus/sessions/session_{date}_{id}.md`
+   - Create `.prompticorn/sessions/session_{date}_{id}.md`
    - Track mode history, actions, context summary
    - Persist across IDE restarts
 
@@ -238,9 +238,9 @@ Copilot likely uses **hook-based lifecycle events**:
 ### IR Mapping
 
 For CopilotBuilder:
-- `PromptosaurusAgent` → Hook-based agent definition
-- `PromptosaurusSkill` → Skill agent + hook references
-- `PromptosaurusWorkflow` → Hook sequence definition
+- `PrompticornAgent` → Hook-based agent definition
+- `PrompticornSkill` → Skill agent + hook references
+- `PrompticornWorkflow` → Hook sequence definition
 - Builder output: Hook configuration objects
 
 **Note:** Needs deeper research - inferred from VS Code Copilot Agent API patterns.
@@ -284,9 +284,9 @@ Cursor appears to use **autonomous agent mode with implicit reasoning**:
 ### IR Mapping
 
 For CursorBuilder:
-- `PromptosaurusAgent` → Instruction set + context configuration
-- `PromptosaurusSkill` → Domain-specific instruction set
-- `PromptosaurusWorkflow` → Goal-based orchestration (implicit)
+- `PrompticornAgent` → Instruction set + context configuration
+- `PrompticornSkill` → Domain-specific instruction set
+- `PrompticornWorkflow` → Goal-based orchestration (implicit)
 - Builder output: Instruction configuration
 
 **Note:** Requires investigation of Cursor's actual agent API - inferred from behavior patterns.
@@ -332,9 +332,9 @@ Kilo CLI likely uses **step-based task execution**:
 ### IR Mapping
 
 For KiloCliBuilder:
-- `PromptosaurusAgent` → CLI command definition
-- `PromptosaurusSkill` → Step definition
-- `PromptosaurusWorkflow` → Workflow file with step sequence
+- `PrompticornAgent` → CLI command definition
+- `PrompticornSkill` → Step definition
+- `PrompticornWorkflow` → Workflow file with step sequence
 - Builder output: Workflow YAML + step definitions
 
 **Note:** Requires source code research - currently inferred only.
@@ -359,7 +359,7 @@ For KiloCliBuilder:
 
 ### For Pydantic IR Models
 
-1. **All tools use system prompts** → `PromptosaurusAgent.prompt` and `prompt_verbose`
+1. **All tools use system prompts** → `PrompticornAgent.prompt` and `prompt_verbose`
 2. **Skills vary significantly** → Builders handle translation to tool-specific format
 3. **Workflows are differently structured** → Use builder mixins (`SupportsWorkflows`)
 4. **Progress tracking varies** → Only Cline has explicit progress model
@@ -367,7 +367,7 @@ For KiloCliBuilder:
 
 ### For Builder Implementation
 
-1. **PromptosaurusBuilder (base ABC)**
+1. **PrompticornBuilder (base ABC)**
    - `build_agent()` → system prompt + tool definitions
    - `validate_agent()` → check for tool name conflicts, etc.
 

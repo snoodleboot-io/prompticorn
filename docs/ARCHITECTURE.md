@@ -1,6 +1,6 @@
-# Promptosaurus Architecture
+# prompticorn Architecture
 
-Comprehensive architectural documentation for the promptosaurus system.
+Comprehensive architectural documentation for the prompticorn system.
 
 ## Table of Contents
 
@@ -18,7 +18,7 @@ Comprehensive architectural documentation for the promptosaurus system.
 
 ### Purpose
 
-Promptosaurus is a **tool-agnostic prompt architecture system** that enables you to:
+prompticorn is a **tool-agnostic prompt architecture system** that enables you to:
 - Define AI agents once in a unified Intermediate Representation (IR) format
 - Generate configurations for 5 different AI coding assistants (Kilo, Cline, Claude, Cursor, Copilot)
 - Manage agent complexity with minimal/verbose variants
@@ -80,7 +80,7 @@ graph TB
 
 ### 1. IR (Intermediate Representation) System
 
-**Location:** `promptosaurus/ir/`
+**Location:** `prompticorn/ir/`
 
 #### Models (`ir/models/`)
 
@@ -153,7 +153,7 @@ Load and construct IR models from filesystem:
 
 ```python
 # Example: ComponentLoader
-loader = ComponentLoader("promptosaurus/agents/code/minimal")
+loader = ComponentLoader("prompticorn/agents/code/minimal")
 bundle = loader.load()
 # bundle.prompt - Prompt content
 # bundle.skills - List of skills
@@ -162,14 +162,14 @@ bundle = loader.load()
 
 ### 2. Agent Registry & Discovery
 
-**Location:** `promptosaurus/agent_registry/`
+**Location:** `prompticorn/agent_registry/`
 
 #### Discovery (`agent_registry/discovery.py`)
 
 Auto-discovers agents from filesystem:
 
 ```python
-discovery = RegistryDiscovery(agents_dir="promptosaurus/agents", variant="minimal")
+discovery = RegistryDiscovery(agents_dir="prompticorn/agents", variant="minimal")
 agents = discovery.discover()
 # Returns: {"code": Agent(...), "test": Agent(...), ...}
 ```
@@ -208,7 +208,7 @@ agents/
 Manages discovered agents with caching:
 
 ```python
-registry = Registry.from_discovery("promptosaurus/agents", cache=True)
+registry = Registry.from_discovery("prompticorn/agents", cache=True)
 agent = registry.get_agent("code", variant="minimal")
 all_agents = registry.get_all_agents()
 names = registry.list_agents()
@@ -221,7 +221,7 @@ names = registry.list_agents()
 
 ### 3. Persona System
 
-**Location:** `promptosaurus/personas/`
+**Location:** `prompticorn/personas/`
 
 #### Purpose
 
@@ -230,7 +230,7 @@ Filter agents based on team roles (personas) to reduce cognitive load.
 #### PersonaRegistry (`personas/registry.py`)
 
 ```python
-registry = PersonaRegistry.from_yaml("promptosaurus/personas/personas.yaml")
+registry = PersonaRegistry.from_yaml("prompticorn/personas/personas.yaml")
 
 # Get agents for a persona
 agents = registry.get_agents_for_persona("software_engineer")
@@ -265,7 +265,7 @@ personas:
 
 ### 4. Builder System
 
-**Location:** `promptosaurus/builders/`
+**Location:** `prompticorn/builders/`
 
 #### Abstract Base Class (`builders/base.py`)
 
@@ -324,7 +324,7 @@ output = builder.build(agent, options)
 
 ### 5. Template Substitution System
 
-**Location:** `promptosaurus/builders/template_handlers/`
+**Location:** `prompticorn/builders/template_handlers/`
 
 Dynamically substitute template variables based on project configuration.
 
@@ -348,15 +348,15 @@ result = renderer.render(template, config)
 
 ### 6. Configuration System
 
-**Location:** `promptosaurus/config_handler.py`
+**Location:** `prompticorn/config_handler.py`
 
 #### ConfigHandler
 
-Manages `.promptosaurus.yaml`:
+Manages `.prompticorn.yaml`:
 
 ```python
 handler = ConfigHandler()
-config = handler.read_config(".promptosaurus.yaml")
+config = handler.read_config(".prompticorn.yaml")
 
 # Example config:
 {
@@ -373,7 +373,7 @@ config = handler.read_config(".promptosaurus.yaml")
 
 ### 7. UI System
 
-**Location:** `promptosaurus/ui/`
+**Location:** `prompticorn/ui/`
 
 Terminal-based interactive UI for configuration.
 
@@ -387,7 +387,7 @@ Terminal-based interactive UI for configuration.
 
 ### 8. Questions System
 
-**Location:** `promptosaurus/questions/`
+**Location:** `prompticorn/questions/`
 
 Interactive interrogation for project configuration.
 
@@ -416,10 +416,10 @@ sequenceDiagram
     participant Builder
     participant FileSystem
 
-    User->>CLI: promptosaurus init
+    User->>CLI: prompticorn init
     CLI->>Questions: Ask configuration questions
     Questions-->>CLI: User responses
-    CLI->>ConfigHandler: Write .promptosaurus.yaml
+    CLI->>ConfigHandler: Write .prompticorn.yaml
     CLI->>Registry: Discover agents
     Registry->>FileSystem: Scan agents/ directory
     FileSystem-->>Registry: Agent files
@@ -643,7 +643,7 @@ LanguageRegistry.register("mylang", MyLangQuestions)
 
 3. **Create conventions file:**
 ```
-promptosaurus/configurations/core/core-conventions-mylang.md
+prompticorn/configurations/core/core-conventions-mylang.md
 ```
 
 ### Adding a New Persona

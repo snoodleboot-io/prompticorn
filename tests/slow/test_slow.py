@@ -1,14 +1,6 @@
-"""Slow tests for promptosaurus - placeholder for future tests."""
-
-import pytest
+"""Slow / performance tests — to be expanded."""
 
 
-@pytest.mark.slow
-@pytest.mark.placeholder
-def test_slow_placeholder():
-    """Placeholder slow test."""
-    # TODO: Add slow tests when we have:
-    # - Performance benchmarks
-    # - Large file processing tests
-    # - Stress tests
+def test_placeholder():
+    """Placeholder until real slow tests are written."""
     pass

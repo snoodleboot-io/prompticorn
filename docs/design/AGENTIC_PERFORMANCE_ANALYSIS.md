@@ -775,13 +775,13 @@ Experts   │      Minimal
 **Configuration A: Default Minimal**
 ```bash
 # Use minimal for daily work
-promptosaurus init --variant minimal
+prompticorn init --variant minimal
 
 # Switch to verbose for complex tasks
-promptosaurus switch --variant verbose
+prompticorn switch --variant verbose
 
 # Back to minimal after complex task done
-promptosaurus switch --variant minimal
+prompticorn switch --variant minimal
 ```
 
 **Configuration B: Smart Detection**

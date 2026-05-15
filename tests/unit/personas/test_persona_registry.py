@@ -4,13 +4,13 @@ from pathlib import Path
 
 import pytest
 
-from promptosaurus.personas.registry import PersonaRegistry
+from prompticorn.personas.registry import PersonaRegistry
 
 
 @pytest.fixture
 def personas_yaml_path():
     """Path to the personas.yaml file"""
-    return Path("promptosaurus/personas/personas.yaml")
+    return Path("prompticorn/personas/personas.yaml")
 
 
 @pytest.fixture
