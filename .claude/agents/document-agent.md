@@ -19,6 +19,7 @@ Use this mode when writing or updating documentation.
 
 This workflow will guide you through:
 - Steps
+- Complete Flow Summary
 
 ## Subagents
 

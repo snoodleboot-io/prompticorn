@@ -19,6 +19,7 @@ Use this mode when enforcing coding standards, checking compliance against conve
 
 This workflow will guide you through:
 - Steps
+- Complete Flow Summary
 
 ## Skills
 

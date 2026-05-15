@@ -19,6 +19,7 @@ Use this mode when writing new tests or improving test coverage.
 
 This workflow will guide you through:
 - Steps
+- Complete Flow Summary
 
 ## Subagents
 

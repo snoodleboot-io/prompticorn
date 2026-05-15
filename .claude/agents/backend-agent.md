@@ -19,6 +19,7 @@ Use this mode when designing APIs, architecting microservices, optimizing databa
 
 This workflow will guide you through:
 - Steps
+- Complete Flow Summary
 
 ## Subagents
 

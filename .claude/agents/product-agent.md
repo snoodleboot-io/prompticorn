@@ -87,6 +87,7 @@ Let me know what product challenge you're facing, and I'll help you navigate it 
 
 This workflow will guide you through:
 - Steps
+- Complete Flow Summary
 
 ## Subagents
 

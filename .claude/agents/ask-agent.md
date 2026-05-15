@@ -19,6 +19,7 @@ Use this mode when you have questions about the codebase, architecture, or techn
 
 This workflow will guide you through:
 - Steps
+- Complete Flow Summary
 
 ## Subagents
 

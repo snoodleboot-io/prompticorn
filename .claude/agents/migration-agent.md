@@ -19,6 +19,7 @@ Use this mode when upgrading dependencies or migrating between frameworks.
 
 This workflow will guide you through:
 - Steps
+- Complete Flow Summary
 
 ## Subagents
 

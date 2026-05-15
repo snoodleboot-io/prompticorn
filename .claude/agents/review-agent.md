@@ -19,6 +19,7 @@ Use this mode when reviewing code for quality, performance, or accessibility iss
 
 This workflow will guide you through:
 - Steps
+- Complete Flow Summary
 
 ## Subagents
 

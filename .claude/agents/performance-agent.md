@@ -19,6 +19,7 @@ Use this mode when profiling applications, identifying performance bottlenecks, 
 
 This workflow will guide you through:
 - Steps
+- Complete Flow Summary
 
 ## Subagents
 

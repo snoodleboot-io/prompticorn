@@ -19,6 +19,7 @@ Use this mode when explaining code or helping onboard developers.
 
 This workflow will guide you through:
 - Steps
+- Complete Flow Summary
 
 ## Subagents
 

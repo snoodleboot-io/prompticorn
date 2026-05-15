@@ -19,6 +19,7 @@ Use this mode when designing component architectures, optimizing frontend perfor
 
 This workflow will guide you through:
 - Steps
+- Complete Flow Summary
 
 ## Subagents
 

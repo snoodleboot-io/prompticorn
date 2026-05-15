@@ -22,7 +22,7 @@ concurrency:
 env:
   PACKAGE_NAME: prompticorn
   PYTHON_MIN_VERSION: "3.10"
-  MAJOR_VERSION: "0"  # Hardcoded - edit this to bump major version for breaking changes
+  MAJOR_VERSION: "1"  # Hardcoded - edit this to bump major version for breaking changes
   IS_MAIN: ${{ github.ref == 'refs/heads/main' }}
 
 jobs:
