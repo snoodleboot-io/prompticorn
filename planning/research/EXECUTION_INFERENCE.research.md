@@ -58,7 +58,7 @@ ClaudeBuilder must:
 4. Extracts markdown body (agent instructions)
 5. Creates system prompt for Claude: instructions + core rules
 6. Returns Claude responses to user
-7. Session file (.promptosaurus/sessions/) tracks context across mode switches
+7. Session file (.prompticorn/sessions/) tracks context across mode switches
 ```
 
 ### Skills Usage (INFERRED)

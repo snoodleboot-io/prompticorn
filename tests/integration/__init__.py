@@ -1,1 +1,1 @@
-"""Integration tests for promptosaurus."""
+"""Integration tests for prompticorn."""

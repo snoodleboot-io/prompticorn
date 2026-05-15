@@ -174,7 +174,7 @@ project/
 ### Initialize for Claude
 ```bash
 cd your-project
-promptosaurus init
+prompticorn init
 # Select "claude" when prompted
 ```
 
@@ -189,10 +189,10 @@ promptosaurus init
 ### Switching Tools
 ```bash
 # From another tool to Claude
-promptosaurus switch --tool claude
+prompticorn switch --tool claude
 
 # From Claude to another tool  
-promptosaurus switch --tool kilo-ide
+prompticorn switch --tool kilo-ide
 ```
 
 **Auto-migration handles everything** - no manual steps needed
@@ -224,7 +224,7 @@ $ uv run pytest tests/unit/builders/test_claude_builder.py -v
 
 ### Build Verification
 ```bash
-$ promptosaurus init (tool=claude, persona=software_engineer)
+$ prompticorn init (tool=claude, persona=software_engineer)
 ✓ 5 agent files
 ✓ 11 subagent files
 ✓ 7 workflow files
@@ -369,13 +369,13 @@ $ promptosaurus init (tool=claude, persona=software_engineer)
 - `docs/design/CLAUDE_REDESIGN_STATUS.md`
 
 **Implementation:**
-- `promptosaurus/builders/claude_builder.py`
-- `promptosaurus/builders/claude_md.py`
-- `promptosaurus/builders/convention_generator.py`
-- `promptosaurus/builders/naming_utils.py`
+- `prompticorn/builders/claude_builder.py`
+- `prompticorn/builders/claude_md.py`
+- `prompticorn/builders/convention_generator.py`
+- `prompticorn/builders/naming_utils.py`
 
 **Templates:**
-- `promptosaurus/templates/claude/`
+- `prompticorn/templates/claude/`
 
 **Tests:**
 - `tests/unit/builders/test_claude_builder.py`

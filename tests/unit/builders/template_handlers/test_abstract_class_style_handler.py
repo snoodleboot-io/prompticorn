@@ -1,6 +1,6 @@
 import unittest
 
-from promptosaurus.builders.template_handlers.abstract_class_style_handler import (
+from prompticorn.builders.template_handlers.abstract_class_style_handler import (
     AbstractClassStyleHandler,
 )
 

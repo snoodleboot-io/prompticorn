@@ -21,7 +21,7 @@ This document shows **concrete configuration file examples** for how each tool (
 name: "code"
 description: "Write and refactor production code with SOLID principles"
 model: "anthropic/claude-opus-4-1"
-state_management: ".promptosaurus/sessions/"
+state_management: ".prompticorn/sessions/"
 ---
 
 # System Prompt

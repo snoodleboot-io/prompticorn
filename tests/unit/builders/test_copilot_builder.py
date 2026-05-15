@@ -12,8 +12,8 @@ Tests cover:
 
 from pathlib import Path
 
-from promptosaurus.builders.copilot_builder import CopilotBuilder
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.copilot_builder import CopilotBuilder
+from prompticorn.ir.models import Agent
 
 
 class TestCopilotBuilderInitialization:

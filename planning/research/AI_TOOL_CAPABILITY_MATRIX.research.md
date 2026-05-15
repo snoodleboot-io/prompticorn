@@ -33,10 +33,10 @@ Comprehensive comparison of how each AI tool implements core agent capabilities.
 | **STORAGE/FORMAT** | API payload (JSON) | Directory-based: `.cline/skills/`, `.clinerules/`, etc | Directory-based: `.github/skills/`, `.github/hooks/` | Same as Cloud | Directory-based: `.kilo/agents/`, `.kilo/skills/`, `.kilo/commands/` | Unknown (inferred) |
 | **Config File** | N/A (API parameters) | Implicit (directory structure) | Implicit (directory structure) | Same as Cloud | `kilo.jsonc` JSON config file | `.cursorrules` file |
 | **Global Config** | N/A | `~/.cline/` (user-level) | N/A | `~/.config/copilot/` (inferred) | `~/.config/kilo/` (user-level) | Unknown |
-| **State Persistence** | Message history (session-based) | Focus chain file (`.cline_tasks/`) with file watchers | GitHub Actions environment (task-specific) | Local chronicle (session history) | Session management (`.promptosaurus/sessions/`) | Implicit (session context) |
+| **State Persistence** | Message history (session-based) | Focus chain file (`.cline_tasks/`) with file watchers | GitHub Actions environment (task-specific) | Local chronicle (session history) | Session management (`.prompticorn/sessions/`) | Implicit (session context) |
 | **Activation/Trigger** | User sends message + tools | User types `/` or `use_skill` tool | Agent sees skill descriptions at startup | User selects agent or `@mentions` subagent | User selects agent or `@mentions` subagent | User describes goal |
 | **Multi-Agent Coordination** | Tool that calls Claude API | Not explicitly supported | Task tool invokes other agents | `@mentions` or Task tool | `@mentions` or Task tool | N/A (single agent) |
-| **Context Window Management** | Explicit (messages parameter) | Focus chain (progress tracking) | GitHub Actions limits | Session-based (local) | Session-based (.promptosaurus) | Implicit (model context) |
+| **Context Window Management** | Explicit (messages parameter) | Focus chain (progress tracking) | GitHub Actions limits | Session-based (local) | Session-based (.prompticorn) | Implicit (model context) |
 | **Tool Categories** | read, edit, bash, web tools, code execution | read, write, bash, MCP servers, web tools | read, edit, bash, web tools, MCP servers | Same as Cloud | read, glob, grep, edit, write, bash, webfetch, MCP servers | N/A |
 
 ---
@@ -83,7 +83,7 @@ Comprehensive comparison of how each AI tool implements core agent capabilities.
 ### Universal IR Models Needed:
 
 ```python
-PromptosaurusAgent:
+PrompticornAgent:
   - name: str
   - description: str
   - prompt: str (minimal)
@@ -93,20 +93,20 @@ PromptosaurusAgent:
   - subagents: list[str]
   - permissions: dict (optional)
   
-PromptosaurusSkill:
+PrompticornSkill:
   - name: str
   - description: str
   - instructions: str
   - instructions_verbose: str (optional)
   - resources: dict (bundled files)
   
-PromptosaurusWorkflow:
+PrompticornWorkflow:
   - name: str
   - description: str
   - steps: list[str]
   - type: "implicit" | "explicit" | "hook-based"
   
-PromptosaurusRules:
+PrompticornRules:
   - name: str
   - description: str
   - content: str

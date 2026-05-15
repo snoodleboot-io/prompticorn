@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 
 [project]
-name = "promptosaurus"
+name = "prompticorn"
 version = "0.1.0"
 description = "Build AI coding assistant configs from a shared prompt library"
 readme = "README.md"
@@ -40,15 +40,15 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/johna/promptosaurus"
-Repository = "https://github.com/johna/promptosaurus"
-Issues = "https://github.com/johna/promptosaurus/issues"
+Homepage = "https://github.com/johna/prompticorn"
+Repository = "https://github.com/johna/prompticorn"
+Issues = "https://github.com/johna/prompticorn/issues"
 
 [project.scripts]
-promptosaurus = "promptosaurus.cli:cli"
+prompticorn = "prompticorn.cli:cli"
 
 [tool.hatch.build.targets.wheel]
-packages = ["promptosaurus"]
+packages = ["prompticorn"]
 
 [dependency-groups]
 dev = [
@@ -102,7 +102,7 @@ markers = [
 
 [tool.pyright]
 pythonVersion = "3.10"
-include = ["promptosaurus"]
+include = ["prompticorn"]
 exclude = ["tests", "**/__pycache__", ".venv"]
 ignore = [".venv"]
 strict = []

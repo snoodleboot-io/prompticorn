@@ -352,7 +352,7 @@ Remaining: 154K (77% free)
 
 **Future Feature Concept:**
 ```yaml
-# .promptosaurus/.promptosaurus.yaml
+# .prompticorn/.prompticorn.yaml
 
 agents:
   # High-level thinking - use verbose
@@ -401,19 +401,19 @@ agents:
 **Project-Level Switching:**
 ```bash
 # Start with verbose for planning
-promptosaurus init --variant verbose
+prompticorn init --variant verbose
 
 # Planning phase
 # Use architect, plan agents
 
 # Switch to minimal for implementation
-promptosaurus update --variant minimal
+prompticorn update --variant minimal
 
 # Implementation phase
 # Use code, test, frontend agents
 
 # Switch back to verbose for review
-promptosaurus update --variant verbose
+prompticorn update --variant verbose
 
 # Review phase
 # Use review, performance agents
@@ -610,22 +610,22 @@ All phases minimal:
 
 ```bash
 # Planning phase
-promptosaurus init --variant verbose
+prompticorn init --variant verbose
 # Use plan, architect agents
 
 # Implementation phase
-promptosaurus update --variant minimal
+prompticorn update --variant minimal
 # Use code, test agents
 
 # Review phase
-promptosaurus update --variant verbose
+prompticorn update --variant verbose
 # Use review agent
 ```
 
 ### Phase 2: Per-Agent Configuration (Future)
 
 ```yaml
-# .promptosaurus/.promptosaurus.yaml
+# .prompticorn/.prompticorn.yaml
 agent_variants:
   architect: verbose
   plan: verbose
@@ -636,7 +636,7 @@ agent_variants:
 
 ```bash
 # Single init generates different variants per agent
-promptosaurus init
+prompticorn init
 
 # Automatically uses correct variant per agent
 # No manual switching needed

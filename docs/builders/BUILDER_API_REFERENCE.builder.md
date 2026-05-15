@@ -122,7 +122,7 @@ class KiloBuilder(Builder):
 name: "agent_name"
 description: "Agent description"
 model: "anthropic/claude-opus-4-1"
-state_management: ".promptosaurus/sessions/"
+state_management: ".prompticorn/sessions/"
 ---
 
 # System Prompt
@@ -151,9 +151,9 @@ state_management: ".promptosaurus/sessions/"
 ### Usage Example
 
 ```python
-from promptosaurus.builders.kilo_builder import KiloBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.kilo_builder import KiloBuilder
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 
 # Create an agent
 agent = Agent(
@@ -195,7 +195,7 @@ subagent_files = builder.build_subagents(agent, options)
 name: "code"
 description: "Expert software engineer"
 model: "anthropic/claude-opus-4-1"
-state_management: ".promptosaurus/sessions/"
+state_management: ".prompticorn/sessions/"
 ---
 
 # System Prompt
@@ -332,9 +332,9 @@ Invoke by: `use_skill subagent_name` or request 'subagent-name subagent'
 ### Usage Example
 
 ```python
-from promptosaurus.builders.cline_builder import ClineBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.cline_builder import ClineBuilder
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 
 # Create agent
 agent = Agent(
@@ -476,9 +476,9 @@ Same as KiloBuilder. Note that `build()` returns a `dict[str, str]` instead of s
 ### Usage Example
 
 ```python
-from promptosaurus.builders.claude_builder import ClaudeBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.claude_builder import ClaudeBuilder
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 from pathlib import Path
 
 # Create agent
@@ -618,9 +618,9 @@ Specializes in subagent-name tasks.
 ### Usage Example
 
 ```python
-from promptosaurus.builders.copilot_builder import CopilotBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.copilot_builder import CopilotBuilder
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 
 # Create agent
 agent = Agent(
@@ -772,9 +772,9 @@ Usage: [Usage information]
 ### Usage Example
 
 ```python
-from promptosaurus.builders.cursor_builder import CursorBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.cursor_builder import CursorBuilder
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 
 # Create agent
 agent = Agent(
@@ -945,7 +945,7 @@ All builders raise `BuilderValidationError` for invalid inputs.
 ### BuilderValidationError
 
 ```python
-from promptosaurus.builders.errors import BuilderValidationError
+from prompticorn.builders.errors import BuilderValidationError
 
 try:
     builder.build(invalid_agent, options)
@@ -984,10 +984,10 @@ BuilderValidationError: Invalid output from Claude builder: Output is not JSON s
 
 ```python
 from pathlib import Path
-from promptosaurus.builders.factory import BuilderFactory
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.registry.registry import Registry
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.factory import BuilderFactory
+from prompticorn.builders.base import BuildOptions
+from prompticorn.registry.registry import Registry
+from prompticorn.ir.models import Agent
 
 # Load agent
 registry = Registry.from_discovery("./agents")
@@ -1040,7 +1040,7 @@ verbose_output = builder.build(agent, verbose_options)
 ### Error Handling Pattern
 
 ```python
-from promptosaurus.builders.errors import BuilderValidationError
+from prompticorn.builders.errors import BuilderValidationError
 
 try:
     # Validate first (optional but recommended)

@@ -17,9 +17,9 @@ from tempfile import TemporaryDirectory
 
 import pytest
 
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.builders.cline_builder import ClineBuilder
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.base import BuildOptions
+from prompticorn.builders.cline_builder import ClineBuilder
+from prompticorn.ir.models import Agent
 
 
 class TestClineBuilderFileWriting:

@@ -2,12 +2,12 @@
 
 ## Overview
 
-The Intermediate Representation (IR) system is the core data modeling layer of Promptosaurus. It provides tool-agnostic data models that represent all components of the prompt architecture system, enabling builders to transform these models into tool-specific outputs.
+The Intermediate Representation (IR) system is the core data modeling layer of Prompticorn. It provides tool-agnostic data models that represent all components of the prompt architecture system, enabling builders to transform these models into tool-specific outputs.
 
 ## Core Models
 
 ### Agent Model
-**File:** `promptosaurus/ir/models/agent.py`
+**File:** `prompticorn/ir/models/agent.py`
 
 The Agent model represents a complete AI entity with its configuration, capabilities (tools and skills), and behavioral patterns (workflows). Agents can contain subagents for hierarchical composition.
 
@@ -24,7 +24,7 @@ The Agent model represents a complete AI entity with its configuration, capabili
 
 **Example Usage:**
 ```python
-from promptosaurus.ir.models import Agent
+from prompticorn.ir.models import Agent
 
 agent = Agent(
     name="code",
@@ -39,7 +39,7 @@ agent = Agent(
 ```
 
 ### Workflow Model
-**File:** `promptosaurus/ir/models/workflow.py`
+**File:** `prompticorn/ir/models/workflow.py`
 
 Workflows define a series of steps that an agent can execute in a defined order. Each step is a string describing an action.
 
@@ -50,7 +50,7 @@ Workflows define a series of steps that an agent can execute in a defined order.
 
 **Example Usage:**
 ```python
-from promptosaurus.ir.models import Workflow
+from prompticorn.ir.models import Workflow
 
 workflow = Workflow(
     name="feature-development",
@@ -67,7 +67,7 @@ workflow = Workflow(
 ```
 
 ### Skill Model
-**File:** `promptosaurus/ir/models/skill.py`
+**File:** `prompticorn/ir/models/skill.py`
 
 Skills encapsulate specialized knowledge domains that agents leverage for domain-specific expertise.
 
@@ -78,7 +78,7 @@ Skills encapsulate specialized knowledge domains that agents leverage for domain
 - `parameters`: Configuration parameters for the skill
 
 ### Tool Model
-**File:** `promptosaurus/ir/models/tool.py`
+**File:** `prompticorn/ir/models/tool.py`
 
 Tools describe available tool integrations that agents can use to interact with external systems.
 
@@ -89,7 +89,7 @@ Tools describe available tool integrations that agents can use to interact with 
 - `permissions`: Permission rules for tool usage
 
 ### Rules Model
-**File:** `promptosaurus/ir/models/rules.py`
+**File:** `prompticorn/ir/models/rules.py`
 
 Rules configure behavioral constraints and guidelines that govern agent behavior.
 
@@ -100,7 +100,7 @@ Rules configure behavioral constraints and guidelines that govern agent behavior
 - `priority`: Priority level for rule application
 
 ### Project Model
-**File:** `promptosaurus/ir/models/project.py`
+**File:** `prompticorn/ir/models/project.py`
 
 Project manages project-level configuration and metadata.
 
@@ -124,7 +124,7 @@ All IR models use Pydantic for automatic validation and type checking. Validatio
 
 **Example Validation:**
 ```python
-from promptosaurus.ir.models import Agent
+from prompticorn.ir.models import Agent
 
 # This will raise a validation error due to empty name
 try:
@@ -160,7 +160,7 @@ IR models can be extended through inheritance to add tool-specific or project-sp
 
 **Example Extension:**
 ```python
-from promptosaurus.ir.models import Agent
+from prompticorn.ir.models import Agent
 from pydantic import Field
 from typing import List, Optional
 

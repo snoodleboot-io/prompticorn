@@ -8,11 +8,11 @@ The `{{PRIMARY_AGENTS_LIST}}` template variable was not being populated in the b
 
 ### Issue 1: Wrong Base Class
 
-**File:** `promptosaurus/builders/template_handlers/primary_agents_handler.py`
+**File:** `prompticorn/builders/template_handlers/primary_agents_handler.py`
 
 **Problem:**
 ```python
-from promptosaurus.builders.template_handlers.template_handler import TemplateVariableHandler
+from prompticorn.builders.template_handlers.template_handler import TemplateVariableHandler
 
 class PrimaryAgentsHandler(TemplateVariableHandler):  # ❌ WRONG
 ```
@@ -27,7 +27,7 @@ class PrimaryAgentsHandler(TemplateVariableHandler):  # ❌ WRONG
 
 **Fix:**
 ```python
-from promptosaurus.builders.template_handlers.template_handler import TemplateHandler
+from prompticorn.builders.template_handlers.template_handler import TemplateHandler
 
 class PrimaryAgentsHandler(TemplateHandler):  # ✅ CORRECT
 ```
@@ -36,7 +36,7 @@ class PrimaryAgentsHandler(TemplateHandler):  # ✅ CORRECT
 
 ### Issue 2: Missing from known_variables List
 
-**File:** `promptosaurus/builders/builder.py`
+**File:** `prompticorn/builders/builder.py`
 
 **Problem:** The `_substitute_template_variables` method has a hardcoded list of known variables:
 
@@ -81,20 +81,20 @@ known_variables = [
 
 ### Changes Made
 
-1. **promptosaurus/builders/template_handlers/primary_agents_handler.py**
+1. **prompticorn/builders/template_handlers/primary_agents_handler.py**
    - Changed: `class PrimaryAgentsHandler(TemplateVariableHandler):`
    - To: `class PrimaryAgentsHandler(TemplateHandler):`
    - Reason: Extend ABC base class, not Protocol
 
-2. **promptosaurus/builders/builder.py** (Line ~293)
+2. **prompticorn/builders/builder.py** (Line ~293)
    - Added: `"PRIMARY_AGENTS_LIST",` to known_variables list
    - Reason: Variable must be in list to be looked up
 
-3. **promptosaurus/builders/builder.py** (Line ~30)
-   - Added: `from promptosaurus.builders.template_handlers.primary_agents_handler import PrimaryAgentsHandler`
+3. **prompticorn/builders/builder.py** (Line ~30)
+   - Added: `from prompticorn.builders.template_handlers.primary_agents_handler import PrimaryAgentsHandler`
    - Reason: Import the handler
 
-4. **promptosaurus/builders/builder.py** (Line ~365)
+4. **prompticorn/builders/builder.py** (Line ~365)
    - Added: `PrimaryAgentsHandler(),` to fallback_handlers list
    - Reason: Register handler in default registry
 
@@ -143,7 +143,7 @@ To verify the fix works:
 
 ```bash
 # Build the config
-promptosaurus build kilo ./output
+prompticorn build kilo ./output
 
 # Check orchestrator prompt
 cat output/.kilo/agents/orchestrator.md | grep -A 20 "Available primary agents"

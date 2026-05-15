@@ -17,7 +17,7 @@
 **Status:** Ready to start
 
 #### Deliverables
-- [ ] promptosaurus/agents/mlai/prompt.md (main agent instruction)
+- [ ] prompticorn/agents/mlai/prompt.md (main agent instruction)
 - [ ] 4 subagents with minimal/verbose variants (8 files total)
   - PHASE3-AGENT-001a: Model Training Specialist
   - PHASE3-AGENT-001b: MLOps Engineer
@@ -49,7 +49,7 @@
 **Status:** Ready to start
 
 #### Deliverables
-- [ ] promptosaurus/agents/security/prompt.md (main agent instruction)
+- [ ] prompticorn/agents/security/prompt.md (main agent instruction)
 - [ ] 4 subagents with minimal/verbose variants (8 files total)
   - PHASE3-AGENT-002a: Threat Modeling Expert
   - PHASE3-AGENT-002b: Vulnerability Assessment Specialist
@@ -81,7 +81,7 @@
 **Status:** Ready to start
 
 #### Deliverables
-- [ ] promptosaurus/agents/product/prompt.md (main agent instruction)
+- [ ] prompticorn/agents/product/prompt.md (main agent instruction)
 - [ ] 3 subagents with minimal/verbose variants (6 files total)
   - PHASE3-AGENT-003a: Requirements Analyst
   - PHASE3-AGENT-003b: Roadmap Planner
@@ -439,7 +439,7 @@
 - [ ] Tests (12+ cases)
 
 #### Acceptance Criteria
-- [ ] Desktop app can load Promptosaurus configurations
+- [ ] Desktop app can load Prompticorn configurations
 - [ ] All agents/workflows supported
 - [ ] Tests passing
 - [ ] Documentation complete

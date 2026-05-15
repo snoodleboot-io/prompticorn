@@ -1,6 +1,6 @@
 import unittest
 
-from promptosaurus.builders.template_handlers.language_handler import LanguageHandler
+from prompticorn.builders.template_handlers.language_handler import LanguageHandler
 
 
 class TestLanguageHandler(unittest.TestCase):

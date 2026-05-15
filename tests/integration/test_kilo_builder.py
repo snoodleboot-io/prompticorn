@@ -17,10 +17,10 @@ from tempfile import TemporaryDirectory
 import pytest
 import yaml
 
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.builders.errors import VariantNotFoundError
-from promptosaurus.builders.kilo_builder import KiloBuilder
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.base import BuildOptions
+from prompticorn.builders.errors import VariantNotFoundError
+from prompticorn.builders.kilo_builder import KiloBuilder
+from prompticorn.ir.models import Agent
 
 
 class TestKiloBuilderFileWriting:

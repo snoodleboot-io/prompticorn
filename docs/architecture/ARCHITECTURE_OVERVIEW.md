@@ -1,4 +1,4 @@
-# Promptosaurus Architecture Overview
+# Prompticorn Architecture Overview
 
 ## System Architecture Diagram
 
@@ -67,7 +67,7 @@ graph TD
 ## Component Responsibilities
 
 ### 1. Intermediate Representation (IR) Layer
-**Location:** `promptosaurus/ir/`
+**Location:** `prompticorn/ir/`
 **Purpose:** Provides tool-agnostic data models for all prompt architecture components
 **Components:**
 - **Agent Model:** Represents AI agent configuration with tools, skills, workflows
@@ -78,7 +78,7 @@ graph TD
 - **Project Model:** Manages project-level configuration
 
 ### 2. Builder Architecture
-**Location:** `promptosaurus/builders/`
+**Location:** `prompticorn/builders/`
 **Purpose:** Transforms IR models into tool-specific output formats
 **Components:**
 - **Builder:** Base class defining builder interface
@@ -88,7 +88,7 @@ graph TD
 - **BuildOptions:** Configuration for build variants (minimal/verbose)
 
 ### 3. Registry System
-**Location:** `promptosaurus/registry.py`
+**Location:** `prompticorn/registry.py`
 **Purpose:** Central configuration for modes, files, and output ordering
 **Components:**
 - **Mode Registry:** Maps mode keys to display names and file lists
@@ -98,7 +98,7 @@ graph TD
 - **Validation:** Ensures all registered files exist
 
 ### 4. Persona Filtering System
-**Location:** `promptosaurus/personas/`
+**Location:** `prompticorn/personas/`
 **Purpose:** Enables role-based agent, workflow, and skill selection
 **Components:**
 - **PersonaRegistry:** Loads and manages persona definitions from YAML
@@ -106,7 +106,7 @@ graph TD
 - **Universal Agents:** Always-enabled agents available to all personas
 
 ### 5. Template Substitution System
-**Location:** `promptosaurus/builders/template_handlers/`
+**Location:** `prompticorn/builders/template_handlers/`
 **Purpose:** Processes Jinja2 templates with custom filters and resolvers
 **Components:**
 - **Template Engine:** Jinja2-based rendering engine
@@ -116,7 +116,7 @@ graph TD
 - **Error Resolvers:** Handle template rendering errors gracefully
 
 ### 6. Loader and Parser Architecture
-**Location:** `promptosaurus/ir/loaders/` and `promptosaurus/ir/parsers/`
+**Location:** `prompticorn/ir/loaders/` and `prompticorn/ir/parsers/`
 **Purpose:** Loads and parses prompt source files into IR models
 **Components:**
 - **Component Loaders:** Load agents, skills, workflows, tools, rules
@@ -139,7 +139,7 @@ sequenceDiagram
     participant Template
     participant Output
     
-    User->>CLI: promptosaurus init
+    User->>CLI: prompticorn init
     CLI->>Registry: Get mode configuration and file mappings
     Registry-->>CLI: Return registered files and modes
     CLI->>Factory: Request builder for tool 'kilo'

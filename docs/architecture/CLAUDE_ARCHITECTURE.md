@@ -97,7 +97,7 @@ project/
 
 ### Source Structure
 ```
-promptosaurus/
+prompticorn/
 ├── templates/claude/                  # Jinja2 templates
 │   ├── agent.md.j2
 │   ├── CLAUDE.md.j2
@@ -286,7 +286,7 @@ promptosaurus/
 ### Build Process
 
 ```
-1. User runs: promptosaurus init (tool=claude)
+1. User runs: prompticorn init (tool=claude)
    │
    ▼
 2. PromptBuilder.build()
@@ -399,7 +399,7 @@ Total: ~30KB loaded dynamically vs 728KB loaded upfront
 
 ### Jinja2 Templates
 
-**Location:** `promptosaurus/templates/claude/`
+**Location:** `prompticorn/templates/claude/`
 
 **Templates:**
 1. `agent.md.j2` - Agent files
@@ -510,23 +510,23 @@ This ensures builds never fail due to missing content.
 
 ### Adding New Languages
 
-1. Add `conventions-{language}.md` to `promptosaurus/agents/core/`
-2. Rebuild: `promptosaurus switch claude`
+1. Add `conventions-{language}.md` to `prompticorn/agents/core/`
+2. Rebuild: `prompticorn switch claude`
 3. New file appears in `.claude/conventions/languages/{language}.md`
 
 ### Adding Custom Agents
 
-1. Add agent directory to `promptosaurus/agents/{agent}/`
+1. Add agent directory to `prompticorn/agents/{agent}/`
 2. Create `prompt.md` with agent definition
 3. Optionally add subagents in `subagents/` subdirectory
-4. Rebuild: `promptosaurus switch claude`
+4. Rebuild: `prompticorn switch claude`
 
 ### Adding Custom Workflows
 
-1. Add workflow directory to `promptosaurus/workflows/{workflow}/`
+1. Add workflow directory to `prompticorn/workflows/{workflow}/`
 2. Create `minimal/workflow.md` and/or `verbose/workflow.md`
 3. Reference from agent configuration
-4. Rebuild: `promptosaurus switch claude`
+4. Rebuild: `prompticorn switch claude`
 
 ---
 
@@ -583,7 +583,7 @@ This ensures builds never fail due to missing content.
 **Checklist:**
 ```bash
 # Build for Claude
-promptosaurus init (select claude)
+prompticorn init (select claude)
 
 # Verify structure
 ls -la .claude/
@@ -601,7 +601,7 @@ cat .claude/conventions/languages/python.md
 test ! -d custom_instructions/ && echo "✓ No custom_instructions/"
 
 # Switch tools
-promptosaurus switch kilo-ide
+prompticorn switch kilo-ide
 test ! -d .claude/ && echo "✓ .claude/ removed"
 test ! -f CLAUDE.md && echo "✓ CLAUDE.md removed"
 ```
@@ -693,11 +693,11 @@ Any changes must maintain:
 - **User Guide:** `docs/user-guide/CLAUDE_USAGE.md`
 - **Design Document:** `docs/design/CLAUDE_ARTIFACT_REDESIGN.md`
 - **Status Tracking:** `docs/design/CLAUDE_REDESIGN_STATUS.md`
-- **Implementation:** `promptosaurus/builders/claude_builder.py`
-- **Templates:** `promptosaurus/templates/claude/`
+- **Implementation:** `prompticorn/builders/claude_builder.py`
+- **Templates:** `prompticorn/templates/claude/`
 
 ---
 
 **Document Version:** 2.0  
 **Last Updated:** 2026-04-14  
-**Maintained By:** Promptosaurus Team
+**Maintained By:** Prompticorn Team

@@ -1,4 +1,4 @@
-# Promptosaurus Builder Examples
+# Prompticorn Builder Examples
 
 This directory contains comprehensive examples of builder outputs for all 5 supported tools: **Kilo**, **Cline**, **Claude**, **GitHub Copilot**, and **Cursor**.
 
@@ -44,19 +44,19 @@ Model:       anthropic/claude-opus-4-1
 3. **Customize the content**: Edit the system prompt, tools, and descriptions
 4. **Deploy**: Follow the "Installation" section in each tool's README
 
-### Option 2: Generate from Promptosaurus
+### Option 2: Generate from Prompticorn
 
-Use the Promptosaurus CLI to generate custom outputs:
+Use the Prompticorn CLI to generate custom outputs:
 
 ```bash
-# Install promptosaurus
-pip install promptosaurus
+# Install prompticorn
+pip install prompticorn
 
 # Initialize configuration (runs setup wizard)
-promptosaurus init
+prompticorn init
 
 # Switch to a different tool output
-promptosaurus switch
+prompticorn switch
 ```
 
 ### Option 3: Use as Templates
@@ -65,7 +65,7 @@ These examples serve as templates for creating new agents:
 
 1. Study the structure in your chosen tool's example
 2. Create a new agent with different name/description
-3. Generate output using Promptosaurus
+3. Generate output using Prompticorn
 4. Deploy following the tool-specific installation guide
 
 ## What's Included in Each Example
@@ -153,7 +153,7 @@ cp examples/kilo/code.yml .kilo/agents/test.md
 name: "test"
 description: "Test writing and coverage assistant"
 model: "anthropic/claude-opus-4-1"
-state_management: ".promptosaurus/sessions/"
+state_management: ".prompticorn/sessions/"
 ---
 
 # System Prompt
@@ -195,7 +195,7 @@ your-project/
 
 ## For More Information
 
-- [Promptosaurus Documentation](../docs/README.md)
+- [Prompticorn Documentation](../docs/README.md)
 - [Builder API Reference](../docs/BUILDERS.md)
 - [Agent Configuration Guide](../docs/AGENT_CONFIG.md)
 
@@ -203,4 +203,4 @@ your-project/
 
 - Check the tool-specific README for common issues
 - See [Troubleshooting Guide](../docs/TROUBLESHOOTING.md)
-- Open an issue at https://github.com/Kilo-Org/promptosaurus/issues
+- Open an issue at https://github.com/Kilo-Org/prompticorn/issues

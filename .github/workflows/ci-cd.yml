@@ -20,7 +20,7 @@ concurrency:
   cancel-in-progress: true
 
 env:
-  PACKAGE_NAME: promptosaurus
+  PACKAGE_NAME: prompticorn
   PYTHON_MIN_VERSION: "3.10"
   MAJOR_VERSION: "0"  # Hardcoded - edit this to bump major version for breaking changes
   IS_MAIN: ${{ github.ref == 'refs/heads/main' }}
@@ -289,8 +289,8 @@ jobs:
           python -m venv test_env
           source test_env/bin/activate
           pip install dist/*.whl
-          promptosaurus --help
-          python -c "import promptosaurus; print('promptosaurus imported successfully')"
+          prompticorn --help
+          python -c "import prompticorn; print('prompticorn imported successfully')"
         shell: bash
 
   # Build for release - requires all
@@ -355,8 +355,8 @@ jobs:
           python -m venv test_env
           source test_env/bin/activate
           pip install dist/*.whl
-          promptosaurus --help
-          python -c "import promptosaurus; print('promptosaurus imported successfully')"
+          prompticorn --help
+          python -c "import prompticorn; print('prompticorn imported successfully')"
         shell: bash
 
   # =============================================================================
@@ -435,7 +435,7 @@ jobs:
 
           # Retry up to 3 times if package not immediately available
           for i in 1 2 3; do
-            echo "Attempt $i: Installing promptosaurus==${{ needs.build-release.outputs.version }}..."
+            echo "Attempt $i: Installing prompticorn==${{ needs.build-release.outputs.version }}..."
             if pip install --index-url https://test.pypi.org/simple/ --extra-index-url https://pypi.org/simple/ ${{ env.PACKAGE_NAME }}==${{ needs.build-release.outputs.version }}; then
               echo "Package installed successfully!"
               break
@@ -446,9 +446,9 @@ jobs:
           done
 
           # Verify CLI works
-          promptosaurus --help
+          prompticorn --help
           # Verify import works
-          python -c "import promptosaurus; print(f'Successfully installed promptosaurus {promptosaurus.__version__} from TestPyPI')"
+          python -c "import prompticorn; print(f'Successfully installed prompticorn {prompticorn.__version__} from TestPyPI')"
         shell: bash
 
   verify-pypi:
@@ -472,7 +472,7 @@ jobs:
 
           # Retry up to 3 times if package not immediately available
           for i in 1 2 3; do
-            echo "Attempt $i: Installing promptosaurus==${{ needs.build-release.outputs.version }}..."
+            echo "Attempt $i: Installing prompticorn==${{ needs.build-release.outputs.version }}..."
             if pip install ${{ env.PACKAGE_NAME }}==${{ needs.build-release.outputs.version }}; then
               echo "Package installed successfully!"
               break
@@ -483,9 +483,9 @@ jobs:
           done
 
           # Verify CLI works
-          promptosaurus --help
+          prompticorn --help
           # Verify import works
-          python -c "import promptosaurus; print(f'Successfully installed promptosaurus {promptosaurus.__version__} from PyPI')"
+          python -c "import prompticorn; print(f'Successfully installed prompticorn {prompticorn.__version__} from PyPI')"
         shell: bash
 
   # =============================================================================

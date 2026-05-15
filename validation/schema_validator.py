@@ -82,9 +82,9 @@ class SchemaValidator:
 
     def validate_all(self) -> tuple[int, int]:
         """Validate all files."""
-        agents_dir = self.project_root / "promptosaurus" / "agents"
-        workflows_dir = self.project_root / "promptosaurus" / "workflows"
-        skills_dir = self.project_root / "promptosaurus" / "skills"
+        agents_dir = self.project_root / "prompticorn" / "agents"
+        workflows_dir = self.project_root / "prompticorn" / "workflows"
+        skills_dir = self.project_root / "prompticorn" / "skills"
 
         validated = 0
         failed = 0

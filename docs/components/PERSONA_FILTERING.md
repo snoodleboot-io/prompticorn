@@ -2,12 +2,12 @@
 
 ## Overview
 
-The Persona filtering system enables role-based selection of agents, workflows, and skills in Promptosaurus. It implements dynamic agent enabling/disabling based on selected personas, allowing users to tailor the available functionality to their specific role or context.
+The Persona filtering system enables role-based selection of agents, workflows, and skills in Prompticorn. It implements dynamic agent enabling/disabling based on selected personas, allowing users to tailor the available functionality to their specific role or context.
 
 ## Core Components
 
 ### PersonaRegistry
-**File:** `promptosaurus/personas/registry.py`
+**File:** `prompticorn/personas/registry.py`
 
 The PersonaRegistry loads and manages persona definitions from a YAML file. It provides methods to query persona information, agent mappings, workflow mappings, and skill mappings.
 
@@ -23,7 +23,7 @@ The PersonaRegistry loads and manages persona definitions from a YAML file. It p
 - `get_description(persona_name)`: Get persona description
 
 ### PersonaFilter
-**File:** `promptosaurus/personas/registry.py`
+**File:** `prompticorn/personas/registry.py`
 
 The PersonaFilter implements the dynamic agent enabling/disabling mechanism. Agents are enabled if present in ANY selected persona, disabled otherwise. Universal agents are always enabled.
 
@@ -39,7 +39,7 @@ The PersonaFilter implements the dynamic agent enabling/disabling mechanism. Age
 
 ## Persona Definition Format
 
-Personas are defined in `promptosaurus/personas/personas.yaml` with the following structure:
+Personas are defined in `prompticorn/personas/personas.yaml` with the following structure:
 
 ```yaml
 version: "1.0.0"
@@ -96,7 +96,7 @@ sequenceDiagram
     participant PersonaFilter
     participant IR
     
-    User->>CLI: promptosaurus init (select persona) or promptosaurus swap
+    User->>CLI: prompticorn init (select persona) or prompticorn swap
     CLI->>PersonaRegistry: Load persona definitions
     PersonaRegistry-->>CLI: Return persona registry
     CLI->>PersonaFilter: Create filter with selected personas
@@ -146,7 +146,7 @@ graph TD
 
 ### Adding New Personas
 
-1. Edit `promptosaurus/personas/personas.yaml`
+1. Edit `prompticorn/personas/personas.yaml`
 2. Add a new entry under the `personas` key
 3. Define all required fields: display_name, description, focus, primary_agents, secondary_agents, workflows, skills
 4. Optionally add to `universal_agents` if the agent should be available to all personas
@@ -156,7 +156,7 @@ graph TD
 To load personas from a different source:
 
 ```python
-from promptosaurus.personas.registry import PersonaRegistry
+from prompticorn.personas.registry import PersonaRegistry
 import json
 
 # Load from JSON instead of YAML

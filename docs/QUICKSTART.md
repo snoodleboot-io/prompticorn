@@ -1,10 +1,10 @@
 # Quick Start Guide
 
-Get up to speed with Promptosaurus in 5 minutes.
+Get up to speed with Prompticorn in 5 minutes.
 
-## What is Promptosaurus?
+## What is Prompticorn?
 
-Promptosaurus is a comprehensive AI agent library with:
+Prompticorn is a comprehensive AI agent library with:
 - **25 primary agents** across different domains (data, DevOps, testing, backend, frontend, etc.)
 - **49 workflows** for common development tasks
 - **58 specialized skills** for domain-specific expertise
@@ -41,7 +41,7 @@ Specialized knowledge domains that agents leverage (SQL optimization, Kubernetes
 ## Directory Map
 
 ```
-promptosaurus/
+prompticorn/
 ├── agents/              # All agent definitions (25 agents, 82 subagents)
 ├── workflows/           # Task workflows (49 total, minimal/verbose variants)
 ├── skills/              # Specialized knowledge (58 total, minimal/verbose variants)
@@ -61,7 +61,7 @@ promptosaurus/
 1. Open [LIBRARY_INDEX.md](./LIBRARY_INDEX.md)
 2. Search for your role (e.g., "backend", "DevOps", "testing")
 3. Get agent ID and path
-4. Open `promptosaurus/agents/{agent-id}/` to read instructions
+4. Open `prompticorn/agents/{agent-id}/` to read instructions
 
 ### Find a workflow for a task
 1. Open [LIBRARY_INDEX.md](./LIBRARY_INDEX.md)
@@ -69,7 +69,7 @@ promptosaurus/
 3. Get workflow path
 4. Read `minimal/workflow.md` for quick reference or `verbose/workflow.md` for detailed guide
 
-### Set up Promptosaurus in your IDE
+### Set up Prompticorn in your IDE
 1. Read [TOOL_CONFIGURATION_EXAMPLES.reference.md](./reference/TOOL_CONFIGURATION_EXAMPLES.reference.md)
 2. Choose your tool (Kilo, Cline, Cursor, Copilot)
 3. Copy the appropriate rules to your project

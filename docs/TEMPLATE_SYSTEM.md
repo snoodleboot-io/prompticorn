@@ -1,6 +1,6 @@
 # Template Substitution System
 
-Promptosaurus uses a powerful template substitution system to customize agent prompts based on your project configuration.
+Prompticorn uses a powerful template substitution system to customize agent prompts based on your project configuration.
 
 ## Table of Contents
 
@@ -45,9 +45,9 @@ and pytest for tests.
 ### When Are Templates Applied?
 
 Templates are substituted when you run:
-- `promptosaurus init` - During initial configuration generation
-- `promptosaurus switch` - When switching AI tools
-- `promptosaurus swap` - When swapping personas
+- `prompticorn init` - During initial configuration generation
+- `prompticorn switch` - When switching AI tools
+- `prompticorn swap` - When swapping personas
 
 ---
 
@@ -59,7 +59,7 @@ All template variables use the format: `{{VARIABLE_NAME}}`
 
 | Variable | Example Value | Source |
 |----------|---------------|---------|
-| `{{LANGUAGE}}` | `python`, `typescript`, `go` | `spec.language` in `.promptosaurus.yaml` |
+| `{{LANGUAGE}}` | `python`, `typescript`, `go` | `spec.language` in `.prompticorn.yaml` |
 | `{{RUNTIME}}` | `3.12`, `5.4`, `1.21` | `spec.runtime` |
 
 ### Package Management
@@ -104,7 +104,7 @@ All template variables use the format: `{{VARIABLE_NAME}}`
 
 ### 1. Configuration Storage
 
-Your project configuration is stored in `.promptosaurus.yaml`:
+Your project configuration is stored in `.prompticorn.yaml`:
 
 ```yaml
 version: "1.0"
@@ -123,7 +123,7 @@ spec:
 
 When building agent configurations, the template system:
 
-1. **Reads** your `.promptosaurus.yaml`
+1. **Reads** your `.prompticorn.yaml`
 2. **Finds** all template variables (e.g., `{{LANGUAGE}}`)
 3. **Looks up** values from config
 4. **Substitutes** variables with actual values
@@ -145,7 +145,7 @@ Each template variable has a **handler** responsible for substitution:
 
 ### Basic Substitution
 
-**In agent prompt file (`promptosaurus/agents/code/minimal/prompt.md`):**
+**In agent prompt file (`prompticorn/agents/code/minimal/prompt.md`):**
 
 ```markdown
 ---
@@ -242,7 +242,7 @@ class TemplateVariableHandler(Protocol):
 
 ### Built-in Handlers
 
-Located in `promptosaurus/builders/template_handlers/`:
+Located in `prompticorn/builders/template_handlers/`:
 
 | Handler | Variable | Config Key |
 |---------|----------|------------|
@@ -264,7 +264,7 @@ Located in `promptosaurus/builders/template_handlers/`:
 
 Templates use **Jinja2** for advanced rendering:
 
-**Location:** `promptosaurus/builders/template_handlers/resolvers/jinja2_template_renderer.py`
+**Location:** `prompticorn/builders/template_handlers/resolvers/jinja2_template_renderer.py`
 
 **Features:**
 - Variable substitution
@@ -279,13 +279,13 @@ Templates use **Jinja2** for advanced rendering:
 
 ### Step 1: Create Handler Class
 
-Create a new file in `promptosaurus/builders/template_handlers/`:
+Create a new file in `prompticorn/builders/template_handlers/`:
 
 ```python
 # my_custom_handler.py
 
 from typing import Any
-from promptosaurus.builders.template_handlers.template_handler import TemplateHandler
+from prompticorn.builders.template_handlers.template_handler import TemplateHandler
 
 class MyCustomHandler(TemplateHandler):
     """Handler for MY_CUSTOM_VAR template variable."""
@@ -300,7 +300,7 @@ class MyCustomHandler(TemplateHandler):
 
 ### Step 2: Register Handler
 
-Register in `promptosaurus/builders/template_handlers/__init__.py`:
+Register in `prompticorn/builders/template_handlers/__init__.py`:
 
 ```python
 from .my_custom_handler import MyCustomHandler
@@ -324,7 +324,7 @@ Custom configuration: {{MY_CUSTOM_VAR}}
 
 ### Step 4: Add to Config Schema
 
-Update `.promptosaurus.yaml` to include your field:
+Update `.prompticorn.yaml` to include your field:
 
 ```yaml
 spec:
@@ -338,7 +338,7 @@ spec:
 
 ### Template Caching
 
-**Location:** `promptosaurus/builders/template_handlers/resolvers/error_recovery.py`
+**Location:** `prompticorn/builders/template_handlers/resolvers/error_recovery.py`
 
 Templates are cached after first render for performance:
 
@@ -353,7 +353,7 @@ class TemplateCache:
 
 ### Safe Filters
 
-**Location:** `promptosaurus/builders/template_handlers/resolvers/safe_filters.py`
+**Location:** `prompticorn/builders/template_handlers/resolvers/safe_filters.py`
 
 Safely access nested config values:
 
@@ -365,7 +365,7 @@ If `config.spec.language` doesn't exist, returns `"python"` instead of error.
 
 ### Custom Jinja2 Filters
 
-**Location:** `promptosaurus/builders/template_handlers/resolvers/custom_filters.py`
+**Location:** `prompticorn/builders/template_handlers/resolvers/custom_filters.py`
 
 Add custom filters for advanced transformations:
 
@@ -389,7 +389,7 @@ Language: PYTHON
 
 ### Error Recovery
 
-**Location:** `promptosaurus/builders/template_handlers/resolvers/error_recovery.py`
+**Location:** `prompticorn/builders/template_handlers/resolvers/error_recovery.py`
 
 If a template variable is missing, the system:
 
@@ -411,12 +411,12 @@ Use [MISSING: NONEXISTENT_VAR] for deployment.
 
 ### Template Validation
 
-**Location:** `promptosaurus/builders/template_handlers/resolvers/template_validator.py`
+**Location:** `prompticorn/builders/template_handlers/resolvers/template_validator.py`
 
 Validate templates before rendering:
 
 ```python
-from promptosaurus.builders.template_handlers.resolvers.template_validator import TemplateValidator
+from prompticorn.builders.template_handlers.resolvers.template_validator import TemplateValidator
 
 validator = TemplateValidator()
 errors = validator.validate(template_string)
@@ -504,13 +504,13 @@ If you add custom handlers, document them in your project:
 **Solution:**
 ```bash
 # Check your config
-cat .promptosaurus.yaml
+cat .prompticorn.yaml
 
 # Verify variable name matches handler
-grep "LANGUAGE" promptosaurus/builders/template_handlers/language_handler.py
+grep "LANGUAGE" prompticorn/builders/template_handlers/language_handler.py
 
 # Check if handler is registered
-grep "LanguageHandler" promptosaurus/builders/template_handlers/__init__.py
+grep "LanguageHandler" prompticorn/builders/template_handlers/__init__.py
 ```
 
 ### Template Rendering Error
@@ -558,7 +558,7 @@ TemplateRenderingError: Undefined variable 'NONEXISTENT_VAR'
 
 **Check config:**
 ```bash
-cat .promptosaurus.yaml
+cat .prompticorn.yaml
 
 # Should have:
 spec:
@@ -569,7 +569,7 @@ spec:
 **Solution:**
 ```bash
 # Re-run init to fix config
-promptosaurus init
+prompticorn init
 ```
 
 ### List Variables Not Iterating
@@ -585,7 +585,7 @@ linter: "ruff, mypy"
 linter: ["ruff", "mypy"]
 ```
 
-**Solution:** Use YAML list syntax in `.promptosaurus.yaml`
+**Solution:** Use YAML list syntax in `.prompticorn.yaml`
 
 ---
 
@@ -593,7 +593,7 @@ linter: ["ruff", "mypy"]
 
 ### Example 1: Python Project Template
 
-**Config (`.promptosaurus.yaml`):**
+**Config (`.prompticorn.yaml`):**
 ```yaml
 spec:
   language: "python"
@@ -677,13 +677,13 @@ Mock dependencies using {{MOCKING_LIBRARY}}.
 
 | Component | Path |
 |-----------|------|
-| **Handlers** | `promptosaurus/builders/template_handlers/` |
-| **Base Class** | `promptosaurus/builders/template_handlers/template_handler.py` |
-| **Jinja2 Renderer** | `promptosaurus/builders/template_handlers/resolvers/jinja2_template_renderer.py` |
-| **Error Recovery** | `promptosaurus/builders/template_handlers/resolvers/error_recovery.py` |
-| **Custom Filters** | `promptosaurus/builders/template_handlers/resolvers/custom_filters.py` |
-| **Safe Filters** | `promptosaurus/builders/template_handlers/resolvers/safe_filters.py` |
-| **Validator** | `promptosaurus/builders/template_handlers/resolvers/template_validator.py` |
+| **Handlers** | `prompticorn/builders/template_handlers/` |
+| **Base Class** | `prompticorn/builders/template_handlers/template_handler.py` |
+| **Jinja2 Renderer** | `prompticorn/builders/template_handlers/resolvers/jinja2_template_renderer.py` |
+| **Error Recovery** | `prompticorn/builders/template_handlers/resolvers/error_recovery.py` |
+| **Custom Filters** | `prompticorn/builders/template_handlers/resolvers/custom_filters.py` |
+| **Safe Filters** | `prompticorn/builders/template_handlers/resolvers/safe_filters.py` |
+| **Validator** | `prompticorn/builders/template_handlers/resolvers/template_validator.py` |
 
 ### Related Documentation
 

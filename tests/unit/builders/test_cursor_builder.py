@@ -15,7 +15,7 @@ Tests cover:
 
 from pathlib import Path
 
-from promptosaurus.builders.cursor_builder import CursorBuilder
+from prompticorn.builders.cursor_builder import CursorBuilder
 
 
 class TestCursorBuilderInitialization:

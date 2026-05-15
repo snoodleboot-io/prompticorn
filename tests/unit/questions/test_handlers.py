@@ -1,13 +1,13 @@
-"""Tests for promptosaurus.questions.handlers module."""
+"""Tests for prompticorn.questions.handlers module."""
 
 from unittest.mock import Mock
 
 import pytest
 
-from promptosaurus.questions.handlers.handle_single_language_questions import (
+from prompticorn.questions.handlers.handle_single_language_questions import (
     HandleSingleLanguageQuestions,
 )
-from promptosaurus.questions.handlers.language_question_handler import LanguageQuestionHandler
+from prompticorn.questions.handlers.language_question_handler import LanguageQuestionHandler
 
 
 class TestLanguageQuestionHandler:

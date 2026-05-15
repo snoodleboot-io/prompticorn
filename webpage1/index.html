@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Promptosaurus — Unified Prompt Architecture for AI Coding Assistants</title>
+  <title>Prompticorn — Unified Prompt Architecture for AI Coding Assistants</title>
   <meta name="description" content="Stop maintaining five separate agent configs. Define your agents once, generate configs for any AI coding tool. Auto-generate configurations for Kilo, Cline, Claude, Cursor, and GitHub Copilot." />
 
   <!-- Fonts -->
@@ -31,9 +31,9 @@
 ======================================================== -->
 <nav id="navbar" aria-label="Main navigation">
   <div class="nav-inner">
-    <a href="#hero" class="nav-logo" aria-label="Promptosaurus home">
-      <img src="assets/logo.png" alt="Promptosaurus" class="nav-logo-img" />
-      <span class="nav-logo-text">Promptosaurus</span>
+    <a href="#hero" class="nav-logo" aria-label="Prompticorn home">
+      <img src="assets/logo.png" alt="Prompticorn" class="nav-logo-img" />
+      <span class="nav-logo-text">Prompticorn</span>
     </a>
 
     <button class="nav-hamburger" id="nav-hamburger" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
@@ -48,7 +48,7 @@
       <li><a href="#examples">Examples</a></li>
       <li><a href="#docs">Docs</a></li>
       <li>
-        <a href="https://github.com/snoodleboot-io/promptosaurus" class="nav-github" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
+        <a href="https://github.com/snoodleboot-io/prompticorn" class="nav-github" target="_blank" rel="noopener noreferrer" aria-label="GitHub repository">
           <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" width="20" height="20"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12c0-5.523-4.477-10-10-10z"/></svg>
           GitHub
         </a>
@@ -65,7 +65,7 @@
   <div class="hero-particles" id="hero-particles" aria-hidden="true"></div>
 
   <div class="container hero-content">
-    <img src="assets/logo.png" alt="Promptosaurus" class="hero-logo" />
+    <img src="assets/logo.png" alt="Prompticorn" class="hero-logo" />
 
     <div class="hero-badge">
       <span class="badge-dot"></span>
@@ -78,7 +78,7 @@
     </h1>
 
     <p class="hero-subtitle">
-      Stop maintaining five separate agent configs. Run <code>promptosaurus init</code> once — Promptosaurus generates production-ready configurations for <strong>Kilo, Cline, Claude, Cursor,</strong> and <strong>GitHub Copilot</strong> automatically. Switch tools or swap personas any time without starting over.
+      Stop maintaining five separate agent configs. Run <code>prompticorn init</code> once — Prompticorn generates production-ready configurations for <strong>Kilo, Cline, Claude, Cursor,</strong> and <strong>GitHub Copilot</strong> automatically. Switch tools or swap personas any time without starting over.
     </p>
 
     <div class="hero-ctas">
@@ -86,7 +86,7 @@
         <svg aria-hidden="true" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="18" height="18"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
         Get Started
       </a>
-      <a href="https://github.com/snoodleboot-io/promptosaurus" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">
+      <a href="https://github.com/snoodleboot-io/prompticorn" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">
         <svg aria-hidden="true" viewBox="0 0 24 24" fill="currentColor" width="18" height="18"><path d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.166 6.839 9.489.5.092.682-.217.682-.482 0-.237-.009-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.155-1.11-1.462-1.11-1.462-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12c0-5.523-4.477-10-10-10z"/></svg>
         View on GitHub
       </a>
@@ -133,8 +133,8 @@
 
     <div class="hero-install-strip">
       <span class="install-label">Install:</span>
-      <code class="install-cmd" id="hero-install-cmd">pip install promptosaurus</code>
-      <button class="copy-btn" data-copy="pip install promptosaurus" aria-label="Copy install command">
+      <code class="install-cmd" id="hero-install-cmd">pip install prompticorn</code>
+      <button class="copy-btn" data-copy="pip install prompticorn" aria-label="Copy install command">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
       </button>
     </div>
@@ -154,7 +154,7 @@
     <div class="section-header">
       <div class="section-tag">Core Capabilities</div>
       <h2>Everything your team needs.<br /><span class="gradient-text">Nothing you don't.</span></h2>
-      <p class="section-desc">Built for engineering teams that take AI tooling seriously. Promptosaurus eliminates configuration drift and boilerplate sprawl across your AI assistant ecosystem.</p>
+      <p class="section-desc">Built for engineering teams that take AI tooling seriously. Prompticorn eliminates configuration drift and boilerplate sprawl across your AI assistant ecosystem.</p>
     </div>
 
     <div class="features-grid">
@@ -205,7 +205,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><circle cx="12" cy="12" r="3"/><path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/></svg>
         </div>
         <h3>Auto-Discovery Registry</h3>
-        <p>Zero-config agent registration. The <code>BuilderFactory</code> and <code>Registry</code> automatically discover and register builders. Configurations are stored in <code>.promptosaurus.yaml</code> — edit directly or use <code>promptosaurus update</code> for guided changes.</p>
+        <p>Zero-config agent registration. The <code>BuilderFactory</code> and <code>Registry</code> automatically discover and register builders. Configurations are stored in <code>.prompticorn.yaml</code> — edit directly or use <code>prompticorn update</code> for guided changes.</p>
         <div class="feature-tags">
           <span class="tag">Zero Config</span>
           <span class="tag">Auto-Discovery</span>
@@ -258,7 +258,7 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><path d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
         </div>
         <h3>Validate Before You Ship</h3>
-        <p>Built-in validation with <code>promptosaurus validate</code> checks your configuration for correctness, missing references, and schema compliance before any output is generated.</p>
+        <p>Built-in validation with <code>prompticorn validate</code> checks your configuration for correctness, missing references, and schema compliance before any output is generated.</p>
         <div class="feature-tags">
           <span class="tag">Schema Validation</span>
           <span class="tag">Pre-flight Checks</span>
@@ -285,7 +285,7 @@
         <div class="step-number">01</div>
         <div class="step-content">
           <h3>Configure Your Agents</h3>
-          <p>Run <code>promptosaurus init</code> or edit <code>.promptosaurus.yaml</code> to define your agents, skills, and workflows. Store in YAML or Markdown — the loader handles both.</p>
+          <p>Run <code>prompticorn init</code> or edit <code>.prompticorn.yaml</code> to define your agents, skills, and workflows. Store in YAML or Markdown — the loader handles both.</p>
         </div>
         <div class="step-connector" aria-hidden="true"></div>
       </div>
@@ -331,7 +331,7 @@
       <div class="diagram-container" id="diagram-dataflow">
         <div class="mermaid" id="mermaid-dataflow">
 flowchart LR
-  A([".promptosaurus.yaml"]) --> B["Loader / Parser"]
+  A([".prompticorn.yaml"]) --> B["Loader / Parser"]
   B --> C["Config loaded\n(Agent, Skill, Workflow)"]
   C --> D{"PersonaFilter"}
   D -->|active persona| E["Filtered Agent Set"]
@@ -369,7 +369,7 @@ sequenceDiagram
   participant Template as TemplateHandler
   participant FS as FileSystem
 
-  User->>CLI: promptosaurus init
+  User->>CLI: prompticorn init
   CLI->>Registry: query modes & config
   Registry-->>CLI: builder config
   CLI->>Factory: create_builder(mode)
@@ -410,7 +410,7 @@ sequenceDiagram
         <div class="mermaid" id="mermaid-statemachine">
 stateDiagram-v2
   [*] --> Idle
-  Idle --> Loading : promptosaurus init
+  Idle --> Loading : prompticorn init
   Loading --> Validating : Config loaded
   Validating --> Error : schema violation
   Validating --> Filtering : valid
@@ -435,7 +435,7 @@ stateDiagram-v2
     <div class="section-header">
       <div class="section-tag">Supported AI Tools</div>
       <h2>One config.<br /><span class="gradient-text">Five native outputs.</span></h2>
-      <p class="section-desc">Pick your AI coding assistant and Promptosaurus generates the right config files in the right format. No lowest-common-denominator compromises — each output is idiomatic to the tool it serves.</p>
+      <p class="section-desc">Pick your AI coding assistant and Prompticorn generates the right config files in the right format. No lowest-common-denominator compromises — each output is idiomatic to the tool it serves.</p>
     </div>
 
     <div class="builders-grid">
@@ -449,7 +449,7 @@ stateDiagram-v2
           </div>
           <div class="builder-status active">Supported</div>
         </div>
-        <p class="builder-desc">Generates YAML frontmatter + Markdown agent files for Kilo IDE. Run <code>promptosaurus init</code> and select Kilo as your target tool — files are written to the <code>.kilo/agents/</code> directory automatically.</p>
+        <p class="builder-desc">Generates YAML frontmatter + Markdown agent files for Kilo IDE. Run <code>prompticorn init</code> and select Kilo as your target tool — files are written to the <code>.kilo/agents/</code> directory automatically.</p>
         <div class="builder-outputs">
           <div class="builder-output-label">Output target:</div>
           <code class="builder-output-path">.kilo/agents/{agent_name}.md</code>
@@ -486,7 +486,7 @@ You are a senior software engineer...</code></pre>
           </div>
           <div class="builder-status active">Supported</div>
         </div>
-        <p class="builder-desc">Generates a pure Markdown <code>.clinerules</code> file. Select Cline during <code>promptosaurus init</code> and your agent configuration is rendered into Cline's natural-language rule format automatically.</p>
+        <p class="builder-desc">Generates a pure Markdown <code>.clinerules</code> file. Select Cline during <code>prompticorn init</code> and your agent configuration is rendered into Cline's natural-language rule format automatically.</p>
         <div class="builder-outputs">
           <div class="builder-output-label">Output target:</div>
           <code class="builder-output-path">.clinerules</code>
@@ -519,7 +519,7 @@ Follow the project's established patterns...</code></pre>
           </div>
           <div class="builder-status active">Supported</div>
         </div>
-        <p class="builder-desc">Generates the full <code>.claude/</code> directory with agents, workflows, and skills as Markdown files. Select Claude during <code>promptosaurus init</code> to populate your entire Claude Code configuration tree.</p>
+        <p class="builder-desc">Generates the full <code>.claude/</code> directory with agents, workflows, and skills as Markdown files. Select Claude during <code>prompticorn init</code> to populate your entire Claude Code configuration tree.</p>
         <div class="builder-outputs">
           <div class="builder-output-label">Output target:</div>
           <code class="builder-output-path">.claude/</code>
@@ -552,7 +552,7 @@ Follow the project's established patterns...</code></pre>
           </div>
           <div class="builder-status active">Supported</div>
         </div>
-        <p class="builder-desc">Generates YAML frontmatter + Markdown instruction files for GitHub Copilot. Select Copilot during <code>promptosaurus init</code> and your agent configs are written to <code>.github/instructions/</code>, version-controlled alongside your code.</p>
+        <p class="builder-desc">Generates YAML frontmatter + Markdown instruction files for GitHub Copilot. Select Copilot during <code>prompticorn init</code> and your agent configs are written to <code>.github/instructions/</code>, version-controlled alongside your code.</p>
         <div class="builder-outputs">
           <div class="builder-output-label">Output target:</div>
           <code class="builder-output-path">.github/instructions/{agent}.md</code>
@@ -585,7 +585,7 @@ Python code in this repository...</code></pre>
           </div>
           <div class="builder-status active">Supported</div>
         </div>
-        <p class="builder-desc">Generates Markdown rules files for Cursor. Select Cursor during <code>promptosaurus init</code> and your configuration is written to both <code>.cursor/rules/</code> and <code>.cursorrules</code>, keeping Cursor in sync with your AI toolchain.</p>
+        <p class="builder-desc">Generates Markdown rules files for Cursor. Select Cursor during <code>prompticorn init</code> and your configuration is written to both <code>.cursor/rules/</code> and <code>.cursorrules</code>, keeping Cursor in sync with your AI toolchain.</p>
         <div class="builder-outputs">
           <div class="builder-output-label">Output target:</div>
           <code class="builder-output-path">.cursor/rules/ + .cursorrules</code>
@@ -636,12 +636,12 @@ Follow project conventions strictly...</code></pre>
         <div class="code-block-wrapper">
           <div class="code-block-header">
             <span class="code-block-lang">bash</span>
-            <button class="copy-btn" data-copy="pip install promptosaurus" aria-label="Copy to clipboard">
+            <button class="copy-btn" data-copy="pip install prompticorn" aria-label="Copy to clipboard">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
               Copy
             </button>
           </div>
-          <pre><code class="language-bash">pip install promptosaurus</code></pre>
+          <pre><code class="language-bash">pip install prompticorn</code></pre>
         </div>
       </div>
 
@@ -649,12 +649,12 @@ Follow project conventions strictly...</code></pre>
         <div class="code-block-wrapper">
           <div class="code-block-header">
             <span class="code-block-lang">bash</span>
-            <button class="copy-btn" data-copy="uv add promptosaurus" aria-label="Copy to clipboard">
+            <button class="copy-btn" data-copy="uv add prompticorn" aria-label="Copy to clipboard">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
               Copy
             </button>
           </div>
-          <pre><code class="language-bash">uv add promptosaurus</code></pre>
+          <pre><code class="language-bash">uv add prompticorn</code></pre>
         </div>
       </div>
 
@@ -662,53 +662,53 @@ Follow project conventions strictly...</code></pre>
         <div class="code-block-wrapper">
           <div class="code-block-header">
             <span class="code-block-lang">bash</span>
-            <button class="copy-btn" data-copy="# Initialize Promptosaurus in your project
-promptosaurus init
+            <button class="copy-btn" data-copy="# Initialize Prompticorn in your project
+prompticorn init
 
 # List all registered modes
-promptosaurus list
+prompticorn list
 
 # Switch to a different AI assistant tool
-promptosaurus switch
+prompticorn switch
 
 # Swap the active persona
-promptosaurus swap
+prompticorn swap
 
 # Update your configuration
-promptosaurus update
+prompticorn update
 
 # Validate your config before building
-promptosaurus validate" aria-label="Copy to clipboard">
+prompticorn validate" aria-label="Copy to clipboard">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
               Copy
             </button>
           </div>
-          <pre><code class="language-bash"># Initialize Promptosaurus in your project
-promptosaurus init
+          <pre><code class="language-bash"># Initialize Prompticorn in your project
+prompticorn init
 
 # List all registered modes
-promptosaurus list
+prompticorn list
 
 # Switch to a different AI assistant tool
-promptosaurus switch
+prompticorn switch
 
 # Swap the active persona
-promptosaurus swap
+prompticorn swap
 
 # Update your configuration
-promptosaurus update
+prompticorn update
 
 # Validate your config before building
-promptosaurus validate</code></pre>
+prompticorn validate</code></pre>
         </div>
       </div>
       <div class="tab-panel" id="tab-config-file" role="tabpanel" aria-labelledby="btn-config-file" hidden>
-        <p style="margin: 0 0 1rem; color: var(--text-muted); font-size: 0.95rem;">This file is auto-generated by <code>promptosaurus init</code>. Edit it directly and run <code>promptosaurus update</code> to regenerate your configs — no need to re-run the interactive wizard.</p>
+        <p style="margin: 0 0 1rem; color: var(--text-muted); font-size: 0.95rem;">This file is auto-generated by <code>prompticorn init</code>. Edit it directly and run <code>prompticorn update</code> to regenerate your configs — no need to re-run the interactive wizard.</p>
         <div class="code-block-wrapper">
           <div class="code-block-header">
             <span class="code-block-lang">yaml</span>
-            <button class="copy-btn" data-copy="# .promptosaurus.yaml — auto-generated by promptosaurus init
-# Edit manually and run promptosaurus update to regenerate
+            <button class="copy-btn" data-copy="# .prompticorn.yaml — auto-generated by prompticorn init
+# Edit manually and run prompticorn update to regenerate
 
 tool: kilo-ide          # kilo-ide | kilo-cli | cline | claude | cursor | copilot
 variant: minimal        # minimal | verbose
@@ -719,13 +719,13 @@ personas:
   - backend-software-engineer
   - qa-tester
 
-# Run promptosaurus update after editing this file" aria-label="Copy to clipboard">
+# Run prompticorn update after editing this file" aria-label="Copy to clipboard">
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
               Copy
             </button>
           </div>
-          <pre><code class="language-yaml"># .promptosaurus.yaml — auto-generated by `promptosaurus init`
-# Edit manually and run `promptosaurus update` to regenerate
+          <pre><code class="language-yaml"># .prompticorn.yaml — auto-generated by `prompticorn init`
+# Edit manually and run `prompticorn update` to regenerate
 
 tool: kilo-ide          # kilo-ide | kilo-cli | cline | claude | cursor | copilot
 variant: minimal        # minimal | verbose
@@ -736,7 +736,7 @@ personas:
   - backend-software-engineer
   - qa-tester
 
-# Run `promptosaurus update` after editing this file</code></pre>
+# Run `prompticorn update` after editing this file</code></pre>
         </div>
       </div>
     </div>
@@ -744,16 +744,16 @@ personas:
     <!-- Init wizard walkthrough -->
     <div class="cli-table-wrapper" style="margin-bottom: 2rem;">
       <h3 class="cli-table-title">The Init Wizard</h3>
-      <p style="margin: 0.5rem 0 1.5rem; color: var(--text-muted); font-size: 0.95rem;">Run <code>promptosaurus init</code> in your project root. The interactive wizard guides you through every choice:</p>
+      <p style="margin: 0.5rem 0 1.5rem; color: var(--text-muted); font-size: 0.95rem;">Run <code>prompticorn init</code> in your project root. The interactive wizard guides you through every choice:</p>
       <div class="code-block-wrapper">
         <div class="code-block-header">
           <span class="code-block-lang">bash</span>
-          <button class="copy-btn" data-copy="promptosaurus init" aria-label="Copy to clipboard">
+          <button class="copy-btn" data-copy="prompticorn init" aria-label="Copy to clipboard">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="15" height="15"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
             Copy
           </button>
         </div>
-        <pre><code class="language-bash">$ promptosaurus init
+        <pre><code class="language-bash">$ prompticorn init
 
 ? Which AI tool do you want to configure?
   > Kilo IDE
@@ -789,7 +789,7 @@ Generating configuration for Kilo IDE...
 Written: .kilo/agents/code.md
 Written: .kilo/agents/debug.md
 Written: .kilo/agents/backend.md
-Written: .promptosaurus.yaml
+Written: .prompticorn.yaml
 
 Done! Your Kilo IDE configuration is ready.</code></pre>
       </div>
@@ -807,27 +807,27 @@ Done! Your Kilo IDE configuration is ready.</code></pre>
         </thead>
         <tbody>
           <tr>
-            <td><code>promptosaurus init</code></td>
+            <td><code>prompticorn init</code></td>
             <td>Interactive initialization — sets up your project with the chosen AI tool</td>
           </tr>
           <tr>
-            <td><code>promptosaurus list</code></td>
+            <td><code>prompticorn list</code></td>
             <td>List all registered modes and available builders in the registry</td>
           </tr>
           <tr>
-            <td><code>promptosaurus switch</code></td>
+            <td><code>prompticorn switch</code></td>
             <td>Interactively switch the active AI assistant tool (regenerates configs)</td>
           </tr>
           <tr>
-            <td><code>promptosaurus swap</code></td>
+            <td><code>prompticorn swap</code></td>
             <td>Swap the active persona — re-filters agents for the new team role</td>
           </tr>
           <tr>
-            <td><code>promptosaurus update</code></td>
-            <td>Update configuration files after editing <code>.promptosaurus.yaml</code></td>
+            <td><code>prompticorn update</code></td>
+            <td>Update configuration files after editing <code>.prompticorn.yaml</code></td>
           </tr>
           <tr>
-            <td><code>promptosaurus validate</code></td>
+            <td><code>prompticorn validate</code></td>
             <td>Validate config — check for errors before committing</td>
           </tr>
         </tbody>
@@ -845,7 +845,7 @@ Done! Your Kilo IDE configuration is ready.</code></pre>
     <div class="section-header">
       <div class="section-tag">Examples</div>
       <h2>Real patterns.<br /><span class="gradient-text">Copy and run.</span></h2>
-      <p class="section-desc">Practical CLI workflows for common Promptosaurus scenarios. All examples use the interactive wizard or CLI commands.</p>
+      <p class="section-desc">Practical CLI workflows for common Prompticorn scenarios. All examples use the interactive wizard or CLI commands.</p>
     </div>
 
     <div class="examples-list">
@@ -855,7 +855,7 @@ Done! Your Kilo IDE configuration is ready.</code></pre>
           <span class="example-num">01</span>
           <div>
             <h3>Set up for Kilo IDE — single backend engineer</h3>
-            <p>Initialize Promptosaurus targeting Kilo IDE for a solo backend engineer. The wizard generates only backend-relevant agents.</p>
+            <p>Initialize Prompticorn targeting Kilo IDE for a solo backend engineer. The wizard generates only backend-relevant agents.</p>
           </div>
         </div>
         <div class="code-block-wrapper">
@@ -866,10 +866,10 @@ Done! Your Kilo IDE configuration is ready.</code></pre>
               Copy
             </button>
           </div>
-          <pre><code class="language-bash">pip install promptosaurus
-# or: uv add promptosaurus
+          <pre><code class="language-bash">pip install prompticorn
+# or: uv add prompticorn
 
-promptosaurus init
+prompticorn init
 # ? Which AI tool? → Kilo IDE
 # ? Repository type? → Single-language
 # ? Prompt variant? → Verbose
@@ -880,7 +880,7 @@ promptosaurus init
 # Written: .kilo/agents/code.md
 # Written: .kilo/agents/debug.md
 # Written: .kilo/agents/backend.md
-# Written: .promptosaurus.yaml</code></pre>
+# Written: .prompticorn.yaml</code></pre>
         </div>
       </div>
 
@@ -900,7 +900,7 @@ promptosaurus init
               Copy
             </button>
           </div>
-          <pre><code class="language-bash">promptosaurus init
+          <pre><code class="language-bash">prompticorn init
 # ? Which AI tool? → Claude
 # ? Repository type? → Multi-language monorepo
 # ? Prompt variant? → Minimal
@@ -917,7 +917,7 @@ promptosaurus init
 # Written: .claude/agents/qa.md
 # Written: .claude/agents/debug.md   ← universal
 # Written: .claude/agents/ask.md     ← universal
-# Written: .promptosaurus.yaml</code></pre>
+# Written: .prompticorn.yaml</code></pre>
         </div>
       </div>
 
@@ -926,7 +926,7 @@ promptosaurus init
           <span class="example-num">03</span>
           <div>
             <h3>Switch to a different AI tool</h3>
-            <p>Already initialized? Switch from one AI tool to another. Promptosaurus reads your existing <code>.promptosaurus.yaml</code> and regenerates for the new target.</p>
+            <p>Already initialized? Switch from one AI tool to another. Prompticorn reads your existing <code>.prompticorn.yaml</code> and regenerates for the new target.</p>
           </div>
         </div>
         <div class="code-block-wrapper">
@@ -938,7 +938,7 @@ promptosaurus init
             </button>
           </div>
           <pre><code class="language-bash"># Currently configured for Kilo IDE, switching to Cursor
-promptosaurus switch
+prompticorn switch
 # ? Which AI tool do you want to switch to?
 #   > Cursor
 # Regenerating for Cursor...
@@ -966,7 +966,7 @@ promptosaurus switch
             </button>
           </div>
           <pre><code class="language-bash"># Swap personas — a new team member is a Data Scientist
-promptosaurus swap
+prompticorn swap
 # ? Update persona selection:
 #   [x] Backend Software Engineer
 #   [x] Data Scientist        ← newly added
@@ -993,14 +993,14 @@ promptosaurus swap
             </button>
           </div>
           <pre><code class="language-bash"># Validate config integrity
-promptosaurus validate
-# Checking .promptosaurus.yaml...
+prompticorn validate
+# Checking .prompticorn.yaml...
 # Checking registered agents...
 # No issues found. Configuration is valid.
 
 # Use as a CI step (GitHub Actions, etc.)
-# - name: Validate Promptosaurus config
-#   run: promptosaurus validate</code></pre>
+# - name: Validate Prompticorn config
+#   run: prompticorn validate</code></pre>
         </div>
       </div>
 
@@ -1119,8 +1119,8 @@ promptosaurus validate
   <div class="container">
     <div class="section-header">
       <div class="section-tag">Collaborators</div>
-      <h2>Building on<br /><span class="gradient-text">Promptosaurus.</span></h2>
-      <p class="section-desc">Want to extend Promptosaurus, add a new AI tool target, or integrate it into your own tooling? Here's everything you need to contribute or build on top of the library.</p>
+      <h2>Building on<br /><span class="gradient-text">Prompticorn.</span></h2>
+      <p class="section-desc">Want to extend Prompticorn, add a new AI tool target, or integrate it into your own tooling? Here's everything you need to contribute or build on top of the library.</p>
     </div>
 
     <div class="collab-grid">
@@ -1131,7 +1131,7 @@ promptosaurus validate
         </div>
         <h3>Contribute on GitHub</h3>
         <p>Browse issues, submit PRs, and read the contribution guide. The codebase is structured around five builders — each one is a self-contained, testable unit.</p>
-        <a href="https://github.com/snoodleboot-io/promptosaurus" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
+        <a href="https://github.com/snoodleboot-io/prompticorn" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">View on GitHub →</a>
       </div>
 
       <div class="collab-card">
@@ -1139,7 +1139,7 @@ promptosaurus validate
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M17.5 14.5v6M14.5 17.5h6"/></svg>
         </div>
         <h3>Builder Architecture</h3>
-        <p>Promptosaurus uses five internal builder classes that transform IR models into tool-specific outputs: <code>KiloBuilder</code>, <code>ClineBuilder</code>, <code>ClaudeBuilder</code>, <code>CopilotBuilder</code>, and <code>CursorBuilder</code>. Each implements a common <code>build(agent, options)</code> interface. <code>BuilderFactory</code> handles instantiation.</p>
+        <p>Prompticorn uses five internal builder classes that transform IR models into tool-specific outputs: <code>KiloBuilder</code>, <code>ClineBuilder</code>, <code>ClaudeBuilder</code>, <code>CopilotBuilder</code>, and <code>CursorBuilder</code>. Each implements a common <code>build(agent, options)</code> interface. <code>BuilderFactory</code> handles instantiation.</p>
       </div>
 
       <div class="collab-card">
@@ -1147,11 +1147,11 @@ promptosaurus validate
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="28" height="28"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
         </div>
         <h3>Python API (Programmatic Usage)</h3>
-        <p>If you're integrating Promptosaurus into scripts or build pipelines, you can call builders directly:</p>
+        <p>If you're integrating Prompticorn into scripts or build pipelines, you can call builders directly:</p>
         <div class="builder-snippet" style="margin-top: 1rem;">
-          <pre><code class="language-python">from promptosaurus.builders.kilo_builder import KiloBuilder
-from promptosaurus.ir.models import Agent
-from promptosaurus.builders.config import BuildOptions
+          <pre><code class="language-python">from prompticorn.builders.kilo_builder import KiloBuilder
+from prompticorn.ir.models import Agent
+from prompticorn.builders.config import BuildOptions
 
 builder = KiloBuilder()
 agent = Agent(
@@ -1170,10 +1170,10 @@ output = builder.build(agent, BuildOptions(variant="verbose"))
         </div>
         <h3>Contribution Resources</h3>
         <ul class="builder-caps">
-          <li><a href="https://github.com/snoodleboot-io/promptosaurus/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">CONTRIBUTING.md</a> — setup, conventions, PR process</li>
-          <li><a href="https://github.com/snoodleboot-io/promptosaurus" target="_blank" rel="noopener noreferrer">Builder API docs</a> — interface reference for each builder</li>
-          <li><a href="https://github.com/snoodleboot-io/promptosaurus/issues" target="_blank" rel="noopener noreferrer">Open issues</a> — good first issues labeled</li>
-          <li><a href="https://github.com/snoodleboot-io/promptosaurus/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">License</a></li>
+          <li><a href="https://github.com/snoodleboot-io/prompticorn/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">CONTRIBUTING.md</a> — setup, conventions, PR process</li>
+          <li><a href="https://github.com/snoodleboot-io/prompticorn" target="_blank" rel="noopener noreferrer">Builder API docs</a> — interface reference for each builder</li>
+          <li><a href="https://github.com/snoodleboot-io/prompticorn/issues" target="_blank" rel="noopener noreferrer">Open issues</a> — good first issues labeled</li>
+          <li><a href="https://github.com/snoodleboot-io/prompticorn/blob/main/LICENSE" target="_blank" rel="noopener noreferrer">License</a></li>
         </ul>
       </div>
 
@@ -1187,9 +1187,9 @@ output = builder.build(agent, BuildOptions(variant="verbose"))
 <footer class="site-footer">
   <div class="container footer-inner">
     <div class="footer-brand">
-      <img src="assets/logo.png" alt="Promptosaurus" class="footer-logo" />
+      <img src="assets/logo.png" alt="Prompticorn" class="footer-logo" />
       <div>
-        <div class="footer-brand-name">Promptosaurus</div>
+        <div class="footer-brand-name">Prompticorn</div>
         <div class="footer-brand-tagline">Unified prompt architecture for AI coding assistants</div>
       </div>
     </div>
@@ -1215,9 +1215,9 @@ output = builder.build(agent, BuildOptions(variant="verbose"))
       <div class="footer-nav-col">
         <div class="footer-nav-title">Project</div>
         <ul>
-          <li><a href="https://github.com/snoodleboot-io/promptosaurus" target="_blank" rel="noopener noreferrer">GitHub</a></li>
+          <li><a href="https://github.com/snoodleboot-io/prompticorn" target="_blank" rel="noopener noreferrer">GitHub</a></li>
           <li><a href="#collaborators">Collaborators</a></li>
-          <li><a href="https://github.com/snoodleboot-io/promptosaurus/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">Contributing</a></li>
+          <li><a href="https://github.com/snoodleboot-io/prompticorn/blob/main/CONTRIBUTING.md" target="_blank" rel="noopener noreferrer">Contributing</a></li>
         </ul>
       </div>
     </nav>
@@ -1225,7 +1225,7 @@ output = builder.build(agent, BuildOptions(variant="verbose"))
 
   <div class="footer-bottom">
     <div class="container">
-      <span class="footer-copy">&copy; 2026 Promptosaurus. Built for engineers who care about their tooling.</span>
+      <span class="footer-copy">&copy; 2026 Prompticorn. Built for engineers who care about their tooling.</span>
       <span class="footer-tech">Vanilla HTML · No build step · GitHub Pages</span>
     </div>
   </div>

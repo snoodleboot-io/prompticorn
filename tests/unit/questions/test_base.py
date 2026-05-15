@@ -1,11 +1,11 @@
-"""Tests for promptosaurus.questions.base module."""
+"""Tests for prompticorn.questions.base module."""
 
 import pytest
 
-from promptosaurus.questions.base.constants import RepositoryTypes
-from promptosaurus.questions.base.folder_mapping_question import FolderMappingQuestion
-from promptosaurus.questions.base.question import Question
-from promptosaurus.questions.base.repository_type_question import RepositoryTypeQuestion
+from prompticorn.questions.base.constants import RepositoryTypes
+from prompticorn.questions.base.folder_mapping_question import FolderMappingQuestion
+from prompticorn.questions.base.question import Question
+from prompticorn.questions.base.repository_type_question import RepositoryTypeQuestion
 
 
 class TestQuestion:

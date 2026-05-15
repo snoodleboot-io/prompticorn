@@ -204,7 +204,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - 95.0% test coverage, 47+ tests
 
 #### CLI Tool
-- `prompt-build` internal tool for all 5 builders (public CLI is `promptosaurus`)
+- `prompt-build` internal tool for all 5 builders (public CLI is `prompticorn`)
 - Builder selection: `--builder kilo,cline,claude,copilot,cursor`
 - Agent selection: `--agent <name>`
 - Variant selection: `--variant minimal|verbose`
@@ -331,7 +331,7 @@ See `docs/MIGRATION_GUIDE.md` for step-by-step instructions.
 
 ### Added
 
-- Initial release of Promptosaurus
+- Initial release of Prompticorn
 - Support for single-language repositories
 - CLI commands: init, list, validate
 - Builder support for: Kilo CLI, Kilo IDE, Cline, Cursor, Copilot

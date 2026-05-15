@@ -909,7 +909,7 @@ Follow checklist
 - [ ] Verify no `custom_instructions/` artifacts
 
 **5.3 End-to-End Tests**
-- [ ] Test `promptosaurus init` with Claude
+- [ ] Test `prompticorn init` with Claude
 - [ ] Test switching from Kilo to Claude
 - [ ] Test switching from Claude to Kilo
 - [ ] Verify artifact cleanup
@@ -934,7 +934,7 @@ Follow checklist
 - [ ] Include decision flowchart for variant selection
 - [ ] Reference hybrid strategy guide and blog post
 - [ ] Add examples: planning phase → implementation phase switching
-- [ ] Document CLI commands for variant switching: `promptosaurus config set variant verbose`
+- [ ] Document CLI commands for variant switching: `prompticorn config set variant verbose`
 
 ---
 
@@ -952,7 +952,7 @@ Follow checklist
 
 2. **Run init with new version:**
    ```bash
-   promptosaurus init
+   prompticorn init
    # Select Claude
    ```
 
@@ -1151,7 +1151,7 @@ vs Current: 728KB in JSON files
 
 ### C. References
 
-- Promptosaurus IR Models: `promptosaurus/ir/models/`
-- Current ClaudeBuilder: `promptosaurus/builders/claude_builder.py`
-- Artifact Definitions: `promptosaurus/artifacts.py`
-- Agent Registry: `promptosaurus/agent_registry/registry.py`
+- Prompticorn IR Models: `prompticorn/ir/models/`
+- Current ClaudeBuilder: `prompticorn/builders/claude_builder.py`
+- Artifact Definitions: `prompticorn/artifacts.py`
+- Agent Registry: `prompticorn/agent_registry/registry.py`

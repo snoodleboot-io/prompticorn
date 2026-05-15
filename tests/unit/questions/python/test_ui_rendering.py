@@ -7,14 +7,14 @@ rendering pipeline to verify that:
 3. The multi-line explanation fix works properly
 """
 
-from promptosaurus.questions.python.python_package_manager_question import (
+from prompticorn.questions.python.python_package_manager_question import (
     PythonPackageManagerQuestion,
 )
-from promptosaurus.questions.python.python_runtime_question import PythonRuntimeQuestion
-from promptosaurus.ui.domain.context import PipelineContext, QuestionContext
-from promptosaurus.ui.render.columns import ColumnLayoutRenderer
-from promptosaurus.ui.render.vertical import VerticalLayoutRenderer
-from promptosaurus.ui.state.single_selection_state import SingleSelectionState
+from prompticorn.questions.python.python_runtime_question import PythonRuntimeQuestion
+from prompticorn.ui.domain.context import PipelineContext, QuestionContext
+from prompticorn.ui.render.columns import ColumnLayoutRenderer
+from prompticorn.ui.render.vertical import VerticalLayoutRenderer
+from prompticorn.ui.state.single_selection_state import SingleSelectionState
 
 
 class TestPythonRuntimeUIRendering:

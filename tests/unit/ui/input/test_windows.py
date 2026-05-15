@@ -1,4 +1,4 @@
-"""Unit tests for promptosaurus.ui.input.windows module.
+"""Unit tests for prompticorn.ui.input.windows module.
 
 Tests the Windows-specific input provider using msvcrt for raw input.
 """
@@ -7,8 +7,8 @@ from unittest.mock import MagicMock, Mock
 
 import pytest
 
-from promptosaurus.ui.domain.events import InputEvent, InputEventType
-from promptosaurus.ui.input.windows import WindowsInputProvider
+from prompticorn.ui.domain.events import InputEvent, InputEventType
+from prompticorn.ui.input.windows import WindowsInputProvider
 
 
 class TestWindowsInputProvider:

@@ -4,13 +4,13 @@ from pathlib import Path
 
 import pytest
 
-from promptosaurus.personas.registry import PersonaFilter, PersonaRegistry
+from prompticorn.personas.registry import PersonaFilter, PersonaRegistry
 
 
 @pytest.fixture
 def registry():
     """Loaded PersonaRegistry instance"""
-    personas_yaml_path = Path("promptosaurus/personas/personas.yaml")
+    personas_yaml_path = Path("prompticorn/personas/personas.yaml")
     return PersonaRegistry.from_yaml(personas_yaml_path)
 
 

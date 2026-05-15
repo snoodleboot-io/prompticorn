@@ -11,9 +11,9 @@ class ContentValidator:
         self.project_root = project_root
         self.errors: list[str] = []
         self.warnings: list[str] = []
-        self.agents_dir = project_root / "promptosaurus" / "agents"
-        self.workflows_dir = project_root / "promptosaurus" / "workflows"
-        self.skills_dir = project_root / "promptosaurus" / "skills"
+        self.agents_dir = project_root / "prompticorn" / "agents"
+        self.workflows_dir = project_root / "prompticorn" / "workflows"
+        self.skills_dir = project_root / "prompticorn" / "skills"
 
     def validate_all(self) -> tuple[int, int]:
         """Run all validations."""

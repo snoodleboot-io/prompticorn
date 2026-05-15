@@ -1,4 +1,4 @@
-"""Unit tests for promptosaurus.ui._selector module.
+"""Unit tests for prompticorn.ui._selector module.
 
 Tests the public UI API functions for interactive selection, confirmation,
 and prompting with default values.
@@ -8,7 +8,7 @@ from unittest.mock import MagicMock, patch
 
 import pytest
 
-from promptosaurus.ui._selector import (
+from prompticorn.ui._selector import (
     confirm_interactive,
     prompt_with_default,
     select_option_with_explain,
@@ -21,9 +21,9 @@ class TestSelectOptionWithExplain:
     def test_creates_question_context_with_correct_parameters(self) -> None:
         """Test that QuestionContext is created with correct parameters."""
         with (
-            patch("promptosaurus.ui._selector.RenderStage") as mock_render,
-            patch("promptosaurus.ui._selector.StateUpdateStage"),
-            patch("promptosaurus.ui._selector.PipelineOrchestrator") as mock_pipeline,
+            patch("prompticorn.ui._selector.RenderStage") as mock_render,
+            patch("prompticorn.ui._selector.StateUpdateStage"),
+            patch("prompticorn.ui._selector.PipelineOrchestrator") as mock_pipeline,
         ):
             mock_pipeline_instance = MagicMock()
             mock_pipeline_instance.run.return_value = "option1"
@@ -34,7 +34,7 @@ class TestSelectOptionWithExplain:
             mock_render.return_value = mock_render_instance
 
             with patch(
-                "promptosaurus.ui._selector.UIFactory.create_input_provider"
+                "prompticorn.ui._selector.UIFactory.create_input_provider"
             ) as mock_input_factory:
                 mock_input_provider = MagicMock()
                 mock_input_factory.return_value = mock_input_provider
@@ -53,9 +53,9 @@ class TestSelectOptionWithExplain:
     def test_returns_single_option_when_allow_multiple_false(self) -> None:
         """Test returns string when allow_multiple=False."""
         with (
-            patch("promptosaurus.ui._selector.RenderStage") as mock_render,
-            patch("promptosaurus.ui._selector.StateUpdateStage"),
-            patch("promptosaurus.ui._selector.PipelineOrchestrator") as mock_pipeline,
+            patch("prompticorn.ui._selector.RenderStage") as mock_render,
+            patch("prompticorn.ui._selector.StateUpdateStage"),
+            patch("prompticorn.ui._selector.PipelineOrchestrator") as mock_pipeline,
         ):
             mock_pipeline_instance = MagicMock()
             mock_pipeline_instance.run.return_value = "selected_option"
@@ -65,7 +65,7 @@ class TestSelectOptionWithExplain:
             mock_render_instance.stdscr = None
             mock_render.return_value = mock_render_instance
 
-            with patch("promptosaurus.ui._selector.UIFactory.create_input_provider"):
+            with patch("prompticorn.ui._selector.UIFactory.create_input_provider"):
                 result = select_option_with_explain(
                     question="Q",
                     options=["A", "B"],
@@ -79,9 +79,9 @@ class TestSelectOptionWithExplain:
     def test_returns_list_when_allow_multiple_true(self) -> None:
         """Test returns list when allow_multiple=True."""
         with (
-            patch("promptosaurus.ui._selector.RenderStage") as mock_render,
-            patch("promptosaurus.ui._selector.StateUpdateStage"),
-            patch("promptosaurus.ui._selector.PipelineOrchestrator") as mock_pipeline,
+            patch("prompticorn.ui._selector.RenderStage") as mock_render,
+            patch("prompticorn.ui._selector.StateUpdateStage"),
+            patch("prompticorn.ui._selector.PipelineOrchestrator") as mock_pipeline,
         ):
             mock_pipeline_instance = MagicMock()
             mock_pipeline_instance.run.return_value = ["option1", "option2"]
@@ -91,7 +91,7 @@ class TestSelectOptionWithExplain:
             mock_render_instance.stdscr = None
             mock_render.return_value = mock_render_instance
 
-            with patch("promptosaurus.ui._selector.UIFactory.create_input_provider"):
+            with patch("prompticorn.ui._selector.UIFactory.create_input_provider"):
                 result = select_option_with_explain(
                     question="Q",
                     options=["opt1", "opt2", "opt3"],
@@ -105,9 +105,9 @@ class TestSelectOptionWithExplain:
     def test_cleans_up_curses_on_exit(self) -> None:
         """Test that curses resources are cleaned up even if pipeline fails."""
         with (
-            patch("promptosaurus.ui._selector.RenderStage") as mock_render,
-            patch("promptosaurus.ui._selector.StateUpdateStage"),
-            patch("promptosaurus.ui._selector.PipelineOrchestrator") as mock_pipeline,
+            patch("prompticorn.ui._selector.RenderStage") as mock_render,
+            patch("prompticorn.ui._selector.StateUpdateStage"),
+            patch("prompticorn.ui._selector.PipelineOrchestrator") as mock_pipeline,
         ):
             mock_pipeline_instance = MagicMock()
             mock_pipeline_instance.run.side_effect = RuntimeError("Pipeline error")
@@ -118,7 +118,7 @@ class TestSelectOptionWithExplain:
             mock_render_instance.cleanup = MagicMock()
             mock_render.return_value = mock_render_instance
 
-            with patch("promptosaurus.ui._selector.UIFactory.create_input_provider"):
+            with patch("prompticorn.ui._selector.UIFactory.create_input_provider"):
                 with pytest.raises(RuntimeError):
                     select_option_with_explain(
                         question="Q",
@@ -132,9 +132,9 @@ class TestSelectOptionWithExplain:
     def test_handles_default_indices_none_input(self) -> None:
         """Test that default_indices defaults to set containing default_index."""
         with (
-            patch("promptosaurus.ui._selector.RenderStage") as mock_render,
-            patch("promptosaurus.ui._selector.StateUpdateStage"),
-            patch("promptosaurus.ui._selector.PipelineOrchestrator") as mock_pipeline,
+            patch("prompticorn.ui._selector.RenderStage") as mock_render,
+            patch("prompticorn.ui._selector.StateUpdateStage"),
+            patch("prompticorn.ui._selector.PipelineOrchestrator") as mock_pipeline,
         ):
             mock_pipeline_instance = MagicMock()
             mock_pipeline_instance.run.return_value = "option1"
@@ -144,7 +144,7 @@ class TestSelectOptionWithExplain:
             mock_render_instance.stdscr = None
             mock_render.return_value = mock_render_instance
 
-            with patch("promptosaurus.ui._selector.UIFactory.create_input_provider"):
+            with patch("prompticorn.ui._selector.UIFactory.create_input_provider"):
                 result = select_option_with_explain(
                     question="Q",
                     options=["opt1", "opt2"],
@@ -159,10 +159,10 @@ class TestSelectOptionWithExplain:
     def test_uses_curses_provider_when_curses_available(self) -> None:
         """Test that CursesInputProvider is used when curses initializes."""
         with (
-            patch("promptosaurus.ui._selector.RenderStage") as mock_render,
-            patch("promptosaurus.ui._selector.StateUpdateStage"),
-            patch("promptosaurus.ui._selector.CursesInputProvider") as mock_curses_provider,
-            patch("promptosaurus.ui._selector.PipelineOrchestrator") as mock_pipeline,
+            patch("prompticorn.ui._selector.RenderStage") as mock_render,
+            patch("prompticorn.ui._selector.StateUpdateStage"),
+            patch("prompticorn.ui._selector.CursesInputProvider") as mock_curses_provider,
+            patch("prompticorn.ui._selector.PipelineOrchestrator") as mock_pipeline,
         ):
             mock_render_instance = MagicMock()
             mock_render_instance.stdscr = MagicMock()  # Curses available
@@ -185,11 +185,11 @@ class TestSelectOptionWithExplain:
     def test_fallback_to_default_input_on_curses_error(self) -> None:
         """Test fallback to default input provider when curses init fails."""
         with (
-            patch("promptosaurus.ui._selector.RenderStage") as mock_render,
-            patch("promptosaurus.ui._selector.StateUpdateStage"),
-            patch("promptosaurus.ui._selector.PipelineOrchestrator") as mock_pipeline,
+            patch("prompticorn.ui._selector.RenderStage") as mock_render,
+            patch("prompticorn.ui._selector.StateUpdateStage"),
+            patch("prompticorn.ui._selector.PipelineOrchestrator") as mock_pipeline,
             patch(
-                "promptosaurus.ui._selector.UIFactory.create_input_provider"
+                "prompticorn.ui._selector.UIFactory.create_input_provider"
             ) as mock_input_factory,
         ):
             mock_render_instance = MagicMock()
@@ -216,9 +216,9 @@ class TestSelectOptionWithExplain:
     def test_accepts_none_index_parameter(self) -> None:
         """Test that none_index parameter is accepted."""
         with (
-            patch("promptosaurus.ui._selector.RenderStage") as mock_render,
-            patch("promptosaurus.ui._selector.StateUpdateStage"),
-            patch("promptosaurus.ui._selector.PipelineOrchestrator") as mock_pipeline,
+            patch("prompticorn.ui._selector.RenderStage") as mock_render,
+            patch("prompticorn.ui._selector.StateUpdateStage"),
+            patch("prompticorn.ui._selector.PipelineOrchestrator") as mock_pipeline,
         ):
             mock_pipeline_instance = MagicMock()
             mock_pipeline_instance.run.return_value = "option1"
@@ -228,7 +228,7 @@ class TestSelectOptionWithExplain:
             mock_render_instance.stdscr = None
             mock_render.return_value = mock_render_instance
 
-            with patch("promptosaurus.ui._selector.UIFactory.create_input_provider"):
+            with patch("prompticorn.ui._selector.UIFactory.create_input_provider"):
                 result = select_option_with_explain(
                     question="Q",
                     options=["opt1", "opt2", "None"],
@@ -245,7 +245,7 @@ class TestConfirmInteractive:
 
     def test_returns_true_on_yes(self) -> None:
         """Test returns True when user selects Yes."""
-        with patch("promptosaurus.ui._selector.select_option_with_explain") as mock_select:
+        with patch("prompticorn.ui._selector.select_option_with_explain") as mock_select:
             mock_select.return_value = "Yes"
 
             result = confirm_interactive(prompt="Proceed?")
@@ -254,7 +254,7 @@ class TestConfirmInteractive:
 
     def test_returns_false_on_no(self) -> None:
         """Test returns False when user selects No."""
-        with patch("promptosaurus.ui._selector.select_option_with_explain") as mock_select:
+        with patch("prompticorn.ui._selector.select_option_with_explain") as mock_select:
             mock_select.return_value = "No"
 
             result = confirm_interactive(prompt="Proceed?")
@@ -263,7 +263,7 @@ class TestConfirmInteractive:
 
     def test_uses_yes_as_default_when_default_true(self) -> None:
         """Test that default_index=0 (Yes) when default=True."""
-        with patch("promptosaurus.ui._selector.select_option_with_explain") as mock_select:
+        with patch("prompticorn.ui._selector.select_option_with_explain") as mock_select:
             mock_select.return_value = "Yes"
 
             confirm_interactive(prompt="Proceed?", default=True)
@@ -274,7 +274,7 @@ class TestConfirmInteractive:
 
     def test_uses_no_as_default_when_default_false(self) -> None:
         """Test that default_index=1 (No) when default=False."""
-        with patch("promptosaurus.ui._selector.select_option_with_explain") as mock_select:
+        with patch("prompticorn.ui._selector.select_option_with_explain") as mock_select:
             mock_select.return_value = "No"
 
             confirm_interactive(prompt="Proceed?", default=False)
@@ -285,7 +285,7 @@ class TestConfirmInteractive:
 
     def test_passes_correct_options(self) -> None:
         """Test that Yes/No options are passed to select_option_with_explain."""
-        with patch("promptosaurus.ui._selector.select_option_with_explain") as mock_select:
+        with patch("prompticorn.ui._selector.select_option_with_explain") as mock_select:
             mock_select.return_value = "Yes"
 
             confirm_interactive(prompt="Continue?")
@@ -296,7 +296,7 @@ class TestConfirmInteractive:
 
     def test_passes_prompt_as_question(self) -> None:
         """Test that prompt is passed as question to select_option_with_explain."""
-        with patch("promptosaurus.ui._selector.select_option_with_explain") as mock_select:
+        with patch("prompticorn.ui._selector.select_option_with_explain") as mock_select:
             mock_select.return_value = "Yes"
 
             test_prompt = "Do you want to continue?"

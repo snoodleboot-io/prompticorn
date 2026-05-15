@@ -3,13 +3,13 @@
 import sys
 from pathlib import Path
 
-# Add the promptosaurus directory to the path
+# Add the prompticorn directory to the path
 sys.path.insert(0, str(Path(__file__).parent.parent))
 
 import pytest
 
-from promptosaurus.builders.builder import Builder
-from promptosaurus.builders.template_handlers.resolvers.template_rendering_error import (
+from prompticorn.builders.builder import Builder
+from prompticorn.builders.template_handlers.resolvers.template_rendering_error import (
     TemplateRenderingError,
 )
 
@@ -254,7 +254,7 @@ Default boolean: {{ config.optional_setting | default(false) }}
     config = {
         "spec": {
             "linters": ["ruff", "flake8"],
-            "project_name": "Promptosaurus",
+            "project_name": "Prompticorn",
             "database": {"host": "db.example.com"},
             # optional_setting is missing
         }
@@ -265,7 +265,7 @@ Default boolean: {{ config.optional_setting | default(false) }}
     assert "Default missing: fallback" in result
     assert "Default database: db.example.com" in result
     assert "Join linters: ruff, flake8" in result
-    assert "Upper project: PROMPTOSAURUS" in result
+    assert "Upper project: PROMPTICORN" in result
     assert "Default boolean: False" in result
 
 
@@ -456,7 +456,7 @@ Child content here.
             raise FileNotFoundError(f"Template {filename} not found")
 
     with patch(
-        "promptosaurus.builders.template_handlers.resolvers.jinja2_template_renderer.registry.prompt_body",
+        "prompticorn.builders.template_handlers.resolvers.jinja2_template_renderer.registry.prompt_body",
         side_effect=mock_prompt_body,
     ):
         # Test rendering child template that extends base
@@ -499,7 +499,7 @@ def test_jinja2_template_inheritance_by_name():
             raise FileNotFoundError(f"Template {filename} not found")
 
     with patch(
-        "promptosaurus.builders.template_handlers.resolvers.jinja2_template_renderer.registry.prompt_body",
+        "prompticorn.builders.template_handlers.resolvers.jinja2_template_renderer.registry.prompt_body",
         side_effect=mock_prompt_body,
     ):
         # Test rendering by name using the new handle_by_name method
@@ -532,7 +532,7 @@ def test_jinja2_circular_inheritance_detection():
             raise FileNotFoundError(f"Template {filename} not found")
 
     with patch(
-        "promptosaurus.builders.template_handlers.resolvers.jinja2_template_renderer.registry.prompt_body",
+        "prompticorn.builders.template_handlers.resolvers.jinja2_template_renderer.registry.prompt_body",
         side_effect=mock_prompt_body,
     ):
         # Test that circular inheritance raises an error
@@ -573,7 +573,7 @@ def test_jinja2_multi_level_inheritance():
             raise FileNotFoundError(f"Template {filename} not found")
 
     with patch(
-        "promptosaurus.builders.template_handlers.resolvers.jinja2_template_renderer.registry.prompt_body",
+        "prompticorn.builders.template_handlers.resolvers.jinja2_template_renderer.registry.prompt_body",
         side_effect=mock_prompt_body,
     ):
         # Test multi-level inheritance
@@ -625,7 +625,7 @@ Child content end
             raise FileNotFoundError(f"Template {filename} not found")
 
     with patch(
-        "promptosaurus.builders.template_handlers.resolvers.jinja2_template_renderer.registry.prompt_body",
+        "prompticorn.builders.template_handlers.resolvers.jinja2_template_renderer.registry.prompt_body",
         side_effect=mock_prompt_body,
     ):
         # Test complex block structures with super() calls
@@ -656,7 +656,7 @@ def test_jinja2_inheritance_error_handling():
 {% block content %}Content{% endblock %}"""
 
     with patch(
-        "promptosaurus.registry.registry.prompt_body",
+        "prompticorn.registry.registry.prompt_body",
         side_effect=FileNotFoundError("Template not found"),
     ):
         with pytest.raises(TemplateRenderingError) as exc_info:
@@ -676,7 +676,7 @@ def test_jinja2_inheritance_error_handling():
             raise FileNotFoundError(f"Template {filename} not found")
 
     with patch(
-        "promptosaurus.builders.template_handlers.resolvers.jinja2_template_renderer.registry.prompt_body",
+        "prompticorn.builders.template_handlers.resolvers.jinja2_template_renderer.registry.prompt_body",
         side_effect=mock_prompt_body,
     ):
         with pytest.raises(TemplateRenderingError) as exc_info:

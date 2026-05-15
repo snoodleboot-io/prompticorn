@@ -5,8 +5,8 @@ from pathlib import Path
 
 import pytest
 
-from promptosaurus.builders.component_selector import ComponentBundle, ComponentSelector, Variant
-from promptosaurus.builders.errors import ComponentNotFoundError
+from prompticorn.builders.component_selector import ComponentBundle, ComponentSelector, Variant
+from prompticorn.builders.errors import ComponentNotFoundError
 
 
 @pytest.fixture
@@ -84,7 +84,7 @@ class TestComponentSelectorSelectVariant:
 
     def test_select_minimal_variant(self, test_agent_with_variants):
         """Test selecting minimal variant."""
-        from promptosaurus.ir.models import Agent
+        from prompticorn.ir.models import Agent
 
         selector = ComponentSelector(str(test_agent_with_variants))
         agent = Agent(
@@ -103,7 +103,7 @@ class TestComponentSelectorSelectVariant:
 
     def test_select_verbose_variant(self, test_agent_with_variants):
         """Test selecting verbose variant."""
-        from promptosaurus.ir.models import Agent
+        from prompticorn.ir.models import Agent
 
         selector = ComponentSelector(str(test_agent_with_variants))
         agent = Agent(
@@ -121,7 +121,7 @@ class TestComponentSelectorSelectVariant:
 
     def test_select_nonexistent_agent(self, test_agent_with_variants):
         """Test selecting from non-existent agent."""
-        from promptosaurus.ir.models import Agent
+        from prompticorn.ir.models import Agent
 
         selector = ComponentSelector(str(test_agent_with_variants))
         agent = Agent(
@@ -139,7 +139,7 @@ class TestComponentSelectorSelectVariant:
 
     def test_select_nonexistent_variant_falls_back(self, test_agent_with_variants):
         """Test selecting minimal when not available falls back to verbose."""
-        from promptosaurus.ir.models import Agent
+        from prompticorn.ir.models import Agent
 
         selector = ComponentSelector(str(test_agent_with_variants))
 
@@ -259,7 +259,7 @@ class TestComponentSelectorIntegration:
 
     def test_full_selection_workflow(self, test_agent_with_variants):
         """Test full variant selection workflow."""
-        from promptosaurus.ir.models import Agent
+        from prompticorn.ir.models import Agent
 
         selector = ComponentSelector(str(test_agent_with_variants))
         agent = Agent(
@@ -284,7 +284,7 @@ class TestComponentSelectorIntegration:
 
     def test_fallback_workflow(self, test_agent_with_variants):
         """Test fallback when minimal variant doesn't exist."""
-        from promptosaurus.ir.models import Agent
+        from prompticorn.ir.models import Agent
 
         selector = ComponentSelector(str(test_agent_with_variants))
 
@@ -311,7 +311,7 @@ class TestComponentSelectorIntegration:
 
     def test_list_and_select(self, test_agent_with_variants):
         """Test listing variants then selecting."""
-        from promptosaurus.ir.models import Agent
+        from prompticorn.ir.models import Agent
 
         selector = ComponentSelector(str(test_agent_with_variants))
         agent = Agent(

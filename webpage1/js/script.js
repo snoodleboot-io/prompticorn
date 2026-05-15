@@ -1,5 +1,5 @@
 /* ============================================================
-   PROMPTOSAURUS — script.js
+   PROMPTICORN — script.js
    Vanilla JS: nav, tabs, copy, mermaid, D3, search, animations
    ============================================================ */
 

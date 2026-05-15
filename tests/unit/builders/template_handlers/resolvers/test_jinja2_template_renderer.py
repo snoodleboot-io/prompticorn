@@ -4,16 +4,16 @@ import sys
 from pathlib import Path
 from unittest.mock import Mock, patch
 
-# Add the promptosaurus directory to the path
+# Add the prompticorn directory to the path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent.parent))
 
 import jinja2
 import pytest
 
-from promptosaurus.builders.template_handlers.resolvers.jinja2_template_renderer import (
+from prompticorn.builders.template_handlers.resolvers.jinja2_template_renderer import (
     Jinja2TemplateRenderer,
 )
-from promptosaurus.builders.template_handlers.resolvers.template_rendering_error import (
+from prompticorn.builders.template_handlers.resolvers.template_rendering_error import (
     TemplateRenderingError,
 )
 
@@ -130,7 +130,7 @@ Outer end
     @pytest.mark.skip(reason="Registry frozen - mocking not supported, but core inheritance works")
     def test_resolve_inheritance_chain_single_level(self, renderer, monkeypatch):
         """Test _resolve_inheritance_chain resolves single-level inheritance."""
-        from promptosaurus.builders.template_handlers.resolvers import jinja2_template_renderer
+        from prompticorn.builders.template_handlers.resolvers import jinja2_template_renderer
 
         base_template = """Base
 {% block content %}Default{% endblock %}"""
@@ -152,7 +152,7 @@ Outer end
     @pytest.mark.skip(reason="Registry frozen - monkeypatch not supported")
     def test_resolve_inheritance_chain_multi_level(self, renderer, monkeypatch):
         """Test _resolve_inheritance_chain resolves multi-level inheritance."""
-        from promptosaurus.builders.template_handlers.resolvers import jinja2_template_renderer
+        from prompticorn.builders.template_handlers.resolvers import jinja2_template_renderer
 
         grandparent = """Grandparent
 {% block header %}Default Header{% endblock %}
@@ -200,7 +200,7 @@ Outer end
             templates[f"template{i}.md"] = f"""{{% extends "template{i + 1}.md" %}}"""
 
         # Mock the registry to return these templates
-        with patch("promptosaurus.registry.registry.prompt_body") as mock_body:
+        with patch("prompticorn.registry.registry.prompt_body") as mock_body:
             mock_body.side_effect = lambda name: templates.get(name, "")
 
             deep_template = """{% extends "template0.md" %}"""
@@ -213,7 +213,7 @@ Outer end
     @pytest.mark.skip(reason="Registry frozen - mocking not supported, but core inheritance works")
     def test_merge_templates_basic(self, renderer, monkeypatch):
         """Test _merge_templates merges basic inheritance."""
-        from promptosaurus.builders.template_handlers.resolvers import jinja2_template_renderer
+        from prompticorn.builders.template_handlers.resolvers import jinja2_template_renderer
 
         base = """Base
 {% block content %}Default{% endblock %}"""
@@ -233,7 +233,7 @@ Outer end
     @pytest.mark.skip(reason="Registry frozen - mocking not supported, but core inheritance works")
     def test_merge_templates_with_super(self, renderer, monkeypatch):
         """Test _merge_templates handles {% super() %} calls."""
-        from promptosaurus.builders.template_handlers.resolvers import jinja2_template_renderer
+        from prompticorn.builders.template_handlers.resolvers import jinja2_template_renderer
 
         base = """Base
 {% block content %}Default content{% endblock %}"""
@@ -253,7 +253,7 @@ Outer end
     @pytest.mark.skip(reason="Registry frozen - mocking not supported, but core inheritance works")
     def test_merge_templates_missing_base(self, renderer, monkeypatch):
         """Test _merge_templates handles missing base templates."""
-        from promptosaurus.builders.template_handlers.resolvers import jinja2_template_renderer
+        from prompticorn.builders.template_handlers.resolvers import jinja2_template_renderer
 
         child = """{% extends "missing.md" %}
 {% block content %}Content{% endblock %}"""

@@ -105,7 +105,7 @@ Applicable across ML/AI, Security, and Product:
 ### Access a Skill
 
 ```
-promptosaurus/skills/[skill-name]/
+prompticorn/skills/[skill-name]/
 ├── minimal/
 │   └── SKILL.md         ← Quick reference
 └── verbose/

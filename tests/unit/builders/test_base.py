@@ -8,8 +8,8 @@ Tests cover:
 
 import pytest
 
-from promptosaurus.builders.base import Builder, BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.base import Builder, BuildOptions
+from prompticorn.ir.models import Agent
 
 # ============================================================================
 # FIXTURES - Test builders and agents

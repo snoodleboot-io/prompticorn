@@ -18,8 +18,8 @@ from typing import TYPE_CHECKING
 
 import pytest
 
-from promptosaurus.ir.models import Agent
-from promptosaurus.prompt_builders.prompt_build_cli import PromptBuildCLI
+from prompticorn.ir.models import Agent
+from prompticorn.prompt_builders.prompt_build_cli import PromptBuildCLI
 
 if TYPE_CHECKING:
     from collections.abc import Generator as GeneratorType

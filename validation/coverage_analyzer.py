@@ -9,9 +9,9 @@ class CoverageAnalyzer:
     def __init__(self, project_root: Path):
         """Initialize analyzer."""
         self.project_root = project_root
-        self.agents_dir = project_root / "promptosaurus" / "agents"
-        self.workflows_dir = project_root / "promptosaurus" / "workflows"
-        self.skills_dir = project_root / "promptosaurus" / "skills"
+        self.agents_dir = project_root / "prompticorn" / "agents"
+        self.workflows_dir = project_root / "prompticorn" / "workflows"
+        self.skills_dir = project_root / "prompticorn" / "skills"
 
     def analyze_all(self) -> dict[str, dict]:
         """Analyze coverage of all Phase 1 content."""

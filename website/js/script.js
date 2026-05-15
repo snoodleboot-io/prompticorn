@@ -1,5 +1,5 @@
 /* ============================================================
-   PROMPTOSAURUS — Multi-Mode script.js
+   PROMPTICORN — Multi-Mode script.js
    ============================================================ */
 
 'use strict';

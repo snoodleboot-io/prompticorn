@@ -13,9 +13,9 @@ from tempfile import TemporaryDirectory
 
 import pytest
 
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.builders.kilo_builder import KiloBuilder
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.base import BuildOptions
+from prompticorn.builders.kilo_builder import KiloBuilder
+from prompticorn.ir.models import Agent
 
 
 class TestKiloBuilderInitialization:
@@ -103,7 +103,7 @@ class TestKiloBuilderFrontmatter:
         )
         builder = KiloBuilder()
         frontmatter = builder._build_frontmatter(agent)
-        assert frontmatter["state_management"] == ".promptosaurus/sessions/"
+        assert frontmatter["state_management"] == ".prompticorn/sessions/"
 
     def test_frontmatter_all_required_keys(self) -> None:
         """Test frontmatter contains all required keys."""

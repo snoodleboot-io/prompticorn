@@ -2,9 +2,9 @@
 
 from unittest.mock import MagicMock, Mock
 
-from promptosaurus.ui.domain.context import PipelineContext, QuestionContext
-from promptosaurus.ui.pipeline.render_stage import RenderStage
-from promptosaurus.ui.state.single_selection_state import SingleSelectionState
+from prompticorn.ui.domain.context import PipelineContext, QuestionContext
+from prompticorn.ui.pipeline.render_stage import RenderStage
+from prompticorn.ui.state.single_selection_state import SingleSelectionState
 
 
 class TestRenderStageMultilineExplanation:

@@ -22,19 +22,19 @@ After migrating directory structure (docs/ → docs/ + planning/ + _temp/), the 
 ### Issue
 Architect and Planning agents have edit permissions limited to `docs/` only. They cannot create files in `planning/`.
 
-### File: `promptosaurus/agents/architect/prompt.md`
+### File: `prompticorn/agents/architect/prompt.md`
 
 **Current (Lines 8-10):**
 ```yaml
 edit:
-  (docs/.*\.md$|\.promptosaurus/sessions/.*\.md$): allow
+  (docs/.*\.md$|\.prompticorn/sessions/.*\.md$): allow
   '*': deny
 ```
 
 **Proposed:**
 ```yaml
 edit:
-  (docs/.*\.md$|planning/.*\.md$|\.promptosaurus/sessions/.*\.md$): allow
+  (docs/.*\.md$|planning/.*\.md$|\.prompticorn/sessions/.*\.md$): allow
   '*': deny
 ```
 
@@ -45,19 +45,19 @@ edit:
 
 ---
 
-### File: `promptosaurus/agents/planning/prompt.md`
+### File: `prompticorn/agents/planning/prompt.md`
 
 **Current (Lines 8-10):**
 ```yaml
 edit:
-  (docs/.*\.md$|\.promptosaurus/sessions/.*\.md$): allow
+  (docs/.*\.md$|\.prompticorn/sessions/.*\.md$): allow
   '*': deny
 ```
 
 **Proposed:**
 ```yaml
 edit:
-  (docs/.*\.md$|planning/.*\.md$|\.promptosaurus/sessions/.*\.md$): allow
+  (docs/.*\.md$|planning/.*\.md$|\.prompticorn/sessions/.*\.md$): allow
   '*': deny
 ```
 
@@ -71,7 +71,7 @@ edit:
 
 ## Part 2: Agent Instructions
 
-### File: `promptosaurus/agents/planning/prompt.md`
+### File: `prompticorn/agents/planning/prompt.md`
 
 **Current (Line 14):**
 ```
@@ -97,7 +97,7 @@ stable user-facing documentation.
 
 ## Part 3: Decision Log Template
 
-### File: `promptosaurus/agents/core/decision-log-template.md`
+### File: `prompticorn/agents/core/decision-log-template.md`
 
 **Current (Lines 8-11):**
 ```markdown
@@ -145,7 +145,7 @@ For stable, user-facing architectural decisions:
 
 ## Part 4: Decision Log Subagents
 
-### File: `promptosaurus/agents/ask/subagents/decision-log/minimal/prompt.md`
+### File: `prompticorn/agents/ask/subagents/decision-log/minimal/prompt.md`
 
 **Current:**
 ```
@@ -161,7 +161,7 @@ For stable, user-facing architectural decisions:
 
 ---
 
-### File: `promptosaurus/agents/ask/subagents/decision-log/verbose/prompt.md`
+### File: `prompticorn/agents/ask/subagents/decision-log/verbose/prompt.md`
 
 **Current:**
 ```
@@ -180,7 +180,7 @@ For stable, user-facing architectural decisions:
 
 ## Part 5: Decision Log Workflow
 
-### File: `promptosaurus/workflows/decision-log-workflow/minimal/workflow.md`
+### File: `prompticorn/workflows/decision-log-workflow/minimal/workflow.md`
 
 **Current:**
 ```
@@ -194,7 +194,7 @@ Store in `planning/current/adrs/` for active decisions:
 
 ---
 
-### File: `promptosaurus/workflows/decision-log-workflow/verbose/workflow.md`
+### File: `prompticorn/workflows/decision-log-workflow/verbose/workflow.md`
 
 **Current (Lines 100-108):**
 ```markdown
@@ -244,7 +244,7 @@ docs/
 
 ## Part 6: Scaffold Workflow
 
-### File: `promptosaurus/workflows/scaffold-workflow/minimal/workflow.md`
+### File: `prompticorn/workflows/scaffold-workflow/minimal/workflow.md`
 
 **Current:**
 ```
@@ -255,7 +255,7 @@ docs/
 
 ---
 
-### File: `promptosaurus/workflows/scaffold-workflow/verbose/workflow.md`
+### File: `prompticorn/workflows/scaffold-workflow/verbose/workflow.md`
 
 **Current (Line 137):**
 ```bash
@@ -279,7 +279,7 @@ mkdir -p _temp
 
 ## Part 7: Document Subagent
 
-### File: `promptosaurus/agents/document/subagents/strategy-for-applications/verbose/prompt.md`
+### File: `prompticorn/agents/document/subagents/strategy-for-applications/verbose/prompt.md`
 
 **Current:**
 ```
@@ -296,7 +296,7 @@ See [planning/current/adrs/](planning/current/adrs/) for active decisions or
 
 ## Part 8: Session Examples
 
-### File: `promptosaurus/agents/core/session.md`
+### File: `prompticorn/agents/core/session.md`
 
 **Current (Lines 159-161):**
 ```markdown
@@ -322,23 +322,23 @@ See [planning/current/adrs/](planning/current/adrs/) for active decisions or
 ## Summary: Files to Update
 
 ### CRITICAL (Agent Permissions - Required)
-1. `promptosaurus/agents/architect/prompt.md` - Add `planning/.*\.md$` to edit permissions
-2. `promptosaurus/agents/planning/prompt.md` - Add `planning/.*\.md$` to edit permissions
+1. `prompticorn/agents/architect/prompt.md` - Add `planning/.*\.md$` to edit permissions
+2. `prompticorn/agents/planning/prompt.md` - Add `planning/.*\.md$` to edit permissions
 
 ### HIGH PRIORITY (Instructions & Templates)
-3. `promptosaurus/agents/planning/prompt.md` - Update instructions text
-4. `promptosaurus/agents/core/decision-log-template.md` - Update ADR storage locations
-5. `promptosaurus/agents/core/session.md` - Update example paths
+3. `prompticorn/agents/planning/prompt.md` - Update instructions text
+4. `prompticorn/agents/core/decision-log-template.md` - Update ADR storage locations
+5. `prompticorn/agents/core/session.md` - Update example paths
 
 ### MEDIUM PRIORITY (Subagents)
-6. `promptosaurus/agents/ask/subagents/decision-log/minimal/prompt.md` - Update ADR paths
-7. `promptosaurus/agents/ask/subagents/decision-log/verbose/prompt.md` - Update ADR paths
-8. `promptosaurus/agents/document/subagents/strategy-for-applications/verbose/prompt.md` - Update reference
+6. `prompticorn/agents/ask/subagents/decision-log/minimal/prompt.md` - Update ADR paths
+7. `prompticorn/agents/ask/subagents/decision-log/verbose/prompt.md` - Update ADR paths
+8. `prompticorn/agents/document/subagents/strategy-for-applications/verbose/prompt.md` - Update reference
 
 ### WORKFLOWS
-9. `promptosaurus/workflows/decision-log-workflow/minimal/workflow.md` - Update storage path
-10. `promptosaurus/workflows/decision-log-workflow/verbose/workflow.md` - Update all paths (~10 references)
-11. `promptosaurus/workflows/scaffold-workflow/verbose/workflow.md` - Add planning/ creation
+9. `prompticorn/workflows/decision-log-workflow/minimal/workflow.md` - Update storage path
+10. `prompticorn/workflows/decision-log-workflow/verbose/workflow.md` - Update all paths (~10 references)
+11. `prompticorn/workflows/scaffold-workflow/verbose/workflow.md` - Add planning/ creation
 
 **Total:** 11 files
 
@@ -469,7 +469,7 @@ It should NOT:
 
 ### Updated File
 
-- `promptosaurus/agents/orchestrator/prompt.md`
+- `prompticorn/agents/orchestrator/prompt.md`
   - Changed: `edit: '*': allow` → `edit: '*': deny`
   - Added: Explicit delegation instructions in description
 
@@ -500,7 +500,7 @@ It should NOT:
 
 Use template variable `{{PRIMARY_AGENTS_LIST}}` in orchestrator prompt that gets populated during build.
 
-**File: `promptosaurus/agents/orchestrator/prompt.md`**
+**File: `prompticorn/agents/orchestrator/prompt.md`**
 
 ```markdown
 **Available primary agents for delegation:**
@@ -509,14 +509,14 @@ Use template variable `{{PRIMARY_AGENTS_LIST}}` in orchestrator prompt that gets
 
 ### Implementation Required
 
-Create new template handler: `promptosaurus/builders/template_handlers/primary_agents_handler.py`
+Create new template handler: `prompticorn/builders/template_handlers/primary_agents_handler.py`
 
 ```python
 """Template handler for PRIMARY_AGENTS_LIST variable."""
 
 from typing import Any
-from promptosaurus.agent_registry.discovery import RegistryDiscovery
-from promptosaurus.builders.template_handlers.template_handler import TemplateVariableHandler
+from prompticorn.agent_registry.discovery import RegistryDiscovery
+from prompticorn.builders.template_handlers.template_handler import TemplateVariableHandler
 
 
 class PrimaryAgentsHandler(TemplateVariableHandler):
@@ -536,7 +536,7 @@ class PrimaryAgentsHandler(TemplateVariableHandler):
         Returns:
             Formatted markdown list of primary agents with descriptions
         """
-        from promptosaurus.registry import registry
+        from prompticorn.registry import registry
         
         # Get all agents
         all_agents = registry.get_all_agents()
@@ -558,10 +558,10 @@ class PrimaryAgentsHandler(TemplateVariableHandler):
         return "\n".join(lines)
 ```
 
-**Register in builder:** `promptosaurus/builders/builder.py`
+**Register in builder:** `prompticorn/builders/builder.py`
 
 ```python
-from promptosaurus.builders.template_handlers.primary_agents_handler import PrimaryAgentsHandler
+from prompticorn.builders.template_handlers.primary_agents_handler import PrimaryAgentsHandler
 
 # In Builder.__init__():
 self._template_handler_registry.register_handler(PrimaryAgentsHandler())

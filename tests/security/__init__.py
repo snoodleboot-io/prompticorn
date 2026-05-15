@@ -1,1 +1,1 @@
-"""Security tests for promptosaurus."""
+"""Security tests for prompticorn."""

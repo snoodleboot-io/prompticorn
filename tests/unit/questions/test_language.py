@@ -1,8 +1,8 @@
-"""Tests for promptosaurus.questions.language module."""
+"""Tests for prompticorn.questions.language module."""
 
 import pytest
 
-from promptosaurus.questions.language import (
+from prompticorn.questions.language import (
     LANGUAGE_KEYS,
     get_language_questions,
 )

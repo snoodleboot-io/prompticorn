@@ -94,7 +94,7 @@ Meta-workflows for orchestrating other workflows:
 ### Access a Workflow
 
 ```
-promptosaurus/workflows/[workflow-name]/
+prompticorn/workflows/[workflow-name]/
 ├── minimal/
 │   └── workflow.md      ← Quick overview
 └── verbose/

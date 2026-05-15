@@ -4,7 +4,7 @@ import shutil
 import unittest
 from pathlib import Path
 
-from promptosaurus.prompt_builder import get_prompt_builder
+from prompticorn.prompt_builder import get_prompt_builder
 
 
 class TestToolArtifactIsolation(unittest.TestCase):

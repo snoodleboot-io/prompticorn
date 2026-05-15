@@ -2,7 +2,7 @@
 
 import pytest
 
-from promptosaurus.prompt_builder import PromptBuilder
+from prompticorn.prompt_builder import PromptBuilder
 
 
 class TestLanguageExtraction:

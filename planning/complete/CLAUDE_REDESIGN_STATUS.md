@@ -10,22 +10,22 @@
 Created Jinja2 templates for all Claude Markdown artifacts:
 
 **Templates Created:**
-1. **`promptosaurus/templates/claude/agent.md.j2`** (2.4KB)
+1. **`prompticorn/templates/claude/agent.md.j2`** (2.4KB)
    - Agent file template with workflow, subagents, skills sections
    - Lazy loading instructions (load workflow → detect language → load conventions)
    - Delegation patterns for subagents
 
-2. **`promptosaurus/templates/claude/CLAUDE.md.j2`** (1.8KB)
+2. **`prompticorn/templates/claude/CLAUDE.md.j2`** (1.8KB)
    - Routing file template with agent registry
    - Routing rules by category (Code Implementation, System Design, etc.)
    - Instructions for lazy loading
 
-3. **`promptosaurus/templates/claude/subagent.md.j2`** (474B)
+3. **`prompticorn/templates/claude/subagent.md.j2`** (474B)
    - Subagent file template with delegation context
    - Return to parent instructions
    - Simplified structure for focused tasks
 
-4. **`promptosaurus/templates/claude/workflow.md.j2`** (1.3KB)
+4. **`prompticorn/templates/claude/workflow.md.j2`** (1.3KB)
    - Workflow file template with language detection step
    - Sequential steps with actions and resource loading
    - Completion criteria checklist
@@ -39,7 +39,7 @@ Created Jinja2 templates for all Claude Markdown artifacts:
 ### ✅ Phase 1.3: File Name Conversion (100% Complete)
 Created naming utilities module with kebab-case conversion:
 
-**File:** `promptosaurus/builders/naming_utils.py` (130 lines)
+**File:** `prompticorn/builders/naming_utils.py` (130 lines)
 
 **Functions:**
 - `to_kebab_case(name)`: Convert any name to kebab-case
@@ -61,13 +61,13 @@ Added Phase 6.3 to implementation plan in `CLAUDE_ARTIFACT_REDESIGN.md`:
 - User documentation for variant switching
 - Workflow examples for planning → implementation phase transitions
 - Decision flowchart for variant selection
-- CLI command documentation: `promptosaurus config set variant verbose`
+- CLI command documentation: `prompticorn config set variant verbose`
 
 ## In Progress
 
 ### 🔄 Phase 1.1: ClaudeBuilder Changes (0% Complete)
 **Next Steps:**
-1. Update `promptosaurus/builders/claude_builder.py`
+1. Update `prompticorn/builders/claude_builder.py`
 2. Change output format from JSON → Markdown
 3. Implement template rendering with Jinja2
 4. Add methods for:
@@ -77,7 +77,7 @@ Added Phase 6.3 to implementation plan in `CLAUDE_ARTIFACT_REDESIGN.md`:
    - `_render_workflow_file(workflow, template_data)` → Markdown string
 
 **Files to Modify:**
-- `promptosaurus/builders/claude_builder.py` (main changes)
+- `prompticorn/builders/claude_builder.py` (main changes)
 
 ## Not Started
 
@@ -88,7 +88,7 @@ Added Phase 6.3 to implementation plan in `CLAUDE_ARTIFACT_REDESIGN.md`:
 - [ ] Update `_write_output()` to handle new paths
 
 ### ⏳ Phase 2.1: Update Artifact Definitions
-**File:** `promptosaurus/artifacts.py`
+**File:** `prompticorn/artifacts.py`
 
 Current:
 ```python
@@ -167,7 +167,7 @@ Target:
 - [ ] Verify no `custom_instructions/` artifacts
 
 **5.3 End-to-End Tests**
-- [ ] Test `promptosaurus init` with Claude
+- [ ] Test `prompticorn init` with Claude
 - [ ] Test switching from Kilo to Claude
 - [ ] Test switching from Claude to Kilo
 - [ ] Verify artifact cleanup
@@ -212,7 +212,7 @@ Target:
 ### Immediate (Next Session)
 1. **Update ClaudeBuilder to use templates**
    - Import Jinja2 and naming_utils
-   - Load templates from `promptosaurus/templates/claude/`
+   - Load templates from `prompticorn/templates/claude/`
    - Implement `_render_agent_file()` method
    - Change `build()` to return Markdown string instead of JSON dict
 
@@ -242,7 +242,7 @@ Target:
 - ✅ Jinja2 >=3.0.0 (already in pyproject.toml)
 
 **Project Structure:**
-- ✅ `promptosaurus/templates/claude/` created
+- ✅ `prompticorn/templates/claude/` created
 - ✅ Templates created (4 files)
 - ✅ Naming utils module created
 
@@ -276,15 +276,15 @@ Target:
 ## Files Modified
 
 - ✅ `docs/design/CLAUDE_ARTIFACT_REDESIGN.md` — Added Phase 6.3
-- ✅ `.promptosaurus/sessions/session_20260413_interface_pattern.md` — Session tracking
+- ✅ `.prompticorn/sessions/session_20260413_interface_pattern.md` — Session tracking
 
 ## Files Created
 
-- ✅ `promptosaurus/templates/claude/agent.md.j2`
-- ✅ `promptosaurus/templates/claude/CLAUDE.md.j2`
-- ✅ `promptosaurus/templates/claude/subagent.md.j2`
-- ✅ `promptosaurus/templates/claude/workflow.md.j2`
-- ✅ `promptosaurus/builders/naming_utils.py`
+- ✅ `prompticorn/templates/claude/agent.md.j2`
+- ✅ `prompticorn/templates/claude/CLAUDE.md.j2`
+- ✅ `prompticorn/templates/claude/subagent.md.j2`
+- ✅ `prompticorn/templates/claude/workflow.md.j2`
+- ✅ `prompticorn/builders/naming_utils.py`
 - ✅ `docs/design/CLAUDE_REDESIGN_STATUS.md` (this file)
 
 ## References
@@ -294,12 +294,12 @@ Target:
 - **Performance Analysis:** `docs/design/AGENTIC_PERFORMANCE_ANALYSIS.md`
 - **Hybrid Strategy:** `docs/design/HYBRID_VARIANT_STRATEGY.md`
 - **Blog Post:** `docs/blog/CHOOSING_THE_RIGHT_VARIANT.md`
-- **Session File:** `.promptosaurus/sessions/session_20260413_interface_pattern.md`
+- **Session File:** `.prompticorn/sessions/session_20260413_interface_pattern.md`
 
 ## Completed (Additional)
 
 ### ✅ Phase 1.1: ClaudeBuilder Changes (100% Complete)
-Updated `promptosaurus/builders/claude_builder.py` to generate Markdown instead of JSON:
+Updated `prompticorn/builders/claude_builder.py` to generate Markdown instead of JSON:
 
 **Changes Made:**
 1. **Replaced output format:**
@@ -308,7 +308,7 @@ Updated `promptosaurus/builders/claude_builder.py` to generate Markdown instead 
    - Example: `{".claude/agents/code-agent.md": "# Code Agent\n..."}`
 
 2. **Added template rendering:**
-   - Loads Jinja2 templates from `promptosaurus/templates/claude/`
+   - Loads Jinja2 templates from `prompticorn/templates/claude/`
    - `_render_agent_file()`: Renders primary agent files
    - `_render_subagent_file()`: Renders subagent files
    - `_render_workflow_file()`: Renders workflow files
@@ -321,12 +321,12 @@ Updated `promptosaurus/builders/claude_builder.py` to generate Markdown instead 
    - `_generate_agent_notes()`: Generates agent-specific notes
 
 **Files Changed:**
-- `promptosaurus/builders/claude_builder.py` (replaced, old backed up to claude_builder_old.py)
-- `promptosaurus/prompt_builder.py` (updated _write_output method for Claude)
-- `promptosaurus/artifacts.py` (updated Claude artifact definitions)
+- `prompticorn/builders/claude_builder.py` (replaced, old backed up to claude_builder_old.py)
+- `prompticorn/prompt_builder.py` (updated _write_output method for Claude)
+- `prompticorn/artifacts.py` (updated Claude artifact definitions)
 
 ### ✅ Phase 2.1: Update Artifact Definitions (100% Complete)
-Updated `promptosaurus/artifacts.py` to reflect new Claude structure:
+Updated `prompticorn/artifacts.py` to reflect new Claude structure:
 
 **Before:**
 ```python
@@ -409,7 +409,7 @@ if isinstance(content, dict) and all(isinstance(k, str) and isinstance(v, str) f
 2. ✅ Test template rendering - DONE (syntax verified)
 3. ✅ Update artifact definitions - DONE
 4. 🔄 Create CLAUDE.md generator - NEXT
-5. 🔄 Test full build with promptosaurus
+5. 🔄 Test full build with prompticorn
 
 ### Short-term (This Week)
 1. Complete Phase 3.1 (CLAUDE.md generator)
@@ -429,15 +429,15 @@ Before considering Phase 1 complete, need to verify:
 
 **Test Command:**
 ```bash
-cd /home/john_aven/Documents/software/promptosaurus
+cd /home/john_aven/Documents/software/prompticorn
 # Test with a simple agent build
-uv run promptosaurus --help  # Verify no import errors
+uv run prompticorn --help  # Verify no import errors
 ```
 
 ## Session 2 Update (2026-04-14 15:57-16:05)
 
 ### ✅ Phase 3.1: CLAUDE.md Generator (100% Complete)
-Created `promptosaurus/builders/claude_md.py` to generate CLAUDE.md routing file:
+Created `prompticorn/builders/claude_md.py` to generate CLAUDE.md routing file:
 
 **Features:**
 - Uses CLAUDE.md.j2 template
@@ -455,7 +455,7 @@ Code Implementation, System Design, Bug Fixing, Code Review, Testing, Refactorin
 - Writes to root `CLAUDE.md` file
 
 ### ✅ Phase 3.3: Convention File Generator (100% Complete)
-Created `promptosaurus/builders/convention_generator.py` to generate convention files:
+Created `prompticorn/builders/convention_generator.py` to generate convention files:
 
 **Functions:**
 - `generate_core_convention()`: Combines system + conventions + session → general.md
@@ -509,13 +509,13 @@ python, typescript, rust, golang, java, javascript, c, cpp, csharp, kotlin, swif
 ## Files Created (Session 2)
 
 **Created:**
-- `promptosaurus/builders/claude_md.py` (152 lines)
-- `promptosaurus/builders/convention_generator.py` (99 lines)
+- `prompticorn/builders/claude_md.py` (152 lines)
+- `prompticorn/builders/convention_generator.py` (99 lines)
 
 **Modified:**
-- `promptosaurus/prompt_builder.py` (added claude_md, convention imports + generation)
-- `promptosaurus/artifacts.py` (added CLAUDE.md to create/remove sets)
-- `.promptosaurus/sessions/session_20260413_interface_pattern.md` (tracking)
+- `prompticorn/prompt_builder.py` (added claude_md, convention imports + generation)
+- `prompticorn/artifacts.py` (added CLAUDE.md to create/remove sets)
+- `.prompticorn/sessions/session_20260413_interface_pattern.md` (tracking)
 
 ## Build Output (Expected)
 
@@ -557,7 +557,7 @@ When building for Claude, the system now generates:
 ### Immediate (Next Session)
 1. ✅ Create CLAUDE.md generator - DONE
 2. ✅ Create convention file generators - DONE
-3. 🔄 Test full build with promptosaurus - NEXT
+3. 🔄 Test full build with prompticorn - NEXT
 4. 🔄 Verify all files generated correctly
 5. 🔄 Improve workflow/subagent extraction with real data (Phase 4)
 
@@ -583,9 +583,9 @@ Before considering implementation complete:
 **Test Commands:**
 ```bash
 # Test build (will create artifacts)
-cd /home/john_aven/Documents/software/promptosaurus
+cd /home/john_aven/Documents/software/prompticorn
 uv run python -c "
-from promptosaurus.prompt_builder import PromptBuilder
+from prompticorn.prompt_builder import PromptBuilder
 from pathlib import Path
 
 builder = PromptBuilder(tool_name='claude', persona='software_engineer', variant='minimal')
@@ -609,14 +609,14 @@ Enhanced ClaudeBuilder to load real workflow and subagent content instead of pla
 
 **Real Workflow Loading:**
 - Updated `_render_workflow_file()` to use `WorkflowLoader.load_workflow()`
-- Loads from `promptosaurus/workflows/{workflow}/{variant}/workflow.md`
+- Loads from `prompticorn/workflows/{workflow}/{variant}/workflow.md`
 - Strips YAML frontmatter automatically
 - Falls back to template if workflow not found
 - **Verified:** Actual "feature" workflow content loaded with real steps
 
 **Real Subagent Loading:**
 - Created `_load_subagent_content()` method
-- Loads from `promptosaurus/agents/{agent}/subagents/{subagent}/{variant}/prompt.md`
+- Loads from `prompticorn/agents/{agent}/subagents/{subagent}/{variant}/prompt.md`
 - Falls back to other variant if primary not found
 - Returns actual subagent markdown content
 - **Verified:** Actual "rubber-duck" subagent content loaded with real instructions
@@ -670,27 +670,27 @@ Updated ClaudeBuilder tests to expect Markdown instead of JSON:
 ## Files Modified (All Sessions)
 
 **Created:**
-- `promptosaurus/templates/claude/agent.md.j2` (2.4KB)
-- `promptosaurus/templates/claude/CLAUDE.md.j2` (1.8KB)
-- `promptosaurus/templates/claude/subagent.md.j2` (474B)
-- `promptosaurus/templates/claude/workflow.md.j2` (1.3KB)
-- `promptosaurus/builders/naming_utils.py` (130 lines)
-- `promptosaurus/builders/claude_md.py` (152 lines)
-- `promptosaurus/builders/convention_generator.py` (99 lines)
+- `prompticorn/templates/claude/agent.md.j2` (2.4KB)
+- `prompticorn/templates/claude/CLAUDE.md.j2` (1.8KB)
+- `prompticorn/templates/claude/subagent.md.j2` (474B)
+- `prompticorn/templates/claude/workflow.md.j2` (1.3KB)
+- `prompticorn/builders/naming_utils.py` (130 lines)
+- `prompticorn/builders/claude_md.py` (152 lines)
+- `prompticorn/builders/convention_generator.py` (99 lines)
 - `docs/design/CLAUDE_REDESIGN_STATUS.md` (this file)
 
 **Modified:**
-- `promptosaurus/builders/claude_builder.py` (complete rewrite, 3 versions)
-- `promptosaurus/prompt_builder.py` (CLAUDE.md generation, conventions)
-- `promptosaurus/artifacts.py` (CLAUDE.md in artifact sets)
+- `prompticorn/builders/claude_builder.py` (complete rewrite, 3 versions)
+- `prompticorn/prompt_builder.py` (CLAUDE.md generation, conventions)
+- `prompticorn/artifacts.py` (CLAUDE.md in artifact sets)
 - `tests/unit/builders/test_claude_builder.py` (complete rewrite)
 - `docs/design/CLAUDE_ARTIFACT_REDESIGN.md` (added Phase 6.3)
-- `.promptosaurus/sessions/session_20260413_interface_pattern.md` (tracking)
+- `.prompticorn/sessions/session_20260413_interface_pattern.md` (tracking)
 
 **Backed Up:**
-- `promptosaurus/builders/claude_builder_old.py` (original JSON version)
-- `promptosaurus/builders/claude_builder_phase2.py` (phase 2 backup)
-- `promptosaurus/builders/claude_builder_new.py` (initial markdown version)
+- `prompticorn/builders/claude_builder_old.py` (original JSON version)
+- `prompticorn/builders/claude_builder_phase2.py` (phase 2 backup)
+- `prompticorn/builders/claude_builder_new.py` (initial markdown version)
 
 ## Build Output Verification
 
@@ -889,16 +889,16 @@ Created detailed architectural documentation:
 ## Final Deliverables
 
 ### Code Created (10 files)
-1. `promptosaurus/templates/claude/agent.md.j2` (2.4KB)
-2. `promptosaurus/templates/claude/CLAUDE.md.j2` (1.8KB)
-3. `promptosaurus/templates/claude/subagent.md.j2` (474B)
-4. `promptosaurus/templates/claude/workflow.md.j2` (1.3KB)
-5. `promptosaurus/builders/naming_utils.py` (130 lines)
-6. `promptosaurus/builders/claude_md.py` (152 lines)
-7. `promptosaurus/builders/convention_generator.py` (99 lines)
-8. `promptosaurus/builders/claude_builder.py` (rewritten, ~400 lines)
-9. `promptosaurus/prompt_builder.py` (modified for CLAUDE.md + conventions)
-10. `promptosaurus/artifacts.py` (modified for CLAUDE.md artifacts)
+1. `prompticorn/templates/claude/agent.md.j2` (2.4KB)
+2. `prompticorn/templates/claude/CLAUDE.md.j2` (1.8KB)
+3. `prompticorn/templates/claude/subagent.md.j2` (474B)
+4. `prompticorn/templates/claude/workflow.md.j2` (1.3KB)
+5. `prompticorn/builders/naming_utils.py` (130 lines)
+6. `prompticorn/builders/claude_md.py` (152 lines)
+7. `prompticorn/builders/convention_generator.py` (99 lines)
+8. `prompticorn/builders/claude_builder.py` (rewritten, ~400 lines)
+9. `prompticorn/prompt_builder.py` (modified for CLAUDE.md + conventions)
+10. `prompticorn/artifacts.py` (modified for CLAUDE.md artifacts)
 
 ### Tests Updated (1 file)
 1. `tests/unit/builders/test_claude_builder.py` (rewritten, 11 tests passing)
@@ -909,12 +909,12 @@ Created detailed architectural documentation:
 3. `docs/design/CLAUDE_ARTIFACT_REDESIGN.md` (1,148 lines)
 4. `docs/design/CLAUDE_REDESIGN_STATUS.md` (this file)
 5. `docs/README.md` (updated)
-6. `.promptosaurus/sessions/session_20260413_interface_pattern.md` (session tracking)
+6. `.prompticorn/sessions/session_20260413_interface_pattern.md` (session tracking)
 
 ### Backed Up (3 files)
-1. `promptosaurus/builders/claude_builder_old.py` (original JSON version)
-2. `promptosaurus/builders/claude_builder_phase2.py` (phase 2 backup)
-3. `promptosaurus/builders/claude_builder_new.py` (initial markdown version)
+1. `prompticorn/builders/claude_builder_old.py` (original JSON version)
+2. `prompticorn/builders/claude_builder_phase2.py` (phase 2 backup)
+3. `prompticorn/builders/claude_builder_new.py` (initial markdown version)
 
 ## Final Verification ✅
 

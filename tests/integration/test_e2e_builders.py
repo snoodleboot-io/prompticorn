@@ -23,14 +23,14 @@ from typing import Any
 import pytest
 import yaml
 
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.builders.claude_builder import ClaudeBuilder
-from promptosaurus.builders.cline_builder import ClineBuilder
-from promptosaurus.builders.copilot_builder import CopilotBuilder
-from promptosaurus.builders.cursor_builder import CursorBuilder
-from promptosaurus.builders.factory import BuilderFactory
-from promptosaurus.builders.kilo_builder import KiloBuilder
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.base import BuildOptions
+from prompticorn.builders.claude_builder import ClaudeBuilder
+from prompticorn.builders.cline_builder import ClineBuilder
+from prompticorn.builders.copilot_builder import CopilotBuilder
+from prompticorn.builders.cursor_builder import CursorBuilder
+from prompticorn.builders.factory import BuilderFactory
+from prompticorn.builders.kilo_builder import KiloBuilder
+from prompticorn.ir.models import Agent
 
 # ============================================================================
 # Fixtures for test setup and agent loading

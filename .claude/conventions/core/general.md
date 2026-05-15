@@ -1,6 +1,6 @@
 # System Instructions
 
-<!-- path: promptosaurus/prompts/agents/core/core-system.md -->
+<!-- path: prompticorn/prompts/agents/core/core-system.md -->
 # Core System
 Always-on base behaviors for all modes and tools.
 EDIT THIS FILE to change global assistant behavior.
@@ -59,7 +59,7 @@ git branch --show-current
 
 **1. MUST check for existing session:**
 ```bash
-ls -la .promptosaurus/sessions/session_*.md 2>/dev/null
+ls -la .prompticorn/sessions/session_*.md 2>/dev/null
 ```
 
 **2. MUST handle existing session or create new:**
@@ -69,14 +69,14 @@ ls -la .promptosaurus/sessions/session_*.md 2>/dev/null
   - Update `current_mode` field to current mode
   - Add timestamp entry to Mode History if switching modes
 - If no session exists: MUST create one immediately
-  - Location: `.promptosaurus/sessions/session_{YYYYMMDD}_{RANDOM}.md`
+  - Location: `.prompticorn/sessions/session_{YYYYMMDD}_{RANDOM}.md`
   - Include YAML frontmatter with branch name
   - Initialize Mode History, Actions Taken, and Context Summary sections
 - Never proceed without a valid session
 
 **3. MANDATORY VERIFICATION (before doing any work):**
 ```
-- [ ] Session file exists in .promptosaurus/sessions/: YES
+- [ ] Session file exists in .prompticorn/sessions/: YES
 - [ ] Session file has YAML frontmatter: YES
 - [ ] Session branch matches current branch: YES
 - [ ] Session has Mode History section: YES
@@ -262,7 +262,7 @@ When a task can be broken down into smaller, specialized components:
 
 # General Conventions
 
-<!-- path: promptosaurus/prompts/agents/core/core-conventions.md -->
+<!-- path: prompticorn/prompts/agents/core/core-conventions.md -->
 {%- import 'macros/naming_conventions.jinja2' as naming -%}
 {%- import 'macros/checklist.jinja2' as checklist -%}
 # Core Conventions
@@ -422,7 +422,7 @@ See `Core Session` for complete protocol and file format specifications.
 
 # Session Management
 
-<!-- path: promptosaurus/prompts/agents/core/core-session.md -->
+<!-- path: prompticorn/prompts/agents/core/core-session.md -->
 # Core Session
 
 ## 🔴 CRITICAL: Session Management is MANDATORY
@@ -464,7 +464,7 @@ Session files provide persistent context across mode switches, enabling continui
 
 ## Session File Location
 
-- **Directory:** `.promptosaurus/sessions/`
+- **Directory:** `.prompticorn/sessions/`
 - **Naming:** `session_{YYYYMMDD}_{random}.md` (e.g., `session_20260302_a7x9k2.md`)
 - **Format:** Markdown with YAML frontmatter
 - **Git:** Session files are gitignored and NOT committed
@@ -707,13 +707,13 @@ Completed code review of PROJ-123-1. Found 2 blocking issues (error handling, ti
    - If on feature branch: use that branch name
 
 2. **Check for existing session:**
-   - List files in `.promptosaurus/sessions/`
+   - List files in `.prompticorn/sessions/`
    - Read each file's YAML frontmatter
    - Look for `branch:` field matching current branch
    - Find most recent session if multiple exist
 
 3. **If no session exists:**
-   - Create `.promptosaurus/sessions/` directory if needed
+   - Create `.prompticorn/sessions/` directory if needed
    - Create new session file using format above
    - Set `current_mode` to current mode
    - Record branch name and timestamp
@@ -762,10 +762,10 @@ Use format: `### {ISO8601 timestamp} - {mode} mode`
 - Completing work phase
 
 ### Session Rotation Guidelines:
-- Check age: `ls -l .promptosaurus/sessions/`
+- Check age: `ls -l .prompticorn/sessions/`
 - If oldest session is 1+ week old, consider archive
 - Keep last session for 30 days for historical reference
-- Archive old sessions: `mv session_*.md .promptosaurus/sessions/archive/`
+- Archive old sessions: `mv session_*.md .prompticorn/sessions/archive/`
 
 ---
 
@@ -795,10 +795,10 @@ This ensures continuity when switching between modes (e.g., Architect → Code �
 ### Session file not found
 ```bash
 # Check if directory exists
-ls -la .promptosaurus/sessions/
+ls -la .prompticorn/sessions/
 
 # If directory doesn't exist, create it
-mkdir -p .promptosaurus/sessions/
+mkdir -p .prompticorn/sessions/
 
 # Create new session
 # (Follow session file format from above)
@@ -807,10 +807,10 @@ mkdir -p .promptosaurus/sessions/
 ### Multiple sessions for same branch
 ```bash
 # Check which sessions exist
-ls -la .promptosaurus/sessions/
+ls -la .prompticorn/sessions/
 
 # Read each session's branch field
-for file in .promptosaurus/sessions/session_*.md; do
+for file in .prompticorn/sessions/session_*.md; do
   echo "=== $file ===" && head -5 "$file"
 done
 
@@ -824,7 +824,7 @@ done
 git branch --show-current
 
 # Check session branch
-grep "^branch:" .promptosaurus/sessions/session_*.md
+grep "^branch:" .prompticorn/sessions/session_*.md
 
 # If mismatch:
 # Option 1: Create new session for current branch
@@ -848,6 +848,6 @@ grep "^branch:" .promptosaurus/sessions/session_*.md
 # Option 2: Create new session (old one is still readable as backup)
 
 # Check YAML syntax
-head -10 .promptosaurus/sessions/session_*.md
+head -10 .prompticorn/sessions/session_*.md
 # Should see lines: ---, session_id:, branch:, created_at:, current_mode:, version:, ---
 ```

@@ -23,8 +23,8 @@ Builders transform Agent IR (Intermediate Representation) models into tool-speci
 
 **Quick Example:**
 ```python
-from promptosaurus.builders.kilo_builder import KiloBuilder
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.kilo_builder import KiloBuilder
+from prompticorn.ir.models import Agent
 
 builder = KiloBuilder()
 agent = Agent(name="code", description="Code expert", system_prompt="...")
@@ -50,7 +50,7 @@ output = builder.build(agent, BuildOptions(variant="verbose"))
 
 **Quick Example:**
 ```python
-from promptosaurus.builders.cline_builder import ClineBuilder
+from prompticorn.builders.cline_builder import ClineBuilder
 
 builder = ClineBuilder()
 agent = Agent(name="code", description="...", system_prompt="...")
@@ -77,7 +77,7 @@ rules = builder.build(agent, BuildOptions(variant="verbose"))
 
 **Quick Example:**
 ```python
-from promptosaurus.builders.claude_builder import ClaudeBuilder
+from prompticorn.builders.claude_builder import ClaudeBuilder
 from pathlib import Path
 
 builder = ClaudeBuilder()
@@ -107,7 +107,7 @@ for file_path, content in config.items():
 
 **Quick Example:**
 ```python
-from promptosaurus.builders.copilot_builder import CopilotBuilder
+from prompticorn.builders.copilot_builder import CopilotBuilder
 
 builder = CopilotBuilder(agents_dir=".github/instructions")
 agent = Agent(name="code", description="...", system_prompt="...")
@@ -134,7 +134,7 @@ instructions = builder.build(agent, BuildOptions(variant="verbose"))
 
 **Quick Example:**
 ```python
-from promptosaurus.builders.cursor_builder import CursorBuilder
+from prompticorn.builders.cursor_builder import CursorBuilder
 
 builder = CursorBuilder()
 agent = Agent(name="dev", description="...", system_prompt="...")
@@ -296,7 +296,7 @@ class BuildOptions:
 ### Task: Create a New Builder
 
 1. Read [KiloBuilder Guide](./KILO_BUILDER_GUIDE.md) for complete structure
-2. Extend `Builder` from `promptosaurus/builders/base.py`
+2. Extend `Builder` from `prompticorn/builders/base.py`
 3. Implement `build()` and `validate()` methods
 4. Register in builder factory
 5. Create documentation following guide format
@@ -407,7 +407,7 @@ class Agent:
 All builders raise `BuilderValidationError` on validation failure:
 
 ```python
-from promptosaurus.builders.errors import BuilderValidationError
+from prompticorn.builders.errors import BuilderValidationError
 
 try:
     config = builder.build(agent, options)
@@ -444,15 +444,15 @@ except BuilderValidationError as e:
 
 ## Source Code References
 
-- **Base Classes:** `promptosaurus/builders/base.py`
-- **Kilo Implementation:** `promptosaurus/builders/kilo_builder.py`
-- **Cline Implementation:** `promptosaurus/builders/cline_builder.py`
-- **Claude Implementation:** `promptosaurus/builders/claude_builder.py`
-- **Copilot Implementation:** `promptosaurus/builders/copilot_builder.py`
-- **Cursor Implementation:** `promptosaurus/builders/cursor_builder.py`
-- **Errors:** `promptosaurus/builders/errors.py`
-- **Examples:** `promptosaurus/builders/examples_usage.py`
-- **IR Models:** `promptosaurus/ir/models.py`
+- **Base Classes:** `prompticorn/builders/base.py`
+- **Kilo Implementation:** `prompticorn/builders/kilo_builder.py`
+- **Cline Implementation:** `prompticorn/builders/cline_builder.py`
+- **Claude Implementation:** `prompticorn/builders/claude_builder.py`
+- **Copilot Implementation:** `prompticorn/builders/copilot_builder.py`
+- **Cursor Implementation:** `prompticorn/builders/cursor_builder.py`
+- **Errors:** `prompticorn/builders/errors.py`
+- **Examples:** `prompticorn/builders/examples_usage.py`
+- **IR Models:** `prompticorn/ir/models.py`
 
 ---
 
@@ -461,7 +461,7 @@ except BuilderValidationError as e:
 For detailed information on any builder:
 - Read the comprehensive guide for that builder
 - Check the docstrings in source code
-- Review examples in `promptosaurus/builders/examples_usage.py`
+- Review examples in `prompticorn/builders/examples_usage.py`
 - Look at test files in `tests/unit/builders/`
 
 For issues or questions:

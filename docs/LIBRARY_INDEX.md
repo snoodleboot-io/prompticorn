@@ -1,10 +1,10 @@
-# Promptosaurus Library Index
+# Prompticorn Library Index
 
 **Version:** 0.1.0  
 **Last Updated:** April 13, 2026  
 **Status:** Current
 
-Complete searchable catalog of all Promptosaurus agents, workflows, and skills.
+Complete searchable catalog of all Prompticorn agents, workflows, and skills.
 
 ---
 
@@ -21,7 +21,7 @@ Complete searchable catalog of all Promptosaurus agents, workflows, and skills.
 
 ### All Primary Agents (25 total)
 
-Located in `promptosaurus/agents/[agent-name]/`
+Located in `prompticorn/agents/[agent-name]/`
 
 | Agent | Purpose | Persona Affinity |
 |-------|---------|------------------|
@@ -141,7 +141,7 @@ For persona-based filtering, see: [PERSONA_GUIDES.md](./PERSONA_GUIDES.md)
 ## How to Use This Index
 
 ### Search by Agent Name
-Find the agent in the [Agents](#agents) table above and check its location: `promptosaurus/agents/[agent-name]/`
+Find the agent in the [Agents](#agents) table above and check its location: `prompticorn/agents/[agent-name]/`
 
 ### Search by Persona
 1. Find your role in [Personas](#personas)
@@ -154,7 +154,7 @@ Find the agent in the [Agents](#agents) table above and check its location: `pro
 3. Explore agent subdirectories for workflows and skills
 
 ### Find Workflows and Skills
-- Subagents located in: `promptosaurus/agents/[agent-name]/subagents/[subagent-name]/`
+- Subagents located in: `prompticorn/agents/[agent-name]/subagents/[subagent-name]/`
 - Each subagent has `minimal/` and `verbose/` variants
 
 ---
@@ -162,15 +162,15 @@ Find the agent in the [Agents](#agents) table above and check its location: `pro
 ## File Locations
 
 ### Agent Prompts
-- Location: `promptosaurus/agents/[agent-name]/prompt.md`
-- Example: `promptosaurus/agents/backend/prompt.md`
+- Location: `prompticorn/agents/[agent-name]/prompt.md`
+- Example: `prompticorn/agents/backend/prompt.md`
 
 ### Subagents
-- Location: `promptosaurus/agents/[agent-name]/subagents/[subagent-name]/[minimal|verbose]/prompt.md`
-- Example: `promptosaurus/agents/backend/subagents/api-design/minimal/prompt.md`
+- Location: `prompticorn/agents/[agent-name]/subagents/[subagent-name]/[minimal|verbose]/prompt.md`
+- Example: `prompticorn/agents/backend/subagents/api-design/minimal/prompt.md`
 
 ### Persona Configuration
-- Location: `promptosaurus/personas/personas.yaml`
+- Location: `prompticorn/personas/personas.yaml`
 - Defines which agents/workflows/skills are available per persona
 
 ---

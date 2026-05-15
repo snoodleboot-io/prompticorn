@@ -1,1 +1,1 @@
-"""Slow tests for promptosaurus."""
+"""Slow tests for prompticorn."""

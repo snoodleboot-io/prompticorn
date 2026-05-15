@@ -9,9 +9,9 @@ class ConsistencyChecker:
     def __init__(self, project_root: Path):
         """Initialize checker."""
         self.project_root = project_root
-        self.agents_dir = project_root / "promptosaurus" / "agents"
-        self.workflows_dir = project_root / "promptosaurus" / "workflows"
-        self.skills_dir = project_root / "promptosaurus" / "skills"
+        self.agents_dir = project_root / "prompticorn" / "agents"
+        self.workflows_dir = project_root / "prompticorn" / "workflows"
+        self.skills_dir = project_root / "prompticorn" / "skills"
         self.issues: list[str] = []
 
     def check_all(self) -> tuple[int, list[str]]:

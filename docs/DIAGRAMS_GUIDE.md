@@ -1,6 +1,6 @@
 # Visual Diagrams & Flows
 
-Comprehensive visual documentation for Promptosaurus workflows using Mermaid diagrams.
+Comprehensive visual documentation for Prompticorn workflows using Mermaid diagrams.
 
 ## Table of Contents
 
@@ -15,11 +15,11 @@ Comprehensive visual documentation for Promptosaurus workflows using Mermaid dia
 
 ## Workflow Diagrams
 
-### Complete Promptosaurus Setup Workflow
+### Complete Prompticorn Setup Workflow
 
 ```mermaid
 flowchart TD
-    A["User Runs CLI<br/>promptosaurus init"] --> B["Select AI Assistant Tool<br/>(Kilo IDE, Kilo CLI, Cline, Cursor, Copilot)"]
+    A["User Runs CLI<br/>prompticorn init"] --> B["Select AI Assistant Tool<br/>(Kilo IDE, Kilo CLI, Cline, Cursor, Copilot)"]
     B --> C["Choose Repository Type<br/>(single-language or multi-language-monorepo)"]
     C --> D["Select Prompt Variant<br/>(minimal for efficiency or verbose for detail)"]
     D --> E["Choose Active Personas<br/>(filters which agents are generated)"]
@@ -39,7 +39,7 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    A["promptosaurus init"] --> B["Step 1: Select AI Tool"]
+    A["prompticorn init"] --> B["Step 1: Select AI Tool"]
     B --> B1["Options: Kilo IDE, Kilo CLI, Cline, Cursor, Copilot"]
     B1 --> B2["✓ Selected: Kilo IDE"]
     
@@ -61,7 +61,7 @@ flowchart TD
     F2 --> F3["✓ All answers collected"]
     
     F3 --> G["Save Configuration"]
-    G --> G1["✓ .promptosaurus/.promptosaurus.yaml created"]
+    G --> G1["✓ .prompticorn/.prompticorn.yaml created"]
     
     G1 --> H["Generate Tool Outputs"]
     H --> H1[".kilo/agents/code.md<br/>.kilo/agents/test.md<br/>.kilo/agents/review.md<br/>..."]
@@ -75,7 +75,7 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    A["Current State: .promptosaurus/.promptosaurus.yaml exists"] --> B["promptosaurus switch"]
+    A["Current State: .prompticorn/.prompticorn.yaml exists"] --> B["prompticorn switch"]
     B --> C["Check Configuration ✓"]
     C --> D["Select New Tool<br/>(interactive menu)"]
     D --> D1["Options: Kilo IDE, Kilo CLI, Cline, Cursor, Copilot"]
@@ -84,7 +84,7 @@ flowchart TD
     D2 --> E["Generate Cline Configuration"]
     E --> E1["✓ .clinerules created"]
     
-    E1 --> F["✓ Tool switch complete!<br/>(Keep existing .promptosaurus/.promptosaurus.yaml,<br/>now have both .kilo/ and .clinerules)"]
+    E1 --> F["✓ Tool switch complete!<br/>(Keep existing .prompticorn/.prompticorn.yaml,<br/>now have both .kilo/ and .clinerules)"]
     
     style A fill:#fff3e0
     style F fill:#c8e6c9
@@ -94,14 +94,14 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    A["Current State: .promptosaurus/.promptosaurus.yaml exists with personas"] --> B["promptosaurus swap"]
+    A["Current State: .prompticorn/.prompticorn.yaml exists with personas"] --> B["prompticorn swap"]
     B --> C["Check Configuration ✓"]
     C --> D["Select New Personas<br/>(interactive menu)"]
     D --> D1["Current: software_engineer, qa_tester<br/>Available: All personas"]
     D1 --> D2["✓ Selected: software_engineer, devops_engineer, architect"]
     
     D2 --> E["Update Configuration"]
-    E --> E1[".promptosaurus/.promptosaurus.yaml:<br/>active_personas = [...]"]
+    E --> E1[".prompticorn/.prompticorn.yaml:<br/>active_personas = [...]"]
     E1 --> E2["✓ Configuration updated"]
     
     E2 --> F["Regenerate All Outputs<br/>(with new persona filter applied)"]
@@ -181,7 +181,7 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    A["RegistryDiscovery<br/>Scans: promptosaurus/agents/"] --> B["For each agent_name/:<br/>Look for minimal/<br/>Look for verbose/<br/>Select variant"]
+    A["RegistryDiscovery<br/>Scans: prompticorn/agents/"] --> B["For each agent_name/:<br/>Look for minimal/<br/>Look for verbose/<br/>Select variant"]
     B --> C["Load prompt.md<br/>(required)<br/>YAML frontmatter<br/>Markdown body"]
     C --> D["Load optional files:<br/>skills.md<br/>workflow.md"]
     D --> E["Create Agent IR<br/>(immutable model)"]

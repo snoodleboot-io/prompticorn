@@ -1,6 +1,6 @@
 # Integration Guides
 
-How to integrate Promptosaurus with your development workflow and CI/CD pipelines.
+How to integrate Prompticorn with your development workflow and CI/CD pipelines.
 
 ## Table of Contents
 
@@ -17,16 +17,16 @@ How to integrate Promptosaurus with your development workflow and CI/CD pipeline
 ### Automated Configuration Validation
 
 ```yaml
-# .github/workflows/promptosaurus-validate.yml
+# .github/workflows/prompticorn-validate.yml
 
-name: Validate Promptosaurus Configuration
+name: Validate Prompticorn Configuration
 
 on:
   push:
     branches: [main, develop]
     paths:
-      - '.promptosaurus.yaml'
-      - 'promptosaurus/**'
+      - '.prompticorn.yaml'
+      - 'prompticorn/**'
   pull_request:
     branches: [main, develop]
 
@@ -40,20 +40,20 @@ jobs:
         with:
           python-version: '3.12'
       
-      - name: Install promptosaurus
-        run: pip install promptosaurus
+      - name: Install prompticorn
+        run: pip install prompticorn
       
       - name: Validate configuration
-        run: promptosaurus validate
+        run: prompticorn validate
       
       - name: List registered agents
-        run: promptosaurus list
+        run: prompticorn list
 ```
 
 ### Auto-Update Agent Configs on Config Change
 
 ```yaml
-# .github/workflows/promptosaurus-regenerate.yml
+# .github/workflows/prompticorn-regenerate.yml
 
 name: Regenerate Agent Configurations
 
@@ -61,7 +61,7 @@ on:
   push:
     branches: [main]
     paths:
-      - '.promptosaurus.yaml'
+      - '.prompticorn.yaml'
 
 jobs:
   regenerate:
@@ -75,15 +75,15 @@ jobs:
         with:
           python-version: '3.12'
       
-      - name: Install promptosaurus
-        run: pip install promptosaurus
+      - name: Install prompticorn
+        run: pip install prompticorn
       
       - name: Regenerate all tool configs
         run: |
-          promptosaurus switch kilo-ide
-          promptosaurus switch cline
-          promptosaurus switch cursor
-          promptosaurus switch copilot
+          prompticorn switch kilo-ide
+          prompticorn switch cline
+          prompticorn switch cursor
+          prompticorn switch copilot
       
       - name: Commit if changed
         run: |
@@ -119,8 +119,8 @@ jobs:
         with:
           python-version: '3.12'
       
-      - name: Install promptosaurus
-        run: pip install promptosaurus
+      - name: Install prompticorn
+        run: pip install prompticorn
       
       - name: Test with persona - ${{ matrix.personas }}
         run: |
@@ -139,11 +139,11 @@ jobs:
           EOF
           
           # Copy to actual config
-          cp test-config.yaml .promptosaurus.yaml
+          cp test-config.yaml .prompticorn.yaml
           
           # Validate and regenerate
-          promptosaurus validate
-          promptosaurus list
+          prompticorn validate
+          prompticorn list
 ```
 
 ---
@@ -163,22 +163,22 @@ validate-config:
   stage: validate
   image: python:3.12
   script:
-    - pip install promptosaurus
-    - promptosaurus validate
-    - promptosaurus list
+    - pip install prompticorn
+    - prompticorn validate
+    - prompticorn list
   only:
     changes:
-      - .promptosaurus.yaml
-      - promptosaurus/**
+      - .prompticorn.yaml
+      - prompticorn/**
 
 regenerate-configs:
   stage: build
   image: python:3.12
   script:
-    - pip install promptosaurus
-    - promptosaurus switch kilo-ide
-    - promptosaurus switch cline
-    - promptosaurus switch cursor
+    - pip install prompticorn
+    - prompticorn switch kilo-ide
+    - prompticorn switch cline
+    - prompticorn switch cursor
   artifacts:
     paths:
       - .kilo/
@@ -201,20 +201,20 @@ regenerate-configs:
 repos:
   - repo: local
     hooks:
-      - id: promptosaurus-validate
-        name: Validate Promptosaurus Config
-        entry: promptosaurus validate
+      - id: prompticorn-validate
+        name: Validate Prompticorn Config
+        entry: prompticorn validate
         language: system
-        files: ^\.promptosaurus\.yaml$
+        files: ^\.prompticorn\.yaml$
         pass_filenames: false
         always_run: false
         stages: [commit]
       
-      - id: promptosaurus-list
-        name: List Promptosaurus Agents
-        entry: bash -c 'promptosaurus list'
+      - id: prompticorn-list
+        name: List Prompticorn Agents
+        entry: bash -c 'prompticorn list'
         language: system
-        files: ^(\.promptosaurus\.yaml|promptosaurus/.*)$
+        files: ^(\.prompticorn\.yaml|prompticorn/.*)$
         pass_filenames: false
         always_run: false
         stages: [manual]  # Run with: pre-commit run -a
@@ -260,9 +260,9 @@ pre-commit run -a
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Validate Promptosaurus",
+      "label": "Validate Prompticorn",
       "type": "shell",
-      "command": "promptosaurus",
+      "command": "prompticorn",
       "args": ["validate"],
       "problemMatcher": [],
       "presentation": {
@@ -271,9 +271,9 @@ pre-commit run -a
       }
     },
     {
-      "label": "List Promptosaurus Agents",
+      "label": "List Prompticorn Agents",
       "type": "shell",
-      "command": "promptosaurus",
+      "command": "prompticorn",
       "args": ["list"],
       "problemMatcher": [],
       "presentation": {
@@ -282,9 +282,9 @@ pre-commit run -a
       }
     },
     {
-      "label": "Initialize Promptosaurus",
+      "label": "Initialize Prompticorn",
       "type": "shell",
-      "command": "promptosaurus",
+      "command": "prompticorn",
       "args": ["init"],
       "problemMatcher": [],
       "presentation": {
@@ -299,7 +299,7 @@ pre-commit run -a
 #### Usage
 
 - Press `Ctrl+Shift+B` to run tasks
-- Select "Validate Promptosaurus" or other tasks
+- Select "Validate Prompticorn" or other tasks
 
 ### JetBrains IDEs (IntelliJ, PyCharm, WebStorm)
 
@@ -309,19 +309,19 @@ pre-commit run -a
 2. **+ Add new tool** → Configure:
 
 ```
-Name:       Promptosaurus Validate
-Program:    promptosaurus
+Name:       Prompticorn Validate
+Program:    prompticorn
 Arguments:  validate
 Working directory: $ProjectFileDir$
 ```
 
 3. Repeat for:
-   - `promptosaurus list`
-   - `promptosaurus init`
+   - `prompticorn list`
+   - `prompticorn init`
 
 #### Usage
 
-- **Tools** → **Promptosaurus Validate**
+- **Tools** → **Prompticorn Validate**
 - Or create keyboard shortcuts in Keymap settings
 
 ---
@@ -337,19 +337,19 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-# Install promptosaurus
-RUN pip install --no-cache-dir promptosaurus
+# Install prompticorn
+RUN pip install --no-cache-dir prompticorn
 
 # Copy configuration
-COPY .promptosaurus.yaml .
+COPY .prompticorn.yaml .
 
 # Validate on build
-RUN promptosaurus validate
+RUN prompticorn validate
 
 # Copy agents
-COPY promptosaurus/ ./promptosaurus/
+COPY prompticorn/ ./prompticorn/
 
-CMD ["promptosaurus", "list"]
+CMD ["prompticorn", "list"]
 ```
 
 ### Docker Compose
@@ -360,11 +360,11 @@ CMD ["promptosaurus", "list"]
 version: '3.8'
 
 services:
-  promptosaurus:
+  prompticorn:
     build: .
     volumes:
       - .:/app
-    command: promptosaurus validate
+    command: prompticorn validate
 ```
 
 ### Usage
@@ -374,10 +374,10 @@ services:
 docker-compose build
 
 # Run validation
-docker-compose run promptosaurus promptosaurus validate
+docker-compose run prompticorn prompticorn validate
 
 # Run other commands
-docker-compose run promptosaurus promptosaurus list
+docker-compose run prompticorn prompticorn list
 ```
 
 ---
@@ -391,23 +391,23 @@ docker-compose run promptosaurus promptosaurus list
 
 # Initialize
 init:
-	promptosaurus init
+	prompticorn init
 
 # List agents
 list:
-	promptosaurus list
+	prompticorn list
 
 # Validate config
 validate:
-	promptosaurus validate
+	prompticorn validate
 
 # Switch tool
 switch:
-	promptosaurus switch
+	prompticorn switch
 
 # Update configuration
 update:
-	promptosaurus update
+	prompticorn update
 
 # Clean generated files
 clean:
@@ -437,29 +437,29 @@ make rebuild      # Clean and rebuild everything
 
 ```bash
 # Set environment variables
-export PROMPTOSAURUS_LANGUAGE=python
-export PROMPTOSAURUS_RUNTIME=3.12
-export PROMPTOSAURUS_PACKAGE_MANAGER=uv
+export PROMPTICORN_LANGUAGE=python
+export PROMPTICORN_RUNTIME=3.12
+export PROMPTICORN_PACKAGE_MANAGER=uv
 
 # Use in scripts
-promptosaurus validate
+prompticorn validate
 
 # Unset when done
-unset PROMPTOSAURUS_LANGUAGE
-unset PROMPTOSAURUS_RUNTIME
-unset PROMPTOSAURUS_PACKAGE_MANAGER
+unset PROMPTICORN_LANGUAGE
+unset PROMPTICORN_RUNTIME
+unset PROMPTICORN_PACKAGE_MANAGER
 ```
 
 ### CI/CD Secrets
 
 ```yaml
 # GitHub Actions example
-- name: Setup Promptosaurus Config
+- name: Setup Prompticorn Config
   env:
     LANGUAGE: ${{ secrets.LANGUAGE }}
     RUNTIME: ${{ secrets.RUNTIME }}
   run: |
-    promptosaurus validate
+    prompticorn validate
 ```
 
 ---
@@ -468,7 +468,7 @@ unset PROMPTOSAURUS_PACKAGE_MANAGER
 
 1. **Always Validate Before Deploy**
    ```bash
-   promptosaurus validate || exit 1
+   prompticorn validate || exit 1
    ```
 
 2. **Version Your Configuration**
@@ -483,10 +483,10 @@ unset PROMPTOSAURUS_PACKAGE_MANAGER
 
 4. **Regenerate on Configuration Change**
    - Auto-commit regenerated files
-   - Keep configs in sync with .promptosaurus.yaml
+   - Keep configs in sync with .prompticorn.yaml
 
 5. **Monitor Configuration Files**
-   - Alert on .promptosaurus.yaml changes
+   - Alert on .prompticorn.yaml changes
    - Validate before merge
 
 ---

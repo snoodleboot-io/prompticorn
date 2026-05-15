@@ -13,7 +13,7 @@ def main():
     project_root = Path(__file__).parent.parent
 
     print("\n" + "=" * 60)
-    print("PROMPTOSAURUS PHASE 1 VALIDATION SUITE")
+    print("PROMPTICORN PHASE 1 VALIDATION SUITE")
     print("=" * 60 + "\n")
 
     # Run content validation

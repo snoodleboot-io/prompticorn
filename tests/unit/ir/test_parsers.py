@@ -9,8 +9,8 @@ Tests cover:
 
 import pytest
 
-from promptosaurus.ir.exceptions import ParseError
-from promptosaurus.ir.parsers import MarkdownParser, YAMLParser
+from prompticorn.ir.exceptions import ParseError
+from prompticorn.ir.parsers import MarkdownParser, YAMLParser
 
 # ============================================================================
 # FIXTURES - YAMLParser test data

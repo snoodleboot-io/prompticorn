@@ -1,6 +1,6 @@
-"""Tests for promptosaurus.questions.base.folder_spec module."""
+"""Tests for prompticorn.questions.base.folder_spec module."""
 
-from promptosaurus.questions.base.folder_spec import FolderSpec
+from prompticorn.questions.base.folder_spec import FolderSpec
 
 
 class TestFolderSpec:

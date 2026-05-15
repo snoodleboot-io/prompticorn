@@ -15,7 +15,7 @@ Kilo agents use a specific format:
 name: agent_name
 description: Agent description
 model: anthropic/claude-opus-4-1
-state_management: .promptosaurus/sessions/
+state_management: .prompticorn/sessions/
 ---
 
 # System Prompt
@@ -313,10 +313,10 @@ model: anthropic/claude-opus-4-1  # Valid
 
 ### Session Management
 
-Kilo uses `.promptosaurus/sessions/` for maintaining context across calls. The agent file specifies this path:
+Kilo uses `.prompticorn/sessions/` for maintaining context across calls. The agent file specifies this path:
 
 ```yaml
-state_management: .promptosaurus/sessions/
+state_management: .prompticorn/sessions/
 ```
 
 This enables:
@@ -367,7 +367,7 @@ For comprehensive configurations:
 name: code
 description: Code generation and review assistant
 model: anthropic/claude-opus-4-1
-state_management: .promptosaurus/sessions/
+state_management: .prompticorn/sessions/
 ---
 
 # System Prompt

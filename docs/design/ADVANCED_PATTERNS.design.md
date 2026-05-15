@@ -1,4 +1,4 @@
-# Promptosaurus Advanced Patterns Guide
+# Prompticorn Advanced Patterns Guide
 
 **Version:** 2.0.0  
 **Date:** April 9, 2026  
@@ -26,8 +26,8 @@
 #### Step 1: Understand the Builder Interface
 
 ```python
-from promptosaurus.ir.models import Agent
-from promptosaurus.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
+from prompticorn.builders.base import BuildOptions
 from typing import Any
 
 
@@ -60,8 +60,8 @@ class Builder:
 #### Step 2: Implement Your Builder
 
 ```python
-from promptosaurus.builders.base import Builder, BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.base import Builder, BuildOptions
+from prompticorn.ir.models import Agent
 from typing import Any
 import json
 
@@ -171,7 +171,7 @@ class SlackBuilder(Builder):
 
 
 # Register the builder
-from promptosaurus.builders.factory import BuilderFactory
+from prompticorn.builders.factory import BuilderFactory
 BuilderFactory.register("slack", SlackBuilder)
 
 # Use it
@@ -190,8 +190,8 @@ print(json.dumps(manifest, indent=2))
 #### Step 3: Support Optional Features
 
 ```python
-from promptosaurus.builders.base import Builder, BuildOptions
-from promptosaurus.ir.models import Agent, Skill, Workflow, Rules
+from prompticorn.builders.base import Builder, BuildOptions
+from prompticorn.ir.models import Agent, Skill, Workflow, Rules
 from typing import Any
 
 
@@ -238,8 +238,8 @@ class EnhancedSlackBuilder(Builder):
 
 ```python
 import pytest
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 
 
 class TestSlackBuilder:
@@ -322,7 +322,7 @@ class TestSlackBuilder:
 ```python
 from pydantic import BaseModel, Field
 from typing import List, Optional, Dict, Any
-from promptosaurus.ir.models import Agent
+from prompticorn.ir.models import Agent
 
 
 class ExtendedAgent(Agent):
@@ -429,7 +429,7 @@ except Exception as e:
 ```python
 from dataclasses import dataclass
 from typing import List, Dict
-from promptosaurus.ir.models import Agent, Skill, Workflow
+from prompticorn.ir.models import Agent, Skill, Workflow
 
 
 @dataclass
@@ -505,7 +505,7 @@ print(team.get_all_skills())  # All skills across team
 
 ```python
 from typing import Dict, Type, Any
-from promptosaurus.builders.base import Builder
+from prompticorn.builders.base import Builder
 
 
 class BuilderPlugin:
@@ -549,7 +549,7 @@ class PluginRegistry:
         self._plugins[plugin.name] = plugin
         
         # Register builder with main factory
-        from promptosaurus.builders.factory import BuilderFactory
+        from prompticorn.builders.factory import BuilderFactory
         BuilderFactory.register(plugin.name, plugin.builder_class)
     
     def unregister(self, name: str) -> None:
@@ -683,7 +683,7 @@ print(registry.list_plugins())
 
 ```python
 from typing import Dict, List, Optional
-from promptosaurus.ir.models import Agent
+from prompticorn.ir.models import Agent
 from pathlib import Path
 import json
 
@@ -787,9 +787,9 @@ print(registry.get_metadata("architect"))
 ```python
 from functools import cached_property
 from typing import Dict
-from promptosaurus.ir.models import Agent
-from promptosaurus.builders.factory import BuilderFactory
-from promptosaurus.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
+from prompticorn.builders.factory import BuilderFactory
+from prompticorn.builders.base import BuildOptions
 
 
 class CachedBuilderSession:
@@ -847,9 +847,9 @@ print(session.get_cache_stats())
 ```python
 import asyncio
 from concurrent.futures import ThreadPoolExecutor
-from promptosaurus.ir.models import Agent
-from promptosaurus.builders.factory import BuilderFactory
-from promptosaurus.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
+from prompticorn.builders.factory import BuilderFactory
+from prompticorn.builders.base import BuildOptions
 
 
 async def build_for_all_tools_async(
@@ -942,8 +942,8 @@ print(f"Parallel builds: {config.max_parallel_builds}")
 
 ```python
 from dataclasses import dataclass
-from promptosaurus.builders.factory import BuilderFactory
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.factory import BuilderFactory
+from prompticorn.ir.models import Agent
 
 
 @dataclass
@@ -1024,7 +1024,7 @@ else:
 from enum import Enum
 from datetime import datetime, timedelta
 from typing import Callable, Any
-from promptosaurus.builders.errors import BuilderException
+from prompticorn.builders.errors import BuilderException
 
 
 class CircuitState(Enum):
@@ -1106,9 +1106,9 @@ for i in range(10):
 ```python
 import time
 from typing import Dict, List
-from promptosaurus.ir.models import Agent
-from promptosaurus.builders.factory import BuilderFactory
-from promptosaurus.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
+from prompticorn.builders.factory import BuilderFactory
+from prompticorn.builders.base import BuildOptions
 
 
 class BuilderBenchmark:
@@ -1186,4 +1186,4 @@ benchmark.print_report()
 
 ---
 
-*This guide covers advanced patterns for extending and customizing Promptosaurus. For standard usage, see the Integration Guide.*
+*This guide covers advanced patterns for extending and customizing Prompticorn. For standard usage, see the Integration Guide.*

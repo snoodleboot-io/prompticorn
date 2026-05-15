@@ -2,12 +2,12 @@
 
 ## Overview
 
-The Builder architecture in Promptosaurus is responsible for transforming Intermediate Representation (IR) models into tool-specific output formats. It uses a factory pattern for builder instantiation and a protocol-based system for optional feature support.
+The Builder architecture in Prompticorn is responsible for transforming Intermediate Representation (IR) models into tool-specific output formats. It uses a factory pattern for builder instantiation and a protocol-based system for optional feature support.
 
 ## Core Components
 
 ### Builder Base Class
-**File:** `promptosaurus/builders/base.py`
+**File:** `prompticorn/builders/base.py`
 
 The Builder base class defines the interface that all tool-specific builders must implement. It ensures consistent behavior across different tool targets while providing common functionality.
 
@@ -29,7 +29,7 @@ The BuildOptions dataclass provides configuration for the build process:
 - `include_tools`: Whether to include tools in output
 
 ### Builder Factory
-**File:** `promptosaurus/builders/factory.py`
+**File:** `prompticorn/builders/factory.py`
 
 The BuilderFactory implements the factory pattern for creating and managing builder instances. It maintains a registry of builder classes and provides a clean API for getting builder instances.
 
@@ -42,9 +42,9 @@ The BuilderFactory implements the factory pattern for creating and managing buil
 - `get_builder_info(tool_name)`: Get metadata about a registered builder
 
 ### Protocol-Based Feature Support
-**File:** `promptosaurus/builders/interfaces.py`
+**File:** `prompticorn/builders/interfaces.py`
 
-Instead of traditional inheritance, Promptosaurus uses typing.Protocol for optional builder features. This provides structural subtyping without runtime overhead or tight coupling.
+Instead of traditional inheritance, Prompticorn uses typing.Protocol for optional builder features. This provides structural subtyping without runtime overhead or tight coupling.
 
 **Available Protocols:**
 - `SupportsSkills`: For builders that support building skills
@@ -79,28 +79,28 @@ graph TD
 ## Tool-Specific Builders
 
 ### KiloBuilder
-**File:** `promptosaurus/builders/kilo_builder.py`
+**File:** `prompticorn/builders/kilo_builder.py`
 
 Builds output for Kilo Code AI tool. Generates configuration files for Kilo's agent system.
 
 **Output Format:** YAML-based configuration with specific sections for different agent capabilities.
 
 ### ClaudeBuilder
-**File:** `promptosaurus/builders/claude_builder.py`
+**File:** `prompticorn/builders/claude_builder.py`
 
 Builds output for Claude AI tool. Generates prompt files and configuration for Claude's agent system.
 
 **Output Format:** Markdown files, returns `dict[str, str]` mapping file paths to content.
 
 ### ClineBuilder
-**File:** `promptosaurus/builders/cline_builder.py`
+**File:** `prompticorn/builders/cline_builder.py`
 
 Builds output for Cline AI tool. Generates configuration files for Cline's agent system.
 
 **Output Format:** Markdown (`.clinerules`) files.
 
 ### CopilotBuilder
-**File:** `promptosaurus/builders/copilot_builder.py`
+**File:** `prompticorn/builders/copilot_builder.py`
 
 Builds output for GitHub Copilot. Generates configuration files for Copilot's agent system.
 
@@ -132,8 +132,8 @@ To create a new builder for an unsupported tool:
 
 1. **Inherit from Builder:**
 ```python
-from promptosaurus.builders.base import Builder, BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.base import Builder, BuildOptions
+from prompticorn.ir.models import Agent
 from typing import Any
 
 class MyToolBuilder(Builder):
@@ -154,16 +154,16 @@ class MyToolBuilder(Builder):
 
 2. **Register with Factory:**
 ```python
-from promptosaurus.builders.factory import BuilderFactory
+from prompticorn.builders.factory import BuilderFactory
 
 BuilderFactory.register("mytool", MyToolBuilder)
 ```
 
 3. **Use the Builder:**
 ```python
-from promptosaurus.builders.factory import BuilderFactory
-from promptosaurus.ir.models import Agent
-from promptosaurus.builders.base import BuildOptions
+from prompticorn.builders.factory import BuilderFactory
+from prompticorn.ir.models import Agent
+from prompticorn.builders.base import BuildOptions
 
 agent = Agent(
     name="my-agent",
