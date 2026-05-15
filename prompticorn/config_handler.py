@@ -81,6 +81,16 @@ class ConfigHandler:
         return config_dir / cls.DEFAULT_CONFIG_FILE
 
     @classmethod
+    def _migrate_from_promptosaurus(cls, config_dir: Path) -> None:
+        """Rename .promptosaurus to .prompticorn if the old directory exists.
+
+        TODO: Remove this method once all users have migrated.
+        """
+        legacy_dir = config_dir.parent / ".promptosaurus"
+        if legacy_dir.exists() and not config_dir.exists():
+            legacy_dir.rename(config_dir)
+
+    @classmethod
     def ensure_config_dir(cls, config_dir: Path | None = None) -> Path:
         """Ensure the configuration directory exists.
 
@@ -95,6 +105,7 @@ class ConfigHandler:
         """
         if config_dir is None:
             config_dir = cls.DEFAULT_CONFIG_DIR
+        cls._migrate_from_promptosaurus(config_dir)
         config_dir.mkdir(parents=True, exist_ok=True)
         # Also create sessions directory for session management
         (config_dir / "sessions").mkdir(parents=True, exist_ok=True)
@@ -115,6 +126,8 @@ class ConfigHandler:
         """
         if config_path is None:
             config_path = cls.get_config_path()
+
+        cls._migrate_from_promptosaurus(config_path.parent)
 
         if not config_path.exists():
             return {}
