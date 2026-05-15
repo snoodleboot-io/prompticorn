@@ -2,7 +2,7 @@
 
 from click.testing import CliRunner
 
-from promptosaurus.cli import cli
+from prompticorn.cli import cli
 
 
 class TestSwapCommand:

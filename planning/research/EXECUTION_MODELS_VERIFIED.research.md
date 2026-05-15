@@ -31,14 +31,14 @@
 
 ### IR Mapping
 
-- `PromptosaurusAgent` → System prompt + tool descriptions (JSON schema)
-- `PromptosaurusSkill` → Tool object with name, description, input_schema
-- `PromptosaurusWorkflow` → Implicit ordering (Claude decides sequence)
+- `PrompticornAgent` → System prompt + tool descriptions (JSON schema)
+- `PrompticornSkill` → Tool object with name, description, input_schema
+- `PrompticornWorkflow` → Implicit ordering (Claude decides sequence)
 
 ### Example Flow
 
 ```
-PromptosaurusAgent:
+PrompticornAgent:
   prompt: "You are a Python expert..."
   skills: ["test-writing", "refactoring"]
   
@@ -160,18 +160,18 @@ Cline has 5 systems for customization:
 
 For ClineBuilder:
 
-- `PromptosaurusAgent`:
+- `PrompticornAgent`:
   - `prompt` → System instructions + Rules
   - `skills` → Skill directory references
   - `workflows` → Workflow references
   
-- `PromptosaurusSkill`:
+- `PrompticornSkill`:
   - `name` → Skill directory name
   - `description` → Triggers skill activation
   - `instructions` → SKILL.md body
   - `resources` → docs/, scripts/ directories
   
-- `PromptosaurusWorkflow`:
+- `PrompticornWorkflow`:
   - `steps` → Workflow steps (natural language or XML)
   - Files written to: `.clinerules/workflows/{name}.md`
 
@@ -313,18 +313,18 @@ project/
 
 For CopilotBuilder (both cloud agent and CLI):
 
-- `PromptosaurusAgent`:
+- `PrompticornAgent`:
   - `prompt` → Custom instructions file
   - `skills` → Skill references
   
-- `PromptosaurusSkill`:
+- `PrompticornSkill`:
   - `name` → Skill directory name
   - `description` → Trigger for skill activation
   - `instructions` → SKILL.md body
   - `resources` → Scripts in skill directory
   - Files written to: `.github/skills/{name}/SKILL.md`
   
-- `PromptosaurusWorkflow` (via Hooks):
+- `PrompticornWorkflow` (via Hooks):
   - `steps` → Hook definitions with bash/powershell
   - Files written to: `.github/hooks/*.json`
 
@@ -427,9 +427,9 @@ Autonomous agent with implicit reasoning:
 ### IR Mapping (Speculative)
 
 For CursorBuilder:
-- `PromptosaurusAgent` → Custom instructions or system prompts
-- `PromptosaurusSkill` → Possibly `.cursorrules` or instruction sections
-- `PromptosaurusWorkflow` → Implicit in agent reasoning
+- `PrompticornAgent` → Custom instructions or system prompts
+- `PrompticornSkill` → Possibly `.cursorrules` or instruction sections
+- `PrompticornWorkflow` → Implicit in agent reasoning
 
 **⚠️ NOTE:** Cursor needs deeper public documentation research before finalization.
 
@@ -449,7 +449,7 @@ Mode-based agent system with session management:
 2. Kilo loads mode definition from .kilocodemodes (YAML)
 3. Kilo loads system prompt from .kilocode/rules/system.md
 4. Kilo loads mode-specific prompt from .kilocode/rules-{mode}/*.md
-5. Kilo initializes session (.promptosaurus/sessions/*.md)
+5. Kilo initializes session (.prompticorn/sessions/*.md)
 6. IDE invokes Claude with assembled prompt
 7. Claude returns tool calls
 8. IDE executes, updates session
@@ -480,7 +480,7 @@ customModes:
 
 ### Session Management
 
-- **Storage:** `.promptosaurus/sessions/session_*.md` (YAML frontmatter + markdown)
+- **Storage:** `.prompticorn/sessions/session_*.md` (YAML frontmatter + markdown)
 - **Tracks:**
   - Mode history (sequence of modes used)
   - Actions taken (timestamped list)
@@ -496,16 +496,16 @@ customModes:
 
 For KiloBuilder:
 
-- `PromptosaurusAgent`:
+- `PrompticornAgent`:
   - `name` → Agent slug in .kilocodemodes
   - `prompt` → .kilocode/rules-{mode}/instructions.md (minimal)
   - `prompt_verbose` → .kilocode/rules-{mode}/instructions-verbose.md (detailed)
   - Files written to: `.kilocode/rules-{agent}/` directory structure
   
-- `PromptosaurusSkill`:
+- `PrompticornSkill`:
   - Files written to: `.kilocode/skills/{skill}/SKILL.md`
   
-- `PromptosaurusWorkflow`:
+- `PrompticornWorkflow`:
   - Implicit via session mode history (future explicit support)
 
 ### Example Kilo Project Structure
@@ -528,7 +528,7 @@ project/
 │   │   └── test-writing/
 │   │       └── SKILL.md
 │   └── workflows/          # Future: explicit workflows
-└── .promptosaurus/
+└── .prompticorn/
     └── sessions/           # Session management
         └── session_*.md
 ```
@@ -564,9 +564,9 @@ Step-based workflow orchestration:
 ### IR Mapping (Speculative)
 
 For KiloCliBuilder:
-- `PromptosaurusAgent` → CLI command/entry point definition
-- `PromptosaurusSkill` → Step definition/reusable procedure
-- `PromptosaurusWorkflow` → Workflow YAML with step sequence
+- `PrompticornAgent` → CLI command/entry point definition
+- `PrompticornSkill` → Step definition/reusable procedure
+- `PrompticornWorkflow` → Workflow YAML with step sequence
 
 **⚠️ NOTE:** Requires source code analysis of Kilo CLI for verification.
 
@@ -581,7 +581,7 @@ For KiloCliBuilder:
 | **Skill Activation** | Implicit (Claude picks) | `use_skill` tool | Auto on match | Auto on match | Unknown | Via system prompt | Step invocation |
 | **Hooks/Validation** | None | (nascent) | JSON-based with bash | JSON-based with bash | Unknown | (future) | Unknown |
 | **Workflows** | Implicit (tool chains) | Markdown steps | Hook orchestration | /fleet parallel tasks | Unknown | Session-based | Explicit steps |
-| **Session/State** | Message history | Focus chain file | GitHub Actions env | Local chronicle | Unknown | .promptosaurus/sessions/ | Workflow state |
+| **Session/State** | Message history | Focus chain file | GitHub Actions env | Local chronicle | Unknown | .prompticorn/sessions/ | Workflow state |
 | **Rules/Conventions** | System prompt | `.clinerules/` markdown | Custom instructions | Custom instructions | `.cursorrules` (inferred) | `.kilocode/rules-*` | Unknown |
 | **Confidence** | ✅ HIGH | ✅ HIGH | ✅ HIGH | ✅ HIGH | 🟡 MEDIUM | 🟡 MEDIUM | 🟠 LOW |
 
@@ -640,7 +640,7 @@ For KiloCliBuilder:
 | Cline | Focus chain (file) + file watchers | Persistent file |
 | Copilot Cloud | GitHub Actions environment | Task-specific |
 | Copilot CLI | Local chronicle | Session history |
-| Kilo | Session file (.promptosaurus) | Persistent file |
+| Kilo | Session file (.prompticorn) | Persistent file |
 
 ---
 

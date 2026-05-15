@@ -57,9 +57,9 @@ ClaudeBuilder generates a `dict[str, str]` mapping file paths to Markdown conten
 ### Most Basic Example
 
 ```python
-from promptosaurus.builders.claude_builder import ClaudeBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.claude_builder import ClaudeBuilder
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 
 # Create a builder
 builder = ClaudeBuilder()
@@ -104,9 +104,9 @@ for file_path, content in config.items():
 ### Import
 
 ```python
-from promptosaurus.builders.claude_builder import ClaudeBuilder
-from promptosaurus.builders.base import BuildOptions, BuilderValidationError
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.claude_builder import ClaudeBuilder
+from prompticorn.builders.base import BuildOptions, BuilderValidationError
+from prompticorn.ir.models import Agent
 ```
 
 ### Initialize
@@ -143,7 +143,7 @@ print(builder.supports_feature("tools"))       # True
 ### 1. Create Agent Model
 
 ```python
-from promptosaurus.ir.models import Agent
+from prompticorn.ir.models import Agent
 
 agent = Agent(
     name="research_assistant",
@@ -176,7 +176,7 @@ if errors:
 ### 3. Configure Build Options
 
 ```python
-from promptosaurus.builders.base import BuildOptions
+from prompticorn.builders.base import BuildOptions
 
 # For API integration
 options = BuildOptions(
@@ -605,9 +605,9 @@ def build(self, agent: Agent, options: BuildOptions) -> dict[str, str]:
 ### Example 1: Simple Code Agent
 
 ```python
-from promptosaurus.builders.claude_builder import ClaudeBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.claude_builder import ClaudeBuilder
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 from pathlib import Path
 
 def build_code_agent():
@@ -654,9 +654,9 @@ if __name__ == "__main__":
 ### Example 2: Multi-Tool System
 
 ```python
-from promptosaurus.builders.claude_builder import ClaudeBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.claude_builder import ClaudeBuilder
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 from pathlib import Path
 
 def build_devops_agent():
@@ -703,9 +703,9 @@ if __name__ == "__main__":
 ### Example 3: Writing Files to Disk
 
 ```python
-from promptosaurus.builders.claude_builder import ClaudeBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.claude_builder import ClaudeBuilder
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 from pathlib import Path
 
 def write_claude_agent_files():
@@ -748,9 +748,9 @@ if __name__ == "__main__":
 ### Example 4: Configuration Management
 
 ```python
-from promptosaurus.builders.claude_builder import ClaudeBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.claude_builder import ClaudeBuilder
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 from pathlib import Path
 
 def manage_agent_configurations():
@@ -817,10 +817,10 @@ For building other tools, see:
 
 ## Support & Resources
 
-- **Source Code:** `promptosaurus/builders/claude_builder.py`
-- **Base Class:** `promptosaurus/builders/base.py` (Builder)
-- **IR Models:** `promptosaurus/ir/models.py` (Agent dataclass)
-- **Examples:** `promptosaurus/builders/examples_usage.py`
+- **Source Code:** `prompticorn/builders/claude_builder.py`
+- **Base Class:** `prompticorn/builders/base.py` (Builder)
+- **IR Models:** `prompticorn/ir/models.py` (Agent dataclass)
+- **Examples:** `prompticorn/builders/examples_usage.py`
 - **Claude API Docs:** [api.anthropic.com](https://api.anthropic.com)
 - **Messages API:** [docs.anthropic.com/messages](https://docs.anthropic.com/messages/overview)
 

@@ -50,7 +50,7 @@
 
 To implement these changes, you need to:
 
-1. **Update agent source definitions** in `promptosaurus/agents/{agent}/`
+1. **Update agent source definitions** in `prompticorn/agents/{agent}/`
 2. **Regenerate agent files** using the builder
 3. **Verify** that each agent only lists its assigned skills and workflows
 

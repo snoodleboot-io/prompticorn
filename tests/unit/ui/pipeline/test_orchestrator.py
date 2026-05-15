@@ -1,4 +1,4 @@
-"""Unit tests for promptosaurus.ui.pipeline.orchestrator.
+"""Unit tests for prompticorn.ui.pipeline.orchestrator.
 
 This module tests the PipelineOrchestrator class which coordinates
 the entire UI interaction flow. Tests focus on state transitions,
@@ -9,13 +9,13 @@ from unittest.mock import Mock
 
 import pytest
 
-from promptosaurus.ui.domain.context import QuestionContext
-from promptosaurus.ui.pipeline.orchestrator import PipelineOrchestrator
-from promptosaurus.ui.state.multi_selection_state import MultiSelectionState
-from promptosaurus.ui.state.mutual_exclusion_multi_selection_state import (
+from prompticorn.ui.domain.context import QuestionContext
+from prompticorn.ui.pipeline.orchestrator import PipelineOrchestrator
+from prompticorn.ui.state.multi_selection_state import MultiSelectionState
+from prompticorn.ui.state.mutual_exclusion_multi_selection_state import (
     MutualExclusionMultiSelectionState,
 )
-from promptosaurus.ui.state.single_selection_state import SingleSelectionState
+from prompticorn.ui.state.single_selection_state import SingleSelectionState
 
 
 class TestPipelineOrchestratorInit:
@@ -48,7 +48,7 @@ class TestPipelineOrchestratorInit:
         orchestrator = PipelineOrchestrator(input_provider, render_stage, state_update_stage)
 
         # Assert
-        from promptosaurus.ui.pipeline.command_factory import CommandFactory
+        from prompticorn.ui.pipeline.command_factory import CommandFactory
 
         assert isinstance(orchestrator.command_factory, CommandFactory)
 

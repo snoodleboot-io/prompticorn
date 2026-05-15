@@ -4,13 +4,13 @@ import pytest
 from sweet_tea.abstract_factory import AbstractFactory
 from sweet_tea.sweet_tea_error import SweetTeaError
 
-from promptosaurus.ui.domain.context import PipelineContext, QuestionContext
-from promptosaurus.ui.domain.renderer import Renderer
-from promptosaurus.ui.render.columns import ColumnLayoutRenderer
-from promptosaurus.ui.render.explain import ExplainRenderer
-from promptosaurus.ui.render.vertical import VerticalLayoutRenderer
-from promptosaurus.ui.state.single_selection_state import SingleSelectionState
-from promptosaurus.ui.ui_factory import UIFactory
+from prompticorn.ui.domain.context import PipelineContext, QuestionContext
+from prompticorn.ui.domain.renderer import Renderer
+from prompticorn.ui.render.columns import ColumnLayoutRenderer
+from prompticorn.ui.render.explain import ExplainRenderer
+from prompticorn.ui.render.vertical import VerticalLayoutRenderer
+from prompticorn.ui.state.single_selection_state import SingleSelectionState
+from prompticorn.ui.ui_factory import UIFactory
 
 
 class TestUIFactory:

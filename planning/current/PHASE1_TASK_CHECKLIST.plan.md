@@ -26,18 +26,18 @@ Each task has a checkbox `- [ ]`. When you complete a task:
 
 **DELIVERABLE:** 3 top-level agent files created and committed
 
-- [x] Create `promptosaurus/agents/data/prompt.md` (agent definition)
-  - File: `promptosaurus/agents/data/prompt.md`
+- [x] Create `prompticorn/agents/data/prompt.md` (agent definition)
+  - File: `prompticorn/agents/data/prompt.md`
   - Content: Agent overview, responsibilities, capabilities
   - Status: ✅ COMPLETED
   
-- [x] Create `promptosaurus/agents/observability/prompt.md` (agent definition)
-  - File: `promptosaurus/agents/observability/prompt.md`
+- [x] Create `prompticorn/agents/observability/prompt.md` (agent definition)
+  - File: `prompticorn/agents/observability/prompt.md`
   - Content: Agent overview, responsibilities, capabilities
   - Status: ✅ COMPLETED
   
-- [x] Create `promptosaurus/agents/incident/prompt.md` (agent definition)
-  - File: `promptosaurus/agents/incident/prompt.md`
+- [x] Create `prompticorn/agents/incident/prompt.md` (agent definition)
+  - File: `prompticorn/agents/incident/prompt.md`
   - Content: Agent overview, responsibilities, capabilities
   - Status: ✅ COMPLETED
 
@@ -55,51 +55,51 @@ Each task has a checkbox `- [ ]`. When you complete a task:
 
 #### data/pipeline subagent
 
-- [x] Create `promptosaurus/agents/data/subagents/pipeline/minimal/prompt.md`
+- [x] Create `prompticorn/agents/data/subagents/pipeline/minimal/prompt.md`
   - Purpose: ETL/ELT pipeline design and optimization (minimal variant)
   - Status: ✅ COMPLETED
   
-- [x] Create `promptosaurus/agents/data/subagents/pipeline/verbose/prompt.md`
+- [x] Create `prompticorn/agents/data/subagents/pipeline/verbose/prompt.md`
   - Purpose: ETL/ELT pipeline design and optimization (verbose variant)
   - Status: ✅ COMPLETED
 
 #### data/warehouse subagent
 
-- [x] Create `promptosaurus/agents/data/subagents/warehouse/minimal/prompt.md`
+- [x] Create `prompticorn/agents/data/subagents/warehouse/minimal/prompt.md`
   - Purpose: Data warehouse design and modeling (minimal variant)
   - Status: ✅ COMPLETED
   
-- [x] Create `promptosaurus/agents/data/subagents/warehouse/verbose/prompt.md`
+- [x] Create `prompticorn/agents/data/subagents/warehouse/verbose/prompt.md`
   - Purpose: Data warehouse design and modeling (verbose variant)
   - Status: ✅ COMPLETED
 
 #### data/quality subagent
 
-- [x] Create `promptosaurus/agents/data/subagents/quality/minimal/prompt.md`
+- [x] Create `prompticorn/agents/data/subagents/quality/minimal/prompt.md`
   - Purpose: Data validation, testing, and monitoring (minimal variant)
   - Status: ✅ COMPLETED
   
-- [x] Create `promptosaurus/agents/data/subagents/quality/verbose/prompt.md`
+- [x] Create `prompticorn/agents/data/subagents/quality/verbose/prompt.md`
   - Purpose: Data validation, testing, and monitoring (verbose variant)
   - Status: ✅ COMPLETED
 
 #### data/governance subagent
 
-- [x] Create `promptosaurus/agents/data/subagents/governance/minimal/prompt.md`
+- [x] Create `prompticorn/agents/data/subagents/governance/minimal/prompt.md`
   - Purpose: Data lineage, catalog, compliance (minimal variant)
   - Status: ✅ COMPLETED
   
-- [x] Create `promptosaurus/agents/data/subagents/governance/verbose/prompt.md`
+- [x] Create `prompticorn/agents/data/subagents/governance/verbose/prompt.md`
   - Purpose: Data lineage, catalog, compliance (verbose variant)
   - Status: ✅ COMPLETED
 
 #### data/streaming subagent
 
-- [x] Create `promptosaurus/agents/data/subagents/streaming/minimal/prompt.md`
+- [x] Create `prompticorn/agents/data/subagents/streaming/minimal/prompt.md`
   - Purpose: Real-time data processing (minimal variant)
   - Status: ✅ COMPLETED
   
-- [x] Create `promptosaurus/agents/data/subagents/streaming/verbose/prompt.md`
+- [x] Create `prompticorn/agents/data/subagents/streaming/verbose/prompt.md`
   - Purpose: Real-time data processing (verbose variant)
   - Status: ✅ COMPLETED
 
@@ -117,51 +117,51 @@ Each task has a checkbox `- [ ]`. When you complete a task:
 
 #### observability/metrics subagent
 
-- [x] Create `promptosaurus/agents/observability/subagents/metrics/minimal/prompt.md`
+- [x] Create `prompticorn/agents/observability/subagents/metrics/minimal/prompt.md`
   - Purpose: Prometheus, StatsD, custom metrics (minimal variant)
   - Status: ✅ COMPLETED
   
-- [x] Create `promptosaurus/agents/observability/subagents/metrics/verbose/prompt.md`
+- [x] Create `prompticorn/agents/observability/subagents/metrics/verbose/prompt.md`
   - Purpose: Prometheus, StatsD, custom metrics (verbose variant)
   - Status: ✅ COMPLETED
 
 #### observability/logging subagent
 
-- [x] Create `promptosaurus/agents/observability/subagents/logging/minimal/prompt.md`
+- [x] Create `prompticorn/agents/observability/subagents/logging/minimal/prompt.md`
   - Purpose: Structured logging, aggregation (minimal variant)
   - Status: ✅ COMPLETED
   
-- [x] Create `promptosaurus/agents/observability/subagents/logging/verbose/prompt.md`
+- [x] Create `prompticorn/agents/observability/subagents/logging/verbose/prompt.md`
   - Purpose: Structured logging, aggregation (verbose variant)
   - Status: ✅ COMPLETED
 
 #### observability/tracing subagent
 
-- [x] Create `promptosaurus/agents/observability/subagents/tracing/minimal/prompt.md`
+- [x] Create `prompticorn/agents/observability/subagents/tracing/minimal/prompt.md`
   - Purpose: Distributed tracing (OpenTelemetry, Jaeger) (minimal variant)
   - Status: ✅ COMPLETED
   
-- [x] Create `promptosaurus/agents/observability/subagents/tracing/verbose/prompt.md`
+- [x] Create `prompticorn/agents/observability/subagents/tracing/verbose/prompt.md`
   - Purpose: Distributed tracing (OpenTelemetry, Jaeger) (verbose variant)
   - Status: ✅ COMPLETED
 
 #### observability/alerting subagent
 
-- [x] Create `promptosaurus/agents/observability/subagents/alerting/minimal/prompt.md`
+- [x] Create `prompticorn/agents/observability/subagents/alerting/minimal/prompt.md`
   - Purpose: Alert design, tuning, escalation (minimal variant)
   - Status: ✅ COMPLETED
   
-- [x] Create `promptosaurus/agents/observability/subagents/alerting/verbose/prompt.md`
+- [x] Create `prompticorn/agents/observability/subagents/alerting/verbose/prompt.md`
   - Purpose: Alert design, tuning, escalation (verbose variant)
   - Status: ✅ COMPLETED
 
 #### observability/dashboards subagent
 
-- [x] Create `promptosaurus/agents/observability/subagents/dashboards/minimal/prompt.md`
+- [x] Create `prompticorn/agents/observability/subagents/dashboards/minimal/prompt.md`
   - Purpose: Grafana, visualization best practices (minimal variant)
   - Status: ✅ COMPLETED
   
-- [x] Create `promptosaurus/agents/observability/subagents/dashboards/verbose/prompt.md`
+- [x] Create `prompticorn/agents/observability/subagents/dashboards/verbose/prompt.md`
   - Purpose: Grafana, visualization best practices (verbose variant)
   - Status: ✅ COMPLETED
 
@@ -178,41 +178,41 @@ Each task has a checkbox `- [ ]`. When you complete a task:
 
 #### incident/triage subagent
 
-- [x] Create `promptosaurus/agents/incident/subagents/triage/minimal/prompt.md`
+- [x] Create `prompticorn/agents/incident/subagents/triage/minimal/prompt.md`
   - Purpose: Incident detection and initial response (minimal variant)
   - Status: ✅ COMPLETED
   
-- [x] Create `promptosaurus/agents/incident/subagents/triage/verbose/prompt.md`
+- [x] Create `prompticorn/agents/incident/subagents/triage/verbose/prompt.md`
   - Purpose: Incident detection and initial response (verbose variant)
   - Status: ✅ COMPLETED
 
 #### incident/postmortem subagent
 
-- [x] Create `promptosaurus/agents/incident/subagents/postmortem/minimal/prompt.md`
+- [x] Create `prompticorn/agents/incident/subagents/postmortem/minimal/prompt.md`
   - Purpose: Blameless postmortems, learning (minimal variant)
   - Status: ✅ COMPLETED
   
-- [x] Create `promptosaurus/agents/incident/subagents/postmortem/verbose/prompt.md`
+- [x] Create `prompticorn/agents/incident/subagents/postmortem/verbose/prompt.md`
   - Purpose: Blameless postmortems, learning (verbose variant)
   - Status: ✅ COMPLETED
 
 #### incident/runbook subagent
 
-- [x] Create `promptosaurus/agents/incident/subagents/runbook/minimal/prompt.md`
+- [x] Create `prompticorn/agents/incident/subagents/runbook/minimal/prompt.md`
   - Purpose: Operational procedure creation (minimal variant)
   - Status: ✅ COMPLETED
   
-- [x] Create `promptosaurus/agents/incident/subagents/runbook/verbose/prompt.md`
+- [x] Create `prompticorn/agents/incident/subagents/runbook/verbose/prompt.md`
   - Purpose: Operational procedure creation (verbose variant)
   - Status: ✅ COMPLETED
 
 #### incident/oncall subagent
 
-- [x] Create `promptosaurus/agents/incident/subagents/oncall/minimal/prompt.md`
+- [x] Create `prompticorn/agents/incident/subagents/oncall/minimal/prompt.md`
   - Purpose: On-call rotation, escalation policies (minimal variant)
   - Status: ✅ COMPLETED
   
-- [x] Create `promptosaurus/agents/incident/subagents/oncall/verbose/prompt.md`
+- [x] Create `prompticorn/agents/incident/subagents/oncall/verbose/prompt.md`
   - Purpose: On-call rotation, escalation policies (verbose variant)
   - Status: ✅ COMPLETED
 
@@ -252,27 +252,27 @@ Days 4-5: 8 incident subagents ✅ (COMPLETE)
 
 **DELIVERABLE:** 6 files (3 workflows × 2 variants)
 
-- [x] Create `promptosaurus/workflows/data-pipeline-workflow/minimal/workflow.md` ✅
+- [x] Create `prompticorn/workflows/data-pipeline-workflow/minimal/workflow.md` ✅
   - Purpose: Design ETL/ELT pipelines
   - Status: COMPLETED
 
-- [x] Create `promptosaurus/workflows/data-pipeline-workflow/verbose/workflow.md` ✅
+- [x] Create `prompticorn/workflows/data-pipeline-workflow/verbose/workflow.md` ✅
   - Purpose: Design ETL/ELT pipelines
   - Status: COMPLETED
 
-- [x] Create `promptosaurus/workflows/data-quality-workflow/minimal/workflow.md` ✅
+- [x] Create `prompticorn/workflows/data-quality-workflow/minimal/workflow.md` ✅
   - Purpose: Implement validation and monitoring
   - Status: COMPLETED
 
-- [x] Create `promptosaurus/workflows/data-quality-workflow/verbose/workflow.md` ✅
+- [x] Create `prompticorn/workflows/data-quality-workflow/verbose/workflow.md` ✅
   - Purpose: Implement validation and monitoring
   - Status: COMPLETED
 
-- [x] Create `promptosaurus/workflows/schema-migration-workflow/minimal/workflow.md` ✅
+- [x] Create `prompticorn/workflows/schema-migration-workflow/minimal/workflow.md` ✅
   - Purpose: Safe database schema evolution
   - Status: COMPLETED
 
-- [x] Create `promptosaurus/workflows/schema-migration-workflow/verbose/workflow.md` ✅
+- [x] Create `prompticorn/workflows/schema-migration-workflow/verbose/workflow.md` ✅
   - Purpose: Safe database schema evolution
   - Status: COMPLETED
 
@@ -286,27 +286,27 @@ Days 4-5: 8 incident subagents ✅ (COMPLETE)
 
 **DELIVERABLE:** 6 files (3 workflows × 2 variants)
 
-- [x] Create `promptosaurus/workflows/observability-workflow/minimal/workflow.md` ✅
+- [x] Create `prompticorn/workflows/observability-workflow/minimal/workflow.md` ✅
   - Purpose: Setup monitoring stack
   - Status: COMPLETED
 
-- [x] Create `promptosaurus/workflows/observability-workflow/verbose/workflow.md` ✅
+- [x] Create `prompticorn/workflows/observability-workflow/verbose/workflow.md` ✅
   - Purpose: Setup monitoring stack
   - Status: COMPLETED
 
-- [x] Create `promptosaurus/workflows/slo-sli-workflow/minimal/workflow.md` ✅
+- [x] Create `prompticorn/workflows/slo-sli-workflow/minimal/workflow.md` ✅
   - Purpose: Define and track SLOs/SLIs
   - Status: COMPLETED
 
-- [x] Create `promptosaurus/workflows/slo-sli-workflow/verbose/workflow.md` ✅
+- [x] Create `prompticorn/workflows/slo-sli-workflow/verbose/workflow.md` ✅
   - Purpose: Define and track SLOs/SLIs
   - Status: COMPLETED
 
-- [x] Create `promptosaurus/workflows/capacity-planning-workflow/minimal/workflow.md` ✅
+- [x] Create `prompticorn/workflows/capacity-planning-workflow/minimal/workflow.md` ✅
   - Purpose: Resource forecasting
   - Status: COMPLETED
 
-- [x] Create `promptosaurus/workflows/capacity-planning-workflow/verbose/workflow.md` ✅
+- [x] Create `prompticorn/workflows/capacity-planning-workflow/verbose/workflow.md` ✅
   - Purpose: Resource forecasting
   - Status: COMPLETED
 
@@ -320,19 +320,19 @@ Days 4-5: 8 incident subagents ✅ (COMPLETE)
 
 **DELIVERABLE:** 4 files (2 workflows × 2 variants)
 
-- [x] Create `promptosaurus/workflows/incident-response-workflow/minimal/workflow.md` ✅
+- [x] Create `prompticorn/workflows/incident-response-workflow/minimal/workflow.md` ✅
   - Purpose: Triage, escalation, communication
   - Status: COMPLETED
 
-- [x] Create `promptosaurus/workflows/incident-response-workflow/verbose/workflow.md` ✅
+- [x] Create `prompticorn/workflows/incident-response-workflow/verbose/workflow.md` ✅
   - Purpose: Triage, escalation, communication
   - Status: COMPLETED
 
-- [x] Create `promptosaurus/workflows/postmortem-workflow/minimal/workflow.md` ✅
+- [x] Create `prompticorn/workflows/postmortem-workflow/minimal/workflow.md` ✅
   - Purpose: Incident analysis and learning
   - Status: COMPLETED
 
-- [x] Create `promptosaurus/workflows/postmortem-workflow/verbose/workflow.md` ✅
+- [x] Create `prompticorn/workflows/postmortem-workflow/verbose/workflow.md` ✅
   - Purpose: Incident analysis and learning
   - Status: COMPLETED
 
@@ -369,39 +369,39 @@ Days 8-9: 4 incident management workflow files ✅
 
 **DELIVERABLE:** 10 files (5 skills × 2 variants)
 
-- [ ] Create `promptosaurus/skills/sql-optimization/minimal/SKILL.md`
+- [ ] Create `prompticorn/skills/sql-optimization/minimal/SKILL.md`
   - Purpose: Query performance tuning patterns
   - Status: Not started
 
-- [ ] Create `promptosaurus/skills/sql-optimization/verbose/SKILL.md`
+- [ ] Create `prompticorn/skills/sql-optimization/verbose/SKILL.md`
   - Status: Not started
 
-- [ ] Create `promptosaurus/skills/dimensional-modeling/minimal/SKILL.md`
+- [ ] Create `prompticorn/skills/dimensional-modeling/minimal/SKILL.md`
   - Purpose: Star/snowflake schema design
   - Status: Not started
 
-- [ ] Create `promptosaurus/skills/dimensional-modeling/verbose/SKILL.md`
+- [ ] Create `prompticorn/skills/dimensional-modeling/verbose/SKILL.md`
   - Status: Not started
 
-- [ ] Create `promptosaurus/skills/data-partitioning/minimal/SKILL.md`
+- [ ] Create `prompticorn/skills/data-partitioning/minimal/SKILL.md`
   - Purpose: Partitioning strategies for scale
   - Status: Not started
 
-- [ ] Create `promptosaurus/skills/data-partitioning/verbose/SKILL.md`
+- [ ] Create `prompticorn/skills/data-partitioning/verbose/SKILL.md`
   - Status: Not started
 
-- [ ] Create `promptosaurus/skills/idempotency-patterns/minimal/SKILL.md`
+- [ ] Create `prompticorn/skills/idempotency-patterns/minimal/SKILL.md`
   - Purpose: Safe retry mechanisms
   - Status: Not started
 
-- [ ] Create `promptosaurus/skills/idempotency-patterns/verbose/SKILL.md`
+- [ ] Create `prompticorn/skills/idempotency-patterns/verbose/SKILL.md`
   - Status: Not started
 
-- [ ] Create `promptosaurus/skills/slowly-changing-dimensions/minimal/SKILL.md`
+- [ ] Create `prompticorn/skills/slowly-changing-dimensions/minimal/SKILL.md`
   - Purpose: SCD type 1/2/3 handling
   - Status: Not started
 
-- [ ] Create `promptosaurus/skills/slowly-changing-dimensions/verbose/SKILL.md`
+- [ ] Create `prompticorn/skills/slowly-changing-dimensions/verbose/SKILL.md`
   - Status: Not started
 
 **VERIFICATION:**
@@ -414,32 +414,32 @@ Days 8-9: 4 incident management workflow files ✅
 
 **DELIVERABLE:** 8 files (4 skills × 2 variants)
 
-- [ ] Create `promptosaurus/skills/prometheus-query-patterns/minimal/SKILL.md`
+- [ ] Create `prompticorn/skills/prometheus-query-patterns/minimal/SKILL.md`
   - Purpose: PromQL best practices
   - Status: Not started
 
-- [ ] Create `promptosaurus/skills/prometheus-query-patterns/verbose/SKILL.md`
+- [ ] Create `prompticorn/skills/prometheus-query-patterns/verbose/SKILL.md`
   - Status: Not started
 
-- [ ] Create `promptosaurus/skills/distributed-tracing-instrumentation/minimal/SKILL.md`
+- [ ] Create `prompticorn/skills/distributed-tracing-instrumentation/minimal/SKILL.md`
   - Purpose: OpenTelemetry patterns
   - Status: Not started
 
-- [ ] Create `promptosaurus/skills/distributed-tracing-instrumentation/verbose/SKILL.md`
+- [ ] Create `prompticorn/skills/distributed-tracing-instrumentation/verbose/SKILL.md`
   - Status: Not started
 
-- [ ] Create `promptosaurus/skills/slo-sli-definition/minimal/SKILL.md`
+- [ ] Create `prompticorn/skills/slo-sli-definition/minimal/SKILL.md`
   - Purpose: Service level objective design
   - Status: Not started
 
-- [ ] Create `promptosaurus/skills/slo-sli-definition/verbose/SKILL.md`
+- [ ] Create `prompticorn/skills/slo-sli-definition/verbose/SKILL.md`
   - Status: Not started
 
-- [ ] Create `promptosaurus/skills/alert-tuning/minimal/SKILL.md`
+- [ ] Create `prompticorn/skills/alert-tuning/minimal/SKILL.md`
   - Purpose: Alert design and noise reduction
   - Status: Not started
 
-- [ ] Create `promptosaurus/skills/alert-tuning/verbose/SKILL.md`
+- [ ] Create `prompticorn/skills/alert-tuning/verbose/SKILL.md`
   - Status: Not started
 
 **VERIFICATION:**
@@ -452,18 +452,18 @@ Days 8-9: 4 incident management workflow files ✅
 
 **DELIVERABLE:** 4 files (2 skills × 2 variants)
 
-- [ ] Create `promptosaurus/skills/incident-response-playbook/minimal/SKILL.md`
+- [ ] Create `prompticorn/skills/incident-response-playbook/minimal/SKILL.md`
   - Purpose: Incident response procedures
   - Status: Not started
 
-- [ ] Create `promptosaurus/skills/incident-response-playbook/verbose/SKILL.md`
+- [ ] Create `prompticorn/skills/incident-response-playbook/verbose/SKILL.md`
   - Status: Not started
 
-- [ ] Create `promptosaurus/skills/blameless-postmortem/minimal/SKILL.md`
+- [ ] Create `prompticorn/skills/blameless-postmortem/minimal/SKILL.md`
   - Purpose: Postmortem process and learning
   - Status: Not started
 
-- [ ] Create `promptosaurus/skills/blameless-postmortem/verbose/SKILL.md`
+- [ ] Create `prompticorn/skills/blameless-postmortem/verbose/SKILL.md`
   - Status: Not started
 
 **VERIFICATION:**
@@ -626,10 +626,10 @@ Phase 1 is complete when:
 ## Quick Reference
 
 ### File Naming Convention
-- Agents: `promptosaurus/agents/{name}/prompt.md`
-- Subagents: `promptosaurus/agents/{agent}/subagents/{name}/{minimal,verbose}/prompt.md`
-- Workflows: `promptosaurus/workflows/{name}/{minimal,verbose}/workflow.md`
-- Skills: `promptosaurus/skills/{name}/{minimal,verbose}/SKILL.md`
+- Agents: `prompticorn/agents/{name}/prompt.md`
+- Subagents: `prompticorn/agents/{agent}/subagents/{name}/{minimal,verbose}/prompt.md`
+- Workflows: `prompticorn/workflows/{name}/{minimal,verbose}/workflow.md`
+- Skills: `prompticorn/skills/{name}/{minimal,verbose}/SKILL.md`
 
 ### Variant Guidelines
 See: `docs/design/VARIANT_DIFFERENTIATION_STRATEGY.md`

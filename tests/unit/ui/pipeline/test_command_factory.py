@@ -2,13 +2,13 @@
 
 import pytest
 
-from promptosaurus.ui.commands.confirm import ConfirmCommand
-from promptosaurus.ui.commands.navigate import NavigateCommand
-from promptosaurus.ui.commands.noop import NoOpCommand
-from promptosaurus.ui.commands.quit import QuitCommand
-from promptosaurus.ui.commands.select import SelectCommand
-from promptosaurus.ui.domain.events import InputEvent, InputEventType
-from promptosaurus.ui.pipeline.command_factory import CommandFactory
+from prompticorn.ui.commands.confirm import ConfirmCommand
+from prompticorn.ui.commands.navigate import NavigateCommand
+from prompticorn.ui.commands.noop import NoOpCommand
+from prompticorn.ui.commands.quit import QuitCommand
+from prompticorn.ui.commands.select import SelectCommand
+from prompticorn.ui.domain.events import InputEvent, InputEventType
+from prompticorn.ui.pipeline.command_factory import CommandFactory
 
 
 def num(value: int) -> InputEvent:

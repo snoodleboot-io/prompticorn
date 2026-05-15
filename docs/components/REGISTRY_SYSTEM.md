@@ -2,12 +2,12 @@
 
 ## Overview
 
-The Registry system serves as the single source of truth for all modes, their associated prompt files, and output ordering in Promptosaurus. It validates that all registered files exist and provides methods for generating various ignore files.
+The Registry system serves as the single source of truth for all modes, their associated prompt files, and output ordering in prompticorn. It validates that all registered files exist and provides methods for generating various ignore files.
 
 ## Core Components
 
 ### Registry Class
-**File:** `promptosaurus/registry.py`
+**File:** `prompticorn/registry.py`
 
 The Registry class is a Pydantic model that contains all mode and file registrations. It validates that all registered files exist in the prompts directory and provides methods for generating ignore files for different AI tools.
 

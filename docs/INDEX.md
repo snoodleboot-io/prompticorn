@@ -1,6 +1,6 @@
 # Documentation Index
 
-Promptosaurus documentation is organized by intent and purpose.
+prompticorn documentation is organized by intent and purpose.
 
 ## Getting Started (Pick Your Path)
 
@@ -46,7 +46,7 @@ Intent is encoded in filename suffixes:
 
 ## Content Types
 
-### In promptosaurus/
+### In prompticorn/
 - `agents/*/prompt.md` - Agent instructions
 - `workflows/**/minimal|verbose/workflow.md` - Workflow guides
 - `skills/**/minimal/SKILL.md` - Specialized skills

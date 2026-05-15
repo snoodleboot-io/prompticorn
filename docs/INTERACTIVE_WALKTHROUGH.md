@@ -1,6 +1,6 @@
 # Interactive Walkthroughs
 
-Step-by-step guided walkthroughs for common Promptosaurus tasks.
+Step-by-step guided walkthroughs for common prompticorn tasks.
 
 ## Table of Contents
 
@@ -20,19 +20,19 @@ You're starting a new Python project and want to use Kilo Code IDE as your AI as
 ### Duration
 **5-10 minutes**
 
-### Step 1: Install Promptosaurus
+### Step 1: Install prompticorn
 
 ```bash
 # Install the package
-pip install promptosaurus
+pip install prompticorn
 
 # Verify installation
-promptosaurus --help
+prompticorn --help
 ```
 
 **Expected Output:**
 ```
-Usage: promptosaurus [OPTIONS] COMMAND [ARGS]...
+Usage: prompticorn [OPTIONS] COMMAND [ARGS]...
 
   Prompt library CLI — manage and validate your prompt configurations.
 
@@ -57,7 +57,7 @@ Commands:
 cd my-python-project
 
 # Start setup wizard
-promptosaurus init
+prompticorn init
 ```
 
 ### Step 3: Question 1 - Select AI Tool
@@ -212,7 +212,7 @@ Select (default: 1): 1
   Configuration saved!
 =========================================================
 
-  Config file: /Users/you/my-python-project/.promptosaurus/.promptosaurus.yaml
+  Config file: /Users/you/my-python-project/.prompticorn/.prompticorn.yaml
 
 ------------------------------------------------------------
   Generating AI assistant configurations (minimal)...
@@ -237,7 +237,7 @@ Select (default: 1): 1
 
 ```bash
 # List all generated agents
-promptosaurus list
+prompticorn list
 
 # Should show agents grouped by role
 ```
@@ -272,7 +272,7 @@ TEST MODE  [test]
 3. **Update Configuration Later**
    ```bash
    # Update settings without re-running init
-   promptosaurus update
+   prompticorn update
    ```
 
 ---
@@ -287,7 +287,7 @@ You've been using Kilo IDE, now you want to also use Cline.
 
 ### Current State
 ```
-.promptosaurus.yaml  (exists from previous setup)
+.prompticorn.yaml  (exists from previous setup)
 .kilo/agents/        (all agents for Kilo)
 ```
 
@@ -295,10 +295,10 @@ You've been using Kilo IDE, now you want to also use Cline.
 
 ```bash
 # This is simple! Just run switch command
-promptosaurus switch
+prompticorn switch
 
 # Or directly:
-promptosaurus switch cline
+prompticorn switch cline
 ```
 
 ### Step 2: Select Tool
@@ -356,7 +356,7 @@ active_personas: ["software_engineer", "qa_tester"]
 ### Step 1: Swap Personas
 
 ```bash
-promptosaurus swap
+prompticorn swap
 ```
 
 ### Step 2: Select New Personas
@@ -413,7 +413,7 @@ You have a project with both Python backend and TypeScript frontend.
 ### Step 1: Run Init
 
 ```bash
-promptosaurus init
+prompticorn init
 ```
 
 ### Step 2-4: Select Tool, Repository Type, Variant
@@ -533,7 +533,7 @@ Setup complete!
 
 ### Result
 
-Your `.promptosaurus.yaml`:
+Your `.prompticorn.yaml`:
 ```yaml
 spec:
   - folder: "backend/api"
@@ -556,14 +556,14 @@ Agents are generated with language-specific prompts for each folder!
 ### Problem: "Configuration file not found"
 
 ```bash
-$ promptosaurus list
-Error: No configuration found. Run 'promptosaurus init' first.
+$ prompticorn list
+Error: No configuration found. Run 'prompticorn init' first.
 ```
 
 **Solution:**
 ```bash
 # Initialize configuration
-promptosaurus init
+prompticorn init
 ```
 
 ---
@@ -571,17 +571,17 @@ promptosaurus init
 ### Problem: "Missing: .kilo/agents/code.md"
 
 ```bash
-$ promptosaurus validate
+$ prompticorn validate
 ✗ MISSING: .kilo/agents/code.md
 ```
 
 **Solution:**
 ```bash
 # Regenerate all configurations
-promptosaurus init
+prompticorn init
 
 # Or if you switched tools and need to regenerate
-promptosaurus switch kilo-ide
+prompticorn switch kilo-ide
 ```
 
 ---
@@ -590,7 +590,7 @@ promptosaurus switch kilo-ide
 
 ```
 # List shows agents but they don't appear in Kilo/Cline
-$ promptosaurus list
+$ prompticorn list
 (Shows all agents)
 ```
 
@@ -599,7 +599,7 @@ $ promptosaurus list
 2. Restart your AI tool
 3. Validate configuration:
 ```bash
-promptosaurus validate
+prompticorn validate
 ```
 
 ---

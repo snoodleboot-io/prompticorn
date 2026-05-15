@@ -305,11 +305,11 @@ If Claude charged per input token (hypothetical):
 
 ```bash
 # Minimal (default)
-promptosaurus init
+prompticorn init
 # Select: Minimal variant
 
 # Verbose (for learning)
-promptosaurus init
+prompticorn init
 # Select: Verbose variant
 ```
 
@@ -317,7 +317,7 @@ promptosaurus init
 
 ```bash
 # Update existing configuration
-promptosaurus update
+prompticorn update
 # Change variant: Minimal ↔ Verbose
 ```
 

@@ -7,28 +7,28 @@
 #### Backend Software Engineer
 ```bash
 # Initialize configuration and select backend_software_engineer persona
-promptosaurus init
+prompticorn init
 # Select: backend_software_engineer persona (includes code, backend agents)
 ```
 
 #### Frontend Software Engineer
 ```bash
 # Initialize configuration and select frontend_software_engineer persona
-promptosaurus init
+prompticorn init
 # Select: frontend_software_engineer persona (includes code, frontend agents)
 ```
 
 #### DevOps Engineer
 ```bash
 # Initialize configuration and select devops_engineer persona
-promptosaurus init
+prompticorn init
 # Select: devops_engineer persona (includes code, devops, observability, incident agents)
 ```
 
 #### QA/Test Engineer
 ```bash
 # Initialize configuration and select qa_tester persona
-promptosaurus init
+prompticorn init
 # Select: qa_tester persona (includes test, review agents)
 ```
 
@@ -37,21 +37,21 @@ promptosaurus init
 #### New Project Setup
 ```bash
 # Create base configuration for new project
-promptosaurus init
+prompticorn init
 # Select: desired AI tool, repo type, variant, and personas interactively
 
 # Verify configuration
-promptosaurus validate
+prompticorn validate
 ```
 
 #### Legacy System Modernization
 ```bash
 # Initialize with architect persona for analysis and planning
-promptosaurus init
+prompticorn init
 # Select: architect persona (includes architect, backend, frontend, data agents)
 
 # Switch tools if needed
-promptosaurus switch kilo-ide
+prompticorn switch kilo-ide
 ```
 
 ## Tool-Specific Use Cases
@@ -59,56 +59,56 @@ promptosaurus switch kilo-ide
 ### Kilo Code IDE
 ```bash
 # Initialize for Kilo Code IDE
-promptosaurus init
+prompticorn init
 # Select "Kilo IDE" when prompted
 # Files generated in .kilo/agents/
 
 # Switch to Kilo IDE from another tool
-promptosaurus switch kilo-ide
+prompticorn switch kilo-ide
 ```
 
 ### Kilo Code CLI
 ```bash
 # Initialize for Kilo Code CLI
-promptosaurus init
+prompticorn init
 # Select "Kilo CLI" when prompted
 # Files generated in .opencode/rules/
 
 # Switch to Kilo CLI from another tool
-promptosaurus switch kilo-cli
+prompticorn switch kilo-cli
 ```
 
 ### Cline
 ```bash
 # Initialize for Cline
-promptosaurus init
+prompticorn init
 # Select "Cline" when prompted
 # Single file generated: .clinerules
 
 # Switch to Cline from another tool
-promptosaurus switch cline
+prompticorn switch cline
 ```
 
 ### Claude
 ```bash
 # Initialize for Claude
-promptosaurus init
+prompticorn init
 # Select "claude" when prompted
 # Files generated in .claude/
 
 # Switch to Claude from another tool
-promptosaurus switch claude
+prompticorn switch claude
 ```
 
 ### GitHub Copilot
 ```bash
 # Initialize for GitHub Copilot
-promptosaurus init
+prompticorn init
 # Select "Copilot" when prompted
 # File generated: .github/copilot-instructions.md
 
 # Switch to Copilot from another tool
-promptosaurus switch copilot
+prompticorn switch copilot
 ```
 
 ## Workflow Automation
@@ -136,8 +136,8 @@ graph TD
 
 ### CI/CD Integration
 ```yaml
-# .github/workflows/promptosaurus.yml
-name: Promptosaurus Configuration
+# .github/workflows/prompticorn.yml
+name: prompticorn Configuration
 on:
   push:
     branches: [ main ]
@@ -155,17 +155,17 @@ jobs:
       with:
         python-version: '3.11'
     
-    - name: Install Promptosaurus
+    - name: Install prompticorn
       run: pip install -e .
     
     - name: Validate Configuration
       run: |
-        promptosaurus validate
+        prompticorn validate
     
     - name: Upload Configuration Artifacts
       uses: actions/upload-artifact@v3
       with:
-        name: promptosaurus-config
+        name: prompticorn-config
         path: |
           .kilo/
           .clinerules
@@ -190,8 +190,8 @@ jobs:
 1. Verify correct personas were selected during `init` or `swap`
 2. Check that the persona exists in the configuration
 3. Ensure persona filtering isn't excluding the component
-4. Run `promptosaurus swap` to change active personas
-5. Run `promptosaurus validate` to check configuration integrity
+4. Run `prompticorn swap` to change active personas
+5. Run `prompticorn validate` to check configuration integrity
 
 ### Performance Issues
 **Symptoms:** Slow generation times
@@ -206,7 +206,7 @@ jobs:
 1. Verify persona names are spelled correctly (e.g., `qa_tester`, `backend_software_engineer`, `frontend_software_engineer`)
 2. Check that personas exist in the configuration
 3. Ensure universal agents are working as expected
-4. Run `promptosaurus swap` to reselect personas interactively
+4. Run `prompticorn swap` to reselect personas interactively
 5. Test with simple persona combinations first
 
 ## Best Practices
@@ -219,7 +219,7 @@ jobs:
 
 ### For Teams
 1. **Standardize Configurations:** Commit generated configurations to version control
-2. **Validate in CI:** Use `promptosaurus validate` in your CI pipeline
+2. **Validate in CI:** Use `prompticorn validate` in your CI pipeline
 3. **Document Personas:** Record which personas are used for different team roles
 4. **Version Control:** Tag configurations with application versions
 5. **Share Knowledge:** Document which agents work best for different tasks

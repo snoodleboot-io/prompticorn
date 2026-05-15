@@ -37,7 +37,7 @@ KiloBuilder generates files with this structure:
 name: "agent_name"
 description: "Agent description"
 model: "anthropic/claude-opus-4-1"
-state_management: ".promptosaurus/sessions/"
+state_management: ".prompticorn/sessions/"
 ---
 
 # System Prompt
@@ -80,9 +80,9 @@ state_management: ".promptosaurus/sessions/"
 
 ```python
 from pathlib import Path
-from promptosaurus.builders.kilo_builder import KiloBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.kilo_builder import KiloBuilder
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 
 # Create a builder
 builder = KiloBuilder(agents_dir=".kilo/agents")
@@ -110,7 +110,7 @@ print(output)
 name: code
 description: Generates and refactors code
 model: anthropic/claude-opus-4-1
-state_management: .promptosaurus/sessions/
+state_management: .prompticorn/sessions/
 ---
 
 # System Prompt
@@ -136,9 +136,9 @@ You are an expert software engineer skilled in all programming languages.
 ### Import
 
 ```python
-from promptosaurus.builders.kilo_builder import KiloBuilder
-from promptosaurus.builders.base import BuildOptions, BuilderValidationError
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.kilo_builder import KiloBuilder
+from prompticorn.builders.base import BuildOptions, BuilderValidationError
+from prompticorn.ir.models import Agent
 ```
 
 ### Initialize
@@ -178,7 +178,7 @@ supports_subagents = builder.supports_feature("subagents")  # True
 ### 1. Create an Agent IR Model
 
 ```python
-from promptosaurus.ir.models import Agent
+from prompticorn.ir.models import Agent
 
 agent = Agent(
     name="test_runner",
@@ -215,7 +215,7 @@ else:
 ### 3. Create Build Options
 
 ```python
-from promptosaurus.builders.base import BuildOptions
+from prompticorn.builders.base import BuildOptions
 
 # Minimal variant (smaller output)
 options_min = BuildOptions(
@@ -775,9 +775,9 @@ class BuildOptions:
 
 ```python
 from pathlib import Path
-from promptosaurus.builders.kilo_builder import KiloBuilder
-from promptosaurus.builders.base import BuildOptions, BuilderValidationError
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.kilo_builder import KiloBuilder
+from prompticorn.builders.base import BuildOptions, BuilderValidationError
+from prompticorn.ir.models import Agent
 
 def build_simple_agent():
     """Build a simple agent with minimal configuration."""
@@ -825,9 +825,9 @@ if __name__ == "__main__":
 
 ```python
 from pathlib import Path
-from promptosaurus.builders.kilo_builder import KiloBuilder
-from promptosaurus.builders.base import BuildOptions, BuilderValidationError
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.kilo_builder import KiloBuilder
+from prompticorn.builders.base import BuildOptions, BuilderValidationError
+from prompticorn.ir.models import Agent
 
 def build_multi_subagent_system():
     """Build a system with parent agent and multiple subagents."""
@@ -879,9 +879,9 @@ if __name__ == "__main__":
 
 ```python
 from pathlib import Path
-from promptosaurus.builders.kilo_builder import KiloBuilder
-from promptosaurus.builders.base import BuildOptions, BuilderValidationError
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.kilo_builder import KiloBuilder
+from prompticorn.builders.base import BuildOptions, BuilderValidationError
+from prompticorn.ir.models import Agent
 
 def build_all_variants():
     """Build agents in both minimal and verbose variants."""
@@ -936,9 +936,9 @@ if __name__ == "__main__":
 
 ```python
 from pathlib import Path
-from promptosaurus.builders.kilo_builder import KiloBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.kilo_builder import KiloBuilder
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 
 def build_from_config(config: dict) -> str:
     """Build agent from configuration dictionary."""
@@ -997,8 +997,8 @@ For building other tools, see:
 
 ## Support & Resources
 
-- **Source Code:** `promptosaurus/builders/kilo_builder.py`
-- **Base Class:** `promptosaurus/builders/base.py` (Builder)
-- **IR Models:** `promptosaurus/ir/models.py` (Agent dataclass)
-- **Examples:** `promptosaurus/builders/examples_usage.py`
+- **Source Code:** `prompticorn/builders/kilo_builder.py`
+- **Base Class:** `prompticorn/builders/base.py` (Builder)
+- **IR Models:** `prompticorn/ir/models.py` (Agent dataclass)
+- **Examples:** `prompticorn/builders/examples_usage.py`
 

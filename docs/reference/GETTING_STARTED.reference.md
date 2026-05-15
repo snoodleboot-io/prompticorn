@@ -1,9 +1,9 @@
-# Getting Started with Promptosaurus
+# Getting Started with prompticorn
 
 **Version:** 2.0.0  
 **Last Updated:** April 9, 2026
 
-A quick guide to using Promptosaurus Promptosaurus for unified AI agent prompt management across 5 coding assistants.
+A quick guide to using prompticorn prompticorn for unified AI agent prompt management across 5 coding assistants.
 
 ---
 
@@ -23,26 +23,26 @@ A quick guide to using Promptosaurus Promptosaurus for unified AI agent prompt m
 ### Using pip
 
 ```bash
-pip install promptosaurus
+pip install prompticorn
 ```
 
 ### Using uv
 
 ```bash
-uv add promptosaurus
+uv add prompticorn
 ```
 
 ### Using poetry
 
 ```bash
-poetry add promptosaurus
+poetry add prompticorn
 ```
 
 ### Verify Installation
 
 ```bash
-promptosaurus --help
-# Output: Usage: promptosaurus [OPTIONS] COMMAND [ARGS]...
+prompticorn --help
+# Output: Usage: prompticorn [OPTIONS] COMMAND [ARGS]...
 ```
 
 ---
@@ -110,17 +110,17 @@ Focus on clarity, scalability, and maintainability.
 ### 4. Set Up Initial Configuration
 
 ```bash
-promptosaurus init
+prompticorn init
 ```
 
 **Then switch to the tool you want to use:**
 
 ```bash
-promptosaurus switch kilo
+prompticorn switch kilo
 # or
-promptosaurus switch cline
+prompticorn switch cline
 # or
-promptosaurus switch claude
+prompticorn switch claude
 ```
 
 ### 5. Verify Files
@@ -156,19 +156,19 @@ ls -la .claude/agents/
 
 ```bash
 # Switch to Kilo
-promptosaurus switch kilo
+prompticorn switch kilo
 
 # Switch to Claude
-promptosaurus switch claude
+prompticorn switch claude
 
 # Switch to Cline
-promptosaurus switch cline
+prompticorn switch cline
 ```
 
 ### List Available Agents
 
 ```bash
-promptosaurus list
+prompticorn list
 
 # Output:
 # Available Agents:
@@ -250,8 +250,8 @@ Focus on creating systems that are scalable, maintainable, and cost-effective.
 
 **Setup:**
 ```bash
-promptosaurus init
-promptosaurus switch kilo
+prompticorn init
+prompticorn switch kilo
 ```
 
 **Generated File: `.kilo/agents/architect.md`**
@@ -354,7 +354,7 @@ skills: ["unit-testing", "edge-case-analysis", "mutation-testing", "property-bas
 
 **Setup:**
 ```bash
-promptosaurus switch cline
+prompticorn switch cline
 ```
 
 **Generated Section: `.clinerules`**
@@ -401,7 +401,7 @@ You are a software engineer. Your role:
 
 **Setup:**
 ```bash
-promptosaurus switch claude
+prompticorn switch claude
 ```
 
 **Generated Files in `.claude/` directory:**
@@ -416,9 +416,9 @@ You are a software engineer. Your role:
 
 **Use ClaudeBuilder programmatically:**
 ```python
-from promptosaurus.builders.claude_builder import ClaudeBuilder
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.claude_builder import ClaudeBuilder
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 from pathlib import Path
 
 builder = ClaudeBuilder()
@@ -467,7 +467,7 @@ You are a security engineer. Review code for:
 
 **Setup:**
 ```bash
-promptosaurus switch cursor
+prompticorn switch cursor
 ```
 
 **Generated File: `.cursorrules`**
@@ -511,7 +511,7 @@ You are a code reviewer. Focus on:
 
 **Setup:**
 ```bash
-promptosaurus switch copilot
+prompticorn switch copilot
 ```
 
 **Generated File: `.github/instructions/review.md`**
@@ -539,7 +539,7 @@ You are a code reviewer. Focus on:
 ### Initialize Project
 
 ```bash
-promptosaurus init
+prompticorn init
 ```
 
 Interactive setup wizard:
@@ -551,38 +551,38 @@ Interactive setup wizard:
 ### List Agents
 
 ```bash
-promptosaurus list
+prompticorn list
 
 # With verbose output
-promptosaurus list --verbose
+prompticorn list --verbose
 
 # Filter by agent
-promptosaurus list architect
+prompticorn list architect
 ```
 
 ### Switch Tools
 
 ```bash
 # Switch to Kilo IDE
-promptosaurus switch kilo
+prompticorn switch kilo
 
 # Switch to Cline
-promptosaurus switch cline
+prompticorn switch cline
 
 # Switch to Claude
-promptosaurus switch claude
+prompticorn switch claude
 
 # Switch to Cursor
-promptosaurus switch cursor
+prompticorn switch cursor
 
 # Switch to Copilot
-promptosaurus switch copilot
+prompticorn switch copilot
 ```
 
 ### Validate Configuration
 
 ```bash
-promptosaurus validate
+prompticorn validate
 
 # Checks for:
 # - All required files present
@@ -598,19 +598,19 @@ promptosaurus validate
 ### Problem: Command Not Found
 
 ```bash
-# Error: promptosaurus: command not found
+# Error: prompticorn: command not found
 ```
 
 **Solution:**
 ```bash
 # Verify installation
-pip list | grep promptosaurus
+pip list | grep prompticorn
 
 # If not installed, install it
-pip install promptosaurus
+pip install prompticorn
 
 # If installed but not in PATH, use python -m
-python -m promptosaurus.cli --version
+python -m prompticorn.cli --version
 ```
 
 ### Problem: Missing Required Files
@@ -713,7 +713,7 @@ ls -la .github/instructions/
 After getting started:
 
 1. **Read the Full Documentation**
-   - [PHASE2A_RELEASE_NOTES.md](./PHASE2A_RELEASE_NOTES.md) - What's new in Promptosaurus
+   - [PHASE2A_RELEASE_NOTES.md](./PHASE2A_RELEASE_NOTES.md) - What's new in prompticorn
    - [BUILDER_API_REFERENCE.md](./BUILDER_API_REFERENCE.md) - API documentation
    - [MIGRATION_GUIDE.md](./MIGRATION_GUIDE.md) - Migrate from old system
 
@@ -730,8 +730,8 @@ After getting started:
    - Architect agent (for system design)
 
 4. **Integrate with Your Workflow**
-   - Add `promptosaurus init` to new project setup
-   - Use `promptosaurus switch <tool>` when changing tools
+   - Add `prompticorn init` to new project setup
+   - Use `prompticorn switch <tool>` when changing tools
    - Commit generated files for reproducibility
 
 ---
@@ -740,13 +740,13 @@ After getting started:
 
 | Task | Command |
 |------|---------|
-| Install | `pip install promptosaurus` |
-| Initialize | `promptosaurus init` |
-| List agents | `promptosaurus list` |
-| Switch to Kilo | `promptosaurus switch kilo` |
-| Switch to Claude | `promptosaurus switch claude` |
-| Validate | `promptosaurus validate` |
-| Get help | `promptosaurus --help` |
+| Install | `pip install prompticorn` |
+| Initialize | `prompticorn init` |
+| List agents | `prompticorn list` |
+| Switch to Kilo | `prompticorn switch kilo` |
+| Switch to Claude | `prompticorn switch claude` |
+| Validate | `prompticorn validate` |
+| Get help | `prompticorn --help` |
 
 ---
 
@@ -759,4 +759,4 @@ After getting started:
 
 ---
 
-**Ready to get started? Run `promptosaurus init` to set up your project!**
+**Ready to get started? Run `prompticorn init` to set up your project!**

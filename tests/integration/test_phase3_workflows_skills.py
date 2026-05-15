@@ -19,7 +19,7 @@ import yaml
 class TestPhase3Workflows:
     """Test Phase 3 workflow creation and structure"""
 
-    WORKFLOWS_DIR = Path("promptosaurus/workflows")
+    WORKFLOWS_DIR = Path("prompticorn/workflows")
 
     # Expected workflows by track
     TRACK_1_WORKFLOWS = {
@@ -144,7 +144,7 @@ class TestPhase3Workflows:
 class TestPhase3Skills:
     """Test Phase 3 skill creation and structure"""
 
-    SKILLS_DIR = Path("promptosaurus/skills")
+    SKILLS_DIR = Path("prompticorn/skills")
 
     # Expected skills by track
     TRACK_1_SKILLS = {
@@ -272,7 +272,7 @@ class TestPhase3Skills:
 class TestPhase3Registration:
     """Test Phase 3 registration in language_skill_mapping.yaml"""
 
-    MAPPING_FILE = Path("promptosaurus/configurations/language_skill_mapping.yaml")
+    MAPPING_FILE = Path("prompticorn/configurations/language_skill_mapping.yaml")
 
     def test_mapping_file_exists(self):
         """Verify language_skill_mapping.yaml exists"""
@@ -375,8 +375,8 @@ class TestPhase3Registration:
 class TestPhase3Totals:
     """Test overall Phase 3 deliverables"""
 
-    WORKFLOWS_DIR = Path("promptosaurus/workflows")
-    SKILLS_DIR = Path("promptosaurus/skills")
+    WORKFLOWS_DIR = Path("prompticorn/workflows")
+    SKILLS_DIR = Path("prompticorn/skills")
 
     def test_total_phase3_workflows(self):
         """Verify 45 Phase 3 workflows total"""

@@ -25,7 +25,7 @@
 - **Entry Point:** User selects agent mode in Kilo IDE/CLI
 - **Load Mechanism:** Kilo loads `.kilo/agents/{mode}.md`
 - **Execution:** Agent instructions are system prompt to Claude
-- **State Management:** `.promptosaurus/sessions/session_*.md` tracks mode/context
+- **State Management:** `.prompticorn/sessions/session_*.md` tracks mode/context
 
 ### How Kilo Chains Operations
 **Question to Answer:** How do workflows invoke each other?

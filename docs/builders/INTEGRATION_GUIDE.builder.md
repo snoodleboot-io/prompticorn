@@ -1,8 +1,8 @@
-# Promptosaurus Integration Guide
+# prompticorn Integration Guide
 
 **Version:** 2.0.0  
 **Date:** April 9, 2026  
-**Target Audience:** Developers integrating Promptosaurus IR models into existing projects
+**Target Audience:** Developers integrating prompticorn IR models into existing projects
 
 ---
 
@@ -22,7 +22,7 @@
 
 ## Overview
 
-Promptosaurus provides a **tool-agnostic Intermediate Representation (IR)** system that you can integrate into your existing projects. This guide shows you how to:
+prompticorn provides a **tool-agnostic Intermediate Representation (IR)** system that you can integrate into your existing projects. This guide shows you how to:
 
 - Use IR models as a foundation for your own applications
 - Build custom builders for new tools or platforms
@@ -45,9 +45,9 @@ Promptosaurus provides a **tool-agnostic Intermediate Representation (IR)** syst
 The simplest approach is to directly use IR models in your code:
 
 ```python
-from promptosaurus.ir.models import Agent, Skill, Workflow
-from promptosaurus.builders.factory import BuilderFactory
-from promptosaurus.builders.base import BuildOptions
+from prompticorn.ir.models import Agent, Skill, Workflow
+from prompticorn.builders.factory import BuilderFactory
+from prompticorn.builders.base import BuildOptions
 
 # Create an agent directly
 agent = Agent(
@@ -81,8 +81,8 @@ print(output)
 Create your own builder for your specific tool:
 
 ```python
-from promptosaurus.builders.base import Builder, BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.base import Builder, BuildOptions
+from prompticorn.ir.models import Agent
 from typing import Any
 
 class MyCustomToolBuilder(Builder):
@@ -125,7 +125,7 @@ class MyCustomToolBuilder(Builder):
 
 
 # Register your builder
-from promptosaurus.builders.factory import BuilderFactory
+from prompticorn.builders.factory import BuilderFactory
 BuilderFactory.register("my_tool", MyCustomToolBuilder)
 
 # Use it like any other builder
@@ -150,9 +150,9 @@ Support optional features using Python protocols:
 
 ```python
 from typing import Protocol, List
-from promptosaurus.ir.models import Skill, Workflow, Rules
-from promptosaurus.builders.base import Builder, BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.ir.models import Skill, Workflow, Rules
+from prompticorn.builders.base import Builder, BuildOptions
+from prompticorn.ir.models import Agent
 
 class SupportsSkills(Protocol):
     """Protocol for builders that support skills."""
@@ -199,7 +199,7 @@ class FeatureAwareBuilder(Builder):
 ```python
 import json
 from pathlib import Path
-from promptosaurus.ir.models import Agent
+from prompticorn.ir.models import Agent
 
 # Load from JSON
 def load_agent_from_json(filepath: str) -> Agent:
@@ -228,7 +228,7 @@ code_agent = load_agent_from_yaml("agents/code/config.yaml")
 
 ```python
 from pydantic import ValidationError
-from promptosaurus.ir.models import Agent
+from prompticorn.ir.models import Agent
 
 try:
     agent = Agent(
@@ -247,7 +247,7 @@ except ValidationError as e:
 ```python
 from dataclasses import dataclass
 from typing import Dict
-from promptosaurus.ir.models import Agent
+from prompticorn.ir.models import Agent
 
 @dataclass
 class AgentRegistry:
@@ -304,9 +304,9 @@ print(registry.get("architect").description)  # "Design systems"
 Inject the builder factory to make your code testable:
 
 ```python
-from promptosaurus.builders.factory import BuilderFactory
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.factory import BuilderFactory
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 from typing import Protocol
 
 class Builder(Protocol):
@@ -347,8 +347,8 @@ test_service = AgentService(builder_factory=MockFactory())
 ```python
 from dataclasses import dataclass
 from abc import ABC, abstractmethod
-from promptosaurus.builders.base import Builder, BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.base import Builder, BuildOptions
+from prompticorn.ir.models import Agent
 
 class BuilderProvider(ABC):
     """Abstract provider for builders."""
@@ -362,7 +362,7 @@ class DefaultBuilderProvider(BuilderProvider):
     """Default provider using the factory."""
     
     def get_builder(self, tool: str) -> Builder:
-        from promptosaurus.builders.factory import BuilderFactory
+        from prompticorn.builders.factory import BuilderFactory
         return BuilderFactory.get_builder(tool)
 
 
@@ -380,7 +380,7 @@ class AgentBuildContext:
 
 
 # Usage
-from promptosaurus.builders.factory import BuilderFactory
+from prompticorn.builders.factory import BuilderFactory
 provider = DefaultBuilderProvider()
 context = AgentBuildContext(builder_provider=provider, variant="verbose")
 output = context.build(agent, "claude")
@@ -393,10 +393,10 @@ output = context.build(agent, "claude")
 ### Strategy 1: Validation Before Build
 
 ```python
-from promptosaurus.builders.errors import BuilderValidationError
-from promptosaurus.builders.factory import BuilderFactory
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.errors import BuilderValidationError
+from prompticorn.builders.factory import BuilderFactory
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 
 def safe_build(agent: Agent, tool: str) -> str | dict | None:
     """Build agent with validation."""
@@ -423,14 +423,14 @@ def safe_build(agent: Agent, tool: str) -> str | dict | None:
 ### Strategy 2: Error Recovery
 
 ```python
-from promptosaurus.builders.errors import (
+from prompticorn.builders.errors import (
     BuilderNotFoundError,
     BuilderValidationError,
     UnsupportedFeatureError
 )
-from promptosaurus.builders.factory import BuilderFactory
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.factory import BuilderFactory
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 
 def build_with_fallback(agent: Agent, tool: str, fallback_tool: str = "kilo"):
     """Build with fallback to another tool."""
@@ -456,9 +456,9 @@ def build_with_fallback(agent: Agent, tool: str, fallback_tool: str = "kilo"):
 ```python
 from dataclasses import dataclass
 from typing import Optional
-from promptosaurus.ir.models import Agent
-from promptosaurus.builders.factory import BuilderFactory
-from promptosaurus.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
+from prompticorn.builders.factory import BuilderFactory
+from prompticorn.builders.base import BuildOptions
 
 @dataclass
 class BuildResult:
@@ -512,8 +512,8 @@ else:
 
 ```python
 import pytest
-from promptosaurus.builders.base import Builder, BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.base import Builder, BuildOptions
+from prompticorn.ir.models import Agent
 
 
 class MyBuilder(Builder):
@@ -592,9 +592,9 @@ class TestMyBuilder:
 
 ```python
 import pytest
-from promptosaurus.builders.factory import BuilderFactory
-from promptosaurus.ir.models import Agent
-from promptosaurus.builders.base import BuildOptions
+from prompticorn.builders.factory import BuilderFactory
+from prompticorn.ir.models import Agent
+from prompticorn.builders.base import BuildOptions
 
 
 class TestBuilderIntegration:
@@ -652,9 +652,9 @@ def test_roundtrip_build():
 
 ```python
 from functools import lru_cache
-from promptosaurus.builders.factory import BuilderFactory
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.factory import BuilderFactory
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 
 
 @lru_cache(maxsize=128)
@@ -672,9 +672,9 @@ def cached_build(agent_name: str, tool: str, variant: str) -> str:
 
 ```python
 from concurrent.futures import ThreadPoolExecutor
-from promptosaurus.builders.factory import BuilderFactory
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.factory import BuilderFactory
+from prompticorn.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
 
 
 def build_for_all_tools(agent: Agent, variant: str = "minimal") -> dict[str, str | dict]:
@@ -715,10 +715,10 @@ def build_multiple_agents(agents: list[Agent], tools: list[str]) -> dict:
 ```python
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
-from promptosaurus.ir.models import Agent
-from promptosaurus.builders.factory import BuilderFactory
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.builders.errors import BuilderNotFoundError, BuilderValidationError
+from prompticorn.ir.models import Agent
+from prompticorn.builders.factory import BuilderFactory
+from prompticorn.builders.base import BuildOptions
+from prompticorn.builders.errors import BuilderNotFoundError, BuilderValidationError
 
 app = FastAPI()
 
@@ -767,15 +767,15 @@ async def build_agent(request: AgentBuildRequest):
 
 ```python
 import click
-from promptosaurus.ir.models import Agent
-from promptosaurus.builders.factory import BuilderFactory
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.builders.errors import BuilderException
+from prompticorn.ir.models import Agent
+from prompticorn.builders.factory import BuilderFactory
+from prompticorn.builders.base import BuildOptions
+from prompticorn.builders.errors import BuilderException
 
 
 @click.group()
 def cli():
-    """Promptosaurus CLI."""
+    """prompticorn CLI."""
     pass
 
 
@@ -823,9 +823,9 @@ if __name__ == "__main__":
 from pathlib import Path
 import json
 import yaml
-from promptosaurus.ir.models import Agent
-from promptosaurus.builders.factory import BuilderFactory
-from promptosaurus.builders.base import BuildOptions
+from prompticorn.ir.models import Agent
+from prompticorn.builders.factory import BuilderFactory
+from prompticorn.builders.base import BuildOptions
 
 
 class AgentConfigManager:
@@ -894,20 +894,20 @@ class AgentConfigManager:
 
 **Error:**
 ```
-ImportError: cannot import name 'Agent' from 'promptosaurus.ir.models'
+ImportError: cannot import name 'Agent' from 'prompticorn.ir.models'
 ```
 
 **Solution:**
 ```bash
 # Make sure the package is installed
-pip install promptosaurus
+pip install prompticorn
 
 # Or install in editable mode for development
 pip install -e .
 ```
 
 ```python
-from promptosaurus.ir.models import Agent
+from prompticorn.ir.models import Agent
 ```
 
 ### Issue: Builder Not Found
@@ -920,7 +920,7 @@ BuilderNotFoundError: No builder registered for tool: 'my_tool'
 **Solution:**
 ```python
 # Register your builder before using
-from promptosaurus.builders.factory import BuilderFactory
+from prompticorn.builders.factory import BuilderFactory
 from my_builders import MyCustomBuilder
 
 BuilderFactory.register("my_tool", MyCustomBuilder)
@@ -990,4 +990,4 @@ def build_in_batches(agents: list[Agent], batch_size: int = 100):
 
 ---
 
-*This guide covers practical integration patterns for Promptosaurus. For questions or issues, refer to the troubleshooting section or consult the main documentation.*
+*This guide covers practical integration patterns for prompticorn. For questions or issues, refer to the troubleshooting section or consult the main documentation.*

@@ -10,14 +10,14 @@
 
 ## Context
 
-The promptosaurus system has undergone significant expansion (Phase 3 completed):
+The prompticorn system has undergone significant expansion (Phase 3 completed):
 - 28 primary agents (up from core agents)
 - 3 new agent tracks: ML/AI, Security, Product
 - 100+ workflows
 - 50+ skills
 - Multiple subagents per primary agent
 
-Users initializing a new promptosaurus instance now face overwhelming choice and discovery. A developer building web applications doesn't need ML/AI agents and workflows. A security engineer doesn't need DevOps Engineer workflows. Yet the system generates everything by default, creating noise and reducing focus.
+Users initializing a new prompticorn instance now face overwhelming choice and discovery. A developer building web applications doesn't need ML/AI agents and workflows. A security engineer doesn't need DevOps Engineer workflows. Yet the system generates everything by default, creating noise and reducing focus.
 
 The problem is acute because:
 1. **Discovery overload** - Users can't easily understand what's available and relevant
@@ -368,14 +368,14 @@ Universal agents (ask, debug, explain, plan, orchestrator) are ALWAYS enabled re
 ### Phase 1: Foundation and Mapping (Week 1)
 
 **Deliverables:**
-1. Create `promptosaurus/personas/personas.yaml` with:
+1. Create `prompticorn/personas/personas.yaml` with:
    - 8-10 core personas (Software Engineer, Architect, QA, DevOps Engineer, Security, Product, etc.)
    - Complete mappings for all 28 agents
    - Complete mappings for all 100+ workflows
    - Complete mappings for all 50+ skills
    - Definitions of universal agents
 
-2. Create `promptosaurus/personas/registry.py`:
+2. Create `prompticorn/personas/registry.py`:
    - PersonaRegistry class - load and manage personas.yaml
    - PersonaFilter class - filter agents/workflows/skills by active personas
    - Validation methods - ensure all agents are assigned
@@ -393,18 +393,18 @@ Universal agents (ask, debug, explain, plan, orchestrator) are ALWAYS enabled re
 ### Phase 2: Core Integration (Week 2)
 
 **Deliverables:**
-1. Update `promptosaurus/config_handler.py`:
+1. Update `prompticorn/config_handler.py`:
    - Add `active_personas` field to configuration
    - Load/save personas to kilo.json
 
-2. Update `promptosaurus/agent_registry/registry.py`:
+2. Update `prompticorn/agent_registry/registry.py`:
    - Integrate PersonaFilter
    - Add `get_filtered_agents()`, `get_filtered_workflows()`, `get_filtered_skills()`
    - Make filtering automatic based on active_personas in config
    - Implement `PersonaFilter.get_enabled_agents()` to determine which agents to enable/disable
    - Integrate with Kilo's agent enable/disable mechanism (see "Dynamic Agent Enabling/Disabling" section)
 
-3. Update `promptosaurus/prompt_builder.py`:
+3. Update `prompticorn/prompt_builder.py`:
    - Use filtered registry instead of all agents
    - Generate only for active personas
 
@@ -429,7 +429,7 @@ Universal agents (ask, debug, explain, plan, orchestrator) are ALWAYS enabled re
    - Suggest sensible defaults based on detected project type (if possible)
 
 2. Update config management:
-   - Add `promptosaurus update` support for changing personas
+   - Add `prompticorn update` support for changing personas
    - Validate personas exist before saving
    - Clear error messages for invalid personas
 
@@ -523,7 +523,7 @@ Universal agents (ask, debug, explain, plan, orchestrator) are ALWAYS enabled re
    - Recommendation?
 
 4. **Persona Persistence** - Should users be able to change personas after init, or is it a session-wide decision?
-   - Suggestion: Allow changes via `promptosaurus update` or session initialization
+   - Suggestion: Allow changes via `prompticorn update` or session initialization
 
 5. **Default Behavior** - If someone doesn't specify personas at init:
    - Option A: Require selection (default: all personas)

@@ -1,6 +1,6 @@
 import unittest
 
-from promptosaurus.builders.template_handlers.testing_framework_handler import (
+from prompticorn.builders.template_handlers.testing_framework_handler import (
     TestingFrameworkHandler,
 )
 

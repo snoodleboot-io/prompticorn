@@ -17,13 +17,13 @@ Successfully implemented language-agnostic agent skill/workflow mapping system. 
 ## Files Created
 
 ### 1. Configuration Files
-- ✅ `promptosaurus/configurations/` - New directory created
-- ✅ `promptosaurus/configurations/agent_skill_mapping.yaml` - 25 agent entries (language-agnostic)
-- ✅ `promptosaurus/configurations/language_skill_mapping.yaml` - Moved and cleaned up
+- ✅ `prompticorn/configurations/` - New directory created
+- ✅ `prompticorn/configurations/agent_skill_mapping.yaml` - 25 agent entries (language-agnostic)
+- ✅ `prompticorn/configurations/language_skill_mapping.yaml` - Moved and cleaned up
 
 ### 2. Loader Class
-- ✅ `promptosaurus/ir/loaders/agent_skill_mapping_loader.py` - New loader class (161 lines)
-- ✅ `promptosaurus/ir/loaders/__init__.py` - Updated to export new loader
+- ✅ `prompticorn/ir/loaders/agent_skill_mapping_loader.py` - New loader class (161 lines)
+- ✅ `prompticorn/ir/loaders/__init__.py` - Updated to export new loader
 
 ### 3. Validation Script
 - ✅ `scripts/validate_agent_mappings.py` - Validation script (101 lines)
@@ -33,18 +33,18 @@ Successfully implemented language-agnostic agent skill/workflow mapping system. 
 ## Files Modified
 
 ### 1. Build System Integration
-- ✅ `promptosaurus/prompt_builder.py`:
+- ✅ `prompticorn/prompt_builder.py`:
   - Imported `AgentSkillMappingLoader`
   - Initialized `agent_skill_loader` in `__init__`
   - Updated `_filter_agent_for_language()` with two-tier resolution
   - Priority: agent_mapping → language_mapping → fallback
 
 ### 2. Loader Path Updates
-- ✅ `promptosaurus/ir/loaders/language_skill_mapping_loader.py`:
-  - Updated default path to `promptosaurus/configurations/language_skill_mapping.yaml`
+- ✅ `prompticorn/ir/loaders/language_skill_mapping_loader.py`:
+  - Updated default path to `prompticorn/configurations/language_skill_mapping.yaml`
 
 ### 3. Configuration Cleanup
-- ✅ `promptosaurus/configurations/language_skill_mapping.yaml`:
+- ✅ `prompticorn/configurations/language_skill_mapping.yaml`:
   - Removed `python:` section (113 lines)
   - Removed 9 `python/*` entries (`python/code`, `python/test`, etc.)
   - Added header explaining new two-tier system
@@ -179,17 +179,17 @@ Once build environment is set up:
 ## Files Summary
 
 ### New Files (3)
-1. `promptosaurus/configurations/agent_skill_mapping.yaml` (2,500 lines)
-2. `promptosaurus/ir/loaders/agent_skill_mapping_loader.py` (161 lines)
+1. `prompticorn/configurations/agent_skill_mapping.yaml` (2,500 lines)
+2. `prompticorn/ir/loaders/agent_skill_mapping_loader.py` (161 lines)
 3. `scripts/validate_agent_mappings.py` (101 lines)
 
 ### Modified Files (3)
-1. `promptosaurus/prompt_builder.py` (~50 lines changed)
-2. `promptosaurus/ir/loaders/__init__.py` (~5 lines added)
-3. `promptosaurus/ir/loaders/language_skill_mapping_loader.py` (~1 line changed)
+1. `prompticorn/prompt_builder.py` (~50 lines changed)
+2. `prompticorn/ir/loaders/__init__.py` (~5 lines added)
+3. `prompticorn/ir/loaders/language_skill_mapping_loader.py` (~1 line changed)
 
 ### Moved Files (1)
-1. `language_skill_mapping.yaml` → `promptosaurus/configurations/language_skill_mapping.yaml`
+1. `language_skill_mapping.yaml` → `prompticorn/configurations/language_skill_mapping.yaml`
 
 ### Total Lines Changed: ~2,820 lines (mostly new configuration data)
 

@@ -1,4 +1,4 @@
-# Promptosaurus Agent → Subagent Relationships
+# prompticorn Agent → Subagent Relationships
 
 **Updated:** April 13, 2026  
 **Version:** 0.1.0
@@ -10,26 +10,26 @@ This document maps actual agent-to-subagent relationships in the codebase.
 ## Agent → Subagent Mapping
 
 ### architect
-**Location:** `promptosaurus/agents/architect/subagents/`
+**Location:** `prompticorn/agents/architect/subagents/`
 - **data-model** - Database schema and data model design
 - **scaffold** - Project scaffolding and architecture setup
 - **task-breakdown** - Feature decomposition and planning
 
 ### ask
-**Location:** `promptosaurus/agents/ask/subagents/`
+**Location:** `prompticorn/agents/ask/subagents/`
 - **decision-log** - Recording architectural and technical decisions
 - **docs** - Documentation generation and improvement
 - **testing** - Testing strategies and approaches
 
 ### backend
-**Location:** `promptosaurus/agents/backend/subagents/`
+**Location:** `prompticorn/agents/backend/subagents/`
 - **api-design** - REST, GraphQL, gRPC API patterns
 - **caching** - Multi-level caching strategies
 - **microservices** - Service boundaries and communication
 - **storage** - SQL/NoSQL database selection
 
 ### code
-**Location:** `promptosaurus/agents/code/subagents/`
+**Location:** `prompticorn/agents/code/subagents/`
 - **boilerplate** - Code template generation
 - **dependency-upgrade** - Dependency management and upgrades
 - **feature** - Feature implementation guidance
@@ -38,13 +38,13 @@ This document maps actual agent-to-subagent relationships in the codebase.
 - **refactor** - Code refactoring strategies
 
 ### compliance
-**Location:** `promptosaurus/agents/compliance/subagents/`
+**Location:** `prompticorn/agents/compliance/subagents/`
 - **gdpr** - GDPR compliance guidance
 - **review** - Compliance code review
 - **soc2** - SOC 2 compliance requirements
 
 ### data
-**Location:** `promptosaurus/agents/data/subagents/`
+**Location:** `prompticorn/agents/data/subagents/`
 - **governance** - Data governance and lineage
 - **pipeline** - ETL/ELT pipeline design
 - **quality** - Data quality frameworks
@@ -52,13 +52,13 @@ This document maps actual agent-to-subagent relationships in the codebase.
 - **warehouse** - Data warehouse architecture
 
 ### debug
-**Location:** `promptosaurus/agents/debug/subagents/`
+**Location:** `prompticorn/agents/debug/subagents/`
 - **log-analysis** - Log parsing and analysis
 - **root-cause** - Root cause analysis
 - **rubber-duck** - Guided problem articulation
 
 ### devops
-**Location:** `promptosaurus/agents/devops/subagents/`
+**Location:** `prompticorn/agents/devops/subagents/`
 - **aws** - AWS infrastructure design
 - **docker** - Container optimization and security
 - **gitops** - GitOps deployment automation
@@ -66,37 +66,37 @@ This document maps actual agent-to-subagent relationships in the codebase.
 - **terraform-deployment** - Infrastructure as Code
 
 ### document
-**Location:** `promptosaurus/agents/document/subagents/`
+**Location:** `prompticorn/agents/document/subagents/`
 - **strategy-for-applications** - Application documentation strategy
 
 ### enforcement
-**Location:** `promptosaurus/agents/enforcement/`
+**Location:** `prompticorn/agents/enforcement/`
 - **No subagents** - Core agent only
 
 ### explain
-**Location:** `promptosaurus/agents/explain/subagents/`
+**Location:** `prompticorn/agents/explain/subagents/`
 - **strategy** - Code explanation and walkthroughs
 
 ### frontend
-**Location:** `promptosaurus/agents/frontend/subagents/`
+**Location:** `prompticorn/agents/frontend/subagents/`
 - **accessibility** - WCAG compliance and inclusive design
 - **mobile** - React Native and mobile development
 - **react-patterns** - React hooks and state management
 - **vue-patterns** - Vue.js composition patterns
 
 ### incident
-**Location:** `promptosaurus/agents/incident/subagents/`
+**Location:** `prompticorn/agents/incident/subagents/`
 - **oncall** - On-call rotation and escalation
 - **postmortem** - Blameless postmortem facilitation
 - **runbook** - Incident runbook creation
 - **triage** - Rapid incident severity assessment
 
 ### migration
-**Location:** `promptosaurus/agents/migration/subagents/`
+**Location:** `prompticorn/agents/migration/subagents/`
 - **strategy** - Migration planning and execution
 
 ### mlai
-**Location:** `promptosaurus/agents/mlai/subagents/`
+**Location:** `prompticorn/agents/mlai/subagents/`
 - **data-preparation** - Feature engineering and cleaning
 - **deployment** - Model serving and inference
 - **ml-ethics-reviewer** - Ethical ML and responsible AI
@@ -107,7 +107,7 @@ This document maps actual agent-to-subagent relationships in the codebase.
 - **monitoring** - Drift detection and retraining
 
 ### observability
-**Location:** `promptosaurus/agents/observability/subagents/`
+**Location:** `prompticorn/agents/observability/subagents/`
 - **alerting** - Alert design and tuning
 - **dashboards** - Dashboard design and visualization
 - **logging** - Log aggregation and analysis
@@ -115,48 +115,48 @@ This document maps actual agent-to-subagent relationships in the codebase.
 - **tracing** - Distributed tracing instrumentation
 
 ### orchestrator
-**Location:** `promptosaurus/agents/orchestrator/subagents/`
+**Location:** `prompticorn/agents/orchestrator/subagents/`
 - **devops** - DevOps workflow coordination
 - **maintenance** - Maintenance workflow management
 - **meta** - Multi-step task coordination
 - **pr-description** - Pull request description generation
 
 ### performance
-**Location:** `promptosaurus/agents/performance/subagents/`
+**Location:** `prompticorn/agents/performance/subagents/`
 - **benchmarking** - Performance baseline and comparison
 - **bottleneck-analysis** - Hotspot identification
 - **optimization-strategies** - Caching and algorithm optimization
 - **profiling** - CPU and memory profiling
 
 ### plan
-**Location:** `promptosaurus/agents/plan/`
+**Location:** `prompticorn/agents/plan/`
 - **No subagents** - Core agent only
 
 ### product
-**Location:** `promptosaurus/agents/product/subagents/`
+**Location:** `prompticorn/agents/product/subagents/`
 - **metrics-analytics-lead** - KPIs, OKRs, analytics
 - **requirements-analyst** - Requirements gathering and user stories
 - **roadmap-planner** - Strategic roadmap planning
 
 ### qa-tester
-**Location:** `promptosaurus/agents/qa-tester/subagents/`
+**Location:** `prompticorn/agents/qa-tester/subagents/`
 - **e2e-testing** - End-to-end user journey testing
 - **integration-testing** - Multi-component testing
 - **load-testing** - Performance and stress testing
 - **unit-testing** - Unit test strategies and patterns
 
 ### refactor
-**Location:** `promptosaurus/agents/refactor/subagents/`
+**Location:** `prompticorn/agents/refactor/subagents/`
 - **strategy** - Code refactoring strategy
 
 ### review
-**Location:** `promptosaurus/agents/review/subagents/`
+**Location:** `prompticorn/agents/review/subagents/`
 - **accessibility** - Accessibility code review
 - **code** - General code review
 - **performance** - Performance code review
 
 ### security
-**Location:** `promptosaurus/agents/security/subagents/`
+**Location:** `prompticorn/agents/security/subagents/`
 - **compliance-auditor** - OWASP, GDPR, HIPAA compliance
 - **review** - Security code review
 - **security-architecture-reviewer** - Architecture security review
@@ -165,7 +165,7 @@ This document maps actual agent-to-subagent relationships in the codebase.
 - **vulnerability-assessment-specialist** - Vulnerability scanning and remediation
 
 ### test
-**Location:** `promptosaurus/agents/test/subagents/`
+**Location:** `prompticorn/agents/test/subagents/`
 - **strategy** - Testing strategy and approach
 
 ---
@@ -211,13 +211,13 @@ This document maps actual agent-to-subagent relationships in the codebase.
 
 **Location Pattern:**
 ```
-promptosaurus/agents/[agent-name]/subagents/[subagent-name]/[minimal|verbose]/prompt.md
+prompticorn/agents/[agent-name]/subagents/[subagent-name]/[minimal|verbose]/prompt.md
 ```
 
 **Example:**
 ```
-promptosaurus/agents/backend/subagents/api-design/minimal/prompt.md
-promptosaurus/agents/backend/subagents/api-design/verbose/prompt.md
+prompticorn/agents/backend/subagents/api-design/minimal/prompt.md
+prompticorn/agents/backend/subagents/api-design/verbose/prompt.md
 ```
 
 ---
@@ -227,21 +227,21 @@ promptosaurus/agents/backend/subagents/api-design/verbose/prompt.md
 ### Find Subagents for an Agent
 1. Locate agent name in the list above
 2. Check its subagent list
-3. Navigate to: `promptosaurus/agents/[agent-name]/subagents/[subagent-name]/`
+3. Navigate to: `prompticorn/agents/[agent-name]/subagents/[subagent-name]/`
 
 ### Verify Subagent Existence
 ```bash
 # List all subagents for an agent
-ls -1 promptosaurus/agents/backend/subagents/
+ls -1 prompticorn/agents/backend/subagents/
 
 # List all agents with subagents
-find promptosaurus/agents -type d -name "subagents"
+find prompticorn/agents -type d -name "subagents"
 ```
 
 ### Count Total Subagents
 ```bash
 # Count all subagent directories
-find promptosaurus/agents -type d -mindepth 3 -maxdepth 3 -path "*/subagents/*" | wc -l
+find prompticorn/agents -type d -mindepth 3 -maxdepth 3 -path "*/subagents/*" | wc -l
 # Output: 82
 ```
 

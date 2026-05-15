@@ -50,14 +50,14 @@ if config:
 ### 3. Fixed `PrimaryAgentsHandler`
 
 The handler was using the wrong registry. Updated to:
-- Use `agent_registry.Registry` instead of old `promptosaurus.registry`
+- Use `agent_registry.Registry` instead of old `prompticorn.registry`
 - Try multiple possible paths for agent discovery
 - Filter agents by `mode='primary'`
 - Return formatted markdown list
 
 ### 4. Added import
 
-Added `from promptosaurus.builders.builder import Builder` to imports.
+Added `from prompticorn.builders.builder import Builder` to imports.
 
 ---
 
@@ -65,8 +65,8 @@ Added `from promptosaurus.builders.builder import Builder` to imports.
 
 | File | Change |
 |------|--------|
-| `promptosaurus/builders/kilo_builder.py` | Added `Builder` import, initialized `_builder` in `__init__`, called `_substitute_template_variables()` in `build()` |
-| `promptosaurus/builders/template_handlers/primary_agents_handler.py` | Fixed to use `agent_registry.Registry`, improved path discovery, fixed filtering logic |
+| `prompticorn/builders/kilo_builder.py` | Added `Builder` import, initialized `_builder` in `__init__`, called `_substitute_template_variables()` in `build()` |
+| `prompticorn/builders/template_handlers/primary_agents_handler.py` | Fixed to use `agent_registry.Registry`, improved path discovery, fixed filtering logic |
 
 ---
 
@@ -148,7 +148,7 @@ Multiple path attempts ensure discovery works in all contexts.
 
 Currently `KiloBuilder` depends on `Builder` just for `_substitute_template_variables()`. Could extract to:
 ```python
-# promptosaurus/builders/template_utils.py
+# prompticorn/builders/template_utils.py
 def substitute_template_variables(content: str, config: dict) -> str:
     ...
 ```
@@ -160,7 +160,7 @@ Then both `Builder` and `KiloBuilder` could use it without coupling.
 Instead of trying multiple paths, could:
 - Accept `agents_dir` as constructor parameter to PrimaryAgentsHandler
 - Pass via config dict: `config['agents_dir']`
-- Use environment variable: `PROMPTOSAURUS_AGENTS_DIR`
+- Use environment variable: `PROMPTICORN_AGENTS_DIR`
 
 ### 3. Template variable documentation
 
@@ -174,7 +174,7 @@ Document all available template variables in one place:
 
 ## Related
 
-- **Template variable system:** `promptosaurus/builders/builder.py` lines 280-306
-- **Handler registry:** `promptosaurus/builders/template_handlers/`
+- **Template variable system:** `prompticorn/builders/builder.py` lines 280-306
+- **Handler registry:** `prompticorn/builders/template_handlers/`
 - **Original issue:** `planning/current/PRIMARY_AGENTS_LIST_FIX.md` (root cause analysis)
-- **Orchestrator agent:** `promptosaurus/agents/orchestrator/prompt.md`
+- **Orchestrator agent:** `prompticorn/agents/orchestrator/prompt.md`

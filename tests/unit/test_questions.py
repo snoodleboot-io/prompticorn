@@ -2,31 +2,31 @@
 
 import pytest
 
-from promptosaurus.questions.base.constants import RepositoryTypes
-from promptosaurus.questions.base.folder_mapping_question import FolderMappingQuestion
-from promptosaurus.questions.base.repository_type_question import RepositoryTypeQuestion
-from promptosaurus.questions.handlers.handle_single_language_questions import (
+from prompticorn.questions.base.constants import RepositoryTypes
+from prompticorn.questions.base.folder_mapping_question import FolderMappingQuestion
+from prompticorn.questions.base.repository_type_question import RepositoryTypeQuestion
+from prompticorn.questions.handlers.handle_single_language_questions import (
     HandleSingleLanguageQuestions,
 )
-from promptosaurus.questions.handlers.language_question_handler import LanguageQuestionHandler
-from promptosaurus.questions.language import (
+from prompticorn.questions.handlers.language_question_handler import LanguageQuestionHandler
+from prompticorn.questions.language import (
     LANGUAGE_KEYS,
     get_language_questions,
 )
-from promptosaurus.questions.python.python_formatter_question import PythonFormatterQuestion
-from promptosaurus.questions.python.python_linter_question import PythonLinterQuestion
-from promptosaurus.questions.python.python_package_manager_question import (
+from prompticorn.questions.python.python_formatter_question import PythonFormatterQuestion
+from prompticorn.questions.python.python_linter_question import PythonLinterQuestion
+from prompticorn.questions.python.python_package_manager_question import (
     PythonPackageManagerQuestion,
 )
-from promptosaurus.questions.python.python_runtime_question import PythonRuntimeQuestion
-from promptosaurus.questions.python.python_test_framework_question import (
+from prompticorn.questions.python.python_runtime_question import PythonRuntimeQuestion
+from prompticorn.questions.python.python_test_framework_question import (
     PythonTestFrameworkQuestion,
 )
-from promptosaurus.questions.python.python_test_runner_question import PythonTestRunnerQuestion
-from promptosaurus.questions.typescript.typescript_package_manager_question import (
+from prompticorn.questions.python.python_test_runner_question import PythonTestRunnerQuestion
+from prompticorn.questions.typescript.typescript_package_manager_question import (
     TypeScriptPackageManagerQuestion,
 )
-from promptosaurus.questions.typescript.typescript_version_question import (
+from prompticorn.questions.typescript.typescript_version_question import (
     TypeScriptVersionQuestion,
 )
 

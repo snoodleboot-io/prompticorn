@@ -2,7 +2,7 @@
 name: code
 description: Code generation and review assistant  
 model: anthropic/claude-opus-4-1
-state_management: .promptosaurus/sessions/
+state_management: .prompticorn/sessions/
 ---
 
 # System Prompt

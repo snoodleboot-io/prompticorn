@@ -14,18 +14,18 @@
 **Deliverables:** 3 agents + 22 subagent files
 
 - **PHASE3-AGENT-001 (ML/AI Engineer)**
-  - Main agent: `promptosaurus/agents/mlai/prompt.md`
+  - Main agent: `prompticorn/agents/mlai/prompt.md`
   - 4 subagents: model-training-specialist, mlops-engineer, ml-evaluation-expert, ml-ethics-reviewer
   - Commit: 747c472
 
 - **PHASE3-AGENT-002 (Security Engineer)**
-  - Main agent: `promptosaurus/agents/security/prompt.md`
+  - Main agent: `prompticorn/agents/security/prompt.md`
   - 4 subagents: threat-modeling-expert, vulnerability-assessment-specialist, security-architecture-reviewer, compliance-auditor
   - OWASP Top 10 references included
   - Commit: ce9b28f
 
 - **PHASE3-AGENT-003 (Product Manager)**
-  - Main agent: `promptosaurus/agents/product/prompt.md`
+  - Main agent: `prompticorn/agents/product/prompt.md`
   - 3 subagents: requirements-analyst, roadmap-planner, metrics-analytics-lead
   - Product-focused (not engineering-focused)
   - Commit: b00c7b39
@@ -36,7 +36,7 @@
 
 ### ✅ Track 1: ML/AI Workflows (12 workflows, 24 files) - COMPLETE
 **Status:** Generic, production-ready workflows  
-**Directory:** `promptosaurus/workflows/`
+**Directory:** `prompticorn/workflows/`
 
 Workflows created with minimal (35-50 lines) and verbose (150-300 lines) variants:
 1. model-evaluation-workflow
@@ -56,7 +56,7 @@ Workflows created with minimal (35-50 lines) and verbose (150-300 lines) variant
 
 ### ✅ Track 2: Security Workflows (10 workflows, 20 files) - COMPLETE
 **Status:** Generic, production-ready workflows  
-**Directory:** `promptosaurus/workflows/`
+**Directory:** `prompticorn/workflows/`
 
 Workflows created with minimal and verbose variants:
 1. threat-modeling-workflow (STRIDE/PASTA methodologies)
@@ -74,7 +74,7 @@ Workflows created with minimal and verbose variants:
 
 ### ✅ Track 3: Product Workflows (8 workflows, 16 files) - COMPLETE
 **Status:** Generic, production-ready workflows  
-**Directory:** `promptosaurus/workflows/`
+**Directory:** `prompticorn/workflows/`
 
 Workflows created with minimal and verbose variants:
 1. requirements-gathering-workflow
@@ -189,7 +189,7 @@ Organize skills across 4 categories (parallel tracks):
 
 **File Structure (same as workflows):**
 ```
-promptosaurus/skills/{skill-name}/
+prompticorn/skills/{skill-name}/
 ├── minimal/
 │   └── skill.md (20-30 lines)
 └── verbose/
@@ -314,7 +314,7 @@ Final steps:
 
 ### Completed (Week 1-2)
 ```
-promptosaurus/agents/
+prompticorn/agents/
 ├── mlai/                                    (ENHANCED)
 │   ├── prompt.md
 │   └── subagents/
@@ -336,7 +336,7 @@ promptosaurus/agents/
         ├── roadmap-planner/
         └── metrics-analytics-lead/
 
-promptosaurus/workflows/
+prompticorn/workflows/
 ├── [12 ML/AI workflows] × 2 variants = 24 files
 ├── [10 Security workflows] × 2 variants = 20 files
 ├── [8 Product workflows] × 2 variants = 16 files
@@ -345,7 +345,7 @@ promptosaurus/workflows/
 
 ### Pending (Week 3-4)
 ```
-promptosaurus/skills/
+prompticorn/skills/
 └── [50 skills] × 2 variants = 100 files
 
 tests/integration/

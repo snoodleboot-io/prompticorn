@@ -1,5 +1,5 @@
 /* ============================================================
-   PROMPTOSAURUS — Multi-Mode script.js
+   PROMPTICORN — Multi-Mode script.js
    ============================================================ */
 
 'use strict';
@@ -310,6 +310,23 @@ document.querySelectorAll('#d3-graph, .mermaid-wrap').forEach(el => diagramObser
 document.addEventListener('DOMContentLoaded', () => {
   if (window.Prism) Prism.highlightAll();
 });
+
+/* ── Accessible colours toggle ── */
+const accessibleColorsBtn = document.getElementById('accessible-colors-btn');
+const ACCESSIBLE_COLORS_KEY = 'prompticorn-accessible-colors';
+
+function applyAccessibleColors(enabled, persist) {
+  document.body.toggleAttribute('data-accessible-colors', enabled);
+  accessibleColorsBtn?.classList.toggle('active', enabled);
+  accessibleColorsBtn?.setAttribute('aria-pressed', String(enabled));
+  if (persist) localStorage.setItem(ACCESSIBLE_COLORS_KEY, enabled ? '1' : '0');
+}
+
+accessibleColorsBtn?.addEventListener('click', () => {
+  applyAccessibleColors(!document.body.hasAttribute('data-accessible-colors'), true);
+});
+
+applyAccessibleColors(localStorage.getItem(ACCESSIBLE_COLORS_KEY) === '1', false);
 
 /* ── Smooth scroll for anchor links ── */
 document.querySelectorAll('a[href^="#"]').forEach(a => {

@@ -4,7 +4,7 @@ import shutil
 import unittest
 from pathlib import Path
 
-from promptosaurus.artifacts import ARTIFACT_FILES, ArtifactManager
+from prompticorn.artifacts import ARTIFACT_FILES, ArtifactManager
 
 
 class TestArtifactCleanup(unittest.TestCase):

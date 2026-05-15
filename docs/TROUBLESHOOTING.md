@@ -1,6 +1,6 @@
 # Troubleshooting Guide
 
-This guide helps you diagnose and fix common issues with promptosaurus.
+This guide helps you diagnose and fix common issues with prompticorn.
 
 ## Table of Contents
 
@@ -25,7 +25,7 @@ This guide helps you diagnose and fix common issues with promptosaurus.
 # Check your Python version
 python --version
 
-# Promptosaurus requires Python 3.10+
+# prompticorn requires Python 3.10+
 # If you have an older version, upgrade Python or use pyenv
 ```
 
@@ -33,19 +33,19 @@ python --version
 
 ### Dependency Conflicts
 
-**Problem:** `pip install promptosaurus` fails with dependency conflicts
+**Problem:** `pip install prompticorn` fails with dependency conflicts
 
 **Solution:**
 ```bash
 # Use a virtual environment to avoid conflicts
 python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
-pip install promptosaurus
+pip install prompticorn
 
 # Or use uv (recommended)
 uv venv
 source .venv/bin/activate
-uv pip install promptosaurus
+uv pip install prompticorn
 ```
 
 ### Permission Errors
@@ -57,10 +57,10 @@ uv pip install promptosaurus
 # Don't use sudo - use virtual environment instead
 python -m venv .venv
 source .venv/bin/activate
-pip install promptosaurus
+pip install prompticorn
 
 # Or install to user directory
-pip install --user promptosaurus
+pip install --user prompticorn
 ```
 
 ### Platform-Specific Issues
@@ -69,7 +69,7 @@ pip install --user promptosaurus
 ```bash
 # If you get encoding errors
 set PYTHONIOENCODING=utf-8
-pip install promptosaurus
+pip install prompticorn
 ```
 
 **macOS/Linux:**
@@ -82,19 +82,19 @@ pip install windows-curses  # Only on Windows
 
 ## Configuration Issues
 
-### .promptosaurus/.promptosaurus.yaml Not Found
+### .prompticorn/.prompticorn.yaml Not Found
 
 **Problem:** Commands fail with "Configuration file not found"
 
 **Solution:**
 ```bash
 # Initialize configuration first
-promptosaurus init
+prompticorn init
 
-# This creates .promptosaurus/.promptosaurus.yaml in your project root
+# This creates .prompticorn/.prompticorn.yaml in your project root
 ```
 
-**Expected location:** `./.promptosaurus/.promptosaurus.yaml` (current directory)
+**Expected location:** `./.prompticorn/.prompticorn.yaml` (current directory)
 
 ### Invalid YAML Syntax
 
@@ -103,7 +103,7 @@ promptosaurus init
 **Solution:**
 ```bash
 # Validate your YAML
-cat .promptosaurus/.promptosaurus.yaml
+cat .prompticorn/.prompticorn.yaml
 
 # Common issues:
 # - Tabs instead of spaces (use spaces only)
@@ -129,9 +129,9 @@ spec:
 **Solution:**
 ```bash
 # Re-run init and manually select language
-promptosaurus init
+prompticorn init
 
-# Or edit .promptosaurus/.promptosaurus.yaml directly
+# Or edit .prompticorn/.prompticorn.yaml directly
 # Update spec.language and spec.runtime fields
 ```
 
@@ -141,8 +141,8 @@ promptosaurus init
 
 **Solution:**
 ```bash
-# Check your persona selection in .promptosaurus/.promptosaurus.yaml
-cat .promptosaurus/.promptosaurus.yaml | grep -A 5 personas
+# Check your persona selection in .prompticorn/.prompticorn.yaml
+cat .prompticorn/.prompticorn.yaml | grep -A 5 personas
 
 # Ensure at least one persona is selected
 # Universal agents (ask, debug, explain) are always available
@@ -159,10 +159,10 @@ cat .promptosaurus/.promptosaurus.yaml | grep -A 5 personas
 **Solution:**
 ```bash
 # List available builders
-promptosaurus list
+prompticorn list
 
 # Supported builders: kilo-cli, kilo-ide, claude, cline, cursor, copilot
-# Check spelling in .promptosaurus/.promptosaurus.yaml or command
+# Check spelling in .prompticorn/.prompticorn.yaml or command
 ```
 
 ### Validation Failures
@@ -172,7 +172,7 @@ promptosaurus list
 **Solution:**
 ```bash
 # Check agent prompt files exist
-ls -la promptosaurus/agents/
+ls -la prompticorn/agents/
 
 # Ensure each agent has:
 # - prompt.md (top-level agent)
@@ -203,7 +203,7 @@ df -h .
 **Solution:**
 ```bash
 # Check if agent prompt files exist
-ls promptosaurus/agents/*/prompt.md
+ls prompticorn/agents/*/prompt.md
 
 # Fallback: System will try verbose if minimal missing
 # Check logs for warnings
@@ -215,15 +215,15 @@ ls promptosaurus/agents/*/prompt.md
 
 ### Agents Not Found
 
-**Problem:** `promptosaurus list` shows no agents
+**Problem:** `prompticorn list` shows no agents
 
 **Solution:**
 ```bash
 # Check agents directory exists
-ls -la promptosaurus/agents/
+ls -la prompticorn/agents/
 
 # Verify agent structure
-        ls promptosaurus/agents/code/prompt.md
+        ls prompticorn/agents/code/prompt.md
 
         # Expected structure:
         # agents/
@@ -239,7 +239,7 @@ ls -la promptosaurus/agents/
 ```bash
 # Each agent needs at least one variant
 # Check which agents are missing prompts
-find promptosaurus/agents -name "prompt.md"
+find prompticorn/agents -name "prompt.md"
 
 # Create missing prompt.md with minimum structure:
 ---
@@ -258,7 +258,7 @@ Your prompt content here.
 **Solution:**
 ```bash
 # Check subagent structure
-ls promptosaurus/agents/debug/subagents/
+ls prompticorn/agents/debug/subagents/
 
 # Expected:
 # agents/
@@ -276,10 +276,10 @@ ls promptosaurus/agents/debug/subagents/
 **Solution:**
 ```bash
 # Clear cache (if implemented)
-rm -rf .promptosaurus/cache/
+rm -rf .prompticorn/cache/
 
 # Re-run discovery
-promptosaurus validate
+prompticorn validate
 ```
 
 ---
@@ -288,35 +288,35 @@ promptosaurus validate
 
 ### `init` Command Failures
 
-**Problem:** `promptosaurus init` fails midway
+**Problem:** `prompticorn init` fails midway
 
 **Solution:**
 ```bash
-# Check if .promptosaurus/.promptosaurus.yaml already exists
-        ls -la .promptosaurus/.promptosaurus.yaml
+# Check if .prompticorn/.prompticorn.yaml already exists
+        ls -la .prompticorn/.prompticorn.yaml
 
         # Backup and remove old config
-        mv .promptosaurus/.promptosaurus.yaml .promptosaurus/.promptosaurus.yaml.backup
+        mv .prompticorn/.prompticorn.yaml .prompticorn/.prompticorn.yaml.backup
 
         # Re-run init
-        promptosaurus init
+        prompticorn init
 
         # If interactive UI fails, check terminal compatibility
         export TERM=xterm-256color
-        promptosaurus init
+        prompticorn init
 ```
 
 ### `list` Command Empty Results
 
-**Problem:** `promptosaurus list` shows nothing
+**Problem:** `prompticorn list` shows nothing
 
 **Solution:**
 ```bash
 # Check configuration exists
-cat .promptosaurus/.promptosaurus.yaml
+cat .prompticorn/.prompticorn.yaml
 
 # Verify agents directory
-ls promptosaurus/agents/
+ls prompticorn/agents/
 
 # Check persona filtering
 # If personas selected, some agents may be filtered out
@@ -324,12 +324,12 @@ ls promptosaurus/agents/
 
 ### `validate` Command Errors
 
-**Problem:** `promptosaurus validate` reports errors
+**Problem:** `prompticorn validate` reports errors
 
 **Solution:**
 ```bash
 # Read error messages carefully
-promptosaurus validate
+prompticorn validate
 
 # Common issues:
 # - Missing prompt files
@@ -344,12 +344,12 @@ promptosaurus validate
 **Solution:**
 ```bash
 # Check valid tool names
-promptosaurus switch --help
+prompticorn switch --help
 
         # Valid tools: kilo-cli, kilo-ide, claude, cline, cursor, copilot
 
 # Check persona names
-cat promptosaurus/personas/personas.yaml
+cat prompticorn/personas/personas.yaml
 ```
 
 ---
@@ -363,18 +363,18 @@ cat promptosaurus/personas/personas.yaml
 **Fix:**
 ```bash
 # List available commands
-promptosaurus --help
+prompticorn --help
 
 # Valid commands: init, list, validate, switch, swap, update
 ```
 
-### `FileNotFoundError: .promptosaurus/.promptosaurus.yaml`
+### `FileNotFoundError: .prompticorn/.prompticorn.yaml`
 
 **Cause:** Configuration not initialized
 
 **Fix:**
 ```bash
-promptosaurus init
+prompticorn init
 ```
 
 ### `YAMLError: could not determine a constructor`
@@ -390,10 +390,10 @@ promptosaurus init
 **Fix:**
 ```bash
 # List available agents
-promptosaurus list
+prompticorn list
 
 # Check agent directory
-ls promptosaurus/agents/
+ls prompticorn/agents/
 ```
 
 ### `UnsupportedFeatureError: Builder does not support 'xyz'`
@@ -410,14 +410,14 @@ ls promptosaurus/agents/
 
 ```bash
 # Check stderr output for diagnostic information
-promptosaurus init 2> debug.log
+prompticorn init 2> debug.log
 ```
 
 ### Check Logs
 
 ```bash
 # Logs typically go to stderr
-promptosaurus init 2> debug.log
+prompticorn init 2> debug.log
 
 # Review log file
 cat debug.log
@@ -426,45 +426,45 @@ cat debug.log
 ### Verify Installation
 
 ```bash
-# Check promptosaurus is installed
-which promptosaurus
+# Check prompticorn is installed
+which prompticorn
 
 # Check version
-pip show promptosaurus
+pip show prompticorn
 
 # Test import
-python -c "import promptosaurus; print(promptosaurus.__file__)"
+python -c "import prompticorn; print(prompticorn.__file__)"
 ```
 
 ### Clear Cache
 
 ```bash
 # Remove cache directories
-rm -rf .promptosaurus/cache/
+rm -rf .prompticorn/cache/
 rm -rf __pycache__/
 rm -rf .pytest_cache/
 
 # Re-run command
-promptosaurus init
+prompticorn init
 ```
 
 ### Check File Permissions
 
 ```bash
 # Ensure files are readable
-        ls -la .promptosaurus/.promptosaurus.yaml
-        ls -la promptosaurus/agents/
+        ls -la .prompticorn/.prompticorn.yaml
+        ls -la prompticorn/agents/
 
         # Fix permissions if needed
-        chmod 644 .promptosaurus/.promptosaurus.yaml
-        chmod -R 755 promptosaurus/
+        chmod 644 .prompticorn/.prompticorn.yaml
+        chmod -R 755 prompticorn/
 ```
 
 ### Validate YAML
 
 ```bash
 # Use Python to validate YAML
-python -c "import yaml; yaml.safe_load(open('.promptosaurus/.promptosaurus.yaml'))"
+python -c "import yaml; yaml.safe_load(open('.prompticorn/.prompticorn.yaml'))"
 
 # Or use online YAML validator
 ```
@@ -473,10 +473,10 @@ python -c "import yaml; yaml.safe_load(open('.promptosaurus/.promptosaurus.yaml'
 
 ```bash
 # Verify expected structure
-tree promptosaurus/agents/ -L 3
+tree prompticorn/agents/ -L 3
 
 # Or
-find promptosaurus/agents -type f -name "prompt.md"
+find prompticorn/agents -type f -name "prompt.md"
 ```
 
 ---
@@ -484,7 +484,7 @@ find promptosaurus/agents -type f -name "prompt.md"
 ## Getting More Help
 
 ### GitHub Issues
-Report bugs or request help: [GitHub Issues](https://github.com/snoodleboot-io/promptosaurus/issues)
+Report bugs or request help: [GitHub Issues](https://github.com/snoodleboot-io/prompticorn/issues)
 
 ### Documentation
 - [README.md](../README.md) - Overview
@@ -495,14 +495,14 @@ Report bugs or request help: [GitHub Issues](https://github.com/snoodleboot-io/p
 
 - [ ] Python 3.10+ installed
 - [ ] Virtual environment activated
-- [ ] `promptosaurus init` run successfully
-- [ ] `.promptosaurus/.promptosaurus.yaml` exists and valid
+- [ ] `prompticorn init` run successfully
+- [ ] `.prompticorn/.prompticorn.yaml` exists and valid
 - [ ] Agents directory exists with proper structure
 - [ ] File permissions correct
 - [ ] No YAML syntax errors
 
 If all checks pass and issue persists, please file a GitHub issue with:
 - Error message
-- `pip show promptosaurus` output
-- `.promptosaurus/.promptosaurus.yaml` content (redact sensitive info)
-- Output of `promptosaurus validate`
+- `pip show prompticorn` output
+- `.prompticorn/.prompticorn.yaml` content (redact sensitive info)
+- Output of `prompticorn validate`

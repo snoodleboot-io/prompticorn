@@ -4,9 +4,9 @@ from pathlib import Path
 
 import pytest
 
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.builders.kilo_builder import KiloBuilder
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.base import BuildOptions
+from prompticorn.builders.kilo_builder import KiloBuilder
+from prompticorn.ir.models import Agent
 
 
 class TestTemplateSubstitution:
@@ -77,9 +77,9 @@ class TestTemplateSubstitution:
     def test_real_orchestrator_agent_gets_agent_list(self):
         """Real orchestrator agent should get populated agent list."""
         # Arrange
-        from promptosaurus.agent_registry.registry import Registry
+        from prompticorn.agent_registry.registry import Registry
 
-        agents_dir = Path("promptosaurus/agents")
+        agents_dir = Path("prompticorn/agents")
         if not agents_dir.exists():
             pytest.skip("Agents directory not found")
 
@@ -144,7 +144,7 @@ class TestPrimaryAgentsHandler:
 
     def test_handler_can_handle_primary_agents_list(self):
         """Handler should recognize PRIMARY_AGENTS_LIST variable."""
-        from promptosaurus.builders.template_handlers.primary_agents_handler import (
+        from prompticorn.builders.template_handlers.primary_agents_handler import (
             PrimaryAgentsHandler,
         )
 
@@ -153,7 +153,7 @@ class TestPrimaryAgentsHandler:
 
     def test_handler_rejects_other_variables(self):
         """Handler should reject variables it doesn't handle."""
-        from promptosaurus.builders.template_handlers.primary_agents_handler import (
+        from prompticorn.builders.template_handlers.primary_agents_handler import (
             PrimaryAgentsHandler,
         )
 
@@ -164,7 +164,7 @@ class TestPrimaryAgentsHandler:
 
     def test_handler_returns_string(self):
         """Handler should return a string when called."""
-        from promptosaurus.builders.template_handlers.primary_agents_handler import (
+        from prompticorn.builders.template_handlers.primary_agents_handler import (
             PrimaryAgentsHandler,
         )
 
@@ -176,7 +176,7 @@ class TestPrimaryAgentsHandler:
 
     def test_handler_formats_as_markdown_list(self):
         """Handler should return markdown-formatted list."""
-        from promptosaurus.builders.template_handlers.primary_agents_handler import (
+        from prompticorn.builders.template_handlers.primary_agents_handler import (
             PrimaryAgentsHandler,
         )
 

@@ -2,7 +2,7 @@
 
 ## Overview
 
-The Promptosaurus CLI provides commands for initializing, configuring, and managing AI assistant configurations. Built with Click, it offers an intuitive interface for generating tool-specific configurations from the Intermediate Representation (IR) models.
+The prompticorn CLI provides commands for initializing, configuring, and managing AI assistant configurations. Built with Click, it offers an intuitive interface for generating tool-specific configurations from the Intermediate Representation (IR) models.
 
 ## Global Options
 
@@ -12,13 +12,13 @@ All commands support these global options:
 
 ## Commands
 
-### `promptosaurus list`
+### `prompticorn list`
 
 List all registered modes and their associated prompt files.
 
 **Usage:**
 ```bash
-promptosaurus list
+prompticorn list
 ```
 
 **Options:**
@@ -42,12 +42,12 @@ TEST MODE  [test]
   ...
 ```
 
-### `promptosaurus init`
+### `prompticorn init`
 Interactively initialize prompt configuration for your project.
 
 **Usage:**
 ```bash
-promptosaurus init
+prompticorn init
 ```
 
 **Note:** `init` is interactive only. It prompts you through all configuration steps.
@@ -63,15 +63,15 @@ promptosaurus init
 **Examples:**
 ```bash
 # Interactive initialization
-promptosaurus init
+prompticorn init
 ```
 
-### `promptosaurus switch`
+### `prompticorn switch`
 Switch to a different AI assistant tool.
 
 **Usage:**
 ```bash
-promptosaurus switch [TOOL_NAME]
+prompticorn switch [TOOL_NAME]
 ```
 
 **Arguments:**
@@ -82,21 +82,21 @@ promptosaurus switch [TOOL_NAME]
 **Examples:**
 ```bash
 # Switch directly to Cline
-promptosaurus switch cline
+prompticorn switch cline
 
 # Interactive tool selection
-promptosaurus switch
+prompticorn switch
 
 # Switch to GitHub Copilot
-promptosaurus switch copilot
+prompticorn switch copilot
 ```
 
-### `promptosaurus swap`
+### `prompticorn swap`
 Swap active personas and regenerate configurations.
 
 **Usage:**
 ```bash
-promptosaurus swap
+prompticorn swap
 ```
 
 **Note:** `swap` is interactive only. It shows a menu to select personas.
@@ -104,15 +104,15 @@ promptosaurus swap
 **Examples:**
 ```bash
 # Interactive persona selection
-promptosaurus swap
+prompticorn swap
 ```
 
-### `promptosaurus update`
+### `prompticorn update`
 Update configuration options interactively.
 
 **Usage:**
 ```bash
-promptosaurus update
+prompticorn update
 ```
 
 **Note:** `update` is interactive only. It shows a menu to change specific options.
@@ -122,15 +122,15 @@ promptosaurus update
 **Examples:**
 ```bash
 # Interactive configuration update
-promptosaurus update
+prompticorn update
 ```
 
-### `promptosaurus validate`
+### `prompticorn validate`
 Validate configuration integrity.
 
 **Usage:**
 ```bash
-promptosaurus validate
+prompticorn validate
 ```
 
 **Checks Performed:**
@@ -144,7 +144,7 @@ promptosaurus validate
 **Examples:**
 ```bash
 # Validate current configuration
-promptosaurus validate
+prompticorn validate
 ```
 
 ## Advanced Usage
@@ -154,9 +154,9 @@ promptosaurus validate
 For programmatic access, use the Python API:
 
 ```python
-from promptosaurus.builders.factory import BuilderFactory
-from promptosaurus.ir.models import Agent
-from promptosaurus.builders.base import BuildOptions
+from prompticorn.builders.factory import BuilderFactory
+from prompticorn.ir.models import Agent
+from prompticorn.builders.base import BuildOptions
 
 # Get builder
 builder = BuilderFactory.get_builder("kilo")
@@ -176,7 +176,7 @@ output = builder.build(agent, BuildOptions(variant="verbose"))
 
 ### Configuration File
 
-The configuration is stored in `.promptosaurus/.promptosaurus.yaml` by default. Key sections include:
+The configuration is stored in `.prompticorn/.prompticorn.yaml` by default. Key sections include:
 
 ```yaml
 repository:
@@ -198,8 +198,8 @@ ai_tool: kilo-ide  # currently selected AI tool
 
 The CLI respects these environment variables:
 
-- `PROMPTOSAURUS_PROMPTS_PATH`: Path to prompts directory (default: `promptosaurus/prompts`)
-- `PROMPTOSAURUS_LOG_LEVEL`: Logging level (DEBUG, INFO, WARNING, ERROR)
+- `PROMPTICORN_PROMPTS_PATH`: Path to prompts directory (default: `prompticorn/prompts`)
+- `PROMPTICORN_LOG_LEVEL`: Logging level (DEBUG, INFO, WARNING, ERROR)
 
 ## Exit Codes
 
@@ -217,7 +217,7 @@ The CLI uses standard exit codes:
 ### Complete Setup Workflow
 ```bash
 # 1. Initialize configuration
-promptosaurus init
+prompticorn init
 #   -> Select: Kilo IDE
 #   -> Select: Single language repository
 #   -> Select: Verbose variant
@@ -225,16 +225,16 @@ promptosaurus init
 #   -> Configure: Python 3.11, uv, pytest, etc.
 
 # 2. Verify configuration
-promptosaurus validate
+prompticorn validate
 
 # 3. Switch to different tool if needed
-promptosaurus switch cline
+prompticorn switch cline
 
 # 4. Update personas for different task
-promptosaurus swap
+prompticorn swap
 
 # 5. Regenerate configurations
-promptosaurus init  # will reuse existing config and regenerate
+prompticorn init  # will reuse existing config and regenerate
 ```
 
 ### Automation Scripts
@@ -243,15 +243,15 @@ promptosaurus init  # will reuse existing config and regenerate
 # Generate configurations for all tools
 
 # Ensure configuration exists
-if [ ! -f .promptosaurus/.promptosaurus.yaml ]; then
-    echo "Please run 'promptosaurus init' first"
+if [ ! -f .prompticorn/.prompticorn.yaml ]; then
+    echo "Please run 'prompticorn init' first"
     exit 1
 fi
 
 # Generate for each tool
 for tool in kilo-ide kilo-cli cline cursor copilot; do
     echo "Generating $tool configuration..."
-    promptosaurus switch $tool
+    prompticorn switch $tool
 done
 
 echo "All configurations generated!"

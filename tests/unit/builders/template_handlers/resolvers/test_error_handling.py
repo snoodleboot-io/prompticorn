@@ -14,23 +14,23 @@ from unittest.mock import patch
 import jinja2
 import pytest
 
-from promptosaurus.builders.template_handlers.resolvers.error_recovery import (
+from prompticorn.builders.template_handlers.resolvers.error_recovery import (
     ErrorContextBuilder,
     SafeAccessor,
     TemplateCache,
 )
-from promptosaurus.builders.template_handlers.resolvers.jinja2_template_renderer import (
+from prompticorn.builders.template_handlers.resolvers.jinja2_template_renderer import (
     Jinja2TemplateRenderer,
 )
-from promptosaurus.builders.template_handlers.resolvers.registry_template_loader import (
+from prompticorn.builders.template_handlers.resolvers.registry_template_loader import (
     RegistryTemplateLoader,
 )
-from promptosaurus.builders.template_handlers.resolvers.safe_filters import (
+from prompticorn.builders.template_handlers.resolvers.safe_filters import (
     safe_get,
     safe_int,
     safe_list,
 )
-from promptosaurus.builders.template_handlers.resolvers.template_rendering_error import (
+from prompticorn.builders.template_handlers.resolvers.template_rendering_error import (
     TemplateRenderingError,
 )
 
@@ -139,7 +139,7 @@ class TestMissingTemplateHandling:
         result = renderer.handle_by_name("missing.md", {}, allow_recovery=True)
         assert "Fallback Content" in result
 
-    @patch("promptosaurus.builders.template_handlers.resolvers.jinja2_template_renderer.registry")
+    @patch("prompticorn.builders.template_handlers.resolvers.jinja2_template_renderer.registry")
     def test_missing_include_template(self, mock_registry, renderer):
         """Test handling of missing included templates."""
         mock_registry.prompt_body.side_effect = Exception("Template not found")
@@ -240,7 +240,7 @@ class TestCircularReferenceDetection:
         """Create Jinja2 renderer."""
         return Jinja2TemplateRenderer(environment)
 
-    @patch("promptosaurus.builders.template_handlers.resolvers.jinja2_template_renderer.registry")
+    @patch("prompticorn.builders.template_handlers.resolvers.jinja2_template_renderer.registry")
     def test_circular_inheritance_detection(self, mock_registry, renderer):
         """Test detection of circular template inheritance."""
 
@@ -325,10 +325,10 @@ class TestFilterErrorHandling:
     @pytest.fixture
     def environment(self):
         """Create Jinja2 environment."""
-        from promptosaurus.builders.template_handlers.resolvers.custom_filters import (
+        from prompticorn.builders.template_handlers.resolvers.custom_filters import (
             register_custom_filters,
         )
-        from promptosaurus.builders.template_handlers.resolvers.safe_filters import (
+        from prompticorn.builders.template_handlers.resolvers.safe_filters import (
             register_safe_filters,
         )
 

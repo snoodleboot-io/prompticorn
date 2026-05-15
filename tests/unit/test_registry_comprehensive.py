@@ -1,4 +1,4 @@
-"""Comprehensive unit tests for promptosaurus.registry.
+"""Comprehensive unit tests for prompticorn.registry.
 
 This module provides extensive test coverage for the Registry class,
 testing all methods, validators, and edge cases.
@@ -10,7 +10,7 @@ from pathlib import Path
 
 import pytest
 
-from promptosaurus.registry import Registry, _dest_name, _prompt_body_cached
+from prompticorn.registry import Registry, _dest_name, _prompt_body_cached
 
 
 class TestModuleLevelFunctions:
@@ -98,7 +98,7 @@ class TestRegistryInitialization:
         """Should have correct default prompts_dir path."""
         registry = Registry()
         assert registry.prompts_dir.name == "prompts"
-        assert registry.prompts_dir.parent.name == "promptosaurus"
+        assert registry.prompts_dir.parent.name == "prompticorn"
 
     def test_always_on_files_configured(self):
         """Should have always_on files configured."""
@@ -374,21 +374,21 @@ class TestRegistrySingleton:
 
     def test_singleton_instance_exists(self):
         """Should have a singleton registry instance."""
-        from promptosaurus.registry import registry
+        from prompticorn.registry import registry
 
         assert registry is not None
         assert isinstance(registry, Registry)
 
     def test_singleton_instance_has_modes(self):
         """Singleton should have modes configured."""
-        from promptosaurus.registry import registry
+        from prompticorn.registry import registry
 
         assert len(registry.modes) > 0
         assert "code" in registry.modes
 
     def test_singleton_instance_has_files(self):
         """Singleton should have files configured."""
-        from promptosaurus.registry import registry
+        from prompticorn.registry import registry
 
         assert len(registry.always_on) > 0
         assert len(registry.mode_files) > 0

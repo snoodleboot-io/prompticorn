@@ -7,7 +7,7 @@
 
 ## Overview
 
-Promptosaurus generates a clean, organized `.claude/` directory structure for Claude AI assistant usage. The system uses lazy loading, where Claude only loads what it needs when it needs it.
+prompticorn generates a clean, organized `.claude/` directory structure for Claude AI assistant usage. The system uses lazy loading, where Claude only loads what it needs when it needs it.
 
 ---
 
@@ -17,7 +17,7 @@ Promptosaurus generates a clean, organized `.claude/` directory structure for Cl
 
 ```bash
 cd your-project
-promptosaurus init
+prompticorn init
 # Select "claude" when prompted
 ```
 
@@ -310,7 +310,7 @@ Skills are reusable capabilities stored in directories:
 ### From Another Tool to Claude
 
 ```bash
-promptosaurus switch claude
+prompticorn switch claude
 ```
 
 This will:
@@ -325,7 +325,7 @@ This will:
 ### From Claude to Another Tool
 
 ```bash
-promptosaurus switch kilo-ide
+prompticorn switch kilo-ide
 ```
 
 This will:
@@ -394,7 +394,7 @@ Don't try to load everything at once.
 **Solution:** Run:
 ```bash
 rm -rf custom_instructions/
-promptosaurus switch claude
+prompticorn switch claude
 ```
 
 The new system doesn't use custom_instructions/.
@@ -425,13 +425,13 @@ Commit the entire `.claude/` directory and CLAUDE.md. These are project artifact
 ## FAQ
 
 ### Q: Do I need to manually create any files?
-**A:** No. Run `promptosaurus init` and everything is generated.
+**A:** No. Run `prompticorn init` and everything is generated.
 
 ### Q: Can I edit the generated files?
 **A:** Yes, but be aware they'll be regenerated on next build. For project-specific changes, add to `general.md` rather than editing agent files.
 
 ### Q: How do I add a new language?
-**A:** Language conventions are bundled with Promptosaurus. If your language isn't supported, the workflow will use general conventions.
+**A:** Language conventions are bundled with prompticorn. If your language isn't supported, the workflow will use general conventions.
 
 ### Q: What's the difference between a workflow and a skill?
 **A:** Workflows are multi-step processes that agents follow. Skills are reusable capabilities that workflows can invoke.
@@ -440,7 +440,7 @@ Commit the entire `.claude/` directory and CLAUDE.md. These are project artifact
 **A:** No. Claude should use one agent per task. If you need coordination between tasks, use the orchestrator agent.
 
 ### Q: How do I update to the latest version?
-**A:** Run `promptosaurus switch claude` to regenerate all files with the latest templates and conventions.
+**A:** Run `prompticorn switch claude` to regenerate all files with the latest templates and conventions.
 
 ---
 

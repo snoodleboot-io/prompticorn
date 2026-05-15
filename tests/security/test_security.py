@@ -1,15 +1,6 @@
-"""Security tests for promptosaurus - placeholder for future tests."""
-
-import pytest
+"""Security tests — to be expanded."""
 
 
-@pytest.mark.security
-@pytest.mark.placeholder
-def test_security_placeholder():
-    """Placeholder security test."""
-    # TODO: Add security tests when we have:
-    # - Input validation tests
-    # - Path traversal tests
-    # - Secret detection tests
-    # - Secure file handling tests
+def test_placeholder():
+    """Placeholder until real security tests are written."""
     pass

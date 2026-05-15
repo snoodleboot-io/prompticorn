@@ -1,6 +1,6 @@
 import unittest
 
-from promptosaurus.builders.template_handlers.linter_handler import LinterHandler
+from prompticorn.builders.template_handlers.linter_handler import LinterHandler
 
 
 class TestLinterHandler(unittest.TestCase):

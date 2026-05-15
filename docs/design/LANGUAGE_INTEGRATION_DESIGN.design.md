@@ -26,7 +26,7 @@ tools_needed: [edit, write, read]
 ---
 ```
 
-Create `promptosaurus/language_skill_mapping.yaml`:
+Create `prompticorn/language_skill_mapping.yaml`:
 ```yaml
 all:
   skills:
@@ -265,7 +265,7 @@ tools_needed: [write]
 
 ### Part 2: Auto-Include Core Conventions by Language
 
-Create `promptosaurus/ir/loaders/core_files_loader.py`:
+Create `prompticorn/ir/loaders/core_files_loader.py`:
 
 ```python
 class CoreFilesLoader:
@@ -336,10 +336,10 @@ During build, render with actual config values from CLI questions.
 ## Files to Create/Modify
 
 Create:
-- promptosaurus/ir/loaders/core_files_loader.py
-- promptosaurus/ir/loaders/language_skill_mapping_loader.py
-- promptosaurus/ir/loaders/subagent_compatibility_resolver.py
-- promptosaurus/language_skill_mapping.yaml
+- prompticorn/ir/loaders/core_files_loader.py
+- prompticorn/ir/loaders/language_skill_mapping_loader.py
+- prompticorn/ir/loaders/subagent_compatibility_resolver.py
+- prompticorn/language_skill_mapping.yaml
 
 Modify:
 - All skills (add languages and subagents fields)

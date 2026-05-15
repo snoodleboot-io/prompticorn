@@ -4,10 +4,10 @@ import sys
 import unittest
 from pathlib import Path
 
-# Add promptosaurus to path
+# Add prompticorn to path
 sys.path.insert(0, str(Path(__file__).parent.parent.parent))
 
-from promptosaurus.builders.template_handlers.resolvers.jinja2_template_renderer import (
+from prompticorn.builders.template_handlers.resolvers.jinja2_template_renderer import (
     Jinja2TemplateRenderer,
 )
 
@@ -20,7 +20,7 @@ class TestConventionsConditionalRendering(unittest.TestCase):
         import jinja2
 
         # Set up Jinja2 environment with FileSystemLoader to resolve template imports
-        core_dir = Path(__file__).parent.parent.parent / "promptosaurus" / "agents" / "core"
+        core_dir = Path(__file__).parent.parent.parent / "prompticorn" / "agents" / "core"
         jinja_env = jinja2.Environment(
             loader=jinja2.FileSystemLoader(str(core_dir)),
             undefined=jinja2.StrictUndefined,

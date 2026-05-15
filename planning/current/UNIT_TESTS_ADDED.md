@@ -126,7 +126,7 @@ uv run pytest tests/unit/ir/test_loaders.py::TestAgentSkillMappingLoader -v
 uv run pytest tests/unit/ir/test_loaders.py::TestAgentSkillMappingLoader::test_get_skills_for_agent_success -v
 
 # Run with coverage
-uv run pytest tests/unit/ir/test_loaders.py::TestAgentSkillMappingLoader --cov=promptosaurus.ir.loaders.agent_skill_mapping_loader
+uv run pytest tests/unit/ir/test_loaders.py::TestAgentSkillMappingLoader --cov=prompticorn.ir.loaders.agent_skill_mapping_loader
 ```
 
 ---

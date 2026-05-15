@@ -1,6 +1,6 @@
 import unittest
 
-from promptosaurus.builders.template_handlers.package_manager_handler import PackageManagerHandler
+from prompticorn.builders.template_handlers.package_manager_handler import PackageManagerHandler
 
 
 class TestPackageManagerHandler(unittest.TestCase):

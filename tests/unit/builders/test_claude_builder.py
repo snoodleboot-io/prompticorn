@@ -12,9 +12,9 @@ Tests cover:
 
 from pathlib import Path
 
-from promptosaurus.builders.base import BuildOptions
-from promptosaurus.builders.claude_builder import ClaudeBuilder
-from promptosaurus.ir.models import Agent
+from prompticorn.builders.base import BuildOptions
+from prompticorn.builders.claude_builder import ClaudeBuilder
+from prompticorn.ir.models import Agent
 
 
 class TestClaudeBuilderInitialization:

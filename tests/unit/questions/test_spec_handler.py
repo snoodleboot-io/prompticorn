@@ -1,8 +1,8 @@
-"""Tests for promptosaurus.questions.base.spec_handler module."""
+"""Tests for prompticorn.questions.base.spec_handler module."""
 
 import pytest
 
-from promptosaurus.questions.base.spec_handler import (
+from prompticorn.questions.base.spec_handler import (
     MultiLanguageSpecHandler,
     SingleLanguageSpecHandler,
     SpecHandler,

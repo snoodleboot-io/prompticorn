@@ -1,6 +1,6 @@
 # Directory Structure
 
-This document explains the organization of the Promptosaurus repository.
+This document explains the organization of the prompticorn repository.
 
 ## Overall Structure
 
@@ -8,7 +8,7 @@ This document explains the organization of the Promptosaurus repository.
 .
 ├── docs/                    # User-facing documentation
 ├── planning/                # Development planning (internal)
-├── promptosaurus/           # Source code
+├── prompticorn/           # Source code
 ├── tests/                   # Tests
 ├── examples/                # Example configurations
 └── [root config files]
@@ -18,7 +18,7 @@ This document explains the organization of the Promptosaurus repository.
 
 ## docs/ - User-Facing Documentation
 
-Contains documentation for users, developers, and operators using Promptosaurus.
+Contains documentation for users, developers, and operators using prompticorn.
 
 ```
 docs/
@@ -78,8 +78,8 @@ docs/
 │
 └── misc/                    # Images and assets
     ├── promptosaurs 1.png
-    ├── promptosaurus2.png
-    └── promptosaurus3-no-bg.png
+    ├── prompticorn2.png
+    └── prompticorn3-no-bg.png
 ```
 
 ### Content Categories
@@ -148,10 +148,10 @@ The `planning/` directory is for internal development work:
 
 ---
 
-## promptosaurus/ - Source Code
+## prompticorn/ - Source Code
 
 ```
-promptosaurus/
+prompticorn/
 ├── agents/                  # Agent prompt files (25 primary agents)
 │   ├── architect/
 │   ├── ask/
@@ -205,7 +205,7 @@ examples/
 └── [example project configurations]
 ```
 
-Example configurations showing how to use Promptosaurus in different scenarios.
+Example configurations showing how to use prompticorn in different scenarios.
 
 ---
 
@@ -215,7 +215,7 @@ Example configurations showing how to use Promptosaurus in different scenarios.
 .
 ├── pyproject.toml          # Python project configuration
 ├── README.md               # Repository README
-├── .promptosaurus.yaml     # Promptosaurus configuration
+├── .prompticorn.yaml     # prompticorn configuration
 └── [other config files]
 ```
 
@@ -238,7 +238,7 @@ Intent is encoded in filename suffixes:
 - **For users:** Start with `docs/README.md` or `docs/QUICKSTART.md`
 - **For developers:** See `docs/builders/` for building custom integrations
 - **For architecture:** See `docs/ARCHITECTURE.md` and `docs/design/`
-- **For source code:** Navigate `promptosaurus/` directory
+- **For source code:** Navigate `prompticorn/` directory
 
 ---
 

@@ -1,6 +1,6 @@
 import unittest
 
-from promptosaurus.builders.template_handlers.runtime_handler import RuntimeHandler
+from prompticorn.builders.template_handlers.runtime_handler import RuntimeHandler
 
 
 class TestRuntimeHandler(unittest.TestCase):

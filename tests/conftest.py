@@ -14,19 +14,19 @@ def project_root():
 @pytest.fixture
 def agents_dir(project_root):
     """Get agents directory."""
-    return project_root / "promptosaurus" / "agents"
+    return project_root / "prompticorn" / "agents"
 
 
 @pytest.fixture
 def workflows_dir(project_root):
     """Get workflows directory."""
-    return project_root / "promptosaurus" / "workflows"
+    return project_root / "prompticorn" / "workflows"
 
 
 @pytest.fixture
 def skills_dir(project_root):
     """Get skills directory."""
-    return project_root / "promptosaurus" / "skills"
+    return project_root / "prompticorn" / "skills"
 
 
 @pytest.fixture

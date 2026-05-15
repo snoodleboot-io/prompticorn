@@ -11,7 +11,7 @@ Tests cover:
 import pytest
 from pydantic import ValidationError
 
-from promptosaurus.ir.models import Agent, Project, Rules, Skill, Tool, Workflow
+from prompticorn.ir.models import Agent, Project, Rules, Skill, Tool, Workflow
 
 # ============================================================================
 # FIXTURES - Common test data

@@ -166,7 +166,7 @@ def _format_workflows_section(self, workflow_names: list[str]) -> str:
 We have 50+ workflow.md files in the IR:
 
 ```
-promptosaurus/agents/code/subagents/feature/minimal/workflow.md
+prompticorn/agents/code/subagents/feature/minimal/workflow.md
 ```
 
 **Content:**
@@ -264,7 +264,7 @@ Just list workflow names and let tools figure it out.
 
 ### Step 1: Add Workflow Loader
 ```python
-# promptosaurus/ir/loaders/workflow_loader.py - already exists!
+# prompticorn/ir/loaders/workflow_loader.py - already exists!
 # Just need to use it in builders
 ```
 

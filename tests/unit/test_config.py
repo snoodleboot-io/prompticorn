@@ -3,7 +3,7 @@
 import tempfile
 from pathlib import Path
 
-from promptosaurus.config_handler import (
+from prompticorn.config_handler import (
     ConfigHandler,
     create_default_config,
 )
@@ -16,7 +16,7 @@ class TestConfigHandler:
         """Should return default config path."""
         path = ConfigHandler.get_config_path()
 
-        assert path == Path(".promptosaurus") / ".promptosaurus.yaml"
+        assert path == Path(".prompticorn") / ".prompticorn.yaml"
 
     def test_get_custom_config_path_uses_default_filename(self):
         """Should return custom config path with default filename when directory provided."""
@@ -24,12 +24,12 @@ class TestConfigHandler:
         path = ConfigHandler.get_config_path(custom)
 
         # When a directory is provided, it should append the default filename
-        assert path == custom / ".promptosaurus.yaml"
+        assert path == custom / ".prompticorn.yaml"
 
     def test_ensure_config_dir_creates_directory(self):
         """Should create config directory if it doesn't exist."""
         with tempfile.TemporaryDirectory() as tmpdir:
-            config_dir = Path(tmpdir) / ".promptosaurus"
+            config_dir = Path(tmpdir) / ".prompticorn"
             assert not config_dir.exists()
 
             ConfigHandler.ensure_config_dir(config_dir)
