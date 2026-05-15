@@ -91,7 +91,7 @@ To contribute or develop locally:
 
 ```bash
 # Clone the repository
-git clone https://github.com/johna/prompticorn.git
+git clone https://github.com/snoodleboot-io/prompticorn.git
 cd prompticorn
 
 # Install in development mode
