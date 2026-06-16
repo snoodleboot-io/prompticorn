@@ -61,20 +61,25 @@ def _build_template_context(spec: dict[str, Any] | None) -> dict[str, Any]:
     return context
 
 
-def generate_core_convention() -> str:
+def generate_core_convention(repository_type: str = "") -> str:
     """Generate core general.md convention file.
 
     Combines system.md, conventions.md, and session.md into one file.
+
+    Args:
+        repository_type: Repository type from config (e.g. 'single-language',
+            'multi-language-monorepo') used to populate the core conventions.
 
     Returns:
         Content for .claude/conventions/core/general.md
     """
     core_dir = Path(__file__).parent.parent / "agents" / "core"
     environment = _get_convention_environment()
+    context = {"repository_type": repository_type}
 
     def _render_section(path: Path) -> str:
         """Read and render a core convention source (resolves macro imports)."""
-        return environment.from_string(path.read_text(encoding="utf-8")).render()
+        return environment.from_string(path.read_text(encoding="utf-8")).render(**context)
 
     sections = []
 
@@ -174,6 +179,7 @@ def _normalize_specs(
 
 def generate_all_conventions(
     specs: list[dict[str, Any]] | dict[str, Any] | list[str] | None = None,
+    repository_type: str = "",
 ) -> dict[str, str]:
     """Generate convention files for Claude.
 
@@ -183,6 +189,8 @@ def generate_all_conventions(
             (multi-language-monorepo), a list of language names (legacy), or None to
             generate conventions for all available languages. Spec values are
             substituted into each language convention template.
+        repository_type: Repository type from config, used to populate the core
+            convention (e.g. 'single-language', 'multi-language-monorepo').
 
     Returns:
         Dictionary mapping file paths to content
@@ -195,7 +203,7 @@ def generate_all_conventions(
     output = {}
 
     # Generate core general.md
-    core_content = generate_core_convention()
+    core_content = generate_core_convention(repository_type)
     output[".claude/conventions/core/general.md"] = core_content
 
     # Generate a convention per language, substituting that folder's spec values.

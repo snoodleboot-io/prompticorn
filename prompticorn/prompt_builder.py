@@ -344,7 +344,10 @@ class PromptBuilder:
                     # Generate convention files for Claude (only selected languages)
                     try:
                         selected_specs = self._extract_all_specs_from_config(config)
-                        conventions = generate_all_conventions(selected_specs)
+                        repository_type = (
+                            (config.get("repository") or {}).get("type", "") if config else ""
+                        )
+                        conventions = generate_all_conventions(selected_specs, repository_type)
                         for file_path_str, content_str in conventions.items():
                             full_path = output / file_path_str
                             full_path.parent.mkdir(parents=True, exist_ok=True)
