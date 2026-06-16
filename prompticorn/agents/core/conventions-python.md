@@ -77,15 +77,7 @@ Environment vars:    UPPER_SNAKE_CASE always
 - All code must pass pyright strict mode before commit
 - No commits with type errors or `Any` types without explicit justification
 
-### Testing
-
-[Dynamic content - see template]
-
-TODO
-
-[Dynamic content - see template]
-
-[Dynamic content - see template]
+{{ testing.render_testing_section(language, test_framework, coverage_targets) }}
 
 ### Code Style
 - Follow PEP 8 (enforced by Ruff)
@@ -101,8 +93,6 @@ TODO
 - Use `@property` decorator with getters/setters instead of `get_x()` / `set_x()` methods
 - Use `@property.deleter` when cleanup logic is needed on attribute deletion
 - Prevent setting when inappropriate by raising `AttributeError` or `TypeError` in setters
-
-[Dynamic content - see template]
 
 #### Public/Protected/Private Scoping
 - Use single underscore `_` prefix for protected/internal attributes and methods
@@ -172,8 +162,6 @@ def my_decorator(func):
 - Use `async with` for async context managers
 - Use `async for` for async iterators
 - Never use `time.sleep()` in async code - use `await asyncio.sleep()`
-
-[Dynamic content - see template]
 
 #### Context Managers (sync and async)
 - **ALWAYS use context managers** for resource management (files, connections, locks)

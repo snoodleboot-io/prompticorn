@@ -37,8 +37,4 @@ Environment vars:   UPPER_SNAKE_CASE always
 - Use structured concurrency
 - Use Flow for streams of data
 
-### Testing
-
-[Dynamic content - see template]
-
-TODO
+{{ testing.render_testing_section(language, test_framework, coverage_targets) }}

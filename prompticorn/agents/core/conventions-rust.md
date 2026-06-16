@@ -38,8 +38,4 @@ Environment vars:   UPPER_SNAKE_CASE always
 - Prefer trait bounds over generic parameters
 - Implement `Default`, `Clone`, `Debug`, `Display`, `Serialize`, `Deserialize` where appropriate
 
-### Testing
-
-[Dynamic content - see template]
-
-TODO
+{{ testing.render_testing_section(language, test_framework, coverage_targets) }}

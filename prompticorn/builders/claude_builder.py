@@ -9,6 +9,7 @@ from pathlib import Path
 from jinja2 import Environment, FileSystemLoader
 
 from prompticorn.builders.base import Builder, BuildOptions
+from prompticorn.builders.builder import Builder as LegacyBuilder
 from prompticorn.builders.errors import BuilderValidationError
 from prompticorn.builders.naming_utils import (
     agent_to_file_name,
@@ -45,6 +46,10 @@ class ClaudeBuilder(Builder):
         """
         self.agents_dir = agents_dir
         self.core_loader = CoreFilesLoader()
+
+        # Legacy Builder provides template-variable substitution (e.g.
+        # {{PRIMARY_AGENTS_LIST}}, {{LANGUAGE}}) via registered handlers.
+        self._legacy_builder = LegacyBuilder()
 
         # Setup Jinja2 template environment
         template_dir = Path(__file__).parent.parent / "templates" / "claude"
@@ -164,12 +169,20 @@ class ClaudeBuilder(Builder):
 
         prepared_skills = self._prepare_skills_data(agent.skills) if agent.skills else []
 
+        # Substitute template variables (e.g. {{PRIMARY_AGENTS_LIST}}) in the
+        # system prompt before rendering, mirroring the KiloBuilder behaviour.
+        system_prompt = agent.system_prompt
+        if config:
+            system_prompt = self._legacy_builder._substitute_template_variables(
+                system_prompt, config
+            )
+
         # Prepare template data
         template_data = {
             "agent": {
                 "name": agent.name.title(),
                 "description": agent.description,
-                "system_prompt": agent.system_prompt,
+                "system_prompt": system_prompt,
             },
             "when_to_use": self._generate_when_to_use(agent),
             "workflow": agent.workflows[0] if agent.workflows else None,
