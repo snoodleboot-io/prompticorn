@@ -1,7 +1,7 @@
 # Claude Template Population Fix
 
-**Status:** 🚧 IN PROGRESS — Phases 0–3a done (incl. macro consolidation); Phase 3b (core `general.md` fill-ins)
-and Phase 4 (`validate`/concat) remain — both need a decision
+**Status:** 🚧 IN PROGRESS — Phases 0–3b done (committed); Phase 4 (`validate`/`list`/concat) remains — needs a
+behavior decision (separate legacy-registry subsystem)
 **Date:** 2026-06-15
 **Branch:** `fix/claude-template-population`
 **Owner:** (unassigned)
@@ -131,7 +131,7 @@ breaks `validate` and any future concat consumer.
 - Confirm `PrimaryAgentsHandler` respects persona filtering (currently lists all registry agents even when
   personas exclude some — see Minor below).
 
-### Phase 3 — Convention template content (the user's headline concern) ⏳ NEXT
+### Phase 3 — Convention template content (the user's headline concern) ✅ DONE
 The wiring is fixed, but the **convention templates don't reference the values**:
 - **Test framework / coverage not shown.** `conventions-{lang}.md` has a `### Testing` section that is literal
   stub text (`[Dynamic content - see template]`, `TODO`) and imports `macros/testing_sections.jinja2` +
