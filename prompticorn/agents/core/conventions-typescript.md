@@ -39,15 +39,7 @@ Environment vars:   UPPER_SNAKE_CASE always
 - Use barrel files (index.ts) for clean public APIs
 - Order imports: external → internal → types (with blank lines between)
 
-### Testing
-
-[Dynamic content - see template]
-
-TODO
-
-[Dynamic content - see template]
-
-[Dynamic content - see template]
+{{ testing.render_testing_section(language, test_framework, coverage_targets) }}
 
 ### Code Style
 - Use ESNext features (optional chaining, nullish coalescing)

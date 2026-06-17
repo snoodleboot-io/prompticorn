@@ -38,8 +38,4 @@ Environment vars:   UPPER_SNAKE_CASE always
 - Group imports: java → javax → third-party → internal
 - Never use wildcard imports (*)
 
-### Testing
-
-[Dynamic content - see template]
-
-TODO
+{{ testing.render_testing_section(language, test_framework, coverage_targets) }}

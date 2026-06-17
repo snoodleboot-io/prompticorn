@@ -35,8 +35,4 @@ Environment vars:   UPPER_SNAKE_CASE always
 - Use RuboCop for linting
 - Use meaningful method names
 
-### Testing
-
-[Dynamic content - see template]
-
-TODO
+{{ testing.render_testing_section(language, test_framework, coverage_targets) }}

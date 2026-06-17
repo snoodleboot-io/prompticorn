@@ -37,11 +37,7 @@ Environment vars:   UPPER_SNAKE_CASE always
 - Group: standard library → external packages → internal packages
 - Use aliases only when necessary (e.g., `errs "errors"`)
 
-### Testing
-
-[Dynamic content - see template]
-
-TODO
+{{ testing.render_testing_section(language, test_framework, coverage_targets) }}
 
 ### Code Style
 - Follow Go idioms — use `go fmt` / `gofmt`

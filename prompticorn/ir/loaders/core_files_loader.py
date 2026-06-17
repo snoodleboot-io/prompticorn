@@ -29,9 +29,15 @@ class CoreFilesLoader:
         """
         self.core_dir = Path(core_dir)
 
+        # Resolve macro imports (``macros/...``) against the canonical macro
+        # library under prompticorn/prompts, matching ConventionGenerator. (The
+        # core_dir contains only stub macros; using it as the import root would
+        # break convention templates that call the testing/coverage macros.)
+        prompts_dir = self.core_dir.parent.parent / "prompts"
+
         # Create Jinja2 environment with FileSystemLoader for template imports
         self.jinja_env = Environment(
-            loader=FileSystemLoader(str(self.core_dir)),
+            loader=FileSystemLoader(str(prompts_dir)),
             undefined=StrictUndefined,
         )
 

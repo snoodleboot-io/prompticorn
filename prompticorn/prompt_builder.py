@@ -108,6 +108,37 @@ class PromptBuilder:
         else:
             return None
 
+    @staticmethod
+    def _extract_all_specs_from_config(
+        config: dict[str, Any] | None,
+    ) -> list[dict[str, Any]] | None:
+        """Extract all language/folder specs from config.
+
+        Unlike :meth:`_extract_all_languages_from_config`, this returns the full
+        spec dicts (runtime, package_manager, test_framework, linter, formatter,
+        coverage, ...) so convention templates can be populated with the user's
+        actual choices.
+
+        Args:
+            config: Project configuration
+
+        Returns:
+            List of spec dicts, or None if no usable spec is present.
+        """
+        if not config:
+            return None
+
+        spec = config.get("spec")
+
+        if isinstance(spec, dict) and spec.get("language"):
+            return [spec]
+        elif isinstance(spec, list):
+            specs = [
+                folder for folder in spec if isinstance(folder, dict) and folder.get("language")
+            ]
+            return specs if specs else None
+        return None
+
     def build(
         self, output: Path, config: dict[str, Any] | None = None, dry_run: bool = False
     ) -> list[str]:
@@ -312,8 +343,11 @@ class PromptBuilder:
 
                     # Generate convention files for Claude (only selected languages)
                     try:
-                        selected_languages = self._extract_all_languages_from_config(config)
-                        conventions = generate_all_conventions(selected_languages)
+                        selected_specs = self._extract_all_specs_from_config(config)
+                        repository_type = (
+                            (config.get("repository") or {}).get("type", "") if config else ""
+                        )
+                        conventions = generate_all_conventions(selected_specs, repository_type)
                         for file_path_str, content_str in conventions.items():
                             full_path = output / file_path_str
                             full_path.parent.mkdir(parents=True, exist_ok=True)

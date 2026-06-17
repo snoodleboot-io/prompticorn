@@ -19,10 +19,14 @@ class TestConventionsConditionalRendering(unittest.TestCase):
         """Set up test fixtures."""
         import jinja2
 
-        # Set up Jinja2 environment with FileSystemLoader to resolve template imports
-        core_dir = Path(__file__).parent.parent.parent / "prompticorn" / "agents" / "core"
+        # Set up Jinja2 environment with FileSystemLoader rooted at prompts/ so that
+        # macro imports (``macros/...``) resolve to the canonical macro library,
+        # matching how ConventionGenerator renders conventions in production.
+        repo_root = Path(__file__).parent.parent.parent / "prompticorn"
+        core_dir = repo_root / "agents" / "core"
+        prompts_dir = repo_root / "prompts"
         jinja_env = jinja2.Environment(
-            loader=jinja2.FileSystemLoader(str(core_dir)),
+            loader=jinja2.FileSystemLoader(str(prompts_dir)),
             undefined=jinja2.StrictUndefined,
         )
         self.renderer = Jinja2TemplateRenderer(jinja_env)

@@ -5,16 +5,16 @@
 
 Project coding standards - base conventions for all projects. 
 
-For language-specific rules, see: core-conventions-ts.md, core-conventions-py.md, etc.
+For language-specific rules, see the per-language files under `.claude/conventions/languages/` (e.g. `python.md`, `typescript.md`).
 
 All mode-specific rules inherit from this file.
 
 ## Repository Structure
 
-Repository type: TODO
+Repository type: {{ repository_type or "_(set in .prompticorn.yaml)_" }}
 
 ### If single-language:
-Include: core-conventions-[LANG].md where [LANG] matches your primary language
+Include `.claude/conventions/languages/<language>.md` for your primary language.
 
 ### If multi-language-monorepo:
 Define each language area:
