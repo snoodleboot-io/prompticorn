@@ -1,7 +1,23 @@
 # Claude Template Population Fix
 
-**Status:** 🚧 IN PROGRESS — Phases 0–3b done (committed); Phase 4 (`validate`/`list`/concat) remains — needs a
-behavior decision (separate legacy-registry subsystem)
+**Status:** ✅ COMPLETE — Phases 0–3b shipped in #60; Phase 4 (`validate`/`list`/concat) done on
+`fix/list-validate-discovery`.
+
+## Phase 4 outcome (done)
+- `list` and `validate` rewritten on the live `agent_registry` discovery (`Registry.from_discovery` /
+  `RegistryDiscovery.validate_structure` + `discover()` smoke-load). `list` now enumerates discovered agents,
+  subagents, and minimal/verbose variants; `validate` checks structure and clean load. Both broke before
+  (47 false errors); `validate` now reports "Registry valid: 25 agents, 82 subagents". Output is generic (no
+  product name).
+- Retired the dead flat-concat machinery: `registry.concat_order`, the disabled `validate_all_files_exist`
+  model-validator, `registry.validate_files()`, and `builder._build_concatenated_content`/`_build_concatenated`
+  (plus now-unused `registry`/`datetime` imports). Kept `prompt_body`/`prompt_path`/`prompts_dir` (live Jinja
+  inheritance) and the legacy `Builder` class (used for `_substitute_template_variables`).
+- Added `core` to discovery's non-agent skip set (shared conventions dir was wrongly flagged + warned).
+- Added CLI tests for `list`/`validate` (previously zero coverage); removed the obsolete `validate_files`/
+  `concat_order` tests. Full suite green (1611 passed / 22 skipped); ruff + pyright clean.
+- Deferred (recommended): retiring the now-orphaned `always_on`/`modes`/`mode_files`/`all_registered_files`
+  (no production consumer after the `list` rewrite, but ~15 tests assert on them) — separate cleanup.
 **Date:** 2026-06-15
 **Branch:** `fix/claude-template-population`
 **Owner:** (unassigned)

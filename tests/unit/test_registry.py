@@ -88,28 +88,3 @@ class TestRegistry(unittest.TestCase):
 
         result = registry.dest_name("architect", "architect-scaffold.md", ext=".mdc")
         assert result == "scaffold.mdc"
-
-    def test_validate_returns_list(self):
-        """validate_files() should return a list."""
-        from prompticorn.registry import registry
-
-        result = registry.validate_files()
-        assert isinstance(result, list)
-
-    def test_validate_with_valid_files_returns_empty(self):
-        """validate_files() should return empty list when all files exist.
-
-        NOTE: Temporarily skipped during Phase 3 IR migration.
-        The old prompts/agents/ directory has been removed, and validation
-        is disabled. This test will be updated or removed once migration is complete.
-        """
-        import pytest
-
-        pytest.skip("Validation disabled during IR migration (Phase 3)")
-
-        from prompticorn.registry import registry
-
-        errors = registry.validate_files()
-        # Filter out orphan warnings - we may have extra files
-        missing_errors = [e for e in errors if "MISSING" in e]
-        assert len(missing_errors) == 0, f"Missing files: {missing_errors}"

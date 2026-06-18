@@ -11,6 +11,10 @@ from prompticorn.ir.exceptions import MissingFileError, ParseError
 from prompticorn.ir.loaders import ComponentLoader
 from prompticorn.ir.models import Agent
 
+# Top-level directories under agents/ that are not agents and must be skipped
+# during discovery and structural validation (e.g. shared convention files).
+_NON_AGENT_DIRS = frozenset({"subagents", "core"})
+
 
 class RegistryDiscovery:
     """Auto-discovers agents from filesystem structure.
@@ -100,7 +104,7 @@ class RegistryDiscovery:
                 continue
 
             # Skip special directories
-            if agent_dir.name.startswith(".") or agent_dir.name == "subagents":
+            if agent_dir.name.startswith(".") or agent_dir.name in _NON_AGENT_DIRS:
                 continue
 
             agent_name = agent_dir.name
@@ -166,6 +170,8 @@ class RegistryDiscovery:
         # Check each agent directory
         for agent_dir in self.agents_dir.iterdir():
             if not agent_dir.is_dir() or agent_dir.name.startswith("."):
+                continue
+            if agent_dir.name in _NON_AGENT_DIRS:
                 continue
 
             agent_name = agent_dir.name

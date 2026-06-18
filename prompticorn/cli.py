@@ -51,7 +51,9 @@ from prompticorn.questions.base.folder_spec import (
 )
 from prompticorn.questions.base.repository_type_question import RepositoryTypeQuestion
 from prompticorn.questions.language import LANGUAGE_KEYS
-from prompticorn.registry import registry
+
+# Bundled agents directory (same location prompt_builder discovers from)
+_AGENTS_DIR = Path(__file__).parent / "agents"
 
 # Valid languages for each preset type/subtype
 
@@ -390,40 +392,42 @@ def cli():
 @cli.command("list")
 def list_prompts():
     """
-    List all registered modes and their prompt files.
+    List all discovered agents, their subagents, and prompt variants.
 
-    Displays a formatted list of all registered prompt files, organized by mode.
-    Files marked with ✓ exist on disk, files marked with ✗ MISSING are registered
-    but not found.
-
-    Always-on files are displayed first (files included in all modes), followed
-    by mode-specific files grouped by mode name.
+    Agents are discovered from the bundled agents directory. For each agent the
+    base prompt.md is shown, and for each subagent the available minimal/verbose
+    prompt variants. Files marked with ✓ exist on disk; ✗ MISSING are absent.
 
     Usage:
         prompticorn list
     """
-    always_header = click.style("ALWAYS ON (all modes)", bold=True)
-    click.echo(f"\n{always_header}")
-    for fname in registry.always_on:
-        exists = (
-            "✓" if (registry.prompts_dir / fname).exists() else click.style("✗ MISSING", fg="red")
-        )
-        click.echo(f"  {exists}  {fname}")
+    from prompticorn.agent_registry import Registry as AgentRegistry
+    from prompticorn.agent_registry import RegistryLoadError
 
-    for mode_key, label in registry.modes.items():
-        header = click.style(f"\n{label.upper()} MODE  [{mode_key}]", bold=True)
-        click.echo(header)
-        files = registry.mode_files.get(mode_key, [])
-        if not files:
-            click.secho("  (no files registered)", fg="yellow")
-            continue
-        for fname in files:
-            exists = (
-                "✓"
-                if (registry.prompts_dir / fname).exists()
-                else click.style("✗ MISSING", fg="red")
-            )
-            click.echo(f"  {exists}  {fname}")
+    try:
+        reg = AgentRegistry.from_discovery(_AGENTS_DIR)
+    except RegistryLoadError as exc:
+        click.secho(f"\n✗ Failed to load agent registry: {exc}", fg="red")
+        sys.exit(1)
+
+    click.echo("\n" + click.style("AGENT REGISTRY", bold=True))
+    for name in reg.list_agents():
+        agent = reg.get_agent(name)
+        click.echo("\n" + click.style(name, bold=True) + f"  — {agent.description}")
+
+        base = _AGENTS_DIR / name / "prompt.md"
+        base_mark = "✓" if base.exists() else click.style("✗ MISSING", fg="red")
+        click.echo(f"  {base_mark}  prompt.md")
+
+        subagents = reg.list_subagents(name)
+        if subagents:
+            click.echo("  subagents:")
+            for sub in subagents:
+                click.echo(f"    {sub}")
+                for variant in ("minimal", "verbose"):
+                    vpath = _AGENTS_DIR / name / "subagents" / sub / variant / "prompt.md"
+                    vmark = "✓" if vpath.exists() else click.style("✗ MISSING", fg="red")
+                    click.echo(f"      {vmark}  {variant}/prompt.md")
 
     click.echo()
 
@@ -1155,34 +1159,44 @@ def _get_builder(tool: str):
 @cli.command("validate")
 def validate_prompts():
     """
-    Validate configuration integrity.
+    Validate agent registry structure and that all agents load cleanly.
 
     Checks that:
-    1. All registered prompt files exist on disk
-    2. No unregistered prompt files (orphans) exist in the prompts/ directory
-    3. Configuration format is valid
-
-    Reports missing files (registered but not found) and orphans
-    (files that exist but aren't registered).
+    1. Each agent has a base prompt.md (or minimal/verbose variants)
+    2. Each subagent has minimal/verbose variant directories with prompt.md
+    3. All discovered agents parse without load errors
 
     Usage:
         prompticorn validate
 
     Output:
-        ✓ All good — no missing or orphaned files.
+        ✓ Registry valid: N agents, M subagents.
         or
-        ✗ MISSING: path/to/file.md
-        ✗ ORPHAN: path/to/unregistered/file.md
+        ✗ <structural issue>
     """
-    click.echo("\n▶ Validating prompt registry...\n")
-    errors = registry.validate_files()
-    if not errors:
-        click.secho("  ✓ All good — no missing or orphaned files.", fg="green")
-    else:
-        for err in errors:
-            color = "red" if "MISSING" in err else "yellow"
-            click.secho(f"  ✗ {err}", fg=color)
+    from prompticorn.agent_registry import RegistryDiscovery, RegistryLoadError
+
+    click.echo("\n▶ Validating agent registry...\n")
+    discovery = RegistryDiscovery(_AGENTS_DIR)
+    issues = discovery.validate_structure()
+
+    try:
+        agents = discovery.discover()
+    except RegistryLoadError as exc:
+        issues.append(f"load error: {exc}")
+        agents = {}
+
+    if issues:
+        for issue in issues:
+            click.secho(f"  ✗ {issue}", fg="red")
         click.echo()
-        click.secho(f"  {len(errors)} issue(s) found.", fg="red")
+        click.secho(f"  {len(issues)} issue(s) found.", fg="red")
         sys.exit(1)
+
+    top_level = [name for name in agents if "/" not in name]
+    subagents = [name for name in agents if "/" in name]
+    click.secho(
+        f"  ✓ Registry valid: {len(top_level)} agents, {len(subagents)} subagents.",
+        fg="green",
+    )
     click.echo()

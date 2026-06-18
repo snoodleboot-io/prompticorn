@@ -221,40 +221,6 @@ class TestRegistryMethods:
         assert test_registry.dest_name("test", "test-file.md") == "file.md"
         assert test_registry.dest_name("code", "code-feature.md", ".txt") == "feature.txt"
 
-    def test_validate_files_method(self, test_registry):
-        """Should validate all registered files."""
-        # Note: validate_files may return errors during migration
-        # Just verify it returns a list
-        errors = test_registry.validate_files()
-        assert isinstance(errors, list)
-
-    def test_validate_files_reports_missing(self):
-        """Should report missing files."""
-        with tempfile.TemporaryDirectory() as tmpdir:
-            prompts_dir = Path(tmpdir)  # tmpdir already exists, don't create again
-
-            registry = Registry(prompts_dir=prompts_dir, always_on=["missing.md"], mode_files={})
-
-            # The method should work even with missing files
-            errors = registry.validate_files()
-            assert isinstance(errors, list)
-            # During migration, validation may be disabled, so we can't assert specific errors
-
-    def test_validate_files_reports_orphans(self):
-        """Should report orphan files not in registry."""
-        with tempfile.TemporaryDirectory() as tmpdir:
-            prompts_dir = Path(tmpdir)  # tmpdir already exists
-
-            # Create an orphan file
-            (prompts_dir / "orphan.md").write_text("orphan content")
-
-            registry = Registry(prompts_dir=prompts_dir, always_on=[], mode_files={})
-
-            # The method should work even with orphan files
-            errors = registry.validate_files()
-            assert isinstance(errors, list)
-            # During migration, validation may be disabled
-
 
 class TestRegistryIgnoreFileGeneration:
     """Tests for ignore file generation methods."""
@@ -320,16 +286,6 @@ class TestRegistryEdgeCases:
         with tempfile.TemporaryDirectory() as tmpdir:
             registry = Registry(prompts_dir=Path(tmpdir), mode_files={"empty_mode": []})
             assert registry.mode_files["empty_mode"] == []
-
-    def test_concat_order_with_missing_files(self):
-        """Should handle concat_order with files not in registry."""
-        with tempfile.TemporaryDirectory() as tmpdir:
-            registry = Registry(
-                prompts_dir=Path(tmpdir), concat_order=[("LABEL", "not_registered.md")]
-            )
-
-            errors = registry.validate_files()
-            assert any("CONCAT_ORDER 'LABEL'" in error for error in errors)
 
     def test_copilot_apply_patterns(self):
         """Should have valid copilot apply patterns."""
