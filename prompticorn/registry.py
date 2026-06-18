@@ -4,14 +4,6 @@ This module provides the Registry class which serves as the central configuratio
 for all modes and their associated prompt files, and provides methods for
 generating various ignore files.
 
-To add a new mode:
-  1. Add it to modes (key → display label)
-  2. Add its files to mode_files (key → ordered list of filenames from prompts/)
-
-To add a new file to an existing mode:
-  1. Drop the .md file in prompts/
-  2. Add the filename to mode_files[mode]
-
 Classes:
     Registry: Pydantic model containing all mode and file registrations.
 
@@ -23,7 +15,7 @@ Functions:
 from functools import lru_cache
 from pathlib import Path
 
-from pydantic import BaseModel, ConfigDict, computed_field, field_validator
+from pydantic import BaseModel, ConfigDict, field_validator
 
 
 # ── Module-level cached function ─────────────────────────────────────────────
@@ -84,14 +76,11 @@ def _dest_name(mode_key: str, filename: str, ext: str = ".md") -> str:
 class Registry(BaseModel):
     """Registry of all modes, prompt files, and output ordering.
 
-    This Pydantic model serves as the single source of truth for all agent modes
-    and their associated prompt files.
+    This Pydantic model provides prompt-file access (for template inheritance) and
+    generates the various tool ignore files.
 
     Attributes:
         prompts_dir: Path to the prompts directory containing all .md files.
-        always_on: List of prompt files that apply to all modes.
-        modes: Dictionary mapping mode keys to display names.
-        mode_files: Dictionary mapping mode keys to their prompt files.
         default_ignore_patterns: List of glob patterns for ignore files.
         copilot_apply: Dictionary mapping modes to glob patterns for Copilot.
     """
@@ -103,109 +92,6 @@ class Registry(BaseModel):
 
     # ── Prompt file directory ─────────────────────────────────────────────────
     prompts_dir: Path = Path(__file__).parent / "prompts"
-
-    # ── Always-on files ───────────────────────────────────────────────────────
-    always_on: list[str] = [
-        # Core system files (loaded for all tools)
-        "agents/core/system.md",
-        "agents/core/conventions.md",
-        "agents/core/session.md",
-        "agents/core/decision-log-template.md",
-        "agents/core/session-troubleshooting.md",
-        # Language-specific conventions (user includes relevant ones)
-        # Currently available:
-        "agents/core/conventions-python.md",
-        "agents/core/conventions-typescript.md",
-        # TODO: Restore remaining language conventions from origin/main
-    ]
-
-    # ── Mode registry ───────────────────────────────────────────────────────
-    # TODO: Discover This
-    modes: dict[str, str] = {
-        "architect": "Architect",
-        "test": "Test",
-        "refactor": "Refactor",
-        "document": "Document",
-        "explain": "Explain",
-        "migration": "Migration",
-        "code": "Code",
-        "review": "Review",
-        "debug": "Debug",
-        "ask": "Ask",
-        "security": "Security",
-        "compliance": "Compliance",
-        "orchestrator": "Orchestrator",
-        "enforcement": "Enforcement",
-        "planning": "Planning",
-    }
-
-    # ── Files per mode ───────────────────────────────────────────────────────
-    # TODO: This should be auto-discoverable
-    mode_files: dict[str, list[str]] = {
-        "architect": [
-            "agents/architect/subagents/architect-scaffold.md",
-            "agents/architect/subagents/architect-task-breakdown.md",
-            "agents/architect/subagents/architect-data-model.md",
-        ],
-        "test": [
-            "agents/test/subagents/test-strategy.md",
-        ],
-        "refactor": [
-            "agents/refactor/subagents/refactor-strategy.md",
-            "agents/code/subagents/code-refactor.md",
-        ],
-        "document": [
-            "agents/document/subagents/document-strategy-for-applications.md",
-        ],
-        "explain": [
-            "agents/explain/subagents/explain-strategy.md",
-        ],
-        "migration": [
-            "agents/migration/subagents/migration-strategy.md",
-            "agents/code/subagents/code-migration.md",
-            "agents/code/subagents/code-dependency-upgrade.md",
-        ],
-        "code": [
-            "agents/code/subagents/code-feature.md",
-            "agents/code/subagents/code-boilerplate.md",
-            "agents/code/subagents/code-house-style.md",
-        ],
-        "review": [
-            "agents/review/subagents/review-code.md",
-            "agents/review/subagents/review-performance.md",
-            "agents/review/subagents/review-accessibility.md",
-        ],
-        "debug": [
-            "agents/debug/subagents/debug-root-cause.md",
-            "agents/debug/subagents/debug-log-analysis.md",
-            "agents/debug/subagents/debug-rubber-duck.md",
-            "agents/core/core-session-troubleshooting.md",
-        ],
-        "ask": [
-            "agents/ask/subagents/ask-docs.md",
-            "agents/ask/subagents/ask-testing.md",
-            "agents/ask/subagents/ask-decision-log.md",
-            "agents/core/core-decision-log-template.md",
-        ],
-        "security": [
-            "agents/security/subagents/security-review.md",
-        ],
-        "compliance": [
-            "agents/compliance/subagents/compliance-review.md",
-        ],
-        "orchestrator": [
-            "agents/orchestrator/subagents/orchestrator-devops.md",
-            "agents/orchestrator/subagents/orchestrator-meta.md",
-            "agents/orchestrator/subagents/orchestrator-pr-description.md",
-        ],
-        "enforcement": [
-            "agents/enforcement/enforcement.md",
-        ],
-        "planning": [
-            "agents/project_planning/planning.md",
-            "agents/project_planning/methodology.md",
-        ],
-    }
 
     # ── Default ignore patterns for all agents ─────────────────────────────
     default_ignore_patterns: list[str] = [
@@ -266,24 +152,6 @@ class Registry(BaseModel):
         "orchestrator": "**/*.yml,**/*.yaml,**/Dockerfile,**/.github/**",
     }
 
-    # ── Computed properties ────────────────────────────────────────────────
-
-    @computed_field  # type: ignore[prop-decorator]
-    @property
-    def all_registered_files(self) -> set[str]:
-        """Get all files registered in the registry.
-
-        This computed property collects all unique prompt filenames from the
-        always_on list and all mode_files dictionaries.
-
-        Returns:
-            Set of all registered filename strings.
-        """
-        files = set(self.always_on)
-        for file_list in self.mode_files.values():
-            files.update(file_list)
-        return files
-
     # ── Validators ───────────────────────────────────────────────────────────
 
     @field_validator("prompts_dir")
@@ -294,14 +162,6 @@ class Registry(BaseModel):
             raise ValueError(f"Prompts directory does not exist: {v}")
         if not v.is_dir():
             raise ValueError(f"Prompts path is not a directory: {v}")
-        return v
-
-    @field_validator("modes")
-    @classmethod
-    def modes_must_not_be_empty(cls, v: dict[str, str]) -> dict[str, str]:
-        """Verify modes dictionary is not empty."""
-        if not v:
-            raise ValueError("Modes dictionary cannot be empty")
         return v
 
     # ── Methods ─────────────────────────────────────────────────────────────

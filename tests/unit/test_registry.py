@@ -25,42 +25,6 @@ class TestRegistry(unittest.TestCase):
 
         assert registry.prompts_dir.is_dir()
 
-    def test_always_on_is_list(self):
-        """always_on should be a list."""
-        from prompticorn.registry import registry
-
-        assert isinstance(registry.always_on, list)
-
-    def test_always_on_contains_strings(self):
-        """always_on should contain string filenames."""
-        from prompticorn.registry import registry
-
-        assert all(isinstance(f, str) for f in registry.always_on)
-
-    def test_modes_is_dict(self):
-        """modes should be a dictionary."""
-        from prompticorn.registry import registry
-
-        assert isinstance(registry.modes, dict)
-
-    def test_modes_not_empty(self):
-        """modes should not be empty."""
-        from prompticorn.registry import registry
-
-        assert len(registry.modes) > 0
-
-    def test_mode_files_is_dict(self):
-        """mode_files should be a dictionary."""
-        from prompticorn.registry import registry
-
-        assert isinstance(registry.mode_files, dict)
-
-    def test_mode_files_not_empty(self):
-        """mode_files should not be empty."""
-        from prompticorn.registry import registry
-
-        assert len(registry.mode_files) > 0
-
     def test_prompt_path_returns_path(self):
         """prompt_path() should return a Path."""
         from prompticorn.registry import registry

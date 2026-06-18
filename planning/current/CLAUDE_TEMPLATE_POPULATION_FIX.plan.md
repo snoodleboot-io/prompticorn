@@ -16,8 +16,10 @@
 - Added `core` to discovery's non-agent skip set (shared conventions dir was wrongly flagged + warned).
 - Added CLI tests for `list`/`validate` (previously zero coverage); removed the obsolete `validate_files`/
   `concat_order` tests. Full suite green (1611 passed / 22 skipped); ruff + pyright clean.
-- Deferred (recommended): retiring the now-orphaned `always_on`/`modes`/`mode_files`/`all_registered_files`
-  (no production consumer after the `list` rewrite, but ~15 tests assert on them) — separate cleanup.
+- Retired the now-orphaned legacy registry fields `always_on`/`modes`/`mode_files`/`all_registered_files` (plus
+  the `modes_must_not_be_empty` validator and `computed_field` import) — confirmed zero production consumers; only
+  `prompt_body`/`prompt_path`/`prompts_dir` (Jinja inheritance) and the ignore-file generators remain. Updated the
+  ~14 tests that asserted on the removed fields.
 **Date:** 2026-06-15
 **Branch:** `fix/claude-template-population`
 **Owner:** (unassigned)
