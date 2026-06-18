@@ -64,11 +64,15 @@ class CoreFilesLoader:
         """
         files = {}
 
-        # Always include core files
+        # Always include core files (templated when config is provided so macro
+        # imports and {{ }} placeholders are resolved, not emitted raw).
         for filename in ["system.md", "conventions.md", "session.md"]:
             filepath = self.core_dir / filename
             if filepath.exists():
-                files[filename.replace(".md", "")] = filepath.read_text(encoding="utf-8")
+                content = filepath.read_text(encoding="utf-8")
+                if config:
+                    content = self._template_content(content, config)
+                files[filename.replace(".md", "")] = content
 
         # Conditionally include language conventions
         if language:
@@ -103,8 +107,11 @@ class CoreFilesLoader:
             'Language: python, Runtime: 3.11'
         """
         spec = config.get("spec", {})
+        abstract_class_style = spec.get("abstract_class_style", "interface")
+        repository_type = (config.get("repository") or {}).get("type", "")
 
         context = {
+            "repository_type": repository_type,
             "language": spec.get("language", ""),
             "runtime": spec.get("runtime", ""),
             "package_manager": spec.get("package_manager", ""),
@@ -113,8 +120,12 @@ class CoreFilesLoader:
             "formatter": spec.get("formatter", ""),
             "coverage_tool": spec.get("coverage_tool", ""),
             "coverage_targets": spec.get("coverage", {}),
-            "abstract_class_style": spec.get("abstract_class_style", "interface"),
-            "config": spec,  # Also pass full config object for templates that use config.field
+            "abstract_class_style": abstract_class_style,
+            # Pass the spec as ``config`` for templates that use ``config.<field>``.
+            # Ensure ``abstract_class_style`` is always present so the convention
+            # templates' ``{% if config.abstract_class_style %}`` blocks don't fail
+            # under StrictUndefined when the spec omits it.
+            "config": {**spec, "abstract_class_style": abstract_class_style},
         }
 
         template = self.jinja_env.from_string(content)

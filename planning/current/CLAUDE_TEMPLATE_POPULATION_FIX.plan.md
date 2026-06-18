@@ -20,6 +20,19 @@
   the `modes_must_not_be_empty` validator and `computed_field` import) — confirmed zero production consumers; only
   `prompt_body`/`prompt_path`/`prompts_dir` (Jinja inheritance) and the ignore-file generators remain. Updated the
   ~14 tests that asserted on the removed fields.
+
+### Follow-on fix — kilo/cline/cursor/copilot population (pre-existing, surfaced by review)
+Building copilot/cline/cursor silently failed **every agent** and leaked raw templates — the `CoreFilesLoader`
+path (used by all four non-Claude tools) was never given what PR #60 added to the Claude path:
+- `CoreFilesLoader._template_content`: the rendered `config` now always carries `abstract_class_style` (was
+  crashing `{% if config.abstract_class_style %}` under StrictUndefined) and `repository_type` (was crashing
+  `{{ repository_type }}` in `conventions.md`).
+- `CoreFilesLoader.get_core_files`: the always-on core files (`system`/`conventions`/`session`) are now templated,
+  not embedded raw (macro imports / `{{ }}` were leaking into `.clinerules`/`.cursorrules`/copilot instructions).
+- `cline`/`cursor`/`copilot` builders now run `_substitute_template_variables` on agent system prompts (mirrors
+  Kilo/Claude) so `{{PRIMARY_AGENTS_LIST}}` is populated.
+- Added `tests/integration/test_multitool_population.py` (no agent-build failures, no unrendered templates across
+  all four tools). All five builders now build clean: 0 failures, 0 leaks.
 **Date:** 2026-06-15
 **Branch:** `fix/claude-template-population`
 **Owner:** (unassigned)

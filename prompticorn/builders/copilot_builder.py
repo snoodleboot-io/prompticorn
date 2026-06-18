@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any
 
 from prompticorn.builders.base import Builder, BuildOptions
+from prompticorn.builders.builder import Builder as LegacyBuilder
 from prompticorn.builders.errors import BuilderValidationError
 from prompticorn.ir.loaders import CoreFilesLoader
 from prompticorn.ir.models import Agent
@@ -60,6 +61,9 @@ class CopilotBuilder(Builder):
         """
         self.agents_dir = agents_dir
         self.core_loader = CoreFilesLoader()
+        # Legacy Builder provides template-variable substitution (e.g.
+        # {{PRIMARY_AGENTS_LIST}}) for agent system prompts.
+        self._legacy_builder = LegacyBuilder()
 
     def build(self, agent: Agent, options: BuildOptions, config: dict | None = None) -> str:
         """Build a GitHub Copilot instructions file.
@@ -87,6 +91,10 @@ class CopilotBuilder(Builder):
 
         # Use agent system prompt directly (no variants for top-level agents)
         system_prompt = agent.system_prompt
+        if config:
+            system_prompt = self._legacy_builder._substitute_template_variables(
+                system_prompt, config
+            )
 
         # Prepare YAML frontmatter with applyTo
         frontmatter = self._build_frontmatter(agent)
