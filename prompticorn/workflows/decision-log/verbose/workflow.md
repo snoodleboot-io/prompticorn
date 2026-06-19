@@ -620,7 +620,7 @@ jobs:
       - name: Check ADR numbering
         run: |
           # Verify sequential numbering
-          cd docs/decisions
+          cd planning/current/adrs
           ls ADR-*.md | sort -V | awk -F'[-.]' '{print $2}' | sort -n | uniq -d
 ```
 
