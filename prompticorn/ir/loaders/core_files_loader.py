@@ -115,9 +115,15 @@ class CoreFilesLoader:
         spec = config.get("spec", {})
         abstract_class_style = spec.get("abstract_class_style", "interface")
         repository_type = (config.get("repository") or {}).get("type", "")
+        project = config.get("project") or {}
 
         context = {
             "repository_type": repository_type,
+            "database": project.get("database", ""),
+            "orm": project.get("orm", ""),
+            "commit_style": project.get("commit_style", ""),
+            "pr_size": project.get("pr_size", ""),
+            "deploy_target": project.get("deploy_target", ""),
             "language": spec.get("language", ""),
             "runtime": spec.get("runtime", ""),
             "package_manager": spec.get("package_manager", ""),

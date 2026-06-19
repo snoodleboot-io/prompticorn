@@ -203,6 +203,24 @@ class ConfigHandler:
                     "path": 60,
                 },
             },
+            "project": cls.get_default_project_settings(),
+        }
+
+    @classmethod
+    def get_default_project_settings(cls) -> dict[str, str]:
+        """Get default project-level settings (language-agnostic).
+
+        These populate the core conventions and are captured during `init`.
+
+        Returns:
+            Dictionary of project-level settings with empty defaults.
+        """
+        return {
+            "database": "",
+            "orm": "",
+            "commit_style": "",
+            "pr_size": "",
+            "deploy_target": "",
         }
 
     @classmethod
@@ -219,6 +237,7 @@ class ConfigHandler:
                 "mappings": {},
             },
             "spec": [],  # List of folder specs for multi-language-monorepo
+            "project": cls.get_default_project_settings(),
         }
 
 

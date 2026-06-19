@@ -170,11 +170,11 @@ The wiring is fixed, but the **convention templates don't reference the values**
   (`{{ testing.* (test_framework, ...) }}`, `{{ coverage.* (coverage) }}`) and/or add a `Test Framework:
   {{ test_framework }}` header line mirroring the existing Linter/Formatter lines. Spans ~20 language files —
   needs the macro signatures pinned down first.
-- **Core `general.md` fill-ins (BUG 4).** `conventions.md` carries `Repository type: TODO`, `[LANG]`,
-  `Database: TODO`, `Commit style: TODO`, `Target: TODO`. For values known from config (repository type, primary
-  language) substitute during `generate_core_convention()` (now spec-aware-capable). For uncaptured values
-  (Database, ORM, Deploy): either add to the `init` questionnaire + spec, or make the fill-in intent obvious
-  (e.g. `<FILL IN: database>`) rather than a bare `TODO`. Needs a decision (see Open Questions).
+- **Core `general.md` fill-ins (BUG 4) — DONE.** Repository type populates from config. Database/ORM/commit
+  style/PR size/deploy target are now **captured as project-level `init` questions** (new
+  `questions/project/`), stored in a config `project` section, and injected into `conventions.md` via both
+  render paths (ConventionGenerator + CoreFilesLoader). Unset values render `_(not specified)_` rather than a
+  bare `TODO`. Tests: `tests/integration/test_project_settings_population.py`.
 - Tighten the regression test to assert `test_framework`/coverage values appear once the templates reference them.
 
 ### Phase 4 — `validate` / concat_order (BUG 5) ⏳ NEEDS DECISION

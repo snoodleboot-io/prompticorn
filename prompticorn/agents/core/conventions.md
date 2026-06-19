@@ -107,20 +107,20 @@ Testing conventions are language-specific. See your language's conventions file 
 
 ## Database
 
-Database:            TODO           e.g., PostgreSQL, DynamoDB
-ORM/Query:           TODO                e.g., Prisma, SQLAlchemy, GORM
+Database:            {{ database or "_(not specified)_" }}           e.g., PostgreSQL, DynamoDB
+ORM/Query:           {{ orm or "_(not specified)_" }}                e.g., Prisma, SQLAlchemy, GORM
 
 ## Git & PR Conventions
 
 Branch naming:       feat|fix|chore|docs / ticket-id - short-description
 MANDATORY WITHOUT EXCEPTION: Ticket IDs MUST be real and obtained from user-provided files, actual project tickets, or the feature request. 
 DO NOT hallucinate, invent, or use fake ticket IDs like "PROJ-123" or "#456" unless they are explicitly provided in the user's request or associated project documentation.
-Commit style:        TODO  e.g., Conventional Commits, free-form
-PR size:             TODO lines changed (soft limit)
+Commit style:        {{ commit_style or "_(not specified)_" }}  e.g., Conventional Commits, free-form
+PR size:             {{ pr_size or "_(not specified)_" }} lines changed (soft limit)
 
 ## Deployment
 
-Target:              TODO  e.g., AWS Lambda, Vercel, GKE
+Target:              {{ deploy_target or "_(not specified)_" }}  e.g., AWS Lambda, Vercel, GKE
 
 ---
 

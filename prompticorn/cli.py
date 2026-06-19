@@ -370,6 +370,38 @@ def _ask_folder_questions(folder_specs: list[dict[str, Any]]) -> list[dict[str, 
     return updated_specs
 
 
+def _ask_project_questions(select_option) -> dict[str, str]:
+    """Ask project-level questions and return the config ``project`` section.
+
+    Each project question's key is ``project_<field>``; the selected value is stored
+    under ``<field>``. The "Not specified" option maps to an empty string.
+
+    Args:
+        select_option: Interactive selection function (select_option_with_explain).
+
+    Returns:
+        Dict of project settings (database, orm, commit_style, pr_size, deploy_target).
+    """
+    from prompticorn.questions.project import NOT_SPECIFIED, get_project_questions
+
+    project: dict[str, str] = {}
+    for question in get_project_questions():
+        field = question.key.replace("project_", "")
+        default_index = (
+            question.options.index(question.default) if question.default in question.options else 0
+        )
+        value = select_option(
+            question=question.question_text,
+            options=question.options,
+            explanations=question.option_explanations,
+            question_explanation=question.explanation,
+            default_index=default_index,
+            allow_multiple=False,
+        )
+        project[field] = "" if value == NOT_SPECIFIED else str(value)
+    return project
+
+
 # # ── Initialize registry ───────────────────────────────────────────────────────
 # fill_registry()
 
@@ -624,6 +656,15 @@ def init_prompts():
                 config["repository"]["type"] = repo_type
                 config["variant"] = variant  # Add variant to config
                 config["active_personas"] = active_personas  # Add selected personas
+
+        # Step 4.5: Ask project-level questions (database, ORM, commit style, etc.)
+        try:
+            config["project"] = _ask_project_questions(select_option_with_explain)
+        except UserCancelledError:
+            raise
+        except Exception as e:
+            click.secho(f"  Warning: Could not collect project settings ({e}).", fg="yellow")
+            config.setdefault("project", ConfigHandler.get_default_project_settings())
 
         # Save configuration (now includes variant from Step 3)
         ConfigHandler.save_config(config)
