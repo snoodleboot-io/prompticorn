@@ -5,6 +5,8 @@ from typing import Any
 
 import jinja2
 
+from prompticorn.text_utils import strip_source_header_comments
+
 # Keys that may appear in a folder/language spec and should be exposed as
 # top-level template variables when rendering a convention file.
 _SPEC_TEMPLATE_KEYS = (
@@ -52,8 +54,11 @@ def _build_template_context(spec: dict[str, Any] | None) -> dict[str, Any]:
     """
     spec = spec or {}
     context: dict[str, Any] = {key: spec.get(key, "") for key in _SPEC_TEMPLATE_KEYS}
+    # Default abstract_class_style so the convention's conditional blocks render
+    # consistently even for older specs that omit it.
+    context["abstract_class_style"] = spec.get("abstract_class_style") or "interface"
     # Expose the full spec as ``config`` for templates using ``config.<field>``.
-    context["config"] = spec
+    context["config"] = {**spec, "abstract_class_style": context["abstract_class_style"]}
     # ``coverage_targets`` is the documented name for the coverage dict passed to
     # the testing/coverage macros (the templates alias the coverage *macro module*
     # as ``coverage``, so the data must use a distinct name to avoid shadowing).
@@ -79,7 +84,8 @@ def generate_core_convention(repository_type: str = "") -> str:
 
     def _render_section(path: Path) -> str:
         """Read and render a core convention source (resolves macro imports)."""
-        return environment.from_string(path.read_text(encoding="utf-8")).render(**context)
+        source = strip_source_header_comments(path.read_text(encoding="utf-8"))
+        return environment.from_string(source).render(**context)
 
     sections = []
 
@@ -126,7 +132,7 @@ def generate_language_convention(language: str, spec: dict[str, Any] | None = No
     if not convention_path.exists():
         return None
 
-    template_source = convention_path.read_text(encoding="utf-8")
+    template_source = strip_source_header_comments(convention_path.read_text(encoding="utf-8"))
     environment = _get_convention_environment()
     context = _build_template_context(spec)
     return environment.from_string(template_source).render(**context)

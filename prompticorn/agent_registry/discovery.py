@@ -10,6 +10,7 @@ from prompticorn.agent_registry.errors import RegistryLoadError
 from prompticorn.ir.exceptions import MissingFileError, ParseError
 from prompticorn.ir.loaders import ComponentLoader
 from prompticorn.ir.models import Agent
+from prompticorn.text_utils import strip_source_header_comments
 
 # Top-level directories under agents/ that are not agents and must be skipped
 # during discovery and structural validation (e.g. shared convention files).
@@ -284,7 +285,7 @@ class RegistryDiscovery:
         name = prompt_data.get("name") or agent_name
         description = prompt_data.get("description", "")
         mode = prompt_data.get("mode", "all")
-        system_prompt = prompt_data.get("system_prompt", "")
+        system_prompt = strip_source_header_comments(prompt_data.get("system_prompt", ""))
         tools = prompt_data.get("tools", [])
         skills = prompt_data.get("skills", [])
         workflows = prompt_data.get("workflows", [])
@@ -342,7 +343,7 @@ class RegistryDiscovery:
         name = prompt_data.get("name") or agent_name
         description = prompt_data.get("description", "")
         mode = prompt_data.get("mode", "all")
-        system_prompt = prompt_data.get("system_prompt", "")
+        system_prompt = strip_source_header_comments(prompt_data.get("system_prompt", ""))
         tools = prompt_data.get("tools", [])
         skills = prompt_data.get("skills", [])
         workflows = prompt_data.get("workflows", [])

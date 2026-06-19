@@ -4,6 +4,8 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
+from prompticorn.text_utils import strip_source_header_comments
+
 
 class CoreFilesLoader:
     """Loads core system, conventions, and language-specific convention files.
@@ -72,6 +74,8 @@ class CoreFilesLoader:
                 content = filepath.read_text(encoding="utf-8")
                 if config:
                     content = self._template_content(content, config)
+                else:
+                    content = strip_source_header_comments(content)
                 files[filename.replace(".md", "")] = content
 
         # Conditionally include language conventions
@@ -83,6 +87,8 @@ class CoreFilesLoader:
                 # If config provided, template the content
                 if config:
                     content = self._template_content(content, config)
+                else:
+                    content = strip_source_header_comments(content)
 
                 files[f"conventions_{language}"] = content
 
@@ -129,7 +135,7 @@ class CoreFilesLoader:
         }
 
         template = self.jinja_env.from_string(content)
-        return template.render(**context)
+        return strip_source_header_comments(template.render(**context))
 
     def get_system_prompt(self) -> str:
         """Get the system.md core file.
@@ -199,5 +205,7 @@ class CoreFilesLoader:
         content = lang_file.read_text(encoding="utf-8")
         if config:
             content = self._template_content(content, config)
+        else:
+            content = strip_source_header_comments(content)
 
         return content

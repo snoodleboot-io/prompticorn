@@ -99,6 +99,7 @@ class SingleLanguageSpecHandler(SpecHandler):
             "linter": linter,
             "linters": [linter] if linter else [],  # List version for advanced templating
             "formatter": defaults.get("formatter", ""),
+            "abstract_class_style": defaults.get("abstract_class_style") or "interface",
             "coverage": FolderSpecRegistry.get_default_coverage(),
         }
 

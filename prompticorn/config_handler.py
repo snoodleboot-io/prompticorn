@@ -193,6 +193,7 @@ class ConfigHandler:
                 "linter": "",
                 "linters": [],  # List of linters for advanced templating
                 "formatter": "",
+                "abstract_class_style": "interface",
                 "coverage": {
                     "line": 80,
                     "branch": 70,

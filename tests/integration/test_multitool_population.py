@@ -49,6 +49,6 @@ def test_output_has_no_unrendered_templates(tool, tmp_path, python_config):
         if not path.is_file():
             continue
         text = path.read_text(encoding="utf-8", errors="ignore")
-        if _JINJA.search(text) or "{{PRIMARY_AGENTS_LIST}}" in text:
+        if _JINJA.search(text) or "{{PRIMARY_AGENTS_LIST}}" in text or "<!-- path:" in text:
             offenders.append(path.name)
     assert not offenders, f"{tool} emitted unrendered templates in: {offenders}"
