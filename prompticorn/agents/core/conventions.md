@@ -30,8 +30,7 @@ File extension determines which rules apply:
 
 ## File & Folder Structure
 
-src/
-└── _(organize by feature/module — define your project's layout here)_
+{{ source_layout }}
 
 Rule: One export per file unless it is a barrel (index.ts).
 Rule: Co-locate tests with source (auth.ts → auth.test.ts).

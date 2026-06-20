@@ -6,6 +6,7 @@ from prompticorn.cli import _ask_project_questions
 from prompticorn.config_handler import create_default_config
 from prompticorn.prompt_builder import get_prompt_builder
 from prompticorn.questions.project import NOT_SPECIFIED, get_project_questions
+from prompticorn.source_layouts import get_source_layout
 
 
 class TestProjectQuestions:
@@ -83,3 +84,32 @@ class TestProjectInjection:
         assert "SQLAlchemy" in blob
         assert "AWS Lambda" in blob
         assert "Database:            TODO" not in blob
+
+
+class TestSourceLayout:
+    """Language-specific source-tree layout in the core convention."""
+
+    def test_get_source_layout_is_language_specific(self):
+        # Arrange / Act / Assert
+        assert "index.ts" in get_source_layout("typescript")
+        assert "__init__.py" in get_source_layout("python")
+        assert "cmd/" in get_source_layout("golang")
+
+    def test_get_source_layout_falls_back_to_default(self):
+        # An unknown language gets the generic layout, never empty.
+        layout = get_source_layout("nonexistent-lang")
+        assert "src/" in layout
+
+    def test_core_convention_renders_language_layout(self, tmp_path):
+        # Arrange
+        config = create_default_config("python")
+        config["variant"] = "minimal"
+        config["active_personas"] = ["software_engineer"]
+        # Act
+        get_prompt_builder("claude").build(tmp_path, config=config, dry_run=False)
+        general = (tmp_path / ".claude" / "conventions" / "core" / "general.md").read_text(
+            encoding="utf-8"
+        )
+        # Assert — the Python standard layout is rendered (not a generic stub).
+        assert "__init__.py" in general
+        assert "└── TODO" not in general

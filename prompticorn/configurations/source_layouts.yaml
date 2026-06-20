@@ -1,0 +1,74 @@
+# Standard source-tree layouts per language, rendered into the core convention's
+# "File & Folder Structure" section based on the project's primary language.
+# Languages not listed fall back to the generic "default" layout below.
+
+default: |
+  src/                     # application source, organized by feature/module
+  tests/                   # tests mirroring the source layout
+
+python: |
+  src/
+  └── <your_package>/
+      ├── __init__.py
+      ├── domain/          # entities, value objects, domain logic
+      ├── services/        # application / business logic
+      ├── adapters/        # external IO (db, http, filesystem)
+      └── settings.py      # pydantic-settings configuration
+  tests/
+      ├── unit/
+      └── integration/
+
+typescript: |
+  src/
+  ├── domain/              # entities, types, domain logic
+  ├── services/            # application / business logic
+  ├── adapters/            # external IO (db, http, fs)
+  └── index.ts             # public entry point
+  tests/
+
+javascript: |
+  src/
+  ├── domain/              # entities, domain logic
+  ├── services/            # application / business logic
+  ├── adapters/            # external IO (db, http, fs)
+  └── index.js             # public entry point
+  tests/
+
+golang: |
+  cmd/
+  └── <app>/main.go        # binary entrypoints
+  internal/                # private application code
+  pkg/                     # public, importable libraries
+  <package>_test.go        # tests co-located with source
+
+rust: |
+  src/
+  ├── lib.rs               # library crate root
+  ├── main.rs              # binary entrypoint (if applicable)
+  └── <module>/mod.rs      # modules
+  tests/                   # integration tests
+
+java: |
+  src/
+  ├── main/java/<group>/<artifact>/   # production sources
+  └── test/java/<group>/<artifact>/   # tests mirroring main
+
+kotlin: |
+  src/
+  ├── main/kotlin/<group>/<artifact>/ # production sources
+  └── test/kotlin/<group>/<artifact>/ # tests mirroring main
+
+ruby: |
+  lib/
+  └── <gem_name>/          # library code
+  app/                     # application code (Rails)
+  spec/                    # RSpec tests
+
+csharp: |
+  src/
+  └── <Project>/
+      ├── Domain/
+      ├── Services/
+      └── Program.cs
+  tests/
+  └── <Project>.Tests/

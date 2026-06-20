@@ -5,6 +5,7 @@ from typing import Any
 
 import jinja2
 
+from prompticorn.source_layouts import get_source_layout
 from prompticorn.text_utils import strip_source_header_comments
 
 # Project-level (language-agnostic) keys exposed to the core convention template.
@@ -77,7 +78,9 @@ def _build_template_context(spec: dict[str, Any] | None) -> dict[str, Any]:
 
 
 def generate_core_convention(
-    repository_type: str = "", project: dict[str, Any] | None = None
+    repository_type: str = "",
+    project: dict[str, Any] | None = None,
+    primary_language: str = "",
 ) -> str:
     """Generate core general.md convention file.
 
@@ -88,6 +91,8 @@ def generate_core_convention(
             'multi-language-monorepo') used to populate the core conventions.
         project: Project-level settings (database, orm, commit_style, pr_size,
             deploy_target) used to populate the core conventions.
+        primary_language: Primary project language, used to render the standard
+            source-tree layout for that language.
 
     Returns:
         Content for .claude/conventions/core/general.md
@@ -95,7 +100,10 @@ def generate_core_convention(
     core_dir = Path(__file__).parent.parent / "agents" / "core"
     environment = _get_convention_environment()
     project = project or {}
-    context = {"repository_type": repository_type}
+    context = {
+        "repository_type": repository_type,
+        "source_layout": get_source_layout(primary_language),
+    }
     context.update({key: project.get(key, "") for key in _PROJECT_TEMPLATE_KEYS})
 
     def _render_section(path: Path) -> str:
@@ -227,13 +235,16 @@ def generate_all_conventions(
     """
     output = {}
 
+    normalized_specs = _normalize_specs(specs)
+    primary_language = normalized_specs[0]["language"] if normalized_specs else ""
+
     # Generate core general.md
-    core_content = generate_core_convention(repository_type, project)
+    core_content = generate_core_convention(repository_type, project, primary_language)
     output[".claude/conventions/core/general.md"] = core_content
 
     # Generate a convention per language, substituting that folder's spec values.
     # NOTE: if two folders share a language, the later spec wins (keyed by language).
-    for spec in _normalize_specs(specs):
+    for spec in normalized_specs:
         language = spec["language"]
         lang_content = generate_language_convention(language, spec)
         if lang_content:
