@@ -252,7 +252,10 @@ class Builder:
         for var_name in known_variables:
             handler = self._template_handler_registry.get_handler_for_variable(var_name)
             if handler:
-                context[var_name] = handler.handle(var_name, spec_config)
+                # PRIMARY_AGENTS_LIST needs the full config (active_personas) to match
+                # the agents actually generated; other handlers consume the spec only.
+                handler_config = config if var_name == "PRIMARY_AGENTS_LIST" else spec_config
+                context[var_name] = handler.handle(var_name, handler_config or {})
 
         return self._jinja2_renderer.handle(content, context)
 

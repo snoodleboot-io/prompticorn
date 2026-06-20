@@ -61,16 +61,21 @@ class PrimaryAgentsHandler(TemplateHandler):
         except Exception:
             return "*(No agents discovered - registry error)*"
 
-        # Filter to primary agents only
-        primary_agents = []
-        for _agent_name, agent in all_agents_dict.items():
-            # Include agents that have mode='primary'
-            # Exclude subagents and special modes
-            if hasattr(agent, "mode") and agent.mode == "primary":
-                primary_agents.append(agent)
-            # Also include agents without explicit mode if they're top-level
-            elif not hasattr(agent, "mode") and not hasattr(agent, "parent_agent"):
-                primary_agents.append(agent)
+        # Top-level agents only (keys without "/").
+        top_level = [
+            agent for agent_name, agent in all_agents_dict.items() if "/" not in agent_name
+        ]
+
+        enabled = self._enabled_agent_names(config)
+        if enabled is not None:
+            # Match the agents actually generated for the active personas, so the
+            # orchestrator never references an agent whose file wasn't built.
+            primary_agents = [agent for agent in top_level if agent.name in enabled]
+        else:
+            # No persona filtering: list agents declared as primary.
+            primary_agents = [
+                agent for agent in top_level if getattr(agent, "mode", None) == "primary"
+            ]
 
         # Sort alphabetically by name
         primary_agents.sort(key=lambda a: a.name)
@@ -81,3 +86,27 @@ class PrimaryAgentsHandler(TemplateHandler):
             lines.append(f"- **{agent.name}**: {agent.description}")
 
         return "\n".join(lines) if lines else "*(No primary agents found)*"
+
+    @staticmethod
+    def _enabled_agent_names(config: dict[str, Any]) -> set[str] | None:
+        """Resolve the set of agent names enabled by the config's active personas.
+
+        Returns:
+            Set of enabled agent names, or None when no personas are selected or
+            persona data cannot be loaded (caller then falls back to mode-based
+            selection).
+        """
+        active_personas = (config or {}).get("active_personas")
+        if not active_personas:
+            return None
+
+        try:
+            from pathlib import Path
+
+            from prompticorn.personas import PersonaFilter, PersonaRegistry
+
+            personas_yaml = Path(__file__).parent.parent.parent / "personas" / "personas.yaml"
+            persona_registry = PersonaRegistry.from_yaml(personas_yaml)
+            return PersonaFilter(persona_registry, active_personas).get_enabled_agents()
+        except Exception:
+            return None

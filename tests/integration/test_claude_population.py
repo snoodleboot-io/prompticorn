@@ -106,10 +106,19 @@ class TestSingleLanguageClaudePopulation:
         orchestrator = (tmp_path / ".claude" / "agents" / "orchestrator-agent.md").read_text(
             encoding="utf-8"
         )
-        # Assert — the template variable is replaced with a real agent list.
+        # Assert — the template variable is replaced with a real agent list,
+        # restricted to the active persona's agents (which are the ones generated).
         assert "{{PRIMARY_AGENTS_LIST}}" not in orchestrator
-        assert "- **architect**" in orchestrator
+        assert "- **code**" in orchestrator
         assert "- **backend**" in orchestrator
+        # An agent NOT in the software_engineer persona must not be listed
+        # (it isn't generated, so the orchestrator must not reference it).
+        assert "- **compliance**" not in orchestrator
+        generated_agents = {
+            p.stem.replace("-agent", "") for p in (tmp_path / ".claude" / "agents").glob("*.md")
+        }
+        listed_agents = set(re.findall(r"^- \*\*([a-z]+)\*\*", orchestrator, re.MULTILINE))
+        assert listed_agents == generated_agents
 
 
 class TestMultiLanguageClaudePopulation:
