@@ -26,6 +26,7 @@ _UNRENDERED_PATTERNS = (
     re.compile(r"\{\{"),  # Jinja2 expression
     re.compile(r"\{%"),  # Jinja2 statement
     re.compile(r"Dynamic content - see template"),  # unfilled convention stub
+    re.compile(r"<!--\s*path:"),  # leaked internal source-path comment
 )
 
 
@@ -94,6 +95,10 @@ class TestSingleLanguageClaudePopulation:
         assert "ruff" in python_md
         assert "pytest" in python_md
         assert "#### Coverage Targets" in python_md
+        # abstract_class_style is populated from the (defaulted) spec and the
+        # matching conditional block renders.
+        assert "Abstract Class Style: interface" in python_md
+        assert "Interface Pattern" in python_md
 
     def test_orchestrator_agents_list_is_populated(self, tmp_path, single_python_config):
         # Arrange / Act

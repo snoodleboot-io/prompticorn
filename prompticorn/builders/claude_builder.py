@@ -20,6 +20,7 @@ from prompticorn.builders.naming_utils import (
 from prompticorn.builders.workflow_loader import WorkflowLoader
 from prompticorn.ir.loaders import CoreFilesLoader
 from prompticorn.ir.models import Agent
+from prompticorn.text_utils import strip_source_header_comments
 
 
 class ClaudeBuilder(Builder):
@@ -313,7 +314,7 @@ class ClaudeBuilder(Builder):
             )
 
         if subagent_path.exists():
-            return subagent_path.read_text(encoding="utf-8")
+            return strip_source_header_comments(subagent_path.read_text(encoding="utf-8"))
 
         return None
 

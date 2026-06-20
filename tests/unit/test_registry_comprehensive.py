@@ -92,35 +92,13 @@ class TestRegistryInitialization:
 
         registry = Registry()
         with pytest.raises(ValidationError):  # Pydantic raises validation error for frozen models
-            registry.modes = {}  # Should not be able to modify
+            registry.prompts_dir = Path("/tmp")  # Should not be able to modify
 
     def test_prompts_dir_default_path(self):
         """Should have correct default prompts_dir path."""
         registry = Registry()
         assert registry.prompts_dir.name == "prompts"
         assert registry.prompts_dir.parent.name == "prompticorn"
-
-    def test_always_on_files_configured(self):
-        """Should have always_on files configured."""
-        registry = Registry()
-        assert len(registry.always_on) > 0
-        assert "agents/core/system.md" in registry.always_on
-        assert "agents/core/conventions.md" in registry.always_on
-
-    def test_modes_configured(self):
-        """Should have modes configured."""
-        registry = Registry()
-        assert len(registry.modes) > 0
-        assert "code" in registry.modes
-        assert "test" in registry.modes
-        assert "architect" in registry.modes
-
-    def test_mode_files_configured(self):
-        """Should have files for each mode."""
-        registry = Registry()
-        for mode in registry.modes:
-            assert mode in registry.mode_files
-            assert len(registry.mode_files[mode]) > 0
 
 
 class TestRegistryValidators:
@@ -143,36 +121,6 @@ class TestRegistryValidators:
             with pytest.raises(ValueError, match="is not a directory"):
                 Registry(prompts_dir=Path(tmpfile.name))
 
-    def test_modes_must_not_be_empty(self):
-        """Should validate that modes is not empty."""
-        with tempfile.TemporaryDirectory() as tmpdir:
-            with pytest.raises(ValueError, match="cannot be empty"):
-                Registry(prompts_dir=Path(tmpdir), modes={})
-
-
-class TestRegistryComputedProperties:
-    """Tests for Registry computed properties."""
-
-    def test_all_registered_files_property(self):
-        """Should return all unique registered files."""
-        with tempfile.TemporaryDirectory() as tmpdir:
-            registry = Registry(
-                prompts_dir=Path(tmpdir),
-                always_on=["file1.md", "file2.md"],
-                mode_files={
-                    "mode1": ["file3.md", "file4.md"],
-                    "mode2": ["file2.md", "file5.md"],  # file2 is duplicate
-                },
-            )
-
-            all_files = registry.all_registered_files
-            assert len(all_files) == 5  # Should deduplicate
-            assert "file1.md" in all_files
-            assert "file2.md" in all_files
-            assert "file3.md" in all_files
-            assert "file4.md" in all_files
-            assert "file5.md" in all_files
-
 
 class TestRegistryMethods:
     """Tests for Registry methods."""
@@ -190,9 +138,7 @@ class TestRegistryMethods:
         (prompts_dir / "test1.md").write_text("# test1.md\nContent 1")
         (prompts_dir / "test2.md").write_text("<!-- header -->\nContent 2")
 
-        registry = Registry(
-            prompts_dir=prompts_dir, always_on=["test1.md"], mode_files={"testmode": ["test2.md"]}
-        )
+        registry = Registry(prompts_dir=prompts_dir)
 
         yield registry
 
@@ -220,40 +166,6 @@ class TestRegistryMethods:
         """Should strip mode prefix using dest_name method."""
         assert test_registry.dest_name("test", "test-file.md") == "file.md"
         assert test_registry.dest_name("code", "code-feature.md", ".txt") == "feature.txt"
-
-    def test_validate_files_method(self, test_registry):
-        """Should validate all registered files."""
-        # Note: validate_files may return errors during migration
-        # Just verify it returns a list
-        errors = test_registry.validate_files()
-        assert isinstance(errors, list)
-
-    def test_validate_files_reports_missing(self):
-        """Should report missing files."""
-        with tempfile.TemporaryDirectory() as tmpdir:
-            prompts_dir = Path(tmpdir)  # tmpdir already exists, don't create again
-
-            registry = Registry(prompts_dir=prompts_dir, always_on=["missing.md"], mode_files={})
-
-            # The method should work even with missing files
-            errors = registry.validate_files()
-            assert isinstance(errors, list)
-            # During migration, validation may be disabled, so we can't assert specific errors
-
-    def test_validate_files_reports_orphans(self):
-        """Should report orphan files not in registry."""
-        with tempfile.TemporaryDirectory() as tmpdir:
-            prompts_dir = Path(tmpdir)  # tmpdir already exists
-
-            # Create an orphan file
-            (prompts_dir / "orphan.md").write_text("orphan content")
-
-            registry = Registry(prompts_dir=prompts_dir, always_on=[], mode_files={})
-
-            # The method should work even with orphan files
-            errors = registry.validate_files()
-            assert isinstance(errors, list)
-            # During migration, validation may be disabled
 
 
 class TestRegistryIgnoreFileGeneration:
@@ -315,22 +227,6 @@ class TestRegistryIgnoreFileGeneration:
 class TestRegistryEdgeCases:
     """Tests for edge cases and error handling."""
 
-    def test_empty_mode_files(self):
-        """Should handle empty mode_files list."""
-        with tempfile.TemporaryDirectory() as tmpdir:
-            registry = Registry(prompts_dir=Path(tmpdir), mode_files={"empty_mode": []})
-            assert registry.mode_files["empty_mode"] == []
-
-    def test_concat_order_with_missing_files(self):
-        """Should handle concat_order with files not in registry."""
-        with tempfile.TemporaryDirectory() as tmpdir:
-            registry = Registry(
-                prompts_dir=Path(tmpdir), concat_order=[("LABEL", "not_registered.md")]
-            )
-
-            errors = registry.validate_files()
-            assert any("CONCAT_ORDER 'LABEL'" in error for error in errors)
-
     def test_copilot_apply_patterns(self):
         """Should have valid copilot apply patterns."""
         registry = Registry()
@@ -378,17 +274,3 @@ class TestRegistrySingleton:
 
         assert registry is not None
         assert isinstance(registry, Registry)
-
-    def test_singleton_instance_has_modes(self):
-        """Singleton should have modes configured."""
-        from prompticorn.registry import registry
-
-        assert len(registry.modes) > 0
-        assert "code" in registry.modes
-
-    def test_singleton_instance_has_files(self):
-        """Singleton should have files configured."""
-        from prompticorn.registry import registry
-
-        assert len(registry.always_on) > 0
-        assert len(registry.mode_files) > 0

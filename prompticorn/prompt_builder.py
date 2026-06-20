@@ -347,7 +347,10 @@ class PromptBuilder:
                         repository_type = (
                             (config.get("repository") or {}).get("type", "") if config else ""
                         )
-                        conventions = generate_all_conventions(selected_specs, repository_type)
+                        project = config.get("project") if config else None
+                        conventions = generate_all_conventions(
+                            selected_specs, repository_type, project
+                        )
                         for file_path_str, content_str in conventions.items():
                             full_path = output / file_path_str
                             full_path.parent.mkdir(parents=True, exist_ok=True)

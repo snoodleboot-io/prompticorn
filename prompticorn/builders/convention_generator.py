@@ -5,6 +5,17 @@ from typing import Any
 
 import jinja2
 
+from prompticorn.text_utils import strip_source_header_comments
+
+# Project-level (language-agnostic) keys exposed to the core convention template.
+_PROJECT_TEMPLATE_KEYS = (
+    "database",
+    "orm",
+    "commit_style",
+    "pr_size",
+    "deploy_target",
+)
+
 # Keys that may appear in a folder/language spec and should be exposed as
 # top-level template variables when rendering a convention file.
 _SPEC_TEMPLATE_KEYS = (
@@ -52,8 +63,11 @@ def _build_template_context(spec: dict[str, Any] | None) -> dict[str, Any]:
     """
     spec = spec or {}
     context: dict[str, Any] = {key: spec.get(key, "") for key in _SPEC_TEMPLATE_KEYS}
+    # Default abstract_class_style so the convention's conditional blocks render
+    # consistently even for older specs that omit it.
+    context["abstract_class_style"] = spec.get("abstract_class_style") or "interface"
     # Expose the full spec as ``config`` for templates using ``config.<field>``.
-    context["config"] = spec
+    context["config"] = {**spec, "abstract_class_style": context["abstract_class_style"]}
     # ``coverage_targets`` is the documented name for the coverage dict passed to
     # the testing/coverage macros (the templates alias the coverage *macro module*
     # as ``coverage``, so the data must use a distinct name to avoid shadowing).
@@ -61,7 +75,9 @@ def _build_template_context(spec: dict[str, Any] | None) -> dict[str, Any]:
     return context
 
 
-def generate_core_convention(repository_type: str = "") -> str:
+def generate_core_convention(
+    repository_type: str = "", project: dict[str, Any] | None = None
+) -> str:
     """Generate core general.md convention file.
 
     Combines system.md, conventions.md, and session.md into one file.
@@ -69,17 +85,22 @@ def generate_core_convention(repository_type: str = "") -> str:
     Args:
         repository_type: Repository type from config (e.g. 'single-language',
             'multi-language-monorepo') used to populate the core conventions.
+        project: Project-level settings (database, orm, commit_style, pr_size,
+            deploy_target) used to populate the core conventions.
 
     Returns:
         Content for .claude/conventions/core/general.md
     """
     core_dir = Path(__file__).parent.parent / "agents" / "core"
     environment = _get_convention_environment()
+    project = project or {}
     context = {"repository_type": repository_type}
+    context.update({key: project.get(key, "") for key in _PROJECT_TEMPLATE_KEYS})
 
     def _render_section(path: Path) -> str:
         """Read and render a core convention source (resolves macro imports)."""
-        return environment.from_string(path.read_text(encoding="utf-8")).render(**context)
+        source = strip_source_header_comments(path.read_text(encoding="utf-8"))
+        return environment.from_string(source).render(**context)
 
     sections = []
 
@@ -126,7 +147,7 @@ def generate_language_convention(language: str, spec: dict[str, Any] | None = No
     if not convention_path.exists():
         return None
 
-    template_source = convention_path.read_text(encoding="utf-8")
+    template_source = strip_source_header_comments(convention_path.read_text(encoding="utf-8"))
     environment = _get_convention_environment()
     context = _build_template_context(spec)
     return environment.from_string(template_source).render(**context)
@@ -180,6 +201,7 @@ def _normalize_specs(
 def generate_all_conventions(
     specs: list[dict[str, Any]] | dict[str, Any] | list[str] | None = None,
     repository_type: str = "",
+    project: dict[str, Any] | None = None,
 ) -> dict[str, str]:
     """Generate convention files for Claude.
 
@@ -191,6 +213,8 @@ def generate_all_conventions(
             substituted into each language convention template.
         repository_type: Repository type from config, used to populate the core
             convention (e.g. 'single-language', 'multi-language-monorepo').
+        project: Project-level settings (database, orm, commit_style, pr_size,
+            deploy_target) used to populate the core convention.
 
     Returns:
         Dictionary mapping file paths to content
@@ -203,7 +227,7 @@ def generate_all_conventions(
     output = {}
 
     # Generate core general.md
-    core_content = generate_core_convention(repository_type)
+    core_content = generate_core_convention(repository_type, project)
     output[".claude/conventions/core/general.md"] = core_content
 
     # Generate a convention per language, substituting that folder's spec values.

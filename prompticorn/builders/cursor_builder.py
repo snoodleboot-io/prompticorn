@@ -7,6 +7,7 @@ into Cursor AI configuration files (.cursorrules) with markdown formatting.
 from pathlib import Path
 
 from prompticorn.builders.base import Builder, BuildOptions
+from prompticorn.builders.builder import Builder as LegacyBuilder
 from prompticorn.builders.errors import BuilderValidationError
 from prompticorn.ir.loaders import CoreFilesLoader
 from prompticorn.ir.models import Agent
@@ -62,6 +63,9 @@ class CursorBuilder(Builder):
         """
         self.agents_dir = agents_dir
         self.core_loader = CoreFilesLoader()
+        # Legacy Builder provides template-variable substitution (e.g.
+        # {{PRIMARY_AGENTS_LIST}}) for agent system prompts.
+        self._legacy_builder = LegacyBuilder()
 
     def build(self, agent: Agent, options: BuildOptions, config: dict | None = None) -> str:
         """Build a Cursor AI configuration file.
@@ -89,6 +93,10 @@ class CursorBuilder(Builder):
 
         # Use agent system prompt directly (no variants for top-level agents)
         system_prompt = agent.system_prompt
+        if config:
+            system_prompt = self._legacy_builder._substitute_template_variables(
+                system_prompt, config
+            )
 
         # Compose markdown output as prose (no YAML frontmatter)
         sections = []

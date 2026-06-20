@@ -10,6 +10,11 @@ from prompticorn.agent_registry.errors import RegistryLoadError
 from prompticorn.ir.exceptions import MissingFileError, ParseError
 from prompticorn.ir.loaders import ComponentLoader
 from prompticorn.ir.models import Agent
+from prompticorn.text_utils import strip_source_header_comments
+
+# Top-level directories under agents/ that are not agents and must be skipped
+# during discovery and structural validation (e.g. shared convention files).
+_NON_AGENT_DIRS = frozenset({"subagents", "core"})
 
 
 class RegistryDiscovery:
@@ -100,7 +105,7 @@ class RegistryDiscovery:
                 continue
 
             # Skip special directories
-            if agent_dir.name.startswith(".") or agent_dir.name == "subagents":
+            if agent_dir.name.startswith(".") or agent_dir.name in _NON_AGENT_DIRS:
                 continue
 
             agent_name = agent_dir.name
@@ -166,6 +171,8 @@ class RegistryDiscovery:
         # Check each agent directory
         for agent_dir in self.agents_dir.iterdir():
             if not agent_dir.is_dir() or agent_dir.name.startswith("."):
+                continue
+            if agent_dir.name in _NON_AGENT_DIRS:
                 continue
 
             agent_name = agent_dir.name
@@ -278,7 +285,7 @@ class RegistryDiscovery:
         name = prompt_data.get("name") or agent_name
         description = prompt_data.get("description", "")
         mode = prompt_data.get("mode", "all")
-        system_prompt = prompt_data.get("system_prompt", "")
+        system_prompt = strip_source_header_comments(prompt_data.get("system_prompt", ""))
         tools = prompt_data.get("tools", [])
         skills = prompt_data.get("skills", [])
         workflows = prompt_data.get("workflows", [])
@@ -336,7 +343,7 @@ class RegistryDiscovery:
         name = prompt_data.get("name") or agent_name
         description = prompt_data.get("description", "")
         mode = prompt_data.get("mode", "all")
-        system_prompt = prompt_data.get("system_prompt", "")
+        system_prompt = strip_source_header_comments(prompt_data.get("system_prompt", ""))
         tools = prompt_data.get("tools", [])
         skills = prompt_data.get("skills", [])
         workflows = prompt_data.get("workflows", [])

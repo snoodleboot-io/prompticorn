@@ -1,18 +1,8 @@
 """Registry module - Single source of truth for all modes, prompt files, and output ordering.
 
 This module provides the Registry class which serves as the central configuration
-for all modes, their associated prompt files, and output ordering. It validates
-that all registered files exist and provides methods for generating various ignore files.
-
-To add a new mode:
-  1. Add it to modes (key → display label)
-  2. Add its files to mode_files (key → ordered list of filenames from prompts/)
-  3. Add entries to concat_order for tools that use a flat concatenated output
-
-To add a new file to an existing mode:
-  1. Drop the .md file in prompts/
-  2. Add the filename to mode_files[mode]
-  3. Add a concat_order entry with the section label
+for all modes and their associated prompt files, and provides methods for
+generating various ignore files.
 
 Classes:
     Registry: Pydantic model containing all mode and file registrations.
@@ -25,7 +15,7 @@ Functions:
 from functools import lru_cache
 from pathlib import Path
 
-from pydantic import BaseModel, ConfigDict, computed_field, field_validator, model_validator
+from pydantic import BaseModel, ConfigDict, field_validator
 
 
 # ── Module-level cached function ─────────────────────────────────────────────
@@ -86,16 +76,11 @@ def _dest_name(mode_key: str, filename: str, ext: str = ".md") -> str:
 class Registry(BaseModel):
     """Registry of all modes, prompt files, and output ordering.
 
-    This Pydantic model serves as the single source of truth for all agent modes,
-    their associated prompt files, and the ordering for concatenated output.
-    It validates that all registered files exist in the prompts directory.
+    This Pydantic model provides prompt-file access (for template inheritance) and
+    generates the various tool ignore files.
 
     Attributes:
         prompts_dir: Path to the prompts directory containing all .md files.
-        always_on: List of prompt files that apply to all modes.
-        modes: Dictionary mapping mode keys to display names.
-        mode_files: Dictionary mapping mode keys to their prompt files.
-        concat_order: Ordered list of (section_label, filename) tuples for output.
         default_ignore_patterns: List of glob patterns for ignore files.
         copilot_apply: Dictionary mapping modes to glob patterns for Copilot.
     """
@@ -107,149 +92,6 @@ class Registry(BaseModel):
 
     # ── Prompt file directory ─────────────────────────────────────────────────
     prompts_dir: Path = Path(__file__).parent / "prompts"
-
-    # ── Always-on files ───────────────────────────────────────────────────────
-    always_on: list[str] = [
-        # Core system files (loaded for all tools)
-        "agents/core/system.md",
-        "agents/core/conventions.md",
-        "agents/core/session.md",
-        "agents/core/decision-log-template.md",
-        "agents/core/session-troubleshooting.md",
-        # Language-specific conventions (user includes relevant ones)
-        # Currently available:
-        "agents/core/conventions-python.md",
-        "agents/core/conventions-typescript.md",
-        # TODO: Restore remaining language conventions from origin/main
-    ]
-
-    # ── Mode registry ───────────────────────────────────────────────────────
-    # TODO: Discover This
-    modes: dict[str, str] = {
-        "architect": "Architect",
-        "test": "Test",
-        "refactor": "Refactor",
-        "document": "Document",
-        "explain": "Explain",
-        "migration": "Migration",
-        "code": "Code",
-        "review": "Review",
-        "debug": "Debug",
-        "ask": "Ask",
-        "security": "Security",
-        "compliance": "Compliance",
-        "orchestrator": "Orchestrator",
-        "enforcement": "Enforcement",
-        "planning": "Planning",
-    }
-
-    # ── Files per mode ───────────────────────────────────────────────────────
-    # TODO: This should be auto-discoverable
-    mode_files: dict[str, list[str]] = {
-        "architect": [
-            "agents/architect/subagents/architect-scaffold.md",
-            "agents/architect/subagents/architect-task-breakdown.md",
-            "agents/architect/subagents/architect-data-model.md",
-        ],
-        "test": [
-            "agents/test/subagents/test-strategy.md",
-        ],
-        "refactor": [
-            "agents/refactor/subagents/refactor-strategy.md",
-            "agents/code/subagents/code-refactor.md",
-        ],
-        "document": [
-            "agents/document/subagents/document-strategy-for-applications.md",
-        ],
-        "explain": [
-            "agents/explain/subagents/explain-strategy.md",
-        ],
-        "migration": [
-            "agents/migration/subagents/migration-strategy.md",
-            "agents/code/subagents/code-migration.md",
-            "agents/code/subagents/code-dependency-upgrade.md",
-        ],
-        "code": [
-            "agents/code/subagents/code-feature.md",
-            "agents/code/subagents/code-boilerplate.md",
-            "agents/code/subagents/code-house-style.md",
-        ],
-        "review": [
-            "agents/review/subagents/review-code.md",
-            "agents/review/subagents/review-performance.md",
-            "agents/review/subagents/review-accessibility.md",
-        ],
-        "debug": [
-            "agents/debug/subagents/debug-root-cause.md",
-            "agents/debug/subagents/debug-log-analysis.md",
-            "agents/debug/subagents/debug-rubber-duck.md",
-            "agents/core/core-session-troubleshooting.md",
-        ],
-        "ask": [
-            "agents/ask/subagents/ask-docs.md",
-            "agents/ask/subagents/ask-testing.md",
-            "agents/ask/subagents/ask-decision-log.md",
-            "agents/core/core-decision-log-template.md",
-        ],
-        "security": [
-            "agents/security/subagents/security-review.md",
-        ],
-        "compliance": [
-            "agents/compliance/subagents/compliance-review.md",
-        ],
-        "orchestrator": [
-            "agents/orchestrator/subagents/orchestrator-devops.md",
-            "agents/orchestrator/subagents/orchestrator-meta.md",
-            "agents/orchestrator/subagents/orchestrator-pr-description.md",
-        ],
-        "enforcement": [
-            "agents/enforcement/enforcement.md",
-        ],
-        "planning": [
-            "agents/project_planning/planning.md",
-            "agents/project_planning/methodology.md",
-        ],
-    }
-
-    # ── Concatenated output order ───────────────────────────────────────────
-    concat_order: list[tuple[str, str]] = [
-        ("CORE BEHAVIORS", "agents/core/core-system.md"),
-        ("CONVENTIONS", "agents/core/core-conventions.md"),
-        ("SESSION MANAGEMENT", "agents/core/core-session.md"),
-        ("SESSION TROUBLESHOOTING", "agents/core/core-session-troubleshooting.md"),
-        ("TYPESCRIPT", "agents/core/core-conventions-typescript.md"),
-        ("PYTHON", "agents/core/core-conventions-python.md"),
-        ("GO", "agents/core/core-conventions-golang.md"),
-        ("SQL", "agents/core/core-conventions-sql.md"),
-        ("PLANNING / ARCHITECT", "agents/architect/subagents/architect-scaffold.md"),
-        ("TASK BREAKDOWN", "agents/architect/subagents/architect-task-breakdown.md"),
-        ("DATA MODEL", "agents/architect/subagents/architect-data-model.md"),
-        ("FEATURE IMPLEMENTATION", "agents/code/subagents/code-feature.md"),
-        ("BOILERPLATE", "agents/code/subagents/code-boilerplate.md"),
-        ("HOUSE STYLE", "agents/code/subagents/code-house-style.md"),
-        ("TESTING", "agents/test/subagents/test-strategy.md"),
-        ("REFACTORING", "agents/refactor/subagents/refactor-strategy.md"),
-        ("MIGRATION", "agents/migration/subagents/migration-strategy.md"),
-        ("DOCUMENTATION", "agents/document/subagents/document-strategy-for-applications.md"),
-        ("EXPLAIN", "agents/explain/subagents/explain-strategy.md"),
-        ("CODE REVIEW", "agents/review/subagents/review-code.md"),
-        ("PERFORMANCE REVIEW", "agents/review/subagents/review-performance.md"),
-        ("ACCESSIBILITY REVIEW", "agents/review/subagents/review-accessibility.md"),
-        ("SECURITY REVIEW", "agents/security/subagents/security-review.md"),
-        ("COMPLIANCE REVIEW", "agents/compliance/subagents/compliance-review.md"),
-        ("DEBUGGING", "agents/debug/subagents/debug-root-cause.md"),
-        ("LOG ANALYSIS", "agents/debug/subagents/debug-log-analysis.md"),
-        ("RUBBER DUCK", "agents/debug/subagents/debug-rubber-duck.md"),
-        ("DOCS GENERATION", "agents/ask/subagents/ask-docs.md"),
-        ("TEST GENERATION", "agents/ask/subagents/ask-testing.md"),
-        ("DECISION LOG", "agents/ask/subagents/ask-decision-log.md"),
-        ("DECISION LOG TEMPLATE", "agents/core/core-decision-log-template.md"),
-        ("DEVOPS", "agents/orchestrator/subagents/orchestrator-devops.md"),
-        ("META / PROCESS", "agents/orchestrator/subagents/orchestrator-meta.md"),
-        ("ENFORCEMENT", "agents/enforcement/enforcement.md"),
-        ("PLANNING", "agents/project_planning/planning.md"),
-        ("PLANNING METHODOLOGY", "agents/project_planning/methodology.md"),
-    ]
 
     # ── Default ignore patterns for all agents ─────────────────────────────
     default_ignore_patterns: list[str] = [
@@ -310,24 +152,6 @@ class Registry(BaseModel):
         "orchestrator": "**/*.yml,**/*.yaml,**/Dockerfile,**/.github/**",
     }
 
-    # ── Computed properties ────────────────────────────────────────────────
-
-    @computed_field  # type: ignore[prop-decorator]
-    @property
-    def all_registered_files(self) -> set[str]:
-        """Get all files registered in the registry.
-
-        This computed property collects all unique prompt filenames from the
-        always_on list and all mode_files dictionaries.
-
-        Returns:
-            Set of all registered filename strings.
-        """
-        files = set(self.always_on)
-        for file_list in self.mode_files.values():
-            files.update(file_list)
-        return files
-
     # ── Validators ───────────────────────────────────────────────────────────
 
     @field_validator("prompts_dir")
@@ -339,43 +163,6 @@ class Registry(BaseModel):
         if not v.is_dir():
             raise ValueError(f"Prompts path is not a directory: {v}")
         return v
-
-    @field_validator("modes")
-    @classmethod
-    def modes_must_not_be_empty(cls, v: dict[str, str]) -> dict[str, str]:
-        """Verify modes dictionary is not empty."""
-        if not v:
-            raise ValueError("Modes dictionary cannot be empty")
-        return v
-
-    @model_validator(mode="after")
-    def validate_all_files_exist(self) -> "Registry":
-        """Check every registered filename exists in prompts/.
-
-        NOTE: Temporarily disabled during Phase 3 IR migration.
-        The old prompts/agents/ directory has been removed, and all content
-        is now in the IR structure (prompticorn/agents/). This validation
-        will be re-enabled or removed once the migration is complete.
-        """
-        # DISABLED: Validation temporarily disabled during IR migration
-        # errors: list[str] = []
-
-        # for fname in self.all_registered_files:
-        #     if not (self.prompts_dir / fname).exists():
-        #         errors.append(f"MISSING: {fname}")
-
-        # for label, fname in self.concat_order:
-        #     if fname not in self.all_registered_files:
-        #         errors.append(f"CONCAT_ORDER '{label}': '{fname}' not in any mode or ALWAYS_ON")
-
-        # for p in self.prompts_dir.glob("*.md"):
-        #     if p.name not in self.all_registered_files:
-        #         errors.append(f"ORPHAN: {p.name} exists in prompts/ but is not registered")
-
-        # if errors:
-        #     raise ValueError("; ".join(errors))
-
-        return self
 
     # ── Methods ─────────────────────────────────────────────────────────────
 
@@ -421,34 +208,6 @@ class Registry(BaseModel):
             The filename with mode prefix stripped.
         """
         return _dest_name(mode_key, filename, ext)
-
-    def validate_files(self) -> list[str]:
-        """Check every registered filename exists in prompts/.
-
-        This method performs validation to ensure all registered files actually
-        exist in the prompts directory. It checks:
-        1. All files in always_on and mode_files exist
-        2. All files in concat_order are registered
-        3. No orphan files exist in prompts/ that aren't registered
-
-        Returns:
-            List of error messages. Empty list if all files are valid.
-        """
-        errors: list[str] = []
-
-        for fname in self.all_registered_files:
-            if not self.prompt_path(fname).exists():
-                errors.append(f"MISSING: {fname}")
-
-        for label, fname in self.concat_order:
-            if fname not in self.all_registered_files:
-                errors.append(f"CONCAT_ORDER '{label}': '{fname}' not in any mode or ALWAYS_ON")
-
-        for p in self.prompts_dir.glob("*.md"):
-            if p.name not in self.all_registered_files:
-                errors.append(f"ORPHAN: {p.name} exists in prompts/ but is not registered")
-
-        return errors
 
     # ── Ignore file generation ──────────────────────────────────────────────
 

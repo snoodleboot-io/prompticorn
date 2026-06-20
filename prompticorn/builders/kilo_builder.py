@@ -12,6 +12,7 @@ from prompticorn.builders.builder import Builder as LegacyBuilder
 from prompticorn.builders.errors import BuilderValidationError
 from prompticorn.ir.loaders import CoreFilesLoader
 from prompticorn.ir.models import Agent
+from prompticorn.text_utils import strip_source_header_comments
 
 
 class KiloBuilder(Builder):
@@ -423,7 +424,7 @@ class KiloBuilder(Builder):
         for filename in static_files:
             source_path = self.core_loader.core_dir / filename
             if source_path.exists():
-                content = source_path.read_text(encoding="utf-8")
+                content = strip_source_header_comments(source_path.read_text(encoding="utf-8"))
                 output_path = rules_dir / filename
                 output_path.write_text(content, encoding="utf-8")
                 written_files.append(f"rules/{filename}")

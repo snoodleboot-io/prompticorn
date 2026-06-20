@@ -1,7 +1,38 @@
 # Claude Template Population Fix
 
-**Status:** 🚧 IN PROGRESS — Phases 0–3b done (committed); Phase 4 (`validate`/`list`/concat) remains — needs a
-behavior decision (separate legacy-registry subsystem)
+**Status:** ✅ COMPLETE — Phases 0–3b shipped in #60; Phase 4 (`validate`/`list`/concat) done on
+`fix/list-validate-discovery`.
+
+## Phase 4 outcome (done)
+- `list` and `validate` rewritten on the live `agent_registry` discovery (`Registry.from_discovery` /
+  `RegistryDiscovery.validate_structure` + `discover()` smoke-load). `list` now enumerates discovered agents,
+  subagents, and minimal/verbose variants; `validate` checks structure and clean load. Both broke before
+  (47 false errors); `validate` now reports "Registry valid: 25 agents, 82 subagents". Output is generic (no
+  product name).
+- Retired the dead flat-concat machinery: `registry.concat_order`, the disabled `validate_all_files_exist`
+  model-validator, `registry.validate_files()`, and `builder._build_concatenated_content`/`_build_concatenated`
+  (plus now-unused `registry`/`datetime` imports). Kept `prompt_body`/`prompt_path`/`prompts_dir` (live Jinja
+  inheritance) and the legacy `Builder` class (used for `_substitute_template_variables`).
+- Added `core` to discovery's non-agent skip set (shared conventions dir was wrongly flagged + warned).
+- Added CLI tests for `list`/`validate` (previously zero coverage); removed the obsolete `validate_files`/
+  `concat_order` tests. Full suite green (1611 passed / 22 skipped); ruff + pyright clean.
+- Retired the now-orphaned legacy registry fields `always_on`/`modes`/`mode_files`/`all_registered_files` (plus
+  the `modes_must_not_be_empty` validator and `computed_field` import) — confirmed zero production consumers; only
+  `prompt_body`/`prompt_path`/`prompts_dir` (Jinja inheritance) and the ignore-file generators remain. Updated the
+  ~14 tests that asserted on the removed fields.
+
+### Follow-on fix — kilo/cline/cursor/copilot population (pre-existing, surfaced by review)
+Building copilot/cline/cursor silently failed **every agent** and leaked raw templates — the `CoreFilesLoader`
+path (used by all four non-Claude tools) was never given what PR #60 added to the Claude path:
+- `CoreFilesLoader._template_content`: the rendered `config` now always carries `abstract_class_style` (was
+  crashing `{% if config.abstract_class_style %}` under StrictUndefined) and `repository_type` (was crashing
+  `{{ repository_type }}` in `conventions.md`).
+- `CoreFilesLoader.get_core_files`: the always-on core files (`system`/`conventions`/`session`) are now templated,
+  not embedded raw (macro imports / `{{ }}` were leaking into `.clinerules`/`.cursorrules`/copilot instructions).
+- `cline`/`cursor`/`copilot` builders now run `_substitute_template_variables` on agent system prompts (mirrors
+  Kilo/Claude) so `{{PRIMARY_AGENTS_LIST}}` is populated.
+- Added `tests/integration/test_multitool_population.py` (no agent-build failures, no unrendered templates across
+  all four tools). All five builders now build clean: 0 failures, 0 leaks.
 **Date:** 2026-06-15
 **Branch:** `fix/claude-template-population`
 **Owner:** (unassigned)
@@ -139,11 +170,11 @@ The wiring is fixed, but the **convention templates don't reference the values**
   (`{{ testing.* (test_framework, ...) }}`, `{{ coverage.* (coverage) }}`) and/or add a `Test Framework:
   {{ test_framework }}` header line mirroring the existing Linter/Formatter lines. Spans ~20 language files —
   needs the macro signatures pinned down first.
-- **Core `general.md` fill-ins (BUG 4).** `conventions.md` carries `Repository type: TODO`, `[LANG]`,
-  `Database: TODO`, `Commit style: TODO`, `Target: TODO`. For values known from config (repository type, primary
-  language) substitute during `generate_core_convention()` (now spec-aware-capable). For uncaptured values
-  (Database, ORM, Deploy): either add to the `init` questionnaire + spec, or make the fill-in intent obvious
-  (e.g. `<FILL IN: database>`) rather than a bare `TODO`. Needs a decision (see Open Questions).
+- **Core `general.md` fill-ins (BUG 4) — DONE.** Repository type populates from config. Database/ORM/commit
+  style/PR size/deploy target are now **captured as project-level `init` questions** (new
+  `questions/project/`), stored in a config `project` section, and injected into `conventions.md` via both
+  render paths (ConventionGenerator + CoreFilesLoader). Unset values render `_(not specified)_` rather than a
+  bare `TODO`. Tests: `tests/integration/test_project_settings_population.py`.
 - Tighten the regression test to assert `test_framework`/coverage values appear once the templates reference them.
 
 ### Phase 4 — `validate` / concat_order (BUG 5) ⏳ NEEDS DECISION
