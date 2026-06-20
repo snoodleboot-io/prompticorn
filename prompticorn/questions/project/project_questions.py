@@ -107,6 +107,30 @@ class PrSizeQuestion(Question):
         return NOT_SPECIFIED
 
 
+class ErrorHandlingQuestion(Question):
+    """Project error-handling pattern."""
+
+    @property
+    def key(self) -> str:
+        return "project_error_handling"
+
+    @property
+    def question_text(self) -> str:
+        return "What error-handling pattern does this project follow?"
+
+    @property
+    def explanation(self) -> str:
+        return "How errors are surfaced and handled (documented in the core conventions)."
+
+    @property
+    def options(self) -> list[str]:
+        return [NOT_SPECIFIED, "Exceptions", "Result type", "Error values / codes"]
+
+    @property
+    def default(self) -> str:
+        return NOT_SPECIFIED
+
+
 class DeployTargetQuestion(Question):
     """Project deployment target."""
 
@@ -152,6 +176,7 @@ def get_project_questions() -> list[Question]:
     return [
         DatabaseQuestion(),
         OrmQuestion(),
+        ErrorHandlingQuestion(),
         CommitStyleQuestion(),
         PrSizeQuestion(),
         DeployTargetQuestion(),

@@ -11,6 +11,7 @@ from prompticorn.text_utils import strip_source_header_comments
 _PROJECT_TEMPLATE_KEYS = (
     "database",
     "orm",
+    "error_handling",
     "commit_style",
     "pr_size",
     "deploy_target",

@@ -31,7 +31,7 @@ File extension determines which rules apply:
 ## File & Folder Structure
 
 src/
-└── TODO
+└── _(organize by feature/module — define your project's layout here)_
 
 Rule: One export per file unless it is a barrel (index.ts).
 Rule: Co-locate tests with source (auth.ts → auth.test.ts).
@@ -83,7 +83,7 @@ All OOP components must follow SOLID principles:
 
 ## Error Handling
 
-Pattern: TODO
+Pattern: {{ error_handling or "_(not specified)_" }}
 
 - Never swallow errors silently
 - Always include context: Error("failed to fetch user: " + userId)

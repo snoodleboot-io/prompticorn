@@ -218,6 +218,7 @@ class ConfigHandler:
         return {
             "database": "",
             "orm": "",
+            "error_handling": "",
             "commit_style": "",
             "pr_size": "",
             "deploy_target": "",

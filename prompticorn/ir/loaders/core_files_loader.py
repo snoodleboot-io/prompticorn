@@ -121,6 +121,7 @@ class CoreFilesLoader:
             "repository_type": repository_type,
             "database": project.get("database", ""),
             "orm": project.get("orm", ""),
+            "error_handling": project.get("error_handling", ""),
             "commit_style": project.get("commit_style", ""),
             "pr_size": project.get("pr_size", ""),
             "deploy_target": project.get("deploy_target", ""),

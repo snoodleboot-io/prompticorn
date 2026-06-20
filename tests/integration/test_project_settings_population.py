@@ -17,6 +17,7 @@ class TestProjectQuestions:
         assert keys == [
             "project_database",
             "project_orm",
+            "project_error_handling",
             "project_commit_style",
             "project_pr_size",
             "project_deploy_target",
@@ -35,6 +36,7 @@ class TestProjectQuestions:
         assert project == {
             "database": "",
             "orm": "",
+            "error_handling": "",
             "commit_style": "",
             "pr_size": "",
             "deploy_target": "",
