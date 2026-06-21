@@ -162,10 +162,11 @@ haskell: |
   <package>.cabal
 
 html: |
-  index.html               # entry page
-  assets/                  # images, fonts
-  css/
-  js/
+  index.html               # default home page (top level, lowercase names)
+  assets/                  # all static assets
+  ├── css/
+  ├── js/
+  └── images/
 
 julia: |
   src/                     # <Package>.jl and modules
@@ -173,14 +174,16 @@ julia: |
   Project.toml
 
 lua: |
-  src/                     # Lua modules
+  src/                     # Lua modules (main module: <modulename>.lua)
+  └── bin/                 # executables
   spec/                    # busted tests
-  <rock>.rockspec
+  <rock>-<version>.rockspec
 
 objc: |
-  Sources/                 # .h/.m sources
-  Tests/
-  <Project>.xcodeproj
+  Classes/                 # .h/.m sources (group into Models/, Views/, ...)
+  Tests/                   # test/spec classes
+  Info.plist
+  <Project>.xcodeproj      # (frameworks: split Public/ vs Private/ headers)
 
 php: |
   src/                     # PSR-4 autoloaded classes
@@ -189,8 +192,12 @@ php: |
 
 r: |
   R/                       # package functions
-  tests/testthat/          # testthat tests
+  man/                     # generated documentation (.Rd)
+  tests/
+  ├── testthat/            # testthat test files (test-*.R)
+  └── testthat.R           # test runner entry point
   DESCRIPTION
+  NAMESPACE
 
 scala: |
   src/
@@ -204,9 +211,10 @@ shell: |
   tests/                   # bats tests
 
 sql: |
-  migrations/              # versioned schema migrations
-  models/                  # views / stored procedures
-  seeds/                   # seed data
+  migrations/              # versioned, immutable schema migrations (V001__name.sql)
+  seeds/                   # seed / starter data (INSERTs)
+  schema/                  # views, functions, stored procedures
+  # multi-env: nest migrations under environments/<env>/
 
 swift: |
   Sources/

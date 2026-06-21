@@ -2,7 +2,7 @@
 # Core Conventions Shell
 
 Language:             {{ language }} e.g., Bash 5.2, Zsh
-Shell:              {{ shell }}             e.g., Bash, Zsh
+Shell:              {{ runtime }}             e.g., Bash, Zsh
 Package Manager:      {{ package_manager }} e.g., apt, yum, brew
 
 ### Naming Conventions

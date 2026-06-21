@@ -185,3 +185,22 @@ class TestAllLanguagesRender:
         assert lang_conv, f"no language convention generated for {language}"
         assert not _JINJA.search(lang_conv)
         assert "<!-- path" not in lang_conv
+
+    @pytest.mark.parametrize("language", get_all_languages())
+    def test_language_builds_end_to_end_strict(self, language, tmp_path):
+        # Full build via a CoreFilesLoader-based tool (copilot) exercises the
+        # StrictUndefined render path — a convention referencing an undefined
+        # variable fails here even though the lenient Claude path would tolerate it.
+        config = create_default_config(language)
+        config["variant"] = "minimal"
+        config["active_personas"] = ["software_engineer"]
+        # Act
+        actions = get_prompt_builder("copilot").build(tmp_path, config=config, dry_run=False)
+        # Assert — no agent/file build failures and no leaked templates.
+        failures = [a for a in actions if a.startswith("✗")]
+        assert not failures, f"{language}: {failures}"
+        for path in tmp_path.rglob("*"):
+            if path.is_file():
+                text = path.read_text(encoding="utf-8", errors="ignore")
+                assert not _JINJA.search(text), f"{language}: jinja leak in {path.name}"
+                assert "<!-- path" not in text, f"{language}: path leak in {path.name}"
