@@ -120,7 +120,9 @@ class CoreFilesLoader:
 
         context = {
             "repository_type": repository_type,
-            "source_layout": get_source_layout(spec.get("language", "")),
+            "source_layout": get_source_layout(
+                spec.get("language", ""), project.get("layout_style", "flat")
+            ),
             "database": project.get("database", ""),
             "orm": project.get("orm", ""),
             "error_handling": project.get("error_handling", ""),

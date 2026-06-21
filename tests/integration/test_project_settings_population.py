@@ -16,6 +16,7 @@ class TestProjectQuestions:
         # Each question key is project_<field>; <field> is the config key.
         keys = [q.key for q in get_project_questions()]
         assert keys == [
+            "project_layout_style",
             "project_database",
             "project_orm",
             "project_error_handling",
@@ -33,8 +34,9 @@ class TestProjectQuestions:
 
         # Act
         project = _ask_project_questions(select_default)
-        # Assert
+        # Assert — "Not specified" maps to empty; layout_style defaults to flat.
         assert project == {
+            "layout_style": "flat",
             "database": "",
             "orm": "",
             "error_handling": "",
@@ -95,10 +97,26 @@ class TestSourceLayout:
         assert "__init__.py" in get_source_layout("python")
         assert "cmd/" in get_source_layout("golang")
 
+    def test_default_style_is_flat(self):
+        # Python defaults to a flat package layout, not a src/ layout.
+        assert not get_source_layout("python").startswith("src/")
+        assert not get_source_layout("python", "flat").startswith("src/")
+
+    def test_src_style_is_selectable(self):
+        # Users can opt into a src/ layout.
+        assert get_source_layout("python", "src").startswith("src/")
+        assert get_source_layout("typescript", "src").startswith("src/")
+
+    def test_config_default_layout_style_is_flat(self):
+        from prompticorn.config_handler import ConfigHandler
+
+        assert ConfigHandler.get_default_project_settings()["layout_style"] == "flat"
+
     def test_get_source_layout_falls_back_to_default(self):
-        # An unknown language gets the generic layout, never empty.
+        # An unknown language gets the generic (flat) layout, never empty.
         layout = get_source_layout("nonexistent-lang")
-        assert "src/" in layout
+        assert "tests/" in layout
+        assert layout.strip()
 
     def test_core_convention_renders_language_layout(self, tmp_path):
         # Arrange

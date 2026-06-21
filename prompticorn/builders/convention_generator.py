@@ -102,7 +102,7 @@ def generate_core_convention(
     project = project or {}
     context = {
         "repository_type": repository_type,
-        "source_layout": get_source_layout(primary_language),
+        "source_layout": get_source_layout(primary_language, project.get("layout_style", "flat")),
     }
     context.update({key: project.get(key, "") for key in _PROJECT_TEMPLATE_KEYS})
 

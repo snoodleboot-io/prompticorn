@@ -107,6 +107,40 @@ class PrSizeQuestion(Question):
         return NOT_SPECIFIED
 
 
+class LayoutStyleQuestion(Question):
+    """Source-tree layout style (flat vs src)."""
+
+    @property
+    def key(self) -> str:
+        return "project_layout_style"
+
+    @property
+    def question_text(self) -> str:
+        return "Which source-tree layout should the conventions document?"
+
+    @property
+    def explanation(self) -> str:
+        return (
+            "flat: package/modules at the repo root (idiomatic default).\n"
+            "src: sources nested under a src/ directory."
+        )
+
+    @property
+    def options(self) -> list[str]:
+        return ["flat", "src"]
+
+    @property
+    def option_explanations(self) -> dict[str, str]:
+        return {
+            "flat": "Package/modules at the repo root (recommended default).",
+            "src": "Sources nested under a src/ directory.",
+        }
+
+    @property
+    def default(self) -> str:
+        return "flat"
+
+
 class ErrorHandlingQuestion(Question):
     """Project error-handling pattern."""
 
@@ -174,6 +208,7 @@ def get_project_questions() -> list[Question]:
         List of Question instances.
     """
     return [
+        LayoutStyleQuestion(),
         DatabaseQuestion(),
         OrmQuestion(),
         ErrorHandlingQuestion(),
