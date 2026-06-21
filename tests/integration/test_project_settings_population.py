@@ -1,5 +1,7 @@
 """Tests for project-level settings capture and injection into core conventions."""
 
+from pathlib import Path
+
 import pytest
 
 from prompticorn.cli import _ask_project_questions
@@ -111,6 +113,23 @@ class TestSourceLayout:
         from prompticorn.config_handler import ConfigHandler
 
         assert ConfigHandler.get_default_project_settings()["layout_style"] == "flat"
+
+    def test_every_supported_language_has_a_layout(self):
+        # Every language with a convention file must have its own source layout
+        # (no silent fallback to the generic default).
+        import yaml
+
+        from prompticorn.builders.convention_generator import get_all_languages
+
+        layouts_file = (
+            Path(__file__).parent.parent.parent
+            / "prompticorn"
+            / "configurations"
+            / "source_layouts.yaml"
+        )
+        defined = {k.lower() for k in yaml.safe_load(layouts_file.read_text()) if k != "default"}
+        missing = sorted(set(get_all_languages()) - defined)
+        assert not missing, f"languages without a source layout: {missing}"
 
     def test_get_source_layout_falls_back_to_default(self):
         # An unknown language gets the generic (flat) layout, never empty.

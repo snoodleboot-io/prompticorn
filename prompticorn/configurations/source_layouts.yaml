@@ -110,3 +110,114 @@ csharp: |
       └── Program.cs
   tests/
   └── <Project>.Tests/
+
+c: |
+  src/                     # .c implementation files
+  include/                 # public .h headers
+  tests/
+  Makefile
+
+cpp: |
+  src/                     # .cpp implementation files
+  include/                 # public headers
+  tests/
+  CMakeLists.txt
+
+clojure: |
+  src/                     # namespaces (src/<group>/<artifact>/...)
+  test/
+  deps.edn
+
+dart: |
+  lib/                     # library / package code
+  bin/                     # executables
+  test/
+  pubspec.yaml
+
+elixir: |
+  lib/                     # modules
+  test/
+  mix.exs
+
+elm: |
+  src/                     # Elm modules (Main.elm, ...)
+  tests/
+  elm.json
+
+fsharp: |
+  src/
+  └── <Project>/           # .fs sources + <Project>.fsproj
+  tests/
+  └── <Project>.Tests/
+
+groovy: |
+  src/
+  ├── main/groovy/<group>/ # production sources
+  └── test/groovy/<group>/ # tests
+
+haskell: |
+  src/                     # library modules
+  app/                     # executable Main.hs
+  test/
+  <package>.cabal
+
+html: |
+  index.html               # entry page
+  assets/                  # images, fonts
+  css/
+  js/
+
+julia: |
+  src/                     # <Package>.jl and modules
+  test/
+  Project.toml
+
+lua: |
+  src/                     # Lua modules
+  spec/                    # busted tests
+  <rock>.rockspec
+
+objc: |
+  Sources/                 # .h/.m sources
+  Tests/
+  <Project>.xcodeproj
+
+php: |
+  src/                     # PSR-4 autoloaded classes
+  tests/
+  composer.json
+
+r: |
+  R/                       # package functions
+  tests/testthat/          # testthat tests
+  DESCRIPTION
+
+scala: |
+  src/
+  ├── main/scala/<group>/  # production sources
+  └── test/scala/<group>/  # tests
+  build.sbt
+
+shell: |
+  bin/                     # executable scripts
+  lib/                     # sourced helper functions
+  tests/                   # bats tests
+
+sql: |
+  migrations/              # versioned schema migrations
+  models/                  # views / stored procedures
+  seeds/                   # seed data
+
+swift: |
+  Sources/
+  └── <Target>/            # .swift sources
+  Tests/
+  └── <Target>Tests/
+  Package.swift
+
+terraform: |
+  main.tf                  # root module resources
+  variables.tf
+  outputs.tf
+  modules/                 # reusable modules
+  environments/            # per-env configs (dev, prod)
