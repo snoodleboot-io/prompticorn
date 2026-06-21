@@ -1,14 +1,21 @@
 """Tests for project-level settings capture and injection into core conventions."""
 
+import re
 from pathlib import Path
 
 import pytest
 
+from prompticorn.builders.convention_generator import (
+    generate_all_conventions,
+    get_all_languages,
+)
 from prompticorn.cli import _ask_project_questions
 from prompticorn.config_handler import create_default_config
 from prompticorn.prompt_builder import get_prompt_builder
 from prompticorn.questions.project import NOT_SPECIFIED, get_project_questions
 from prompticorn.source_layouts import get_source_layout
+
+_JINJA = re.compile(r"\{\{|\{%")
 
 
 class TestProjectQuestions:
@@ -150,3 +157,31 @@ class TestSourceLayout:
         # Assert — the Python standard layout is rendered (not a generic stub).
         assert "__init__.py" in general
         assert "└── TODO" not in general
+
+
+class TestAllLanguagesRender:
+    """End-to-end render check for every supported language."""
+
+    @pytest.mark.parametrize("language", get_all_languages())
+    def test_language_conventions_render_clean(self, language):
+        # Arrange
+        spec = {
+            "language": language,
+            "runtime": "",
+            "package_manager": "",
+            "test_framework": "",
+            "linter": "",
+            "formatter": "",
+            "coverage": {},
+        }
+        # Act
+        out = generate_all_conventions([spec], "single-language", {"layout_style": "flat"})
+        general = out[".claude/conventions/core/general.md"]
+        lang_conv = out.get(f".claude/conventions/languages/{language}.md", "")
+        # Assert — language's source layout rendered into core convention, no leaks.
+        assert get_source_layout(language).splitlines()[0] in general
+        assert not _JINJA.search(general)
+        assert "<!-- path" not in general
+        assert lang_conv, f"no language convention generated for {language}"
+        assert not _JINJA.search(lang_conv)
+        assert "<!-- path" not in lang_conv
