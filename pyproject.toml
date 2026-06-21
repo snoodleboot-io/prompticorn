@@ -5,7 +5,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "prompticorn"
-version = "0.1.0"
+# Version is dynamic: sourced from prompticorn/__about__.py and injected by CI/CD.
+dynamic = ["version"]
 description = "Build AI coding assistant configs from a shared prompt library"
 readme = "README.md"
 license = { text = "MIT" }
@@ -46,6 +47,9 @@ Issues = "https://github.com/snoodleboot-io/prompticorn/issues"
 
 [project.scripts]
 prompticorn = "prompticorn.cli:cli"
+
+[tool.hatch.version]
+path = "prompticorn/__about__.py"
 
 [tool.hatch.build.targets.wheel]
 packages = ["prompticorn"]
