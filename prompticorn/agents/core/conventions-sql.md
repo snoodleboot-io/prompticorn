@@ -2,7 +2,7 @@
 # Core Conventions SQL
 
 Database:            {{ database }} e.g., PostgreSQL, MySQL, SQLite
-ORM/Query:           {{ orm_query }} e.g., Prisma, SQLAlchemy, GORM, Drizzle
+ORM/Query:           {{ orm }} e.g., Prisma, SQLAlchemy, GORM, Drizzle
 
 ### Naming Conventions
 
@@ -17,12 +17,12 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           {{ line_coverage }} e.g., 80%
-Branch:         {{ branch_coverage }} e.g., 70%
-Function:       {{ function_coverage }} e.g., 90%
-Statement:      {{ statement_coverage }} e.g., 85%
-Mutation:       {{ mutation_coverage }} e.g., 80%
-Path:           {{ path_coverage }} e.g., 60%
+Line:           {{ coverage_targets.get('line', '') }} e.g., 80%
+Branch:         {{ coverage_targets.get('branch', '') }} e.g., 70%
+Function:       {{ coverage_targets.get('function', '') }} e.g., 90%
+Statement:      {{ coverage_targets.get('statement', '') }} e.g., 85%
+Mutation:       {{ coverage_targets.get('mutation', '') }} e.g., 80%
+Path:           {{ coverage_targets.get('path', '') }} e.g., 60%
 
 #### Test Types
 

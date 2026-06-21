@@ -101,3 +101,7 @@ _temp/
 *.temp
 .DS_Store
 .idea/
+
+# Local scratch/review build dirs
+test_local/
+local_test/

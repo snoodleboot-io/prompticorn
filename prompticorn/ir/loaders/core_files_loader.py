@@ -4,6 +4,7 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
+from prompticorn.source_layouts import get_source_layout
 from prompticorn.text_utils import strip_source_header_comments
 
 
@@ -119,8 +120,12 @@ class CoreFilesLoader:
 
         context = {
             "repository_type": repository_type,
+            "source_layout": get_source_layout(
+                spec.get("language", ""), project.get("layout_style", "flat")
+            ),
             "database": project.get("database", ""),
             "orm": project.get("orm", ""),
+            "error_handling": project.get("error_handling", ""),
             "commit_style": project.get("commit_style", ""),
             "pr_size": project.get("pr_size", ""),
             "deploy_target": project.get("deploy_target", ""),

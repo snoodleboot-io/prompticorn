@@ -107,6 +107,64 @@ class PrSizeQuestion(Question):
         return NOT_SPECIFIED
 
 
+class LayoutStyleQuestion(Question):
+    """Source-tree layout style (flat vs src)."""
+
+    @property
+    def key(self) -> str:
+        return "project_layout_style"
+
+    @property
+    def question_text(self) -> str:
+        return "Which source-tree layout should the conventions document?"
+
+    @property
+    def explanation(self) -> str:
+        return (
+            "flat: package/modules at the repo root (idiomatic default).\n"
+            "src: sources nested under a src/ directory."
+        )
+
+    @property
+    def options(self) -> list[str]:
+        return ["flat", "src"]
+
+    @property
+    def option_explanations(self) -> dict[str, str]:
+        return {
+            "flat": "Package/modules at the repo root (recommended default).",
+            "src": "Sources nested under a src/ directory.",
+        }
+
+    @property
+    def default(self) -> str:
+        return "flat"
+
+
+class ErrorHandlingQuestion(Question):
+    """Project error-handling pattern."""
+
+    @property
+    def key(self) -> str:
+        return "project_error_handling"
+
+    @property
+    def question_text(self) -> str:
+        return "What error-handling pattern does this project follow?"
+
+    @property
+    def explanation(self) -> str:
+        return "How errors are surfaced and handled (documented in the core conventions)."
+
+    @property
+    def options(self) -> list[str]:
+        return [NOT_SPECIFIED, "Exceptions", "Result type", "Error values / codes"]
+
+    @property
+    def default(self) -> str:
+        return NOT_SPECIFIED
+
+
 class DeployTargetQuestion(Question):
     """Project deployment target."""
 
@@ -150,8 +208,10 @@ def get_project_questions() -> list[Question]:
         List of Question instances.
     """
     return [
+        LayoutStyleQuestion(),
         DatabaseQuestion(),
         OrmQuestion(),
+        ErrorHandlingQuestion(),
         CommitStyleQuestion(),
         PrSizeQuestion(),
         DeployTargetQuestion(),

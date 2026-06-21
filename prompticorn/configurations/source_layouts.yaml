@@ -1,0 +1,231 @@
+# Standard source-tree layouts per language, rendered into the core convention's
+# "File & Folder Structure" section based on the project's primary language and the
+# chosen layout style (flat is the default; src is selectable in init).
+#
+# An entry may be either:
+#   - a mapping with "flat" and "src" keys (when both layouts are idiomatic), or
+#   - a single string (when the ecosystem dictates one canonical layout).
+# Languages not listed fall back to "default".
+
+default:
+  flat: |
+    <module>/                # source organized by feature/module (flat layout)
+    tests/                   # tests mirroring the source layout
+  src: |
+    src/                     # source organized by feature/module
+    tests/                   # tests mirroring the source layout
+
+python:
+  flat: |
+    <your_package>/          # importable package at repo root (flat layout, default)
+    ├── __init__.py
+    ├── domain/              # entities, value objects, domain logic
+    ├── services/            # application / business logic
+    ├── adapters/            # external IO (db, http, filesystem)
+    └── settings.py          # pydantic-settings configuration
+    tests/
+    ├── unit/
+    └── integration/
+    pyproject.toml
+  src: |
+    src/
+    └── <your_package>/
+        ├── __init__.py
+        ├── domain/          # entities, value objects, domain logic
+        ├── services/        # application / business logic
+        ├── adapters/        # external IO (db, http, filesystem)
+        └── settings.py      # pydantic-settings configuration
+    tests/
+    ├── unit/
+    └── integration/
+    pyproject.toml
+
+typescript:
+  flat: |
+    <module>/                # source organized by feature/module (flat layout, default)
+    ├── domain/              # entities, types, domain logic
+    ├── services/            # application / business logic
+    ├── adapters/            # external IO (db, http, fs)
+    └── index.ts             # public entry point
+    tests/
+  src: |
+    src/
+    ├── domain/              # entities, types, domain logic
+    ├── services/            # application / business logic
+    ├── adapters/            # external IO (db, http, fs)
+    └── index.ts             # public entry point
+    tests/
+
+javascript:
+  flat: |
+    <module>/                # source organized by feature/module (flat layout, default)
+    ├── domain/              # entities, domain logic
+    ├── services/            # application / business logic
+    ├── adapters/            # external IO (db, http, fs)
+    └── index.js             # public entry point
+    tests/
+  src: |
+    src/
+    ├── domain/              # entities, domain logic
+    ├── services/            # application / business logic
+    ├── adapters/            # external IO (db, http, fs)
+    └── index.js             # public entry point
+    tests/
+
+golang: |
+  cmd/
+  └── <app>/main.go        # binary entrypoints
+  internal/                # private application code
+  pkg/                     # public, importable libraries
+  <package>_test.go        # tests co-located with source
+
+rust: |
+  src/
+  ├── lib.rs               # library crate root
+  ├── main.rs              # binary entrypoint (if applicable)
+  └── <module>/mod.rs      # modules
+  tests/                   # integration tests
+
+java: |
+  src/
+  ├── main/java/<group>/<artifact>/   # production sources
+  └── test/java/<group>/<artifact>/   # tests mirroring main
+
+kotlin: |
+  src/
+  ├── main/kotlin/<group>/<artifact>/ # production sources
+  └── test/kotlin/<group>/<artifact>/ # tests mirroring main
+
+ruby: |
+  lib/
+  └── <gem_name>/          # library code
+  app/                     # application code (Rails)
+  spec/                    # RSpec tests
+
+csharp: |
+  src/
+  └── <Project>/
+      ├── Domain/
+      ├── Services/
+      └── Program.cs
+  tests/
+  └── <Project>.Tests/
+
+c: |
+  src/                     # .c implementation files
+  include/                 # public .h headers
+  tests/
+  Makefile
+
+cpp: |
+  src/                     # .cpp implementation files
+  include/                 # public headers
+  tests/
+  CMakeLists.txt
+
+clojure: |
+  src/                     # namespaces (src/<group>/<artifact>/...)
+  test/
+  deps.edn
+
+dart: |
+  lib/                     # library / package code
+  bin/                     # executables
+  test/
+  pubspec.yaml
+
+elixir: |
+  lib/                     # modules
+  test/
+  mix.exs
+
+elm: |
+  src/                     # Elm modules (Main.elm, ...)
+  tests/
+  elm.json
+
+fsharp: |
+  src/
+  └── <Project>/           # .fs sources + <Project>.fsproj
+  tests/
+  └── <Project>.Tests/
+
+groovy: |
+  src/
+  ├── main/groovy/<group>/ # production sources
+  └── test/groovy/<group>/ # tests
+
+haskell: |
+  src/                     # library modules
+  app/                     # executable Main.hs
+  test/
+  <package>.cabal
+
+html: |
+  index.html               # default home page (top level, lowercase names)
+  assets/                  # all static assets
+  ├── css/
+  ├── js/
+  └── images/
+
+julia: |
+  src/                     # <Package>.jl and modules
+  test/
+  Project.toml
+
+lua: |
+  src/                     # Lua modules (main module: <modulename>.lua)
+  └── bin/                 # executables
+  spec/                    # busted tests
+  <rock>-<version>.rockspec
+
+objc: |
+  Classes/                 # .h/.m sources (group into Models/, Views/, ...)
+  Tests/                   # test/spec classes
+  Info.plist
+  <Project>.xcodeproj      # (frameworks: split Public/ vs Private/ headers)
+
+php: |
+  src/                     # PSR-4 autoloaded classes
+  tests/
+  composer.json
+
+r: |
+  R/                       # package functions
+  man/                     # generated documentation (.Rd)
+  tests/
+  ├── testthat/            # testthat test files (test-*.R)
+  └── testthat.R           # test runner entry point
+  DESCRIPTION
+  NAMESPACE
+
+scala: |
+  src/
+  ├── main/scala/<group>/  # production sources
+  └── test/scala/<group>/  # tests
+  build.sbt
+
+shell: |
+  bin/                     # executable scripts
+  lib/                     # sourced helper functions
+  tests/                   # bats tests
+
+sql: |
+  migrations/              # versioned, immutable schema migrations (V001__name.sql)
+  seeds/                   # seed / starter data (INSERTs)
+  schema/                  # views, functions, stored procedures
+  # multi-env: nest migrations under environments/<env>/
+
+swift: |
+  Sources/
+  └── <Target>/            # .swift sources
+  Tests/
+  └── <Target>Tests/
+  Package.swift
+
+terraform: |
+  main.tf                  # root module resources
+  variables.tf
+  outputs.tf
+  modules/                 # reusable modules
+  environments/            # per-env configs (dev, prod)

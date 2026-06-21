@@ -216,8 +216,10 @@ class ConfigHandler:
             Dictionary of project-level settings with empty defaults.
         """
         return {
+            "layout_style": "flat",
             "database": "",
             "orm": "",
+            "error_handling": "",
             "commit_style": "",
             "pr_size": "",
             "deploy_target": "",
