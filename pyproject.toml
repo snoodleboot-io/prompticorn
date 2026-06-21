@@ -62,7 +62,16 @@ dev = [
     "pre-commit>=4.0.0",
     "pyright>=1.1.389",
     "build>=1.0.0",
+    "mutmut>=3.0",
 ]
+
+[tool.mutmut]
+# Mutation testing. Run:  uv run mutmut run   then:  uv run mutmut results
+# Mutation is slow over the whole tree — target a module by editing paths_to_mutate.
+paths_to_mutate = ["prompticorn/"]
+tests_dir = ["tests/"]
+# Skip the slow end-to-end builder tests during mutation runs for speed.
+runner = "uv run pytest -x -q -m 'not slow' --no-cov"
 
 
 [tool.ruff]
