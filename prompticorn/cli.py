@@ -50,6 +50,7 @@ from prompticorn.questions.base.folder_spec import (
     FolderSpecRegistry,
 )
 from prompticorn.questions.base.repository_type_question import RepositoryTypeQuestion
+from prompticorn.questions.handlers.handle_single_language_questions import resolve_answer
 from prompticorn.questions.language import LANGUAGE_KEYS
 
 # Bundled agents directory (same location prompt_builder discovers from)
@@ -306,8 +307,8 @@ def _ask_language_questions_for_folder(spec: dict[str, Any]) -> dict[str, Any]:
             allow_multiple=question.allow_multiple,
         )
 
-        # Store the answer in the spec
-        spec[question.key] = answer
+        # Store the answer (resolving preset values like coverage targets)
+        spec[question.key] = resolve_answer(question, answer)
 
     return spec
 
@@ -362,8 +363,8 @@ def _ask_folder_questions(folder_specs: list[dict[str, Any]]) -> list[dict[str, 
                 allow_multiple=question.allow_multiple,
             )
 
-            # Store the answer in the spec
-            spec[question.key] = answer
+            # Store the answer (resolving preset values like coverage targets)
+            spec[question.key] = resolve_answer(question, answer)
 
         updated_specs.append(spec)
 

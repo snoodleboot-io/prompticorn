@@ -21,6 +21,21 @@ from prompticorn.questions.base.question import Question
 from prompticorn.questions.language import LANGUAGE_KEYS, get_language_questions
 
 
+def resolve_answer(question: Question, answer: Any) -> Any:
+    """Resolve a selected option to its stored value.
+
+    Some questions (e.g. coverage targets) present preset names but store a
+    structured value (a dict). If the question defines ``get_value`` and it
+    resolves the answer, use that; otherwise keep the raw answer.
+    """
+    get_value = getattr(question, "get_value", None)
+    if callable(get_value):
+        resolved = get_value(answer)
+        if resolved is not None:
+            return resolved
+    return answer
+
+
 class HandleSingleLanguageQuestions:
     """Handler for single-language repository questions.
 
@@ -90,7 +105,7 @@ class HandleSingleLanguageQuestions:
 
         # Ask each question in the pipeline
         for q in lang_questions:
-            value = self._ask_question(q, language)
+            value = resolve_answer(q, self._ask_question(q, language))
             config_key = q.key.replace(f"{language}_", "")
             config["spec"][config_key] = value
 

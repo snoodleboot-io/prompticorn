@@ -73,7 +73,10 @@ def _build_template_context(spec: dict[str, Any] | None) -> dict[str, Any]:
     # ``coverage_targets`` is the documented name for the coverage dict passed to
     # the testing/coverage macros (the templates alias the coverage *macro module*
     # as ``coverage``, so the data must use a distinct name to avoid shadowing).
-    context["coverage_targets"] = spec.get("coverage") or {}
+    # Must be a dict — a spec may carry a coverage preset *name* (a string); guard
+    # so a bad shape never crashes (and silently drops) convention rendering.
+    coverage = spec.get("coverage")
+    context["coverage_targets"] = coverage if isinstance(coverage, dict) else {}
     return context
 
 
