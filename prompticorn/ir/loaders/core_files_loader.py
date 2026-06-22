@@ -114,6 +114,10 @@ class CoreFilesLoader:
             'Language: python, Runtime: 3.11'
         """
         spec = config.get("spec", {})
+        # Multi-language-monorepo configs carry a list of folder specs; use the
+        # first as the primary spec (matching the builders' language extraction).
+        if isinstance(spec, list):
+            spec = spec[0] if spec else {}
         abstract_class_style = spec.get("abstract_class_style", "interface")
         repository_type = (config.get("repository") or {}).get("type", "")
         project = config.get("project") or {}
