@@ -269,10 +269,10 @@ jobs:
          GITHUB_EVENT_ACTION: ${{ github.event.action || '' }}
          MAJOR_VERSION: ${{ env.MAJOR_VERSION }}
 
-      - name: Update version in pyproject.toml
+      - name: Inject version into __about__.py
         run: |
-          sed -i "s/^version = \"0.1.0\"/version = \"${{ steps.version.outputs.version }}\"/" pyproject.toml
-          cat pyproject.toml | grep "^version ="
+          sed -i "s/^__version__ = .*/__version__ = \"${{ steps.version.outputs.version }}\"/" prompticorn/__about__.py
+          grep "^__version__" prompticorn/__about__.py
 
       - name: Build package
         run: uv build
@@ -335,10 +335,10 @@ jobs:
           GITHUB_EVENT_ACTION: ${{ github.event.action || '' }}
           MAJOR_VERSION: ${{ env.MAJOR_VERSION }}
 
-      - name: Update version in pyproject.toml
+      - name: Inject version into __about__.py
         run: |
-          sed -i "s/^version = \"0.1.0\"/version = \"${{ steps.version.outputs.version }}\"/" pyproject.toml
-          cat pyproject.toml | grep "^version ="
+          sed -i "s/^__version__ = .*/__version__ = \"${{ steps.version.outputs.version }}\"/" prompticorn/__about__.py
+          grep "^__version__" prompticorn/__about__.py
 
       - name: Build package
         run: uv build

@@ -4,28 +4,40 @@
 
 prompticorn uses a **persona-based filtering system** to reduce cognitive overload by showing only the agents, workflows, and skills relevant to your team's roles.
 
-Instead of generating all 25 primary agents, you select which **personas** (SDLC roles) your team uses, and prompticorn generates only the agents needed for those roles.
+Instead of generating all 25 primary agents (plus their subagents), you select which
+**personas** (SDLC roles) your team uses, and prompticorn generates only the agents,
+workflows, and skills needed for those roles.
 
 ## What Are Personas?
 
 Personas represent common software development roles (SDLC personas). Each persona has a specific focus and set of agents/workflows/skills mapped to it.
 
+Personas are defined in `prompticorn/personas/personas.yaml`. There are **12 persona
+definitions** (3 software-engineer specializations plus a deprecated `software_engineer`
+alias). The "Primary Agents" column lists each persona's primary agents from the YAML;
+secondary (cross-cutting) agents and the 5 universal agents are added on top.
+
 **Available Personas:**
 
-| Persona | Focus | Key Agents |
-|---------|-------|------------|
-| **Software Engineer** _(deprecated, use a specific variant below)_ | Writing, maintaining, and testing application code | code, test, refactor, migration |
-| **Backend Software Engineer** | Backend systems, APIs, and server-side development | code, test, refactor, migration |
-| **Frontend Software Engineer** | Frontend development, UI, and client-side code | code, test, refactor, migration |
+| Persona | Focus | Primary Agents |
+|---------|-------|----------------|
+| **Software Engineer (Fullstack)** _(deprecated alias — use Fullstack Software Engineer)_ | Complete applications from UI to API to database | code, test, refactor, migration |
+| **Backend Software Engineer** | Scalable backend systems, APIs, and data persistence layers | code, test, refactor, migration |
+| **Frontend Software Engineer** | Performant, accessible UIs for web and mobile | code, test, refactor, migration |
 | **Fullstack Software Engineer** | Full-stack development across backend and frontend | code, test, refactor, migration |
 | **Architect** | System design, architecture planning, technical decisions | architect, backend, frontend, data |
-| **QA/Tester** | Quality assurance, testing strategies, test automation | test, review, qa-tester |
-| **DevOps Engineer** | CI/CD, infrastructure, deployment automation | code, devops, observability, incident |
-| **Security Engineer** | Security reviews, threat modeling, compliance | security, review, compliance |
-| **Product Manager** | Product strategy, requirements, roadmap planning | product, plan, document |
-| **Data Engineer** | Data pipelines, warehouses, data quality | data, code (ETL), performance |
-| **Data Scientist** | ML model training, evaluation, experimentation | mlai, code (ML), data |
-| **Technical Writer** | Documentation, READMEs, user guides | document, explain |
+| **QA / Tester** | Quality assurance, testing strategy, test automation | test, review |
+| **DevOps Engineer** | Infrastructure as code, deployment, operations, CI/CD | code, devops, observability, incident |
+| **Security Engineer** | Security hardening, threat modeling, and compliance | security, compliance |
+| **Product Manager** | Requirements, prioritization, and roadmap planning | product |
+| **Data Engineer** | Data pipelines, data quality, and data infrastructure | code, data |
+| **Data Scientist** | ML, model development, and optimization | code, mlai |
+| **Technical Writer** | Documentation and technical communication | document |
+
+> Secondary agents per persona (from `personas.yaml`): for example, QA/Tester also pulls
+> in `performance` and `enforcement`; Security Engineer also pulls in `incident`, `review`,
+> and `enforcement`; Data Scientist also pulls in `data`, `test`, `performance`, `devops`,
+> and `observability`. See `prompticorn/personas/personas.yaml` for the full lists.
 
 ## Universal Agents
 
@@ -49,11 +61,17 @@ Step 3.5: Select Personas
 
 Which personas (SDLC roles) will be working on this codebase?
 
-  [ ] Software Engineer - Software development, implementation, and coding
-  [ ] Architect - System design, architecture planning, and technical decision making
-  [ ] QA/Tester - Quality assurance, testing strategies, and automated test suites
-  [ ] DevOps Engineer - Automate deployment, infrastructure, CI/CD pipelines
-  [... 5 more options ...]
+  [ ] Backend Software Engineer - Backend systems, APIs, and data persistence
+  [ ] Frontend Software Engineer - Performant, accessible web/mobile UIs
+  [ ] Fullstack Software Engineer - Complete apps from UI to API to database
+  [ ] Architect - System design, architecture planning, technical decisions
+  [ ] QA / Tester - Quality assurance, testing strategy, test automation
+  [ ] DevOps Engineer - Infrastructure as code, deployment, CI/CD
+  [ ] Security Engineer - Security hardening, threat modeling, compliance
+  [ ] Product Manager - Requirements, prioritization, roadmap planning
+  [ ] Data Engineer - Data pipelines, data quality, data infrastructure
+  [ ] Data Scientist - ML, model development, optimization
+  [ ] Technical Writer - Documentation and technical communication
 
 Select one or more roles. Only agents/workflows for selected personas will be generated.
 ```
@@ -62,59 +80,59 @@ Select one or more roles. Only agents/workflows for selected personas will be ge
 
 ## Examples
 
-### Example 1: Small Startup (Software Engineer Only)
+### Example 1: Small Startup (Fullstack Software Engineer Only)
 
 **Selected Personas:**
-- Software Engineer
+- Fullstack Software Engineer
 
 **Generated Agents (~14 agents):**
 - Universal agents (5): ask, debug, explain, plan, orchestrator
-- Software Engineer agents (9): code, test, refactor, migration, review, backend, frontend, performance, enforcement
+- Fullstack SWE primary (4): code, test, refactor, migration
+- Fullstack SWE secondary (5): review, backend, frontend, performance, enforcement
 
 **What's Filtered Out:**
-- architect, devops, security, mlai, data, product, compliance (not needed for day-to-day coding)
+- architect, devops, security, compliance, mlai, data, observability, incident, product, document (not needed for day-to-day coding)
 
 ---
 
-### Example 2: Full-Stack Team (Software Engineer + QA/Tester)
+### Example 2: Product Team (Fullstack Software Engineer + QA/Tester)
 
 **Selected Personas:**
-- Software Engineer
-- QA/Tester
+- Fullstack Software Engineer
+- QA / Tester
 
 **Generated Agents (~15 agents):**
 - Universal agents (5): ask, debug, explain, plan, orchestrator
-- Software Engineer agents (9): code, test, refactor, migration, review, backend, frontend, performance, enforcement
-- QA/Tester additional agents (1): qa-tester
-- **Note:** test agent is shared by both personas (no duplication)
+- Fullstack SWE agents (9): code, test, refactor, migration, review, backend, frontend, performance, enforcement
+- QA/Tester adds (0 new primary): test and review are shared; qa-tester is the standalone agent, with performance and enforcement as shared secondaries
+- **Note:** `test`, `review`, `performance`, and `enforcement` are shared across both personas (no duplication)
 
 **Why This Works:**
-- Software Engineers write application code
-- QA/Testers write test code using the `test` agent (NOT the `code` agent)
-- Both personas share the `test` agent
-- QA/Tester gets specialized `qa-tester` agent for testing strategies and quality assurance processes
+- Fullstack engineers write application code with the `code` agent
+- QA/Testers center on the `test` and `review` agents rather than `code`
+- The `qa-tester` agent provides specialized testing-strategy and quality-assurance subagents (unit, integration, e2e, load)
 
 ---
 
-### Example 3: Enterprise Team (Software Engineer + DevOps + Security)
+### Example 3: Enterprise Team (Fullstack Software Engineer + DevOps + Security)
 
 **Selected Personas:**
-- Software Engineer
+- Fullstack Software Engineer
 - DevOps Engineer
 - Security Engineer
 
 **Generated Agents (~18 agents):**
 - Universal agents (5): ask, debug, explain, plan, orchestrator
-- Software Engineer agents (9): code, test, refactor, migration, review, backend, frontend, performance, enforcement
-- DevOps additional agents (1): devops
-- Security additional agents (2): security, compliance
-- **Note:** code, review, performance agents are shared across personas
+- Fullstack SWE agents (9): code, test, refactor, migration, review, backend, frontend, performance, enforcement
+- DevOps adds: devops, observability, incident (code is shared)
+- Security adds: security, compliance (review, incident, enforcement are shared secondaries)
+- **Note:** `code`, `review`, `performance`, `enforcement`, and `incident` are shared across personas
 
 **Why This Works:**
-- Software Engineers write application code
+- Fullstack engineers write application code
 - DevOps Engineers write Infrastructure-as-Code (IaC) using the `code` agent
-- Security Engineers review code and infrastructure using `security` and `review` agents
-- All three personas benefit from the `code`, `review`, and `performance` agents
+- Security Engineers review code and infrastructure using `security`, `compliance`, and `review` agents
+- All three personas benefit from shared cross-cutting agents
 
 ---
 
@@ -125,7 +143,7 @@ Select one or more roles. Only agents/workflows for selected personas will be ge
 **Why?**  
 QA/Testers write **test code**, not **application code**. The `test` agent is specialized for writing tests, while the `code` agent is for application/business logic.
 
-If your QA team also writes application code, select both "Software Engineer" and "QA/Tester" personas.
+If your QA team also writes application code, select both a software-engineer persona (e.g. "Fullstack Software Engineer") and "QA / Tester".
 
 ### 2. DevOps Engineer HAS `code` Agent
 
@@ -140,13 +158,13 @@ Data Scientists write Python/R code for ML model training, feature engineering, 
 ### 4. Multi-Persona Selection Uses UNION Logic
 
 **How It Works:**  
-If you select "Software Engineer" + "QA/Tester", you get:
-- All agents from Software Engineer
-- + All agents from QA/Tester
+If you select "Fullstack Software Engineer" + "QA / Tester", you get:
+- All agents from Fullstack Software Engineer
+- + All agents from QA / Tester
 - + Universal agents (always included)
 
 **No Duplicates:**  
-If an agent is in multiple personas (e.g., `test` is in both Software Engineer and QA/Tester), it's only generated once.
+If an agent is in multiple personas (e.g., `test` and `review` are in both Fullstack Software Engineer and QA / Tester), it's only generated once.
 
 ---
 
@@ -163,9 +181,15 @@ spec:
   ...
 variant: minimal
 active_personas:
-  - software_engineer
+  - fullstack_software_engineer
   - qa_tester
 ```
+
+> Persona keys use snake_case as defined in `prompticorn/personas/personas.yaml` (for
+> example `backend_software_engineer`, `frontend_software_engineer`,
+> `fullstack_software_engineer`, `qa_tester`, `devops_engineer`, `security_engineer`,
+> `product_manager`, `data_engineer`, `data_scientist`, `technical_writer`). The
+> `software_engineer` key remains as a deprecated alias for `fullstack_software_engineer`.
 
 ## Changing Personas Later
 
@@ -204,11 +228,15 @@ prompticorn init
 
 ### Q: Do personas affect workflows and skills too?
 
-**A:** Yes! Each persona has workflows and skills mapped to it. For example, Software Engineer gets workflows like `code`, `testing`, `refactor`, and skills like `solid-principles`, `debugging-methodology`, etc.
+**A:** Yes! Each persona has workflows and skills mapped to it (in `personas.yaml`, with
+agent-level detail in `prompticorn/configurations/agent_skill_mapping.yaml`). For example,
+the software-engineer personas get workflows like `code`, `testing`, and `refactor`, and
+skills like `incremental-implementation`, `code-review-practices`, `testing-strategies`,
+and `debugging-methodology`.
 
 ### Q: Are agents from unselected personas completely unavailable?
 
-**A:** Yes. If you select only "Software Engineer", agents like `devops`, `security`, and `mlai` will not be generated. To use them, you must select the corresponding personas.
+**A:** Yes. If you select only a software-engineer persona, agents like `devops`, `security`, and `mlai` will not be generated. To use them, you must select the corresponding personas.
 
 ---
 
@@ -248,7 +276,7 @@ Regenerating kilo-ide configuration...
 
 Personas swapped successfully!
 
-  Active personas: Software Engineer, Data Scientist, Data Engineer
+  Active personas: Fullstack Software Engineer, Data Scientist, Data Engineer
 ```
 
 **When to use swap:**

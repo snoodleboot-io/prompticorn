@@ -5,7 +5,8 @@ build-backend = "hatchling.build"
 
 [project]
 name = "prompticorn"
-version = "0.1.0"
+# Version is dynamic: sourced from prompticorn/__about__.py and injected by CI/CD.
+dynamic = ["version"]
 description = "Build AI coding assistant configs from a shared prompt library"
 readme = "README.md"
 license = { text = "MIT" }
@@ -47,6 +48,9 @@ Issues = "https://github.com/snoodleboot-io/prompticorn/issues"
 [project.scripts]
 prompticorn = "prompticorn.cli:cli"
 
+[tool.hatch.version]
+path = "prompticorn/__about__.py"
+
 [tool.hatch.build.targets.wheel]
 packages = ["prompticorn"]
 
@@ -58,7 +62,16 @@ dev = [
     "pre-commit>=4.0.0",
     "pyright>=1.1.389",
     "build>=1.0.0",
+    "mutmut>=3.0",
 ]
+
+[tool.mutmut]
+# Mutation testing. Run:  uv run mutmut run   then:  uv run mutmut results
+# Mutation is slow over the whole tree — target a module by editing paths_to_mutate.
+paths_to_mutate = ["prompticorn/"]
+tests_dir = ["tests/"]
+# Skip the slow end-to-end builder tests during mutation runs for speed.
+runner = "uv run pytest -x -q -m 'not slow' --no-cov"
 
 
 [tool.ruff]

@@ -31,7 +31,7 @@ We are committed to providing a welcoming and inclusive environment. Please:
 
 ### Prerequisites
 
-- **Python 3.10+** (3.12 recommended)
+- **Python 3.10+** (the project targets 3.10–3.14)
 - **uv** for package management (recommended) or pip
 - **Git** for version control
 - **pyright** for type checking
@@ -47,7 +47,7 @@ We are committed to providing a welcoming and inclusive environment. Please:
 
 3. Add upstream remote:
    ```bash
-   git remote add upstream https://github.com/johna/prompticorn.git
+   git remote add upstream https://github.com/snoodleboot-io/prompticorn.git
    ```
 
 ### Install Development Environment
@@ -71,27 +71,39 @@ uv sync --dev
 python -m venv .venv
 source .venv/bin/activate  # On Windows: .venv\Scripts\activate
 
-# Install in development mode
-pip install -e ".[dev]"
+# Install the package in development mode
+pip install -e .
+
+# Install the dev tools (declared under [dependency-groups] in pyproject.toml)
+pip install pytest pytest-cov ruff pyright pre-commit build mutmut
 ```
+
+> **Note:** dev tooling lives in the PEP 735 `[dependency-groups]` table, which
+> `uv sync --dev` installs automatically. Plain `pip` does not yet resolve that
+> table, so install the dev tools explicitly (above) or, on a recent pip, with
+> `pip install --group dev`.
 
 ### Verify Installation
 
 ```bash
 # Check CLI works
-prompticorn --help
+uv run prompticorn --help
 
 # Run tests
-pytest
+uv run pytest
 
 # Type checking
-pyright
+uv run pyright
 
 # Linting
-ruff check .
+uv run ruff check .
 ```
 
 If all commands succeed, you're ready to contribute!
+
+> **Tip:** Prefix tool invocations with `uv run` so they execute inside the
+> project's managed environment. If you activated the virtualenv manually
+> (`source .venv/bin/activate`), you can drop the `uv run` prefix.
 
 ---
 
@@ -117,48 +129,96 @@ git checkout -b feat/your-feature-name
 
 ### 3. Run Tests
 
+Tests run with [pytest](https://docs.pytest.org/). Configuration lives in the
+`[tool.pytest.ini_options]` table of `pyproject.toml` (test discovery, strict
+markers, and the `slow`/`integration`/`security`/`unit` markers).
+
 ```bash
 # All tests
-pytest
+uv run pytest
 
 # Unit tests only
-pytest tests/unit
+uv run pytest tests/unit
 
 # Integration tests
-pytest tests/integration
+uv run pytest tests/integration
 
-# With coverage
-pytest --cov=prompticorn --cov-report=html
+# Skip the slow end-to-end builder tests
+uv run pytest -m "not slow"
 
-# View coverage report
-open htmlcov/index.html  # macOS
-xdg-open htmlcov/index.html  # Linux
-start htmlcov/index.html  # Windows
+# Stop on first failure
+uv run pytest -x
 ```
 
-### 4. Type Checking
+### 4. Coverage
+
+Coverage is collected with [pytest-cov](https://pytest-cov.readthedocs.io/). The
+project sits at roughly **85%** line coverage; new code should not regress it.
 
 ```bash
-# Run pyright (strict mode)
-pyright
+# Terminal summary
+uv run pytest --cov=prompticorn --cov-report=term-missing
 
-# No errors allowed - fix all type issues
+# HTML report
+uv run pytest --cov=prompticorn --cov-report=html
+
+# View coverage report
+open htmlcov/index.html      # macOS
+xdg-open htmlcov/index.html  # Linux
+start htmlcov/index.html     # Windows
 ```
 
-### 5. Linting and Formatting
+### 5. Mutation Testing
+
+For changes to core logic, run [mutmut](https://mutmut.readthedocs.io/) to check
+that the test suite actually catches injected faults. Mutation testing is
+configured in the `[tool.mutmut]` table of `pyproject.toml` (it mutates
+`prompticorn/`, runs against `tests/`, and uses a fast runner that skips the
+`slow` tests with coverage disabled).
+
+```bash
+# Run mutation testing (slow over the whole tree)
+uv run mutmut run
+
+# Inspect surviving mutants
+uv run mutmut results
+```
+
+Mutation runs over the full package are slow — when iterating on one module,
+narrow `paths_to_mutate` in `[tool.mutmut]` to that path before running.
+
+### 6. Type Checking
+
+Type checking uses [pyright](https://github.com/microsoft/pyright). Its
+configuration is in the `[tool.pyright]` table of `pyproject.toml`
+(`typeCheckingMode = "standard"`, checking the `prompticorn` package and
+excluding `tests`).
+
+```bash
+# Run pyright
+uv run pyright
+
+# Fix all reported type issues before opening a PR
+```
+
+### 7. Linting and Formatting
+
+Both linting and formatting use [ruff](https://docs.astral.sh/ruff/), configured
+in the `[tool.ruff]` tables of `pyproject.toml` (line length 100, target
+`py310`; lint rules E/W/F/I/B/C4/UP; double-quote formatting).
 
 ```bash
 # Check for issues
-ruff check .
+uv run ruff check .
 
 # Auto-fix issues
-ruff check --fix .
+uv run ruff check --fix .
 
 # Format code
-ruff format .
+uv run ruff format .
 ```
 
-### 6. Commit Changes
+### 8. Commit Changes
 
 ```bash
 # Stage changes
@@ -176,7 +236,7 @@ git commit -m "feat: add new builder for XYZ"
 - `test:` - Adding/updating tests
 - `chore:` - Maintenance tasks
 
-### 7. Push and Create PR
+### 9. Push and Create PR
 
 ```bash
 # Push to your fork
@@ -193,77 +253,91 @@ git push origin feat/your-feature-name
 
 ```
 prompticorn/
-├── prompticorn/          # Main package
+├── prompticorn/             # Main package
+│   ├── __about__.py         # Single source of the (dynamic) version
 │   ├── __init__.py
-│   ├── cli.py             # CLI entry point
-│   ├── config_handler.py  # Configuration management
-│   ├── registry.py        # Legacy registry
+│   ├── cli.py               # CLI entry point (init, list, validate, switch, swap, update)
+│   ├── config_handler.py    # Read/write .prompticorn/.prompticorn.yaml
+│   ├── registry.py          # Component registry (gitignore patterns, etc.)
+│   ├── source_layouts.py    # Per-language source-tree layout resolution
 │   │
-│   ├── ir/                # Intermediate Representation
-│   │   ├── models/        # Agent, Skill, Workflow models
-│   │   ├── parsers/       # YAML, Markdown parsers
-│   │   └── loaders/       # Component loaders
+│   ├── agents/              # Bundled agent definitions (25 agents + core/)
+│   │   ├── core/            # Shared conventions (conventions-<lang>.md, system, session)
+│   │   ├── code/
+│   │   ├── test/
+│   │   └── ...
 │   │
-│   ├── agent_registry/    # Agent discovery and registry
-│   │   ├── registry.py
-│   │   └── discovery.py
+│   ├── skills/             # ~95 reusable skill definitions
+│   ├── workflows/          # ~100 workflow definitions
 │   │
-│   ├── builders/          # Tool-specific builders
-│   │   ├── base.py        # Builder
-│   │   ├── factory.py     # BuilderFactory
+│   ├── agent_registry/      # Live agent discovery and registry
+│   │   ├── discovery.py     # RegistryDiscovery: scans agents/ tree
+│   │   ├── registry.py      # Registry: build from discovery
+│   │   └── errors.py
+│   │
+│   ├── builders/            # Tool-specific builders (Kilo, Cline, Claude, Cursor, Copilot)
+│   │   ├── base.py
+│   │   ├── factory.py
 │   │   ├── kilo_builder.py
 │   │   ├── cline_builder.py
 │   │   ├── claude_builder.py
 │   │   ├── cursor_builder.py
 │   │   ├── copilot_builder.py
-│   │   └── template_handlers/  # Template substitution
+│   │   ├── convention_generator.py  # Populates conventions from spec choices
+│   │   └── template_handlers/
 │   │
-│   ├── personas/          # Persona-based filtering
-│   │   └── registry.py
+│   ├── ir/                  # Intermediate Representation
+│   │   ├── models/          # agent, skill, workflow, project, rules, tool
+│   │   ├── parsers/
+│   │   └── loaders/
 │   │
-│   ├── ui/                # Terminal UI
-│   │   ├── input/         # Input providers
-│   │   ├── commands/      # UI commands
-│   │   ├── render/        # Renderers
-│   │   └── state/         # State management
+│   ├── configurations/      # YAML data (languages, mappings, source_layouts.yaml)
+│   ├── personas/            # Persona definitions (personas.yaml + registry.py)
 │   │
-│   ├── questions/         # Interactive questions
+│   ├── questions/           # Interactive questions for init
 │   │   ├── base/
+│   │   ├── project/         # Project-level questions (db, ORM, layout, etc.)
 │   │   ├── python/
-│   │   └── typescript/
+│   │   └── ...              # one package per supported language
 │   │
-│   └── agents/            # Bundled agent definitions
-│       ├── code/
-│       ├── test/
-│       └── ...
+│   ├── ui/                  # Terminal UI (input, commands, render, state, pipeline)
+│   ├── prompts/             # Shared prompt assets
+│   │   └── macros/          # Jinja2 macros (checklist, coverage_targets, ...)
+│   └── templates/           # Jinja2 templates (claude/)
 │
-├── tests/                 # Test suite
+├── tests/                   # Test suite
 │   ├── unit/
 │   ├── integration/
 │   ├── security/
+│   ├── slow/
 │   └── conftest.py
 │
-├── docs/                  # Documentation
+├── docs/                    # Documentation
 │   ├── user-guide/
 │   ├── reference/
 │   ├── builders/
 │   └── architecture/
 │
-├── pyproject.toml         # Project metadata
-└── README.md              # Project overview
+├── .github/                 # CI/CD (calculate_version.py, ci-cd.yml)
+├── pyproject.toml           # Project metadata, tool config (ruff/pyright/pytest/mutmut)
+└── README.md                # Project overview
 ```
 
 ### Key Files
 
 | File | Purpose |
 |------|---------|
-| `cli.py` | CLI commands (init, list, validate, etc.) |
-| `config_handler.py` | Read/write `.prompticorn.yaml` |
-| `prompt_builder.py` | Main builder wrapper (Phase 2A) |
+| `__about__.py` | Single source of the package version (`0.0.0.dev0` locally; injected by CI) |
+| `cli.py` | CLI commands (init, list, validate, switch, swap, update) |
+| `config_handler.py` | Read/write `.prompticorn/.prompticorn.yaml` |
+| `source_layouts.py` | Resolve per-language source-tree layout (flat/src) |
 | `ir/models/agent.py` | Agent IR model (immutable Pydantic) |
-| `agent_registry/discovery.py` | Auto-discover agents from filesystem |
+| `agent_registry/discovery.py` | Auto-discover agents from the `agents/` tree |
 | `builders/factory.py` | Builder factory pattern |
+| `builders/convention_generator.py` | Populate conventions from the user's spec choices |
 | `personas/registry.py` | Persona filtering logic |
+| `configurations/source_layouts.yaml` | Per-language source-tree layout data |
+| `.github/scripts/calculate_version.py` | CI version derivation (see [Release Process](#release-process-maintainers)) |
 
 ---
 
@@ -347,16 +421,16 @@ class MyToolBuilder(Builder):
 
 #### Step 2: Register Builder
 
-In `prompticorn/builders/factory.py`, add to `_register_default_builders()`:
+Register your builder with the `BuilderFactory` (see
+`prompticorn/builders/factory.py`) alongside the existing tools:
 
 ```python
-def _register_default_builders():
-    factory.register("kilo", KiloBuilder)
-    factory.register("cline", ClineBuilder)
-    factory.register("claude", ClaudeBuilder)
-    factory.register("cursor", CursorBuilder)
-    factory.register("copilot", CopilotBuilder)
-    factory.register("mytool", MyToolBuilder)  # Add this
+BuilderFactory.register("kilo", KiloBuilder)
+BuilderFactory.register("cline", ClineBuilder)
+BuilderFactory.register("claude", ClaudeBuilder)
+BuilderFactory.register("cursor", CursorBuilder)
+BuilderFactory.register("copilot", CopilotBuilder)
+BuilderFactory.register("mytool", MyToolBuilder)  # Add this
 ```
 
 #### Step 3: Add to CLI
@@ -366,7 +440,7 @@ In `prompticorn/cli.py`, add to tool selection:
 ```python
 ai_tool = select_option_with_explain(
     question="Which AI assistant would you like to configure?",
-    options=["Kilo CLI", "Kilo IDE", "Cline", "Cursor", "Copilot", "MyTool"],  # Add "MyTool"
+    options=["Kilo CLI", "Kilo IDE", "Claude", "Cline", "Cursor", "Copilot", "MyTool"],  # Add "MyTool"
     explanations={
         # ... existing ...
         "MyTool": "MyTool - .mytool/config.md",
@@ -426,13 +500,13 @@ Add builder documentation to `docs/builders/MYTOOL_BUILDER_GUIDE.builder.md`.
 
 ```bash
 # Run all tests
-pytest
+uv run pytest
 
 # Type checking
-pyright
+uv run pyright
 
 # Try it manually
-prompticorn init
+uv run prompticorn init
 # Select "MyTool"
 # Verify output files generated
 ```
@@ -473,30 +547,27 @@ class MyLangRuntimeQuestion(Question):
 
 #### Step 2: Register Language
 
-In `prompticorn/questions/language.py`:
+Languages are discovered dynamically from
+`prompticorn/configurations/languages.yaml`. Add your language to the
+`supported_languages` list:
 
-```python
-LANGUAGE_KEYS = [
-    "python",
-    "typescript",
-    "javascript",
-    "mylang",  # Add this
-]
+```yaml
+supported_languages:
+  - python
+  - typescript
+  - javascript
+  - mylang  # Add this
 ```
+
+`LanguageRegistry` (in `prompticorn/questions/language.py`) reads this file, so
+no code change is required to register the language itself.
 
 #### Step 3: Create Conventions File
 
-Create `prompticorn/configurations/core-conventions-mylang.md`:
-
-```markdown
-# Core Conventions MyLang
-
-Language:        mylang
-Runtime:         2.0
-Package Manager: mylang-pkg
-Linter:          mylang-lint
-Formatter:       mylang-fmt
-```
+Add the language convention to `prompticorn/agents/core/conventions-mylang.md`.
+This file is the template the convention generator populates with the user's
+spec choices (runtime, package manager, linter, formatter, coverage targets,
+and the resolved source-tree layout) during `init`.
 
 #### Step 4: Add Template Handlers
 
@@ -540,7 +611,7 @@ personas:
 
 ```bash
 # Re-run init
-prompticorn init
+uv run prompticorn init
 
 # Select "My New Role" persona
 # Verify correct agents generated
@@ -653,8 +724,11 @@ Create `prompticorn/agents/my-agent/minimal/workflow.md` (optional):
 #### Step 5: Test Discovery
 
 ```bash
-# Validate agent discovered
-prompticorn list
+# Validate the agent registry structure
+uv run prompticorn validate
+
+# List discovered agents, subagents, and prompt variants
+uv run prompticorn list
 
 # Should show "my-agent" in output
 ```
@@ -670,6 +744,7 @@ tests/
 ├── unit/              # Unit tests (fast, isolated)
 ├── integration/       # Integration tests (slower, realistic)
 ├── security/          # Security tests
+├── slow/              # Slow end-to-end builder tests (marked `slow`)
 └── conftest.py        # Pytest fixtures
 ```
 
@@ -696,27 +771,34 @@ def test_agent_loader_loads_valid_agent():
 
 ### Coverage Expectations
 
-- **Overall:** 90%+
-- **Core modules:** 95%+ (ir/, builders/, registry/)
-- **UI modules:** 80%+ (harder to test interactively)
+- **Overall:** the suite sits around **85%**; don't regress it.
+- **Core modules** (`ir/`, `builders/`, `agent_registry/`): aim high — these
+  carry the build logic and are the easiest to test thoroughly.
+- **UI modules** are harder to exercise interactively; cover what you reasonably
+  can.
+
+For changes to core logic, also run mutation testing (`uv run mutmut run`) to
+confirm the tests catch injected faults — see
+[Mutation Testing](#5-mutation-testing).
 
 ### Running Specific Tests
 
 ```bash
 # Single file
-pytest tests/unit/test_config.py
+uv run pytest tests/unit/test_config.py
 
 # Single test
-pytest tests/unit/test_config.py::test_config_loads
+uv run pytest tests/unit/test_config.py::test_config_loads
 
 # By marker
-pytest -m slow  # Slow tests only
+uv run pytest -m slow            # Slow tests only
+uv run pytest -m "not slow"      # Everything except slow tests
 
 # With verbose output
-pytest -v
+uv run pytest -v
 
 # Stop on first failure
-pytest -x
+uv run pytest -x
 ```
 
 ### Test Fixtures
@@ -796,7 +878,8 @@ Update docs when you:
 
 ### Python Conventions
 
-Follow `.kilo/rules/conventions-python.md` exactly.
+Follow the bundled Python convention at
+`prompticorn/agents/core/conventions-python.md`.
 
 **Key rules:**
 - Type hints on all public functions
@@ -804,7 +887,8 @@ Follow `.kilo/rules/conventions-python.md` exactly.
 - No `setattr`/`getattr` unless framework code
 - All modules have `__init__.py`
 - Use `ruff` for linting and formatting
-- Use `pyright` in strict mode
+- Use `pyright` for type checking (configured as `standard` mode in
+  `[tool.pyright]`)
 
 ### Type Hints Required
 
@@ -850,10 +934,11 @@ raise Exception("Error")
 ### Before Submitting
 
 Checklist:
-- [ ] All tests pass locally (`pytest`)
-- [ ] Type checking passes (`pyright`)
-- [ ] Linting passes (`ruff check .`)
-- [ ] Code formatted (`ruff format .`)
+- [ ] All tests pass locally (`uv run pytest`)
+- [ ] Type checking passes (`uv run pyright`)
+- [ ] Linting passes (`uv run ruff check .`)
+- [ ] Code formatted (`uv run ruff format .`)
+- [ ] Coverage not regressed (`uv run pytest --cov=prompticorn`)
 - [ ] Documentation updated
 - [ ] Commit messages are clear
 - [ ] Branch name follows convention
@@ -895,13 +980,15 @@ Checklist:
 
 ### CI/CD Checks
 
-GitHub Actions runs:
+GitHub Actions (`.github/workflows/ci-cd.yml`) runs:
 - `pytest` - All tests
 - `pyright` - Type checking
 - `ruff check` - Linting
 - Coverage report
 
-All must pass before merge.
+All must pass before merge. The same workflow derives the package version and
+publishes to TestPyPI (on PRs to `main`) and PyPI (on merge to `main`) — see
+[Release Process](#release-process-maintainers).
 
 ---
 
@@ -917,7 +1004,7 @@ All must pass before merge.
 
 Include:
 - Python version
-- prompticorn version
+- prompticorn version (`uv run prompticorn --version`, or the installed PyPI version)
 - Operating system
 - Steps to reproduce
 - Expected vs actual behavior
@@ -935,12 +1022,37 @@ Include:
 
 ## Release Process (Maintainers)
 
-1. Update version in `pyproject.toml`
-2. Update `CHANGELOG.md`
-3. Create release tag: `git tag v0.2.0`
-4. Push tag: `git push --tags`
-5. GitHub Actions builds and publishes to PyPI
+**There is no manual version bump.** The version is *dynamic* and derived by
+CI/CD — do not edit a version string by hand.
+
+### How versioning works
+
+- `pyproject.toml` declares `dynamic = ["version"]` and sources the version from
+  `prompticorn/__about__.py` via Hatch (`[tool.hatch.version]`).
+- `prompticorn/__about__.py` holds only a dev placeholder (`0.0.0.dev0`). That is
+  the version you get for local/editable installs — it is never hand-edited to a
+  real release number.
+- At build time, CI/CD computes the real version
+  (`.github/scripts/calculate_version.py`, invoked from
+  `.github/workflows/ci-cd.yml`) using the scheme **MAJOR.MINOR.PATCH**:
+  - **MAJOR** — from the CI environment (`MAJOR_VERSION`).
+  - **MINOR** — derived from PyPI release history (latest published MINOR for the
+    current MAJOR, plus one).
+  - **PATCH** — derived from the change set (the PR number for PR builds; a
+    release `0` on merge to `main`).
+
+### What that means for contributors
+
+- Don't bump any version field in `pyproject.toml` or `__about__.py`.
+- Don't create `vX.Y.Z` release tags by hand — the workflow handles publishing.
+- Locally, `prompticorn --version` reporting `0.0.0.dev0` is expected.
+
+### Releasing
+
+1. Update `CHANGELOG.md`.
+2. Open a PR to `main`. CI publishes a preview build to **TestPyPI**.
+3. Merge to `main`. CI computes the release version and publishes to **PyPI**.
 
 ---
 
-Thank you for contributing to prompticorn! 🦖
+Thank you for contributing to prompticorn!

@@ -2,23 +2,45 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
-and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
+
+## Versioning
+
+Published versions are **derived automatically in CI/CD** (see
+`.github/scripts/calculate_version.py`): `MAJOR.MINOR.PATCH`, where `MAJOR` is
+fixed by the pipeline, `MINOR` tracks the PyPI release line, and `PATCH` comes from
+the change set. The package version is dynamic (`prompticorn/__about__.py`,
+`0.0.0.dev0` locally); there is no hand-maintained version in `pyproject.toml`.
+Historical `2.x` headings below were internal phase labels and do not correspond to
+a separate release series — there is no `v3.0.0`; Phase 3 content ships on the
+normal release line.
 
 ## [Unreleased]
 
-### Fixed
-- **Multi-select menus now support items 10 and above** — digit keypresses are buffered and committed when you press space, comma, or after a 500ms pause. Previously each digit fired immediately, making it impossible to reach items 10+.
+### Added
+- **Project-level settings captured in `init`** — database, ORM, error-handling
+  pattern, commit style, PR-size limit, deploy target, and source-layout style,
+  stored in a config `project` section and rendered into the core conventions.
+- **Language-standard source-tree layouts** for all 29 supported languages, with a
+  flat default and a selectable `src` style.
+- **Phase 3 agent library** — ML/AI, Security, and Product agents (+ subagents),
+  with their workflows and skills and agent→skill/workflow mappings.
+- **Mutation testing** wired in (`mutmut`, `[tool.mutmut]`).
+- **Dynamic package version** injected by CI/CD (`prompticorn/__about__.py`).
 
-### Planned for v2.1
-- Direct module registration (no filesystem discovery required)
-- JSON schema validation for custom agents
-- Custom tool type registry
-- Enhanced error messages with debugging hints
-- Lazy loading for large agent registries
-- Template inheritance support
-- Dynamic variant selection
-- Multi-language builders (JavaScript/Go)
+### Changed
+- **`prompticorn list` / `validate`** rewritten on the live agent-discovery
+  registry; retired the dead flat-concatenation machinery and orphaned legacy
+  registry tables.
+- Conventions and agent prompts now populate the user's actual spec choices
+  (language, runtime, package manager, test framework, linter, formatter, coverage,
+  abstract-class style) across Claude, Kilo, Cline, Cursor, and Copilot.
+
+### Fixed
+- Generated artifacts no longer emit raw Jinja2, unresolved `{{PRIMARY_AGENTS_LIST}}`,
+  or internal `<!-- path: … -->` source comments; the orchestrator agent list is
+  filtered to the active personas.
+- **Multi-select menus now support items 10 and above** — digit keypresses are buffered and committed when you press space, comma, or after a 500ms pause. Previously each digit fired immediately, making it impossible to reach items 10+.
 
 ---
 

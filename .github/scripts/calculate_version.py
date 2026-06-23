@@ -24,7 +24,7 @@ from datetime import datetime
 class VersionCalculator:
     """Calculates version based on PyPI release history."""
 
-    def __init__(self, package_name: str = "promptosaurus"):
+    def __init__(self, package_name: str = "prompticorn"):
         self.package_name = package_name
 
     def get_pypi_version(self) -> tuple[int, int] | None:
@@ -135,7 +135,7 @@ class VersionCalculator:
 def main():
     """Main entry point for CI/CD integration."""
     # Get package name from environment or use default (strip whitespace)
-    package_name = os.environ.get("PACKAGE_NAME", "promptosaurus").strip()
+    package_name = os.environ.get("PACKAGE_NAME", "prompticorn").strip()
 
     # Get MAJOR version from environment
     env_major = os.environ.get("MAJOR_VERSION", "0").strip()

@@ -1,25 +1,33 @@
 # prompticorn
 
-**Version 0.1.0** - A unified, tool-agnostic prompt architecture for managing AI agent configurations across 5 coding assistants.
+A unified, tool-agnostic prompt architecture for managing AI coding-assistant configurations across 5 assistants.
 
-Define your agent once in a simple IR format, automatically generate outputs for:
-- **Kilo** IDE (YAML + Markdown)
-- **Cline** (Markdown with skill directives)
-- **Claude** (Markdown `.claude/` directory)
-- **Cursor** (Markdown rules)
-- **GitHub Copilot** (GitHub instructions)
+> **Version:** the published version is dynamic. `pyproject.toml` declares
+> `dynamic = ["version"]` sourced from `prompticorn/__about__.py`, and CI/CD injects the
+> real `MAJOR.MINOR.PATCH` at build time. Local and editable installs report `0.0.0.dev0`.
+> Check your installed version with `pip show prompticorn`.
+
+Define your project's agents, conventions, and personas once, then generate the
+right config for whichever assistant your team uses:
+
+- **Kilo** Code — IDE (`.kilo/agents/`) and CLI (`.opencode/rules/`)
+- **Cline** — `.clinerules`
+- **Claude** — `.claude/` directory plus `CLAUDE.md`
+- **Cursor** — `.cursor/rules/` plus `.cursorrules`
+- **GitHub Copilot** — `.github/copilot-instructions.md`
+
+## What's in the library
+
+- **25 primary agents** (architect, backend, frontend, code, test, debug, security, devops, and more)
+- **~100 workflows** in minimal and verbose variants
+- **~95 specialized skills**
+- **29 languages** with first-class conventions (`prompticorn/agents/core/conventions-*.md`)
 
 ## Install
 
-Install via pip:
-
 ```bash
 pip install prompticorn
-```
-
-Or with uv:
-
-```bash
+# or
 uv add prompticorn
 ```
 
@@ -27,82 +35,67 @@ This installs the `prompticorn` CLI command.
 
 ## Quick Start
 
-See [QUICKSTART.md](./docs/QUICKSTART.md) for a 5-minute guide.
+```bash
+cd your-project
+prompticorn init
+```
+
+`init` is interactive: it asks which assistant to configure, your repository
+type, prompt variant, personas, language-specific settings, and a set of
+project questions (database, ORM, error-handling pattern, commit style, PR-size
+limit, deploy target, and source-tree layout). It then writes
+`.prompticorn/.prompticorn.yaml` and generates the assistant's config files.
+
+See [docs/QUICKSTART.md](./docs/QUICKSTART.md) for the full walkthrough.
 
 ## Key Features
 
-- **Unified IR System** - Define agents once, generate for all tools
-- **5 Production-Ready Builders** - Kilo, Cline, Claude, Cursor, Copilot
-- **Minimal/Verbose Variants** - Save tokens by choosing variant at build time
-- **Persona-Based Filtering** - Select your team\'s roles, get only relevant agents
-- **Auto-Discovery Registry** - Zero-config agent registration
-- **CLI Tool** - Interactive `prompticorn init` command
-- **Backwards Compatible** - Existing configurations still work
+- **Unified IR system** — define agents once, generate for every supported tool.
+- **5 production builders** — Kilo, Cline, Claude, Cursor, Copilot.
+- **Minimal / verbose variants** — trade tokens for detail at build time.
+- **Persona-based filtering** — pick your team's roles and only relevant agents are generated.
+- **Spec-driven conventions** — your language, runtime, package manager, test
+  framework, linter, formatter, coverage targets, and project settings are baked
+  into the generated conventions.
+- **Per-language source layouts** — the core convention renders each language's
+  standard source tree; `flat` is the default and `src` is selectable.
+- **Auto-discovery registry** — agents are discovered from the bundled
+  `agents/` tree; no manual registration.
 
-## Commands Reference
+## Commands
 
 | Command | Description |
 |---------|-------------|
-| `prompticorn init` | Interactively initialize prompt configuration for your project |
-| `prompticorn list` | List all registered modes and their prompt files |
-| `prompticorn switch` | Switch to a different AI assistant tool |
-| `prompticorn swap` | Swap active personas and regenerate AI assistant configurations |
-| `prompticorn update` | Update configuration options interactively |
-| `prompticorn validate` | Check that all registered prompt files exist and no files are missing |
+| `prompticorn init` | Interactive setup: pick a tool, answer language and project questions, generate configs. |
+| `prompticorn list` | List discovered agents, their subagents, and prompt variants (live agent discovery). |
+| `prompticorn validate` | Check the `agents/` structure: every agent and subagent has the expected prompt files and loads cleanly. |
+| `prompticorn switch [tool]` | Switch to a different assistant, removing old artifacts and regenerating from the saved config. |
+| `prompticorn swap` | Change active personas and regenerate configs with the new agent set. |
+| `prompticorn update` | Update saved configuration options interactively. |
 
 ## Documentation
 
-### User Guides
-- **[QUICKSTART.md](./docs/QUICKSTART.md)** - Quick start guide
-- **[PERSONAS.md](./docs/PERSONAS.md)** - Documentation on persona-based filtering
-- **[GETTING_STARTED.md](./docs/user-guide/GETTING_STARTED.md)** - Detailed getting started guide
-
-### Reference
-- **[API_REFERENCE.reference.md](./docs/reference/API_REFERENCE.reference.md)** - API reference documentation
-- **[BUILDER_API_REFERENCE.builder.md](./docs/builders/BUILDER_API_REFERENCE.builder.md)** - Builder API reference
-- **[BUILDER_IMPLEMENTATION_GUIDE.builder.md](./docs/builders/BUILDER_IMPLEMENTATION_GUIDE.builder.md)** - Guide for implementing new builders
-- **[ARCHITECTURE_OVERVIEW.md](./docs/architecture/ARCHITECTURE_OVERVIEW.md)** - System architecture overview
-- **[INDEX.md](./docs/INDEX.md)** - Documentation navigation hub
-
-### Workflow
-- **Adding prompts**: Run `prompticorn init` to generate configurations, then edit files in generated directories (e.g., `.kilo/rules/`)
-- **Updating prompts**: Edit source prompts, then re-run `prompticorn init` to regenerate
-
-### Mode Reference
-| Mode | Key | Purpose |
-|------|-----|---------|  
-| Architect | `architect` | Scaffold projects, task breakdowns, data models |
-| Test | `test` | Coverage-first test writing |
-| Refactor | `refactor` | Structural changes, behavior preserved |
-| Document | `document` | Docstrings, READMEs, changelogs |
-| Explain | `explain` | Code walkthroughs for onboarding |
-| Migration | `migration` | Dependency upgrades, framework ports |
-| Code | `code` | Feature implementation, boilerplate |
-| Review | `review` | Code, performance, accessibility review |
-| Debug | `debug` | Root cause, log analysis, rubber duck |
-| Ask | `ask` | Q&A, decision logs |
-| Security | `security` | Security review (code and infra) |
-| Compliance | `compliance` | SOC 2, ISO 27001, GDPR, HIPAA, PCI-DSS |
-| Orchestrator | `orchestrator` | CI/CD, DevOps, PR descriptions |
+- **[docs/QUICKSTART.md](./docs/QUICKSTART.md)** — 5-minute getting-started guide
+- **[docs/INDEX.md](./docs/INDEX.md)** — documentation navigation hub
+- **[docs/PERSONAS.md](./docs/PERSONAS.md)** — persona-based filtering
 
 ## Development
 
-To contribute or develop locally:
-
 ```bash
-# Clone the repository
 git clone https://github.com/snoodleboot-io/prompticorn.git
 cd prompticorn
 
-# Install in development mode
-pip install -e .
-
-# Or with uv
+# Install in editable mode (reports version 0.0.0.dev0)
 uv pip install -e .
 
-# Run tests
-pytest -v
+# Run tests with coverage (target ~85%)
+uv run pytest
 
-# Type checking
-pyright
+# Mutation testing
+uv run mutmut run
+
+# Lint, format, and type-check
+uv run ruff check .
+uv run ruff format .
+uv run pyright
 ```

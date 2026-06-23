@@ -114,6 +114,10 @@ class CoreFilesLoader:
             'Language: python, Runtime: 3.11'
         """
         spec = config.get("spec", {})
+        # Multi-language-monorepo configs carry a list of folder specs; use the
+        # first as the primary spec (matching the builders' language extraction).
+        if isinstance(spec, list):
+            spec = spec[0] if spec else {}
         abstract_class_style = spec.get("abstract_class_style", "interface")
         repository_type = (config.get("repository") or {}).get("type", "")
         project = config.get("project") or {}
@@ -136,7 +140,11 @@ class CoreFilesLoader:
             "linter": spec.get("linter", ""),
             "formatter": spec.get("formatter", ""),
             "coverage_tool": spec.get("coverage_tool", ""),
-            "coverage_targets": spec.get("coverage", {}),
+            # Must be a dict for the testing/coverage macros; a spec may carry a
+            # coverage preset *name* (string), so guard against a non-dict value.
+            "coverage_targets": spec.get("coverage")
+            if isinstance(spec.get("coverage"), dict)
+            else {},
             "abstract_class_style": abstract_class_style,
             # Pass the spec as ``config`` for templates that use ``config.<field>``.
             # Ensure ``abstract_class_style`` is always present so the convention

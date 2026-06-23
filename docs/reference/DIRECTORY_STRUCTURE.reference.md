@@ -45,14 +45,14 @@ docs/
 │
 ├── design/                  # Architecture and design decisions
 │   ├── ADVANCED_PATTERNS.design.md
+│   ├── AGENTIC_PERFORMANCE_ANALYSIS.md
+│   ├── HYBRID_VARIANT_STRATEGY.md
 │   ├── LANGUAGE_INTEGRATION_DESIGN.design.md
+│   ├── MINIMAL_VS_VERBOSE_TOKENS.md
 │   ├── VARIANT_DIFFERENTIATION_STRATEGY.design.md
 │   └── WORKFLOW_HANDLING_ANALYSIS.design.md
 │
-├── architecture/            # Architecture documentation
-│   └── ARCHITECTURE_OVERVIEW.md
-│
-├── components/              # Component documentation
+├── components/              # Component-level documentation
 │   ├── BUILDER_ARCHITECTURE.md
 │   ├── IR_SYSTEM.md
 │   ├── LOADER_PARSER.md
@@ -73,13 +73,13 @@ docs/
 │
 ├── user-guide/              # End-user guides
 │   ├── CLI_REFERENCE.md
+│   ├── CLAUDE_USAGE.md
 │   ├── COMMON_USE_CASES.md
-│   └── GETTING_STARTED.md
+│   ├── GETTING_STARTED.md
+│   └── PROJECT_SETTINGS.md
 │
-└── misc/                    # Images and assets
-    ├── promptosaurs 1.png
-    ├── prompticorn2.png
-    └── prompticorn3-no-bg.png
+└── blog/                    # Long-form articles
+    └── CHOOSING_THE_RIGHT_VARIANT.md
 ```
 
 ### Content Categories
@@ -100,18 +100,17 @@ docs/
 
 **Architecture & Design:**
 - ARCHITECTURE.md - High-level system architecture
-- design/ - Architecture patterns, design decisions
-- architecture/ - Detailed architecture documentation
+- design/ - Architecture patterns, design decisions, variant strategy
 - components/ - Component-level documentation
 
 **Builders:**
 - builders/ - Documentation for creating custom builders for IDEs
 
 **User Guides:**
-- user-guide/ - CLI reference, common use cases, getting started
+- user-guide/ - CLI reference, Claude usage, common use cases, project settings
 
-**Assets:**
-- misc/ - Images, logos, and diagrams
+**Articles:**
+- blog/ - Long-form articles (e.g. choosing the right variant)
 
 ---
 
@@ -150,34 +149,83 @@ The `planning/` directory is for internal development work:
 
 ## prompticorn/ - Source Code
 
+The bundled prompt library (agents, skills, workflows, conventions) lives
+alongside the Python modules that discover and build configurations from it.
+
 ```
 prompticorn/
-├── agents/                  # Agent prompt files (25 primary agents)
+├── __about__.py             # Single source of the (dynamic) version
+├── __init__.py
+├── cli.py                   # CLI entry point: init, list, validate, switch, swap, update
+├── config_handler.py        # Read/write .prompticorn/.prompticorn.yaml
+├── registry.py              # Component registry (e.g. .gitignore patterns)
+├── source_layouts.py        # Resolve per-language source-tree layout (flat/src)
+│
+├── agents/                  # Agent prompt files (25 agents + core/)
+│   ├── core/                # Shared conventions: conventions-<lang>.md (29 languages),
+│   │                        #   system.md, session.md, etc.
 │   ├── architect/
 │   ├── ask/
 │   ├── backend/
-│   └── [22 more agents]
+│   └── [22 more agents]     # each: prompt.md (+ minimal/verbose variants, subagents/)
 │
-├── builders/                # Builder implementations
+├── skills/                  # Reusable skill definitions (~95 skills)
+├── workflows/               # Workflow definitions (~100 workflows)
+│
+├── agent_registry/          # Live agent discovery and loading
+│   ├── discovery.py         # RegistryDiscovery: scans the agents/ tree
+│   ├── registry.py          # Registry: builds from discovery
+│   └── errors.py
+│
+├── builders/                # Tool-specific builders (Kilo, Cline, Claude, Cursor, Copilot)
 │   ├── base.py
+│   ├── factory.py           # BuilderFactory
 │   ├── kilo_builder.py
 │   ├── cline_builder.py
-│   └── [more builders]
+│   ├── claude_builder.py
+│   ├── cursor_builder.py
+│   ├── copilot_builder.py
+│   ├── convention_generator.py  # Populates conventions from the user's spec choices
+│   └── template_handlers/
 │
-├── configurations/          # Configuration files
+├── ir/                      # Intermediate Representation
+│   ├── models/              # agent, skill, workflow, project, rules, tool
+│   ├── parsers/
+│   └── loaders/
+│
+├── configurations/          # YAML data
+│   ├── languages.yaml       # Supported languages (drives LanguageRegistry)
+│   ├── source_layouts.yaml  # Per-language flat/src source-tree layouts
 │   ├── agent_skill_mapping.yaml
-│   └── [config files]
+│   └── [more config files]
 │
-├── personas/                # Persona definitions
-│   ├── personas.yaml
-│   └── registry.py
+├── personas/                # Persona definitions (personas.yaml + registry.py)
 │
-├── agent_registry/          # Agent discovery and loading
-│   ├── discovery.py
-│   └── registry.py
+├── questions/               # Interactive questions asked during init
+│   ├── base/
+│   ├── project/             # Project-level questions (database, ORM, layout, etc.)
+│   ├── python/
+│   └── [one package per supported language]
 │
-└── cli.py                   # CLI entry point
+├── ui/                      # Terminal UI (input, commands, render, state, pipeline)
+├── prompts/                 # Shared prompt assets
+│   └── macros/              # Jinja2 macros (checklist, coverage_targets, error_handling, ...)
+└── templates/               # Jinja2 templates (claude/)
 ```
+
+### Supported AI tools
+
+The builders generate configurations for five AI coding assistants: **Kilo**
+(CLI and IDE), **Cline**, **Claude**, **Cursor**, and **Copilot**.
+
+### Bundled library inventory
+
+| Component | Location | Count |
+|-----------|----------|-------|
+| Agents | `prompticorn/agents/` (excluding `core/`) | 25 |
+| Workflows | `prompticorn/workflows/` | ~100 |
+| Skills | `prompticorn/skills/` | ~95 |
+| Language conventions | `prompticorn/agents/core/conventions-*.md` | 29 |
 
 ---
 
@@ -193,8 +241,14 @@ tests/
 │   └── [more test directories]
 │
 ├── integration/            # Integration tests (multi-component)
-└── conftest.py            # Shared test fixtures
+├── security/               # Security tests
+├── slow/                   # Slow end-to-end builder tests (marked `slow`)
+└── conftest.py             # Shared test fixtures
 ```
+
+Tests run with `uv run pytest` (configured in `[tool.pytest.ini_options]`).
+Markers (`slow`, `integration`, `security`, `unit`) let you select subsets, e.g.
+`uv run pytest -m "not slow"`.
 
 ---
 
@@ -213,11 +267,21 @@ Example configurations showing how to use prompticorn in different scenarios.
 
 ```
 .
-├── pyproject.toml          # Python project configuration
+├── pyproject.toml          # Project metadata + tool config (ruff, pyright, pytest, mutmut)
+├── uv.lock                 # Locked dependency versions (uv)
 ├── README.md               # Repository README
-├── .prompticorn.yaml     # prompticorn configuration
-└── [other config files]
+├── CONTRIBUTING.md         # Contributor guide
+├── CHANGELOG.md            # Release notes
+├── .pre-commit-config.yaml # Pre-commit hooks
+├── .coveragerc             # Coverage configuration
+└── .prompticorn/           # prompticorn's own config for this repo
+    └── .prompticorn.yaml   # Stored config (written by `init`; default dir is .prompticorn/)
 ```
+
+> **Versioning:** there is no version field to edit by hand. `pyproject.toml`
+> declares `dynamic = ["version"]`, sourced from `prompticorn/__about__.py`
+> (`0.0.0.dev0` for local installs) and injected by CI/CD at build time. See
+> CONTRIBUTING.md → "Release Process" for the MAJOR.MINOR.PATCH scheme.
 
 ---
 
@@ -242,9 +306,13 @@ Intent is encoded in filename suffixes:
 
 ---
 
-## Version History
+## Revision History
 
-| Version | Date | Changes |
-|---------|------|---------|
-| 2.0 | 2026-04-13 | Updated to reflect actual structure, removed deleted files |
-| 1.0 | 2026-04-09 | Initial directory structure documentation |
+These are revisions of *this document*, not product releases (the package itself
+is versioned dynamically — see CONTRIBUTING.md → "Release Process").
+
+| Revision | Date | Changes |
+|----------|------|---------|
+| 3 | 2026-06-23 | Refreshed source tree (skills/, workflows/, ir/, ui/, questions/, prompts/macros, agent_registry/, configurations/), library inventory, dynamic versioning notes, accurate docs/ and tests/ layout |
+| 2 | 2026-04-13 | Updated to reflect actual structure, removed deleted files |
+| 1 | 2026-04-09 | Initial directory structure documentation |

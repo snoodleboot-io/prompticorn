@@ -8,6 +8,20 @@ from prompticorn.builders.factory import BuilderFactory
 from prompticorn.ir.models import Agent
 
 
+@pytest.fixture(autouse=True)
+def _isolate_builder_factory():
+    """Snapshot and restore the shared BuilderFactory registry around every test.
+
+    BuilderFactory._builders is class-level (process-global); these tests register
+    and clear it. Without isolation, a test that clears it leaks into later tests
+    (and previously dropped the copilot/cursor builtins for the rest of the run).
+    """
+    saved = dict(BuilderFactory._builders)
+    yield
+    BuilderFactory._builders.clear()
+    BuilderFactory._builders.update(saved)
+
+
 class TestBuilder(Builder):
     """Test builder for factory testing."""
 
@@ -113,20 +127,8 @@ class TestBuilderFactoryListBuilders:
     """Test listing builders in factory."""
 
     def setup_method(self):
-        """Clear the factory before each test."""
+        """Start from an empty factory (autouse fixture restores it afterward)."""
         BuilderFactory.clear()
-
-    def teardown_method(self):
-        """Restore builtin builders after each test."""
-        # Register builtin builders back for other tests
-        from prompticorn.builders.claude_builder import ClaudeBuilder
-        from prompticorn.builders.cline_builder import ClineBuilder
-        from prompticorn.builders.kilo_builder import KiloBuilder
-
-        BuilderFactory.clear()
-        BuilderFactory.register("kilo", KiloBuilder)
-        BuilderFactory.register("cline", ClineBuilder)
-        BuilderFactory.register("claude", ClaudeBuilder)
 
     def test_list_builders_empty(self):
         """Test listing builders when empty."""
@@ -210,20 +212,8 @@ class TestBuilderFactoryIntegration:
     """Test factory integration scenarios."""
 
     def setup_method(self):
-        """Clear the factory before each test."""
+        """Start from an empty factory (autouse fixture restores it afterward)."""
         BuilderFactory.clear()
-
-    def teardown_method(self):
-        """Restore builtin builders after each test."""
-        # Register builtin builders back for other tests
-        from prompticorn.builders.claude_builder import ClaudeBuilder
-        from prompticorn.builders.cline_builder import ClineBuilder
-        from prompticorn.builders.kilo_builder import KiloBuilder
-
-        BuilderFactory.clear()
-        BuilderFactory.register("kilo", KiloBuilder)
-        BuilderFactory.register("cline", ClineBuilder)
-        BuilderFactory.register("claude", ClaudeBuilder)
 
     def test_full_factory_workflow(self):
         """Test full factory workflow."""
