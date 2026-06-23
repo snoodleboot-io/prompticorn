@@ -10,6 +10,7 @@ This guide will help you get up and running with prompticorn in just 5 minutes.
 - pip or uv package manager
 - One of the supported AI coding assistants:
   - Kilo Code (CLI or IDE)
+  - Claude
   - Cline
   - Cursor
   - GitHub Copilot
@@ -38,18 +39,18 @@ You should see:
 ```
 Usage: prompticorn [OPTIONS] COMMAND [ARGS]...
 
-  Prompt library CLI — manage and validate your prompt configurations.
+  prompticorn CLI — manage and validate your prompt configurations.
 
 Options:
   --help  Show this message and exit.
 
 Commands:
   init      Interactively initialize prompt configuration for your project.
-  list      List all registered modes and their prompt files.
+  list      List all discovered agents, their subagents, and prompt variants.
   switch    Switch to a different AI assistant tool.
   swap      Swap active personas and regenerate configurations.
   update    Update configuration options interactively.
-  validate  Check that all registered prompt files exist and no files are...
+  validate  Validate agent registry structure and that all agents load...
 ```
 
 ---
@@ -74,12 +75,15 @@ Which AI assistant would you like to configure?
 Options:
   - Kilo CLI    (.opencode/rules/ with collapsed mode files)
   - Kilo IDE    (.kilo/agents/ individual agent files)
+  - Claude      (.claude/ directory with Markdown agent files and CLAUDE.md)
   - Cline       (.clinerules file - concatenated rules)
   - Cursor      (.cursor/rules/ directory + .cursorrules)
   - Copilot     (.github/copilot-instructions.md)
 
 Select: Kilo IDE
 ```
+
+The default selection is **Kilo IDE**.
 
 #### Question 2: Repository type?
 
@@ -111,20 +115,23 @@ Select: Minimal
 Which personas will be working on this codebase?
 
 Options:
-  - Software Engineer
-  - QA/Tester
+  - Backend Software Engineer
+  - Frontend Software Engineer
+  - Fullstack Software Engineer
+  - Architect
+  - QA / Tester
   - DevOps Engineer
   - Security Engineer
-  - Architect
+  - Product Manager
   - Data Engineer
   - Data Scientist
   - Technical Writer
-  - Product Manager
 
-Select: Software Engineer, QA/Tester
+Select: Fullstack Software Engineer, QA / Tester
 ```
 
-*You can select multiple personas using Space, then Enter to confirm.*
+*You can select multiple personas using Space, then Enter to confirm. Only
+agents and workflows for the selected personas are generated.*
 
 #### Question 5: Language configuration
 
@@ -168,6 +175,40 @@ What testing framework?
 
 If you selected **multi-language-monorepo**, you'll configure each folder separately.
 
+#### Question 6: Project settings
+
+Finally, `init` asks a short set of language-agnostic project questions. These
+populate the project-level fields of the generated core conventions. Every
+question except the layout style offers a **Not specified** option that renders
+as a clear placeholder if you skip it.
+
+```
+Which source-tree layout should the conventions document?
+  - flat   (package/modules at the repo root — recommended default)
+  - src    (sources nested under a src/ directory)
+
+Which database does this project use?
+  - Not specified / PostgreSQL / MySQL / SQLite / MongoDB / DynamoDB / Redis
+
+Which ORM / query layer does this project use?
+  - Not specified / SQLAlchemy / Prisma / Django ORM / GORM / TypeORM / Raw SQL
+
+What error-handling pattern does this project follow?
+  - Not specified / Exceptions / Result type / Error values / codes
+
+Which commit message style does this project follow?
+  - Not specified / Conventional Commits / Free-form
+
+What soft PR size limit (lines changed) should agents target?
+  - Not specified / 200 / 400 / 800
+
+What is the primary deployment target?
+  - Not specified / AWS Lambda / AWS ECS / Kubernetes / GKE / Vercel / Heroku / On-prem
+```
+
+The layout choice is saved as `project.layout_style` and the matching
+per-language standard source tree is rendered into the core conventions.
+
 #### Result
 
 After answering all questions:
@@ -177,7 +218,7 @@ After answering all questions:
   Configuration saved!
 =========================================================
 
-  Config file: /home/you/project/.prompticorn.yaml
+  Config file: .prompticorn/.prompticorn.yaml
 
 ------------------------------------------------------------
   Generating AI assistant configurations (minimal)...
@@ -196,9 +237,13 @@ After answering all questions:
 
 ---
 
-### Step 2: Verify Configuration
+### Step 2: Inspect and Validate the Agent Registry
 
-List all registered agents:
+`list` and `validate` are discovery-based: they inspect the agents bundled with
+prompticorn (the `agents/` registry), not your generated config or any flat
+`prompts/` directory.
+
+List all discovered agents, their subagents, and prompt variants:
 
 ```bash
 prompticorn list
@@ -206,21 +251,27 @@ prompticorn list
 
 Output:
 ```
-Registered modes and their files:
+AGENT REGISTRY
 
-code:
-  - .kilo/agents/code.md
+architect  — System design, architecture planning, and technical decisions
+  ✓  prompt.md
+  subagents:
+    architect-data-model
+      ✓  minimal/prompt.md
+      ✓  verbose/prompt.md
 
-test:
-  - .kilo/agents/test.md
-
-review:
-  - .kilo/agents/review.md
+code  — Implement features and make direct code changes
+  ✓  prompt.md
+  subagents:
+    code-implementation
+      ✓  minimal/prompt.md
+      ✓  verbose/prompt.md
 
 ... etc
 ```
 
-Validate configuration:
+Validate the registry structure (every agent has a base prompt and each subagent
+has minimal/verbose variants that load cleanly):
 
 ```bash
 prompticorn validate
@@ -228,9 +279,9 @@ prompticorn validate
 
 Output:
 ```
-▶ Validating prompt registry...
+▶ Validating agent registry...
 
-  ✓ All good — no missing or orphaned files.
+  ✓ Registry valid: 25 agents, 82 subagents.
 ```
 
 ---
@@ -255,6 +306,11 @@ Kilo Code automatically discovers these files.
 
 Files generated in `.opencode/rules/`:
 - Collapsed format with all modes in fewer files
+
+#### For Claude
+
+Generates a `.claude/` directory with Markdown agent files plus a top-level
+`CLAUDE.md`.
 
 #### For Cline
 
@@ -325,7 +381,7 @@ prompticorn init
 #   - AI Tool: Kilo IDE
 #   - Repo Type: single-language
 #   - Variant: Minimal
-#   - Personas: Software Engineer, QA/Tester
+#   - Personas: Fullstack Software Engineer, QA / Tester
 #   - Language: Python
 #   - Runtime: 3.12
 #   - Package Manager: uv
@@ -349,7 +405,7 @@ prompticorn init
 #   - AI Tool: Cline
 #   - Repo Type: multi-language-monorepo
 #   - Variant: Verbose
-#   - Personas: Software Engineer, DevOps Engineer
+#   - Personas: Fullstack Software Engineer, DevOps Engineer
 
 # Then configure folders:
 #   Folder 1: backend/api (Python 3.12, uv, pytest)
@@ -380,35 +436,42 @@ prompticorn switch
 
 ## Configuration File
 
-The `.prompticorn.yaml` file stores your project configuration.
+The configuration lives at `.prompticorn/.prompticorn.yaml` and stores your
+project configuration.
 
 ### Single-Language Example
 
 ```yaml
-version: "1.0"
 repository:
-  type: "single-language"
+  type: "single_language"
 spec:
   language: "python"
   runtime: "3.12"
   package_manager: "uv"
-  testing_framework: "pytest"
-  test_runner: "pytest"
+  test_framework: "pytest"
   linter: ["ruff"]
-  formatter: ["black"]
-  coverage_tool: "pytest-cov"
+  formatter: ["ruff"]
+  coverage: ...
 variant: "minimal"
 active_personas:
-  - "software_engineer"
+  - "fullstack_software_engineer"
   - "qa_tester"
+ai_tool: "kilo-ide"
+project:
+  layout_style: "flat"        # or "src"
+  database: "PostgreSQL"
+  orm: "SQLAlchemy"
+  error_handling: "Exceptions"
+  commit_style: "Conventional Commits"
+  pr_size: "400"
+  deploy_target: "AWS Lambda"
 ```
 
 ### Multi-Language Monorepo Example
 
 ```yaml
-version: "1.0"
 repository:
-  type: "multi-language-monorepo"
+  type: "multi_language_monorepo"
 spec:
   - folder: "backend/api"
     type: "backend"
@@ -416,18 +479,21 @@ spec:
     language: "python"
     runtime: "3.12"
     package_manager: "uv"
-    testing_framework: "pytest"
+    test_framework: "pytest"
   - folder: "frontend"
     type: "frontend"
     subtype: "ui"
     language: "typescript"
     runtime: "5.4"
     package_manager: "npm"
-    testing_framework: "vitest"
+    test_framework: "vitest"
 variant: "minimal"
 active_personas:
-  - "software_engineer"
+  - "fullstack_software_engineer"
   - "devops_engineer"
+ai_tool: "cline"
+project:
+  layout_style: "flat"
 ```
 
 ---
@@ -438,17 +504,19 @@ prompticorn uses **personas** to filter which agents are generated, reducing cog
 
 ### Available Personas
 
-| Persona | Primary Agents | Description |
-|---------|---------------|-------------|
-| Software Engineer | code, test, refactor, review | Core development work |
-| QA/Tester | test, review | Testing and quality assurance |
-| DevOps Engineer | code, devops, observability, incident | Operations and infrastructure |
-| Security Engineer | security, compliance | Security reviews and compliance |
-| Architect | architect, backend, frontend, data | System design and architecture |
-| Data Engineer | data-pipeline, etl | Data engineering workflows |
-| Data Scientist | mlai, experiment | ML/AI and experimentation |
-| Technical Writer | document, explain | Documentation and education |
-| Product Manager | plan, roadmap | Product planning |
+| Persona | Description |
+|---------|-------------|
+| Backend Software Engineer | Backend development, APIs, microservices, and distributed systems |
+| Frontend Software Engineer | Frontend development, UI/UX, and accessible web experiences |
+| Fullstack Software Engineer | Full-stack development across frontend and backend |
+| Architect | System design, architecture planning, and technical decisions |
+| QA / Tester | Quality assurance, testing strategy, and test automation |
+| DevOps Engineer | Infrastructure, deployment, operations, and CI/CD |
+| Security Engineer | Security hardening, threat modeling, and compliance |
+| Product Manager | Requirements, prioritization, and roadmap planning |
+| Data Engineer | Data pipelines, data quality, and data infrastructure |
+| Data Scientist | Machine learning, model development, and optimization |
+| Technical Writer | Documentation and technical communication |
 
 ### Universal Agents (Always Available)
 
@@ -499,15 +567,15 @@ prompticorn init
 
 ### YAML syntax error
 
-**Cause:** Manually edited `.prompticorn.yaml` with invalid syntax
+**Cause:** Manually edited `.prompticorn/.prompticorn.yaml` with invalid syntax
 
 **Solution:**
 ```bash
 # Validate YAML syntax
-python -c "import yaml; yaml.safe_load(open('.prompticorn.yaml'))"
+python -c "import yaml; yaml.safe_load(open('.prompticorn/.prompticorn.yaml'))"
 
 # Or delete and re-run init
-rm .prompticorn.yaml
+rm .prompticorn/.prompticorn.yaml
 prompticorn init
 ```
 

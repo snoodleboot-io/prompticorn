@@ -1,9 +1,15 @@
-# prompticorn Agent → Subagent Relationships
+# prompticorn Agent Relationships Matrix
 
-**Updated:** April 13, 2026  
-**Version:** 0.1.0
+**Updated:** June 21, 2026
+**Status:** Current
 
-This document maps actual agent-to-subagent relationships in the codebase.
+This document maps actual relationships in the codebase:
+
+1. **Agent → Subagent** — derived from `prompticorn/agents/*/subagents/`
+2. **Agent → Skills / Workflows** — derived from `prompticorn/configurations/agent_skill_mapping.yaml`
+
+> Package version is dynamic (sourced from `prompticorn/__about__.py`, CI-injected); it
+> is intentionally not pinned in this document.
 
 ---
 
@@ -203,6 +209,117 @@ This document maps actual agent-to-subagent relationships in the codebase.
 
 ---
 
+## Agent → Skills & Workflows
+
+Source of truth: `prompticorn/configurations/agent_skill_mapping.yaml` (language-agnostic
+base mappings; rare language-specific overrides live in `language_skill_mapping.yaml`).
+
+> Note: the mapping file keys agents by name. The `plan` universal agent is keyed as
+> `planning` in the mapping file, and `enforcement` (which has no subagents) still has
+> skill/workflow mappings.
+
+### architect
+- **Skills:** architecture-documentation, data-model-discovery, feature-planning, mermaid-erd-creation, post-implementation-checklist, problem-decomposition, technical-communication, technical-decision-making
+- **Workflows:** architecture-documentation, data-model, decision-log, scaffold, strategy, task-breakdown
+
+### ask
+- **Skills:** documentation-best-practices, technical-communication, test-aaa-structure, test-mocking-rules, testing-strategies
+- **Workflows:** decision-log, docs, testing
+
+### backend
+- **Skills:** architecture-documentation, code-review-practices, data-model-discovery, data-validation-pipelines, incremental-implementation, performance-optimization
+- **Workflows:** api-design, code, data-model, performance, review
+
+### code
+- **Skills:** code-review-practices, feature-planning, incremental-implementation, post-implementation-checklist, quality-assurance, technical-debt-management, test-coverage-categories
+- **Workflows:** boilerplate, code, feature, house-style, refactor, testing
+
+### compliance
+- **Skills:** documentation-best-practices, quality-assurance, technical-communication
+- **Workflows:** compliance-audit, security-hardening-checklist, workflow-compliance-patterns
+
+### data
+- **Skills:** architecture-documentation, data-model-discovery, data-validation-pipelines, data-versioning-reproducibility, feature-store-design
+- **Workflows:** data-model, data-quality-monitoring, experiment-tracking-setup, workflow-versioning-management
+
+### debug
+- **Skills:** debugging-methodology, problem-decomposition, technical-communication
+- **Workflows:** debugging-methodology, log-analysis, root-cause
+
+### devops
+- **Skills:** continuous-improvement, documentation-best-practices, technical-decision-making
+- **Workflows:** dependency-scanning, secret-management, workflow-monitoring, workflow-orchestration-patterns, workflow-rollback-strategies
+
+### document
+- **Skills:** architecture-documentation, documentation-best-practices, mermaid-erd-creation, technical-communication
+- **Workflows:** docs, strategy-for-applications, workflow-documentation-patterns
+
+### enforcement
+- **Skills:** code-review-practices, quality-assurance, technical-debt-management
+- **Workflows:** code, house-style, review
+
+### explain
+- **Skills:** architecture-documentation, documentation-best-practices, technical-communication
+- **Workflows:** docs, strategy
+
+### frontend
+- **Skills:** code-review-practices, incremental-implementation, performance-optimization, testing-strategies
+- **Workflows:** accessibility, code, testing, ux-validation
+
+### incident
+- **Skills:** continuous-improvement, debugging-methodology, problem-decomposition, technical-communication
+- **Workflows:** incident-response-security, log-analysis, root-cause
+
+### migration
+- **Skills:** incremental-implementation, problem-decomposition, technical-debt-management, technical-decision-making
+- **Workflows:** dependency-upgrade, migration, strategy, workflow-migration-patterns
+
+### mlai
+- **Skills:** anomaly-detection-techniques, batch-vs-realtime-scoring, cross-validation-strategies, data-validation-pipelines, data-versioning-reproducibility, dimensionality-reduction, ensemble-methods, feature-importance-analysis, feature-store-design, hyperparameter-optimization, imbalanced-classification, mlops-pipeline-design, model-interpretability, model-performance-debugging, time-series-preprocessing
+- **Workflows:** experiment-tracking-setup, feature-engineering-guide, hyperparameter-tuning, ml-monitoring-observability, mlops-pipeline-setup, model-evaluation, model-governance, model-interpretability-guide, model-retraining-strategy, model-serving, production-ml-deployment
+
+### observability
+- **Skills:** anomaly-detection-techniques, continuous-improvement, debugging-methodology, performance-optimization
+- **Workflows:** analytics-setup, log-analysis, ml-monitoring-observability, performance, workflow-monitoring
+
+### orchestrator
+- **Skills:** feature-planning, problem-decomposition, team-collaboration, technical-decision-making
+- **Workflows:** meta, multi-agent-coordination, task-breakdown, workflow-orchestration-patterns
+
+### performance
+- **Skills:** continuous-improvement, debugging-methodology, performance-optimization, problem-decomposition
+- **Workflows:** performance, workflow-performance-optimization, workflow-scaling-patterns
+
+### plan (mapped as `planning`)
+- **Skills:** architecture-documentation, feature-planning, problem-decomposition, technical-communication, technical-decision-making
+- **Workflows:** decision-log, feature-prioritization, requirements-gathering, roadmap-planning, task-breakdown
+
+### product
+- **Skills:** feature-planning, problem-decomposition, team-collaboration, technical-communication
+- **Workflows:** a-b-testing, analytics-setup, feature-launch-checklist, feature-prioritization, requirements-gathering, roadmap-planning, user-research-guide
+
+### qa-tester
+- **Skills:** code-review-practices, quality-assurance, test-aaa-structure, test-coverage-categories, test-mocking-rules, testing-strategies
+- **Workflows:** review, testing, workflow-testing-patterns
+
+### refactor
+- **Skills:** code-review-practices, continuous-improvement, incremental-implementation, quality-assurance, technical-debt-management
+- **Workflows:** code, refactor, strategy
+
+### review
+- **Skills:** code-review-practices, performance-optimization, quality-assurance, technical-communication, technical-debt-management
+- **Workflows:** accessibility, performance, review, security-code-review
+
+### security
+- **Skills:** code-review-practices, problem-decomposition, quality-assurance, technical-decision-making
+- **Workflows:** penetration-testing-guide, security-code-review, security-hardening-checklist, security-testing, threat-modeling, vulnerability-scanning, workflow-security-in-workflows
+
+### test
+- **Skills:** incremental-implementation, quality-assurance, test-aaa-structure, test-coverage-categories, test-mocking-rules, testing-strategies
+- **Workflows:** strategy, testing, workflow-testing-patterns
+
+---
+
 ## Subagent Variants
 
 **All subagents provide two variants:**
@@ -255,9 +372,9 @@ find prompticorn/agents -type d -mindepth 3 -maxdepth 3 -path "*/subagents/*" | 
 
 ---
 
-## Version History
+## Inventory History
 
-| Version | Date | Agents | Subagents | Notes |
-|---------|------|--------|-----------|-------|
-| 0.1.0 | 2026-04-13 | 25 | 86 | Initial baseline with accurate counts |
+| Date | Agents | Subagents | Skills | Workflows | Notes |
+|------|--------|-----------|--------|-----------|-------|
+| 2026-06-21 | 25 | 82 | 95 | 100 | Refreshed to current reality; added agent → skills/workflows mappings |
 

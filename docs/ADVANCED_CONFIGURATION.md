@@ -1,72 +1,147 @@
 # Advanced Configuration Guide
 
-Comprehensive guide to advanced configuration options in prompticorn.
+Comprehensive guide to the `.prompticorn/.prompticorn.yaml` schema and advanced
+configuration options in prompticorn.
 
 ## Table of Contents
 
 - [Configuration File Schema](#configuration-file-schema)
+- [The `spec` Section](#the-spec-section)
 - [Single-Language Projects](#single-language-projects)
 - [Multi-Language Monorepos](#multi-language-monorepos)
+- [The `project` Section](#the-project-section)
 - [Persona Configuration](#persona-configuration)
 - [Variant Selection](#variant-selection)
-- [Builder-Specific Settings](#builder-specific-settings)
-- [Template Variables](#template-variables)
-- [Ignore Files](#ignore-files)
-- [Advanced Use Cases](#advanced-use-cases)
+- [Supported AI Tools](#supported-ai-tools)
+- [How Conventions Are Generated](#how-conventions-are-generated)
+- [Configuration Validation](#configuration-validation)
+- [Best Practices](#best-practices)
 
 ---
 
 ## Configuration File Schema
 
-The `.prompticorn/.prompticorn.yaml` file is your project's configuration source.
+The configuration lives at `.prompticorn/.prompticorn.yaml` (the directory is
+`.prompticorn/`, the file is `.prompticorn.yaml`). It is your project's single
+source of truth — `init`, `switch`, `swap`, and `update` all read and write it.
 
-### Required Fields
+> An older `.promptosaurus/` directory is automatically migrated to
+> `.prompticorn/` on first run.
+
+### Required fields
 
 ```yaml
-version: "1.0"              # Config schema version
+version: "1.0"              # config schema version
 repository:
   type: "single-language"   # or "multi-language-monorepo"
-spec: { }                   # Language/folder specifications (see below)
+spec: {}                    # language/folder specification(s)
 ```
 
-### Optional Fields
+### Optional fields
 
 ```yaml
 variant: "minimal"          # or "verbose"
-active_personas: []         # List of persona IDs
+active_personas: []         # list of persona IDs
+ai_tool: "claude"           # last-selected tool (written by switch)
+project: {}                 # language-agnostic project settings
 ```
 
-### Complete Schema Reference
+### Complete schema reference
 
 ```yaml
 version: string               # "1.0" (required)
-repository:
-  type: string               # "single-language" | "multi-language-monorepo" (required)
-spec:
-  # For single-language:
-  language: string           # "python", "typescript", "go", etc.
-  runtime: string            # "3.12", "5.4", "1.21", etc.
-  package_manager: string    # "uv", "npm", "go mod", etc.
-  testing_framework: string  # "pytest", "vitest", "go test", etc.
-  test_runner: string        # Same as testing_framework or custom
-  linter: list[string]       # ["ruff", "mypy"] or single value
-  formatter: list[string]    # ["black"] or single value
-  coverage_tool: string      # "pytest-cov", "c8", etc.
-  e2e_tool: string           # "playwright", "cypress", etc.
-  mocking_library: string    # "unittest.mock", "vitest.mock", etc.
-  mutation_tool: string      # "mutmut", "stryker", etc.
-  abstract_class_style: string  # "abc", "Protocol", "interface"
-  
-  # For multi-language-monorepo:
-  - folder: string           # Folder path (e.g., "backend/api")
-    type: string             # "backend", "frontend", "custom"
-    subtype: string          # "api", "ui", "library", etc.
-    language: string         # Same as above
-    runtime: string          # Same as above
-    # ... (all language-specific fields above)
 
-variant: string              # "minimal" | "verbose" (optional, default: "minimal")
-active_personas: list[string]  # ["fullstack_software_engineer", "qa_tester", ...] (optional)
+repository:
+  type: string                # "single-language" | "multi-language-monorepo"
+
+spec:
+  # single-language: a mapping (see "The spec Section")
+  # multi-language-monorepo: a list of folder mappings
+
+project:                      # language-agnostic settings (see "The project Section")
+  layout_style: string        # "flat" (default) | "src"
+  database: string            # e.g. "PostgreSQL" or "" (not specified)
+  orm: string                 # e.g. "SQLAlchemy"
+  error_handling: string      # e.g. "Exceptions"
+  commit_style: string        # e.g. "Conventional Commits"
+  pr_size: string             # e.g. "400" (soft limit, lines changed)
+  deploy_target: string       # e.g. "AWS Lambda"
+
+variant: string               # "minimal" | "verbose"
+active_personas: list[string] # e.g. ["software_engineer", "qa_tester"]
+ai_tool: string               # "claude" | "cline" | "cursor" | "copilot" | "kilo-ide" | "kilo-cli"
+```
+
+---
+
+## The `spec` Section
+
+The `spec` section captures language-specific choices. These field names match
+the keys read by the convention generators
+(`prompticorn/builders/convention_generator.py` and
+`prompticorn/ir/loaders/core_files_loader.py`):
+
+```yaml
+spec:
+  language: string            # "python", "typescript", "rust", ...
+  runtime: string             # "3.12", "5.4", "1.22", ...
+  package_manager: string     # "uv", "npm", "go mod", ...
+  test_framework: string      # "pytest", "vitest", "go test", ...
+  linter: string              # single linter, e.g. "ruff"
+  linters: list[string]       # multiple linters, e.g. ["ruff", "mypy"]
+  formatter: string           # e.g. "black"
+  abstract_class_style: string  # "interface" (default) | "abc" | "Protocol"
+  coverage:                   # coverage TARGETS as a mapping (not a single number)
+    line: 80
+    branch: 70
+    function: 90
+    statement: 85
+    mutation: 80
+    path: 60
+```
+
+Notes:
+
+- `spec.coverage` is a **mapping of targets**, not a scalar. (The default
+  template from `ConfigHandler.get_default_single_language_template` seeds the
+  values shown above.) A bad shape is ignored rather than crashing rendering.
+- Both `linter` (single) and `linters` (list) are recognised.
+- `abstract_class_style` defaults to `"interface"` when omitted, so the
+  language conventions' conditional blocks always render.
+
+### Default single-language template
+
+`prompticorn init` writes a template equivalent to:
+
+```yaml
+version: "1.0"
+repository:
+  type: "single-language"
+  mappings: {}
+spec:
+  language: ""
+  runtime: ""
+  package_manager: ""
+  test_framework: ""
+  linter: ""
+  linters: []
+  formatter: ""
+  abstract_class_style: "interface"
+  coverage:
+    line: 80
+    branch: 70
+    function: 90
+    statement: 85
+    mutation: 80
+    path: 60
+project:
+  layout_style: "flat"
+  database: ""
+  orm: ""
+  error_handling: ""
+  commit_style: ""
+  pr_size: ""
+  deploy_target: ""
 ```
 
 ---
@@ -75,7 +150,7 @@ active_personas: list[string]  # ["fullstack_software_engineer", "qa_tester", ..
 
 For projects using one primary programming language.
 
-### Minimal Configuration
+### Minimal configuration
 
 ```yaml
 version: "1.0"
@@ -87,9 +162,7 @@ spec:
   package_manager: "uv"
 ```
 
-This is enough to generate basic agent configurations.
-
-### Complete Python Configuration
+### Complete Python configuration
 
 ```yaml
 version: "1.0"
@@ -99,23 +172,32 @@ spec:
   language: "python"
   runtime: "3.12"
   package_manager: "uv"
-  testing_framework: "pytest"
-  test_runner: "pytest"
-  linter: ["ruff", "mypy"]
-  formatter: ["black"]
-  coverage_tool: "pytest-cov"
-  coverage_target: 90
-  e2e_tool: "playwright"
-  mocking_library: "unittest.mock"
-  mutation_tool: "mutmut"
+  test_framework: "pytest"
+  linters: ["ruff", "mypy"]
+  formatter: "black"
   abstract_class_style: "abc"
+  coverage:
+    line: 90
+    branch: 80
+    function: 95
+    statement: 90
+    mutation: 80
+    path: 70
 variant: "minimal"
 active_personas:
-  - "software_engineer"  # deprecated, use fullstack_software_engineer
+  - "software_engineer"
   - "qa_tester"
+project:
+  layout_style: "flat"
+  database: "PostgreSQL"
+  orm: "SQLAlchemy"
+  error_handling: "Exceptions"
+  commit_style: "Conventional Commits"
+  pr_size: "400"
+  deploy_target: "AWS Lambda"
 ```
 
-### Complete TypeScript Configuration
+### Complete TypeScript configuration
 
 ```yaml
 version: "1.0"
@@ -125,69 +207,47 @@ spec:
   language: "typescript"
   runtime: "5.4"
   package_manager: "npm"
-  testing_framework: "vitest"
-  test_runner: "npm test"
-  linter: ["eslint", "@typescript-eslint"]
-  formatter: ["prettier"]
-  coverage_tool: "c8"
-  coverage_target: 85
-  e2e_tool: "playwright"
-  mocking_library: "vitest.mock"
-  mutation_tool: "stryker"
+  test_framework: "vitest"
+  linters: ["eslint", "@typescript-eslint"]
+  formatter: "prettier"
   abstract_class_style: "interface"
+  coverage:
+    line: 85
+    branch: 75
+    function: 90
+    statement: 85
+    mutation: 75
+    path: 60
 variant: "verbose"
 active_personas:
-  - "software_engineer"  # deprecated, use fullstack_software_engineer
+  - "frontend_software_engineer"
   - "devops_engineer"
+project:
+  layout_style: "src"
+  database: "PostgreSQL"
+  orm: "Prisma"
+  commit_style: "Conventional Commits"
+  deploy_target: "Vercel"
 ```
 
-### Language-Specific Fields
+### Supported languages
 
-#### Python
+prompticorn ships standard conventions for **29 languages** (one
+`conventions-<language>.md` per language):
 
-```yaml
-spec:
-  language: "python"
-  runtime: "3.10" | "3.11" | "3.12" | "3.13" | "3.14"
-  package_manager: "pip" | "poetry" | "uv"
-  testing_framework: "pytest" | "unittest"
-  linter: ["ruff", "pylint", "mypy", "flake8"]
-  formatter: ["black", "ruff"]
-  abstract_class_style: "abc" | "Protocol"
 ```
-
-#### TypeScript/JavaScript
-
-```yaml
-spec:
-  language: "typescript" | "javascript"
-  runtime: "5.0" | "5.1" | "5.2" | "5.3" | "5.4"  # TypeScript version
-  package_manager: "npm" | "yarn" | "pnpm" | "bun"
-  testing_framework: "vitest" | "jest" | "mocha"
-  linter: ["eslint", "@typescript-eslint"]
-  formatter: ["prettier", "biome"]
-  abstract_class_style: "class" | "interface"
-```
-
-#### Go
-
-```yaml
-spec:
-  language: "go"
-  runtime: "1.20" | "1.21" | "1.22"
-  package_manager: "go mod"
-  testing_framework: "go test"
-  linter: ["golangci-lint", "staticcheck"]
-  formatter: ["gofmt", "goimports"]
+c, clojure, cpp, csharp, dart, elixir, elm, fsharp, golang, groovy,
+haskell, html, java, javascript, julia, kotlin, lua, objc, php, python,
+r, ruby, rust, scala, shell, sql, swift, terraform, typescript
 ```
 
 ---
 
 ## Multi-Language Monorepos
 
-For projects with multiple languages in different folders.
-
-### Structure
+For projects with multiple languages in different folders. The `spec` is a
+**list** of folder mappings; the first folder's language is treated as the
+primary language for the core conventions.
 
 ```yaml
 version: "1.0"
@@ -200,159 +260,95 @@ spec:
     language: "python"
     runtime: "3.12"
     package_manager: "uv"
-    testing_framework: "pytest"
-    # ... other Python-specific settings
-  
+    test_framework: "pytest"
+
   - folder: "frontend"
     type: "frontend"
     subtype: "ui"
     language: "typescript"
     runtime: "5.4"
     package_manager: "npm"
-    testing_framework: "vitest"
-    # ... other TypeScript-specific settings
-  
+    test_framework: "vitest"
+
   - folder: "shared/utils"
-    type: "library"
-    subtype: "shared"
+    type: "custom"
+    subtype: "custom"
     language: "typescript"
     runtime: "5.4"
     package_manager: "npm"
 
 variant: "minimal"
 active_personas:
-  - "software_engineer"  # deprecated, use fullstack_software_engineer
+  - "fullstack_software_engineer"
   - "devops_engineer"
+project:
+  layout_style: "flat"
+  database: "PostgreSQL"
 ```
 
-### Standard Folder Types
+A convention file is generated per folder language. If two folders share a
+language, the later spec wins (conventions are keyed by language).
+
+### Folder types and subtypes
+
+Folder presets are offered interactively during `init`:
 
 #### Backend
 
-```yaml
-- folder: "backend/api"
-  type: "backend"
-  subtype: "api"        # API server
-  language: "python"    # Default: python
-  # ... language-specific settings
-```
-
-**Subtypes:**
-- `api` - REST/GraphQL API server
-- `worker` - Background worker/queue processor
-- `library` - Shared backend library
-- `cli` - Command-line tool
+- `api` — REST/GraphQL API server
+- `worker` — background worker / queue processor
+- `library` — shared backend library
+- `cli` — command-line tool
 
 #### Frontend
 
-```yaml
-- folder: "frontend"
-  type: "frontend"
-  subtype: "ui"         # Web application
-  language: "typescript"  # Default: typescript
-  # ... language-specific settings
-```
-
-**Subtypes:**
-- `ui` - Web application (React, Vue, etc.)
-- `library` - Shared frontend library
-- `e2e` - End-to-end tests
+- `ui` — web application (React, Vue, etc.)
+- `library` — shared frontend library
+- `e2e` — end-to-end tests
 
 #### Custom
 
+Any folder path with a language you choose; `type` and `subtype` are both
+`custom`.
+
+### Hierarchical paths
+
+Folder paths may be nested, e.g. `services/auth/api`, `services/auth/worker`,
+`services/payment/api`.
+
+---
+
+## The `project` Section
+
+The `project` section captures **language-agnostic** decisions (database, ORM,
+error-handling pattern, commit style, PR-size limit, deployment target, and the
+source-tree layout style). These are collected during `init` and rendered into
+the core conventions.
+
+See [PROJECT_SETTINGS.md](./user-guide/PROJECT_SETTINGS.md) for full per-field
+options, rendering details, and the per-language source-tree layouts (flat vs.
+src) backed by `prompticorn/configurations/source_layouts.yaml`.
+
 ```yaml
-- folder: "services/auth"
-  type: "custom"
-  subtype: "microservice"
-  language: "go"
-  # ... language-specific settings
+project:
+  layout_style: "flat"        # "flat" (default) | "src"
+  database: "PostgreSQL"
+  orm: "SQLAlchemy"
+  error_handling: "Exceptions"
+  commit_style: "Conventional Commits"
+  pr_size: "400"
+  deploy_target: "AWS Lambda"
 ```
 
-### Hierarchical Paths
-
-Folders can be nested:
-
-```yaml
-spec:
-  - folder: "services/auth/api"
-    type: "backend"
-    subtype: "api"
-    language: "go"
-  
-  - folder: "services/auth/worker"
-    type: "backend"
-    subtype: "worker"
-    language: "go"
-  
-  - folder: "services/payment/api"
-    type: "backend"
-    subtype: "api"
-    language: "python"
-```
+Empty values render as `_(not specified)_` in the conventions.
 
 ---
 
 ## Persona Configuration
 
-Personas control which agents are generated.
-
-### Available Personas
-
-```yaml
-active_personas:
-  - "software_engineer"    # Core development
-  - "qa_tester"            # Testing and QA
-  - "devops_engineer"      # CI/CD and ops
-  - "security_engineer"    # Security reviews
-  - "architect"            # System design
-  - "data_engineer"        # Data pipelines
-  - "data_scientist"       # ML/AI
-  - "technical_writer"     # Documentation
-  - "product_manager"      # Product planning
-```
-
-### Universal Agents
-
-These agents are **always generated** regardless of persona selection:
-- `ask` - Q&A and decision logs
-- `debug` - Debugging assistance
-- `explain` - Code explanations
-- `plan` - Planning and task breakdown
-- `orchestrator` - Workflow coordination
-
-### Agent Filtering Examples
-
-#### Example 1: Solo Developer
-
-```yaml
-active_personas:
-  - "software_engineer"
-```
-
-**Generated agents:**
-- Universal: ask, debug, explain, plan, orchestrator
-- Software Engineer: code, test, refactor, migration, review, backend, frontend, performance, enforcement
-
-**Total:** ~14 agents
-
-#### Example 2: Full-Stack Team
-
-```yaml
-active_personas:
-  - "software_engineer"
-  - "qa_tester"
-  - "devops_engineer"
-```
-
-**Generated agents:**
-- Universal: ask, debug, explain, plan, orchestrator
-- Software Engineer: code, test, refactor, migration, review, backend, frontend, performance, enforcement
-- QA/Tester: test, review (overlap with Software Engineer)
-- DevOps: devops, observability, incident
-
-**Total:** ~15 agents (with overlap)
-
-#### Example 3: Enterprise Team
+Personas control which agents are generated. Available personas are defined in
+`prompticorn/personas/personas.yaml`; `init` and `swap` present them
+interactively.
 
 ```yaml
 active_personas:
@@ -361,14 +357,28 @@ active_personas:
   - "devops_engineer"
   - "security_engineer"
   - "architect"
+  - "data_engineer"
+  - "data_scientist"
+  - "technical_writer"
+  - "product_manager"
 ```
 
-**Generated agents:**
-- All previous + architect, security, compliance
+> The role-specific personas
+> `backend_software_engineer`, `frontend_software_engineer`, and
+> `fullstack_software_engineer` are also available; prefer these over the
+> generic `software_engineer` where it fits your team.
 
-**Total:** ~20 agents
+### Universal agents
 
-### Custom Persona Creation
+A small set of agents is **always generated** regardless of persona selection:
+
+- `ask` — Q&A and explanations
+- `debug` — debugging assistance
+- `explain` — code walkthroughs and onboarding
+- `plan` — planning and task breakdown
+- `orchestrator` — workflow coordination
+
+### Custom persona creation
 
 Edit `prompticorn/personas/personas.yaml`:
 
@@ -376,7 +386,7 @@ Edit `prompticorn/personas/personas.yaml`:
 personas:
   my_custom_persona:
     display_name: "My Custom Role"
-    description: "Custom role for specific workflow"
+    description: "Custom role for a specific workflow"
     primary_agents:
       - "code"
       - "test"
@@ -388,7 +398,7 @@ personas:
       - "debugging-methodology"
 ```
 
-Then use in your config:
+Then reference it:
 
 ```yaml
 active_personas:
@@ -399,504 +409,164 @@ active_personas:
 
 ## Variant Selection
 
-Choose between **minimal** (efficient) or **verbose** (detailed) agent prompts.
-
-### Minimal Variant
-
-```yaml
-variant: "minimal"
-```
-
-**Characteristics:**
-- Concise prompts (50-200 lines)
-- Essential instructions only
-- Lower token usage
-- Faster response times
-- Best for: Cost-conscious projects, experienced developers
-
-### Verbose Variant
+Choose between **minimal** (efficient) and **verbose** (detailed) agent prompts.
+The variant is global — all agents use the same one.
 
 ```yaml
-variant: "verbose"
-```
-
-**Characteristics:**
-- Detailed prompts (200-800 lines)
-- Extensive examples
-- More context and explanations
-- Higher token usage
-- Best for: Learning, complex projects, junior developers
-
-### Per-Agent Variant Override
-
-Currently, variant is global. All agents use the same variant.
-
-**Future feature:** Per-agent variant selection.
-
----
-
-## Builder-Specific Settings
-
-Different AI tools have different output formats.
-
-### Kilo IDE
-
-```yaml
-# No builder-specific settings needed
-# Outputs to: .kilo/agents/
-```
-
-**Output structure:**
-```
-.kilo/
-├── agents/
-│   ├── code.md
-│   ├── test.md
-│   └── ...
-└── rules/
-    ├── system.md
-    └── conventions.md
-```
-
-### Kilo CLI
-
-```yaml
-# No builder-specific settings needed
-# Outputs to: .opencode/rules/
-```
-
-**Output structure:**
-```
-.opencode/
-└── rules/
-    ├── always-on.md  (collapsed)
-    └── modes.md      (collapsed)
-```
-
-### Cline
-
-```yaml
-# No builder-specific settings needed
-# Outputs to: .clinerules
-```
-
-**Output:** Single concatenated file.
-
-### Cursor
-
-```yaml
-# No builder-specific settings needed
-# Outputs to: .cursor/rules/
-```
-
-**Output structure:**
-```
-.cursor/
-└── rules/
-    ├── code.mdc
-    ├── test.mdc
-    └── ...
-```
-
-Plus legacy `.cursorrules` file.
-
-### GitHub Copilot
-
-```yaml
-# No builder-specific settings needed
-# Outputs to: .github/copilot-instructions.md
-```
-
-**Output:** Single markdown file.
-
----
-
-## Template Variables
-
-See [TEMPLATE_SYSTEM.md](./TEMPLATE_SYSTEM.md) for complete documentation.
-
-### Quick Reference
-
-All variables in `.prompticorn/.prompticorn.yaml` `spec` section are available as templates:
-
-```yaml
-spec:
-  language: "python"       # → {{LANGUAGE}}
-  runtime: "3.12"          # → {{RUNTIME}}
-  package_manager: "uv"    # → {{PACKAGE_MANAGER}}
-  testing_framework: "pytest"  # → {{TESTING_FRAMEWORK}}
-  # ... etc
-```
-
-### Usage in Custom Prompts
-
-Create custom agent prompts using template variables:
-
-```markdown
----
-name: my-custom-agent
-description: Custom agent for {{LANGUAGE}}
----
-
-# System Prompt
-
-You are a {{LANGUAGE}} {{RUNTIME}} expert.
-Use {{PACKAGE_MANAGER}} for dependencies.
-Test with {{TESTING_FRAMEWORK}}.
+variant: "minimal"   # lightweight prompts, fewer tokens, lower cost
+# or
+variant: "verbose"   # detailed prompts with more examples and explanation
 ```
 
 ---
 
-## Ignore Files
+## Supported AI Tools
 
-prompticorn can generate ignore files for various tools.
+`init` and `switch` generate configuration for one tool at a time. The five
+supported AI assistants are **Kilo, Cline, Claude, Cursor, and Copilot** (Kilo
+offers both a CLI and an IDE target):
 
-### .kiloignore
+| Tool (menu) | Normalized name | Output |
+|-------------|-----------------|--------|
+| Kilo CLI | `kilo-cli` | `.opencode/rules/` (collapsed mode files) |
+| Kilo IDE | `kilo-ide` | `.kilo/agents/` (individual agent files) |
+| Claude | `claude` | `.claude/` directory (Markdown agents) + `CLAUDE.md` |
+| Cline | `cline` | `.clinerules` (single concatenated file) |
+| Cursor | `cursor` | `.cursor/rules/` directory + `.cursorrules` |
+| Copilot | `copilot` | `.github/copilot-instructions.md` |
 
-Generated for Kilo Code:
-
-```
-# Auto-generated by prompticorn
-node_modules/
-.venv/
-__pycache__/
-*.pyc
-.git/
-```
-
-### .gitignore Integration
-
-prompticorn respects existing `.gitignore` and can generate additional patterns:
-
-```gitignore
-# prompticorn
-.prompticorn/
-.kilo/
-.clinerules
-.cursor/
-```
-
-### Custom Ignore Patterns
-
-Add custom patterns to `.prompticorn/.prompticorn.yaml`:
-
-```yaml
-ignore_patterns:
-  - "vendor/"
-  - "dist/"
-  - "*.log"
-```
-
----
-
-## Advanced Use Cases
-
-### Use Case 1: Multiple AI Tools
-
-Generate configs for all tools:
+Switching tools removes the previous tool's generated artifacts before writing
+the new ones.
 
 ```bash
-# Generate Kilo
-prompticorn init
-# Select: Kilo IDE
-
-# Generate Cline
-prompticorn switch
-# Select: Cline
-
-# Generate Cursor
-prompticorn switch
-# Select: Cursor
+prompticorn init             # interactive first-time setup
+prompticorn switch claude    # regenerate for Claude using existing config
+prompticorn switch cline     # switch to Cline
 ```
 
-**Result:** All three configs exist simultaneously.
+---
 
-### Use Case 2: Environment-Specific Configs
+## How Conventions Are Generated
 
-#### Development
+The generated core conventions (`.claude/conventions/core/general.md`, or the
+equivalent for your tool) are produced from Jinja2 templates under
+`prompticorn/agents/core/` (`system.md`, `conventions.md`, `session.md`) plus a
+per-language `conventions-<language>.md`.
 
-`.prompticorn.dev.yaml`:
-```yaml
-version: "1.0"
-repository:
-  type: "single-language"
-spec:
-  language: "python"
-  runtime: "3.12"
-variant: "verbose"  # More detailed for development
-```
+Two code paths render them:
 
-#### Production
+- `prompticorn/builders/convention_generator.py` —
+  `generate_core_convention()` and `generate_language_convention()`.
+- `prompticorn/ir/loaders/core_files_loader.py` —
+  `CoreFilesLoader.get_core_files()` / `_template_content()`.
 
-`.prompticorn.prod.yaml`:
-```yaml
-version: "1.0"
-repository:
-  type: "single-language"
-spec:
-  language: "python"
-  runtime: "3.12"
-variant: "minimal"  # Efficient for production
-```
+They substitute your actual choices into the templates, including:
 
-**Switch configs:**
-```bash
-cp .prompticorn.dev.yaml .prompticorn/.prompticorn.yaml
-prompticorn init
-```
+- `spec` values: `language`, `runtime`, `package_manager`, `test_framework`,
+  `linter`/`linters`, `formatter`, `abstract_class_style`, and the `coverage`
+  targets (exposed to the coverage macros).
+- `project` values: `database`, `orm`, `error_handling`, `commit_style`,
+  `pr_size`, `deploy_target`.
+- `repository.type` (as `repository_type`).
+- `source_layout` — the per-language standard source-tree layout, chosen by
+  `project.layout_style` (`flat` default, `src` selectable) via
+  `get_source_layout()` in `prompticorn/source_layouts.py`, with data from
+  `prompticorn/configurations/source_layouts.yaml`.
 
-### Use Case 3: Team Configurations
-
-#### Backend Team
-
-`.prompticorn.backend.yaml`:
-```yaml
-active_personas:
-  - "software_engineer"
-  - "devops_engineer"
-  - "security_engineer"
-```
-
-#### Frontend Team
-
-`.prompticorn.frontend.yaml`:
-```yaml
-active_personas:
-  - "software_engineer"
-  - "qa_tester"
-```
-
-### Use Case 4: CI/CD Integration
-
-**GitHub Actions:**
-
-```yaml
-name: Generate AI Configs
-
-on:
-  push:
-    branches: [main]
-
-jobs:
-  generate:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: actions/setup-python@v4
-        with:
-          python-version: '3.12'
-      - run: pip install prompticorn
-      - run: prompticorn validate
-      - run: prompticorn init
-```
-
-### Use Case 5: Monorepo with Shared Config
-
-**Base config:** `.prompticorn.base.yaml`
-
-```yaml
-version: "1.0"
-variant: "minimal"
-active_personas:
-  - "software_engineer"
-  - "qa_tester"
-```
-
-**Per-language overlays:**
-
-```yaml
-# backend/.prompticorn.yaml
-extends: "../.prompticorn.base.yaml"
-repository:
-  type: "single-language"
-spec:
-  language: "python"
-  runtime: "3.12"
-```
-
-**Note:** Config inheritance is a planned feature.
+Empty values render as `_(not specified)_`, so the conventions always read
+cleanly even before everything is decided.
 
 ---
 
 ## Configuration Validation
 
-### Validate Syntax
-
-```bash
-# Check YAML syntax
-python -c "import yaml; yaml.safe_load(open('.prompticorn/.prompticorn.yaml'))"
-```
-
-### Validate with prompticorn
+`validate` checks the **agent registry structure** (discovered from the bundled
+`agents/` directory), not a flat `prompts/` layout. It verifies that each agent
+has a base `prompt.md` (or minimal/verbose variants), that each subagent has
+`minimal/` and `verbose/` variant directories with `prompt.md`, and that all
+discovered agents load cleanly.
 
 ```bash
 prompticorn validate
 ```
 
-**Output:**
+Output on success:
+
 ```
-▶ Validating prompt registry...
+▶ Validating agent registry...
 
-  ✓ All good — no missing or orphaned files.
-```
-
-### Common Validation Errors
-
-#### Invalid YAML Syntax
-
-**Error:**
-```
-YAMLError: expected ':', but found '<stream end>'
+  ✓ Registry valid: N agents, M subagents.
 ```
 
-**Cause:** Missing colon or incorrect indentation
+To list discovered agents, their subagents, and variants:
 
-**Fix:** Use spaces (not tabs), check colons
-
-#### Unknown Language
-
-**Error:**
-```
-ValueError: Unknown language 'pythn'
+```bash
+prompticorn list
 ```
 
-**Cause:** Language name misspelled
+To sanity-check your YAML syntax independently:
 
-**Fix:** Use correct language name from supported list
-
-#### Missing Required Fields
-
-**Error:**
+```bash
+python -c "import yaml; yaml.safe_load(open('.prompticorn/.prompticorn.yaml'))"
 ```
-ValidationError: 'language' is required
-```
-
-**Cause:** Missing required field in spec
-
-**Fix:** Add all required fields (language, runtime, package_manager at minimum)
-
----
-
-## Migration and Upgrades
-
-### Upgrading Config Version
-
-Currently on version `1.0`. Future versions will have migration guides.
-
-### Breaking Changes
-
-Breaking changes will be documented in [MIGRATION_GUIDE.md](./MIGRATION_GUIDE.md).
-
-### Config Schema Versioning
-
-```yaml
-version: "1.0"  # Always specify version
-```
-
-When upgrading:
-1. Read migration guide
-2. Update `version` field
-3. Run `prompticorn validate`
-4. Regenerate configs with `prompticorn init`
 
 ---
 
 ## Best Practices
 
-### 1. Use Version Control
+### Commit the config, ignore the generated artifacts
 
-**Commit** `.prompticorn/.prompticorn.yaml` to git:
+Commit `.prompticorn/.prompticorn.yaml` so the whole team shares the same
+configuration:
 
 ```bash
 git add .prompticorn/.prompticorn.yaml
 git commit -m "Add prompticorn config"
 ```
 
-**Ignore** generated files:
+Ignore the per-tool generated files:
 
 ```gitignore
 .kilo/
+.opencode/
 .clinerules
 .cursor/
+.cursorrules
 .github/copilot-instructions.md
 ```
 
-### 2. Start Minimal, Expand Later
+### Start minimal, expand later
 
-Begin with minimal config:
+Begin with `language`, `runtime`, and `package_manager`, then fill in the rest
+of `spec` and `project` as your team standardises.
 
-```yaml
-version: "1.0"
-repository:
-  type: "single-language"
-spec:
-  language: "python"
-  runtime: "3.12"
-  package_manager: "uv"
-```
+### Keep personas focused
 
-Add more fields as needed.
+Select only the personas your team actually uses — every persona expands the set
+of generated agents.
 
-### 3. Document Custom Settings
+### Regenerate after edits
 
-Add comments to your config:
-
-```yaml
-spec:
-  language: "python"
-  runtime: "3.12"
-  package_manager: "uv"  # Using uv for speed
-  testing_framework: "pytest"  # Team standard
-```
-
-### 4. Use Personas Wisely
-
-Don't select all personas - only those your team uses:
-
-```yaml
-# Good (focused)
-active_personas:
-  - "software_engineer"
-  - "qa_tester"
-
-# Bad (too many)
-active_personas:
-  - "software_engineer"
-  - "qa_tester"
-  - "devops_engineer"
-  - "security_engineer"
-  - "architect"
-  - "data_engineer"
-  - "data_scientist"
-```
-
-### 5. Validate After Changes
-
-Always run validation after editing config:
+After editing `.prompticorn/.prompticorn.yaml`, regenerate so the rendered
+conventions and agents pick up the change:
 
 ```bash
-# Edit config
-vim .prompticorn/.prompticorn.yaml
-
-        # Validate
-        prompticorn validate
-
-        # Regenerate if valid
-        prompticorn init
+prompticorn switch <tool>   # or: prompticorn init
 ```
 
 ---
 
 ## Reference
 
-### Related Documentation
-
-- [GETTING_STARTED.md](./user-guide/GETTING_STARTED.md) - Basic usage
-- [TEMPLATE_SYSTEM.md](./TEMPLATE_SYSTEM.md) - Template variables
-- [PERSONAS.md](./PERSONAS.md) - Persona system details
-- [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) - Common issues
+- [PROJECT_SETTINGS.md](./user-guide/PROJECT_SETTINGS.md) — the `project`
+  section and source-tree layouts in depth.
+- [GETTING_STARTED.md](./user-guide/GETTING_STARTED.md) — first-run walkthrough.
 
 ---
 
-**Last Updated:** 2026-04-13  
-**Version:** 0.1.0
+**Last Updated:** 2026-06-22
+
+> Version: prompticorn uses a **dynamic** version. `pyproject.toml` declares
+> `dynamic = ["version"]` sourced from `prompticorn/__about__.py`; CI/CD injects
+> the real `MAJOR.MINOR.PATCH` at build time. Local/editable installs report
+> `0.0.0.dev0`.
