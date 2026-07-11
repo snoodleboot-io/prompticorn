@@ -10,11 +10,22 @@ from prompticorn.builders.claude_md import generate_claude_md
 from prompticorn.builders.convention_generator import generate_all_conventions
 from prompticorn.builders.factory import BuilderFactory
 from prompticorn.builders.kilo_builder import KiloBuilder
+from prompticorn.builders.skill_emitter import write_skill
 from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
 from prompticorn.ir.loaders.language_skill_mapping_loader import LanguageSkillMappingLoader
 from prompticorn.ir.models.agent import Agent
 from prompticorn.personas import PersonaFilter, PersonaRegistry
 from prompticorn.tools import builder_dispatch
+
+# Internal builder name -> base directory for tools that emit the Agent Skills
+# spec folder (<base>/skills/<name>/SKILL.md). Copilot uses a flat layout and is
+# handled separately.
+_SKILL_FOLDER_BASE_DIRS: dict[str, str] = {
+    "kilo": ".kilo",
+    "cline": ".cline",
+    "claude": ".claude",
+    "cursor": ".cursor",
+}
 
 
 class PromptBuilder:
@@ -807,51 +818,24 @@ class PromptBuilder:
         Returns:
             List of files written
         """
-        written_files = []
         skill_name = skill["name"]
         content = skill["full_content"]
 
-        if self.tool_name == "kilo":
-            # Kilo: .kilo/skills/{skill_name}/SKILL.md
-            skill_dir = output / ".kilo" / "skills" / skill_name
-            skill_dir.mkdir(parents=True, exist_ok=True)
-            skill_file = skill_dir / "SKILL.md"
-            skill_file.write_text(content, encoding="utf-8")
-            written_files.append(f".kilo/skills/{skill_name}/SKILL.md")
+        # Tools that follow the Agent Skills spec emit an identical
+        # <base>/skills/<name>/SKILL.md folder; only the base directory differs.
+        base_dir = _SKILL_FOLDER_BASE_DIRS.get(self.tool_name)
+        if base_dir is not None:
+            return [write_skill(output, base_dir, skill_name, content)]
 
-        elif self.tool_name == "cline":
-            # Cline: .cline/skills/{skill_name}/SKILL.md
-            skill_dir = output / ".cline" / "skills" / skill_name
-            skill_dir.mkdir(parents=True, exist_ok=True)
-            skill_file = skill_dir / "SKILL.md"
-            skill_file.write_text(content, encoding="utf-8")
-            written_files.append(f".cline/skills/{skill_name}/SKILL.md")
-
-        elif self.tool_name == "claude":
-            # Claude: .claude/skills/{skill_name}/SKILL.md
-            skill_dir = output / ".claude" / "skills" / skill_name
-            skill_dir.mkdir(parents=True, exist_ok=True)
-            skill_file = skill_dir / "SKILL.md"
-            skill_file.write_text(content, encoding="utf-8")
-            written_files.append(f".claude/skills/{skill_name}/SKILL.md")
-
-        elif self.tool_name == "copilot":
-            # Copilot: .github/skills/{skill_name}.md
+        if self.tool_name == "copilot":
+            # Copilot: flat .github/skills/{skill_name}.md
             skills_dir = output / ".github" / "skills"
             skills_dir.mkdir(parents=True, exist_ok=True)
             skill_file = skills_dir / f"{skill_name}.md"
             skill_file.write_text(content, encoding="utf-8")
-            written_files.append(f".github/skills/{skill_name}.md")
+            return [f".github/skills/{skill_name}.md"]
 
-        elif self.tool_name == "cursor":
-            # Cursor: .cursor/skills/{skill_name}/SKILL.md
-            skill_dir = output / ".cursor" / "skills" / skill_name
-            skill_dir.mkdir(parents=True, exist_ok=True)
-            skill_file = skill_dir / "SKILL.md"
-            skill_file.write_text(content, encoding="utf-8")
-            written_files.append(f".cursor/skills/{skill_name}/SKILL.md")
-
-        return written_files
+        return []
 
 
 def get_prompt_builder(tool: str):
