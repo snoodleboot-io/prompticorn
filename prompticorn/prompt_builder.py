@@ -360,8 +360,21 @@ class PromptBuilder:
                     except Exception as conv_error:
                         actions.append(f"⚠ Failed to generate conventions: {conv_error}")
                 else:
-                    # Generate AGENTS.md for other tools
-                    agents_md_content = generate_agents_md(primary_agents_built)
+                    # Generate self-contained AGENTS.md for other tools: routing
+                    # index + inlined core conventions (sourced from the primary spec).
+                    selected_specs = self._extract_all_specs_from_config(config)
+                    primary_spec = selected_specs[0] if selected_specs else {}
+                    repository_type = (
+                        (config.get("repository") or {}).get("type", "") if config else ""
+                    )
+                    project = config.get("project") if config else None
+                    agents_md_content = generate_agents_md(
+                        primary_agents_built,
+                        repository_type=repository_type,
+                        project=project,
+                        primary_language=primary_spec.get("language", ""),
+                        primary_spec=primary_spec,
+                    )
                     agents_md_path = output / "AGENTS.md"
                     agents_md_path.write_text(agents_md_content, encoding="utf-8")
                     actions.append("✓ AGENTS.md")
