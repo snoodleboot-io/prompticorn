@@ -1,62 +1,18 @@
 """Project-level configuration questions (language-agnostic).
 
-These populate the project-level fields of the core conventions (database, ORM,
-commit style, PR size, deploy target). They are asked once during ``init`` and
-stored under the config ``project`` section. The ``NOT_SPECIFIED`` option maps to
-an empty value so the convention renders a clear "_(not specified)_" placeholder.
+These populate the project-level fields of the core conventions (commit style,
+PR size, deploy target). They are asked once during ``init`` and stored under the
+config ``project`` section. The ``NOT_SPECIFIED`` option maps to an empty value so
+the convention renders a clear "_(not specified)_" placeholder.
+
+Note: ``layout_style`` and ``error_handling`` are now CORE per-language questions
+(stored on each language/folder spec), and ``database``/``orm`` were replaced by
+the fungible backend-only ``databases``/``data_access`` questions.
 """
 
 from prompticorn.questions.base.question import Question
 
 NOT_SPECIFIED = "Not specified"
-
-
-class DatabaseQuestion(Question):
-    """Project database selection."""
-
-    @property
-    def key(self) -> str:
-        return "project_database"
-
-    @property
-    def question_text(self) -> str:
-        return "Which database does this project use?"
-
-    @property
-    def explanation(self) -> str:
-        return "The primary datastore. Documented in the core conventions for all agents."
-
-    @property
-    def options(self) -> list[str]:
-        return [NOT_SPECIFIED, "PostgreSQL", "MySQL", "SQLite", "MongoDB", "DynamoDB", "Redis"]
-
-    @property
-    def default(self) -> str:
-        return NOT_SPECIFIED
-
-
-class OrmQuestion(Question):
-    """Project ORM / query layer selection."""
-
-    @property
-    def key(self) -> str:
-        return "project_orm"
-
-    @property
-    def question_text(self) -> str:
-        return "Which ORM / query layer does this project use?"
-
-    @property
-    def explanation(self) -> str:
-        return "The data-access layer agents should use for queries and models."
-
-    @property
-    def options(self) -> list[str]:
-        return [NOT_SPECIFIED, "SQLAlchemy", "Prisma", "Django ORM", "GORM", "TypeORM", "Raw SQL"]
-
-    @property
-    def default(self) -> str:
-        return NOT_SPECIFIED
 
 
 class CommitStyleQuestion(Question):
@@ -107,64 +63,6 @@ class PrSizeQuestion(Question):
         return NOT_SPECIFIED
 
 
-class LayoutStyleQuestion(Question):
-    """Source-tree layout style (flat vs src)."""
-
-    @property
-    def key(self) -> str:
-        return "project_layout_style"
-
-    @property
-    def question_text(self) -> str:
-        return "Which source-tree layout should the conventions document?"
-
-    @property
-    def explanation(self) -> str:
-        return (
-            "flat: package/modules at the repo root (idiomatic default).\n"
-            "src: sources nested under a src/ directory."
-        )
-
-    @property
-    def options(self) -> list[str]:
-        return ["flat", "src"]
-
-    @property
-    def option_explanations(self) -> dict[str, str]:
-        return {
-            "flat": "Package/modules at the repo root (recommended default).",
-            "src": "Sources nested under a src/ directory.",
-        }
-
-    @property
-    def default(self) -> str:
-        return "flat"
-
-
-class ErrorHandlingQuestion(Question):
-    """Project error-handling pattern."""
-
-    @property
-    def key(self) -> str:
-        return "project_error_handling"
-
-    @property
-    def question_text(self) -> str:
-        return "What error-handling pattern does this project follow?"
-
-    @property
-    def explanation(self) -> str:
-        return "How errors are surfaced and handled (documented in the core conventions)."
-
-    @property
-    def options(self) -> list[str]:
-        return [NOT_SPECIFIED, "Exceptions", "Result type", "Error values / codes"]
-
-    @property
-    def default(self) -> str:
-        return NOT_SPECIFIED
-
-
 class DeployTargetQuestion(Question):
     """Project deployment target."""
 
@@ -208,10 +106,6 @@ def get_project_questions() -> list[Question]:
         List of Question instances.
     """
     return [
-        LayoutStyleQuestion(),
-        DatabaseQuestion(),
-        OrmQuestion(),
-        ErrorHandlingQuestion(),
         CommitStyleQuestion(),
         PrSizeQuestion(),
         DeployTargetQuestion(),

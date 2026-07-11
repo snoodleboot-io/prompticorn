@@ -74,6 +74,9 @@ folder_type_presets:
     cli:
       language: "python"
       subtype: "cli"
+    data:
+      language: "python"
+      subtype: "data"
   frontend:
     ui:
       language: "typescript"

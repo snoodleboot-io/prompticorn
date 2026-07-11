@@ -9,10 +9,9 @@ from prompticorn.source_layouts import get_source_layout
 from prompticorn.text_utils import strip_source_header_comments
 
 # Project-level (language-agnostic) keys exposed to the core convention template.
+# Data-system (database/orm), error_handling and layout_style are now per-folder
+# spec values and are derived from the primary spec, not from project settings.
 _PROJECT_TEMPLATE_KEYS = (
-    "database",
-    "orm",
-    "error_handling",
     "commit_style",
     "pr_size",
     "deploy_target",
@@ -84,6 +83,7 @@ def generate_core_convention(
     repository_type: str = "",
     project: dict[str, Any] | None = None,
     primary_language: str = "",
+    primary_spec: dict[str, Any] | None = None,
 ) -> str:
     """Generate core general.md convention file.
 
@@ -92,10 +92,14 @@ def generate_core_convention(
     Args:
         repository_type: Repository type from config (e.g. 'single-language',
             'multi-language-monorepo') used to populate the core conventions.
-        project: Project-level settings (database, orm, commit_style, pr_size,
-            deploy_target) used to populate the core conventions.
+        project: Project-level settings (commit_style, pr_size, deploy_target)
+            used to populate the core conventions.
         primary_language: Primary project language, used to render the standard
             source-tree layout for that language.
+        primary_spec: Primary folder/language spec. The database/orm,
+            error_handling and layout_style template vars are derived from this
+            spec's per-folder values (databases / data_access lists are
+            comma-joined into the scalar template vars).
 
     Returns:
         Content for .claude/conventions/core/general.md
@@ -103,9 +107,20 @@ def generate_core_convention(
     core_dir = Path(__file__).parent.parent / "agents" / "core"
     environment = _get_convention_environment()
     project = project or {}
+    primary_spec = primary_spec or {}
+
+    # Data-system and layout/error-handling settings are per-folder spec values.
+    databases = primary_spec.get("databases") or []
+    data_access = primary_spec.get("data_access") or []
+
     context = {
         "repository_type": repository_type,
-        "source_layout": get_source_layout(primary_language, project.get("layout_style", "flat")),
+        "source_layout": get_source_layout(
+            primary_language, primary_spec.get("layout_style", "flat")
+        ),
+        "database": ", ".join(databases),
+        "orm": ", ".join(data_access),
+        "error_handling": primary_spec.get("error_handling", ""),
     }
     context.update({key: project.get(key, "") for key in _PROJECT_TEMPLATE_KEYS})
 
@@ -225,8 +240,9 @@ def generate_all_conventions(
             substituted into each language convention template.
         repository_type: Repository type from config, used to populate the core
             convention (e.g. 'single-language', 'multi-language-monorepo').
-        project: Project-level settings (database, orm, commit_style, pr_size,
-            deploy_target) used to populate the core convention.
+        project: Project-level settings (commit_style, pr_size, deploy_target)
+            used to populate the core convention. Data-system (database/orm),
+            error_handling and layout_style are sourced from the primary spec.
 
     Returns:
         Dictionary mapping file paths to content
@@ -239,10 +255,13 @@ def generate_all_conventions(
     output = {}
 
     normalized_specs = _normalize_specs(specs)
-    primary_language = normalized_specs[0]["language"] if normalized_specs else ""
+    primary_spec = normalized_specs[0] if normalized_specs else {}
+    primary_language = primary_spec.get("language", "")
 
     # Generate core general.md
-    core_content = generate_core_convention(repository_type, project, primary_language)
+    core_content = generate_core_convention(
+        repository_type, project, primary_language, primary_spec
+    )
     output[".claude/conventions/core/general.md"] = core_content
 
     # Generate a convention per language, substituting that folder's spec values.

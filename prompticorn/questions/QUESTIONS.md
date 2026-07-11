@@ -231,6 +231,62 @@ sequenceDiagram
 
 This integration is seamless from the user's perspective. They run `prompt init`, select their language, and then work through a series of questions. Each question appears with its options, explanations, and clear instructions. The answers are collected and used to configure the subsequent file generation.
 
+## Question Scoping: Three Tiers
+
+Questions are organized into three scopes that determine where their answers are
+stored and which folders they apply to:
+
+1. **Core (per-language)** — Asked for every language/folder. Stored on the
+   spec. Driven by the `core:` list of each language in `question_pipelines.yaml`.
+   Includes language, runtime, package manager, test framework, linter,
+   formatter, coverage, and now `layout_style` and `error_handling` (re-tiered
+   from project-level so each language/folder carries its own value).
+
+2. **Fungible (per-folder)** — Asked only for monorepo folders, keyed by
+   `{type}/{subtype}` (e.g. `backend/api`, `frontend/ui`) under each language's
+   `fungible:` block. This tier carries the application framework question and the
+   **data-system** questions. Single-language repositories stay **core-only** and
+   never see fungible questions.
+
+3. **Project (language-agnostic)** — Asked once for the whole repository and
+   stored under `project`. Now limited to `commit_style`, `pr_size`, and
+   `deploy_target`.
+
+### Data-system questions (databases / data_access)
+
+`databases` and `data_access` are **multi-select, backend-only fungible**
+questions. A backend folder may select several of each; frontend folders never
+see them.
+
+- **`databases`** — A single shared `DatabasesQuestion` (PostgreSQL, MySQL,
+  MariaDB, SQLite, MongoDB, Cassandra, DynamoDB, Firestore, Redis, Memcached,
+  Elasticsearch, BigQuery, Snowflake).
+- **`data_access`** — The data access / query layer (formerly "ORM"). Sourced
+  from **per-language** classes (`PythonDataAccessQuestion`,
+  `TypeScriptDataAccessQuestion`, `GoDataAccessQuestion`, ...) so each language
+  offers idiomatic options. Covers ORMs, query builders, ODMs, and raw SQL.
+
+These appear under the `fungible.backend/api`, `fungible.backend/worker`,
+`fungible.backend/cli`, and `fungible.backend/data` keys of each backend-capable
+language.
+
+### The `backend/data` subtype
+
+A new backend subtype, **`data`**, represents a folder that *is* a data system
+(e.g. a warehouse, ETL, or analytics package). It belongs to the data-system
+group and is asked **only** the `databases` + `data_access` questions — no
+application framework question.
+
+### Migration of legacy configs
+
+Older configs stored a single scalar `project.database` / `project.orm` (plus
+`project.layout_style` / `project.error_handling`). On load, a one-shot,
+idempotent migration (`ConfigHandler._migrate_old_orm_database_to_fungible`)
+normalizes these into the new per-spec shape: `databases` / `data_access` lists
+on each spec (backend/custom folders inherit the old scalars; frontend folders
+get empty lists), and `layout_style` / `error_handling` moved onto the spec.
+Renderers only ever see the new shape.
+
 ## See Also
 
 For the main PROMPTICORN package overview, see the parent [PROMPTICORN](../PROMPTICORN.md) documentation. For details on the interactive UI system that presents these questions, see the [UI](ui/UI.md) package documentation.

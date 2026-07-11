@@ -113,11 +113,11 @@ def _setup_monorepo_folders() -> list[dict[str, Any]]:
             question="What type of folder would you like to add?",
             options=["backend (preset)", "frontend (preset)", "custom"],
             explanations={
-                "backend (preset)": "Backend folder types: api, library, worker, cli",
+                "backend (preset)": "Backend folder types: api, library, worker, cli, data",
                 "frontend (preset)": "Frontend folder types: ui, library, e2e",
                 "custom": "Define your own folder type and configuration",
             },
-            question_explanation="Select a folder type: backend (api, library, worker, cli), frontend (ui, library, e2e), or custom",
+            question_explanation="Select a folder type: backend (api, library, worker, cli, data), frontend (ui, library, e2e), or custom",
             default_index=0,
             allow_multiple=False,
         )
@@ -275,7 +275,11 @@ def _ask_language_questions_for_folder(spec: dict[str, Any]) -> dict[str, Any]:
     Raises:
         QuestionPipelineError: If questions cannot be loaded for the language
     """
-    from prompticorn.questions.language import QuestionPipelineError, get_language_questions
+    from prompticorn.questions.language import (
+        QuestionPipelineError,
+        get_fungible_questions,
+        get_language_questions,
+    )
     from prompticorn.ui._selector import select_option_with_explain
 
     spec.get("folder", "")
@@ -298,6 +302,29 @@ def _ask_language_questions_for_folder(spec: dict[str, Any]) -> dict[str, Any]:
 
     # Ask each question
     for question in questions:
+        answer = select_option_with_explain(
+            question=question.question_text,
+            options=question.options,
+            explanations=question.option_explanations,
+            question_explanation=question.explanation,
+            default_index=0,
+            allow_multiple=question.allow_multiple,
+        )
+
+        # Store the answer (resolving preset values like coverage targets)
+        spec[question.key] = resolve_answer(question, answer)
+
+    # Ask fungible (per-folder) questions keyed by this folder's type/subtype
+    # (e.g. "backend/api"). These differ per workspace and surface the
+    # context-aware framework questions defined in question_pipelines.yaml.
+    fungible_type_key = f"{spec.get('type', '')}/{spec.get('subtype', '')}"
+    try:
+        fungible_questions = get_fungible_questions(language, fungible_type_key)
+    except QuestionPipelineError:
+        # If fungible questions cannot be loaded for this folder type, skip
+        fungible_questions = []
+
+    for question in fungible_questions:
         answer = select_option_with_explain(
             question=question.question_text,
             options=question.options,
@@ -381,7 +408,9 @@ def _ask_project_questions(select_option) -> dict[str, str]:
         select_option: Interactive selection function (select_option_with_explain).
 
     Returns:
-        Dict of project settings (database, orm, commit_style, pr_size, deploy_target).
+        Dict of project settings (commit_style, pr_size, deploy_target). Note:
+        layout_style and error_handling are now core per-language questions stored
+        on each folder/spec, not project-level.
     """
     from prompticorn.questions.project import NOT_SPECIFIED, get_project_questions
 

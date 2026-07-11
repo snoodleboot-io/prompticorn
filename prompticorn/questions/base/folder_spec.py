@@ -88,8 +88,10 @@ class FolderSpec:
         folder: The folder path (e.g., "frontend", "backend", "services/auth/api")
         type: The folder type - "backend" or "frontend"
         subtype: The folder subtype:
-            - backend: api, library, worker, cli
+            - backend: api, library, worker, cli, data
             - frontend: ui, library, e2e
+            (backend "data" is a folder that IS a data system: data-system
+            questions only, no application framework question)
         language: The programming language for this folder
         runtime: The runtime version
         package_manager: The package manager
@@ -102,7 +104,7 @@ class FolderSpec:
 
     folder: str
     type: str  # "backend" or "frontend"
-    subtype: str  # "api", "library", "worker", "cli" or "ui", "library", "e2e"
+    subtype: str  # "api", "library", "worker", "cli", "data" or "ui", "library", "e2e"
     language: str = ""  # Can be empty - will be derived from preset if type/subtype provided
     runtime: str = ""
     package_manager: str = ""
