@@ -23,12 +23,10 @@ class TestProjectQuestions:
 
     def test_keys_map_to_project_fields(self):
         # Each question key is project_<field>; <field> is the config key.
+        # layout_style/error_handling moved to per-language core questions and
+        # database/orm became per-folder fungible databases/data_access.
         keys = [q.key for q in get_project_questions()]
         assert keys == [
-            "project_layout_style",
-            "project_database",
-            "project_orm",
-            "project_error_handling",
             "project_commit_style",
             "project_pr_size",
             "project_deploy_target",
@@ -43,12 +41,8 @@ class TestProjectQuestions:
 
         # Act
         project = _ask_project_questions(select_default)
-        # Assert — "Not specified" maps to empty; layout_style defaults to flat.
+        # Assert — "Not specified" maps to empty for the remaining project keys.
         assert project == {
-            "layout_style": "flat",
-            "database": "",
-            "orm": "",
-            "error_handling": "",
             "commit_style": "",
             "pr_size": "",
             "deploy_target": "",
@@ -63,7 +57,7 @@ class TestProjectQuestions:
             return next(o for o in options if o != NOT_SPECIFIED)
 
         project = _ask_project_questions(select_first_real)
-        assert project["database"] == "PostgreSQL"
+        assert project["commit_style"] != ""
         assert all(v != "" for v in project.values())
 
 
@@ -72,13 +66,14 @@ class TestProjectInjection:
 
     @pytest.mark.parametrize("tool", ["claude", "copilot"])
     def test_project_values_render_in_core_convention(self, tool, tmp_path):
-        # Arrange
+        # Arrange — data-system values now live on the (primary) spec; the
+        # project section carries the language-agnostic settings.
         config = create_default_config("python")
         config["variant"] = "minimal"
         config["active_personas"] = ["software_engineer"]
+        config["spec"]["databases"] = ["PostgreSQL"]
+        config["spec"]["data_access"] = ["SQLAlchemy"]
         config["project"] = {
-            "database": "PostgreSQL",
-            "orm": "SQLAlchemy",
             "commit_style": "Conventional Commits",
             "pr_size": "400",
             "deploy_target": "AWS Lambda",
@@ -117,9 +112,11 @@ class TestSourceLayout:
         assert get_source_layout("typescript", "src").startswith("src/")
 
     def test_config_default_layout_style_is_flat(self):
+        # layout_style is now a per-language core spec value (not project-level).
         from prompticorn.config_handler import ConfigHandler
 
-        assert ConfigHandler.get_default_project_settings()["layout_style"] == "flat"
+        template = ConfigHandler.get_default_single_language_template()
+        assert template["spec"]["layout_style"] == "flat"
 
     def test_every_supported_language_has_a_layout(self):
         # Every language with a convention file must have its own source layout

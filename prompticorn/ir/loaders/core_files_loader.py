@@ -122,14 +122,20 @@ class CoreFilesLoader:
         repository_type = (config.get("repository") or {}).get("type", "")
         project = config.get("project") or {}
 
+        # Data-system (databases / data_access) and layout/error-handling settings
+        # are per-folder/per-language spec values. Derive the scalar template vars
+        # from the primary spec's multi-select lists (comma-joined).
+        databases = spec.get("databases") or []
+        data_access = spec.get("data_access") or []
+
         context = {
             "repository_type": repository_type,
             "source_layout": get_source_layout(
-                spec.get("language", ""), project.get("layout_style", "flat")
+                spec.get("language", ""), spec.get("layout_style", "flat")
             ),
-            "database": project.get("database", ""),
-            "orm": project.get("orm", ""),
-            "error_handling": project.get("error_handling", ""),
+            "database": ", ".join(databases),
+            "orm": ", ".join(data_access),
+            "error_handling": spec.get("error_handling", ""),
             "commit_style": project.get("commit_style", ""),
             "pr_size": project.get("pr_size", ""),
             "deploy_target": project.get("deploy_target", ""),

@@ -51,6 +51,19 @@ backend:
     - php
     - swift
     - shell
+  data:
+    - python
+    - typescript
+    - javascript
+    - go
+    - java
+    - kotlin
+    - scala
+    - rust
+    - csharp
+    - ruby
+    - php
+    - elixir
 
 frontend:
   ui:

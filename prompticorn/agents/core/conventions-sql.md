@@ -2,7 +2,7 @@
 # Core Conventions SQL
 
 Database:            {{ database }} e.g., PostgreSQL, MySQL, SQLite
-ORM/Query:           {{ orm }} e.g., Prisma, SQLAlchemy, GORM, Drizzle
+Data access:         {{ orm }} e.g., Prisma, SQLAlchemy, GORM, Drizzle, raw SQL
 
 ### Naming Conventions
 

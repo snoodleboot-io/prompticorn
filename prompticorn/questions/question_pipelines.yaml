@@ -19,11 +19,23 @@ python:
     - PythonMockingLibraryQuestion
     - PythonCoverageToolQuestion
     - PythonMutationToolQuestion
+    - PythonLayoutStyleQuestion
+    - PythonErrorHandlingQuestion
   fungible:
     backend/api:
       - PythonAPIFrameworkQuestion
+      - DatabasesQuestion
+      - PythonDataAccessQuestion
     backend/worker:
       - PythonWorkerFrameworkQuestion
+      - DatabasesQuestion
+      - PythonDataAccessQuestion
+    backend/cli:
+      - DatabasesQuestion
+      - PythonDataAccessQuestion
+    backend/data:
+      - DatabasesQuestion
+      - PythonDataAccessQuestion
     frontend/ui:
       - PythonUIFrameworkQuestion
     frontend/e2e: []
@@ -33,7 +45,21 @@ typescript:
     - TypeScriptVersionQuestion
     - TypeScriptPackageManagerQuestion
     - TypeScriptTestFrameworkQuestion
+    - TypeScriptLayoutStyleQuestion
+    - TypeScriptErrorHandlingQuestion
   fungible:
+    backend/api:
+      - DatabasesQuestion
+      - TypeScriptDataAccessQuestion
+    backend/worker:
+      - DatabasesQuestion
+      - TypeScriptDataAccessQuestion
+    backend/cli:
+      - DatabasesQuestion
+      - TypeScriptDataAccessQuestion
+    backend/data:
+      - DatabasesQuestion
+      - TypeScriptDataAccessQuestion
     frontend/ui:
       - TypeScriptFrameworkQuestion
     frontend/e2e: []
@@ -43,7 +69,21 @@ javascript:
     - TypeScriptVersionQuestion
     - TypeScriptPackageManagerQuestion
     - TypeScriptTestFrameworkQuestion
+    - TypeScriptLayoutStyleQuestion
+    - TypeScriptErrorHandlingQuestion
   fungible:
+    backend/api:
+      - DatabasesQuestion
+      - TypeScriptDataAccessQuestion
+    backend/worker:
+      - DatabasesQuestion
+      - TypeScriptDataAccessQuestion
+    backend/cli:
+      - DatabasesQuestion
+      - TypeScriptDataAccessQuestion
+    backend/data:
+      - DatabasesQuestion
+      - TypeScriptDataAccessQuestion
     frontend/ui:
       - TypeScriptFrameworkQuestion
     frontend/e2e: []
@@ -54,9 +94,21 @@ go:
     - GoLinterQuestion
     - GoFormatterQuestion
     - GoTestFrameworkQuestion
+    - GoLayoutStyleQuestion
+    - GoErrorHandlingQuestion
   fungible:
-    backend/api: []
-    backend/cli: []
+    backend/api:
+      - DatabasesQuestion
+      - GoDataAccessQuestion
+    backend/worker:
+      - DatabasesQuestion
+      - GoDataAccessQuestion
+    backend/cli:
+      - DatabasesQuestion
+      - GoDataAccessQuestion
+    backend/data:
+      - DatabasesQuestion
+      - GoDataAccessQuestion
 
 rust:
   core:
@@ -66,8 +118,18 @@ rust:
     - RustFormatterQuestion
     - RustTestFrameworkQuestion
   fungible:
-    backend/api: []
-    backend/cli: []
+    backend/api:
+      - DatabasesQuestion
+      - RustDataAccessQuestion
+    backend/worker:
+      - DatabasesQuestion
+      - RustDataAccessQuestion
+    backend/cli:
+      - DatabasesQuestion
+      - RustDataAccessQuestion
+    backend/data:
+      - DatabasesQuestion
+      - RustDataAccessQuestion
 
 java:
   core:
@@ -76,14 +138,36 @@ java:
     - JavaLinterQuestion
     - JavaTestFrameworkQuestion
   fungible:
-    backend/api: []
+    backend/api:
+      - DatabasesQuestion
+      - JavaDataAccessQuestion
+    backend/worker:
+      - DatabasesQuestion
+      - JavaDataAccessQuestion
+    backend/cli:
+      - DatabasesQuestion
+      - JavaDataAccessQuestion
+    backend/data:
+      - DatabasesQuestion
+      - JavaDataAccessQuestion
 
 csharp:
   core:
     - CSharpVersionQuestion
     - CSharpTestFrameworkQuestion
   fungible:
-    backend/api: []
+    backend/api:
+      - DatabasesQuestion
+      - CSharpDataAccessQuestion
+    backend/worker:
+      - DatabasesQuestion
+      - CSharpDataAccessQuestion
+    backend/cli:
+      - DatabasesQuestion
+      - CSharpDataAccessQuestion
+    backend/data:
+      - DatabasesQuestion
+      - CSharpDataAccessQuestion
 
 ruby:
   core:
@@ -92,8 +176,18 @@ ruby:
     - RubyLinterQuestion
     - RubyTestFrameworkQuestion
   fungible:
-    backend/api: []
-    backend/worker: []
+    backend/api:
+      - DatabasesQuestion
+      - RubyDataAccessQuestion
+    backend/worker:
+      - DatabasesQuestion
+      - RubyDataAccessQuestion
+    backend/cli:
+      - DatabasesQuestion
+      - RubyDataAccessQuestion
+    backend/data:
+      - DatabasesQuestion
+      - RubyDataAccessQuestion
 
 php:
   core:
@@ -101,7 +195,18 @@ php:
     - PhpPackageManagerQuestion
     - PhpTestFrameworkQuestion
   fungible:
-    backend/api: []
+    backend/api:
+      - DatabasesQuestion
+      - PhpDataAccessQuestion
+    backend/worker:
+      - DatabasesQuestion
+      - PhpDataAccessQuestion
+    backend/cli:
+      - DatabasesQuestion
+      - PhpDataAccessQuestion
+    backend/data:
+      - DatabasesQuestion
+      - PhpDataAccessQuestion
 
 swift:
   core:
@@ -109,7 +214,18 @@ swift:
     - SwiftPackageManagerQuestion
     - SwiftTestFrameworkQuestion
   fungible:
-    backend/api: []
+    backend/api:
+      - DatabasesQuestion
+      - SwiftDataAccessQuestion
+    backend/worker:
+      - DatabasesQuestion
+      - SwiftDataAccessQuestion
+    backend/cli:
+      - DatabasesQuestion
+      - SwiftDataAccessQuestion
+    backend/data:
+      - DatabasesQuestion
+      - SwiftDataAccessQuestion
 
 kotlin:
   core:
@@ -117,7 +233,18 @@ kotlin:
     - KotlinBuildToolQuestion
     - KotlinTestFrameworkQuestion
   fungible:
-    backend/api: []
+    backend/api:
+      - DatabasesQuestion
+      - KotlinDataAccessQuestion
+    backend/worker:
+      - DatabasesQuestion
+      - KotlinDataAccessQuestion
+    backend/cli:
+      - DatabasesQuestion
+      - KotlinDataAccessQuestion
+    backend/data:
+      - DatabasesQuestion
+      - KotlinDataAccessQuestion
 
 scala:
   core:
@@ -125,13 +252,36 @@ scala:
     - ScalaBuildToolQuestion
     - ScalaTestFrameworkQuestion
   fungible:
-    backend/api: []
+    backend/api:
+      - DatabasesQuestion
+      - ScalaDataAccessQuestion
+    backend/worker:
+      - DatabasesQuestion
+      - ScalaDataAccessQuestion
+    backend/cli:
+      - DatabasesQuestion
+      - ScalaDataAccessQuestion
+    backend/data:
+      - DatabasesQuestion
+      - ScalaDataAccessQuestion
 
 elixir:
   core:
     - ElixirVersionQuestion
     - ElixirTestFrameworkQuestion
-  fungible: []
+  fungible:
+    backend/api:
+      - DatabasesQuestion
+      - ElixirDataAccessQuestion
+    backend/worker:
+      - DatabasesQuestion
+      - ElixirDataAccessQuestion
+    backend/cli:
+      - DatabasesQuestion
+      - ElixirDataAccessQuestion
+    backend/data:
+      - DatabasesQuestion
+      - ElixirDataAccessQuestion
 
 elm:
   core:
@@ -155,7 +305,18 @@ fsharp:
   core:
     - FSharpVersionQuestion
   fungible:
-    backend/api: []
+    backend/api:
+      - DatabasesQuestion
+      - FSharpDataAccessQuestion
+    backend/worker:
+      - DatabasesQuestion
+      - FSharpDataAccessQuestion
+    backend/cli:
+      - DatabasesQuestion
+      - FSharpDataAccessQuestion
+    backend/data:
+      - DatabasesQuestion
+      - FSharpDataAccessQuestion
 
 dart:
   core:

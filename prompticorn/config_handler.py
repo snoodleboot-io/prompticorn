@@ -133,7 +133,86 @@ class ConfigHandler:
             return {}
 
         with open(config_path, encoding="utf-8") as f:
-            return cls._get_yaml().load(f) or {}
+            config = cls._get_yaml().load(f) or {}
+
+        cls._migrate_old_orm_database_to_fungible(config)
+        return config
+
+    @classmethod
+    def _migrate_old_orm_database_to_fungible(cls, config: dict[str, Any]) -> None:
+        """Normalize legacy scalar project.orm/project.database to the new shape.
+
+        Older configs stored a single ``project.database`` and ``project.orm``
+        scalar (plus ``project.layout_style`` / ``project.error_handling``). The
+        current model stores ``databases`` and ``data_access`` as per-folder
+        multi-select lists on each spec, and ``layout_style`` / ``error_handling``
+        per language/folder spec. This one-shot, idempotent migration rewrites old
+        configs in place so renderers only ever see the new shape.
+
+        Behavior:
+            - Single-language (spec is a dict): seed ``databases`` / ``data_access``
+              lists from the old scalars when absent, and carry over
+              ``layout_style`` / ``error_handling`` onto the spec.
+            - Multi-language-monorepo (spec is a list): seed ``databases`` /
+              ``data_access`` on backend/custom folders from the old scalars when
+              absent (frontend folders get empty lists); carry over
+              ``layout_style`` / ``error_handling`` onto each spec.
+            - Drop the migrated keys from ``project``.
+            - No-op when the config already uses the new shape (no legacy scalars).
+
+        Args:
+            config: Configuration dictionary to migrate in place.
+        """
+        if not config:
+            return
+
+        project = config.get("project")
+        if not isinstance(project, dict):
+            return
+
+        old_db = project.get("database")
+        old_orm = project.get("orm")
+        old_layout = project.get("layout_style")
+        old_error = project.get("error_handling")
+
+        has_legacy = any(
+            key in project for key in ("database", "orm", "layout_style", "error_handling")
+        )
+        if not has_legacy:
+            return
+
+        db_list = [old_db] if old_db else []
+        access_list = [old_orm] if old_orm else []
+
+        def _seed_spec(spec: dict[str, Any], *, seed_data_system: bool) -> None:
+            """Apply migrated values to a single spec dict in place."""
+            if seed_data_system:
+                spec.setdefault("databases", list(db_list))
+                spec.setdefault("data_access", list(access_list))
+            else:
+                spec.setdefault("databases", [])
+                spec.setdefault("data_access", [])
+            if old_layout is not None:
+                spec.setdefault("layout_style", old_layout)
+            if old_error is not None:
+                spec.setdefault("error_handling", old_error)
+
+        spec = config.get("spec")
+        if isinstance(spec, dict):
+            # Single-language: the lone spec inherits the legacy data-system values.
+            _seed_spec(spec, seed_data_system=True)
+        elif isinstance(spec, list):
+            for folder in spec:
+                if not isinstance(folder, dict):
+                    continue
+                # Frontend folders never carry data-system selections.
+                folder_type = folder.get("type", "")
+                seed = folder_type != "frontend"
+                _seed_spec(folder, seed_data_system=seed)
+
+        # Drop the now-migrated legacy keys from the project section.
+        for key in ("database", "orm", "layout_style", "error_handling"):
+            project.pop(key, None)
 
     @classmethod
     def save_config(cls, config: dict[str, Any], config_path: Path | None = None) -> None:
@@ -194,6 +273,10 @@ class ConfigHandler:
                 "linters": [],  # List of linters for advanced templating
                 "formatter": "",
                 "abstract_class_style": "interface",
+                "layout_style": "flat",
+                "error_handling": "",
+                "databases": [],
+                "data_access": [],
                 "coverage": {
                     "line": 80,
                     "branch": 70,
@@ -212,14 +295,14 @@ class ConfigHandler:
 
         These populate the core conventions and are captured during `init`.
 
+        Data-system settings (databases, data_access) and layout_style /
+        error_handling are now per-folder/per-language spec values, not
+        project-level; they are intentionally absent here.
+
         Returns:
             Dictionary of project-level settings with empty defaults.
         """
         return {
-            "layout_style": "flat",
-            "database": "",
-            "orm": "",
-            "error_handling": "",
             "commit_style": "",
             "pr_size": "",
             "deploy_target": "",

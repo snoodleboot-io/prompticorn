@@ -271,14 +271,9 @@ class TestDefaultTemplates:
         # Act
         settings = ConfigHandler.get_default_project_settings()
 
-        # Assert
-        assert settings["layout_style"] == "flat"
-        assert settings["database"] == ""
+        # Assert — data-system and layout/error-handling moved to per-spec.
+        assert settings["commit_style"] == ""
         assert set(settings) == {
-            "layout_style",
-            "database",
-            "orm",
-            "error_handling",
             "commit_style",
             "pr_size",
             "deploy_target",
@@ -292,7 +287,7 @@ class TestDefaultTemplates:
         # Assert
         assert template["repository"]["type"] == "multi-language-monorepo"
         assert template["spec"] == []
-        assert template["project"]["layout_style"] == "flat"
+        assert template["project"]["commit_style"] == ""
 
 
 class TestCreateDefaultConfig:
@@ -406,3 +401,98 @@ class TestDetectRepositoryType:
         """A spec that is neither list nor dict should be unknown."""
         # Act / Assert
         assert detect_repository_type({"spec": "not-a-collection"}) == "unknown"
+
+
+class TestOrmDatabaseMigration:
+    """Tests for the one-shot legacy orm/database migration on load."""
+
+    def test_single_language_scalar_migrated_to_lists(self):
+        """Old single-language scalars become per-spec lists; project keys dropped."""
+        # Arrange
+        config = {
+            "spec": {"language": "python"},
+            "project": {
+                "database": "PostgreSQL",
+                "orm": "SQLAlchemy",
+                "layout_style": "src",
+                "error_handling": "Exceptions",
+                "commit_style": "Conventional Commits",
+            },
+        }
+        # Act
+        ConfigHandler._migrate_old_orm_database_to_fungible(config)
+        # Assert
+        assert config["spec"]["databases"] == ["PostgreSQL"]
+        assert config["spec"]["data_access"] == ["SQLAlchemy"]
+        assert config["spec"]["layout_style"] == "src"
+        assert config["spec"]["error_handling"] == "Exceptions"
+        assert "database" not in config["project"]
+        assert "orm" not in config["project"]
+        assert "layout_style" not in config["project"]
+        assert "error_handling" not in config["project"]
+        assert config["project"]["commit_style"] == "Conventional Commits"
+
+    def test_monorepo_backend_seeded_frontend_empty(self):
+        """Backend/custom folders inherit data-system; frontend folders get [] ."""
+        # Arrange
+        config = {
+            "spec": [
+                {"language": "python", "type": "backend", "subtype": "api"},
+                {"language": "typescript", "type": "frontend", "subtype": "ui"},
+            ],
+            "project": {"database": "PostgreSQL", "orm": "Prisma"},
+        }
+        # Act
+        ConfigHandler._migrate_old_orm_database_to_fungible(config)
+        # Assert
+        backend, frontend = config["spec"]
+        assert backend["databases"] == ["PostgreSQL"]
+        assert backend["data_access"] == ["Prisma"]
+        assert frontend["databases"] == []
+        assert frontend["data_access"] == []
+
+    def test_migration_is_idempotent(self):
+        """Running the migration twice must not corrupt or accumulate values."""
+        # Arrange
+        config = {
+            "spec": {"language": "python"},
+            "project": {"database": "PostgreSQL", "orm": "SQLAlchemy"},
+        }
+        # Act
+        ConfigHandler._migrate_old_orm_database_to_fungible(config)
+        first = {
+            "databases": list(config["spec"]["databases"]),
+            "data_access": list(config["spec"]["data_access"]),
+        }
+        ConfigHandler._migrate_old_orm_database_to_fungible(config)
+        # Assert — second run is a no-op (legacy keys already removed).
+        assert config["spec"]["databases"] == first["databases"]
+        assert config["spec"]["data_access"] == first["data_access"]
+
+    def test_new_shape_config_is_noop(self):
+        """A config already in the new shape is left untouched."""
+        # Arrange
+        config = {
+            "spec": {
+                "language": "python",
+                "databases": ["MySQL"],
+                "data_access": ["Django ORM"],
+            },
+            "project": {"commit_style": ""},
+        }
+        # Act
+        ConfigHandler._migrate_old_orm_database_to_fungible(config)
+        # Assert
+        assert config["spec"]["databases"] == ["MySQL"]
+        assert config["spec"]["data_access"] == ["Django ORM"]
+        assert "databases" not in config["project"]
+
+    def test_empty_scalars_become_empty_lists(self):
+        """Empty legacy scalars migrate to empty lists, not [''] ."""
+        # Arrange
+        config = {"spec": {"language": "python"}, "project": {"database": "", "orm": ""}}
+        # Act
+        ConfigHandler._migrate_old_orm_database_to_fungible(config)
+        # Assert
+        assert config["spec"]["databases"] == []
+        assert config["spec"]["data_access"] == []
