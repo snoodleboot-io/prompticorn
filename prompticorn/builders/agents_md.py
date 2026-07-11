@@ -1,120 +1,99 @@
-"""Generator for root AGENTS.md file with only in-scope agents."""
+"""Canonical AGENTS.md emitter (PRO-31 / E1).
+
+Produces a self-contained root ``AGENTS.md``: an agent routing index plus the
+inlined core/general conventions. This is the free baseline for every tool that
+reads ``AGENTS.md`` natively (Codex, Zed, Windsurf, Roo, Junie; opt-in Gemini),
+so it must not reference any single tool's private directory layout.
+"""
+
+from typing import Any
+
+from prompticorn.builders.convention_generator import generate_core_convention
 
 
-def generate_agents_md(primary_agents: list[dict] | None = None) -> str:
-    """Generate AGENTS.md content with only the agents in scope.
+def generate_agents_md(
+    primary_agents: list[dict] | None = None,
+    *,
+    repository_type: str = "",
+    project: dict[str, Any] | None = None,
+    primary_language: str = "",
+    primary_spec: dict[str, Any] | None = None,
+) -> str:
+    """Generate self-contained ``AGENTS.md`` content.
 
     Args:
-        primary_agents: List of dicts with 'name' and 'description' for each agent in scope.
-                       If None, generates a template.
+        primary_agents: List of dicts with ``name`` and ``description`` for each
+            agent in scope. If falsy, a generic routing note is emitted instead
+            of a table.
+        repository_type: Repository type (e.g. ``single-language``), passed
+            through to the core conventions.
+        project: Project-level settings (commit_style, pr_size, deploy_target).
+        primary_language: Primary project language, used for the source-tree
+            layout in the core conventions.
+        primary_spec: Primary folder/language spec, used to derive per-folder
+            conventions (databases, data_access, error_handling, layout_style).
 
     Returns:
-        Content for root AGENTS.md file
+        Content for the root ``AGENTS.md`` file.
     """
+    sections = [_generate_routing_index(primary_agents)]
 
-    # If no agents provided, generate template
+    conventions = generate_core_convention(
+        repository_type=repository_type,
+        project=project,
+        primary_language=primary_language,
+        primary_spec=primary_spec,
+    ).strip()
+    if conventions:
+        sections.append(conventions)
+
+    return "\n\n---\n\n".join(sections) + "\n"
+
+
+def _generate_routing_index(primary_agents: list[dict] | None) -> str:
+    """Build the agent routing index (header + table or generic note)."""
+    header = (
+        "# Agents\n\n"
+        "This file defines the AI agents available for this project and the "
+        "conventions they follow. It is loaded automatically by tools that read "
+        "`AGENTS.md`.\n"
+    )
+
     if not primary_agents:
-        return _generate_template()
+        return (
+            header
+            + "\n## Available agents\n\n"
+            "Route to the agent whose purpose best matches the task, and switch "
+            "agents as the task changes. Each agent has specialized behaviors and "
+            "will suggest switching when another agent is better suited.\n"
+        )
 
-    # Generate with actual agents in scope
-    return _generate_with_agents(primary_agents)
-
-
-def _generate_template() -> str:
-    """Generate template AGENTS.md when no agents are specified."""
-    return """# Kilo Code Agents
-
-This directory contains the agent instructions and system configuration.
-
-## Structure
-
-- **`AGENTS.md`** (this file) — User guide for understanding the agents
-- **`.kilo/rules/`** — Core behaviors and conventions (always loaded)
-- **`.kilo/agents/`** — Individual agent definitions and subagents
-
-## Core Instructions
-
-The `.kilo/rules/` directory contains core files that are always loaded:
-- `system.md` — Core system behaviors
-- `conventions.md` — General conventions
-- `session.md` — Session management
-- `conventions-{language}.md` — Language-specific conventions (if configured)
-
-**Important:** Always load the core files from `.kilo/rules/` for any task, as they contain the foundational behaviors and conventions for this project.
-
-## Available Agents
-
-This configuration includes multiple agent types. See `.kilo/agents/` for all available agents.
-
-## Usage
-
-Switch between agents based on the task at hand. Each agent has specialized behaviors and will suggest switching when appropriate.
-
-## Configuration
-
-The IDE extensions automatically load the appropriate agent instructions from the `.kilo/` directory based on the current mode selection.
-
-For other tools (Claude, Cline, Cursor, Copilot), the agent instructions are adapted to that tool's format but maintain the same structure and purpose.
-"""
+    rows = "\n".join(
+        f"| **{a.get('name', 'unknown')}** | {_clean_description(a)} |" for a in primary_agents
+    )
+    return (
+        header
+        + f"\n## Available agents\n\n"
+        f"This configuration includes the following {len(primary_agents)} "
+        "primary agent(s). Route to the agent whose purpose best matches the "
+        "task, and switch agents as the task changes.\n\n"
+        "| Agent | Purpose |\n"
+        "|-------|---------|\n"
+        f"{rows}\n"
+    )
 
 
-def _generate_with_agents(primary_agents: list[dict]) -> str:
-    """Generate AGENTS.md with specific agents in scope."""
+def _clean_description(agent_info: dict) -> str:
+    """Normalize an agent description for the routing table."""
+    name = agent_info.get("name", "unknown")
+    description = agent_info.get("description", f"Agent: {name}")
 
-    # Build agent table rows
-    agent_rows = []
-    for agent_info in primary_agents:
-        name = agent_info.get("name", "unknown")
-        description = agent_info.get("description", f"Agent: {name}")
+    # Drop a redundant "Agent: name" prefix if present.
+    if description.startswith("Agent: "):
+        description = description[7:].strip()
 
-        # Clean up description - remove "Agent: name" prefix if it exists
-        if description.startswith("Agent: "):
-            description = description[7:].strip()
+    # Capitalize the first letter for consistent table formatting.
+    if description and description[0].islower():
+        description = description[0].upper() + description[1:]
 
-        # Capitalize first letter if needed
-        if description and description[0].islower():
-            description = description[0].upper() + description[1:]
-
-        # Format for markdown table
-        agent_rows.append(f"| **{name}** | {description} |")
-
-    agent_table = "\n".join(agent_rows)
-
-    return f"""# Kilo Code Agents
-
-This directory contains the agent instructions and system configuration for your project.
-
-## In-Scope Agents
-
-This configuration includes the following {len(primary_agents)} primary agent(s):
-
-| Agent | Purpose |
-|-------|---------|
-{agent_table}
-
-## Structure
-
-- **`AGENTS.md`** (this file) — User guide for understanding the agents in scope
-- **`.kilo/rules/`** — Core behaviors and conventions (always loaded)
-- **`.kilo/agents/`** — Agent definitions and subagents
-
-## Core Instructions
-
-The `.kilo/rules/` directory contains core files that are always loaded:
-- `system.md` — Core system behaviors
-- `conventions.md` — General conventions
-- `session.md` — Session management
-- `conventions-{{language}}.md` — Language-specific conventions (if configured)
-
-**Important:** Always load the core files from `.kilo/rules/` for any task, as they contain the foundational behaviors and conventions for this project.
-
-## Usage
-
-Switch between agents based on the task at hand. Each agent has specialized behaviors and will suggest switching when appropriate.
-
-## Configuration
-
-The IDE extensions automatically load the appropriate agent instructions from the `.kilo/` directory based on the current mode selection.
-
-For other tools (Claude, Cline, Cursor, Copilot), the agent instructions are adapted to that tool's format but maintain the same structure and purpose.
-"""
+    return description
