@@ -17,17 +17,13 @@ Functions:
 import re
 from typing import Final
 
-SUPPORTED_TOOLS: Final[set[str]] = {"kilo-cli", "kilo-ide", "claude", "cline", "cursor", "copilot"}
+from prompticorn.tools import name_mappings, supported_tool_ids
 
-# Mapping from normalized input (without special chars) to canonical tool name
-TOOL_MAPPINGS: Final[dict[str, str]] = {
-    "kilocli": "kilo-cli",
-    "kiloide": "kilo-ide",
-    "cline": "cline",
-    "cursor": "cursor",
-    "copilot": "copilot",
-    "claude": "claude",
-}
+SUPPORTED_TOOLS: Final[set[str]] = supported_tool_ids()
+
+# Mapping from normalized input (without special chars) to canonical tool name.
+# Derived from the central tool registry (see prompticorn/tools.py).
+TOOL_MAPPINGS: Final[dict[str, str]] = name_mappings()
 
 
 def normalize_tool_name(input_name: str) -> str:

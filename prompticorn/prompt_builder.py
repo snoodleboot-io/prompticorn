@@ -14,6 +14,7 @@ from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingL
 from prompticorn.ir.loaders.language_skill_mapping_loader import LanguageSkillMappingLoader
 from prompticorn.ir.models.agent import Agent
 from prompticorn.personas import PersonaFilter, PersonaRegistry
+from prompticorn.tools import builder_dispatch
 
 
 class PromptBuilder:
@@ -852,17 +853,8 @@ def get_prompt_builder(tool: str):
     Raises:
         ValueError: If tool is unknown
     """
-    # Map tool names to builder names
-    tool_mapping = {
-        "kilo-cli": "kilo",
-        "kilo-ide": "kilo",
-        "cline": "cline",
-        "cursor": "cursor",
-        "copilot": "copilot",
-        "claude": "claude",
-    }
-
-    internal_tool = tool_mapping.get(tool)
+    # Map tool ids to internal builder names (from the central tool registry).
+    internal_tool = builder_dispatch().get(tool)
     if not internal_tool:
         raise ValueError(f"Unknown tool: {tool}")
 

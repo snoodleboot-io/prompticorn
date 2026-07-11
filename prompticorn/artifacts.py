@@ -22,17 +22,13 @@ import shutil
 from pathlib import Path
 from typing import Final
 
-# Single source of truth: the artifacts each tool CREATES. A tool's `remove`
-# set is derived from these (see _build_artifact_files), so adding a new tool
-# means adding one entry here and never touching another tool's configuration.
-_TOOL_CREATE: Final[dict[str, set[str]]] = {
-    "kilo-cli": {".opencode/"},
-    "kilo-ide": {".kilo/"},
-    "cline": {".clinerules"},
-    "cursor": {".cursor/", ".cursorrules"},
-    "copilot": {".github/copilot-instructions.md"},
-    "claude": {".claude/", "CLAUDE.md"},  # .claude/ directory + CLAUDE.md routing file
-}
+from prompticorn.tools import create_artifacts_by_tool
+
+# The artifacts each tool CREATES, sourced from the central tool registry
+# (prompticorn/tools.py). A tool's `remove` set is derived from these (see
+# _build_artifact_files), so adding a new tool means adding one ToolSpec entry
+# and never touching another tool's configuration.
+_TOOL_CREATE: Final[dict[str, set[str]]] = create_artifacts_by_tool()
 
 # Legacy / never-valid artifacts that must be cleaned up when switching to any
 # tool, even though no current tool creates them (old output formats, and the

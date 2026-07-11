@@ -52,6 +52,8 @@ from prompticorn.questions.base.folder_spec import (
 from prompticorn.questions.base.repository_type_question import RepositoryTypeQuestion
 from prompticorn.questions.handlers.handle_single_language_questions import resolve_answer
 from prompticorn.questions.language import LANGUAGE_KEYS
+from prompticorn.tools import menu_explanations as tool_menu_explanations
+from prompticorn.tools import menu_options as tool_menu_options
 
 # Bundled agents directory (same location prompt_builder discovers from)
 _AGENTS_DIR = Path(__file__).parent / "agents"
@@ -543,15 +545,8 @@ def init_prompts():
         # Step 1: Select which AI assistant to configure
         ai_tool = select_option_with_explain(
             question="Which AI assistant would you like to configure?",
-            options=["Kilo CLI", "Kilo IDE", "Claude", "Cline", "Cursor", "Copilot"],
-            explanations={
-                "Kilo CLI": "Kilo Code (CLI) - .opencode/rules/ with collapsed mode files",
-                "Kilo IDE": "Kilo Code (IDE) - .kilo/agents/ individual agent files",
-                "Claude": "Claude - generates .claude/ directory with Markdown agent files and CLAUDE.md",
-                "Cline": "Cline - .clinerules file (concatenated rules)",
-                "Cursor": "Cursor - .cursor/rules/ directory + .cursorrules",
-                "Copilot": "GitHub Copilot - .github/copilot-instructions.md",
-            },
+            options=tool_menu_options(),
+            explanations=tool_menu_explanations(),
             question_explanation="Select one AI assistant to configure.",
             default_index=1,
             allow_multiple=False,
@@ -801,18 +796,10 @@ def switch_command(tool_name: str | None):
     else:
         # Show interactive menu
         try:
-            tool_options = ["Kilo CLI", "Kilo IDE", "Claude", "Cline", "Cursor", "Copilot"]
             target_tool_result = select_option_with_explain(
                 question="Which AI assistant would you like to switch to?",
-                options=tool_options,
-                explanations={
-                    "Kilo CLI": "Kilo Code (CLI) - .opencode/rules/ with collapsed mode files",
-                    "Kilo IDE": "Kilo Code (IDE) - .kilo/agents/ individual agent files",
-                    "Claude": "Claude - generates .claude/ directory with Markdown agent files and CLAUDE.md",
-                    "Cline": "Cline - .clinerules file (concatenated rules)",
-                    "Cursor": "Cursor - .cursor/rules/ directory + .cursorrules",
-                    "Copilot": "GitHub Copilot - .github/copilot-instructions.md",
-                },
+                options=tool_menu_options(),
+                explanations=tool_menu_explanations(),
                 question_explanation="Select an AI assistant to switch to.",
                 default_index=1,
                 allow_multiple=False,
