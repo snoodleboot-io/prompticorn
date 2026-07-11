@@ -22,97 +22,50 @@ import shutil
 from pathlib import Path
 from typing import Final
 
-# Define which artifacts each tool creates and should remove when switching
-ARTIFACT_FILES: Final[dict[str, dict[str, set[str]]]] = {
-    "kilo-cli": {
-        "create": {".opencode/"},
-        "remove": {
-            "CLAUDE.md",
-            ".kilo/",  # Remove new kilo-ide output
-            ".kilocode/",  # Remove legacy
-            ".clinerules",
-            ".cursor/",
-            ".cursorrules",
-            ".github/copilot-instructions.md",
-            ".claude/",
-            "custom_instructions/",
-            "rules/",  # Ensure root rules/ never exists
-        },
-    },
-    "kilo-ide": {
-        "create": {".kilo/"},
-        "remove": {
-            "CLAUDE.md",
-            ".opencode/",
-            ".kilocode/",  # Remove legacy if present
-            ".clinerules",
-            ".cursor/",
-            ".cursorrules",
-            ".github/copilot-instructions.md",
-            ".claude/",
-            "custom_instructions/",
-            "rules/",  # Ensure root rules/ never exists
-        },
-    },
-    "cline": {
-        "create": {".clinerules"},
-        "remove": {
-            "CLAUDE.md",
-            ".opencode/",
-            ".kilo/",
-            ".kilocode/",
-            ".cursor/",
-            ".cursorrules",
-            ".github/copilot-instructions.md",
-            ".claude/",
-            "custom_instructions/",
-            "rules/",  # Ensure root rules/ never exists
-        },
-    },
-    "cursor": {
-        "create": {".cursor/", ".cursorrules"},
-        "remove": {
-            "CLAUDE.md",
-            ".opencode/",
-            ".kilo/",
-            ".kilocode/",
-            ".clinerules",
-            ".github/copilot-instructions.md",
-            ".claude/",
-            "custom_instructions/",
-            "rules/",  # Ensure root rules/ never exists
-        },
-    },
-    "copilot": {
-        "create": {".github/copilot-instructions.md"},
-        "remove": {
-            "CLAUDE.md",
-            ".opencode/",
-            ".kilo/",
-            ".kilocode/",
-            ".clinerules",
-            ".cursor/",
-            ".cursorrules",
-            ".claude/",
-            "custom_instructions/",
-            "rules/",  # Ensure root rules/ never exists
-        },
-    },
-    "claude": {
-        "create": {".claude/", "CLAUDE.md"},  # .claude/ directory + CLAUDE.md routing file
-        "remove": {
-            ".opencode/",
-            ".kilo/",
-            ".kilocode/",
-            ".clinerules",
-            ".cursor/",
-            ".cursorrules",
-            ".github/copilot-instructions.md",
-            "custom_instructions/",  # Now removable (old format)
-            "rules/",  # Ensure root rules/ never exists
-        },
-    },
+# Single source of truth: the artifacts each tool CREATES. A tool's `remove`
+# set is derived from these (see _build_artifact_files), so adding a new tool
+# means adding one entry here and never touching another tool's configuration.
+_TOOL_CREATE: Final[dict[str, set[str]]] = {
+    "kilo-cli": {".opencode/"},
+    "kilo-ide": {".kilo/"},
+    "cline": {".clinerules"},
+    "cursor": {".cursor/", ".cursorrules"},
+    "copilot": {".github/copilot-instructions.md"},
+    "claude": {".claude/", "CLAUDE.md"},  # .claude/ directory + CLAUDE.md routing file
 }
+
+# Legacy / never-valid artifacts that must be cleaned up when switching to any
+# tool, even though no current tool creates them (old output formats, and the
+# root rules/ directory which must never exist).
+_LEGACY_ARTIFACTS: Final[frozenset[str]] = frozenset(
+    {
+        ".kilocode/",  # legacy kilo output directory
+        "custom_instructions/",  # legacy format
+        "rules/",  # ensure root rules/ never exists
+    }
+)
+
+
+def _build_artifact_files() -> dict[str, dict[str, set[str]]]:
+    """Derive the create/remove artifact map from the create sets.
+
+    Each tool removes every OTHER tool's created artifacts plus the shared
+    legacy artifacts. A tool never removes its own artifacts. Because the
+    remove sets are computed, they cannot drift out of sync with the create
+    sets, and a new tool only needs a single entry in ``_TOOL_CREATE``.
+    """
+    artifact_files: dict[str, dict[str, set[str]]] = {}
+    for tool, created in _TOOL_CREATE.items():
+        remove: set[str] = set(_LEGACY_ARTIFACTS)
+        for other, other_created in _TOOL_CREATE.items():
+            if other != tool:
+                remove |= other_created
+        artifact_files[tool] = {"create": set(created), "remove": remove}
+    return artifact_files
+
+
+# Define which artifacts each tool creates and should remove when switching.
+ARTIFACT_FILES: Final[dict[str, dict[str, set[str]]]] = _build_artifact_files()
 
 
 class ArtifactManager:
