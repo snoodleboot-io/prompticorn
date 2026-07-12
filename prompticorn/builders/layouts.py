@@ -14,6 +14,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+from prompticorn.builders.gemini_builder import generate_gemini_settings, workflow_to_toml
 from prompticorn.builders.junie_builder import slugify as junie_slugify
 from prompticorn.builders.roo_builder import generate_roomodes
 from prompticorn.builders.roo_builder import slugify as zed_slugify
@@ -237,6 +238,43 @@ class ZedLayout(ToolLayout):
         return [write_skill(output, AGENTS_SKILLS_BASE, skill_name, content)]
 
 
+class GeminiLayout(ToolLayout):
+    """.gemini/ directory: one agent file per agent, skills, TOML commands.
+
+    Agents are one file each (``.gemini/agents/<slug>.md``). Workflows become
+    ``.gemini/commands/<slug>.toml``. ``finalize`` writes ``.gemini/settings.json``
+    so Gemini reads the root ``AGENTS.md`` (E1) via ``context.fileName``.
+    """
+
+    writes_workflows = True
+
+    def write_agent(self, output: Path, agent_name: str, content: str | dict[str, Any]) -> list[str]:
+        assert isinstance(content, str)
+        agents_dir = output / ".gemini" / "agents"
+        agents_dir.mkdir(parents=True, exist_ok=True)
+        rel = f".gemini/agents/{junie_slugify(agent_name)}.md"
+        (output / rel).write_text(content, encoding="utf-8")
+        return [rel]
+
+    def write_skill(self, output: Path, skill_name: str, content: str) -> list[str]:
+        return [write_skill(output, ".gemini", skill_name, content)]
+
+    def write_workflow(self, output: Path, workflow_name: str, content: str) -> list[str]:
+        commands_dir = output / ".gemini" / "commands"
+        commands_dir.mkdir(parents=True, exist_ok=True)
+        rel = f".gemini/commands/{junie_slugify(workflow_name)}.toml"
+        (output / rel).write_text(workflow_to_toml(workflow_name, content), encoding="utf-8")
+        return [rel]
+
+    def finalize(
+        self, output: Path, built_agents: list[Any], config: dict[str, Any] | None
+    ) -> list[str]:
+        gemini_dir = output / ".gemini"
+        gemini_dir.mkdir(parents=True, exist_ok=True)
+        (gemini_dir / "settings.json").write_text(generate_gemini_settings(), encoding="utf-8")
+        return [".gemini/settings.json"]
+
+
 _LAYOUTS: dict[str, ToolLayout] = {
     "kilo": KiloLayout(),
     "cline": ClineLayout(),
@@ -246,6 +284,7 @@ _LAYOUTS: dict[str, ToolLayout] = {
     "roo": RooLayout(),
     "junie": JunieLayout(),
     "zed": ZedLayout(),
+    "gemini": GeminiLayout(),
 }
 
 

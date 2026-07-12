@@ -25,6 +25,7 @@ from prompticorn.builders.errors import (
     VariantNotFoundError,
 )
 from prompticorn.builders.factory import BuilderFactory
+from prompticorn.builders.gemini_builder import GeminiBuilder
 from prompticorn.builders.interfaces import (
     SupportsRules,
     SupportsSkills,
@@ -64,6 +65,7 @@ __all__ = [
     "RooBuilder",
     "JunieBuilder",
     "ZedBuilder",
+    "GeminiBuilder",
 ]
 
 # Auto-register all builders when module is imported
@@ -75,3 +77,4 @@ BuilderFactory.register("cursor", CursorBuilder)
 BuilderFactory.register("roo", RooBuilder)
 BuilderFactory.register("junie", JunieBuilder)
 BuilderFactory.register("zed", ZedBuilder)
+BuilderFactory.register("gemini", GeminiBuilder)

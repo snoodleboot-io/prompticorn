@@ -31,7 +31,18 @@ class TestToolRegistry(unittest.TestCase):
     def test_supported_tool_ids(self) -> None:
         self.assertEqual(
             supported_tool_ids(),
-            {"kilo-cli", "kilo-ide", "claude", "cline", "cursor", "copilot", "roo", "junie", "zed"},
+            {
+                "kilo-cli",
+                "kilo-ide",
+                "claude",
+                "cline",
+                "cursor",
+                "copilot",
+                "roo",
+                "junie",
+                "zed",
+                "gemini",
+            },
         )
 
     def test_name_mappings_match_legacy(self) -> None:
@@ -49,6 +60,8 @@ class TestToolRegistry(unittest.TestCase):
                 "roocode": "roo",
                 "junie": "junie",
                 "zed": "zed",
+                "gemini": "gemini",
+                "geminicli": "gemini",
             },
         )
 
@@ -66,6 +79,7 @@ class TestToolRegistry(unittest.TestCase):
                 "roo": "roo",
                 "junie": "junie",
                 "zed": "zed",
+                "gemini": "gemini",
             },
         )
 
@@ -82,6 +96,7 @@ class TestToolRegistry(unittest.TestCase):
                 "Roo Code",
                 "Junie",
                 "Zed",
+                "Gemini CLI",
             ],
         )
 
@@ -98,6 +113,7 @@ class TestToolRegistry(unittest.TestCase):
                 "Roo Code": "Roo Code - .roomodes custom modes + .roo/ rules, skills, and commands",
                 "Junie": "JetBrains Junie (CLI) - .junie/ agents, skills, and commands + AGENTS.md",
                 "Zed": "Zed - .agents/skills/ (agents-as-skills) + AGENTS.md instructions",
+                "Gemini CLI": "Google Gemini CLI - .gemini/ agents, skills, and TOML commands + AGENTS.md",
             },
         )
 
@@ -115,6 +131,7 @@ class TestToolRegistry(unittest.TestCase):
                 "roo": {".roomodes", ".roo/"},
                 "junie": {".junie/"},
                 "zed": {".agents/"},
+                "gemini": {".gemini/"},
             },
         )
         # The six original tools keep their historical ordering so that
