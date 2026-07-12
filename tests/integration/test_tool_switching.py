@@ -203,6 +203,43 @@ class TestToolSwitching(unittest.TestCase):
         self.assertTrue((self.test_dir / ".roomodes").exists())
         self.assertFalse((self.test_dir / ".junie").exists())
 
+    def test_builder_creates_correct_artifacts_zed(self):
+        """Zed builder creates .agents/skills/, detectable and cleanable."""
+        config = {
+            "variant": "minimal",
+            "spec": {"language": "python"},
+            "active_personas": ["software_engineer"],
+        }
+        get_prompt_builder("zed").build(self.test_dir, config, dry_run=False)
+
+        self.assertTrue((self.test_dir / ".agents" / "skills").exists())
+        self.assertFalse((self.test_dir / ".junie").exists())
+        self.assertFalse((self.test_dir / ".claude").exists())
+
+        manager = ArtifactManager(self.test_dir)
+        self.assertEqual(manager.current_tool, "zed")
+
+        manager.remove_artifacts_created_by("zed")
+        self.assertFalse((self.test_dir / ".agents").exists())
+
+    def test_switching_zed_to_junie_cleans_zed(self):
+        """Switching from zed to junie removes .agents/ and creates .junie/."""
+        config = {
+            "variant": "minimal",
+            "spec": {"language": "python"},
+            "active_personas": ["software_engineer"],
+        }
+        get_prompt_builder("zed").build(self.test_dir, config, dry_run=False)
+        self.assertTrue((self.test_dir / ".agents").exists())
+
+        manager = ArtifactManager(self.test_dir)
+        manager.remove_artifacts_created_by(manager.current_tool)
+        self.assertFalse((self.test_dir / ".agents").exists())
+
+        get_prompt_builder("junie").build(self.test_dir, config, dry_run=False)
+        self.assertTrue((self.test_dir / ".junie").exists())
+        self.assertFalse((self.test_dir / ".agents").exists())
+
 
 if __name__ == "__main__":
     unittest.main()
