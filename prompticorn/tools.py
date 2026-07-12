@@ -102,6 +102,13 @@ _TOOL_SPECS: Final[tuple[ToolSpec, ...]] = (
         builder_name="zed",
         create_artifacts=frozenset({".agents/"}),
     ),
+    ToolSpec(
+        id="gemini",
+        display_label="Gemini CLI",
+        explanation="Google Gemini CLI - .gemini/ agents, skills, and TOML commands + AGENTS.md",
+        builder_name="gemini",
+        create_artifacts=frozenset({".gemini/"}),
+    ),
 )
 
 TOOLS: Final[dict[str, ToolSpec]] = {spec.id: spec for spec in _TOOL_SPECS}
@@ -119,6 +126,7 @@ MENU_ORDER: Final[tuple[str, ...]] = (
     "roo",
     "junie",
     "zed",
+    "gemini",
 )
 
 
