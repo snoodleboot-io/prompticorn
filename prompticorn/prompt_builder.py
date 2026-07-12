@@ -9,23 +9,12 @@ from prompticorn.builders.base import BuildOptions
 from prompticorn.builders.claude_md import generate_claude_md
 from prompticorn.builders.convention_generator import generate_all_conventions
 from prompticorn.builders.factory import BuilderFactory
-from prompticorn.builders.kilo_builder import KiloBuilder
-from prompticorn.builders.skill_emitter import write_skill
+from prompticorn.builders.layouts import get_layout
 from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
 from prompticorn.ir.loaders.language_skill_mapping_loader import LanguageSkillMappingLoader
 from prompticorn.ir.models.agent import Agent
 from prompticorn.personas import PersonaFilter, PersonaRegistry
 from prompticorn.tools import builder_dispatch
-
-# Internal builder name -> base directory for tools that emit the Agent Skills
-# spec folder (<base>/skills/<name>/SKILL.md). Copilot uses a flat layout and is
-# handled separately.
-_SKILL_FOLDER_BASE_DIRS: dict[str, str] = {
-    "kilo": ".kilo",
-    "cline": ".cline",
-    "claude": ".claude",
-    "cursor": ".cursor",
-}
 
 
 class PromptBuilder:
@@ -44,6 +33,7 @@ class PromptBuilder:
         """
         self.tool_name = tool_name
         self.builder = BuilderFactory.get_builder(tool_name)
+        self.layout = get_layout(tool_name)
 
         # Load agents from bundled IR directory
         agents_dir = Path(__file__).parent / "agents"
@@ -225,7 +215,7 @@ class PromptBuilder:
 
         # For Kilo, write core convention files to .kilo/rules/ before building agents
         rules_files_written = []
-        if isinstance(self.builder, KiloBuilder) and not dry_run:
+        if self.layout.writes_rules and not dry_run:
             try:
                 rules_files_written = self.builder.write_rules_files(output, config)
                 actions.extend([f"✓ {f}" for f in rules_files_written])
@@ -263,7 +253,7 @@ class PromptBuilder:
                     actions.extend([f"✓ {f}" for f in new_files])
 
                 # Build subagents as separate files under .kilo/agents/{agent_name}/{subagent}.md
-                if agent.subagents and not dry_run and self.tool_name == "kilo":
+                if agent.subagents and not dry_run and self.layout.writes_subagents:
                     for subagent_name in agent.subagents:
                         try:
                             # Load actual subagent from registry
@@ -320,7 +310,7 @@ class PromptBuilder:
 
         # Write workflows (for tools that use separate workflow files like Kilo)
         all_workflows_written = set()
-        if not dry_run and self.tool_name == "kilo":
+        if not dry_run and self.layout.writes_workflows:
             for agent_name, agent in all_agents.items():
                 if agent.workflows:
                     try:
@@ -341,7 +331,7 @@ class PromptBuilder:
         # Generate root AGENTS.md or CLAUDE.md file (only for primary agents in scope)
         if not dry_run:
             try:
-                if self.tool_name == "claude":
+                if self.layout.emits_claude_md:
                     # Generate CLAUDE.md for Claude
                     persona_name = (
                         config.get("persona", "software_engineer")
@@ -390,7 +380,7 @@ class PromptBuilder:
                     agents_md_path.write_text(agents_md_content, encoding="utf-8")
                     actions.append("✓ AGENTS.md")
             except Exception as e:
-                file_name = "CLAUDE.md" if self.tool_name == "claude" else "AGENTS.md"
+                file_name = self.layout.root_doc_filename()
                 actions.append(f"⚠ Failed to generate {file_name}: {e}")
 
         return actions
@@ -533,75 +523,7 @@ class PromptBuilder:
         Returns:
             List of files written
         """
-        written_files = []
-
-        if self.tool_name == "kilo":
-            # Kilo: .kilo/agents/{agent_name}.md
-            agents_dir = output / ".kilo" / "agents"
-            agents_dir.mkdir(parents=True, exist_ok=True)
-
-            file_path = agents_dir / f"{agent_name}.md"
-            file_path.write_text(str(content), encoding="utf-8")
-            written_files.append(f".kilo/agents/{agent_name}.md")
-
-        elif self.tool_name == "cline":
-            # Cline: .clinerules (concatenated)
-            file_path = output / ".clinerules"
-
-            # Append to existing or create new
-            if file_path.exists():
-                existing = file_path.read_text(encoding="utf-8")
-                file_path.write_text(f"{existing}\n\n{content}", encoding="utf-8")
-            else:
-                file_path.write_text(str(content), encoding="utf-8")
-            written_files.append(".clinerules")
-
-        elif self.tool_name == "claude":
-            # Claude: .claude/ directory structure with Markdown files
-            # Content is dict[str, str] mapping file paths to markdown content
-            if isinstance(content, dict) and all(
-                isinstance(k, str) and isinstance(v, str) for k, v in content.items()
-            ):
-                # New format: dict with file paths as keys
-                for file_path_str, markdown_content in content.items():
-                    full_path = output / file_path_str
-                    full_path.parent.mkdir(parents=True, exist_ok=True)
-                    full_path.write_text(markdown_content, encoding="utf-8")
-                    written_files.append(file_path_str)
-            else:
-                # Old format (fallback): JSON dict to custom_instructions/
-                import json
-
-                instructions_dir = output / "custom_instructions"
-                instructions_dir.mkdir(parents=True, exist_ok=True)
-                file_path = instructions_dir / f"{agent_name}.json"
-                file_path.write_text(json.dumps(content, indent=2), encoding="utf-8")
-                written_files.append(f"custom_instructions/{agent_name}.json")
-
-        elif self.tool_name == "copilot":
-            # Copilot: .github/copilot-instructions.md (concatenated)
-            github_dir = output / ".github"
-            github_dir.mkdir(parents=True, exist_ok=True)
-
-            file_path = github_dir / "copilot-instructions.md"
-            if file_path.exists():
-                existing = file_path.read_text(encoding="utf-8")
-                file_path.write_text(f"{existing}\n\n{content}", encoding="utf-8")
-            else:
-                file_path.write_text(str(content), encoding="utf-8")
-            written_files.append(".github/copilot-instructions.md")
-
-        elif self.tool_name == "cursor":
-            # Cursor: .cursorrules
-            file_path = output / ".cursorrules"
-            if file_path.exists():
-                existing = file_path.read_text(encoding="utf-8")
-                file_path.write_text(f"{existing}\n\n{content}", encoding="utf-8")
-            else:
-                file_path.write_text(str(content), encoding="utf-8")
-            written_files.append(".cursorrules")
-
-        return written_files
+        return self.layout.write_agent(output, agent_name, content)
 
     def _write_subagent_output(
         self, output: Path, agent_name: str, subagent_name: str, content: str | dict[str, Any]
@@ -701,8 +623,8 @@ class PromptBuilder:
         if not hasattr(agent, "workflows") or not agent.workflows:
             return written_files
 
-        # Write each workflow as a command file (Kilo-specific)
-        if self.tool_name == "kilo":
+        # Write each workflow as a command file (Kilo-specific layout).
+        if self.layout.writes_workflows:
             commands_dir = output / ".kilo" / "commands"
             commands_dir.mkdir(parents=True, exist_ok=True)
 
@@ -818,24 +740,7 @@ class PromptBuilder:
         Returns:
             List of files written
         """
-        skill_name = skill["name"]
-        content = skill["full_content"]
-
-        # Tools that follow the Agent Skills spec emit an identical
-        # <base>/skills/<name>/SKILL.md folder; only the base directory differs.
-        base_dir = _SKILL_FOLDER_BASE_DIRS.get(self.tool_name)
-        if base_dir is not None:
-            return [write_skill(output, base_dir, skill_name, content)]
-
-        if self.tool_name == "copilot":
-            # Copilot: flat .github/skills/{skill_name}.md
-            skills_dir = output / ".github" / "skills"
-            skills_dir.mkdir(parents=True, exist_ok=True)
-            skill_file = skills_dir / f"{skill_name}.md"
-            skill_file.write_text(content, encoding="utf-8")
-            return [f".github/skills/{skill_name}.md"]
-
-        return []
+        return self.layout.write_skill(output, skill["name"], skill["full_content"])
 
 
 def get_prompt_builder(tool: str):
