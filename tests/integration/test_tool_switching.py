@@ -166,6 +166,43 @@ class TestToolSwitching(unittest.TestCase):
         self.assertTrue((self.test_dir / ".roomodes").exists())
         self.assertFalse((self.test_dir / ".claude").exists())
 
+    def test_builder_creates_correct_artifacts_junie(self):
+        """Junie builder creates .junie/ (agents), detectable and cleanable."""
+        config = {
+            "variant": "minimal",
+            "spec": {"language": "python"},
+            "active_personas": ["software_engineer"],
+        }
+        get_prompt_builder("junie").build(self.test_dir, config, dry_run=False)
+
+        self.assertTrue((self.test_dir / ".junie" / "agents").exists())
+        self.assertFalse((self.test_dir / ".kilo").exists())
+        self.assertFalse((self.test_dir / ".claude").exists())
+
+        manager = ArtifactManager(self.test_dir)
+        self.assertEqual(manager.current_tool, "junie")
+
+        manager.remove_artifacts_created_by("junie")
+        self.assertFalse((self.test_dir / ".junie").exists())
+
+    def test_switching_junie_to_roo_cleans_junie(self):
+        """Switching from junie to roo removes .junie/ and creates Roo files."""
+        config = {
+            "variant": "minimal",
+            "spec": {"language": "python"},
+            "active_personas": ["software_engineer"],
+        }
+        get_prompt_builder("junie").build(self.test_dir, config, dry_run=False)
+        self.assertTrue((self.test_dir / ".junie").exists())
+
+        manager = ArtifactManager(self.test_dir)
+        manager.remove_artifacts_created_by(manager.current_tool)
+        self.assertFalse((self.test_dir / ".junie").exists())
+
+        get_prompt_builder("roo").build(self.test_dir, config, dry_run=False)
+        self.assertTrue((self.test_dir / ".roomodes").exists())
+        self.assertFalse((self.test_dir / ".junie").exists())
+
 
 if __name__ == "__main__":
     unittest.main()
