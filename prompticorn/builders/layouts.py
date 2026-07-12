@@ -19,6 +19,7 @@ from prompticorn.builders.junie_builder import slugify as junie_slugify
 from prompticorn.builders.roo_builder import generate_roomodes
 from prompticorn.builders.roo_builder import slugify as zed_slugify
 from prompticorn.builders.skill_emitter import AGENTS_SKILLS_BASE, write_skill
+from prompticorn.builders.windsurf_builder import workflow_to_windsurf
 
 
 def _append_or_write(path: Path, content: Any) -> None:
@@ -311,6 +312,33 @@ class AmazonQLayout(ToolLayout):
         return [rel]
 
 
+class WindsurfLayout(ToolLayout):
+    """.windsurf/ : agents-as-skills, rule conventions, workflows. No AGENTS.md.
+
+    Agents (and real skills) go to ``.windsurf/skills/`` (escape the 12k rules
+    budget); conventions go to ``.windsurf/rules/`` (writes_rules); workflows to
+    ``.windsurf/workflows/``. The fat root AGENTS.md is suppressed for the char cap.
+    """
+
+    writes_rules = True
+    writes_workflows = True
+    emits_agents_md = False
+
+    def write_agent(self, output: Path, agent_name: str, content: str | dict[str, Any]) -> list[str]:
+        assert isinstance(content, str)
+        return [write_skill(output, ".windsurf", zed_slugify(agent_name), content)]
+
+    def write_skill(self, output: Path, skill_name: str, content: str) -> list[str]:
+        return [write_skill(output, ".windsurf", skill_name, content)]
+
+    def write_workflow(self, output: Path, workflow_name: str, content: str) -> list[str]:
+        workflows_dir = output / ".windsurf" / "workflows"
+        workflows_dir.mkdir(parents=True, exist_ok=True)
+        rel = f".windsurf/workflows/{junie_slugify(workflow_name)}.md"
+        (output / rel).write_text(workflow_to_windsurf(workflow_name, content), encoding="utf-8")
+        return [rel]
+
+
 _LAYOUTS: dict[str, ToolLayout] = {
     "kilo": KiloLayout(),
     "cline": ClineLayout(),
@@ -322,6 +350,7 @@ _LAYOUTS: dict[str, ToolLayout] = {
     "zed": ZedLayout(),
     "gemini": GeminiLayout(),
     "amazonq": AmazonQLayout(),
+    "windsurf": WindsurfLayout(),
 }
 
 
