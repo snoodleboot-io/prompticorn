@@ -240,6 +240,44 @@ class TestToolSwitching(unittest.TestCase):
         self.assertTrue((self.test_dir / ".junie").exists())
         self.assertFalse((self.test_dir / ".agents").exists())
 
+    def test_builder_creates_correct_artifacts_gemini(self):
+        """Gemini builder creates .gemini/ (agents + settings), detectable and cleanable."""
+        config = {
+            "variant": "minimal",
+            "spec": {"language": "python"},
+            "active_personas": ["software_engineer"],
+        }
+        get_prompt_builder("gemini").build(self.test_dir, config, dry_run=False)
+
+        self.assertTrue((self.test_dir / ".gemini" / "agents").exists())
+        self.assertTrue((self.test_dir / ".gemini" / "settings.json").exists())
+        self.assertFalse((self.test_dir / ".junie").exists())
+        self.assertFalse((self.test_dir / ".claude").exists())
+
+        manager = ArtifactManager(self.test_dir)
+        self.assertEqual(manager.current_tool, "gemini")
+
+        manager.remove_artifacts_created_by("gemini")
+        self.assertFalse((self.test_dir / ".gemini").exists())
+
+    def test_switching_gemini_to_claude_cleans_gemini(self):
+        """Switching from gemini to claude removes .gemini/ and creates .claude/."""
+        config = {
+            "variant": "minimal",
+            "spec": {"language": "python"},
+            "active_personas": ["software_engineer"],
+        }
+        get_prompt_builder("gemini").build(self.test_dir, config, dry_run=False)
+        self.assertTrue((self.test_dir / ".gemini").exists())
+
+        manager = ArtifactManager(self.test_dir)
+        manager.remove_artifacts_created_by(manager.current_tool)
+        self.assertFalse((self.test_dir / ".gemini").exists())
+
+        get_prompt_builder("claude").build(self.test_dir, config, dry_run=False)
+        self.assertTrue((self.test_dir / ".claude").exists())
+        self.assertFalse((self.test_dir / ".gemini").exists())
+
 
 if __name__ == "__main__":
     unittest.main()
