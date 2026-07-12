@@ -43,6 +43,7 @@ class TestToolRegistry(unittest.TestCase):
                 "zed",
                 "gemini",
                 "amazonq",
+                "windsurf",
             },
         )
 
@@ -64,6 +65,7 @@ class TestToolRegistry(unittest.TestCase):
                 "gemini": "gemini",
                 "geminicli": "gemini",
                 "amazonq": "amazonq",
+                "windsurf": "windsurf",
             },
         )
 
@@ -83,6 +85,7 @@ class TestToolRegistry(unittest.TestCase):
                 "zed": "zed",
                 "gemini": "gemini",
                 "amazonq": "amazonq",
+                "windsurf": "windsurf",
             },
         )
 
@@ -101,6 +104,7 @@ class TestToolRegistry(unittest.TestCase):
                 "Zed",
                 "Gemini CLI",
                 "Amazon Q",
+                "Windsurf",
             ],
         )
 
@@ -119,6 +123,7 @@ class TestToolRegistry(unittest.TestCase):
                 "Zed": "Zed - .agents/skills/ (agents-as-skills) + AGENTS.md instructions",
                 "Gemini CLI": "Google Gemini CLI - .gemini/ agents, skills, and TOML commands + AGENTS.md",
                 "Amazon Q": "Amazon Q Developer CLI - .amazonq/ JSON agents, rules, and prompts",
+                "Windsurf": "Windsurf / Cascade - .windsurf/ skills, glob-scoped rules, and workflows",
             },
         )
 
@@ -138,6 +143,7 @@ class TestToolRegistry(unittest.TestCase):
                 "zed": {".agents/"},
                 "gemini": {".gemini/"},
                 "amazonq": {".amazonq/"},
+                "windsurf": {".windsurf/"},
             },
         )
         # The six original tools keep their historical ordering so that
