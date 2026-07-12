@@ -123,6 +123,49 @@ class TestToolSwitching(unittest.TestCase):
         self.assertTrue((self.test_dir / "CLAUDE.md").exists())
         self.assertFalse((self.test_dir / ".kilo").exists())
 
+    def test_builder_creates_correct_artifacts_roo(self):
+        """Roo builder creates .roomodes + .roo/, detectable and cleanable."""
+        config = {
+            "variant": "minimal",
+            "spec": {"language": "python"},
+            "active_personas": ["software_engineer"],
+        }
+        get_prompt_builder("roo").build(self.test_dir, config, dry_run=False)
+
+        # Roo artifacts exist; other tools' do not
+        self.assertTrue((self.test_dir / ".roomodes").exists())
+        self.assertTrue((self.test_dir / ".roo").exists())
+        self.assertFalse((self.test_dir / ".kilo").exists())
+        self.assertFalse((self.test_dir / ".claude").exists())
+
+        # Detected as the current tool
+        manager = ArtifactManager(self.test_dir)
+        self.assertEqual(manager.current_tool, "roo")
+
+        # Switching away removes Roo's artifacts
+        manager.remove_artifacts_created_by("roo")
+        self.assertFalse((self.test_dir / ".roomodes").exists())
+        self.assertFalse((self.test_dir / ".roo").exists())
+
+    def test_switching_claude_to_roo_cleans_claude(self):
+        """Switching from claude to roo removes .claude/CLAUDE.md and creates Roo files."""
+        config = {
+            "variant": "minimal",
+            "spec": {"language": "python"},
+            "active_personas": ["software_engineer"],
+        }
+        get_prompt_builder("claude").build(self.test_dir, config, dry_run=False)
+        self.assertTrue((self.test_dir / ".claude").exists())
+
+        manager = ArtifactManager(self.test_dir)
+        manager.remove_artifacts_created_by(manager.current_tool)
+        self.assertFalse((self.test_dir / ".claude").exists())
+        self.assertFalse((self.test_dir / "CLAUDE.md").exists())
+
+        get_prompt_builder("roo").build(self.test_dir, config, dry_run=False)
+        self.assertTrue((self.test_dir / ".roomodes").exists())
+        self.assertFalse((self.test_dir / ".claude").exists())
+
 
 if __name__ == "__main__":
     unittest.main()
