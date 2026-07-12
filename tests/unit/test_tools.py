@@ -31,7 +31,7 @@ class TestToolRegistry(unittest.TestCase):
     def test_supported_tool_ids(self) -> None:
         self.assertEqual(
             supported_tool_ids(),
-            {"kilo-cli", "kilo-ide", "claude", "cline", "cursor", "copilot", "roo", "junie"},
+            {"kilo-cli", "kilo-ide", "claude", "cline", "cursor", "copilot", "roo", "junie", "zed"},
         )
 
     def test_name_mappings_match_legacy(self) -> None:
@@ -48,6 +48,7 @@ class TestToolRegistry(unittest.TestCase):
                 "roo": "roo",
                 "roocode": "roo",
                 "junie": "junie",
+                "zed": "zed",
             },
         )
 
@@ -64,13 +65,24 @@ class TestToolRegistry(unittest.TestCase):
                 "claude": "claude",
                 "roo": "roo",
                 "junie": "junie",
+                "zed": "zed",
             },
         )
 
     def test_menu_options_order_and_labels(self) -> None:
         self.assertEqual(
             menu_options(),
-            ["Kilo CLI", "Kilo IDE", "Claude", "Cline", "Cursor", "Copilot", "Roo Code", "Junie"],
+            [
+                "Kilo CLI",
+                "Kilo IDE",
+                "Claude",
+                "Cline",
+                "Cursor",
+                "Copilot",
+                "Roo Code",
+                "Junie",
+                "Zed",
+            ],
         )
 
     def test_menu_explanations_match_legacy(self) -> None:
@@ -85,6 +97,7 @@ class TestToolRegistry(unittest.TestCase):
                 "Copilot": "GitHub Copilot - .github/copilot-instructions.md",
                 "Roo Code": "Roo Code - .roomodes custom modes + .roo/ rules, skills, and commands",
                 "Junie": "JetBrains Junie (CLI) - .junie/ agents, skills, and commands + AGENTS.md",
+                "Zed": "Zed - .agents/skills/ (agents-as-skills) + AGENTS.md instructions",
             },
         )
 
@@ -101,6 +114,7 @@ class TestToolRegistry(unittest.TestCase):
                 "claude": {".claude/", "CLAUDE.md"},
                 "roo": {".roomodes", ".roo/"},
                 "junie": {".junie/"},
+                "zed": {".agents/"},
             },
         )
         # The six original tools keep their historical ordering so that

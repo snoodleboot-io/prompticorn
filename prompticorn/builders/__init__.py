@@ -35,6 +35,7 @@ from prompticorn.builders.junie_builder import JunieBuilder
 from prompticorn.builders.kilo_builder import KiloBuilder
 from prompticorn.builders.registry import BuilderRegistry
 from prompticorn.builders.roo_builder import RooBuilder
+from prompticorn.builders.zed_builder import ZedBuilder
 
 __all__ = [
     "Builder",
@@ -62,6 +63,7 @@ __all__ = [
     "CursorBuilder",
     "RooBuilder",
     "JunieBuilder",
+    "ZedBuilder",
 ]
 
 # Auto-register all builders when module is imported
@@ -72,3 +74,4 @@ BuilderFactory.register("copilot", CopilotBuilder)
 BuilderFactory.register("cursor", CursorBuilder)
 BuilderFactory.register("roo", RooBuilder)
 BuilderFactory.register("junie", JunieBuilder)
+BuilderFactory.register("zed", ZedBuilder)
