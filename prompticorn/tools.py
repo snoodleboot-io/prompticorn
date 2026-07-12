@@ -109,6 +109,13 @@ _TOOL_SPECS: Final[tuple[ToolSpec, ...]] = (
         builder_name="gemini",
         create_artifacts=frozenset({".gemini/"}),
     ),
+    ToolSpec(
+        id="amazonq",
+        display_label="Amazon Q",
+        explanation="Amazon Q Developer CLI - .amazonq/ JSON agents, rules, and prompts",
+        builder_name="amazonq",
+        create_artifacts=frozenset({".amazonq/"}),
+    ),
 )
 
 TOOLS: Final[dict[str, ToolSpec]] = {spec.id: spec for spec in _TOOL_SPECS}
@@ -127,6 +134,7 @@ MENU_ORDER: Final[tuple[str, ...]] = (
     "junie",
     "zed",
     "gemini",
+    "amazonq",
 )
 
 

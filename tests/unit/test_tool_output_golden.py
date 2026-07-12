@@ -12,6 +12,7 @@ re-capture. Do NOT regenerate to make a failing refactor pass.
 
 import hashlib
 import json
+import re
 import tempfile
 import unittest
 from pathlib import Path
@@ -21,15 +22,23 @@ from prompticorn.prompt_builder import get_prompt_builder
 _FIXTURE = Path(__file__).parent / "_golden_tool_output.json"
 _CONFIG_BASE = {"spec": {"language": "python"}, "active_personas": ["software_engineer"]}
 
+# ISO dates are normalized before hashing so the golden is stable across day
+# boundaries (e.g. CLAUDE.md stamps datetime.now() into a "Last Updated" line).
+_DATE_RE = re.compile(rb"\d{4}-\d{2}-\d{2}")
+
+
+def _digest(path: Path) -> str:
+    """sha256 of a file's bytes with ISO dates normalized out."""
+    return hashlib.sha256(_DATE_RE.sub(b"YYYY-MM-DD", path.read_bytes())).hexdigest()
+
 
 def _manifest(root: Path) -> list[list[str]]:
-    """Return sorted [relative_posix_path, sha256] for every file under root."""
-    items: list[list[str]] = []
-    for path in sorted(root.rglob("*")):
-        if path.is_file():
-            digest = hashlib.sha256(path.read_bytes()).hexdigest()
-            items.append([path.relative_to(root).as_posix(), digest])
-    return items
+    """Return sorted [relative_posix_path, date-normalized sha256] under root."""
+    return [
+        [path.relative_to(root).as_posix(), _digest(path)]
+        for path in sorted(root.rglob("*"))
+        if path.is_file()
+    ]
 
 
 class TestToolOutputGolden(unittest.TestCase):

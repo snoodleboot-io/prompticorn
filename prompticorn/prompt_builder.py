@@ -364,7 +364,7 @@ class PromptBuilder:
                         actions.append(f"✓ {len(conventions)} convention files")
                     except Exception as conv_error:
                         actions.append(f"⚠ Failed to generate conventions: {conv_error}")
-                else:
+                elif self.layout.emits_agents_md:
                     # Generate self-contained AGENTS.md for other tools: routing
                     # index + inlined core conventions (sourced from the primary spec).
                     selected_specs = self._extract_all_specs_from_config(config)
