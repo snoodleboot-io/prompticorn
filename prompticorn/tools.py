@@ -81,6 +81,13 @@ _TOOL_SPECS: Final[tuple[ToolSpec, ...]] = (
         builder_name="claude",
         create_artifacts=frozenset({".claude/", "CLAUDE.md"}),
     ),
+    ToolSpec(
+        id="roo",
+        display_label="Roo Code",
+        explanation="Roo Code - .roomodes custom modes + .roo/ rules, skills, and commands",
+        builder_name="roo",
+        create_artifacts=frozenset({".roomodes", ".roo/"}),
+    ),
 )
 
 TOOLS: Final[dict[str, ToolSpec]] = {spec.id: spec for spec in _TOOL_SPECS}
@@ -95,6 +102,7 @@ MENU_ORDER: Final[tuple[str, ...]] = (
     "cline",
     "cursor",
     "copilot",
+    "roo",
 )
 
 
