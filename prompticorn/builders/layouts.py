@@ -16,7 +16,8 @@ from typing import Any
 
 from prompticorn.builders.junie_builder import slugify as junie_slugify
 from prompticorn.builders.roo_builder import generate_roomodes
-from prompticorn.builders.skill_emitter import write_skill
+from prompticorn.builders.roo_builder import slugify as zed_slugify
+from prompticorn.builders.skill_emitter import AGENTS_SKILLS_BASE, write_skill
 
 
 def _append_or_write(path: Path, content: Any) -> None:
@@ -220,6 +221,22 @@ class JunieLayout(ToolLayout):
         return [f".junie/commands/{workflow_name}.md"]
 
 
+class ZedLayout(ToolLayout):
+    """.agents/skills/ (Agent Skills spec) + AGENTS.md.
+
+    Zed has no agent primitive, so each agent is emitted as a skill under
+    ``.agents/skills/`` (alongside real skills); the routing overview and
+    conventions ride the root ``AGENTS.md``.
+    """
+
+    def write_agent(self, output: Path, agent_name: str, content: str | dict[str, Any]) -> list[str]:
+        assert isinstance(content, str)
+        return [write_skill(output, AGENTS_SKILLS_BASE, zed_slugify(agent_name), content)]
+
+    def write_skill(self, output: Path, skill_name: str, content: str) -> list[str]:
+        return [write_skill(output, AGENTS_SKILLS_BASE, skill_name, content)]
+
+
 _LAYOUTS: dict[str, ToolLayout] = {
     "kilo": KiloLayout(),
     "cline": ClineLayout(),
@@ -228,6 +245,7 @@ _LAYOUTS: dict[str, ToolLayout] = {
     "claude": ClaudeLayout(),
     "roo": RooLayout(),
     "junie": JunieLayout(),
+    "zed": ZedLayout(),
 }
 
 

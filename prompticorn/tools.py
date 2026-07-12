@@ -95,6 +95,13 @@ _TOOL_SPECS: Final[tuple[ToolSpec, ...]] = (
         builder_name="junie",
         create_artifacts=frozenset({".junie/"}),
     ),
+    ToolSpec(
+        id="zed",
+        display_label="Zed",
+        explanation="Zed - .agents/skills/ (agents-as-skills) + AGENTS.md instructions",
+        builder_name="zed",
+        create_artifacts=frozenset({".agents/"}),
+    ),
 )
 
 TOOLS: Final[dict[str, ToolSpec]] = {spec.id: spec for spec in _TOOL_SPECS}
@@ -111,6 +118,7 @@ MENU_ORDER: Final[tuple[str, ...]] = (
     "copilot",
     "roo",
     "junie",
+    "zed",
 )
 
 
