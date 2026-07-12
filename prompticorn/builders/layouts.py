@@ -14,6 +14,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+from prompticorn.builders.junie_builder import slugify as junie_slugify
 from prompticorn.builders.roo_builder import generate_roomodes
 from prompticorn.builders.skill_emitter import write_skill
 
@@ -192,6 +193,33 @@ class RooLayout(ToolLayout):
         return [".roomodes"]
 
 
+class JunieLayout(ToolLayout):
+    """.junie/ directory: one agent file per agent, skills, and commands.
+
+    Unlike Roo, Junie agents are one file each (``.junie/agents/<slug>.md``), so
+    no aggregate ``finalize`` is needed. Conventions ride the root ``AGENTS.md``.
+    """
+
+    writes_workflows = True
+
+    def write_agent(self, output: Path, agent_name: str, content: str | dict[str, Any]) -> list[str]:
+        assert isinstance(content, str)
+        agents_dir = output / ".junie" / "agents"
+        agents_dir.mkdir(parents=True, exist_ok=True)
+        rel = f".junie/agents/{junie_slugify(agent_name)}.md"
+        (output / rel).write_text(content, encoding="utf-8")
+        return [rel]
+
+    def write_skill(self, output: Path, skill_name: str, content: str) -> list[str]:
+        return [write_skill(output, ".junie", skill_name, content)]
+
+    def write_workflow(self, output: Path, workflow_name: str, content: str) -> list[str]:
+        commands_dir = output / ".junie" / "commands"
+        commands_dir.mkdir(parents=True, exist_ok=True)
+        (commands_dir / f"{workflow_name}.md").write_text(content, encoding="utf-8")
+        return [f".junie/commands/{workflow_name}.md"]
+
+
 _LAYOUTS: dict[str, ToolLayout] = {
     "kilo": KiloLayout(),
     "cline": ClineLayout(),
@@ -199,6 +227,7 @@ _LAYOUTS: dict[str, ToolLayout] = {
     "copilot": CopilotLayout(),
     "claude": ClaudeLayout(),
     "roo": RooLayout(),
+    "junie": JunieLayout(),
 }
 
 

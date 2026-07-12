@@ -31,6 +31,7 @@ from prompticorn.builders.interfaces import (
     SupportsSubagents,
     SupportsWorkflows,
 )
+from prompticorn.builders.junie_builder import JunieBuilder
 from prompticorn.builders.kilo_builder import KiloBuilder
 from prompticorn.builders.registry import BuilderRegistry
 from prompticorn.builders.roo_builder import RooBuilder
@@ -60,6 +61,7 @@ __all__ = [
     "CopilotBuilder",
     "CursorBuilder",
     "RooBuilder",
+    "JunieBuilder",
 ]
 
 # Auto-register all builders when module is imported
@@ -69,3 +71,4 @@ BuilderFactory.register("claude", ClaudeBuilder)
 BuilderFactory.register("copilot", CopilotBuilder)
 BuilderFactory.register("cursor", CursorBuilder)
 BuilderFactory.register("roo", RooBuilder)
+BuilderFactory.register("junie", JunieBuilder)
