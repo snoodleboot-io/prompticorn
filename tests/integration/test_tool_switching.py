@@ -278,6 +278,45 @@ class TestToolSwitching(unittest.TestCase):
         self.assertTrue((self.test_dir / ".claude").exists())
         self.assertFalse((self.test_dir / ".gemini").exists())
 
+    def test_builder_creates_correct_artifacts_amazonq(self):
+        """Amazon Q creates .amazonq/ (no AGENTS.md), detectable and cleanable."""
+        config = {
+            "variant": "minimal",
+            "spec": {"language": "python"},
+            "active_personas": ["software_engineer"],
+        }
+        get_prompt_builder("amazonq").build(self.test_dir, config, dry_run=False)
+
+        self.assertTrue((self.test_dir / ".amazonq" / "cli-agents").exists())
+        self.assertTrue((self.test_dir / ".amazonq" / "rules").exists())
+        # Amazon Q does not read AGENTS.md — it must not be emitted.
+        self.assertFalse((self.test_dir / "AGENTS.md").exists())
+        self.assertFalse((self.test_dir / ".claude").exists())
+
+        manager = ArtifactManager(self.test_dir)
+        self.assertEqual(manager.current_tool, "amazonq")
+
+        manager.remove_artifacts_created_by("amazonq")
+        self.assertFalse((self.test_dir / ".amazonq").exists())
+
+    def test_switching_amazonq_to_kilo_cleans_amazonq(self):
+        """Switching from amazonq to kilo-ide removes .amazonq/ and creates .kilo/."""
+        config = {
+            "variant": "minimal",
+            "spec": {"language": "python"},
+            "active_personas": ["software_engineer"],
+        }
+        get_prompt_builder("amazonq").build(self.test_dir, config, dry_run=False)
+        self.assertTrue((self.test_dir / ".amazonq").exists())
+
+        manager = ArtifactManager(self.test_dir)
+        manager.remove_artifacts_created_by(manager.current_tool)
+        self.assertFalse((self.test_dir / ".amazonq").exists())
+
+        get_prompt_builder("kilo-ide").build(self.test_dir, config, dry_run=False)
+        self.assertTrue((self.test_dir / ".kilo").exists())
+        self.assertFalse((self.test_dir / ".amazonq").exists())
+
 
 if __name__ == "__main__":
     unittest.main()
