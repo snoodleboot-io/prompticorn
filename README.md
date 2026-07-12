@@ -15,6 +15,7 @@ right config for whichever assistant your team uses:
 - **Claude** — `.claude/` directory plus `CLAUDE.md`
 - **Cursor** — `.cursor/rules/` plus `.cursorrules`
 - **GitHub Copilot** — `.github/copilot-instructions.md`
+- **Roo Code** — `.roomodes` custom modes plus `.roo/` rules, skills, and commands
 
 ## What's in the library
 
@@ -51,7 +52,7 @@ See [docs/QUICKSTART.md](./docs/QUICKSTART.md) for the full walkthrough.
 ## Key Features
 
 - **Unified IR system** — define agents once, generate for every supported tool.
-- **5 production builders** — Kilo, Cline, Claude, Cursor, Copilot.
+- **6 production builders** — Kilo, Cline, Claude, Cursor, Copilot, Roo Code.
 - **Minimal / verbose variants** — trade tokens for detail at build time.
 - **Persona-based filtering** — pick your team's roles and only relevant agents are generated.
 - **Spec-driven conventions** — your language, runtime, package manager, test

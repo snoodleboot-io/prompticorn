@@ -20,7 +20,7 @@ Comprehensive architectural documentation for the prompticorn system.
 
 prompticorn is a **tool-agnostic prompt architecture system** that enables you to:
 - Define AI agents once in a unified Intermediate Representation (IR) format
-- Generate configurations for 5 different AI coding assistants (Kilo, Cline, Claude, Cursor, Copilot)
+- Generate configurations for 6 different AI coding assistants (Kilo, Cline, Claude, Cursor, Copilot, Roo Code)
 - Manage agent complexity with minimal/verbose variants
 - Filter agents by persona (role-based)
 - Customize prompts with template substitution
@@ -321,6 +321,7 @@ output = builder.build(agent, options)
 | **ClaudeBuilder** | JSON | `claude-agents.json` |
 | **CursorBuilder** | Markdown | `.cursor/rules/*.mdc` |
 | **CopilotBuilder** | Markdown | `.github/copilot-instructions.md` |
+| **RooBuilder** | YAML + Markdown | `.roomodes`, `.roo/rules-{slug}/`, `.roo/skills/`, `.roo/commands/` |
 
 ### 5. Template Substitution System
 
