@@ -20,6 +20,7 @@ right config for whichever assistant your team uses:
 - **Zed** — `.agents/skills/` (agents-as-skills) plus `AGENTS.md` instructions
 - **Gemini CLI** — `.gemini/` agents, skills, and TOML commands plus `AGENTS.md`
 - **Amazon Q** (CLI) — `.amazonq/` JSON agents, `rules/` conventions, and prompts
+- **Windsurf** / Cascade — `.windsurf/` skills, glob-scoped `rules/`, and workflows
 
 ## What's in the library
 
@@ -56,7 +57,7 @@ See [docs/QUICKSTART.md](./docs/QUICKSTART.md) for the full walkthrough.
 ## Key Features
 
 - **Unified IR system** — define agents once, generate for every supported tool.
-- **10 production builders** — Kilo, Cline, Claude, Cursor, Copilot, Roo Code, Junie, Zed, Gemini CLI, Amazon Q.
+- **11 production builders** — Kilo, Cline, Claude, Cursor, Copilot, Roo Code, Junie, Zed, Gemini CLI, Amazon Q, Windsurf.
 - **Minimal / verbose variants** — trade tokens for detail at build time.
 - **Persona-based filtering** — pick your team's roles and only relevant agents are generated.
 - **Spec-driven conventions** — your language, runtime, package manager, test
