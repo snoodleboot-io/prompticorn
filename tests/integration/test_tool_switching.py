@@ -317,6 +317,45 @@ class TestToolSwitching(unittest.TestCase):
         self.assertTrue((self.test_dir / ".kilo").exists())
         self.assertFalse((self.test_dir / ".amazonq").exists())
 
+    def test_builder_creates_correct_artifacts_windsurf(self):
+        """Windsurf creates .windsurf/ (no AGENTS.md), detectable and cleanable."""
+        config = {
+            "variant": "minimal",
+            "spec": {"language": "python"},
+            "active_personas": ["software_engineer"],
+        }
+        get_prompt_builder("windsurf").build(self.test_dir, config, dry_run=False)
+
+        self.assertTrue((self.test_dir / ".windsurf" / "rules").exists())
+        self.assertTrue((self.test_dir / ".windsurf" / "skills").exists())
+        # Windsurf conventions live in .windsurf/rules/, not AGENTS.md (char budget).
+        self.assertFalse((self.test_dir / "AGENTS.md").exists())
+        self.assertFalse((self.test_dir / ".claude").exists())
+
+        manager = ArtifactManager(self.test_dir)
+        self.assertEqual(manager.current_tool, "windsurf")
+
+        manager.remove_artifacts_created_by("windsurf")
+        self.assertFalse((self.test_dir / ".windsurf").exists())
+
+    def test_switching_windsurf_to_cursor_cleans_windsurf(self):
+        """Switching from windsurf to cursor removes .windsurf/ and creates cursor files."""
+        config = {
+            "variant": "minimal",
+            "spec": {"language": "python"},
+            "active_personas": ["software_engineer"],
+        }
+        get_prompt_builder("windsurf").build(self.test_dir, config, dry_run=False)
+        self.assertTrue((self.test_dir / ".windsurf").exists())
+
+        manager = ArtifactManager(self.test_dir)
+        manager.remove_artifacts_created_by(manager.current_tool)
+        self.assertFalse((self.test_dir / ".windsurf").exists())
+
+        get_prompt_builder("cursor").build(self.test_dir, config, dry_run=False)
+        self.assertTrue((self.test_dir / ".cursorrules").exists())
+        self.assertFalse((self.test_dir / ".windsurf").exists())
+
 
 if __name__ == "__main__":
     unittest.main()

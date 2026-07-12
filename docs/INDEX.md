@@ -4,7 +4,7 @@ prompticorn documentation is organized by intent and purpose.
 
 prompticorn generates AI coding-assistant configs from a shared prompt library:
 **25 primary agents**, **~100 workflows**, **~95 skills**, and conventions for
-**29 languages**, targeting Kilo, Cline, Claude, Cursor, Copilot, Roo Code, Junie, Zed, Gemini CLI, and Amazon Q.
+**29 languages**, targeting Kilo, Cline, Claude, Cursor, Copilot, Roo Code, Junie, Zed, Gemini CLI, Amazon Q, and Windsurf.
 
 ## Getting Started (Pick Your Path)
 
@@ -34,7 +34,7 @@ See `docs/design/`:
 - [WORKFLOW_HANDLING_ANALYSIS.design.md](./design/WORKFLOW_HANDLING_ANALYSIS.design.md)
 
 ### 🛠️ Builder Documentation
-See `docs/builders/` for per-tool builder guides (Kilo, Cline, Claude, Cursor, Copilot, Roo Code, Junie, Zed, Gemini CLI, Amazon Q)
+See `docs/builders/` for per-tool builder guides (Kilo, Cline, Claude, Cursor, Copilot, Roo Code, Junie, Zed, Gemini CLI, Amazon Q, Windsurf)
 plus the builder API reference and implementation guide.
 
 ## CLI Commands

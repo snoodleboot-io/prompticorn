@@ -20,7 +20,7 @@ Comprehensive architectural documentation for the prompticorn system.
 
 prompticorn is a **tool-agnostic prompt architecture system** that enables you to:
 - Define AI agents once in a unified Intermediate Representation (IR) format
-- Generate configurations for 10 different AI coding assistants (Kilo, Cline, Claude, Cursor, Copilot, Roo Code, Junie, Zed, Gemini CLI, Amazon Q)
+- Generate configurations for 11 different AI coding assistants (Kilo, Cline, Claude, Cursor, Copilot, Roo Code, Junie, Zed, Gemini CLI, Amazon Q, Windsurf)
 - Manage agent complexity with minimal/verbose variants
 - Filter agents by persona (role-based)
 - Customize prompts with template substitution
@@ -326,6 +326,7 @@ output = builder.build(agent, options)
 | **ZedBuilder** | YAML + Markdown | `.agents/skills/` (agents-as-skills), `AGENTS.md` |
 | **GeminiBuilder** | Markdown + TOML | `.gemini/agents/`, `.gemini/skills/`, `.gemini/commands/*.toml`, `.gemini/settings.json` |
 | **AmazonQBuilder** | JSON + Markdown | `.amazonq/cli-agents/*.json`, `.amazonq/rules/`, `.amazonq/prompts/` (no AGENTS.md) |
+| **WindsurfBuilder** | Markdown | `.windsurf/skills/` (agents-as-skills), `.windsurf/rules/` (glob), `.windsurf/workflows/` (no AGENTS.md) |
 
 ### 5. Template Substitution System
 
