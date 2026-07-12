@@ -14,6 +14,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+from prompticorn.builders.roo_builder import generate_roomodes
 from prompticorn.builders.skill_emitter import write_skill
 
 
@@ -47,6 +48,20 @@ class ToolLayout:
     def write_skill(self, output: Path, skill_name: str, content: str) -> list[str]:
         raise NotImplementedError
 
+    def write_workflow(self, output: Path, workflow_name: str, content: str) -> list[str]:
+        """Write one workflow/command file. Only called when writes_workflows."""
+        raise NotImplementedError
+
+    def finalize(
+        self, output: Path, built_agents: list[Any], config: dict[str, Any] | None
+    ) -> list[str]:
+        """Emit any aggregate file(s) built from all agents' outputs.
+
+        Called once after every agent has been written. Base is a no-op; Roo
+        overrides it to assemble the single ``.roomodes`` file.
+        """
+        return []
+
 
 class KiloLayout(ToolLayout):
     """.kilo/ directory: per-agent files, subagents, workflows, rules."""
@@ -63,6 +78,12 @@ class KiloLayout(ToolLayout):
 
     def write_skill(self, output: Path, skill_name: str, content: str) -> list[str]:
         return [write_skill(output, ".kilo", skill_name, content)]
+
+    def write_workflow(self, output: Path, workflow_name: str, content: str) -> list[str]:
+        commands_dir = output / ".kilo" / "commands"
+        commands_dir.mkdir(parents=True, exist_ok=True)
+        (commands_dir / f"{workflow_name}.md").write_text(content, encoding="utf-8")
+        return [f".kilo/commands/{workflow_name}.md"]
 
 
 class ClineLayout(ToolLayout):
@@ -132,12 +153,52 @@ class ClaudeLayout(ToolLayout):
         return [write_skill(output, ".claude", skill_name, content)]
 
 
+class RooLayout(ToolLayout):
+    """.roo/ + .roomodes: aggregate custom-modes file, per-mode rules, commands.
+
+    Agents become entries in a single ``.roomodes`` (assembled in ``finalize``);
+    each agent's bulk instructions go to ``.roo/rules-{slug}/`` (Roo loads those
+    only when that mode is active). Conventions ride the root ``AGENTS.md``.
+    """
+
+    writes_workflows = True
+
+    def write_agent(self, output: Path, agent_name: str, content: str | dict[str, Any]) -> list[str]:
+        # content is a RooBuilder mode-entry dict; write the bulk instructions
+        # to the mode-specific rules dir and keep .roomodes lean.
+        assert isinstance(content, dict)
+        rules_dir = output / f".roo/rules-{content['slug']}"
+        rules_dir.mkdir(parents=True, exist_ok=True)
+        rel = f".roo/rules-{content['slug']}/01-instructions.md"
+        (output / rel).write_text(content["instructions"], encoding="utf-8")
+        return [rel]
+
+    def write_skill(self, output: Path, skill_name: str, content: str) -> list[str]:
+        return [write_skill(output, ".roo", skill_name, content)]
+
+    def write_workflow(self, output: Path, workflow_name: str, content: str) -> list[str]:
+        commands_dir = output / ".roo" / "commands"
+        commands_dir.mkdir(parents=True, exist_ok=True)
+        (commands_dir / f"{workflow_name}.md").write_text(content, encoding="utf-8")
+        return [f".roo/commands/{workflow_name}.md"]
+
+    def finalize(
+        self, output: Path, built_agents: list[Any], config: dict[str, Any] | None
+    ) -> list[str]:
+        mode_entries = [c for c in built_agents if isinstance(c, dict) and "slug" in c]
+        if not mode_entries:
+            return []
+        (output / ".roomodes").write_text(generate_roomodes(mode_entries), encoding="utf-8")
+        return [".roomodes"]
+
+
 _LAYOUTS: dict[str, ToolLayout] = {
     "kilo": KiloLayout(),
     "cline": ClineLayout(),
     "cursor": CursorLayout(),
     "copilot": CopilotLayout(),
     "claude": ClaudeLayout(),
+    "roo": RooLayout(),
 }
 
 

@@ -213,6 +213,9 @@ class PromptBuilder:
         # Track primary agents being built (for AGENTS.md)
         primary_agents_built = []
 
+        # Per-agent build outputs, for layouts that emit an aggregate file (Roo).
+        built_agent_outputs: list[Any] = []
+
         # For Kilo, write core convention files to .kilo/rules/ before building agents
         rules_files_written = []
         if self.layout.writes_rules and not dry_run:
@@ -243,6 +246,7 @@ class PromptBuilder:
                 )
 
                 output_content = self.builder.build(filtered_agent, options, config)
+                built_agent_outputs.append(output_content)
 
                 # Write output
                 if not dry_run:
@@ -382,6 +386,14 @@ class PromptBuilder:
             except Exception as e:
                 file_name = self.layout.root_doc_filename()
                 actions.append(f"⚠ Failed to generate {file_name}: {e}")
+
+        # Emit any aggregate file built from all agents (e.g. Roo's .roomodes).
+        if not dry_run:
+            try:
+                for finalized in self.layout.finalize(output, built_agent_outputs, config):
+                    actions.append(f"✓ {finalized}")
+            except Exception as e:
+                actions.append(f"⚠ Failed to finalize output: {e}")
 
         return actions
 
@@ -623,20 +635,14 @@ class PromptBuilder:
         if not hasattr(agent, "workflows") or not agent.workflows:
             return written_files
 
-        # Write each workflow as a command file (Kilo-specific layout).
+        # Write each workflow as a command file via the tool's layout.
         if self.layout.writes_workflows:
-            commands_dir = output / ".kilo" / "commands"
-            commands_dir.mkdir(parents=True, exist_ok=True)
-
             for workflow_name in agent.workflows:
-                # Load workflow content
                 workflow_content = self._load_workflow_content(workflow_name, variant)
-
                 if workflow_content:
-                    # Write to .kilo/commands/{workflow-name}.md
-                    command_file = commands_dir / f"{workflow_name}.md"
-                    command_file.write_text(workflow_content, encoding="utf-8")
-                    written_files.append(f".kilo/commands/{workflow_name}.md")
+                    written_files.extend(
+                        self.layout.write_workflow(output, workflow_name, workflow_content)
+                    )
 
         return written_files
 

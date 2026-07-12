@@ -31,7 +31,7 @@ class TestToolRegistry(unittest.TestCase):
     def test_supported_tool_ids(self) -> None:
         self.assertEqual(
             supported_tool_ids(),
-            {"kilo-cli", "kilo-ide", "claude", "cline", "cursor", "copilot"},
+            {"kilo-cli", "kilo-ide", "claude", "cline", "cursor", "copilot", "roo"},
         )
 
     def test_name_mappings_match_legacy(self) -> None:
@@ -45,6 +45,8 @@ class TestToolRegistry(unittest.TestCase):
                 "cursor": "cursor",
                 "copilot": "copilot",
                 "claude": "claude",
+                "roo": "roo",
+                "roocode": "roo",
             },
         )
 
@@ -59,13 +61,14 @@ class TestToolRegistry(unittest.TestCase):
                 "cursor": "cursor",
                 "copilot": "copilot",
                 "claude": "claude",
+                "roo": "roo",
             },
         )
 
     def test_menu_options_order_and_labels(self) -> None:
         self.assertEqual(
             menu_options(),
-            ["Kilo CLI", "Kilo IDE", "Claude", "Cline", "Cursor", "Copilot"],
+            ["Kilo CLI", "Kilo IDE", "Claude", "Cline", "Cursor", "Copilot", "Roo Code"],
         )
 
     def test_menu_explanations_match_legacy(self) -> None:
@@ -78,6 +81,7 @@ class TestToolRegistry(unittest.TestCase):
                 "Cline": "Cline - .clinerules file (concatenated rules)",
                 "Cursor": "Cursor - .cursor/rules/ directory + .cursorrules",
                 "Copilot": "GitHub Copilot - .github/copilot-instructions.md",
+                "Roo Code": "Roo Code - .roomodes custom modes + .roo/ rules, skills, and commands",
             },
         )
 
@@ -92,12 +96,14 @@ class TestToolRegistry(unittest.TestCase):
                 "cursor": {".cursor/", ".cursorrules"},
                 "copilot": {".github/copilot-instructions.md"},
                 "claude": {".claude/", "CLAUDE.md"},
+                "roo": {".roomodes", ".roo/"},
             },
         )
-        # Order must match the historical artifacts ordering so that
-        # ArtifactManager.current_tool first-match detection is unchanged.
+        # The six original tools keep their historical ordering so that
+        # ArtifactManager.current_tool first-match detection is unchanged; new
+        # tools append after them.
         self.assertEqual(
-            list(create),
+            list(create)[:6],
             ["kilo-cli", "kilo-ide", "cline", "cursor", "copilot", "claude"],
         )
 
