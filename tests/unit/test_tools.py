@@ -42,6 +42,7 @@ class TestToolRegistry(unittest.TestCase):
                 "junie",
                 "zed",
                 "gemini",
+                "amazonq",
             },
         )
 
@@ -62,6 +63,7 @@ class TestToolRegistry(unittest.TestCase):
                 "zed": "zed",
                 "gemini": "gemini",
                 "geminicli": "gemini",
+                "amazonq": "amazonq",
             },
         )
 
@@ -80,6 +82,7 @@ class TestToolRegistry(unittest.TestCase):
                 "junie": "junie",
                 "zed": "zed",
                 "gemini": "gemini",
+                "amazonq": "amazonq",
             },
         )
 
@@ -97,6 +100,7 @@ class TestToolRegistry(unittest.TestCase):
                 "Junie",
                 "Zed",
                 "Gemini CLI",
+                "Amazon Q",
             ],
         )
 
@@ -114,6 +118,7 @@ class TestToolRegistry(unittest.TestCase):
                 "Junie": "JetBrains Junie (CLI) - .junie/ agents, skills, and commands + AGENTS.md",
                 "Zed": "Zed - .agents/skills/ (agents-as-skills) + AGENTS.md instructions",
                 "Gemini CLI": "Google Gemini CLI - .gemini/ agents, skills, and TOML commands + AGENTS.md",
+                "Amazon Q": "Amazon Q Developer CLI - .amazonq/ JSON agents, rules, and prompts",
             },
         )
 
@@ -132,6 +137,7 @@ class TestToolRegistry(unittest.TestCase):
                 "junie": {".junie/"},
                 "zed": {".agents/"},
                 "gemini": {".gemini/"},
+                "amazonq": {".amazonq/"},
             },
         )
         # The six original tools keep their historical ordering so that

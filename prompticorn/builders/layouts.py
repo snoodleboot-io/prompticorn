@@ -41,6 +41,9 @@ class ToolLayout:
     writes_rules: bool = False
     #: Whether the root doc is CLAUDE.md (True) or AGENTS.md (False).
     emits_claude_md: bool = False
+    #: Whether to emit the root AGENTS.md at all. False for tools that carry
+    #: their own convention files instead (e.g. Amazon Q's .amazonq/rules/).
+    emits_agents_md: bool = True
 
     def root_doc_filename(self) -> str:
         return "CLAUDE.md" if self.emits_claude_md else "AGENTS.md"
@@ -275,6 +278,39 @@ class GeminiLayout(ToolLayout):
         return [".gemini/settings.json"]
 
 
+class AmazonQLayout(ToolLayout):
+    """.amazonq/ : JSON agents, rules conventions, saved prompts. No AGENTS.md.
+
+    Amazon Q does not read AGENTS.md, so conventions are written to
+    ``.amazonq/rules/`` (writes_rules) and no root doc is emitted. Agents are
+    JSON (``.amazonq/cli-agents/``), workflows are prompts, skills are dropped
+    (Amazon Q has no skill primitive).
+    """
+
+    writes_rules = True
+    writes_workflows = True
+    emits_agents_md = False
+
+    def write_agent(self, output: Path, agent_name: str, content: str | dict[str, Any]) -> list[str]:
+        assert isinstance(content, str)
+        agents_dir = output / ".amazonq" / "cli-agents"
+        agents_dir.mkdir(parents=True, exist_ok=True)
+        rel = f".amazonq/cli-agents/{junie_slugify(agent_name)}.json"
+        (output / rel).write_text(content, encoding="utf-8")
+        return [rel]
+
+    def write_skill(self, output: Path, skill_name: str, content: str) -> list[str]:
+        # Amazon Q has no skill primitive; skills are dropped in v1.
+        return []
+
+    def write_workflow(self, output: Path, workflow_name: str, content: str) -> list[str]:
+        prompts_dir = output / ".amazonq" / "prompts"
+        prompts_dir.mkdir(parents=True, exist_ok=True)
+        rel = f".amazonq/prompts/{junie_slugify(workflow_name)}.md"
+        (output / rel).write_text(content, encoding="utf-8")
+        return [rel]
+
+
 _LAYOUTS: dict[str, ToolLayout] = {
     "kilo": KiloLayout(),
     "cline": ClineLayout(),
@@ -285,6 +321,7 @@ _LAYOUTS: dict[str, ToolLayout] = {
     "junie": JunieLayout(),
     "zed": ZedLayout(),
     "gemini": GeminiLayout(),
+    "amazonq": AmazonQLayout(),
 }
 
 
