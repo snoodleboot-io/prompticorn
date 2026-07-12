@@ -31,7 +31,7 @@ class TestToolRegistry(unittest.TestCase):
     def test_supported_tool_ids(self) -> None:
         self.assertEqual(
             supported_tool_ids(),
-            {"kilo-cli", "kilo-ide", "claude", "cline", "cursor", "copilot", "roo"},
+            {"kilo-cli", "kilo-ide", "claude", "cline", "cursor", "copilot", "roo", "junie"},
         )
 
     def test_name_mappings_match_legacy(self) -> None:
@@ -47,6 +47,7 @@ class TestToolRegistry(unittest.TestCase):
                 "claude": "claude",
                 "roo": "roo",
                 "roocode": "roo",
+                "junie": "junie",
             },
         )
 
@@ -62,13 +63,14 @@ class TestToolRegistry(unittest.TestCase):
                 "copilot": "copilot",
                 "claude": "claude",
                 "roo": "roo",
+                "junie": "junie",
             },
         )
 
     def test_menu_options_order_and_labels(self) -> None:
         self.assertEqual(
             menu_options(),
-            ["Kilo CLI", "Kilo IDE", "Claude", "Cline", "Cursor", "Copilot", "Roo Code"],
+            ["Kilo CLI", "Kilo IDE", "Claude", "Cline", "Cursor", "Copilot", "Roo Code", "Junie"],
         )
 
     def test_menu_explanations_match_legacy(self) -> None:
@@ -82,6 +84,7 @@ class TestToolRegistry(unittest.TestCase):
                 "Cursor": "Cursor - .cursor/rules/ directory + .cursorrules",
                 "Copilot": "GitHub Copilot - .github/copilot-instructions.md",
                 "Roo Code": "Roo Code - .roomodes custom modes + .roo/ rules, skills, and commands",
+                "Junie": "JetBrains Junie (CLI) - .junie/ agents, skills, and commands + AGENTS.md",
             },
         )
 
@@ -97,6 +100,7 @@ class TestToolRegistry(unittest.TestCase):
                 "copilot": {".github/copilot-instructions.md"},
                 "claude": {".claude/", "CLAUDE.md"},
                 "roo": {".roomodes", ".roo/"},
+                "junie": {".junie/"},
             },
         )
         # The six original tools keep their historical ordering so that

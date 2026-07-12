@@ -88,6 +88,13 @@ _TOOL_SPECS: Final[tuple[ToolSpec, ...]] = (
         builder_name="roo",
         create_artifacts=frozenset({".roomodes", ".roo/"}),
     ),
+    ToolSpec(
+        id="junie",
+        display_label="Junie",
+        explanation="JetBrains Junie (CLI) - .junie/ agents, skills, and commands + AGENTS.md",
+        builder_name="junie",
+        create_artifacts=frozenset({".junie/"}),
+    ),
 )
 
 TOOLS: Final[dict[str, ToolSpec]] = {spec.id: spec for spec in _TOOL_SPECS}
@@ -103,6 +110,7 @@ MENU_ORDER: Final[tuple[str, ...]] = (
     "cursor",
     "copilot",
     "roo",
+    "junie",
 )
 
 
