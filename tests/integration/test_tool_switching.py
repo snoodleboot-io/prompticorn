@@ -356,6 +356,45 @@ class TestToolSwitching(unittest.TestCase):
         self.assertTrue((self.test_dir / ".cursorrules").exists())
         self.assertFalse((self.test_dir / ".windsurf").exists())
 
+    def test_builder_creates_correct_artifacts_continue(self):
+        """Continue creates .continue/ (no AGENTS.md), detectable and cleanable."""
+        config = {
+            "variant": "minimal",
+            "spec": {"language": "python"},
+            "active_personas": ["software_engineer"],
+        }
+        get_prompt_builder("continue").build(self.test_dir, config, dry_run=False)
+
+        self.assertTrue((self.test_dir / ".continue" / "rules").exists())
+        self.assertTrue((self.test_dir / ".continue" / "prompts").exists())
+        # Continue conventions live in .continue/rules/, not AGENTS.md.
+        self.assertFalse((self.test_dir / "AGENTS.md").exists())
+        self.assertFalse((self.test_dir / ".claude").exists())
+
+        manager = ArtifactManager(self.test_dir)
+        self.assertEqual(manager.current_tool, "continue")
+
+        manager.remove_artifacts_created_by("continue")
+        self.assertFalse((self.test_dir / ".continue").exists())
+
+    def test_switching_continue_to_cline_cleans_continue(self):
+        """Switching from continue to cline removes .continue/ and creates .clinerules."""
+        config = {
+            "variant": "minimal",
+            "spec": {"language": "python"},
+            "active_personas": ["software_engineer"],
+        }
+        get_prompt_builder("continue").build(self.test_dir, config, dry_run=False)
+        self.assertTrue((self.test_dir / ".continue").exists())
+
+        manager = ArtifactManager(self.test_dir)
+        manager.remove_artifacts_created_by(manager.current_tool)
+        self.assertFalse((self.test_dir / ".continue").exists())
+
+        get_prompt_builder("cline").build(self.test_dir, config, dry_run=False)
+        self.assertTrue((self.test_dir / ".clinerules").exists())
+        self.assertFalse((self.test_dir / ".continue").exists())
+
 
 if __name__ == "__main__":
     unittest.main()
