@@ -15,6 +15,7 @@ from prompticorn.builders.component_selector import (
     ComponentSelector,
     Variant,
 )
+from prompticorn.builders.continue_builder import ContinueBuilder
 from prompticorn.builders.copilot_builder import CopilotBuilder
 from prompticorn.builders.cursor_builder import CursorBuilder
 from prompticorn.builders.errors import (
@@ -70,6 +71,7 @@ __all__ = [
     "GeminiBuilder",
     "AmazonQBuilder",
     "WindsurfBuilder",
+    "ContinueBuilder",
 ]
 
 # Auto-register all builders when module is imported
@@ -84,3 +86,4 @@ BuilderFactory.register("zed", ZedBuilder)
 BuilderFactory.register("gemini", GeminiBuilder)
 BuilderFactory.register("amazonq", AmazonQBuilder)
 BuilderFactory.register("windsurf", WindsurfBuilder)
+BuilderFactory.register("continue", ContinueBuilder)
