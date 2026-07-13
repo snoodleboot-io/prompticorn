@@ -5,6 +5,7 @@ interface classes for generating tool-specific configurations from the
 Intermediate Representation (IR) Agent models.
 """
 
+from prompticorn.builders.aider_builder import AiderBuilder
 from prompticorn.builders.amazonq_builder import AmazonQBuilder
 from prompticorn.builders.base import Builder, BuildOptions
 from prompticorn.builders.claude_builder import ClaudeBuilder
@@ -72,6 +73,7 @@ __all__ = [
     "AmazonQBuilder",
     "WindsurfBuilder",
     "ContinueBuilder",
+    "AiderBuilder",
 ]
 
 # Auto-register all builders when module is imported
@@ -87,3 +89,4 @@ BuilderFactory.register("gemini", GeminiBuilder)
 BuilderFactory.register("amazonq", AmazonQBuilder)
 BuilderFactory.register("windsurf", WindsurfBuilder)
 BuilderFactory.register("continue", ContinueBuilder)
+BuilderFactory.register("aider", AiderBuilder)

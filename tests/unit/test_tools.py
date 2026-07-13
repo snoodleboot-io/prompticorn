@@ -45,6 +45,7 @@ class TestToolRegistry(unittest.TestCase):
                 "amazonq",
                 "windsurf",
                 "continue",
+                "aider",
             },
         )
 
@@ -68,6 +69,7 @@ class TestToolRegistry(unittest.TestCase):
                 "amazonq": "amazonq",
                 "windsurf": "windsurf",
                 "continue": "continue",
+                "aider": "aider",
             },
         )
 
@@ -89,6 +91,7 @@ class TestToolRegistry(unittest.TestCase):
                 "amazonq": "amazonq",
                 "windsurf": "windsurf",
                 "continue": "continue",
+                "aider": "aider",
             },
         )
 
@@ -109,6 +112,7 @@ class TestToolRegistry(unittest.TestCase):
                 "Amazon Q",
                 "Windsurf",
                 "Continue",
+                "Aider",
             ],
         )
 
@@ -129,6 +133,7 @@ class TestToolRegistry(unittest.TestCase):
                 "Amazon Q": "Amazon Q Developer CLI - .amazonq/ JSON agents, rules, and prompts",
                 "Windsurf": "Windsurf / Cascade - .windsurf/ skills, glob-scoped rules, and workflows",
                 "Continue": "Continue.dev - .continue/ glob-scoped rules and invokable prompts",
+                "Aider": "Aider - CONVENTIONS.md + .aider.conf.yml (conventions only)",
             },
         )
 
@@ -150,6 +155,7 @@ class TestToolRegistry(unittest.TestCase):
                 "amazonq": {".amazonq/"},
                 "windsurf": {".windsurf/"},
                 "continue": {".continue/"},
+                "aider": {"CONVENTIONS.md", ".aider.conf.yml"},
             },
         )
         # The six original tools keep their historical ordering so that

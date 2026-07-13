@@ -375,6 +375,24 @@ class ContinueLayout(ToolLayout):
         return [rel]
 
 
+class AiderLayout(ToolLayout):
+    """Conventions-only: CONVENTIONS.md + .aider.conf.yml (via writes_rules).
+
+    Aider has no agent/skill/workflow primitive, so those writes are no-ops; the
+    root AGENTS.md is suppressed. The single CONVENTIONS.md + .aider.conf.yml are
+    emitted by AiderBuilder.write_rules_files.
+    """
+
+    writes_rules = True
+    emits_agents_md = False
+
+    def write_agent(self, output: Path, agent_name: str, content: str | dict[str, Any]) -> list[str]:
+        return []
+
+    def write_skill(self, output: Path, skill_name: str, content: str) -> list[str]:
+        return []
+
+
 _LAYOUTS: dict[str, ToolLayout] = {
     "kilo": KiloLayout(),
     "cline": ClineLayout(),
@@ -388,6 +406,7 @@ _LAYOUTS: dict[str, ToolLayout] = {
     "amazonq": AmazonQLayout(),
     "windsurf": WindsurfLayout(),
     "continue": ContinueLayout(),
+    "aider": AiderLayout(),
 }
 
 
