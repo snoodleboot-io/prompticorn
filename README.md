@@ -22,6 +22,7 @@ right config for whichever assistant your team uses:
 - **Amazon Q** (CLI) — `.amazonq/` JSON agents, `rules/` conventions, and prompts
 - **Windsurf** / Cascade — `.windsurf/` skills, glob-scoped `rules/`, and workflows
 - **Continue.dev** — `.continue/` glob-scoped `rules/` and invokable `prompts/`
+- **Aider** — `CONVENTIONS.md` plus `.aider.conf.yml` (conventions only)
 
 ## What's in the library
 
@@ -58,7 +59,7 @@ See [docs/QUICKSTART.md](./docs/QUICKSTART.md) for the full walkthrough.
 ## Key Features
 
 - **Unified IR system** — define agents once, generate for every supported tool.
-- **12 production builders** — Kilo, Cline, Claude, Cursor, Copilot, Roo Code, Junie, Zed, Gemini CLI, Amazon Q, Windsurf, Continue.dev.
+- **13 production builders** — Kilo, Cline, Claude, Cursor, Copilot, Roo Code, Junie, Zed, Gemini CLI, Amazon Q, Windsurf, Continue.dev, Aider.
 - **Minimal / verbose variants** — trade tokens for detail at build time.
 - **Persona-based filtering** — pick your team's roles and only relevant agents are generated.
 - **Spec-driven conventions** — your language, runtime, package manager, test
