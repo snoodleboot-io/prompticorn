@@ -1,4 +1,24 @@
 {
+  "aider::minimal": [
+    [
+      ".aider.conf.yml",
+      "3c44a5f3fd7fd95e7053d5260de7c2b907dd53e5d6546cf2be869591eaa79cce"
+    ],
+    [
+      "CONVENTIONS.md",
+      "5f6c70f424b84298ade47039eba76c0664bedacb73878b3b26d80bd30702ee4a"
+    ]
+  ],
+  "aider::verbose": [
+    [
+      ".aider.conf.yml",
+      "3c44a5f3fd7fd95e7053d5260de7c2b907dd53e5d6546cf2be869591eaa79cce"
+    ],
+    [
+      "CONVENTIONS.md",
+      "5f6c70f424b84298ade47039eba76c0664bedacb73878b3b26d80bd30702ee4a"
+    ]
+  ],
   "amazonq::minimal": [
     [
       ".amazonq/cli-agents/ask.json",

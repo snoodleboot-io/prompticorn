@@ -130,6 +130,13 @@ _TOOL_SPECS: Final[tuple[ToolSpec, ...]] = (
         builder_name="continue",
         create_artifacts=frozenset({".continue/"}),
     ),
+    ToolSpec(
+        id="aider",
+        display_label="Aider",
+        explanation="Aider - CONVENTIONS.md + .aider.conf.yml (conventions only)",
+        builder_name="aider",
+        create_artifacts=frozenset({"CONVENTIONS.md", ".aider.conf.yml"}),
+    ),
 )
 
 TOOLS: Final[dict[str, ToolSpec]] = {spec.id: spec for spec in _TOOL_SPECS}
@@ -151,6 +158,7 @@ MENU_ORDER: Final[tuple[str, ...]] = (
     "amazonq",
     "windsurf",
     "continue",
+    "aider",
 )
 
 
