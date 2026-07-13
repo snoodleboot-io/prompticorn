@@ -123,6 +123,13 @@ _TOOL_SPECS: Final[tuple[ToolSpec, ...]] = (
         builder_name="windsurf",
         create_artifacts=frozenset({".windsurf/"}),
     ),
+    ToolSpec(
+        id="continue",
+        display_label="Continue",
+        explanation="Continue.dev - .continue/ glob-scoped rules and invokable prompts",
+        builder_name="continue",
+        create_artifacts=frozenset({".continue/"}),
+    ),
 )
 
 TOOLS: Final[dict[str, ToolSpec]] = {spec.id: spec for spec in _TOOL_SPECS}
@@ -143,6 +150,7 @@ MENU_ORDER: Final[tuple[str, ...]] = (
     "gemini",
     "amazonq",
     "windsurf",
+    "continue",
 )
 
 

@@ -14,6 +14,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+from prompticorn.builders.continue_builder import workflow_to_continue_prompt
 from prompticorn.builders.gemini_builder import generate_gemini_settings, workflow_to_toml
 from prompticorn.builders.junie_builder import slugify as junie_slugify
 from prompticorn.builders.roo_builder import generate_roomodes
@@ -339,6 +340,41 @@ class WindsurfLayout(ToolLayout):
         return [rel]
 
 
+class ContinueLayout(ToolLayout):
+    """.continue/ : agents-as-rules, conventions rules, invokable prompts. No AGENTS.md.
+
+    Continue has no agent primitive, so each agent is a description-scoped rule
+    (``.continue/rules/<slug>.md``); conventions also go to ``.continue/rules/``
+    (writes_rules); workflows become ``.continue/prompts/<slug>.md``. Skills are
+    dropped (no primitive) and the root AGENTS.md is suppressed (not read).
+    """
+
+    writes_rules = True
+    writes_workflows = True
+    emits_agents_md = False
+
+    def write_agent(self, output: Path, agent_name: str, content: str | dict[str, Any]) -> list[str]:
+        assert isinstance(content, str)
+        rules_dir = output / ".continue" / "rules"
+        rules_dir.mkdir(parents=True, exist_ok=True)
+        rel = f".continue/rules/{junie_slugify(agent_name)}.md"
+        (output / rel).write_text(content, encoding="utf-8")
+        return [rel]
+
+    def write_skill(self, output: Path, skill_name: str, content: str) -> list[str]:
+        # Continue has no skill primitive; skills are dropped in v1.
+        return []
+
+    def write_workflow(self, output: Path, workflow_name: str, content: str) -> list[str]:
+        prompts_dir = output / ".continue" / "prompts"
+        prompts_dir.mkdir(parents=True, exist_ok=True)
+        rel = f".continue/prompts/{junie_slugify(workflow_name)}.md"
+        (output / rel).write_text(
+            workflow_to_continue_prompt(workflow_name, content), encoding="utf-8"
+        )
+        return [rel]
+
+
 _LAYOUTS: dict[str, ToolLayout] = {
     "kilo": KiloLayout(),
     "cline": ClineLayout(),
@@ -351,6 +387,7 @@ _LAYOUTS: dict[str, ToolLayout] = {
     "gemini": GeminiLayout(),
     "amazonq": AmazonQLayout(),
     "windsurf": WindsurfLayout(),
+    "continue": ContinueLayout(),
 }
 
 
