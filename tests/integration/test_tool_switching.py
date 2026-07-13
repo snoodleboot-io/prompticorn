@@ -395,6 +395,46 @@ class TestToolSwitching(unittest.TestCase):
         self.assertTrue((self.test_dir / ".clinerules").exists())
         self.assertFalse((self.test_dir / ".continue").exists())
 
+    def test_builder_creates_correct_artifacts_aider(self):
+        """Aider creates CONVENTIONS.md + .aider.conf.yml (only), detectable and cleanable."""
+        config = {
+            "variant": "minimal",
+            "spec": {"language": "python"},
+            "active_personas": ["software_engineer"],
+        }
+        get_prompt_builder("aider").build(self.test_dir, config, dry_run=False)
+
+        self.assertTrue((self.test_dir / "CONVENTIONS.md").exists())
+        self.assertTrue((self.test_dir / ".aider.conf.yml").exists())
+        self.assertFalse((self.test_dir / "AGENTS.md").exists())
+        self.assertFalse((self.test_dir / ".claude").exists())
+
+        manager = ArtifactManager(self.test_dir)
+        self.assertEqual(manager.current_tool, "aider")
+
+        manager.remove_artifacts_created_by("aider")
+        self.assertFalse((self.test_dir / "CONVENTIONS.md").exists())
+        self.assertFalse((self.test_dir / ".aider.conf.yml").exists())
+
+    def test_switching_aider_to_claude_cleans_aider(self):
+        """Switching from aider to claude removes CONVENTIONS.md + .aider.conf.yml."""
+        config = {
+            "variant": "minimal",
+            "spec": {"language": "python"},
+            "active_personas": ["software_engineer"],
+        }
+        get_prompt_builder("aider").build(self.test_dir, config, dry_run=False)
+        self.assertTrue((self.test_dir / ".aider.conf.yml").exists())
+
+        manager = ArtifactManager(self.test_dir)
+        manager.remove_artifacts_created_by(manager.current_tool)
+        self.assertFalse((self.test_dir / ".aider.conf.yml").exists())
+        self.assertFalse((self.test_dir / "CONVENTIONS.md").exists())
+
+        get_prompt_builder("claude").build(self.test_dir, config, dry_run=False)
+        self.assertTrue((self.test_dir / ".claude").exists())
+        self.assertFalse((self.test_dir / ".aider.conf.yml").exists())
+
 
 if __name__ == "__main__":
     unittest.main()
