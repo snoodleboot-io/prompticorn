@@ -117,6 +117,8 @@ rust:
     - RustLinterQuestion
     - RustFormatterQuestion
     - RustTestFrameworkQuestion
+    - RustLayoutStyleQuestion
+    - RustErrorHandlingQuestion
   fungible:
     backend/api:
       - DatabasesQuestion
@@ -137,6 +139,8 @@ java:
     - JavaBuildToolQuestion
     - JavaLinterQuestion
     - JavaTestFrameworkQuestion
+    - JavaLayoutStyleQuestion
+    - JavaErrorHandlingQuestion
   fungible:
     backend/api:
       - DatabasesQuestion
@@ -155,6 +159,8 @@ csharp:
   core:
     - CSharpVersionQuestion
     - CSharpTestFrameworkQuestion
+    - CSharpLayoutStyleQuestion
+    - CSharpErrorHandlingQuestion
   fungible:
     backend/api:
       - DatabasesQuestion
@@ -175,6 +181,8 @@ ruby:
     - RubyPackageManagerQuestion
     - RubyLinterQuestion
     - RubyTestFrameworkQuestion
+    - RubyLayoutStyleQuestion
+    - RubyErrorHandlingQuestion
   fungible:
     backend/api:
       - DatabasesQuestion
@@ -194,6 +202,8 @@ php:
     - PhpVersionQuestion
     - PhpPackageManagerQuestion
     - PhpTestFrameworkQuestion
+    - PhpLayoutStyleQuestion
+    - PhpErrorHandlingQuestion
   fungible:
     backend/api:
       - DatabasesQuestion
@@ -213,6 +223,8 @@ swift:
     - SwiftVersionQuestion
     - SwiftPackageManagerQuestion
     - SwiftTestFrameworkQuestion
+    - SwiftLayoutStyleQuestion
+    - SwiftErrorHandlingQuestion
   fungible:
     backend/api:
       - DatabasesQuestion
@@ -232,6 +244,8 @@ kotlin:
     - KotlinVersionQuestion
     - KotlinBuildToolQuestion
     - KotlinTestFrameworkQuestion
+    - KotlinLayoutStyleQuestion
+    - KotlinErrorHandlingQuestion
   fungible:
     backend/api:
       - DatabasesQuestion
@@ -251,6 +265,8 @@ scala:
     - ScalaVersionQuestion
     - ScalaBuildToolQuestion
     - ScalaTestFrameworkQuestion
+    - ScalaLayoutStyleQuestion
+    - ScalaErrorHandlingQuestion
   fungible:
     backend/api:
       - DatabasesQuestion
@@ -269,6 +285,8 @@ elixir:
   core:
     - ElixirVersionQuestion
     - ElixirTestFrameworkQuestion
+    - ElixirLayoutStyleQuestion
+    - ElixirErrorHandlingQuestion
   fungible:
     backend/api:
       - DatabasesQuestion
@@ -304,6 +322,8 @@ clojure:
 fsharp:
   core:
     - FSharpVersionQuestion
+    - FSharpLayoutStyleQuestion
+    - FSharpErrorHandlingQuestion
   fungible:
     backend/api:
       - DatabasesQuestion

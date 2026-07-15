@@ -52,3 +52,31 @@ def test_fungible_questions_load_and_validate(language):
     for folder_type in _FOLDER_TYPES:
         for q in get_fungible_questions(language, folder_type):
             _check_question(q)
+
+
+# error_handling and layout_style are core, per-language questions (PRO-2). Every
+# backend-capable language must carry its own idiomatic pair so no language falls
+# back to silent defaults for these fields.
+_BACKEND_CAPABLE = [
+    "python",
+    "typescript",
+    "javascript",
+    "go",
+    "rust",
+    "java",
+    "csharp",
+    "ruby",
+    "php",
+    "swift",
+    "kotlin",
+    "scala",
+    "elixir",
+    "fsharp",
+]
+
+
+@pytest.mark.parametrize("language", _BACKEND_CAPABLE)
+def test_backend_language_has_error_handling_and_layout_style(language):
+    keys = {q.key for q in get_core_questions(language)}
+    assert "error_handling" in keys, f"{language}: missing core error_handling question"
+    assert "layout_style" in keys, f"{language}: missing core layout_style question"
