@@ -106,8 +106,8 @@ Testing conventions are language-specific. See your language's conventions file 
 
 ## Database
 
-Database:            {{ database or "_(not specified)_" }}           e.g., PostgreSQL, DynamoDB
-Data access:         {{ orm or "_(not specified)_" }}                e.g., Prisma, SQLAlchemy, GORM, raw SQL
+Database:            {{ databases or "_(not specified)_" }}           e.g., PostgreSQL, DynamoDB
+Data access:         {{ data_access or "_(not specified)_" }}                e.g., Prisma, SQLAlchemy, GORM, raw SQL
 
 ## Git & PR Conventions
 
