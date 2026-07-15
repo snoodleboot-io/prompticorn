@@ -133,8 +133,8 @@ class CoreFilesLoader:
             "source_layout": get_source_layout(
                 spec.get("language", ""), spec.get("layout_style", "flat")
             ),
-            "database": ", ".join(databases),
-            "orm": ", ".join(data_access),
+            "databases": ", ".join(databases),
+            "data_access": ", ".join(data_access),
             "error_handling": spec.get("error_handling", ""),
             "commit_style": project.get("commit_style", ""),
             "pr_size": project.get("pr_size", ""),

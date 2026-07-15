@@ -118,8 +118,8 @@ def generate_core_convention(
         "source_layout": get_source_layout(
             primary_language, primary_spec.get("layout_style", "flat")
         ),
-        "database": ", ".join(databases),
-        "orm": ", ".join(data_access),
+        "databases": ", ".join(databases),
+        "data_access": ", ".join(data_access),
         "error_handling": primary_spec.get("error_handling", ""),
     }
     context.update({key: project.get(key, "") for key in _PROJECT_TEMPLATE_KEYS})

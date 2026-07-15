@@ -1,8 +1,8 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions-sql.md -->
 # Core Conventions SQL
 
-Database:            {{ database }} e.g., PostgreSQL, MySQL, SQLite
-Data access:         {{ orm }} e.g., Prisma, SQLAlchemy, GORM, Drizzle, raw SQL
+Database:            {{ databases }} e.g., PostgreSQL, MySQL, SQLite
+Data access:         {{ data_access }} e.g., Prisma, SQLAlchemy, GORM, Drizzle, raw SQL
 
 ### Naming Conventions
 
