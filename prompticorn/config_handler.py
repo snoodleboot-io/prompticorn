@@ -185,7 +185,15 @@ class ConfigHandler:
         access_list = [old_orm] if old_orm else []
 
         def _seed_spec(spec: dict[str, Any], *, seed_data_system: bool) -> None:
-            """Apply migrated values to a single spec dict in place."""
+            """Apply migrated values to a single spec dict in place.
+
+            Note the deliberate asymmetry (PRO-3): ``databases``/``data_access``
+            are backend-only, so frontend folders get empty lists. But
+            ``layout_style``/``error_handling`` are per-language core fields that
+            apply to frontend languages too, so every folder inherits the user's
+            prior global choice — dropping them from frontend would silently lose
+            it (the folder would render "(not specified)").
+            """
             if seed_data_system:
                 spec.setdefault("databases", list(db_list))
                 spec.setdefault("data_access", list(access_list))
