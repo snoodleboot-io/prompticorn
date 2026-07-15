@@ -451,6 +451,32 @@ class TestOrmDatabaseMigration:
         assert frontend["databases"] == []
         assert frontend["data_access"] == []
 
+    def test_frontend_inherits_layout_and_error_but_not_data_system(self):
+        """PRO-3 decision: layout_style/error_handling are per-language core fields
+        that apply to frontend languages too, so a frontend folder inherits the
+        user's prior global choice on migration (dropping them would silently lose
+        it). Only the data-system fields are backend-only."""
+        # Arrange
+        config = {
+            "spec": [
+                {"language": "typescript", "type": "frontend", "subtype": "ui"},
+            ],
+            "project": {
+                "database": "PostgreSQL",
+                "orm": "Prisma",
+                "layout_style": "src",
+                "error_handling": "Exceptions",
+            },
+        }
+        # Act
+        ConfigHandler._migrate_old_orm_database_to_fungible(config)
+        # Assert — data-system stays empty (backend-only), but layout/error carry over.
+        (frontend,) = config["spec"]
+        assert frontend["databases"] == []
+        assert frontend["data_access"] == []
+        assert frontend["layout_style"] == "src"
+        assert frontend["error_handling"] == "Exceptions"
+
     def test_migration_is_idempotent(self):
         """Running the migration twice must not corrupt or accumulate values."""
         # Arrange
