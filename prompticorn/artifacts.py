@@ -56,6 +56,9 @@ def _build_artifact_files() -> dict[str, dict[str, set[str]]]:
         for other, other_created in _TOOL_CREATE.items():
             if other != tool:
                 remove |= other_created
+        # Never remove a path this tool also creates (some tools share create
+        # paths, e.g. Codex and Zed both write .agents/); the tool keeps its own.
+        remove -= set(created)
         artifact_files[tool] = {"create": set(created), "remove": remove}
     return artifact_files
 
@@ -162,19 +165,27 @@ class ArtifactManager:
 
     @property
     def current_tool(self) -> str | None:
-        """Detect currently configured AI tool by checking which artifacts exist.
+        """Detect the currently configured AI tool by which artifacts exist.
+
+        Returns the tool with the MOST create-artifacts present on disk (ties
+        broken by registration order). This "most-specific match" distinguishes
+        tools whose create sets overlap: e.g. Codex writes both ``.agents/`` and
+        ``.codex/`` while Zed writes only ``.agents/``, so a Codex project (both
+        present) resolves to Codex, and a Zed project (only ``.agents/``) to Zed.
+        For the disjoint-create tools this behaves exactly like a first match.
 
         Returns:
-            The name of the currently active tool, or None if no tool detected.
-            Returns the first matching tool found.
+            The name of the currently active tool, or None if none detected.
         """
+        best_tool: str | None = None
+        best_count = 0
         for tool, files in ARTIFACT_FILES.items():
-            # Check if any of this tool's unique files exist
-            for artifact in files["create"]:
-                if (self.base_path / artifact).exists():
-                    return tool
-
-        return None
+            count = sum(
+                1 for artifact in files["create"] if (self.base_path / artifact).exists()
+            )
+            if count > best_count:
+                best_tool, best_count = tool, count
+        return best_tool
 
     def get_artifacts_to_create(self, tool: str) -> set[str]:
         """Get the set of artifacts that should be created for a tool.
