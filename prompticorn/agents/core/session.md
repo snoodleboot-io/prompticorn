@@ -44,6 +44,13 @@ Session files provide persistent context across mode switches, enabling continui
 - **Naming:** `session_{YYYYMMDD}_{random}.md` (e.g., `session_20260302_a7x9k2.md`)
 - **Format:** Markdown with YAML frontmatter
 - **Git:** Session files are gitignored and NOT committed
+- **Subagent heartbeat files:** one per delegated background/isolated subagent,
+  named for the agent (e.g. `phase2-f24.md`), living in this same directory. See
+  "Subagent Progress Heartbeats" in the core system conventions for the cadence
+  and line format. Resolve this directory in the MAIN repo (a subagent's isolated
+  worktree copy is gitignored and never surfaces in the human's checkout).
+- **Orchestrator progress rollup:** `session_{YYYYMMDD}_{phase}_progress.md` — a
+  table the orchestrator updates at each launch / gate / PR / merge checkpoint.
 
 ## Session File Format
 

@@ -231,6 +231,31 @@ When a task can be broken down into smaller, specialized components:
 - Coordinate between agents using orchestrator mode for complex workflows
 - Ensure proper session management when switching between agents
 
+### Subagent Progress Heartbeats
+
+Any delegated subagent whose work you cannot directly observe — background,
+long-running, or running in an isolated checkout (e.g. a separate worktree) — MUST
+be instructed, in its brief, to emit periodic progress so a human can tell "still
+working" from "stalled." Apply this whenever the delegation runs detached from the
+main conversation; skip it for quick inline calls whose result returns immediately.
+
+Rules (state these tool-agnostically in the subagent's brief):
+- **One file per agent** under the session directory: `.prompticorn/sessions/<agent-label>.md`
+  (e.g. `.prompticorn/sessions/phase2-f24.md`). Several agents sharing one file
+  clobber each other's lines — never share a heartbeat file.
+- **Resolve the directory in the MAIN repository**, not in the subagent's isolated
+  copy. If the subagent works in a separate worktree, its local `.prompticorn/` is
+  gitignored and never surfaces in the checkout the human is watching — point it at
+  the main repo's session directory instead.
+- **Cadence:** append one timestamped line after each completed unit of work
+  (story/task), not on a wall-clock timer. Format:
+  `- <UTC time> <Feature>-S<k> done: <one-line summary>`.
+- **Non-blocking:** the heartbeat is for visibility only; it never replaces the
+  subagent's final report or its actual deliverable.
+- **Orchestrator rollup:** when coordinating multiple subagents, additionally
+  maintain a progress table (e.g. `session_<date>_<phase>_progress.md`) and update
+  it at each launch / gate / PR / merge checkpoint.
+
 ### Questions
 
 - Ask one focused question at a time — never a list of blockers
