@@ -23,6 +23,7 @@ right config for whichever assistant your team uses:
 - **Windsurf** / Cascade — `.windsurf/` skills, glob-scoped `rules/`, and workflows
 - **Continue.dev** — `.continue/` glob-scoped `rules/` and invokable `prompts/`
 - **Aider** — `CONVENTIONS.md` plus `.aider.conf.yml` (conventions only)
+- **OpenAI Codex** (CLI) — `AGENTS.md` plus `.agents/skills/` and `.codex/config.toml`
 
 ## What's in the library
 
@@ -59,7 +60,7 @@ See [docs/QUICKSTART.md](./docs/QUICKSTART.md) for the full walkthrough.
 ## Key Features
 
 - **Unified IR system** — define agents once, generate for every supported tool.
-- **13 production builders** — Kilo, Cline, Claude, Cursor, Copilot, Roo Code, Junie, Zed, Gemini CLI, Amazon Q, Windsurf, Continue.dev, Aider.
+- **14 production builders** — Kilo, Cline, Claude, Cursor, Copilot, Roo Code, Junie, Zed, Gemini CLI, Amazon Q, Windsurf, Continue.dev, Aider, Codex.
 - **Minimal / verbose variants** — trade tokens for detail at build time.
 - **Persona-based filtering** — pick your team's roles and only relevant agents are generated.
 - **Spec-driven conventions** — your language, runtime, package manager, test

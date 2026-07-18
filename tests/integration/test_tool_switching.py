@@ -435,6 +435,53 @@ class TestToolSwitching(unittest.TestCase):
         self.assertTrue((self.test_dir / ".claude").exists())
         self.assertFalse((self.test_dir / ".aider.conf.yml").exists())
 
+    def test_builder_creates_correct_artifacts_codex(self):
+        """Codex creates .agents/ + .codex/config.toml + AGENTS.md, detectable/cleanable."""
+        config = {
+            "variant": "minimal",
+            "spec": {"language": "python"},
+            "active_personas": ["software_engineer"],
+        }
+        get_prompt_builder("codex").build(self.test_dir, config, dry_run=False)
+
+        self.assertTrue((self.test_dir / ".agents" / "skills").exists())
+        self.assertTrue((self.test_dir / ".codex" / "config.toml").exists())
+        self.assertTrue((self.test_dir / "AGENTS.md").exists())
+
+        manager = ArtifactManager(self.test_dir)
+        self.assertEqual(manager.current_tool, "codex")
+
+        manager.remove_artifacts_created_by("codex")
+        self.assertFalse((self.test_dir / ".agents").exists())
+        self.assertFalse((self.test_dir / ".codex").exists())
+
+    def test_switching_zed_and_codex_round_trip(self):
+        """The collision fix end-to-end: zed and codex share .agents/ but are
+        detected and switched correctly via the .codex/ marker."""
+        config = {
+            "variant": "minimal",
+            "spec": {"language": "python"},
+            "active_personas": ["software_engineer"],
+        }
+        manager = ArtifactManager(self.test_dir)
+
+        # Start on Zed: only .agents/, detected as zed.
+        get_prompt_builder("zed").build(self.test_dir, config, dry_run=False)
+        self.assertEqual(manager.current_tool, "zed")
+
+        # Switch to Codex: clean the detected tool, then build codex.
+        manager.remove_artifacts_created_by(manager.current_tool)
+        get_prompt_builder("codex").build(self.test_dir, config, dry_run=False)
+        self.assertTrue((self.test_dir / ".codex" / "config.toml").exists())
+        self.assertEqual(manager.current_tool, "codex")
+
+        # Switch back to Zed: codex cleanup removes .codex/ + .agents/, then zed rebuilds.
+        manager.remove_artifacts_created_by(manager.current_tool)
+        self.assertFalse((self.test_dir / ".codex").exists())
+        get_prompt_builder("zed").build(self.test_dir, config, dry_run=False)
+        self.assertFalse((self.test_dir / ".codex").exists())
+        self.assertEqual(manager.current_tool, "zed")
+
 
 if __name__ == "__main__":
     unittest.main()
