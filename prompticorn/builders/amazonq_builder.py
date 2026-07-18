@@ -95,7 +95,9 @@ class AmazonQBuilder(Builder):
             seen.add(language)
             lang_content = generate_language_convention(language, spec)
             if lang_content:
-                (rules_dir / f"conventions-{language}.md").write_text(lang_content, encoding="utf-8")
+                (rules_dir / f"conventions-{language}.md").write_text(
+                    lang_content, encoding="utf-8"
+                )
                 written.append(f".amazonq/rules/conventions-{language}.md")
 
         return written
