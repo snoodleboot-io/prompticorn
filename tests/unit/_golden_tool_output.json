@@ -85,6 +85,10 @@
       "a1b827fc4585627e6921a08c920afcc9c4cc5b5e218a2226997c37012f9be5cf"
     ],
     [
+      ".amazonq/prompts/dependency-upgrade.md",
+      "9d3000eb83fb8b40ec463b0222ebc8e94e5e5c1ffabc16c621dbb91018bc4e0e"
+    ],
+    [
       ".amazonq/prompts/feature.md",
       "5d23dd05bceff76cb7d55b270a6a2d12033d9699ac80859583494e495c4e13d5"
     ],
@@ -93,12 +97,36 @@
       "4abc19173ed0dea7fdd208ecbf05cf12fd98aaed316eb77159ef470d04d8c392"
     ],
     [
+      ".amazonq/prompts/migration.md",
+      "dbcd192531c470acb163e0d7181d4c005540f733c7dd5e89990803c70b80f90d"
+    ],
+    [
+      ".amazonq/prompts/performance.md",
+      "6a87f9aec27b7a4476ea4cefbd6b32024c96889d2be685d033d52625d425f5b3"
+    ],
+    [
       ".amazonq/prompts/refactor.md",
       "15b128253b00b70ace6411671285b8aeeb593961017054f9737f7bbe7fb0acc9"
     ],
     [
+      ".amazonq/prompts/strategy.md",
+      "6322fdc10564c8a47d74ff3a4313ba2bbeafa7a10aae79bc518816a97daf803b"
+    ],
+    [
       ".amazonq/prompts/testing.md",
       "d8c818f6e448e7927bbc600f10831ff7c242510751b5a67cd8fdeca6188b7c2d"
+    ],
+    [
+      ".amazonq/prompts/workflow-migration-patterns.md",
+      "760b42e31539d1433426f31bd09498bf7808a5104c24579dbf94bac13004b9d2"
+    ],
+    [
+      ".amazonq/prompts/workflow-performance-optimization.md",
+      "e03e193dd8e1c84b6b86b8c2553a6f2961cfbc32a73d23f2aae17a773140e133"
+    ],
+    [
+      ".amazonq/prompts/workflow-scaling-patterns.md",
+      "1206fb5a49bd7d9b60de274df0ccc391bfd081f8aca502213bc7901e6728f0ef"
     ],
     [
       ".amazonq/rules/conventions-python.md",
@@ -175,6 +203,10 @@
       "88cd8e0b6f0491e4686daf633495fc5d4e25668f6fb68224b0cc997f821d6ecc"
     ],
     [
+      ".amazonq/prompts/dependency-upgrade.md",
+      "89e8ef66fc3468e9e7cbf2c2b0530039a4e780cdcc4d38b0191be3db35e1b510"
+    ],
+    [
       ".amazonq/prompts/feature.md",
       "9fd9335de09868ffd044a832086e7e98a7664206db269bd52de4c514a9532bfa"
     ],
@@ -183,12 +215,36 @@
       "7bc53eb68cdba3dbb123dde3693702ea7ccbbe5521ec92452101e79810359f34"
     ],
     [
+      ".amazonq/prompts/migration.md",
+      "7cfaf5b54f0303cb4b7811c2737a87b73a2e4419a3600a200050939785ae0238"
+    ],
+    [
+      ".amazonq/prompts/performance.md",
+      "0435290ef5b6bcde2c6c8c91b5fac2fb1e74534d340deda3d21fb66aad384d81"
+    ],
+    [
       ".amazonq/prompts/refactor.md",
       "b99c39dece9b3d49b6faaa46585b8f4a6cf449b94f49206058241334db154a95"
     ],
     [
+      ".amazonq/prompts/strategy.md",
+      "a5c82c27d72149fc42dcc75fc80e2618390ef2feb195741aa54eba4cf6a3efa9"
+    ],
+    [
       ".amazonq/prompts/testing.md",
       "d6d0859c54f04c5c69608b75ae2569cf2bb4aae96aa7ee14936592b4472bca2d"
+    ],
+    [
+      ".amazonq/prompts/workflow-migration-patterns.md",
+      "6b8cc853fcc2e8edef02c11935f70c9528dbfb3dd21cd1a215f92fac625a8768"
+    ],
+    [
+      ".amazonq/prompts/workflow-performance-optimization.md",
+      "07b40c1fb5ae860a24e26a0c2cec00eedcb3f7e3c02efa8705b0a2f99f7bb784"
+    ],
+    [
+      ".amazonq/prompts/workflow-scaling-patterns.md",
+      "907195f7ab03b3948bd5af14584c0a5d9221dbde55f069ce096659a6116cdec7"
     ],
     [
       ".amazonq/rules/conventions-python.md",
@@ -202,43 +258,43 @@
   "claude::minimal": [
     [
       ".claude/agents/ask-agent.md",
-      "b1f763b25f3893313959ecf285e6fedecd085b670cbda261b47882d4d1b57ed4"
+      "34d9d6696c9365297b98b6b9f2a73fd039a1d9b32539099fa149a4c5c63ba625"
     ],
     [
       ".claude/agents/backend-agent.md",
-      "6dec24d3097afd26ed9b4e2ba57e9893199e6e80a6b4dc07a771cac31136bb41"
+      "6de9b3c820c4b09da77367df1a41ee57a729686169bb54ceaa590f65a4c1f6f2"
     ],
     [
       ".claude/agents/code-agent.md",
-      "2891ff3f0b44d38741a019e7297cfe0cc4f8e4d1845e2028f43ec0df99986de1"
+      "9dc3d84257a3904f1dcd6cf3facd7e0029e4cfac942959f60287bfbbc0a24c5d"
     ],
     [
       ".claude/agents/debug-agent.md",
-      "d7a16210a52fc163453127267f359bfd223d27e8a72b26d4c126d93bfbbdff33"
+      "5de80b4d434fd58dcde1353258ea9d472e0069213839187b94465fb38cb31d2a"
     ],
     [
       ".claude/agents/enforcement-agent.md",
-      "cbad927a5688a35e380c239a518296b0e7f2b9ba07e311f17ec97c9a942befdf"
+      "62c1cab70aaeb8ff8ab5b9ccbf5f46a51dc9d293d0f19c8e58f81fb29ec6b34b"
     ],
     [
       ".claude/agents/explain-agent.md",
-      "4a800dd7a26b0d904bd0853ce8c61a5c4e2205260918e19db7454c6f1bb59885"
+      "bccb28306034e0fdef2d10cbb80cd2fb1cd5a1cb8f62c20033bc8b47cea95ff6"
     ],
     [
       ".claude/agents/frontend-agent.md",
-      "727b73b43170bfb05beaada8ae8052234be8b23acc60768bb6e38efe3e0d3533"
+      "b14eea8d004aaa44d62751595ed2010a7b791e507606cebc1902e4909ea36213"
     ],
     [
       ".claude/agents/migration-agent.md",
-      "92e3464356905de42ef8f75616875225f7680569d2cea306a4f44add68398b29"
+      "c081108514897887a7a8ad473490b1eff730a5e4530942724345e77c6498fcc3"
     ],
     [
       ".claude/agents/orchestrator-agent.md",
-      "2009bc813b89376dffb3a97056a9ddd0e4d75c7920d6de0590ede417e553e491"
+      "61f8e02ccced3704479cd3b6a0598161bf6dc62bb8c213581378b90c6a18de66"
     ],
     [
       ".claude/agents/performance-agent.md",
-      "942063b31284075a225041b7133610c713759ae09831a1a6591c4d6df21cfeaa"
+      "e15fb7ebe4703c85c8aadf72f653cc151a69531f304959cd0c13c2dd5fd80b30"
     ],
     [
       ".claude/agents/plan-agent.md",
@@ -246,15 +302,15 @@
     ],
     [
       ".claude/agents/refactor-agent.md",
-      "f4e97677e3a95b954e272331b2b1fc016e7506238e80bd2edca4763fde3edd73"
+      "68e7bdad2c7a14fc11415ca763f48e054d1254124d87581cdabed0ed3530138b"
     ],
     [
       ".claude/agents/review-agent.md",
-      "5366b95295a24181b509b2eb84e8dcfc6da49978ac8fb0caae3717604d48f402"
+      "5c9cfbf5e63b88480894b849969b662eeabd599bc9e3c2b5fa29ab4f0ade6f5f"
     ],
     [
       ".claude/agents/test-agent.md",
-      "6f3e1de05c056c22d3207df7b3a4440f794f85a41a7a304de5e7af347667be1e"
+      "0b7c50cb1742c6c68adecea71554d4f04bd4defef131ad248589fa022a1f39ca"
     ],
     [
       ".claude/conventions/core/general.md",
@@ -265,6 +321,34 @@
       "b0132b19576cee189661d92178e1099f30b3e47c8b2a6ac8a459ac4787f0d92f"
     ],
     [
+      ".claude/skills/architecture-documentation/SKILL.md",
+      "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
+    ],
+    [
+      ".claude/skills/code-review-practices/SKILL.md",
+      "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
+    ],
+    [
+      ".claude/skills/continuous-improvement/SKILL.md",
+      "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+    ],
+    [
+      ".claude/skills/data-model-discovery/SKILL.md",
+      "b2168e0a29217dac25abc926ae9b37d3ee25f3f745fa2af30746bcbd7775cb82"
+    ],
+    [
+      ".claude/skills/data-validation-pipelines/SKILL.md",
+      "09739cef80da0955aba6cb78b5c03b82eda86664438e9eb4aa139b657112e908"
+    ],
+    [
+      ".claude/skills/debugging-methodology/SKILL.md",
+      "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
+    ],
+    [
+      ".claude/skills/documentation-best-practices/SKILL.md",
+      "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
+    ],
+    [
       ".claude/skills/feature-planning/SKILL.md",
       "a85d09f78dec318635b4de95f1202d3443fb9e67b9b320237572df0aa6425454"
     ],
@@ -273,8 +357,40 @@
       "c8db9858e7b72b9f941e9038d15d04503ebf60c51462e3a71367903f3c8e5063"
     ],
     [
+      ".claude/skills/multiagent-orchestration/SKILL.md",
+      "d6c940687cbd37a68a491a4303032bc90ac7b9dff01e2db84e1c451082aa26b9"
+    ],
+    [
+      ".claude/skills/performance-optimization/SKILL.md",
+      "326754e646454eb1d54a4e9692a8dfb1896902b9adf51a1513b46aa5669d647a"
+    ],
+    [
       ".claude/skills/post-implementation-checklist/SKILL.md",
       "b3348cb58adf17c882a470bf2ffd87a0556ac6a0c4f47e5fbfc24c127217bee8"
+    ],
+    [
+      ".claude/skills/problem-decomposition/SKILL.md",
+      "f37c4a570593d780e4b1173ef0082df62d03efb2e00bfcaac5d1feecb2caec8e"
+    ],
+    [
+      ".claude/skills/quality-assurance/SKILL.md",
+      "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+    ],
+    [
+      ".claude/skills/team-collaboration/SKILL.md",
+      "8d3703e287a6a9c94a53da968ece20bf8b2bac4f7a28d3d49f838c9646b5be02"
+    ],
+    [
+      ".claude/skills/technical-communication/SKILL.md",
+      "66f5368887094575002c8f83064e41110ceab580afd197cc4ed0319a48e933bb"
+    ],
+    [
+      ".claude/skills/technical-debt-management/SKILL.md",
+      "16d955e806942e53c349c73cb281eecd1248e83ca8be203f409d67eb0b0d3fc0"
+    ],
+    [
+      ".claude/skills/technical-decision-making/SKILL.md",
+      "d16fe4266cf65a2e88bd45d15f95fe91771be2cd4c1a10d00328503f11a38f48"
     ],
     [
       ".claude/skills/test-aaa-structure/SKILL.md",
@@ -287,6 +403,10 @@
     [
       ".claude/skills/test-mocking-rules/SKILL.md",
       "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec"
+    ],
+    [
+      ".claude/skills/testing-strategies/SKILL.md",
+      "15500c149b2af4d6844bc36903465b6b155ee9b38e897910e5f010a40eb829ab"
     ],
     [
       ".claude/subagents/accessibility.md",
@@ -413,12 +533,40 @@
       "cabd1a441f4683add2dc556d32701e7fc9d34cde89d3feada1cfa8700c2c2ef8"
     ],
     [
+      ".claude/workflows/accessibility.md",
+      "ce1af658da23f829f9a7d046613cb3ed445b5873de31c077b4501f04b190e294"
+    ],
+    [
+      ".claude/workflows/api-design.md",
+      "e4ac30c934ebed0723b8d548742e4a38b21f09810ef9dd2100c9a724a79673bf"
+    ],
+    [
       ".claude/workflows/boilerplate.md",
       "70aa4508b39d2036db31e43dc09f655dab446a58587fe2cb69ef9e58f33c5bff"
     ],
     [
       ".claude/workflows/code.md",
       "b5b7fd63e160a15d6a188a0776b1d3c555dafc09dab48014eb31d13f3ce6c15e"
+    ],
+    [
+      ".claude/workflows/data-model.md",
+      "8b2b6b39ce7f902e69076563dc397bd9d469d1f3cb618ffb3d170c2f5b453a86"
+    ],
+    [
+      ".claude/workflows/debugging-methodology.md",
+      "6528cd6611c2ad03e83838820881b1e950f796c0a66807178d74f677da6ae0e1"
+    ],
+    [
+      ".claude/workflows/decision-log.md",
+      "43675903502bcde579c64b95b006f1bf75679197608528f18760d1927d3d96ec"
+    ],
+    [
+      ".claude/workflows/dependency-upgrade.md",
+      "2e6aa45b27eecd32a29a0706bfb756fe674f6d75b8b2ddc566d6fe4754e6a7c3"
+    ],
+    [
+      ".claude/workflows/docs.md",
+      "f3272f6b80e38c4177a0681f7d5c525e0c217a78d6254fdb71315d77cd771752"
     ],
     [
       ".claude/workflows/feature.md",
@@ -429,12 +577,76 @@
       "7d956c941d45269e5787fb9939bb534e447c33107a82391f41bdb72d80cb086f"
     ],
     [
+      ".claude/workflows/log-analysis.md",
+      "b67858582fd2557735da3ba68d0ed24b52cbe83e514d9ac43abcc655cd1b27f3"
+    ],
+    [
+      ".claude/workflows/meta.md",
+      "864a3b9ec84b74d2d38d3f74cd01c449d713e0874b63d06dc1c2011c3bd430cb"
+    ],
+    [
+      ".claude/workflows/migration.md",
+      "d1ce5ee971e83eefcbf8370d5c891c4bdcf974820dd9d2cf1f05c9841836bee8"
+    ],
+    [
+      ".claude/workflows/multi-agent-coordination.md",
+      "b0e7f2ea2e122614360bc296a0e0279c5349a186699f5d0d18afde9c4171bad9"
+    ],
+    [
+      ".claude/workflows/performance.md",
+      "10e97f307543f2f1766284e8122f5943d809fb6edf8e494e3694bcedb7c213a6"
+    ],
+    [
       ".claude/workflows/refactor.md",
       "da9fca674a38c10283ee63aef9fc5f73436723e269ed957da8744374b14f17a3"
     ],
     [
+      ".claude/workflows/review.md",
+      "80d3f502c5f06ec354f833e18f1fc6d1aea6608fec02950d7a3703814ae9b7b9"
+    ],
+    [
+      ".claude/workflows/root-cause.md",
+      "0d61c4a75360c545fd062210b8d1936ee695f17b470d136bafb66f0db6d6c1ea"
+    ],
+    [
+      ".claude/workflows/security-code-review.md",
+      "d849486a33b1f54d8fdfb2fdea0b4df71d159028decd4f7960c3996804389555"
+    ],
+    [
+      ".claude/workflows/strategy.md",
+      "d217cae36610920a99ad8c04f5d8b5749d3be3821bdd1839b549af6dc179fe60"
+    ],
+    [
+      ".claude/workflows/task-breakdown.md",
+      "1f19a2fef6b3e0b3733d41fc325b143e70028a17cfd54c90068646e4ae68035f"
+    ],
+    [
       ".claude/workflows/testing.md",
       "cb7c3e3c7740f5402d0f84683a9be79429506927658c9b689354e41f96bb7abf"
+    ],
+    [
+      ".claude/workflows/ux-validation.md",
+      "8094d682ff07b1f020d1edf64fe7c8ac026c2340f574f503b2fbe8f0432bedb9"
+    ],
+    [
+      ".claude/workflows/workflow-migration-patterns.md",
+      "3defe45307592bc105f7fd81fa338503647664f259c95232db5cfe8ec01eb54f"
+    ],
+    [
+      ".claude/workflows/workflow-orchestration-patterns.md",
+      "b89caf301d7b713b2e19278a13d174ef8a79d8f20fd52c93ef692621c9b15b01"
+    ],
+    [
+      ".claude/workflows/workflow-performance-optimization.md",
+      "17832cdfb5dd7d406e2b9fc701e101d4052730dcf927b8e527f42f3dfe7c3dc2"
+    ],
+    [
+      ".claude/workflows/workflow-scaling-patterns.md",
+      "673cb9efd6255e5ddfa215732f43a96b89ebe5f40268ae683031060c9eb3095a"
+    ],
+    [
+      ".claude/workflows/workflow-testing-patterns.md",
+      "9c8f0572ce6d66a69a927c403d1700ab0459cb1ecfa2b403854f8d5b5fc6ea45"
     ],
     [
       "CLAUDE.md",
@@ -444,43 +656,43 @@
   "claude::verbose": [
     [
       ".claude/agents/ask-agent.md",
-      "72c09d56e8844b22cd3a39690198046c383b2dbfeada39c8bdd4a9e236eed621"
+      "3e9f9e3663d915e94e167ad8ef42911eaa2ff1b946a989c53b43993dbb43dd66"
     ],
     [
       ".claude/agents/backend-agent.md",
-      "25a13f0a6d798dd6bb27c068bc26521959ea3c55bd8676f070f331a578873864"
+      "fa623b278d333efda43d5a0fe07805f6cd304c03ae23279fca706fce145a7bdb"
     ],
     [
       ".claude/agents/code-agent.md",
-      "974ec953484054701a89e5f0515c5ae2a554b338f8587de134e891517dd78920"
+      "37fbb451329ff58e888d1f980eda83c898ec226c8c41a7f3f76e61613d5c8132"
     ],
     [
       ".claude/agents/debug-agent.md",
-      "c2efe60628e3507b64bb217591b18cc9561a080b20de87c4d3b88cfe1b36be11"
+      "5de80b4d434fd58dcde1353258ea9d472e0069213839187b94465fb38cb31d2a"
     ],
     [
       ".claude/agents/enforcement-agent.md",
-      "ae3cc1bd322c33a52b3f63ff37cce32c3a116ebe504875ff37938ae641a883e1"
+      "e6067ac2449825d1d5659a893785046eda049c15a5e8d84f628601c3fddec317"
     ],
     [
       ".claude/agents/explain-agent.md",
-      "9dc264a46bf3cb8f9181d668d47e77a0e9eb0b0320ea6610f306676e1d1f933f"
+      "bccb28306034e0fdef2d10cbb80cd2fb1cd5a1cb8f62c20033bc8b47cea95ff6"
     ],
     [
       ".claude/agents/frontend-agent.md",
-      "7dd1462115779d8a1492acdc82a9ce22bd70da08ae53e9b0dbf7c08ad258452e"
+      "3236b778ea84725ddda868fae5d3edc313d4cea087a6ade11c8b8231bf8eb404"
     ],
     [
       ".claude/agents/migration-agent.md",
-      "c64b8502d9bb2ba13a8f1fb5edb7bd52f2e6616fdf844a18acd21f36c5953bdd"
+      "2416e2eea9c98a66e057fdaa67ea685fb24066464a98b1c749fa4a80051fe914"
     ],
     [
       ".claude/agents/orchestrator-agent.md",
-      "d759f02c64347e3c17378b74e752d2e13a45c7961de87ff7ae5cc1263de93c99"
+      "047ddce5b343d704a09e04b0fb9b4ab77011a0be713b63d019a3ad9901399f88"
     ],
     [
       ".claude/agents/performance-agent.md",
-      "4ceba2ff73530134dd641f020c9ec0bebca490fbc577ea782977049f1de836fe"
+      "15e9dd5c3ec7d1ffcb65ed29e4682a54375243b370b57488461695aa9ef0d4a7"
     ],
     [
       ".claude/agents/plan-agent.md",
@@ -488,15 +700,15 @@
     ],
     [
       ".claude/agents/refactor-agent.md",
-      "4f071ad4ffe7862fec720d443d4e6e0b233b208a8ebb3db606d3ddd5772fd3ed"
+      "49c17456a8fd212ae4033c85dd0f538e447b383a4f7edb4d9ca64009075430f2"
     ],
     [
       ".claude/agents/review-agent.md",
-      "7f23854ec21ac81bf29030ac50c8f257ebe9294739f5fe00ac54303831e237f4"
+      "6f9e675e1ce7c76cfd9a0956865baf7175fabddccceeed2bc6edd1ac4c7d8059"
     ],
     [
       ".claude/agents/test-agent.md",
-      "74829fd544eb67d6fd6b3c01db82fdbe7055ee34bd2cec0d3de746dfa716aed8"
+      "b7e15bde7402451ede803445c3ca0803ee3bb588d35d4ac9e24b6804810988d9"
     ],
     [
       ".claude/conventions/core/general.md",
@@ -507,6 +719,34 @@
       "b0132b19576cee189661d92178e1099f30b3e47c8b2a6ac8a459ac4787f0d92f"
     ],
     [
+      ".claude/skills/architecture-documentation/SKILL.md",
+      "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
+    ],
+    [
+      ".claude/skills/code-review-practices/SKILL.md",
+      "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
+    ],
+    [
+      ".claude/skills/continuous-improvement/SKILL.md",
+      "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+    ],
+    [
+      ".claude/skills/data-model-discovery/SKILL.md",
+      "7bb93b77674b80de48bc5f572f0a1bd8c51458f4050ecfe0af70d6c6f3123713"
+    ],
+    [
+      ".claude/skills/data-validation-pipelines/SKILL.md",
+      "684d497852e1980d9e8a322c59e9ac637c2dc100d484358aa0b8281a3ac0f25c"
+    ],
+    [
+      ".claude/skills/debugging-methodology/SKILL.md",
+      "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
+    ],
+    [
+      ".claude/skills/documentation-best-practices/SKILL.md",
+      "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
+    ],
+    [
       ".claude/skills/feature-planning/SKILL.md",
       "3b43fa04f2823fcd2adc420ba1adc4989c3fe6d0a247f93f1d0e765f5ec971e6"
     ],
@@ -515,8 +755,40 @@
       "af8ee67d6925c3095724964a59a134d9725d5952bfa361cf5d7eef7e42ffbe6a"
     ],
     [
+      ".claude/skills/multiagent-orchestration/SKILL.md",
+      "4f56926633e3b6527047e07041e415cbf0bc171ca9cfdf7fa0f99b8550a51705"
+    ],
+    [
+      ".claude/skills/performance-optimization/SKILL.md",
+      "81f057d445e73f1877db1b7996b34a9cd2976e8670f332ac2e13f0c4eac392b2"
+    ],
+    [
       ".claude/skills/post-implementation-checklist/SKILL.md",
       "9a41690df76da259b04cf85fb7dcb6a0330f57cc4edf9ecb04e4adfb508a130d"
+    ],
+    [
+      ".claude/skills/problem-decomposition/SKILL.md",
+      "9962362a175e7b4ee9acd1bc585511234902694910c5ba1f20a3e53ee01c2047"
+    ],
+    [
+      ".claude/skills/quality-assurance/SKILL.md",
+      "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+    ],
+    [
+      ".claude/skills/team-collaboration/SKILL.md",
+      "59a7c4fc7970bd4af790f6642fb030df0fbfde73d95595fa2289196c71ee64ba"
+    ],
+    [
+      ".claude/skills/technical-communication/SKILL.md",
+      "725be0f40aa295e16c715ada58178484a886e3d7d0eef134e5d3926132923625"
+    ],
+    [
+      ".claude/skills/technical-debt-management/SKILL.md",
+      "c2592c501d10efa2cd701602f205caf567984c0e8fb5c233454129a829bf1c59"
+    ],
+    [
+      ".claude/skills/technical-decision-making/SKILL.md",
+      "4f5b3cb084e61b2e1c7edcdb9eec25927a06974bf2c189e371525a867be5b985"
     ],
     [
       ".claude/skills/test-aaa-structure/SKILL.md",
@@ -529,6 +801,10 @@
     [
       ".claude/skills/test-mocking-rules/SKILL.md",
       "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e"
+    ],
+    [
+      ".claude/skills/testing-strategies/SKILL.md",
+      "042493cfef510d68a72e9e99385bd99101832340f9e080e4c14786d4d3d8cac0"
     ],
     [
       ".claude/subagents/accessibility.md",
@@ -655,12 +931,40 @@
       "ad0d7ccc0a77f765f4d9c8fd4a56b260752f548dd08924e4e90ac2abf57a433e"
     ],
     [
+      ".claude/workflows/accessibility.md",
+      "5e9be01ec25871b2eded8eb541dc3efaf190380034bcec8ad4501175e69580f0"
+    ],
+    [
+      ".claude/workflows/api-design.md",
+      "845f020a20a5e48d19c4a7d6ef03d0e568c8da9128c7396968d07985e176cb69"
+    ],
+    [
       ".claude/workflows/boilerplate.md",
       "a71635fd43997ee7e47b12437a8a75256a0f19310dcfb7e48de657602e60da4e"
     ],
     [
       ".claude/workflows/code.md",
       "b3305658bb153a853482d7c46d8d559a9c1d91cdf6dfbc8c88402cb5957f8e7e"
+    ],
+    [
+      ".claude/workflows/data-model.md",
+      "e69f6c5dd9fc41db8f448ee215ae2071ceac7843673e587d9f6867cd0b9afde0"
+    ],
+    [
+      ".claude/workflows/debugging-methodology.md",
+      "6528cd6611c2ad03e83838820881b1e950f796c0a66807178d74f677da6ae0e1"
+    ],
+    [
+      ".claude/workflows/decision-log.md",
+      "83b87742aa60aadbb408bc6603e6a065760305c38ff69c77befa365de1995746"
+    ],
+    [
+      ".claude/workflows/dependency-upgrade.md",
+      "53d60d598a28373b78fbb6076a93ac1637d47be28f1fb148a30b366fdb9aa78b"
+    ],
+    [
+      ".claude/workflows/docs.md",
+      "f3272f6b80e38c4177a0681f7d5c525e0c217a78d6254fdb71315d77cd771752"
     ],
     [
       ".claude/workflows/feature.md",
@@ -671,12 +975,76 @@
       "e1a9e77520d6315e67518fb7d9735346d6535f94081e5c3dbd6ab105b5340da1"
     ],
     [
+      ".claude/workflows/log-analysis.md",
+      "4b76cdb7f163f439515cd03f603743aa803f207bb6c73c11150d45691e4e1e55"
+    ],
+    [
+      ".claude/workflows/meta.md",
+      "18548a54fef048ac650cd29b6935af21ae657a63a37b5eb787ffa80f56e1159e"
+    ],
+    [
+      ".claude/workflows/migration.md",
+      "5d7a0ef2f8c16fbc341ebc3928bd2ca55c27620cf17def9a09955b20f6792937"
+    ],
+    [
+      ".claude/workflows/multi-agent-coordination.md",
+      "8d5c31a547d30dd0b5c91f0948620978b2a2c7b3f78ac9953b06069933f3abba"
+    ],
+    [
+      ".claude/workflows/performance.md",
+      "c9c5fc2ba85c60ee255c0cc5c0530809008985d591b2a23924c5e76d9a802cbc"
+    ],
+    [
       ".claude/workflows/refactor.md",
       "fcbedb44588ba229718345bb69ce2d80c5af2f58d37527b7610d27958a82da1c"
     ],
     [
+      ".claude/workflows/review.md",
+      "c879edd0906d3e26e4cfbc4e8928e6ba6bd56c56cf0df7401619b006e1db857f"
+    ],
+    [
+      ".claude/workflows/root-cause.md",
+      "57de80e852e54e4390addb152d4a1fc6d3b4360bd29964bb79936e082b82330f"
+    ],
+    [
+      ".claude/workflows/security-code-review.md",
+      "e975260732ca5c7643fcc643ad4f0e06ecac3b327950e7933ba1be2832d5dd9d"
+    ],
+    [
+      ".claude/workflows/strategy.md",
+      "58a9860b7a3493bb65360586e07a817737fba907a87ff05211fe78b9a8667c57"
+    ],
+    [
+      ".claude/workflows/task-breakdown.md",
+      "4af7bb6fe674a1561bd442fe8781a0735096709aa0bb7e3dc36d431fb0a22b9b"
+    ],
+    [
       ".claude/workflows/testing.md",
       "7ece0ebfb424e5c1b0bca0c4b569eea499202bf571b41ea3e19a806e867b6008"
+    ],
+    [
+      ".claude/workflows/ux-validation.md",
+      "9537a0b4736f5637637239045259fbc408ee6036492ef466a990080b388962e2"
+    ],
+    [
+      ".claude/workflows/workflow-migration-patterns.md",
+      "96d3a81557b3792780f298a4a0517c7c2ebc32f3b90cdbe47ebd9828b323329e"
+    ],
+    [
+      ".claude/workflows/workflow-orchestration-patterns.md",
+      "cc48e655da060afb6f43db60d50183b5cbd4270398003b4185da255296068b98"
+    ],
+    [
+      ".claude/workflows/workflow-performance-optimization.md",
+      "45beb719da274277f2da5f44310b45cf336b20140fdffc5779cc95f479efd4b3"
+    ],
+    [
+      ".claude/workflows/workflow-scaling-patterns.md",
+      "adc892caf3ef91e3067531da2e20f768ae3c764d8b5dd901a54fe72b2fb2b832"
+    ],
+    [
+      ".claude/workflows/workflow-testing-patterns.md",
+      "cb773366823f491d080f52f8f4ad0e76560c3ca9d0f7a1419fbb0392babda0ee"
     ],
     [
       "CLAUDE.md",
@@ -684,6 +1052,34 @@
     ]
   ],
   "cline::minimal": [
+    [
+      ".cline/skills/architecture-documentation/SKILL.md",
+      "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
+    ],
+    [
+      ".cline/skills/code-review-practices/SKILL.md",
+      "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
+    ],
+    [
+      ".cline/skills/continuous-improvement/SKILL.md",
+      "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+    ],
+    [
+      ".cline/skills/data-model-discovery/SKILL.md",
+      "b2168e0a29217dac25abc926ae9b37d3ee25f3f745fa2af30746bcbd7775cb82"
+    ],
+    [
+      ".cline/skills/data-validation-pipelines/SKILL.md",
+      "09739cef80da0955aba6cb78b5c03b82eda86664438e9eb4aa139b657112e908"
+    ],
+    [
+      ".cline/skills/debugging-methodology/SKILL.md",
+      "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
+    ],
+    [
+      ".cline/skills/documentation-best-practices/SKILL.md",
+      "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
+    ],
     [
       ".cline/skills/feature-planning/SKILL.md",
       "a85d09f78dec318635b4de95f1202d3443fb9e67b9b320237572df0aa6425454"
@@ -693,8 +1089,40 @@
       "c8db9858e7b72b9f941e9038d15d04503ebf60c51462e3a71367903f3c8e5063"
     ],
     [
+      ".cline/skills/multiagent-orchestration/SKILL.md",
+      "d6c940687cbd37a68a491a4303032bc90ac7b9dff01e2db84e1c451082aa26b9"
+    ],
+    [
+      ".cline/skills/performance-optimization/SKILL.md",
+      "326754e646454eb1d54a4e9692a8dfb1896902b9adf51a1513b46aa5669d647a"
+    ],
+    [
       ".cline/skills/post-implementation-checklist/SKILL.md",
       "b3348cb58adf17c882a470bf2ffd87a0556ac6a0c4f47e5fbfc24c127217bee8"
+    ],
+    [
+      ".cline/skills/problem-decomposition/SKILL.md",
+      "f37c4a570593d780e4b1173ef0082df62d03efb2e00bfcaac5d1feecb2caec8e"
+    ],
+    [
+      ".cline/skills/quality-assurance/SKILL.md",
+      "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+    ],
+    [
+      ".cline/skills/team-collaboration/SKILL.md",
+      "8d3703e287a6a9c94a53da968ece20bf8b2bac4f7a28d3d49f838c9646b5be02"
+    ],
+    [
+      ".cline/skills/technical-communication/SKILL.md",
+      "66f5368887094575002c8f83064e41110ceab580afd197cc4ed0319a48e933bb"
+    ],
+    [
+      ".cline/skills/technical-debt-management/SKILL.md",
+      "16d955e806942e53c349c73cb281eecd1248e83ca8be203f409d67eb0b0d3fc0"
+    ],
+    [
+      ".cline/skills/technical-decision-making/SKILL.md",
+      "d16fe4266cf65a2e88bd45d15f95fe91771be2cd4c1a10d00328503f11a38f48"
     ],
     [
       ".cline/skills/test-aaa-structure/SKILL.md",
@@ -709,8 +1137,12 @@
       "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec"
     ],
     [
+      ".cline/skills/testing-strategies/SKILL.md",
+      "15500c149b2af4d6844bc36903465b6b155ee9b38e897910e5f010a40eb829ab"
+    ],
+    [
       ".clinerules",
-      "788bd0e33775c51ff37bb43e50f66a38be3a4307ae165eb765618f7e064a56b2"
+      "cd152b78d345afcadda72701b9741458f1a3ff8591dfb15a9bc76f7da5a228a3"
     ],
     [
       "AGENTS.md",
@@ -718,6 +1150,34 @@
     ]
   ],
   "cline::verbose": [
+    [
+      ".cline/skills/architecture-documentation/SKILL.md",
+      "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
+    ],
+    [
+      ".cline/skills/code-review-practices/SKILL.md",
+      "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
+    ],
+    [
+      ".cline/skills/continuous-improvement/SKILL.md",
+      "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+    ],
+    [
+      ".cline/skills/data-model-discovery/SKILL.md",
+      "7bb93b77674b80de48bc5f572f0a1bd8c51458f4050ecfe0af70d6c6f3123713"
+    ],
+    [
+      ".cline/skills/data-validation-pipelines/SKILL.md",
+      "684d497852e1980d9e8a322c59e9ac637c2dc100d484358aa0b8281a3ac0f25c"
+    ],
+    [
+      ".cline/skills/debugging-methodology/SKILL.md",
+      "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
+    ],
+    [
+      ".cline/skills/documentation-best-practices/SKILL.md",
+      "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
+    ],
     [
       ".cline/skills/feature-planning/SKILL.md",
       "3b43fa04f2823fcd2adc420ba1adc4989c3fe6d0a247f93f1d0e765f5ec971e6"
@@ -727,8 +1187,40 @@
       "af8ee67d6925c3095724964a59a134d9725d5952bfa361cf5d7eef7e42ffbe6a"
     ],
     [
+      ".cline/skills/multiagent-orchestration/SKILL.md",
+      "4f56926633e3b6527047e07041e415cbf0bc171ca9cfdf7fa0f99b8550a51705"
+    ],
+    [
+      ".cline/skills/performance-optimization/SKILL.md",
+      "81f057d445e73f1877db1b7996b34a9cd2976e8670f332ac2e13f0c4eac392b2"
+    ],
+    [
       ".cline/skills/post-implementation-checklist/SKILL.md",
       "9a41690df76da259b04cf85fb7dcb6a0330f57cc4edf9ecb04e4adfb508a130d"
+    ],
+    [
+      ".cline/skills/problem-decomposition/SKILL.md",
+      "9962362a175e7b4ee9acd1bc585511234902694910c5ba1f20a3e53ee01c2047"
+    ],
+    [
+      ".cline/skills/quality-assurance/SKILL.md",
+      "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+    ],
+    [
+      ".cline/skills/team-collaboration/SKILL.md",
+      "59a7c4fc7970bd4af790f6642fb030df0fbfde73d95595fa2289196c71ee64ba"
+    ],
+    [
+      ".cline/skills/technical-communication/SKILL.md",
+      "725be0f40aa295e16c715ada58178484a886e3d7d0eef134e5d3926132923625"
+    ],
+    [
+      ".cline/skills/technical-debt-management/SKILL.md",
+      "c2592c501d10efa2cd701602f205caf567984c0e8fb5c233454129a829bf1c59"
+    ],
+    [
+      ".cline/skills/technical-decision-making/SKILL.md",
+      "4f5b3cb084e61b2e1c7edcdb9eec25927a06974bf2c189e371525a867be5b985"
     ],
     [
       ".cline/skills/test-aaa-structure/SKILL.md",
@@ -743,8 +1235,12 @@
       "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e"
     ],
     [
+      ".cline/skills/testing-strategies/SKILL.md",
+      "042493cfef510d68a72e9e99385bd99101832340f9e080e4c14786d4d3d8cac0"
+    ],
+    [
       ".clinerules",
-      "7eea8019bd31f6c44bc472782a0f048598745c2575d1f70febba7f8081dc9945"
+      "6ce60433243d0fd7485544205d1dcb85dfd7751c2522710243fd48e5abd339ba"
     ],
     [
       "AGENTS.md",
@@ -752,6 +1248,10 @@
     ]
   ],
   "codex::minimal": [
+    [
+      ".agents/skills/architecture-documentation/SKILL.md",
+      "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
+    ],
     [
       ".agents/skills/ask/SKILL.md",
       "97519379dbc61b402ecfbf7960d4cbaeb8eb2bc5a38c19e8254c67f1364e1640"
@@ -765,8 +1265,32 @@
       "6f26b0214f98bc30fefe5f5ab0534921b3842eb80d8d976bd5679ac658dfaf69"
     ],
     [
+      ".agents/skills/code-review-practices/SKILL.md",
+      "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
+    ],
+    [
+      ".agents/skills/continuous-improvement/SKILL.md",
+      "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+    ],
+    [
+      ".agents/skills/data-model-discovery/SKILL.md",
+      "b2168e0a29217dac25abc926ae9b37d3ee25f3f745fa2af30746bcbd7775cb82"
+    ],
+    [
+      ".agents/skills/data-validation-pipelines/SKILL.md",
+      "09739cef80da0955aba6cb78b5c03b82eda86664438e9eb4aa139b657112e908"
+    ],
+    [
       ".agents/skills/debug/SKILL.md",
       "700df53305c39964e8e724fadc6260ce2d95d1931419c57fa8b141867c774ec5"
+    ],
+    [
+      ".agents/skills/debugging-methodology/SKILL.md",
+      "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
+    ],
+    [
+      ".agents/skills/documentation-best-practices/SKILL.md",
+      "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
     ],
     [
       ".agents/skills/enforcement/SKILL.md",
@@ -793,12 +1317,20 @@
       "35f185966bcfce22ed6f6592062c05e11ba4c18b85172ba47b03cc3cd4a039cd"
     ],
     [
+      ".agents/skills/multiagent-orchestration/SKILL.md",
+      "d6c940687cbd37a68a491a4303032bc90ac7b9dff01e2db84e1c451082aa26b9"
+    ],
+    [
       ".agents/skills/orchestrator/SKILL.md",
       "4ea1895617ba5a71a70510b4a9557daf87f9cbe12e1c5439aac1f389bb7e5a67"
     ],
     [
       ".agents/skills/performance/SKILL.md",
       "4b45c289b41efc6e7b2977e5fb93beb432c6d52461ce0569289228375ad9af86"
+    ],
+    [
+      ".agents/skills/performance-optimization/SKILL.md",
+      "326754e646454eb1d54a4e9692a8dfb1896902b9adf51a1513b46aa5669d647a"
     ],
     [
       ".agents/skills/plan/SKILL.md",
@@ -809,12 +1341,36 @@
       "b3348cb58adf17c882a470bf2ffd87a0556ac6a0c4f47e5fbfc24c127217bee8"
     ],
     [
+      ".agents/skills/problem-decomposition/SKILL.md",
+      "f37c4a570593d780e4b1173ef0082df62d03efb2e00bfcaac5d1feecb2caec8e"
+    ],
+    [
+      ".agents/skills/quality-assurance/SKILL.md",
+      "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+    ],
+    [
       ".agents/skills/refactor/SKILL.md",
       "fa32eb7dfe5ff3e58f4c4ce6c425b54309018ab39f4989e0323830db409b4bf9"
     ],
     [
       ".agents/skills/review/SKILL.md",
       "a839b22dab90efc8da1beda86f4c4020d6abbfa53536ba8dd4212a956ff66d8c"
+    ],
+    [
+      ".agents/skills/team-collaboration/SKILL.md",
+      "8d3703e287a6a9c94a53da968ece20bf8b2bac4f7a28d3d49f838c9646b5be02"
+    ],
+    [
+      ".agents/skills/technical-communication/SKILL.md",
+      "66f5368887094575002c8f83064e41110ceab580afd197cc4ed0319a48e933bb"
+    ],
+    [
+      ".agents/skills/technical-debt-management/SKILL.md",
+      "16d955e806942e53c349c73cb281eecd1248e83ca8be203f409d67eb0b0d3fc0"
+    ],
+    [
+      ".agents/skills/technical-decision-making/SKILL.md",
+      "d16fe4266cf65a2e88bd45d15f95fe91771be2cd4c1a10d00328503f11a38f48"
     ],
     [
       ".agents/skills/test/SKILL.md",
@@ -831,6 +1387,10 @@
     [
       ".agents/skills/test-mocking-rules/SKILL.md",
       "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec"
+    ],
+    [
+      ".agents/skills/testing-strategies/SKILL.md",
+      "15500c149b2af4d6844bc36903465b6b155ee9b38e897910e5f010a40eb829ab"
     ],
     [
       ".codex/config.toml",
@@ -843,6 +1403,10 @@
   ],
   "codex::verbose": [
     [
+      ".agents/skills/architecture-documentation/SKILL.md",
+      "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
+    ],
+    [
       ".agents/skills/ask/SKILL.md",
       "97519379dbc61b402ecfbf7960d4cbaeb8eb2bc5a38c19e8254c67f1364e1640"
     ],
@@ -855,8 +1419,32 @@
       "6f26b0214f98bc30fefe5f5ab0534921b3842eb80d8d976bd5679ac658dfaf69"
     ],
     [
+      ".agents/skills/code-review-practices/SKILL.md",
+      "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
+    ],
+    [
+      ".agents/skills/continuous-improvement/SKILL.md",
+      "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+    ],
+    [
+      ".agents/skills/data-model-discovery/SKILL.md",
+      "7bb93b77674b80de48bc5f572f0a1bd8c51458f4050ecfe0af70d6c6f3123713"
+    ],
+    [
+      ".agents/skills/data-validation-pipelines/SKILL.md",
+      "684d497852e1980d9e8a322c59e9ac637c2dc100d484358aa0b8281a3ac0f25c"
+    ],
+    [
       ".agents/skills/debug/SKILL.md",
       "700df53305c39964e8e724fadc6260ce2d95d1931419c57fa8b141867c774ec5"
+    ],
+    [
+      ".agents/skills/debugging-methodology/SKILL.md",
+      "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
+    ],
+    [
+      ".agents/skills/documentation-best-practices/SKILL.md",
+      "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
     ],
     [
       ".agents/skills/enforcement/SKILL.md",
@@ -883,12 +1471,20 @@
       "35f185966bcfce22ed6f6592062c05e11ba4c18b85172ba47b03cc3cd4a039cd"
     ],
     [
+      ".agents/skills/multiagent-orchestration/SKILL.md",
+      "4f56926633e3b6527047e07041e415cbf0bc171ca9cfdf7fa0f99b8550a51705"
+    ],
+    [
       ".agents/skills/orchestrator/SKILL.md",
       "4ea1895617ba5a71a70510b4a9557daf87f9cbe12e1c5439aac1f389bb7e5a67"
     ],
     [
       ".agents/skills/performance/SKILL.md",
       "4b45c289b41efc6e7b2977e5fb93beb432c6d52461ce0569289228375ad9af86"
+    ],
+    [
+      ".agents/skills/performance-optimization/SKILL.md",
+      "81f057d445e73f1877db1b7996b34a9cd2976e8670f332ac2e13f0c4eac392b2"
     ],
     [
       ".agents/skills/plan/SKILL.md",
@@ -899,12 +1495,36 @@
       "9a41690df76da259b04cf85fb7dcb6a0330f57cc4edf9ecb04e4adfb508a130d"
     ],
     [
+      ".agents/skills/problem-decomposition/SKILL.md",
+      "9962362a175e7b4ee9acd1bc585511234902694910c5ba1f20a3e53ee01c2047"
+    ],
+    [
+      ".agents/skills/quality-assurance/SKILL.md",
+      "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+    ],
+    [
       ".agents/skills/refactor/SKILL.md",
       "fa32eb7dfe5ff3e58f4c4ce6c425b54309018ab39f4989e0323830db409b4bf9"
     ],
     [
       ".agents/skills/review/SKILL.md",
       "a839b22dab90efc8da1beda86f4c4020d6abbfa53536ba8dd4212a956ff66d8c"
+    ],
+    [
+      ".agents/skills/team-collaboration/SKILL.md",
+      "59a7c4fc7970bd4af790f6642fb030df0fbfde73d95595fa2289196c71ee64ba"
+    ],
+    [
+      ".agents/skills/technical-communication/SKILL.md",
+      "725be0f40aa295e16c715ada58178484a886e3d7d0eef134e5d3926132923625"
+    ],
+    [
+      ".agents/skills/technical-debt-management/SKILL.md",
+      "c2592c501d10efa2cd701602f205caf567984c0e8fb5c233454129a829bf1c59"
+    ],
+    [
+      ".agents/skills/technical-decision-making/SKILL.md",
+      "4f5b3cb084e61b2e1c7edcdb9eec25927a06974bf2c189e371525a867be5b985"
     ],
     [
       ".agents/skills/test/SKILL.md",
@@ -921,6 +1541,10 @@
     [
       ".agents/skills/test-mocking-rules/SKILL.md",
       "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e"
+    ],
+    [
+      ".agents/skills/testing-strategies/SKILL.md",
+      "042493cfef510d68a72e9e99385bd99101832340f9e080e4c14786d4d3d8cac0"
     ],
     [
       ".codex/config.toml",
@@ -941,6 +1565,10 @@
       "a9299e4e0e236b1290210a3edd17f0f0a9050ab3f12a786d876c87a5b94ec04a"
     ],
     [
+      ".continue/prompts/dependency-upgrade.md",
+      "92d30370fa8a13c2a7897dbb6fca5bd51cc2973debc0e2afd63cf54a78c45568"
+    ],
+    [
       ".continue/prompts/feature.md",
       "d8a13eaa68f64e77aa18437d03bef5f10e6f2661ae10a46ee1d0ab3ba7027681"
     ],
@@ -949,12 +1577,36 @@
       "fddc6b9d601585e1ebc341912252a39b962d6fbba522f6e2342a191559ff230e"
     ],
     [
+      ".continue/prompts/migration.md",
+      "90e1269c23baa6fe20b462a0dc55a37ad5dea028aa3334ae18f2f7b77fb782f9"
+    ],
+    [
+      ".continue/prompts/performance.md",
+      "3ec32ad6de9b09455f7229868d453264bc8540175d0c76812ec2c0a9b543bd3a"
+    ],
+    [
       ".continue/prompts/refactor.md",
       "fb41d63895329af1726c05e781f3730d61113c31e0fc0ac98f18233b68e28074"
     ],
     [
+      ".continue/prompts/strategy.md",
+      "93f9282ce3ddc7dc9f1768ab0bb4c60975979496519a40e0909fa4c4f0b2f059"
+    ],
+    [
       ".continue/prompts/testing.md",
       "3ebf38ff437e6526e71c081284a2ec7edcca921b478549b0b5bafaa86138027f"
+    ],
+    [
+      ".continue/prompts/workflow-migration-patterns.md",
+      "0bf275564eb9ed52d46c42970bfddae400daf324ae3122f5044fb2ec30f634df"
+    ],
+    [
+      ".continue/prompts/workflow-performance-optimization.md",
+      "ef4e96351f4beaba551cd53bd18480a1bed3b571c0ab03c53bde0a9337abdc83"
+    ],
+    [
+      ".continue/prompts/workflow-scaling-patterns.md",
+      "c87e9173d3468477f63ab869dfdabb5e4baa628a19069ad6960e9c5898a9263c"
     ],
     [
       ".continue/rules/ask.md",
@@ -1031,6 +1683,10 @@
       "120d024c423be3349e734d3ee409701a1a4eff8652f26b2efdd4e5bbc3c59fa6"
     ],
     [
+      ".continue/prompts/dependency-upgrade.md",
+      "1b395c4a2afbd7bcd02ef563685169f73ea3f3af50d06aa3df80569b3ea0ca07"
+    ],
+    [
       ".continue/prompts/feature.md",
       "47cdfa345001e88b10f991017addf64e70c239d81f12b6e97dea56455870abcc"
     ],
@@ -1039,12 +1695,36 @@
       "0f47f51f3fae2e7c944ef0e0213b10c9b4d7acad5d8d6c49df86f61145ec4109"
     ],
     [
+      ".continue/prompts/migration.md",
+      "1ceafc8d4cbd2520523a30d07325c729018a071616d7f3fabafc64a056634ea7"
+    ],
+    [
+      ".continue/prompts/performance.md",
+      "98bb19bf567951c720d0eafc17a8260494eb7de9d9dd9f5e820dbc69525fbe76"
+    ],
+    [
       ".continue/prompts/refactor.md",
       "99321e6d813f6c66450f517bec4f36be8c0d839e3646a05076ca5142ab6e5dd1"
     ],
     [
+      ".continue/prompts/strategy.md",
+      "c74713320e4a8613527f761fd0934900676ec00caa4ce8728d813d3099bd9138"
+    ],
+    [
       ".continue/prompts/testing.md",
       "43051f27439a0b8fabe33c77b6ede394f91a3e6aed077b0fdbe9089837091db2"
+    ],
+    [
+      ".continue/prompts/workflow-migration-patterns.md",
+      "a0a514df50ec1586b5855a77f4624a9a7c20c53a2e3ebd4c869c01dfe6465815"
+    ],
+    [
+      ".continue/prompts/workflow-performance-optimization.md",
+      "be96f126429794d65e3d631c7d05d4abb93284885743d8a8359dba64ad4dfd21"
+    ],
+    [
+      ".continue/prompts/workflow-scaling-patterns.md",
+      "b27fe2d2973f261d6a0e70bf72a7019c7939d41fd803a810dbcdfaf998d999e6"
     ],
     [
       ".continue/rules/ask.md",
@@ -1114,7 +1794,35 @@
   "copilot::minimal": [
     [
       ".github/copilot-instructions.md",
-      "95e60c0e7295132e6ee59bd6cdf05620746d7e5045fb7a231f483b25d4d1ff22"
+      "8f0939bffacf6b0234d61d405a27d1852aa53389d91f939b2e0314a869e12a23"
+    ],
+    [
+      ".github/skills/architecture-documentation.md",
+      "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
+    ],
+    [
+      ".github/skills/code-review-practices.md",
+      "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
+    ],
+    [
+      ".github/skills/continuous-improvement.md",
+      "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+    ],
+    [
+      ".github/skills/data-model-discovery.md",
+      "b2168e0a29217dac25abc926ae9b37d3ee25f3f745fa2af30746bcbd7775cb82"
+    ],
+    [
+      ".github/skills/data-validation-pipelines.md",
+      "09739cef80da0955aba6cb78b5c03b82eda86664438e9eb4aa139b657112e908"
+    ],
+    [
+      ".github/skills/debugging-methodology.md",
+      "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
+    ],
+    [
+      ".github/skills/documentation-best-practices.md",
+      "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
     ],
     [
       ".github/skills/feature-planning.md",
@@ -1125,8 +1833,40 @@
       "c8db9858e7b72b9f941e9038d15d04503ebf60c51462e3a71367903f3c8e5063"
     ],
     [
+      ".github/skills/multiagent-orchestration.md",
+      "d6c940687cbd37a68a491a4303032bc90ac7b9dff01e2db84e1c451082aa26b9"
+    ],
+    [
+      ".github/skills/performance-optimization.md",
+      "326754e646454eb1d54a4e9692a8dfb1896902b9adf51a1513b46aa5669d647a"
+    ],
+    [
       ".github/skills/post-implementation-checklist.md",
       "b3348cb58adf17c882a470bf2ffd87a0556ac6a0c4f47e5fbfc24c127217bee8"
+    ],
+    [
+      ".github/skills/problem-decomposition.md",
+      "f37c4a570593d780e4b1173ef0082df62d03efb2e00bfcaac5d1feecb2caec8e"
+    ],
+    [
+      ".github/skills/quality-assurance.md",
+      "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+    ],
+    [
+      ".github/skills/team-collaboration.md",
+      "8d3703e287a6a9c94a53da968ece20bf8b2bac4f7a28d3d49f838c9646b5be02"
+    ],
+    [
+      ".github/skills/technical-communication.md",
+      "66f5368887094575002c8f83064e41110ceab580afd197cc4ed0319a48e933bb"
+    ],
+    [
+      ".github/skills/technical-debt-management.md",
+      "16d955e806942e53c349c73cb281eecd1248e83ca8be203f409d67eb0b0d3fc0"
+    ],
+    [
+      ".github/skills/technical-decision-making.md",
+      "d16fe4266cf65a2e88bd45d15f95fe91771be2cd4c1a10d00328503f11a38f48"
     ],
     [
       ".github/skills/test-aaa-structure.md",
@@ -1139,6 +1879,10 @@
     [
       ".github/skills/test-mocking-rules.md",
       "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec"
+    ],
+    [
+      ".github/skills/testing-strategies.md",
+      "15500c149b2af4d6844bc36903465b6b155ee9b38e897910e5f010a40eb829ab"
     ],
     [
       "AGENTS.md",
@@ -1148,7 +1892,35 @@
   "copilot::verbose": [
     [
       ".github/copilot-instructions.md",
-      "861510b8adc3db504ccb16043a73958faeea577e1072a5a24d73d4aef71e2882"
+      "f923b94e03e26f24f85c5acacc0bde4a154c182cc9f07b7324110976009e49c2"
+    ],
+    [
+      ".github/skills/architecture-documentation.md",
+      "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
+    ],
+    [
+      ".github/skills/code-review-practices.md",
+      "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
+    ],
+    [
+      ".github/skills/continuous-improvement.md",
+      "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+    ],
+    [
+      ".github/skills/data-model-discovery.md",
+      "7bb93b77674b80de48bc5f572f0a1bd8c51458f4050ecfe0af70d6c6f3123713"
+    ],
+    [
+      ".github/skills/data-validation-pipelines.md",
+      "684d497852e1980d9e8a322c59e9ac637c2dc100d484358aa0b8281a3ac0f25c"
+    ],
+    [
+      ".github/skills/debugging-methodology.md",
+      "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
+    ],
+    [
+      ".github/skills/documentation-best-practices.md",
+      "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
     ],
     [
       ".github/skills/feature-planning.md",
@@ -1159,8 +1931,40 @@
       "af8ee67d6925c3095724964a59a134d9725d5952bfa361cf5d7eef7e42ffbe6a"
     ],
     [
+      ".github/skills/multiagent-orchestration.md",
+      "4f56926633e3b6527047e07041e415cbf0bc171ca9cfdf7fa0f99b8550a51705"
+    ],
+    [
+      ".github/skills/performance-optimization.md",
+      "81f057d445e73f1877db1b7996b34a9cd2976e8670f332ac2e13f0c4eac392b2"
+    ],
+    [
       ".github/skills/post-implementation-checklist.md",
       "9a41690df76da259b04cf85fb7dcb6a0330f57cc4edf9ecb04e4adfb508a130d"
+    ],
+    [
+      ".github/skills/problem-decomposition.md",
+      "9962362a175e7b4ee9acd1bc585511234902694910c5ba1f20a3e53ee01c2047"
+    ],
+    [
+      ".github/skills/quality-assurance.md",
+      "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+    ],
+    [
+      ".github/skills/team-collaboration.md",
+      "59a7c4fc7970bd4af790f6642fb030df0fbfde73d95595fa2289196c71ee64ba"
+    ],
+    [
+      ".github/skills/technical-communication.md",
+      "725be0f40aa295e16c715ada58178484a886e3d7d0eef134e5d3926132923625"
+    ],
+    [
+      ".github/skills/technical-debt-management.md",
+      "c2592c501d10efa2cd701602f205caf567984c0e8fb5c233454129a829bf1c59"
+    ],
+    [
+      ".github/skills/technical-decision-making.md",
+      "4f5b3cb084e61b2e1c7edcdb9eec25927a06974bf2c189e371525a867be5b985"
     ],
     [
       ".github/skills/test-aaa-structure.md",
@@ -1175,11 +1979,43 @@
       "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e"
     ],
     [
+      ".github/skills/testing-strategies.md",
+      "042493cfef510d68a72e9e99385bd99101832340f9e080e4c14786d4d3d8cac0"
+    ],
+    [
       "AGENTS.md",
       "447a0a62e1f941c111567084d0d7a0f53e4893079a8d509f674d9dd1cbed58b2"
     ]
   ],
   "cursor::minimal": [
+    [
+      ".cursor/skills/architecture-documentation/SKILL.md",
+      "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
+    ],
+    [
+      ".cursor/skills/code-review-practices/SKILL.md",
+      "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
+    ],
+    [
+      ".cursor/skills/continuous-improvement/SKILL.md",
+      "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+    ],
+    [
+      ".cursor/skills/data-model-discovery/SKILL.md",
+      "b2168e0a29217dac25abc926ae9b37d3ee25f3f745fa2af30746bcbd7775cb82"
+    ],
+    [
+      ".cursor/skills/data-validation-pipelines/SKILL.md",
+      "09739cef80da0955aba6cb78b5c03b82eda86664438e9eb4aa139b657112e908"
+    ],
+    [
+      ".cursor/skills/debugging-methodology/SKILL.md",
+      "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
+    ],
+    [
+      ".cursor/skills/documentation-best-practices/SKILL.md",
+      "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
+    ],
     [
       ".cursor/skills/feature-planning/SKILL.md",
       "a85d09f78dec318635b4de95f1202d3443fb9e67b9b320237572df0aa6425454"
@@ -1189,8 +2025,40 @@
       "c8db9858e7b72b9f941e9038d15d04503ebf60c51462e3a71367903f3c8e5063"
     ],
     [
+      ".cursor/skills/multiagent-orchestration/SKILL.md",
+      "d6c940687cbd37a68a491a4303032bc90ac7b9dff01e2db84e1c451082aa26b9"
+    ],
+    [
+      ".cursor/skills/performance-optimization/SKILL.md",
+      "326754e646454eb1d54a4e9692a8dfb1896902b9adf51a1513b46aa5669d647a"
+    ],
+    [
       ".cursor/skills/post-implementation-checklist/SKILL.md",
       "b3348cb58adf17c882a470bf2ffd87a0556ac6a0c4f47e5fbfc24c127217bee8"
+    ],
+    [
+      ".cursor/skills/problem-decomposition/SKILL.md",
+      "f37c4a570593d780e4b1173ef0082df62d03efb2e00bfcaac5d1feecb2caec8e"
+    ],
+    [
+      ".cursor/skills/quality-assurance/SKILL.md",
+      "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+    ],
+    [
+      ".cursor/skills/team-collaboration/SKILL.md",
+      "8d3703e287a6a9c94a53da968ece20bf8b2bac4f7a28d3d49f838c9646b5be02"
+    ],
+    [
+      ".cursor/skills/technical-communication/SKILL.md",
+      "66f5368887094575002c8f83064e41110ceab580afd197cc4ed0319a48e933bb"
+    ],
+    [
+      ".cursor/skills/technical-debt-management/SKILL.md",
+      "16d955e806942e53c349c73cb281eecd1248e83ca8be203f409d67eb0b0d3fc0"
+    ],
+    [
+      ".cursor/skills/technical-decision-making/SKILL.md",
+      "d16fe4266cf65a2e88bd45d15f95fe91771be2cd4c1a10d00328503f11a38f48"
     ],
     [
       ".cursor/skills/test-aaa-structure/SKILL.md",
@@ -1205,8 +2073,12 @@
       "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec"
     ],
     [
+      ".cursor/skills/testing-strategies/SKILL.md",
+      "15500c149b2af4d6844bc36903465b6b155ee9b38e897910e5f010a40eb829ab"
+    ],
+    [
       ".cursorrules",
-      "9be0f5de66950af1925b62658bd746c02218d562fda3b5b9d1e2dc92e9fe8a1a"
+      "b514164e056fb399f214291b77b08516af95536beb53db9403e7c4e1bc8a4c24"
     ],
     [
       "AGENTS.md",
@@ -1214,6 +2086,34 @@
     ]
   ],
   "cursor::verbose": [
+    [
+      ".cursor/skills/architecture-documentation/SKILL.md",
+      "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
+    ],
+    [
+      ".cursor/skills/code-review-practices/SKILL.md",
+      "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
+    ],
+    [
+      ".cursor/skills/continuous-improvement/SKILL.md",
+      "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+    ],
+    [
+      ".cursor/skills/data-model-discovery/SKILL.md",
+      "7bb93b77674b80de48bc5f572f0a1bd8c51458f4050ecfe0af70d6c6f3123713"
+    ],
+    [
+      ".cursor/skills/data-validation-pipelines/SKILL.md",
+      "684d497852e1980d9e8a322c59e9ac637c2dc100d484358aa0b8281a3ac0f25c"
+    ],
+    [
+      ".cursor/skills/debugging-methodology/SKILL.md",
+      "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
+    ],
+    [
+      ".cursor/skills/documentation-best-practices/SKILL.md",
+      "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
+    ],
     [
       ".cursor/skills/feature-planning/SKILL.md",
       "3b43fa04f2823fcd2adc420ba1adc4989c3fe6d0a247f93f1d0e765f5ec971e6"
@@ -1223,8 +2123,40 @@
       "af8ee67d6925c3095724964a59a134d9725d5952bfa361cf5d7eef7e42ffbe6a"
     ],
     [
+      ".cursor/skills/multiagent-orchestration/SKILL.md",
+      "4f56926633e3b6527047e07041e415cbf0bc171ca9cfdf7fa0f99b8550a51705"
+    ],
+    [
+      ".cursor/skills/performance-optimization/SKILL.md",
+      "81f057d445e73f1877db1b7996b34a9cd2976e8670f332ac2e13f0c4eac392b2"
+    ],
+    [
       ".cursor/skills/post-implementation-checklist/SKILL.md",
       "9a41690df76da259b04cf85fb7dcb6a0330f57cc4edf9ecb04e4adfb508a130d"
+    ],
+    [
+      ".cursor/skills/problem-decomposition/SKILL.md",
+      "9962362a175e7b4ee9acd1bc585511234902694910c5ba1f20a3e53ee01c2047"
+    ],
+    [
+      ".cursor/skills/quality-assurance/SKILL.md",
+      "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+    ],
+    [
+      ".cursor/skills/team-collaboration/SKILL.md",
+      "59a7c4fc7970bd4af790f6642fb030df0fbfde73d95595fa2289196c71ee64ba"
+    ],
+    [
+      ".cursor/skills/technical-communication/SKILL.md",
+      "725be0f40aa295e16c715ada58178484a886e3d7d0eef134e5d3926132923625"
+    ],
+    [
+      ".cursor/skills/technical-debt-management/SKILL.md",
+      "c2592c501d10efa2cd701602f205caf567984c0e8fb5c233454129a829bf1c59"
+    ],
+    [
+      ".cursor/skills/technical-decision-making/SKILL.md",
+      "4f5b3cb084e61b2e1c7edcdb9eec25927a06974bf2c189e371525a867be5b985"
     ],
     [
       ".cursor/skills/test-aaa-structure/SKILL.md",
@@ -1239,8 +2171,12 @@
       "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e"
     ],
     [
+      ".cursor/skills/testing-strategies/SKILL.md",
+      "042493cfef510d68a72e9e99385bd99101832340f9e080e4c14786d4d3d8cac0"
+    ],
+    [
       ".cursorrules",
-      "61eabc61abe482bc8d6511a393509abe7d90436ec130faa2b03bbf4268ff3382"
+      "0c6124dde45deb5b21030e7b445d1ea0696ef8eabf3c5ab666fec7033a71158e"
     ],
     [
       "AGENTS.md",
@@ -1313,6 +2249,10 @@
       "8e62eefa73658e4f607ac3415dab9f6c8b39a75011cd1698afa8dac0b9ffec48"
     ],
     [
+      ".gemini/commands/dependency-upgrade.toml",
+      "6ddca614f48055534429322f52dfdd29f053ec289d9f3e2668276347124e8d8d"
+    ],
+    [
       ".gemini/commands/feature.toml",
       "ca86305e5aa0a03b82b5e59d02a54ecff7fa19d95addcb6b7f827a9a1896a023"
     ],
@@ -1321,16 +2261,68 @@
       "c06e57a7a5362c9ac1a47536c06988d91087822a2e51fb6c5cef8e93e1117593"
     ],
     [
+      ".gemini/commands/migration.toml",
+      "b31a30ba892c81e99974a3212fdd3dd62213cd6565a988a6dbe30c612fc751e9"
+    ],
+    [
+      ".gemini/commands/performance.toml",
+      "6fd06c46b0dcf57e87b1db8113311c9bfc3e8801d4a7ee31e32adbcee9ffa7c5"
+    ],
+    [
       ".gemini/commands/refactor.toml",
       "a8e1c2dcd7a1e5adc358f29a3527cc76d12bfe747938ec746e2b70f2869f2cf7"
+    ],
+    [
+      ".gemini/commands/strategy.toml",
+      "0a09fcdbe0a95bdc9dfc87931c39ad405d33889a9ba4aefbe97ee5b7e026f572"
     ],
     [
       ".gemini/commands/testing.toml",
       "6dcaeb10dacc9987c1ec6daad544ae535df6f7a456f6398fa023b92a49288063"
     ],
     [
+      ".gemini/commands/workflow-migration-patterns.toml",
+      "0d9519483a159df08bf1655f4189469eac935fed4394fc0d168c29b3f39223c0"
+    ],
+    [
+      ".gemini/commands/workflow-performance-optimization.toml",
+      "b5104df4a0714fdc0ca417a1522f8bc98b194119404824c07fa6f2fbc9896f14"
+    ],
+    [
+      ".gemini/commands/workflow-scaling-patterns.toml",
+      "f2edd4c887d7213b68dd81a32f3367908af49440c70f51248402456bb0ee27b2"
+    ],
+    [
       ".gemini/settings.json",
       "eb83e3c3291bc7e9994cd57973ab9d3fed5f600b02cfad010c714c889acd5349"
+    ],
+    [
+      ".gemini/skills/architecture-documentation/SKILL.md",
+      "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
+    ],
+    [
+      ".gemini/skills/code-review-practices/SKILL.md",
+      "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
+    ],
+    [
+      ".gemini/skills/continuous-improvement/SKILL.md",
+      "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+    ],
+    [
+      ".gemini/skills/data-model-discovery/SKILL.md",
+      "b2168e0a29217dac25abc926ae9b37d3ee25f3f745fa2af30746bcbd7775cb82"
+    ],
+    [
+      ".gemini/skills/data-validation-pipelines/SKILL.md",
+      "09739cef80da0955aba6cb78b5c03b82eda86664438e9eb4aa139b657112e908"
+    ],
+    [
+      ".gemini/skills/debugging-methodology/SKILL.md",
+      "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
+    ],
+    [
+      ".gemini/skills/documentation-best-practices/SKILL.md",
+      "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
     ],
     [
       ".gemini/skills/feature-planning/SKILL.md",
@@ -1341,8 +2333,40 @@
       "c8db9858e7b72b9f941e9038d15d04503ebf60c51462e3a71367903f3c8e5063"
     ],
     [
+      ".gemini/skills/multiagent-orchestration/SKILL.md",
+      "d6c940687cbd37a68a491a4303032bc90ac7b9dff01e2db84e1c451082aa26b9"
+    ],
+    [
+      ".gemini/skills/performance-optimization/SKILL.md",
+      "326754e646454eb1d54a4e9692a8dfb1896902b9adf51a1513b46aa5669d647a"
+    ],
+    [
       ".gemini/skills/post-implementation-checklist/SKILL.md",
       "b3348cb58adf17c882a470bf2ffd87a0556ac6a0c4f47e5fbfc24c127217bee8"
+    ],
+    [
+      ".gemini/skills/problem-decomposition/SKILL.md",
+      "f37c4a570593d780e4b1173ef0082df62d03efb2e00bfcaac5d1feecb2caec8e"
+    ],
+    [
+      ".gemini/skills/quality-assurance/SKILL.md",
+      "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+    ],
+    [
+      ".gemini/skills/team-collaboration/SKILL.md",
+      "8d3703e287a6a9c94a53da968ece20bf8b2bac4f7a28d3d49f838c9646b5be02"
+    ],
+    [
+      ".gemini/skills/technical-communication/SKILL.md",
+      "66f5368887094575002c8f83064e41110ceab580afd197cc4ed0319a48e933bb"
+    ],
+    [
+      ".gemini/skills/technical-debt-management/SKILL.md",
+      "16d955e806942e53c349c73cb281eecd1248e83ca8be203f409d67eb0b0d3fc0"
+    ],
+    [
+      ".gemini/skills/technical-decision-making/SKILL.md",
+      "d16fe4266cf65a2e88bd45d15f95fe91771be2cd4c1a10d00328503f11a38f48"
     ],
     [
       ".gemini/skills/test-aaa-structure/SKILL.md",
@@ -1355,6 +2379,10 @@
     [
       ".gemini/skills/test-mocking-rules/SKILL.md",
       "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec"
+    ],
+    [
+      ".gemini/skills/testing-strategies/SKILL.md",
+      "15500c149b2af4d6844bc36903465b6b155ee9b38e897910e5f010a40eb829ab"
     ],
     [
       "AGENTS.md",
@@ -1427,6 +2455,10 @@
       "6fa1277596ea7cf343ddd27a0a6b2ec6850f05966a5a6cffd33303defe447077"
     ],
     [
+      ".gemini/commands/dependency-upgrade.toml",
+      "448289c245f737e8d72836aeaed923c25fa84974862b92afce150c5435a3bea2"
+    ],
+    [
       ".gemini/commands/feature.toml",
       "75587cee6c377d39fb71ba9ff9d8f6ef60f2da4926c2cd792551a8d42a89b53b"
     ],
@@ -1435,16 +2467,68 @@
       "c6d41104a8705dc601c029ff05251d8ce2b358b2d5e674264d056342f78e8404"
     ],
     [
+      ".gemini/commands/migration.toml",
+      "cbefcc5f216200bd15f5f85d3226a6db9e6ccd4bf951ba51a5f8180c723b5604"
+    ],
+    [
+      ".gemini/commands/performance.toml",
+      "842beb484d7f6ba316cc4398ccdc520134ddb6c183dbd98b0bf65f3fc83abbd7"
+    ],
+    [
       ".gemini/commands/refactor.toml",
       "b757b2f6d1beed3e78c0db1d4746dee74c22298d3064935e73ae6b9994545a6c"
+    ],
+    [
+      ".gemini/commands/strategy.toml",
+      "7037395fed8bc28381c2bf6b1d72f31fd22ed8ebe95f1167eba79953da7feb5d"
     ],
     [
       ".gemini/commands/testing.toml",
       "dd77712f3528c0c4931be01bc623c1f27b546f39c52c3d33c2aa81166ddf7dcf"
     ],
     [
+      ".gemini/commands/workflow-migration-patterns.toml",
+      "ba3d4758248d672bcceb58311bac1e47ba1d66f0245a78f4ebb84fb008fe96fb"
+    ],
+    [
+      ".gemini/commands/workflow-performance-optimization.toml",
+      "f6be0e6ad2a67668cb2d2ee07ec62ae9c66b7a615af8d84e925fb05b98f0e598"
+    ],
+    [
+      ".gemini/commands/workflow-scaling-patterns.toml",
+      "3ebd1224404e55eb8bc65caff5bcdbf6870fc4432b1e79f2f7b11fc2b3056741"
+    ],
+    [
       ".gemini/settings.json",
       "eb83e3c3291bc7e9994cd57973ab9d3fed5f600b02cfad010c714c889acd5349"
+    ],
+    [
+      ".gemini/skills/architecture-documentation/SKILL.md",
+      "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
+    ],
+    [
+      ".gemini/skills/code-review-practices/SKILL.md",
+      "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
+    ],
+    [
+      ".gemini/skills/continuous-improvement/SKILL.md",
+      "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+    ],
+    [
+      ".gemini/skills/data-model-discovery/SKILL.md",
+      "7bb93b77674b80de48bc5f572f0a1bd8c51458f4050ecfe0af70d6c6f3123713"
+    ],
+    [
+      ".gemini/skills/data-validation-pipelines/SKILL.md",
+      "684d497852e1980d9e8a322c59e9ac637c2dc100d484358aa0b8281a3ac0f25c"
+    ],
+    [
+      ".gemini/skills/debugging-methodology/SKILL.md",
+      "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
+    ],
+    [
+      ".gemini/skills/documentation-best-practices/SKILL.md",
+      "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
     ],
     [
       ".gemini/skills/feature-planning/SKILL.md",
@@ -1455,8 +2539,40 @@
       "af8ee67d6925c3095724964a59a134d9725d5952bfa361cf5d7eef7e42ffbe6a"
     ],
     [
+      ".gemini/skills/multiagent-orchestration/SKILL.md",
+      "4f56926633e3b6527047e07041e415cbf0bc171ca9cfdf7fa0f99b8550a51705"
+    ],
+    [
+      ".gemini/skills/performance-optimization/SKILL.md",
+      "81f057d445e73f1877db1b7996b34a9cd2976e8670f332ac2e13f0c4eac392b2"
+    ],
+    [
       ".gemini/skills/post-implementation-checklist/SKILL.md",
       "9a41690df76da259b04cf85fb7dcb6a0330f57cc4edf9ecb04e4adfb508a130d"
+    ],
+    [
+      ".gemini/skills/problem-decomposition/SKILL.md",
+      "9962362a175e7b4ee9acd1bc585511234902694910c5ba1f20a3e53ee01c2047"
+    ],
+    [
+      ".gemini/skills/quality-assurance/SKILL.md",
+      "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+    ],
+    [
+      ".gemini/skills/team-collaboration/SKILL.md",
+      "59a7c4fc7970bd4af790f6642fb030df0fbfde73d95595fa2289196c71ee64ba"
+    ],
+    [
+      ".gemini/skills/technical-communication/SKILL.md",
+      "725be0f40aa295e16c715ada58178484a886e3d7d0eef134e5d3926132923625"
+    ],
+    [
+      ".gemini/skills/technical-debt-management/SKILL.md",
+      "c2592c501d10efa2cd701602f205caf567984c0e8fb5c233454129a829bf1c59"
+    ],
+    [
+      ".gemini/skills/technical-decision-making/SKILL.md",
+      "4f5b3cb084e61b2e1c7edcdb9eec25927a06974bf2c189e371525a867be5b985"
     ],
     [
       ".gemini/skills/test-aaa-structure/SKILL.md",
@@ -1471,6 +2587,10 @@
       "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e"
     ],
     [
+      ".gemini/skills/testing-strategies/SKILL.md",
+      "042493cfef510d68a72e9e99385bd99101832340f9e080e4c14786d4d3d8cac0"
+    ],
+    [
       "AGENTS.md",
       "447a0a62e1f941c111567084d0d7a0f53e4893079a8d509f674d9dd1cbed58b2"
     ]
@@ -1478,43 +2598,43 @@
   "junie::minimal": [
     [
       ".junie/agents/ask.md",
-      "c1f937ed31fba8d522f7e17383139325c96c70d4076deb61008596b1ab147288"
+      "29966fbee6efbbe5554b7c952dc867eb468b2b5332ad84a36ffa877a32282a41"
     ],
     [
       ".junie/agents/backend.md",
-      "2704e8263e70d3bc367f3820b2285783103bb53125a0581ba9b3d0e46ebe0f59"
+      "602ed84ff3fbc365322d9be6840468456550533d26d19ba044dd82adbdd81a40"
     ],
     [
       ".junie/agents/code.md",
-      "84154d1e7b65634bf70a96a5c083a21de175806342bcdec4206cf3c292c6073e"
+      "247aeca88f35726b1df5444a4defed8fbbc530196c1ad8a15f26409d71c8b8df"
     ],
     [
       ".junie/agents/debug.md",
-      "dd0f8904555143368328a883428406ba4be847bd22735924993c85bc86b59b84"
+      "053a6386f1263241d1ee14143853ea52f5414432099343379d77cc834c239610"
     ],
     [
       ".junie/agents/enforcement.md",
-      "a2451211255aea40a88bfa6c2a521f03b2427d04bf396a13ee767874ffabfa31"
+      "75d9875f6f158183d4b3601d878e661994c20898c17ccf88b078d6bfb454e46a"
     ],
     [
       ".junie/agents/explain.md",
-      "6fa534b35388c9fbc1a344f701ee2e96089557dd8dfb98c94da36a9ef92f7ae1"
+      "7beb7096cb6ab99d7a6ce944ca5673c211ebfc68700799cc16f4e1145908161e"
     ],
     [
       ".junie/agents/frontend.md",
-      "8765d63782e5dea75dedb5a3b39a393191d4b3912564d8d34b31655ce7a42118"
+      "b0e41f25478d16d6bc04e0a47caab471e8dd5e2fd994613e9b5b27979989cf79"
     ],
     [
       ".junie/agents/migration.md",
-      "69a6909a8bf5540cf4c72a4fd4514d487464cbd0d5c958a91d5ca8c8633017ba"
+      "5fcbd9e2576c84d0c93838bd2c39bd2c2406e7b0f6df41b08ff36a970f61ca6e"
     ],
     [
       ".junie/agents/orchestrator.md",
-      "c1f7968d23a73ff5ea87a86dbe3429d85c5b909f904f35ce8cb632b1df1c7a5d"
+      "b8f2e0ef56590143fe4aa8c49188ef5f2b554776bcc333ccb204e1abb59de822"
     ],
     [
       ".junie/agents/performance.md",
-      "bdc8ce2b745deb3ea0a8f7b7e521c06ff2b894d8467a4f64cf349f2960d813c9"
+      "5851f9a0844ac2f7f4d61d41ca63f835b6962b71701cab4eb421723f2ba36068"
     ],
     [
       ".junie/agents/plan.md",
@@ -1522,15 +2642,15 @@
     ],
     [
       ".junie/agents/refactor.md",
-      "ec9c958c58994f5f510c618c81e3f7f94f6755e32d2dcb7bedf3e384574e37a1"
+      "b1f538430d0311a7cfa13562a2b2b155dd88d823125143b0fe31f3a8256e6377"
     ],
     [
       ".junie/agents/review.md",
-      "1ec57e06cd69a722de568a51b0511dfe055f9814e3cf34d410aca900bd381c7f"
+      "1b42125b0fb51208bceb1e95092813b320d557e54dd28c6ae9a4789770d5d08c"
     ],
     [
       ".junie/agents/test.md",
-      "1bb4a5f1065543fd10ab4fee9510096d359455ddcbc490efae9d9198de0a92d3"
+      "3a29c368e7b75fa1b21bacf6d9c16301037be4db1ed5077c08ffc098c2a4daa6"
     ],
     [
       ".junie/commands/boilerplate.md",
@@ -1541,6 +2661,10 @@
       "a1b827fc4585627e6921a08c920afcc9c4cc5b5e218a2226997c37012f9be5cf"
     ],
     [
+      ".junie/commands/dependency-upgrade.md",
+      "9d3000eb83fb8b40ec463b0222ebc8e94e5e5c1ffabc16c621dbb91018bc4e0e"
+    ],
+    [
       ".junie/commands/feature.md",
       "5d23dd05bceff76cb7d55b270a6a2d12033d9699ac80859583494e495c4e13d5"
     ],
@@ -1549,12 +2673,64 @@
       "4abc19173ed0dea7fdd208ecbf05cf12fd98aaed316eb77159ef470d04d8c392"
     ],
     [
+      ".junie/commands/migration.md",
+      "dbcd192531c470acb163e0d7181d4c005540f733c7dd5e89990803c70b80f90d"
+    ],
+    [
+      ".junie/commands/performance.md",
+      "6a87f9aec27b7a4476ea4cefbd6b32024c96889d2be685d033d52625d425f5b3"
+    ],
+    [
       ".junie/commands/refactor.md",
       "15b128253b00b70ace6411671285b8aeeb593961017054f9737f7bbe7fb0acc9"
     ],
     [
+      ".junie/commands/strategy.md",
+      "6322fdc10564c8a47d74ff3a4313ba2bbeafa7a10aae79bc518816a97daf803b"
+    ],
+    [
       ".junie/commands/testing.md",
       "d8c818f6e448e7927bbc600f10831ff7c242510751b5a67cd8fdeca6188b7c2d"
+    ],
+    [
+      ".junie/commands/workflow-migration-patterns.md",
+      "760b42e31539d1433426f31bd09498bf7808a5104c24579dbf94bac13004b9d2"
+    ],
+    [
+      ".junie/commands/workflow-performance-optimization.md",
+      "e03e193dd8e1c84b6b86b8c2553a6f2961cfbc32a73d23f2aae17a773140e133"
+    ],
+    [
+      ".junie/commands/workflow-scaling-patterns.md",
+      "1206fb5a49bd7d9b60de274df0ccc391bfd081f8aca502213bc7901e6728f0ef"
+    ],
+    [
+      ".junie/skills/architecture-documentation/SKILL.md",
+      "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
+    ],
+    [
+      ".junie/skills/code-review-practices/SKILL.md",
+      "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
+    ],
+    [
+      ".junie/skills/continuous-improvement/SKILL.md",
+      "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+    ],
+    [
+      ".junie/skills/data-model-discovery/SKILL.md",
+      "b2168e0a29217dac25abc926ae9b37d3ee25f3f745fa2af30746bcbd7775cb82"
+    ],
+    [
+      ".junie/skills/data-validation-pipelines/SKILL.md",
+      "09739cef80da0955aba6cb78b5c03b82eda86664438e9eb4aa139b657112e908"
+    ],
+    [
+      ".junie/skills/debugging-methodology/SKILL.md",
+      "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
+    ],
+    [
+      ".junie/skills/documentation-best-practices/SKILL.md",
+      "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
     ],
     [
       ".junie/skills/feature-planning/SKILL.md",
@@ -1565,8 +2741,40 @@
       "c8db9858e7b72b9f941e9038d15d04503ebf60c51462e3a71367903f3c8e5063"
     ],
     [
+      ".junie/skills/multiagent-orchestration/SKILL.md",
+      "d6c940687cbd37a68a491a4303032bc90ac7b9dff01e2db84e1c451082aa26b9"
+    ],
+    [
+      ".junie/skills/performance-optimization/SKILL.md",
+      "326754e646454eb1d54a4e9692a8dfb1896902b9adf51a1513b46aa5669d647a"
+    ],
+    [
       ".junie/skills/post-implementation-checklist/SKILL.md",
       "b3348cb58adf17c882a470bf2ffd87a0556ac6a0c4f47e5fbfc24c127217bee8"
+    ],
+    [
+      ".junie/skills/problem-decomposition/SKILL.md",
+      "f37c4a570593d780e4b1173ef0082df62d03efb2e00bfcaac5d1feecb2caec8e"
+    ],
+    [
+      ".junie/skills/quality-assurance/SKILL.md",
+      "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+    ],
+    [
+      ".junie/skills/team-collaboration/SKILL.md",
+      "8d3703e287a6a9c94a53da968ece20bf8b2bac4f7a28d3d49f838c9646b5be02"
+    ],
+    [
+      ".junie/skills/technical-communication/SKILL.md",
+      "66f5368887094575002c8f83064e41110ceab580afd197cc4ed0319a48e933bb"
+    ],
+    [
+      ".junie/skills/technical-debt-management/SKILL.md",
+      "16d955e806942e53c349c73cb281eecd1248e83ca8be203f409d67eb0b0d3fc0"
+    ],
+    [
+      ".junie/skills/technical-decision-making/SKILL.md",
+      "d16fe4266cf65a2e88bd45d15f95fe91771be2cd4c1a10d00328503f11a38f48"
     ],
     [
       ".junie/skills/test-aaa-structure/SKILL.md",
@@ -1581,6 +2789,10 @@
       "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec"
     ],
     [
+      ".junie/skills/testing-strategies/SKILL.md",
+      "15500c149b2af4d6844bc36903465b6b155ee9b38e897910e5f010a40eb829ab"
+    ],
+    [
       "AGENTS.md",
       "447a0a62e1f941c111567084d0d7a0f53e4893079a8d509f674d9dd1cbed58b2"
     ]
@@ -1588,43 +2800,43 @@
   "junie::verbose": [
     [
       ".junie/agents/ask.md",
-      "c1f937ed31fba8d522f7e17383139325c96c70d4076deb61008596b1ab147288"
+      "29966fbee6efbbe5554b7c952dc867eb468b2b5332ad84a36ffa877a32282a41"
     ],
     [
       ".junie/agents/backend.md",
-      "2704e8263e70d3bc367f3820b2285783103bb53125a0581ba9b3d0e46ebe0f59"
+      "602ed84ff3fbc365322d9be6840468456550533d26d19ba044dd82adbdd81a40"
     ],
     [
       ".junie/agents/code.md",
-      "84154d1e7b65634bf70a96a5c083a21de175806342bcdec4206cf3c292c6073e"
+      "247aeca88f35726b1df5444a4defed8fbbc530196c1ad8a15f26409d71c8b8df"
     ],
     [
       ".junie/agents/debug.md",
-      "dd0f8904555143368328a883428406ba4be847bd22735924993c85bc86b59b84"
+      "053a6386f1263241d1ee14143853ea52f5414432099343379d77cc834c239610"
     ],
     [
       ".junie/agents/enforcement.md",
-      "a2451211255aea40a88bfa6c2a521f03b2427d04bf396a13ee767874ffabfa31"
+      "75d9875f6f158183d4b3601d878e661994c20898c17ccf88b078d6bfb454e46a"
     ],
     [
       ".junie/agents/explain.md",
-      "6fa534b35388c9fbc1a344f701ee2e96089557dd8dfb98c94da36a9ef92f7ae1"
+      "7beb7096cb6ab99d7a6ce944ca5673c211ebfc68700799cc16f4e1145908161e"
     ],
     [
       ".junie/agents/frontend.md",
-      "8765d63782e5dea75dedb5a3b39a393191d4b3912564d8d34b31655ce7a42118"
+      "b0e41f25478d16d6bc04e0a47caab471e8dd5e2fd994613e9b5b27979989cf79"
     ],
     [
       ".junie/agents/migration.md",
-      "69a6909a8bf5540cf4c72a4fd4514d487464cbd0d5c958a91d5ca8c8633017ba"
+      "5fcbd9e2576c84d0c93838bd2c39bd2c2406e7b0f6df41b08ff36a970f61ca6e"
     ],
     [
       ".junie/agents/orchestrator.md",
-      "c1f7968d23a73ff5ea87a86dbe3429d85c5b909f904f35ce8cb632b1df1c7a5d"
+      "b8f2e0ef56590143fe4aa8c49188ef5f2b554776bcc333ccb204e1abb59de822"
     ],
     [
       ".junie/agents/performance.md",
-      "bdc8ce2b745deb3ea0a8f7b7e521c06ff2b894d8467a4f64cf349f2960d813c9"
+      "5851f9a0844ac2f7f4d61d41ca63f835b6962b71701cab4eb421723f2ba36068"
     ],
     [
       ".junie/agents/plan.md",
@@ -1632,15 +2844,15 @@
     ],
     [
       ".junie/agents/refactor.md",
-      "ec9c958c58994f5f510c618c81e3f7f94f6755e32d2dcb7bedf3e384574e37a1"
+      "b1f538430d0311a7cfa13562a2b2b155dd88d823125143b0fe31f3a8256e6377"
     ],
     [
       ".junie/agents/review.md",
-      "1ec57e06cd69a722de568a51b0511dfe055f9814e3cf34d410aca900bd381c7f"
+      "1b42125b0fb51208bceb1e95092813b320d557e54dd28c6ae9a4789770d5d08c"
     ],
     [
       ".junie/agents/test.md",
-      "1bb4a5f1065543fd10ab4fee9510096d359455ddcbc490efae9d9198de0a92d3"
+      "3a29c368e7b75fa1b21bacf6d9c16301037be4db1ed5077c08ffc098c2a4daa6"
     ],
     [
       ".junie/commands/boilerplate.md",
@@ -1651,6 +2863,10 @@
       "88cd8e0b6f0491e4686daf633495fc5d4e25668f6fb68224b0cc997f821d6ecc"
     ],
     [
+      ".junie/commands/dependency-upgrade.md",
+      "89e8ef66fc3468e9e7cbf2c2b0530039a4e780cdcc4d38b0191be3db35e1b510"
+    ],
+    [
       ".junie/commands/feature.md",
       "9fd9335de09868ffd044a832086e7e98a7664206db269bd52de4c514a9532bfa"
     ],
@@ -1659,12 +2875,64 @@
       "7bc53eb68cdba3dbb123dde3693702ea7ccbbe5521ec92452101e79810359f34"
     ],
     [
+      ".junie/commands/migration.md",
+      "7cfaf5b54f0303cb4b7811c2737a87b73a2e4419a3600a200050939785ae0238"
+    ],
+    [
+      ".junie/commands/performance.md",
+      "0435290ef5b6bcde2c6c8c91b5fac2fb1e74534d340deda3d21fb66aad384d81"
+    ],
+    [
       ".junie/commands/refactor.md",
       "b99c39dece9b3d49b6faaa46585b8f4a6cf449b94f49206058241334db154a95"
     ],
     [
+      ".junie/commands/strategy.md",
+      "a5c82c27d72149fc42dcc75fc80e2618390ef2feb195741aa54eba4cf6a3efa9"
+    ],
+    [
       ".junie/commands/testing.md",
       "d6d0859c54f04c5c69608b75ae2569cf2bb4aae96aa7ee14936592b4472bca2d"
+    ],
+    [
+      ".junie/commands/workflow-migration-patterns.md",
+      "6b8cc853fcc2e8edef02c11935f70c9528dbfb3dd21cd1a215f92fac625a8768"
+    ],
+    [
+      ".junie/commands/workflow-performance-optimization.md",
+      "07b40c1fb5ae860a24e26a0c2cec00eedcb3f7e3c02efa8705b0a2f99f7bb784"
+    ],
+    [
+      ".junie/commands/workflow-scaling-patterns.md",
+      "907195f7ab03b3948bd5af14584c0a5d9221dbde55f069ce096659a6116cdec7"
+    ],
+    [
+      ".junie/skills/architecture-documentation/SKILL.md",
+      "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
+    ],
+    [
+      ".junie/skills/code-review-practices/SKILL.md",
+      "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
+    ],
+    [
+      ".junie/skills/continuous-improvement/SKILL.md",
+      "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+    ],
+    [
+      ".junie/skills/data-model-discovery/SKILL.md",
+      "7bb93b77674b80de48bc5f572f0a1bd8c51458f4050ecfe0af70d6c6f3123713"
+    ],
+    [
+      ".junie/skills/data-validation-pipelines/SKILL.md",
+      "684d497852e1980d9e8a322c59e9ac637c2dc100d484358aa0b8281a3ac0f25c"
+    ],
+    [
+      ".junie/skills/debugging-methodology/SKILL.md",
+      "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
+    ],
+    [
+      ".junie/skills/documentation-best-practices/SKILL.md",
+      "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
     ],
     [
       ".junie/skills/feature-planning/SKILL.md",
@@ -1675,8 +2943,40 @@
       "af8ee67d6925c3095724964a59a134d9725d5952bfa361cf5d7eef7e42ffbe6a"
     ],
     [
+      ".junie/skills/multiagent-orchestration/SKILL.md",
+      "4f56926633e3b6527047e07041e415cbf0bc171ca9cfdf7fa0f99b8550a51705"
+    ],
+    [
+      ".junie/skills/performance-optimization/SKILL.md",
+      "81f057d445e73f1877db1b7996b34a9cd2976e8670f332ac2e13f0c4eac392b2"
+    ],
+    [
       ".junie/skills/post-implementation-checklist/SKILL.md",
       "9a41690df76da259b04cf85fb7dcb6a0330f57cc4edf9ecb04e4adfb508a130d"
+    ],
+    [
+      ".junie/skills/problem-decomposition/SKILL.md",
+      "9962362a175e7b4ee9acd1bc585511234902694910c5ba1f20a3e53ee01c2047"
+    ],
+    [
+      ".junie/skills/quality-assurance/SKILL.md",
+      "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+    ],
+    [
+      ".junie/skills/team-collaboration/SKILL.md",
+      "59a7c4fc7970bd4af790f6642fb030df0fbfde73d95595fa2289196c71ee64ba"
+    ],
+    [
+      ".junie/skills/technical-communication/SKILL.md",
+      "725be0f40aa295e16c715ada58178484a886e3d7d0eef134e5d3926132923625"
+    ],
+    [
+      ".junie/skills/technical-debt-management/SKILL.md",
+      "c2592c501d10efa2cd701602f205caf567984c0e8fb5c233454129a829bf1c59"
+    ],
+    [
+      ".junie/skills/technical-decision-making/SKILL.md",
+      "4f5b3cb084e61b2e1c7edcdb9eec25927a06974bf2c189e371525a867be5b985"
     ],
     [
       ".junie/skills/test-aaa-structure/SKILL.md",
@@ -1689,6 +2989,10 @@
     [
       ".junie/skills/test-mocking-rules/SKILL.md",
       "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e"
+    ],
+    [
+      ".junie/skills/testing-strategies/SKILL.md",
+      "042493cfef510d68a72e9e99385bd99101832340f9e080e4c14786d4d3d8cac0"
     ],
     [
       "AGENTS.md",
@@ -1710,7 +3014,7 @@
     ],
     [
       ".kilo/agents/ask.md",
-      "ed2f4b5ff40b350dba2838a961c15b57a7711ae888b5c0171011b4770569722c"
+      "c8b0e8e855daf3b0ac31e4a890a4e131bc35144c65cbd81f3e4f5254c4023196"
     ],
     [
       ".kilo/agents/backend/api-design.md",
@@ -1730,7 +3034,7 @@
     ],
     [
       ".kilo/agents/backend.md",
-      "e9073e9116128cfff5bba44aadd2e30d84186a3331736925a722022d4fc49f4b"
+      "5110e0be6b52b9fddffd4a77875528611518385bef726a1b241d9d893450bedf"
     ],
     [
       ".kilo/agents/code/boilerplate.md",
@@ -1750,15 +3054,15 @@
     ],
     [
       ".kilo/agents/code/migration.md",
-      "7fc72ba908e2da4bca07e9bb79761b1ee10cc28815785a5d934553e16cac7d6b"
+      "2fcfe286fe4caca22fb8325ca7b5887e0119a73d00d6b47b19123fa60f890e76"
     ],
     [
       ".kilo/agents/code/refactor.md",
-      "67313bf3afe6b7d8080474010363b196ae64daadfc2a45ebf5b0595b607b3fbf"
+      "fd5077127614a306ce1fb42eeab5bac9886c0e2fa81655dc5eed682b7a4e213d"
     ],
     [
       ".kilo/agents/code.md",
-      "88e02cc50c1b8e517b279797df5c6a4e5ed60ca2a7d4b2e82764f052eaff2eff"
+      "df1aa3dba52b3a3315a551d379f92b8c8ead719c465248f904f47272573b8eb4"
     ],
     [
       ".kilo/agents/debug/log-analysis.md",
@@ -1774,11 +3078,11 @@
     ],
     [
       ".kilo/agents/debug.md",
-      "e0d9954b7ca622091b27cc065cf5c34edde96e8d6d26a18303c4f0aeabd977f1"
+      "dbfc9646a99e467e0ba118bfcd710417afedb375435a9783e2157b3457029572"
     ],
     [
       ".kilo/agents/enforcement.md",
-      "09ca5ccd3f98989f9c249e9a5696078589fca9a9477bb6ebe7e3ba36aebc0d75"
+      "c528d45d0ad9bde19c3f8d362e7d9c4b7fdf9f8528b2890cac65d1df58a9b26b"
     ],
     [
       ".kilo/agents/explain/strategy.md",
@@ -1786,7 +3090,7 @@
     ],
     [
       ".kilo/agents/explain.md",
-      "1dad689234bc737955e4e51c0f262629fd714ef1e0dd34a3b17eb571987801c0"
+      "18ccf79ccfb32846d77030b75cb12ff49f633d19e68f09a4400a1c76e0642997"
     ],
     [
       ".kilo/agents/frontend/accessibility.md",
@@ -1806,7 +3110,7 @@
     ],
     [
       ".kilo/agents/frontend.md",
-      "79280b4b0c7bc7f11eeab420b5e99da817b4b8eaef9b6e2dd76d9dc1eac552b1"
+      "823b954ff7fd4c3f151b45d998e12da70d43ab549647706799aa4dd246503e35"
     ],
     [
       ".kilo/agents/migration/strategy.md",
@@ -1814,11 +3118,11 @@
     ],
     [
       ".kilo/agents/migration.md",
-      "1507ae731743c22fbb50cdfdd6b828347fbf813c9888e0d4744e1b278493f480"
+      "e016345a94755baf936b95332d85e02169e634f1f18bffb5aed7782a910edee3"
     ],
     [
       ".kilo/agents/orchestrator/devops.md",
-      "3b8a48844787ebc75f5bddb3aeef0ef4ff4ea8808b9f27865e4b2469b0cdbc8d"
+      "75532900195e1e242a32117a4b7bd36c874b649067bc4b9eb7f74d04302fa24f"
     ],
     [
       ".kilo/agents/orchestrator/maintenance.md",
@@ -1834,7 +3138,7 @@
     ],
     [
       ".kilo/agents/orchestrator.md",
-      "3a43c6831d0985899f0c2703d864d0bf98454c635739a4cd14fcbc3b151e1b85"
+      "97a860d54c78484d33fff23516d7f94d25a1836d38f1b82bcf5fafaf07ecc74b"
     ],
     [
       ".kilo/agents/performance/benchmarking.md",
@@ -1854,7 +3158,7 @@
     ],
     [
       ".kilo/agents/performance.md",
-      "5e1ec40d982311e2fea894ebfa7922ef1fbb5199a38b17cbf2c6a08570d82eba"
+      "28cdf732afdf902b632c4a2f9c1863c0d2267bbe84c5ff7c46a5811041e0d0b5"
     ],
     [
       ".kilo/agents/plan.md",
@@ -1866,7 +3170,7 @@
     ],
     [
       ".kilo/agents/refactor.md",
-      "b13405f004b25938c29c44002fd3492338ac1e832f9cf07eb827757abdf3c10b"
+      "b0259d0f2b3b7b0530bff6613b4e7c8c74c851f3650104eef96bc45ed0827c21"
     ],
     [
       ".kilo/agents/review/accessibility.md",
@@ -1874,15 +3178,15 @@
     ],
     [
       ".kilo/agents/review/code.md",
-      "1fca2377868d66c9c3e9b113c1e12a540cf7b57c3a62ce8897552cc7a9e2b8ba"
+      "773a88e9560c64157a31ea097e04199a8d3ae4b2bbb4ab460d5a669748207383"
     ],
     [
       ".kilo/agents/review/performance.md",
-      "9827583ebce06085d0f619af2fecbdd11e06cd7891432b0e9ca992811c4d9cb3"
+      "038c5ee3dab34ab5cd984cb1bebea386470e5c6c2b487efd0f20583da14f8d42"
     ],
     [
       ".kilo/agents/review.md",
-      "f3361002c45a14184457a9ebfda02989aa3db8a2f5515d23c0bd5d39105e2405"
+      "c42ab91ff6a8f12ba1d6831c985d0b8014c3068146f9d21b2202c1b50b2b3628"
     ],
     [
       ".kilo/agents/test/strategy.md",
@@ -1890,7 +3194,7 @@
     ],
     [
       ".kilo/agents/test.md",
-      "a9e5a755a26700ba75fd58e4afa5fea293bffa21d658a423850c259e68c6c7bb"
+      "a0f4fe07a2090f4332a35d2d61b856f406b2979d4954eb622dd3fe9ec32689a3"
     ],
     [
       ".kilo/commands/boilerplate.md",
@@ -1901,6 +3205,10 @@
       "a1b827fc4585627e6921a08c920afcc9c4cc5b5e218a2226997c37012f9be5cf"
     ],
     [
+      ".kilo/commands/dependency-upgrade.md",
+      "9d3000eb83fb8b40ec463b0222ebc8e94e5e5c1ffabc16c621dbb91018bc4e0e"
+    ],
+    [
       ".kilo/commands/feature.md",
       "5d23dd05bceff76cb7d55b270a6a2d12033d9699ac80859583494e495c4e13d5"
     ],
@@ -1909,12 +3217,36 @@
       "4abc19173ed0dea7fdd208ecbf05cf12fd98aaed316eb77159ef470d04d8c392"
     ],
     [
+      ".kilo/commands/migration.md",
+      "dbcd192531c470acb163e0d7181d4c005540f733c7dd5e89990803c70b80f90d"
+    ],
+    [
+      ".kilo/commands/performance.md",
+      "6a87f9aec27b7a4476ea4cefbd6b32024c96889d2be685d033d52625d425f5b3"
+    ],
+    [
       ".kilo/commands/refactor.md",
       "15b128253b00b70ace6411671285b8aeeb593961017054f9737f7bbe7fb0acc9"
     ],
     [
+      ".kilo/commands/strategy.md",
+      "6322fdc10564c8a47d74ff3a4313ba2bbeafa7a10aae79bc518816a97daf803b"
+    ],
+    [
       ".kilo/commands/testing.md",
       "d8c818f6e448e7927bbc600f10831ff7c242510751b5a67cd8fdeca6188b7c2d"
+    ],
+    [
+      ".kilo/commands/workflow-migration-patterns.md",
+      "760b42e31539d1433426f31bd09498bf7808a5104c24579dbf94bac13004b9d2"
+    ],
+    [
+      ".kilo/commands/workflow-performance-optimization.md",
+      "e03e193dd8e1c84b6b86b8c2553a6f2961cfbc32a73d23f2aae17a773140e133"
+    ],
+    [
+      ".kilo/commands/workflow-scaling-patterns.md",
+      "1206fb5a49bd7d9b60de274df0ccc391bfd081f8aca502213bc7901e6728f0ef"
     ],
     [
       ".kilo/rules/conventions-python.md",
@@ -1941,6 +3273,34 @@
       "69eb118484f93009b85d299cf0831748056f28c6e979ec1e1454f3b3384f40dd"
     ],
     [
+      ".kilo/skills/architecture-documentation/SKILL.md",
+      "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
+    ],
+    [
+      ".kilo/skills/code-review-practices/SKILL.md",
+      "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
+    ],
+    [
+      ".kilo/skills/continuous-improvement/SKILL.md",
+      "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+    ],
+    [
+      ".kilo/skills/data-model-discovery/SKILL.md",
+      "b2168e0a29217dac25abc926ae9b37d3ee25f3f745fa2af30746bcbd7775cb82"
+    ],
+    [
+      ".kilo/skills/data-validation-pipelines/SKILL.md",
+      "09739cef80da0955aba6cb78b5c03b82eda86664438e9eb4aa139b657112e908"
+    ],
+    [
+      ".kilo/skills/debugging-methodology/SKILL.md",
+      "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
+    ],
+    [
+      ".kilo/skills/documentation-best-practices/SKILL.md",
+      "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
+    ],
+    [
       ".kilo/skills/feature-planning/SKILL.md",
       "a85d09f78dec318635b4de95f1202d3443fb9e67b9b320237572df0aa6425454"
     ],
@@ -1949,8 +3309,40 @@
       "c8db9858e7b72b9f941e9038d15d04503ebf60c51462e3a71367903f3c8e5063"
     ],
     [
+      ".kilo/skills/multiagent-orchestration/SKILL.md",
+      "d6c940687cbd37a68a491a4303032bc90ac7b9dff01e2db84e1c451082aa26b9"
+    ],
+    [
+      ".kilo/skills/performance-optimization/SKILL.md",
+      "326754e646454eb1d54a4e9692a8dfb1896902b9adf51a1513b46aa5669d647a"
+    ],
+    [
       ".kilo/skills/post-implementation-checklist/SKILL.md",
       "b3348cb58adf17c882a470bf2ffd87a0556ac6a0c4f47e5fbfc24c127217bee8"
+    ],
+    [
+      ".kilo/skills/problem-decomposition/SKILL.md",
+      "f37c4a570593d780e4b1173ef0082df62d03efb2e00bfcaac5d1feecb2caec8e"
+    ],
+    [
+      ".kilo/skills/quality-assurance/SKILL.md",
+      "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+    ],
+    [
+      ".kilo/skills/team-collaboration/SKILL.md",
+      "8d3703e287a6a9c94a53da968ece20bf8b2bac4f7a28d3d49f838c9646b5be02"
+    ],
+    [
+      ".kilo/skills/technical-communication/SKILL.md",
+      "66f5368887094575002c8f83064e41110ceab580afd197cc4ed0319a48e933bb"
+    ],
+    [
+      ".kilo/skills/technical-debt-management/SKILL.md",
+      "16d955e806942e53c349c73cb281eecd1248e83ca8be203f409d67eb0b0d3fc0"
+    ],
+    [
+      ".kilo/skills/technical-decision-making/SKILL.md",
+      "d16fe4266cf65a2e88bd45d15f95fe91771be2cd4c1a10d00328503f11a38f48"
     ],
     [
       ".kilo/skills/test-aaa-structure/SKILL.md",
@@ -1963,6 +3355,10 @@
     [
       ".kilo/skills/test-mocking-rules/SKILL.md",
       "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec"
+    ],
+    [
+      ".kilo/skills/testing-strategies/SKILL.md",
+      "15500c149b2af4d6844bc36903465b6b155ee9b38e897910e5f010a40eb829ab"
     ],
     [
       "AGENTS.md",
@@ -1984,7 +3380,7 @@
     ],
     [
       ".kilo/agents/ask.md",
-      "ed2f4b5ff40b350dba2838a961c15b57a7711ae888b5c0171011b4770569722c"
+      "c8b0e8e855daf3b0ac31e4a890a4e131bc35144c65cbd81f3e4f5254c4023196"
     ],
     [
       ".kilo/agents/backend/api-design.md",
@@ -2004,7 +3400,7 @@
     ],
     [
       ".kilo/agents/backend.md",
-      "e9073e9116128cfff5bba44aadd2e30d84186a3331736925a722022d4fc49f4b"
+      "5110e0be6b52b9fddffd4a77875528611518385bef726a1b241d9d893450bedf"
     ],
     [
       ".kilo/agents/code/boilerplate.md",
@@ -2024,15 +3420,15 @@
     ],
     [
       ".kilo/agents/code/migration.md",
-      "7fc72ba908e2da4bca07e9bb79761b1ee10cc28815785a5d934553e16cac7d6b"
+      "2fcfe286fe4caca22fb8325ca7b5887e0119a73d00d6b47b19123fa60f890e76"
     ],
     [
       ".kilo/agents/code/refactor.md",
-      "67313bf3afe6b7d8080474010363b196ae64daadfc2a45ebf5b0595b607b3fbf"
+      "fd5077127614a306ce1fb42eeab5bac9886c0e2fa81655dc5eed682b7a4e213d"
     ],
     [
       ".kilo/agents/code.md",
-      "88e02cc50c1b8e517b279797df5c6a4e5ed60ca2a7d4b2e82764f052eaff2eff"
+      "df1aa3dba52b3a3315a551d379f92b8c8ead719c465248f904f47272573b8eb4"
     ],
     [
       ".kilo/agents/debug/log-analysis.md",
@@ -2048,11 +3444,11 @@
     ],
     [
       ".kilo/agents/debug.md",
-      "e0d9954b7ca622091b27cc065cf5c34edde96e8d6d26a18303c4f0aeabd977f1"
+      "dbfc9646a99e467e0ba118bfcd710417afedb375435a9783e2157b3457029572"
     ],
     [
       ".kilo/agents/enforcement.md",
-      "09ca5ccd3f98989f9c249e9a5696078589fca9a9477bb6ebe7e3ba36aebc0d75"
+      "c528d45d0ad9bde19c3f8d362e7d9c4b7fdf9f8528b2890cac65d1df58a9b26b"
     ],
     [
       ".kilo/agents/explain/strategy.md",
@@ -2060,7 +3456,7 @@
     ],
     [
       ".kilo/agents/explain.md",
-      "1dad689234bc737955e4e51c0f262629fd714ef1e0dd34a3b17eb571987801c0"
+      "18ccf79ccfb32846d77030b75cb12ff49f633d19e68f09a4400a1c76e0642997"
     ],
     [
       ".kilo/agents/frontend/accessibility.md",
@@ -2080,7 +3476,7 @@
     ],
     [
       ".kilo/agents/frontend.md",
-      "79280b4b0c7bc7f11eeab420b5e99da817b4b8eaef9b6e2dd76d9dc1eac552b1"
+      "823b954ff7fd4c3f151b45d998e12da70d43ab549647706799aa4dd246503e35"
     ],
     [
       ".kilo/agents/migration/strategy.md",
@@ -2088,11 +3484,11 @@
     ],
     [
       ".kilo/agents/migration.md",
-      "1507ae731743c22fbb50cdfdd6b828347fbf813c9888e0d4744e1b278493f480"
+      "e016345a94755baf936b95332d85e02169e634f1f18bffb5aed7782a910edee3"
     ],
     [
       ".kilo/agents/orchestrator/devops.md",
-      "3b8a48844787ebc75f5bddb3aeef0ef4ff4ea8808b9f27865e4b2469b0cdbc8d"
+      "75532900195e1e242a32117a4b7bd36c874b649067bc4b9eb7f74d04302fa24f"
     ],
     [
       ".kilo/agents/orchestrator/maintenance.md",
@@ -2108,7 +3504,7 @@
     ],
     [
       ".kilo/agents/orchestrator.md",
-      "3a43c6831d0985899f0c2703d864d0bf98454c635739a4cd14fcbc3b151e1b85"
+      "97a860d54c78484d33fff23516d7f94d25a1836d38f1b82bcf5fafaf07ecc74b"
     ],
     [
       ".kilo/agents/performance/benchmarking.md",
@@ -2128,7 +3524,7 @@
     ],
     [
       ".kilo/agents/performance.md",
-      "5e1ec40d982311e2fea894ebfa7922ef1fbb5199a38b17cbf2c6a08570d82eba"
+      "28cdf732afdf902b632c4a2f9c1863c0d2267bbe84c5ff7c46a5811041e0d0b5"
     ],
     [
       ".kilo/agents/plan.md",
@@ -2140,7 +3536,7 @@
     ],
     [
       ".kilo/agents/refactor.md",
-      "b13405f004b25938c29c44002fd3492338ac1e832f9cf07eb827757abdf3c10b"
+      "b0259d0f2b3b7b0530bff6613b4e7c8c74c851f3650104eef96bc45ed0827c21"
     ],
     [
       ".kilo/agents/review/accessibility.md",
@@ -2148,15 +3544,15 @@
     ],
     [
       ".kilo/agents/review/code.md",
-      "1fca2377868d66c9c3e9b113c1e12a540cf7b57c3a62ce8897552cc7a9e2b8ba"
+      "773a88e9560c64157a31ea097e04199a8d3ae4b2bbb4ab460d5a669748207383"
     ],
     [
       ".kilo/agents/review/performance.md",
-      "9827583ebce06085d0f619af2fecbdd11e06cd7891432b0e9ca992811c4d9cb3"
+      "038c5ee3dab34ab5cd984cb1bebea386470e5c6c2b487efd0f20583da14f8d42"
     ],
     [
       ".kilo/agents/review.md",
-      "f3361002c45a14184457a9ebfda02989aa3db8a2f5515d23c0bd5d39105e2405"
+      "c42ab91ff6a8f12ba1d6831c985d0b8014c3068146f9d21b2202c1b50b2b3628"
     ],
     [
       ".kilo/agents/test/strategy.md",
@@ -2164,7 +3560,7 @@
     ],
     [
       ".kilo/agents/test.md",
-      "a9e5a755a26700ba75fd58e4afa5fea293bffa21d658a423850c259e68c6c7bb"
+      "a0f4fe07a2090f4332a35d2d61b856f406b2979d4954eb622dd3fe9ec32689a3"
     ],
     [
       ".kilo/commands/boilerplate.md",
@@ -2175,6 +3571,10 @@
       "88cd8e0b6f0491e4686daf633495fc5d4e25668f6fb68224b0cc997f821d6ecc"
     ],
     [
+      ".kilo/commands/dependency-upgrade.md",
+      "89e8ef66fc3468e9e7cbf2c2b0530039a4e780cdcc4d38b0191be3db35e1b510"
+    ],
+    [
       ".kilo/commands/feature.md",
       "9fd9335de09868ffd044a832086e7e98a7664206db269bd52de4c514a9532bfa"
     ],
@@ -2183,12 +3583,36 @@
       "7bc53eb68cdba3dbb123dde3693702ea7ccbbe5521ec92452101e79810359f34"
     ],
     [
+      ".kilo/commands/migration.md",
+      "7cfaf5b54f0303cb4b7811c2737a87b73a2e4419a3600a200050939785ae0238"
+    ],
+    [
+      ".kilo/commands/performance.md",
+      "0435290ef5b6bcde2c6c8c91b5fac2fb1e74534d340deda3d21fb66aad384d81"
+    ],
+    [
       ".kilo/commands/refactor.md",
       "b99c39dece9b3d49b6faaa46585b8f4a6cf449b94f49206058241334db154a95"
     ],
     [
+      ".kilo/commands/strategy.md",
+      "a5c82c27d72149fc42dcc75fc80e2618390ef2feb195741aa54eba4cf6a3efa9"
+    ],
+    [
       ".kilo/commands/testing.md",
       "d6d0859c54f04c5c69608b75ae2569cf2bb4aae96aa7ee14936592b4472bca2d"
+    ],
+    [
+      ".kilo/commands/workflow-migration-patterns.md",
+      "6b8cc853fcc2e8edef02c11935f70c9528dbfb3dd21cd1a215f92fac625a8768"
+    ],
+    [
+      ".kilo/commands/workflow-performance-optimization.md",
+      "07b40c1fb5ae860a24e26a0c2cec00eedcb3f7e3c02efa8705b0a2f99f7bb784"
+    ],
+    [
+      ".kilo/commands/workflow-scaling-patterns.md",
+      "907195f7ab03b3948bd5af14584c0a5d9221dbde55f069ce096659a6116cdec7"
     ],
     [
       ".kilo/rules/conventions-python.md",
@@ -2215,6 +3639,34 @@
       "69eb118484f93009b85d299cf0831748056f28c6e979ec1e1454f3b3384f40dd"
     ],
     [
+      ".kilo/skills/architecture-documentation/SKILL.md",
+      "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
+    ],
+    [
+      ".kilo/skills/code-review-practices/SKILL.md",
+      "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
+    ],
+    [
+      ".kilo/skills/continuous-improvement/SKILL.md",
+      "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+    ],
+    [
+      ".kilo/skills/data-model-discovery/SKILL.md",
+      "7bb93b77674b80de48bc5f572f0a1bd8c51458f4050ecfe0af70d6c6f3123713"
+    ],
+    [
+      ".kilo/skills/data-validation-pipelines/SKILL.md",
+      "684d497852e1980d9e8a322c59e9ac637c2dc100d484358aa0b8281a3ac0f25c"
+    ],
+    [
+      ".kilo/skills/debugging-methodology/SKILL.md",
+      "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
+    ],
+    [
+      ".kilo/skills/documentation-best-practices/SKILL.md",
+      "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
+    ],
+    [
       ".kilo/skills/feature-planning/SKILL.md",
       "3b43fa04f2823fcd2adc420ba1adc4989c3fe6d0a247f93f1d0e765f5ec971e6"
     ],
@@ -2223,8 +3675,40 @@
       "af8ee67d6925c3095724964a59a134d9725d5952bfa361cf5d7eef7e42ffbe6a"
     ],
     [
+      ".kilo/skills/multiagent-orchestration/SKILL.md",
+      "4f56926633e3b6527047e07041e415cbf0bc171ca9cfdf7fa0f99b8550a51705"
+    ],
+    [
+      ".kilo/skills/performance-optimization/SKILL.md",
+      "81f057d445e73f1877db1b7996b34a9cd2976e8670f332ac2e13f0c4eac392b2"
+    ],
+    [
       ".kilo/skills/post-implementation-checklist/SKILL.md",
       "9a41690df76da259b04cf85fb7dcb6a0330f57cc4edf9ecb04e4adfb508a130d"
+    ],
+    [
+      ".kilo/skills/problem-decomposition/SKILL.md",
+      "9962362a175e7b4ee9acd1bc585511234902694910c5ba1f20a3e53ee01c2047"
+    ],
+    [
+      ".kilo/skills/quality-assurance/SKILL.md",
+      "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+    ],
+    [
+      ".kilo/skills/team-collaboration/SKILL.md",
+      "59a7c4fc7970bd4af790f6642fb030df0fbfde73d95595fa2289196c71ee64ba"
+    ],
+    [
+      ".kilo/skills/technical-communication/SKILL.md",
+      "725be0f40aa295e16c715ada58178484a886e3d7d0eef134e5d3926132923625"
+    ],
+    [
+      ".kilo/skills/technical-debt-management/SKILL.md",
+      "c2592c501d10efa2cd701602f205caf567984c0e8fb5c233454129a829bf1c59"
+    ],
+    [
+      ".kilo/skills/technical-decision-making/SKILL.md",
+      "4f5b3cb084e61b2e1c7edcdb9eec25927a06974bf2c189e371525a867be5b985"
     ],
     [
       ".kilo/skills/test-aaa-structure/SKILL.md",
@@ -2237,6 +3721,10 @@
     [
       ".kilo/skills/test-mocking-rules/SKILL.md",
       "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e"
+    ],
+    [
+      ".kilo/skills/testing-strategies/SKILL.md",
+      "042493cfef510d68a72e9e99385bd99101832340f9e080e4c14786d4d3d8cac0"
     ],
     [
       "AGENTS.md",
@@ -2258,7 +3746,7 @@
     ],
     [
       ".kilo/agents/ask.md",
-      "ed2f4b5ff40b350dba2838a961c15b57a7711ae888b5c0171011b4770569722c"
+      "c8b0e8e855daf3b0ac31e4a890a4e131bc35144c65cbd81f3e4f5254c4023196"
     ],
     [
       ".kilo/agents/backend/api-design.md",
@@ -2278,7 +3766,7 @@
     ],
     [
       ".kilo/agents/backend.md",
-      "e9073e9116128cfff5bba44aadd2e30d84186a3331736925a722022d4fc49f4b"
+      "5110e0be6b52b9fddffd4a77875528611518385bef726a1b241d9d893450bedf"
     ],
     [
       ".kilo/agents/code/boilerplate.md",
@@ -2298,15 +3786,15 @@
     ],
     [
       ".kilo/agents/code/migration.md",
-      "7fc72ba908e2da4bca07e9bb79761b1ee10cc28815785a5d934553e16cac7d6b"
+      "2fcfe286fe4caca22fb8325ca7b5887e0119a73d00d6b47b19123fa60f890e76"
     ],
     [
       ".kilo/agents/code/refactor.md",
-      "67313bf3afe6b7d8080474010363b196ae64daadfc2a45ebf5b0595b607b3fbf"
+      "fd5077127614a306ce1fb42eeab5bac9886c0e2fa81655dc5eed682b7a4e213d"
     ],
     [
       ".kilo/agents/code.md",
-      "88e02cc50c1b8e517b279797df5c6a4e5ed60ca2a7d4b2e82764f052eaff2eff"
+      "df1aa3dba52b3a3315a551d379f92b8c8ead719c465248f904f47272573b8eb4"
     ],
     [
       ".kilo/agents/debug/log-analysis.md",
@@ -2322,11 +3810,11 @@
     ],
     [
       ".kilo/agents/debug.md",
-      "e0d9954b7ca622091b27cc065cf5c34edde96e8d6d26a18303c4f0aeabd977f1"
+      "dbfc9646a99e467e0ba118bfcd710417afedb375435a9783e2157b3457029572"
     ],
     [
       ".kilo/agents/enforcement.md",
-      "09ca5ccd3f98989f9c249e9a5696078589fca9a9477bb6ebe7e3ba36aebc0d75"
+      "c528d45d0ad9bde19c3f8d362e7d9c4b7fdf9f8528b2890cac65d1df58a9b26b"
     ],
     [
       ".kilo/agents/explain/strategy.md",
@@ -2334,7 +3822,7 @@
     ],
     [
       ".kilo/agents/explain.md",
-      "1dad689234bc737955e4e51c0f262629fd714ef1e0dd34a3b17eb571987801c0"
+      "18ccf79ccfb32846d77030b75cb12ff49f633d19e68f09a4400a1c76e0642997"
     ],
     [
       ".kilo/agents/frontend/accessibility.md",
@@ -2354,7 +3842,7 @@
     ],
     [
       ".kilo/agents/frontend.md",
-      "79280b4b0c7bc7f11eeab420b5e99da817b4b8eaef9b6e2dd76d9dc1eac552b1"
+      "823b954ff7fd4c3f151b45d998e12da70d43ab549647706799aa4dd246503e35"
     ],
     [
       ".kilo/agents/migration/strategy.md",
@@ -2362,11 +3850,11 @@
     ],
     [
       ".kilo/agents/migration.md",
-      "1507ae731743c22fbb50cdfdd6b828347fbf813c9888e0d4744e1b278493f480"
+      "e016345a94755baf936b95332d85e02169e634f1f18bffb5aed7782a910edee3"
     ],
     [
       ".kilo/agents/orchestrator/devops.md",
-      "3b8a48844787ebc75f5bddb3aeef0ef4ff4ea8808b9f27865e4b2469b0cdbc8d"
+      "75532900195e1e242a32117a4b7bd36c874b649067bc4b9eb7f74d04302fa24f"
     ],
     [
       ".kilo/agents/orchestrator/maintenance.md",
@@ -2382,7 +3870,7 @@
     ],
     [
       ".kilo/agents/orchestrator.md",
-      "3a43c6831d0985899f0c2703d864d0bf98454c635739a4cd14fcbc3b151e1b85"
+      "97a860d54c78484d33fff23516d7f94d25a1836d38f1b82bcf5fafaf07ecc74b"
     ],
     [
       ".kilo/agents/performance/benchmarking.md",
@@ -2402,7 +3890,7 @@
     ],
     [
       ".kilo/agents/performance.md",
-      "5e1ec40d982311e2fea894ebfa7922ef1fbb5199a38b17cbf2c6a08570d82eba"
+      "28cdf732afdf902b632c4a2f9c1863c0d2267bbe84c5ff7c46a5811041e0d0b5"
     ],
     [
       ".kilo/agents/plan.md",
@@ -2414,7 +3902,7 @@
     ],
     [
       ".kilo/agents/refactor.md",
-      "b13405f004b25938c29c44002fd3492338ac1e832f9cf07eb827757abdf3c10b"
+      "b0259d0f2b3b7b0530bff6613b4e7c8c74c851f3650104eef96bc45ed0827c21"
     ],
     [
       ".kilo/agents/review/accessibility.md",
@@ -2422,15 +3910,15 @@
     ],
     [
       ".kilo/agents/review/code.md",
-      "1fca2377868d66c9c3e9b113c1e12a540cf7b57c3a62ce8897552cc7a9e2b8ba"
+      "773a88e9560c64157a31ea097e04199a8d3ae4b2bbb4ab460d5a669748207383"
     ],
     [
       ".kilo/agents/review/performance.md",
-      "9827583ebce06085d0f619af2fecbdd11e06cd7891432b0e9ca992811c4d9cb3"
+      "038c5ee3dab34ab5cd984cb1bebea386470e5c6c2b487efd0f20583da14f8d42"
     ],
     [
       ".kilo/agents/review.md",
-      "f3361002c45a14184457a9ebfda02989aa3db8a2f5515d23c0bd5d39105e2405"
+      "c42ab91ff6a8f12ba1d6831c985d0b8014c3068146f9d21b2202c1b50b2b3628"
     ],
     [
       ".kilo/agents/test/strategy.md",
@@ -2438,7 +3926,7 @@
     ],
     [
       ".kilo/agents/test.md",
-      "a9e5a755a26700ba75fd58e4afa5fea293bffa21d658a423850c259e68c6c7bb"
+      "a0f4fe07a2090f4332a35d2d61b856f406b2979d4954eb622dd3fe9ec32689a3"
     ],
     [
       ".kilo/commands/boilerplate.md",
@@ -2449,6 +3937,10 @@
       "a1b827fc4585627e6921a08c920afcc9c4cc5b5e218a2226997c37012f9be5cf"
     ],
     [
+      ".kilo/commands/dependency-upgrade.md",
+      "9d3000eb83fb8b40ec463b0222ebc8e94e5e5c1ffabc16c621dbb91018bc4e0e"
+    ],
+    [
       ".kilo/commands/feature.md",
       "5d23dd05bceff76cb7d55b270a6a2d12033d9699ac80859583494e495c4e13d5"
     ],
@@ -2457,12 +3949,36 @@
       "4abc19173ed0dea7fdd208ecbf05cf12fd98aaed316eb77159ef470d04d8c392"
     ],
     [
+      ".kilo/commands/migration.md",
+      "dbcd192531c470acb163e0d7181d4c005540f733c7dd5e89990803c70b80f90d"
+    ],
+    [
+      ".kilo/commands/performance.md",
+      "6a87f9aec27b7a4476ea4cefbd6b32024c96889d2be685d033d52625d425f5b3"
+    ],
+    [
       ".kilo/commands/refactor.md",
       "15b128253b00b70ace6411671285b8aeeb593961017054f9737f7bbe7fb0acc9"
     ],
     [
+      ".kilo/commands/strategy.md",
+      "6322fdc10564c8a47d74ff3a4313ba2bbeafa7a10aae79bc518816a97daf803b"
+    ],
+    [
       ".kilo/commands/testing.md",
       "d8c818f6e448e7927bbc600f10831ff7c242510751b5a67cd8fdeca6188b7c2d"
+    ],
+    [
+      ".kilo/commands/workflow-migration-patterns.md",
+      "760b42e31539d1433426f31bd09498bf7808a5104c24579dbf94bac13004b9d2"
+    ],
+    [
+      ".kilo/commands/workflow-performance-optimization.md",
+      "e03e193dd8e1c84b6b86b8c2553a6f2961cfbc32a73d23f2aae17a773140e133"
+    ],
+    [
+      ".kilo/commands/workflow-scaling-patterns.md",
+      "1206fb5a49bd7d9b60de274df0ccc391bfd081f8aca502213bc7901e6728f0ef"
     ],
     [
       ".kilo/rules/conventions-python.md",
@@ -2489,6 +4005,34 @@
       "69eb118484f93009b85d299cf0831748056f28c6e979ec1e1454f3b3384f40dd"
     ],
     [
+      ".kilo/skills/architecture-documentation/SKILL.md",
+      "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
+    ],
+    [
+      ".kilo/skills/code-review-practices/SKILL.md",
+      "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
+    ],
+    [
+      ".kilo/skills/continuous-improvement/SKILL.md",
+      "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+    ],
+    [
+      ".kilo/skills/data-model-discovery/SKILL.md",
+      "b2168e0a29217dac25abc926ae9b37d3ee25f3f745fa2af30746bcbd7775cb82"
+    ],
+    [
+      ".kilo/skills/data-validation-pipelines/SKILL.md",
+      "09739cef80da0955aba6cb78b5c03b82eda86664438e9eb4aa139b657112e908"
+    ],
+    [
+      ".kilo/skills/debugging-methodology/SKILL.md",
+      "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
+    ],
+    [
+      ".kilo/skills/documentation-best-practices/SKILL.md",
+      "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
+    ],
+    [
       ".kilo/skills/feature-planning/SKILL.md",
       "a85d09f78dec318635b4de95f1202d3443fb9e67b9b320237572df0aa6425454"
     ],
@@ -2497,8 +4041,40 @@
       "c8db9858e7b72b9f941e9038d15d04503ebf60c51462e3a71367903f3c8e5063"
     ],
     [
+      ".kilo/skills/multiagent-orchestration/SKILL.md",
+      "d6c940687cbd37a68a491a4303032bc90ac7b9dff01e2db84e1c451082aa26b9"
+    ],
+    [
+      ".kilo/skills/performance-optimization/SKILL.md",
+      "326754e646454eb1d54a4e9692a8dfb1896902b9adf51a1513b46aa5669d647a"
+    ],
+    [
       ".kilo/skills/post-implementation-checklist/SKILL.md",
       "b3348cb58adf17c882a470bf2ffd87a0556ac6a0c4f47e5fbfc24c127217bee8"
+    ],
+    [
+      ".kilo/skills/problem-decomposition/SKILL.md",
+      "f37c4a570593d780e4b1173ef0082df62d03efb2e00bfcaac5d1feecb2caec8e"
+    ],
+    [
+      ".kilo/skills/quality-assurance/SKILL.md",
+      "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+    ],
+    [
+      ".kilo/skills/team-collaboration/SKILL.md",
+      "8d3703e287a6a9c94a53da968ece20bf8b2bac4f7a28d3d49f838c9646b5be02"
+    ],
+    [
+      ".kilo/skills/technical-communication/SKILL.md",
+      "66f5368887094575002c8f83064e41110ceab580afd197cc4ed0319a48e933bb"
+    ],
+    [
+      ".kilo/skills/technical-debt-management/SKILL.md",
+      "16d955e806942e53c349c73cb281eecd1248e83ca8be203f409d67eb0b0d3fc0"
+    ],
+    [
+      ".kilo/skills/technical-decision-making/SKILL.md",
+      "d16fe4266cf65a2e88bd45d15f95fe91771be2cd4c1a10d00328503f11a38f48"
     ],
     [
       ".kilo/skills/test-aaa-structure/SKILL.md",
@@ -2511,6 +4087,10 @@
     [
       ".kilo/skills/test-mocking-rules/SKILL.md",
       "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec"
+    ],
+    [
+      ".kilo/skills/testing-strategies/SKILL.md",
+      "15500c149b2af4d6844bc36903465b6b155ee9b38e897910e5f010a40eb829ab"
     ],
     [
       "AGENTS.md",
@@ -2532,7 +4112,7 @@
     ],
     [
       ".kilo/agents/ask.md",
-      "ed2f4b5ff40b350dba2838a961c15b57a7711ae888b5c0171011b4770569722c"
+      "c8b0e8e855daf3b0ac31e4a890a4e131bc35144c65cbd81f3e4f5254c4023196"
     ],
     [
       ".kilo/agents/backend/api-design.md",
@@ -2552,7 +4132,7 @@
     ],
     [
       ".kilo/agents/backend.md",
-      "e9073e9116128cfff5bba44aadd2e30d84186a3331736925a722022d4fc49f4b"
+      "5110e0be6b52b9fddffd4a77875528611518385bef726a1b241d9d893450bedf"
     ],
     [
       ".kilo/agents/code/boilerplate.md",
@@ -2572,15 +4152,15 @@
     ],
     [
       ".kilo/agents/code/migration.md",
-      "7fc72ba908e2da4bca07e9bb79761b1ee10cc28815785a5d934553e16cac7d6b"
+      "2fcfe286fe4caca22fb8325ca7b5887e0119a73d00d6b47b19123fa60f890e76"
     ],
     [
       ".kilo/agents/code/refactor.md",
-      "67313bf3afe6b7d8080474010363b196ae64daadfc2a45ebf5b0595b607b3fbf"
+      "fd5077127614a306ce1fb42eeab5bac9886c0e2fa81655dc5eed682b7a4e213d"
     ],
     [
       ".kilo/agents/code.md",
-      "88e02cc50c1b8e517b279797df5c6a4e5ed60ca2a7d4b2e82764f052eaff2eff"
+      "df1aa3dba52b3a3315a551d379f92b8c8ead719c465248f904f47272573b8eb4"
     ],
     [
       ".kilo/agents/debug/log-analysis.md",
@@ -2596,11 +4176,11 @@
     ],
     [
       ".kilo/agents/debug.md",
-      "e0d9954b7ca622091b27cc065cf5c34edde96e8d6d26a18303c4f0aeabd977f1"
+      "dbfc9646a99e467e0ba118bfcd710417afedb375435a9783e2157b3457029572"
     ],
     [
       ".kilo/agents/enforcement.md",
-      "09ca5ccd3f98989f9c249e9a5696078589fca9a9477bb6ebe7e3ba36aebc0d75"
+      "c528d45d0ad9bde19c3f8d362e7d9c4b7fdf9f8528b2890cac65d1df58a9b26b"
     ],
     [
       ".kilo/agents/explain/strategy.md",
@@ -2608,7 +4188,7 @@
     ],
     [
       ".kilo/agents/explain.md",
-      "1dad689234bc737955e4e51c0f262629fd714ef1e0dd34a3b17eb571987801c0"
+      "18ccf79ccfb32846d77030b75cb12ff49f633d19e68f09a4400a1c76e0642997"
     ],
     [
       ".kilo/agents/frontend/accessibility.md",
@@ -2628,7 +4208,7 @@
     ],
     [
       ".kilo/agents/frontend.md",
-      "79280b4b0c7bc7f11eeab420b5e99da817b4b8eaef9b6e2dd76d9dc1eac552b1"
+      "823b954ff7fd4c3f151b45d998e12da70d43ab549647706799aa4dd246503e35"
     ],
     [
       ".kilo/agents/migration/strategy.md",
@@ -2636,11 +4216,11 @@
     ],
     [
       ".kilo/agents/migration.md",
-      "1507ae731743c22fbb50cdfdd6b828347fbf813c9888e0d4744e1b278493f480"
+      "e016345a94755baf936b95332d85e02169e634f1f18bffb5aed7782a910edee3"
     ],
     [
       ".kilo/agents/orchestrator/devops.md",
-      "3b8a48844787ebc75f5bddb3aeef0ef4ff4ea8808b9f27865e4b2469b0cdbc8d"
+      "75532900195e1e242a32117a4b7bd36c874b649067bc4b9eb7f74d04302fa24f"
     ],
     [
       ".kilo/agents/orchestrator/maintenance.md",
@@ -2656,7 +4236,7 @@
     ],
     [
       ".kilo/agents/orchestrator.md",
-      "3a43c6831d0985899f0c2703d864d0bf98454c635739a4cd14fcbc3b151e1b85"
+      "97a860d54c78484d33fff23516d7f94d25a1836d38f1b82bcf5fafaf07ecc74b"
     ],
     [
       ".kilo/agents/performance/benchmarking.md",
@@ -2676,7 +4256,7 @@
     ],
     [
       ".kilo/agents/performance.md",
-      "5e1ec40d982311e2fea894ebfa7922ef1fbb5199a38b17cbf2c6a08570d82eba"
+      "28cdf732afdf902b632c4a2f9c1863c0d2267bbe84c5ff7c46a5811041e0d0b5"
     ],
     [
       ".kilo/agents/plan.md",
@@ -2688,7 +4268,7 @@
     ],
     [
       ".kilo/agents/refactor.md",
-      "b13405f004b25938c29c44002fd3492338ac1e832f9cf07eb827757abdf3c10b"
+      "b0259d0f2b3b7b0530bff6613b4e7c8c74c851f3650104eef96bc45ed0827c21"
     ],
     [
       ".kilo/agents/review/accessibility.md",
@@ -2696,15 +4276,15 @@
     ],
     [
       ".kilo/agents/review/code.md",
-      "1fca2377868d66c9c3e9b113c1e12a540cf7b57c3a62ce8897552cc7a9e2b8ba"
+      "773a88e9560c64157a31ea097e04199a8d3ae4b2bbb4ab460d5a669748207383"
     ],
     [
       ".kilo/agents/review/performance.md",
-      "9827583ebce06085d0f619af2fecbdd11e06cd7891432b0e9ca992811c4d9cb3"
+      "038c5ee3dab34ab5cd984cb1bebea386470e5c6c2b487efd0f20583da14f8d42"
     ],
     [
       ".kilo/agents/review.md",
-      "f3361002c45a14184457a9ebfda02989aa3db8a2f5515d23c0bd5d39105e2405"
+      "c42ab91ff6a8f12ba1d6831c985d0b8014c3068146f9d21b2202c1b50b2b3628"
     ],
     [
       ".kilo/agents/test/strategy.md",
@@ -2712,7 +4292,7 @@
     ],
     [
       ".kilo/agents/test.md",
-      "a9e5a755a26700ba75fd58e4afa5fea293bffa21d658a423850c259e68c6c7bb"
+      "a0f4fe07a2090f4332a35d2d61b856f406b2979d4954eb622dd3fe9ec32689a3"
     ],
     [
       ".kilo/commands/boilerplate.md",
@@ -2723,6 +4303,10 @@
       "88cd8e0b6f0491e4686daf633495fc5d4e25668f6fb68224b0cc997f821d6ecc"
     ],
     [
+      ".kilo/commands/dependency-upgrade.md",
+      "89e8ef66fc3468e9e7cbf2c2b0530039a4e780cdcc4d38b0191be3db35e1b510"
+    ],
+    [
       ".kilo/commands/feature.md",
       "9fd9335de09868ffd044a832086e7e98a7664206db269bd52de4c514a9532bfa"
     ],
@@ -2731,12 +4315,36 @@
       "7bc53eb68cdba3dbb123dde3693702ea7ccbbe5521ec92452101e79810359f34"
     ],
     [
+      ".kilo/commands/migration.md",
+      "7cfaf5b54f0303cb4b7811c2737a87b73a2e4419a3600a200050939785ae0238"
+    ],
+    [
+      ".kilo/commands/performance.md",
+      "0435290ef5b6bcde2c6c8c91b5fac2fb1e74534d340deda3d21fb66aad384d81"
+    ],
+    [
       ".kilo/commands/refactor.md",
       "b99c39dece9b3d49b6faaa46585b8f4a6cf449b94f49206058241334db154a95"
     ],
     [
+      ".kilo/commands/strategy.md",
+      "a5c82c27d72149fc42dcc75fc80e2618390ef2feb195741aa54eba4cf6a3efa9"
+    ],
+    [
       ".kilo/commands/testing.md",
       "d6d0859c54f04c5c69608b75ae2569cf2bb4aae96aa7ee14936592b4472bca2d"
+    ],
+    [
+      ".kilo/commands/workflow-migration-patterns.md",
+      "6b8cc853fcc2e8edef02c11935f70c9528dbfb3dd21cd1a215f92fac625a8768"
+    ],
+    [
+      ".kilo/commands/workflow-performance-optimization.md",
+      "07b40c1fb5ae860a24e26a0c2cec00eedcb3f7e3c02efa8705b0a2f99f7bb784"
+    ],
+    [
+      ".kilo/commands/workflow-scaling-patterns.md",
+      "907195f7ab03b3948bd5af14584c0a5d9221dbde55f069ce096659a6116cdec7"
     ],
     [
       ".kilo/rules/conventions-python.md",
@@ -2763,6 +4371,34 @@
       "69eb118484f93009b85d299cf0831748056f28c6e979ec1e1454f3b3384f40dd"
     ],
     [
+      ".kilo/skills/architecture-documentation/SKILL.md",
+      "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
+    ],
+    [
+      ".kilo/skills/code-review-practices/SKILL.md",
+      "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
+    ],
+    [
+      ".kilo/skills/continuous-improvement/SKILL.md",
+      "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+    ],
+    [
+      ".kilo/skills/data-model-discovery/SKILL.md",
+      "7bb93b77674b80de48bc5f572f0a1bd8c51458f4050ecfe0af70d6c6f3123713"
+    ],
+    [
+      ".kilo/skills/data-validation-pipelines/SKILL.md",
+      "684d497852e1980d9e8a322c59e9ac637c2dc100d484358aa0b8281a3ac0f25c"
+    ],
+    [
+      ".kilo/skills/debugging-methodology/SKILL.md",
+      "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
+    ],
+    [
+      ".kilo/skills/documentation-best-practices/SKILL.md",
+      "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
+    ],
+    [
       ".kilo/skills/feature-planning/SKILL.md",
       "3b43fa04f2823fcd2adc420ba1adc4989c3fe6d0a247f93f1d0e765f5ec971e6"
     ],
@@ -2771,8 +4407,40 @@
       "af8ee67d6925c3095724964a59a134d9725d5952bfa361cf5d7eef7e42ffbe6a"
     ],
     [
+      ".kilo/skills/multiagent-orchestration/SKILL.md",
+      "4f56926633e3b6527047e07041e415cbf0bc171ca9cfdf7fa0f99b8550a51705"
+    ],
+    [
+      ".kilo/skills/performance-optimization/SKILL.md",
+      "81f057d445e73f1877db1b7996b34a9cd2976e8670f332ac2e13f0c4eac392b2"
+    ],
+    [
       ".kilo/skills/post-implementation-checklist/SKILL.md",
       "9a41690df76da259b04cf85fb7dcb6a0330f57cc4edf9ecb04e4adfb508a130d"
+    ],
+    [
+      ".kilo/skills/problem-decomposition/SKILL.md",
+      "9962362a175e7b4ee9acd1bc585511234902694910c5ba1f20a3e53ee01c2047"
+    ],
+    [
+      ".kilo/skills/quality-assurance/SKILL.md",
+      "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+    ],
+    [
+      ".kilo/skills/team-collaboration/SKILL.md",
+      "59a7c4fc7970bd4af790f6642fb030df0fbfde73d95595fa2289196c71ee64ba"
+    ],
+    [
+      ".kilo/skills/technical-communication/SKILL.md",
+      "725be0f40aa295e16c715ada58178484a886e3d7d0eef134e5d3926132923625"
+    ],
+    [
+      ".kilo/skills/technical-debt-management/SKILL.md",
+      "c2592c501d10efa2cd701602f205caf567984c0e8fb5c233454129a829bf1c59"
+    ],
+    [
+      ".kilo/skills/technical-decision-making/SKILL.md",
+      "4f5b3cb084e61b2e1c7edcdb9eec25927a06974bf2c189e371525a867be5b985"
     ],
     [
       ".kilo/skills/test-aaa-structure/SKILL.md",
@@ -2785,6 +4453,10 @@
     [
       ".kilo/skills/test-mocking-rules/SKILL.md",
       "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e"
+    ],
+    [
+      ".kilo/skills/testing-strategies/SKILL.md",
+      "042493cfef510d68a72e9e99385bd99101832340f9e080e4c14786d4d3d8cac0"
     ],
     [
       "AGENTS.md",
@@ -2801,6 +4473,10 @@
       "a1b827fc4585627e6921a08c920afcc9c4cc5b5e218a2226997c37012f9be5cf"
     ],
     [
+      ".roo/commands/dependency-upgrade.md",
+      "9d3000eb83fb8b40ec463b0222ebc8e94e5e5c1ffabc16c621dbb91018bc4e0e"
+    ],
+    [
       ".roo/commands/feature.md",
       "5d23dd05bceff76cb7d55b270a6a2d12033d9699ac80859583494e495c4e13d5"
     ],
@@ -2809,52 +4485,76 @@
       "4abc19173ed0dea7fdd208ecbf05cf12fd98aaed316eb77159ef470d04d8c392"
     ],
     [
+      ".roo/commands/migration.md",
+      "dbcd192531c470acb163e0d7181d4c005540f733c7dd5e89990803c70b80f90d"
+    ],
+    [
+      ".roo/commands/performance.md",
+      "6a87f9aec27b7a4476ea4cefbd6b32024c96889d2be685d033d52625d425f5b3"
+    ],
+    [
       ".roo/commands/refactor.md",
       "15b128253b00b70ace6411671285b8aeeb593961017054f9737f7bbe7fb0acc9"
+    ],
+    [
+      ".roo/commands/strategy.md",
+      "6322fdc10564c8a47d74ff3a4313ba2bbeafa7a10aae79bc518816a97daf803b"
     ],
     [
       ".roo/commands/testing.md",
       "d8c818f6e448e7927bbc600f10831ff7c242510751b5a67cd8fdeca6188b7c2d"
     ],
     [
+      ".roo/commands/workflow-migration-patterns.md",
+      "760b42e31539d1433426f31bd09498bf7808a5104c24579dbf94bac13004b9d2"
+    ],
+    [
+      ".roo/commands/workflow-performance-optimization.md",
+      "e03e193dd8e1c84b6b86b8c2553a6f2961cfbc32a73d23f2aae17a773140e133"
+    ],
+    [
+      ".roo/commands/workflow-scaling-patterns.md",
+      "1206fb5a49bd7d9b60de274df0ccc391bfd081f8aca502213bc7901e6728f0ef"
+    ],
+    [
       ".roo/rules-ask/01-instructions.md",
-      "97d930ff76361968ce9b2104ea90922e162ea0334100671806453b2eff479db0"
+      "2aa4d60659fda59ff902fa71889b10719e26a5494df85e4894e3a480518f061a"
     ],
     [
       ".roo/rules-backend/01-instructions.md",
-      "1d746edfdda5924bfea8e8a294ecc523dd47888eff2d9448c58bbca89c2da84f"
+      "9fae4444a3597b23f90f14e761ff764a24a0feeebc1132480d1a98ae3656ede2"
     ],
     [
       ".roo/rules-code/01-instructions.md",
-      "0a3434aa536e9e2a92177833662939f7651705463be0189825975aee6df48e98"
+      "83df24f18d2f00c9972007d449d9e104597ef62412461511be8cbc377e3a6873"
     ],
     [
       ".roo/rules-debug/01-instructions.md",
-      "bf61a2a0d0270d500992eb76aa17c33732495790009c323a92b4db22b1f37ec5"
+      "0ee059e3d96dc697ff67600f5193c0d188aea16af3949f49a4ba24459cb4110c"
     ],
     [
       ".roo/rules-enforcement/01-instructions.md",
-      "f66e7b8ae8326325b8bc0871eb96ecaba6c243279252599797220a83d74ad965"
+      "3e4b374f8ddbbefd6efc319e1a0ac9f5da9727a3f34f776029b4d13020b3528f"
     ],
     [
       ".roo/rules-explain/01-instructions.md",
-      "dbcc82ff473067aac95eff189820d0986e0421d67248ce02c27dc3b34ede27d1"
+      "6a3050b000786c7ebf47828ceebbe78438681c7ed14fc343e6efd838369ff892"
     ],
     [
       ".roo/rules-frontend/01-instructions.md",
-      "dea63de05006b20bee81e5dd72599beb2a0abc7601bdebb0b741137b74f8e6ad"
+      "63063a9f81de5d3fb50674ce051146a6914809e143e28f47aeb16e7fc6df22b3"
     ],
     [
       ".roo/rules-migration/01-instructions.md",
-      "56d9e99d1e2d4d55de415521466f48026b3913f7b891b0f935425079aba930bc"
+      "55217c21e9fe5a45c97ed7416783b614497270674ca065c346406c0369cf6f7b"
     ],
     [
       ".roo/rules-orchestrator/01-instructions.md",
-      "29a38f31c2fe7b9181d51724f237fdd8829a0fb5dcb84d6ec5b211c549f49027"
+      "f499a20a02118bf2a5f2fc92ad1c4ad6b55bf1ec8ee490430ad3678cb1db6c01"
     ],
     [
       ".roo/rules-performance/01-instructions.md",
-      "2744eb4f4b94cce5b640a732bb2a8fda23340efdbfb47a19d2fcd408db923e30"
+      "f0fae2c7c642b8b57fb10fc1c9df2959f344589df306a85b5c30b36f9c1897d4"
     ],
     [
       ".roo/rules-plan/01-instructions.md",
@@ -2862,15 +4562,43 @@
     ],
     [
       ".roo/rules-refactor/01-instructions.md",
-      "91e0c964a537f0e1f1de735b754a5a9720c6622013c47f712c8e4cc8e429a26f"
+      "e0c53cafad033697956d46de6c9a181b59d4fcb0c15f804f7e06087aff616c64"
     ],
     [
       ".roo/rules-review/01-instructions.md",
-      "7ace4bf205ea51ab7aa92bfebccf2aeaf8ed2011b37a45f9243a7fa158ca2563"
+      "394bd1a4555d23200434b98203259369f96cc455be44093c554e5e10e3826302"
     ],
     [
       ".roo/rules-test/01-instructions.md",
-      "4a381404bd2e4472cb0ab12113ba043be1b132a3f5c612aab823bb1305022e7b"
+      "182f8f15b6f00428c1df58362648f5a9caec5a489745502d203d325e2477f9cc"
+    ],
+    [
+      ".roo/skills/architecture-documentation/SKILL.md",
+      "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
+    ],
+    [
+      ".roo/skills/code-review-practices/SKILL.md",
+      "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
+    ],
+    [
+      ".roo/skills/continuous-improvement/SKILL.md",
+      "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+    ],
+    [
+      ".roo/skills/data-model-discovery/SKILL.md",
+      "b2168e0a29217dac25abc926ae9b37d3ee25f3f745fa2af30746bcbd7775cb82"
+    ],
+    [
+      ".roo/skills/data-validation-pipelines/SKILL.md",
+      "09739cef80da0955aba6cb78b5c03b82eda86664438e9eb4aa139b657112e908"
+    ],
+    [
+      ".roo/skills/debugging-methodology/SKILL.md",
+      "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
+    ],
+    [
+      ".roo/skills/documentation-best-practices/SKILL.md",
+      "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
     ],
     [
       ".roo/skills/feature-planning/SKILL.md",
@@ -2881,8 +4609,40 @@
       "c8db9858e7b72b9f941e9038d15d04503ebf60c51462e3a71367903f3c8e5063"
     ],
     [
+      ".roo/skills/multiagent-orchestration/SKILL.md",
+      "d6c940687cbd37a68a491a4303032bc90ac7b9dff01e2db84e1c451082aa26b9"
+    ],
+    [
+      ".roo/skills/performance-optimization/SKILL.md",
+      "326754e646454eb1d54a4e9692a8dfb1896902b9adf51a1513b46aa5669d647a"
+    ],
+    [
       ".roo/skills/post-implementation-checklist/SKILL.md",
       "b3348cb58adf17c882a470bf2ffd87a0556ac6a0c4f47e5fbfc24c127217bee8"
+    ],
+    [
+      ".roo/skills/problem-decomposition/SKILL.md",
+      "f37c4a570593d780e4b1173ef0082df62d03efb2e00bfcaac5d1feecb2caec8e"
+    ],
+    [
+      ".roo/skills/quality-assurance/SKILL.md",
+      "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+    ],
+    [
+      ".roo/skills/team-collaboration/SKILL.md",
+      "8d3703e287a6a9c94a53da968ece20bf8b2bac4f7a28d3d49f838c9646b5be02"
+    ],
+    [
+      ".roo/skills/technical-communication/SKILL.md",
+      "66f5368887094575002c8f83064e41110ceab580afd197cc4ed0319a48e933bb"
+    ],
+    [
+      ".roo/skills/technical-debt-management/SKILL.md",
+      "16d955e806942e53c349c73cb281eecd1248e83ca8be203f409d67eb0b0d3fc0"
+    ],
+    [
+      ".roo/skills/technical-decision-making/SKILL.md",
+      "d16fe4266cf65a2e88bd45d15f95fe91771be2cd4c1a10d00328503f11a38f48"
     ],
     [
       ".roo/skills/test-aaa-structure/SKILL.md",
@@ -2895,6 +4655,10 @@
     [
       ".roo/skills/test-mocking-rules/SKILL.md",
       "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec"
+    ],
+    [
+      ".roo/skills/testing-strategies/SKILL.md",
+      "15500c149b2af4d6844bc36903465b6b155ee9b38e897910e5f010a40eb829ab"
     ],
     [
       ".roomodes",
@@ -2915,6 +4679,10 @@
       "88cd8e0b6f0491e4686daf633495fc5d4e25668f6fb68224b0cc997f821d6ecc"
     ],
     [
+      ".roo/commands/dependency-upgrade.md",
+      "89e8ef66fc3468e9e7cbf2c2b0530039a4e780cdcc4d38b0191be3db35e1b510"
+    ],
+    [
       ".roo/commands/feature.md",
       "9fd9335de09868ffd044a832086e7e98a7664206db269bd52de4c514a9532bfa"
     ],
@@ -2923,52 +4691,76 @@
       "7bc53eb68cdba3dbb123dde3693702ea7ccbbe5521ec92452101e79810359f34"
     ],
     [
+      ".roo/commands/migration.md",
+      "7cfaf5b54f0303cb4b7811c2737a87b73a2e4419a3600a200050939785ae0238"
+    ],
+    [
+      ".roo/commands/performance.md",
+      "0435290ef5b6bcde2c6c8c91b5fac2fb1e74534d340deda3d21fb66aad384d81"
+    ],
+    [
       ".roo/commands/refactor.md",
       "b99c39dece9b3d49b6faaa46585b8f4a6cf449b94f49206058241334db154a95"
+    ],
+    [
+      ".roo/commands/strategy.md",
+      "a5c82c27d72149fc42dcc75fc80e2618390ef2feb195741aa54eba4cf6a3efa9"
     ],
     [
       ".roo/commands/testing.md",
       "d6d0859c54f04c5c69608b75ae2569cf2bb4aae96aa7ee14936592b4472bca2d"
     ],
     [
+      ".roo/commands/workflow-migration-patterns.md",
+      "6b8cc853fcc2e8edef02c11935f70c9528dbfb3dd21cd1a215f92fac625a8768"
+    ],
+    [
+      ".roo/commands/workflow-performance-optimization.md",
+      "07b40c1fb5ae860a24e26a0c2cec00eedcb3f7e3c02efa8705b0a2f99f7bb784"
+    ],
+    [
+      ".roo/commands/workflow-scaling-patterns.md",
+      "907195f7ab03b3948bd5af14584c0a5d9221dbde55f069ce096659a6116cdec7"
+    ],
+    [
       ".roo/rules-ask/01-instructions.md",
-      "97d930ff76361968ce9b2104ea90922e162ea0334100671806453b2eff479db0"
+      "2aa4d60659fda59ff902fa71889b10719e26a5494df85e4894e3a480518f061a"
     ],
     [
       ".roo/rules-backend/01-instructions.md",
-      "1d746edfdda5924bfea8e8a294ecc523dd47888eff2d9448c58bbca89c2da84f"
+      "9fae4444a3597b23f90f14e761ff764a24a0feeebc1132480d1a98ae3656ede2"
     ],
     [
       ".roo/rules-code/01-instructions.md",
-      "0a3434aa536e9e2a92177833662939f7651705463be0189825975aee6df48e98"
+      "83df24f18d2f00c9972007d449d9e104597ef62412461511be8cbc377e3a6873"
     ],
     [
       ".roo/rules-debug/01-instructions.md",
-      "bf61a2a0d0270d500992eb76aa17c33732495790009c323a92b4db22b1f37ec5"
+      "0ee059e3d96dc697ff67600f5193c0d188aea16af3949f49a4ba24459cb4110c"
     ],
     [
       ".roo/rules-enforcement/01-instructions.md",
-      "f66e7b8ae8326325b8bc0871eb96ecaba6c243279252599797220a83d74ad965"
+      "3e4b374f8ddbbefd6efc319e1a0ac9f5da9727a3f34f776029b4d13020b3528f"
     ],
     [
       ".roo/rules-explain/01-instructions.md",
-      "dbcc82ff473067aac95eff189820d0986e0421d67248ce02c27dc3b34ede27d1"
+      "6a3050b000786c7ebf47828ceebbe78438681c7ed14fc343e6efd838369ff892"
     ],
     [
       ".roo/rules-frontend/01-instructions.md",
-      "dea63de05006b20bee81e5dd72599beb2a0abc7601bdebb0b741137b74f8e6ad"
+      "63063a9f81de5d3fb50674ce051146a6914809e143e28f47aeb16e7fc6df22b3"
     ],
     [
       ".roo/rules-migration/01-instructions.md",
-      "56d9e99d1e2d4d55de415521466f48026b3913f7b891b0f935425079aba930bc"
+      "55217c21e9fe5a45c97ed7416783b614497270674ca065c346406c0369cf6f7b"
     ],
     [
       ".roo/rules-orchestrator/01-instructions.md",
-      "29a38f31c2fe7b9181d51724f237fdd8829a0fb5dcb84d6ec5b211c549f49027"
+      "f499a20a02118bf2a5f2fc92ad1c4ad6b55bf1ec8ee490430ad3678cb1db6c01"
     ],
     [
       ".roo/rules-performance/01-instructions.md",
-      "2744eb4f4b94cce5b640a732bb2a8fda23340efdbfb47a19d2fcd408db923e30"
+      "f0fae2c7c642b8b57fb10fc1c9df2959f344589df306a85b5c30b36f9c1897d4"
     ],
     [
       ".roo/rules-plan/01-instructions.md",
@@ -2976,15 +4768,43 @@
     ],
     [
       ".roo/rules-refactor/01-instructions.md",
-      "91e0c964a537f0e1f1de735b754a5a9720c6622013c47f712c8e4cc8e429a26f"
+      "e0c53cafad033697956d46de6c9a181b59d4fcb0c15f804f7e06087aff616c64"
     ],
     [
       ".roo/rules-review/01-instructions.md",
-      "7ace4bf205ea51ab7aa92bfebccf2aeaf8ed2011b37a45f9243a7fa158ca2563"
+      "394bd1a4555d23200434b98203259369f96cc455be44093c554e5e10e3826302"
     ],
     [
       ".roo/rules-test/01-instructions.md",
-      "4a381404bd2e4472cb0ab12113ba043be1b132a3f5c612aab823bb1305022e7b"
+      "182f8f15b6f00428c1df58362648f5a9caec5a489745502d203d325e2477f9cc"
+    ],
+    [
+      ".roo/skills/architecture-documentation/SKILL.md",
+      "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
+    ],
+    [
+      ".roo/skills/code-review-practices/SKILL.md",
+      "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
+    ],
+    [
+      ".roo/skills/continuous-improvement/SKILL.md",
+      "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+    ],
+    [
+      ".roo/skills/data-model-discovery/SKILL.md",
+      "7bb93b77674b80de48bc5f572f0a1bd8c51458f4050ecfe0af70d6c6f3123713"
+    ],
+    [
+      ".roo/skills/data-validation-pipelines/SKILL.md",
+      "684d497852e1980d9e8a322c59e9ac637c2dc100d484358aa0b8281a3ac0f25c"
+    ],
+    [
+      ".roo/skills/debugging-methodology/SKILL.md",
+      "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
+    ],
+    [
+      ".roo/skills/documentation-best-practices/SKILL.md",
+      "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
     ],
     [
       ".roo/skills/feature-planning/SKILL.md",
@@ -2995,8 +4815,40 @@
       "af8ee67d6925c3095724964a59a134d9725d5952bfa361cf5d7eef7e42ffbe6a"
     ],
     [
+      ".roo/skills/multiagent-orchestration/SKILL.md",
+      "4f56926633e3b6527047e07041e415cbf0bc171ca9cfdf7fa0f99b8550a51705"
+    ],
+    [
+      ".roo/skills/performance-optimization/SKILL.md",
+      "81f057d445e73f1877db1b7996b34a9cd2976e8670f332ac2e13f0c4eac392b2"
+    ],
+    [
       ".roo/skills/post-implementation-checklist/SKILL.md",
       "9a41690df76da259b04cf85fb7dcb6a0330f57cc4edf9ecb04e4adfb508a130d"
+    ],
+    [
+      ".roo/skills/problem-decomposition/SKILL.md",
+      "9962362a175e7b4ee9acd1bc585511234902694910c5ba1f20a3e53ee01c2047"
+    ],
+    [
+      ".roo/skills/quality-assurance/SKILL.md",
+      "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+    ],
+    [
+      ".roo/skills/team-collaboration/SKILL.md",
+      "59a7c4fc7970bd4af790f6642fb030df0fbfde73d95595fa2289196c71ee64ba"
+    ],
+    [
+      ".roo/skills/technical-communication/SKILL.md",
+      "725be0f40aa295e16c715ada58178484a886e3d7d0eef134e5d3926132923625"
+    ],
+    [
+      ".roo/skills/technical-debt-management/SKILL.md",
+      "c2592c501d10efa2cd701602f205caf567984c0e8fb5c233454129a829bf1c59"
+    ],
+    [
+      ".roo/skills/technical-decision-making/SKILL.md",
+      "4f5b3cb084e61b2e1c7edcdb9eec25927a06974bf2c189e371525a867be5b985"
     ],
     [
       ".roo/skills/test-aaa-structure/SKILL.md",
@@ -3009,6 +4861,10 @@
     [
       ".roo/skills/test-mocking-rules/SKILL.md",
       "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e"
+    ],
+    [
+      ".roo/skills/testing-strategies/SKILL.md",
+      "042493cfef510d68a72e9e99385bd99101832340f9e080e4c14786d4d3d8cac0"
     ],
     [
       ".roomodes",
@@ -3029,6 +4885,10 @@
       "df1243a055754d27aeee3761ced00242775c475ebe2b6c4a2033a48baa9f2f49"
     ],
     [
+      ".windsurf/skills/architecture-documentation/SKILL.md",
+      "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
+    ],
+    [
       ".windsurf/skills/ask/SKILL.md",
       "97519379dbc61b402ecfbf7960d4cbaeb8eb2bc5a38c19e8254c67f1364e1640"
     ],
@@ -3041,8 +4901,32 @@
       "6f26b0214f98bc30fefe5f5ab0534921b3842eb80d8d976bd5679ac658dfaf69"
     ],
     [
+      ".windsurf/skills/code-review-practices/SKILL.md",
+      "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
+    ],
+    [
+      ".windsurf/skills/continuous-improvement/SKILL.md",
+      "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+    ],
+    [
+      ".windsurf/skills/data-model-discovery/SKILL.md",
+      "b2168e0a29217dac25abc926ae9b37d3ee25f3f745fa2af30746bcbd7775cb82"
+    ],
+    [
+      ".windsurf/skills/data-validation-pipelines/SKILL.md",
+      "09739cef80da0955aba6cb78b5c03b82eda86664438e9eb4aa139b657112e908"
+    ],
+    [
       ".windsurf/skills/debug/SKILL.md",
       "700df53305c39964e8e724fadc6260ce2d95d1931419c57fa8b141867c774ec5"
+    ],
+    [
+      ".windsurf/skills/debugging-methodology/SKILL.md",
+      "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
+    ],
+    [
+      ".windsurf/skills/documentation-best-practices/SKILL.md",
+      "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
     ],
     [
       ".windsurf/skills/enforcement/SKILL.md",
@@ -3069,12 +4953,20 @@
       "35f185966bcfce22ed6f6592062c05e11ba4c18b85172ba47b03cc3cd4a039cd"
     ],
     [
+      ".windsurf/skills/multiagent-orchestration/SKILL.md",
+      "d6c940687cbd37a68a491a4303032bc90ac7b9dff01e2db84e1c451082aa26b9"
+    ],
+    [
       ".windsurf/skills/orchestrator/SKILL.md",
       "4ea1895617ba5a71a70510b4a9557daf87f9cbe12e1c5439aac1f389bb7e5a67"
     ],
     [
       ".windsurf/skills/performance/SKILL.md",
       "4b45c289b41efc6e7b2977e5fb93beb432c6d52461ce0569289228375ad9af86"
+    ],
+    [
+      ".windsurf/skills/performance-optimization/SKILL.md",
+      "326754e646454eb1d54a4e9692a8dfb1896902b9adf51a1513b46aa5669d647a"
     ],
     [
       ".windsurf/skills/plan/SKILL.md",
@@ -3085,12 +4977,36 @@
       "b3348cb58adf17c882a470bf2ffd87a0556ac6a0c4f47e5fbfc24c127217bee8"
     ],
     [
+      ".windsurf/skills/problem-decomposition/SKILL.md",
+      "f37c4a570593d780e4b1173ef0082df62d03efb2e00bfcaac5d1feecb2caec8e"
+    ],
+    [
+      ".windsurf/skills/quality-assurance/SKILL.md",
+      "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+    ],
+    [
       ".windsurf/skills/refactor/SKILL.md",
       "fa32eb7dfe5ff3e58f4c4ce6c425b54309018ab39f4989e0323830db409b4bf9"
     ],
     [
       ".windsurf/skills/review/SKILL.md",
       "a839b22dab90efc8da1beda86f4c4020d6abbfa53536ba8dd4212a956ff66d8c"
+    ],
+    [
+      ".windsurf/skills/team-collaboration/SKILL.md",
+      "8d3703e287a6a9c94a53da968ece20bf8b2bac4f7a28d3d49f838c9646b5be02"
+    ],
+    [
+      ".windsurf/skills/technical-communication/SKILL.md",
+      "66f5368887094575002c8f83064e41110ceab580afd197cc4ed0319a48e933bb"
+    ],
+    [
+      ".windsurf/skills/technical-debt-management/SKILL.md",
+      "16d955e806942e53c349c73cb281eecd1248e83ca8be203f409d67eb0b0d3fc0"
+    ],
+    [
+      ".windsurf/skills/technical-decision-making/SKILL.md",
+      "d16fe4266cf65a2e88bd45d15f95fe91771be2cd4c1a10d00328503f11a38f48"
     ],
     [
       ".windsurf/skills/test/SKILL.md",
@@ -3109,12 +5025,20 @@
       "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec"
     ],
     [
+      ".windsurf/skills/testing-strategies/SKILL.md",
+      "15500c149b2af4d6844bc36903465b6b155ee9b38e897910e5f010a40eb829ab"
+    ],
+    [
       ".windsurf/workflows/boilerplate.md",
       "e62f0443979372fdf7d50e4da2a5b7c15c839eb78361be0ad5205eb59f8cf0a1"
     ],
     [
       ".windsurf/workflows/code.md",
       "c1074ad32ddab7c34b0206c2ff5f7e543af1b65ce3e92399a8c291b4d1e28002"
+    ],
+    [
+      ".windsurf/workflows/dependency-upgrade.md",
+      "b19a65f3e6d8c0d1a4db1f5f00626677532c008f3a915f72c5fec14ebc2dadff"
     ],
     [
       ".windsurf/workflows/feature.md",
@@ -3125,12 +5049,36 @@
       "e28b1b9b5fa6df08b5f89517953b05e9b31db1d8a058c3c60d4bbb9f297c20eb"
     ],
     [
+      ".windsurf/workflows/migration.md",
+      "1af4628a25af19f41e26966d9b63472cc549b2fd84a9a134e46c15dd109eaec1"
+    ],
+    [
+      ".windsurf/workflows/performance.md",
+      "df4b60960e55057eaeadc262444b26caa4479aa2f46981fa133ab92bdcc31dfd"
+    ],
+    [
       ".windsurf/workflows/refactor.md",
       "0b9333f3b63dd4e719d59d0c8de314d686dd63bf35ba189fcc2db8f0ab2715e7"
     ],
     [
+      ".windsurf/workflows/strategy.md",
+      "c619a76c4b1afafd5045aec4d442140318a1d796afa0dfcbceed00ab75b7784a"
+    ],
+    [
       ".windsurf/workflows/testing.md",
       "5fe0568c7fcc20e319e78f28c2f5274f2e702c74d5d61cd275f00e772d348c54"
+    ],
+    [
+      ".windsurf/workflows/workflow-migration-patterns.md",
+      "bae31ce3d7e740d0b4a16d4fcb96accb7146fc8e8450ff48571108e314254ece"
+    ],
+    [
+      ".windsurf/workflows/workflow-performance-optimization.md",
+      "60be42ceecd08755c2d9776dd0fce53745e568bd82a8c73ca11192060a16005c"
+    ],
+    [
+      ".windsurf/workflows/workflow-scaling-patterns.md",
+      "6f70926a0b19f91e52e0506a50d5a724639e8f1b9ec9db67c468ff7e473f0e7e"
     ]
   ],
   "windsurf::verbose": [
@@ -3143,6 +5091,10 @@
       "df1243a055754d27aeee3761ced00242775c475ebe2b6c4a2033a48baa9f2f49"
     ],
     [
+      ".windsurf/skills/architecture-documentation/SKILL.md",
+      "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
+    ],
+    [
       ".windsurf/skills/ask/SKILL.md",
       "97519379dbc61b402ecfbf7960d4cbaeb8eb2bc5a38c19e8254c67f1364e1640"
     ],
@@ -3155,8 +5107,32 @@
       "6f26b0214f98bc30fefe5f5ab0534921b3842eb80d8d976bd5679ac658dfaf69"
     ],
     [
+      ".windsurf/skills/code-review-practices/SKILL.md",
+      "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
+    ],
+    [
+      ".windsurf/skills/continuous-improvement/SKILL.md",
+      "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+    ],
+    [
+      ".windsurf/skills/data-model-discovery/SKILL.md",
+      "7bb93b77674b80de48bc5f572f0a1bd8c51458f4050ecfe0af70d6c6f3123713"
+    ],
+    [
+      ".windsurf/skills/data-validation-pipelines/SKILL.md",
+      "684d497852e1980d9e8a322c59e9ac637c2dc100d484358aa0b8281a3ac0f25c"
+    ],
+    [
       ".windsurf/skills/debug/SKILL.md",
       "700df53305c39964e8e724fadc6260ce2d95d1931419c57fa8b141867c774ec5"
+    ],
+    [
+      ".windsurf/skills/debugging-methodology/SKILL.md",
+      "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
+    ],
+    [
+      ".windsurf/skills/documentation-best-practices/SKILL.md",
+      "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
     ],
     [
       ".windsurf/skills/enforcement/SKILL.md",
@@ -3183,12 +5159,20 @@
       "35f185966bcfce22ed6f6592062c05e11ba4c18b85172ba47b03cc3cd4a039cd"
     ],
     [
+      ".windsurf/skills/multiagent-orchestration/SKILL.md",
+      "4f56926633e3b6527047e07041e415cbf0bc171ca9cfdf7fa0f99b8550a51705"
+    ],
+    [
       ".windsurf/skills/orchestrator/SKILL.md",
       "4ea1895617ba5a71a70510b4a9557daf87f9cbe12e1c5439aac1f389bb7e5a67"
     ],
     [
       ".windsurf/skills/performance/SKILL.md",
       "4b45c289b41efc6e7b2977e5fb93beb432c6d52461ce0569289228375ad9af86"
+    ],
+    [
+      ".windsurf/skills/performance-optimization/SKILL.md",
+      "81f057d445e73f1877db1b7996b34a9cd2976e8670f332ac2e13f0c4eac392b2"
     ],
     [
       ".windsurf/skills/plan/SKILL.md",
@@ -3199,12 +5183,36 @@
       "9a41690df76da259b04cf85fb7dcb6a0330f57cc4edf9ecb04e4adfb508a130d"
     ],
     [
+      ".windsurf/skills/problem-decomposition/SKILL.md",
+      "9962362a175e7b4ee9acd1bc585511234902694910c5ba1f20a3e53ee01c2047"
+    ],
+    [
+      ".windsurf/skills/quality-assurance/SKILL.md",
+      "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+    ],
+    [
       ".windsurf/skills/refactor/SKILL.md",
       "fa32eb7dfe5ff3e58f4c4ce6c425b54309018ab39f4989e0323830db409b4bf9"
     ],
     [
       ".windsurf/skills/review/SKILL.md",
       "a839b22dab90efc8da1beda86f4c4020d6abbfa53536ba8dd4212a956ff66d8c"
+    ],
+    [
+      ".windsurf/skills/team-collaboration/SKILL.md",
+      "59a7c4fc7970bd4af790f6642fb030df0fbfde73d95595fa2289196c71ee64ba"
+    ],
+    [
+      ".windsurf/skills/technical-communication/SKILL.md",
+      "725be0f40aa295e16c715ada58178484a886e3d7d0eef134e5d3926132923625"
+    ],
+    [
+      ".windsurf/skills/technical-debt-management/SKILL.md",
+      "c2592c501d10efa2cd701602f205caf567984c0e8fb5c233454129a829bf1c59"
+    ],
+    [
+      ".windsurf/skills/technical-decision-making/SKILL.md",
+      "4f5b3cb084e61b2e1c7edcdb9eec25927a06974bf2c189e371525a867be5b985"
     ],
     [
       ".windsurf/skills/test/SKILL.md",
@@ -3223,12 +5231,20 @@
       "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e"
     ],
     [
+      ".windsurf/skills/testing-strategies/SKILL.md",
+      "042493cfef510d68a72e9e99385bd99101832340f9e080e4c14786d4d3d8cac0"
+    ],
+    [
       ".windsurf/workflows/boilerplate.md",
       "9a89511ac4fdddc7e81463af16159b2e9a0a17b92d37e75ab72376f6f412ee0b"
     ],
     [
       ".windsurf/workflows/code.md",
       "0ab5956bb7d871389ee1ebfb36a2b6ec27c36b50c1ca554e2268fe3252f21713"
+    ],
+    [
+      ".windsurf/workflows/dependency-upgrade.md",
+      "bc2899532419e54bea06c35fcdd357ee42a1378fb42395da7ec3e7c0d1678dfa"
     ],
     [
       ".windsurf/workflows/feature.md",
@@ -3239,15 +5255,43 @@
       "1c99c4d40469bfb08ceb75be0c83213718ba8eba7e9d68416674281381a3c5dc"
     ],
     [
+      ".windsurf/workflows/migration.md",
+      "635445b0514f27ce38d9d78f7fa1ff8e2b3532ce12ca9dc9ce546f87accf798b"
+    ],
+    [
+      ".windsurf/workflows/performance.md",
+      "589ca53207fd9a9910f6eafa91034e120a262951288382440584db4311b55146"
+    ],
+    [
       ".windsurf/workflows/refactor.md",
       "44a29a869f7380bb4a42497ac5e7e62f72544df82e2f92573922b57739221bcb"
     ],
     [
+      ".windsurf/workflows/strategy.md",
+      "873e8593fdb5a59a17a3ac854b4b67dc4c747fba7cc019f307a2fa288a5071ec"
+    ],
+    [
       ".windsurf/workflows/testing.md",
       "615f540da742cf3c554e3318a40018e16c966cae867a138c65440931e9590abb"
+    ],
+    [
+      ".windsurf/workflows/workflow-migration-patterns.md",
+      "52379e10d2943895140f64a5dd6cc4481a7025cb0562da295fc5b60431fa3c96"
+    ],
+    [
+      ".windsurf/workflows/workflow-performance-optimization.md",
+      "ec0602745fb7745d96b248df6976de04f4c08af42e7eeaa2a312098e7dd36321"
+    ],
+    [
+      ".windsurf/workflows/workflow-scaling-patterns.md",
+      "ad65b79b89eb92b9f7bebacb856f9d1640ec0f9fdeb5970636a8e534ce62d4d2"
     ]
   ],
   "zed::minimal": [
+    [
+      ".agents/skills/architecture-documentation/SKILL.md",
+      "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
+    ],
     [
       ".agents/skills/ask/SKILL.md",
       "97519379dbc61b402ecfbf7960d4cbaeb8eb2bc5a38c19e8254c67f1364e1640"
@@ -3261,8 +5305,32 @@
       "6f26b0214f98bc30fefe5f5ab0534921b3842eb80d8d976bd5679ac658dfaf69"
     ],
     [
+      ".agents/skills/code-review-practices/SKILL.md",
+      "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
+    ],
+    [
+      ".agents/skills/continuous-improvement/SKILL.md",
+      "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+    ],
+    [
+      ".agents/skills/data-model-discovery/SKILL.md",
+      "b2168e0a29217dac25abc926ae9b37d3ee25f3f745fa2af30746bcbd7775cb82"
+    ],
+    [
+      ".agents/skills/data-validation-pipelines/SKILL.md",
+      "09739cef80da0955aba6cb78b5c03b82eda86664438e9eb4aa139b657112e908"
+    ],
+    [
       ".agents/skills/debug/SKILL.md",
       "700df53305c39964e8e724fadc6260ce2d95d1931419c57fa8b141867c774ec5"
+    ],
+    [
+      ".agents/skills/debugging-methodology/SKILL.md",
+      "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
+    ],
+    [
+      ".agents/skills/documentation-best-practices/SKILL.md",
+      "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
     ],
     [
       ".agents/skills/enforcement/SKILL.md",
@@ -3289,12 +5357,20 @@
       "35f185966bcfce22ed6f6592062c05e11ba4c18b85172ba47b03cc3cd4a039cd"
     ],
     [
+      ".agents/skills/multiagent-orchestration/SKILL.md",
+      "d6c940687cbd37a68a491a4303032bc90ac7b9dff01e2db84e1c451082aa26b9"
+    ],
+    [
       ".agents/skills/orchestrator/SKILL.md",
       "4ea1895617ba5a71a70510b4a9557daf87f9cbe12e1c5439aac1f389bb7e5a67"
     ],
     [
       ".agents/skills/performance/SKILL.md",
       "4b45c289b41efc6e7b2977e5fb93beb432c6d52461ce0569289228375ad9af86"
+    ],
+    [
+      ".agents/skills/performance-optimization/SKILL.md",
+      "326754e646454eb1d54a4e9692a8dfb1896902b9adf51a1513b46aa5669d647a"
     ],
     [
       ".agents/skills/plan/SKILL.md",
@@ -3305,12 +5381,36 @@
       "b3348cb58adf17c882a470bf2ffd87a0556ac6a0c4f47e5fbfc24c127217bee8"
     ],
     [
+      ".agents/skills/problem-decomposition/SKILL.md",
+      "f37c4a570593d780e4b1173ef0082df62d03efb2e00bfcaac5d1feecb2caec8e"
+    ],
+    [
+      ".agents/skills/quality-assurance/SKILL.md",
+      "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+    ],
+    [
       ".agents/skills/refactor/SKILL.md",
       "fa32eb7dfe5ff3e58f4c4ce6c425b54309018ab39f4989e0323830db409b4bf9"
     ],
     [
       ".agents/skills/review/SKILL.md",
       "a839b22dab90efc8da1beda86f4c4020d6abbfa53536ba8dd4212a956ff66d8c"
+    ],
+    [
+      ".agents/skills/team-collaboration/SKILL.md",
+      "8d3703e287a6a9c94a53da968ece20bf8b2bac4f7a28d3d49f838c9646b5be02"
+    ],
+    [
+      ".agents/skills/technical-communication/SKILL.md",
+      "66f5368887094575002c8f83064e41110ceab580afd197cc4ed0319a48e933bb"
+    ],
+    [
+      ".agents/skills/technical-debt-management/SKILL.md",
+      "16d955e806942e53c349c73cb281eecd1248e83ca8be203f409d67eb0b0d3fc0"
+    ],
+    [
+      ".agents/skills/technical-decision-making/SKILL.md",
+      "d16fe4266cf65a2e88bd45d15f95fe91771be2cd4c1a10d00328503f11a38f48"
     ],
     [
       ".agents/skills/test/SKILL.md",
@@ -3329,11 +5429,19 @@
       "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec"
     ],
     [
+      ".agents/skills/testing-strategies/SKILL.md",
+      "15500c149b2af4d6844bc36903465b6b155ee9b38e897910e5f010a40eb829ab"
+    ],
+    [
       "AGENTS.md",
       "447a0a62e1f941c111567084d0d7a0f53e4893079a8d509f674d9dd1cbed58b2"
     ]
   ],
   "zed::verbose": [
+    [
+      ".agents/skills/architecture-documentation/SKILL.md",
+      "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
+    ],
     [
       ".agents/skills/ask/SKILL.md",
       "97519379dbc61b402ecfbf7960d4cbaeb8eb2bc5a38c19e8254c67f1364e1640"
@@ -3347,8 +5455,32 @@
       "6f26b0214f98bc30fefe5f5ab0534921b3842eb80d8d976bd5679ac658dfaf69"
     ],
     [
+      ".agents/skills/code-review-practices/SKILL.md",
+      "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
+    ],
+    [
+      ".agents/skills/continuous-improvement/SKILL.md",
+      "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+    ],
+    [
+      ".agents/skills/data-model-discovery/SKILL.md",
+      "7bb93b77674b80de48bc5f572f0a1bd8c51458f4050ecfe0af70d6c6f3123713"
+    ],
+    [
+      ".agents/skills/data-validation-pipelines/SKILL.md",
+      "684d497852e1980d9e8a322c59e9ac637c2dc100d484358aa0b8281a3ac0f25c"
+    ],
+    [
       ".agents/skills/debug/SKILL.md",
       "700df53305c39964e8e724fadc6260ce2d95d1931419c57fa8b141867c774ec5"
+    ],
+    [
+      ".agents/skills/debugging-methodology/SKILL.md",
+      "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
+    ],
+    [
+      ".agents/skills/documentation-best-practices/SKILL.md",
+      "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
     ],
     [
       ".agents/skills/enforcement/SKILL.md",
@@ -3375,12 +5507,20 @@
       "35f185966bcfce22ed6f6592062c05e11ba4c18b85172ba47b03cc3cd4a039cd"
     ],
     [
+      ".agents/skills/multiagent-orchestration/SKILL.md",
+      "4f56926633e3b6527047e07041e415cbf0bc171ca9cfdf7fa0f99b8550a51705"
+    ],
+    [
       ".agents/skills/orchestrator/SKILL.md",
       "4ea1895617ba5a71a70510b4a9557daf87f9cbe12e1c5439aac1f389bb7e5a67"
     ],
     [
       ".agents/skills/performance/SKILL.md",
       "4b45c289b41efc6e7b2977e5fb93beb432c6d52461ce0569289228375ad9af86"
+    ],
+    [
+      ".agents/skills/performance-optimization/SKILL.md",
+      "81f057d445e73f1877db1b7996b34a9cd2976e8670f332ac2e13f0c4eac392b2"
     ],
     [
       ".agents/skills/plan/SKILL.md",
@@ -3391,12 +5531,36 @@
       "9a41690df76da259b04cf85fb7dcb6a0330f57cc4edf9ecb04e4adfb508a130d"
     ],
     [
+      ".agents/skills/problem-decomposition/SKILL.md",
+      "9962362a175e7b4ee9acd1bc585511234902694910c5ba1f20a3e53ee01c2047"
+    ],
+    [
+      ".agents/skills/quality-assurance/SKILL.md",
+      "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+    ],
+    [
       ".agents/skills/refactor/SKILL.md",
       "fa32eb7dfe5ff3e58f4c4ce6c425b54309018ab39f4989e0323830db409b4bf9"
     ],
     [
       ".agents/skills/review/SKILL.md",
       "a839b22dab90efc8da1beda86f4c4020d6abbfa53536ba8dd4212a956ff66d8c"
+    ],
+    [
+      ".agents/skills/team-collaboration/SKILL.md",
+      "59a7c4fc7970bd4af790f6642fb030df0fbfde73d95595fa2289196c71ee64ba"
+    ],
+    [
+      ".agents/skills/technical-communication/SKILL.md",
+      "725be0f40aa295e16c715ada58178484a886e3d7d0eef134e5d3926132923625"
+    ],
+    [
+      ".agents/skills/technical-debt-management/SKILL.md",
+      "c2592c501d10efa2cd701602f205caf567984c0e8fb5c233454129a829bf1c59"
+    ],
+    [
+      ".agents/skills/technical-decision-making/SKILL.md",
+      "4f5b3cb084e61b2e1c7edcdb9eec25927a06974bf2c189e371525a867be5b985"
     ],
     [
       ".agents/skills/test/SKILL.md",
@@ -3413,6 +5577,10 @@
     [
       ".agents/skills/test-mocking-rules/SKILL.md",
       "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e"
+    ],
+    [
+      ".agents/skills/testing-strategies/SKILL.md",
+      "042493cfef510d68a72e9e99385bd99101832340f9e080e4c14786d4d3d8cac0"
     ],
     [
       "AGENTS.md",

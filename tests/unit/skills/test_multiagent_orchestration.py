@@ -1,5 +1,6 @@
 """Tests for the multiagent-orchestration skill (PRO-28)."""
 
+import re
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -9,7 +10,7 @@ import yaml
 from prompticorn.builders.errors import BuilderException
 from prompticorn.ir.loaders.skill_loader import SkillLoader
 from prompticorn.ir.models import Agent
-from prompticorn.prompt_builder import PromptBuilder
+from prompticorn.prompt_builder import PromptBuilder, get_prompt_builder
 
 _SKILL = "multiagent-orchestration"
 _VARIANTS = ["minimal", "verbose"]
@@ -81,3 +82,48 @@ class TestMultiagentOrchestrationSkill:
                 pytest.fail(f"{tool} failed to emit the skill: {exc}")
             assert expected in written
             assert (root / expected).exists()
+
+    def test_reaches_single_language_build(self):
+        """PRO-62: agent-level skills (from the mapping) must survive a
+        single-language build. Previously a language override replaced the
+        agent-level skill set, dropping the orchestrator's skills entirely."""
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            get_prompt_builder("claude").build(
+                root,
+                {
+                    "spec": {"language": "python"},
+                    "active_personas": ["software_engineer"],
+                    "variant": "minimal",
+                },
+                dry_run=False,
+            )
+            # The agent-level skill reaches the build even though python has a
+            # language override that does not list it.
+            assert (root / ".claude" / "skills" / _SKILL / "SKILL.md").exists()
+
+    def test_no_dangling_skill_references_in_single_language_build(self):
+        """Every skill a built agent's markdown references must have its SKILL.md
+        emitted on disk (no broken links)."""
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            get_prompt_builder("claude").build(
+                root,
+                {
+                    "spec": {"language": "python"},
+                    "active_personas": ["software_engineer"],
+                    "variant": "minimal",
+                },
+                dry_run=False,
+            )
+            referenced = set()
+            for md in (root / ".claude" / "agents").glob("*.md"):
+                referenced.update(
+                    re.findall(r"\.claude/skills/([\w-]+)/SKILL\.md", md.read_text())
+                )
+            missing = sorted(
+                name
+                for name in referenced
+                if not (root / ".claude" / "skills" / name / "SKILL.md").exists()
+            )
+            assert not missing, f"dangling skill references: {missing}"
