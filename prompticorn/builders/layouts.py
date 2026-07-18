@@ -14,6 +14,7 @@ import json
 from pathlib import Path
 from typing import Any
 
+from prompticorn.builders.codex_builder import generate_codex_config
 from prompticorn.builders.continue_builder import workflow_to_continue_prompt
 from prompticorn.builders.gemini_builder import generate_gemini_settings, workflow_to_toml
 from prompticorn.builders.junie_builder import slugify as junie_slugify
@@ -393,6 +394,31 @@ class AiderLayout(ToolLayout):
         return []
 
 
+class CodexLayout(ToolLayout):
+    """.agents/skills/ (agents-as-skills) + AGENTS.md + .codex/config.toml.
+
+    Like Zed, agents/skills go to ``.agents/skills/`` and conventions ride the
+    root ``AGENTS.md`` (E1). ``finalize`` additionally writes ``.codex/config.toml``
+    — a real Codex config layer and the unique marker that lets ``current_tool``
+    tell a Codex project apart from a Zed one.
+    """
+
+    def write_agent(self, output: Path, agent_name: str, content: str | dict[str, Any]) -> list[str]:
+        assert isinstance(content, str)
+        return [write_skill(output, AGENTS_SKILLS_BASE, zed_slugify(agent_name), content)]
+
+    def write_skill(self, output: Path, skill_name: str, content: str) -> list[str]:
+        return [write_skill(output, AGENTS_SKILLS_BASE, skill_name, content)]
+
+    def finalize(
+        self, output: Path, built_agents: list[Any], config: dict[str, Any] | None
+    ) -> list[str]:
+        codex_dir = output / ".codex"
+        codex_dir.mkdir(parents=True, exist_ok=True)
+        (codex_dir / "config.toml").write_text(generate_codex_config(), encoding="utf-8")
+        return [".codex/config.toml"]
+
+
 _LAYOUTS: dict[str, ToolLayout] = {
     "kilo": KiloLayout(),
     "cline": ClineLayout(),
@@ -407,6 +433,7 @@ _LAYOUTS: dict[str, ToolLayout] = {
     "windsurf": WindsurfLayout(),
     "continue": ContinueLayout(),
     "aider": AiderLayout(),
+    "codex": CodexLayout(),
 }
 
 

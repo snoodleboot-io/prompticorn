@@ -137,6 +137,15 @@ _TOOL_SPECS: Final[tuple[ToolSpec, ...]] = (
         builder_name="aider",
         create_artifacts=frozenset({"CONVENTIONS.md", ".aider.conf.yml"}),
     ),
+    ToolSpec(
+        id="codex",
+        display_label="Codex",
+        explanation="OpenAI Codex CLI - AGENTS.md + .agents/skills/ + .codex/config.toml",
+        builder_name="codex",
+        # .codex/ is the unique marker distinguishing a Codex project from a Zed
+        # one (both share .agents/); current_tool prefers the most-specific match.
+        create_artifacts=frozenset({".agents/", ".codex/"}),
+    ),
 )
 
 TOOLS: Final[dict[str, ToolSpec]] = {spec.id: spec for spec in _TOOL_SPECS}
@@ -159,6 +168,7 @@ MENU_ORDER: Final[tuple[str, ...]] = (
     "windsurf",
     "continue",
     "aider",
+    "codex",
 )
 
 

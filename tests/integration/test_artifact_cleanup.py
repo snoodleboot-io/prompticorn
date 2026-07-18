@@ -99,22 +99,12 @@ class TestArtifactCleanup(unittest.TestCase):
         3. Removing kilo artifacts
         4. Verifying only claude artifacts exist after removal
         """
-        # Setup: Create kilo artifacts
+        # Setup: only kilo artifacts exist (the real switch flow cleans the old
+        # tool BEFORE building the new one, so both are never present at once).
         kilo_dir = self.test_dir / ".kilo"
         kilo_dir.mkdir()
         (kilo_dir / "agents").mkdir()
         (kilo_dir / "agents" / "test.md").write_text("test")
-
-        # Create claude artifacts (simulating what would be built)
-        claude_dir = self.test_dir / ".claude"
-        claude_md = self.test_dir / "CLAUDE.md"
-        claude_dir.mkdir()
-        (claude_dir / "skills").mkdir()
-        claude_md.write_text("# Claude routing file")
-
-        # Verify setup
-        self.assertTrue(kilo_dir.exists())
-        self.assertTrue(claude_dir.exists())
 
         # Step 1: Detect current tool (should be kilo)
         current_tool = self.manager.current_tool
@@ -127,13 +117,15 @@ class TestArtifactCleanup(unittest.TestCase):
         self.assertFalse(kilo_dir.exists())
         self.assertTrue(any("Removed directory: .kilo/" in action for action in removal_actions))
 
-        # Step 4: Verify claude artifacts remain
-        self.assertTrue(claude_dir.exists())
-        self.assertTrue(claude_md.exists())
+        # Step 4: Now build claude (after the old tool was cleaned).
+        claude_dir = self.test_dir / ".claude"
+        claude_md = self.test_dir / "CLAUDE.md"
+        claude_dir.mkdir()
+        (claude_dir / "skills").mkdir()
+        claude_md.write_text("# Claude routing file")
 
         # Step 5: Verify current tool is now detected as claude
-        new_current = self.manager.current_tool
-        self.assertEqual(new_current, "claude")
+        self.assertEqual(self.manager.current_tool, "claude")
 
     def test_removing_wrong_artifacts_should_fail(self):
         """Test that removing artifacts for non-existent tool returns empty list."""
@@ -149,19 +141,20 @@ class TestArtifactCleanup(unittest.TestCase):
             self.assertIsInstance(artifact_config["remove"], set, f"{tool_name} 'remove' not a set")
 
     def test_no_overlap_in_create_artifacts(self):
-        """Test that tools don't create overlapping artifacts."""
-        # Collect all 'create' artifacts by tool
-        create_artifacts = {}
-        for tool_name, config in ARTIFACT_FILES.items():
-            create_artifacts[tool_name] = config["create"]
-
-        # Check for overlaps
+        """Tools' create artifacts are disjoint except the documented Codex/Zed
+        sharing of ``.agents/`` (both emit Agent Skills there; ``current_tool``
+        disambiguates via most-specific match — Codex also writes ``.codex/``)."""
         seen = {}
-        for tool, artifacts in create_artifacts.items():
-            for artifact in artifacts:
+        overlaps = set()
+        for tool, config in ARTIFACT_FILES.items():
+            for artifact in config["create"]:
                 if artifact in seen:
-                    self.fail(f"Artifact {artifact} created by both {seen[artifact]} and {tool}")
+                    overlaps.add((frozenset({seen[artifact], tool}), artifact))
                 seen[artifact] = tool
+
+        assert overlaps == {(frozenset({"codex", "zed"}), ".agents/")}, (
+            f"unexpected create-artifact overlaps: {overlaps}"
+        )
 
 
 if __name__ == "__main__":

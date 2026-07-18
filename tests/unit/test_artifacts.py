@@ -29,12 +29,17 @@ class TestArtifactDerivation(unittest.TestCase):
             self.assertEqual(ARTIFACT_FILES[tool]["create"], created)
 
     def test_remove_is_union_of_other_creates_plus_legacy(self) -> None:
-        """remove(tool) == (union of other tools' creates) | legacy."""
-        for tool in _TOOL_CREATE:
+        """remove(tool) == ((union of other tools' creates) | legacy) - own creates.
+
+        Own creates are subtracted so a tool never removes a path it also writes,
+        even when two tools share a create path (e.g. Codex and Zed both .agents/).
+        """
+        for tool, own in _TOOL_CREATE.items():
             expected = set(_LEGACY_ARTIFACTS)
             for other, created in _TOOL_CREATE.items():
                 if other != tool:
                     expected |= created
+            expected -= set(own)
             self.assertEqual(ARTIFACT_FILES[tool]["remove"], expected)
 
     def test_tool_never_removes_its_own_artifacts(self) -> None:
@@ -43,14 +48,18 @@ class TestArtifactDerivation(unittest.TestCase):
             self.assertEqual(created & ARTIFACT_FILES[tool]["remove"], set())
 
     def test_every_create_is_removed_by_every_other_tool(self) -> None:
-        """Switching to any other tool cleans up this tool's artifacts."""
+        """Switching to any other tool cleans up this tool's artifacts, except a
+        path the other tool also creates (a shared path is kept, not removed —
+        e.g. switching Zed->Codex keeps .agents/ since Codex writes it too)."""
         for tool, created in _TOOL_CREATE.items():
-            for other in _TOOL_CREATE:
-                if other != tool:
-                    self.assertTrue(
-                        created <= ARTIFACT_FILES[other]["remove"],
-                        f"{other} does not remove {tool}'s artifacts {created}",
-                    )
+            for other, other_created in _TOOL_CREATE.items():
+                if other == tool:
+                    continue
+                expected_removed = set(created) - set(other_created)
+                self.assertTrue(
+                    expected_removed <= ARTIFACT_FILES[other]["remove"],
+                    f"{other} does not remove {tool}'s non-shared artifacts {expected_removed}",
+                )
 
     def test_legacy_artifacts_removed_by_all_tools(self) -> None:
         """Legacy artifacts are cleaned up regardless of the active tool."""

@@ -46,6 +46,7 @@ class TestToolRegistry(unittest.TestCase):
                 "windsurf",
                 "continue",
                 "aider",
+                "codex",
             },
         )
 
@@ -70,6 +71,7 @@ class TestToolRegistry(unittest.TestCase):
                 "windsurf": "windsurf",
                 "continue": "continue",
                 "aider": "aider",
+                "codex": "codex",
             },
         )
 
@@ -92,6 +94,7 @@ class TestToolRegistry(unittest.TestCase):
                 "windsurf": "windsurf",
                 "continue": "continue",
                 "aider": "aider",
+                "codex": "codex",
             },
         )
 
@@ -113,6 +116,7 @@ class TestToolRegistry(unittest.TestCase):
                 "Windsurf",
                 "Continue",
                 "Aider",
+                "Codex",
             ],
         )
 
@@ -134,6 +138,7 @@ class TestToolRegistry(unittest.TestCase):
                 "Windsurf": "Windsurf / Cascade - .windsurf/ skills, glob-scoped rules, and workflows",
                 "Continue": "Continue.dev - .continue/ glob-scoped rules and invokable prompts",
                 "Aider": "Aider - CONVENTIONS.md + .aider.conf.yml (conventions only)",
+                "Codex": "OpenAI Codex CLI - AGENTS.md + .agents/skills/ + .codex/config.toml",
             },
         )
 
@@ -156,6 +161,7 @@ class TestToolRegistry(unittest.TestCase):
                 "windsurf": {".windsurf/"},
                 "continue": {".continue/"},
                 "aider": {"CONVENTIONS.md", ".aider.conf.yml"},
+                "codex": {".agents/", ".codex/"},
             },
         )
         # The six original tools keep their historical ordering so that

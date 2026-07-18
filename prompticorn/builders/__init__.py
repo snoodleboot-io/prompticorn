@@ -10,6 +10,7 @@ from prompticorn.builders.amazonq_builder import AmazonQBuilder
 from prompticorn.builders.base import Builder, BuildOptions
 from prompticorn.builders.claude_builder import ClaudeBuilder
 from prompticorn.builders.cline_builder import ClineBuilder
+from prompticorn.builders.codex_builder import CodexBuilder
 from prompticorn.builders.component_composer import ComponentComposer
 from prompticorn.builders.component_selector import (
     ComponentBundle,
@@ -74,6 +75,7 @@ __all__ = [
     "WindsurfBuilder",
     "ContinueBuilder",
     "AiderBuilder",
+    "CodexBuilder",
 ]
 
 # Auto-register all builders when module is imported
@@ -90,3 +92,4 @@ BuilderFactory.register("amazonq", AmazonQBuilder)
 BuilderFactory.register("windsurf", WindsurfBuilder)
 BuilderFactory.register("continue", ContinueBuilder)
 BuilderFactory.register("aider", AiderBuilder)
+BuilderFactory.register("codex", CodexBuilder)
