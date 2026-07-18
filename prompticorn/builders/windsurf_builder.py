@@ -4,7 +4,8 @@ Windsurf has no agent primitive and a hard ~12k-character budget on rules, so
 each prompticorn agent is emitted as a **skill** (``.windsurf/skills/<slug>/
 SKILL.md``) — skills are progressively disclosed and escape the rules budget.
 Conventions go to ``.windsurf/rules/`` with Cascade ``trigger`` frontmatter
-(core = ``always_on``, per-language = ``glob``); the fat root ``AGENTS.md`` is
+(core = ``always_on`` when it fits Windsurf's ~12k budget, else ``model_decision``;
+per-language = ``glob``); the fat root ``AGENTS.md`` is
 suppressed to stay within the 12k budget. Workflows become
 ``.windsurf/workflows/<slug>.md``.
 
@@ -12,6 +13,7 @@ Verified against docs.devin.ai/desktop/cascade/*. See the Windsurf design doc in
 Linear.
 """
 
+import warnings
 from pathlib import Path
 
 import yaml
@@ -43,6 +45,26 @@ _LANG_EXT = {
     "elixir": "ex",
     "fsharp": "fs",
 }
+
+
+# Windsurf caps rule files at ~12,000 characters (per file, and the always-on
+# aggregate). Rules over this are silently truncated by Windsurf.
+_RULE_CHAR_LIMIT = 12000
+
+
+class WindsurfRuleBudgetWarning(UserWarning):
+    """Raised when an emitted Windsurf rule exceeds the ~12k character cap."""
+
+
+def _warn_if_over_budget(rel_path: str, content: str) -> None:
+    if len(content) > _RULE_CHAR_LIMIT:
+        warnings.warn(
+            f"{rel_path} is {len(content)} chars, over Windsurf's "
+            f"{_RULE_CHAR_LIMIT}-char rule cap; Windsurf will truncate it. "
+            "Consider trimming conventions or moving detail into skills.",
+            WindsurfRuleBudgetWarning,
+            stacklevel=2,
+        )
 
 
 def _rule(frontmatter: dict[str, object], body: str) -> str:
@@ -81,8 +103,11 @@ class WindsurfBuilder(Builder):
     def write_rules_files(self, output_dir: Path, config: dict | None = None) -> list[str]:
         """Write core + per-language conventions to ``.windsurf/rules/``.
 
-        Core is an ``always_on`` rule; each language is a ``glob`` rule scoped to
-        its file extension (or ``model_decision`` when the extension is unknown).
+        Core is ``always_on`` only when it fits Windsurf's ~12k budget; a larger
+        core is emitted ``model_decision`` (pulled on demand by description) so it
+        does not consume the always-on budget. Each language is a ``glob`` rule
+        scoped to its file extension (``model_decision`` when the extension is
+        unknown). Any rule still over the per-file cap raises a build warning.
         """
         rules_dir = output_dir / ".windsurf" / "rules"
         rules_dir.mkdir(parents=True, exist_ok=True)
@@ -99,10 +124,14 @@ class WindsurfBuilder(Builder):
             primary_language=primary_spec.get("language", ""),
             primary_spec=primary_spec,
         )
-        (rules_dir / "conventions-core.md").write_text(
-            _rule({"trigger": "always_on", "description": "Core project conventions"}, core),
-            encoding="utf-8",
+        # A large always-on core would blow the 12k always-on budget; keep it
+        # always-on only when it fits, otherwise make it description-triggered.
+        core_trigger = "always_on" if len(core) <= _RULE_CHAR_LIMIT else "model_decision"
+        core_rule = _rule(
+            {"trigger": core_trigger, "description": "Core project conventions"}, core
         )
+        (rules_dir / "conventions-core.md").write_text(core_rule, encoding="utf-8")
+        _warn_if_over_budget(".windsurf/rules/conventions-core.md", core_rule)
         written.append(".windsurf/rules/conventions-core.md")
 
         seen: set[str] = set()
@@ -123,10 +152,11 @@ class WindsurfBuilder(Builder):
                 }
             else:
                 fm = {"trigger": "model_decision", "description": f"{language} conventions"}
-            (rules_dir / f"conventions-{language}.md").write_text(
-                _rule(fm, lang_content), encoding="utf-8"
-            )
-            written.append(f".windsurf/rules/conventions-{language}.md")
+            rel = f".windsurf/rules/conventions-{language}.md"
+            lang_rule = _rule(fm, lang_content)
+            (rules_dir / f"conventions-{language}.md").write_text(lang_rule, encoding="utf-8")
+            _warn_if_over_budget(rel, lang_rule)
+            written.append(rel)
 
         return written
 

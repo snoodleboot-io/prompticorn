@@ -3022,7 +3022,7 @@
   "windsurf::minimal": [
     [
       ".windsurf/rules/conventions-core.md",
-      "e8688953837ee726cd47c400ce4a0bb802c4cd5d3a1a55c2e2e33b09e32da2a3"
+      "28240e099084889d3dbb60ad3d1be1488102abd73ffdab59d298b2e9b9b48d38"
     ],
     [
       ".windsurf/rules/conventions-python.md",
@@ -3136,7 +3136,7 @@
   "windsurf::verbose": [
     [
       ".windsurf/rules/conventions-core.md",
-      "e8688953837ee726cd47c400ce4a0bb802c4cd5d3a1a55c2e2e33b09e32da2a3"
+      "28240e099084889d3dbb60ad3d1be1488102abd73ffdab59d298b2e9b9b48d38"
     ],
     [
       ".windsurf/rules/conventions-python.md",

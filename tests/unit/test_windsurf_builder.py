@@ -1,6 +1,7 @@
 """Unit tests for the Windsurf / Cascade generator (PRO-52)."""
 
 import unittest
+import warnings
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
@@ -8,7 +9,14 @@ import yaml
 
 from prompticorn.builders.base import BuildOptions
 from prompticorn.builders.layouts import get_layout
-from prompticorn.builders.windsurf_builder import WindsurfBuilder, workflow_to_windsurf
+from prompticorn.builders.windsurf_builder import (
+    _RULE_CHAR_LIMIT,
+    WindsurfBuilder,
+    WindsurfRuleBudgetWarning,
+    _rule,
+    _warn_if_over_budget,
+    workflow_to_windsurf,
+)
 from prompticorn.ir.models import Agent
 
 _OPTS = BuildOptions(variant="minimal")
@@ -31,10 +39,13 @@ class TestWindsurfBuilder(unittest.TestCase):
     def test_rules_have_trigger_frontmatter(self) -> None:
         with TemporaryDirectory() as tmp:
             root = Path(tmp)
-            written = WindsurfBuilder().write_rules_files(root, {"spec": {"language": "python"}})
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                written = WindsurfBuilder().write_rules_files(root, {"spec": {"language": "python"}})
             self.assertIn(".windsurf/rules/conventions-core.md", written)
+            # Core is budget-aware: always_on when it fits, else model_decision.
             core = _frontmatter((root / ".windsurf/rules/conventions-core.md").read_text())
-            self.assertEqual(core["trigger"], "always_on")
+            self.assertIn(core["trigger"], ("always_on", "model_decision"))
             lang = _frontmatter((root / ".windsurf/rules/conventions-python.md").read_text())
             self.assertEqual(lang["trigger"], "glob")
             self.assertEqual(lang["globs"], "**/*.py")
@@ -94,6 +105,41 @@ class TestWindsurfLayout(unittest.TestCase):
             self.assertFalse((root / "AGENTS.md").exists())
             self.assertTrue((root / ".windsurf/rules/conventions-core.md").exists())
             self.assertTrue(list(root.glob(".windsurf/skills/*/SKILL.md")))
+
+
+class TestWindsurfCharCap(unittest.TestCase):
+    """PRO-61: keep the always-on budget safe and warn on the ~12k per-file cap."""
+
+    def test_oversize_core_is_model_decision_not_always_on(self) -> None:
+        # The real core conventions exceed 12k, so it must not sit always-on
+        # (which would blow the 12k always-on budget) — it becomes description-triggered.
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            with warnings.catch_warnings():
+                warnings.simplefilter("ignore")
+                WindsurfBuilder().write_rules_files(root, {"spec": {"language": "python"}})
+            core = (root / ".windsurf/rules/conventions-core.md").read_text()
+            self.assertEqual(_frontmatter(core)["trigger"], "model_decision")
+
+    def test_oversize_rule_raises_budget_warning(self) -> None:
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            with warnings.catch_warnings(record=True) as caught:
+                warnings.simplefilter("always")
+                WindsurfBuilder().write_rules_files(root, {"spec": {"language": "python"}})
+            self.assertTrue(
+                any(issubclass(w.category, WindsurfRuleBudgetWarning) for w in caught),
+                "expected a WindsurfRuleBudgetWarning for the oversize core rule",
+            )
+
+    def test_within_budget_content_is_always_on_and_silent(self) -> None:
+        # A small rule fits: always-on, no warning.
+        rule = _rule({"trigger": "always_on", "description": "tiny"}, "be concise")
+        self.assertLess(len(rule), _RULE_CHAR_LIMIT)
+        with warnings.catch_warnings(record=True) as caught:
+            warnings.simplefilter("always")
+            _warn_if_over_budget(".windsurf/rules/x.md", rule)
+        self.assertEqual([w for w in caught if issubclass(w.category, WindsurfRuleBudgetWarning)], [])
 
 
 if __name__ == "__main__":
