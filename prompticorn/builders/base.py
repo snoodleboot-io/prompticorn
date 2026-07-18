@@ -5,6 +5,7 @@ builders must implement, as well as the BuildOptions configuration class.
 """
 
 from dataclasses import dataclass
+from pathlib import Path
 from typing import Any
 
 from prompticorn.ir.models import Agent
@@ -113,6 +114,22 @@ class Builder:
             Description of what format this builder outputs (e.g., "YAML", "JSON", "Markdown")
         """
         return "Unknown"
+
+    def write_rules_files(self, output_dir: Path, config: dict | None = None) -> list[str]:
+        """Write standalone core/convention rule files for this builder.
+
+        Only builders whose layout sets ``writes_rules`` (Kilo, Windsurf, Aider,
+        AmazonQ, Continue) emit rule files; the base implementation is a no-op so
+        the caller can invoke it uniformly.
+
+        Args:
+            output_dir: Root output directory.
+            config: Optional build configuration.
+
+        Returns:
+            List of written file paths (empty for builders without rule files).
+        """
+        return []
 
     def get_tool_name(self) -> str:
         """Get the name of the tool this builder targets.

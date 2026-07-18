@@ -1,10 +1,15 @@
 """Unit tests for the OpenAI Codex generator (PRO-16)."""
 
+import sys
 import unittest
 from pathlib import Path
 from tempfile import TemporaryDirectory
 
-import tomllib
+if sys.version_info >= (3, 11):
+    import tomllib
+else:  # Python 3.10 has no stdlib tomllib
+    import tomli as tomllib
+
 import yaml
 
 from prompticorn.artifacts import ArtifactManager
