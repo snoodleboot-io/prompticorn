@@ -146,6 +146,17 @@ _TOOL_SPECS: Final[tuple[ToolSpec, ...]] = (
         # one (both share .agents/); current_tool prefers the most-specific match.
         create_artifacts=frozenset({".agents/", ".codex/"}),
     ),
+    ToolSpec(
+        id="copilot-chat",
+        display_label="Copilot Chat",
+        explanation="GitHub Copilot Chat - .github/agents/ custom agents, /prompt commands, applyTo instructions",
+        builder_name="copilot_chat",
+        # Disjoint from the `copilot` target's .github/copilot-instructions.md so
+        # the two never collide; each of these is unique to Copilot Chat.
+        create_artifacts=frozenset(
+            {".github/agents/", ".github/prompts/", ".github/instructions/"}
+        ),
+    ),
 )
 
 TOOLS: Final[dict[str, ToolSpec]] = {spec.id: spec for spec in _TOOL_SPECS}
@@ -160,6 +171,7 @@ MENU_ORDER: Final[tuple[str, ...]] = (
     "cline",
     "cursor",
     "copilot",
+    "copilot-chat",
     "roo",
     "junie",
     "zed",

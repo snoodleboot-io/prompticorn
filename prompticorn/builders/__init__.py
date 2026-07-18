@@ -19,6 +19,7 @@ from prompticorn.builders.component_selector import (
 )
 from prompticorn.builders.continue_builder import ContinueBuilder
 from prompticorn.builders.copilot_builder import CopilotBuilder
+from prompticorn.builders.copilot_chat_builder import CopilotChatBuilder
 from prompticorn.builders.cursor_builder import CursorBuilder
 from prompticorn.builders.errors import (
     BuilderException,
@@ -66,6 +67,7 @@ __all__ = [
     "ClineBuilder",
     "ClaudeBuilder",
     "CopilotBuilder",
+    "CopilotChatBuilder",
     "CursorBuilder",
     "RooBuilder",
     "JunieBuilder",
@@ -83,6 +85,7 @@ BuilderFactory.register("kilo", KiloBuilder)
 BuilderFactory.register("cline", ClineBuilder)
 BuilderFactory.register("claude", ClaudeBuilder)
 BuilderFactory.register("copilot", CopilotBuilder)
+BuilderFactory.register("copilot_chat", CopilotChatBuilder)
 BuilderFactory.register("cursor", CursorBuilder)
 BuilderFactory.register("roo", RooBuilder)
 BuilderFactory.register("junie", JunieBuilder)

@@ -20,7 +20,7 @@ Comprehensive architectural documentation for the prompticorn system.
 
 prompticorn is a **tool-agnostic prompt architecture system** that enables you to:
 - Define AI agents once in a unified Intermediate Representation (IR) format
-- Generate configurations for 14 different AI coding assistants (Kilo, Cline, Claude, Cursor, Copilot, Roo Code, Junie, Zed, Gemini CLI, Amazon Q, Windsurf, Continue.dev, Aider, Codex)
+- Generate configurations for 15 different AI coding assistants (Kilo, Cline, Claude, Cursor, Copilot, Copilot Chat, Roo Code, Junie, Zed, Gemini CLI, Amazon Q, Windsurf, Continue.dev, Aider, Codex)
 - Manage agent complexity with minimal/verbose variants
 - Filter agents by persona (role-based)
 - Customize prompts with template substitution
@@ -321,6 +321,7 @@ output = builder.build(agent, options)
 | **ClaudeBuilder** | JSON | `claude-agents.json` |
 | **CursorBuilder** | Markdown | `.cursor/rules/*.mdc` |
 | **CopilotBuilder** | Markdown | `.github/copilot-instructions.md` |
+| **CopilotChatBuilder** | Markdown | `.github/agents/*.agent.md` (custom agents), `.github/prompts/*.prompt.md` (slash commands), `.github/instructions/*.instructions.md` (glob) — no AGENTS.md |
 | **RooBuilder** | YAML + Markdown | `.roomodes`, `.roo/rules-{slug}/`, `.roo/skills/`, `.roo/commands/` |
 | **JunieBuilder** | YAML + Markdown | `.junie/agents/`, `.junie/skills/`, `.junie/commands/` |
 | **ZedBuilder** | YAML + Markdown | `.agents/skills/` (agents-as-skills), `AGENTS.md` |
