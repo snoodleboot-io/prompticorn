@@ -17,6 +17,18 @@ from prompticorn.personas import PersonaFilter, PersonaRegistry
 from prompticorn.tools import builder_dispatch
 
 
+def _dedupe_preserve_order(*lists: list[str] | None) -> list[str]:
+    """Union the given lists, keeping first-seen order and dropping duplicates."""
+    seen: set[str] = set()
+    result: list[str] = []
+    for lst in lists:
+        for item in lst or []:
+            if item not in seen:
+                seen.add(item)
+                result.append(item)
+    return result
+
+
 class PromptBuilder:
     """Builder that uses bundled IR-format agents with Phase 2A builders.
 
@@ -293,24 +305,29 @@ class PromptBuilder:
             except Exception as e:
                 actions.append(f"✗ Failed to build {agent_name}: {e}")
 
-        # Now collect and write skills from ALL agents (including subagents)
+        # Now collect and write skills from ALL agents (including subagents).
+        # Skills live in the agent/language mapping registries, not the raw IR
+        # model (whose .skills is empty for most agents), so gate on the FILTERED
+        # agent's skills — otherwise the SKILL.md files an agent's markdown table
+        # references would never be written, leaving dangling links.
         if not dry_run:
             for agent_name, agent in all_agents.items():
-                if agent.skills:
-                    try:
-                        # Filter agent for language before writing skills
-                        filtered_agent = self._filter_agent_for_language(
-                            agent, language, agent_name=agent_name
-                        )
-                        skill_files = self._write_skill_files(
-                            output, agent_name, filtered_agent, variant
-                        )
-                        for skill_file in skill_files:
-                            if skill_file not in all_skills_written:
-                                actions.append(f"✓ {skill_file}")
-                                all_skills_written.add(skill_file)
-                    except Exception as e:
-                        actions.append(f"✗ Failed to write skills for {agent_name}: {e}")
+                try:
+                    # Filter agent for language before writing skills
+                    filtered_agent = self._filter_agent_for_language(
+                        agent, language, agent_name=agent_name
+                    )
+                    if not filtered_agent.skills:
+                        continue
+                    skill_files = self._write_skill_files(
+                        output, agent_name, filtered_agent, variant
+                    )
+                    for skill_file in skill_files:
+                        if skill_file not in all_skills_written:
+                            actions.append(f"✓ {skill_file}")
+                            all_skills_written.add(skill_file)
+                except Exception as e:
+                    actions.append(f"✗ Failed to write skills for {agent_name}: {e}")
 
         # Write workflows (for tools that use separate workflow files like Kilo)
         all_workflows_written = set()
@@ -404,12 +421,14 @@ class PromptBuilder:
 
         Uses two-tier resolution system:
         1. AgentSkillMappingLoader - language-agnostic skills/workflows for agent
-        2. LanguageSkillMappingLoader - language-specific overrides (if exist)
+        2. LanguageSkillMappingLoader - language-specific additions (if any)
 
-        Priority resolution:
-        1. agent_skill_mapping.yaml - Base skills for agent (language-agnostic)
-        2. language_skill_mapping.yaml - Language+agent overrides (rare)
-        3. Fallback - Original agent skills/workflows (if no mappings)
+        Resolution: the agent-level skills/workflows are the base; language-specific
+        ones are ADDED to them (union, not replacement). Previously a language
+        mapping replaced the agent-level set entirely, which silently dropped
+        agent-level skills (e.g. the orchestrator's) from single-language builds.
+        Falls back to the agent's own declared skills/workflows if neither loader
+        yields anything.
 
         Args:
             agent: Agent to filter
@@ -444,10 +463,11 @@ class PromptBuilder:
                 language, subagent=subagent_path
             )
 
-        # Priority: language overrides > agent mapping > original
-        # Language overrides take precedence if they exist (non-empty)
-        final_skills = language_skills if language_skills else agent_skills
-        final_workflows = language_workflows if language_workflows else agent_workflows
+        # Union: agent-level skills are the base; language-specific ones are added
+        # on top (order-preserving, de-duplicated). A language mapping augments the
+        # agent set rather than replacing it.
+        final_skills = _dedupe_preserve_order(agent_skills, language_skills)
+        final_workflows = _dedupe_preserve_order(agent_workflows, language_workflows)
 
         # If no mappings found at all, use original agent skills/workflows
         if not final_skills:
