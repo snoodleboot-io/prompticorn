@@ -284,6 +284,7 @@ orchestrator:
     - problem-decomposition
     - team-collaboration
     - technical-decision-making
+    - multiagent-orchestration
   workflows:
     - meta
     - multi-agent-coordination
