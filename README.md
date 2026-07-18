@@ -15,6 +15,7 @@ right config for whichever assistant your team uses:
 - **Claude** — `.claude/` directory plus `CLAUDE.md`
 - **Cursor** — `.cursor/rules/` plus `.cursorrules`
 - **GitHub Copilot** — `.github/copilot-instructions.md`
+- **GitHub Copilot Chat** (VS Code) — `.github/agents/` custom agents, `.github/prompts/` slash commands, and `applyTo` `.github/instructions/`
 - **Roo Code** — `.roomodes` custom modes plus `.roo/` rules, skills, and commands
 - **JetBrains Junie** (CLI) — `.junie/` agents, skills, and commands plus `AGENTS.md`
 - **Zed** — `.agents/skills/` (agents-as-skills) plus `AGENTS.md` instructions
@@ -60,7 +61,7 @@ See [docs/QUICKSTART.md](./docs/QUICKSTART.md) for the full walkthrough.
 ## Key Features
 
 - **Unified IR system** — define agents once, generate for every supported tool.
-- **14 production builders** — Kilo, Cline, Claude, Cursor, Copilot, Roo Code, Junie, Zed, Gemini CLI, Amazon Q, Windsurf, Continue.dev, Aider, Codex.
+- **15 production builders** — Kilo, Cline, Claude, Cursor, Copilot, Copilot Chat, Roo Code, Junie, Zed, Gemini CLI, Amazon Q, Windsurf, Continue.dev, Aider, Codex.
 - **Minimal / verbose variants** — trade tokens for detail at build time.
 - **Persona-based filtering** — pick your team's roles and only relevant agents are generated.
 - **Spec-driven conventions** — your language, runtime, package manager, test

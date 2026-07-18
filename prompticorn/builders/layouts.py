@@ -16,6 +16,9 @@ from typing import Any
 
 from prompticorn.builders.codex_builder import generate_codex_config
 from prompticorn.builders.continue_builder import workflow_to_continue_prompt
+from prompticorn.builders.copilot_chat_builder import (
+    workflow_to_prompt as workflow_to_copilot_prompt,
+)
 from prompticorn.builders.gemini_builder import generate_gemini_settings, workflow_to_toml
 from prompticorn.builders.junie_builder import slugify as junie_slugify
 from prompticorn.builders.roo_builder import generate_roomodes
@@ -141,6 +144,45 @@ class CopilotLayout(ToolLayout):
         skills_dir.mkdir(parents=True, exist_ok=True)
         (skills_dir / f"{skill_name}.md").write_text(content, encoding="utf-8")
         return [f".github/skills/{skill_name}.md"]
+
+
+class CopilotChatLayout(ToolLayout):
+    """.github/ : custom agents, prompt-file commands, applyTo instructions.
+
+    Copilot Chat's rich customization surface. Agents become
+    ``.github/agents/<slug>.agent.md`` custom agents; workflows become
+    ``.github/prompts/<slug>.prompt.md`` slash commands; conventions go to
+    ``.github/instructions/*.instructions.md`` (writes_rules). Skills have no
+    Copilot Chat primitive and are dropped. No root AGENTS.md — core conventions
+    ride the always-on ``core.instructions.md`` instead.
+    """
+
+    writes_workflows = True
+    writes_rules = True
+    emits_agents_md = False
+
+    def write_agent(
+        self, output: Path, agent_name: str, content: str | dict[str, Any]
+    ) -> list[str]:
+        assert isinstance(content, str)
+        agents_dir = output / ".github" / "agents"
+        agents_dir.mkdir(parents=True, exist_ok=True)
+        rel = f".github/agents/{junie_slugify(agent_name)}.agent.md"
+        (output / rel).write_text(content, encoding="utf-8")
+        return [rel]
+
+    def write_skill(self, output: Path, skill_name: str, content: str) -> list[str]:
+        # Copilot Chat has no skill primitive; skills are dropped in v1.
+        return []
+
+    def write_workflow(self, output: Path, workflow_name: str, content: str) -> list[str]:
+        prompts_dir = output / ".github" / "prompts"
+        prompts_dir.mkdir(parents=True, exist_ok=True)
+        rel = f".github/prompts/{junie_slugify(workflow_name)}.prompt.md"
+        (output / rel).write_text(
+            workflow_to_copilot_prompt(workflow_name, content), encoding="utf-8"
+        )
+        return [rel]
 
 
 class ClaudeLayout(ToolLayout):
@@ -454,6 +496,7 @@ _LAYOUTS: dict[str, ToolLayout] = {
     "cline": ClineLayout(),
     "cursor": CursorLayout(),
     "copilot": CopilotLayout(),
+    "copilot_chat": CopilotChatLayout(),
     "claude": ClaudeLayout(),
     "roo": RooLayout(),
     "junie": JunieLayout(),

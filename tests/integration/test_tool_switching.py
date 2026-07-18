@@ -482,6 +482,54 @@ class TestToolSwitching(unittest.TestCase):
         self.assertFalse((self.test_dir / ".codex").exists())
         self.assertEqual(manager.current_tool, "zed")
 
+    def test_switching_from_copilot_chat(self):
+        """Copilot Chat creates .github/{agents,prompts,instructions}/, no AGENTS.md."""
+        config = {
+            "variant": "minimal",
+            "spec": {"language": "python"},
+            "active_personas": ["software_engineer"],
+        }
+        get_prompt_builder("copilot-chat").build(self.test_dir, config, dry_run=False)
+
+        self.assertTrue((self.test_dir / ".github" / "agents").exists())
+        self.assertTrue((self.test_dir / ".github" / "prompts").exists())
+        self.assertTrue((self.test_dir / ".github" / "instructions").exists())
+        self.assertFalse((self.test_dir / "AGENTS.md").exists())
+
+        manager = ArtifactManager(self.test_dir)
+        self.assertEqual(manager.current_tool, "copilot-chat")
+
+        manager.remove_artifacts_created_by("copilot-chat")
+        self.assertFalse((self.test_dir / ".github" / "agents").exists())
+        self.assertFalse((self.test_dir / ".github" / "prompts").exists())
+        self.assertFalse((self.test_dir / ".github" / "instructions").exists())
+
+    def test_switching_copilot_and_copilot_chat_round_trip(self):
+        """copilot and copilot-chat both live under .github/ but have disjoint
+        create-sets, so each is detected and cleaned independently."""
+        config = {
+            "variant": "minimal",
+            "spec": {"language": "python"},
+            "active_personas": ["software_engineer"],
+        }
+        manager = ArtifactManager(self.test_dir)
+
+        # Start on Copilot: only .github/copilot-instructions.md.
+        get_prompt_builder("copilot").build(self.test_dir, config, dry_run=False)
+        self.assertEqual(manager.current_tool, "copilot")
+
+        # Switch to Copilot Chat: clean what copilot created (copilot-instructions.md).
+        manager.remove_artifacts_created_by(manager.current_tool or "")
+        get_prompt_builder("copilot-chat").build(self.test_dir, config, dry_run=False)
+        self.assertFalse((self.test_dir / ".github" / "copilot-instructions.md").exists())
+        self.assertEqual(manager.current_tool, "copilot-chat")
+
+        # Switch back to Copilot: clean the agents/prompts/instructions dirs.
+        manager.remove_artifacts_created_by(manager.current_tool or "")
+        self.assertFalse((self.test_dir / ".github" / "agents").exists())
+        get_prompt_builder("copilot").build(self.test_dir, config, dry_run=False)
+        self.assertEqual(manager.current_tool, "copilot")
+
 
 if __name__ == "__main__":
     unittest.main()
