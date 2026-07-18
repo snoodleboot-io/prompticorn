@@ -61,8 +61,7 @@ def _generate_routing_index(primary_agents: list[dict] | None) -> str:
 
     if not primary_agents:
         return (
-            header
-            + "\n## Available agents\n\n"
+            header + "\n## Available agents\n\n"
             "Route to the agent whose purpose best matches the task, and switch "
             "agents as the task changes. Each agent has specialized behaviors and "
             "will suggest switching when another agent is better suited.\n"
@@ -72,8 +71,7 @@ def _generate_routing_index(primary_agents: list[dict] | None) -> str:
         f"| **{a.get('name', 'unknown')}** | {_clean_description(a)} |" for a in primary_agents
     )
     return (
-        header
-        + f"\n## Available agents\n\n"
+        header + f"\n## Available agents\n\n"
         f"This configuration includes the following {len(primary_agents)} "
         "primary agent(s). Route to the agent whose purpose best matches the "
         "task, and switch agents as the task changes.\n\n"

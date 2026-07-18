@@ -20,10 +20,7 @@ class ScalaLayoutStyleQuestion(Question):
 
     @property
     def explanation(self) -> str:
-        return (
-            "flat: sources at the repo/module root.\n"
-            "src: sources nested under a src/ directory."
-        )
+        return "flat: sources at the repo/module root.\nsrc: sources nested under a src/ directory."
 
     @property
     def options(self) -> list[str]:

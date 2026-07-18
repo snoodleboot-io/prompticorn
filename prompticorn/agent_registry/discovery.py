@@ -99,8 +99,10 @@ class RegistryDiscovery:
         if not self.agents_dir.is_dir():
             raise RegistryLoadError(f"Agents directory not found: {self.agents_dir}")
 
-        # Iterate through top-level directories in agents/
-        for agent_dir in self.agents_dir.iterdir():
+        # Iterate through top-level directories in agents/ (sorted for
+        # deterministic, filesystem-independent discovery order — otherwise the
+        # order leaks into every generated file that lists agents).
+        for agent_dir in sorted(self.agents_dir.iterdir()):
             if not agent_dir.is_dir():
                 continue
 
@@ -136,8 +138,8 @@ class RegistryDiscovery:
         if not subagents_dir.is_dir():
             return subagents
 
-        # Iterate through subagent directories
-        for subagent_dir in subagents_dir.iterdir():
+        # Iterate through subagent directories (sorted for deterministic order).
+        for subagent_dir in sorted(subagents_dir.iterdir()):
             if not subagent_dir.is_dir():
                 continue
 
@@ -168,8 +170,8 @@ class RegistryDiscovery:
             issues.append(f"Agents directory not found: {self.agents_dir}")
             return issues
 
-        # Check each agent directory
-        for agent_dir in self.agents_dir.iterdir():
+        # Check each agent directory (sorted for deterministic issue order).
+        for agent_dir in sorted(self.agents_dir.iterdir()):
             if not agent_dir.is_dir() or agent_dir.name.startswith("."):
                 continue
             if agent_dir.name in _NON_AGENT_DIRS:
@@ -204,7 +206,7 @@ class RegistryDiscovery:
             # Check subagents if they exist
             subagents_dir = agent_dir / "subagents"
             if subagents_dir.is_dir():
-                for subagent_dir in subagents_dir.iterdir():
+                for subagent_dir in sorted(subagents_dir.iterdir()):
                     if not subagent_dir.is_dir() or subagent_dir.name.startswith("."):
                         continue
 

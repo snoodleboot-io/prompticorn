@@ -522,7 +522,7 @@
     ],
     [
       ".claude/subagents/strategy.md",
-      "c0c9fcd6a3df423baec9aa92b378e3a8f6ea6640d41ef2212787a2c48b1f2c24"
+      "1ba4f202f870bd0c9ae3ab87f822063368314c776d46de7f9e4a6fa9531ffe22"
     ],
     [
       ".claude/subagents/testing.md",
@@ -650,7 +650,7 @@
     ],
     [
       "CLAUDE.md",
-      "9fb2bf94620da505845a98508a05e23afef0bbea5453c4ec69902f4f47a0eb7c"
+      "aebbe61934a59d5ac7a42c6e791bcd7a5caf27eb4a467ce323e3e25d4b8ad02e"
     ]
   ],
   "claude::verbose": [
@@ -920,7 +920,7 @@
     ],
     [
       ".claude/subagents/strategy.md",
-      "b0a89db30ec8e851ee5180d52259f8cd6c4491926d28f8b18f1fa7eddffb0759"
+      "1ba4f202f870bd0c9ae3ab87f822063368314c776d46de7f9e4a6fa9531ffe22"
     ],
     [
       ".claude/subagents/testing.md",
@@ -1048,7 +1048,7 @@
     ],
     [
       "CLAUDE.md",
-      "9fb2bf94620da505845a98508a05e23afef0bbea5453c4ec69902f4f47a0eb7c"
+      "aebbe61934a59d5ac7a42c6e791bcd7a5caf27eb4a467ce323e3e25d4b8ad02e"
     ]
   ],
   "cline::minimal": [
@@ -1142,11 +1142,11 @@
     ],
     [
       ".clinerules",
-      "cd152b78d345afcadda72701b9741458f1a3ff8591dfb15a9bc76f7da5a228a3"
+      "ed9336557d0951427233b906cd9d8d8380b7fefa78f9d59f4ae455d080da3533"
     ],
     [
       "AGENTS.md",
-      "447a0a62e1f941c111567084d0d7a0f53e4893079a8d509f674d9dd1cbed58b2"
+      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
     ]
   ],
   "cline::verbose": [
@@ -1240,11 +1240,11 @@
     ],
     [
       ".clinerules",
-      "6ce60433243d0fd7485544205d1dcb85dfd7751c2522710243fd48e5abd339ba"
+      "309b3d2b271abac38a2d565cff8e8f427e37d225cfde48bf46c9017f8d180ffd"
     ],
     [
       "AGENTS.md",
-      "447a0a62e1f941c111567084d0d7a0f53e4893079a8d509f674d9dd1cbed58b2"
+      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
     ]
   ],
   "codex::minimal": [
@@ -1398,7 +1398,7 @@
     ],
     [
       "AGENTS.md",
-      "447a0a62e1f941c111567084d0d7a0f53e4893079a8d509f674d9dd1cbed58b2"
+      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
     ]
   ],
   "codex::verbose": [
@@ -1552,7 +1552,7 @@
     ],
     [
       "AGENTS.md",
-      "447a0a62e1f941c111567084d0d7a0f53e4893079a8d509f674d9dd1cbed58b2"
+      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
     ]
   ],
   "continue::minimal": [
@@ -1794,7 +1794,7 @@
   "copilot::minimal": [
     [
       ".github/copilot-instructions.md",
-      "8f0939bffacf6b0234d61d405a27d1852aa53389d91f939b2e0314a869e12a23"
+      "77bd4e814152aea3c72791bdca6a11ba58849459d333d9ea7bf30d660c9b745d"
     ],
     [
       ".github/skills/architecture-documentation.md",
@@ -1886,13 +1886,13 @@
     ],
     [
       "AGENTS.md",
-      "447a0a62e1f941c111567084d0d7a0f53e4893079a8d509f674d9dd1cbed58b2"
+      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
     ]
   ],
   "copilot::verbose": [
     [
       ".github/copilot-instructions.md",
-      "f923b94e03e26f24f85c5acacc0bde4a154c182cc9f07b7324110976009e49c2"
+      "8914875f671ff026b081555d0f529659ed270db267d56fdc45701c64b7955b22"
     ],
     [
       ".github/skills/architecture-documentation.md",
@@ -1984,7 +1984,7 @@
     ],
     [
       "AGENTS.md",
-      "447a0a62e1f941c111567084d0d7a0f53e4893079a8d509f674d9dd1cbed58b2"
+      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
     ]
   ],
   "cursor::minimal": [
@@ -2078,11 +2078,11 @@
     ],
     [
       ".cursorrules",
-      "b514164e056fb399f214291b77b08516af95536beb53db9403e7c4e1bc8a4c24"
+      "727d9bbb0e0cdde86595f42bb58b7f929dafdbbc2bd7228a3712f26e433170f3"
     ],
     [
       "AGENTS.md",
-      "447a0a62e1f941c111567084d0d7a0f53e4893079a8d509f674d9dd1cbed58b2"
+      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
     ]
   ],
   "cursor::verbose": [
@@ -2176,11 +2176,11 @@
     ],
     [
       ".cursorrules",
-      "0c6124dde45deb5b21030e7b445d1ea0696ef8eabf3c5ab666fec7033a71158e"
+      "34eea218be0e260fef64945ae952e8ae4b0eab524986cae203cafa86584f72b7"
     ],
     [
       "AGENTS.md",
-      "447a0a62e1f941c111567084d0d7a0f53e4893079a8d509f674d9dd1cbed58b2"
+      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
     ]
   ],
   "gemini::minimal": [
@@ -2386,7 +2386,7 @@
     ],
     [
       "AGENTS.md",
-      "447a0a62e1f941c111567084d0d7a0f53e4893079a8d509f674d9dd1cbed58b2"
+      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
     ]
   ],
   "gemini::verbose": [
@@ -2592,7 +2592,7 @@
     ],
     [
       "AGENTS.md",
-      "447a0a62e1f941c111567084d0d7a0f53e4893079a8d509f674d9dd1cbed58b2"
+      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
     ]
   ],
   "junie::minimal": [
@@ -2794,7 +2794,7 @@
     ],
     [
       "AGENTS.md",
-      "447a0a62e1f941c111567084d0d7a0f53e4893079a8d509f674d9dd1cbed58b2"
+      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
     ]
   ],
   "junie::verbose": [
@@ -2996,7 +2996,7 @@
     ],
     [
       "AGENTS.md",
-      "447a0a62e1f941c111567084d0d7a0f53e4893079a8d509f674d9dd1cbed58b2"
+      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
     ]
   ],
   "kilo-cli::minimal": [
@@ -3362,7 +3362,7 @@
     ],
     [
       "AGENTS.md",
-      "447a0a62e1f941c111567084d0d7a0f53e4893079a8d509f674d9dd1cbed58b2"
+      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
     ]
   ],
   "kilo-cli::verbose": [
@@ -3728,7 +3728,7 @@
     ],
     [
       "AGENTS.md",
-      "447a0a62e1f941c111567084d0d7a0f53e4893079a8d509f674d9dd1cbed58b2"
+      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
     ]
   ],
   "kilo-ide::minimal": [
@@ -4094,7 +4094,7 @@
     ],
     [
       "AGENTS.md",
-      "447a0a62e1f941c111567084d0d7a0f53e4893079a8d509f674d9dd1cbed58b2"
+      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
     ]
   ],
   "kilo-ide::verbose": [
@@ -4460,7 +4460,7 @@
     ],
     [
       "AGENTS.md",
-      "447a0a62e1f941c111567084d0d7a0f53e4893079a8d509f674d9dd1cbed58b2"
+      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
     ]
   ],
   "roo::minimal": [
@@ -4666,7 +4666,7 @@
     ],
     [
       "AGENTS.md",
-      "447a0a62e1f941c111567084d0d7a0f53e4893079a8d509f674d9dd1cbed58b2"
+      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
     ]
   ],
   "roo::verbose": [
@@ -4872,7 +4872,7 @@
     ],
     [
       "AGENTS.md",
-      "447a0a62e1f941c111567084d0d7a0f53e4893079a8d509f674d9dd1cbed58b2"
+      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
     ]
   ],
   "windsurf::minimal": [
@@ -5434,7 +5434,7 @@
     ],
     [
       "AGENTS.md",
-      "447a0a62e1f941c111567084d0d7a0f53e4893079a8d509f674d9dd1cbed58b2"
+      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
     ]
   ],
   "zed::verbose": [
@@ -5584,7 +5584,7 @@
     ],
     [
       "AGENTS.md",
-      "447a0a62e1f941c111567084d0d7a0f53e4893079a8d509f674d9dd1cbed58b2"
+      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
     ]
   ]
 }

@@ -180,9 +180,7 @@ class ArtifactManager:
         best_tool: str | None = None
         best_count = 0
         for tool, files in ARTIFACT_FILES.items():
-            count = sum(
-                1 for artifact in files["create"] if (self.base_path / artifact).exists()
-            )
+            count = sum(1 for artifact in files["create"] if (self.base_path / artifact).exists())
             if count > best_count:
                 best_tool, best_count = tool, count
         return best_tool

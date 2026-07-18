@@ -51,7 +51,9 @@ class ToolLayout:
     def root_doc_filename(self) -> str:
         return "CLAUDE.md" if self.emits_claude_md else "AGENTS.md"
 
-    def write_agent(self, output: Path, agent_name: str, content: str | dict[str, Any]) -> list[str]:
+    def write_agent(
+        self, output: Path, agent_name: str, content: str | dict[str, Any]
+    ) -> list[str]:
         raise NotImplementedError
 
     def write_skill(self, output: Path, skill_name: str, content: str) -> list[str]:
@@ -79,7 +81,9 @@ class KiloLayout(ToolLayout):
     writes_workflows = True
     writes_rules = True
 
-    def write_agent(self, output: Path, agent_name: str, content: str | dict[str, Any]) -> list[str]:
+    def write_agent(
+        self, output: Path, agent_name: str, content: str | dict[str, Any]
+    ) -> list[str]:
         agents_dir = output / ".kilo" / "agents"
         agents_dir.mkdir(parents=True, exist_ok=True)
         (agents_dir / f"{agent_name}.md").write_text(str(content), encoding="utf-8")
@@ -98,7 +102,9 @@ class KiloLayout(ToolLayout):
 class ClineLayout(ToolLayout):
     """.clinerules: single concatenated file."""
 
-    def write_agent(self, output: Path, agent_name: str, content: str | dict[str, Any]) -> list[str]:
+    def write_agent(
+        self, output: Path, agent_name: str, content: str | dict[str, Any]
+    ) -> list[str]:
         _append_or_write(output / ".clinerules", content)
         return [".clinerules"]
 
@@ -109,7 +115,9 @@ class ClineLayout(ToolLayout):
 class CursorLayout(ToolLayout):
     """.cursorrules: single concatenated file."""
 
-    def write_agent(self, output: Path, agent_name: str, content: str | dict[str, Any]) -> list[str]:
+    def write_agent(
+        self, output: Path, agent_name: str, content: str | dict[str, Any]
+    ) -> list[str]:
         _append_or_write(output / ".cursorrules", content)
         return [".cursorrules"]
 
@@ -120,7 +128,9 @@ class CursorLayout(ToolLayout):
 class CopilotLayout(ToolLayout):
     """.github/copilot-instructions.md: concatenated; flat skill files."""
 
-    def write_agent(self, output: Path, agent_name: str, content: str | dict[str, Any]) -> list[str]:
+    def write_agent(
+        self, output: Path, agent_name: str, content: str | dict[str, Any]
+    ) -> list[str]:
         github_dir = output / ".github"
         github_dir.mkdir(parents=True, exist_ok=True)
         _append_or_write(github_dir / "copilot-instructions.md", content)
@@ -138,7 +148,9 @@ class ClaudeLayout(ToolLayout):
 
     emits_claude_md = True
 
-    def write_agent(self, output: Path, agent_name: str, content: str | dict[str, Any]) -> list[str]:
+    def write_agent(
+        self, output: Path, agent_name: str, content: str | dict[str, Any]
+    ) -> list[str]:
         # New format: content is a dict mapping relative file paths to markdown.
         if isinstance(content, dict) and all(
             isinstance(k, str) and isinstance(v, str) for k, v in content.items()
@@ -172,7 +184,9 @@ class RooLayout(ToolLayout):
 
     writes_workflows = True
 
-    def write_agent(self, output: Path, agent_name: str, content: str | dict[str, Any]) -> list[str]:
+    def write_agent(
+        self, output: Path, agent_name: str, content: str | dict[str, Any]
+    ) -> list[str]:
         # content is a RooBuilder mode-entry dict; write the bulk instructions
         # to the mode-specific rules dir and keep .roomodes lean.
         assert isinstance(content, dict)
@@ -210,7 +224,9 @@ class JunieLayout(ToolLayout):
 
     writes_workflows = True
 
-    def write_agent(self, output: Path, agent_name: str, content: str | dict[str, Any]) -> list[str]:
+    def write_agent(
+        self, output: Path, agent_name: str, content: str | dict[str, Any]
+    ) -> list[str]:
         assert isinstance(content, str)
         agents_dir = output / ".junie" / "agents"
         agents_dir.mkdir(parents=True, exist_ok=True)
@@ -236,7 +252,9 @@ class ZedLayout(ToolLayout):
     conventions ride the root ``AGENTS.md``.
     """
 
-    def write_agent(self, output: Path, agent_name: str, content: str | dict[str, Any]) -> list[str]:
+    def write_agent(
+        self, output: Path, agent_name: str, content: str | dict[str, Any]
+    ) -> list[str]:
         assert isinstance(content, str)
         return [write_skill(output, AGENTS_SKILLS_BASE, zed_slugify(agent_name), content)]
 
@@ -254,7 +272,9 @@ class GeminiLayout(ToolLayout):
 
     writes_workflows = True
 
-    def write_agent(self, output: Path, agent_name: str, content: str | dict[str, Any]) -> list[str]:
+    def write_agent(
+        self, output: Path, agent_name: str, content: str | dict[str, Any]
+    ) -> list[str]:
         assert isinstance(content, str)
         agents_dir = output / ".gemini" / "agents"
         agents_dir.mkdir(parents=True, exist_ok=True)
@@ -294,7 +314,9 @@ class AmazonQLayout(ToolLayout):
     writes_workflows = True
     emits_agents_md = False
 
-    def write_agent(self, output: Path, agent_name: str, content: str | dict[str, Any]) -> list[str]:
+    def write_agent(
+        self, output: Path, agent_name: str, content: str | dict[str, Any]
+    ) -> list[str]:
         assert isinstance(content, str)
         agents_dir = output / ".amazonq" / "cli-agents"
         agents_dir.mkdir(parents=True, exist_ok=True)
@@ -326,7 +348,9 @@ class WindsurfLayout(ToolLayout):
     writes_workflows = True
     emits_agents_md = False
 
-    def write_agent(self, output: Path, agent_name: str, content: str | dict[str, Any]) -> list[str]:
+    def write_agent(
+        self, output: Path, agent_name: str, content: str | dict[str, Any]
+    ) -> list[str]:
         assert isinstance(content, str)
         return [write_skill(output, ".windsurf", zed_slugify(agent_name), content)]
 
@@ -354,7 +378,9 @@ class ContinueLayout(ToolLayout):
     writes_workflows = True
     emits_agents_md = False
 
-    def write_agent(self, output: Path, agent_name: str, content: str | dict[str, Any]) -> list[str]:
+    def write_agent(
+        self, output: Path, agent_name: str, content: str | dict[str, Any]
+    ) -> list[str]:
         assert isinstance(content, str)
         rules_dir = output / ".continue" / "rules"
         rules_dir.mkdir(parents=True, exist_ok=True)
@@ -387,7 +413,9 @@ class AiderLayout(ToolLayout):
     writes_rules = True
     emits_agents_md = False
 
-    def write_agent(self, output: Path, agent_name: str, content: str | dict[str, Any]) -> list[str]:
+    def write_agent(
+        self, output: Path, agent_name: str, content: str | dict[str, Any]
+    ) -> list[str]:
         return []
 
     def write_skill(self, output: Path, skill_name: str, content: str) -> list[str]:
@@ -403,7 +431,9 @@ class CodexLayout(ToolLayout):
     tell a Codex project apart from a Zed one.
     """
 
-    def write_agent(self, output: Path, agent_name: str, content: str | dict[str, Any]) -> list[str]:
+    def write_agent(
+        self, output: Path, agent_name: str, content: str | dict[str, Any]
+    ) -> list[str]:
         assert isinstance(content, str)
         return [write_skill(output, AGENTS_SKILLS_BASE, zed_slugify(agent_name), content)]
 
