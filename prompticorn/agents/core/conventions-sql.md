@@ -1,6 +1,7 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions-sql.md -->
 # Core Conventions SQL
 
+Dialect:             {{ sql_dialect }} e.g., PostgreSQL, T-SQL, PL/SQL, MySQL
 Database:            {{ databases }} e.g., PostgreSQL, MySQL, SQLite
 Data access:         {{ data_access }} e.g., Prisma, SQLAlchemy, GORM, Drizzle, raw SQL
 

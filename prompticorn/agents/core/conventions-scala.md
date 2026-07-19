@@ -3,7 +3,7 @@
 
 Language:             {{ language }} e.g., Scala 3.4
 Runtime:              {{ runtime }} e.g., JVM 21
-Package Manager:      {{ package_manager }} e.g., sbt, mill
+Build tool:           {{ build_tool }} e.g., sbt, mill
 Linter:               {{ linter }} e.g., Scalafmt, Scalafix
 Formatter:           {{ formatter }} e.g., Scalafmt
 

@@ -2,7 +2,8 @@
 # Core Conventions Haskell
 
 Language:             {{ language }} e.g., Haskell 9.8
-Package Manager:      {{ package_manager }} e.g., Cabal, Stack
+Compiler:             {{ compiler }} e.g., GHC
+Build tool:           {{ build_tool }} e.g., Cabal, Stack
 Linter:               {{ linter }} e.g., HLint, Stan
 Formatter:           {{ formatter }} e.g., Brittany, Ormolu
 

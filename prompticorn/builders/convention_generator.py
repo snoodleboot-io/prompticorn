@@ -36,6 +36,13 @@ _SPEC_TEMPLATE_KEYS = (
     "coverage_tool",
     "mutation_tool",
     "framework",
+    # Language-specific identity/build selections (PRO-83) — collected via
+    # config_key but previously rendered nowhere (or the convention read the
+    # wrong var, e.g. shell reading runtime instead of shell_type).
+    "compiler",
+    "build_tool",
+    "sql_dialect",
+    "shell_type",
 )
 
 

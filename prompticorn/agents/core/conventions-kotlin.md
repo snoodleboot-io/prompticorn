@@ -4,7 +4,7 @@
 
 Language:             {{ language }} e.g., Kotlin 1.9
 Runtime:              {{ runtime }} e.g., JVM 21, Kotlin/JS, Kotlin/Native
-Package Manager:      {{ package_manager }} e.g., Gradle, Maven
+Build tool:           {{ build_tool }} e.g., Gradle, Maven
 Linter:               {{ linter }} e.g., ktlint, detekt
 Formatter:           {{ formatter }} e.g., ktlint
 

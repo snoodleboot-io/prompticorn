@@ -3,7 +3,7 @@
 
 Language:             {{ language }} e.g., Clojure 1.12
 Runtime:              {{ runtime }} e.g., JVM
-Package Manager:      {{ package_manager }} e.g., deps.edn, Leiningen
+Build tool:           {{ build_tool }} e.g., deps.edn, Leiningen
 Linter:               {{ linter }} e.g., eastwood, clj-kondo
 Formatter:           {{ formatter }} e.g., cljfmt
 

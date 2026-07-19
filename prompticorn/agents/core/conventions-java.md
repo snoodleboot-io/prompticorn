@@ -4,7 +4,7 @@
 
 Language:             {{ language }} e.g., Java 21
 Runtime:              {{ runtime }} e.g., JDK 21, OpenJDK
-Package Manager:      {{ package_manager }} e.g., Maven, Gradle
+Build tool:           {{ build_tool }} e.g., Maven, Gradle
 Linter:               {{ linter }} e.g., Checkstyle, SpotBugs
 Formatter:           {{ formatter }} e.g., Google Java Format, Spotless
 

@@ -152,6 +152,11 @@ class CoreFilesLoader:
             "coverage_tool": spec.get("coverage_tool", ""),
             "mutation_tool": spec.get("mutation_tool", ""),
             "framework": spec.get("framework", ""),
+            # Language-specific identity/build selections (PRO-83).
+            "compiler": spec.get("compiler", ""),
+            "build_tool": spec.get("build_tool", ""),
+            "sql_dialect": spec.get("sql_dialect", ""),
+            "shell_type": spec.get("shell_type", ""),
             # Must be a dict for the testing/coverage macros; a spec may carry a
             # coverage preset *name* (string), so guard against a non-dict value.
             "coverage_targets": spec.get("coverage")
