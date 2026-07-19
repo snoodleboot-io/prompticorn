@@ -1,8 +1,5 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions-python.md -->
-{%- import 'macros/naming_conventions.jinja2' as naming -%}
 {%- import 'macros/testing_sections.jinja2' as testing -%}
-{%- import 'macros/coverage_targets.jinja2' as coverage -%}
-{%- import 'macros/code_examples.jinja2' as examples -%}
 # Core Conventions Python
 
 Language:             {{ language }} e.g., Python 3.11+

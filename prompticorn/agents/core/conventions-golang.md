@@ -1,6 +1,5 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions-golang.md -->
 {%- import 'macros/testing_sections.jinja2' as testing -%}
-{%- import 'macros/coverage_targets.jinja2' as coverage -%}
 # Core Conventions Golang
 
 Language:             {{ language }} e.g., Go 1.22

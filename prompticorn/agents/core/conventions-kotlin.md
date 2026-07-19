@@ -1,6 +1,5 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions-kotlin.md -->
 {%- import 'macros/testing_sections.jinja2' as testing -%}
-{%- import 'macros/coverage_targets.jinja2' as coverage -%}
 # Core Conventions Kotlin
 
 Language:             {{ language }} e.g., Kotlin 1.9

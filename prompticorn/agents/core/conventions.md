@@ -1,6 +1,4 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions.md -->
-{%- import 'macros/naming_conventions.jinja2' as naming -%}
-{%- import 'macros/checklist.jinja2' as checklist -%}
 # Core Conventions
 
 Project coding standards - base conventions for all projects. 

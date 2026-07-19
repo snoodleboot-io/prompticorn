@@ -1,6 +1,5 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions-ruby.md -->
 {%- import 'macros/testing_sections.jinja2' as testing -%}
-{%- import 'macros/coverage_targets.jinja2' as coverage -%}
 # Core Conventions Ruby
 
 Language:             {{ language }} e.g., Ruby 3.3

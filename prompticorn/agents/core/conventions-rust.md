@@ -1,6 +1,5 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions-rust.md -->
 {%- import 'macros/testing_sections.jinja2' as testing -%}
-{%- import 'macros/coverage_targets.jinja2' as coverage -%}
 # Core Conventions Rust
 
 Language:             {{ language }} e.g., Rust 1.75
