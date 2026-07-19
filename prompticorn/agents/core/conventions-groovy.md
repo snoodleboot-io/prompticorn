@@ -1,7 +1,7 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions-groovy.md -->
 # Core Conventions Groovy
 
-Language:             {{ language }} e 4.0.g., Groovy
+Language:             {{ language }} e.g., Groovy 4.0
 Runtime:              {{ runtime }} e.g., JVM
 Package Manager:      {{ package_manager }} e.g., Gradle
 Linter:               {{ linter }} e.g., CodeNarc
