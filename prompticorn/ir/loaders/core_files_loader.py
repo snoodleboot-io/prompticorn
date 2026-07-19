@@ -144,8 +144,14 @@ class CoreFilesLoader:
             "package_manager": spec.get("package_manager", ""),
             "test_framework": spec.get("test_framework", ""),
             "linter": spec.get("linter", ""),
+            "linters": spec.get("linters", ""),
             "formatter": spec.get("formatter", ""),
+            # Testing-tool selections (PRO-69) — rendered by the conventions.
+            "test_runner": spec.get("test_runner", ""),
+            "mocking_library": spec.get("mocking_library", ""),
             "coverage_tool": spec.get("coverage_tool", ""),
+            "mutation_tool": spec.get("mutation_tool", ""),
+            "framework": spec.get("framework", ""),
             # Must be a dict for the testing/coverage macros; a spec may carry a
             # coverage preset *name* (string), so guard against a non-dict value.
             "coverage_targets": spec.get("coverage")

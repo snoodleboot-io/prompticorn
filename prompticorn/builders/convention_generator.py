@@ -29,6 +29,13 @@ _SPEC_TEMPLATE_KEYS = (
     "formatter",
     "abstract_class_style",
     "coverage",
+    # Testing-tool selections (PRO-69) — previously collected but read by no
+    # template. Exposed so conventions can render the user's actual choices.
+    "test_runner",
+    "mocking_library",
+    "coverage_tool",
+    "mutation_tool",
+    "framework",
 )
 
 

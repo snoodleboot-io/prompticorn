@@ -84,6 +84,11 @@ _SENTINELS = {
     "test_framework": "SENTINEL_TESTFW_X",
     "linter": "SENTINEL_LINTER_X",
     "formatter": "SENTINEL_FORMATTER_X",
+    # PRO-69: python testing-tool selections, now rendered by conventions-python.md.
+    "test_runner": "SENTINEL_TESTRUNNER_X",
+    "mocking_library": "SENTINEL_MOCKING_X",
+    "coverage_tool": "SENTINEL_COVTOOL_X",
+    "mutation_tool": "SENTINEL_MUTATION_X",
 }
 
 # Core single-select questions whose chosen answer must land under the expected
@@ -107,14 +112,10 @@ _KNOWN_NOT_RENDERED = {
     "coverage": "dict of targets; rendered as numbers, not a single literal",
     "layout_style": "drives the source-tree layout, not emitted verbatim",
     "error_handling": "may render '(not specified)'; covered by convention tests",
-    "linters": "advanced multi-linter list; not rendered (only scalar 'linter')",
+    "linters": "PRO-69: rendered when present, but a list; not sentinel-asserted",
     "abstract_class_style": "renders as a conditional block, not a literal value",
-    # PRO-69 dead-ends — collected but referenced by no template:
-    "test_runner": "PRO-69 dead-end (wire-or-retire pending)",
-    "mocking_library": "PRO-69 dead-end (wire-or-retire pending)",
-    "coverage_tool": "PRO-69 dead-end (wire-or-retire pending)",
-    "mutation_tool": "PRO-69 dead-end (wire-or-retire pending)",
-    "framework": "PRO-69 dead-end (fungible; not in single-language core)",
+    "framework": "PRO-69: rendered for csharp/ts/fsharp core + python fungible; "
+    "not collected in python single-language, so not sentinel-asserted here",
 }
 
 

@@ -8,6 +8,8 @@ Runtime:              {{ runtime }} e.g., Node 20, Deno, Bun
 Package Manager:      {{ package_manager }} e.g., npm, pnpm, yarn
 Linter:               {{ linter }} e.g., ESLint
 Formatter:           {{ formatter }} e.g., Prettier
+{% if framework %}Framework:            {{ framework }} e.g., React, Next.js, Express
+{% endif %}
 
 ### Naming Conventions
 

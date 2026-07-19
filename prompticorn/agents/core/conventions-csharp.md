@@ -6,6 +6,8 @@ Runtime:              {{ runtime }} e.g., .NET 8, Mono
 Package Manager:      {{ package_manager }} e.g., NuGet, dotnet
 Linter:               {{ linter }} e.g., StyleCop, SonarLint
 Formatter:           {{ formatter }} e.g., dotnet format, ReSharper
+{% if framework %}Framework:            {{ framework }} e.g., ASP.NET Core, Blazor
+{% endif %}
 
 ### Naming Conventions
 

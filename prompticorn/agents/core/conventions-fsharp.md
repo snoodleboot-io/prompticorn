@@ -6,6 +6,8 @@ Runtime:              {{ runtime }} e.g., .NET 8
 Package Manager:      {{ package_manager }} e.g., NuGet, dotnet
 Linter:               {{ linter }} e.g., Fantomas
 Formatter:           {{ formatter }} e.g., Fantomas
+{% if framework %}Framework:            {{ framework }} e.g., Giraffe, Saturn, Fable
+{% endif %}
 
 ### Naming Conventions
 

@@ -79,7 +79,14 @@ Environment vars:    UPPER_SNAKE_CASE always
 
 {{ testing.render_testing_section(language, test_framework, coverage_targets) }}
 
-### Code Style
+{% if test_runner or mocking_library or coverage_tool or mutation_tool or linters %}#### Testing Tools
+{% if test_runner %}- Test runner: {{ test_runner if test_runner is string else test_runner | join(', ') }}
+{% endif %}{% if mocking_library %}- Mocking library: {{ mocking_library if mocking_library is string else mocking_library | join(', ') }}
+{% endif %}{% if coverage_tool %}- Coverage tool: {{ coverage_tool if coverage_tool is string else coverage_tool | join(', ') }}
+{% endif %}{% if mutation_tool %}- Mutation tool: {{ mutation_tool if mutation_tool is string else mutation_tool | join(', ') }}
+{% endif %}{% if linters %}- Additional linters: {{ linters if linters is string else linters | join(', ') }}
+{% endif %}
+{% endif %}### Code Style
 - Follow PEP 8 (enforced by Ruff)
 - Use f-strings for string formatting
 - Use `dataclasses` for simple data containers
