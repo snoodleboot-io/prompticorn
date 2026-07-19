@@ -12,6 +12,8 @@ description frontmatter (the agent frontmatter contract is recent/evolving).
 See the Gemini design doc in Linear.
 """
 
+import json
+
 import yaml
 
 from prompticorn.builders.base import Builder, BuildOptions
@@ -79,8 +81,12 @@ def generate_gemini_settings() -> str:
 def workflow_to_toml(workflow_name: str, content: str) -> str:
     """Wrap a workflow's Markdown body into a Gemini command TOML file.
 
-    Uses a TOML multiline *literal* string (``'''``) so no escaping of the
-    Markdown body is needed.
+    Emits both fields as TOML basic strings via ``json.dumps`` — JSON string
+    syntax is a valid TOML basic string, so it correctly escapes any content
+    (quotes, backslashes, newlines, and ``'''`` sequences). A hand-built ``'''``
+    literal could not: TOML literal strings cannot contain ``'''`` and do not
+    support escaping, so a workflow body with a triple-quote produced invalid
+    TOML (PRO-88).
     """
     description = f"{workflow_name} workflow"
-    return f"description = {description!r}\nprompt = '''\n{content}\n'''\n"
+    return f"description = {json.dumps(description)}\nprompt = {json.dumps(content)}\n"

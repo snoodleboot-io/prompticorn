@@ -6,7 +6,7 @@
     ],
     [
       "CONVENTIONS.md",
-      "e0982e1340b220f32bba5e1482a5e98ecabca3ef5d33b39eba58f316d8eb9cf5"
+      "eaaf22528de56854c5f955a01b1a8ac4bd188cdc726c468cc2f14207a2f19845"
     ]
   ],
   "aider::verbose": [
@@ -16,7 +16,7 @@
     ],
     [
       "CONVENTIONS.md",
-      "e0982e1340b220f32bba5e1482a5e98ecabca3ef5d33b39eba58f316d8eb9cf5"
+      "eaaf22528de56854c5f955a01b1a8ac4bd188cdc726c468cc2f14207a2f19845"
     ]
   ],
   "amazonq::minimal": [
@@ -54,7 +54,7 @@
     ],
     [
       ".amazonq/cli-agents/orchestrator.json",
-      "c988bbda3e1aa4fc01ec833dfeb03950a500a0f071836d198110ed1777a448ed"
+      "ed62c61052fe90a0b529da2478f2dbda1418a1f14a6d7b8bda03ed1bbb30c38e"
     ],
     [
       ".amazonq/cli-agents/performance.json",
@@ -130,7 +130,7 @@
     ],
     [
       ".amazonq/rules/conventions-python.md",
-      "b0132b19576cee189661d92178e1099f30b3e47c8b2a6ac8a459ac4787f0d92f"
+      "26cb1e7886c59bcf6f28bd7d1e919acc90f80b4bcb0f2f43eadca3744af214f4"
     ],
     [
       ".amazonq/rules/conventions.md",
@@ -172,7 +172,7 @@
     ],
     [
       ".amazonq/cli-agents/orchestrator.json",
-      "c988bbda3e1aa4fc01ec833dfeb03950a500a0f071836d198110ed1777a448ed"
+      "ed62c61052fe90a0b529da2478f2dbda1418a1f14a6d7b8bda03ed1bbb30c38e"
     ],
     [
       ".amazonq/cli-agents/performance.json",
@@ -248,7 +248,7 @@
     ],
     [
       ".amazonq/rules/conventions-python.md",
-      "b0132b19576cee189661d92178e1099f30b3e47c8b2a6ac8a459ac4787f0d92f"
+      "26cb1e7886c59bcf6f28bd7d1e919acc90f80b4bcb0f2f43eadca3744af214f4"
     ],
     [
       ".amazonq/rules/conventions.md",
@@ -318,7 +318,7 @@
     ],
     [
       ".claude/conventions/languages/python.md",
-      "b0132b19576cee189661d92178e1099f30b3e47c8b2a6ac8a459ac4787f0d92f"
+      "26cb1e7886c59bcf6f28bd7d1e919acc90f80b4bcb0f2f43eadca3744af214f4"
     ],
     [
       ".claude/skills/architecture-documentation/SKILL.md",
@@ -716,7 +716,7 @@
     ],
     [
       ".claude/conventions/languages/python.md",
-      "b0132b19576cee189661d92178e1099f30b3e47c8b2a6ac8a459ac4787f0d92f"
+      "26cb1e7886c59bcf6f28bd7d1e919acc90f80b4bcb0f2f43eadca3744af214f4"
     ],
     [
       ".claude/skills/architecture-documentation/SKILL.md",
@@ -1142,11 +1142,11 @@
     ],
     [
       ".clinerules",
-      "ed9336557d0951427233b906cd9d8d8380b7fefa78f9d59f4ae455d080da3533"
+      "132ab8d1987d1d0672724d284c420a0b7ea73cba646992ed03bb5a4a0a756627"
     ],
     [
       "AGENTS.md",
-      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "cline::verbose": [
@@ -1240,11 +1240,11 @@
     ],
     [
       ".clinerules",
-      "309b3d2b271abac38a2d565cff8e8f427e37d225cfde48bf46c9017f8d180ffd"
+      "6fd0c8dabb0db7bdc4640b490a169ed401f31c016b9665d800155a3e12e6d83f"
     ],
     [
       "AGENTS.md",
-      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "codex::minimal": [
@@ -1398,7 +1398,7 @@
     ],
     [
       "AGENTS.md",
-      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "codex::verbose": [
@@ -1552,7 +1552,7 @@
     ],
     [
       "AGENTS.md",
-      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "continue::minimal": [
@@ -1626,7 +1626,7 @@
     ],
     [
       ".continue/rules/conventions-python.md",
-      "26db68da8498094321a85a4c1683ac32560c9d53d62b02fac8ed992e6f718304"
+      "f6feb2fd8119eeaa155d83e066cbc6cb49e1f7833cba2e788508b9d6fad7ffec"
     ],
     [
       ".continue/rules/debug.md",
@@ -1744,7 +1744,7 @@
     ],
     [
       ".continue/rules/conventions-python.md",
-      "26db68da8498094321a85a4c1683ac32560c9d53d62b02fac8ed992e6f718304"
+      "f6feb2fd8119eeaa155d83e066cbc6cb49e1f7833cba2e788508b9d6fad7ffec"
     ],
     [
       ".continue/rules/debug.md",
@@ -1850,7 +1850,7 @@
     ],
     [
       ".github/instructions/conventions-python.instructions.md",
-      "ad94ebbfc8a6c026c5325eac565ffbeb2b5f4b9e55047437239af7d72632497d"
+      "a9427fd7d14ebea2d1041f70b58455ab44a80edc20e86381507e0175c8cc0f2d"
     ],
     [
       ".github/instructions/core.instructions.md",
@@ -1968,7 +1968,7 @@
     ],
     [
       ".github/instructions/conventions-python.instructions.md",
-      "ad94ebbfc8a6c026c5325eac565ffbeb2b5f4b9e55047437239af7d72632497d"
+      "a9427fd7d14ebea2d1041f70b58455ab44a80edc20e86381507e0175c8cc0f2d"
     ],
     [
       ".github/instructions/core.instructions.md",
@@ -2030,7 +2030,7 @@
   "copilot::minimal": [
     [
       ".github/copilot-instructions.md",
-      "77bd4e814152aea3c72791bdca6a11ba58849459d333d9ea7bf30d660c9b745d"
+      "306c72d9776dc87649ac31d8fc9580c19f6efe0124d921befd0434be08200e24"
     ],
     [
       ".github/skills/architecture-documentation.md",
@@ -2122,13 +2122,13 @@
     ],
     [
       "AGENTS.md",
-      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "copilot::verbose": [
     [
       ".github/copilot-instructions.md",
-      "8914875f671ff026b081555d0f529659ed270db267d56fdc45701c64b7955b22"
+      "e17435f88d62bb527c8e265bd7a3d7e02937aa5d0c90168c7ab6b7abdff0ec1e"
     ],
     [
       ".github/skills/architecture-documentation.md",
@@ -2220,7 +2220,7 @@
     ],
     [
       "AGENTS.md",
-      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "cursor::minimal": [
@@ -2314,11 +2314,11 @@
     ],
     [
       ".cursorrules",
-      "727d9bbb0e0cdde86595f42bb58b7f929dafdbbc2bd7228a3712f26e433170f3"
+      "d013613891e4c7be2d760fdc23c6ed46ed09dfc38bdaf2757746cc11af21dc5b"
     ],
     [
       "AGENTS.md",
-      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "cursor::verbose": [
@@ -2412,11 +2412,11 @@
     ],
     [
       ".cursorrules",
-      "34eea218be0e260fef64945ae952e8ae4b0eab524986cae203cafa86584f72b7"
+      "e2d49cc0cd80bb9802277070badd21ebf043599512a3b096e2caaec6b07f3238"
     ],
     [
       "AGENTS.md",
-      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "gemini::minimal": [
@@ -2478,55 +2478,55 @@
     ],
     [
       ".gemini/commands/boilerplate.toml",
-      "12aa06c8210b2b87c2a29a85eacd7ad114ca0dfb9e47db57371b0a961a83b1db"
+      "4cec91029240933d419351e34551c08e0a4a8831b9356be8fb98992ab5227034"
     ],
     [
       ".gemini/commands/code.toml",
-      "8e62eefa73658e4f607ac3415dab9f6c8b39a75011cd1698afa8dac0b9ffec48"
+      "3b52d78f9e521f247207886fb6b300a2fdad08cf980ab0e5099a80bb78bf4628"
     ],
     [
       ".gemini/commands/dependency-upgrade.toml",
-      "6ddca614f48055534429322f52dfdd29f053ec289d9f3e2668276347124e8d8d"
+      "a5d346d746a85ccc6319db5af7bcb1f0b87a2aadfcb2e1f999a4b883ce3d09d4"
     ],
     [
       ".gemini/commands/feature.toml",
-      "ca86305e5aa0a03b82b5e59d02a54ecff7fa19d95addcb6b7f827a9a1896a023"
+      "70d39fae0550c0e02e945e854a08e7cd186e6bc1bfc49bcf6065c76361a4a3d4"
     ],
     [
       ".gemini/commands/house-style.toml",
-      "c06e57a7a5362c9ac1a47536c06988d91087822a2e51fb6c5cef8e93e1117593"
+      "24de0cf65bbb00998fab3efbd81ad50c4b3774c8ca28637c83a74245d91728e3"
     ],
     [
       ".gemini/commands/migration.toml",
-      "b31a30ba892c81e99974a3212fdd3dd62213cd6565a988a6dbe30c612fc751e9"
+      "8a2c77b025a327a55eef628dc1fa43c951f1541762061a90c70572368ea64856"
     ],
     [
       ".gemini/commands/performance.toml",
-      "6fd06c46b0dcf57e87b1db8113311c9bfc3e8801d4a7ee31e32adbcee9ffa7c5"
+      "40cd3c2b089c4d100d70d038f91b1e13bdf5e39cf70f1a9726af664e275139ce"
     ],
     [
       ".gemini/commands/refactor.toml",
-      "a8e1c2dcd7a1e5adc358f29a3527cc76d12bfe747938ec746e2b70f2869f2cf7"
+      "04201dd4aeb0733bf2a90c99a4fcd5d819ca31e9ced72418c75b2f2905506b66"
     ],
     [
       ".gemini/commands/strategy.toml",
-      "0a09fcdbe0a95bdc9dfc87931c39ad405d33889a9ba4aefbe97ee5b7e026f572"
+      "2f5f13374030e47bf0acf2919f1b9ee1a814cbd5e640aa134f044cdf8265c003"
     ],
     [
       ".gemini/commands/testing.toml",
-      "6dcaeb10dacc9987c1ec6daad544ae535df6f7a456f6398fa023b92a49288063"
+      "5980b6cc509ff8e8494d2d76b89cf062cd3c610e2bb0d39cc025ce289c10e540"
     ],
     [
       ".gemini/commands/workflow-migration-patterns.toml",
-      "0d9519483a159df08bf1655f4189469eac935fed4394fc0d168c29b3f39223c0"
+      "427ff5e023f37d4117b0051f1d5892e0e0fcd0cce0a94348df629fee379178ee"
     ],
     [
       ".gemini/commands/workflow-performance-optimization.toml",
-      "b5104df4a0714fdc0ca417a1522f8bc98b194119404824c07fa6f2fbc9896f14"
+      "7d4a2243419cb35c366903a9f4186a4d5769d5436fd1e4b01f024c3120c3a6a8"
     ],
     [
       ".gemini/commands/workflow-scaling-patterns.toml",
-      "f2edd4c887d7213b68dd81a32f3367908af49440c70f51248402456bb0ee27b2"
+      "eb40519d952b21429be673907880fa03e7873cf975243c1d79f46e97de471155"
     ],
     [
       ".gemini/settings.json",
@@ -2622,7 +2622,7 @@
     ],
     [
       "AGENTS.md",
-      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "gemini::verbose": [
@@ -2684,55 +2684,55 @@
     ],
     [
       ".gemini/commands/boilerplate.toml",
-      "a37878bc585541ede970e34f22b520eb7a51a0cad3b3875874448577b33917ad"
+      "a8fd338ccacbf6859d19a69e3c3f21a502706dce18486da73b9892cac7e9df97"
     ],
     [
       ".gemini/commands/code.toml",
-      "6fa1277596ea7cf343ddd27a0a6b2ec6850f05966a5a6cffd33303defe447077"
+      "d139a8992fa6d2441178350be8208d650bc0468466af34ccfdcb5fbd1c500df0"
     ],
     [
       ".gemini/commands/dependency-upgrade.toml",
-      "448289c245f737e8d72836aeaed923c25fa84974862b92afce150c5435a3bea2"
+      "3b88e64d354d7e805148fda877d6c475e2f1f5473160f0266713e8535c69ed1d"
     ],
     [
       ".gemini/commands/feature.toml",
-      "75587cee6c377d39fb71ba9ff9d8f6ef60f2da4926c2cd792551a8d42a89b53b"
+      "6d47c37e4ca2893fb1e23f49d5ce173a6e7eb7fba50824f2cfa1bdbcd0d47fc2"
     ],
     [
       ".gemini/commands/house-style.toml",
-      "c6d41104a8705dc601c029ff05251d8ce2b358b2d5e674264d056342f78e8404"
+      "fc73485dac1ad5a7fc6930b304c203a59b971ed9d5e776e309fb40230a0bf5af"
     ],
     [
       ".gemini/commands/migration.toml",
-      "cbefcc5f216200bd15f5f85d3226a6db9e6ccd4bf951ba51a5f8180c723b5604"
+      "c7c915bedb7b31db5b56b898554bc98f416f33e9c147a9f805f898e1fe17c122"
     ],
     [
       ".gemini/commands/performance.toml",
-      "842beb484d7f6ba316cc4398ccdc520134ddb6c183dbd98b0bf65f3fc83abbd7"
+      "328e5e3021486df25225d58210dfcaea28e6f54a1b218d8e90cd760b7a045edb"
     ],
     [
       ".gemini/commands/refactor.toml",
-      "b757b2f6d1beed3e78c0db1d4746dee74c22298d3064935e73ae6b9994545a6c"
+      "d9173c7487b961f0edbf79482d9e0b19d1a746a994d1d7f8fbafc9121dacb72d"
     ],
     [
       ".gemini/commands/strategy.toml",
-      "7037395fed8bc28381c2bf6b1d72f31fd22ed8ebe95f1167eba79953da7feb5d"
+      "52a221ba230857e1887997c671e14e995a89958b9c2e2bc179d29c4ce6362afe"
     ],
     [
       ".gemini/commands/testing.toml",
-      "dd77712f3528c0c4931be01bc623c1f27b546f39c52c3d33c2aa81166ddf7dcf"
+      "e5488f10649ff2a65b6f9d07ec2f8d75547477205e33d753ff543edd3bc374bf"
     ],
     [
       ".gemini/commands/workflow-migration-patterns.toml",
-      "ba3d4758248d672bcceb58311bac1e47ba1d66f0245a78f4ebb84fb008fe96fb"
+      "c58939bbf417e917cac8d430e20c3b307d5a8197e6337d3f781b8bf9af85e6f2"
     ],
     [
       ".gemini/commands/workflow-performance-optimization.toml",
-      "f6be0e6ad2a67668cb2d2ee07ec62ae9c66b7a615af8d84e925fb05b98f0e598"
+      "8366dff7242f9d7b88934374acb4d224db254ba9347f61b88ae5959d30bbd257"
     ],
     [
       ".gemini/commands/workflow-scaling-patterns.toml",
-      "3ebd1224404e55eb8bc65caff5bcdbf6870fc4432b1e79f2f7b11fc2b3056741"
+      "9653bf7b01f2684c100752487b2d7baab5a78524b48389eeb09041274be1d978"
     ],
     [
       ".gemini/settings.json",
@@ -2828,7 +2828,7 @@
     ],
     [
       "AGENTS.md",
-      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "junie::minimal": [
@@ -3030,7 +3030,7 @@
     ],
     [
       "AGENTS.md",
-      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "junie::verbose": [
@@ -3232,7 +3232,7 @@
     ],
     [
       "AGENTS.md",
-      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "kilo-cli::minimal": [
@@ -3486,7 +3486,7 @@
     ],
     [
       ".kilo/rules/conventions-python.md",
-      "9f275186be58aae87fc7824ac41309864b7e23396cffda3bb3c8907c02a1d0f1"
+      "05b7a2a8b86eb4a27b27bb703e535c55b296d881bd5bda474bac6084c76e951d"
     ],
     [
       ".kilo/rules/conventions.md",
@@ -3598,7 +3598,7 @@
     ],
     [
       "AGENTS.md",
-      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "kilo-cli::verbose": [
@@ -3852,7 +3852,7 @@
     ],
     [
       ".kilo/rules/conventions-python.md",
-      "9f275186be58aae87fc7824ac41309864b7e23396cffda3bb3c8907c02a1d0f1"
+      "05b7a2a8b86eb4a27b27bb703e535c55b296d881bd5bda474bac6084c76e951d"
     ],
     [
       ".kilo/rules/conventions.md",
@@ -3964,7 +3964,7 @@
     ],
     [
       "AGENTS.md",
-      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "kilo-ide::minimal": [
@@ -4218,7 +4218,7 @@
     ],
     [
       ".kilo/rules/conventions-python.md",
-      "9f275186be58aae87fc7824ac41309864b7e23396cffda3bb3c8907c02a1d0f1"
+      "05b7a2a8b86eb4a27b27bb703e535c55b296d881bd5bda474bac6084c76e951d"
     ],
     [
       ".kilo/rules/conventions.md",
@@ -4330,7 +4330,7 @@
     ],
     [
       "AGENTS.md",
-      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "kilo-ide::verbose": [
@@ -4584,7 +4584,7 @@
     ],
     [
       ".kilo/rules/conventions-python.md",
-      "9f275186be58aae87fc7824ac41309864b7e23396cffda3bb3c8907c02a1d0f1"
+      "05b7a2a8b86eb4a27b27bb703e535c55b296d881bd5bda474bac6084c76e951d"
     ],
     [
       ".kilo/rules/conventions.md",
@@ -4696,7 +4696,7 @@
     ],
     [
       "AGENTS.md",
-      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "roo::minimal": [
@@ -4902,7 +4902,7 @@
     ],
     [
       "AGENTS.md",
-      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "roo::verbose": [
@@ -5108,7 +5108,7 @@
     ],
     [
       "AGENTS.md",
-      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "windsurf::minimal": [
@@ -5118,7 +5118,7 @@
     ],
     [
       ".windsurf/rules/conventions-python.md",
-      "df1243a055754d27aeee3761ced00242775c475ebe2b6c4a2033a48baa9f2f49"
+      "f244dbf0b92deb57689c03d5699156f21db0a797a546a8670eded83c16949fdf"
     ],
     [
       ".windsurf/skills/architecture-documentation/SKILL.md",
@@ -5324,7 +5324,7 @@
     ],
     [
       ".windsurf/rules/conventions-python.md",
-      "df1243a055754d27aeee3761ced00242775c475ebe2b6c4a2033a48baa9f2f49"
+      "f244dbf0b92deb57689c03d5699156f21db0a797a546a8670eded83c16949fdf"
     ],
     [
       ".windsurf/skills/architecture-documentation/SKILL.md",
@@ -5670,7 +5670,7 @@
     ],
     [
       "AGENTS.md",
-      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "zed::verbose": [
@@ -5820,7 +5820,7 @@
     ],
     [
       "AGENTS.md",
-      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ]
 }

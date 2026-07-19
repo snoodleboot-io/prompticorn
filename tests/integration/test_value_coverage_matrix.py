@@ -305,6 +305,45 @@ def test_output_has_no_unrendered_templates(tool, tmp_path):
     assert not offenders, f"{tool} emitted unrendered templates: {offenders}"
 
 
+def _parse_toml(path):
+    try:
+        import tomllib
+    except ModuleNotFoundError:  # py3.10
+        import tomli as tomllib
+    with open(path, "rb") as fh:
+        tomllib.load(fh)
+
+
+@pytest.mark.parametrize("tool", _ALL_TOOLS)
+def test_emitted_structured_files_parse(tool, tmp_path):
+    """Every emitted JSON/TOML/YAML artifact must parse (PRO-80).
+
+    The no-leak scan only greps for ``{{ }}``; it never parsed structured output,
+    which is how a token substitution injecting raw newlines into a JSON string
+    (Amazon Q's agent ``prompt``) shipped invalid JSON. This closes that gap.
+    """
+    import json as _json
+
+    import yaml
+
+    get_prompt_builder(tool).build(tmp_path, config=_sentinel_config(), dry_run=False)
+    failures = []
+    for p in tmp_path.rglob("*"):
+        if not p.is_file():
+            continue
+        suffix = p.suffix.lower()
+        try:
+            if suffix == ".json":
+                _json.loads(p.read_text(encoding="utf-8"))
+            elif suffix == ".toml":
+                _parse_toml(p)
+            elif suffix in (".yaml", ".yml") or p.name == ".roomodes":
+                yaml.safe_load(p.read_text(encoding="utf-8"))
+        except Exception as exc:  # noqa: BLE001
+            failures.append(f"{p.relative_to(tmp_path)}: {type(exc).__name__}: {exc}")
+    assert not failures, f"{tool} emitted unparseable structured file(s): {failures}"
+
+
 def test_no_template_variable_placeholder_in_convention_sources():
     """Guard (PRO-73): no convention ships the literal '[Template variable]'
     placeholder. Unlike Jinja `{{ }}`, this literal survives rendering silently,

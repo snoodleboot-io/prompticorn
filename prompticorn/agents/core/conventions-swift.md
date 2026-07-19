@@ -1,11 +1,11 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions-swift.md -->
 # Core Conventions Swift
 
-Language:             {{ language }} e.g., Swift 5.9
-Runtime:              {{ runtime }} e.g., macOS, iOS, Linux
-Package Manager:      {{ package_manager }} e.g., Swift Package Manager, CocoaPods
-Linter:               {{ linter }} e.g., SwiftLint
-Formatter:           {{ formatter }} e.g., SwiftFormat
+Language:             {{ language or "e.g., Swift 5.9" }}
+Runtime:              {{ runtime or "e.g., macOS, iOS, Linux" }}
+Package Manager:      {{ package_manager or "e.g., Swift Package Manager, CocoaPods" }}
+Linter:               {{ linter or "e.g., SwiftLint" }}
+Formatter:           {{ formatter or "e.g., SwiftFormat" }}
 
 ### Naming Conventions
 
@@ -38,10 +38,10 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           {{ coverage_targets.get('line', '') }}          e.g., 80%
-Branch:         {{ coverage_targets.get('branch', '') }}        e.g., 70%
-Function:       {{ coverage_targets.get('function', '') }}       e.g., 90%
-Statement:      {{ coverage_targets.get('statement', '') }}      e.g., 85%
+Line:           {{ coverage_targets.get('line', '') or "e.g., 80%" }}
+Branch:         {{ coverage_targets.get('branch', '') or "e.g., 70%" }}
+Function:       {{ coverage_targets.get('function', '') or "e.g., 90%" }}
+Statement:      {{ coverage_targets.get('statement', '') or "e.g., 85%" }}
 
 #### Test Types
 
@@ -57,9 +57,9 @@ Statement:      {{ coverage_targets.get('statement', '') }}      e.g., 85%
 - Use SwiftSnapshotTesting for visual testing
 
 #### Framework & Tools
-Framework:       {{ test_framework }}        e.g., XCTest
-Mocking:        {{ mocking_library }}              e.g., Mockingbird
-Coverage tool:  {{ coverage_tool }}              e.g., Xcode coverage
+Framework:       {{ test_framework or "e.g., XCTest" }}
+Mocking:        {{ mocking_library or "e.g., Mockingbird" }}
+Coverage tool:  {{ coverage_tool or "e.g., Xcode coverage" }}
 
 #### Scaffolding
 

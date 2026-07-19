@@ -60,7 +60,12 @@ def workflow_to_prompt(name: str, content: str) -> str:
 
     body = WorkflowLoader.format_workflow_content(content, include_frontmatter=False)
     description = f"{name.replace('-', ' ')} workflow"
-    return f"---\ndescription: {description}\n---\n\n{body}\n"
+    # Serialize the frontmatter via yaml.safe_dump (like the sibling builders)
+    # so a name containing a colon/quote can't break the YAML block (PRO-88).
+    frontmatter = yaml.safe_dump(
+        {"description": description}, default_flow_style=False, sort_keys=False
+    ).strip()
+    return f"---\n{frontmatter}\n---\n\n{body}\n"
 
 
 class CopilotChatBuilder(Builder):

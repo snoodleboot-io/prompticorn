@@ -1,13 +1,12 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions-kotlin.md -->
 {%- import 'macros/testing_sections.jinja2' as testing -%}
-{%- import 'macros/coverage_targets.jinja2' as coverage -%}
 # Core Conventions Kotlin
 
-Language:             {{ language }} e.g., Kotlin 1.9
-Runtime:              {{ runtime }} e.g., JVM 21, Kotlin/JS, Kotlin/Native
-Package Manager:      {{ package_manager }} e.g., Gradle, Maven
-Linter:               {{ linter }} e.g., ktlint, detekt
-Formatter:           {{ formatter }} e.g., ktlint
+Language:             {{ language or "e.g., Kotlin 1.9" }}
+Runtime:              {{ runtime or "e.g., JVM 21, Kotlin/JS, Kotlin/Native" }}
+Build tool:           {{ build_tool or "e.g., Gradle, Maven" }}
+Linter:               {{ linter or "e.g., ktlint, detekt" }}
+Formatter:           {{ formatter or "e.g., ktlint" }}
 
 ### Naming Conventions
 

@@ -1,10 +1,10 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions-julia.md -->
 # Core Conventions Julia
 
-Language:             {{ language }} e.g., Julia 1.10
-Package Manager:      {{ package_manager }} e.g., Pkg
-Linter:               {{ linter }} e.g., Jet.jl, Lint.jl
-Formatter:           {{ formatter }} e.g., JuliaFormatter
+Language:             {{ language or "e.g., Julia 1.10" }}
+Package Manager:      {{ package_manager or "e.g., Pkg" }}
+Linter:               {{ linter or "e.g., Jet.jl, Lint.jl" }}
+Formatter:           {{ formatter or "e.g., JuliaFormatter" }}
 
 ### Naming Conventions
 
@@ -32,5 +32,5 @@ Environment vars:   UPPER_SNAKE_CASE always
 - Use descriptive function names
 
 ### Testing
-Framework:       {{ test_framework }}        e.g., Test.jl
-Coverage tool:  {{ coverage_tool }}              e.g., Coverage.jl
+Framework:       {{ test_framework or "e.g., Test.jl" }}
+Coverage tool:  {{ coverage_tool or "e.g., Coverage.jl" }}

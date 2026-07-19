@@ -1,10 +1,11 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions-haskell.md -->
 # Core Conventions Haskell
 
-Language:             {{ language }} e.g., Haskell 9.8
-Package Manager:      {{ package_manager }} e.g., Cabal, Stack
-Linter:               {{ linter }} e.g., HLint, Stan
-Formatter:           {{ formatter }} e.g., Brittany, Ormolu
+Language:             {{ language or "e.g., Haskell 9.8" }}
+Compiler:             {{ compiler or "e.g., GHC" }}
+Build tool:           {{ build_tool or "e.g., Cabal, Stack" }}
+Linter:               {{ linter or "e.g., HLint, Stan" }}
+Formatter:           {{ formatter or "e.g., Brittany, Ormolu" }}
 
 ### Naming Conventions
 
@@ -33,6 +34,6 @@ Environment vars:   UPPER_SNAKE_CASE always
 - Use hlint for linting
 
 ### Testing
-Framework:       {{ test_framework }}        e.g., HSpec, QuickCheck
+Framework:       {{ test_framework or "e.g., HSpec, QuickCheck" }}
 Property tool:           e.g., QuickCheck, Hedgehog
-Coverage tool:  {{ coverage_tool }}              e.g., HPC
+Coverage tool:  {{ coverage_tool or "e.g., HPC" }}

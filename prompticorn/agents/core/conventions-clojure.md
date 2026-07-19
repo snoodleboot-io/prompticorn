@@ -1,11 +1,11 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions-clojure.md -->
 # Core Conventions Clojure
 
-Language:             {{ language }} e.g., Clojure 1.12
-Runtime:              {{ runtime }} e.g., JVM
-Package Manager:      {{ package_manager }} e.g., deps.edn, Leiningen
-Linter:               {{ linter }} e.g., eastwood, clj-kondo
-Formatter:           {{ formatter }} e.g., cljfmt
+Language:             {{ language or "e.g., Clojure 1.12" }}
+Runtime:              {{ runtime or "e.g., JVM" }}
+Build tool:           {{ build_tool or "e.g., deps.edn, Leiningen" }}
+Linter:               {{ linter or "e.g., eastwood, clj-kondo" }}
+Formatter:           {{ formatter or "e.g., cljfmt" }}
 
 ### Naming Conventions
 
@@ -33,6 +33,6 @@ Environment vars:   UPPER_SNAKE_CASE always
 - Use meaningful names
 
 ### Testing
-Framework:       {{ test_framework }}        e.g., clojure.test
+Framework:       {{ test_framework or "e.g., clojure.test" }}
 Property tool:           e.g., test.check
-Coverage tool:  {{ coverage_tool }}              e.g., cloverage
+Coverage tool:  {{ coverage_tool or "e.g., cloverage" }}

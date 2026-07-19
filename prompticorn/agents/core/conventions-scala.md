@@ -1,11 +1,11 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions-scala.md -->
 # Core Conventions Scala
 
-Language:             {{ language }} e.g., Scala 3.4
-Runtime:              {{ runtime }} e.g., JVM 21
-Package Manager:      {{ package_manager }} e.g., sbt, mill
-Linter:               {{ linter }} e.g., Scalafmt, Scalafix
-Formatter:           {{ formatter }} e.g., Scalafmt
+Language:             {{ language or "e.g., Scala 3.4" }}
+Runtime:              {{ runtime or "e.g., JVM 21" }}
+Build tool:           {{ build_tool or "e.g., sbt, mill" }}
+Linter:               {{ linter or "e.g., Scalafmt, Scalafix" }}
+Formatter:           {{ formatter or "e.g., Scalafmt" }}
 
 ### Naming Conventions
 
@@ -38,11 +38,11 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           {{ coverage_targets.get('line', '') }}          e.g., 80%
-Branch:         {{ coverage_targets.get('branch', '') }}        e.g., 70%
-Function:       {{ coverage_targets.get('function', '') }}       e.g., 90%
-Statement:      {{ coverage_targets.get('statement', '') }}      e.g., 85%
-Path:           {{ coverage_targets.get('path', '') }}           e.g., 60%
+Line:           {{ coverage_targets.get('line', '') or "e.g., 80%" }}
+Branch:         {{ coverage_targets.get('branch', '') or "e.g., 70%" }}
+Function:       {{ coverage_targets.get('function', '') or "e.g., 90%" }}
+Statement:      {{ coverage_targets.get('statement', '') or "e.g., 85%" }}
+Path:           {{ coverage_targets.get('path', '') or "e.g., 60%" }}
 
 #### Test Types
 
@@ -59,10 +59,10 @@ Path:           {{ coverage_targets.get('path', '') }}           e.g., 60%
 - Use ScalaCheck for property-based testing
 
 #### Framework & Tools
-Framework:       {{ test_framework }}        e.g., ScalaTest, MUnit, specs2
-Mocking:        {{ mocking_library }}              e.g., ScalaMock, Mockito
+Framework:       {{ test_framework or "e.g., ScalaTest, MUnit, specs2" }}
+Mocking:        {{ mocking_library or "e.g., ScalaMock, Mockito" }}
 Property tool:           e.g., ScalaCheck
-Coverage tool:  {{ coverage_tool }}              e.g., scoverage
+Coverage tool:  {{ coverage_tool or "e.g., scoverage" }}
 
 #### Scaffolding
 

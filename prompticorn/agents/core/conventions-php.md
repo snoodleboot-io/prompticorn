@@ -1,11 +1,11 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions-php.md -->
 # Core Conventions PHP
 
-Language:             {{ language }} e.g., PHP 8.3
-Runtime:              {{ runtime }} e.g., PHP-FPM, Laravel Octane
-Package Manager:      {{ package_manager }} e.g., Composer
-Linter:               {{ linter }} e.g., PHP CS Fixer, Pint
-Formatter:           {{ formatter }} e.g., Pint, PHP CS Fixer
+Language:             {{ language or "e.g., PHP 8.3" }}
+Runtime:              {{ runtime or "e.g., PHP-FPM, Laravel Octane" }}
+Package Manager:      {{ package_manager or "e.g., Composer" }}
+Linter:               {{ linter or "e.g., PHP CS Fixer, Pint" }}
+Formatter:           {{ formatter or "e.g., Pint, PHP CS Fixer" }}
 
 ### Naming Conventions
 
@@ -38,11 +38,11 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           {{ coverage_targets.get('line', '') }}          e.g., 80%
-Branch:         {{ coverage_targets.get('branch', '') }}        e.g., 70%
-Function:       {{ coverage_targets.get('function', '') }}       e.g., 90%
-Statement:      {{ coverage_targets.get('statement', '') }}      e.g., 85%
-Path:           {{ coverage_targets.get('path', '') }}           e.g., 60%
+Line:           {{ coverage_targets.get('line', '') or "e.g., 80%" }}
+Branch:         {{ coverage_targets.get('branch', '') or "e.g., 70%" }}
+Function:       {{ coverage_targets.get('function', '') or "e.g., 90%" }}
+Statement:      {{ coverage_targets.get('statement', '') or "e.g., 85%" }}
+Path:           {{ coverage_targets.get('path', '') or "e.g., 60%" }}
 
 #### Test Types
 
@@ -59,9 +59,9 @@ Path:           {{ coverage_targets.get('path', '') }}           e.g., 60%
 - Use Pest or Laravel Dusk for browser testing
 
 #### Framework & Tools
-Framework:       {{ test_framework }}        e.g., PHPUnit, Pest
-Mocking:        {{ mocking_library }}              e.g., Mockery, PHP-Mock
-Coverage tool:  {{ coverage_tool }}              e.g., Xdebug, PCOV
+Framework:       {{ test_framework or "e.g., PHPUnit, Pest" }}
+Mocking:        {{ mocking_library or "e.g., Mockery, PHP-Mock" }}
+Coverage tool:  {{ coverage_tool or "e.g., Xdebug, PCOV" }}
 
 #### Scaffolding
 

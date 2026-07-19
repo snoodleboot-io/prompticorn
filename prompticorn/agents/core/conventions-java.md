@@ -1,13 +1,12 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions-java.md -->
 {%- import 'macros/testing_sections.jinja2' as testing -%}
-{%- import 'macros/coverage_targets.jinja2' as coverage -%}
 # Core Conventions Java
 
-Language:             {{ language }} e.g., Java 21
-Runtime:              {{ runtime }} e.g., JDK 21, OpenJDK
-Package Manager:      {{ package_manager }} e.g., Maven, Gradle
-Linter:               {{ linter }} e.g., Checkstyle, SpotBugs
-Formatter:           {{ formatter }} e.g., Google Java Format, Spotless
+Language:             {{ language or "e.g., Java 21" }}
+Runtime:              {{ runtime or "e.g., JDK 21, OpenJDK" }}
+Build tool:           {{ build_tool or "e.g., Maven, Gradle" }}
+Linter:               {{ linter or "e.g., Checkstyle, SpotBugs" }}
+Formatter:           {{ formatter or "e.g., Google Java Format, Spotless" }}
 
 ### Naming Conventions
 

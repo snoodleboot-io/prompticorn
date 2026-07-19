@@ -1,8 +1,9 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions-sql.md -->
 # Core Conventions SQL
 
-Database:            {{ databases }} e.g., PostgreSQL, MySQL, SQLite
-Data access:         {{ data_access }} e.g., Prisma, SQLAlchemy, GORM, Drizzle, raw SQL
+Dialect:             {{ sql_dialect or "e.g., PostgreSQL, T-SQL, PL/SQL, MySQL" }}
+Database:            {{ databases or "e.g., PostgreSQL, MySQL, SQLite" }}
+Data access:         {{ data_access or "e.g., Prisma, SQLAlchemy, GORM, Drizzle, raw SQL" }}
 
 ### Naming Conventions
 
@@ -17,12 +18,12 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           {{ coverage_targets.get('line', '') }} e.g., 80%
-Branch:         {{ coverage_targets.get('branch', '') }} e.g., 70%
-Function:       {{ coverage_targets.get('function', '') }} e.g., 90%
-Statement:      {{ coverage_targets.get('statement', '') }} e.g., 85%
-Mutation:       {{ coverage_targets.get('mutation', '') }} e.g., 80%
-Path:           {{ coverage_targets.get('path', '') }} e.g., 60%
+Line:           {{ coverage_targets.get('line', '') or "e.g., 80%" }}
+Branch:         {{ coverage_targets.get('branch', '') or "e.g., 70%" }}
+Function:       {{ coverage_targets.get('function', '') or "e.g., 90%" }}
+Statement:      {{ coverage_targets.get('statement', '') or "e.g., 85%" }}
+Mutation:       {{ coverage_targets.get('mutation', '') or "e.g., 80%" }}
+Path:           {{ coverage_targets.get('path', '') or "e.g., 60%" }}
 
 #### Test Types
 
@@ -52,9 +53,9 @@ Path:           {{ coverage_targets.get('path', '') }} e.g., 60%
 - Test under load with realistic data volumes
 
 #### Framework & Tools
-Framework:       {{ test_framework }}        e.g., pytest, Go test, Jest
-Mocking library: {{ mocking_library }}              e.g., factory_boy, testfixtures
-Coverage tool:  {{ coverage_tool }}              e.g., coverage.py, istanbul
+Framework:       {{ test_framework or "e.g., pytest, Go test, Jest" }}
+Mocking library: {{ mocking_library or "e.g., factory_boy, testfixtures" }}
+Coverage tool:  {{ coverage_tool or "e.g., coverage.py, istanbul" }}
 Factory tool:             e.g., factory_boy, testdata
 
 #### Scaffolding

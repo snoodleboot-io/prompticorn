@@ -1,5 +1,6 @@
 """Builder wrapper to generate tool-specific configs from bundled IR agents."""
 
+import json
 from pathlib import Path
 from typing import Any
 
@@ -433,6 +434,13 @@ class PromptBuilder:
         rewrites only files that actually contain the token, via plain string
         replacement — never a Jinja re-render, so literal ``{{ }}`` in code
         examples is untouched.
+
+        The replacement is a multi-line markdown bullet list. In a markdown/YAML
+        body those newlines are harmless, but a builder that embeds the token
+        inside a **JSON string** (Amazon Q's agent ``prompt``) already escaped the
+        placeholder via ``json.dumps``; substituting the raw value there would
+        inject unescaped control characters and corrupt the JSON. So the value is
+        JSON-escaped for ``.json`` files (PRO-80).
         """
         token = "{{PRIMARY_AGENTS_LIST}}"
         value: str | None = None
@@ -447,7 +455,11 @@ class PromptBuilder:
                 continue
             if value is None:
                 value = PrimaryAgentsHandler().handle("PRIMARY_AGENTS_LIST", config or {})
-            path.write_text(text.replace(token, value), encoding="utf-8")
+            # In .json the token sits inside an already-escaped JSON string; escape
+            # the replacement to match (json.dumps(...)[1:-1] = the escaped inner
+            # content, without the surrounding quotes).
+            replacement = json.dumps(value)[1:-1] if path.suffix == ".json" else value
+            path.write_text(text.replace(token, replacement), encoding="utf-8")
 
     def _filter_agent_for_language(
         self, agent: Agent, language: str | None, agent_name: str | None = None
