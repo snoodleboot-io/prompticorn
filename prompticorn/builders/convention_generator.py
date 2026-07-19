@@ -28,7 +28,6 @@ _SPEC_TEMPLATE_KEYS = (
     "linters",
     "formatter",
     "abstract_class_style",
-    "coverage",
     # Testing-tool selections (PRO-69) — previously collected but read by no
     # template. Exposed so conventions can render the user's actual choices.
     "test_runner",
@@ -100,6 +99,18 @@ def _build_template_context(spec: dict[str, Any] | None) -> dict[str, Any]:
     context["data_access"] = (
         ", ".join(data_access) if isinstance(data_access, list) else data_access
     )
+    # Parity with the CoreFilesLoader context (kilo/cline/cursor/copilot) so a
+    # convention referencing any of these renders consistently rather than
+    # StrictUndefined-crashing on one path and rendering on the other (PRO-87).
+    # source_layout/error_handling derive from the spec; the project/repository
+    # keys aren't available when rendering a language convention here, so they
+    # default empty (generate_language_convention takes no project argument).
+    context["source_layout"] = get_source_layout(
+        spec.get("language", ""), spec.get("layout_style", "flat")
+    )
+    context["error_handling"] = spec.get("error_handling", "")
+    for key in ("repository_type", "commit_style", "pr_size", "deploy_target"):
+        context.setdefault(key, "")
     return context
 
 
