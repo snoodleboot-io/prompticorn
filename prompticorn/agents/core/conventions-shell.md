@@ -30,13 +30,13 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           [Template variable]          e.g., 80%
+Line:           {{ coverage_targets.get('line', '') }}          e.g., 80%
 
 #### Test Types
 - Use bats-core for testing
 - Test scripts as black box
 
 #### Framework & Tools
-Framework:       [Template variable]        e.g., bats-core, shunit2
-Linting:       [Template variable]           e.g., shellcheck
-Coverage tool:  [Template variable]              e.g., bashcov
+Framework:       {{ test_framework }}        e.g., bats-core, shunit2
+Linting:       {{ linter }}           e.g., shellcheck
+Coverage tool:  {{ coverage_tool }}              e.g., bashcov

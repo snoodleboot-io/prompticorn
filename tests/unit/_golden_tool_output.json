@@ -54,7 +54,7 @@
     ],
     [
       ".amazonq/cli-agents/orchestrator.json",
-      "b3125abbce088e97706a70c3e1639a52c15f2547fd8eeb1cca89d5dce1bddd2f"
+      "c988bbda3e1aa4fc01ec833dfeb03950a500a0f071836d198110ed1777a448ed"
     ],
     [
       ".amazonq/cli-agents/performance.json",
@@ -172,7 +172,7 @@
     ],
     [
       ".amazonq/cli-agents/orchestrator.json",
-      "b3125abbce088e97706a70c3e1639a52c15f2547fd8eeb1cca89d5dce1bddd2f"
+      "c988bbda3e1aa4fc01ec833dfeb03950a500a0f071836d198110ed1777a448ed"
     ],
     [
       ".amazonq/cli-agents/performance.json",
@@ -1146,7 +1146,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "cline::verbose": [
@@ -1244,7 +1244,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "codex::minimal": [
@@ -1322,7 +1322,7 @@
     ],
     [
       ".agents/skills/orchestrator/SKILL.md",
-      "4ea1895617ba5a71a70510b4a9557daf87f9cbe12e1c5439aac1f389bb7e5a67"
+      "e17faea9fc151089cabff9af202da8f1e084c46bda1845d6fe45673b3f4b14db"
     ],
     [
       ".agents/skills/performance/SKILL.md",
@@ -1398,7 +1398,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "codex::verbose": [
@@ -1476,7 +1476,7 @@
     ],
     [
       ".agents/skills/orchestrator/SKILL.md",
-      "4ea1895617ba5a71a70510b4a9557daf87f9cbe12e1c5439aac1f389bb7e5a67"
+      "e17faea9fc151089cabff9af202da8f1e084c46bda1845d6fe45673b3f4b14db"
     ],
     [
       ".agents/skills/performance/SKILL.md",
@@ -1552,7 +1552,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "continue::minimal": [
@@ -1650,7 +1650,7 @@
     ],
     [
       ".continue/rules/orchestrator.md",
-      "f3d8cc41b012f0126ead2f682f70dc91d79b3b8767e3572975d59c55867e21d6"
+      "ba0b25747d1628dec1e90f0cae887c42f42a883f0591d6db081a49784638d6db"
     ],
     [
       ".continue/rules/performance.md",
@@ -1768,7 +1768,7 @@
     ],
     [
       ".continue/rules/orchestrator.md",
-      "f3d8cc41b012f0126ead2f682f70dc91d79b3b8767e3572975d59c55867e21d6"
+      "ba0b25747d1628dec1e90f0cae887c42f42a883f0591d6db081a49784638d6db"
     ],
     [
       ".continue/rules/performance.md",
@@ -1789,6 +1789,242 @@
     [
       ".continue/rules/test.md",
       "f372345589c16a4944a26a796680ee9ae6d6a8d49cb64fc4dde236ee9acd677f"
+    ]
+  ],
+  "copilot-chat::minimal": [
+    [
+      ".github/agents/ask.agent.md",
+      "97519379dbc61b402ecfbf7960d4cbaeb8eb2bc5a38c19e8254c67f1364e1640"
+    ],
+    [
+      ".github/agents/backend.agent.md",
+      "b49c1edf1efd6827866e0847da0fab7ce49fc74407f82279e3ba70cb3e2ab3c4"
+    ],
+    [
+      ".github/agents/code.agent.md",
+      "6f26b0214f98bc30fefe5f5ab0534921b3842eb80d8d976bd5679ac658dfaf69"
+    ],
+    [
+      ".github/agents/debug.agent.md",
+      "700df53305c39964e8e724fadc6260ce2d95d1931419c57fa8b141867c774ec5"
+    ],
+    [
+      ".github/agents/enforcement.agent.md",
+      "a305e4c50123b2316f5f174f1392052c53f12ea985066eba9d27b16bf6a4a78e"
+    ],
+    [
+      ".github/agents/explain.agent.md",
+      "130957e824158a05d3e17875ed7519ec7438cfff128d30dfb40ed97e36c6f248"
+    ],
+    [
+      ".github/agents/frontend.agent.md",
+      "6783c7e258f16f763248511406652bc5af4705bdb8a89fd808c07cdd6d135cbf"
+    ],
+    [
+      ".github/agents/migration.agent.md",
+      "35f185966bcfce22ed6f6592062c05e11ba4c18b85172ba47b03cc3cd4a039cd"
+    ],
+    [
+      ".github/agents/orchestrator.agent.md",
+      "e17faea9fc151089cabff9af202da8f1e084c46bda1845d6fe45673b3f4b14db"
+    ],
+    [
+      ".github/agents/performance.agent.md",
+      "a64e236a29f8cda83d5e4f156190ef94f353517e1af62129c7be00baf743bb20"
+    ],
+    [
+      ".github/agents/plan.agent.md",
+      "e6792669877152f650e852f8616c03fea68c32f87f591dd018d7b29075988639"
+    ],
+    [
+      ".github/agents/refactor.agent.md",
+      "fa32eb7dfe5ff3e58f4c4ce6c425b54309018ab39f4989e0323830db409b4bf9"
+    ],
+    [
+      ".github/agents/review.agent.md",
+      "a839b22dab90efc8da1beda86f4c4020d6abbfa53536ba8dd4212a956ff66d8c"
+    ],
+    [
+      ".github/agents/test.agent.md",
+      "7cdc9e8209e0629355cc0e60feccaddd09422c403488ec1c44b11c7bbc96f015"
+    ],
+    [
+      ".github/instructions/conventions-python.instructions.md",
+      "ad94ebbfc8a6c026c5325eac565ffbeb2b5f4b9e55047437239af7d72632497d"
+    ],
+    [
+      ".github/instructions/core.instructions.md",
+      "6adb65a4fb133948898fd7e2d6bd71ce11e92f8ec1d91c4703dee4689ac17db9"
+    ],
+    [
+      ".github/prompts/boilerplate.prompt.md",
+      "6523f5d6394bea02e526e238f19c9937349680e3290efebae821aed991fd790f"
+    ],
+    [
+      ".github/prompts/code.prompt.md",
+      "75a6adf008e4ba8682021e1bfb64b72b84ad84f8ea41718d0b5827931e3b35f6"
+    ],
+    [
+      ".github/prompts/dependency-upgrade.prompt.md",
+      "9b3dc6020e3a25cbf29745a8b3580642d119683186d039fc98ae44b24ac58ee1"
+    ],
+    [
+      ".github/prompts/feature.prompt.md",
+      "4b30718699ee8073fccb831feba840892f9b2de760ae2b61c0e48222b25674a7"
+    ],
+    [
+      ".github/prompts/house-style.prompt.md",
+      "2c52f39d6fe4bf138a57b613dfedf05af1fd5da1c14e8d39817d1b6cb5df30b7"
+    ],
+    [
+      ".github/prompts/migration.prompt.md",
+      "2e4a533a5a5162509c6fbe200fd3ebd3f852bcb4a41cb8b804a92bb478ded3d8"
+    ],
+    [
+      ".github/prompts/performance.prompt.md",
+      "c8ad50756f319bb19a8a7f14dea1333c2176c66747c67dff33369f0b4b3dbabe"
+    ],
+    [
+      ".github/prompts/refactor.prompt.md",
+      "80c36e705e93c642d1e0de46df6edd0d7e75269d7c2f15f23486a832397ee0c9"
+    ],
+    [
+      ".github/prompts/strategy.prompt.md",
+      "52dd04531aacd44fb1efe1d70b166baf61c1317b435b732d21f4fa35d01dd5ba"
+    ],
+    [
+      ".github/prompts/testing.prompt.md",
+      "1dc61ab4e379ad00d1a9467e7273fc8e43381bb470176702729c097cadc4acc2"
+    ],
+    [
+      ".github/prompts/workflow-migration-patterns.prompt.md",
+      "a1026aff7e4588155bd493f1f113c71301a5472d384154a468afcedd53aa9628"
+    ],
+    [
+      ".github/prompts/workflow-performance-optimization.prompt.md",
+      "520aabbd4befc5274f70c86467be17ef220bb19a960cf3ee3db9c3f4f9d722b1"
+    ],
+    [
+      ".github/prompts/workflow-scaling-patterns.prompt.md",
+      "06e58fe891a0b5d6f3c710dcc234fe6332bfae8d0b04f6ce8fcd1eb4393dfb65"
+    ]
+  ],
+  "copilot-chat::verbose": [
+    [
+      ".github/agents/ask.agent.md",
+      "97519379dbc61b402ecfbf7960d4cbaeb8eb2bc5a38c19e8254c67f1364e1640"
+    ],
+    [
+      ".github/agents/backend.agent.md",
+      "b49c1edf1efd6827866e0847da0fab7ce49fc74407f82279e3ba70cb3e2ab3c4"
+    ],
+    [
+      ".github/agents/code.agent.md",
+      "6f26b0214f98bc30fefe5f5ab0534921b3842eb80d8d976bd5679ac658dfaf69"
+    ],
+    [
+      ".github/agents/debug.agent.md",
+      "700df53305c39964e8e724fadc6260ce2d95d1931419c57fa8b141867c774ec5"
+    ],
+    [
+      ".github/agents/enforcement.agent.md",
+      "a305e4c50123b2316f5f174f1392052c53f12ea985066eba9d27b16bf6a4a78e"
+    ],
+    [
+      ".github/agents/explain.agent.md",
+      "130957e824158a05d3e17875ed7519ec7438cfff128d30dfb40ed97e36c6f248"
+    ],
+    [
+      ".github/agents/frontend.agent.md",
+      "6783c7e258f16f763248511406652bc5af4705bdb8a89fd808c07cdd6d135cbf"
+    ],
+    [
+      ".github/agents/migration.agent.md",
+      "35f185966bcfce22ed6f6592062c05e11ba4c18b85172ba47b03cc3cd4a039cd"
+    ],
+    [
+      ".github/agents/orchestrator.agent.md",
+      "e17faea9fc151089cabff9af202da8f1e084c46bda1845d6fe45673b3f4b14db"
+    ],
+    [
+      ".github/agents/performance.agent.md",
+      "a64e236a29f8cda83d5e4f156190ef94f353517e1af62129c7be00baf743bb20"
+    ],
+    [
+      ".github/agents/plan.agent.md",
+      "e6792669877152f650e852f8616c03fea68c32f87f591dd018d7b29075988639"
+    ],
+    [
+      ".github/agents/refactor.agent.md",
+      "fa32eb7dfe5ff3e58f4c4ce6c425b54309018ab39f4989e0323830db409b4bf9"
+    ],
+    [
+      ".github/agents/review.agent.md",
+      "a839b22dab90efc8da1beda86f4c4020d6abbfa53536ba8dd4212a956ff66d8c"
+    ],
+    [
+      ".github/agents/test.agent.md",
+      "7cdc9e8209e0629355cc0e60feccaddd09422c403488ec1c44b11c7bbc96f015"
+    ],
+    [
+      ".github/instructions/conventions-python.instructions.md",
+      "ad94ebbfc8a6c026c5325eac565ffbeb2b5f4b9e55047437239af7d72632497d"
+    ],
+    [
+      ".github/instructions/core.instructions.md",
+      "6adb65a4fb133948898fd7e2d6bd71ce11e92f8ec1d91c4703dee4689ac17db9"
+    ],
+    [
+      ".github/prompts/boilerplate.prompt.md",
+      "407442e7bd9c158502ef792aab7e4fcb905d94d88b1bcecace6145212cce97cc"
+    ],
+    [
+      ".github/prompts/code.prompt.md",
+      "82d702bc3631a227871a29659a0425aa25adb5dc70944f65c664a81d0c2d9985"
+    ],
+    [
+      ".github/prompts/dependency-upgrade.prompt.md",
+      "c1b50362f79cbbc639eb3f785a3e2deea4e66cecfbf3b9498fc39b9c610fc82b"
+    ],
+    [
+      ".github/prompts/feature.prompt.md",
+      "79d8b03fa3a42e9ba1bf96e7a7cf5ccb7acc0ba640d07fc6a4368c4b64123d66"
+    ],
+    [
+      ".github/prompts/house-style.prompt.md",
+      "1d3cfc30366e3b9d4b3d308ac7a43aafa6c06ef33ccf0734e5c07e6cf0d6c8ac"
+    ],
+    [
+      ".github/prompts/migration.prompt.md",
+      "e93570fd06986577dd640c08203593c28470d6776b4403e9ec23b4441b6db9ad"
+    ],
+    [
+      ".github/prompts/performance.prompt.md",
+      "74f56c7ca4f4d65be1d4489b2b3502694e1a1b3c477a1a85f8cff16c16814499"
+    ],
+    [
+      ".github/prompts/refactor.prompt.md",
+      "471c8fe9c09f08dd3bf5e7805a4dc59ef0242d2aad2f2cce6258d0acd997b411"
+    ],
+    [
+      ".github/prompts/strategy.prompt.md",
+      "7c71718f47679295a4fa7c780f38fa0d2bdc338ad02ae1c4167bf29c0100ff48"
+    ],
+    [
+      ".github/prompts/testing.prompt.md",
+      "72c6781eefc255b01c49bf3b2a48d62e788982a6b13f0a5217256c8dd52efa81"
+    ],
+    [
+      ".github/prompts/workflow-migration-patterns.prompt.md",
+      "3b40aa368af6dc02c1966470dff330384c5718fd55dac0e26431970af51bbf93"
+    ],
+    [
+      ".github/prompts/workflow-performance-optimization.prompt.md",
+      "37cde0b3d8303e2f5a7bef35fbcb4b8da93e4669459d0a21ed9e66ca2db80bca"
+    ],
+    [
+      ".github/prompts/workflow-scaling-patterns.prompt.md",
+      "03799bca9c4115b4a3cab780d6258c941fd632683f442e73eb3e55667cd2e4b5"
     ]
   ],
   "copilot::minimal": [
@@ -1886,7 +2122,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "copilot::verbose": [
@@ -1984,7 +2220,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "cursor::minimal": [
@@ -2082,7 +2318,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "cursor::verbose": [
@@ -2180,7 +2416,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "gemini::minimal": [
@@ -2218,7 +2454,7 @@
     ],
     [
       ".gemini/agents/orchestrator.md",
-      "4ea1895617ba5a71a70510b4a9557daf87f9cbe12e1c5439aac1f389bb7e5a67"
+      "e17faea9fc151089cabff9af202da8f1e084c46bda1845d6fe45673b3f4b14db"
     ],
     [
       ".gemini/agents/performance.md",
@@ -2386,7 +2622,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "gemini::verbose": [
@@ -2424,7 +2660,7 @@
     ],
     [
       ".gemini/agents/orchestrator.md",
-      "4ea1895617ba5a71a70510b4a9557daf87f9cbe12e1c5439aac1f389bb7e5a67"
+      "e17faea9fc151089cabff9af202da8f1e084c46bda1845d6fe45673b3f4b14db"
     ],
     [
       ".gemini/agents/performance.md",
@@ -2592,7 +2828,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "junie::minimal": [
@@ -2630,7 +2866,7 @@
     ],
     [
       ".junie/agents/orchestrator.md",
-      "b8f2e0ef56590143fe4aa8c49188ef5f2b554776bcc333ccb204e1abb59de822"
+      "8927c1dca418a1240ef6ae5ce9ea533e4471ad5cffa181be8c9c77f1522dbf5a"
     ],
     [
       ".junie/agents/performance.md",
@@ -2794,7 +3030,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "junie::verbose": [
@@ -2832,7 +3068,7 @@
     ],
     [
       ".junie/agents/orchestrator.md",
-      "b8f2e0ef56590143fe4aa8c49188ef5f2b554776bcc333ccb204e1abb59de822"
+      "8927c1dca418a1240ef6ae5ce9ea533e4471ad5cffa181be8c9c77f1522dbf5a"
     ],
     [
       ".junie/agents/performance.md",
@@ -2996,7 +3232,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "kilo-cli::minimal": [
@@ -3362,7 +3598,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "kilo-cli::verbose": [
@@ -3728,7 +3964,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "kilo-ide::minimal": [
@@ -4094,7 +4330,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "kilo-ide::verbose": [
@@ -4460,7 +4696,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "roo::minimal": [
@@ -4550,7 +4786,7 @@
     ],
     [
       ".roo/rules-orchestrator/01-instructions.md",
-      "f499a20a02118bf2a5f2fc92ad1c4ad6b55bf1ec8ee490430ad3678cb1db6c01"
+      "105f7097c51216500001b0e2dc99aa262f6be6005b3073dad250aa480800bd64"
     ],
     [
       ".roo/rules-performance/01-instructions.md",
@@ -4666,7 +4902,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "roo::verbose": [
@@ -4756,7 +4992,7 @@
     ],
     [
       ".roo/rules-orchestrator/01-instructions.md",
-      "f499a20a02118bf2a5f2fc92ad1c4ad6b55bf1ec8ee490430ad3678cb1db6c01"
+      "105f7097c51216500001b0e2dc99aa262f6be6005b3073dad250aa480800bd64"
     ],
     [
       ".roo/rules-performance/01-instructions.md",
@@ -4872,7 +5108,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "windsurf::minimal": [
@@ -4958,7 +5194,7 @@
     ],
     [
       ".windsurf/skills/orchestrator/SKILL.md",
-      "4ea1895617ba5a71a70510b4a9557daf87f9cbe12e1c5439aac1f389bb7e5a67"
+      "e17faea9fc151089cabff9af202da8f1e084c46bda1845d6fe45673b3f4b14db"
     ],
     [
       ".windsurf/skills/performance/SKILL.md",
@@ -5164,7 +5400,7 @@
     ],
     [
       ".windsurf/skills/orchestrator/SKILL.md",
-      "4ea1895617ba5a71a70510b4a9557daf87f9cbe12e1c5439aac1f389bb7e5a67"
+      "e17faea9fc151089cabff9af202da8f1e084c46bda1845d6fe45673b3f4b14db"
     ],
     [
       ".windsurf/skills/performance/SKILL.md",
@@ -5362,7 +5598,7 @@
     ],
     [
       ".agents/skills/orchestrator/SKILL.md",
-      "4ea1895617ba5a71a70510b4a9557daf87f9cbe12e1c5439aac1f389bb7e5a67"
+      "e17faea9fc151089cabff9af202da8f1e084c46bda1845d6fe45673b3f4b14db"
     ],
     [
       ".agents/skills/performance/SKILL.md",
@@ -5434,7 +5670,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "zed::verbose": [
@@ -5512,7 +5748,7 @@
     ],
     [
       ".agents/skills/orchestrator/SKILL.md",
-      "4ea1895617ba5a71a70510b4a9557daf87f9cbe12e1c5439aac1f389bb7e5a67"
+      "e17faea9fc151089cabff9af202da8f1e084c46bda1845d6fe45673b3f4b14db"
     ],
     [
       ".agents/skills/performance/SKILL.md",
@@ -5584,243 +5820,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
-    ]
-  ],
-  "copilot-chat::minimal": [
-    [
-      ".github/agents/ask.agent.md",
-      "97519379dbc61b402ecfbf7960d4cbaeb8eb2bc5a38c19e8254c67f1364e1640"
-    ],
-    [
-      ".github/agents/backend.agent.md",
-      "b49c1edf1efd6827866e0847da0fab7ce49fc74407f82279e3ba70cb3e2ab3c4"
-    ],
-    [
-      ".github/agents/code.agent.md",
-      "6f26b0214f98bc30fefe5f5ab0534921b3842eb80d8d976bd5679ac658dfaf69"
-    ],
-    [
-      ".github/agents/debug.agent.md",
-      "700df53305c39964e8e724fadc6260ce2d95d1931419c57fa8b141867c774ec5"
-    ],
-    [
-      ".github/agents/enforcement.agent.md",
-      "a305e4c50123b2316f5f174f1392052c53f12ea985066eba9d27b16bf6a4a78e"
-    ],
-    [
-      ".github/agents/explain.agent.md",
-      "130957e824158a05d3e17875ed7519ec7438cfff128d30dfb40ed97e36c6f248"
-    ],
-    [
-      ".github/agents/frontend.agent.md",
-      "6783c7e258f16f763248511406652bc5af4705bdb8a89fd808c07cdd6d135cbf"
-    ],
-    [
-      ".github/agents/migration.agent.md",
-      "35f185966bcfce22ed6f6592062c05e11ba4c18b85172ba47b03cc3cd4a039cd"
-    ],
-    [
-      ".github/agents/orchestrator.agent.md",
-      "4ea1895617ba5a71a70510b4a9557daf87f9cbe12e1c5439aac1f389bb7e5a67"
-    ],
-    [
-      ".github/agents/performance.agent.md",
-      "a64e236a29f8cda83d5e4f156190ef94f353517e1af62129c7be00baf743bb20"
-    ],
-    [
-      ".github/agents/plan.agent.md",
-      "e6792669877152f650e852f8616c03fea68c32f87f591dd018d7b29075988639"
-    ],
-    [
-      ".github/agents/refactor.agent.md",
-      "fa32eb7dfe5ff3e58f4c4ce6c425b54309018ab39f4989e0323830db409b4bf9"
-    ],
-    [
-      ".github/agents/review.agent.md",
-      "a839b22dab90efc8da1beda86f4c4020d6abbfa53536ba8dd4212a956ff66d8c"
-    ],
-    [
-      ".github/agents/test.agent.md",
-      "7cdc9e8209e0629355cc0e60feccaddd09422c403488ec1c44b11c7bbc96f015"
-    ],
-    [
-      ".github/instructions/conventions-python.instructions.md",
-      "ad94ebbfc8a6c026c5325eac565ffbeb2b5f4b9e55047437239af7d72632497d"
-    ],
-    [
-      ".github/instructions/core.instructions.md",
-      "6adb65a4fb133948898fd7e2d6bd71ce11e92f8ec1d91c4703dee4689ac17db9"
-    ],
-    [
-      ".github/prompts/boilerplate.prompt.md",
-      "6523f5d6394bea02e526e238f19c9937349680e3290efebae821aed991fd790f"
-    ],
-    [
-      ".github/prompts/code.prompt.md",
-      "75a6adf008e4ba8682021e1bfb64b72b84ad84f8ea41718d0b5827931e3b35f6"
-    ],
-    [
-      ".github/prompts/dependency-upgrade.prompt.md",
-      "9b3dc6020e3a25cbf29745a8b3580642d119683186d039fc98ae44b24ac58ee1"
-    ],
-    [
-      ".github/prompts/feature.prompt.md",
-      "4b30718699ee8073fccb831feba840892f9b2de760ae2b61c0e48222b25674a7"
-    ],
-    [
-      ".github/prompts/house-style.prompt.md",
-      "2c52f39d6fe4bf138a57b613dfedf05af1fd5da1c14e8d39817d1b6cb5df30b7"
-    ],
-    [
-      ".github/prompts/migration.prompt.md",
-      "2e4a533a5a5162509c6fbe200fd3ebd3f852bcb4a41cb8b804a92bb478ded3d8"
-    ],
-    [
-      ".github/prompts/performance.prompt.md",
-      "c8ad50756f319bb19a8a7f14dea1333c2176c66747c67dff33369f0b4b3dbabe"
-    ],
-    [
-      ".github/prompts/refactor.prompt.md",
-      "80c36e705e93c642d1e0de46df6edd0d7e75269d7c2f15f23486a832397ee0c9"
-    ],
-    [
-      ".github/prompts/strategy.prompt.md",
-      "52dd04531aacd44fb1efe1d70b166baf61c1317b435b732d21f4fa35d01dd5ba"
-    ],
-    [
-      ".github/prompts/testing.prompt.md",
-      "1dc61ab4e379ad00d1a9467e7273fc8e43381bb470176702729c097cadc4acc2"
-    ],
-    [
-      ".github/prompts/workflow-migration-patterns.prompt.md",
-      "a1026aff7e4588155bd493f1f113c71301a5472d384154a468afcedd53aa9628"
-    ],
-    [
-      ".github/prompts/workflow-performance-optimization.prompt.md",
-      "520aabbd4befc5274f70c86467be17ef220bb19a960cf3ee3db9c3f4f9d722b1"
-    ],
-    [
-      ".github/prompts/workflow-scaling-patterns.prompt.md",
-      "06e58fe891a0b5d6f3c710dcc234fe6332bfae8d0b04f6ce8fcd1eb4393dfb65"
-    ]
-  ],
-  "copilot-chat::verbose": [
-    [
-      ".github/agents/ask.agent.md",
-      "97519379dbc61b402ecfbf7960d4cbaeb8eb2bc5a38c19e8254c67f1364e1640"
-    ],
-    [
-      ".github/agents/backend.agent.md",
-      "b49c1edf1efd6827866e0847da0fab7ce49fc74407f82279e3ba70cb3e2ab3c4"
-    ],
-    [
-      ".github/agents/code.agent.md",
-      "6f26b0214f98bc30fefe5f5ab0534921b3842eb80d8d976bd5679ac658dfaf69"
-    ],
-    [
-      ".github/agents/debug.agent.md",
-      "700df53305c39964e8e724fadc6260ce2d95d1931419c57fa8b141867c774ec5"
-    ],
-    [
-      ".github/agents/enforcement.agent.md",
-      "a305e4c50123b2316f5f174f1392052c53f12ea985066eba9d27b16bf6a4a78e"
-    ],
-    [
-      ".github/agents/explain.agent.md",
-      "130957e824158a05d3e17875ed7519ec7438cfff128d30dfb40ed97e36c6f248"
-    ],
-    [
-      ".github/agents/frontend.agent.md",
-      "6783c7e258f16f763248511406652bc5af4705bdb8a89fd808c07cdd6d135cbf"
-    ],
-    [
-      ".github/agents/migration.agent.md",
-      "35f185966bcfce22ed6f6592062c05e11ba4c18b85172ba47b03cc3cd4a039cd"
-    ],
-    [
-      ".github/agents/orchestrator.agent.md",
-      "4ea1895617ba5a71a70510b4a9557daf87f9cbe12e1c5439aac1f389bb7e5a67"
-    ],
-    [
-      ".github/agents/performance.agent.md",
-      "a64e236a29f8cda83d5e4f156190ef94f353517e1af62129c7be00baf743bb20"
-    ],
-    [
-      ".github/agents/plan.agent.md",
-      "e6792669877152f650e852f8616c03fea68c32f87f591dd018d7b29075988639"
-    ],
-    [
-      ".github/agents/refactor.agent.md",
-      "fa32eb7dfe5ff3e58f4c4ce6c425b54309018ab39f4989e0323830db409b4bf9"
-    ],
-    [
-      ".github/agents/review.agent.md",
-      "a839b22dab90efc8da1beda86f4c4020d6abbfa53536ba8dd4212a956ff66d8c"
-    ],
-    [
-      ".github/agents/test.agent.md",
-      "7cdc9e8209e0629355cc0e60feccaddd09422c403488ec1c44b11c7bbc96f015"
-    ],
-    [
-      ".github/instructions/conventions-python.instructions.md",
-      "ad94ebbfc8a6c026c5325eac565ffbeb2b5f4b9e55047437239af7d72632497d"
-    ],
-    [
-      ".github/instructions/core.instructions.md",
-      "6adb65a4fb133948898fd7e2d6bd71ce11e92f8ec1d91c4703dee4689ac17db9"
-    ],
-    [
-      ".github/prompts/boilerplate.prompt.md",
-      "407442e7bd9c158502ef792aab7e4fcb905d94d88b1bcecace6145212cce97cc"
-    ],
-    [
-      ".github/prompts/code.prompt.md",
-      "82d702bc3631a227871a29659a0425aa25adb5dc70944f65c664a81d0c2d9985"
-    ],
-    [
-      ".github/prompts/dependency-upgrade.prompt.md",
-      "c1b50362f79cbbc639eb3f785a3e2deea4e66cecfbf3b9498fc39b9c610fc82b"
-    ],
-    [
-      ".github/prompts/feature.prompt.md",
-      "79d8b03fa3a42e9ba1bf96e7a7cf5ccb7acc0ba640d07fc6a4368c4b64123d66"
-    ],
-    [
-      ".github/prompts/house-style.prompt.md",
-      "1d3cfc30366e3b9d4b3d308ac7a43aafa6c06ef33ccf0734e5c07e6cf0d6c8ac"
-    ],
-    [
-      ".github/prompts/migration.prompt.md",
-      "e93570fd06986577dd640c08203593c28470d6776b4403e9ec23b4441b6db9ad"
-    ],
-    [
-      ".github/prompts/performance.prompt.md",
-      "74f56c7ca4f4d65be1d4489b2b3502694e1a1b3c477a1a85f8cff16c16814499"
-    ],
-    [
-      ".github/prompts/refactor.prompt.md",
-      "471c8fe9c09f08dd3bf5e7805a4dc59ef0242d2aad2f2cce6258d0acd997b411"
-    ],
-    [
-      ".github/prompts/strategy.prompt.md",
-      "7c71718f47679295a4fa7c780f38fa0d2bdc338ad02ae1c4167bf29c0100ff48"
-    ],
-    [
-      ".github/prompts/testing.prompt.md",
-      "72c6781eefc255b01c49bf3b2a48d62e788982a6b13f0a5217256c8dd52efa81"
-    ],
-    [
-      ".github/prompts/workflow-migration-patterns.prompt.md",
-      "3b40aa368af6dc02c1966470dff330384c5718fd55dac0e26431970af51bbf93"
-    ],
-    [
-      ".github/prompts/workflow-performance-optimization.prompt.md",
-      "37cde0b3d8303e2f5a7bef35fbcb4b8da93e4669459d0a21ed9e66ca2db80bca"
-    ],
-    [
-      ".github/prompts/workflow-scaling-patterns.prompt.md",
-      "03799bca9c4115b4a3cab780d6258c941fd632683f442e73eb3e55667cd2e4b5"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ]
 }

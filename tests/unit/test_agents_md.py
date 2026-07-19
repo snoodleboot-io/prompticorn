@@ -49,6 +49,26 @@ class TestAgentsMdEmitter(unittest.TestCase):
         self.assertTrue(out.endswith("\n"))
         self.assertFalse(out.endswith("\n\n"))
 
+    def test_inlines_per_language_convention(self) -> None:
+        """PRO-67: AGENTS.md-only tools must get the per-language convention, with
+        the user's chosen toolchain value rendered (not a template placeholder)."""
+        spec = {"language": "python", "test_framework": "PYTEST_SENTINEL"}
+        out = generate_agents_md(_AGENTS, primary_language="python", language_specs=[spec])
+        # A python-convention-unique marker (not present in the core convention).
+        self.assertIn("typing.Optional", out)
+        self.assertIn("PYTEST_SENTINEL", out)
+
+    def test_language_specs_defaults_to_primary_spec(self) -> None:
+        spec = {"language": "python", "linter": "LINT_SENTINEL"}
+        out = generate_agents_md(_AGENTS, primary_language="python", primary_spec=spec)
+        self.assertIn("LINT_SENTINEL", out)
+
+    def test_no_language_convention_when_no_spec(self) -> None:
+        """With no language spec, only routing + core conventions are emitted
+        (no python-specific per-language section)."""
+        out = generate_agents_md(_AGENTS)
+        self.assertNotIn("typing.Optional", out)
+
 
 if __name__ == "__main__":
     unittest.main()

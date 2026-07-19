@@ -2,7 +2,7 @@
 # Core Conventions C++
 
 Language:             {{ language }} e.g., C++20, C++23
-Compiler:            [Template variable]            e.g., GCC, Clang, MSVC
+Compiler:                        e.g., GCC, Clang, MSVC
 Package Manager:      {{ package_manager }} e.g., CMake, vcpkg, Conan
 Linter:               {{ linter }} e.g., clang-tidy, cppcheck
 Formatter:           {{ formatter }} e.g., clang-format
@@ -39,11 +39,11 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           [Template variable]          e.g., 80%
-Branch:         [Template variable]        e.g., 70%
-Function:       [Template variable]       e.g., 90%
-Statement:      [Template variable]      e.g., 85%
-Path:           [Template variable]           e.g., 60%
+Line:           {{ coverage_targets.get('line', '') }}          e.g., 80%
+Branch:         {{ coverage_targets.get('branch', '') }}        e.g., 70%
+Function:       {{ coverage_targets.get('function', '') }}       e.g., 90%
+Statement:      {{ coverage_targets.get('statement', '') }}      e.g., 85%
+Path:           {{ coverage_targets.get('path', '') }}           e.g., 60%
 
 #### Test Types
 
@@ -61,9 +61,9 @@ Path:           [Template variable]           e.g., 60%
 - Test parsers and input validation
 
 #### Framework & Tools
-Framework:       [Template variable]        e.g., Google Test, Catch2, doctest
-Mocking:        [Template variable]              e.g., Google Mock, Trompeloeil
-Coverage tool:  [Template variable]              e.g., lcov, gcov, llvm-cov
+Framework:       {{ test_framework }}        e.g., Google Test, Catch2, doctest
+Mocking:        {{ mocking_library }}              e.g., Google Mock, Trompeloeil
+Coverage tool:  {{ coverage_tool }}              e.g., lcov, gcov, llvm-cov
 
 #### Scaffolding
 

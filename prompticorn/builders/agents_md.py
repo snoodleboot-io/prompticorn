@@ -8,7 +8,10 @@ so it must not reference any single tool's private directory layout.
 
 from typing import Any
 
-from prompticorn.builders.convention_generator import generate_core_convention
+from prompticorn.builders.convention_generator import (
+    generate_core_convention,
+    generate_language_convention,
+)
 
 
 def generate_agents_md(
@@ -18,6 +21,7 @@ def generate_agents_md(
     project: dict[str, Any] | None = None,
     primary_language: str = "",
     primary_spec: dict[str, Any] | None = None,
+    language_specs: list[dict[str, Any]] | None = None,
 ) -> str:
     """Generate self-contained ``AGENTS.md`` content.
 
@@ -32,6 +36,11 @@ def generate_agents_md(
             layout in the core conventions.
         primary_spec: Primary folder/language spec, used to derive per-folder
             conventions (databases, data_access, error_handling, layout_style).
+        language_specs: All selected language/folder specs. Their per-language
+            conventions are inlined after the core conventions so the user's
+            toolchain choices (runtime, linter, formatter, test framework, …)
+            reach AGENTS.md-only tools, which emit no separate per-language file
+            (PRO-67). Defaults to ``[primary_spec]`` when omitted.
 
     Returns:
         Content for the root ``AGENTS.md`` file.
@@ -46,6 +55,17 @@ def generate_agents_md(
     ).strip()
     if conventions:
         sections.append(conventions)
+
+    specs = (
+        language_specs if language_specs is not None else ([primary_spec] if primary_spec else [])
+    )
+    for spec in specs:
+        language = (spec or {}).get("language", "")
+        if not language:
+            continue
+        lang_convention = generate_language_convention(language, spec)
+        if lang_convention and lang_convention.strip():
+            sections.append(lang_convention.strip())
 
     return "\n\n---\n\n".join(sections) + "\n"
 

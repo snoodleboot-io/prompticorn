@@ -6,6 +6,8 @@ Runtime:              {{ runtime }} e.g., .NET 8
 Package Manager:      {{ package_manager }} e.g., NuGet, dotnet
 Linter:               {{ linter }} e.g., Fantomas
 Formatter:           {{ formatter }} e.g., Fantomas
+{% if framework %}Framework:            {{ framework }} e.g., Giraffe, Saturn, Fable
+{% endif %}
 
 ### Naming Conventions
 
@@ -33,5 +35,5 @@ Environment vars:   UPPER_SNAKE_CASE always
 - Use pipe operator
 
 ### Testing
-Framework:       [Template variable]        e.g., NUnit, xUnit, Expecto
-Coverage tool:  [Template variable]              e.g., Coverlet
+Framework:       {{ test_framework }}        e.g., NUnit, xUnit, Expecto
+Coverage tool:  {{ coverage_tool }}              e.g., Coverlet

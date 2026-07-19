@@ -38,12 +38,12 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           [Template variable]          e.g., 80%
-Branch:         [Template variable]        e.g., 70%
-Function:       [Template variable]       e.g., 90%
-Statement:      [Template variable]      e.g., 85%
-Mutation:       [Template variable]       e.g., 80%
-Path:           [Template variable]           e.g., 60%
+Line:           {{ coverage_targets.get('line', '') }}          e.g., 80%
+Branch:         {{ coverage_targets.get('branch', '') }}        e.g., 70%
+Function:       {{ coverage_targets.get('function', '') }}       e.g., 90%
+Statement:      {{ coverage_targets.get('statement', '') }}      e.g., 85%
+Mutation:       {{ coverage_targets.get('mutation', '') }}       e.g., 80%
+Path:           {{ coverage_targets.get('path', '') }}           e.g., 60%
 
 #### Test Types
 
@@ -63,10 +63,10 @@ Path:           [Template variable]           e.g., 60%
 - Use `stryker-mutator` for JavaScript
 
 #### Framework & Tools
-Framework:       [Template variable]        e.g., Jest, Vitest, Mocha
-Mocking library: [Template variable]              e.g., jest-mock, sinon
-Coverage tool:  [Template variable]              e.g., Jest coverage, c8
-E2E tool:       [Template variable]             e.g., Playwright, Cypress
+Framework:       {{ test_framework }}        e.g., Jest, Vitest, Mocha
+Mocking library: {{ mocking_library }}              e.g., jest-mock, sinon
+Coverage tool:  {{ coverage_tool }}              e.g., Jest coverage, c8
+E2E tool:                    e.g., Playwright, Cypress
 
 #### Scaffolding
 

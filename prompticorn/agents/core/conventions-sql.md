@@ -52,10 +52,10 @@ Path:           {{ coverage_targets.get('path', '') }} e.g., 60%
 - Test under load with realistic data volumes
 
 #### Framework & Tools
-Framework:       [Template variable]        e.g., pytest, Go test, Jest
-Mocking library: [Template variable]              e.g., factory_boy, testfixtures
-Coverage tool:  [Template variable]              e.g., coverage.py, istanbul
-Factory tool:   [Template variable]          e.g., factory_boy, testdata
+Framework:       {{ test_framework }}        e.g., pytest, Go test, Jest
+Mocking library: {{ mocking_library }}              e.g., factory_boy, testfixtures
+Coverage tool:  {{ coverage_tool }}              e.g., coverage.py, istanbul
+Factory tool:             e.g., factory_boy, testdata
 
 #### Scaffolding
 

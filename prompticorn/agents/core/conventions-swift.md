@@ -38,10 +38,10 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           [Template variable]          e.g., 80%
-Branch:         [Template variable]        e.g., 70%
-Function:       [Template variable]       e.g., 90%
-Statement:      [Template variable]      e.g., 85%
+Line:           {{ coverage_targets.get('line', '') }}          e.g., 80%
+Branch:         {{ coverage_targets.get('branch', '') }}        e.g., 70%
+Function:       {{ coverage_targets.get('function', '') }}       e.g., 90%
+Statement:      {{ coverage_targets.get('statement', '') }}      e.g., 85%
 
 #### Test Types
 
@@ -57,9 +57,9 @@ Statement:      [Template variable]      e.g., 85%
 - Use SwiftSnapshotTesting for visual testing
 
 #### Framework & Tools
-Framework:       [Template variable]        e.g., XCTest
-Mocking:        [Template variable]              e.g., Mockingbird
-Coverage tool:  [Template variable]              e.g., Xcode coverage
+Framework:       {{ test_framework }}        e.g., XCTest
+Mocking:        {{ mocking_library }}              e.g., Mockingbird
+Coverage tool:  {{ coverage_tool }}              e.g., Xcode coverage
 
 #### Scaffolding
 

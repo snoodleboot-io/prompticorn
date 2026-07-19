@@ -35,15 +35,15 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           [Template variable]          e.g., 80%
-Branch:         [Template variable]        e.g., 70%
-Function:       [Template variable]       e.g., 90%
+Line:           {{ coverage_targets.get('line', '') }}          e.g., 80%
+Branch:         {{ coverage_targets.get('branch', '') }}        e.g., 70%
+Function:       {{ coverage_targets.get('function', '') }}       e.g., 90%
 
 #### Test Types
 - Use flutter_test or test package
 - Use mockito for mocking
 
 #### Framework & Tools
-Framework:       [Template variable]        e.g., flutter_test, test
-Mocking:        [Template variable]              e.g., mockito
-Coverage tool:  [Template variable]              e.g., coverage
+Framework:       {{ test_framework }}        e.g., flutter_test, test
+Mocking:        {{ mocking_library }}              e.g., mockito
+Coverage tool:  {{ coverage_tool }}              e.g., coverage

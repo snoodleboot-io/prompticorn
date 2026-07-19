@@ -32,5 +32,5 @@ Environment vars:   UPPER_SNAKE_CASE always
 - Use meaningful variable names
 
 ### Testing
-Framework:       [Template variable]        e.g., busted
-Coverage tool:  [Template variable]              e.g., luacov
+Framework:       {{ test_framework }}        e.g., busted
+Coverage tool:  {{ coverage_tool }}              e.g., luacov

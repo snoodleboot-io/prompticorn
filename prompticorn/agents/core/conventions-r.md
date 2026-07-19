@@ -36,11 +36,11 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           [Template variable]          e.g., 80%
-Branch:         [Template variable]        e.g., 70%
-Function:       [Template variable]       e.g., 90%
-Statement:      [Template variable]      e.g., 85%
-Path:           [Template variable]           e.g., 60%
+Line:           {{ coverage_targets.get('line', '') }}          e.g., 80%
+Branch:         {{ coverage_targets.get('branch', '') }}        e.g., 70%
+Function:       {{ coverage_targets.get('function', '') }}       e.g., 90%
+Statement:      {{ coverage_targets.get('statement', '') }}      e.g., 85%
+Path:           {{ coverage_targets.get('path', '') }}           e.g., 60%
 
 #### Test Types
 
@@ -54,9 +54,9 @@ Path:           [Template variable]           e.g., 60%
 - Test data transformations
 
 #### Framework & Tools
-Framework:       [Template variable]        e.g., testthat, tinytest
-Mocking:        [Template variable]              e.g., mockery, mockr
-Coverage tool:  [Template variable]              e.g., covr
+Framework:       {{ test_framework }}        e.g., testthat, tinytest
+Mocking:        {{ mocking_library }}              e.g., mockery, mockr
+Coverage tool:  {{ coverage_tool }}              e.g., covr
 
 #### Scaffolding
 

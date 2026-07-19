@@ -2,7 +2,7 @@
 # Core Conventions C
 
 Language:             {{ language }} e.g., C17, C23
-Compiler:            [Template variable]            e.g., GCC, Clang, MSVC
+Compiler:                        e.g., GCC, Clang, MSVC
 Package Manager:      {{ package_manager }} e.g., CMake, make
 Linter:               {{ linter }} e.g., cppcheck, clang-tidy
 Formatter:           {{ formatter }} e.g., clang-format
@@ -40,11 +40,11 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           [Template variable]          e.g., 80%
-Branch:         [Template variable]        e.g., 70%
-Function:       [Template variable]       e.g., 90%
-Statement:      [Template variable]      e.g., 85%
-Path:           [Template variable]           e.g., 60%
+Line:           {{ coverage_targets.get('line', '') }}          e.g., 80%
+Branch:         {{ coverage_targets.get('branch', '') }}        e.g., 70%
+Function:       {{ coverage_targets.get('function', '') }}       e.g., 90%
+Statement:      {{ coverage_targets.get('statement', '') }}      e.g., 85%
+Path:           {{ coverage_targets.get('path', '') }}           e.g., 60%
 
 #### Test Types
 
@@ -62,9 +62,9 @@ Path:           [Template variable]           e.g., 60%
 - Run in CI pipeline
 
 #### Framework & Tools
-Framework:       [Template variable]        e.g., Unity, Check, CMocka
-Coverage tool:  [Template variable]              e.g., lcov, gcov
-Static analysis: [Template variable]           e.g., cppcheck, clang-tidy
+Framework:       {{ test_framework }}        e.g., Unity, Check, CMocka
+Coverage tool:  {{ coverage_tool }}              e.g., lcov, gcov
+Static analysis: {{ linter }}           e.g., cppcheck, clang-tidy
 
 #### Scaffolding
 

@@ -29,6 +29,13 @@ _SPEC_TEMPLATE_KEYS = (
     "formatter",
     "abstract_class_style",
     "coverage",
+    # Testing-tool selections (PRO-69) — previously collected but read by no
+    # template. Exposed so conventions can render the user's actual choices.
+    "test_runner",
+    "mocking_library",
+    "coverage_tool",
+    "mutation_tool",
+    "framework",
 )
 
 
@@ -76,6 +83,16 @@ def _build_template_context(spec: dict[str, Any] | None) -> dict[str, Any]:
     # so a bad shape never crashes (and silently drops) convention rendering.
     coverage = spec.get("coverage")
     context["coverage_targets"] = coverage if isinstance(coverage, dict) else {}
+    # Data-system values, comma-joined like the core convention context. A
+    # language convention (e.g. conventions-sql.md) references these directly, so
+    # they must be present here too — the Kilo/CoreFilesLoader path already
+    # injects them, and this keeps the Claude/AGENTS.md path consistent (PRO-70).
+    databases = spec.get("databases") or []
+    data_access = spec.get("data_access") or []
+    context["databases"] = ", ".join(databases) if isinstance(databases, list) else databases
+    context["data_access"] = (
+        ", ".join(data_access) if isinstance(data_access, list) else data_access
+    )
     return context
 
 

@@ -32,5 +32,5 @@ Environment vars:   UPPER_SNAKE_CASE always
 - Use descriptive function names
 
 ### Testing
-Framework:       [Template variable]        e.g., Test.jl
-Coverage tool:  [Template variable]              e.g., Coverage.jl
+Framework:       {{ test_framework }}        e.g., Test.jl
+Coverage tool:  {{ coverage_tool }}              e.g., Coverage.jl
