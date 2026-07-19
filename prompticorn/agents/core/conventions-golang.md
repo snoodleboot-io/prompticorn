@@ -2,11 +2,11 @@
 {%- import 'macros/testing_sections.jinja2' as testing -%}
 # Core Conventions Golang
 
-Language:             {{ language }} e.g., Go 1.22
-Runtime:              {{ runtime }} e.g., Go runtime
-Package Manager:      {{ package_manager }} e.g., go mod
-Linter:               {{ linter }} e.g., golangci-lint
-Formatter:           {{ formatter }} e.g., gofmt, goimports
+Language:             {{ language or "e.g., Go 1.22" }}
+Runtime:              {{ runtime or "e.g., Go runtime" }}
+Package Manager:      {{ package_manager or "e.g., go mod" }}
+Linter:               {{ linter or "e.g., golangci-lint" }}
+Formatter:           {{ formatter or "e.g., gofmt, goimports" }}
 
 ### Naming Conventions
 

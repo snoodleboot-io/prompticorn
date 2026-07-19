@@ -1,11 +1,11 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions-lua.md -->
 # Core Conventions Lua
 
-Language:             {{ language }} e.g., Lua 5.4
-Runtime:              {{ runtime }} e.g., LuaJIT, Lua VM
-Package Manager:      {{ package_manager }} e.g., LuaRocks
-Linter:               {{ linter }} e.g., luacheck
-Formatter:           {{ formatter }} e.g., lua-format
+Language:             {{ language or "e.g., Lua 5.4" }}
+Runtime:              {{ runtime or "e.g., LuaJIT, Lua VM" }}
+Package Manager:      {{ package_manager or "e.g., LuaRocks" }}
+Linter:               {{ linter or "e.g., luacheck" }}
+Formatter:           {{ formatter or "e.g., lua-format" }}
 
 ### Naming Conventions
 
@@ -32,5 +32,5 @@ Environment vars:   UPPER_SNAKE_CASE always
 - Use meaningful variable names
 
 ### Testing
-Framework:       {{ test_framework }}        e.g., busted
-Coverage tool:  {{ coverage_tool }}              e.g., luacov
+Framework:       {{ test_framework or "e.g., busted" }}
+Coverage tool:  {{ coverage_tool or "e.g., luacov" }}

@@ -17,7 +17,7 @@
 
 {% if coverage_targets %}#### Coverage Targets
 {% for metric, value in coverage_targets.items() %}
-{{ metric | capitalize }}:{{ "           " }}{{ value }}{{ "          " }}e.g., {{ value }}%
+{{ metric | capitalize }}:{{ "           " }}{{ value }}
 {% endfor %}
 
 {% endif %}#### Test Types

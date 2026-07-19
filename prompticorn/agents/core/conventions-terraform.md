@@ -1,7 +1,7 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions-terraform.md -->
 # Core Conventions Terraform
 
-Language:             {{ language }} e.g., Terraform 1.6+
+Language:             {{ language or "e.g., Terraform 1.6+" }}
 Provider:                        e.g., AWS, Azure, GCP
 State:                     e.g., S3, Azure Blob, GCS
 
@@ -35,9 +35,9 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           {{ coverage_targets.get('line', '') }}          e.g., 80%
-Branch:         {{ coverage_targets.get('branch', '') }}        e.g., 70%
-Path:           {{ coverage_targets.get('path', '') }}           e.g., 60%
+Line:           {{ coverage_targets.get('line', '') or "e.g., 80%" }}
+Branch:         {{ coverage_targets.get('branch', '') or "e.g., 70%" }}
+Path:           {{ coverage_targets.get('path', '') or "e.g., 60%" }}
 
 #### Test Types
 
@@ -62,7 +62,7 @@ Path:           {{ coverage_targets.get('path', '') }}           e.g., 60%
 
 #### Framework & Tools
 Validation:        e.g., terraform validate
-Linting:       {{ linter }}           e.g., tflint, checkov
+Linting:       {{ linter or "e.g., tflint, checkov" }}
 Policy:                 e.g., Sentinel, Conftest, OPA
 
 #### Scaffolding

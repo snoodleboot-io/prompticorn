@@ -1,10 +1,10 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions-html.md -->
 # Core Conventions HTML
 
-Language:             {{ language }} e.g., HTML5
-Version:              {{ runtime }}            e.g., HTML5, HTML4 Strict, XHTML5
-Formatter:           {{ formatter }} e.g., prettier, html-beautify, djLint
-Linter:               {{ linter }} e.g., htmlhint, W3C Validator
+Language:             {{ language or "e.g., HTML5" }}
+Version:              {{ runtime or "e.g., HTML5, HTML4 Strict, XHTML5" }}
+Formatter:           {{ formatter or "e.g., prettier, html-beautify, djLint" }}
+Linter:               {{ linter or "e.g., htmlhint, W3C Validator" }}
 
 ### Naming Conventions
 

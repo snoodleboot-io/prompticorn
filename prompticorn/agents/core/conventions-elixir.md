@@ -1,11 +1,11 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions-elixir.md -->
 # Core Conventions Elixir
 
-Language:             {{ language }} e.g., Elixir 1.15+
-Runtime:              {{ runtime }} e.g., OTP 26
-Package Manager:      {{ package_manager }} e.g., mix
-Linter:               {{ linter }} e.g., Credo, Sobelow
-Formatter:           {{ formatter }} e.g., mix format
+Language:             {{ language or "e.g., Elixir 1.15+" }}
+Runtime:              {{ runtime or "e.g., OTP 26" }}
+Package Manager:      {{ package_manager or "e.g., mix" }}
+Linter:               {{ linter or "e.g., Credo, Sobelow" }}
+Formatter:           {{ formatter or "e.g., mix format" }}
 
 ### Naming Conventions
 
@@ -40,11 +40,11 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           {{ coverage_targets.get('line', '') }}          e.g., 80%
-Branch:         {{ coverage_targets.get('branch', '') }}        e.g., 70%
-Function:       {{ coverage_targets.get('function', '') }}       e.g., 90%
-Statement:      {{ coverage_targets.get('statement', '') }}      e.g., 85%
-Path:           {{ coverage_targets.get('path', '') }}           e.g., 60%
+Line:           {{ coverage_targets.get('line', '') or "e.g., 80%" }}
+Branch:         {{ coverage_targets.get('branch', '') or "e.g., 70%" }}
+Function:       {{ coverage_targets.get('function', '') or "e.g., 90%" }}
+Statement:      {{ coverage_targets.get('statement', '') or "e.g., 85%" }}
+Path:           {{ coverage_targets.get('path', '') or "e.g., 60%" }}
 
 #### Test Types
 
@@ -62,10 +62,10 @@ Path:           {{ coverage_targets.get('path', '') }}           e.g., 60%
 - Use PropCheck for property-based testing
 
 #### Framework & Tools
-Framework:       {{ test_framework }}        e.g., ExUnit
-Mocking:        {{ mocking_library }}              e.g., Mox
+Framework:       {{ test_framework or "e.g., ExUnit" }}
+Mocking:        {{ mocking_library or "e.g., Mox" }}
 Property tool:           e.g., PropCheck, StreamData
-Coverage tool:  {{ coverage_tool }}              e.g., ExCoveralls
+Coverage tool:  {{ coverage_tool or "e.g., ExCoveralls" }}
 
 #### Scaffolding
 

@@ -2,12 +2,12 @@
 {%- import 'macros/testing_sections.jinja2' as testing -%}
 # Core Conventions Python
 
-Language:             {{ language }} e.g., Python 3.11+
-Runtime:              {{ runtime }} e.g., CPython 3.11, PyPy
-Package Manager:      {{ package_manager }} e.g., poetry, pip, uv
-Linter:               {{ linter }} e.g., Ruff, flake8
-Formatter:           {{ formatter }} e.g., Ruff, Black
-Abstract Class Style: {{ abstract_class_style }} e.g., abc, interface
+Language:             {{ language or "e.g., Python 3.11+" }}
+Runtime:              {{ runtime or "e.g., CPython 3.11, PyPy" }}
+Package Manager:      {{ package_manager or "e.g., poetry, pip, uv" }}
+Linter:               {{ linter or "e.g., Ruff, flake8" }}
+Formatter:           {{ formatter or "e.g., Ruff, Black" }}
+Abstract Class Style: {{ abstract_class_style or "e.g., abc, interface" }}
 
 ### Naming Conventions
 

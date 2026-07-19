@@ -1,9 +1,9 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions-shell.md -->
 # Core Conventions Shell
 
-Language:             {{ language }} e.g., Bash 5.2, Zsh
-Shell:              {{ shell_type }}             e.g., Bash, Zsh
-Package Manager:      {{ package_manager }} e.g., apt, yum, brew
+Language:             {{ language or "e.g., Bash 5.2, Zsh" }}
+Shell:              {{ shell_type or "e.g., Bash, Zsh" }}
+Package Manager:      {{ package_manager or "e.g., apt, yum, brew" }}
 
 ### Naming Conventions
 
@@ -30,13 +30,13 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           {{ coverage_targets.get('line', '') }}          e.g., 80%
+Line:           {{ coverage_targets.get('line', '') or "e.g., 80%" }}
 
 #### Test Types
 - Use bats-core for testing
 - Test scripts as black box
 
 #### Framework & Tools
-Framework:       {{ test_framework }}        e.g., bats-core, shunit2
-Linting:       {{ linter }}           e.g., shellcheck
-Coverage tool:  {{ coverage_tool }}              e.g., bashcov
+Framework:       {{ test_framework or "e.g., bats-core, shunit2" }}
+Linting:       {{ linter or "e.g., shellcheck" }}
+Coverage tool:  {{ coverage_tool or "e.g., bashcov" }}

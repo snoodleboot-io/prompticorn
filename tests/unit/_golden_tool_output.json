@@ -6,7 +6,7 @@
     ],
     [
       "CONVENTIONS.md",
-      "20961c9a4fc0898415376db0ab7ed8682cbd4249667b2e6567318f84339a5da5"
+      "eaaf22528de56854c5f955a01b1a8ac4bd188cdc726c468cc2f14207a2f19845"
     ]
   ],
   "aider::verbose": [
@@ -16,7 +16,7 @@
     ],
     [
       "CONVENTIONS.md",
-      "20961c9a4fc0898415376db0ab7ed8682cbd4249667b2e6567318f84339a5da5"
+      "eaaf22528de56854c5f955a01b1a8ac4bd188cdc726c468cc2f14207a2f19845"
     ]
   ],
   "amazonq::minimal": [
@@ -130,7 +130,7 @@
     ],
     [
       ".amazonq/rules/conventions-python.md",
-      "048c0fde93c99441a153cffb32c56fdc12d724ee706a61110caaee279bac13d9"
+      "26cb1e7886c59bcf6f28bd7d1e919acc90f80b4bcb0f2f43eadca3744af214f4"
     ],
     [
       ".amazonq/rules/conventions.md",
@@ -248,7 +248,7 @@
     ],
     [
       ".amazonq/rules/conventions-python.md",
-      "048c0fde93c99441a153cffb32c56fdc12d724ee706a61110caaee279bac13d9"
+      "26cb1e7886c59bcf6f28bd7d1e919acc90f80b4bcb0f2f43eadca3744af214f4"
     ],
     [
       ".amazonq/rules/conventions.md",
@@ -318,7 +318,7 @@
     ],
     [
       ".claude/conventions/languages/python.md",
-      "048c0fde93c99441a153cffb32c56fdc12d724ee706a61110caaee279bac13d9"
+      "26cb1e7886c59bcf6f28bd7d1e919acc90f80b4bcb0f2f43eadca3744af214f4"
     ],
     [
       ".claude/skills/architecture-documentation/SKILL.md",
@@ -716,7 +716,7 @@
     ],
     [
       ".claude/conventions/languages/python.md",
-      "048c0fde93c99441a153cffb32c56fdc12d724ee706a61110caaee279bac13d9"
+      "26cb1e7886c59bcf6f28bd7d1e919acc90f80b4bcb0f2f43eadca3744af214f4"
     ],
     [
       ".claude/skills/architecture-documentation/SKILL.md",
@@ -1142,11 +1142,11 @@
     ],
     [
       ".clinerules",
-      "3a464cd23cc8f49320a5080b9f5a2edfca682e76b6f80da52c5ad0ecd3f6b147"
+      "132ab8d1987d1d0672724d284c420a0b7ea73cba646992ed03bb5a4a0a756627"
     ],
     [
       "AGENTS.md",
-      "76d3c57ca908077324c7cb37b809f06ac2f2c9b0a5d4738332c6122eabbfae01"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "cline::verbose": [
@@ -1240,11 +1240,11 @@
     ],
     [
       ".clinerules",
-      "3f63623d76c3170f1ca2fd7d3989316d7b72832da7ff84fa2c1fff3b26989151"
+      "6fd0c8dabb0db7bdc4640b490a169ed401f31c016b9665d800155a3e12e6d83f"
     ],
     [
       "AGENTS.md",
-      "76d3c57ca908077324c7cb37b809f06ac2f2c9b0a5d4738332c6122eabbfae01"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "codex::minimal": [
@@ -1398,7 +1398,7 @@
     ],
     [
       "AGENTS.md",
-      "76d3c57ca908077324c7cb37b809f06ac2f2c9b0a5d4738332c6122eabbfae01"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "codex::verbose": [
@@ -1552,7 +1552,7 @@
     ],
     [
       "AGENTS.md",
-      "76d3c57ca908077324c7cb37b809f06ac2f2c9b0a5d4738332c6122eabbfae01"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "continue::minimal": [
@@ -1626,7 +1626,7 @@
     ],
     [
       ".continue/rules/conventions-python.md",
-      "adad7fa5634735cd2c6ebbcd13696a41d6d22ec116690456568c1b6f353ca52c"
+      "f6feb2fd8119eeaa155d83e066cbc6cb49e1f7833cba2e788508b9d6fad7ffec"
     ],
     [
       ".continue/rules/debug.md",
@@ -1744,7 +1744,7 @@
     ],
     [
       ".continue/rules/conventions-python.md",
-      "adad7fa5634735cd2c6ebbcd13696a41d6d22ec116690456568c1b6f353ca52c"
+      "f6feb2fd8119eeaa155d83e066cbc6cb49e1f7833cba2e788508b9d6fad7ffec"
     ],
     [
       ".continue/rules/debug.md",
@@ -1850,7 +1850,7 @@
     ],
     [
       ".github/instructions/conventions-python.instructions.md",
-      "e4c9befa2c1f02e58994ae7662aa813cb8de6f5e7beb882c3b50a20811074740"
+      "a9427fd7d14ebea2d1041f70b58455ab44a80edc20e86381507e0175c8cc0f2d"
     ],
     [
       ".github/instructions/core.instructions.md",
@@ -1968,7 +1968,7 @@
     ],
     [
       ".github/instructions/conventions-python.instructions.md",
-      "e4c9befa2c1f02e58994ae7662aa813cb8de6f5e7beb882c3b50a20811074740"
+      "a9427fd7d14ebea2d1041f70b58455ab44a80edc20e86381507e0175c8cc0f2d"
     ],
     [
       ".github/instructions/core.instructions.md",
@@ -2030,7 +2030,7 @@
   "copilot::minimal": [
     [
       ".github/copilot-instructions.md",
-      "8a4b9d270ea260d15bee22c69be49007fcd954e49b77d45eeb9162ad1abfb6b1"
+      "306c72d9776dc87649ac31d8fc9580c19f6efe0124d921befd0434be08200e24"
     ],
     [
       ".github/skills/architecture-documentation.md",
@@ -2122,13 +2122,13 @@
     ],
     [
       "AGENTS.md",
-      "76d3c57ca908077324c7cb37b809f06ac2f2c9b0a5d4738332c6122eabbfae01"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "copilot::verbose": [
     [
       ".github/copilot-instructions.md",
-      "ca03d73177b949ccd4b1455d72e2d0a2e776d785e13bb06ffe2afa98512911fd"
+      "e17435f88d62bb527c8e265bd7a3d7e02937aa5d0c90168c7ab6b7abdff0ec1e"
     ],
     [
       ".github/skills/architecture-documentation.md",
@@ -2220,7 +2220,7 @@
     ],
     [
       "AGENTS.md",
-      "76d3c57ca908077324c7cb37b809f06ac2f2c9b0a5d4738332c6122eabbfae01"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "cursor::minimal": [
@@ -2314,11 +2314,11 @@
     ],
     [
       ".cursorrules",
-      "e407f98fe652e373505369ba10d89ae6fdede2c0b3f1e3ef47ad4aeddfbbb101"
+      "d013613891e4c7be2d760fdc23c6ed46ed09dfc38bdaf2757746cc11af21dc5b"
     ],
     [
       "AGENTS.md",
-      "76d3c57ca908077324c7cb37b809f06ac2f2c9b0a5d4738332c6122eabbfae01"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "cursor::verbose": [
@@ -2412,11 +2412,11 @@
     ],
     [
       ".cursorrules",
-      "a0d7fb18db1adf9284f911fc03c47d7ec8f2ca860747c7402a9b372044fc1982"
+      "e2d49cc0cd80bb9802277070badd21ebf043599512a3b096e2caaec6b07f3238"
     ],
     [
       "AGENTS.md",
-      "76d3c57ca908077324c7cb37b809f06ac2f2c9b0a5d4738332c6122eabbfae01"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "gemini::minimal": [
@@ -2622,7 +2622,7 @@
     ],
     [
       "AGENTS.md",
-      "76d3c57ca908077324c7cb37b809f06ac2f2c9b0a5d4738332c6122eabbfae01"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "gemini::verbose": [
@@ -2828,7 +2828,7 @@
     ],
     [
       "AGENTS.md",
-      "76d3c57ca908077324c7cb37b809f06ac2f2c9b0a5d4738332c6122eabbfae01"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "junie::minimal": [
@@ -3030,7 +3030,7 @@
     ],
     [
       "AGENTS.md",
-      "76d3c57ca908077324c7cb37b809f06ac2f2c9b0a5d4738332c6122eabbfae01"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "junie::verbose": [
@@ -3232,7 +3232,7 @@
     ],
     [
       "AGENTS.md",
-      "76d3c57ca908077324c7cb37b809f06ac2f2c9b0a5d4738332c6122eabbfae01"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "kilo-cli::minimal": [
@@ -3486,7 +3486,7 @@
     ],
     [
       ".kilo/rules/conventions-python.md",
-      "8de17c9797907ed4ebc955a4a0b1db35c21b6e14d08070362b2372c854e3683a"
+      "05b7a2a8b86eb4a27b27bb703e535c55b296d881bd5bda474bac6084c76e951d"
     ],
     [
       ".kilo/rules/conventions.md",
@@ -3598,7 +3598,7 @@
     ],
     [
       "AGENTS.md",
-      "76d3c57ca908077324c7cb37b809f06ac2f2c9b0a5d4738332c6122eabbfae01"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "kilo-cli::verbose": [
@@ -3852,7 +3852,7 @@
     ],
     [
       ".kilo/rules/conventions-python.md",
-      "8de17c9797907ed4ebc955a4a0b1db35c21b6e14d08070362b2372c854e3683a"
+      "05b7a2a8b86eb4a27b27bb703e535c55b296d881bd5bda474bac6084c76e951d"
     ],
     [
       ".kilo/rules/conventions.md",
@@ -3964,7 +3964,7 @@
     ],
     [
       "AGENTS.md",
-      "76d3c57ca908077324c7cb37b809f06ac2f2c9b0a5d4738332c6122eabbfae01"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "kilo-ide::minimal": [
@@ -4218,7 +4218,7 @@
     ],
     [
       ".kilo/rules/conventions-python.md",
-      "8de17c9797907ed4ebc955a4a0b1db35c21b6e14d08070362b2372c854e3683a"
+      "05b7a2a8b86eb4a27b27bb703e535c55b296d881bd5bda474bac6084c76e951d"
     ],
     [
       ".kilo/rules/conventions.md",
@@ -4330,7 +4330,7 @@
     ],
     [
       "AGENTS.md",
-      "76d3c57ca908077324c7cb37b809f06ac2f2c9b0a5d4738332c6122eabbfae01"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "kilo-ide::verbose": [
@@ -4584,7 +4584,7 @@
     ],
     [
       ".kilo/rules/conventions-python.md",
-      "8de17c9797907ed4ebc955a4a0b1db35c21b6e14d08070362b2372c854e3683a"
+      "05b7a2a8b86eb4a27b27bb703e535c55b296d881bd5bda474bac6084c76e951d"
     ],
     [
       ".kilo/rules/conventions.md",
@@ -4696,7 +4696,7 @@
     ],
     [
       "AGENTS.md",
-      "76d3c57ca908077324c7cb37b809f06ac2f2c9b0a5d4738332c6122eabbfae01"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "roo::minimal": [
@@ -4902,7 +4902,7 @@
     ],
     [
       "AGENTS.md",
-      "76d3c57ca908077324c7cb37b809f06ac2f2c9b0a5d4738332c6122eabbfae01"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "roo::verbose": [
@@ -5108,7 +5108,7 @@
     ],
     [
       "AGENTS.md",
-      "76d3c57ca908077324c7cb37b809f06ac2f2c9b0a5d4738332c6122eabbfae01"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "windsurf::minimal": [
@@ -5118,7 +5118,7 @@
     ],
     [
       ".windsurf/rules/conventions-python.md",
-      "3f8b1aa05dfe5eb6fcb7f0b420505a51f3b103da7932066c55ccee9558951947"
+      "f244dbf0b92deb57689c03d5699156f21db0a797a546a8670eded83c16949fdf"
     ],
     [
       ".windsurf/skills/architecture-documentation/SKILL.md",
@@ -5324,7 +5324,7 @@
     ],
     [
       ".windsurf/rules/conventions-python.md",
-      "3f8b1aa05dfe5eb6fcb7f0b420505a51f3b103da7932066c55ccee9558951947"
+      "f244dbf0b92deb57689c03d5699156f21db0a797a546a8670eded83c16949fdf"
     ],
     [
       ".windsurf/skills/architecture-documentation/SKILL.md",
@@ -5670,7 +5670,7 @@
     ],
     [
       "AGENTS.md",
-      "76d3c57ca908077324c7cb37b809f06ac2f2c9b0a5d4738332c6122eabbfae01"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ],
   "zed::verbose": [
@@ -5820,7 +5820,7 @@
     ],
     [
       "AGENTS.md",
-      "76d3c57ca908077324c7cb37b809f06ac2f2c9b0a5d4738332c6122eabbfae01"
+      "6f68e678fcf98aab08159e55adc2336b12ccf8f9cfd9e3c087e91aff5a19500a"
     ]
   ]
 }

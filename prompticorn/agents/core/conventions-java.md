@@ -2,11 +2,11 @@
 {%- import 'macros/testing_sections.jinja2' as testing -%}
 # Core Conventions Java
 
-Language:             {{ language }} e.g., Java 21
-Runtime:              {{ runtime }} e.g., JDK 21, OpenJDK
-Build tool:           {{ build_tool }} e.g., Maven, Gradle
-Linter:               {{ linter }} e.g., Checkstyle, SpotBugs
-Formatter:           {{ formatter }} e.g., Google Java Format, Spotless
+Language:             {{ language or "e.g., Java 21" }}
+Runtime:              {{ runtime or "e.g., JDK 21, OpenJDK" }}
+Build tool:           {{ build_tool or "e.g., Maven, Gradle" }}
+Linter:               {{ linter or "e.g., Checkstyle, SpotBugs" }}
+Formatter:           {{ formatter or "e.g., Google Java Format, Spotless" }}
 
 ### Naming Conventions
 

@@ -1,12 +1,12 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions-csharp.md -->
 # Core Conventions C#
 
-Language:             {{ language }} e.g., C# 12, .NET 8
-Runtime:              {{ runtime }} e.g., .NET 8, Mono
-Package Manager:      {{ package_manager }} e.g., NuGet, dotnet
-Linter:               {{ linter }} e.g., StyleCop, SonarLint
-Formatter:           {{ formatter }} e.g., dotnet format, ReSharper
-{% if framework %}Framework:            {{ framework }} e.g., ASP.NET Core, Blazor
+Language:             {{ language or "e.g., C# 12, .NET 8" }}
+Runtime:              {{ runtime or "e.g., .NET 8, Mono" }}
+Package Manager:      {{ package_manager or "e.g., NuGet, dotnet" }}
+Linter:               {{ linter or "e.g., StyleCop, SonarLint" }}
+Formatter:           {{ formatter or "e.g., dotnet format, ReSharper" }}
+{% if framework %}Framework:            {{ framework or "e.g., ASP.NET Core, Blazor" }}
 {% endif %}
 
 ### Naming Conventions
@@ -41,12 +41,12 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           {{ coverage_targets.get('line', '') }}          e.g., 80%
-Branch:         {{ coverage_targets.get('branch', '') }}        e.g., 70%
-Function:       {{ coverage_targets.get('function', '') }}       e.g., 90%
-Statement:      {{ coverage_targets.get('statement', '') }}      e.g., 85%
-Mutation:       {{ coverage_targets.get('mutation', '') }}       e.g., 80%
-Path:           {{ coverage_targets.get('path', '') }}           e.g., 60%
+Line:           {{ coverage_targets.get('line', '') or "e.g., 80%" }}
+Branch:         {{ coverage_targets.get('branch', '') or "e.g., 70%" }}
+Function:       {{ coverage_targets.get('function', '') or "e.g., 90%" }}
+Statement:      {{ coverage_targets.get('statement', '') or "e.g., 85%" }}
+Mutation:       {{ coverage_targets.get('mutation', '') or "e.g., 80%" }}
+Path:           {{ coverage_targets.get('path', '') or "e.g., 60%" }}
 
 #### Test Types
 
@@ -67,9 +67,9 @@ Path:           {{ coverage_targets.get('path', '') }}           e.g., 60%
 - Use BenchmarkDotNet for micro-benchmarks
 
 #### Framework & Tools
-Framework:       {{ test_framework }}        e.g., xUnit, NUnit, MSTest
-Mocking library: {{ mocking_library }}              e.g., Moq, NSubstitute
-Coverage tool:  {{ coverage_tool }}              e.g., Coverlet, dotnet-coverage
+Framework:       {{ test_framework or "e.g., xUnit, NUnit, MSTest" }}
+Mocking library: {{ mocking_library or "e.g., Moq, NSubstitute" }}
+Coverage tool:  {{ coverage_tool or "e.g., Coverlet, dotnet-coverage" }}
 
 #### Scaffolding
 

@@ -2,11 +2,11 @@
 {%- import 'macros/testing_sections.jinja2' as testing -%}
 # Core Conventions Ruby
 
-Language:             {{ language }} e.g., Ruby 3.3
-Runtime:              {{ runtime }} e.g., MRI, JRuby
-Package Manager:      {{ package_manager }} e.g., Bundler
-Linter:               {{ linter }} e.g., RuboCop
-Formatter:           {{ formatter }} e.g., Rufo, RuboCop
+Language:             {{ language or "e.g., Ruby 3.3" }}
+Runtime:              {{ runtime or "e.g., MRI, JRuby" }}
+Package Manager:      {{ package_manager or "e.g., Bundler" }}
+Linter:               {{ linter or "e.g., RuboCop" }}
+Formatter:           {{ formatter or "e.g., Rufo, RuboCop" }}
 
 ### Naming Conventions
 

@@ -2,12 +2,12 @@
 {%- import 'macros/testing_sections.jinja2' as testing -%}
 # Core Conventions TypeScript
 
-Language:             {{ language }} e.g., TypeScript 5.x
-Runtime:              {{ runtime }} e.g., Node 20, Deno, Bun
-Package Manager:      {{ package_manager }} e.g., npm, pnpm, yarn
-Linter:               {{ linter }} e.g., ESLint
-Formatter:           {{ formatter }} e.g., Prettier
-{% if framework %}Framework:            {{ framework }} e.g., React, Next.js, Express
+Language:             {{ language or "e.g., TypeScript 5.x" }}
+Runtime:              {{ runtime or "e.g., Node 20, Deno, Bun" }}
+Package Manager:      {{ package_manager or "e.g., npm, pnpm, yarn" }}
+Linter:               {{ linter or "e.g., ESLint" }}
+Formatter:           {{ formatter or "e.g., Prettier" }}
+{% if framework %}Framework:            {{ framework or "e.g., React, Next.js, Express" }}
 {% endif %}
 
 ### Naming Conventions

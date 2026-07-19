@@ -1,11 +1,11 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions-objc.md -->
 # Core Conventions Objective-C
 
-Language:             {{ language }} e.g., Objective-C
-Runtime:              {{ runtime }} e.g., macOS, iOS
-Package Manager:      {{ package_manager }} e.g., CocoaPods, Carthage
-Linter:               {{ linter }} e.g., clang-tidy
-Formatter:           {{ formatter }} e.g., clang-format
+Language:             {{ language or "e.g., Objective-C" }}
+Runtime:              {{ runtime or "e.g., macOS, iOS" }}
+Package Manager:      {{ package_manager or "e.g., CocoaPods, Carthage" }}
+Linter:               {{ linter or "e.g., clang-tidy" }}
+Formatter:           {{ formatter or "e.g., clang-format" }}
 
 ### Naming Conventions
 
@@ -37,15 +37,15 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           {{ coverage_targets.get('line', '') }}          e.g., 80%
-Branch:         {{ coverage_targets.get('branch', '') }}        e.g., 70%
-Function:       {{ coverage_targets.get('function', '') }}       e.g., 90%
+Line:           {{ coverage_targets.get('line', '') or "e.g., 80%" }}
+Branch:         {{ coverage_targets.get('branch', '') or "e.g., 70%" }}
+Function:       {{ coverage_targets.get('function', '') or "e.g., 90%" }}
 
 #### Test Types
 - Use XCTest for testing
 - Use OCMock for mocking
 
 #### Framework & Tools
-Framework:       {{ test_framework }}        e.g., XCTest
-Mocking:        {{ mocking_library }}              e.g., OCMock
-Coverage tool:  {{ coverage_tool }}              e.g., Xcode coverage
+Framework:       {{ test_framework or "e.g., XCTest" }}
+Mocking:        {{ mocking_library or "e.g., OCMock" }}
+Coverage tool:  {{ coverage_tool or "e.g., Xcode coverage" }}

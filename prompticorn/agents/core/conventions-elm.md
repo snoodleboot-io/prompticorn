@@ -1,11 +1,11 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions-elm.md -->
 # Core Conventions Elm
 
-Language:             {{ language }} e.g., Elm 0.19
-Runtime:              {{ runtime }} e.g., Browser, Node.js
-Package Manager:      {{ package_manager }} e.g., elm
-Linter:               {{ linter }} e.g., elm-format, elm-review
-Formatter:           {{ formatter }} e.g., elm-format
+Language:             {{ language or "e.g., Elm 0.19" }}
+Runtime:              {{ runtime or "e.g., Browser, Node.js" }}
+Package Manager:      {{ package_manager or "e.g., elm" }}
+Linter:               {{ linter or "e.g., elm-format, elm-review" }}
+Formatter:           {{ formatter or "e.g., elm-format" }}
 
 ### Naming Conventions
 
@@ -39,11 +39,11 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           {{ coverage_targets.get('line', '') }}          e.g., 80%
-Branch:         {{ coverage_targets.get('branch', '') }}        e.g., 70%
-Function:       {{ coverage_targets.get('function', '') }}       e.g., 90%
-Statement:      {{ coverage_targets.get('statement', '') }}      e.g., 85%
-Path:           {{ coverage_targets.get('path', '') }}           e.g., 60%
+Line:           {{ coverage_targets.get('line', '') or "e.g., 80%" }}
+Branch:         {{ coverage_targets.get('branch', '') or "e.g., 70%" }}
+Function:       {{ coverage_targets.get('function', '') or "e.g., 90%" }}
+Statement:      {{ coverage_targets.get('statement', '') or "e.g., 85%" }}
+Path:           {{ coverage_targets.get('path', '') or "e.g., 60%" }}
 
 #### Test Types
 
@@ -57,9 +57,9 @@ Path:           {{ coverage_targets.get('path', '') }}           e.g., 60%
 - Use fuzz testing with elm-test
 
 #### Framework & Tools
-Framework:       {{ test_framework }}        e.g., elm-test
+Framework:       {{ test_framework or "e.g., elm-test" }}
 Fuzz tool:                  e.g., elm-test (built-in)
-Coverage tool:  {{ coverage_tool }}              e.g., elm-coverage
+Coverage tool:  {{ coverage_tool or "e.g., elm-coverage" }}
 
 #### Scaffolding
 

@@ -1,12 +1,12 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions-fsharp.md -->
 # Core Conventions F
 
-Language:             {{ language }} e.g., F# 7.0
-Runtime:              {{ runtime }} e.g., .NET 8
-Package Manager:      {{ package_manager }} e.g., NuGet, dotnet
-Linter:               {{ linter }} e.g., Fantomas
-Formatter:           {{ formatter }} e.g., Fantomas
-{% if framework %}Framework:            {{ framework }} e.g., Giraffe, Saturn, Fable
+Language:             {{ language or "e.g., F# 7.0" }}
+Runtime:              {{ runtime or "e.g., .NET 8" }}
+Package Manager:      {{ package_manager or "e.g., NuGet, dotnet" }}
+Linter:               {{ linter or "e.g., Fantomas" }}
+Formatter:           {{ formatter or "e.g., Fantomas" }}
+{% if framework %}Framework:            {{ framework or "e.g., Giraffe, Saturn, Fable" }}
 {% endif %}
 
 ### Naming Conventions
@@ -35,5 +35,5 @@ Environment vars:   UPPER_SNAKE_CASE always
 - Use pipe operator
 
 ### Testing
-Framework:       {{ test_framework }}        e.g., NUnit, xUnit, Expecto
-Coverage tool:  {{ coverage_tool }}              e.g., Coverlet
+Framework:       {{ test_framework or "e.g., NUnit, xUnit, Expecto" }}
+Coverage tool:  {{ coverage_tool or "e.g., Coverlet" }}

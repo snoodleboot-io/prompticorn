@@ -1,11 +1,11 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions-groovy.md -->
 # Core Conventions Groovy
 
-Language:             {{ language }} e.g., Groovy 4.0
-Runtime:              {{ runtime }} e.g., JVM
-Package Manager:      {{ package_manager }} e.g., Gradle
-Linter:               {{ linter }} e.g., CodeNarc
-Formatter:           {{ formatter }} e.g., groovyfmt
+Language:             {{ language or "e.g., Groovy 4.0" }}
+Runtime:              {{ runtime or "e.g., JVM" }}
+Package Manager:      {{ package_manager or "e.g., Gradle" }}
+Linter:               {{ linter or "e.g., CodeNarc" }}
+Formatter:           {{ formatter or "e.g., groovyfmt" }}
 
 ### Naming Conventions
 
@@ -30,5 +30,5 @@ Environment vars:   UPPER_SNAKE_CASE always
 - Follow Groovy style guide
 
 ### Testing
-Framework:       {{ test_framework }}        e.g., Spock
-Coverage tool:  {{ coverage_tool }}              e.g., JaCoCo
+Framework:       {{ test_framework or "e.g., Spock" }}
+Coverage tool:  {{ coverage_tool or "e.g., JaCoCo" }}
