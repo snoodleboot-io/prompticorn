@@ -50,7 +50,10 @@ from prompticorn.questions.base.folder_spec import (
     FolderSpecRegistry,
 )
 from prompticorn.questions.base.repository_type_question import RepositoryTypeQuestion
-from prompticorn.questions.handlers.handle_single_language_questions import resolve_answer
+from prompticorn.questions.handlers.handle_single_language_questions import (
+    resolve_answer,
+    spec_key_for,
+)
 from prompticorn.questions.language import LANGUAGE_KEYS
 from prompticorn.tools import menu_explanations as tool_menu_explanations
 from prompticorn.tools import menu_options as tool_menu_options
@@ -314,7 +317,7 @@ def _ask_language_questions_for_folder(spec: dict[str, Any]) -> dict[str, Any]:
         )
 
         # Store the answer (resolving preset values like coverage targets)
-        spec[question.key] = resolve_answer(question, answer)
+        spec[spec_key_for(question, language)] = resolve_answer(question, answer)
 
     # Ask fungible (per-folder) questions keyed by this folder's type/subtype
     # (e.g. "backend/api"). These differ per workspace and surface the
@@ -337,7 +340,7 @@ def _ask_language_questions_for_folder(spec: dict[str, Any]) -> dict[str, Any]:
         )
 
         # Store the answer (resolving preset values like coverage targets)
-        spec[question.key] = resolve_answer(question, answer)
+        spec[spec_key_for(question, language)] = resolve_answer(question, answer)
 
     return spec
 
@@ -393,7 +396,7 @@ def _ask_folder_questions(folder_specs: list[dict[str, Any]]) -> list[dict[str, 
             )
 
             # Store the answer (resolving preset values like coverage targets)
-            spec[question.key] = resolve_answer(question, answer)
+            spec[spec_key_for(question, language)] = resolve_answer(question, answer)
 
         updated_specs.append(spec)
 

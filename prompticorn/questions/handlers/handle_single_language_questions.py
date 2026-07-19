@@ -36,6 +36,27 @@ def resolve_answer(question: Question, answer: Any) -> Any:
     return answer
 
 
+def spec_key_for(question: Question, language: str) -> str:
+    """Resolve the config-``spec`` key under which a question's answer is stored.
+
+    A question may declare an explicit ``config_key`` naming the spec field its
+    answer maps to (e.g. every ``*VersionQuestion`` declares ``config_key =
+    "runtime"``, and ``shell_type`` declares its own key so it does not collide
+    with the folder ``type``). When present it is authoritative. Otherwise the
+    ``<language>_`` prefix is stripped from the question key
+    (``python_linter`` -> ``linter``), matching the seeded spec field names.
+
+    Both the single-language and monorepo flows normalize through this one
+    function, so an answer can never be stored under a key no template reads
+    (the historical bugs: ``go_version`` -> ``version`` and monorepo storing the
+    raw ``python_linter`` key, both of which templates ignored).
+    """
+    config_key = getattr(question, "config_key", None)
+    if config_key:
+        return config_key
+    return question.key.replace(f"{language}_", "")
+
+
 class HandleSingleLanguageQuestions:
     """Handler for single-language repository questions.
 
@@ -106,8 +127,7 @@ class HandleSingleLanguageQuestions:
         # Ask each question in the pipeline
         for q in lang_questions:
             value = resolve_answer(q, self._ask_question(q, language))
-            config_key = q.key.replace(f"{language}_", "")
-            config["spec"][config_key] = value
+            config["spec"][spec_key_for(q, language)] = value
 
         return config
 
