@@ -30,5 +30,5 @@ Environment vars:   UPPER_SNAKE_CASE always
 - Follow Groovy style guide
 
 ### Testing
-Framework:       [Template variable]        e.g., Spock
-Coverage tool:  [Template variable]              e.g., JaCoCo
+Framework:       {{ test_framework }}        e.g., Spock
+Coverage tool:  {{ coverage_tool }}              e.g., JaCoCo

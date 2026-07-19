@@ -33,4 +33,4 @@ Environment vars:   UPPER_SNAKE_CASE always
 
 ### Testing
 Framework:       {{ test_framework }}        e.g., busted
-Coverage tool:  [Template variable]              e.g., luacov
+Coverage tool:  {{ coverage_tool }}              e.g., luacov

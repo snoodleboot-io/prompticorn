@@ -33,6 +33,6 @@ Environment vars:   UPPER_SNAKE_CASE always
 - Use meaningful names
 
 ### Testing
-Framework:       [Template variable]        e.g., clojure.test
-Property tool:   [Template variable]        e.g., test.check
-Coverage tool:  [Template variable]              e.g., cloverage
+Framework:       {{ test_framework }}        e.g., clojure.test
+Property tool:           e.g., test.check
+Coverage tool:  {{ coverage_tool }}              e.g., cloverage

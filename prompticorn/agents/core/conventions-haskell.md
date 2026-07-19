@@ -33,6 +33,6 @@ Environment vars:   UPPER_SNAKE_CASE always
 - Use hlint for linting
 
 ### Testing
-Framework:       [Template variable]        e.g., HSpec, QuickCheck
-Property tool:   [Template variable]        e.g., QuickCheck, Hedgehog
-Coverage tool:  [Template variable]              e.g., HPC
+Framework:       {{ test_framework }}        e.g., HSpec, QuickCheck
+Property tool:           e.g., QuickCheck, Hedgehog
+Coverage tool:  {{ coverage_tool }}              e.g., HPC

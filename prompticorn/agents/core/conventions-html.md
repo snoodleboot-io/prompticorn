@@ -2,7 +2,7 @@
 # Core Conventions HTML
 
 Language:             {{ language }} e.g., HTML5
-Version:              [Template variable]            e.g., HTML5, HTML4 Strict, XHTML5
+Version:              {{ runtime }}            e.g., HTML5, HTML4 Strict, XHTML5
 Formatter:           {{ formatter }} e.g., prettier, html-beautify, djLint
 Linter:               {{ linter }} e.g., htmlhint, W3C Validator
 
@@ -70,7 +70,7 @@ Environment vars:   UPPER_SNAKE_CASE always
 ## Validation
 
 Before committing HTML:
-1. Run through [Template variable]
+1. Run through 
 2. Validate with W3C validator
 3. Check accessibility with axe or similar tool
 4. Test in target browsers

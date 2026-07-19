@@ -37,15 +37,15 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           [Template variable]          e.g., 80%
-Branch:         [Template variable]        e.g., 70%
-Function:       [Template variable]       e.g., 90%
+Line:           {{ coverage_targets.get('line', '') }}          e.g., 80%
+Branch:         {{ coverage_targets.get('branch', '') }}        e.g., 70%
+Function:       {{ coverage_targets.get('function', '') }}       e.g., 90%
 
 #### Test Types
 - Use XCTest for testing
 - Use OCMock for mocking
 
 #### Framework & Tools
-Framework:       [Template variable]        e.g., XCTest
-Mocking:        [Template variable]              e.g., OCMock
-Coverage tool:  [Template variable]              e.g., Xcode coverage
+Framework:       {{ test_framework }}        e.g., XCTest
+Mocking:        {{ mocking_library }}              e.g., OCMock
+Coverage tool:  {{ coverage_tool }}              e.g., Xcode coverage

@@ -2,8 +2,8 @@
 # Core Conventions Terraform
 
 Language:             {{ language }} e.g., Terraform 1.6+
-Provider:             [Template variable]           e.g., AWS, Azure, GCP
-State:               [Template variable]      e.g., S3, Azure Blob, GCS
+Provider:                        e.g., AWS, Azure, GCP
+State:                     e.g., S3, Azure Blob, GCS
 
 ### Naming Conventions
 
@@ -35,9 +35,9 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           [Template variable]          e.g., 80%
-Branch:         [Template variable]        e.g., 70%
-Path:           [Template variable]           e.g., 60%
+Line:           {{ coverage_targets.get('line', '') }}          e.g., 80%
+Branch:         {{ coverage_targets.get('branch', '') }}        e.g., 70%
+Path:           {{ coverage_targets.get('path', '') }}           e.g., 60%
 
 #### Test Types
 
@@ -61,9 +61,9 @@ Path:           [Template variable]           e.g., 60%
 - Use examples for validation
 
 #### Framework & Tools
-Validation:    [Template variable]    e.g., terraform validate
-Linting:       [Template variable]           e.g., tflint, checkov
-Policy:        [Template variable]         e.g., Sentinel, Conftest, OPA
+Validation:        e.g., terraform validate
+Linting:       {{ linter }}           e.g., tflint, checkov
+Policy:                 e.g., Sentinel, Conftest, OPA
 
 #### Scaffolding
 

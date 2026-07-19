@@ -35,5 +35,5 @@ Environment vars:   UPPER_SNAKE_CASE always
 - Use pipe operator
 
 ### Testing
-Framework:       [Template variable]        e.g., NUnit, xUnit, Expecto
-Coverage tool:  [Template variable]              e.g., Coverlet
+Framework:       {{ test_framework }}        e.g., NUnit, xUnit, Expecto
+Coverage tool:  {{ coverage_tool }}              e.g., Coverlet

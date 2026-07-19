@@ -305,6 +305,21 @@ def test_output_has_no_unrendered_templates(tool, tmp_path):
     assert not offenders, f"{tool} emitted unrendered templates: {offenders}"
 
 
+def test_no_template_variable_placeholder_in_convention_sources():
+    """Guard (PRO-73): no convention ships the literal '[Template variable]'
+    placeholder. Unlike Jinja `{{ }}`, this literal survives rendering silently,
+    so it must be caught at the source."""
+    from pathlib import Path as _Path
+
+    core = _Path(__file__).parent.parent.parent / "prompticorn" / "agents" / "core"
+    offenders = [
+        p.name
+        for p in core.glob("conventions-*.md")
+        if "[Template variable]" in p.read_text(encoding="utf-8")
+    ]
+    assert not offenders, f"conventions still using the literal placeholder: {offenders}"
+
+
 def test_every_collected_key_is_accounted_for():
     """Guard: every key the flow stores in spec is either asserted-rendered
     (_SENTINELS) or explicitly classified as not-rendered (_KNOWN_NOT_RENDERED).

@@ -41,12 +41,12 @@ Environment vars:   UPPER_SNAKE_CASE always
 ### Testing
 
 #### Coverage Targets
-Line:           [Template variable]          e.g., 80%
-Branch:         [Template variable]        e.g., 70%
-Function:       [Template variable]       e.g., 90%
-Statement:      [Template variable]      e.g., 85%
-Mutation:       [Template variable]       e.g., 80%
-Path:           [Template variable]           e.g., 60%
+Line:           {{ coverage_targets.get('line', '') }}          e.g., 80%
+Branch:         {{ coverage_targets.get('branch', '') }}        e.g., 70%
+Function:       {{ coverage_targets.get('function', '') }}       e.g., 90%
+Statement:      {{ coverage_targets.get('statement', '') }}      e.g., 85%
+Mutation:       {{ coverage_targets.get('mutation', '') }}       e.g., 80%
+Path:           {{ coverage_targets.get('path', '') }}           e.g., 60%
 
 #### Test Types
 
@@ -68,8 +68,8 @@ Path:           [Template variable]           e.g., 60%
 
 #### Framework & Tools
 Framework:       {{ test_framework }}        e.g., xUnit, NUnit, MSTest
-Mocking library: [Template variable]              e.g., Moq, NSubstitute
-Coverage tool:  [Template variable]              e.g., Coverlet, dotnet-coverage
+Mocking library: {{ mocking_library }}              e.g., Moq, NSubstitute
+Coverage tool:  {{ coverage_tool }}              e.g., Coverlet, dotnet-coverage
 
 #### Scaffolding
 
