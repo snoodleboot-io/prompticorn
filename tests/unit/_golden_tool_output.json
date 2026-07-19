@@ -1146,7 +1146,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "cline::verbose": [
@@ -1244,7 +1244,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "codex::minimal": [
@@ -1398,7 +1398,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "codex::verbose": [
@@ -1552,7 +1552,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "continue::minimal": [
@@ -2122,7 +2122,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "copilot::verbose": [
@@ -2220,7 +2220,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "cursor::minimal": [
@@ -2318,7 +2318,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "cursor::verbose": [
@@ -2416,7 +2416,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "gemini::minimal": [
@@ -2622,7 +2622,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "gemini::verbose": [
@@ -2828,7 +2828,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "junie::minimal": [
@@ -3030,7 +3030,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "junie::verbose": [
@@ -3232,7 +3232,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "kilo-cli::minimal": [
@@ -3598,7 +3598,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "kilo-cli::verbose": [
@@ -3964,7 +3964,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "kilo-ide::minimal": [
@@ -4330,7 +4330,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "kilo-ide::verbose": [
@@ -4696,7 +4696,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "roo::minimal": [
@@ -4902,7 +4902,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "roo::verbose": [
@@ -5108,7 +5108,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "windsurf::minimal": [
@@ -5670,7 +5670,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ],
   "zed::verbose": [
@@ -5820,7 +5820,7 @@
     ],
     [
       "AGENTS.md",
-      "93709c4c15dd2a65c902885d3a40a49414fb1146c6d32bc8766d7909340e8e54"
+      "40e3f5554693c05b29ba98846e2eab01dbd7a039186d16a0bb728d7a730645e6"
     ]
   ]
 }

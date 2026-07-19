@@ -397,6 +397,7 @@ class PromptBuilder:
                         project=project,
                         primary_language=primary_spec.get("language", ""),
                         primary_spec=primary_spec,
+                        language_specs=selected_specs,
                     )
                     agents_md_path = output / "AGENTS.md"
                     agents_md_path.write_text(agents_md_content, encoding="utf-8")

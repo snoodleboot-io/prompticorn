@@ -61,10 +61,10 @@ _JINJA = re.compile(r"\{\{|\{%")
 # distinct builders/layouts, so all are exercised).
 _ALL_TOOLS = sorted(supported_tool_ids())
 
-# PRO-67: these tools emit only the *core* AGENTS.md convention and never a
-# per-language convention, so per-language spec values (runtime, linter, …)
-# never reach them. Round-trip is expected-fail until PRO-67 is resolved.
-_CORE_ONLY_TOOLS = {"codex", "gemini", "junie", "roo", "zed"}
+# PRO-67 (resolved): AGENTS.md-only tools now inline the per-language convention,
+# so per-language spec values reach them too. Kept as an (empty) seam so a future
+# regression on a specific tool can be pinned to a ticket here.
+_CORE_ONLY_TOOLS: set[str] = set()
 
 # PRO-72 (resolved): a post-write pass now resolves {{PRIMARY_AGENTS_LIST}} for
 # the IR-based builders, so no tool leaks it. Kept as an (empty) seam so a future
