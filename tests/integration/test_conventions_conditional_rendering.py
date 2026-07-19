@@ -37,15 +37,22 @@ class TestConventionsConditionalRendering(unittest.TestCase):
         with open(conventions_path) as f:
             self.conventions_content = f.read()
 
-        # Base variables required by the template (matching CoreFilesLoader._template_content)
+        # Base variables required by the template (matching CoreFilesLoader._template_content).
+        # Includes the testing-tool selections wired in PRO-69 so the template's
+        # "{% if test_runner ... %}" block resolves under StrictUndefined.
         self.base_variables = {
             "language": "python",
             "runtime": "3.11",
             "package_manager": "poetry",
             "test_framework": "pytest",
             "linter": "ruff",
+            "linters": "",
             "formatter": "ruff",
+            "test_runner": "",
+            "mocking_library": "",
             "coverage_tool": "pytest-cov",
+            "mutation_tool": "",
+            "framework": "",
             "coverage_targets": {},
         }
 
