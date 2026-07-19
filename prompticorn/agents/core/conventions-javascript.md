@@ -63,7 +63,7 @@ Path:           [Template variable]           e.g., 60%
 - Use `stryker-mutator` for JavaScript
 
 #### Framework & Tools
-Framework:       [Template variable]        e.g., Jest, Vitest, Mocha
+Framework:       {{ test_framework }}        e.g., Jest, Vitest, Mocha
 Mocking library: [Template variable]              e.g., jest-mock, sinon
 Coverage tool:  [Template variable]              e.g., Jest coverage, c8
 E2E tool:       [Template variable]             e.g., Playwright, Cypress

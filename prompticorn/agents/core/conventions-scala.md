@@ -59,7 +59,7 @@ Path:           [Template variable]           e.g., 60%
 - Use ScalaCheck for property-based testing
 
 #### Framework & Tools
-Framework:       [Template variable]        e.g., ScalaTest, MUnit, specs2
+Framework:       {{ test_framework }}        e.g., ScalaTest, MUnit, specs2
 Mocking:        [Template variable]              e.g., ScalaMock, Mockito
 Property tool:   [Template variable]        e.g., ScalaCheck
 Coverage tool:  [Template variable]              e.g., scoverage

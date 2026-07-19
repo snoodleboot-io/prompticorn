@@ -62,7 +62,7 @@ Path:           [Template variable]           e.g., 60%
 - Use PropCheck for property-based testing
 
 #### Framework & Tools
-Framework:       [Template variable]        e.g., ExUnit
+Framework:       {{ test_framework }}        e.g., ExUnit
 Mocking:        [Template variable]              e.g., Mox
 Property tool:   [Template variable]        e.g., PropCheck, StreamData
 Coverage tool:  [Template variable]              e.g., ExCoveralls

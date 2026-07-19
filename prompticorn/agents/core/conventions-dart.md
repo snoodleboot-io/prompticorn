@@ -44,6 +44,6 @@ Function:       [Template variable]       e.g., 90%
 - Use mockito for mocking
 
 #### Framework & Tools
-Framework:       [Template variable]        e.g., flutter_test, test
+Framework:       {{ test_framework }}        e.g., flutter_test, test
 Mocking:        [Template variable]              e.g., mockito
 Coverage tool:  [Template variable]              e.g., coverage

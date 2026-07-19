@@ -65,7 +65,7 @@ Path:           [Template variable]           e.g., 60%
 - Use BenchmarkDotNet for micro-benchmarks
 
 #### Framework & Tools
-Framework:       [Template variable]        e.g., xUnit, NUnit, MSTest
+Framework:       {{ test_framework }}        e.g., xUnit, NUnit, MSTest
 Mocking library: [Template variable]              e.g., Moq, NSubstitute
 Coverage tool:  [Template variable]              e.g., Coverlet, dotnet-coverage
 

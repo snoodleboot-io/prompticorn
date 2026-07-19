@@ -57,7 +57,7 @@ Statement:      [Template variable]      e.g., 85%
 - Use SwiftSnapshotTesting for visual testing
 
 #### Framework & Tools
-Framework:       [Template variable]        e.g., XCTest
+Framework:       {{ test_framework }}        e.g., XCTest
 Mocking:        [Template variable]              e.g., Mockingbird
 Coverage tool:  [Template variable]              e.g., Xcode coverage
 

@@ -59,7 +59,7 @@ Path:           [Template variable]           e.g., 60%
 - Use Pest or Laravel Dusk for browser testing
 
 #### Framework & Tools
-Framework:       [Template variable]        e.g., PHPUnit, Pest
+Framework:       {{ test_framework }}        e.g., PHPUnit, Pest
 Mocking:        [Template variable]              e.g., Mockery, PHP-Mock
 Coverage tool:  [Template variable]              e.g., Xdebug, PCOV
 

@@ -57,7 +57,7 @@ Path:           [Template variable]           e.g., 60%
 - Use fuzz testing with elm-test
 
 #### Framework & Tools
-Framework:       [Template variable]        e.g., elm-test
+Framework:       {{ test_framework }}        e.g., elm-test
 Fuzz tool:      [Template variable]            e.g., elm-test (built-in)
 Coverage tool:  [Template variable]              e.g., elm-coverage
 
