@@ -66,20 +66,10 @@ _ALL_TOOLS = sorted(supported_tool_ids())
 # never reach them. Round-trip is expected-fail until PRO-67 is resolved.
 _CORE_ONLY_TOOLS = {"codex", "gemini", "junie", "roo", "zed"}
 
-# PRO-72: these builders never run the PRIMARY_AGENTS_LIST substitution over
-# their emitted agent/skill files, so {{PRIMARY_AGENTS_LIST}} leaks. No-leak is
-# expected-fail until PRO-72 is resolved.
-_LEAK_TOOLS = {
-    "amazonq",
-    "codex",
-    "continue",
-    "copilot-chat",
-    "gemini",
-    "junie",
-    "roo",
-    "windsurf",
-    "zed",
-}
+# PRO-72 (resolved): a post-write pass now resolves {{PRIMARY_AGENTS_LIST}} for
+# the IR-based builders, so no tool leaks it. Kept as an (empty) seam so a future
+# leak regression on a specific tool can be pinned to a ticket here.
+_LEAK_TOOLS: set[str] = set()
 
 # Core per-language spec values that render as a literal value and so MUST reach
 # the output of any tool that emits a per-language convention. Each is given a

@@ -10,6 +10,7 @@ from prompticorn.builders.claude_md import generate_claude_md
 from prompticorn.builders.convention_generator import generate_all_conventions
 from prompticorn.builders.factory import BuilderFactory
 from prompticorn.builders.layouts import get_layout
+from prompticorn.builders.template_handlers.primary_agents_handler import PrimaryAgentsHandler
 from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
 from prompticorn.ir.loaders.language_skill_mapping_loader import LanguageSkillMappingLoader
 from prompticorn.ir.models.agent import Agent
@@ -412,7 +413,40 @@ class PromptBuilder:
             except Exception as e:
                 actions.append(f"⚠ Failed to finalize output: {e}")
 
+        # Resolve legacy {{PRIMARY_AGENTS_LIST}} in whatever files carry it. The
+        # IR-based builders (gemini/roo/zed/junie/codex/amazonq/windsurf/continue/
+        # copilot-chat) emit the orchestrator's system prompt and skill files
+        # verbatim, so unlike the Claude/Cline/Cursor/Copilot path they never run
+        # the substitution. Resolving here — after every file is written — covers
+        # agent, skill and workflow files uniformly and is a no-op for builders
+        # that already substituted (the token is gone). (PRO-72)
+        if not dry_run:
+            self._resolve_primary_agents_token(output, config)
+
         return actions
+
+    def _resolve_primary_agents_token(self, output: Path, config: dict[str, Any] | None) -> None:
+        """Replace any literal ``{{PRIMARY_AGENTS_LIST}}`` in emitted files.
+
+        Computes the list once (it depends on the config's active personas) and
+        rewrites only files that actually contain the token, via plain string
+        replacement — never a Jinja re-render, so literal ``{{ }}`` in code
+        examples is untouched.
+        """
+        token = "{{PRIMARY_AGENTS_LIST}}"
+        value: str | None = None
+        for path in output.rglob("*"):
+            if not path.is_file():
+                continue
+            try:
+                text = path.read_text(encoding="utf-8")
+            except (UnicodeDecodeError, OSError):
+                continue
+            if token not in text:
+                continue
+            if value is None:
+                value = PrimaryAgentsHandler().handle("PRIMARY_AGENTS_LIST", config or {})
+            path.write_text(text.replace(token, value), encoding="utf-8")
 
     def _filter_agent_for_language(
         self, agent: Agent, language: str | None, agent_name: str | None = None
