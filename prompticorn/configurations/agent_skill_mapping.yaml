@@ -21,6 +21,7 @@ architect:
     - data-model-discovery
     - feature-planning
     - mermaid-erd-creation
+    - nosql-database-selection
     - post-implementation-checklist
     - problem-decomposition
     - technical-communication
@@ -53,11 +54,15 @@ ask:
 # ============================================================================
 backend:
   skills:
+    - api-versioning-strategy
     - architecture-documentation
     - code-review-practices
     - data-model-discovery
     - data-validation-pipelines
+    - distributed-caching-design
+    - idempotency-patterns
     - incremental-implementation
+    - microservices-communication-patterns
     - performance-optimization
   workflows:
     - api-design
@@ -91,6 +96,7 @@ code:
 # ============================================================================
 compliance:
   skills:
+    - compliance-automation
     - documentation-best-practices
     - quality-assurance
     - technical-communication
@@ -106,9 +112,14 @@ data:
   skills:
     - architecture-documentation
     - data-model-discovery
+    - data-partitioning
     - data-validation-pipelines
     - data-versioning-reproducibility
+    - dimensional-modeling
     - feature-store-design
+    - nosql-database-selection
+    - slowly-changing-dimensions
+    - sql-optimization
   workflows:
     - data-model
     - data-quality-monitoring
@@ -122,6 +133,7 @@ debug:
   skills:
     - debugging-methodology
     - problem-decomposition
+    - root-cause-five-whys
     - technical-communication
   workflows:
     - debugging-methodology
@@ -133,8 +145,13 @@ debug:
 # ============================================================================
 devops:
   skills:
+    - container-security-hardening
     - continuous-improvement
+    - deployment-rollback-strategies
     - documentation-best-practices
+    - iac-best-practices
+    - infrastructure-drift-detection
+    - kubernetes-resource-management
     - technical-decision-making
   workflows:
     - dependency-scanning
@@ -188,8 +205,12 @@ explain:
 frontend:
   skills:
     - code-review-practices
+    - component-design-systems
+    - css-performance-optimization
     - incremental-implementation
     - performance-optimization
+    - responsive-design-patterns
+    - state-management-architecture
     - testing-strategies
   workflows:
     - accessibility
@@ -204,7 +225,10 @@ incident:
   skills:
     - continuous-improvement
     - debugging-methodology
+    - incident-automation
+    - incident-timeline-creation
     - problem-decomposition
+    - root-cause-five-whys
     - technical-communication
   workflows:
     - incident-response-security
@@ -238,12 +262,16 @@ mlai:
     - data-versioning-reproducibility
     - dimensionality-reduction
     - ensemble-methods
+    - feature-engineering
     - feature-importance-analysis
     - feature-store-design
     - hyperparameter-optimization
     - imbalanced-classification
+    - ml-deployment
     - mlops-pipeline-design
+    - model-evaluation
     - model-interpretability
+    - model-monitoring
     - model-performance-debugging
     - time-series-preprocessing
   workflows:
@@ -267,7 +295,11 @@ observability:
     - anomaly-detection-techniques
     - continuous-improvement
     - debugging-methodology
+    - distributed-tracing-instrumentation
+    - grafana-dashboard-design
     - performance-optimization
+    - prometheus-query-patterns
+    - slo-sli-definition
   workflows:
     - analytics-setup
     - log-analysis
@@ -281,10 +313,10 @@ observability:
 orchestrator:
   skills:
     - feature-planning
+    - multiagent-orchestration
     - problem-decomposition
     - team-collaboration
     - technical-decision-making
-    - multiagent-orchestration
   workflows:
     - meta
     - multi-agent-coordination
@@ -298,8 +330,10 @@ performance:
   skills:
     - continuous-improvement
     - debugging-methodology
+    - load-testing
     - performance-optimization
     - problem-decomposition
+    - sql-optimization
   workflows:
     - performance
     - workflow-performance-optimization
@@ -346,9 +380,12 @@ product:
 qa-tester:
   skills:
     - code-review-practices
+    - flaky-test-remediation
+    - mutation-testing
     - quality-assurance
     - test-aaa-structure
     - test-coverage-categories
+    - test-data-strategies
     - test-mocking-rules
     - testing-strategies
   workflows:
@@ -392,10 +429,14 @@ review:
 # ============================================================================
 security:
   skills:
+    - api-security
     - code-review-practices
+    - container-security-hardening
+    - key-management
     - problem-decomposition
     - quality-assurance
     - technical-decision-making
+    - threat-modeling
   workflows:
     - penetration-testing-guide
     - security-code-review
@@ -410,10 +451,14 @@ security:
 # ============================================================================
 test:
   skills:
+    - flaky-test-remediation
     - incremental-implementation
+    - load-testing
+    - mutation-testing
     - quality-assurance
     - test-aaa-structure
     - test-coverage-categories
+    - test-data-strategies
     - test-mocking-rules
     - testing-strategies
   workflows:

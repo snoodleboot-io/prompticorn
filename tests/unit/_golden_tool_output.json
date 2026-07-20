@@ -262,7 +262,7 @@
     ],
     [
       ".claude/agents/backend-agent.md",
-      "6de9b3c820c4b09da77367df1a41ee57a729686169bb54ceaa590f65a4c1f6f2"
+      "2f5241f7bb501a2b557c564aa0cabfa55862afc40344bc88bb6e684dcd75a68d"
     ],
     [
       ".claude/agents/code-agent.md",
@@ -270,7 +270,7 @@
     ],
     [
       ".claude/agents/debug-agent.md",
-      "5de80b4d434fd58dcde1353258ea9d472e0069213839187b94465fb38cb31d2a"
+      "1edfe78a264707188fa9260084993dd55676bcf5774f15ee54b088c8c2817d82"
     ],
     [
       ".claude/agents/enforcement-agent.md",
@@ -282,7 +282,7 @@
     ],
     [
       ".claude/agents/frontend-agent.md",
-      "b14eea8d004aaa44d62751595ed2010a7b791e507606cebc1902e4909ea36213"
+      "b024fcaebdbb03e48653ca4e08e29640e418ef9731ff6073b27fe4b22da11ad0"
     ],
     [
       ".claude/agents/migration-agent.md",
@@ -290,11 +290,11 @@
     ],
     [
       ".claude/agents/orchestrator-agent.md",
-      "61f8e02ccced3704479cd3b6a0598161bf6dc62bb8c213581378b90c6a18de66"
+      "f10167013415c64178e7c0e4fb8be4a4d433d93b2d3fb6a282faeb36a0f868bb"
     ],
     [
       ".claude/agents/performance-agent.md",
-      "e15fb7ebe4703c85c8aadf72f653cc151a69531f304959cd0c13c2dd5fd80b30"
+      "b3629fa0a2963be22680adc33c1ed9c56916f3cdea0be926fa50c68237f8e468"
     ],
     [
       ".claude/agents/plan-agent.md",
@@ -310,7 +310,7 @@
     ],
     [
       ".claude/agents/test-agent.md",
-      "0b7c50cb1742c6c68adecea71554d4f04bd4defef131ad248589fa022a1f39ca"
+      "5ed427b49f16bb5231cc0b373af4aac919943b7fdca4f5ea46dcd5f16c8fdc46"
     ],
     [
       ".claude/conventions/core/general.md",
@@ -321,6 +321,10 @@
       "26cb1e7886c59bcf6f28bd7d1e919acc90f80b4bcb0f2f43eadca3744af214f4"
     ],
     [
+      ".claude/skills/api-versioning-strategy/SKILL.md",
+      "062a339a10c5df713eae0561b016be7c2c8a5b6c14d974d932e3d5802344f8c6"
+    ],
+    [
       ".claude/skills/architecture-documentation/SKILL.md",
       "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
     ],
@@ -329,8 +333,20 @@
       "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
     ],
     [
+      ".claude/skills/component-design-systems/SKILL.md",
+      "1bb0df66ef6171502653a5e772be74936770dacc19032bebb6d60b99a7c28132"
+    ],
+    [
+      ".claude/skills/container-security-hardening/SKILL.md",
+      "f001021179851705430635206e964b9682cd643b69b4daf5fa6514d66f326482"
+    ],
+    [
       ".claude/skills/continuous-improvement/SKILL.md",
       "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+    ],
+    [
+      ".claude/skills/css-performance-optimization/SKILL.md",
+      "1baec4f80a3a53a084784c645c755c49272d18e1542040715dfe702836037d12"
     ],
     [
       ".claude/skills/data-model-discovery/SKILL.md",
@@ -345,6 +361,14 @@
       "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
     ],
     [
+      ".claude/skills/deployment-rollback-strategies/SKILL.md",
+      "d2395d14a3c4a3535206ea9f9a65913d332bbb5867ebfc81beacb1a255c66852"
+    ],
+    [
+      ".claude/skills/distributed-caching-design/SKILL.md",
+      "7be0a0c2fa17608a61687445b80fa3329a72b2036cfe6b9ec2590aa18cdd517e"
+    ],
+    [
       ".claude/skills/documentation-best-practices/SKILL.md",
       "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
     ],
@@ -353,12 +377,44 @@
       "a85d09f78dec318635b4de95f1202d3443fb9e67b9b320237572df0aa6425454"
     ],
     [
+      ".claude/skills/flaky-test-remediation/SKILL.md",
+      "af38d1eae88a45994293b7ecb1e2995174a830e032b182735ef91603b0ef775c"
+    ],
+    [
+      ".claude/skills/iac-best-practices/SKILL.md",
+      "4db8feb77b490eea6dd52374637923448a3ae6f27c138d6c996880407c5a096b"
+    ],
+    [
+      ".claude/skills/idempotency-patterns/SKILL.md",
+      "82bb636d4307a3938351e759fda7b6e82fe194b391a683ad1460c203be5d3ddf"
+    ],
+    [
       ".claude/skills/incremental-implementation/SKILL.md",
       "c8db9858e7b72b9f941e9038d15d04503ebf60c51462e3a71367903f3c8e5063"
     ],
     [
+      ".claude/skills/infrastructure-drift-detection/SKILL.md",
+      "2d205cd017dc95f36f8312eae242d89545394bd38f8d6e865f87fd2ab13ef3f6"
+    ],
+    [
+      ".claude/skills/kubernetes-resource-management/SKILL.md",
+      "9e6838351778a507ea552e13f5ca5cf57198ac93c9575fca9676be1419ef04c4"
+    ],
+    [
+      ".claude/skills/load-testing/SKILL.md",
+      "19dfc3642b9f2aefe995d94709ecf5b34d0f1565661e6c22a0fe68ac90a81b58"
+    ],
+    [
+      ".claude/skills/microservices-communication-patterns/SKILL.md",
+      "8cc8e74218d5e09d2100d78553436b8344407ca72c73abebd28f264bab5b215d"
+    ],
+    [
       ".claude/skills/multiagent-orchestration/SKILL.md",
       "d6c940687cbd37a68a491a4303032bc90ac7b9dff01e2db84e1c451082aa26b9"
+    ],
+    [
+      ".claude/skills/mutation-testing/SKILL.md",
+      "72465156b7fd71cc5f721eb2f73012446073a4521c2811f27bc933e618911be2"
     ],
     [
       ".claude/skills/performance-optimization/SKILL.md",
@@ -375,6 +431,22 @@
     [
       ".claude/skills/quality-assurance/SKILL.md",
       "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+    ],
+    [
+      ".claude/skills/responsive-design-patterns/SKILL.md",
+      "105b708b213b2f13448a59ce5731a3ccc88d7a981725f31844d3da23eb6d4546"
+    ],
+    [
+      ".claude/skills/root-cause-five-whys/SKILL.md",
+      "3bf80710e90b704cea7bd09c12eac4ae55243c848973a444066a51d46b319fc2"
+    ],
+    [
+      ".claude/skills/sql-optimization/SKILL.md",
+      "3182fea02148ddc71c4dde630c633cc027defc4529f35c90bd0c9f2f8cd8d2cb"
+    ],
+    [
+      ".claude/skills/state-management-architecture/SKILL.md",
+      "bb5c379c9574566e3631a856e7ada4429cbb1e2b2839e5b48a2c94f1cb157e6a"
     ],
     [
       ".claude/skills/team-collaboration/SKILL.md",
@@ -399,6 +471,10 @@
     [
       ".claude/skills/test-coverage-categories/SKILL.md",
       "fa6fe18acd7a5bd3f899aa65ef3e00a541743f622de4e7ebfb09ff137101c954"
+    ],
+    [
+      ".claude/skills/test-data-strategies/SKILL.md",
+      "a0969a8e0ec0b50d59e0fb0e8ff9ffde8d4accd7321c484ded6fcb3050e31497"
     ],
     [
       ".claude/skills/test-mocking-rules/SKILL.md",
@@ -660,7 +736,7 @@
     ],
     [
       ".claude/agents/backend-agent.md",
-      "fa623b278d333efda43d5a0fe07805f6cd304c03ae23279fca706fce145a7bdb"
+      "ef9a1d84785da8abc8a125797e42d01a8279443118630ffaa9024390de7c8e5a"
     ],
     [
       ".claude/agents/code-agent.md",
@@ -668,7 +744,7 @@
     ],
     [
       ".claude/agents/debug-agent.md",
-      "5de80b4d434fd58dcde1353258ea9d472e0069213839187b94465fb38cb31d2a"
+      "1edfe78a264707188fa9260084993dd55676bcf5774f15ee54b088c8c2817d82"
     ],
     [
       ".claude/agents/enforcement-agent.md",
@@ -680,7 +756,7 @@
     ],
     [
       ".claude/agents/frontend-agent.md",
-      "3236b778ea84725ddda868fae5d3edc313d4cea087a6ade11c8b8231bf8eb404"
+      "98c5decbe12cea7364c4e28e80042ae2bb31fa57ca833e35254c3884bd3d014e"
     ],
     [
       ".claude/agents/migration-agent.md",
@@ -688,11 +764,11 @@
     ],
     [
       ".claude/agents/orchestrator-agent.md",
-      "047ddce5b343d704a09e04b0fb9b4ab77011a0be713b63d019a3ad9901399f88"
+      "c6bcbd59c4a60729f456e102d1c04ee82c3f4149880139d4db4188d22367b60f"
     ],
     [
       ".claude/agents/performance-agent.md",
-      "15e9dd5c3ec7d1ffcb65ed29e4682a54375243b370b57488461695aa9ef0d4a7"
+      "b2cc4a01159fcfd9c792624fc1ec0a18e76294665260b40a4c9f2e39b4f18888"
     ],
     [
       ".claude/agents/plan-agent.md",
@@ -708,7 +784,7 @@
     ],
     [
       ".claude/agents/test-agent.md",
-      "b7e15bde7402451ede803445c3ca0803ee3bb588d35d4ac9e24b6804810988d9"
+      "cc16843a4605ec17b92bc533e879ff757c676f9f641063cbb37ea0209fbc8432"
     ],
     [
       ".claude/conventions/core/general.md",
@@ -719,6 +795,10 @@
       "26cb1e7886c59bcf6f28bd7d1e919acc90f80b4bcb0f2f43eadca3744af214f4"
     ],
     [
+      ".claude/skills/api-versioning-strategy/SKILL.md",
+      "f9b26da1e18a83e0c968339e34963b0711cf45f29eeb611bddd894238427cdd5"
+    ],
+    [
       ".claude/skills/architecture-documentation/SKILL.md",
       "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
     ],
@@ -727,8 +807,20 @@
       "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
     ],
     [
+      ".claude/skills/component-design-systems/SKILL.md",
+      "cb1b1534cd89c9c7fd3ed283b8538bbf59ca7157a1853afd8f4aaee04cd27ab0"
+    ],
+    [
+      ".claude/skills/container-security-hardening/SKILL.md",
+      "c49b021220a4786e43da7781b593f2f9b46337e5dc659d39abaa612ca0b31cb8"
+    ],
+    [
       ".claude/skills/continuous-improvement/SKILL.md",
       "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+    ],
+    [
+      ".claude/skills/css-performance-optimization/SKILL.md",
+      "83cbc72812042b18330ec9f15091ffe74fb26ec38c602f19568d7180180b9c21"
     ],
     [
       ".claude/skills/data-model-discovery/SKILL.md",
@@ -743,6 +835,14 @@
       "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
     ],
     [
+      ".claude/skills/deployment-rollback-strategies/SKILL.md",
+      "ef50c407c99c7d6f1dd30a09132640bfe9553f717034cbd72f95eaf7406dfd56"
+    ],
+    [
+      ".claude/skills/distributed-caching-design/SKILL.md",
+      "31bf68b5dab3a5cc16898ac93fea538876da154d0af47e2b4cabdd0ddbf2abbf"
+    ],
+    [
       ".claude/skills/documentation-best-practices/SKILL.md",
       "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
     ],
@@ -751,12 +851,44 @@
       "3b43fa04f2823fcd2adc420ba1adc4989c3fe6d0a247f93f1d0e765f5ec971e6"
     ],
     [
+      ".claude/skills/flaky-test-remediation/SKILL.md",
+      "0f203482a5d6c7cc77f46048608a249a76dac379769d73a8dd96d2e6c209ea74"
+    ],
+    [
+      ".claude/skills/iac-best-practices/SKILL.md",
+      "e7da4e6302c09d36fc3338d73c70da71ab10c981e7ffdf7cc18f85e853a62810"
+    ],
+    [
+      ".claude/skills/idempotency-patterns/SKILL.md",
+      "cd4400973250e3bf2a04cb9f9022be57cb8c2d14f3eceff1834dadac316e9a68"
+    ],
+    [
       ".claude/skills/incremental-implementation/SKILL.md",
       "af8ee67d6925c3095724964a59a134d9725d5952bfa361cf5d7eef7e42ffbe6a"
     ],
     [
+      ".claude/skills/infrastructure-drift-detection/SKILL.md",
+      "ba399dc9d93bfa327975daf55aa74110c59f9a8271295af7d539024ac0989122"
+    ],
+    [
+      ".claude/skills/kubernetes-resource-management/SKILL.md",
+      "91e6789680fe120d88b80608b8d55786db82f77ecef82e8887f38a6ab6a72e0f"
+    ],
+    [
+      ".claude/skills/load-testing/SKILL.md",
+      "08abc06e211c4882fe857e1ba6678146955267fa23626540e996023953534629"
+    ],
+    [
+      ".claude/skills/microservices-communication-patterns/SKILL.md",
+      "6b6fe9f51433dddf2bc819abffffe271eab0edf0911793ac958575d395458193"
+    ],
+    [
       ".claude/skills/multiagent-orchestration/SKILL.md",
       "4f56926633e3b6527047e07041e415cbf0bc171ca9cfdf7fa0f99b8550a51705"
+    ],
+    [
+      ".claude/skills/mutation-testing/SKILL.md",
+      "7e9e0fa511d57b16686cde557bfb59362d3097f98afc8d5d6b13c53b41391476"
     ],
     [
       ".claude/skills/performance-optimization/SKILL.md",
@@ -773,6 +905,22 @@
     [
       ".claude/skills/quality-assurance/SKILL.md",
       "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+    ],
+    [
+      ".claude/skills/responsive-design-patterns/SKILL.md",
+      "96062773f1262500e9abcfb2ffe7b954be7e30d2bdcfbef64fd4872463ec9439"
+    ],
+    [
+      ".claude/skills/root-cause-five-whys/SKILL.md",
+      "f60365561f5c771b5e322cbbfc5f4880a5fcac4468654605282a6bce38d22baf"
+    ],
+    [
+      ".claude/skills/sql-optimization/SKILL.md",
+      "45dfb605b2d477fa6fc09636afe1fff5bdc529c716a87da4260ff01bb5c2275e"
+    ],
+    [
+      ".claude/skills/state-management-architecture/SKILL.md",
+      "c641a42a54da19f6c0bb5e96b566d1a25349029a9e494366c37f6562ccbec964"
     ],
     [
       ".claude/skills/team-collaboration/SKILL.md",
@@ -797,6 +945,10 @@
     [
       ".claude/skills/test-coverage-categories/SKILL.md",
       "2fdc372ca80ff46ba0df367a1c6d7751a0b367d4abcfc1d5113aa3718fee2d72"
+    ],
+    [
+      ".claude/skills/test-data-strategies/SKILL.md",
+      "fbe3c3bc61495dc614f8ca20b726ff8b8820479dc40248f38d607ee8050cef18"
     ],
     [
       ".claude/skills/test-mocking-rules/SKILL.md",
@@ -1053,6 +1205,10 @@
   ],
   "cline::minimal": [
     [
+      ".cline/skills/api-versioning-strategy/SKILL.md",
+      "062a339a10c5df713eae0561b016be7c2c8a5b6c14d974d932e3d5802344f8c6"
+    ],
+    [
       ".cline/skills/architecture-documentation/SKILL.md",
       "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
     ],
@@ -1061,8 +1217,20 @@
       "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
     ],
     [
+      ".cline/skills/component-design-systems/SKILL.md",
+      "1bb0df66ef6171502653a5e772be74936770dacc19032bebb6d60b99a7c28132"
+    ],
+    [
+      ".cline/skills/container-security-hardening/SKILL.md",
+      "f001021179851705430635206e964b9682cd643b69b4daf5fa6514d66f326482"
+    ],
+    [
       ".cline/skills/continuous-improvement/SKILL.md",
       "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+    ],
+    [
+      ".cline/skills/css-performance-optimization/SKILL.md",
+      "1baec4f80a3a53a084784c645c755c49272d18e1542040715dfe702836037d12"
     ],
     [
       ".cline/skills/data-model-discovery/SKILL.md",
@@ -1077,6 +1245,14 @@
       "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
     ],
     [
+      ".cline/skills/deployment-rollback-strategies/SKILL.md",
+      "d2395d14a3c4a3535206ea9f9a65913d332bbb5867ebfc81beacb1a255c66852"
+    ],
+    [
+      ".cline/skills/distributed-caching-design/SKILL.md",
+      "7be0a0c2fa17608a61687445b80fa3329a72b2036cfe6b9ec2590aa18cdd517e"
+    ],
+    [
       ".cline/skills/documentation-best-practices/SKILL.md",
       "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
     ],
@@ -1085,12 +1261,44 @@
       "a85d09f78dec318635b4de95f1202d3443fb9e67b9b320237572df0aa6425454"
     ],
     [
+      ".cline/skills/flaky-test-remediation/SKILL.md",
+      "af38d1eae88a45994293b7ecb1e2995174a830e032b182735ef91603b0ef775c"
+    ],
+    [
+      ".cline/skills/iac-best-practices/SKILL.md",
+      "4db8feb77b490eea6dd52374637923448a3ae6f27c138d6c996880407c5a096b"
+    ],
+    [
+      ".cline/skills/idempotency-patterns/SKILL.md",
+      "82bb636d4307a3938351e759fda7b6e82fe194b391a683ad1460c203be5d3ddf"
+    ],
+    [
       ".cline/skills/incremental-implementation/SKILL.md",
       "c8db9858e7b72b9f941e9038d15d04503ebf60c51462e3a71367903f3c8e5063"
     ],
     [
+      ".cline/skills/infrastructure-drift-detection/SKILL.md",
+      "2d205cd017dc95f36f8312eae242d89545394bd38f8d6e865f87fd2ab13ef3f6"
+    ],
+    [
+      ".cline/skills/kubernetes-resource-management/SKILL.md",
+      "9e6838351778a507ea552e13f5ca5cf57198ac93c9575fca9676be1419ef04c4"
+    ],
+    [
+      ".cline/skills/load-testing/SKILL.md",
+      "19dfc3642b9f2aefe995d94709ecf5b34d0f1565661e6c22a0fe68ac90a81b58"
+    ],
+    [
+      ".cline/skills/microservices-communication-patterns/SKILL.md",
+      "8cc8e74218d5e09d2100d78553436b8344407ca72c73abebd28f264bab5b215d"
+    ],
+    [
       ".cline/skills/multiagent-orchestration/SKILL.md",
       "d6c940687cbd37a68a491a4303032bc90ac7b9dff01e2db84e1c451082aa26b9"
+    ],
+    [
+      ".cline/skills/mutation-testing/SKILL.md",
+      "72465156b7fd71cc5f721eb2f73012446073a4521c2811f27bc933e618911be2"
     ],
     [
       ".cline/skills/performance-optimization/SKILL.md",
@@ -1107,6 +1315,22 @@
     [
       ".cline/skills/quality-assurance/SKILL.md",
       "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+    ],
+    [
+      ".cline/skills/responsive-design-patterns/SKILL.md",
+      "105b708b213b2f13448a59ce5731a3ccc88d7a981725f31844d3da23eb6d4546"
+    ],
+    [
+      ".cline/skills/root-cause-five-whys/SKILL.md",
+      "3bf80710e90b704cea7bd09c12eac4ae55243c848973a444066a51d46b319fc2"
+    ],
+    [
+      ".cline/skills/sql-optimization/SKILL.md",
+      "3182fea02148ddc71c4dde630c633cc027defc4529f35c90bd0c9f2f8cd8d2cb"
+    ],
+    [
+      ".cline/skills/state-management-architecture/SKILL.md",
+      "bb5c379c9574566e3631a856e7ada4429cbb1e2b2839e5b48a2c94f1cb157e6a"
     ],
     [
       ".cline/skills/team-collaboration/SKILL.md",
@@ -1133,6 +1357,10 @@
       "fa6fe18acd7a5bd3f899aa65ef3e00a541743f622de4e7ebfb09ff137101c954"
     ],
     [
+      ".cline/skills/test-data-strategies/SKILL.md",
+      "a0969a8e0ec0b50d59e0fb0e8ff9ffde8d4accd7321c484ded6fcb3050e31497"
+    ],
+    [
       ".cline/skills/test-mocking-rules/SKILL.md",
       "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec"
     ],
@@ -1142,7 +1370,7 @@
     ],
     [
       ".clinerules",
-      "132ab8d1987d1d0672724d284c420a0b7ea73cba646992ed03bb5a4a0a756627"
+      "3bba4ffb82088861f958cb391df5954e28ebc9a7f5309b789a86b16608d002ed"
     ],
     [
       "AGENTS.md",
@@ -1150,6 +1378,10 @@
     ]
   ],
   "cline::verbose": [
+    [
+      ".cline/skills/api-versioning-strategy/SKILL.md",
+      "f9b26da1e18a83e0c968339e34963b0711cf45f29eeb611bddd894238427cdd5"
+    ],
     [
       ".cline/skills/architecture-documentation/SKILL.md",
       "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
@@ -1159,8 +1391,20 @@
       "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
     ],
     [
+      ".cline/skills/component-design-systems/SKILL.md",
+      "cb1b1534cd89c9c7fd3ed283b8538bbf59ca7157a1853afd8f4aaee04cd27ab0"
+    ],
+    [
+      ".cline/skills/container-security-hardening/SKILL.md",
+      "c49b021220a4786e43da7781b593f2f9b46337e5dc659d39abaa612ca0b31cb8"
+    ],
+    [
       ".cline/skills/continuous-improvement/SKILL.md",
       "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+    ],
+    [
+      ".cline/skills/css-performance-optimization/SKILL.md",
+      "83cbc72812042b18330ec9f15091ffe74fb26ec38c602f19568d7180180b9c21"
     ],
     [
       ".cline/skills/data-model-discovery/SKILL.md",
@@ -1175,6 +1419,14 @@
       "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
     ],
     [
+      ".cline/skills/deployment-rollback-strategies/SKILL.md",
+      "ef50c407c99c7d6f1dd30a09132640bfe9553f717034cbd72f95eaf7406dfd56"
+    ],
+    [
+      ".cline/skills/distributed-caching-design/SKILL.md",
+      "31bf68b5dab3a5cc16898ac93fea538876da154d0af47e2b4cabdd0ddbf2abbf"
+    ],
+    [
       ".cline/skills/documentation-best-practices/SKILL.md",
       "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
     ],
@@ -1183,12 +1435,44 @@
       "3b43fa04f2823fcd2adc420ba1adc4989c3fe6d0a247f93f1d0e765f5ec971e6"
     ],
     [
+      ".cline/skills/flaky-test-remediation/SKILL.md",
+      "0f203482a5d6c7cc77f46048608a249a76dac379769d73a8dd96d2e6c209ea74"
+    ],
+    [
+      ".cline/skills/iac-best-practices/SKILL.md",
+      "e7da4e6302c09d36fc3338d73c70da71ab10c981e7ffdf7cc18f85e853a62810"
+    ],
+    [
+      ".cline/skills/idempotency-patterns/SKILL.md",
+      "cd4400973250e3bf2a04cb9f9022be57cb8c2d14f3eceff1834dadac316e9a68"
+    ],
+    [
       ".cline/skills/incremental-implementation/SKILL.md",
       "af8ee67d6925c3095724964a59a134d9725d5952bfa361cf5d7eef7e42ffbe6a"
     ],
     [
+      ".cline/skills/infrastructure-drift-detection/SKILL.md",
+      "ba399dc9d93bfa327975daf55aa74110c59f9a8271295af7d539024ac0989122"
+    ],
+    [
+      ".cline/skills/kubernetes-resource-management/SKILL.md",
+      "91e6789680fe120d88b80608b8d55786db82f77ecef82e8887f38a6ab6a72e0f"
+    ],
+    [
+      ".cline/skills/load-testing/SKILL.md",
+      "08abc06e211c4882fe857e1ba6678146955267fa23626540e996023953534629"
+    ],
+    [
+      ".cline/skills/microservices-communication-patterns/SKILL.md",
+      "6b6fe9f51433dddf2bc819abffffe271eab0edf0911793ac958575d395458193"
+    ],
+    [
       ".cline/skills/multiagent-orchestration/SKILL.md",
       "4f56926633e3b6527047e07041e415cbf0bc171ca9cfdf7fa0f99b8550a51705"
+    ],
+    [
+      ".cline/skills/mutation-testing/SKILL.md",
+      "7e9e0fa511d57b16686cde557bfb59362d3097f98afc8d5d6b13c53b41391476"
     ],
     [
       ".cline/skills/performance-optimization/SKILL.md",
@@ -1205,6 +1489,22 @@
     [
       ".cline/skills/quality-assurance/SKILL.md",
       "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+    ],
+    [
+      ".cline/skills/responsive-design-patterns/SKILL.md",
+      "96062773f1262500e9abcfb2ffe7b954be7e30d2bdcfbef64fd4872463ec9439"
+    ],
+    [
+      ".cline/skills/root-cause-five-whys/SKILL.md",
+      "f60365561f5c771b5e322cbbfc5f4880a5fcac4468654605282a6bce38d22baf"
+    ],
+    [
+      ".cline/skills/sql-optimization/SKILL.md",
+      "45dfb605b2d477fa6fc09636afe1fff5bdc529c716a87da4260ff01bb5c2275e"
+    ],
+    [
+      ".cline/skills/state-management-architecture/SKILL.md",
+      "c641a42a54da19f6c0bb5e96b566d1a25349029a9e494366c37f6562ccbec964"
     ],
     [
       ".cline/skills/team-collaboration/SKILL.md",
@@ -1231,6 +1531,10 @@
       "2fdc372ca80ff46ba0df367a1c6d7751a0b367d4abcfc1d5113aa3718fee2d72"
     ],
     [
+      ".cline/skills/test-data-strategies/SKILL.md",
+      "fbe3c3bc61495dc614f8ca20b726ff8b8820479dc40248f38d607ee8050cef18"
+    ],
+    [
       ".cline/skills/test-mocking-rules/SKILL.md",
       "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e"
     ],
@@ -1240,7 +1544,7 @@
     ],
     [
       ".clinerules",
-      "6fd0c8dabb0db7bdc4640b490a169ed401f31c016b9665d800155a3e12e6d83f"
+      "c7e5498dfe4c1dce1c965c1d2b51ef4c9a3dd369feff14490c2173b73bf34507"
     ],
     [
       "AGENTS.md",
@@ -1248,6 +1552,10 @@
     ]
   ],
   "codex::minimal": [
+    [
+      ".agents/skills/api-versioning-strategy/SKILL.md",
+      "062a339a10c5df713eae0561b016be7c2c8a5b6c14d974d932e3d5802344f8c6"
+    ],
     [
       ".agents/skills/architecture-documentation/SKILL.md",
       "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
@@ -1269,8 +1577,20 @@
       "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
     ],
     [
+      ".agents/skills/component-design-systems/SKILL.md",
+      "1bb0df66ef6171502653a5e772be74936770dacc19032bebb6d60b99a7c28132"
+    ],
+    [
+      ".agents/skills/container-security-hardening/SKILL.md",
+      "f001021179851705430635206e964b9682cd643b69b4daf5fa6514d66f326482"
+    ],
+    [
       ".agents/skills/continuous-improvement/SKILL.md",
       "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+    ],
+    [
+      ".agents/skills/css-performance-optimization/SKILL.md",
+      "1baec4f80a3a53a084784c645c755c49272d18e1542040715dfe702836037d12"
     ],
     [
       ".agents/skills/data-model-discovery/SKILL.md",
@@ -1289,6 +1609,14 @@
       "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
     ],
     [
+      ".agents/skills/deployment-rollback-strategies/SKILL.md",
+      "d2395d14a3c4a3535206ea9f9a65913d332bbb5867ebfc81beacb1a255c66852"
+    ],
+    [
+      ".agents/skills/distributed-caching-design/SKILL.md",
+      "7be0a0c2fa17608a61687445b80fa3329a72b2036cfe6b9ec2590aa18cdd517e"
+    ],
+    [
       ".agents/skills/documentation-best-practices/SKILL.md",
       "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
     ],
@@ -1305,12 +1633,40 @@
       "a85d09f78dec318635b4de95f1202d3443fb9e67b9b320237572df0aa6425454"
     ],
     [
+      ".agents/skills/flaky-test-remediation/SKILL.md",
+      "af38d1eae88a45994293b7ecb1e2995174a830e032b182735ef91603b0ef775c"
+    ],
+    [
       ".agents/skills/frontend/SKILL.md",
       "6783c7e258f16f763248511406652bc5af4705bdb8a89fd808c07cdd6d135cbf"
     ],
     [
+      ".agents/skills/iac-best-practices/SKILL.md",
+      "4db8feb77b490eea6dd52374637923448a3ae6f27c138d6c996880407c5a096b"
+    ],
+    [
+      ".agents/skills/idempotency-patterns/SKILL.md",
+      "82bb636d4307a3938351e759fda7b6e82fe194b391a683ad1460c203be5d3ddf"
+    ],
+    [
       ".agents/skills/incremental-implementation/SKILL.md",
       "c8db9858e7b72b9f941e9038d15d04503ebf60c51462e3a71367903f3c8e5063"
+    ],
+    [
+      ".agents/skills/infrastructure-drift-detection/SKILL.md",
+      "2d205cd017dc95f36f8312eae242d89545394bd38f8d6e865f87fd2ab13ef3f6"
+    ],
+    [
+      ".agents/skills/kubernetes-resource-management/SKILL.md",
+      "9e6838351778a507ea552e13f5ca5cf57198ac93c9575fca9676be1419ef04c4"
+    ],
+    [
+      ".agents/skills/load-testing/SKILL.md",
+      "19dfc3642b9f2aefe995d94709ecf5b34d0f1565661e6c22a0fe68ac90a81b58"
+    ],
+    [
+      ".agents/skills/microservices-communication-patterns/SKILL.md",
+      "8cc8e74218d5e09d2100d78553436b8344407ca72c73abebd28f264bab5b215d"
     ],
     [
       ".agents/skills/migration/SKILL.md",
@@ -1319,6 +1675,10 @@
     [
       ".agents/skills/multiagent-orchestration/SKILL.md",
       "d6c940687cbd37a68a491a4303032bc90ac7b9dff01e2db84e1c451082aa26b9"
+    ],
+    [
+      ".agents/skills/mutation-testing/SKILL.md",
+      "72465156b7fd71cc5f721eb2f73012446073a4521c2811f27bc933e618911be2"
     ],
     [
       ".agents/skills/orchestrator/SKILL.md",
@@ -1353,8 +1713,24 @@
       "fa32eb7dfe5ff3e58f4c4ce6c425b54309018ab39f4989e0323830db409b4bf9"
     ],
     [
+      ".agents/skills/responsive-design-patterns/SKILL.md",
+      "105b708b213b2f13448a59ce5731a3ccc88d7a981725f31844d3da23eb6d4546"
+    ],
+    [
       ".agents/skills/review/SKILL.md",
       "a839b22dab90efc8da1beda86f4c4020d6abbfa53536ba8dd4212a956ff66d8c"
+    ],
+    [
+      ".agents/skills/root-cause-five-whys/SKILL.md",
+      "3bf80710e90b704cea7bd09c12eac4ae55243c848973a444066a51d46b319fc2"
+    ],
+    [
+      ".agents/skills/sql-optimization/SKILL.md",
+      "3182fea02148ddc71c4dde630c633cc027defc4529f35c90bd0c9f2f8cd8d2cb"
+    ],
+    [
+      ".agents/skills/state-management-architecture/SKILL.md",
+      "bb5c379c9574566e3631a856e7ada4429cbb1e2b2839e5b48a2c94f1cb157e6a"
     ],
     [
       ".agents/skills/team-collaboration/SKILL.md",
@@ -1383,6 +1759,10 @@
     [
       ".agents/skills/test-coverage-categories/SKILL.md",
       "fa6fe18acd7a5bd3f899aa65ef3e00a541743f622de4e7ebfb09ff137101c954"
+    ],
+    [
+      ".agents/skills/test-data-strategies/SKILL.md",
+      "a0969a8e0ec0b50d59e0fb0e8ff9ffde8d4accd7321c484ded6fcb3050e31497"
     ],
     [
       ".agents/skills/test-mocking-rules/SKILL.md",
@@ -1403,6 +1783,10 @@
   ],
   "codex::verbose": [
     [
+      ".agents/skills/api-versioning-strategy/SKILL.md",
+      "f9b26da1e18a83e0c968339e34963b0711cf45f29eeb611bddd894238427cdd5"
+    ],
+    [
       ".agents/skills/architecture-documentation/SKILL.md",
       "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
     ],
@@ -1423,8 +1807,20 @@
       "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
     ],
     [
+      ".agents/skills/component-design-systems/SKILL.md",
+      "cb1b1534cd89c9c7fd3ed283b8538bbf59ca7157a1853afd8f4aaee04cd27ab0"
+    ],
+    [
+      ".agents/skills/container-security-hardening/SKILL.md",
+      "c49b021220a4786e43da7781b593f2f9b46337e5dc659d39abaa612ca0b31cb8"
+    ],
+    [
       ".agents/skills/continuous-improvement/SKILL.md",
       "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+    ],
+    [
+      ".agents/skills/css-performance-optimization/SKILL.md",
+      "83cbc72812042b18330ec9f15091ffe74fb26ec38c602f19568d7180180b9c21"
     ],
     [
       ".agents/skills/data-model-discovery/SKILL.md",
@@ -1443,6 +1839,14 @@
       "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
     ],
     [
+      ".agents/skills/deployment-rollback-strategies/SKILL.md",
+      "ef50c407c99c7d6f1dd30a09132640bfe9553f717034cbd72f95eaf7406dfd56"
+    ],
+    [
+      ".agents/skills/distributed-caching-design/SKILL.md",
+      "31bf68b5dab3a5cc16898ac93fea538876da154d0af47e2b4cabdd0ddbf2abbf"
+    ],
+    [
       ".agents/skills/documentation-best-practices/SKILL.md",
       "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
     ],
@@ -1459,12 +1863,40 @@
       "3b43fa04f2823fcd2adc420ba1adc4989c3fe6d0a247f93f1d0e765f5ec971e6"
     ],
     [
+      ".agents/skills/flaky-test-remediation/SKILL.md",
+      "0f203482a5d6c7cc77f46048608a249a76dac379769d73a8dd96d2e6c209ea74"
+    ],
+    [
       ".agents/skills/frontend/SKILL.md",
       "6783c7e258f16f763248511406652bc5af4705bdb8a89fd808c07cdd6d135cbf"
     ],
     [
+      ".agents/skills/iac-best-practices/SKILL.md",
+      "e7da4e6302c09d36fc3338d73c70da71ab10c981e7ffdf7cc18f85e853a62810"
+    ],
+    [
+      ".agents/skills/idempotency-patterns/SKILL.md",
+      "cd4400973250e3bf2a04cb9f9022be57cb8c2d14f3eceff1834dadac316e9a68"
+    ],
+    [
       ".agents/skills/incremental-implementation/SKILL.md",
       "af8ee67d6925c3095724964a59a134d9725d5952bfa361cf5d7eef7e42ffbe6a"
+    ],
+    [
+      ".agents/skills/infrastructure-drift-detection/SKILL.md",
+      "ba399dc9d93bfa327975daf55aa74110c59f9a8271295af7d539024ac0989122"
+    ],
+    [
+      ".agents/skills/kubernetes-resource-management/SKILL.md",
+      "91e6789680fe120d88b80608b8d55786db82f77ecef82e8887f38a6ab6a72e0f"
+    ],
+    [
+      ".agents/skills/load-testing/SKILL.md",
+      "08abc06e211c4882fe857e1ba6678146955267fa23626540e996023953534629"
+    ],
+    [
+      ".agents/skills/microservices-communication-patterns/SKILL.md",
+      "6b6fe9f51433dddf2bc819abffffe271eab0edf0911793ac958575d395458193"
     ],
     [
       ".agents/skills/migration/SKILL.md",
@@ -1473,6 +1905,10 @@
     [
       ".agents/skills/multiagent-orchestration/SKILL.md",
       "4f56926633e3b6527047e07041e415cbf0bc171ca9cfdf7fa0f99b8550a51705"
+    ],
+    [
+      ".agents/skills/mutation-testing/SKILL.md",
+      "7e9e0fa511d57b16686cde557bfb59362d3097f98afc8d5d6b13c53b41391476"
     ],
     [
       ".agents/skills/orchestrator/SKILL.md",
@@ -1507,8 +1943,24 @@
       "fa32eb7dfe5ff3e58f4c4ce6c425b54309018ab39f4989e0323830db409b4bf9"
     ],
     [
+      ".agents/skills/responsive-design-patterns/SKILL.md",
+      "96062773f1262500e9abcfb2ffe7b954be7e30d2bdcfbef64fd4872463ec9439"
+    ],
+    [
       ".agents/skills/review/SKILL.md",
       "a839b22dab90efc8da1beda86f4c4020d6abbfa53536ba8dd4212a956ff66d8c"
+    ],
+    [
+      ".agents/skills/root-cause-five-whys/SKILL.md",
+      "f60365561f5c771b5e322cbbfc5f4880a5fcac4468654605282a6bce38d22baf"
+    ],
+    [
+      ".agents/skills/sql-optimization/SKILL.md",
+      "45dfb605b2d477fa6fc09636afe1fff5bdc529c716a87da4260ff01bb5c2275e"
+    ],
+    [
+      ".agents/skills/state-management-architecture/SKILL.md",
+      "c641a42a54da19f6c0bb5e96b566d1a25349029a9e494366c37f6562ccbec964"
     ],
     [
       ".agents/skills/team-collaboration/SKILL.md",
@@ -1537,6 +1989,10 @@
     [
       ".agents/skills/test-coverage-categories/SKILL.md",
       "2fdc372ca80ff46ba0df367a1c6d7751a0b367d4abcfc1d5113aa3718fee2d72"
+    ],
+    [
+      ".agents/skills/test-data-strategies/SKILL.md",
+      "fbe3c3bc61495dc614f8ca20b726ff8b8820479dc40248f38d607ee8050cef18"
     ],
     [
       ".agents/skills/test-mocking-rules/SKILL.md",
@@ -2030,7 +2486,11 @@
   "copilot::minimal": [
     [
       ".github/copilot-instructions.md",
-      "306c72d9776dc87649ac31d8fc9580c19f6efe0124d921befd0434be08200e24"
+      "af58b23d16c3971a3b45d6984156671afbb991607c28540d24547d196105e4ab"
+    ],
+    [
+      ".github/skills/api-versioning-strategy.md",
+      "062a339a10c5df713eae0561b016be7c2c8a5b6c14d974d932e3d5802344f8c6"
     ],
     [
       ".github/skills/architecture-documentation.md",
@@ -2041,8 +2501,20 @@
       "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
     ],
     [
+      ".github/skills/component-design-systems.md",
+      "1bb0df66ef6171502653a5e772be74936770dacc19032bebb6d60b99a7c28132"
+    ],
+    [
+      ".github/skills/container-security-hardening.md",
+      "f001021179851705430635206e964b9682cd643b69b4daf5fa6514d66f326482"
+    ],
+    [
       ".github/skills/continuous-improvement.md",
       "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+    ],
+    [
+      ".github/skills/css-performance-optimization.md",
+      "1baec4f80a3a53a084784c645c755c49272d18e1542040715dfe702836037d12"
     ],
     [
       ".github/skills/data-model-discovery.md",
@@ -2057,6 +2529,14 @@
       "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
     ],
     [
+      ".github/skills/deployment-rollback-strategies.md",
+      "d2395d14a3c4a3535206ea9f9a65913d332bbb5867ebfc81beacb1a255c66852"
+    ],
+    [
+      ".github/skills/distributed-caching-design.md",
+      "7be0a0c2fa17608a61687445b80fa3329a72b2036cfe6b9ec2590aa18cdd517e"
+    ],
+    [
       ".github/skills/documentation-best-practices.md",
       "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
     ],
@@ -2065,12 +2545,44 @@
       "a85d09f78dec318635b4de95f1202d3443fb9e67b9b320237572df0aa6425454"
     ],
     [
+      ".github/skills/flaky-test-remediation.md",
+      "af38d1eae88a45994293b7ecb1e2995174a830e032b182735ef91603b0ef775c"
+    ],
+    [
+      ".github/skills/iac-best-practices.md",
+      "4db8feb77b490eea6dd52374637923448a3ae6f27c138d6c996880407c5a096b"
+    ],
+    [
+      ".github/skills/idempotency-patterns.md",
+      "82bb636d4307a3938351e759fda7b6e82fe194b391a683ad1460c203be5d3ddf"
+    ],
+    [
       ".github/skills/incremental-implementation.md",
       "c8db9858e7b72b9f941e9038d15d04503ebf60c51462e3a71367903f3c8e5063"
     ],
     [
+      ".github/skills/infrastructure-drift-detection.md",
+      "2d205cd017dc95f36f8312eae242d89545394bd38f8d6e865f87fd2ab13ef3f6"
+    ],
+    [
+      ".github/skills/kubernetes-resource-management.md",
+      "9e6838351778a507ea552e13f5ca5cf57198ac93c9575fca9676be1419ef04c4"
+    ],
+    [
+      ".github/skills/load-testing.md",
+      "19dfc3642b9f2aefe995d94709ecf5b34d0f1565661e6c22a0fe68ac90a81b58"
+    ],
+    [
+      ".github/skills/microservices-communication-patterns.md",
+      "8cc8e74218d5e09d2100d78553436b8344407ca72c73abebd28f264bab5b215d"
+    ],
+    [
       ".github/skills/multiagent-orchestration.md",
       "d6c940687cbd37a68a491a4303032bc90ac7b9dff01e2db84e1c451082aa26b9"
+    ],
+    [
+      ".github/skills/mutation-testing.md",
+      "72465156b7fd71cc5f721eb2f73012446073a4521c2811f27bc933e618911be2"
     ],
     [
       ".github/skills/performance-optimization.md",
@@ -2087,6 +2599,22 @@
     [
       ".github/skills/quality-assurance.md",
       "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+    ],
+    [
+      ".github/skills/responsive-design-patterns.md",
+      "105b708b213b2f13448a59ce5731a3ccc88d7a981725f31844d3da23eb6d4546"
+    ],
+    [
+      ".github/skills/root-cause-five-whys.md",
+      "3bf80710e90b704cea7bd09c12eac4ae55243c848973a444066a51d46b319fc2"
+    ],
+    [
+      ".github/skills/sql-optimization.md",
+      "3182fea02148ddc71c4dde630c633cc027defc4529f35c90bd0c9f2f8cd8d2cb"
+    ],
+    [
+      ".github/skills/state-management-architecture.md",
+      "bb5c379c9574566e3631a856e7ada4429cbb1e2b2839e5b48a2c94f1cb157e6a"
     ],
     [
       ".github/skills/team-collaboration.md",
@@ -2113,6 +2641,10 @@
       "fa6fe18acd7a5bd3f899aa65ef3e00a541743f622de4e7ebfb09ff137101c954"
     ],
     [
+      ".github/skills/test-data-strategies.md",
+      "a0969a8e0ec0b50d59e0fb0e8ff9ffde8d4accd7321c484ded6fcb3050e31497"
+    ],
+    [
       ".github/skills/test-mocking-rules.md",
       "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec"
     ],
@@ -2128,7 +2660,11 @@
   "copilot::verbose": [
     [
       ".github/copilot-instructions.md",
-      "e17435f88d62bb527c8e265bd7a3d7e02937aa5d0c90168c7ab6b7abdff0ec1e"
+      "2d81349bfa703451ee728807ff0567f6e612bd470520f195918cdd072b8e456e"
+    ],
+    [
+      ".github/skills/api-versioning-strategy.md",
+      "f9b26da1e18a83e0c968339e34963b0711cf45f29eeb611bddd894238427cdd5"
     ],
     [
       ".github/skills/architecture-documentation.md",
@@ -2139,8 +2675,20 @@
       "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
     ],
     [
+      ".github/skills/component-design-systems.md",
+      "cb1b1534cd89c9c7fd3ed283b8538bbf59ca7157a1853afd8f4aaee04cd27ab0"
+    ],
+    [
+      ".github/skills/container-security-hardening.md",
+      "c49b021220a4786e43da7781b593f2f9b46337e5dc659d39abaa612ca0b31cb8"
+    ],
+    [
       ".github/skills/continuous-improvement.md",
       "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+    ],
+    [
+      ".github/skills/css-performance-optimization.md",
+      "83cbc72812042b18330ec9f15091ffe74fb26ec38c602f19568d7180180b9c21"
     ],
     [
       ".github/skills/data-model-discovery.md",
@@ -2155,6 +2703,14 @@
       "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
     ],
     [
+      ".github/skills/deployment-rollback-strategies.md",
+      "ef50c407c99c7d6f1dd30a09132640bfe9553f717034cbd72f95eaf7406dfd56"
+    ],
+    [
+      ".github/skills/distributed-caching-design.md",
+      "31bf68b5dab3a5cc16898ac93fea538876da154d0af47e2b4cabdd0ddbf2abbf"
+    ],
+    [
       ".github/skills/documentation-best-practices.md",
       "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
     ],
@@ -2163,12 +2719,44 @@
       "3b43fa04f2823fcd2adc420ba1adc4989c3fe6d0a247f93f1d0e765f5ec971e6"
     ],
     [
+      ".github/skills/flaky-test-remediation.md",
+      "0f203482a5d6c7cc77f46048608a249a76dac379769d73a8dd96d2e6c209ea74"
+    ],
+    [
+      ".github/skills/iac-best-practices.md",
+      "e7da4e6302c09d36fc3338d73c70da71ab10c981e7ffdf7cc18f85e853a62810"
+    ],
+    [
+      ".github/skills/idempotency-patterns.md",
+      "cd4400973250e3bf2a04cb9f9022be57cb8c2d14f3eceff1834dadac316e9a68"
+    ],
+    [
       ".github/skills/incremental-implementation.md",
       "af8ee67d6925c3095724964a59a134d9725d5952bfa361cf5d7eef7e42ffbe6a"
     ],
     [
+      ".github/skills/infrastructure-drift-detection.md",
+      "ba399dc9d93bfa327975daf55aa74110c59f9a8271295af7d539024ac0989122"
+    ],
+    [
+      ".github/skills/kubernetes-resource-management.md",
+      "91e6789680fe120d88b80608b8d55786db82f77ecef82e8887f38a6ab6a72e0f"
+    ],
+    [
+      ".github/skills/load-testing.md",
+      "08abc06e211c4882fe857e1ba6678146955267fa23626540e996023953534629"
+    ],
+    [
+      ".github/skills/microservices-communication-patterns.md",
+      "6b6fe9f51433dddf2bc819abffffe271eab0edf0911793ac958575d395458193"
+    ],
+    [
       ".github/skills/multiagent-orchestration.md",
       "4f56926633e3b6527047e07041e415cbf0bc171ca9cfdf7fa0f99b8550a51705"
+    ],
+    [
+      ".github/skills/mutation-testing.md",
+      "7e9e0fa511d57b16686cde557bfb59362d3097f98afc8d5d6b13c53b41391476"
     ],
     [
       ".github/skills/performance-optimization.md",
@@ -2185,6 +2773,22 @@
     [
       ".github/skills/quality-assurance.md",
       "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+    ],
+    [
+      ".github/skills/responsive-design-patterns.md",
+      "96062773f1262500e9abcfb2ffe7b954be7e30d2bdcfbef64fd4872463ec9439"
+    ],
+    [
+      ".github/skills/root-cause-five-whys.md",
+      "f60365561f5c771b5e322cbbfc5f4880a5fcac4468654605282a6bce38d22baf"
+    ],
+    [
+      ".github/skills/sql-optimization.md",
+      "45dfb605b2d477fa6fc09636afe1fff5bdc529c716a87da4260ff01bb5c2275e"
+    ],
+    [
+      ".github/skills/state-management-architecture.md",
+      "c641a42a54da19f6c0bb5e96b566d1a25349029a9e494366c37f6562ccbec964"
     ],
     [
       ".github/skills/team-collaboration.md",
@@ -2211,6 +2815,10 @@
       "2fdc372ca80ff46ba0df367a1c6d7751a0b367d4abcfc1d5113aa3718fee2d72"
     ],
     [
+      ".github/skills/test-data-strategies.md",
+      "fbe3c3bc61495dc614f8ca20b726ff8b8820479dc40248f38d607ee8050cef18"
+    ],
+    [
       ".github/skills/test-mocking-rules.md",
       "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e"
     ],
@@ -2225,6 +2833,10 @@
   ],
   "cursor::minimal": [
     [
+      ".cursor/skills/api-versioning-strategy/SKILL.md",
+      "062a339a10c5df713eae0561b016be7c2c8a5b6c14d974d932e3d5802344f8c6"
+    ],
+    [
       ".cursor/skills/architecture-documentation/SKILL.md",
       "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
     ],
@@ -2233,8 +2845,20 @@
       "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
     ],
     [
+      ".cursor/skills/component-design-systems/SKILL.md",
+      "1bb0df66ef6171502653a5e772be74936770dacc19032bebb6d60b99a7c28132"
+    ],
+    [
+      ".cursor/skills/container-security-hardening/SKILL.md",
+      "f001021179851705430635206e964b9682cd643b69b4daf5fa6514d66f326482"
+    ],
+    [
       ".cursor/skills/continuous-improvement/SKILL.md",
       "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+    ],
+    [
+      ".cursor/skills/css-performance-optimization/SKILL.md",
+      "1baec4f80a3a53a084784c645c755c49272d18e1542040715dfe702836037d12"
     ],
     [
       ".cursor/skills/data-model-discovery/SKILL.md",
@@ -2249,6 +2873,14 @@
       "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
     ],
     [
+      ".cursor/skills/deployment-rollback-strategies/SKILL.md",
+      "d2395d14a3c4a3535206ea9f9a65913d332bbb5867ebfc81beacb1a255c66852"
+    ],
+    [
+      ".cursor/skills/distributed-caching-design/SKILL.md",
+      "7be0a0c2fa17608a61687445b80fa3329a72b2036cfe6b9ec2590aa18cdd517e"
+    ],
+    [
       ".cursor/skills/documentation-best-practices/SKILL.md",
       "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
     ],
@@ -2257,12 +2889,44 @@
       "a85d09f78dec318635b4de95f1202d3443fb9e67b9b320237572df0aa6425454"
     ],
     [
+      ".cursor/skills/flaky-test-remediation/SKILL.md",
+      "af38d1eae88a45994293b7ecb1e2995174a830e032b182735ef91603b0ef775c"
+    ],
+    [
+      ".cursor/skills/iac-best-practices/SKILL.md",
+      "4db8feb77b490eea6dd52374637923448a3ae6f27c138d6c996880407c5a096b"
+    ],
+    [
+      ".cursor/skills/idempotency-patterns/SKILL.md",
+      "82bb636d4307a3938351e759fda7b6e82fe194b391a683ad1460c203be5d3ddf"
+    ],
+    [
       ".cursor/skills/incremental-implementation/SKILL.md",
       "c8db9858e7b72b9f941e9038d15d04503ebf60c51462e3a71367903f3c8e5063"
     ],
     [
+      ".cursor/skills/infrastructure-drift-detection/SKILL.md",
+      "2d205cd017dc95f36f8312eae242d89545394bd38f8d6e865f87fd2ab13ef3f6"
+    ],
+    [
+      ".cursor/skills/kubernetes-resource-management/SKILL.md",
+      "9e6838351778a507ea552e13f5ca5cf57198ac93c9575fca9676be1419ef04c4"
+    ],
+    [
+      ".cursor/skills/load-testing/SKILL.md",
+      "19dfc3642b9f2aefe995d94709ecf5b34d0f1565661e6c22a0fe68ac90a81b58"
+    ],
+    [
+      ".cursor/skills/microservices-communication-patterns/SKILL.md",
+      "8cc8e74218d5e09d2100d78553436b8344407ca72c73abebd28f264bab5b215d"
+    ],
+    [
       ".cursor/skills/multiagent-orchestration/SKILL.md",
       "d6c940687cbd37a68a491a4303032bc90ac7b9dff01e2db84e1c451082aa26b9"
+    ],
+    [
+      ".cursor/skills/mutation-testing/SKILL.md",
+      "72465156b7fd71cc5f721eb2f73012446073a4521c2811f27bc933e618911be2"
     ],
     [
       ".cursor/skills/performance-optimization/SKILL.md",
@@ -2279,6 +2943,22 @@
     [
       ".cursor/skills/quality-assurance/SKILL.md",
       "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+    ],
+    [
+      ".cursor/skills/responsive-design-patterns/SKILL.md",
+      "105b708b213b2f13448a59ce5731a3ccc88d7a981725f31844d3da23eb6d4546"
+    ],
+    [
+      ".cursor/skills/root-cause-five-whys/SKILL.md",
+      "3bf80710e90b704cea7bd09c12eac4ae55243c848973a444066a51d46b319fc2"
+    ],
+    [
+      ".cursor/skills/sql-optimization/SKILL.md",
+      "3182fea02148ddc71c4dde630c633cc027defc4529f35c90bd0c9f2f8cd8d2cb"
+    ],
+    [
+      ".cursor/skills/state-management-architecture/SKILL.md",
+      "bb5c379c9574566e3631a856e7ada4429cbb1e2b2839e5b48a2c94f1cb157e6a"
     ],
     [
       ".cursor/skills/team-collaboration/SKILL.md",
@@ -2303,6 +2983,10 @@
     [
       ".cursor/skills/test-coverage-categories/SKILL.md",
       "fa6fe18acd7a5bd3f899aa65ef3e00a541743f622de4e7ebfb09ff137101c954"
+    ],
+    [
+      ".cursor/skills/test-data-strategies/SKILL.md",
+      "a0969a8e0ec0b50d59e0fb0e8ff9ffde8d4accd7321c484ded6fcb3050e31497"
     ],
     [
       ".cursor/skills/test-mocking-rules/SKILL.md",
@@ -2323,6 +3007,10 @@
   ],
   "cursor::verbose": [
     [
+      ".cursor/skills/api-versioning-strategy/SKILL.md",
+      "f9b26da1e18a83e0c968339e34963b0711cf45f29eeb611bddd894238427cdd5"
+    ],
+    [
       ".cursor/skills/architecture-documentation/SKILL.md",
       "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
     ],
@@ -2331,8 +3019,20 @@
       "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
     ],
     [
+      ".cursor/skills/component-design-systems/SKILL.md",
+      "cb1b1534cd89c9c7fd3ed283b8538bbf59ca7157a1853afd8f4aaee04cd27ab0"
+    ],
+    [
+      ".cursor/skills/container-security-hardening/SKILL.md",
+      "c49b021220a4786e43da7781b593f2f9b46337e5dc659d39abaa612ca0b31cb8"
+    ],
+    [
       ".cursor/skills/continuous-improvement/SKILL.md",
       "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+    ],
+    [
+      ".cursor/skills/css-performance-optimization/SKILL.md",
+      "83cbc72812042b18330ec9f15091ffe74fb26ec38c602f19568d7180180b9c21"
     ],
     [
       ".cursor/skills/data-model-discovery/SKILL.md",
@@ -2347,6 +3047,14 @@
       "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
     ],
     [
+      ".cursor/skills/deployment-rollback-strategies/SKILL.md",
+      "ef50c407c99c7d6f1dd30a09132640bfe9553f717034cbd72f95eaf7406dfd56"
+    ],
+    [
+      ".cursor/skills/distributed-caching-design/SKILL.md",
+      "31bf68b5dab3a5cc16898ac93fea538876da154d0af47e2b4cabdd0ddbf2abbf"
+    ],
+    [
       ".cursor/skills/documentation-best-practices/SKILL.md",
       "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
     ],
@@ -2355,12 +3063,44 @@
       "3b43fa04f2823fcd2adc420ba1adc4989c3fe6d0a247f93f1d0e765f5ec971e6"
     ],
     [
+      ".cursor/skills/flaky-test-remediation/SKILL.md",
+      "0f203482a5d6c7cc77f46048608a249a76dac379769d73a8dd96d2e6c209ea74"
+    ],
+    [
+      ".cursor/skills/iac-best-practices/SKILL.md",
+      "e7da4e6302c09d36fc3338d73c70da71ab10c981e7ffdf7cc18f85e853a62810"
+    ],
+    [
+      ".cursor/skills/idempotency-patterns/SKILL.md",
+      "cd4400973250e3bf2a04cb9f9022be57cb8c2d14f3eceff1834dadac316e9a68"
+    ],
+    [
       ".cursor/skills/incremental-implementation/SKILL.md",
       "af8ee67d6925c3095724964a59a134d9725d5952bfa361cf5d7eef7e42ffbe6a"
     ],
     [
+      ".cursor/skills/infrastructure-drift-detection/SKILL.md",
+      "ba399dc9d93bfa327975daf55aa74110c59f9a8271295af7d539024ac0989122"
+    ],
+    [
+      ".cursor/skills/kubernetes-resource-management/SKILL.md",
+      "91e6789680fe120d88b80608b8d55786db82f77ecef82e8887f38a6ab6a72e0f"
+    ],
+    [
+      ".cursor/skills/load-testing/SKILL.md",
+      "08abc06e211c4882fe857e1ba6678146955267fa23626540e996023953534629"
+    ],
+    [
+      ".cursor/skills/microservices-communication-patterns/SKILL.md",
+      "6b6fe9f51433dddf2bc819abffffe271eab0edf0911793ac958575d395458193"
+    ],
+    [
       ".cursor/skills/multiagent-orchestration/SKILL.md",
       "4f56926633e3b6527047e07041e415cbf0bc171ca9cfdf7fa0f99b8550a51705"
+    ],
+    [
+      ".cursor/skills/mutation-testing/SKILL.md",
+      "7e9e0fa511d57b16686cde557bfb59362d3097f98afc8d5d6b13c53b41391476"
     ],
     [
       ".cursor/skills/performance-optimization/SKILL.md",
@@ -2377,6 +3117,22 @@
     [
       ".cursor/skills/quality-assurance/SKILL.md",
       "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+    ],
+    [
+      ".cursor/skills/responsive-design-patterns/SKILL.md",
+      "96062773f1262500e9abcfb2ffe7b954be7e30d2bdcfbef64fd4872463ec9439"
+    ],
+    [
+      ".cursor/skills/root-cause-five-whys/SKILL.md",
+      "f60365561f5c771b5e322cbbfc5f4880a5fcac4468654605282a6bce38d22baf"
+    ],
+    [
+      ".cursor/skills/sql-optimization/SKILL.md",
+      "45dfb605b2d477fa6fc09636afe1fff5bdc529c716a87da4260ff01bb5c2275e"
+    ],
+    [
+      ".cursor/skills/state-management-architecture/SKILL.md",
+      "c641a42a54da19f6c0bb5e96b566d1a25349029a9e494366c37f6562ccbec964"
     ],
     [
       ".cursor/skills/team-collaboration/SKILL.md",
@@ -2401,6 +3157,10 @@
     [
       ".cursor/skills/test-coverage-categories/SKILL.md",
       "2fdc372ca80ff46ba0df367a1c6d7751a0b367d4abcfc1d5113aa3718fee2d72"
+    ],
+    [
+      ".cursor/skills/test-data-strategies/SKILL.md",
+      "fbe3c3bc61495dc614f8ca20b726ff8b8820479dc40248f38d607ee8050cef18"
     ],
     [
       ".cursor/skills/test-mocking-rules/SKILL.md",
@@ -2533,6 +3293,10 @@
       "eb83e3c3291bc7e9994cd57973ab9d3fed5f600b02cfad010c714c889acd5349"
     ],
     [
+      ".gemini/skills/api-versioning-strategy/SKILL.md",
+      "062a339a10c5df713eae0561b016be7c2c8a5b6c14d974d932e3d5802344f8c6"
+    ],
+    [
       ".gemini/skills/architecture-documentation/SKILL.md",
       "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
     ],
@@ -2541,8 +3305,20 @@
       "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
     ],
     [
+      ".gemini/skills/component-design-systems/SKILL.md",
+      "1bb0df66ef6171502653a5e772be74936770dacc19032bebb6d60b99a7c28132"
+    ],
+    [
+      ".gemini/skills/container-security-hardening/SKILL.md",
+      "f001021179851705430635206e964b9682cd643b69b4daf5fa6514d66f326482"
+    ],
+    [
       ".gemini/skills/continuous-improvement/SKILL.md",
       "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+    ],
+    [
+      ".gemini/skills/css-performance-optimization/SKILL.md",
+      "1baec4f80a3a53a084784c645c755c49272d18e1542040715dfe702836037d12"
     ],
     [
       ".gemini/skills/data-model-discovery/SKILL.md",
@@ -2557,6 +3333,14 @@
       "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
     ],
     [
+      ".gemini/skills/deployment-rollback-strategies/SKILL.md",
+      "d2395d14a3c4a3535206ea9f9a65913d332bbb5867ebfc81beacb1a255c66852"
+    ],
+    [
+      ".gemini/skills/distributed-caching-design/SKILL.md",
+      "7be0a0c2fa17608a61687445b80fa3329a72b2036cfe6b9ec2590aa18cdd517e"
+    ],
+    [
       ".gemini/skills/documentation-best-practices/SKILL.md",
       "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
     ],
@@ -2565,12 +3349,44 @@
       "a85d09f78dec318635b4de95f1202d3443fb9e67b9b320237572df0aa6425454"
     ],
     [
+      ".gemini/skills/flaky-test-remediation/SKILL.md",
+      "af38d1eae88a45994293b7ecb1e2995174a830e032b182735ef91603b0ef775c"
+    ],
+    [
+      ".gemini/skills/iac-best-practices/SKILL.md",
+      "4db8feb77b490eea6dd52374637923448a3ae6f27c138d6c996880407c5a096b"
+    ],
+    [
+      ".gemini/skills/idempotency-patterns/SKILL.md",
+      "82bb636d4307a3938351e759fda7b6e82fe194b391a683ad1460c203be5d3ddf"
+    ],
+    [
       ".gemini/skills/incremental-implementation/SKILL.md",
       "c8db9858e7b72b9f941e9038d15d04503ebf60c51462e3a71367903f3c8e5063"
     ],
     [
+      ".gemini/skills/infrastructure-drift-detection/SKILL.md",
+      "2d205cd017dc95f36f8312eae242d89545394bd38f8d6e865f87fd2ab13ef3f6"
+    ],
+    [
+      ".gemini/skills/kubernetes-resource-management/SKILL.md",
+      "9e6838351778a507ea552e13f5ca5cf57198ac93c9575fca9676be1419ef04c4"
+    ],
+    [
+      ".gemini/skills/load-testing/SKILL.md",
+      "19dfc3642b9f2aefe995d94709ecf5b34d0f1565661e6c22a0fe68ac90a81b58"
+    ],
+    [
+      ".gemini/skills/microservices-communication-patterns/SKILL.md",
+      "8cc8e74218d5e09d2100d78553436b8344407ca72c73abebd28f264bab5b215d"
+    ],
+    [
       ".gemini/skills/multiagent-orchestration/SKILL.md",
       "d6c940687cbd37a68a491a4303032bc90ac7b9dff01e2db84e1c451082aa26b9"
+    ],
+    [
+      ".gemini/skills/mutation-testing/SKILL.md",
+      "72465156b7fd71cc5f721eb2f73012446073a4521c2811f27bc933e618911be2"
     ],
     [
       ".gemini/skills/performance-optimization/SKILL.md",
@@ -2587,6 +3403,22 @@
     [
       ".gemini/skills/quality-assurance/SKILL.md",
       "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+    ],
+    [
+      ".gemini/skills/responsive-design-patterns/SKILL.md",
+      "105b708b213b2f13448a59ce5731a3ccc88d7a981725f31844d3da23eb6d4546"
+    ],
+    [
+      ".gemini/skills/root-cause-five-whys/SKILL.md",
+      "3bf80710e90b704cea7bd09c12eac4ae55243c848973a444066a51d46b319fc2"
+    ],
+    [
+      ".gemini/skills/sql-optimization/SKILL.md",
+      "3182fea02148ddc71c4dde630c633cc027defc4529f35c90bd0c9f2f8cd8d2cb"
+    ],
+    [
+      ".gemini/skills/state-management-architecture/SKILL.md",
+      "bb5c379c9574566e3631a856e7ada4429cbb1e2b2839e5b48a2c94f1cb157e6a"
     ],
     [
       ".gemini/skills/team-collaboration/SKILL.md",
@@ -2611,6 +3443,10 @@
     [
       ".gemini/skills/test-coverage-categories/SKILL.md",
       "fa6fe18acd7a5bd3f899aa65ef3e00a541743f622de4e7ebfb09ff137101c954"
+    ],
+    [
+      ".gemini/skills/test-data-strategies/SKILL.md",
+      "a0969a8e0ec0b50d59e0fb0e8ff9ffde8d4accd7321c484ded6fcb3050e31497"
     ],
     [
       ".gemini/skills/test-mocking-rules/SKILL.md",
@@ -2739,6 +3575,10 @@
       "eb83e3c3291bc7e9994cd57973ab9d3fed5f600b02cfad010c714c889acd5349"
     ],
     [
+      ".gemini/skills/api-versioning-strategy/SKILL.md",
+      "f9b26da1e18a83e0c968339e34963b0711cf45f29eeb611bddd894238427cdd5"
+    ],
+    [
       ".gemini/skills/architecture-documentation/SKILL.md",
       "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
     ],
@@ -2747,8 +3587,20 @@
       "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
     ],
     [
+      ".gemini/skills/component-design-systems/SKILL.md",
+      "cb1b1534cd89c9c7fd3ed283b8538bbf59ca7157a1853afd8f4aaee04cd27ab0"
+    ],
+    [
+      ".gemini/skills/container-security-hardening/SKILL.md",
+      "c49b021220a4786e43da7781b593f2f9b46337e5dc659d39abaa612ca0b31cb8"
+    ],
+    [
       ".gemini/skills/continuous-improvement/SKILL.md",
       "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+    ],
+    [
+      ".gemini/skills/css-performance-optimization/SKILL.md",
+      "83cbc72812042b18330ec9f15091ffe74fb26ec38c602f19568d7180180b9c21"
     ],
     [
       ".gemini/skills/data-model-discovery/SKILL.md",
@@ -2763,6 +3615,14 @@
       "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
     ],
     [
+      ".gemini/skills/deployment-rollback-strategies/SKILL.md",
+      "ef50c407c99c7d6f1dd30a09132640bfe9553f717034cbd72f95eaf7406dfd56"
+    ],
+    [
+      ".gemini/skills/distributed-caching-design/SKILL.md",
+      "31bf68b5dab3a5cc16898ac93fea538876da154d0af47e2b4cabdd0ddbf2abbf"
+    ],
+    [
       ".gemini/skills/documentation-best-practices/SKILL.md",
       "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
     ],
@@ -2771,12 +3631,44 @@
       "3b43fa04f2823fcd2adc420ba1adc4989c3fe6d0a247f93f1d0e765f5ec971e6"
     ],
     [
+      ".gemini/skills/flaky-test-remediation/SKILL.md",
+      "0f203482a5d6c7cc77f46048608a249a76dac379769d73a8dd96d2e6c209ea74"
+    ],
+    [
+      ".gemini/skills/iac-best-practices/SKILL.md",
+      "e7da4e6302c09d36fc3338d73c70da71ab10c981e7ffdf7cc18f85e853a62810"
+    ],
+    [
+      ".gemini/skills/idempotency-patterns/SKILL.md",
+      "cd4400973250e3bf2a04cb9f9022be57cb8c2d14f3eceff1834dadac316e9a68"
+    ],
+    [
       ".gemini/skills/incremental-implementation/SKILL.md",
       "af8ee67d6925c3095724964a59a134d9725d5952bfa361cf5d7eef7e42ffbe6a"
     ],
     [
+      ".gemini/skills/infrastructure-drift-detection/SKILL.md",
+      "ba399dc9d93bfa327975daf55aa74110c59f9a8271295af7d539024ac0989122"
+    ],
+    [
+      ".gemini/skills/kubernetes-resource-management/SKILL.md",
+      "91e6789680fe120d88b80608b8d55786db82f77ecef82e8887f38a6ab6a72e0f"
+    ],
+    [
+      ".gemini/skills/load-testing/SKILL.md",
+      "08abc06e211c4882fe857e1ba6678146955267fa23626540e996023953534629"
+    ],
+    [
+      ".gemini/skills/microservices-communication-patterns/SKILL.md",
+      "6b6fe9f51433dddf2bc819abffffe271eab0edf0911793ac958575d395458193"
+    ],
+    [
       ".gemini/skills/multiagent-orchestration/SKILL.md",
       "4f56926633e3b6527047e07041e415cbf0bc171ca9cfdf7fa0f99b8550a51705"
+    ],
+    [
+      ".gemini/skills/mutation-testing/SKILL.md",
+      "7e9e0fa511d57b16686cde557bfb59362d3097f98afc8d5d6b13c53b41391476"
     ],
     [
       ".gemini/skills/performance-optimization/SKILL.md",
@@ -2793,6 +3685,22 @@
     [
       ".gemini/skills/quality-assurance/SKILL.md",
       "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+    ],
+    [
+      ".gemini/skills/responsive-design-patterns/SKILL.md",
+      "96062773f1262500e9abcfb2ffe7b954be7e30d2bdcfbef64fd4872463ec9439"
+    ],
+    [
+      ".gemini/skills/root-cause-five-whys/SKILL.md",
+      "f60365561f5c771b5e322cbbfc5f4880a5fcac4468654605282a6bce38d22baf"
+    ],
+    [
+      ".gemini/skills/sql-optimization/SKILL.md",
+      "45dfb605b2d477fa6fc09636afe1fff5bdc529c716a87da4260ff01bb5c2275e"
+    ],
+    [
+      ".gemini/skills/state-management-architecture/SKILL.md",
+      "c641a42a54da19f6c0bb5e96b566d1a25349029a9e494366c37f6562ccbec964"
     ],
     [
       ".gemini/skills/team-collaboration/SKILL.md",
@@ -2819,6 +3727,10 @@
       "2fdc372ca80ff46ba0df367a1c6d7751a0b367d4abcfc1d5113aa3718fee2d72"
     ],
     [
+      ".gemini/skills/test-data-strategies/SKILL.md",
+      "fbe3c3bc61495dc614f8ca20b726ff8b8820479dc40248f38d607ee8050cef18"
+    ],
+    [
       ".gemini/skills/test-mocking-rules/SKILL.md",
       "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e"
     ],
@@ -2838,7 +3750,7 @@
     ],
     [
       ".junie/agents/backend.md",
-      "602ed84ff3fbc365322d9be6840468456550533d26d19ba044dd82adbdd81a40"
+      "e118391f210e8e87dde94845893e215a4c2b58f1a773d23e0935f7bef1db1fc8"
     ],
     [
       ".junie/agents/code.md",
@@ -2846,7 +3758,7 @@
     ],
     [
       ".junie/agents/debug.md",
-      "053a6386f1263241d1ee14143853ea52f5414432099343379d77cc834c239610"
+      "864018126ca88002860c5a5d5a042acc2963192672dbe6c36a42f38ac74bd0d1"
     ],
     [
       ".junie/agents/enforcement.md",
@@ -2858,7 +3770,7 @@
     ],
     [
       ".junie/agents/frontend.md",
-      "b0e41f25478d16d6bc04e0a47caab471e8dd5e2fd994613e9b5b27979989cf79"
+      "e96fd3454e19550a5fb9ac7b36f83ce2025fd3b1a7d1a719fb3365366ccd0a4d"
     ],
     [
       ".junie/agents/migration.md",
@@ -2866,11 +3778,11 @@
     ],
     [
       ".junie/agents/orchestrator.md",
-      "8927c1dca418a1240ef6ae5ce9ea533e4471ad5cffa181be8c9c77f1522dbf5a"
+      "4fa94af851b8ccfa20ae5feedb28e0e22d48429f783dad772b3371a8a294ac6d"
     ],
     [
       ".junie/agents/performance.md",
-      "5851f9a0844ac2f7f4d61d41ca63f835b6962b71701cab4eb421723f2ba36068"
+      "ef9df7558c60848a881c911054826bf0c41445c57623696bf35252342e51d153"
     ],
     [
       ".junie/agents/plan.md",
@@ -2886,7 +3798,7 @@
     ],
     [
       ".junie/agents/test.md",
-      "3a29c368e7b75fa1b21bacf6d9c16301037be4db1ed5077c08ffc098c2a4daa6"
+      "67aa9b79a50776ef8b4d80238ba7e5ad9c930baaff981368004c5ab59d7fbe36"
     ],
     [
       ".junie/commands/boilerplate.md",
@@ -2941,6 +3853,10 @@
       "1206fb5a49bd7d9b60de274df0ccc391bfd081f8aca502213bc7901e6728f0ef"
     ],
     [
+      ".junie/skills/api-versioning-strategy/SKILL.md",
+      "062a339a10c5df713eae0561b016be7c2c8a5b6c14d974d932e3d5802344f8c6"
+    ],
+    [
       ".junie/skills/architecture-documentation/SKILL.md",
       "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
     ],
@@ -2949,8 +3865,20 @@
       "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
     ],
     [
+      ".junie/skills/component-design-systems/SKILL.md",
+      "1bb0df66ef6171502653a5e772be74936770dacc19032bebb6d60b99a7c28132"
+    ],
+    [
+      ".junie/skills/container-security-hardening/SKILL.md",
+      "f001021179851705430635206e964b9682cd643b69b4daf5fa6514d66f326482"
+    ],
+    [
       ".junie/skills/continuous-improvement/SKILL.md",
       "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+    ],
+    [
+      ".junie/skills/css-performance-optimization/SKILL.md",
+      "1baec4f80a3a53a084784c645c755c49272d18e1542040715dfe702836037d12"
     ],
     [
       ".junie/skills/data-model-discovery/SKILL.md",
@@ -2965,6 +3893,14 @@
       "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
     ],
     [
+      ".junie/skills/deployment-rollback-strategies/SKILL.md",
+      "d2395d14a3c4a3535206ea9f9a65913d332bbb5867ebfc81beacb1a255c66852"
+    ],
+    [
+      ".junie/skills/distributed-caching-design/SKILL.md",
+      "7be0a0c2fa17608a61687445b80fa3329a72b2036cfe6b9ec2590aa18cdd517e"
+    ],
+    [
       ".junie/skills/documentation-best-practices/SKILL.md",
       "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
     ],
@@ -2973,12 +3909,44 @@
       "a85d09f78dec318635b4de95f1202d3443fb9e67b9b320237572df0aa6425454"
     ],
     [
+      ".junie/skills/flaky-test-remediation/SKILL.md",
+      "af38d1eae88a45994293b7ecb1e2995174a830e032b182735ef91603b0ef775c"
+    ],
+    [
+      ".junie/skills/iac-best-practices/SKILL.md",
+      "4db8feb77b490eea6dd52374637923448a3ae6f27c138d6c996880407c5a096b"
+    ],
+    [
+      ".junie/skills/idempotency-patterns/SKILL.md",
+      "82bb636d4307a3938351e759fda7b6e82fe194b391a683ad1460c203be5d3ddf"
+    ],
+    [
       ".junie/skills/incremental-implementation/SKILL.md",
       "c8db9858e7b72b9f941e9038d15d04503ebf60c51462e3a71367903f3c8e5063"
     ],
     [
+      ".junie/skills/infrastructure-drift-detection/SKILL.md",
+      "2d205cd017dc95f36f8312eae242d89545394bd38f8d6e865f87fd2ab13ef3f6"
+    ],
+    [
+      ".junie/skills/kubernetes-resource-management/SKILL.md",
+      "9e6838351778a507ea552e13f5ca5cf57198ac93c9575fca9676be1419ef04c4"
+    ],
+    [
+      ".junie/skills/load-testing/SKILL.md",
+      "19dfc3642b9f2aefe995d94709ecf5b34d0f1565661e6c22a0fe68ac90a81b58"
+    ],
+    [
+      ".junie/skills/microservices-communication-patterns/SKILL.md",
+      "8cc8e74218d5e09d2100d78553436b8344407ca72c73abebd28f264bab5b215d"
+    ],
+    [
       ".junie/skills/multiagent-orchestration/SKILL.md",
       "d6c940687cbd37a68a491a4303032bc90ac7b9dff01e2db84e1c451082aa26b9"
+    ],
+    [
+      ".junie/skills/mutation-testing/SKILL.md",
+      "72465156b7fd71cc5f721eb2f73012446073a4521c2811f27bc933e618911be2"
     ],
     [
       ".junie/skills/performance-optimization/SKILL.md",
@@ -2995,6 +3963,22 @@
     [
       ".junie/skills/quality-assurance/SKILL.md",
       "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+    ],
+    [
+      ".junie/skills/responsive-design-patterns/SKILL.md",
+      "105b708b213b2f13448a59ce5731a3ccc88d7a981725f31844d3da23eb6d4546"
+    ],
+    [
+      ".junie/skills/root-cause-five-whys/SKILL.md",
+      "3bf80710e90b704cea7bd09c12eac4ae55243c848973a444066a51d46b319fc2"
+    ],
+    [
+      ".junie/skills/sql-optimization/SKILL.md",
+      "3182fea02148ddc71c4dde630c633cc027defc4529f35c90bd0c9f2f8cd8d2cb"
+    ],
+    [
+      ".junie/skills/state-management-architecture/SKILL.md",
+      "bb5c379c9574566e3631a856e7ada4429cbb1e2b2839e5b48a2c94f1cb157e6a"
     ],
     [
       ".junie/skills/team-collaboration/SKILL.md",
@@ -3021,6 +4005,10 @@
       "fa6fe18acd7a5bd3f899aa65ef3e00a541743f622de4e7ebfb09ff137101c954"
     ],
     [
+      ".junie/skills/test-data-strategies/SKILL.md",
+      "a0969a8e0ec0b50d59e0fb0e8ff9ffde8d4accd7321c484ded6fcb3050e31497"
+    ],
+    [
       ".junie/skills/test-mocking-rules/SKILL.md",
       "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec"
     ],
@@ -3040,7 +4028,7 @@
     ],
     [
       ".junie/agents/backend.md",
-      "602ed84ff3fbc365322d9be6840468456550533d26d19ba044dd82adbdd81a40"
+      "e118391f210e8e87dde94845893e215a4c2b58f1a773d23e0935f7bef1db1fc8"
     ],
     [
       ".junie/agents/code.md",
@@ -3048,7 +4036,7 @@
     ],
     [
       ".junie/agents/debug.md",
-      "053a6386f1263241d1ee14143853ea52f5414432099343379d77cc834c239610"
+      "864018126ca88002860c5a5d5a042acc2963192672dbe6c36a42f38ac74bd0d1"
     ],
     [
       ".junie/agents/enforcement.md",
@@ -3060,7 +4048,7 @@
     ],
     [
       ".junie/agents/frontend.md",
-      "b0e41f25478d16d6bc04e0a47caab471e8dd5e2fd994613e9b5b27979989cf79"
+      "e96fd3454e19550a5fb9ac7b36f83ce2025fd3b1a7d1a719fb3365366ccd0a4d"
     ],
     [
       ".junie/agents/migration.md",
@@ -3068,11 +4056,11 @@
     ],
     [
       ".junie/agents/orchestrator.md",
-      "8927c1dca418a1240ef6ae5ce9ea533e4471ad5cffa181be8c9c77f1522dbf5a"
+      "4fa94af851b8ccfa20ae5feedb28e0e22d48429f783dad772b3371a8a294ac6d"
     ],
     [
       ".junie/agents/performance.md",
-      "5851f9a0844ac2f7f4d61d41ca63f835b6962b71701cab4eb421723f2ba36068"
+      "ef9df7558c60848a881c911054826bf0c41445c57623696bf35252342e51d153"
     ],
     [
       ".junie/agents/plan.md",
@@ -3088,7 +4076,7 @@
     ],
     [
       ".junie/agents/test.md",
-      "3a29c368e7b75fa1b21bacf6d9c16301037be4db1ed5077c08ffc098c2a4daa6"
+      "67aa9b79a50776ef8b4d80238ba7e5ad9c930baaff981368004c5ab59d7fbe36"
     ],
     [
       ".junie/commands/boilerplate.md",
@@ -3143,6 +4131,10 @@
       "907195f7ab03b3948bd5af14584c0a5d9221dbde55f069ce096659a6116cdec7"
     ],
     [
+      ".junie/skills/api-versioning-strategy/SKILL.md",
+      "f9b26da1e18a83e0c968339e34963b0711cf45f29eeb611bddd894238427cdd5"
+    ],
+    [
       ".junie/skills/architecture-documentation/SKILL.md",
       "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
     ],
@@ -3151,8 +4143,20 @@
       "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
     ],
     [
+      ".junie/skills/component-design-systems/SKILL.md",
+      "cb1b1534cd89c9c7fd3ed283b8538bbf59ca7157a1853afd8f4aaee04cd27ab0"
+    ],
+    [
+      ".junie/skills/container-security-hardening/SKILL.md",
+      "c49b021220a4786e43da7781b593f2f9b46337e5dc659d39abaa612ca0b31cb8"
+    ],
+    [
       ".junie/skills/continuous-improvement/SKILL.md",
       "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+    ],
+    [
+      ".junie/skills/css-performance-optimization/SKILL.md",
+      "83cbc72812042b18330ec9f15091ffe74fb26ec38c602f19568d7180180b9c21"
     ],
     [
       ".junie/skills/data-model-discovery/SKILL.md",
@@ -3167,6 +4171,14 @@
       "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
     ],
     [
+      ".junie/skills/deployment-rollback-strategies/SKILL.md",
+      "ef50c407c99c7d6f1dd30a09132640bfe9553f717034cbd72f95eaf7406dfd56"
+    ],
+    [
+      ".junie/skills/distributed-caching-design/SKILL.md",
+      "31bf68b5dab3a5cc16898ac93fea538876da154d0af47e2b4cabdd0ddbf2abbf"
+    ],
+    [
       ".junie/skills/documentation-best-practices/SKILL.md",
       "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
     ],
@@ -3175,12 +4187,44 @@
       "3b43fa04f2823fcd2adc420ba1adc4989c3fe6d0a247f93f1d0e765f5ec971e6"
     ],
     [
+      ".junie/skills/flaky-test-remediation/SKILL.md",
+      "0f203482a5d6c7cc77f46048608a249a76dac379769d73a8dd96d2e6c209ea74"
+    ],
+    [
+      ".junie/skills/iac-best-practices/SKILL.md",
+      "e7da4e6302c09d36fc3338d73c70da71ab10c981e7ffdf7cc18f85e853a62810"
+    ],
+    [
+      ".junie/skills/idempotency-patterns/SKILL.md",
+      "cd4400973250e3bf2a04cb9f9022be57cb8c2d14f3eceff1834dadac316e9a68"
+    ],
+    [
       ".junie/skills/incremental-implementation/SKILL.md",
       "af8ee67d6925c3095724964a59a134d9725d5952bfa361cf5d7eef7e42ffbe6a"
     ],
     [
+      ".junie/skills/infrastructure-drift-detection/SKILL.md",
+      "ba399dc9d93bfa327975daf55aa74110c59f9a8271295af7d539024ac0989122"
+    ],
+    [
+      ".junie/skills/kubernetes-resource-management/SKILL.md",
+      "91e6789680fe120d88b80608b8d55786db82f77ecef82e8887f38a6ab6a72e0f"
+    ],
+    [
+      ".junie/skills/load-testing/SKILL.md",
+      "08abc06e211c4882fe857e1ba6678146955267fa23626540e996023953534629"
+    ],
+    [
+      ".junie/skills/microservices-communication-patterns/SKILL.md",
+      "6b6fe9f51433dddf2bc819abffffe271eab0edf0911793ac958575d395458193"
+    ],
+    [
       ".junie/skills/multiagent-orchestration/SKILL.md",
       "4f56926633e3b6527047e07041e415cbf0bc171ca9cfdf7fa0f99b8550a51705"
+    ],
+    [
+      ".junie/skills/mutation-testing/SKILL.md",
+      "7e9e0fa511d57b16686cde557bfb59362d3097f98afc8d5d6b13c53b41391476"
     ],
     [
       ".junie/skills/performance-optimization/SKILL.md",
@@ -3197,6 +4241,22 @@
     [
       ".junie/skills/quality-assurance/SKILL.md",
       "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+    ],
+    [
+      ".junie/skills/responsive-design-patterns/SKILL.md",
+      "96062773f1262500e9abcfb2ffe7b954be7e30d2bdcfbef64fd4872463ec9439"
+    ],
+    [
+      ".junie/skills/root-cause-five-whys/SKILL.md",
+      "f60365561f5c771b5e322cbbfc5f4880a5fcac4468654605282a6bce38d22baf"
+    ],
+    [
+      ".junie/skills/sql-optimization/SKILL.md",
+      "45dfb605b2d477fa6fc09636afe1fff5bdc529c716a87da4260ff01bb5c2275e"
+    ],
+    [
+      ".junie/skills/state-management-architecture/SKILL.md",
+      "c641a42a54da19f6c0bb5e96b566d1a25349029a9e494366c37f6562ccbec964"
     ],
     [
       ".junie/skills/team-collaboration/SKILL.md",
@@ -3221,6 +4281,10 @@
     [
       ".junie/skills/test-coverage-categories/SKILL.md",
       "2fdc372ca80ff46ba0df367a1c6d7751a0b367d4abcfc1d5113aa3718fee2d72"
+    ],
+    [
+      ".junie/skills/test-data-strategies/SKILL.md",
+      "fbe3c3bc61495dc614f8ca20b726ff8b8820479dc40248f38d607ee8050cef18"
     ],
     [
       ".junie/skills/test-mocking-rules/SKILL.md",
@@ -3270,7 +4334,7 @@
     ],
     [
       ".kilo/agents/backend.md",
-      "5110e0be6b52b9fddffd4a77875528611518385bef726a1b241d9d893450bedf"
+      "d67ee70900b05b78afc24525d76831d35b09069757b68fcacd3bb15f3a8420d3"
     ],
     [
       ".kilo/agents/code/boilerplate.md",
@@ -3314,7 +4378,7 @@
     ],
     [
       ".kilo/agents/debug.md",
-      "dbfc9646a99e467e0ba118bfcd710417afedb375435a9783e2157b3457029572"
+      "11d719ddaf2f44d8205527ca9719b48b929df5f4209da1f85943471bd054d8fa"
     ],
     [
       ".kilo/agents/enforcement.md",
@@ -3346,7 +4410,7 @@
     ],
     [
       ".kilo/agents/frontend.md",
-      "823b954ff7fd4c3f151b45d998e12da70d43ab549647706799aa4dd246503e35"
+      "cb953cd9d9981d8ca1f086d428762199ea74f763ec3da8c23eed9c1b5dd08476"
     ],
     [
       ".kilo/agents/migration/strategy.md",
@@ -3358,7 +4422,7 @@
     ],
     [
       ".kilo/agents/orchestrator/devops.md",
-      "75532900195e1e242a32117a4b7bd36c874b649067bc4b9eb7f74d04302fa24f"
+      "3f4a55572d500d570c9932d512f3a42b3882571ebd2c772407c7d62721cfd27c"
     ],
     [
       ".kilo/agents/orchestrator/maintenance.md",
@@ -3374,7 +4438,7 @@
     ],
     [
       ".kilo/agents/orchestrator.md",
-      "97a860d54c78484d33fff23516d7f94d25a1836d38f1b82bcf5fafaf07ecc74b"
+      "c741cada01f463794994ad5ddd2bc6b53214a553493c8ec9f10cc760383400ca"
     ],
     [
       ".kilo/agents/performance/benchmarking.md",
@@ -3394,7 +4458,7 @@
     ],
     [
       ".kilo/agents/performance.md",
-      "28cdf732afdf902b632c4a2f9c1863c0d2267bbe84c5ff7c46a5811041e0d0b5"
+      "26ef8bbf2d8ae8d2d44c1edcb44a8cb2a7dfdfe3c8fdc5cd0ffb0fb9b3a4f77e"
     ],
     [
       ".kilo/agents/plan.md",
@@ -3418,7 +4482,7 @@
     ],
     [
       ".kilo/agents/review/performance.md",
-      "038c5ee3dab34ab5cd984cb1bebea386470e5c6c2b487efd0f20583da14f8d42"
+      "fd6b2fb7b82aa5f357b6ede6573e33fa540f9589c34005f187a7b594e0004808"
     ],
     [
       ".kilo/agents/review.md",
@@ -3430,7 +4494,7 @@
     ],
     [
       ".kilo/agents/test.md",
-      "a0f4fe07a2090f4332a35d2d61b856f406b2979d4954eb622dd3fe9ec32689a3"
+      "cc64437f39c25de8ff8c473c1892365c5a252b2c1701b661848ca13312784bb1"
     ],
     [
       ".kilo/commands/boilerplate.md",
@@ -3509,6 +4573,10 @@
       "69eb118484f93009b85d299cf0831748056f28c6e979ec1e1454f3b3384f40dd"
     ],
     [
+      ".kilo/skills/api-versioning-strategy/SKILL.md",
+      "062a339a10c5df713eae0561b016be7c2c8a5b6c14d974d932e3d5802344f8c6"
+    ],
+    [
       ".kilo/skills/architecture-documentation/SKILL.md",
       "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
     ],
@@ -3517,8 +4585,20 @@
       "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
     ],
     [
+      ".kilo/skills/component-design-systems/SKILL.md",
+      "1bb0df66ef6171502653a5e772be74936770dacc19032bebb6d60b99a7c28132"
+    ],
+    [
+      ".kilo/skills/container-security-hardening/SKILL.md",
+      "f001021179851705430635206e964b9682cd643b69b4daf5fa6514d66f326482"
+    ],
+    [
       ".kilo/skills/continuous-improvement/SKILL.md",
       "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+    ],
+    [
+      ".kilo/skills/css-performance-optimization/SKILL.md",
+      "1baec4f80a3a53a084784c645c755c49272d18e1542040715dfe702836037d12"
     ],
     [
       ".kilo/skills/data-model-discovery/SKILL.md",
@@ -3533,6 +4613,14 @@
       "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
     ],
     [
+      ".kilo/skills/deployment-rollback-strategies/SKILL.md",
+      "d2395d14a3c4a3535206ea9f9a65913d332bbb5867ebfc81beacb1a255c66852"
+    ],
+    [
+      ".kilo/skills/distributed-caching-design/SKILL.md",
+      "7be0a0c2fa17608a61687445b80fa3329a72b2036cfe6b9ec2590aa18cdd517e"
+    ],
+    [
       ".kilo/skills/documentation-best-practices/SKILL.md",
       "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
     ],
@@ -3541,12 +4629,44 @@
       "a85d09f78dec318635b4de95f1202d3443fb9e67b9b320237572df0aa6425454"
     ],
     [
+      ".kilo/skills/flaky-test-remediation/SKILL.md",
+      "af38d1eae88a45994293b7ecb1e2995174a830e032b182735ef91603b0ef775c"
+    ],
+    [
+      ".kilo/skills/iac-best-practices/SKILL.md",
+      "4db8feb77b490eea6dd52374637923448a3ae6f27c138d6c996880407c5a096b"
+    ],
+    [
+      ".kilo/skills/idempotency-patterns/SKILL.md",
+      "82bb636d4307a3938351e759fda7b6e82fe194b391a683ad1460c203be5d3ddf"
+    ],
+    [
       ".kilo/skills/incremental-implementation/SKILL.md",
       "c8db9858e7b72b9f941e9038d15d04503ebf60c51462e3a71367903f3c8e5063"
     ],
     [
+      ".kilo/skills/infrastructure-drift-detection/SKILL.md",
+      "2d205cd017dc95f36f8312eae242d89545394bd38f8d6e865f87fd2ab13ef3f6"
+    ],
+    [
+      ".kilo/skills/kubernetes-resource-management/SKILL.md",
+      "9e6838351778a507ea552e13f5ca5cf57198ac93c9575fca9676be1419ef04c4"
+    ],
+    [
+      ".kilo/skills/load-testing/SKILL.md",
+      "19dfc3642b9f2aefe995d94709ecf5b34d0f1565661e6c22a0fe68ac90a81b58"
+    ],
+    [
+      ".kilo/skills/microservices-communication-patterns/SKILL.md",
+      "8cc8e74218d5e09d2100d78553436b8344407ca72c73abebd28f264bab5b215d"
+    ],
+    [
       ".kilo/skills/multiagent-orchestration/SKILL.md",
       "d6c940687cbd37a68a491a4303032bc90ac7b9dff01e2db84e1c451082aa26b9"
+    ],
+    [
+      ".kilo/skills/mutation-testing/SKILL.md",
+      "72465156b7fd71cc5f721eb2f73012446073a4521c2811f27bc933e618911be2"
     ],
     [
       ".kilo/skills/performance-optimization/SKILL.md",
@@ -3563,6 +4683,22 @@
     [
       ".kilo/skills/quality-assurance/SKILL.md",
       "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+    ],
+    [
+      ".kilo/skills/responsive-design-patterns/SKILL.md",
+      "105b708b213b2f13448a59ce5731a3ccc88d7a981725f31844d3da23eb6d4546"
+    ],
+    [
+      ".kilo/skills/root-cause-five-whys/SKILL.md",
+      "3bf80710e90b704cea7bd09c12eac4ae55243c848973a444066a51d46b319fc2"
+    ],
+    [
+      ".kilo/skills/sql-optimization/SKILL.md",
+      "3182fea02148ddc71c4dde630c633cc027defc4529f35c90bd0c9f2f8cd8d2cb"
+    ],
+    [
+      ".kilo/skills/state-management-architecture/SKILL.md",
+      "bb5c379c9574566e3631a856e7ada4429cbb1e2b2839e5b48a2c94f1cb157e6a"
     ],
     [
       ".kilo/skills/team-collaboration/SKILL.md",
@@ -3587,6 +4723,10 @@
     [
       ".kilo/skills/test-coverage-categories/SKILL.md",
       "fa6fe18acd7a5bd3f899aa65ef3e00a541743f622de4e7ebfb09ff137101c954"
+    ],
+    [
+      ".kilo/skills/test-data-strategies/SKILL.md",
+      "a0969a8e0ec0b50d59e0fb0e8ff9ffde8d4accd7321c484ded6fcb3050e31497"
     ],
     [
       ".kilo/skills/test-mocking-rules/SKILL.md",
@@ -3636,7 +4776,7 @@
     ],
     [
       ".kilo/agents/backend.md",
-      "5110e0be6b52b9fddffd4a77875528611518385bef726a1b241d9d893450bedf"
+      "d67ee70900b05b78afc24525d76831d35b09069757b68fcacd3bb15f3a8420d3"
     ],
     [
       ".kilo/agents/code/boilerplate.md",
@@ -3680,7 +4820,7 @@
     ],
     [
       ".kilo/agents/debug.md",
-      "dbfc9646a99e467e0ba118bfcd710417afedb375435a9783e2157b3457029572"
+      "11d719ddaf2f44d8205527ca9719b48b929df5f4209da1f85943471bd054d8fa"
     ],
     [
       ".kilo/agents/enforcement.md",
@@ -3712,7 +4852,7 @@
     ],
     [
       ".kilo/agents/frontend.md",
-      "823b954ff7fd4c3f151b45d998e12da70d43ab549647706799aa4dd246503e35"
+      "cb953cd9d9981d8ca1f086d428762199ea74f763ec3da8c23eed9c1b5dd08476"
     ],
     [
       ".kilo/agents/migration/strategy.md",
@@ -3724,7 +4864,7 @@
     ],
     [
       ".kilo/agents/orchestrator/devops.md",
-      "75532900195e1e242a32117a4b7bd36c874b649067bc4b9eb7f74d04302fa24f"
+      "3f4a55572d500d570c9932d512f3a42b3882571ebd2c772407c7d62721cfd27c"
     ],
     [
       ".kilo/agents/orchestrator/maintenance.md",
@@ -3740,7 +4880,7 @@
     ],
     [
       ".kilo/agents/orchestrator.md",
-      "97a860d54c78484d33fff23516d7f94d25a1836d38f1b82bcf5fafaf07ecc74b"
+      "c741cada01f463794994ad5ddd2bc6b53214a553493c8ec9f10cc760383400ca"
     ],
     [
       ".kilo/agents/performance/benchmarking.md",
@@ -3760,7 +4900,7 @@
     ],
     [
       ".kilo/agents/performance.md",
-      "28cdf732afdf902b632c4a2f9c1863c0d2267bbe84c5ff7c46a5811041e0d0b5"
+      "26ef8bbf2d8ae8d2d44c1edcb44a8cb2a7dfdfe3c8fdc5cd0ffb0fb9b3a4f77e"
     ],
     [
       ".kilo/agents/plan.md",
@@ -3784,7 +4924,7 @@
     ],
     [
       ".kilo/agents/review/performance.md",
-      "038c5ee3dab34ab5cd984cb1bebea386470e5c6c2b487efd0f20583da14f8d42"
+      "fd6b2fb7b82aa5f357b6ede6573e33fa540f9589c34005f187a7b594e0004808"
     ],
     [
       ".kilo/agents/review.md",
@@ -3796,7 +4936,7 @@
     ],
     [
       ".kilo/agents/test.md",
-      "a0f4fe07a2090f4332a35d2d61b856f406b2979d4954eb622dd3fe9ec32689a3"
+      "cc64437f39c25de8ff8c473c1892365c5a252b2c1701b661848ca13312784bb1"
     ],
     [
       ".kilo/commands/boilerplate.md",
@@ -3875,6 +5015,10 @@
       "69eb118484f93009b85d299cf0831748056f28c6e979ec1e1454f3b3384f40dd"
     ],
     [
+      ".kilo/skills/api-versioning-strategy/SKILL.md",
+      "f9b26da1e18a83e0c968339e34963b0711cf45f29eeb611bddd894238427cdd5"
+    ],
+    [
       ".kilo/skills/architecture-documentation/SKILL.md",
       "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
     ],
@@ -3883,8 +5027,20 @@
       "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
     ],
     [
+      ".kilo/skills/component-design-systems/SKILL.md",
+      "cb1b1534cd89c9c7fd3ed283b8538bbf59ca7157a1853afd8f4aaee04cd27ab0"
+    ],
+    [
+      ".kilo/skills/container-security-hardening/SKILL.md",
+      "c49b021220a4786e43da7781b593f2f9b46337e5dc659d39abaa612ca0b31cb8"
+    ],
+    [
       ".kilo/skills/continuous-improvement/SKILL.md",
       "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+    ],
+    [
+      ".kilo/skills/css-performance-optimization/SKILL.md",
+      "83cbc72812042b18330ec9f15091ffe74fb26ec38c602f19568d7180180b9c21"
     ],
     [
       ".kilo/skills/data-model-discovery/SKILL.md",
@@ -3899,6 +5055,14 @@
       "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
     ],
     [
+      ".kilo/skills/deployment-rollback-strategies/SKILL.md",
+      "ef50c407c99c7d6f1dd30a09132640bfe9553f717034cbd72f95eaf7406dfd56"
+    ],
+    [
+      ".kilo/skills/distributed-caching-design/SKILL.md",
+      "31bf68b5dab3a5cc16898ac93fea538876da154d0af47e2b4cabdd0ddbf2abbf"
+    ],
+    [
       ".kilo/skills/documentation-best-practices/SKILL.md",
       "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
     ],
@@ -3907,12 +5071,44 @@
       "3b43fa04f2823fcd2adc420ba1adc4989c3fe6d0a247f93f1d0e765f5ec971e6"
     ],
     [
+      ".kilo/skills/flaky-test-remediation/SKILL.md",
+      "0f203482a5d6c7cc77f46048608a249a76dac379769d73a8dd96d2e6c209ea74"
+    ],
+    [
+      ".kilo/skills/iac-best-practices/SKILL.md",
+      "e7da4e6302c09d36fc3338d73c70da71ab10c981e7ffdf7cc18f85e853a62810"
+    ],
+    [
+      ".kilo/skills/idempotency-patterns/SKILL.md",
+      "cd4400973250e3bf2a04cb9f9022be57cb8c2d14f3eceff1834dadac316e9a68"
+    ],
+    [
       ".kilo/skills/incremental-implementation/SKILL.md",
       "af8ee67d6925c3095724964a59a134d9725d5952bfa361cf5d7eef7e42ffbe6a"
     ],
     [
+      ".kilo/skills/infrastructure-drift-detection/SKILL.md",
+      "ba399dc9d93bfa327975daf55aa74110c59f9a8271295af7d539024ac0989122"
+    ],
+    [
+      ".kilo/skills/kubernetes-resource-management/SKILL.md",
+      "91e6789680fe120d88b80608b8d55786db82f77ecef82e8887f38a6ab6a72e0f"
+    ],
+    [
+      ".kilo/skills/load-testing/SKILL.md",
+      "08abc06e211c4882fe857e1ba6678146955267fa23626540e996023953534629"
+    ],
+    [
+      ".kilo/skills/microservices-communication-patterns/SKILL.md",
+      "6b6fe9f51433dddf2bc819abffffe271eab0edf0911793ac958575d395458193"
+    ],
+    [
       ".kilo/skills/multiagent-orchestration/SKILL.md",
       "4f56926633e3b6527047e07041e415cbf0bc171ca9cfdf7fa0f99b8550a51705"
+    ],
+    [
+      ".kilo/skills/mutation-testing/SKILL.md",
+      "7e9e0fa511d57b16686cde557bfb59362d3097f98afc8d5d6b13c53b41391476"
     ],
     [
       ".kilo/skills/performance-optimization/SKILL.md",
@@ -3929,6 +5125,22 @@
     [
       ".kilo/skills/quality-assurance/SKILL.md",
       "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+    ],
+    [
+      ".kilo/skills/responsive-design-patterns/SKILL.md",
+      "96062773f1262500e9abcfb2ffe7b954be7e30d2bdcfbef64fd4872463ec9439"
+    ],
+    [
+      ".kilo/skills/root-cause-five-whys/SKILL.md",
+      "f60365561f5c771b5e322cbbfc5f4880a5fcac4468654605282a6bce38d22baf"
+    ],
+    [
+      ".kilo/skills/sql-optimization/SKILL.md",
+      "45dfb605b2d477fa6fc09636afe1fff5bdc529c716a87da4260ff01bb5c2275e"
+    ],
+    [
+      ".kilo/skills/state-management-architecture/SKILL.md",
+      "c641a42a54da19f6c0bb5e96b566d1a25349029a9e494366c37f6562ccbec964"
     ],
     [
       ".kilo/skills/team-collaboration/SKILL.md",
@@ -3953,6 +5165,10 @@
     [
       ".kilo/skills/test-coverage-categories/SKILL.md",
       "2fdc372ca80ff46ba0df367a1c6d7751a0b367d4abcfc1d5113aa3718fee2d72"
+    ],
+    [
+      ".kilo/skills/test-data-strategies/SKILL.md",
+      "fbe3c3bc61495dc614f8ca20b726ff8b8820479dc40248f38d607ee8050cef18"
     ],
     [
       ".kilo/skills/test-mocking-rules/SKILL.md",
@@ -4002,7 +5218,7 @@
     ],
     [
       ".kilo/agents/backend.md",
-      "5110e0be6b52b9fddffd4a77875528611518385bef726a1b241d9d893450bedf"
+      "d67ee70900b05b78afc24525d76831d35b09069757b68fcacd3bb15f3a8420d3"
     ],
     [
       ".kilo/agents/code/boilerplate.md",
@@ -4046,7 +5262,7 @@
     ],
     [
       ".kilo/agents/debug.md",
-      "dbfc9646a99e467e0ba118bfcd710417afedb375435a9783e2157b3457029572"
+      "11d719ddaf2f44d8205527ca9719b48b929df5f4209da1f85943471bd054d8fa"
     ],
     [
       ".kilo/agents/enforcement.md",
@@ -4078,7 +5294,7 @@
     ],
     [
       ".kilo/agents/frontend.md",
-      "823b954ff7fd4c3f151b45d998e12da70d43ab549647706799aa4dd246503e35"
+      "cb953cd9d9981d8ca1f086d428762199ea74f763ec3da8c23eed9c1b5dd08476"
     ],
     [
       ".kilo/agents/migration/strategy.md",
@@ -4090,7 +5306,7 @@
     ],
     [
       ".kilo/agents/orchestrator/devops.md",
-      "75532900195e1e242a32117a4b7bd36c874b649067bc4b9eb7f74d04302fa24f"
+      "3f4a55572d500d570c9932d512f3a42b3882571ebd2c772407c7d62721cfd27c"
     ],
     [
       ".kilo/agents/orchestrator/maintenance.md",
@@ -4106,7 +5322,7 @@
     ],
     [
       ".kilo/agents/orchestrator.md",
-      "97a860d54c78484d33fff23516d7f94d25a1836d38f1b82bcf5fafaf07ecc74b"
+      "c741cada01f463794994ad5ddd2bc6b53214a553493c8ec9f10cc760383400ca"
     ],
     [
       ".kilo/agents/performance/benchmarking.md",
@@ -4126,7 +5342,7 @@
     ],
     [
       ".kilo/agents/performance.md",
-      "28cdf732afdf902b632c4a2f9c1863c0d2267bbe84c5ff7c46a5811041e0d0b5"
+      "26ef8bbf2d8ae8d2d44c1edcb44a8cb2a7dfdfe3c8fdc5cd0ffb0fb9b3a4f77e"
     ],
     [
       ".kilo/agents/plan.md",
@@ -4150,7 +5366,7 @@
     ],
     [
       ".kilo/agents/review/performance.md",
-      "038c5ee3dab34ab5cd984cb1bebea386470e5c6c2b487efd0f20583da14f8d42"
+      "fd6b2fb7b82aa5f357b6ede6573e33fa540f9589c34005f187a7b594e0004808"
     ],
     [
       ".kilo/agents/review.md",
@@ -4162,7 +5378,7 @@
     ],
     [
       ".kilo/agents/test.md",
-      "a0f4fe07a2090f4332a35d2d61b856f406b2979d4954eb622dd3fe9ec32689a3"
+      "cc64437f39c25de8ff8c473c1892365c5a252b2c1701b661848ca13312784bb1"
     ],
     [
       ".kilo/commands/boilerplate.md",
@@ -4241,6 +5457,10 @@
       "69eb118484f93009b85d299cf0831748056f28c6e979ec1e1454f3b3384f40dd"
     ],
     [
+      ".kilo/skills/api-versioning-strategy/SKILL.md",
+      "062a339a10c5df713eae0561b016be7c2c8a5b6c14d974d932e3d5802344f8c6"
+    ],
+    [
       ".kilo/skills/architecture-documentation/SKILL.md",
       "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
     ],
@@ -4249,8 +5469,20 @@
       "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
     ],
     [
+      ".kilo/skills/component-design-systems/SKILL.md",
+      "1bb0df66ef6171502653a5e772be74936770dacc19032bebb6d60b99a7c28132"
+    ],
+    [
+      ".kilo/skills/container-security-hardening/SKILL.md",
+      "f001021179851705430635206e964b9682cd643b69b4daf5fa6514d66f326482"
+    ],
+    [
       ".kilo/skills/continuous-improvement/SKILL.md",
       "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+    ],
+    [
+      ".kilo/skills/css-performance-optimization/SKILL.md",
+      "1baec4f80a3a53a084784c645c755c49272d18e1542040715dfe702836037d12"
     ],
     [
       ".kilo/skills/data-model-discovery/SKILL.md",
@@ -4265,6 +5497,14 @@
       "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
     ],
     [
+      ".kilo/skills/deployment-rollback-strategies/SKILL.md",
+      "d2395d14a3c4a3535206ea9f9a65913d332bbb5867ebfc81beacb1a255c66852"
+    ],
+    [
+      ".kilo/skills/distributed-caching-design/SKILL.md",
+      "7be0a0c2fa17608a61687445b80fa3329a72b2036cfe6b9ec2590aa18cdd517e"
+    ],
+    [
       ".kilo/skills/documentation-best-practices/SKILL.md",
       "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
     ],
@@ -4273,12 +5513,44 @@
       "a85d09f78dec318635b4de95f1202d3443fb9e67b9b320237572df0aa6425454"
     ],
     [
+      ".kilo/skills/flaky-test-remediation/SKILL.md",
+      "af38d1eae88a45994293b7ecb1e2995174a830e032b182735ef91603b0ef775c"
+    ],
+    [
+      ".kilo/skills/iac-best-practices/SKILL.md",
+      "4db8feb77b490eea6dd52374637923448a3ae6f27c138d6c996880407c5a096b"
+    ],
+    [
+      ".kilo/skills/idempotency-patterns/SKILL.md",
+      "82bb636d4307a3938351e759fda7b6e82fe194b391a683ad1460c203be5d3ddf"
+    ],
+    [
       ".kilo/skills/incremental-implementation/SKILL.md",
       "c8db9858e7b72b9f941e9038d15d04503ebf60c51462e3a71367903f3c8e5063"
     ],
     [
+      ".kilo/skills/infrastructure-drift-detection/SKILL.md",
+      "2d205cd017dc95f36f8312eae242d89545394bd38f8d6e865f87fd2ab13ef3f6"
+    ],
+    [
+      ".kilo/skills/kubernetes-resource-management/SKILL.md",
+      "9e6838351778a507ea552e13f5ca5cf57198ac93c9575fca9676be1419ef04c4"
+    ],
+    [
+      ".kilo/skills/load-testing/SKILL.md",
+      "19dfc3642b9f2aefe995d94709ecf5b34d0f1565661e6c22a0fe68ac90a81b58"
+    ],
+    [
+      ".kilo/skills/microservices-communication-patterns/SKILL.md",
+      "8cc8e74218d5e09d2100d78553436b8344407ca72c73abebd28f264bab5b215d"
+    ],
+    [
       ".kilo/skills/multiagent-orchestration/SKILL.md",
       "d6c940687cbd37a68a491a4303032bc90ac7b9dff01e2db84e1c451082aa26b9"
+    ],
+    [
+      ".kilo/skills/mutation-testing/SKILL.md",
+      "72465156b7fd71cc5f721eb2f73012446073a4521c2811f27bc933e618911be2"
     ],
     [
       ".kilo/skills/performance-optimization/SKILL.md",
@@ -4295,6 +5567,22 @@
     [
       ".kilo/skills/quality-assurance/SKILL.md",
       "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+    ],
+    [
+      ".kilo/skills/responsive-design-patterns/SKILL.md",
+      "105b708b213b2f13448a59ce5731a3ccc88d7a981725f31844d3da23eb6d4546"
+    ],
+    [
+      ".kilo/skills/root-cause-five-whys/SKILL.md",
+      "3bf80710e90b704cea7bd09c12eac4ae55243c848973a444066a51d46b319fc2"
+    ],
+    [
+      ".kilo/skills/sql-optimization/SKILL.md",
+      "3182fea02148ddc71c4dde630c633cc027defc4529f35c90bd0c9f2f8cd8d2cb"
+    ],
+    [
+      ".kilo/skills/state-management-architecture/SKILL.md",
+      "bb5c379c9574566e3631a856e7ada4429cbb1e2b2839e5b48a2c94f1cb157e6a"
     ],
     [
       ".kilo/skills/team-collaboration/SKILL.md",
@@ -4319,6 +5607,10 @@
     [
       ".kilo/skills/test-coverage-categories/SKILL.md",
       "fa6fe18acd7a5bd3f899aa65ef3e00a541743f622de4e7ebfb09ff137101c954"
+    ],
+    [
+      ".kilo/skills/test-data-strategies/SKILL.md",
+      "a0969a8e0ec0b50d59e0fb0e8ff9ffde8d4accd7321c484ded6fcb3050e31497"
     ],
     [
       ".kilo/skills/test-mocking-rules/SKILL.md",
@@ -4368,7 +5660,7 @@
     ],
     [
       ".kilo/agents/backend.md",
-      "5110e0be6b52b9fddffd4a77875528611518385bef726a1b241d9d893450bedf"
+      "d67ee70900b05b78afc24525d76831d35b09069757b68fcacd3bb15f3a8420d3"
     ],
     [
       ".kilo/agents/code/boilerplate.md",
@@ -4412,7 +5704,7 @@
     ],
     [
       ".kilo/agents/debug.md",
-      "dbfc9646a99e467e0ba118bfcd710417afedb375435a9783e2157b3457029572"
+      "11d719ddaf2f44d8205527ca9719b48b929df5f4209da1f85943471bd054d8fa"
     ],
     [
       ".kilo/agents/enforcement.md",
@@ -4444,7 +5736,7 @@
     ],
     [
       ".kilo/agents/frontend.md",
-      "823b954ff7fd4c3f151b45d998e12da70d43ab549647706799aa4dd246503e35"
+      "cb953cd9d9981d8ca1f086d428762199ea74f763ec3da8c23eed9c1b5dd08476"
     ],
     [
       ".kilo/agents/migration/strategy.md",
@@ -4456,7 +5748,7 @@
     ],
     [
       ".kilo/agents/orchestrator/devops.md",
-      "75532900195e1e242a32117a4b7bd36c874b649067bc4b9eb7f74d04302fa24f"
+      "3f4a55572d500d570c9932d512f3a42b3882571ebd2c772407c7d62721cfd27c"
     ],
     [
       ".kilo/agents/orchestrator/maintenance.md",
@@ -4472,7 +5764,7 @@
     ],
     [
       ".kilo/agents/orchestrator.md",
-      "97a860d54c78484d33fff23516d7f94d25a1836d38f1b82bcf5fafaf07ecc74b"
+      "c741cada01f463794994ad5ddd2bc6b53214a553493c8ec9f10cc760383400ca"
     ],
     [
       ".kilo/agents/performance/benchmarking.md",
@@ -4492,7 +5784,7 @@
     ],
     [
       ".kilo/agents/performance.md",
-      "28cdf732afdf902b632c4a2f9c1863c0d2267bbe84c5ff7c46a5811041e0d0b5"
+      "26ef8bbf2d8ae8d2d44c1edcb44a8cb2a7dfdfe3c8fdc5cd0ffb0fb9b3a4f77e"
     ],
     [
       ".kilo/agents/plan.md",
@@ -4516,7 +5808,7 @@
     ],
     [
       ".kilo/agents/review/performance.md",
-      "038c5ee3dab34ab5cd984cb1bebea386470e5c6c2b487efd0f20583da14f8d42"
+      "fd6b2fb7b82aa5f357b6ede6573e33fa540f9589c34005f187a7b594e0004808"
     ],
     [
       ".kilo/agents/review.md",
@@ -4528,7 +5820,7 @@
     ],
     [
       ".kilo/agents/test.md",
-      "a0f4fe07a2090f4332a35d2d61b856f406b2979d4954eb622dd3fe9ec32689a3"
+      "cc64437f39c25de8ff8c473c1892365c5a252b2c1701b661848ca13312784bb1"
     ],
     [
       ".kilo/commands/boilerplate.md",
@@ -4607,6 +5899,10 @@
       "69eb118484f93009b85d299cf0831748056f28c6e979ec1e1454f3b3384f40dd"
     ],
     [
+      ".kilo/skills/api-versioning-strategy/SKILL.md",
+      "f9b26da1e18a83e0c968339e34963b0711cf45f29eeb611bddd894238427cdd5"
+    ],
+    [
       ".kilo/skills/architecture-documentation/SKILL.md",
       "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
     ],
@@ -4615,8 +5911,20 @@
       "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
     ],
     [
+      ".kilo/skills/component-design-systems/SKILL.md",
+      "cb1b1534cd89c9c7fd3ed283b8538bbf59ca7157a1853afd8f4aaee04cd27ab0"
+    ],
+    [
+      ".kilo/skills/container-security-hardening/SKILL.md",
+      "c49b021220a4786e43da7781b593f2f9b46337e5dc659d39abaa612ca0b31cb8"
+    ],
+    [
       ".kilo/skills/continuous-improvement/SKILL.md",
       "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+    ],
+    [
+      ".kilo/skills/css-performance-optimization/SKILL.md",
+      "83cbc72812042b18330ec9f15091ffe74fb26ec38c602f19568d7180180b9c21"
     ],
     [
       ".kilo/skills/data-model-discovery/SKILL.md",
@@ -4631,6 +5939,14 @@
       "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
     ],
     [
+      ".kilo/skills/deployment-rollback-strategies/SKILL.md",
+      "ef50c407c99c7d6f1dd30a09132640bfe9553f717034cbd72f95eaf7406dfd56"
+    ],
+    [
+      ".kilo/skills/distributed-caching-design/SKILL.md",
+      "31bf68b5dab3a5cc16898ac93fea538876da154d0af47e2b4cabdd0ddbf2abbf"
+    ],
+    [
       ".kilo/skills/documentation-best-practices/SKILL.md",
       "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
     ],
@@ -4639,12 +5955,44 @@
       "3b43fa04f2823fcd2adc420ba1adc4989c3fe6d0a247f93f1d0e765f5ec971e6"
     ],
     [
+      ".kilo/skills/flaky-test-remediation/SKILL.md",
+      "0f203482a5d6c7cc77f46048608a249a76dac379769d73a8dd96d2e6c209ea74"
+    ],
+    [
+      ".kilo/skills/iac-best-practices/SKILL.md",
+      "e7da4e6302c09d36fc3338d73c70da71ab10c981e7ffdf7cc18f85e853a62810"
+    ],
+    [
+      ".kilo/skills/idempotency-patterns/SKILL.md",
+      "cd4400973250e3bf2a04cb9f9022be57cb8c2d14f3eceff1834dadac316e9a68"
+    ],
+    [
       ".kilo/skills/incremental-implementation/SKILL.md",
       "af8ee67d6925c3095724964a59a134d9725d5952bfa361cf5d7eef7e42ffbe6a"
     ],
     [
+      ".kilo/skills/infrastructure-drift-detection/SKILL.md",
+      "ba399dc9d93bfa327975daf55aa74110c59f9a8271295af7d539024ac0989122"
+    ],
+    [
+      ".kilo/skills/kubernetes-resource-management/SKILL.md",
+      "91e6789680fe120d88b80608b8d55786db82f77ecef82e8887f38a6ab6a72e0f"
+    ],
+    [
+      ".kilo/skills/load-testing/SKILL.md",
+      "08abc06e211c4882fe857e1ba6678146955267fa23626540e996023953534629"
+    ],
+    [
+      ".kilo/skills/microservices-communication-patterns/SKILL.md",
+      "6b6fe9f51433dddf2bc819abffffe271eab0edf0911793ac958575d395458193"
+    ],
+    [
       ".kilo/skills/multiagent-orchestration/SKILL.md",
       "4f56926633e3b6527047e07041e415cbf0bc171ca9cfdf7fa0f99b8550a51705"
+    ],
+    [
+      ".kilo/skills/mutation-testing/SKILL.md",
+      "7e9e0fa511d57b16686cde557bfb59362d3097f98afc8d5d6b13c53b41391476"
     ],
     [
       ".kilo/skills/performance-optimization/SKILL.md",
@@ -4661,6 +6009,22 @@
     [
       ".kilo/skills/quality-assurance/SKILL.md",
       "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+    ],
+    [
+      ".kilo/skills/responsive-design-patterns/SKILL.md",
+      "96062773f1262500e9abcfb2ffe7b954be7e30d2bdcfbef64fd4872463ec9439"
+    ],
+    [
+      ".kilo/skills/root-cause-five-whys/SKILL.md",
+      "f60365561f5c771b5e322cbbfc5f4880a5fcac4468654605282a6bce38d22baf"
+    ],
+    [
+      ".kilo/skills/sql-optimization/SKILL.md",
+      "45dfb605b2d477fa6fc09636afe1fff5bdc529c716a87da4260ff01bb5c2275e"
+    ],
+    [
+      ".kilo/skills/state-management-architecture/SKILL.md",
+      "c641a42a54da19f6c0bb5e96b566d1a25349029a9e494366c37f6562ccbec964"
     ],
     [
       ".kilo/skills/team-collaboration/SKILL.md",
@@ -4685,6 +6049,10 @@
     [
       ".kilo/skills/test-coverage-categories/SKILL.md",
       "2fdc372ca80ff46ba0df367a1c6d7751a0b367d4abcfc1d5113aa3718fee2d72"
+    ],
+    [
+      ".kilo/skills/test-data-strategies/SKILL.md",
+      "fbe3c3bc61495dc614f8ca20b726ff8b8820479dc40248f38d607ee8050cef18"
     ],
     [
       ".kilo/skills/test-mocking-rules/SKILL.md",
@@ -4758,7 +6126,7 @@
     ],
     [
       ".roo/rules-backend/01-instructions.md",
-      "9fae4444a3597b23f90f14e761ff764a24a0feeebc1132480d1a98ae3656ede2"
+      "8708e7ad2536572fc85cd9e20b286e8d72ec494bf65ee862753ef54bdf88af38"
     ],
     [
       ".roo/rules-code/01-instructions.md",
@@ -4766,7 +6134,7 @@
     ],
     [
       ".roo/rules-debug/01-instructions.md",
-      "0ee059e3d96dc697ff67600f5193c0d188aea16af3949f49a4ba24459cb4110c"
+      "ce78bc72287e8faeda25518b6d0e33f56e66ee300f2faeb009a608521c55b230"
     ],
     [
       ".roo/rules-enforcement/01-instructions.md",
@@ -4778,7 +6146,7 @@
     ],
     [
       ".roo/rules-frontend/01-instructions.md",
-      "63063a9f81de5d3fb50674ce051146a6914809e143e28f47aeb16e7fc6df22b3"
+      "91b2bf519d983639abf07b0475def391d39284770d9600d175e11116be68705e"
     ],
     [
       ".roo/rules-migration/01-instructions.md",
@@ -4786,11 +6154,11 @@
     ],
     [
       ".roo/rules-orchestrator/01-instructions.md",
-      "105f7097c51216500001b0e2dc99aa262f6be6005b3073dad250aa480800bd64"
+      "9ffbe69b9a8337c5043e882f1c2dcafffc464ac59dc301eb1ad13f49756d196b"
     ],
     [
       ".roo/rules-performance/01-instructions.md",
-      "f0fae2c7c642b8b57fb10fc1c9df2959f344589df306a85b5c30b36f9c1897d4"
+      "b4b5ed3fa26b330e6ec194080b8d5397e455858d2eba803efd4c0dbfc7a4f53f"
     ],
     [
       ".roo/rules-plan/01-instructions.md",
@@ -4806,7 +6174,11 @@
     ],
     [
       ".roo/rules-test/01-instructions.md",
-      "182f8f15b6f00428c1df58362648f5a9caec5a489745502d203d325e2477f9cc"
+      "0acb59a0a1394365afcfc1015d82d14b7b4610710168cf292e6d09564715e4af"
+    ],
+    [
+      ".roo/skills/api-versioning-strategy/SKILL.md",
+      "062a339a10c5df713eae0561b016be7c2c8a5b6c14d974d932e3d5802344f8c6"
     ],
     [
       ".roo/skills/architecture-documentation/SKILL.md",
@@ -4817,8 +6189,20 @@
       "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
     ],
     [
+      ".roo/skills/component-design-systems/SKILL.md",
+      "1bb0df66ef6171502653a5e772be74936770dacc19032bebb6d60b99a7c28132"
+    ],
+    [
+      ".roo/skills/container-security-hardening/SKILL.md",
+      "f001021179851705430635206e964b9682cd643b69b4daf5fa6514d66f326482"
+    ],
+    [
       ".roo/skills/continuous-improvement/SKILL.md",
       "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+    ],
+    [
+      ".roo/skills/css-performance-optimization/SKILL.md",
+      "1baec4f80a3a53a084784c645c755c49272d18e1542040715dfe702836037d12"
     ],
     [
       ".roo/skills/data-model-discovery/SKILL.md",
@@ -4833,6 +6217,14 @@
       "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
     ],
     [
+      ".roo/skills/deployment-rollback-strategies/SKILL.md",
+      "d2395d14a3c4a3535206ea9f9a65913d332bbb5867ebfc81beacb1a255c66852"
+    ],
+    [
+      ".roo/skills/distributed-caching-design/SKILL.md",
+      "7be0a0c2fa17608a61687445b80fa3329a72b2036cfe6b9ec2590aa18cdd517e"
+    ],
+    [
       ".roo/skills/documentation-best-practices/SKILL.md",
       "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
     ],
@@ -4841,12 +6233,44 @@
       "a85d09f78dec318635b4de95f1202d3443fb9e67b9b320237572df0aa6425454"
     ],
     [
+      ".roo/skills/flaky-test-remediation/SKILL.md",
+      "af38d1eae88a45994293b7ecb1e2995174a830e032b182735ef91603b0ef775c"
+    ],
+    [
+      ".roo/skills/iac-best-practices/SKILL.md",
+      "4db8feb77b490eea6dd52374637923448a3ae6f27c138d6c996880407c5a096b"
+    ],
+    [
+      ".roo/skills/idempotency-patterns/SKILL.md",
+      "82bb636d4307a3938351e759fda7b6e82fe194b391a683ad1460c203be5d3ddf"
+    ],
+    [
       ".roo/skills/incremental-implementation/SKILL.md",
       "c8db9858e7b72b9f941e9038d15d04503ebf60c51462e3a71367903f3c8e5063"
     ],
     [
+      ".roo/skills/infrastructure-drift-detection/SKILL.md",
+      "2d205cd017dc95f36f8312eae242d89545394bd38f8d6e865f87fd2ab13ef3f6"
+    ],
+    [
+      ".roo/skills/kubernetes-resource-management/SKILL.md",
+      "9e6838351778a507ea552e13f5ca5cf57198ac93c9575fca9676be1419ef04c4"
+    ],
+    [
+      ".roo/skills/load-testing/SKILL.md",
+      "19dfc3642b9f2aefe995d94709ecf5b34d0f1565661e6c22a0fe68ac90a81b58"
+    ],
+    [
+      ".roo/skills/microservices-communication-patterns/SKILL.md",
+      "8cc8e74218d5e09d2100d78553436b8344407ca72c73abebd28f264bab5b215d"
+    ],
+    [
       ".roo/skills/multiagent-orchestration/SKILL.md",
       "d6c940687cbd37a68a491a4303032bc90ac7b9dff01e2db84e1c451082aa26b9"
+    ],
+    [
+      ".roo/skills/mutation-testing/SKILL.md",
+      "72465156b7fd71cc5f721eb2f73012446073a4521c2811f27bc933e618911be2"
     ],
     [
       ".roo/skills/performance-optimization/SKILL.md",
@@ -4863,6 +6287,22 @@
     [
       ".roo/skills/quality-assurance/SKILL.md",
       "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+    ],
+    [
+      ".roo/skills/responsive-design-patterns/SKILL.md",
+      "105b708b213b2f13448a59ce5731a3ccc88d7a981725f31844d3da23eb6d4546"
+    ],
+    [
+      ".roo/skills/root-cause-five-whys/SKILL.md",
+      "3bf80710e90b704cea7bd09c12eac4ae55243c848973a444066a51d46b319fc2"
+    ],
+    [
+      ".roo/skills/sql-optimization/SKILL.md",
+      "3182fea02148ddc71c4dde630c633cc027defc4529f35c90bd0c9f2f8cd8d2cb"
+    ],
+    [
+      ".roo/skills/state-management-architecture/SKILL.md",
+      "bb5c379c9574566e3631a856e7ada4429cbb1e2b2839e5b48a2c94f1cb157e6a"
     ],
     [
       ".roo/skills/team-collaboration/SKILL.md",
@@ -4887,6 +6327,10 @@
     [
       ".roo/skills/test-coverage-categories/SKILL.md",
       "fa6fe18acd7a5bd3f899aa65ef3e00a541743f622de4e7ebfb09ff137101c954"
+    ],
+    [
+      ".roo/skills/test-data-strategies/SKILL.md",
+      "a0969a8e0ec0b50d59e0fb0e8ff9ffde8d4accd7321c484ded6fcb3050e31497"
     ],
     [
       ".roo/skills/test-mocking-rules/SKILL.md",
@@ -4964,7 +6408,7 @@
     ],
     [
       ".roo/rules-backend/01-instructions.md",
-      "9fae4444a3597b23f90f14e761ff764a24a0feeebc1132480d1a98ae3656ede2"
+      "8708e7ad2536572fc85cd9e20b286e8d72ec494bf65ee862753ef54bdf88af38"
     ],
     [
       ".roo/rules-code/01-instructions.md",
@@ -4972,7 +6416,7 @@
     ],
     [
       ".roo/rules-debug/01-instructions.md",
-      "0ee059e3d96dc697ff67600f5193c0d188aea16af3949f49a4ba24459cb4110c"
+      "ce78bc72287e8faeda25518b6d0e33f56e66ee300f2faeb009a608521c55b230"
     ],
     [
       ".roo/rules-enforcement/01-instructions.md",
@@ -4984,7 +6428,7 @@
     ],
     [
       ".roo/rules-frontend/01-instructions.md",
-      "63063a9f81de5d3fb50674ce051146a6914809e143e28f47aeb16e7fc6df22b3"
+      "91b2bf519d983639abf07b0475def391d39284770d9600d175e11116be68705e"
     ],
     [
       ".roo/rules-migration/01-instructions.md",
@@ -4992,11 +6436,11 @@
     ],
     [
       ".roo/rules-orchestrator/01-instructions.md",
-      "105f7097c51216500001b0e2dc99aa262f6be6005b3073dad250aa480800bd64"
+      "9ffbe69b9a8337c5043e882f1c2dcafffc464ac59dc301eb1ad13f49756d196b"
     ],
     [
       ".roo/rules-performance/01-instructions.md",
-      "f0fae2c7c642b8b57fb10fc1c9df2959f344589df306a85b5c30b36f9c1897d4"
+      "b4b5ed3fa26b330e6ec194080b8d5397e455858d2eba803efd4c0dbfc7a4f53f"
     ],
     [
       ".roo/rules-plan/01-instructions.md",
@@ -5012,7 +6456,11 @@
     ],
     [
       ".roo/rules-test/01-instructions.md",
-      "182f8f15b6f00428c1df58362648f5a9caec5a489745502d203d325e2477f9cc"
+      "0acb59a0a1394365afcfc1015d82d14b7b4610710168cf292e6d09564715e4af"
+    ],
+    [
+      ".roo/skills/api-versioning-strategy/SKILL.md",
+      "f9b26da1e18a83e0c968339e34963b0711cf45f29eeb611bddd894238427cdd5"
     ],
     [
       ".roo/skills/architecture-documentation/SKILL.md",
@@ -5023,8 +6471,20 @@
       "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
     ],
     [
+      ".roo/skills/component-design-systems/SKILL.md",
+      "cb1b1534cd89c9c7fd3ed283b8538bbf59ca7157a1853afd8f4aaee04cd27ab0"
+    ],
+    [
+      ".roo/skills/container-security-hardening/SKILL.md",
+      "c49b021220a4786e43da7781b593f2f9b46337e5dc659d39abaa612ca0b31cb8"
+    ],
+    [
       ".roo/skills/continuous-improvement/SKILL.md",
       "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+    ],
+    [
+      ".roo/skills/css-performance-optimization/SKILL.md",
+      "83cbc72812042b18330ec9f15091ffe74fb26ec38c602f19568d7180180b9c21"
     ],
     [
       ".roo/skills/data-model-discovery/SKILL.md",
@@ -5039,6 +6499,14 @@
       "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
     ],
     [
+      ".roo/skills/deployment-rollback-strategies/SKILL.md",
+      "ef50c407c99c7d6f1dd30a09132640bfe9553f717034cbd72f95eaf7406dfd56"
+    ],
+    [
+      ".roo/skills/distributed-caching-design/SKILL.md",
+      "31bf68b5dab3a5cc16898ac93fea538876da154d0af47e2b4cabdd0ddbf2abbf"
+    ],
+    [
       ".roo/skills/documentation-best-practices/SKILL.md",
       "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
     ],
@@ -5047,12 +6515,44 @@
       "3b43fa04f2823fcd2adc420ba1adc4989c3fe6d0a247f93f1d0e765f5ec971e6"
     ],
     [
+      ".roo/skills/flaky-test-remediation/SKILL.md",
+      "0f203482a5d6c7cc77f46048608a249a76dac379769d73a8dd96d2e6c209ea74"
+    ],
+    [
+      ".roo/skills/iac-best-practices/SKILL.md",
+      "e7da4e6302c09d36fc3338d73c70da71ab10c981e7ffdf7cc18f85e853a62810"
+    ],
+    [
+      ".roo/skills/idempotency-patterns/SKILL.md",
+      "cd4400973250e3bf2a04cb9f9022be57cb8c2d14f3eceff1834dadac316e9a68"
+    ],
+    [
       ".roo/skills/incremental-implementation/SKILL.md",
       "af8ee67d6925c3095724964a59a134d9725d5952bfa361cf5d7eef7e42ffbe6a"
     ],
     [
+      ".roo/skills/infrastructure-drift-detection/SKILL.md",
+      "ba399dc9d93bfa327975daf55aa74110c59f9a8271295af7d539024ac0989122"
+    ],
+    [
+      ".roo/skills/kubernetes-resource-management/SKILL.md",
+      "91e6789680fe120d88b80608b8d55786db82f77ecef82e8887f38a6ab6a72e0f"
+    ],
+    [
+      ".roo/skills/load-testing/SKILL.md",
+      "08abc06e211c4882fe857e1ba6678146955267fa23626540e996023953534629"
+    ],
+    [
+      ".roo/skills/microservices-communication-patterns/SKILL.md",
+      "6b6fe9f51433dddf2bc819abffffe271eab0edf0911793ac958575d395458193"
+    ],
+    [
       ".roo/skills/multiagent-orchestration/SKILL.md",
       "4f56926633e3b6527047e07041e415cbf0bc171ca9cfdf7fa0f99b8550a51705"
+    ],
+    [
+      ".roo/skills/mutation-testing/SKILL.md",
+      "7e9e0fa511d57b16686cde557bfb59362d3097f98afc8d5d6b13c53b41391476"
     ],
     [
       ".roo/skills/performance-optimization/SKILL.md",
@@ -5069,6 +6569,22 @@
     [
       ".roo/skills/quality-assurance/SKILL.md",
       "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+    ],
+    [
+      ".roo/skills/responsive-design-patterns/SKILL.md",
+      "96062773f1262500e9abcfb2ffe7b954be7e30d2bdcfbef64fd4872463ec9439"
+    ],
+    [
+      ".roo/skills/root-cause-five-whys/SKILL.md",
+      "f60365561f5c771b5e322cbbfc5f4880a5fcac4468654605282a6bce38d22baf"
+    ],
+    [
+      ".roo/skills/sql-optimization/SKILL.md",
+      "45dfb605b2d477fa6fc09636afe1fff5bdc529c716a87da4260ff01bb5c2275e"
+    ],
+    [
+      ".roo/skills/state-management-architecture/SKILL.md",
+      "c641a42a54da19f6c0bb5e96b566d1a25349029a9e494366c37f6562ccbec964"
     ],
     [
       ".roo/skills/team-collaboration/SKILL.md",
@@ -5093,6 +6609,10 @@
     [
       ".roo/skills/test-coverage-categories/SKILL.md",
       "2fdc372ca80ff46ba0df367a1c6d7751a0b367d4abcfc1d5113aa3718fee2d72"
+    ],
+    [
+      ".roo/skills/test-data-strategies/SKILL.md",
+      "fbe3c3bc61495dc614f8ca20b726ff8b8820479dc40248f38d607ee8050cef18"
     ],
     [
       ".roo/skills/test-mocking-rules/SKILL.md",
@@ -5121,6 +6641,10 @@
       "f244dbf0b92deb57689c03d5699156f21db0a797a546a8670eded83c16949fdf"
     ],
     [
+      ".windsurf/skills/api-versioning-strategy/SKILL.md",
+      "062a339a10c5df713eae0561b016be7c2c8a5b6c14d974d932e3d5802344f8c6"
+    ],
+    [
       ".windsurf/skills/architecture-documentation/SKILL.md",
       "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
     ],
@@ -5141,8 +6665,20 @@
       "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
     ],
     [
+      ".windsurf/skills/component-design-systems/SKILL.md",
+      "1bb0df66ef6171502653a5e772be74936770dacc19032bebb6d60b99a7c28132"
+    ],
+    [
+      ".windsurf/skills/container-security-hardening/SKILL.md",
+      "f001021179851705430635206e964b9682cd643b69b4daf5fa6514d66f326482"
+    ],
+    [
       ".windsurf/skills/continuous-improvement/SKILL.md",
       "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+    ],
+    [
+      ".windsurf/skills/css-performance-optimization/SKILL.md",
+      "1baec4f80a3a53a084784c645c755c49272d18e1542040715dfe702836037d12"
     ],
     [
       ".windsurf/skills/data-model-discovery/SKILL.md",
@@ -5161,6 +6697,14 @@
       "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
     ],
     [
+      ".windsurf/skills/deployment-rollback-strategies/SKILL.md",
+      "d2395d14a3c4a3535206ea9f9a65913d332bbb5867ebfc81beacb1a255c66852"
+    ],
+    [
+      ".windsurf/skills/distributed-caching-design/SKILL.md",
+      "7be0a0c2fa17608a61687445b80fa3329a72b2036cfe6b9ec2590aa18cdd517e"
+    ],
+    [
       ".windsurf/skills/documentation-best-practices/SKILL.md",
       "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
     ],
@@ -5177,12 +6721,40 @@
       "a85d09f78dec318635b4de95f1202d3443fb9e67b9b320237572df0aa6425454"
     ],
     [
+      ".windsurf/skills/flaky-test-remediation/SKILL.md",
+      "af38d1eae88a45994293b7ecb1e2995174a830e032b182735ef91603b0ef775c"
+    ],
+    [
       ".windsurf/skills/frontend/SKILL.md",
       "6783c7e258f16f763248511406652bc5af4705bdb8a89fd808c07cdd6d135cbf"
     ],
     [
+      ".windsurf/skills/iac-best-practices/SKILL.md",
+      "4db8feb77b490eea6dd52374637923448a3ae6f27c138d6c996880407c5a096b"
+    ],
+    [
+      ".windsurf/skills/idempotency-patterns/SKILL.md",
+      "82bb636d4307a3938351e759fda7b6e82fe194b391a683ad1460c203be5d3ddf"
+    ],
+    [
       ".windsurf/skills/incremental-implementation/SKILL.md",
       "c8db9858e7b72b9f941e9038d15d04503ebf60c51462e3a71367903f3c8e5063"
+    ],
+    [
+      ".windsurf/skills/infrastructure-drift-detection/SKILL.md",
+      "2d205cd017dc95f36f8312eae242d89545394bd38f8d6e865f87fd2ab13ef3f6"
+    ],
+    [
+      ".windsurf/skills/kubernetes-resource-management/SKILL.md",
+      "9e6838351778a507ea552e13f5ca5cf57198ac93c9575fca9676be1419ef04c4"
+    ],
+    [
+      ".windsurf/skills/load-testing/SKILL.md",
+      "19dfc3642b9f2aefe995d94709ecf5b34d0f1565661e6c22a0fe68ac90a81b58"
+    ],
+    [
+      ".windsurf/skills/microservices-communication-patterns/SKILL.md",
+      "8cc8e74218d5e09d2100d78553436b8344407ca72c73abebd28f264bab5b215d"
     ],
     [
       ".windsurf/skills/migration/SKILL.md",
@@ -5191,6 +6763,10 @@
     [
       ".windsurf/skills/multiagent-orchestration/SKILL.md",
       "d6c940687cbd37a68a491a4303032bc90ac7b9dff01e2db84e1c451082aa26b9"
+    ],
+    [
+      ".windsurf/skills/mutation-testing/SKILL.md",
+      "72465156b7fd71cc5f721eb2f73012446073a4521c2811f27bc933e618911be2"
     ],
     [
       ".windsurf/skills/orchestrator/SKILL.md",
@@ -5225,8 +6801,24 @@
       "fa32eb7dfe5ff3e58f4c4ce6c425b54309018ab39f4989e0323830db409b4bf9"
     ],
     [
+      ".windsurf/skills/responsive-design-patterns/SKILL.md",
+      "105b708b213b2f13448a59ce5731a3ccc88d7a981725f31844d3da23eb6d4546"
+    ],
+    [
       ".windsurf/skills/review/SKILL.md",
       "a839b22dab90efc8da1beda86f4c4020d6abbfa53536ba8dd4212a956ff66d8c"
+    ],
+    [
+      ".windsurf/skills/root-cause-five-whys/SKILL.md",
+      "3bf80710e90b704cea7bd09c12eac4ae55243c848973a444066a51d46b319fc2"
+    ],
+    [
+      ".windsurf/skills/sql-optimization/SKILL.md",
+      "3182fea02148ddc71c4dde630c633cc027defc4529f35c90bd0c9f2f8cd8d2cb"
+    ],
+    [
+      ".windsurf/skills/state-management-architecture/SKILL.md",
+      "bb5c379c9574566e3631a856e7ada4429cbb1e2b2839e5b48a2c94f1cb157e6a"
     ],
     [
       ".windsurf/skills/team-collaboration/SKILL.md",
@@ -5255,6 +6847,10 @@
     [
       ".windsurf/skills/test-coverage-categories/SKILL.md",
       "fa6fe18acd7a5bd3f899aa65ef3e00a541743f622de4e7ebfb09ff137101c954"
+    ],
+    [
+      ".windsurf/skills/test-data-strategies/SKILL.md",
+      "a0969a8e0ec0b50d59e0fb0e8ff9ffde8d4accd7321c484ded6fcb3050e31497"
     ],
     [
       ".windsurf/skills/test-mocking-rules/SKILL.md",
@@ -5327,6 +6923,10 @@
       "f244dbf0b92deb57689c03d5699156f21db0a797a546a8670eded83c16949fdf"
     ],
     [
+      ".windsurf/skills/api-versioning-strategy/SKILL.md",
+      "f9b26da1e18a83e0c968339e34963b0711cf45f29eeb611bddd894238427cdd5"
+    ],
+    [
       ".windsurf/skills/architecture-documentation/SKILL.md",
       "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
     ],
@@ -5347,8 +6947,20 @@
       "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
     ],
     [
+      ".windsurf/skills/component-design-systems/SKILL.md",
+      "cb1b1534cd89c9c7fd3ed283b8538bbf59ca7157a1853afd8f4aaee04cd27ab0"
+    ],
+    [
+      ".windsurf/skills/container-security-hardening/SKILL.md",
+      "c49b021220a4786e43da7781b593f2f9b46337e5dc659d39abaa612ca0b31cb8"
+    ],
+    [
       ".windsurf/skills/continuous-improvement/SKILL.md",
       "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+    ],
+    [
+      ".windsurf/skills/css-performance-optimization/SKILL.md",
+      "83cbc72812042b18330ec9f15091ffe74fb26ec38c602f19568d7180180b9c21"
     ],
     [
       ".windsurf/skills/data-model-discovery/SKILL.md",
@@ -5367,6 +6979,14 @@
       "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
     ],
     [
+      ".windsurf/skills/deployment-rollback-strategies/SKILL.md",
+      "ef50c407c99c7d6f1dd30a09132640bfe9553f717034cbd72f95eaf7406dfd56"
+    ],
+    [
+      ".windsurf/skills/distributed-caching-design/SKILL.md",
+      "31bf68b5dab3a5cc16898ac93fea538876da154d0af47e2b4cabdd0ddbf2abbf"
+    ],
+    [
       ".windsurf/skills/documentation-best-practices/SKILL.md",
       "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
     ],
@@ -5383,12 +7003,40 @@
       "3b43fa04f2823fcd2adc420ba1adc4989c3fe6d0a247f93f1d0e765f5ec971e6"
     ],
     [
+      ".windsurf/skills/flaky-test-remediation/SKILL.md",
+      "0f203482a5d6c7cc77f46048608a249a76dac379769d73a8dd96d2e6c209ea74"
+    ],
+    [
       ".windsurf/skills/frontend/SKILL.md",
       "6783c7e258f16f763248511406652bc5af4705bdb8a89fd808c07cdd6d135cbf"
     ],
     [
+      ".windsurf/skills/iac-best-practices/SKILL.md",
+      "e7da4e6302c09d36fc3338d73c70da71ab10c981e7ffdf7cc18f85e853a62810"
+    ],
+    [
+      ".windsurf/skills/idempotency-patterns/SKILL.md",
+      "cd4400973250e3bf2a04cb9f9022be57cb8c2d14f3eceff1834dadac316e9a68"
+    ],
+    [
       ".windsurf/skills/incremental-implementation/SKILL.md",
       "af8ee67d6925c3095724964a59a134d9725d5952bfa361cf5d7eef7e42ffbe6a"
+    ],
+    [
+      ".windsurf/skills/infrastructure-drift-detection/SKILL.md",
+      "ba399dc9d93bfa327975daf55aa74110c59f9a8271295af7d539024ac0989122"
+    ],
+    [
+      ".windsurf/skills/kubernetes-resource-management/SKILL.md",
+      "91e6789680fe120d88b80608b8d55786db82f77ecef82e8887f38a6ab6a72e0f"
+    ],
+    [
+      ".windsurf/skills/load-testing/SKILL.md",
+      "08abc06e211c4882fe857e1ba6678146955267fa23626540e996023953534629"
+    ],
+    [
+      ".windsurf/skills/microservices-communication-patterns/SKILL.md",
+      "6b6fe9f51433dddf2bc819abffffe271eab0edf0911793ac958575d395458193"
     ],
     [
       ".windsurf/skills/migration/SKILL.md",
@@ -5397,6 +7045,10 @@
     [
       ".windsurf/skills/multiagent-orchestration/SKILL.md",
       "4f56926633e3b6527047e07041e415cbf0bc171ca9cfdf7fa0f99b8550a51705"
+    ],
+    [
+      ".windsurf/skills/mutation-testing/SKILL.md",
+      "7e9e0fa511d57b16686cde557bfb59362d3097f98afc8d5d6b13c53b41391476"
     ],
     [
       ".windsurf/skills/orchestrator/SKILL.md",
@@ -5431,8 +7083,24 @@
       "fa32eb7dfe5ff3e58f4c4ce6c425b54309018ab39f4989e0323830db409b4bf9"
     ],
     [
+      ".windsurf/skills/responsive-design-patterns/SKILL.md",
+      "96062773f1262500e9abcfb2ffe7b954be7e30d2bdcfbef64fd4872463ec9439"
+    ],
+    [
       ".windsurf/skills/review/SKILL.md",
       "a839b22dab90efc8da1beda86f4c4020d6abbfa53536ba8dd4212a956ff66d8c"
+    ],
+    [
+      ".windsurf/skills/root-cause-five-whys/SKILL.md",
+      "f60365561f5c771b5e322cbbfc5f4880a5fcac4468654605282a6bce38d22baf"
+    ],
+    [
+      ".windsurf/skills/sql-optimization/SKILL.md",
+      "45dfb605b2d477fa6fc09636afe1fff5bdc529c716a87da4260ff01bb5c2275e"
+    ],
+    [
+      ".windsurf/skills/state-management-architecture/SKILL.md",
+      "c641a42a54da19f6c0bb5e96b566d1a25349029a9e494366c37f6562ccbec964"
     ],
     [
       ".windsurf/skills/team-collaboration/SKILL.md",
@@ -5461,6 +7129,10 @@
     [
       ".windsurf/skills/test-coverage-categories/SKILL.md",
       "2fdc372ca80ff46ba0df367a1c6d7751a0b367d4abcfc1d5113aa3718fee2d72"
+    ],
+    [
+      ".windsurf/skills/test-data-strategies/SKILL.md",
+      "fbe3c3bc61495dc614f8ca20b726ff8b8820479dc40248f38d607ee8050cef18"
     ],
     [
       ".windsurf/skills/test-mocking-rules/SKILL.md",
@@ -5525,6 +7197,10 @@
   ],
   "zed::minimal": [
     [
+      ".agents/skills/api-versioning-strategy/SKILL.md",
+      "062a339a10c5df713eae0561b016be7c2c8a5b6c14d974d932e3d5802344f8c6"
+    ],
+    [
       ".agents/skills/architecture-documentation/SKILL.md",
       "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
     ],
@@ -5545,8 +7221,20 @@
       "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
     ],
     [
+      ".agents/skills/component-design-systems/SKILL.md",
+      "1bb0df66ef6171502653a5e772be74936770dacc19032bebb6d60b99a7c28132"
+    ],
+    [
+      ".agents/skills/container-security-hardening/SKILL.md",
+      "f001021179851705430635206e964b9682cd643b69b4daf5fa6514d66f326482"
+    ],
+    [
       ".agents/skills/continuous-improvement/SKILL.md",
       "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+    ],
+    [
+      ".agents/skills/css-performance-optimization/SKILL.md",
+      "1baec4f80a3a53a084784c645c755c49272d18e1542040715dfe702836037d12"
     ],
     [
       ".agents/skills/data-model-discovery/SKILL.md",
@@ -5565,6 +7253,14 @@
       "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
     ],
     [
+      ".agents/skills/deployment-rollback-strategies/SKILL.md",
+      "d2395d14a3c4a3535206ea9f9a65913d332bbb5867ebfc81beacb1a255c66852"
+    ],
+    [
+      ".agents/skills/distributed-caching-design/SKILL.md",
+      "7be0a0c2fa17608a61687445b80fa3329a72b2036cfe6b9ec2590aa18cdd517e"
+    ],
+    [
       ".agents/skills/documentation-best-practices/SKILL.md",
       "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
     ],
@@ -5581,12 +7277,40 @@
       "a85d09f78dec318635b4de95f1202d3443fb9e67b9b320237572df0aa6425454"
     ],
     [
+      ".agents/skills/flaky-test-remediation/SKILL.md",
+      "af38d1eae88a45994293b7ecb1e2995174a830e032b182735ef91603b0ef775c"
+    ],
+    [
       ".agents/skills/frontend/SKILL.md",
       "6783c7e258f16f763248511406652bc5af4705bdb8a89fd808c07cdd6d135cbf"
     ],
     [
+      ".agents/skills/iac-best-practices/SKILL.md",
+      "4db8feb77b490eea6dd52374637923448a3ae6f27c138d6c996880407c5a096b"
+    ],
+    [
+      ".agents/skills/idempotency-patterns/SKILL.md",
+      "82bb636d4307a3938351e759fda7b6e82fe194b391a683ad1460c203be5d3ddf"
+    ],
+    [
       ".agents/skills/incremental-implementation/SKILL.md",
       "c8db9858e7b72b9f941e9038d15d04503ebf60c51462e3a71367903f3c8e5063"
+    ],
+    [
+      ".agents/skills/infrastructure-drift-detection/SKILL.md",
+      "2d205cd017dc95f36f8312eae242d89545394bd38f8d6e865f87fd2ab13ef3f6"
+    ],
+    [
+      ".agents/skills/kubernetes-resource-management/SKILL.md",
+      "9e6838351778a507ea552e13f5ca5cf57198ac93c9575fca9676be1419ef04c4"
+    ],
+    [
+      ".agents/skills/load-testing/SKILL.md",
+      "19dfc3642b9f2aefe995d94709ecf5b34d0f1565661e6c22a0fe68ac90a81b58"
+    ],
+    [
+      ".agents/skills/microservices-communication-patterns/SKILL.md",
+      "8cc8e74218d5e09d2100d78553436b8344407ca72c73abebd28f264bab5b215d"
     ],
     [
       ".agents/skills/migration/SKILL.md",
@@ -5595,6 +7319,10 @@
     [
       ".agents/skills/multiagent-orchestration/SKILL.md",
       "d6c940687cbd37a68a491a4303032bc90ac7b9dff01e2db84e1c451082aa26b9"
+    ],
+    [
+      ".agents/skills/mutation-testing/SKILL.md",
+      "72465156b7fd71cc5f721eb2f73012446073a4521c2811f27bc933e618911be2"
     ],
     [
       ".agents/skills/orchestrator/SKILL.md",
@@ -5629,8 +7357,24 @@
       "fa32eb7dfe5ff3e58f4c4ce6c425b54309018ab39f4989e0323830db409b4bf9"
     ],
     [
+      ".agents/skills/responsive-design-patterns/SKILL.md",
+      "105b708b213b2f13448a59ce5731a3ccc88d7a981725f31844d3da23eb6d4546"
+    ],
+    [
       ".agents/skills/review/SKILL.md",
       "a839b22dab90efc8da1beda86f4c4020d6abbfa53536ba8dd4212a956ff66d8c"
+    ],
+    [
+      ".agents/skills/root-cause-five-whys/SKILL.md",
+      "3bf80710e90b704cea7bd09c12eac4ae55243c848973a444066a51d46b319fc2"
+    ],
+    [
+      ".agents/skills/sql-optimization/SKILL.md",
+      "3182fea02148ddc71c4dde630c633cc027defc4529f35c90bd0c9f2f8cd8d2cb"
+    ],
+    [
+      ".agents/skills/state-management-architecture/SKILL.md",
+      "bb5c379c9574566e3631a856e7ada4429cbb1e2b2839e5b48a2c94f1cb157e6a"
     ],
     [
       ".agents/skills/team-collaboration/SKILL.md",
@@ -5661,6 +7405,10 @@
       "fa6fe18acd7a5bd3f899aa65ef3e00a541743f622de4e7ebfb09ff137101c954"
     ],
     [
+      ".agents/skills/test-data-strategies/SKILL.md",
+      "a0969a8e0ec0b50d59e0fb0e8ff9ffde8d4accd7321c484ded6fcb3050e31497"
+    ],
+    [
       ".agents/skills/test-mocking-rules/SKILL.md",
       "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec"
     ],
@@ -5674,6 +7422,10 @@
     ]
   ],
   "zed::verbose": [
+    [
+      ".agents/skills/api-versioning-strategy/SKILL.md",
+      "f9b26da1e18a83e0c968339e34963b0711cf45f29eeb611bddd894238427cdd5"
+    ],
     [
       ".agents/skills/architecture-documentation/SKILL.md",
       "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
@@ -5695,8 +7447,20 @@
       "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
     ],
     [
+      ".agents/skills/component-design-systems/SKILL.md",
+      "cb1b1534cd89c9c7fd3ed283b8538bbf59ca7157a1853afd8f4aaee04cd27ab0"
+    ],
+    [
+      ".agents/skills/container-security-hardening/SKILL.md",
+      "c49b021220a4786e43da7781b593f2f9b46337e5dc659d39abaa612ca0b31cb8"
+    ],
+    [
       ".agents/skills/continuous-improvement/SKILL.md",
       "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+    ],
+    [
+      ".agents/skills/css-performance-optimization/SKILL.md",
+      "83cbc72812042b18330ec9f15091ffe74fb26ec38c602f19568d7180180b9c21"
     ],
     [
       ".agents/skills/data-model-discovery/SKILL.md",
@@ -5715,6 +7479,14 @@
       "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
     ],
     [
+      ".agents/skills/deployment-rollback-strategies/SKILL.md",
+      "ef50c407c99c7d6f1dd30a09132640bfe9553f717034cbd72f95eaf7406dfd56"
+    ],
+    [
+      ".agents/skills/distributed-caching-design/SKILL.md",
+      "31bf68b5dab3a5cc16898ac93fea538876da154d0af47e2b4cabdd0ddbf2abbf"
+    ],
+    [
       ".agents/skills/documentation-best-practices/SKILL.md",
       "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
     ],
@@ -5731,12 +7503,40 @@
       "3b43fa04f2823fcd2adc420ba1adc4989c3fe6d0a247f93f1d0e765f5ec971e6"
     ],
     [
+      ".agents/skills/flaky-test-remediation/SKILL.md",
+      "0f203482a5d6c7cc77f46048608a249a76dac379769d73a8dd96d2e6c209ea74"
+    ],
+    [
       ".agents/skills/frontend/SKILL.md",
       "6783c7e258f16f763248511406652bc5af4705bdb8a89fd808c07cdd6d135cbf"
     ],
     [
+      ".agents/skills/iac-best-practices/SKILL.md",
+      "e7da4e6302c09d36fc3338d73c70da71ab10c981e7ffdf7cc18f85e853a62810"
+    ],
+    [
+      ".agents/skills/idempotency-patterns/SKILL.md",
+      "cd4400973250e3bf2a04cb9f9022be57cb8c2d14f3eceff1834dadac316e9a68"
+    ],
+    [
       ".agents/skills/incremental-implementation/SKILL.md",
       "af8ee67d6925c3095724964a59a134d9725d5952bfa361cf5d7eef7e42ffbe6a"
+    ],
+    [
+      ".agents/skills/infrastructure-drift-detection/SKILL.md",
+      "ba399dc9d93bfa327975daf55aa74110c59f9a8271295af7d539024ac0989122"
+    ],
+    [
+      ".agents/skills/kubernetes-resource-management/SKILL.md",
+      "91e6789680fe120d88b80608b8d55786db82f77ecef82e8887f38a6ab6a72e0f"
+    ],
+    [
+      ".agents/skills/load-testing/SKILL.md",
+      "08abc06e211c4882fe857e1ba6678146955267fa23626540e996023953534629"
+    ],
+    [
+      ".agents/skills/microservices-communication-patterns/SKILL.md",
+      "6b6fe9f51433dddf2bc819abffffe271eab0edf0911793ac958575d395458193"
     ],
     [
       ".agents/skills/migration/SKILL.md",
@@ -5745,6 +7545,10 @@
     [
       ".agents/skills/multiagent-orchestration/SKILL.md",
       "4f56926633e3b6527047e07041e415cbf0bc171ca9cfdf7fa0f99b8550a51705"
+    ],
+    [
+      ".agents/skills/mutation-testing/SKILL.md",
+      "7e9e0fa511d57b16686cde557bfb59362d3097f98afc8d5d6b13c53b41391476"
     ],
     [
       ".agents/skills/orchestrator/SKILL.md",
@@ -5779,8 +7583,24 @@
       "fa32eb7dfe5ff3e58f4c4ce6c425b54309018ab39f4989e0323830db409b4bf9"
     ],
     [
+      ".agents/skills/responsive-design-patterns/SKILL.md",
+      "96062773f1262500e9abcfb2ffe7b954be7e30d2bdcfbef64fd4872463ec9439"
+    ],
+    [
       ".agents/skills/review/SKILL.md",
       "a839b22dab90efc8da1beda86f4c4020d6abbfa53536ba8dd4212a956ff66d8c"
+    ],
+    [
+      ".agents/skills/root-cause-five-whys/SKILL.md",
+      "f60365561f5c771b5e322cbbfc5f4880a5fcac4468654605282a6bce38d22baf"
+    ],
+    [
+      ".agents/skills/sql-optimization/SKILL.md",
+      "45dfb605b2d477fa6fc09636afe1fff5bdc529c716a87da4260ff01bb5c2275e"
+    ],
+    [
+      ".agents/skills/state-management-architecture/SKILL.md",
+      "c641a42a54da19f6c0bb5e96b566d1a25349029a9e494366c37f6562ccbec964"
     ],
     [
       ".agents/skills/team-collaboration/SKILL.md",
@@ -5809,6 +7629,10 @@
     [
       ".agents/skills/test-coverage-categories/SKILL.md",
       "2fdc372ca80ff46ba0df367a1c6d7751a0b367d4abcfc1d5113aa3718fee2d72"
+    ],
+    [
+      ".agents/skills/test-data-strategies/SKILL.md",
+      "fbe3c3bc61495dc614f8ca20b726ff8b8820479dc40248f38d607ee8050cef18"
     ],
     [
       ".agents/skills/test-mocking-rules/SKILL.md",
