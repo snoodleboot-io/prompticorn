@@ -398,7 +398,7 @@
     ],
     [
       ".claude/skills/kubernetes-resource-management/SKILL.md",
-      "9e6838351778a507ea552e13f5ca5cf57198ac93c9575fca9676be1419ef04c4"
+      "d8e90b125b39c02afc23fd7077eb02f5ce6ed1a0f866a38faf0606fbf817f6da"
     ],
     [
       ".claude/skills/load-testing/SKILL.md",
@@ -872,7 +872,7 @@
     ],
     [
       ".claude/skills/kubernetes-resource-management/SKILL.md",
-      "91e6789680fe120d88b80608b8d55786db82f77ecef82e8887f38a6ab6a72e0f"
+      "485c9cec77ade687ca97c21a6f2d0710b738c349dec76c491954d047714f5565"
     ],
     [
       ".claude/skills/load-testing/SKILL.md",
@@ -1282,7 +1282,7 @@
     ],
     [
       ".cline/skills/kubernetes-resource-management/SKILL.md",
-      "9e6838351778a507ea552e13f5ca5cf57198ac93c9575fca9676be1419ef04c4"
+      "d8e90b125b39c02afc23fd7077eb02f5ce6ed1a0f866a38faf0606fbf817f6da"
     ],
     [
       ".cline/skills/load-testing/SKILL.md",
@@ -1456,7 +1456,7 @@
     ],
     [
       ".cline/skills/kubernetes-resource-management/SKILL.md",
-      "91e6789680fe120d88b80608b8d55786db82f77ecef82e8887f38a6ab6a72e0f"
+      "485c9cec77ade687ca97c21a6f2d0710b738c349dec76c491954d047714f5565"
     ],
     [
       ".cline/skills/load-testing/SKILL.md",
@@ -1658,7 +1658,7 @@
     ],
     [
       ".agents/skills/kubernetes-resource-management/SKILL.md",
-      "9e6838351778a507ea552e13f5ca5cf57198ac93c9575fca9676be1419ef04c4"
+      "d8e90b125b39c02afc23fd7077eb02f5ce6ed1a0f866a38faf0606fbf817f6da"
     ],
     [
       ".agents/skills/load-testing/SKILL.md",
@@ -1888,7 +1888,7 @@
     ],
     [
       ".agents/skills/kubernetes-resource-management/SKILL.md",
-      "91e6789680fe120d88b80608b8d55786db82f77ecef82e8887f38a6ab6a72e0f"
+      "485c9cec77ade687ca97c21a6f2d0710b738c349dec76c491954d047714f5565"
     ],
     [
       ".agents/skills/load-testing/SKILL.md",
@@ -2566,7 +2566,7 @@
     ],
     [
       ".github/skills/kubernetes-resource-management.md",
-      "9e6838351778a507ea552e13f5ca5cf57198ac93c9575fca9676be1419ef04c4"
+      "d8e90b125b39c02afc23fd7077eb02f5ce6ed1a0f866a38faf0606fbf817f6da"
     ],
     [
       ".github/skills/load-testing.md",
@@ -2740,7 +2740,7 @@
     ],
     [
       ".github/skills/kubernetes-resource-management.md",
-      "91e6789680fe120d88b80608b8d55786db82f77ecef82e8887f38a6ab6a72e0f"
+      "485c9cec77ade687ca97c21a6f2d0710b738c349dec76c491954d047714f5565"
     ],
     [
       ".github/skills/load-testing.md",
@@ -2910,7 +2910,7 @@
     ],
     [
       ".cursor/skills/kubernetes-resource-management/SKILL.md",
-      "9e6838351778a507ea552e13f5ca5cf57198ac93c9575fca9676be1419ef04c4"
+      "d8e90b125b39c02afc23fd7077eb02f5ce6ed1a0f866a38faf0606fbf817f6da"
     ],
     [
       ".cursor/skills/load-testing/SKILL.md",
@@ -3084,7 +3084,7 @@
     ],
     [
       ".cursor/skills/kubernetes-resource-management/SKILL.md",
-      "91e6789680fe120d88b80608b8d55786db82f77ecef82e8887f38a6ab6a72e0f"
+      "485c9cec77ade687ca97c21a6f2d0710b738c349dec76c491954d047714f5565"
     ],
     [
       ".cursor/skills/load-testing/SKILL.md",
@@ -3370,7 +3370,7 @@
     ],
     [
       ".gemini/skills/kubernetes-resource-management/SKILL.md",
-      "9e6838351778a507ea552e13f5ca5cf57198ac93c9575fca9676be1419ef04c4"
+      "d8e90b125b39c02afc23fd7077eb02f5ce6ed1a0f866a38faf0606fbf817f6da"
     ],
     [
       ".gemini/skills/load-testing/SKILL.md",
@@ -3652,7 +3652,7 @@
     ],
     [
       ".gemini/skills/kubernetes-resource-management/SKILL.md",
-      "91e6789680fe120d88b80608b8d55786db82f77ecef82e8887f38a6ab6a72e0f"
+      "485c9cec77ade687ca97c21a6f2d0710b738c349dec76c491954d047714f5565"
     ],
     [
       ".gemini/skills/load-testing/SKILL.md",
@@ -3930,7 +3930,7 @@
     ],
     [
       ".junie/skills/kubernetes-resource-management/SKILL.md",
-      "9e6838351778a507ea552e13f5ca5cf57198ac93c9575fca9676be1419ef04c4"
+      "d8e90b125b39c02afc23fd7077eb02f5ce6ed1a0f866a38faf0606fbf817f6da"
     ],
     [
       ".junie/skills/load-testing/SKILL.md",
@@ -4208,7 +4208,7 @@
     ],
     [
       ".junie/skills/kubernetes-resource-management/SKILL.md",
-      "91e6789680fe120d88b80608b8d55786db82f77ecef82e8887f38a6ab6a72e0f"
+      "485c9cec77ade687ca97c21a6f2d0710b738c349dec76c491954d047714f5565"
     ],
     [
       ".junie/skills/load-testing/SKILL.md",
@@ -4650,7 +4650,7 @@
     ],
     [
       ".kilo/skills/kubernetes-resource-management/SKILL.md",
-      "9e6838351778a507ea552e13f5ca5cf57198ac93c9575fca9676be1419ef04c4"
+      "d8e90b125b39c02afc23fd7077eb02f5ce6ed1a0f866a38faf0606fbf817f6da"
     ],
     [
       ".kilo/skills/load-testing/SKILL.md",
@@ -5092,7 +5092,7 @@
     ],
     [
       ".kilo/skills/kubernetes-resource-management/SKILL.md",
-      "91e6789680fe120d88b80608b8d55786db82f77ecef82e8887f38a6ab6a72e0f"
+      "485c9cec77ade687ca97c21a6f2d0710b738c349dec76c491954d047714f5565"
     ],
     [
       ".kilo/skills/load-testing/SKILL.md",
@@ -5534,7 +5534,7 @@
     ],
     [
       ".kilo/skills/kubernetes-resource-management/SKILL.md",
-      "9e6838351778a507ea552e13f5ca5cf57198ac93c9575fca9676be1419ef04c4"
+      "d8e90b125b39c02afc23fd7077eb02f5ce6ed1a0f866a38faf0606fbf817f6da"
     ],
     [
       ".kilo/skills/load-testing/SKILL.md",
@@ -5976,7 +5976,7 @@
     ],
     [
       ".kilo/skills/kubernetes-resource-management/SKILL.md",
-      "91e6789680fe120d88b80608b8d55786db82f77ecef82e8887f38a6ab6a72e0f"
+      "485c9cec77ade687ca97c21a6f2d0710b738c349dec76c491954d047714f5565"
     ],
     [
       ".kilo/skills/load-testing/SKILL.md",
@@ -6254,7 +6254,7 @@
     ],
     [
       ".roo/skills/kubernetes-resource-management/SKILL.md",
-      "9e6838351778a507ea552e13f5ca5cf57198ac93c9575fca9676be1419ef04c4"
+      "d8e90b125b39c02afc23fd7077eb02f5ce6ed1a0f866a38faf0606fbf817f6da"
     ],
     [
       ".roo/skills/load-testing/SKILL.md",
@@ -6536,7 +6536,7 @@
     ],
     [
       ".roo/skills/kubernetes-resource-management/SKILL.md",
-      "91e6789680fe120d88b80608b8d55786db82f77ecef82e8887f38a6ab6a72e0f"
+      "485c9cec77ade687ca97c21a6f2d0710b738c349dec76c491954d047714f5565"
     ],
     [
       ".roo/skills/load-testing/SKILL.md",
@@ -6746,7 +6746,7 @@
     ],
     [
       ".windsurf/skills/kubernetes-resource-management/SKILL.md",
-      "9e6838351778a507ea552e13f5ca5cf57198ac93c9575fca9676be1419ef04c4"
+      "d8e90b125b39c02afc23fd7077eb02f5ce6ed1a0f866a38faf0606fbf817f6da"
     ],
     [
       ".windsurf/skills/load-testing/SKILL.md",
@@ -7028,7 +7028,7 @@
     ],
     [
       ".windsurf/skills/kubernetes-resource-management/SKILL.md",
-      "91e6789680fe120d88b80608b8d55786db82f77ecef82e8887f38a6ab6a72e0f"
+      "485c9cec77ade687ca97c21a6f2d0710b738c349dec76c491954d047714f5565"
     ],
     [
       ".windsurf/skills/load-testing/SKILL.md",
@@ -7302,7 +7302,7 @@
     ],
     [
       ".agents/skills/kubernetes-resource-management/SKILL.md",
-      "9e6838351778a507ea552e13f5ca5cf57198ac93c9575fca9676be1419ef04c4"
+      "d8e90b125b39c02afc23fd7077eb02f5ce6ed1a0f866a38faf0606fbf817f6da"
     ],
     [
       ".agents/skills/load-testing/SKILL.md",
@@ -7528,7 +7528,7 @@
     ],
     [
       ".agents/skills/kubernetes-resource-management/SKILL.md",
-      "91e6789680fe120d88b80608b8d55786db82f77ecef82e8887f38a6ab6a72e0f"
+      "485c9cec77ade687ca97c21a6f2d0710b738c349dec76c491954d047714f5565"
     ],
     [
       ".agents/skills/load-testing/SKILL.md",

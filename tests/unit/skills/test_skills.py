@@ -190,9 +190,12 @@ class TestSkillContent:
         assert file_path.exists(), f"Missing {skill_name}/verbose"
         content = read_file(file_path)
         assert len(content.strip()) > 300, f"{skill_name} verbose should be comprehensive"
-        assert "Learning Path" in content or "Purpose" in content, (
-            f"{skill_name} verbose should have structured content"
-        )
+        # Authored skills use the house format (``## Core Patterns`` ... checklist);
+        # not-yet-authored ones still carry the older ``Purpose``/``Learning Path``
+        # scaffold. Either shape counts as structured content.
+        assert any(
+            marker in content for marker in ("## Core Patterns", "Learning Path", "Purpose")
+        ), f"{skill_name} verbose should have structured content"
 
 
 @pytest.mark.unit

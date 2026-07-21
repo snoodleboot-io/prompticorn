@@ -10,6 +10,7 @@ Validates:
 - Cross-references are valid
 """
 
+import re
 from pathlib import Path
 
 import pytest
@@ -211,6 +212,24 @@ class TestPhase3Skills:
 
     ALL_PHASE3_SKILLS = TRACK_1_SKILLS | TRACK_2_SKILLS | TRACK_3_SKILLS | TRACK_4_SKILLS
 
+    @classmethod
+    def authored_skills(cls):
+        """Skills converted from the placeholder scaffold to authored content.
+
+        The house format (see ``skills/authentication-design``) opens with an
+        ``# <Name> (Minimal|Verbose)`` heading and carries no YAML frontmatter.
+        Detect by that absence so converting a skill does not require editing
+        this list; the shape is then asserted by
+        ``test_authored_skills_use_house_format``.
+        """
+        return {
+            skill
+            for skill in cls.ALL_PHASE3_SKILLS
+            if not (cls.SKILLS_DIR / skill / "minimal" / "SKILL.md")
+            .read_text()
+            .startswith("---")
+        }
+
     def test_all_skills_exist(self):
         """Verify all 50 Phase 3 skills exist"""
         for skill in self.ALL_PHASE3_SKILLS:
@@ -240,9 +259,28 @@ class TestPhase3Skills:
             verb_lines = len(verbose.read_text().splitlines())
             assert verb_lines > min_lines, f"{skill} verbose should be larger than minimal"
 
+    def test_authored_skills_use_house_format(self):
+        """Authored skills open with a titled heading and carry no frontmatter."""
+        authored = self.authored_skills()
+        assert authored, "expected at least one authored skill"
+
+        for skill in sorted(authored):
+            for variant in ["minimal", "verbose"]:
+                filepath = self.SKILLS_DIR / skill / variant / "SKILL.md"
+                content = filepath.read_text()
+
+                assert not content.startswith("---"), (
+                    f"{skill} {variant} should not carry YAML frontmatter"
+                )
+                first_line = content.splitlines()[0]
+                assert re.fullmatch(rf"# .+ \({variant.title()}\)", first_line), (
+                    f"{skill} {variant} first line should be "
+                    f"'# <Title> ({variant.title()})', got {first_line!r}"
+                )
+
     def test_skills_have_yaml_frontmatter(self):
-        """Verify skills have valid YAML frontmatter"""
-        for skill in self.ALL_PHASE3_SKILLS:
+        """Verify scaffold skills still carry valid YAML frontmatter"""
+        for skill in self.ALL_PHASE3_SKILLS - self.authored_skills():
             for variant in ["minimal", "verbose"]:
                 filepath = self.SKILLS_DIR / skill / variant / "SKILL.md"
                 content = filepath.read_text()
