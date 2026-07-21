@@ -358,7 +358,7 @@
     ],
     [
       ".claude/skills/debugging-methodology/SKILL.md",
-      "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
+      "ac8464fcd849e19f2a53359aec328c70187aa36d0ce5fbc92a19671b8585fdd2"
     ],
     [
       ".claude/skills/deployment-rollback-strategies/SKILL.md",
@@ -370,7 +370,7 @@
     ],
     [
       ".claude/skills/documentation-best-practices/SKILL.md",
-      "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
+      "4107e22ff47cde821d25e429a816c5ea60faca74e1742914c457bc6b76c912a0"
     ],
     [
       ".claude/skills/feature-planning/SKILL.md",
@@ -378,7 +378,7 @@
     ],
     [
       ".claude/skills/flaky-test-remediation/SKILL.md",
-      "af38d1eae88a45994293b7ecb1e2995174a830e032b182735ef91603b0ef775c"
+      "cdb8910c240480ff193d24820d11ab9b5a5bc3e0febb0e5bcca37a0ab3190051"
     ],
     [
       ".claude/skills/iac-best-practices/SKILL.md",
@@ -402,7 +402,7 @@
     ],
     [
       ".claude/skills/load-testing/SKILL.md",
-      "19dfc3642b9f2aefe995d94709ecf5b34d0f1565661e6c22a0fe68ac90a81b58"
+      "f884fe4bd985016cad670f365a86fda3d709b5662cd587e9086b3df4dc63b287"
     ],
     [
       ".claude/skills/microservices-communication-patterns/SKILL.md",
@@ -414,7 +414,7 @@
     ],
     [
       ".claude/skills/mutation-testing/SKILL.md",
-      "72465156b7fd71cc5f721eb2f73012446073a4521c2811f27bc933e618911be2"
+      "5fefe20d0f6eae771be019a8bd0c74afc6a35c3e7e80507bfbdb58ab4bf57284"
     ],
     [
       ".claude/skills/performance-optimization/SKILL.md",
@@ -430,7 +430,7 @@
     ],
     [
       ".claude/skills/quality-assurance/SKILL.md",
-      "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+      "65ab5e15cc2c78372b6baff88e46849e492601eda4953a6085f2bede48741cef"
     ],
     [
       ".claude/skills/responsive-design-patterns/SKILL.md",
@@ -458,7 +458,7 @@
     ],
     [
       ".claude/skills/technical-debt-management/SKILL.md",
-      "16d955e806942e53c349c73cb281eecd1248e83ca8be203f409d67eb0b0d3fc0"
+      "e4d7dd2873e35d20e1f733711712411d2b1e659a07fe962fe0aa754a4c35c603"
     ],
     [
       ".claude/skills/technical-decision-making/SKILL.md",
@@ -474,7 +474,7 @@
     ],
     [
       ".claude/skills/test-data-strategies/SKILL.md",
-      "a0969a8e0ec0b50d59e0fb0e8ff9ffde8d4accd7321c484ded6fcb3050e31497"
+      "0f87265bcde065f25a300690409b19b7ee8be12ad008743dcf95eddcb2b6ff92"
     ],
     [
       ".claude/skills/test-mocking-rules/SKILL.md",
@@ -482,7 +482,7 @@
     ],
     [
       ".claude/skills/testing-strategies/SKILL.md",
-      "15500c149b2af4d6844bc36903465b6b155ee9b38e897910e5f010a40eb829ab"
+      "0cd12cdd5a3d11d0e79e57866f43a88fc6b5eac82ec9a17a4f6265d6234740ff"
     ],
     [
       ".claude/subagents/accessibility.md",
@@ -832,7 +832,7 @@
     ],
     [
       ".claude/skills/debugging-methodology/SKILL.md",
-      "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
+      "90ac965c951611b650aec05b5365131c0964371401fd72418c6f4a2fffe1f17d"
     ],
     [
       ".claude/skills/deployment-rollback-strategies/SKILL.md",
@@ -844,7 +844,7 @@
     ],
     [
       ".claude/skills/documentation-best-practices/SKILL.md",
-      "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
+      "1280d4f90159e37f0315752668e5875ebd87e38b1067459a0db748c802fd67d9"
     ],
     [
       ".claude/skills/feature-planning/SKILL.md",
@@ -852,7 +852,7 @@
     ],
     [
       ".claude/skills/flaky-test-remediation/SKILL.md",
-      "0f203482a5d6c7cc77f46048608a249a76dac379769d73a8dd96d2e6c209ea74"
+      "b084dc5c2ff032b0fba8eb9a114150ea5e1fb9dd7afa1d66a1eb7f02a5316e30"
     ],
     [
       ".claude/skills/iac-best-practices/SKILL.md",
@@ -876,7 +876,7 @@
     ],
     [
       ".claude/skills/load-testing/SKILL.md",
-      "08abc06e211c4882fe857e1ba6678146955267fa23626540e996023953534629"
+      "816ac32056ee9042d706f397872760c7831ecbd5661346ea2ee8b7b8c4671014"
     ],
     [
       ".claude/skills/microservices-communication-patterns/SKILL.md",
@@ -888,7 +888,7 @@
     ],
     [
       ".claude/skills/mutation-testing/SKILL.md",
-      "7e9e0fa511d57b16686cde557bfb59362d3097f98afc8d5d6b13c53b41391476"
+      "cf48a41257be94a660a208669823575884ec88a51393e5b6d9447503e0e6a4ff"
     ],
     [
       ".claude/skills/performance-optimization/SKILL.md",
@@ -904,7 +904,7 @@
     ],
     [
       ".claude/skills/quality-assurance/SKILL.md",
-      "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+      "800b99cc6b54e4d97be3af66dbc797526a6a30ce046e1e202e7042457111b9d5"
     ],
     [
       ".claude/skills/responsive-design-patterns/SKILL.md",
@@ -932,7 +932,7 @@
     ],
     [
       ".claude/skills/technical-debt-management/SKILL.md",
-      "c2592c501d10efa2cd701602f205caf567984c0e8fb5c233454129a829bf1c59"
+      "6d9268998529a423a6b2f41cf357a5358cb81d60dd59557055aa70b6ca5652bc"
     ],
     [
       ".claude/skills/technical-decision-making/SKILL.md",
@@ -948,7 +948,7 @@
     ],
     [
       ".claude/skills/test-data-strategies/SKILL.md",
-      "fbe3c3bc61495dc614f8ca20b726ff8b8820479dc40248f38d607ee8050cef18"
+      "5942a026afd9c8914accd6295217736ea0f851977f1b56402abe9e892c2ed68c"
     ],
     [
       ".claude/skills/test-mocking-rules/SKILL.md",
@@ -956,7 +956,7 @@
     ],
     [
       ".claude/skills/testing-strategies/SKILL.md",
-      "042493cfef510d68a72e9e99385bd99101832340f9e080e4c14786d4d3d8cac0"
+      "717f778041182c0c7cbf50d42c9971590b416c11e697abc7f6bfee72a78a7622"
     ],
     [
       ".claude/subagents/accessibility.md",
@@ -1242,7 +1242,7 @@
     ],
     [
       ".cline/skills/debugging-methodology/SKILL.md",
-      "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
+      "ac8464fcd849e19f2a53359aec328c70187aa36d0ce5fbc92a19671b8585fdd2"
     ],
     [
       ".cline/skills/deployment-rollback-strategies/SKILL.md",
@@ -1254,7 +1254,7 @@
     ],
     [
       ".cline/skills/documentation-best-practices/SKILL.md",
-      "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
+      "4107e22ff47cde821d25e429a816c5ea60faca74e1742914c457bc6b76c912a0"
     ],
     [
       ".cline/skills/feature-planning/SKILL.md",
@@ -1262,7 +1262,7 @@
     ],
     [
       ".cline/skills/flaky-test-remediation/SKILL.md",
-      "af38d1eae88a45994293b7ecb1e2995174a830e032b182735ef91603b0ef775c"
+      "cdb8910c240480ff193d24820d11ab9b5a5bc3e0febb0e5bcca37a0ab3190051"
     ],
     [
       ".cline/skills/iac-best-practices/SKILL.md",
@@ -1286,7 +1286,7 @@
     ],
     [
       ".cline/skills/load-testing/SKILL.md",
-      "19dfc3642b9f2aefe995d94709ecf5b34d0f1565661e6c22a0fe68ac90a81b58"
+      "f884fe4bd985016cad670f365a86fda3d709b5662cd587e9086b3df4dc63b287"
     ],
     [
       ".cline/skills/microservices-communication-patterns/SKILL.md",
@@ -1298,7 +1298,7 @@
     ],
     [
       ".cline/skills/mutation-testing/SKILL.md",
-      "72465156b7fd71cc5f721eb2f73012446073a4521c2811f27bc933e618911be2"
+      "5fefe20d0f6eae771be019a8bd0c74afc6a35c3e7e80507bfbdb58ab4bf57284"
     ],
     [
       ".cline/skills/performance-optimization/SKILL.md",
@@ -1314,7 +1314,7 @@
     ],
     [
       ".cline/skills/quality-assurance/SKILL.md",
-      "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+      "65ab5e15cc2c78372b6baff88e46849e492601eda4953a6085f2bede48741cef"
     ],
     [
       ".cline/skills/responsive-design-patterns/SKILL.md",
@@ -1342,7 +1342,7 @@
     ],
     [
       ".cline/skills/technical-debt-management/SKILL.md",
-      "16d955e806942e53c349c73cb281eecd1248e83ca8be203f409d67eb0b0d3fc0"
+      "e4d7dd2873e35d20e1f733711712411d2b1e659a07fe962fe0aa754a4c35c603"
     ],
     [
       ".cline/skills/technical-decision-making/SKILL.md",
@@ -1358,7 +1358,7 @@
     ],
     [
       ".cline/skills/test-data-strategies/SKILL.md",
-      "a0969a8e0ec0b50d59e0fb0e8ff9ffde8d4accd7321c484ded6fcb3050e31497"
+      "0f87265bcde065f25a300690409b19b7ee8be12ad008743dcf95eddcb2b6ff92"
     ],
     [
       ".cline/skills/test-mocking-rules/SKILL.md",
@@ -1366,7 +1366,7 @@
     ],
     [
       ".cline/skills/testing-strategies/SKILL.md",
-      "15500c149b2af4d6844bc36903465b6b155ee9b38e897910e5f010a40eb829ab"
+      "0cd12cdd5a3d11d0e79e57866f43a88fc6b5eac82ec9a17a4f6265d6234740ff"
     ],
     [
       ".clinerules",
@@ -1416,7 +1416,7 @@
     ],
     [
       ".cline/skills/debugging-methodology/SKILL.md",
-      "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
+      "90ac965c951611b650aec05b5365131c0964371401fd72418c6f4a2fffe1f17d"
     ],
     [
       ".cline/skills/deployment-rollback-strategies/SKILL.md",
@@ -1428,7 +1428,7 @@
     ],
     [
       ".cline/skills/documentation-best-practices/SKILL.md",
-      "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
+      "1280d4f90159e37f0315752668e5875ebd87e38b1067459a0db748c802fd67d9"
     ],
     [
       ".cline/skills/feature-planning/SKILL.md",
@@ -1436,7 +1436,7 @@
     ],
     [
       ".cline/skills/flaky-test-remediation/SKILL.md",
-      "0f203482a5d6c7cc77f46048608a249a76dac379769d73a8dd96d2e6c209ea74"
+      "b084dc5c2ff032b0fba8eb9a114150ea5e1fb9dd7afa1d66a1eb7f02a5316e30"
     ],
     [
       ".cline/skills/iac-best-practices/SKILL.md",
@@ -1460,7 +1460,7 @@
     ],
     [
       ".cline/skills/load-testing/SKILL.md",
-      "08abc06e211c4882fe857e1ba6678146955267fa23626540e996023953534629"
+      "816ac32056ee9042d706f397872760c7831ecbd5661346ea2ee8b7b8c4671014"
     ],
     [
       ".cline/skills/microservices-communication-patterns/SKILL.md",
@@ -1472,7 +1472,7 @@
     ],
     [
       ".cline/skills/mutation-testing/SKILL.md",
-      "7e9e0fa511d57b16686cde557bfb59362d3097f98afc8d5d6b13c53b41391476"
+      "cf48a41257be94a660a208669823575884ec88a51393e5b6d9447503e0e6a4ff"
     ],
     [
       ".cline/skills/performance-optimization/SKILL.md",
@@ -1488,7 +1488,7 @@
     ],
     [
       ".cline/skills/quality-assurance/SKILL.md",
-      "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+      "800b99cc6b54e4d97be3af66dbc797526a6a30ce046e1e202e7042457111b9d5"
     ],
     [
       ".cline/skills/responsive-design-patterns/SKILL.md",
@@ -1516,7 +1516,7 @@
     ],
     [
       ".cline/skills/technical-debt-management/SKILL.md",
-      "c2592c501d10efa2cd701602f205caf567984c0e8fb5c233454129a829bf1c59"
+      "6d9268998529a423a6b2f41cf357a5358cb81d60dd59557055aa70b6ca5652bc"
     ],
     [
       ".cline/skills/technical-decision-making/SKILL.md",
@@ -1532,7 +1532,7 @@
     ],
     [
       ".cline/skills/test-data-strategies/SKILL.md",
-      "fbe3c3bc61495dc614f8ca20b726ff8b8820479dc40248f38d607ee8050cef18"
+      "5942a026afd9c8914accd6295217736ea0f851977f1b56402abe9e892c2ed68c"
     ],
     [
       ".cline/skills/test-mocking-rules/SKILL.md",
@@ -1540,7 +1540,7 @@
     ],
     [
       ".cline/skills/testing-strategies/SKILL.md",
-      "042493cfef510d68a72e9e99385bd99101832340f9e080e4c14786d4d3d8cac0"
+      "717f778041182c0c7cbf50d42c9971590b416c11e697abc7f6bfee72a78a7622"
     ],
     [
       ".clinerules",
@@ -1606,7 +1606,7 @@
     ],
     [
       ".agents/skills/debugging-methodology/SKILL.md",
-      "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
+      "ac8464fcd849e19f2a53359aec328c70187aa36d0ce5fbc92a19671b8585fdd2"
     ],
     [
       ".agents/skills/deployment-rollback-strategies/SKILL.md",
@@ -1618,7 +1618,7 @@
     ],
     [
       ".agents/skills/documentation-best-practices/SKILL.md",
-      "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
+      "4107e22ff47cde821d25e429a816c5ea60faca74e1742914c457bc6b76c912a0"
     ],
     [
       ".agents/skills/enforcement/SKILL.md",
@@ -1634,7 +1634,7 @@
     ],
     [
       ".agents/skills/flaky-test-remediation/SKILL.md",
-      "af38d1eae88a45994293b7ecb1e2995174a830e032b182735ef91603b0ef775c"
+      "cdb8910c240480ff193d24820d11ab9b5a5bc3e0febb0e5bcca37a0ab3190051"
     ],
     [
       ".agents/skills/frontend/SKILL.md",
@@ -1662,7 +1662,7 @@
     ],
     [
       ".agents/skills/load-testing/SKILL.md",
-      "19dfc3642b9f2aefe995d94709ecf5b34d0f1565661e6c22a0fe68ac90a81b58"
+      "f884fe4bd985016cad670f365a86fda3d709b5662cd587e9086b3df4dc63b287"
     ],
     [
       ".agents/skills/microservices-communication-patterns/SKILL.md",
@@ -1678,7 +1678,7 @@
     ],
     [
       ".agents/skills/mutation-testing/SKILL.md",
-      "72465156b7fd71cc5f721eb2f73012446073a4521c2811f27bc933e618911be2"
+      "5fefe20d0f6eae771be019a8bd0c74afc6a35c3e7e80507bfbdb58ab4bf57284"
     ],
     [
       ".agents/skills/orchestrator/SKILL.md",
@@ -1706,7 +1706,7 @@
     ],
     [
       ".agents/skills/quality-assurance/SKILL.md",
-      "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+      "65ab5e15cc2c78372b6baff88e46849e492601eda4953a6085f2bede48741cef"
     ],
     [
       ".agents/skills/refactor/SKILL.md",
@@ -1742,7 +1742,7 @@
     ],
     [
       ".agents/skills/technical-debt-management/SKILL.md",
-      "16d955e806942e53c349c73cb281eecd1248e83ca8be203f409d67eb0b0d3fc0"
+      "e4d7dd2873e35d20e1f733711712411d2b1e659a07fe962fe0aa754a4c35c603"
     ],
     [
       ".agents/skills/technical-decision-making/SKILL.md",
@@ -1762,7 +1762,7 @@
     ],
     [
       ".agents/skills/test-data-strategies/SKILL.md",
-      "a0969a8e0ec0b50d59e0fb0e8ff9ffde8d4accd7321c484ded6fcb3050e31497"
+      "0f87265bcde065f25a300690409b19b7ee8be12ad008743dcf95eddcb2b6ff92"
     ],
     [
       ".agents/skills/test-mocking-rules/SKILL.md",
@@ -1770,7 +1770,7 @@
     ],
     [
       ".agents/skills/testing-strategies/SKILL.md",
-      "15500c149b2af4d6844bc36903465b6b155ee9b38e897910e5f010a40eb829ab"
+      "0cd12cdd5a3d11d0e79e57866f43a88fc6b5eac82ec9a17a4f6265d6234740ff"
     ],
     [
       ".codex/config.toml",
@@ -1836,7 +1836,7 @@
     ],
     [
       ".agents/skills/debugging-methodology/SKILL.md",
-      "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
+      "90ac965c951611b650aec05b5365131c0964371401fd72418c6f4a2fffe1f17d"
     ],
     [
       ".agents/skills/deployment-rollback-strategies/SKILL.md",
@@ -1848,7 +1848,7 @@
     ],
     [
       ".agents/skills/documentation-best-practices/SKILL.md",
-      "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
+      "1280d4f90159e37f0315752668e5875ebd87e38b1067459a0db748c802fd67d9"
     ],
     [
       ".agents/skills/enforcement/SKILL.md",
@@ -1864,7 +1864,7 @@
     ],
     [
       ".agents/skills/flaky-test-remediation/SKILL.md",
-      "0f203482a5d6c7cc77f46048608a249a76dac379769d73a8dd96d2e6c209ea74"
+      "b084dc5c2ff032b0fba8eb9a114150ea5e1fb9dd7afa1d66a1eb7f02a5316e30"
     ],
     [
       ".agents/skills/frontend/SKILL.md",
@@ -1892,7 +1892,7 @@
     ],
     [
       ".agents/skills/load-testing/SKILL.md",
-      "08abc06e211c4882fe857e1ba6678146955267fa23626540e996023953534629"
+      "816ac32056ee9042d706f397872760c7831ecbd5661346ea2ee8b7b8c4671014"
     ],
     [
       ".agents/skills/microservices-communication-patterns/SKILL.md",
@@ -1908,7 +1908,7 @@
     ],
     [
       ".agents/skills/mutation-testing/SKILL.md",
-      "7e9e0fa511d57b16686cde557bfb59362d3097f98afc8d5d6b13c53b41391476"
+      "cf48a41257be94a660a208669823575884ec88a51393e5b6d9447503e0e6a4ff"
     ],
     [
       ".agents/skills/orchestrator/SKILL.md",
@@ -1936,7 +1936,7 @@
     ],
     [
       ".agents/skills/quality-assurance/SKILL.md",
-      "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+      "800b99cc6b54e4d97be3af66dbc797526a6a30ce046e1e202e7042457111b9d5"
     ],
     [
       ".agents/skills/refactor/SKILL.md",
@@ -1972,7 +1972,7 @@
     ],
     [
       ".agents/skills/technical-debt-management/SKILL.md",
-      "c2592c501d10efa2cd701602f205caf567984c0e8fb5c233454129a829bf1c59"
+      "6d9268998529a423a6b2f41cf357a5358cb81d60dd59557055aa70b6ca5652bc"
     ],
     [
       ".agents/skills/technical-decision-making/SKILL.md",
@@ -1992,7 +1992,7 @@
     ],
     [
       ".agents/skills/test-data-strategies/SKILL.md",
-      "fbe3c3bc61495dc614f8ca20b726ff8b8820479dc40248f38d607ee8050cef18"
+      "5942a026afd9c8914accd6295217736ea0f851977f1b56402abe9e892c2ed68c"
     ],
     [
       ".agents/skills/test-mocking-rules/SKILL.md",
@@ -2000,7 +2000,7 @@
     ],
     [
       ".agents/skills/testing-strategies/SKILL.md",
-      "042493cfef510d68a72e9e99385bd99101832340f9e080e4c14786d4d3d8cac0"
+      "717f778041182c0c7cbf50d42c9971590b416c11e697abc7f6bfee72a78a7622"
     ],
     [
       ".codex/config.toml",
@@ -2526,7 +2526,7 @@
     ],
     [
       ".github/skills/debugging-methodology.md",
-      "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
+      "ac8464fcd849e19f2a53359aec328c70187aa36d0ce5fbc92a19671b8585fdd2"
     ],
     [
       ".github/skills/deployment-rollback-strategies.md",
@@ -2538,7 +2538,7 @@
     ],
     [
       ".github/skills/documentation-best-practices.md",
-      "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
+      "4107e22ff47cde821d25e429a816c5ea60faca74e1742914c457bc6b76c912a0"
     ],
     [
       ".github/skills/feature-planning.md",
@@ -2546,7 +2546,7 @@
     ],
     [
       ".github/skills/flaky-test-remediation.md",
-      "af38d1eae88a45994293b7ecb1e2995174a830e032b182735ef91603b0ef775c"
+      "cdb8910c240480ff193d24820d11ab9b5a5bc3e0febb0e5bcca37a0ab3190051"
     ],
     [
       ".github/skills/iac-best-practices.md",
@@ -2570,7 +2570,7 @@
     ],
     [
       ".github/skills/load-testing.md",
-      "19dfc3642b9f2aefe995d94709ecf5b34d0f1565661e6c22a0fe68ac90a81b58"
+      "f884fe4bd985016cad670f365a86fda3d709b5662cd587e9086b3df4dc63b287"
     ],
     [
       ".github/skills/microservices-communication-patterns.md",
@@ -2582,7 +2582,7 @@
     ],
     [
       ".github/skills/mutation-testing.md",
-      "72465156b7fd71cc5f721eb2f73012446073a4521c2811f27bc933e618911be2"
+      "5fefe20d0f6eae771be019a8bd0c74afc6a35c3e7e80507bfbdb58ab4bf57284"
     ],
     [
       ".github/skills/performance-optimization.md",
@@ -2598,7 +2598,7 @@
     ],
     [
       ".github/skills/quality-assurance.md",
-      "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+      "65ab5e15cc2c78372b6baff88e46849e492601eda4953a6085f2bede48741cef"
     ],
     [
       ".github/skills/responsive-design-patterns.md",
@@ -2626,7 +2626,7 @@
     ],
     [
       ".github/skills/technical-debt-management.md",
-      "16d955e806942e53c349c73cb281eecd1248e83ca8be203f409d67eb0b0d3fc0"
+      "e4d7dd2873e35d20e1f733711712411d2b1e659a07fe962fe0aa754a4c35c603"
     ],
     [
       ".github/skills/technical-decision-making.md",
@@ -2642,7 +2642,7 @@
     ],
     [
       ".github/skills/test-data-strategies.md",
-      "a0969a8e0ec0b50d59e0fb0e8ff9ffde8d4accd7321c484ded6fcb3050e31497"
+      "0f87265bcde065f25a300690409b19b7ee8be12ad008743dcf95eddcb2b6ff92"
     ],
     [
       ".github/skills/test-mocking-rules.md",
@@ -2650,7 +2650,7 @@
     ],
     [
       ".github/skills/testing-strategies.md",
-      "15500c149b2af4d6844bc36903465b6b155ee9b38e897910e5f010a40eb829ab"
+      "0cd12cdd5a3d11d0e79e57866f43a88fc6b5eac82ec9a17a4f6265d6234740ff"
     ],
     [
       "AGENTS.md",
@@ -2700,7 +2700,7 @@
     ],
     [
       ".github/skills/debugging-methodology.md",
-      "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
+      "90ac965c951611b650aec05b5365131c0964371401fd72418c6f4a2fffe1f17d"
     ],
     [
       ".github/skills/deployment-rollback-strategies.md",
@@ -2712,7 +2712,7 @@
     ],
     [
       ".github/skills/documentation-best-practices.md",
-      "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
+      "1280d4f90159e37f0315752668e5875ebd87e38b1067459a0db748c802fd67d9"
     ],
     [
       ".github/skills/feature-planning.md",
@@ -2720,7 +2720,7 @@
     ],
     [
       ".github/skills/flaky-test-remediation.md",
-      "0f203482a5d6c7cc77f46048608a249a76dac379769d73a8dd96d2e6c209ea74"
+      "b084dc5c2ff032b0fba8eb9a114150ea5e1fb9dd7afa1d66a1eb7f02a5316e30"
     ],
     [
       ".github/skills/iac-best-practices.md",
@@ -2744,7 +2744,7 @@
     ],
     [
       ".github/skills/load-testing.md",
-      "08abc06e211c4882fe857e1ba6678146955267fa23626540e996023953534629"
+      "816ac32056ee9042d706f397872760c7831ecbd5661346ea2ee8b7b8c4671014"
     ],
     [
       ".github/skills/microservices-communication-patterns.md",
@@ -2756,7 +2756,7 @@
     ],
     [
       ".github/skills/mutation-testing.md",
-      "7e9e0fa511d57b16686cde557bfb59362d3097f98afc8d5d6b13c53b41391476"
+      "cf48a41257be94a660a208669823575884ec88a51393e5b6d9447503e0e6a4ff"
     ],
     [
       ".github/skills/performance-optimization.md",
@@ -2772,7 +2772,7 @@
     ],
     [
       ".github/skills/quality-assurance.md",
-      "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+      "800b99cc6b54e4d97be3af66dbc797526a6a30ce046e1e202e7042457111b9d5"
     ],
     [
       ".github/skills/responsive-design-patterns.md",
@@ -2800,7 +2800,7 @@
     ],
     [
       ".github/skills/technical-debt-management.md",
-      "c2592c501d10efa2cd701602f205caf567984c0e8fb5c233454129a829bf1c59"
+      "6d9268998529a423a6b2f41cf357a5358cb81d60dd59557055aa70b6ca5652bc"
     ],
     [
       ".github/skills/technical-decision-making.md",
@@ -2816,7 +2816,7 @@
     ],
     [
       ".github/skills/test-data-strategies.md",
-      "fbe3c3bc61495dc614f8ca20b726ff8b8820479dc40248f38d607ee8050cef18"
+      "5942a026afd9c8914accd6295217736ea0f851977f1b56402abe9e892c2ed68c"
     ],
     [
       ".github/skills/test-mocking-rules.md",
@@ -2824,7 +2824,7 @@
     ],
     [
       ".github/skills/testing-strategies.md",
-      "042493cfef510d68a72e9e99385bd99101832340f9e080e4c14786d4d3d8cac0"
+      "717f778041182c0c7cbf50d42c9971590b416c11e697abc7f6bfee72a78a7622"
     ],
     [
       "AGENTS.md",
@@ -2870,7 +2870,7 @@
     ],
     [
       ".cursor/skills/debugging-methodology/SKILL.md",
-      "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
+      "ac8464fcd849e19f2a53359aec328c70187aa36d0ce5fbc92a19671b8585fdd2"
     ],
     [
       ".cursor/skills/deployment-rollback-strategies/SKILL.md",
@@ -2882,7 +2882,7 @@
     ],
     [
       ".cursor/skills/documentation-best-practices/SKILL.md",
-      "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
+      "4107e22ff47cde821d25e429a816c5ea60faca74e1742914c457bc6b76c912a0"
     ],
     [
       ".cursor/skills/feature-planning/SKILL.md",
@@ -2890,7 +2890,7 @@
     ],
     [
       ".cursor/skills/flaky-test-remediation/SKILL.md",
-      "af38d1eae88a45994293b7ecb1e2995174a830e032b182735ef91603b0ef775c"
+      "cdb8910c240480ff193d24820d11ab9b5a5bc3e0febb0e5bcca37a0ab3190051"
     ],
     [
       ".cursor/skills/iac-best-practices/SKILL.md",
@@ -2914,7 +2914,7 @@
     ],
     [
       ".cursor/skills/load-testing/SKILL.md",
-      "19dfc3642b9f2aefe995d94709ecf5b34d0f1565661e6c22a0fe68ac90a81b58"
+      "f884fe4bd985016cad670f365a86fda3d709b5662cd587e9086b3df4dc63b287"
     ],
     [
       ".cursor/skills/microservices-communication-patterns/SKILL.md",
@@ -2926,7 +2926,7 @@
     ],
     [
       ".cursor/skills/mutation-testing/SKILL.md",
-      "72465156b7fd71cc5f721eb2f73012446073a4521c2811f27bc933e618911be2"
+      "5fefe20d0f6eae771be019a8bd0c74afc6a35c3e7e80507bfbdb58ab4bf57284"
     ],
     [
       ".cursor/skills/performance-optimization/SKILL.md",
@@ -2942,7 +2942,7 @@
     ],
     [
       ".cursor/skills/quality-assurance/SKILL.md",
-      "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+      "65ab5e15cc2c78372b6baff88e46849e492601eda4953a6085f2bede48741cef"
     ],
     [
       ".cursor/skills/responsive-design-patterns/SKILL.md",
@@ -2970,7 +2970,7 @@
     ],
     [
       ".cursor/skills/technical-debt-management/SKILL.md",
-      "16d955e806942e53c349c73cb281eecd1248e83ca8be203f409d67eb0b0d3fc0"
+      "e4d7dd2873e35d20e1f733711712411d2b1e659a07fe962fe0aa754a4c35c603"
     ],
     [
       ".cursor/skills/technical-decision-making/SKILL.md",
@@ -2986,7 +2986,7 @@
     ],
     [
       ".cursor/skills/test-data-strategies/SKILL.md",
-      "a0969a8e0ec0b50d59e0fb0e8ff9ffde8d4accd7321c484ded6fcb3050e31497"
+      "0f87265bcde065f25a300690409b19b7ee8be12ad008743dcf95eddcb2b6ff92"
     ],
     [
       ".cursor/skills/test-mocking-rules/SKILL.md",
@@ -2994,7 +2994,7 @@
     ],
     [
       ".cursor/skills/testing-strategies/SKILL.md",
-      "15500c149b2af4d6844bc36903465b6b155ee9b38e897910e5f010a40eb829ab"
+      "0cd12cdd5a3d11d0e79e57866f43a88fc6b5eac82ec9a17a4f6265d6234740ff"
     ],
     [
       ".cursorrules",
@@ -3044,7 +3044,7 @@
     ],
     [
       ".cursor/skills/debugging-methodology/SKILL.md",
-      "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
+      "90ac965c951611b650aec05b5365131c0964371401fd72418c6f4a2fffe1f17d"
     ],
     [
       ".cursor/skills/deployment-rollback-strategies/SKILL.md",
@@ -3056,7 +3056,7 @@
     ],
     [
       ".cursor/skills/documentation-best-practices/SKILL.md",
-      "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
+      "1280d4f90159e37f0315752668e5875ebd87e38b1067459a0db748c802fd67d9"
     ],
     [
       ".cursor/skills/feature-planning/SKILL.md",
@@ -3064,7 +3064,7 @@
     ],
     [
       ".cursor/skills/flaky-test-remediation/SKILL.md",
-      "0f203482a5d6c7cc77f46048608a249a76dac379769d73a8dd96d2e6c209ea74"
+      "b084dc5c2ff032b0fba8eb9a114150ea5e1fb9dd7afa1d66a1eb7f02a5316e30"
     ],
     [
       ".cursor/skills/iac-best-practices/SKILL.md",
@@ -3088,7 +3088,7 @@
     ],
     [
       ".cursor/skills/load-testing/SKILL.md",
-      "08abc06e211c4882fe857e1ba6678146955267fa23626540e996023953534629"
+      "816ac32056ee9042d706f397872760c7831ecbd5661346ea2ee8b7b8c4671014"
     ],
     [
       ".cursor/skills/microservices-communication-patterns/SKILL.md",
@@ -3100,7 +3100,7 @@
     ],
     [
       ".cursor/skills/mutation-testing/SKILL.md",
-      "7e9e0fa511d57b16686cde557bfb59362d3097f98afc8d5d6b13c53b41391476"
+      "cf48a41257be94a660a208669823575884ec88a51393e5b6d9447503e0e6a4ff"
     ],
     [
       ".cursor/skills/performance-optimization/SKILL.md",
@@ -3116,7 +3116,7 @@
     ],
     [
       ".cursor/skills/quality-assurance/SKILL.md",
-      "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+      "800b99cc6b54e4d97be3af66dbc797526a6a30ce046e1e202e7042457111b9d5"
     ],
     [
       ".cursor/skills/responsive-design-patterns/SKILL.md",
@@ -3144,7 +3144,7 @@
     ],
     [
       ".cursor/skills/technical-debt-management/SKILL.md",
-      "c2592c501d10efa2cd701602f205caf567984c0e8fb5c233454129a829bf1c59"
+      "6d9268998529a423a6b2f41cf357a5358cb81d60dd59557055aa70b6ca5652bc"
     ],
     [
       ".cursor/skills/technical-decision-making/SKILL.md",
@@ -3160,7 +3160,7 @@
     ],
     [
       ".cursor/skills/test-data-strategies/SKILL.md",
-      "fbe3c3bc61495dc614f8ca20b726ff8b8820479dc40248f38d607ee8050cef18"
+      "5942a026afd9c8914accd6295217736ea0f851977f1b56402abe9e892c2ed68c"
     ],
     [
       ".cursor/skills/test-mocking-rules/SKILL.md",
@@ -3168,7 +3168,7 @@
     ],
     [
       ".cursor/skills/testing-strategies/SKILL.md",
-      "042493cfef510d68a72e9e99385bd99101832340f9e080e4c14786d4d3d8cac0"
+      "717f778041182c0c7cbf50d42c9971590b416c11e697abc7f6bfee72a78a7622"
     ],
     [
       ".cursorrules",
@@ -3330,7 +3330,7 @@
     ],
     [
       ".gemini/skills/debugging-methodology/SKILL.md",
-      "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
+      "ac8464fcd849e19f2a53359aec328c70187aa36d0ce5fbc92a19671b8585fdd2"
     ],
     [
       ".gemini/skills/deployment-rollback-strategies/SKILL.md",
@@ -3342,7 +3342,7 @@
     ],
     [
       ".gemini/skills/documentation-best-practices/SKILL.md",
-      "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
+      "4107e22ff47cde821d25e429a816c5ea60faca74e1742914c457bc6b76c912a0"
     ],
     [
       ".gemini/skills/feature-planning/SKILL.md",
@@ -3350,7 +3350,7 @@
     ],
     [
       ".gemini/skills/flaky-test-remediation/SKILL.md",
-      "af38d1eae88a45994293b7ecb1e2995174a830e032b182735ef91603b0ef775c"
+      "cdb8910c240480ff193d24820d11ab9b5a5bc3e0febb0e5bcca37a0ab3190051"
     ],
     [
       ".gemini/skills/iac-best-practices/SKILL.md",
@@ -3374,7 +3374,7 @@
     ],
     [
       ".gemini/skills/load-testing/SKILL.md",
-      "19dfc3642b9f2aefe995d94709ecf5b34d0f1565661e6c22a0fe68ac90a81b58"
+      "f884fe4bd985016cad670f365a86fda3d709b5662cd587e9086b3df4dc63b287"
     ],
     [
       ".gemini/skills/microservices-communication-patterns/SKILL.md",
@@ -3386,7 +3386,7 @@
     ],
     [
       ".gemini/skills/mutation-testing/SKILL.md",
-      "72465156b7fd71cc5f721eb2f73012446073a4521c2811f27bc933e618911be2"
+      "5fefe20d0f6eae771be019a8bd0c74afc6a35c3e7e80507bfbdb58ab4bf57284"
     ],
     [
       ".gemini/skills/performance-optimization/SKILL.md",
@@ -3402,7 +3402,7 @@
     ],
     [
       ".gemini/skills/quality-assurance/SKILL.md",
-      "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+      "65ab5e15cc2c78372b6baff88e46849e492601eda4953a6085f2bede48741cef"
     ],
     [
       ".gemini/skills/responsive-design-patterns/SKILL.md",
@@ -3430,7 +3430,7 @@
     ],
     [
       ".gemini/skills/technical-debt-management/SKILL.md",
-      "16d955e806942e53c349c73cb281eecd1248e83ca8be203f409d67eb0b0d3fc0"
+      "e4d7dd2873e35d20e1f733711712411d2b1e659a07fe962fe0aa754a4c35c603"
     ],
     [
       ".gemini/skills/technical-decision-making/SKILL.md",
@@ -3446,7 +3446,7 @@
     ],
     [
       ".gemini/skills/test-data-strategies/SKILL.md",
-      "a0969a8e0ec0b50d59e0fb0e8ff9ffde8d4accd7321c484ded6fcb3050e31497"
+      "0f87265bcde065f25a300690409b19b7ee8be12ad008743dcf95eddcb2b6ff92"
     ],
     [
       ".gemini/skills/test-mocking-rules/SKILL.md",
@@ -3454,7 +3454,7 @@
     ],
     [
       ".gemini/skills/testing-strategies/SKILL.md",
-      "15500c149b2af4d6844bc36903465b6b155ee9b38e897910e5f010a40eb829ab"
+      "0cd12cdd5a3d11d0e79e57866f43a88fc6b5eac82ec9a17a4f6265d6234740ff"
     ],
     [
       "AGENTS.md",
@@ -3612,7 +3612,7 @@
     ],
     [
       ".gemini/skills/debugging-methodology/SKILL.md",
-      "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
+      "90ac965c951611b650aec05b5365131c0964371401fd72418c6f4a2fffe1f17d"
     ],
     [
       ".gemini/skills/deployment-rollback-strategies/SKILL.md",
@@ -3624,7 +3624,7 @@
     ],
     [
       ".gemini/skills/documentation-best-practices/SKILL.md",
-      "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
+      "1280d4f90159e37f0315752668e5875ebd87e38b1067459a0db748c802fd67d9"
     ],
     [
       ".gemini/skills/feature-planning/SKILL.md",
@@ -3632,7 +3632,7 @@
     ],
     [
       ".gemini/skills/flaky-test-remediation/SKILL.md",
-      "0f203482a5d6c7cc77f46048608a249a76dac379769d73a8dd96d2e6c209ea74"
+      "b084dc5c2ff032b0fba8eb9a114150ea5e1fb9dd7afa1d66a1eb7f02a5316e30"
     ],
     [
       ".gemini/skills/iac-best-practices/SKILL.md",
@@ -3656,7 +3656,7 @@
     ],
     [
       ".gemini/skills/load-testing/SKILL.md",
-      "08abc06e211c4882fe857e1ba6678146955267fa23626540e996023953534629"
+      "816ac32056ee9042d706f397872760c7831ecbd5661346ea2ee8b7b8c4671014"
     ],
     [
       ".gemini/skills/microservices-communication-patterns/SKILL.md",
@@ -3668,7 +3668,7 @@
     ],
     [
       ".gemini/skills/mutation-testing/SKILL.md",
-      "7e9e0fa511d57b16686cde557bfb59362d3097f98afc8d5d6b13c53b41391476"
+      "cf48a41257be94a660a208669823575884ec88a51393e5b6d9447503e0e6a4ff"
     ],
     [
       ".gemini/skills/performance-optimization/SKILL.md",
@@ -3684,7 +3684,7 @@
     ],
     [
       ".gemini/skills/quality-assurance/SKILL.md",
-      "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+      "800b99cc6b54e4d97be3af66dbc797526a6a30ce046e1e202e7042457111b9d5"
     ],
     [
       ".gemini/skills/responsive-design-patterns/SKILL.md",
@@ -3712,7 +3712,7 @@
     ],
     [
       ".gemini/skills/technical-debt-management/SKILL.md",
-      "c2592c501d10efa2cd701602f205caf567984c0e8fb5c233454129a829bf1c59"
+      "6d9268998529a423a6b2f41cf357a5358cb81d60dd59557055aa70b6ca5652bc"
     ],
     [
       ".gemini/skills/technical-decision-making/SKILL.md",
@@ -3728,7 +3728,7 @@
     ],
     [
       ".gemini/skills/test-data-strategies/SKILL.md",
-      "fbe3c3bc61495dc614f8ca20b726ff8b8820479dc40248f38d607ee8050cef18"
+      "5942a026afd9c8914accd6295217736ea0f851977f1b56402abe9e892c2ed68c"
     ],
     [
       ".gemini/skills/test-mocking-rules/SKILL.md",
@@ -3736,7 +3736,7 @@
     ],
     [
       ".gemini/skills/testing-strategies/SKILL.md",
-      "042493cfef510d68a72e9e99385bd99101832340f9e080e4c14786d4d3d8cac0"
+      "717f778041182c0c7cbf50d42c9971590b416c11e697abc7f6bfee72a78a7622"
     ],
     [
       "AGENTS.md",
@@ -3890,7 +3890,7 @@
     ],
     [
       ".junie/skills/debugging-methodology/SKILL.md",
-      "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
+      "ac8464fcd849e19f2a53359aec328c70187aa36d0ce5fbc92a19671b8585fdd2"
     ],
     [
       ".junie/skills/deployment-rollback-strategies/SKILL.md",
@@ -3902,7 +3902,7 @@
     ],
     [
       ".junie/skills/documentation-best-practices/SKILL.md",
-      "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
+      "4107e22ff47cde821d25e429a816c5ea60faca74e1742914c457bc6b76c912a0"
     ],
     [
       ".junie/skills/feature-planning/SKILL.md",
@@ -3910,7 +3910,7 @@
     ],
     [
       ".junie/skills/flaky-test-remediation/SKILL.md",
-      "af38d1eae88a45994293b7ecb1e2995174a830e032b182735ef91603b0ef775c"
+      "cdb8910c240480ff193d24820d11ab9b5a5bc3e0febb0e5bcca37a0ab3190051"
     ],
     [
       ".junie/skills/iac-best-practices/SKILL.md",
@@ -3934,7 +3934,7 @@
     ],
     [
       ".junie/skills/load-testing/SKILL.md",
-      "19dfc3642b9f2aefe995d94709ecf5b34d0f1565661e6c22a0fe68ac90a81b58"
+      "f884fe4bd985016cad670f365a86fda3d709b5662cd587e9086b3df4dc63b287"
     ],
     [
       ".junie/skills/microservices-communication-patterns/SKILL.md",
@@ -3946,7 +3946,7 @@
     ],
     [
       ".junie/skills/mutation-testing/SKILL.md",
-      "72465156b7fd71cc5f721eb2f73012446073a4521c2811f27bc933e618911be2"
+      "5fefe20d0f6eae771be019a8bd0c74afc6a35c3e7e80507bfbdb58ab4bf57284"
     ],
     [
       ".junie/skills/performance-optimization/SKILL.md",
@@ -3962,7 +3962,7 @@
     ],
     [
       ".junie/skills/quality-assurance/SKILL.md",
-      "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+      "65ab5e15cc2c78372b6baff88e46849e492601eda4953a6085f2bede48741cef"
     ],
     [
       ".junie/skills/responsive-design-patterns/SKILL.md",
@@ -3990,7 +3990,7 @@
     ],
     [
       ".junie/skills/technical-debt-management/SKILL.md",
-      "16d955e806942e53c349c73cb281eecd1248e83ca8be203f409d67eb0b0d3fc0"
+      "e4d7dd2873e35d20e1f733711712411d2b1e659a07fe962fe0aa754a4c35c603"
     ],
     [
       ".junie/skills/technical-decision-making/SKILL.md",
@@ -4006,7 +4006,7 @@
     ],
     [
       ".junie/skills/test-data-strategies/SKILL.md",
-      "a0969a8e0ec0b50d59e0fb0e8ff9ffde8d4accd7321c484ded6fcb3050e31497"
+      "0f87265bcde065f25a300690409b19b7ee8be12ad008743dcf95eddcb2b6ff92"
     ],
     [
       ".junie/skills/test-mocking-rules/SKILL.md",
@@ -4014,7 +4014,7 @@
     ],
     [
       ".junie/skills/testing-strategies/SKILL.md",
-      "15500c149b2af4d6844bc36903465b6b155ee9b38e897910e5f010a40eb829ab"
+      "0cd12cdd5a3d11d0e79e57866f43a88fc6b5eac82ec9a17a4f6265d6234740ff"
     ],
     [
       "AGENTS.md",
@@ -4168,7 +4168,7 @@
     ],
     [
       ".junie/skills/debugging-methodology/SKILL.md",
-      "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
+      "90ac965c951611b650aec05b5365131c0964371401fd72418c6f4a2fffe1f17d"
     ],
     [
       ".junie/skills/deployment-rollback-strategies/SKILL.md",
@@ -4180,7 +4180,7 @@
     ],
     [
       ".junie/skills/documentation-best-practices/SKILL.md",
-      "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
+      "1280d4f90159e37f0315752668e5875ebd87e38b1067459a0db748c802fd67d9"
     ],
     [
       ".junie/skills/feature-planning/SKILL.md",
@@ -4188,7 +4188,7 @@
     ],
     [
       ".junie/skills/flaky-test-remediation/SKILL.md",
-      "0f203482a5d6c7cc77f46048608a249a76dac379769d73a8dd96d2e6c209ea74"
+      "b084dc5c2ff032b0fba8eb9a114150ea5e1fb9dd7afa1d66a1eb7f02a5316e30"
     ],
     [
       ".junie/skills/iac-best-practices/SKILL.md",
@@ -4212,7 +4212,7 @@
     ],
     [
       ".junie/skills/load-testing/SKILL.md",
-      "08abc06e211c4882fe857e1ba6678146955267fa23626540e996023953534629"
+      "816ac32056ee9042d706f397872760c7831ecbd5661346ea2ee8b7b8c4671014"
     ],
     [
       ".junie/skills/microservices-communication-patterns/SKILL.md",
@@ -4224,7 +4224,7 @@
     ],
     [
       ".junie/skills/mutation-testing/SKILL.md",
-      "7e9e0fa511d57b16686cde557bfb59362d3097f98afc8d5d6b13c53b41391476"
+      "cf48a41257be94a660a208669823575884ec88a51393e5b6d9447503e0e6a4ff"
     ],
     [
       ".junie/skills/performance-optimization/SKILL.md",
@@ -4240,7 +4240,7 @@
     ],
     [
       ".junie/skills/quality-assurance/SKILL.md",
-      "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+      "800b99cc6b54e4d97be3af66dbc797526a6a30ce046e1e202e7042457111b9d5"
     ],
     [
       ".junie/skills/responsive-design-patterns/SKILL.md",
@@ -4268,7 +4268,7 @@
     ],
     [
       ".junie/skills/technical-debt-management/SKILL.md",
-      "c2592c501d10efa2cd701602f205caf567984c0e8fb5c233454129a829bf1c59"
+      "6d9268998529a423a6b2f41cf357a5358cb81d60dd59557055aa70b6ca5652bc"
     ],
     [
       ".junie/skills/technical-decision-making/SKILL.md",
@@ -4284,7 +4284,7 @@
     ],
     [
       ".junie/skills/test-data-strategies/SKILL.md",
-      "fbe3c3bc61495dc614f8ca20b726ff8b8820479dc40248f38d607ee8050cef18"
+      "5942a026afd9c8914accd6295217736ea0f851977f1b56402abe9e892c2ed68c"
     ],
     [
       ".junie/skills/test-mocking-rules/SKILL.md",
@@ -4292,7 +4292,7 @@
     ],
     [
       ".junie/skills/testing-strategies/SKILL.md",
-      "042493cfef510d68a72e9e99385bd99101832340f9e080e4c14786d4d3d8cac0"
+      "717f778041182c0c7cbf50d42c9971590b416c11e697abc7f6bfee72a78a7622"
     ],
     [
       "AGENTS.md",
@@ -4610,7 +4610,7 @@
     ],
     [
       ".kilo/skills/debugging-methodology/SKILL.md",
-      "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
+      "ac8464fcd849e19f2a53359aec328c70187aa36d0ce5fbc92a19671b8585fdd2"
     ],
     [
       ".kilo/skills/deployment-rollback-strategies/SKILL.md",
@@ -4622,7 +4622,7 @@
     ],
     [
       ".kilo/skills/documentation-best-practices/SKILL.md",
-      "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
+      "4107e22ff47cde821d25e429a816c5ea60faca74e1742914c457bc6b76c912a0"
     ],
     [
       ".kilo/skills/feature-planning/SKILL.md",
@@ -4630,7 +4630,7 @@
     ],
     [
       ".kilo/skills/flaky-test-remediation/SKILL.md",
-      "af38d1eae88a45994293b7ecb1e2995174a830e032b182735ef91603b0ef775c"
+      "cdb8910c240480ff193d24820d11ab9b5a5bc3e0febb0e5bcca37a0ab3190051"
     ],
     [
       ".kilo/skills/iac-best-practices/SKILL.md",
@@ -4654,7 +4654,7 @@
     ],
     [
       ".kilo/skills/load-testing/SKILL.md",
-      "19dfc3642b9f2aefe995d94709ecf5b34d0f1565661e6c22a0fe68ac90a81b58"
+      "f884fe4bd985016cad670f365a86fda3d709b5662cd587e9086b3df4dc63b287"
     ],
     [
       ".kilo/skills/microservices-communication-patterns/SKILL.md",
@@ -4666,7 +4666,7 @@
     ],
     [
       ".kilo/skills/mutation-testing/SKILL.md",
-      "72465156b7fd71cc5f721eb2f73012446073a4521c2811f27bc933e618911be2"
+      "5fefe20d0f6eae771be019a8bd0c74afc6a35c3e7e80507bfbdb58ab4bf57284"
     ],
     [
       ".kilo/skills/performance-optimization/SKILL.md",
@@ -4682,7 +4682,7 @@
     ],
     [
       ".kilo/skills/quality-assurance/SKILL.md",
-      "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+      "65ab5e15cc2c78372b6baff88e46849e492601eda4953a6085f2bede48741cef"
     ],
     [
       ".kilo/skills/responsive-design-patterns/SKILL.md",
@@ -4710,7 +4710,7 @@
     ],
     [
       ".kilo/skills/technical-debt-management/SKILL.md",
-      "16d955e806942e53c349c73cb281eecd1248e83ca8be203f409d67eb0b0d3fc0"
+      "e4d7dd2873e35d20e1f733711712411d2b1e659a07fe962fe0aa754a4c35c603"
     ],
     [
       ".kilo/skills/technical-decision-making/SKILL.md",
@@ -4726,7 +4726,7 @@
     ],
     [
       ".kilo/skills/test-data-strategies/SKILL.md",
-      "a0969a8e0ec0b50d59e0fb0e8ff9ffde8d4accd7321c484ded6fcb3050e31497"
+      "0f87265bcde065f25a300690409b19b7ee8be12ad008743dcf95eddcb2b6ff92"
     ],
     [
       ".kilo/skills/test-mocking-rules/SKILL.md",
@@ -4734,7 +4734,7 @@
     ],
     [
       ".kilo/skills/testing-strategies/SKILL.md",
-      "15500c149b2af4d6844bc36903465b6b155ee9b38e897910e5f010a40eb829ab"
+      "0cd12cdd5a3d11d0e79e57866f43a88fc6b5eac82ec9a17a4f6265d6234740ff"
     ],
     [
       "AGENTS.md",
@@ -5052,7 +5052,7 @@
     ],
     [
       ".kilo/skills/debugging-methodology/SKILL.md",
-      "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
+      "90ac965c951611b650aec05b5365131c0964371401fd72418c6f4a2fffe1f17d"
     ],
     [
       ".kilo/skills/deployment-rollback-strategies/SKILL.md",
@@ -5064,7 +5064,7 @@
     ],
     [
       ".kilo/skills/documentation-best-practices/SKILL.md",
-      "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
+      "1280d4f90159e37f0315752668e5875ebd87e38b1067459a0db748c802fd67d9"
     ],
     [
       ".kilo/skills/feature-planning/SKILL.md",
@@ -5072,7 +5072,7 @@
     ],
     [
       ".kilo/skills/flaky-test-remediation/SKILL.md",
-      "0f203482a5d6c7cc77f46048608a249a76dac379769d73a8dd96d2e6c209ea74"
+      "b084dc5c2ff032b0fba8eb9a114150ea5e1fb9dd7afa1d66a1eb7f02a5316e30"
     ],
     [
       ".kilo/skills/iac-best-practices/SKILL.md",
@@ -5096,7 +5096,7 @@
     ],
     [
       ".kilo/skills/load-testing/SKILL.md",
-      "08abc06e211c4882fe857e1ba6678146955267fa23626540e996023953534629"
+      "816ac32056ee9042d706f397872760c7831ecbd5661346ea2ee8b7b8c4671014"
     ],
     [
       ".kilo/skills/microservices-communication-patterns/SKILL.md",
@@ -5108,7 +5108,7 @@
     ],
     [
       ".kilo/skills/mutation-testing/SKILL.md",
-      "7e9e0fa511d57b16686cde557bfb59362d3097f98afc8d5d6b13c53b41391476"
+      "cf48a41257be94a660a208669823575884ec88a51393e5b6d9447503e0e6a4ff"
     ],
     [
       ".kilo/skills/performance-optimization/SKILL.md",
@@ -5124,7 +5124,7 @@
     ],
     [
       ".kilo/skills/quality-assurance/SKILL.md",
-      "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+      "800b99cc6b54e4d97be3af66dbc797526a6a30ce046e1e202e7042457111b9d5"
     ],
     [
       ".kilo/skills/responsive-design-patterns/SKILL.md",
@@ -5152,7 +5152,7 @@
     ],
     [
       ".kilo/skills/technical-debt-management/SKILL.md",
-      "c2592c501d10efa2cd701602f205caf567984c0e8fb5c233454129a829bf1c59"
+      "6d9268998529a423a6b2f41cf357a5358cb81d60dd59557055aa70b6ca5652bc"
     ],
     [
       ".kilo/skills/technical-decision-making/SKILL.md",
@@ -5168,7 +5168,7 @@
     ],
     [
       ".kilo/skills/test-data-strategies/SKILL.md",
-      "fbe3c3bc61495dc614f8ca20b726ff8b8820479dc40248f38d607ee8050cef18"
+      "5942a026afd9c8914accd6295217736ea0f851977f1b56402abe9e892c2ed68c"
     ],
     [
       ".kilo/skills/test-mocking-rules/SKILL.md",
@@ -5176,7 +5176,7 @@
     ],
     [
       ".kilo/skills/testing-strategies/SKILL.md",
-      "042493cfef510d68a72e9e99385bd99101832340f9e080e4c14786d4d3d8cac0"
+      "717f778041182c0c7cbf50d42c9971590b416c11e697abc7f6bfee72a78a7622"
     ],
     [
       "AGENTS.md",
@@ -5494,7 +5494,7 @@
     ],
     [
       ".kilo/skills/debugging-methodology/SKILL.md",
-      "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
+      "ac8464fcd849e19f2a53359aec328c70187aa36d0ce5fbc92a19671b8585fdd2"
     ],
     [
       ".kilo/skills/deployment-rollback-strategies/SKILL.md",
@@ -5506,7 +5506,7 @@
     ],
     [
       ".kilo/skills/documentation-best-practices/SKILL.md",
-      "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
+      "4107e22ff47cde821d25e429a816c5ea60faca74e1742914c457bc6b76c912a0"
     ],
     [
       ".kilo/skills/feature-planning/SKILL.md",
@@ -5514,7 +5514,7 @@
     ],
     [
       ".kilo/skills/flaky-test-remediation/SKILL.md",
-      "af38d1eae88a45994293b7ecb1e2995174a830e032b182735ef91603b0ef775c"
+      "cdb8910c240480ff193d24820d11ab9b5a5bc3e0febb0e5bcca37a0ab3190051"
     ],
     [
       ".kilo/skills/iac-best-practices/SKILL.md",
@@ -5538,7 +5538,7 @@
     ],
     [
       ".kilo/skills/load-testing/SKILL.md",
-      "19dfc3642b9f2aefe995d94709ecf5b34d0f1565661e6c22a0fe68ac90a81b58"
+      "f884fe4bd985016cad670f365a86fda3d709b5662cd587e9086b3df4dc63b287"
     ],
     [
       ".kilo/skills/microservices-communication-patterns/SKILL.md",
@@ -5550,7 +5550,7 @@
     ],
     [
       ".kilo/skills/mutation-testing/SKILL.md",
-      "72465156b7fd71cc5f721eb2f73012446073a4521c2811f27bc933e618911be2"
+      "5fefe20d0f6eae771be019a8bd0c74afc6a35c3e7e80507bfbdb58ab4bf57284"
     ],
     [
       ".kilo/skills/performance-optimization/SKILL.md",
@@ -5566,7 +5566,7 @@
     ],
     [
       ".kilo/skills/quality-assurance/SKILL.md",
-      "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+      "65ab5e15cc2c78372b6baff88e46849e492601eda4953a6085f2bede48741cef"
     ],
     [
       ".kilo/skills/responsive-design-patterns/SKILL.md",
@@ -5594,7 +5594,7 @@
     ],
     [
       ".kilo/skills/technical-debt-management/SKILL.md",
-      "16d955e806942e53c349c73cb281eecd1248e83ca8be203f409d67eb0b0d3fc0"
+      "e4d7dd2873e35d20e1f733711712411d2b1e659a07fe962fe0aa754a4c35c603"
     ],
     [
       ".kilo/skills/technical-decision-making/SKILL.md",
@@ -5610,7 +5610,7 @@
     ],
     [
       ".kilo/skills/test-data-strategies/SKILL.md",
-      "a0969a8e0ec0b50d59e0fb0e8ff9ffde8d4accd7321c484ded6fcb3050e31497"
+      "0f87265bcde065f25a300690409b19b7ee8be12ad008743dcf95eddcb2b6ff92"
     ],
     [
       ".kilo/skills/test-mocking-rules/SKILL.md",
@@ -5618,7 +5618,7 @@
     ],
     [
       ".kilo/skills/testing-strategies/SKILL.md",
-      "15500c149b2af4d6844bc36903465b6b155ee9b38e897910e5f010a40eb829ab"
+      "0cd12cdd5a3d11d0e79e57866f43a88fc6b5eac82ec9a17a4f6265d6234740ff"
     ],
     [
       "AGENTS.md",
@@ -5936,7 +5936,7 @@
     ],
     [
       ".kilo/skills/debugging-methodology/SKILL.md",
-      "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
+      "90ac965c951611b650aec05b5365131c0964371401fd72418c6f4a2fffe1f17d"
     ],
     [
       ".kilo/skills/deployment-rollback-strategies/SKILL.md",
@@ -5948,7 +5948,7 @@
     ],
     [
       ".kilo/skills/documentation-best-practices/SKILL.md",
-      "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
+      "1280d4f90159e37f0315752668e5875ebd87e38b1067459a0db748c802fd67d9"
     ],
     [
       ".kilo/skills/feature-planning/SKILL.md",
@@ -5956,7 +5956,7 @@
     ],
     [
       ".kilo/skills/flaky-test-remediation/SKILL.md",
-      "0f203482a5d6c7cc77f46048608a249a76dac379769d73a8dd96d2e6c209ea74"
+      "b084dc5c2ff032b0fba8eb9a114150ea5e1fb9dd7afa1d66a1eb7f02a5316e30"
     ],
     [
       ".kilo/skills/iac-best-practices/SKILL.md",
@@ -5980,7 +5980,7 @@
     ],
     [
       ".kilo/skills/load-testing/SKILL.md",
-      "08abc06e211c4882fe857e1ba6678146955267fa23626540e996023953534629"
+      "816ac32056ee9042d706f397872760c7831ecbd5661346ea2ee8b7b8c4671014"
     ],
     [
       ".kilo/skills/microservices-communication-patterns/SKILL.md",
@@ -5992,7 +5992,7 @@
     ],
     [
       ".kilo/skills/mutation-testing/SKILL.md",
-      "7e9e0fa511d57b16686cde557bfb59362d3097f98afc8d5d6b13c53b41391476"
+      "cf48a41257be94a660a208669823575884ec88a51393e5b6d9447503e0e6a4ff"
     ],
     [
       ".kilo/skills/performance-optimization/SKILL.md",
@@ -6008,7 +6008,7 @@
     ],
     [
       ".kilo/skills/quality-assurance/SKILL.md",
-      "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+      "800b99cc6b54e4d97be3af66dbc797526a6a30ce046e1e202e7042457111b9d5"
     ],
     [
       ".kilo/skills/responsive-design-patterns/SKILL.md",
@@ -6036,7 +6036,7 @@
     ],
     [
       ".kilo/skills/technical-debt-management/SKILL.md",
-      "c2592c501d10efa2cd701602f205caf567984c0e8fb5c233454129a829bf1c59"
+      "6d9268998529a423a6b2f41cf357a5358cb81d60dd59557055aa70b6ca5652bc"
     ],
     [
       ".kilo/skills/technical-decision-making/SKILL.md",
@@ -6052,7 +6052,7 @@
     ],
     [
       ".kilo/skills/test-data-strategies/SKILL.md",
-      "fbe3c3bc61495dc614f8ca20b726ff8b8820479dc40248f38d607ee8050cef18"
+      "5942a026afd9c8914accd6295217736ea0f851977f1b56402abe9e892c2ed68c"
     ],
     [
       ".kilo/skills/test-mocking-rules/SKILL.md",
@@ -6060,7 +6060,7 @@
     ],
     [
       ".kilo/skills/testing-strategies/SKILL.md",
-      "042493cfef510d68a72e9e99385bd99101832340f9e080e4c14786d4d3d8cac0"
+      "717f778041182c0c7cbf50d42c9971590b416c11e697abc7f6bfee72a78a7622"
     ],
     [
       "AGENTS.md",
@@ -6214,7 +6214,7 @@
     ],
     [
       ".roo/skills/debugging-methodology/SKILL.md",
-      "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
+      "ac8464fcd849e19f2a53359aec328c70187aa36d0ce5fbc92a19671b8585fdd2"
     ],
     [
       ".roo/skills/deployment-rollback-strategies/SKILL.md",
@@ -6226,7 +6226,7 @@
     ],
     [
       ".roo/skills/documentation-best-practices/SKILL.md",
-      "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
+      "4107e22ff47cde821d25e429a816c5ea60faca74e1742914c457bc6b76c912a0"
     ],
     [
       ".roo/skills/feature-planning/SKILL.md",
@@ -6234,7 +6234,7 @@
     ],
     [
       ".roo/skills/flaky-test-remediation/SKILL.md",
-      "af38d1eae88a45994293b7ecb1e2995174a830e032b182735ef91603b0ef775c"
+      "cdb8910c240480ff193d24820d11ab9b5a5bc3e0febb0e5bcca37a0ab3190051"
     ],
     [
       ".roo/skills/iac-best-practices/SKILL.md",
@@ -6258,7 +6258,7 @@
     ],
     [
       ".roo/skills/load-testing/SKILL.md",
-      "19dfc3642b9f2aefe995d94709ecf5b34d0f1565661e6c22a0fe68ac90a81b58"
+      "f884fe4bd985016cad670f365a86fda3d709b5662cd587e9086b3df4dc63b287"
     ],
     [
       ".roo/skills/microservices-communication-patterns/SKILL.md",
@@ -6270,7 +6270,7 @@
     ],
     [
       ".roo/skills/mutation-testing/SKILL.md",
-      "72465156b7fd71cc5f721eb2f73012446073a4521c2811f27bc933e618911be2"
+      "5fefe20d0f6eae771be019a8bd0c74afc6a35c3e7e80507bfbdb58ab4bf57284"
     ],
     [
       ".roo/skills/performance-optimization/SKILL.md",
@@ -6286,7 +6286,7 @@
     ],
     [
       ".roo/skills/quality-assurance/SKILL.md",
-      "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+      "65ab5e15cc2c78372b6baff88e46849e492601eda4953a6085f2bede48741cef"
     ],
     [
       ".roo/skills/responsive-design-patterns/SKILL.md",
@@ -6314,7 +6314,7 @@
     ],
     [
       ".roo/skills/technical-debt-management/SKILL.md",
-      "16d955e806942e53c349c73cb281eecd1248e83ca8be203f409d67eb0b0d3fc0"
+      "e4d7dd2873e35d20e1f733711712411d2b1e659a07fe962fe0aa754a4c35c603"
     ],
     [
       ".roo/skills/technical-decision-making/SKILL.md",
@@ -6330,7 +6330,7 @@
     ],
     [
       ".roo/skills/test-data-strategies/SKILL.md",
-      "a0969a8e0ec0b50d59e0fb0e8ff9ffde8d4accd7321c484ded6fcb3050e31497"
+      "0f87265bcde065f25a300690409b19b7ee8be12ad008743dcf95eddcb2b6ff92"
     ],
     [
       ".roo/skills/test-mocking-rules/SKILL.md",
@@ -6338,7 +6338,7 @@
     ],
     [
       ".roo/skills/testing-strategies/SKILL.md",
-      "15500c149b2af4d6844bc36903465b6b155ee9b38e897910e5f010a40eb829ab"
+      "0cd12cdd5a3d11d0e79e57866f43a88fc6b5eac82ec9a17a4f6265d6234740ff"
     ],
     [
       ".roomodes",
@@ -6496,7 +6496,7 @@
     ],
     [
       ".roo/skills/debugging-methodology/SKILL.md",
-      "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
+      "90ac965c951611b650aec05b5365131c0964371401fd72418c6f4a2fffe1f17d"
     ],
     [
       ".roo/skills/deployment-rollback-strategies/SKILL.md",
@@ -6508,7 +6508,7 @@
     ],
     [
       ".roo/skills/documentation-best-practices/SKILL.md",
-      "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
+      "1280d4f90159e37f0315752668e5875ebd87e38b1067459a0db748c802fd67d9"
     ],
     [
       ".roo/skills/feature-planning/SKILL.md",
@@ -6516,7 +6516,7 @@
     ],
     [
       ".roo/skills/flaky-test-remediation/SKILL.md",
-      "0f203482a5d6c7cc77f46048608a249a76dac379769d73a8dd96d2e6c209ea74"
+      "b084dc5c2ff032b0fba8eb9a114150ea5e1fb9dd7afa1d66a1eb7f02a5316e30"
     ],
     [
       ".roo/skills/iac-best-practices/SKILL.md",
@@ -6540,7 +6540,7 @@
     ],
     [
       ".roo/skills/load-testing/SKILL.md",
-      "08abc06e211c4882fe857e1ba6678146955267fa23626540e996023953534629"
+      "816ac32056ee9042d706f397872760c7831ecbd5661346ea2ee8b7b8c4671014"
     ],
     [
       ".roo/skills/microservices-communication-patterns/SKILL.md",
@@ -6552,7 +6552,7 @@
     ],
     [
       ".roo/skills/mutation-testing/SKILL.md",
-      "7e9e0fa511d57b16686cde557bfb59362d3097f98afc8d5d6b13c53b41391476"
+      "cf48a41257be94a660a208669823575884ec88a51393e5b6d9447503e0e6a4ff"
     ],
     [
       ".roo/skills/performance-optimization/SKILL.md",
@@ -6568,7 +6568,7 @@
     ],
     [
       ".roo/skills/quality-assurance/SKILL.md",
-      "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+      "800b99cc6b54e4d97be3af66dbc797526a6a30ce046e1e202e7042457111b9d5"
     ],
     [
       ".roo/skills/responsive-design-patterns/SKILL.md",
@@ -6596,7 +6596,7 @@
     ],
     [
       ".roo/skills/technical-debt-management/SKILL.md",
-      "c2592c501d10efa2cd701602f205caf567984c0e8fb5c233454129a829bf1c59"
+      "6d9268998529a423a6b2f41cf357a5358cb81d60dd59557055aa70b6ca5652bc"
     ],
     [
       ".roo/skills/technical-decision-making/SKILL.md",
@@ -6612,7 +6612,7 @@
     ],
     [
       ".roo/skills/test-data-strategies/SKILL.md",
-      "fbe3c3bc61495dc614f8ca20b726ff8b8820479dc40248f38d607ee8050cef18"
+      "5942a026afd9c8914accd6295217736ea0f851977f1b56402abe9e892c2ed68c"
     ],
     [
       ".roo/skills/test-mocking-rules/SKILL.md",
@@ -6620,7 +6620,7 @@
     ],
     [
       ".roo/skills/testing-strategies/SKILL.md",
-      "042493cfef510d68a72e9e99385bd99101832340f9e080e4c14786d4d3d8cac0"
+      "717f778041182c0c7cbf50d42c9971590b416c11e697abc7f6bfee72a78a7622"
     ],
     [
       ".roomodes",
@@ -6694,7 +6694,7 @@
     ],
     [
       ".windsurf/skills/debugging-methodology/SKILL.md",
-      "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
+      "ac8464fcd849e19f2a53359aec328c70187aa36d0ce5fbc92a19671b8585fdd2"
     ],
     [
       ".windsurf/skills/deployment-rollback-strategies/SKILL.md",
@@ -6706,7 +6706,7 @@
     ],
     [
       ".windsurf/skills/documentation-best-practices/SKILL.md",
-      "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
+      "4107e22ff47cde821d25e429a816c5ea60faca74e1742914c457bc6b76c912a0"
     ],
     [
       ".windsurf/skills/enforcement/SKILL.md",
@@ -6722,7 +6722,7 @@
     ],
     [
       ".windsurf/skills/flaky-test-remediation/SKILL.md",
-      "af38d1eae88a45994293b7ecb1e2995174a830e032b182735ef91603b0ef775c"
+      "cdb8910c240480ff193d24820d11ab9b5a5bc3e0febb0e5bcca37a0ab3190051"
     ],
     [
       ".windsurf/skills/frontend/SKILL.md",
@@ -6750,7 +6750,7 @@
     ],
     [
       ".windsurf/skills/load-testing/SKILL.md",
-      "19dfc3642b9f2aefe995d94709ecf5b34d0f1565661e6c22a0fe68ac90a81b58"
+      "f884fe4bd985016cad670f365a86fda3d709b5662cd587e9086b3df4dc63b287"
     ],
     [
       ".windsurf/skills/microservices-communication-patterns/SKILL.md",
@@ -6766,7 +6766,7 @@
     ],
     [
       ".windsurf/skills/mutation-testing/SKILL.md",
-      "72465156b7fd71cc5f721eb2f73012446073a4521c2811f27bc933e618911be2"
+      "5fefe20d0f6eae771be019a8bd0c74afc6a35c3e7e80507bfbdb58ab4bf57284"
     ],
     [
       ".windsurf/skills/orchestrator/SKILL.md",
@@ -6794,7 +6794,7 @@
     ],
     [
       ".windsurf/skills/quality-assurance/SKILL.md",
-      "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+      "65ab5e15cc2c78372b6baff88e46849e492601eda4953a6085f2bede48741cef"
     ],
     [
       ".windsurf/skills/refactor/SKILL.md",
@@ -6830,7 +6830,7 @@
     ],
     [
       ".windsurf/skills/technical-debt-management/SKILL.md",
-      "16d955e806942e53c349c73cb281eecd1248e83ca8be203f409d67eb0b0d3fc0"
+      "e4d7dd2873e35d20e1f733711712411d2b1e659a07fe962fe0aa754a4c35c603"
     ],
     [
       ".windsurf/skills/technical-decision-making/SKILL.md",
@@ -6850,7 +6850,7 @@
     ],
     [
       ".windsurf/skills/test-data-strategies/SKILL.md",
-      "a0969a8e0ec0b50d59e0fb0e8ff9ffde8d4accd7321c484ded6fcb3050e31497"
+      "0f87265bcde065f25a300690409b19b7ee8be12ad008743dcf95eddcb2b6ff92"
     ],
     [
       ".windsurf/skills/test-mocking-rules/SKILL.md",
@@ -6858,7 +6858,7 @@
     ],
     [
       ".windsurf/skills/testing-strategies/SKILL.md",
-      "15500c149b2af4d6844bc36903465b6b155ee9b38e897910e5f010a40eb829ab"
+      "0cd12cdd5a3d11d0e79e57866f43a88fc6b5eac82ec9a17a4f6265d6234740ff"
     ],
     [
       ".windsurf/workflows/boilerplate.md",
@@ -6976,7 +6976,7 @@
     ],
     [
       ".windsurf/skills/debugging-methodology/SKILL.md",
-      "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
+      "90ac965c951611b650aec05b5365131c0964371401fd72418c6f4a2fffe1f17d"
     ],
     [
       ".windsurf/skills/deployment-rollback-strategies/SKILL.md",
@@ -6988,7 +6988,7 @@
     ],
     [
       ".windsurf/skills/documentation-best-practices/SKILL.md",
-      "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
+      "1280d4f90159e37f0315752668e5875ebd87e38b1067459a0db748c802fd67d9"
     ],
     [
       ".windsurf/skills/enforcement/SKILL.md",
@@ -7004,7 +7004,7 @@
     ],
     [
       ".windsurf/skills/flaky-test-remediation/SKILL.md",
-      "0f203482a5d6c7cc77f46048608a249a76dac379769d73a8dd96d2e6c209ea74"
+      "b084dc5c2ff032b0fba8eb9a114150ea5e1fb9dd7afa1d66a1eb7f02a5316e30"
     ],
     [
       ".windsurf/skills/frontend/SKILL.md",
@@ -7032,7 +7032,7 @@
     ],
     [
       ".windsurf/skills/load-testing/SKILL.md",
-      "08abc06e211c4882fe857e1ba6678146955267fa23626540e996023953534629"
+      "816ac32056ee9042d706f397872760c7831ecbd5661346ea2ee8b7b8c4671014"
     ],
     [
       ".windsurf/skills/microservices-communication-patterns/SKILL.md",
@@ -7048,7 +7048,7 @@
     ],
     [
       ".windsurf/skills/mutation-testing/SKILL.md",
-      "7e9e0fa511d57b16686cde557bfb59362d3097f98afc8d5d6b13c53b41391476"
+      "cf48a41257be94a660a208669823575884ec88a51393e5b6d9447503e0e6a4ff"
     ],
     [
       ".windsurf/skills/orchestrator/SKILL.md",
@@ -7076,7 +7076,7 @@
     ],
     [
       ".windsurf/skills/quality-assurance/SKILL.md",
-      "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+      "800b99cc6b54e4d97be3af66dbc797526a6a30ce046e1e202e7042457111b9d5"
     ],
     [
       ".windsurf/skills/refactor/SKILL.md",
@@ -7112,7 +7112,7 @@
     ],
     [
       ".windsurf/skills/technical-debt-management/SKILL.md",
-      "c2592c501d10efa2cd701602f205caf567984c0e8fb5c233454129a829bf1c59"
+      "6d9268998529a423a6b2f41cf357a5358cb81d60dd59557055aa70b6ca5652bc"
     ],
     [
       ".windsurf/skills/technical-decision-making/SKILL.md",
@@ -7132,7 +7132,7 @@
     ],
     [
       ".windsurf/skills/test-data-strategies/SKILL.md",
-      "fbe3c3bc61495dc614f8ca20b726ff8b8820479dc40248f38d607ee8050cef18"
+      "5942a026afd9c8914accd6295217736ea0f851977f1b56402abe9e892c2ed68c"
     ],
     [
       ".windsurf/skills/test-mocking-rules/SKILL.md",
@@ -7140,7 +7140,7 @@
     ],
     [
       ".windsurf/skills/testing-strategies/SKILL.md",
-      "042493cfef510d68a72e9e99385bd99101832340f9e080e4c14786d4d3d8cac0"
+      "717f778041182c0c7cbf50d42c9971590b416c11e697abc7f6bfee72a78a7622"
     ],
     [
       ".windsurf/workflows/boilerplate.md",
@@ -7250,7 +7250,7 @@
     ],
     [
       ".agents/skills/debugging-methodology/SKILL.md",
-      "fa538dc314138d2e4307d1e860f6b494df547be071bb131e1a496b0f5744472d"
+      "ac8464fcd849e19f2a53359aec328c70187aa36d0ce5fbc92a19671b8585fdd2"
     ],
     [
       ".agents/skills/deployment-rollback-strategies/SKILL.md",
@@ -7262,7 +7262,7 @@
     ],
     [
       ".agents/skills/documentation-best-practices/SKILL.md",
-      "e67da8b4c4ca9c3d2b84f5d60bb87265b2a4313c71577d7bad42706e5b4a679a"
+      "4107e22ff47cde821d25e429a816c5ea60faca74e1742914c457bc6b76c912a0"
     ],
     [
       ".agents/skills/enforcement/SKILL.md",
@@ -7278,7 +7278,7 @@
     ],
     [
       ".agents/skills/flaky-test-remediation/SKILL.md",
-      "af38d1eae88a45994293b7ecb1e2995174a830e032b182735ef91603b0ef775c"
+      "cdb8910c240480ff193d24820d11ab9b5a5bc3e0febb0e5bcca37a0ab3190051"
     ],
     [
       ".agents/skills/frontend/SKILL.md",
@@ -7306,7 +7306,7 @@
     ],
     [
       ".agents/skills/load-testing/SKILL.md",
-      "19dfc3642b9f2aefe995d94709ecf5b34d0f1565661e6c22a0fe68ac90a81b58"
+      "f884fe4bd985016cad670f365a86fda3d709b5662cd587e9086b3df4dc63b287"
     ],
     [
       ".agents/skills/microservices-communication-patterns/SKILL.md",
@@ -7322,7 +7322,7 @@
     ],
     [
       ".agents/skills/mutation-testing/SKILL.md",
-      "72465156b7fd71cc5f721eb2f73012446073a4521c2811f27bc933e618911be2"
+      "5fefe20d0f6eae771be019a8bd0c74afc6a35c3e7e80507bfbdb58ab4bf57284"
     ],
     [
       ".agents/skills/orchestrator/SKILL.md",
@@ -7350,7 +7350,7 @@
     ],
     [
       ".agents/skills/quality-assurance/SKILL.md",
-      "4a099a3954279acfde70c04491547b8e2c3c21326ed8190d036148dfdb06f75b"
+      "65ab5e15cc2c78372b6baff88e46849e492601eda4953a6085f2bede48741cef"
     ],
     [
       ".agents/skills/refactor/SKILL.md",
@@ -7386,7 +7386,7 @@
     ],
     [
       ".agents/skills/technical-debt-management/SKILL.md",
-      "16d955e806942e53c349c73cb281eecd1248e83ca8be203f409d67eb0b0d3fc0"
+      "e4d7dd2873e35d20e1f733711712411d2b1e659a07fe962fe0aa754a4c35c603"
     ],
     [
       ".agents/skills/technical-decision-making/SKILL.md",
@@ -7406,7 +7406,7 @@
     ],
     [
       ".agents/skills/test-data-strategies/SKILL.md",
-      "a0969a8e0ec0b50d59e0fb0e8ff9ffde8d4accd7321c484ded6fcb3050e31497"
+      "0f87265bcde065f25a300690409b19b7ee8be12ad008743dcf95eddcb2b6ff92"
     ],
     [
       ".agents/skills/test-mocking-rules/SKILL.md",
@@ -7414,7 +7414,7 @@
     ],
     [
       ".agents/skills/testing-strategies/SKILL.md",
-      "15500c149b2af4d6844bc36903465b6b155ee9b38e897910e5f010a40eb829ab"
+      "0cd12cdd5a3d11d0e79e57866f43a88fc6b5eac82ec9a17a4f6265d6234740ff"
     ],
     [
       "AGENTS.md",
@@ -7476,7 +7476,7 @@
     ],
     [
       ".agents/skills/debugging-methodology/SKILL.md",
-      "abcbf14d326f7850f8c9d6984f409213ab4f63055e2d41255e7a73daf6f0bbe9"
+      "90ac965c951611b650aec05b5365131c0964371401fd72418c6f4a2fffe1f17d"
     ],
     [
       ".agents/skills/deployment-rollback-strategies/SKILL.md",
@@ -7488,7 +7488,7 @@
     ],
     [
       ".agents/skills/documentation-best-practices/SKILL.md",
-      "b2d2d835aab74477718475efcd6c0c57b8d2f436d9c0ca9fd08c5390ac2a3235"
+      "1280d4f90159e37f0315752668e5875ebd87e38b1067459a0db748c802fd67d9"
     ],
     [
       ".agents/skills/enforcement/SKILL.md",
@@ -7504,7 +7504,7 @@
     ],
     [
       ".agents/skills/flaky-test-remediation/SKILL.md",
-      "0f203482a5d6c7cc77f46048608a249a76dac379769d73a8dd96d2e6c209ea74"
+      "b084dc5c2ff032b0fba8eb9a114150ea5e1fb9dd7afa1d66a1eb7f02a5316e30"
     ],
     [
       ".agents/skills/frontend/SKILL.md",
@@ -7532,7 +7532,7 @@
     ],
     [
       ".agents/skills/load-testing/SKILL.md",
-      "08abc06e211c4882fe857e1ba6678146955267fa23626540e996023953534629"
+      "816ac32056ee9042d706f397872760c7831ecbd5661346ea2ee8b7b8c4671014"
     ],
     [
       ".agents/skills/microservices-communication-patterns/SKILL.md",
@@ -7548,7 +7548,7 @@
     ],
     [
       ".agents/skills/mutation-testing/SKILL.md",
-      "7e9e0fa511d57b16686cde557bfb59362d3097f98afc8d5d6b13c53b41391476"
+      "cf48a41257be94a660a208669823575884ec88a51393e5b6d9447503e0e6a4ff"
     ],
     [
       ".agents/skills/orchestrator/SKILL.md",
@@ -7576,7 +7576,7 @@
     ],
     [
       ".agents/skills/quality-assurance/SKILL.md",
-      "9557a11060fff7f7e4ed4eda68058c22ea019b32b2d33fa74de6dc9edeae6fe2"
+      "800b99cc6b54e4d97be3af66dbc797526a6a30ce046e1e202e7042457111b9d5"
     ],
     [
       ".agents/skills/refactor/SKILL.md",
@@ -7612,7 +7612,7 @@
     ],
     [
       ".agents/skills/technical-debt-management/SKILL.md",
-      "c2592c501d10efa2cd701602f205caf567984c0e8fb5c233454129a829bf1c59"
+      "6d9268998529a423a6b2f41cf357a5358cb81d60dd59557055aa70b6ca5652bc"
     ],
     [
       ".agents/skills/technical-decision-making/SKILL.md",
@@ -7632,7 +7632,7 @@
     ],
     [
       ".agents/skills/test-data-strategies/SKILL.md",
-      "fbe3c3bc61495dc614f8ca20b726ff8b8820479dc40248f38d607ee8050cef18"
+      "5942a026afd9c8914accd6295217736ea0f851977f1b56402abe9e892c2ed68c"
     ],
     [
       ".agents/skills/test-mocking-rules/SKILL.md",
@@ -7640,7 +7640,7 @@
     ],
     [
       ".agents/skills/testing-strategies/SKILL.md",
-      "042493cfef510d68a72e9e99385bd99101832340f9e080e4c14786d4d3d8cac0"
+      "717f778041182c0c7cbf50d42c9971590b416c11e697abc7f6bfee72a78a7622"
     ],
     [
       "AGENTS.md",
