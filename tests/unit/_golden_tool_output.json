@@ -322,15 +322,15 @@
     ],
     [
       ".claude/skills/api-versioning-strategy/SKILL.md",
-      "062a339a10c5df713eae0561b016be7c2c8a5b6c14d974d932e3d5802344f8c6"
+      "ca0422f68057c9fbc27f6cc3e218c19e122502ebce9a36d063be440f2f522773"
     ],
     [
       ".claude/skills/architecture-documentation/SKILL.md",
-      "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
+      "993a75db771f7d88c08eb920e585d13eeb5720ae59451ba03cb89a54fa560fb1"
     ],
     [
       ".claude/skills/code-review-practices/SKILL.md",
-      "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
+      "4a972e7b7e3b26e3a641de6dc07683ffcc4f7eb90b7ad020a1e5896b077f6893"
     ],
     [
       ".claude/skills/component-design-systems/SKILL.md",
@@ -342,7 +342,7 @@
     ],
     [
       ".claude/skills/continuous-improvement/SKILL.md",
-      "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+      "59f0ba8436b42939fc6174fd627b2e62275453a65b4f6155624a2b38b7bce0ef"
     ],
     [
       ".claude/skills/css-performance-optimization/SKILL.md",
@@ -354,7 +354,7 @@
     ],
     [
       ".claude/skills/data-validation-pipelines/SKILL.md",
-      "09739cef80da0955aba6cb78b5c03b82eda86664438e9eb4aa139b657112e908"
+      "7af2188f5e32ebb13525ac3277736d9bbb0e8484007c93f859145046574f70ac"
     ],
     [
       ".claude/skills/debugging-methodology/SKILL.md",
@@ -362,11 +362,11 @@
     ],
     [
       ".claude/skills/deployment-rollback-strategies/SKILL.md",
-      "d2395d14a3c4a3535206ea9f9a65913d332bbb5867ebfc81beacb1a255c66852"
+      "e346e95bf8a47e687ae4dbb0f34fdc646b33b8464605e49b8b4708c17d86e6c8"
     ],
     [
       ".claude/skills/distributed-caching-design/SKILL.md",
-      "7be0a0c2fa17608a61687445b80fa3329a72b2036cfe6b9ec2590aa18cdd517e"
+      "f63c4aaa9a52bdc9b1c494c0bb28a1ce3c86aa9d5726d02d4e47e91488f9cb99"
     ],
     [
       ".claude/skills/documentation-best-practices/SKILL.md",
@@ -382,7 +382,7 @@
     ],
     [
       ".claude/skills/iac-best-practices/SKILL.md",
-      "4db8feb77b490eea6dd52374637923448a3ae6f27c138d6c996880407c5a096b"
+      "06b547078fe356b5cd7fe7133c2f16cfc33164e2f58a4cecb53a731d50fe822b"
     ],
     [
       ".claude/skills/idempotency-patterns/SKILL.md",
@@ -394,7 +394,7 @@
     ],
     [
       ".claude/skills/infrastructure-drift-detection/SKILL.md",
-      "2d205cd017dc95f36f8312eae242d89545394bd38f8d6e865f87fd2ab13ef3f6"
+      "c3ff829521c223d78d9d5370d31b9c97e13fd5c8322820a9a43faeb31dd5de8b"
     ],
     [
       ".claude/skills/kubernetes-resource-management/SKILL.md",
@@ -406,7 +406,7 @@
     ],
     [
       ".claude/skills/microservices-communication-patterns/SKILL.md",
-      "8cc8e74218d5e09d2100d78553436b8344407ca72c73abebd28f264bab5b215d"
+      "669b061210bad4efe3e1c43427f10fa7fd8ebd26a9a377b88017eb9f736d04db"
     ],
     [
       ".claude/skills/multiagent-orchestration/SKILL.md",
@@ -418,7 +418,7 @@
     ],
     [
       ".claude/skills/performance-optimization/SKILL.md",
-      "326754e646454eb1d54a4e9692a8dfb1896902b9adf51a1513b46aa5669d647a"
+      "c1926b007cbc559c3069ee57b6ce48211ee3d001c6891c95613f9007950c72be"
     ],
     [
       ".claude/skills/post-implementation-checklist/SKILL.md",
@@ -426,7 +426,7 @@
     ],
     [
       ".claude/skills/problem-decomposition/SKILL.md",
-      "f37c4a570593d780e4b1173ef0082df62d03efb2e00bfcaac5d1feecb2caec8e"
+      "93153b2a818de51b013717fb9311e04ef07d3f6d46d381ca4f927a730775460e"
     ],
     [
       ".claude/skills/quality-assurance/SKILL.md",
@@ -450,11 +450,11 @@
     ],
     [
       ".claude/skills/team-collaboration/SKILL.md",
-      "8d3703e287a6a9c94a53da968ece20bf8b2bac4f7a28d3d49f838c9646b5be02"
+      "49a0e47936fe77f2f0c27d0d01d380725c619d3b9fb4e5ac1ab7293c05b06193"
     ],
     [
       ".claude/skills/technical-communication/SKILL.md",
-      "66f5368887094575002c8f83064e41110ceab580afd197cc4ed0319a48e933bb"
+      "1c52aee4891d087325705f64d38a853bfb8579e0a3ca384c655a0eba933159e9"
     ],
     [
       ".claude/skills/technical-debt-management/SKILL.md",
@@ -462,7 +462,7 @@
     ],
     [
       ".claude/skills/technical-decision-making/SKILL.md",
-      "d16fe4266cf65a2e88bd45d15f95fe91771be2cd4c1a10d00328503f11a38f48"
+      "461d7f9ee57ea8e3a5962d43cc43e5fe73aa6adc0d7afafe56461407db484995"
     ],
     [
       ".claude/skills/test-aaa-structure/SKILL.md",
@@ -796,15 +796,15 @@
     ],
     [
       ".claude/skills/api-versioning-strategy/SKILL.md",
-      "f9b26da1e18a83e0c968339e34963b0711cf45f29eeb611bddd894238427cdd5"
+      "2257b3a6c90801be433161a17301f6f8c9e3b4ecd7c571ef0250e2094f5f4106"
     ],
     [
       ".claude/skills/architecture-documentation/SKILL.md",
-      "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
+      "b68120668baae9c97a86a70df348231b93880a6369c751748ada65d625ae134c"
     ],
     [
       ".claude/skills/code-review-practices/SKILL.md",
-      "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
+      "1557418a4ba405021ec54b657907118baa8776e19843c847f21a23c0a202a979"
     ],
     [
       ".claude/skills/component-design-systems/SKILL.md",
@@ -816,7 +816,7 @@
     ],
     [
       ".claude/skills/continuous-improvement/SKILL.md",
-      "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+      "22f70dbb2bf73e070f9bbe9b84b2daea3d2dc096e488a155756451c87439063d"
     ],
     [
       ".claude/skills/css-performance-optimization/SKILL.md",
@@ -828,7 +828,7 @@
     ],
     [
       ".claude/skills/data-validation-pipelines/SKILL.md",
-      "684d497852e1980d9e8a322c59e9ac637c2dc100d484358aa0b8281a3ac0f25c"
+      "bb654d8bc690dad50fbe087e29dd58042b50e736cb23556d3e3636ebb08ac8e6"
     ],
     [
       ".claude/skills/debugging-methodology/SKILL.md",
@@ -836,11 +836,11 @@
     ],
     [
       ".claude/skills/deployment-rollback-strategies/SKILL.md",
-      "ef50c407c99c7d6f1dd30a09132640bfe9553f717034cbd72f95eaf7406dfd56"
+      "84eff6d42b8feaa49fe9afd1bca3a1e5073cd02f8b997ad271dd906cc9404fec"
     ],
     [
       ".claude/skills/distributed-caching-design/SKILL.md",
-      "31bf68b5dab3a5cc16898ac93fea538876da154d0af47e2b4cabdd0ddbf2abbf"
+      "44f6da3551c839e689884843eb17c3818b77a96fd35bb1853ef23daaf65c524d"
     ],
     [
       ".claude/skills/documentation-best-practices/SKILL.md",
@@ -856,7 +856,7 @@
     ],
     [
       ".claude/skills/iac-best-practices/SKILL.md",
-      "e7da4e6302c09d36fc3338d73c70da71ab10c981e7ffdf7cc18f85e853a62810"
+      "0d8666abb9dd6b89f6e10454f3eeb7a9df1572d079346a4ded3df01b5795e68d"
     ],
     [
       ".claude/skills/idempotency-patterns/SKILL.md",
@@ -868,7 +868,7 @@
     ],
     [
       ".claude/skills/infrastructure-drift-detection/SKILL.md",
-      "ba399dc9d93bfa327975daf55aa74110c59f9a8271295af7d539024ac0989122"
+      "9a20763b27101518f8cc27115257fc9b1dc09432ade2f401142a9c35ee8e8137"
     ],
     [
       ".claude/skills/kubernetes-resource-management/SKILL.md",
@@ -880,7 +880,7 @@
     ],
     [
       ".claude/skills/microservices-communication-patterns/SKILL.md",
-      "6b6fe9f51433dddf2bc819abffffe271eab0edf0911793ac958575d395458193"
+      "e78b32f3b6a31c088f97fb82593810ce35572b180ab2b5919ad2f94bba0cc92e"
     ],
     [
       ".claude/skills/multiagent-orchestration/SKILL.md",
@@ -892,7 +892,7 @@
     ],
     [
       ".claude/skills/performance-optimization/SKILL.md",
-      "81f057d445e73f1877db1b7996b34a9cd2976e8670f332ac2e13f0c4eac392b2"
+      "49b1987d386bf65ccd845e49369adbe6f2e4dd86f074aa00e22e2e5ae5e91394"
     ],
     [
       ".claude/skills/post-implementation-checklist/SKILL.md",
@@ -900,7 +900,7 @@
     ],
     [
       ".claude/skills/problem-decomposition/SKILL.md",
-      "9962362a175e7b4ee9acd1bc585511234902694910c5ba1f20a3e53ee01c2047"
+      "25928a913e2b2e1400c16db872946f9124de1e11d6447abc8a12e02754b71b84"
     ],
     [
       ".claude/skills/quality-assurance/SKILL.md",
@@ -924,11 +924,11 @@
     ],
     [
       ".claude/skills/team-collaboration/SKILL.md",
-      "59a7c4fc7970bd4af790f6642fb030df0fbfde73d95595fa2289196c71ee64ba"
+      "37753e0e36f339162058fcfba4f62f735a24e0ca0e250fdf5cf92d6d1887f46f"
     ],
     [
       ".claude/skills/technical-communication/SKILL.md",
-      "725be0f40aa295e16c715ada58178484a886e3d7d0eef134e5d3926132923625"
+      "cd1f1ae79c34a37e4b27ff9d21478465a5385f2723fb6d9c60ca1632e9465c6b"
     ],
     [
       ".claude/skills/technical-debt-management/SKILL.md",
@@ -936,7 +936,7 @@
     ],
     [
       ".claude/skills/technical-decision-making/SKILL.md",
-      "4f5b3cb084e61b2e1c7edcdb9eec25927a06974bf2c189e371525a867be5b985"
+      "7a531b16fedcb4554642a3f03ec073dd68706cf8cc277f09f99da778d4fa6e95"
     ],
     [
       ".claude/skills/test-aaa-structure/SKILL.md",
@@ -1206,15 +1206,15 @@
   "cline::minimal": [
     [
       ".cline/skills/api-versioning-strategy/SKILL.md",
-      "062a339a10c5df713eae0561b016be7c2c8a5b6c14d974d932e3d5802344f8c6"
+      "ca0422f68057c9fbc27f6cc3e218c19e122502ebce9a36d063be440f2f522773"
     ],
     [
       ".cline/skills/architecture-documentation/SKILL.md",
-      "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
+      "993a75db771f7d88c08eb920e585d13eeb5720ae59451ba03cb89a54fa560fb1"
     ],
     [
       ".cline/skills/code-review-practices/SKILL.md",
-      "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
+      "4a972e7b7e3b26e3a641de6dc07683ffcc4f7eb90b7ad020a1e5896b077f6893"
     ],
     [
       ".cline/skills/component-design-systems/SKILL.md",
@@ -1226,7 +1226,7 @@
     ],
     [
       ".cline/skills/continuous-improvement/SKILL.md",
-      "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+      "59f0ba8436b42939fc6174fd627b2e62275453a65b4f6155624a2b38b7bce0ef"
     ],
     [
       ".cline/skills/css-performance-optimization/SKILL.md",
@@ -1238,7 +1238,7 @@
     ],
     [
       ".cline/skills/data-validation-pipelines/SKILL.md",
-      "09739cef80da0955aba6cb78b5c03b82eda86664438e9eb4aa139b657112e908"
+      "7af2188f5e32ebb13525ac3277736d9bbb0e8484007c93f859145046574f70ac"
     ],
     [
       ".cline/skills/debugging-methodology/SKILL.md",
@@ -1246,11 +1246,11 @@
     ],
     [
       ".cline/skills/deployment-rollback-strategies/SKILL.md",
-      "d2395d14a3c4a3535206ea9f9a65913d332bbb5867ebfc81beacb1a255c66852"
+      "e346e95bf8a47e687ae4dbb0f34fdc646b33b8464605e49b8b4708c17d86e6c8"
     ],
     [
       ".cline/skills/distributed-caching-design/SKILL.md",
-      "7be0a0c2fa17608a61687445b80fa3329a72b2036cfe6b9ec2590aa18cdd517e"
+      "f63c4aaa9a52bdc9b1c494c0bb28a1ce3c86aa9d5726d02d4e47e91488f9cb99"
     ],
     [
       ".cline/skills/documentation-best-practices/SKILL.md",
@@ -1266,7 +1266,7 @@
     ],
     [
       ".cline/skills/iac-best-practices/SKILL.md",
-      "4db8feb77b490eea6dd52374637923448a3ae6f27c138d6c996880407c5a096b"
+      "06b547078fe356b5cd7fe7133c2f16cfc33164e2f58a4cecb53a731d50fe822b"
     ],
     [
       ".cline/skills/idempotency-patterns/SKILL.md",
@@ -1278,7 +1278,7 @@
     ],
     [
       ".cline/skills/infrastructure-drift-detection/SKILL.md",
-      "2d205cd017dc95f36f8312eae242d89545394bd38f8d6e865f87fd2ab13ef3f6"
+      "c3ff829521c223d78d9d5370d31b9c97e13fd5c8322820a9a43faeb31dd5de8b"
     ],
     [
       ".cline/skills/kubernetes-resource-management/SKILL.md",
@@ -1290,7 +1290,7 @@
     ],
     [
       ".cline/skills/microservices-communication-patterns/SKILL.md",
-      "8cc8e74218d5e09d2100d78553436b8344407ca72c73abebd28f264bab5b215d"
+      "669b061210bad4efe3e1c43427f10fa7fd8ebd26a9a377b88017eb9f736d04db"
     ],
     [
       ".cline/skills/multiagent-orchestration/SKILL.md",
@@ -1302,7 +1302,7 @@
     ],
     [
       ".cline/skills/performance-optimization/SKILL.md",
-      "326754e646454eb1d54a4e9692a8dfb1896902b9adf51a1513b46aa5669d647a"
+      "c1926b007cbc559c3069ee57b6ce48211ee3d001c6891c95613f9007950c72be"
     ],
     [
       ".cline/skills/post-implementation-checklist/SKILL.md",
@@ -1310,7 +1310,7 @@
     ],
     [
       ".cline/skills/problem-decomposition/SKILL.md",
-      "f37c4a570593d780e4b1173ef0082df62d03efb2e00bfcaac5d1feecb2caec8e"
+      "93153b2a818de51b013717fb9311e04ef07d3f6d46d381ca4f927a730775460e"
     ],
     [
       ".cline/skills/quality-assurance/SKILL.md",
@@ -1334,11 +1334,11 @@
     ],
     [
       ".cline/skills/team-collaboration/SKILL.md",
-      "8d3703e287a6a9c94a53da968ece20bf8b2bac4f7a28d3d49f838c9646b5be02"
+      "49a0e47936fe77f2f0c27d0d01d380725c619d3b9fb4e5ac1ab7293c05b06193"
     ],
     [
       ".cline/skills/technical-communication/SKILL.md",
-      "66f5368887094575002c8f83064e41110ceab580afd197cc4ed0319a48e933bb"
+      "1c52aee4891d087325705f64d38a853bfb8579e0a3ca384c655a0eba933159e9"
     ],
     [
       ".cline/skills/technical-debt-management/SKILL.md",
@@ -1346,7 +1346,7 @@
     ],
     [
       ".cline/skills/technical-decision-making/SKILL.md",
-      "d16fe4266cf65a2e88bd45d15f95fe91771be2cd4c1a10d00328503f11a38f48"
+      "461d7f9ee57ea8e3a5962d43cc43e5fe73aa6adc0d7afafe56461407db484995"
     ],
     [
       ".cline/skills/test-aaa-structure/SKILL.md",
@@ -1380,15 +1380,15 @@
   "cline::verbose": [
     [
       ".cline/skills/api-versioning-strategy/SKILL.md",
-      "f9b26da1e18a83e0c968339e34963b0711cf45f29eeb611bddd894238427cdd5"
+      "2257b3a6c90801be433161a17301f6f8c9e3b4ecd7c571ef0250e2094f5f4106"
     ],
     [
       ".cline/skills/architecture-documentation/SKILL.md",
-      "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
+      "b68120668baae9c97a86a70df348231b93880a6369c751748ada65d625ae134c"
     ],
     [
       ".cline/skills/code-review-practices/SKILL.md",
-      "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
+      "1557418a4ba405021ec54b657907118baa8776e19843c847f21a23c0a202a979"
     ],
     [
       ".cline/skills/component-design-systems/SKILL.md",
@@ -1400,7 +1400,7 @@
     ],
     [
       ".cline/skills/continuous-improvement/SKILL.md",
-      "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+      "22f70dbb2bf73e070f9bbe9b84b2daea3d2dc096e488a155756451c87439063d"
     ],
     [
       ".cline/skills/css-performance-optimization/SKILL.md",
@@ -1412,7 +1412,7 @@
     ],
     [
       ".cline/skills/data-validation-pipelines/SKILL.md",
-      "684d497852e1980d9e8a322c59e9ac637c2dc100d484358aa0b8281a3ac0f25c"
+      "bb654d8bc690dad50fbe087e29dd58042b50e736cb23556d3e3636ebb08ac8e6"
     ],
     [
       ".cline/skills/debugging-methodology/SKILL.md",
@@ -1420,11 +1420,11 @@
     ],
     [
       ".cline/skills/deployment-rollback-strategies/SKILL.md",
-      "ef50c407c99c7d6f1dd30a09132640bfe9553f717034cbd72f95eaf7406dfd56"
+      "84eff6d42b8feaa49fe9afd1bca3a1e5073cd02f8b997ad271dd906cc9404fec"
     ],
     [
       ".cline/skills/distributed-caching-design/SKILL.md",
-      "31bf68b5dab3a5cc16898ac93fea538876da154d0af47e2b4cabdd0ddbf2abbf"
+      "44f6da3551c839e689884843eb17c3818b77a96fd35bb1853ef23daaf65c524d"
     ],
     [
       ".cline/skills/documentation-best-practices/SKILL.md",
@@ -1440,7 +1440,7 @@
     ],
     [
       ".cline/skills/iac-best-practices/SKILL.md",
-      "e7da4e6302c09d36fc3338d73c70da71ab10c981e7ffdf7cc18f85e853a62810"
+      "0d8666abb9dd6b89f6e10454f3eeb7a9df1572d079346a4ded3df01b5795e68d"
     ],
     [
       ".cline/skills/idempotency-patterns/SKILL.md",
@@ -1452,7 +1452,7 @@
     ],
     [
       ".cline/skills/infrastructure-drift-detection/SKILL.md",
-      "ba399dc9d93bfa327975daf55aa74110c59f9a8271295af7d539024ac0989122"
+      "9a20763b27101518f8cc27115257fc9b1dc09432ade2f401142a9c35ee8e8137"
     ],
     [
       ".cline/skills/kubernetes-resource-management/SKILL.md",
@@ -1464,7 +1464,7 @@
     ],
     [
       ".cline/skills/microservices-communication-patterns/SKILL.md",
-      "6b6fe9f51433dddf2bc819abffffe271eab0edf0911793ac958575d395458193"
+      "e78b32f3b6a31c088f97fb82593810ce35572b180ab2b5919ad2f94bba0cc92e"
     ],
     [
       ".cline/skills/multiagent-orchestration/SKILL.md",
@@ -1476,7 +1476,7 @@
     ],
     [
       ".cline/skills/performance-optimization/SKILL.md",
-      "81f057d445e73f1877db1b7996b34a9cd2976e8670f332ac2e13f0c4eac392b2"
+      "49b1987d386bf65ccd845e49369adbe6f2e4dd86f074aa00e22e2e5ae5e91394"
     ],
     [
       ".cline/skills/post-implementation-checklist/SKILL.md",
@@ -1484,7 +1484,7 @@
     ],
     [
       ".cline/skills/problem-decomposition/SKILL.md",
-      "9962362a175e7b4ee9acd1bc585511234902694910c5ba1f20a3e53ee01c2047"
+      "25928a913e2b2e1400c16db872946f9124de1e11d6447abc8a12e02754b71b84"
     ],
     [
       ".cline/skills/quality-assurance/SKILL.md",
@@ -1508,11 +1508,11 @@
     ],
     [
       ".cline/skills/team-collaboration/SKILL.md",
-      "59a7c4fc7970bd4af790f6642fb030df0fbfde73d95595fa2289196c71ee64ba"
+      "37753e0e36f339162058fcfba4f62f735a24e0ca0e250fdf5cf92d6d1887f46f"
     ],
     [
       ".cline/skills/technical-communication/SKILL.md",
-      "725be0f40aa295e16c715ada58178484a886e3d7d0eef134e5d3926132923625"
+      "cd1f1ae79c34a37e4b27ff9d21478465a5385f2723fb6d9c60ca1632e9465c6b"
     ],
     [
       ".cline/skills/technical-debt-management/SKILL.md",
@@ -1520,7 +1520,7 @@
     ],
     [
       ".cline/skills/technical-decision-making/SKILL.md",
-      "4f5b3cb084e61b2e1c7edcdb9eec25927a06974bf2c189e371525a867be5b985"
+      "7a531b16fedcb4554642a3f03ec073dd68706cf8cc277f09f99da778d4fa6e95"
     ],
     [
       ".cline/skills/test-aaa-structure/SKILL.md",
@@ -1554,11 +1554,11 @@
   "codex::minimal": [
     [
       ".agents/skills/api-versioning-strategy/SKILL.md",
-      "062a339a10c5df713eae0561b016be7c2c8a5b6c14d974d932e3d5802344f8c6"
+      "ca0422f68057c9fbc27f6cc3e218c19e122502ebce9a36d063be440f2f522773"
     ],
     [
       ".agents/skills/architecture-documentation/SKILL.md",
-      "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
+      "993a75db771f7d88c08eb920e585d13eeb5720ae59451ba03cb89a54fa560fb1"
     ],
     [
       ".agents/skills/ask/SKILL.md",
@@ -1574,7 +1574,7 @@
     ],
     [
       ".agents/skills/code-review-practices/SKILL.md",
-      "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
+      "4a972e7b7e3b26e3a641de6dc07683ffcc4f7eb90b7ad020a1e5896b077f6893"
     ],
     [
       ".agents/skills/component-design-systems/SKILL.md",
@@ -1586,7 +1586,7 @@
     ],
     [
       ".agents/skills/continuous-improvement/SKILL.md",
-      "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+      "59f0ba8436b42939fc6174fd627b2e62275453a65b4f6155624a2b38b7bce0ef"
     ],
     [
       ".agents/skills/css-performance-optimization/SKILL.md",
@@ -1598,7 +1598,7 @@
     ],
     [
       ".agents/skills/data-validation-pipelines/SKILL.md",
-      "09739cef80da0955aba6cb78b5c03b82eda86664438e9eb4aa139b657112e908"
+      "7af2188f5e32ebb13525ac3277736d9bbb0e8484007c93f859145046574f70ac"
     ],
     [
       ".agents/skills/debug/SKILL.md",
@@ -1610,11 +1610,11 @@
     ],
     [
       ".agents/skills/deployment-rollback-strategies/SKILL.md",
-      "d2395d14a3c4a3535206ea9f9a65913d332bbb5867ebfc81beacb1a255c66852"
+      "e346e95bf8a47e687ae4dbb0f34fdc646b33b8464605e49b8b4708c17d86e6c8"
     ],
     [
       ".agents/skills/distributed-caching-design/SKILL.md",
-      "7be0a0c2fa17608a61687445b80fa3329a72b2036cfe6b9ec2590aa18cdd517e"
+      "f63c4aaa9a52bdc9b1c494c0bb28a1ce3c86aa9d5726d02d4e47e91488f9cb99"
     ],
     [
       ".agents/skills/documentation-best-practices/SKILL.md",
@@ -1642,7 +1642,7 @@
     ],
     [
       ".agents/skills/iac-best-practices/SKILL.md",
-      "4db8feb77b490eea6dd52374637923448a3ae6f27c138d6c996880407c5a096b"
+      "06b547078fe356b5cd7fe7133c2f16cfc33164e2f58a4cecb53a731d50fe822b"
     ],
     [
       ".agents/skills/idempotency-patterns/SKILL.md",
@@ -1654,7 +1654,7 @@
     ],
     [
       ".agents/skills/infrastructure-drift-detection/SKILL.md",
-      "2d205cd017dc95f36f8312eae242d89545394bd38f8d6e865f87fd2ab13ef3f6"
+      "c3ff829521c223d78d9d5370d31b9c97e13fd5c8322820a9a43faeb31dd5de8b"
     ],
     [
       ".agents/skills/kubernetes-resource-management/SKILL.md",
@@ -1666,7 +1666,7 @@
     ],
     [
       ".agents/skills/microservices-communication-patterns/SKILL.md",
-      "8cc8e74218d5e09d2100d78553436b8344407ca72c73abebd28f264bab5b215d"
+      "669b061210bad4efe3e1c43427f10fa7fd8ebd26a9a377b88017eb9f736d04db"
     ],
     [
       ".agents/skills/migration/SKILL.md",
@@ -1690,7 +1690,7 @@
     ],
     [
       ".agents/skills/performance-optimization/SKILL.md",
-      "326754e646454eb1d54a4e9692a8dfb1896902b9adf51a1513b46aa5669d647a"
+      "c1926b007cbc559c3069ee57b6ce48211ee3d001c6891c95613f9007950c72be"
     ],
     [
       ".agents/skills/plan/SKILL.md",
@@ -1702,7 +1702,7 @@
     ],
     [
       ".agents/skills/problem-decomposition/SKILL.md",
-      "f37c4a570593d780e4b1173ef0082df62d03efb2e00bfcaac5d1feecb2caec8e"
+      "93153b2a818de51b013717fb9311e04ef07d3f6d46d381ca4f927a730775460e"
     ],
     [
       ".agents/skills/quality-assurance/SKILL.md",
@@ -1734,11 +1734,11 @@
     ],
     [
       ".agents/skills/team-collaboration/SKILL.md",
-      "8d3703e287a6a9c94a53da968ece20bf8b2bac4f7a28d3d49f838c9646b5be02"
+      "49a0e47936fe77f2f0c27d0d01d380725c619d3b9fb4e5ac1ab7293c05b06193"
     ],
     [
       ".agents/skills/technical-communication/SKILL.md",
-      "66f5368887094575002c8f83064e41110ceab580afd197cc4ed0319a48e933bb"
+      "1c52aee4891d087325705f64d38a853bfb8579e0a3ca384c655a0eba933159e9"
     ],
     [
       ".agents/skills/technical-debt-management/SKILL.md",
@@ -1746,7 +1746,7 @@
     ],
     [
       ".agents/skills/technical-decision-making/SKILL.md",
-      "d16fe4266cf65a2e88bd45d15f95fe91771be2cd4c1a10d00328503f11a38f48"
+      "461d7f9ee57ea8e3a5962d43cc43e5fe73aa6adc0d7afafe56461407db484995"
     ],
     [
       ".agents/skills/test/SKILL.md",
@@ -1784,11 +1784,11 @@
   "codex::verbose": [
     [
       ".agents/skills/api-versioning-strategy/SKILL.md",
-      "f9b26da1e18a83e0c968339e34963b0711cf45f29eeb611bddd894238427cdd5"
+      "2257b3a6c90801be433161a17301f6f8c9e3b4ecd7c571ef0250e2094f5f4106"
     ],
     [
       ".agents/skills/architecture-documentation/SKILL.md",
-      "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
+      "b68120668baae9c97a86a70df348231b93880a6369c751748ada65d625ae134c"
     ],
     [
       ".agents/skills/ask/SKILL.md",
@@ -1804,7 +1804,7 @@
     ],
     [
       ".agents/skills/code-review-practices/SKILL.md",
-      "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
+      "1557418a4ba405021ec54b657907118baa8776e19843c847f21a23c0a202a979"
     ],
     [
       ".agents/skills/component-design-systems/SKILL.md",
@@ -1816,7 +1816,7 @@
     ],
     [
       ".agents/skills/continuous-improvement/SKILL.md",
-      "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+      "22f70dbb2bf73e070f9bbe9b84b2daea3d2dc096e488a155756451c87439063d"
     ],
     [
       ".agents/skills/css-performance-optimization/SKILL.md",
@@ -1828,7 +1828,7 @@
     ],
     [
       ".agents/skills/data-validation-pipelines/SKILL.md",
-      "684d497852e1980d9e8a322c59e9ac637c2dc100d484358aa0b8281a3ac0f25c"
+      "bb654d8bc690dad50fbe087e29dd58042b50e736cb23556d3e3636ebb08ac8e6"
     ],
     [
       ".agents/skills/debug/SKILL.md",
@@ -1840,11 +1840,11 @@
     ],
     [
       ".agents/skills/deployment-rollback-strategies/SKILL.md",
-      "ef50c407c99c7d6f1dd30a09132640bfe9553f717034cbd72f95eaf7406dfd56"
+      "84eff6d42b8feaa49fe9afd1bca3a1e5073cd02f8b997ad271dd906cc9404fec"
     ],
     [
       ".agents/skills/distributed-caching-design/SKILL.md",
-      "31bf68b5dab3a5cc16898ac93fea538876da154d0af47e2b4cabdd0ddbf2abbf"
+      "44f6da3551c839e689884843eb17c3818b77a96fd35bb1853ef23daaf65c524d"
     ],
     [
       ".agents/skills/documentation-best-practices/SKILL.md",
@@ -1872,7 +1872,7 @@
     ],
     [
       ".agents/skills/iac-best-practices/SKILL.md",
-      "e7da4e6302c09d36fc3338d73c70da71ab10c981e7ffdf7cc18f85e853a62810"
+      "0d8666abb9dd6b89f6e10454f3eeb7a9df1572d079346a4ded3df01b5795e68d"
     ],
     [
       ".agents/skills/idempotency-patterns/SKILL.md",
@@ -1884,7 +1884,7 @@
     ],
     [
       ".agents/skills/infrastructure-drift-detection/SKILL.md",
-      "ba399dc9d93bfa327975daf55aa74110c59f9a8271295af7d539024ac0989122"
+      "9a20763b27101518f8cc27115257fc9b1dc09432ade2f401142a9c35ee8e8137"
     ],
     [
       ".agents/skills/kubernetes-resource-management/SKILL.md",
@@ -1896,7 +1896,7 @@
     ],
     [
       ".agents/skills/microservices-communication-patterns/SKILL.md",
-      "6b6fe9f51433dddf2bc819abffffe271eab0edf0911793ac958575d395458193"
+      "e78b32f3b6a31c088f97fb82593810ce35572b180ab2b5919ad2f94bba0cc92e"
     ],
     [
       ".agents/skills/migration/SKILL.md",
@@ -1920,7 +1920,7 @@
     ],
     [
       ".agents/skills/performance-optimization/SKILL.md",
-      "81f057d445e73f1877db1b7996b34a9cd2976e8670f332ac2e13f0c4eac392b2"
+      "49b1987d386bf65ccd845e49369adbe6f2e4dd86f074aa00e22e2e5ae5e91394"
     ],
     [
       ".agents/skills/plan/SKILL.md",
@@ -1932,7 +1932,7 @@
     ],
     [
       ".agents/skills/problem-decomposition/SKILL.md",
-      "9962362a175e7b4ee9acd1bc585511234902694910c5ba1f20a3e53ee01c2047"
+      "25928a913e2b2e1400c16db872946f9124de1e11d6447abc8a12e02754b71b84"
     ],
     [
       ".agents/skills/quality-assurance/SKILL.md",
@@ -1964,11 +1964,11 @@
     ],
     [
       ".agents/skills/team-collaboration/SKILL.md",
-      "59a7c4fc7970bd4af790f6642fb030df0fbfde73d95595fa2289196c71ee64ba"
+      "37753e0e36f339162058fcfba4f62f735a24e0ca0e250fdf5cf92d6d1887f46f"
     ],
     [
       ".agents/skills/technical-communication/SKILL.md",
-      "725be0f40aa295e16c715ada58178484a886e3d7d0eef134e5d3926132923625"
+      "cd1f1ae79c34a37e4b27ff9d21478465a5385f2723fb6d9c60ca1632e9465c6b"
     ],
     [
       ".agents/skills/technical-debt-management/SKILL.md",
@@ -1976,7 +1976,7 @@
     ],
     [
       ".agents/skills/technical-decision-making/SKILL.md",
-      "4f5b3cb084e61b2e1c7edcdb9eec25927a06974bf2c189e371525a867be5b985"
+      "7a531b16fedcb4554642a3f03ec073dd68706cf8cc277f09f99da778d4fa6e95"
     ],
     [
       ".agents/skills/test/SKILL.md",
@@ -2490,15 +2490,15 @@
     ],
     [
       ".github/skills/api-versioning-strategy.md",
-      "062a339a10c5df713eae0561b016be7c2c8a5b6c14d974d932e3d5802344f8c6"
+      "ca0422f68057c9fbc27f6cc3e218c19e122502ebce9a36d063be440f2f522773"
     ],
     [
       ".github/skills/architecture-documentation.md",
-      "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
+      "993a75db771f7d88c08eb920e585d13eeb5720ae59451ba03cb89a54fa560fb1"
     ],
     [
       ".github/skills/code-review-practices.md",
-      "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
+      "4a972e7b7e3b26e3a641de6dc07683ffcc4f7eb90b7ad020a1e5896b077f6893"
     ],
     [
       ".github/skills/component-design-systems.md",
@@ -2510,7 +2510,7 @@
     ],
     [
       ".github/skills/continuous-improvement.md",
-      "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+      "59f0ba8436b42939fc6174fd627b2e62275453a65b4f6155624a2b38b7bce0ef"
     ],
     [
       ".github/skills/css-performance-optimization.md",
@@ -2522,7 +2522,7 @@
     ],
     [
       ".github/skills/data-validation-pipelines.md",
-      "09739cef80da0955aba6cb78b5c03b82eda86664438e9eb4aa139b657112e908"
+      "7af2188f5e32ebb13525ac3277736d9bbb0e8484007c93f859145046574f70ac"
     ],
     [
       ".github/skills/debugging-methodology.md",
@@ -2530,11 +2530,11 @@
     ],
     [
       ".github/skills/deployment-rollback-strategies.md",
-      "d2395d14a3c4a3535206ea9f9a65913d332bbb5867ebfc81beacb1a255c66852"
+      "e346e95bf8a47e687ae4dbb0f34fdc646b33b8464605e49b8b4708c17d86e6c8"
     ],
     [
       ".github/skills/distributed-caching-design.md",
-      "7be0a0c2fa17608a61687445b80fa3329a72b2036cfe6b9ec2590aa18cdd517e"
+      "f63c4aaa9a52bdc9b1c494c0bb28a1ce3c86aa9d5726d02d4e47e91488f9cb99"
     ],
     [
       ".github/skills/documentation-best-practices.md",
@@ -2550,7 +2550,7 @@
     ],
     [
       ".github/skills/iac-best-practices.md",
-      "4db8feb77b490eea6dd52374637923448a3ae6f27c138d6c996880407c5a096b"
+      "06b547078fe356b5cd7fe7133c2f16cfc33164e2f58a4cecb53a731d50fe822b"
     ],
     [
       ".github/skills/idempotency-patterns.md",
@@ -2562,7 +2562,7 @@
     ],
     [
       ".github/skills/infrastructure-drift-detection.md",
-      "2d205cd017dc95f36f8312eae242d89545394bd38f8d6e865f87fd2ab13ef3f6"
+      "c3ff829521c223d78d9d5370d31b9c97e13fd5c8322820a9a43faeb31dd5de8b"
     ],
     [
       ".github/skills/kubernetes-resource-management.md",
@@ -2574,7 +2574,7 @@
     ],
     [
       ".github/skills/microservices-communication-patterns.md",
-      "8cc8e74218d5e09d2100d78553436b8344407ca72c73abebd28f264bab5b215d"
+      "669b061210bad4efe3e1c43427f10fa7fd8ebd26a9a377b88017eb9f736d04db"
     ],
     [
       ".github/skills/multiagent-orchestration.md",
@@ -2586,7 +2586,7 @@
     ],
     [
       ".github/skills/performance-optimization.md",
-      "326754e646454eb1d54a4e9692a8dfb1896902b9adf51a1513b46aa5669d647a"
+      "c1926b007cbc559c3069ee57b6ce48211ee3d001c6891c95613f9007950c72be"
     ],
     [
       ".github/skills/post-implementation-checklist.md",
@@ -2594,7 +2594,7 @@
     ],
     [
       ".github/skills/problem-decomposition.md",
-      "f37c4a570593d780e4b1173ef0082df62d03efb2e00bfcaac5d1feecb2caec8e"
+      "93153b2a818de51b013717fb9311e04ef07d3f6d46d381ca4f927a730775460e"
     ],
     [
       ".github/skills/quality-assurance.md",
@@ -2618,11 +2618,11 @@
     ],
     [
       ".github/skills/team-collaboration.md",
-      "8d3703e287a6a9c94a53da968ece20bf8b2bac4f7a28d3d49f838c9646b5be02"
+      "49a0e47936fe77f2f0c27d0d01d380725c619d3b9fb4e5ac1ab7293c05b06193"
     ],
     [
       ".github/skills/technical-communication.md",
-      "66f5368887094575002c8f83064e41110ceab580afd197cc4ed0319a48e933bb"
+      "1c52aee4891d087325705f64d38a853bfb8579e0a3ca384c655a0eba933159e9"
     ],
     [
       ".github/skills/technical-debt-management.md",
@@ -2630,7 +2630,7 @@
     ],
     [
       ".github/skills/technical-decision-making.md",
-      "d16fe4266cf65a2e88bd45d15f95fe91771be2cd4c1a10d00328503f11a38f48"
+      "461d7f9ee57ea8e3a5962d43cc43e5fe73aa6adc0d7afafe56461407db484995"
     ],
     [
       ".github/skills/test-aaa-structure.md",
@@ -2664,15 +2664,15 @@
     ],
     [
       ".github/skills/api-versioning-strategy.md",
-      "f9b26da1e18a83e0c968339e34963b0711cf45f29eeb611bddd894238427cdd5"
+      "2257b3a6c90801be433161a17301f6f8c9e3b4ecd7c571ef0250e2094f5f4106"
     ],
     [
       ".github/skills/architecture-documentation.md",
-      "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
+      "b68120668baae9c97a86a70df348231b93880a6369c751748ada65d625ae134c"
     ],
     [
       ".github/skills/code-review-practices.md",
-      "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
+      "1557418a4ba405021ec54b657907118baa8776e19843c847f21a23c0a202a979"
     ],
     [
       ".github/skills/component-design-systems.md",
@@ -2684,7 +2684,7 @@
     ],
     [
       ".github/skills/continuous-improvement.md",
-      "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+      "22f70dbb2bf73e070f9bbe9b84b2daea3d2dc096e488a155756451c87439063d"
     ],
     [
       ".github/skills/css-performance-optimization.md",
@@ -2696,7 +2696,7 @@
     ],
     [
       ".github/skills/data-validation-pipelines.md",
-      "684d497852e1980d9e8a322c59e9ac637c2dc100d484358aa0b8281a3ac0f25c"
+      "bb654d8bc690dad50fbe087e29dd58042b50e736cb23556d3e3636ebb08ac8e6"
     ],
     [
       ".github/skills/debugging-methodology.md",
@@ -2704,11 +2704,11 @@
     ],
     [
       ".github/skills/deployment-rollback-strategies.md",
-      "ef50c407c99c7d6f1dd30a09132640bfe9553f717034cbd72f95eaf7406dfd56"
+      "84eff6d42b8feaa49fe9afd1bca3a1e5073cd02f8b997ad271dd906cc9404fec"
     ],
     [
       ".github/skills/distributed-caching-design.md",
-      "31bf68b5dab3a5cc16898ac93fea538876da154d0af47e2b4cabdd0ddbf2abbf"
+      "44f6da3551c839e689884843eb17c3818b77a96fd35bb1853ef23daaf65c524d"
     ],
     [
       ".github/skills/documentation-best-practices.md",
@@ -2724,7 +2724,7 @@
     ],
     [
       ".github/skills/iac-best-practices.md",
-      "e7da4e6302c09d36fc3338d73c70da71ab10c981e7ffdf7cc18f85e853a62810"
+      "0d8666abb9dd6b89f6e10454f3eeb7a9df1572d079346a4ded3df01b5795e68d"
     ],
     [
       ".github/skills/idempotency-patterns.md",
@@ -2736,7 +2736,7 @@
     ],
     [
       ".github/skills/infrastructure-drift-detection.md",
-      "ba399dc9d93bfa327975daf55aa74110c59f9a8271295af7d539024ac0989122"
+      "9a20763b27101518f8cc27115257fc9b1dc09432ade2f401142a9c35ee8e8137"
     ],
     [
       ".github/skills/kubernetes-resource-management.md",
@@ -2748,7 +2748,7 @@
     ],
     [
       ".github/skills/microservices-communication-patterns.md",
-      "6b6fe9f51433dddf2bc819abffffe271eab0edf0911793ac958575d395458193"
+      "e78b32f3b6a31c088f97fb82593810ce35572b180ab2b5919ad2f94bba0cc92e"
     ],
     [
       ".github/skills/multiagent-orchestration.md",
@@ -2760,7 +2760,7 @@
     ],
     [
       ".github/skills/performance-optimization.md",
-      "81f057d445e73f1877db1b7996b34a9cd2976e8670f332ac2e13f0c4eac392b2"
+      "49b1987d386bf65ccd845e49369adbe6f2e4dd86f074aa00e22e2e5ae5e91394"
     ],
     [
       ".github/skills/post-implementation-checklist.md",
@@ -2768,7 +2768,7 @@
     ],
     [
       ".github/skills/problem-decomposition.md",
-      "9962362a175e7b4ee9acd1bc585511234902694910c5ba1f20a3e53ee01c2047"
+      "25928a913e2b2e1400c16db872946f9124de1e11d6447abc8a12e02754b71b84"
     ],
     [
       ".github/skills/quality-assurance.md",
@@ -2792,11 +2792,11 @@
     ],
     [
       ".github/skills/team-collaboration.md",
-      "59a7c4fc7970bd4af790f6642fb030df0fbfde73d95595fa2289196c71ee64ba"
+      "37753e0e36f339162058fcfba4f62f735a24e0ca0e250fdf5cf92d6d1887f46f"
     ],
     [
       ".github/skills/technical-communication.md",
-      "725be0f40aa295e16c715ada58178484a886e3d7d0eef134e5d3926132923625"
+      "cd1f1ae79c34a37e4b27ff9d21478465a5385f2723fb6d9c60ca1632e9465c6b"
     ],
     [
       ".github/skills/technical-debt-management.md",
@@ -2804,7 +2804,7 @@
     ],
     [
       ".github/skills/technical-decision-making.md",
-      "4f5b3cb084e61b2e1c7edcdb9eec25927a06974bf2c189e371525a867be5b985"
+      "7a531b16fedcb4554642a3f03ec073dd68706cf8cc277f09f99da778d4fa6e95"
     ],
     [
       ".github/skills/test-aaa-structure.md",
@@ -2834,15 +2834,15 @@
   "cursor::minimal": [
     [
       ".cursor/skills/api-versioning-strategy/SKILL.md",
-      "062a339a10c5df713eae0561b016be7c2c8a5b6c14d974d932e3d5802344f8c6"
+      "ca0422f68057c9fbc27f6cc3e218c19e122502ebce9a36d063be440f2f522773"
     ],
     [
       ".cursor/skills/architecture-documentation/SKILL.md",
-      "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
+      "993a75db771f7d88c08eb920e585d13eeb5720ae59451ba03cb89a54fa560fb1"
     ],
     [
       ".cursor/skills/code-review-practices/SKILL.md",
-      "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
+      "4a972e7b7e3b26e3a641de6dc07683ffcc4f7eb90b7ad020a1e5896b077f6893"
     ],
     [
       ".cursor/skills/component-design-systems/SKILL.md",
@@ -2854,7 +2854,7 @@
     ],
     [
       ".cursor/skills/continuous-improvement/SKILL.md",
-      "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+      "59f0ba8436b42939fc6174fd627b2e62275453a65b4f6155624a2b38b7bce0ef"
     ],
     [
       ".cursor/skills/css-performance-optimization/SKILL.md",
@@ -2866,7 +2866,7 @@
     ],
     [
       ".cursor/skills/data-validation-pipelines/SKILL.md",
-      "09739cef80da0955aba6cb78b5c03b82eda86664438e9eb4aa139b657112e908"
+      "7af2188f5e32ebb13525ac3277736d9bbb0e8484007c93f859145046574f70ac"
     ],
     [
       ".cursor/skills/debugging-methodology/SKILL.md",
@@ -2874,11 +2874,11 @@
     ],
     [
       ".cursor/skills/deployment-rollback-strategies/SKILL.md",
-      "d2395d14a3c4a3535206ea9f9a65913d332bbb5867ebfc81beacb1a255c66852"
+      "e346e95bf8a47e687ae4dbb0f34fdc646b33b8464605e49b8b4708c17d86e6c8"
     ],
     [
       ".cursor/skills/distributed-caching-design/SKILL.md",
-      "7be0a0c2fa17608a61687445b80fa3329a72b2036cfe6b9ec2590aa18cdd517e"
+      "f63c4aaa9a52bdc9b1c494c0bb28a1ce3c86aa9d5726d02d4e47e91488f9cb99"
     ],
     [
       ".cursor/skills/documentation-best-practices/SKILL.md",
@@ -2894,7 +2894,7 @@
     ],
     [
       ".cursor/skills/iac-best-practices/SKILL.md",
-      "4db8feb77b490eea6dd52374637923448a3ae6f27c138d6c996880407c5a096b"
+      "06b547078fe356b5cd7fe7133c2f16cfc33164e2f58a4cecb53a731d50fe822b"
     ],
     [
       ".cursor/skills/idempotency-patterns/SKILL.md",
@@ -2906,7 +2906,7 @@
     ],
     [
       ".cursor/skills/infrastructure-drift-detection/SKILL.md",
-      "2d205cd017dc95f36f8312eae242d89545394bd38f8d6e865f87fd2ab13ef3f6"
+      "c3ff829521c223d78d9d5370d31b9c97e13fd5c8322820a9a43faeb31dd5de8b"
     ],
     [
       ".cursor/skills/kubernetes-resource-management/SKILL.md",
@@ -2918,7 +2918,7 @@
     ],
     [
       ".cursor/skills/microservices-communication-patterns/SKILL.md",
-      "8cc8e74218d5e09d2100d78553436b8344407ca72c73abebd28f264bab5b215d"
+      "669b061210bad4efe3e1c43427f10fa7fd8ebd26a9a377b88017eb9f736d04db"
     ],
     [
       ".cursor/skills/multiagent-orchestration/SKILL.md",
@@ -2930,7 +2930,7 @@
     ],
     [
       ".cursor/skills/performance-optimization/SKILL.md",
-      "326754e646454eb1d54a4e9692a8dfb1896902b9adf51a1513b46aa5669d647a"
+      "c1926b007cbc559c3069ee57b6ce48211ee3d001c6891c95613f9007950c72be"
     ],
     [
       ".cursor/skills/post-implementation-checklist/SKILL.md",
@@ -2938,7 +2938,7 @@
     ],
     [
       ".cursor/skills/problem-decomposition/SKILL.md",
-      "f37c4a570593d780e4b1173ef0082df62d03efb2e00bfcaac5d1feecb2caec8e"
+      "93153b2a818de51b013717fb9311e04ef07d3f6d46d381ca4f927a730775460e"
     ],
     [
       ".cursor/skills/quality-assurance/SKILL.md",
@@ -2962,11 +2962,11 @@
     ],
     [
       ".cursor/skills/team-collaboration/SKILL.md",
-      "8d3703e287a6a9c94a53da968ece20bf8b2bac4f7a28d3d49f838c9646b5be02"
+      "49a0e47936fe77f2f0c27d0d01d380725c619d3b9fb4e5ac1ab7293c05b06193"
     ],
     [
       ".cursor/skills/technical-communication/SKILL.md",
-      "66f5368887094575002c8f83064e41110ceab580afd197cc4ed0319a48e933bb"
+      "1c52aee4891d087325705f64d38a853bfb8579e0a3ca384c655a0eba933159e9"
     ],
     [
       ".cursor/skills/technical-debt-management/SKILL.md",
@@ -2974,7 +2974,7 @@
     ],
     [
       ".cursor/skills/technical-decision-making/SKILL.md",
-      "d16fe4266cf65a2e88bd45d15f95fe91771be2cd4c1a10d00328503f11a38f48"
+      "461d7f9ee57ea8e3a5962d43cc43e5fe73aa6adc0d7afafe56461407db484995"
     ],
     [
       ".cursor/skills/test-aaa-structure/SKILL.md",
@@ -3008,15 +3008,15 @@
   "cursor::verbose": [
     [
       ".cursor/skills/api-versioning-strategy/SKILL.md",
-      "f9b26da1e18a83e0c968339e34963b0711cf45f29eeb611bddd894238427cdd5"
+      "2257b3a6c90801be433161a17301f6f8c9e3b4ecd7c571ef0250e2094f5f4106"
     ],
     [
       ".cursor/skills/architecture-documentation/SKILL.md",
-      "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
+      "b68120668baae9c97a86a70df348231b93880a6369c751748ada65d625ae134c"
     ],
     [
       ".cursor/skills/code-review-practices/SKILL.md",
-      "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
+      "1557418a4ba405021ec54b657907118baa8776e19843c847f21a23c0a202a979"
     ],
     [
       ".cursor/skills/component-design-systems/SKILL.md",
@@ -3028,7 +3028,7 @@
     ],
     [
       ".cursor/skills/continuous-improvement/SKILL.md",
-      "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+      "22f70dbb2bf73e070f9bbe9b84b2daea3d2dc096e488a155756451c87439063d"
     ],
     [
       ".cursor/skills/css-performance-optimization/SKILL.md",
@@ -3040,7 +3040,7 @@
     ],
     [
       ".cursor/skills/data-validation-pipelines/SKILL.md",
-      "684d497852e1980d9e8a322c59e9ac637c2dc100d484358aa0b8281a3ac0f25c"
+      "bb654d8bc690dad50fbe087e29dd58042b50e736cb23556d3e3636ebb08ac8e6"
     ],
     [
       ".cursor/skills/debugging-methodology/SKILL.md",
@@ -3048,11 +3048,11 @@
     ],
     [
       ".cursor/skills/deployment-rollback-strategies/SKILL.md",
-      "ef50c407c99c7d6f1dd30a09132640bfe9553f717034cbd72f95eaf7406dfd56"
+      "84eff6d42b8feaa49fe9afd1bca3a1e5073cd02f8b997ad271dd906cc9404fec"
     ],
     [
       ".cursor/skills/distributed-caching-design/SKILL.md",
-      "31bf68b5dab3a5cc16898ac93fea538876da154d0af47e2b4cabdd0ddbf2abbf"
+      "44f6da3551c839e689884843eb17c3818b77a96fd35bb1853ef23daaf65c524d"
     ],
     [
       ".cursor/skills/documentation-best-practices/SKILL.md",
@@ -3068,7 +3068,7 @@
     ],
     [
       ".cursor/skills/iac-best-practices/SKILL.md",
-      "e7da4e6302c09d36fc3338d73c70da71ab10c981e7ffdf7cc18f85e853a62810"
+      "0d8666abb9dd6b89f6e10454f3eeb7a9df1572d079346a4ded3df01b5795e68d"
     ],
     [
       ".cursor/skills/idempotency-patterns/SKILL.md",
@@ -3080,7 +3080,7 @@
     ],
     [
       ".cursor/skills/infrastructure-drift-detection/SKILL.md",
-      "ba399dc9d93bfa327975daf55aa74110c59f9a8271295af7d539024ac0989122"
+      "9a20763b27101518f8cc27115257fc9b1dc09432ade2f401142a9c35ee8e8137"
     ],
     [
       ".cursor/skills/kubernetes-resource-management/SKILL.md",
@@ -3092,7 +3092,7 @@
     ],
     [
       ".cursor/skills/microservices-communication-patterns/SKILL.md",
-      "6b6fe9f51433dddf2bc819abffffe271eab0edf0911793ac958575d395458193"
+      "e78b32f3b6a31c088f97fb82593810ce35572b180ab2b5919ad2f94bba0cc92e"
     ],
     [
       ".cursor/skills/multiagent-orchestration/SKILL.md",
@@ -3104,7 +3104,7 @@
     ],
     [
       ".cursor/skills/performance-optimization/SKILL.md",
-      "81f057d445e73f1877db1b7996b34a9cd2976e8670f332ac2e13f0c4eac392b2"
+      "49b1987d386bf65ccd845e49369adbe6f2e4dd86f074aa00e22e2e5ae5e91394"
     ],
     [
       ".cursor/skills/post-implementation-checklist/SKILL.md",
@@ -3112,7 +3112,7 @@
     ],
     [
       ".cursor/skills/problem-decomposition/SKILL.md",
-      "9962362a175e7b4ee9acd1bc585511234902694910c5ba1f20a3e53ee01c2047"
+      "25928a913e2b2e1400c16db872946f9124de1e11d6447abc8a12e02754b71b84"
     ],
     [
       ".cursor/skills/quality-assurance/SKILL.md",
@@ -3136,11 +3136,11 @@
     ],
     [
       ".cursor/skills/team-collaboration/SKILL.md",
-      "59a7c4fc7970bd4af790f6642fb030df0fbfde73d95595fa2289196c71ee64ba"
+      "37753e0e36f339162058fcfba4f62f735a24e0ca0e250fdf5cf92d6d1887f46f"
     ],
     [
       ".cursor/skills/technical-communication/SKILL.md",
-      "725be0f40aa295e16c715ada58178484a886e3d7d0eef134e5d3926132923625"
+      "cd1f1ae79c34a37e4b27ff9d21478465a5385f2723fb6d9c60ca1632e9465c6b"
     ],
     [
       ".cursor/skills/technical-debt-management/SKILL.md",
@@ -3148,7 +3148,7 @@
     ],
     [
       ".cursor/skills/technical-decision-making/SKILL.md",
-      "4f5b3cb084e61b2e1c7edcdb9eec25927a06974bf2c189e371525a867be5b985"
+      "7a531b16fedcb4554642a3f03ec073dd68706cf8cc277f09f99da778d4fa6e95"
     ],
     [
       ".cursor/skills/test-aaa-structure/SKILL.md",
@@ -3294,15 +3294,15 @@
     ],
     [
       ".gemini/skills/api-versioning-strategy/SKILL.md",
-      "062a339a10c5df713eae0561b016be7c2c8a5b6c14d974d932e3d5802344f8c6"
+      "ca0422f68057c9fbc27f6cc3e218c19e122502ebce9a36d063be440f2f522773"
     ],
     [
       ".gemini/skills/architecture-documentation/SKILL.md",
-      "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
+      "993a75db771f7d88c08eb920e585d13eeb5720ae59451ba03cb89a54fa560fb1"
     ],
     [
       ".gemini/skills/code-review-practices/SKILL.md",
-      "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
+      "4a972e7b7e3b26e3a641de6dc07683ffcc4f7eb90b7ad020a1e5896b077f6893"
     ],
     [
       ".gemini/skills/component-design-systems/SKILL.md",
@@ -3314,7 +3314,7 @@
     ],
     [
       ".gemini/skills/continuous-improvement/SKILL.md",
-      "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+      "59f0ba8436b42939fc6174fd627b2e62275453a65b4f6155624a2b38b7bce0ef"
     ],
     [
       ".gemini/skills/css-performance-optimization/SKILL.md",
@@ -3326,7 +3326,7 @@
     ],
     [
       ".gemini/skills/data-validation-pipelines/SKILL.md",
-      "09739cef80da0955aba6cb78b5c03b82eda86664438e9eb4aa139b657112e908"
+      "7af2188f5e32ebb13525ac3277736d9bbb0e8484007c93f859145046574f70ac"
     ],
     [
       ".gemini/skills/debugging-methodology/SKILL.md",
@@ -3334,11 +3334,11 @@
     ],
     [
       ".gemini/skills/deployment-rollback-strategies/SKILL.md",
-      "d2395d14a3c4a3535206ea9f9a65913d332bbb5867ebfc81beacb1a255c66852"
+      "e346e95bf8a47e687ae4dbb0f34fdc646b33b8464605e49b8b4708c17d86e6c8"
     ],
     [
       ".gemini/skills/distributed-caching-design/SKILL.md",
-      "7be0a0c2fa17608a61687445b80fa3329a72b2036cfe6b9ec2590aa18cdd517e"
+      "f63c4aaa9a52bdc9b1c494c0bb28a1ce3c86aa9d5726d02d4e47e91488f9cb99"
     ],
     [
       ".gemini/skills/documentation-best-practices/SKILL.md",
@@ -3354,7 +3354,7 @@
     ],
     [
       ".gemini/skills/iac-best-practices/SKILL.md",
-      "4db8feb77b490eea6dd52374637923448a3ae6f27c138d6c996880407c5a096b"
+      "06b547078fe356b5cd7fe7133c2f16cfc33164e2f58a4cecb53a731d50fe822b"
     ],
     [
       ".gemini/skills/idempotency-patterns/SKILL.md",
@@ -3366,7 +3366,7 @@
     ],
     [
       ".gemini/skills/infrastructure-drift-detection/SKILL.md",
-      "2d205cd017dc95f36f8312eae242d89545394bd38f8d6e865f87fd2ab13ef3f6"
+      "c3ff829521c223d78d9d5370d31b9c97e13fd5c8322820a9a43faeb31dd5de8b"
     ],
     [
       ".gemini/skills/kubernetes-resource-management/SKILL.md",
@@ -3378,7 +3378,7 @@
     ],
     [
       ".gemini/skills/microservices-communication-patterns/SKILL.md",
-      "8cc8e74218d5e09d2100d78553436b8344407ca72c73abebd28f264bab5b215d"
+      "669b061210bad4efe3e1c43427f10fa7fd8ebd26a9a377b88017eb9f736d04db"
     ],
     [
       ".gemini/skills/multiagent-orchestration/SKILL.md",
@@ -3390,7 +3390,7 @@
     ],
     [
       ".gemini/skills/performance-optimization/SKILL.md",
-      "326754e646454eb1d54a4e9692a8dfb1896902b9adf51a1513b46aa5669d647a"
+      "c1926b007cbc559c3069ee57b6ce48211ee3d001c6891c95613f9007950c72be"
     ],
     [
       ".gemini/skills/post-implementation-checklist/SKILL.md",
@@ -3398,7 +3398,7 @@
     ],
     [
       ".gemini/skills/problem-decomposition/SKILL.md",
-      "f37c4a570593d780e4b1173ef0082df62d03efb2e00bfcaac5d1feecb2caec8e"
+      "93153b2a818de51b013717fb9311e04ef07d3f6d46d381ca4f927a730775460e"
     ],
     [
       ".gemini/skills/quality-assurance/SKILL.md",
@@ -3422,11 +3422,11 @@
     ],
     [
       ".gemini/skills/team-collaboration/SKILL.md",
-      "8d3703e287a6a9c94a53da968ece20bf8b2bac4f7a28d3d49f838c9646b5be02"
+      "49a0e47936fe77f2f0c27d0d01d380725c619d3b9fb4e5ac1ab7293c05b06193"
     ],
     [
       ".gemini/skills/technical-communication/SKILL.md",
-      "66f5368887094575002c8f83064e41110ceab580afd197cc4ed0319a48e933bb"
+      "1c52aee4891d087325705f64d38a853bfb8579e0a3ca384c655a0eba933159e9"
     ],
     [
       ".gemini/skills/technical-debt-management/SKILL.md",
@@ -3434,7 +3434,7 @@
     ],
     [
       ".gemini/skills/technical-decision-making/SKILL.md",
-      "d16fe4266cf65a2e88bd45d15f95fe91771be2cd4c1a10d00328503f11a38f48"
+      "461d7f9ee57ea8e3a5962d43cc43e5fe73aa6adc0d7afafe56461407db484995"
     ],
     [
       ".gemini/skills/test-aaa-structure/SKILL.md",
@@ -3576,15 +3576,15 @@
     ],
     [
       ".gemini/skills/api-versioning-strategy/SKILL.md",
-      "f9b26da1e18a83e0c968339e34963b0711cf45f29eeb611bddd894238427cdd5"
+      "2257b3a6c90801be433161a17301f6f8c9e3b4ecd7c571ef0250e2094f5f4106"
     ],
     [
       ".gemini/skills/architecture-documentation/SKILL.md",
-      "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
+      "b68120668baae9c97a86a70df348231b93880a6369c751748ada65d625ae134c"
     ],
     [
       ".gemini/skills/code-review-practices/SKILL.md",
-      "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
+      "1557418a4ba405021ec54b657907118baa8776e19843c847f21a23c0a202a979"
     ],
     [
       ".gemini/skills/component-design-systems/SKILL.md",
@@ -3596,7 +3596,7 @@
     ],
     [
       ".gemini/skills/continuous-improvement/SKILL.md",
-      "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+      "22f70dbb2bf73e070f9bbe9b84b2daea3d2dc096e488a155756451c87439063d"
     ],
     [
       ".gemini/skills/css-performance-optimization/SKILL.md",
@@ -3608,7 +3608,7 @@
     ],
     [
       ".gemini/skills/data-validation-pipelines/SKILL.md",
-      "684d497852e1980d9e8a322c59e9ac637c2dc100d484358aa0b8281a3ac0f25c"
+      "bb654d8bc690dad50fbe087e29dd58042b50e736cb23556d3e3636ebb08ac8e6"
     ],
     [
       ".gemini/skills/debugging-methodology/SKILL.md",
@@ -3616,11 +3616,11 @@
     ],
     [
       ".gemini/skills/deployment-rollback-strategies/SKILL.md",
-      "ef50c407c99c7d6f1dd30a09132640bfe9553f717034cbd72f95eaf7406dfd56"
+      "84eff6d42b8feaa49fe9afd1bca3a1e5073cd02f8b997ad271dd906cc9404fec"
     ],
     [
       ".gemini/skills/distributed-caching-design/SKILL.md",
-      "31bf68b5dab3a5cc16898ac93fea538876da154d0af47e2b4cabdd0ddbf2abbf"
+      "44f6da3551c839e689884843eb17c3818b77a96fd35bb1853ef23daaf65c524d"
     ],
     [
       ".gemini/skills/documentation-best-practices/SKILL.md",
@@ -3636,7 +3636,7 @@
     ],
     [
       ".gemini/skills/iac-best-practices/SKILL.md",
-      "e7da4e6302c09d36fc3338d73c70da71ab10c981e7ffdf7cc18f85e853a62810"
+      "0d8666abb9dd6b89f6e10454f3eeb7a9df1572d079346a4ded3df01b5795e68d"
     ],
     [
       ".gemini/skills/idempotency-patterns/SKILL.md",
@@ -3648,7 +3648,7 @@
     ],
     [
       ".gemini/skills/infrastructure-drift-detection/SKILL.md",
-      "ba399dc9d93bfa327975daf55aa74110c59f9a8271295af7d539024ac0989122"
+      "9a20763b27101518f8cc27115257fc9b1dc09432ade2f401142a9c35ee8e8137"
     ],
     [
       ".gemini/skills/kubernetes-resource-management/SKILL.md",
@@ -3660,7 +3660,7 @@
     ],
     [
       ".gemini/skills/microservices-communication-patterns/SKILL.md",
-      "6b6fe9f51433dddf2bc819abffffe271eab0edf0911793ac958575d395458193"
+      "e78b32f3b6a31c088f97fb82593810ce35572b180ab2b5919ad2f94bba0cc92e"
     ],
     [
       ".gemini/skills/multiagent-orchestration/SKILL.md",
@@ -3672,7 +3672,7 @@
     ],
     [
       ".gemini/skills/performance-optimization/SKILL.md",
-      "81f057d445e73f1877db1b7996b34a9cd2976e8670f332ac2e13f0c4eac392b2"
+      "49b1987d386bf65ccd845e49369adbe6f2e4dd86f074aa00e22e2e5ae5e91394"
     ],
     [
       ".gemini/skills/post-implementation-checklist/SKILL.md",
@@ -3680,7 +3680,7 @@
     ],
     [
       ".gemini/skills/problem-decomposition/SKILL.md",
-      "9962362a175e7b4ee9acd1bc585511234902694910c5ba1f20a3e53ee01c2047"
+      "25928a913e2b2e1400c16db872946f9124de1e11d6447abc8a12e02754b71b84"
     ],
     [
       ".gemini/skills/quality-assurance/SKILL.md",
@@ -3704,11 +3704,11 @@
     ],
     [
       ".gemini/skills/team-collaboration/SKILL.md",
-      "59a7c4fc7970bd4af790f6642fb030df0fbfde73d95595fa2289196c71ee64ba"
+      "37753e0e36f339162058fcfba4f62f735a24e0ca0e250fdf5cf92d6d1887f46f"
     ],
     [
       ".gemini/skills/technical-communication/SKILL.md",
-      "725be0f40aa295e16c715ada58178484a886e3d7d0eef134e5d3926132923625"
+      "cd1f1ae79c34a37e4b27ff9d21478465a5385f2723fb6d9c60ca1632e9465c6b"
     ],
     [
       ".gemini/skills/technical-debt-management/SKILL.md",
@@ -3716,7 +3716,7 @@
     ],
     [
       ".gemini/skills/technical-decision-making/SKILL.md",
-      "4f5b3cb084e61b2e1c7edcdb9eec25927a06974bf2c189e371525a867be5b985"
+      "7a531b16fedcb4554642a3f03ec073dd68706cf8cc277f09f99da778d4fa6e95"
     ],
     [
       ".gemini/skills/test-aaa-structure/SKILL.md",
@@ -3854,15 +3854,15 @@
     ],
     [
       ".junie/skills/api-versioning-strategy/SKILL.md",
-      "062a339a10c5df713eae0561b016be7c2c8a5b6c14d974d932e3d5802344f8c6"
+      "ca0422f68057c9fbc27f6cc3e218c19e122502ebce9a36d063be440f2f522773"
     ],
     [
       ".junie/skills/architecture-documentation/SKILL.md",
-      "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
+      "993a75db771f7d88c08eb920e585d13eeb5720ae59451ba03cb89a54fa560fb1"
     ],
     [
       ".junie/skills/code-review-practices/SKILL.md",
-      "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
+      "4a972e7b7e3b26e3a641de6dc07683ffcc4f7eb90b7ad020a1e5896b077f6893"
     ],
     [
       ".junie/skills/component-design-systems/SKILL.md",
@@ -3874,7 +3874,7 @@
     ],
     [
       ".junie/skills/continuous-improvement/SKILL.md",
-      "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+      "59f0ba8436b42939fc6174fd627b2e62275453a65b4f6155624a2b38b7bce0ef"
     ],
     [
       ".junie/skills/css-performance-optimization/SKILL.md",
@@ -3886,7 +3886,7 @@
     ],
     [
       ".junie/skills/data-validation-pipelines/SKILL.md",
-      "09739cef80da0955aba6cb78b5c03b82eda86664438e9eb4aa139b657112e908"
+      "7af2188f5e32ebb13525ac3277736d9bbb0e8484007c93f859145046574f70ac"
     ],
     [
       ".junie/skills/debugging-methodology/SKILL.md",
@@ -3894,11 +3894,11 @@
     ],
     [
       ".junie/skills/deployment-rollback-strategies/SKILL.md",
-      "d2395d14a3c4a3535206ea9f9a65913d332bbb5867ebfc81beacb1a255c66852"
+      "e346e95bf8a47e687ae4dbb0f34fdc646b33b8464605e49b8b4708c17d86e6c8"
     ],
     [
       ".junie/skills/distributed-caching-design/SKILL.md",
-      "7be0a0c2fa17608a61687445b80fa3329a72b2036cfe6b9ec2590aa18cdd517e"
+      "f63c4aaa9a52bdc9b1c494c0bb28a1ce3c86aa9d5726d02d4e47e91488f9cb99"
     ],
     [
       ".junie/skills/documentation-best-practices/SKILL.md",
@@ -3914,7 +3914,7 @@
     ],
     [
       ".junie/skills/iac-best-practices/SKILL.md",
-      "4db8feb77b490eea6dd52374637923448a3ae6f27c138d6c996880407c5a096b"
+      "06b547078fe356b5cd7fe7133c2f16cfc33164e2f58a4cecb53a731d50fe822b"
     ],
     [
       ".junie/skills/idempotency-patterns/SKILL.md",
@@ -3926,7 +3926,7 @@
     ],
     [
       ".junie/skills/infrastructure-drift-detection/SKILL.md",
-      "2d205cd017dc95f36f8312eae242d89545394bd38f8d6e865f87fd2ab13ef3f6"
+      "c3ff829521c223d78d9d5370d31b9c97e13fd5c8322820a9a43faeb31dd5de8b"
     ],
     [
       ".junie/skills/kubernetes-resource-management/SKILL.md",
@@ -3938,7 +3938,7 @@
     ],
     [
       ".junie/skills/microservices-communication-patterns/SKILL.md",
-      "8cc8e74218d5e09d2100d78553436b8344407ca72c73abebd28f264bab5b215d"
+      "669b061210bad4efe3e1c43427f10fa7fd8ebd26a9a377b88017eb9f736d04db"
     ],
     [
       ".junie/skills/multiagent-orchestration/SKILL.md",
@@ -3950,7 +3950,7 @@
     ],
     [
       ".junie/skills/performance-optimization/SKILL.md",
-      "326754e646454eb1d54a4e9692a8dfb1896902b9adf51a1513b46aa5669d647a"
+      "c1926b007cbc559c3069ee57b6ce48211ee3d001c6891c95613f9007950c72be"
     ],
     [
       ".junie/skills/post-implementation-checklist/SKILL.md",
@@ -3958,7 +3958,7 @@
     ],
     [
       ".junie/skills/problem-decomposition/SKILL.md",
-      "f37c4a570593d780e4b1173ef0082df62d03efb2e00bfcaac5d1feecb2caec8e"
+      "93153b2a818de51b013717fb9311e04ef07d3f6d46d381ca4f927a730775460e"
     ],
     [
       ".junie/skills/quality-assurance/SKILL.md",
@@ -3982,11 +3982,11 @@
     ],
     [
       ".junie/skills/team-collaboration/SKILL.md",
-      "8d3703e287a6a9c94a53da968ece20bf8b2bac4f7a28d3d49f838c9646b5be02"
+      "49a0e47936fe77f2f0c27d0d01d380725c619d3b9fb4e5ac1ab7293c05b06193"
     ],
     [
       ".junie/skills/technical-communication/SKILL.md",
-      "66f5368887094575002c8f83064e41110ceab580afd197cc4ed0319a48e933bb"
+      "1c52aee4891d087325705f64d38a853bfb8579e0a3ca384c655a0eba933159e9"
     ],
     [
       ".junie/skills/technical-debt-management/SKILL.md",
@@ -3994,7 +3994,7 @@
     ],
     [
       ".junie/skills/technical-decision-making/SKILL.md",
-      "d16fe4266cf65a2e88bd45d15f95fe91771be2cd4c1a10d00328503f11a38f48"
+      "461d7f9ee57ea8e3a5962d43cc43e5fe73aa6adc0d7afafe56461407db484995"
     ],
     [
       ".junie/skills/test-aaa-structure/SKILL.md",
@@ -4132,15 +4132,15 @@
     ],
     [
       ".junie/skills/api-versioning-strategy/SKILL.md",
-      "f9b26da1e18a83e0c968339e34963b0711cf45f29eeb611bddd894238427cdd5"
+      "2257b3a6c90801be433161a17301f6f8c9e3b4ecd7c571ef0250e2094f5f4106"
     ],
     [
       ".junie/skills/architecture-documentation/SKILL.md",
-      "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
+      "b68120668baae9c97a86a70df348231b93880a6369c751748ada65d625ae134c"
     ],
     [
       ".junie/skills/code-review-practices/SKILL.md",
-      "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
+      "1557418a4ba405021ec54b657907118baa8776e19843c847f21a23c0a202a979"
     ],
     [
       ".junie/skills/component-design-systems/SKILL.md",
@@ -4152,7 +4152,7 @@
     ],
     [
       ".junie/skills/continuous-improvement/SKILL.md",
-      "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+      "22f70dbb2bf73e070f9bbe9b84b2daea3d2dc096e488a155756451c87439063d"
     ],
     [
       ".junie/skills/css-performance-optimization/SKILL.md",
@@ -4164,7 +4164,7 @@
     ],
     [
       ".junie/skills/data-validation-pipelines/SKILL.md",
-      "684d497852e1980d9e8a322c59e9ac637c2dc100d484358aa0b8281a3ac0f25c"
+      "bb654d8bc690dad50fbe087e29dd58042b50e736cb23556d3e3636ebb08ac8e6"
     ],
     [
       ".junie/skills/debugging-methodology/SKILL.md",
@@ -4172,11 +4172,11 @@
     ],
     [
       ".junie/skills/deployment-rollback-strategies/SKILL.md",
-      "ef50c407c99c7d6f1dd30a09132640bfe9553f717034cbd72f95eaf7406dfd56"
+      "84eff6d42b8feaa49fe9afd1bca3a1e5073cd02f8b997ad271dd906cc9404fec"
     ],
     [
       ".junie/skills/distributed-caching-design/SKILL.md",
-      "31bf68b5dab3a5cc16898ac93fea538876da154d0af47e2b4cabdd0ddbf2abbf"
+      "44f6da3551c839e689884843eb17c3818b77a96fd35bb1853ef23daaf65c524d"
     ],
     [
       ".junie/skills/documentation-best-practices/SKILL.md",
@@ -4192,7 +4192,7 @@
     ],
     [
       ".junie/skills/iac-best-practices/SKILL.md",
-      "e7da4e6302c09d36fc3338d73c70da71ab10c981e7ffdf7cc18f85e853a62810"
+      "0d8666abb9dd6b89f6e10454f3eeb7a9df1572d079346a4ded3df01b5795e68d"
     ],
     [
       ".junie/skills/idempotency-patterns/SKILL.md",
@@ -4204,7 +4204,7 @@
     ],
     [
       ".junie/skills/infrastructure-drift-detection/SKILL.md",
-      "ba399dc9d93bfa327975daf55aa74110c59f9a8271295af7d539024ac0989122"
+      "9a20763b27101518f8cc27115257fc9b1dc09432ade2f401142a9c35ee8e8137"
     ],
     [
       ".junie/skills/kubernetes-resource-management/SKILL.md",
@@ -4216,7 +4216,7 @@
     ],
     [
       ".junie/skills/microservices-communication-patterns/SKILL.md",
-      "6b6fe9f51433dddf2bc819abffffe271eab0edf0911793ac958575d395458193"
+      "e78b32f3b6a31c088f97fb82593810ce35572b180ab2b5919ad2f94bba0cc92e"
     ],
     [
       ".junie/skills/multiagent-orchestration/SKILL.md",
@@ -4228,7 +4228,7 @@
     ],
     [
       ".junie/skills/performance-optimization/SKILL.md",
-      "81f057d445e73f1877db1b7996b34a9cd2976e8670f332ac2e13f0c4eac392b2"
+      "49b1987d386bf65ccd845e49369adbe6f2e4dd86f074aa00e22e2e5ae5e91394"
     ],
     [
       ".junie/skills/post-implementation-checklist/SKILL.md",
@@ -4236,7 +4236,7 @@
     ],
     [
       ".junie/skills/problem-decomposition/SKILL.md",
-      "9962362a175e7b4ee9acd1bc585511234902694910c5ba1f20a3e53ee01c2047"
+      "25928a913e2b2e1400c16db872946f9124de1e11d6447abc8a12e02754b71b84"
     ],
     [
       ".junie/skills/quality-assurance/SKILL.md",
@@ -4260,11 +4260,11 @@
     ],
     [
       ".junie/skills/team-collaboration/SKILL.md",
-      "59a7c4fc7970bd4af790f6642fb030df0fbfde73d95595fa2289196c71ee64ba"
+      "37753e0e36f339162058fcfba4f62f735a24e0ca0e250fdf5cf92d6d1887f46f"
     ],
     [
       ".junie/skills/technical-communication/SKILL.md",
-      "725be0f40aa295e16c715ada58178484a886e3d7d0eef134e5d3926132923625"
+      "cd1f1ae79c34a37e4b27ff9d21478465a5385f2723fb6d9c60ca1632e9465c6b"
     ],
     [
       ".junie/skills/technical-debt-management/SKILL.md",
@@ -4272,7 +4272,7 @@
     ],
     [
       ".junie/skills/technical-decision-making/SKILL.md",
-      "4f5b3cb084e61b2e1c7edcdb9eec25927a06974bf2c189e371525a867be5b985"
+      "7a531b16fedcb4554642a3f03ec073dd68706cf8cc277f09f99da778d4fa6e95"
     ],
     [
       ".junie/skills/test-aaa-structure/SKILL.md",
@@ -4574,15 +4574,15 @@
     ],
     [
       ".kilo/skills/api-versioning-strategy/SKILL.md",
-      "062a339a10c5df713eae0561b016be7c2c8a5b6c14d974d932e3d5802344f8c6"
+      "ca0422f68057c9fbc27f6cc3e218c19e122502ebce9a36d063be440f2f522773"
     ],
     [
       ".kilo/skills/architecture-documentation/SKILL.md",
-      "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
+      "993a75db771f7d88c08eb920e585d13eeb5720ae59451ba03cb89a54fa560fb1"
     ],
     [
       ".kilo/skills/code-review-practices/SKILL.md",
-      "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
+      "4a972e7b7e3b26e3a641de6dc07683ffcc4f7eb90b7ad020a1e5896b077f6893"
     ],
     [
       ".kilo/skills/component-design-systems/SKILL.md",
@@ -4594,7 +4594,7 @@
     ],
     [
       ".kilo/skills/continuous-improvement/SKILL.md",
-      "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+      "59f0ba8436b42939fc6174fd627b2e62275453a65b4f6155624a2b38b7bce0ef"
     ],
     [
       ".kilo/skills/css-performance-optimization/SKILL.md",
@@ -4606,7 +4606,7 @@
     ],
     [
       ".kilo/skills/data-validation-pipelines/SKILL.md",
-      "09739cef80da0955aba6cb78b5c03b82eda86664438e9eb4aa139b657112e908"
+      "7af2188f5e32ebb13525ac3277736d9bbb0e8484007c93f859145046574f70ac"
     ],
     [
       ".kilo/skills/debugging-methodology/SKILL.md",
@@ -4614,11 +4614,11 @@
     ],
     [
       ".kilo/skills/deployment-rollback-strategies/SKILL.md",
-      "d2395d14a3c4a3535206ea9f9a65913d332bbb5867ebfc81beacb1a255c66852"
+      "e346e95bf8a47e687ae4dbb0f34fdc646b33b8464605e49b8b4708c17d86e6c8"
     ],
     [
       ".kilo/skills/distributed-caching-design/SKILL.md",
-      "7be0a0c2fa17608a61687445b80fa3329a72b2036cfe6b9ec2590aa18cdd517e"
+      "f63c4aaa9a52bdc9b1c494c0bb28a1ce3c86aa9d5726d02d4e47e91488f9cb99"
     ],
     [
       ".kilo/skills/documentation-best-practices/SKILL.md",
@@ -4634,7 +4634,7 @@
     ],
     [
       ".kilo/skills/iac-best-practices/SKILL.md",
-      "4db8feb77b490eea6dd52374637923448a3ae6f27c138d6c996880407c5a096b"
+      "06b547078fe356b5cd7fe7133c2f16cfc33164e2f58a4cecb53a731d50fe822b"
     ],
     [
       ".kilo/skills/idempotency-patterns/SKILL.md",
@@ -4646,7 +4646,7 @@
     ],
     [
       ".kilo/skills/infrastructure-drift-detection/SKILL.md",
-      "2d205cd017dc95f36f8312eae242d89545394bd38f8d6e865f87fd2ab13ef3f6"
+      "c3ff829521c223d78d9d5370d31b9c97e13fd5c8322820a9a43faeb31dd5de8b"
     ],
     [
       ".kilo/skills/kubernetes-resource-management/SKILL.md",
@@ -4658,7 +4658,7 @@
     ],
     [
       ".kilo/skills/microservices-communication-patterns/SKILL.md",
-      "8cc8e74218d5e09d2100d78553436b8344407ca72c73abebd28f264bab5b215d"
+      "669b061210bad4efe3e1c43427f10fa7fd8ebd26a9a377b88017eb9f736d04db"
     ],
     [
       ".kilo/skills/multiagent-orchestration/SKILL.md",
@@ -4670,7 +4670,7 @@
     ],
     [
       ".kilo/skills/performance-optimization/SKILL.md",
-      "326754e646454eb1d54a4e9692a8dfb1896902b9adf51a1513b46aa5669d647a"
+      "c1926b007cbc559c3069ee57b6ce48211ee3d001c6891c95613f9007950c72be"
     ],
     [
       ".kilo/skills/post-implementation-checklist/SKILL.md",
@@ -4678,7 +4678,7 @@
     ],
     [
       ".kilo/skills/problem-decomposition/SKILL.md",
-      "f37c4a570593d780e4b1173ef0082df62d03efb2e00bfcaac5d1feecb2caec8e"
+      "93153b2a818de51b013717fb9311e04ef07d3f6d46d381ca4f927a730775460e"
     ],
     [
       ".kilo/skills/quality-assurance/SKILL.md",
@@ -4702,11 +4702,11 @@
     ],
     [
       ".kilo/skills/team-collaboration/SKILL.md",
-      "8d3703e287a6a9c94a53da968ece20bf8b2bac4f7a28d3d49f838c9646b5be02"
+      "49a0e47936fe77f2f0c27d0d01d380725c619d3b9fb4e5ac1ab7293c05b06193"
     ],
     [
       ".kilo/skills/technical-communication/SKILL.md",
-      "66f5368887094575002c8f83064e41110ceab580afd197cc4ed0319a48e933bb"
+      "1c52aee4891d087325705f64d38a853bfb8579e0a3ca384c655a0eba933159e9"
     ],
     [
       ".kilo/skills/technical-debt-management/SKILL.md",
@@ -4714,7 +4714,7 @@
     ],
     [
       ".kilo/skills/technical-decision-making/SKILL.md",
-      "d16fe4266cf65a2e88bd45d15f95fe91771be2cd4c1a10d00328503f11a38f48"
+      "461d7f9ee57ea8e3a5962d43cc43e5fe73aa6adc0d7afafe56461407db484995"
     ],
     [
       ".kilo/skills/test-aaa-structure/SKILL.md",
@@ -5016,15 +5016,15 @@
     ],
     [
       ".kilo/skills/api-versioning-strategy/SKILL.md",
-      "f9b26da1e18a83e0c968339e34963b0711cf45f29eeb611bddd894238427cdd5"
+      "2257b3a6c90801be433161a17301f6f8c9e3b4ecd7c571ef0250e2094f5f4106"
     ],
     [
       ".kilo/skills/architecture-documentation/SKILL.md",
-      "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
+      "b68120668baae9c97a86a70df348231b93880a6369c751748ada65d625ae134c"
     ],
     [
       ".kilo/skills/code-review-practices/SKILL.md",
-      "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
+      "1557418a4ba405021ec54b657907118baa8776e19843c847f21a23c0a202a979"
     ],
     [
       ".kilo/skills/component-design-systems/SKILL.md",
@@ -5036,7 +5036,7 @@
     ],
     [
       ".kilo/skills/continuous-improvement/SKILL.md",
-      "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+      "22f70dbb2bf73e070f9bbe9b84b2daea3d2dc096e488a155756451c87439063d"
     ],
     [
       ".kilo/skills/css-performance-optimization/SKILL.md",
@@ -5048,7 +5048,7 @@
     ],
     [
       ".kilo/skills/data-validation-pipelines/SKILL.md",
-      "684d497852e1980d9e8a322c59e9ac637c2dc100d484358aa0b8281a3ac0f25c"
+      "bb654d8bc690dad50fbe087e29dd58042b50e736cb23556d3e3636ebb08ac8e6"
     ],
     [
       ".kilo/skills/debugging-methodology/SKILL.md",
@@ -5056,11 +5056,11 @@
     ],
     [
       ".kilo/skills/deployment-rollback-strategies/SKILL.md",
-      "ef50c407c99c7d6f1dd30a09132640bfe9553f717034cbd72f95eaf7406dfd56"
+      "84eff6d42b8feaa49fe9afd1bca3a1e5073cd02f8b997ad271dd906cc9404fec"
     ],
     [
       ".kilo/skills/distributed-caching-design/SKILL.md",
-      "31bf68b5dab3a5cc16898ac93fea538876da154d0af47e2b4cabdd0ddbf2abbf"
+      "44f6da3551c839e689884843eb17c3818b77a96fd35bb1853ef23daaf65c524d"
     ],
     [
       ".kilo/skills/documentation-best-practices/SKILL.md",
@@ -5076,7 +5076,7 @@
     ],
     [
       ".kilo/skills/iac-best-practices/SKILL.md",
-      "e7da4e6302c09d36fc3338d73c70da71ab10c981e7ffdf7cc18f85e853a62810"
+      "0d8666abb9dd6b89f6e10454f3eeb7a9df1572d079346a4ded3df01b5795e68d"
     ],
     [
       ".kilo/skills/idempotency-patterns/SKILL.md",
@@ -5088,7 +5088,7 @@
     ],
     [
       ".kilo/skills/infrastructure-drift-detection/SKILL.md",
-      "ba399dc9d93bfa327975daf55aa74110c59f9a8271295af7d539024ac0989122"
+      "9a20763b27101518f8cc27115257fc9b1dc09432ade2f401142a9c35ee8e8137"
     ],
     [
       ".kilo/skills/kubernetes-resource-management/SKILL.md",
@@ -5100,7 +5100,7 @@
     ],
     [
       ".kilo/skills/microservices-communication-patterns/SKILL.md",
-      "6b6fe9f51433dddf2bc819abffffe271eab0edf0911793ac958575d395458193"
+      "e78b32f3b6a31c088f97fb82593810ce35572b180ab2b5919ad2f94bba0cc92e"
     ],
     [
       ".kilo/skills/multiagent-orchestration/SKILL.md",
@@ -5112,7 +5112,7 @@
     ],
     [
       ".kilo/skills/performance-optimization/SKILL.md",
-      "81f057d445e73f1877db1b7996b34a9cd2976e8670f332ac2e13f0c4eac392b2"
+      "49b1987d386bf65ccd845e49369adbe6f2e4dd86f074aa00e22e2e5ae5e91394"
     ],
     [
       ".kilo/skills/post-implementation-checklist/SKILL.md",
@@ -5120,7 +5120,7 @@
     ],
     [
       ".kilo/skills/problem-decomposition/SKILL.md",
-      "9962362a175e7b4ee9acd1bc585511234902694910c5ba1f20a3e53ee01c2047"
+      "25928a913e2b2e1400c16db872946f9124de1e11d6447abc8a12e02754b71b84"
     ],
     [
       ".kilo/skills/quality-assurance/SKILL.md",
@@ -5144,11 +5144,11 @@
     ],
     [
       ".kilo/skills/team-collaboration/SKILL.md",
-      "59a7c4fc7970bd4af790f6642fb030df0fbfde73d95595fa2289196c71ee64ba"
+      "37753e0e36f339162058fcfba4f62f735a24e0ca0e250fdf5cf92d6d1887f46f"
     ],
     [
       ".kilo/skills/technical-communication/SKILL.md",
-      "725be0f40aa295e16c715ada58178484a886e3d7d0eef134e5d3926132923625"
+      "cd1f1ae79c34a37e4b27ff9d21478465a5385f2723fb6d9c60ca1632e9465c6b"
     ],
     [
       ".kilo/skills/technical-debt-management/SKILL.md",
@@ -5156,7 +5156,7 @@
     ],
     [
       ".kilo/skills/technical-decision-making/SKILL.md",
-      "4f5b3cb084e61b2e1c7edcdb9eec25927a06974bf2c189e371525a867be5b985"
+      "7a531b16fedcb4554642a3f03ec073dd68706cf8cc277f09f99da778d4fa6e95"
     ],
     [
       ".kilo/skills/test-aaa-structure/SKILL.md",
@@ -5458,15 +5458,15 @@
     ],
     [
       ".kilo/skills/api-versioning-strategy/SKILL.md",
-      "062a339a10c5df713eae0561b016be7c2c8a5b6c14d974d932e3d5802344f8c6"
+      "ca0422f68057c9fbc27f6cc3e218c19e122502ebce9a36d063be440f2f522773"
     ],
     [
       ".kilo/skills/architecture-documentation/SKILL.md",
-      "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
+      "993a75db771f7d88c08eb920e585d13eeb5720ae59451ba03cb89a54fa560fb1"
     ],
     [
       ".kilo/skills/code-review-practices/SKILL.md",
-      "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
+      "4a972e7b7e3b26e3a641de6dc07683ffcc4f7eb90b7ad020a1e5896b077f6893"
     ],
     [
       ".kilo/skills/component-design-systems/SKILL.md",
@@ -5478,7 +5478,7 @@
     ],
     [
       ".kilo/skills/continuous-improvement/SKILL.md",
-      "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+      "59f0ba8436b42939fc6174fd627b2e62275453a65b4f6155624a2b38b7bce0ef"
     ],
     [
       ".kilo/skills/css-performance-optimization/SKILL.md",
@@ -5490,7 +5490,7 @@
     ],
     [
       ".kilo/skills/data-validation-pipelines/SKILL.md",
-      "09739cef80da0955aba6cb78b5c03b82eda86664438e9eb4aa139b657112e908"
+      "7af2188f5e32ebb13525ac3277736d9bbb0e8484007c93f859145046574f70ac"
     ],
     [
       ".kilo/skills/debugging-methodology/SKILL.md",
@@ -5498,11 +5498,11 @@
     ],
     [
       ".kilo/skills/deployment-rollback-strategies/SKILL.md",
-      "d2395d14a3c4a3535206ea9f9a65913d332bbb5867ebfc81beacb1a255c66852"
+      "e346e95bf8a47e687ae4dbb0f34fdc646b33b8464605e49b8b4708c17d86e6c8"
     ],
     [
       ".kilo/skills/distributed-caching-design/SKILL.md",
-      "7be0a0c2fa17608a61687445b80fa3329a72b2036cfe6b9ec2590aa18cdd517e"
+      "f63c4aaa9a52bdc9b1c494c0bb28a1ce3c86aa9d5726d02d4e47e91488f9cb99"
     ],
     [
       ".kilo/skills/documentation-best-practices/SKILL.md",
@@ -5518,7 +5518,7 @@
     ],
     [
       ".kilo/skills/iac-best-practices/SKILL.md",
-      "4db8feb77b490eea6dd52374637923448a3ae6f27c138d6c996880407c5a096b"
+      "06b547078fe356b5cd7fe7133c2f16cfc33164e2f58a4cecb53a731d50fe822b"
     ],
     [
       ".kilo/skills/idempotency-patterns/SKILL.md",
@@ -5530,7 +5530,7 @@
     ],
     [
       ".kilo/skills/infrastructure-drift-detection/SKILL.md",
-      "2d205cd017dc95f36f8312eae242d89545394bd38f8d6e865f87fd2ab13ef3f6"
+      "c3ff829521c223d78d9d5370d31b9c97e13fd5c8322820a9a43faeb31dd5de8b"
     ],
     [
       ".kilo/skills/kubernetes-resource-management/SKILL.md",
@@ -5542,7 +5542,7 @@
     ],
     [
       ".kilo/skills/microservices-communication-patterns/SKILL.md",
-      "8cc8e74218d5e09d2100d78553436b8344407ca72c73abebd28f264bab5b215d"
+      "669b061210bad4efe3e1c43427f10fa7fd8ebd26a9a377b88017eb9f736d04db"
     ],
     [
       ".kilo/skills/multiagent-orchestration/SKILL.md",
@@ -5554,7 +5554,7 @@
     ],
     [
       ".kilo/skills/performance-optimization/SKILL.md",
-      "326754e646454eb1d54a4e9692a8dfb1896902b9adf51a1513b46aa5669d647a"
+      "c1926b007cbc559c3069ee57b6ce48211ee3d001c6891c95613f9007950c72be"
     ],
     [
       ".kilo/skills/post-implementation-checklist/SKILL.md",
@@ -5562,7 +5562,7 @@
     ],
     [
       ".kilo/skills/problem-decomposition/SKILL.md",
-      "f37c4a570593d780e4b1173ef0082df62d03efb2e00bfcaac5d1feecb2caec8e"
+      "93153b2a818de51b013717fb9311e04ef07d3f6d46d381ca4f927a730775460e"
     ],
     [
       ".kilo/skills/quality-assurance/SKILL.md",
@@ -5586,11 +5586,11 @@
     ],
     [
       ".kilo/skills/team-collaboration/SKILL.md",
-      "8d3703e287a6a9c94a53da968ece20bf8b2bac4f7a28d3d49f838c9646b5be02"
+      "49a0e47936fe77f2f0c27d0d01d380725c619d3b9fb4e5ac1ab7293c05b06193"
     ],
     [
       ".kilo/skills/technical-communication/SKILL.md",
-      "66f5368887094575002c8f83064e41110ceab580afd197cc4ed0319a48e933bb"
+      "1c52aee4891d087325705f64d38a853bfb8579e0a3ca384c655a0eba933159e9"
     ],
     [
       ".kilo/skills/technical-debt-management/SKILL.md",
@@ -5598,7 +5598,7 @@
     ],
     [
       ".kilo/skills/technical-decision-making/SKILL.md",
-      "d16fe4266cf65a2e88bd45d15f95fe91771be2cd4c1a10d00328503f11a38f48"
+      "461d7f9ee57ea8e3a5962d43cc43e5fe73aa6adc0d7afafe56461407db484995"
     ],
     [
       ".kilo/skills/test-aaa-structure/SKILL.md",
@@ -5900,15 +5900,15 @@
     ],
     [
       ".kilo/skills/api-versioning-strategy/SKILL.md",
-      "f9b26da1e18a83e0c968339e34963b0711cf45f29eeb611bddd894238427cdd5"
+      "2257b3a6c90801be433161a17301f6f8c9e3b4ecd7c571ef0250e2094f5f4106"
     ],
     [
       ".kilo/skills/architecture-documentation/SKILL.md",
-      "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
+      "b68120668baae9c97a86a70df348231b93880a6369c751748ada65d625ae134c"
     ],
     [
       ".kilo/skills/code-review-practices/SKILL.md",
-      "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
+      "1557418a4ba405021ec54b657907118baa8776e19843c847f21a23c0a202a979"
     ],
     [
       ".kilo/skills/component-design-systems/SKILL.md",
@@ -5920,7 +5920,7 @@
     ],
     [
       ".kilo/skills/continuous-improvement/SKILL.md",
-      "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+      "22f70dbb2bf73e070f9bbe9b84b2daea3d2dc096e488a155756451c87439063d"
     ],
     [
       ".kilo/skills/css-performance-optimization/SKILL.md",
@@ -5932,7 +5932,7 @@
     ],
     [
       ".kilo/skills/data-validation-pipelines/SKILL.md",
-      "684d497852e1980d9e8a322c59e9ac637c2dc100d484358aa0b8281a3ac0f25c"
+      "bb654d8bc690dad50fbe087e29dd58042b50e736cb23556d3e3636ebb08ac8e6"
     ],
     [
       ".kilo/skills/debugging-methodology/SKILL.md",
@@ -5940,11 +5940,11 @@
     ],
     [
       ".kilo/skills/deployment-rollback-strategies/SKILL.md",
-      "ef50c407c99c7d6f1dd30a09132640bfe9553f717034cbd72f95eaf7406dfd56"
+      "84eff6d42b8feaa49fe9afd1bca3a1e5073cd02f8b997ad271dd906cc9404fec"
     ],
     [
       ".kilo/skills/distributed-caching-design/SKILL.md",
-      "31bf68b5dab3a5cc16898ac93fea538876da154d0af47e2b4cabdd0ddbf2abbf"
+      "44f6da3551c839e689884843eb17c3818b77a96fd35bb1853ef23daaf65c524d"
     ],
     [
       ".kilo/skills/documentation-best-practices/SKILL.md",
@@ -5960,7 +5960,7 @@
     ],
     [
       ".kilo/skills/iac-best-practices/SKILL.md",
-      "e7da4e6302c09d36fc3338d73c70da71ab10c981e7ffdf7cc18f85e853a62810"
+      "0d8666abb9dd6b89f6e10454f3eeb7a9df1572d079346a4ded3df01b5795e68d"
     ],
     [
       ".kilo/skills/idempotency-patterns/SKILL.md",
@@ -5972,7 +5972,7 @@
     ],
     [
       ".kilo/skills/infrastructure-drift-detection/SKILL.md",
-      "ba399dc9d93bfa327975daf55aa74110c59f9a8271295af7d539024ac0989122"
+      "9a20763b27101518f8cc27115257fc9b1dc09432ade2f401142a9c35ee8e8137"
     ],
     [
       ".kilo/skills/kubernetes-resource-management/SKILL.md",
@@ -5984,7 +5984,7 @@
     ],
     [
       ".kilo/skills/microservices-communication-patterns/SKILL.md",
-      "6b6fe9f51433dddf2bc819abffffe271eab0edf0911793ac958575d395458193"
+      "e78b32f3b6a31c088f97fb82593810ce35572b180ab2b5919ad2f94bba0cc92e"
     ],
     [
       ".kilo/skills/multiagent-orchestration/SKILL.md",
@@ -5996,7 +5996,7 @@
     ],
     [
       ".kilo/skills/performance-optimization/SKILL.md",
-      "81f057d445e73f1877db1b7996b34a9cd2976e8670f332ac2e13f0c4eac392b2"
+      "49b1987d386bf65ccd845e49369adbe6f2e4dd86f074aa00e22e2e5ae5e91394"
     ],
     [
       ".kilo/skills/post-implementation-checklist/SKILL.md",
@@ -6004,7 +6004,7 @@
     ],
     [
       ".kilo/skills/problem-decomposition/SKILL.md",
-      "9962362a175e7b4ee9acd1bc585511234902694910c5ba1f20a3e53ee01c2047"
+      "25928a913e2b2e1400c16db872946f9124de1e11d6447abc8a12e02754b71b84"
     ],
     [
       ".kilo/skills/quality-assurance/SKILL.md",
@@ -6028,11 +6028,11 @@
     ],
     [
       ".kilo/skills/team-collaboration/SKILL.md",
-      "59a7c4fc7970bd4af790f6642fb030df0fbfde73d95595fa2289196c71ee64ba"
+      "37753e0e36f339162058fcfba4f62f735a24e0ca0e250fdf5cf92d6d1887f46f"
     ],
     [
       ".kilo/skills/technical-communication/SKILL.md",
-      "725be0f40aa295e16c715ada58178484a886e3d7d0eef134e5d3926132923625"
+      "cd1f1ae79c34a37e4b27ff9d21478465a5385f2723fb6d9c60ca1632e9465c6b"
     ],
     [
       ".kilo/skills/technical-debt-management/SKILL.md",
@@ -6040,7 +6040,7 @@
     ],
     [
       ".kilo/skills/technical-decision-making/SKILL.md",
-      "4f5b3cb084e61b2e1c7edcdb9eec25927a06974bf2c189e371525a867be5b985"
+      "7a531b16fedcb4554642a3f03ec073dd68706cf8cc277f09f99da778d4fa6e95"
     ],
     [
       ".kilo/skills/test-aaa-structure/SKILL.md",
@@ -6178,15 +6178,15 @@
     ],
     [
       ".roo/skills/api-versioning-strategy/SKILL.md",
-      "062a339a10c5df713eae0561b016be7c2c8a5b6c14d974d932e3d5802344f8c6"
+      "ca0422f68057c9fbc27f6cc3e218c19e122502ebce9a36d063be440f2f522773"
     ],
     [
       ".roo/skills/architecture-documentation/SKILL.md",
-      "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
+      "993a75db771f7d88c08eb920e585d13eeb5720ae59451ba03cb89a54fa560fb1"
     ],
     [
       ".roo/skills/code-review-practices/SKILL.md",
-      "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
+      "4a972e7b7e3b26e3a641de6dc07683ffcc4f7eb90b7ad020a1e5896b077f6893"
     ],
     [
       ".roo/skills/component-design-systems/SKILL.md",
@@ -6198,7 +6198,7 @@
     ],
     [
       ".roo/skills/continuous-improvement/SKILL.md",
-      "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+      "59f0ba8436b42939fc6174fd627b2e62275453a65b4f6155624a2b38b7bce0ef"
     ],
     [
       ".roo/skills/css-performance-optimization/SKILL.md",
@@ -6210,7 +6210,7 @@
     ],
     [
       ".roo/skills/data-validation-pipelines/SKILL.md",
-      "09739cef80da0955aba6cb78b5c03b82eda86664438e9eb4aa139b657112e908"
+      "7af2188f5e32ebb13525ac3277736d9bbb0e8484007c93f859145046574f70ac"
     ],
     [
       ".roo/skills/debugging-methodology/SKILL.md",
@@ -6218,11 +6218,11 @@
     ],
     [
       ".roo/skills/deployment-rollback-strategies/SKILL.md",
-      "d2395d14a3c4a3535206ea9f9a65913d332bbb5867ebfc81beacb1a255c66852"
+      "e346e95bf8a47e687ae4dbb0f34fdc646b33b8464605e49b8b4708c17d86e6c8"
     ],
     [
       ".roo/skills/distributed-caching-design/SKILL.md",
-      "7be0a0c2fa17608a61687445b80fa3329a72b2036cfe6b9ec2590aa18cdd517e"
+      "f63c4aaa9a52bdc9b1c494c0bb28a1ce3c86aa9d5726d02d4e47e91488f9cb99"
     ],
     [
       ".roo/skills/documentation-best-practices/SKILL.md",
@@ -6238,7 +6238,7 @@
     ],
     [
       ".roo/skills/iac-best-practices/SKILL.md",
-      "4db8feb77b490eea6dd52374637923448a3ae6f27c138d6c996880407c5a096b"
+      "06b547078fe356b5cd7fe7133c2f16cfc33164e2f58a4cecb53a731d50fe822b"
     ],
     [
       ".roo/skills/idempotency-patterns/SKILL.md",
@@ -6250,7 +6250,7 @@
     ],
     [
       ".roo/skills/infrastructure-drift-detection/SKILL.md",
-      "2d205cd017dc95f36f8312eae242d89545394bd38f8d6e865f87fd2ab13ef3f6"
+      "c3ff829521c223d78d9d5370d31b9c97e13fd5c8322820a9a43faeb31dd5de8b"
     ],
     [
       ".roo/skills/kubernetes-resource-management/SKILL.md",
@@ -6262,7 +6262,7 @@
     ],
     [
       ".roo/skills/microservices-communication-patterns/SKILL.md",
-      "8cc8e74218d5e09d2100d78553436b8344407ca72c73abebd28f264bab5b215d"
+      "669b061210bad4efe3e1c43427f10fa7fd8ebd26a9a377b88017eb9f736d04db"
     ],
     [
       ".roo/skills/multiagent-orchestration/SKILL.md",
@@ -6274,7 +6274,7 @@
     ],
     [
       ".roo/skills/performance-optimization/SKILL.md",
-      "326754e646454eb1d54a4e9692a8dfb1896902b9adf51a1513b46aa5669d647a"
+      "c1926b007cbc559c3069ee57b6ce48211ee3d001c6891c95613f9007950c72be"
     ],
     [
       ".roo/skills/post-implementation-checklist/SKILL.md",
@@ -6282,7 +6282,7 @@
     ],
     [
       ".roo/skills/problem-decomposition/SKILL.md",
-      "f37c4a570593d780e4b1173ef0082df62d03efb2e00bfcaac5d1feecb2caec8e"
+      "93153b2a818de51b013717fb9311e04ef07d3f6d46d381ca4f927a730775460e"
     ],
     [
       ".roo/skills/quality-assurance/SKILL.md",
@@ -6306,11 +6306,11 @@
     ],
     [
       ".roo/skills/team-collaboration/SKILL.md",
-      "8d3703e287a6a9c94a53da968ece20bf8b2bac4f7a28d3d49f838c9646b5be02"
+      "49a0e47936fe77f2f0c27d0d01d380725c619d3b9fb4e5ac1ab7293c05b06193"
     ],
     [
       ".roo/skills/technical-communication/SKILL.md",
-      "66f5368887094575002c8f83064e41110ceab580afd197cc4ed0319a48e933bb"
+      "1c52aee4891d087325705f64d38a853bfb8579e0a3ca384c655a0eba933159e9"
     ],
     [
       ".roo/skills/technical-debt-management/SKILL.md",
@@ -6318,7 +6318,7 @@
     ],
     [
       ".roo/skills/technical-decision-making/SKILL.md",
-      "d16fe4266cf65a2e88bd45d15f95fe91771be2cd4c1a10d00328503f11a38f48"
+      "461d7f9ee57ea8e3a5962d43cc43e5fe73aa6adc0d7afafe56461407db484995"
     ],
     [
       ".roo/skills/test-aaa-structure/SKILL.md",
@@ -6460,15 +6460,15 @@
     ],
     [
       ".roo/skills/api-versioning-strategy/SKILL.md",
-      "f9b26da1e18a83e0c968339e34963b0711cf45f29eeb611bddd894238427cdd5"
+      "2257b3a6c90801be433161a17301f6f8c9e3b4ecd7c571ef0250e2094f5f4106"
     ],
     [
       ".roo/skills/architecture-documentation/SKILL.md",
-      "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
+      "b68120668baae9c97a86a70df348231b93880a6369c751748ada65d625ae134c"
     ],
     [
       ".roo/skills/code-review-practices/SKILL.md",
-      "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
+      "1557418a4ba405021ec54b657907118baa8776e19843c847f21a23c0a202a979"
     ],
     [
       ".roo/skills/component-design-systems/SKILL.md",
@@ -6480,7 +6480,7 @@
     ],
     [
       ".roo/skills/continuous-improvement/SKILL.md",
-      "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+      "22f70dbb2bf73e070f9bbe9b84b2daea3d2dc096e488a155756451c87439063d"
     ],
     [
       ".roo/skills/css-performance-optimization/SKILL.md",
@@ -6492,7 +6492,7 @@
     ],
     [
       ".roo/skills/data-validation-pipelines/SKILL.md",
-      "684d497852e1980d9e8a322c59e9ac637c2dc100d484358aa0b8281a3ac0f25c"
+      "bb654d8bc690dad50fbe087e29dd58042b50e736cb23556d3e3636ebb08ac8e6"
     ],
     [
       ".roo/skills/debugging-methodology/SKILL.md",
@@ -6500,11 +6500,11 @@
     ],
     [
       ".roo/skills/deployment-rollback-strategies/SKILL.md",
-      "ef50c407c99c7d6f1dd30a09132640bfe9553f717034cbd72f95eaf7406dfd56"
+      "84eff6d42b8feaa49fe9afd1bca3a1e5073cd02f8b997ad271dd906cc9404fec"
     ],
     [
       ".roo/skills/distributed-caching-design/SKILL.md",
-      "31bf68b5dab3a5cc16898ac93fea538876da154d0af47e2b4cabdd0ddbf2abbf"
+      "44f6da3551c839e689884843eb17c3818b77a96fd35bb1853ef23daaf65c524d"
     ],
     [
       ".roo/skills/documentation-best-practices/SKILL.md",
@@ -6520,7 +6520,7 @@
     ],
     [
       ".roo/skills/iac-best-practices/SKILL.md",
-      "e7da4e6302c09d36fc3338d73c70da71ab10c981e7ffdf7cc18f85e853a62810"
+      "0d8666abb9dd6b89f6e10454f3eeb7a9df1572d079346a4ded3df01b5795e68d"
     ],
     [
       ".roo/skills/idempotency-patterns/SKILL.md",
@@ -6532,7 +6532,7 @@
     ],
     [
       ".roo/skills/infrastructure-drift-detection/SKILL.md",
-      "ba399dc9d93bfa327975daf55aa74110c59f9a8271295af7d539024ac0989122"
+      "9a20763b27101518f8cc27115257fc9b1dc09432ade2f401142a9c35ee8e8137"
     ],
     [
       ".roo/skills/kubernetes-resource-management/SKILL.md",
@@ -6544,7 +6544,7 @@
     ],
     [
       ".roo/skills/microservices-communication-patterns/SKILL.md",
-      "6b6fe9f51433dddf2bc819abffffe271eab0edf0911793ac958575d395458193"
+      "e78b32f3b6a31c088f97fb82593810ce35572b180ab2b5919ad2f94bba0cc92e"
     ],
     [
       ".roo/skills/multiagent-orchestration/SKILL.md",
@@ -6556,7 +6556,7 @@
     ],
     [
       ".roo/skills/performance-optimization/SKILL.md",
-      "81f057d445e73f1877db1b7996b34a9cd2976e8670f332ac2e13f0c4eac392b2"
+      "49b1987d386bf65ccd845e49369adbe6f2e4dd86f074aa00e22e2e5ae5e91394"
     ],
     [
       ".roo/skills/post-implementation-checklist/SKILL.md",
@@ -6564,7 +6564,7 @@
     ],
     [
       ".roo/skills/problem-decomposition/SKILL.md",
-      "9962362a175e7b4ee9acd1bc585511234902694910c5ba1f20a3e53ee01c2047"
+      "25928a913e2b2e1400c16db872946f9124de1e11d6447abc8a12e02754b71b84"
     ],
     [
       ".roo/skills/quality-assurance/SKILL.md",
@@ -6588,11 +6588,11 @@
     ],
     [
       ".roo/skills/team-collaboration/SKILL.md",
-      "59a7c4fc7970bd4af790f6642fb030df0fbfde73d95595fa2289196c71ee64ba"
+      "37753e0e36f339162058fcfba4f62f735a24e0ca0e250fdf5cf92d6d1887f46f"
     ],
     [
       ".roo/skills/technical-communication/SKILL.md",
-      "725be0f40aa295e16c715ada58178484a886e3d7d0eef134e5d3926132923625"
+      "cd1f1ae79c34a37e4b27ff9d21478465a5385f2723fb6d9c60ca1632e9465c6b"
     ],
     [
       ".roo/skills/technical-debt-management/SKILL.md",
@@ -6600,7 +6600,7 @@
     ],
     [
       ".roo/skills/technical-decision-making/SKILL.md",
-      "4f5b3cb084e61b2e1c7edcdb9eec25927a06974bf2c189e371525a867be5b985"
+      "7a531b16fedcb4554642a3f03ec073dd68706cf8cc277f09f99da778d4fa6e95"
     ],
     [
       ".roo/skills/test-aaa-structure/SKILL.md",
@@ -6642,11 +6642,11 @@
     ],
     [
       ".windsurf/skills/api-versioning-strategy/SKILL.md",
-      "062a339a10c5df713eae0561b016be7c2c8a5b6c14d974d932e3d5802344f8c6"
+      "ca0422f68057c9fbc27f6cc3e218c19e122502ebce9a36d063be440f2f522773"
     ],
     [
       ".windsurf/skills/architecture-documentation/SKILL.md",
-      "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
+      "993a75db771f7d88c08eb920e585d13eeb5720ae59451ba03cb89a54fa560fb1"
     ],
     [
       ".windsurf/skills/ask/SKILL.md",
@@ -6662,7 +6662,7 @@
     ],
     [
       ".windsurf/skills/code-review-practices/SKILL.md",
-      "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
+      "4a972e7b7e3b26e3a641de6dc07683ffcc4f7eb90b7ad020a1e5896b077f6893"
     ],
     [
       ".windsurf/skills/component-design-systems/SKILL.md",
@@ -6674,7 +6674,7 @@
     ],
     [
       ".windsurf/skills/continuous-improvement/SKILL.md",
-      "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+      "59f0ba8436b42939fc6174fd627b2e62275453a65b4f6155624a2b38b7bce0ef"
     ],
     [
       ".windsurf/skills/css-performance-optimization/SKILL.md",
@@ -6686,7 +6686,7 @@
     ],
     [
       ".windsurf/skills/data-validation-pipelines/SKILL.md",
-      "09739cef80da0955aba6cb78b5c03b82eda86664438e9eb4aa139b657112e908"
+      "7af2188f5e32ebb13525ac3277736d9bbb0e8484007c93f859145046574f70ac"
     ],
     [
       ".windsurf/skills/debug/SKILL.md",
@@ -6698,11 +6698,11 @@
     ],
     [
       ".windsurf/skills/deployment-rollback-strategies/SKILL.md",
-      "d2395d14a3c4a3535206ea9f9a65913d332bbb5867ebfc81beacb1a255c66852"
+      "e346e95bf8a47e687ae4dbb0f34fdc646b33b8464605e49b8b4708c17d86e6c8"
     ],
     [
       ".windsurf/skills/distributed-caching-design/SKILL.md",
-      "7be0a0c2fa17608a61687445b80fa3329a72b2036cfe6b9ec2590aa18cdd517e"
+      "f63c4aaa9a52bdc9b1c494c0bb28a1ce3c86aa9d5726d02d4e47e91488f9cb99"
     ],
     [
       ".windsurf/skills/documentation-best-practices/SKILL.md",
@@ -6730,7 +6730,7 @@
     ],
     [
       ".windsurf/skills/iac-best-practices/SKILL.md",
-      "4db8feb77b490eea6dd52374637923448a3ae6f27c138d6c996880407c5a096b"
+      "06b547078fe356b5cd7fe7133c2f16cfc33164e2f58a4cecb53a731d50fe822b"
     ],
     [
       ".windsurf/skills/idempotency-patterns/SKILL.md",
@@ -6742,7 +6742,7 @@
     ],
     [
       ".windsurf/skills/infrastructure-drift-detection/SKILL.md",
-      "2d205cd017dc95f36f8312eae242d89545394bd38f8d6e865f87fd2ab13ef3f6"
+      "c3ff829521c223d78d9d5370d31b9c97e13fd5c8322820a9a43faeb31dd5de8b"
     ],
     [
       ".windsurf/skills/kubernetes-resource-management/SKILL.md",
@@ -6754,7 +6754,7 @@
     ],
     [
       ".windsurf/skills/microservices-communication-patterns/SKILL.md",
-      "8cc8e74218d5e09d2100d78553436b8344407ca72c73abebd28f264bab5b215d"
+      "669b061210bad4efe3e1c43427f10fa7fd8ebd26a9a377b88017eb9f736d04db"
     ],
     [
       ".windsurf/skills/migration/SKILL.md",
@@ -6778,7 +6778,7 @@
     ],
     [
       ".windsurf/skills/performance-optimization/SKILL.md",
-      "326754e646454eb1d54a4e9692a8dfb1896902b9adf51a1513b46aa5669d647a"
+      "c1926b007cbc559c3069ee57b6ce48211ee3d001c6891c95613f9007950c72be"
     ],
     [
       ".windsurf/skills/plan/SKILL.md",
@@ -6790,7 +6790,7 @@
     ],
     [
       ".windsurf/skills/problem-decomposition/SKILL.md",
-      "f37c4a570593d780e4b1173ef0082df62d03efb2e00bfcaac5d1feecb2caec8e"
+      "93153b2a818de51b013717fb9311e04ef07d3f6d46d381ca4f927a730775460e"
     ],
     [
       ".windsurf/skills/quality-assurance/SKILL.md",
@@ -6822,11 +6822,11 @@
     ],
     [
       ".windsurf/skills/team-collaboration/SKILL.md",
-      "8d3703e287a6a9c94a53da968ece20bf8b2bac4f7a28d3d49f838c9646b5be02"
+      "49a0e47936fe77f2f0c27d0d01d380725c619d3b9fb4e5ac1ab7293c05b06193"
     ],
     [
       ".windsurf/skills/technical-communication/SKILL.md",
-      "66f5368887094575002c8f83064e41110ceab580afd197cc4ed0319a48e933bb"
+      "1c52aee4891d087325705f64d38a853bfb8579e0a3ca384c655a0eba933159e9"
     ],
     [
       ".windsurf/skills/technical-debt-management/SKILL.md",
@@ -6834,7 +6834,7 @@
     ],
     [
       ".windsurf/skills/technical-decision-making/SKILL.md",
-      "d16fe4266cf65a2e88bd45d15f95fe91771be2cd4c1a10d00328503f11a38f48"
+      "461d7f9ee57ea8e3a5962d43cc43e5fe73aa6adc0d7afafe56461407db484995"
     ],
     [
       ".windsurf/skills/test/SKILL.md",
@@ -6924,11 +6924,11 @@
     ],
     [
       ".windsurf/skills/api-versioning-strategy/SKILL.md",
-      "f9b26da1e18a83e0c968339e34963b0711cf45f29eeb611bddd894238427cdd5"
+      "2257b3a6c90801be433161a17301f6f8c9e3b4ecd7c571ef0250e2094f5f4106"
     ],
     [
       ".windsurf/skills/architecture-documentation/SKILL.md",
-      "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
+      "b68120668baae9c97a86a70df348231b93880a6369c751748ada65d625ae134c"
     ],
     [
       ".windsurf/skills/ask/SKILL.md",
@@ -6944,7 +6944,7 @@
     ],
     [
       ".windsurf/skills/code-review-practices/SKILL.md",
-      "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
+      "1557418a4ba405021ec54b657907118baa8776e19843c847f21a23c0a202a979"
     ],
     [
       ".windsurf/skills/component-design-systems/SKILL.md",
@@ -6956,7 +6956,7 @@
     ],
     [
       ".windsurf/skills/continuous-improvement/SKILL.md",
-      "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+      "22f70dbb2bf73e070f9bbe9b84b2daea3d2dc096e488a155756451c87439063d"
     ],
     [
       ".windsurf/skills/css-performance-optimization/SKILL.md",
@@ -6968,7 +6968,7 @@
     ],
     [
       ".windsurf/skills/data-validation-pipelines/SKILL.md",
-      "684d497852e1980d9e8a322c59e9ac637c2dc100d484358aa0b8281a3ac0f25c"
+      "bb654d8bc690dad50fbe087e29dd58042b50e736cb23556d3e3636ebb08ac8e6"
     ],
     [
       ".windsurf/skills/debug/SKILL.md",
@@ -6980,11 +6980,11 @@
     ],
     [
       ".windsurf/skills/deployment-rollback-strategies/SKILL.md",
-      "ef50c407c99c7d6f1dd30a09132640bfe9553f717034cbd72f95eaf7406dfd56"
+      "84eff6d42b8feaa49fe9afd1bca3a1e5073cd02f8b997ad271dd906cc9404fec"
     ],
     [
       ".windsurf/skills/distributed-caching-design/SKILL.md",
-      "31bf68b5dab3a5cc16898ac93fea538876da154d0af47e2b4cabdd0ddbf2abbf"
+      "44f6da3551c839e689884843eb17c3818b77a96fd35bb1853ef23daaf65c524d"
     ],
     [
       ".windsurf/skills/documentation-best-practices/SKILL.md",
@@ -7012,7 +7012,7 @@
     ],
     [
       ".windsurf/skills/iac-best-practices/SKILL.md",
-      "e7da4e6302c09d36fc3338d73c70da71ab10c981e7ffdf7cc18f85e853a62810"
+      "0d8666abb9dd6b89f6e10454f3eeb7a9df1572d079346a4ded3df01b5795e68d"
     ],
     [
       ".windsurf/skills/idempotency-patterns/SKILL.md",
@@ -7024,7 +7024,7 @@
     ],
     [
       ".windsurf/skills/infrastructure-drift-detection/SKILL.md",
-      "ba399dc9d93bfa327975daf55aa74110c59f9a8271295af7d539024ac0989122"
+      "9a20763b27101518f8cc27115257fc9b1dc09432ade2f401142a9c35ee8e8137"
     ],
     [
       ".windsurf/skills/kubernetes-resource-management/SKILL.md",
@@ -7036,7 +7036,7 @@
     ],
     [
       ".windsurf/skills/microservices-communication-patterns/SKILL.md",
-      "6b6fe9f51433dddf2bc819abffffe271eab0edf0911793ac958575d395458193"
+      "e78b32f3b6a31c088f97fb82593810ce35572b180ab2b5919ad2f94bba0cc92e"
     ],
     [
       ".windsurf/skills/migration/SKILL.md",
@@ -7060,7 +7060,7 @@
     ],
     [
       ".windsurf/skills/performance-optimization/SKILL.md",
-      "81f057d445e73f1877db1b7996b34a9cd2976e8670f332ac2e13f0c4eac392b2"
+      "49b1987d386bf65ccd845e49369adbe6f2e4dd86f074aa00e22e2e5ae5e91394"
     ],
     [
       ".windsurf/skills/plan/SKILL.md",
@@ -7072,7 +7072,7 @@
     ],
     [
       ".windsurf/skills/problem-decomposition/SKILL.md",
-      "9962362a175e7b4ee9acd1bc585511234902694910c5ba1f20a3e53ee01c2047"
+      "25928a913e2b2e1400c16db872946f9124de1e11d6447abc8a12e02754b71b84"
     ],
     [
       ".windsurf/skills/quality-assurance/SKILL.md",
@@ -7104,11 +7104,11 @@
     ],
     [
       ".windsurf/skills/team-collaboration/SKILL.md",
-      "59a7c4fc7970bd4af790f6642fb030df0fbfde73d95595fa2289196c71ee64ba"
+      "37753e0e36f339162058fcfba4f62f735a24e0ca0e250fdf5cf92d6d1887f46f"
     ],
     [
       ".windsurf/skills/technical-communication/SKILL.md",
-      "725be0f40aa295e16c715ada58178484a886e3d7d0eef134e5d3926132923625"
+      "cd1f1ae79c34a37e4b27ff9d21478465a5385f2723fb6d9c60ca1632e9465c6b"
     ],
     [
       ".windsurf/skills/technical-debt-management/SKILL.md",
@@ -7116,7 +7116,7 @@
     ],
     [
       ".windsurf/skills/technical-decision-making/SKILL.md",
-      "4f5b3cb084e61b2e1c7edcdb9eec25927a06974bf2c189e371525a867be5b985"
+      "7a531b16fedcb4554642a3f03ec073dd68706cf8cc277f09f99da778d4fa6e95"
     ],
     [
       ".windsurf/skills/test/SKILL.md",
@@ -7198,11 +7198,11 @@
   "zed::minimal": [
     [
       ".agents/skills/api-versioning-strategy/SKILL.md",
-      "062a339a10c5df713eae0561b016be7c2c8a5b6c14d974d932e3d5802344f8c6"
+      "ca0422f68057c9fbc27f6cc3e218c19e122502ebce9a36d063be440f2f522773"
     ],
     [
       ".agents/skills/architecture-documentation/SKILL.md",
-      "d7e4e469ac925835df71da5717b5b0bf42398143caf33ebb7defed3f1596b175"
+      "993a75db771f7d88c08eb920e585d13eeb5720ae59451ba03cb89a54fa560fb1"
     ],
     [
       ".agents/skills/ask/SKILL.md",
@@ -7218,7 +7218,7 @@
     ],
     [
       ".agents/skills/code-review-practices/SKILL.md",
-      "12f6662246955d7fdbc40d2305922f8486c83b081012cf8d62987fe7e6e637d7"
+      "4a972e7b7e3b26e3a641de6dc07683ffcc4f7eb90b7ad020a1e5896b077f6893"
     ],
     [
       ".agents/skills/component-design-systems/SKILL.md",
@@ -7230,7 +7230,7 @@
     ],
     [
       ".agents/skills/continuous-improvement/SKILL.md",
-      "f890fc6207637081c027881619bde1c41432ea2e3717558af1cb43f5ebebd134"
+      "59f0ba8436b42939fc6174fd627b2e62275453a65b4f6155624a2b38b7bce0ef"
     ],
     [
       ".agents/skills/css-performance-optimization/SKILL.md",
@@ -7242,7 +7242,7 @@
     ],
     [
       ".agents/skills/data-validation-pipelines/SKILL.md",
-      "09739cef80da0955aba6cb78b5c03b82eda86664438e9eb4aa139b657112e908"
+      "7af2188f5e32ebb13525ac3277736d9bbb0e8484007c93f859145046574f70ac"
     ],
     [
       ".agents/skills/debug/SKILL.md",
@@ -7254,11 +7254,11 @@
     ],
     [
       ".agents/skills/deployment-rollback-strategies/SKILL.md",
-      "d2395d14a3c4a3535206ea9f9a65913d332bbb5867ebfc81beacb1a255c66852"
+      "e346e95bf8a47e687ae4dbb0f34fdc646b33b8464605e49b8b4708c17d86e6c8"
     ],
     [
       ".agents/skills/distributed-caching-design/SKILL.md",
-      "7be0a0c2fa17608a61687445b80fa3329a72b2036cfe6b9ec2590aa18cdd517e"
+      "f63c4aaa9a52bdc9b1c494c0bb28a1ce3c86aa9d5726d02d4e47e91488f9cb99"
     ],
     [
       ".agents/skills/documentation-best-practices/SKILL.md",
@@ -7286,7 +7286,7 @@
     ],
     [
       ".agents/skills/iac-best-practices/SKILL.md",
-      "4db8feb77b490eea6dd52374637923448a3ae6f27c138d6c996880407c5a096b"
+      "06b547078fe356b5cd7fe7133c2f16cfc33164e2f58a4cecb53a731d50fe822b"
     ],
     [
       ".agents/skills/idempotency-patterns/SKILL.md",
@@ -7298,7 +7298,7 @@
     ],
     [
       ".agents/skills/infrastructure-drift-detection/SKILL.md",
-      "2d205cd017dc95f36f8312eae242d89545394bd38f8d6e865f87fd2ab13ef3f6"
+      "c3ff829521c223d78d9d5370d31b9c97e13fd5c8322820a9a43faeb31dd5de8b"
     ],
     [
       ".agents/skills/kubernetes-resource-management/SKILL.md",
@@ -7310,7 +7310,7 @@
     ],
     [
       ".agents/skills/microservices-communication-patterns/SKILL.md",
-      "8cc8e74218d5e09d2100d78553436b8344407ca72c73abebd28f264bab5b215d"
+      "669b061210bad4efe3e1c43427f10fa7fd8ebd26a9a377b88017eb9f736d04db"
     ],
     [
       ".agents/skills/migration/SKILL.md",
@@ -7334,7 +7334,7 @@
     ],
     [
       ".agents/skills/performance-optimization/SKILL.md",
-      "326754e646454eb1d54a4e9692a8dfb1896902b9adf51a1513b46aa5669d647a"
+      "c1926b007cbc559c3069ee57b6ce48211ee3d001c6891c95613f9007950c72be"
     ],
     [
       ".agents/skills/plan/SKILL.md",
@@ -7346,7 +7346,7 @@
     ],
     [
       ".agents/skills/problem-decomposition/SKILL.md",
-      "f37c4a570593d780e4b1173ef0082df62d03efb2e00bfcaac5d1feecb2caec8e"
+      "93153b2a818de51b013717fb9311e04ef07d3f6d46d381ca4f927a730775460e"
     ],
     [
       ".agents/skills/quality-assurance/SKILL.md",
@@ -7378,11 +7378,11 @@
     ],
     [
       ".agents/skills/team-collaboration/SKILL.md",
-      "8d3703e287a6a9c94a53da968ece20bf8b2bac4f7a28d3d49f838c9646b5be02"
+      "49a0e47936fe77f2f0c27d0d01d380725c619d3b9fb4e5ac1ab7293c05b06193"
     ],
     [
       ".agents/skills/technical-communication/SKILL.md",
-      "66f5368887094575002c8f83064e41110ceab580afd197cc4ed0319a48e933bb"
+      "1c52aee4891d087325705f64d38a853bfb8579e0a3ca384c655a0eba933159e9"
     ],
     [
       ".agents/skills/technical-debt-management/SKILL.md",
@@ -7390,7 +7390,7 @@
     ],
     [
       ".agents/skills/technical-decision-making/SKILL.md",
-      "d16fe4266cf65a2e88bd45d15f95fe91771be2cd4c1a10d00328503f11a38f48"
+      "461d7f9ee57ea8e3a5962d43cc43e5fe73aa6adc0d7afafe56461407db484995"
     ],
     [
       ".agents/skills/test/SKILL.md",
@@ -7424,11 +7424,11 @@
   "zed::verbose": [
     [
       ".agents/skills/api-versioning-strategy/SKILL.md",
-      "f9b26da1e18a83e0c968339e34963b0711cf45f29eeb611bddd894238427cdd5"
+      "2257b3a6c90801be433161a17301f6f8c9e3b4ecd7c571ef0250e2094f5f4106"
     ],
     [
       ".agents/skills/architecture-documentation/SKILL.md",
-      "29980b687ef0df081cedce3608990f7802707c6eae6d54ab1618312f5ab21ad2"
+      "b68120668baae9c97a86a70df348231b93880a6369c751748ada65d625ae134c"
     ],
     [
       ".agents/skills/ask/SKILL.md",
@@ -7444,7 +7444,7 @@
     ],
     [
       ".agents/skills/code-review-practices/SKILL.md",
-      "8f66f98be253876681b70e6d5635906f86e236c01f5d8bc8e8090c608abf7e8f"
+      "1557418a4ba405021ec54b657907118baa8776e19843c847f21a23c0a202a979"
     ],
     [
       ".agents/skills/component-design-systems/SKILL.md",
@@ -7456,7 +7456,7 @@
     ],
     [
       ".agents/skills/continuous-improvement/SKILL.md",
-      "a7d87a0012dcadd0860534a03d95507ce658f59e4a6963ed9cd6f2b1ec572968"
+      "22f70dbb2bf73e070f9bbe9b84b2daea3d2dc096e488a155756451c87439063d"
     ],
     [
       ".agents/skills/css-performance-optimization/SKILL.md",
@@ -7468,7 +7468,7 @@
     ],
     [
       ".agents/skills/data-validation-pipelines/SKILL.md",
-      "684d497852e1980d9e8a322c59e9ac637c2dc100d484358aa0b8281a3ac0f25c"
+      "bb654d8bc690dad50fbe087e29dd58042b50e736cb23556d3e3636ebb08ac8e6"
     ],
     [
       ".agents/skills/debug/SKILL.md",
@@ -7480,11 +7480,11 @@
     ],
     [
       ".agents/skills/deployment-rollback-strategies/SKILL.md",
-      "ef50c407c99c7d6f1dd30a09132640bfe9553f717034cbd72f95eaf7406dfd56"
+      "84eff6d42b8feaa49fe9afd1bca3a1e5073cd02f8b997ad271dd906cc9404fec"
     ],
     [
       ".agents/skills/distributed-caching-design/SKILL.md",
-      "31bf68b5dab3a5cc16898ac93fea538876da154d0af47e2b4cabdd0ddbf2abbf"
+      "44f6da3551c839e689884843eb17c3818b77a96fd35bb1853ef23daaf65c524d"
     ],
     [
       ".agents/skills/documentation-best-practices/SKILL.md",
@@ -7512,7 +7512,7 @@
     ],
     [
       ".agents/skills/iac-best-practices/SKILL.md",
-      "e7da4e6302c09d36fc3338d73c70da71ab10c981e7ffdf7cc18f85e853a62810"
+      "0d8666abb9dd6b89f6e10454f3eeb7a9df1572d079346a4ded3df01b5795e68d"
     ],
     [
       ".agents/skills/idempotency-patterns/SKILL.md",
@@ -7524,7 +7524,7 @@
     ],
     [
       ".agents/skills/infrastructure-drift-detection/SKILL.md",
-      "ba399dc9d93bfa327975daf55aa74110c59f9a8271295af7d539024ac0989122"
+      "9a20763b27101518f8cc27115257fc9b1dc09432ade2f401142a9c35ee8e8137"
     ],
     [
       ".agents/skills/kubernetes-resource-management/SKILL.md",
@@ -7536,7 +7536,7 @@
     ],
     [
       ".agents/skills/microservices-communication-patterns/SKILL.md",
-      "6b6fe9f51433dddf2bc819abffffe271eab0edf0911793ac958575d395458193"
+      "e78b32f3b6a31c088f97fb82593810ce35572b180ab2b5919ad2f94bba0cc92e"
     ],
     [
       ".agents/skills/migration/SKILL.md",
@@ -7560,7 +7560,7 @@
     ],
     [
       ".agents/skills/performance-optimization/SKILL.md",
-      "81f057d445e73f1877db1b7996b34a9cd2976e8670f332ac2e13f0c4eac392b2"
+      "49b1987d386bf65ccd845e49369adbe6f2e4dd86f074aa00e22e2e5ae5e91394"
     ],
     [
       ".agents/skills/plan/SKILL.md",
@@ -7572,7 +7572,7 @@
     ],
     [
       ".agents/skills/problem-decomposition/SKILL.md",
-      "9962362a175e7b4ee9acd1bc585511234902694910c5ba1f20a3e53ee01c2047"
+      "25928a913e2b2e1400c16db872946f9124de1e11d6447abc8a12e02754b71b84"
     ],
     [
       ".agents/skills/quality-assurance/SKILL.md",
@@ -7604,11 +7604,11 @@
     ],
     [
       ".agents/skills/team-collaboration/SKILL.md",
-      "59a7c4fc7970bd4af790f6642fb030df0fbfde73d95595fa2289196c71ee64ba"
+      "37753e0e36f339162058fcfba4f62f735a24e0ca0e250fdf5cf92d6d1887f46f"
     ],
     [
       ".agents/skills/technical-communication/SKILL.md",
-      "725be0f40aa295e16c715ada58178484a886e3d7d0eef134e5d3926132923625"
+      "cd1f1ae79c34a37e4b27ff9d21478465a5385f2723fb6d9c60ca1632e9465c6b"
     ],
     [
       ".agents/skills/technical-debt-management/SKILL.md",
@@ -7616,7 +7616,7 @@
     ],
     [
       ".agents/skills/technical-decision-making/SKILL.md",
-      "4f5b3cb084e61b2e1c7edcdb9eec25927a06974bf2c189e371525a867be5b985"
+      "7a531b16fedcb4554642a3f03ec073dd68706cf8cc277f09f99da778d4fa6e95"
     ],
     [
       ".agents/skills/test/SKILL.md",

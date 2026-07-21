@@ -1,116 +1,205 @@
----
-name: skill
-description: Manage API versioning and backward compatibility
----
+# API Versioning Strategy (Verbose)
 
-## Purpose
+## Core Patterns
 
-This skill covers manage api versioning and backward compatibility. Mastering this enables you to make informed technical decisions and implement solutions that scale, perform, and remain maintainable.
+### The Compatibility Contract
 
-## Core Concepts
+Versioning exists because you cannot deploy your clients. Once a third party — or
+your own mobile app sitting in an app store review queue — depends on a response
+shape, that shape is a contract, and the only safe assumption is that some caller
+depends on every observable detail of it.
 
-Understanding these foundational concepts is essential:
+Classify every proposed change before you write it:
 
-- semantic versioning
-- deprecation policies
-- header-based versioning
-- URL versioning
+| Change | Compatible | Why |
+|---|---|---|
+| New optional request field | Yes | Old clients omit it; server defaults |
+| New response field | Yes | Provided clients tolerate unknown keys |
+| New endpoint | Yes | Nothing referenced it before |
+| Relaxing a validation rule | Yes | Previously rejected input now succeeds |
+| Removing / renaming a field | No | Client dereferences a missing key |
+| Making a field required | No | Existing requests start failing |
+| Tightening validation | No | Previously valid input now 400s |
+| Changing a default | No | Behavior changes for callers who never opted in |
+| New enum value in a response | No | Exhaustive client switches fall through |
+| Changing pagination semantics | No | Cursors and page sizes are load-bearing |
 
-## When to Apply This Skill
+The subtle entries matter most. Adding `status: "partially_refunded"` to an order
+API is technically additive and practically a breaking change: every client with
+`switch (status)` and no default branch now throws. If your enum will grow, say so
+in the contract from day one and require clients to handle an unknown member.
 
-Use this skill when:
-- Making architectural decisions in this domain
-- Designing systems from scratch
-- Optimizing existing implementations
-- Troubleshooting problems
-- Mentoring junior engineers
-- Conducting design reviews
+### Choosing a Versioning Mechanism
 
-## Learning Path
+| Mechanism | Example | Cacheable | Visible in logs | Verdict |
+|---|---|---|---|---|
+| URI path | `/v2/orders` | Naturally | Yes | Default choice |
+| Custom header | `X-API-Version: 2` | Needs `Vary` | Only if logged | Workable |
+| Accept header | `Accept: application/vnd.acme.v2+json` | Needs `Vary` | Rarely | Purist, painful |
+| Query parameter | `/orders?version=2` | Yes | Yes | Muddles resource identity |
 
-### Foundation (Week 1)
-- Understand core concepts
-- Learn terminology
-- Study common patterns
-- Review case studies
+The REST-purity argument for content negotiation is real: `/orders/8812` names an
+order, and `v1` versus `v2` is a representation of it, so it belongs in `Accept`.
+Every practical force pushes the other way. URI versions are copy-pasteable into a
+bug report, greppable in access logs, trivially routable at the gateway, and cached
+correctly by every intermediary without a `Vary` header you will eventually forget.
+Public APIs that chose header versioning almost universally ended up documenting a
+URI shortcut anyway.
 
-### Application (Week 2-3)
-- Apply techniques to real problems
-- Practice with examples
-- Get feedback on approaches
-- Refine understanding
+Whichever you pick, make the version explicit and required. "No version means
+latest" guarantees that an unversioned integration written today will break on
+your next release.
 
-### Mastery (Week 4+)
-- Tackle complex scenarios
-- Help others learn
-- Share expertise
-- Contribute to community
-- Stay current with evolution
+### Expand, Migrate, Contract
 
-## Key Techniques & Patterns
+The only safe way to change an existing field is to never change it — add the new
+one, move traffic, then remove the old one.
 
-Document the main approaches and patterns in this domain. Include:
-- When to use each technique
-- Pros and cons
-- Trade-offs to consider
-- Common mistakes
+```python
+# Phase 1 — EXPAND. Both shapes valid. Deployed alone.
+def serialize_customer(c):
+    return {
+        "name": c.full_name,          # legacy, still populated
+        "full_name": c.full_name,     # new canonical field
+    }
 
-## Tools & Technologies
+def parse_customer(body):
+    # accept either; prefer the new one
+    name = body.get("full_name") or body.get("name")
+    if name is None:
+        raise Validation("full_name is required")
+    return name
+```
 
-List relevant tools, frameworks, and technologies used in this domain.
+```python
+# Phase 2 — MIGRATE. Instrument reads of the legacy field.
+if "full_name" not in body and "name" in body:
+    metrics.increment("legacy_field_read", tags={"field": "name",
+                                                 "client": client_id})
+```
 
-## Real-World Applications
+Phase 3 removes `name` — but only when that counter has been flat at zero for
+longer than your slowest client's release cycle. Mobile clients routinely have a
+long tail of installs a year old; "zero for two weeks" is not zero.
 
-Examples of where this skill is applied:
-- Backend systems
-- Frontend applications
-- DevOps infrastructure
-- Testing frameworks
-- ML/AI systems
-- Security systems
+The discipline that makes this work is that expand and contract are separate
+deploys. Combined, they are a rename, and a rename has no rollback: the moment you
+ship it, in-flight requests from old clients fail, and rolling back does not undo
+the client-side errors already surfaced to users.
 
-## Best Practices
+The same shape applies to database columns and to event schemas. It is the general
+answer to "how do I change something two systems agree on when I only control one."
 
-- Document all decisions
-- Test thoroughly
-- Monitor effectiveness
-- Iterate based on feedback
-- Share knowledge with team
-- Stay up-to-date with evolution
+### Deprecation and Sunset
 
-## Common Pitfalls
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+Deprecation: Sun, 01 Nov 2026 00:00:00 GMT
+Sunset: Wed, 01 Apr 2027 00:00:00 GMT
+Link: <https://api.acme.com/docs/migrate-v1-v2>; rel="deprecation"
+Warning: 299 - "GET /v1/orders is deprecated; migrate to /v2/orders by 2027-04-01"
+```
 
-- Over-complicating solutions
-- Ignoring performance implications
-- Lack of monitoring
-- Insufficient testing
-- Poor documentation
-- Not considering edge cases
-- Neglecting security aspects
+`Sunset` is standardized in RFC 8594 and names the moment the resource stops
+responding. Machine-readable headers are what let a client's own monitoring flag
+the problem; a human-readable changelog reaches nobody who is not already looking.
 
-## Measurement & Validation
+A workable timeline for an external API:
 
-How to know you've mastered this:
-- Can explain concepts to peers
-- Can design solutions independently
-- Can troubleshoot issues quickly
-- Can mentor others effectively
-- Can make trade-off decisions
-- Can optimize for your context
+| Stage | Internal API | Public API |
+|---|---|---|
+| Announce + headers live | T | T |
+| Direct outreach to top consumers | T + 1 week | T + 2 weeks |
+| Brownout (short scheduled 410s) | T + 1 month | T + 4 months |
+| Sunset | T + 3 months | T + 12 months |
 
-## Advanced Topics
+Brownouts are the underused tool: return `410 Gone` for fifteen minutes on an
+announced date. Every remaining integration discovers its dependency while there is
+still time, instead of on the final cutover at 2am.
 
-Beyond the basics:
-- Performance optimization
-- Advanced patterns
-- Integration with other systems
-- Emerging best practices
-- Research and innovation
+### Measuring Who Is Still There
 
-## Resources & References
+You cannot retire a version you cannot see.
 
-Recommended reading and learning materials for deeper understanding.
+```
+http_requests_total{api_version="v1", client_id="acct_8812", endpoint="/orders"}
+```
 
-## Integration with Other Skills
+Require an authenticated client identity on every request and label metrics with
+it. This converts sunset from a political argument into a list of accounts to email,
+and it is the only evidence that makes "no one uses that field" a fact rather than
+a hope.
 
-How this skill relates to and depends on other skills across the platform.
+### Versioning Events, Not Just Endpoints
+
+Published events are an API with a worse failure mode: consumers are asynchronous,
+so a breaking change surfaces as a silently dead consumer rather than a 400. Put the
+version in the payload and keep consumers tolerant readers — ignore unknown fields,
+never fail on an unexpected enum:
+
+```json
+{"event": "order.created", "schema_version": 2, "data": {"order_id": "8812"}}
+```
+
+Route incompatible shapes to a new topic (`order.created.v2`) rather than mutating
+the existing one in place; that is the expand/contract pattern applied to a bus.
+See `microservices-communication-patterns` for consumer-side handling.
+
+## Common Anti-Patterns
+
+❌ **Renaming a field in one deploy.**
+"It's a small change, we'll just rename `name` to `full_name`." There is no
+rollback and every old client 500s on a missing key.
+✅ Expand, migrate on telemetry, contract in a later release.
+
+❌ **Adding an enum value to an existing field.**
+`status` grows a `partially_refunded` member; clients with exhaustive switches
+crash on an unhandled case.
+✅ Document from day one that enums are open and clients must tolerate unknown
+values, or introduce the new state in a new version.
+
+❌ **Version-per-endpoint.**
+`/v1/orders`, `/v3/customers`, `/v2/payments` — nobody can state what "the API"
+is, and the test matrix is the product of every axis.
+✅ One version for the whole surface, bumped rarely.
+
+❌ **Treating "no version specified" as "latest".**
+An integration written against today's latest silently breaks on your next
+release, with no signal at integration time.
+✅ Require the version. Reject unversioned requests with a 400 naming the fix.
+
+❌ **Silently ignoring unknown request fields.**
+A client sends `emailAddress` instead of `email_address`; you drop it, the request
+succeeds, and the bug surfaces in production months later.
+✅ Reject unknown fields with a 400 that names them.
+
+❌ **Semver on a REST API.**
+`/v1.4.2/orders` invites callers to pin patch versions and multiplies your live
+surface.
+✅ Integers for the URI (`v1`, `v2`). Reserve semver for SDKs and libraries.
+
+❌ **Deprecating in the changelog only.**
+✅ `Deprecation` and `Sunset` headers on every response, plus a brownout.
+
+❌ **Maintaining old versions by forking the codebase.**
+Two copies drift, and a security fix has to land twice.
+✅ One implementation, with a thin translation layer mapping the old shape onto
+the current internal model at the edge.
+
+## API Versioning Checklist
+
+- [ ] Every change classified as breaking or non-breaking before implementation
+- [ ] Version required and explicit on every request; unversioned calls rejected
+- [ ] Version in the URI path, applied to the whole API surface
+- [ ] Enum growth policy stated in the contract; clients required to tolerate unknowns
+- [ ] Field changes shipped as expand → migrate → contract, in separate releases
+- [ ] Legacy field reads instrumented before any removal
+- [ ] `Deprecation`, `Sunset`, and `Link` headers on deprecated responses
+- [ ] Sunset window ≥ 12 months for public APIs, with a scheduled brownout
+- [ ] Per-client, per-version request metrics available and reviewed
+- [ ] At most two major versions live simultaneously
+- [ ] Old versions served by a translation layer, not a forked codebase
+- [ ] Unknown request fields rejected with a 400 naming the field
+- [ ] Published events carry a schema version; incompatible shapes get a new topic
+- [ ] Contract tests run old-client fixtures against the current server on every build
