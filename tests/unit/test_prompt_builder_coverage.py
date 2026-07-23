@@ -9,7 +9,7 @@ language filtering, and the module-level factory) using real inputs and
 import pytest
 
 from prompticorn.ir.models.agent import Agent
-from prompticorn.prompt_builder import PromptBuilder, get_prompt_builder
+from prompticorn.prompt_builder import MissingSkillWarning, PromptBuilder, get_prompt_builder
 
 
 @pytest.fixture
@@ -270,9 +270,13 @@ class TestWriteSkillFiles:
         assert written == [".kilo/skills/code-review-practices/SKILL.md"]
         assert (tmp_path / written[0]).exists()
 
-    def test_unknown_skill_is_silently_skipped(self, kilo_builder, tmp_path):
+    def test_unknown_skill_is_skipped_with_a_warning(self, kilo_builder, tmp_path):
+        # PRO-89: an unresolvable skill still yields no file, but it must no
+        # longer do so silently — the miss is what let 26 skills sit dead.
         agent = make_agent(skills=["totally-made-up-skill"])
-        assert kilo_builder._write_skill_files(tmp_path, "code", agent, "minimal") == []
+        with pytest.warns(MissingSkillWarning, match="totally-made-up-skill"):
+            written = kilo_builder._write_skill_files(tmp_path, "code", agent, "minimal")
+        assert written == []
 
 
 class TestWriteWorkflowFiles:

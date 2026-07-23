@@ -1,6 +1,7 @@
 """Builder wrapper to generate tool-specific configs from bundled IR agents."""
 
 import json
+import warnings
 from pathlib import Path
 from typing import Any
 
@@ -17,6 +18,10 @@ from prompticorn.ir.loaders.language_skill_mapping_loader import LanguageSkillMa
 from prompticorn.ir.models.agent import Agent
 from prompticorn.personas import PersonaFilter, PersonaRegistry
 from prompticorn.tools import builder_dispatch
+
+
+class MissingSkillWarning(UserWarning):
+    """Raised when an agent maps to a skill that has no SKILL.md on disk."""
 
 
 def _dedupe_preserve_order(*lists: list[str] | None) -> list[str]:
@@ -664,19 +669,31 @@ class PromptBuilder:
                 other_variant = "verbose" if variant == "minimal" else "minimal"
                 skill_file = skills_dir / skill_name / other_variant / "SKILL.md"
 
-            if skill_file.exists():
-                # Read skill content
-                skill_content = skill_file.read_text(encoding="utf-8")
+            if not skill_file.exists():
+                # A skill an agent maps to but that has no SKILL.md on disk would
+                # otherwise vanish from the build with no signal at all (PRO-89).
+                warnings.warn(
+                    f"Agent '{agent_name}' maps to skill '{skill_name}', but no "
+                    f"SKILL.md exists in either variant under "
+                    f"{skills_dir / skill_name}; the skill will be missing from "
+                    "the build. Check the skill name and the file's casing.",
+                    MissingSkillWarning,
+                    stacklevel=2,
+                )
+                continue
 
-                # Parse to extract name and content
-                skill_data = {
-                    "name": skill_name,
-                    "full_content": skill_content,
-                }
+            # Read skill content
+            skill_content = skill_file.read_text(encoding="utf-8")
 
-                # Write skill to tool-specific location
-                skill_files = self._write_single_skill(output, skill_data)
-                written_files.extend(skill_files)
+            # Parse to extract name and content
+            skill_data = {
+                "name": skill_name,
+                "full_content": skill_content,
+            }
+
+            # Write skill to tool-specific location
+            skill_files = self._write_single_skill(output, skill_data)
+            written_files.extend(skill_files)
 
         return written_files
 
