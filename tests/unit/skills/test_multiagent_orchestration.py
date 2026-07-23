@@ -62,7 +62,7 @@ class TestMultiagentOrchestrationSkill:
         ("tool", "expected"),
         [
             ("claude", ".claude/skills/multiagent-orchestration/SKILL.md"),
-            ("copilot", ".github/skills/multiagent-orchestration.md"),
+            ("copilot", ".github/skills/multiagent-orchestration/SKILL.md"),
         ],
     )
     def test_emitted_to_each_assistant_primitive(self, tool, expected):

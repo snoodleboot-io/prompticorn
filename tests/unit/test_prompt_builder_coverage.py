@@ -218,7 +218,7 @@ class TestWriteSingleSkill:
             ("kilo", ".kilo/skills/my-skill/SKILL.md"),
             ("cline", ".cline/skills/my-skill/SKILL.md"),
             ("claude", ".claude/skills/my-skill/SKILL.md"),
-            ("copilot", ".github/skills/my-skill.md"),
+            ("copilot", ".github/skills/my-skill/SKILL.md"),
             ("cursor", ".cursor/skills/my-skill/SKILL.md"),
         ],
     )
@@ -227,7 +227,9 @@ class TestWriteSingleSkill:
         skill = {"name": "my-skill", "full_content": "skill body"}
         written = builder._write_single_skill(tmp_path, skill)
         assert written == [expected]
-        assert (tmp_path / expected).read_text() == "skill body"
+        # The emitter synthesizes name/description frontmatter when the body has
+        # none (PRO-7 follow-up); the original body is preserved after it.
+        assert (tmp_path / expected).read_text().endswith("skill body")
 
 
 class TestParseSkillsFile:

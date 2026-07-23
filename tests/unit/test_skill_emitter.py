@@ -30,18 +30,30 @@ class TestSkillEmitter(unittest.TestCase):
     def test_write_creates_file_and_returns_relative_path(self) -> None:
         with TemporaryDirectory() as tmp:
             root = Path(tmp)
-            rel = write_skill(root, ".agents", "verify", "# Verify\nbody\n")
+            rel = write_skill(root, ".agents", "verify", "# Verify\n\n## Purpose\nCheck it.\n")
             self.assertEqual(rel, ".agents/skills/verify/SKILL.md")
             written = root / rel
             self.assertTrue(written.exists())
-            self.assertEqual(written.read_text(encoding="utf-8"), "# Verify\nbody\n")
+            # The emitter guarantees name/description frontmatter (PRO-7 follow-up);
+            # the original body is preserved after the synthesized block.
+            text = written.read_text(encoding="utf-8")
+            self.assertTrue(text.startswith("---\nname: verify\n"))
+            self.assertIn('description: "Check it."', text)
+            self.assertIn("# Verify", text)
+
+    def test_write_preserves_existing_frontmatter_verbatim(self) -> None:
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            body = "---\nname: s\ndescription: kept\n---\n\nbody\n"
+            rel = write_skill(root, ".claude", "s", body)
+            self.assertEqual((root / rel).read_text(encoding="utf-8"), body)
 
     def test_write_is_idempotent_overwrite(self) -> None:
         with TemporaryDirectory() as tmp:
             root = Path(tmp)
-            write_skill(root, ".claude", "s", "first")
-            rel = write_skill(root, ".claude", "s", "second")
-            self.assertEqual((root / rel).read_text(encoding="utf-8"), "second")
+            write_skill(root, ".claude", "s", "# A\n\n## Purpose\nFirst.\n")
+            rel = write_skill(root, ".claude", "s", "# B\n\n## Purpose\nSecond.\n")
+            self.assertIn("Second.", (root / rel).read_text(encoding="utf-8"))
 
     def test_folder_shape_matches_legacy_paths(self) -> None:
         """The relative paths equal what prompt_builder emitted per tool before."""
