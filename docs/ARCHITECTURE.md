@@ -20,7 +20,7 @@ Comprehensive architectural documentation for the prompticorn system.
 
 prompticorn is a **tool-agnostic prompt architecture system** that enables you to:
 - Define AI agents once in a unified Intermediate Representation (IR) format
-- Generate configurations for 15 different AI coding assistants (Kilo, Cline, Claude, Cursor, Copilot, Copilot Chat, Roo Code, Junie, Zed, Gemini CLI, Amazon Q, Windsurf, Continue.dev, Aider, Codex)
+- Generate configurations for 16 tool targets across 15 AI coding assistants (Kilo ships CLI and IDE variants) (Kilo, Cline, Claude, Cursor, Copilot, Copilot Chat, Roo Code, Junie, Zed, Gemini CLI, Amazon Q, Windsurf, Continue.dev, Aider, Codex)
 - Manage agent complexity with minimal/verbose variants
 - Filter agents by persona (role-based)
 - Customize prompts with template substitution
