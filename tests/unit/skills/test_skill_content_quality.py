@@ -47,45 +47,28 @@ _BOILERPLATE_PHRASES = (
 # docstring. Delete this constant and the xfail branch once it reaches zero.
 KNOWN_HOLLOW: frozenset[str] = frozenset(
     {
-        "anomaly-detection-techniques",
         "api-versioning-strategy",
         "architecture-documentation",
-        "batch-vs-realtime-scoring",
         "code-review-practices",
         "competitor-analysis",
         "compliance-assessment",
         "compliance-automation",
-        "component-design-systems",
         "continuous-improvement",
-        "cross-validation-strategies",
-        "css-performance-optimization",
         "data-validation-pipelines",
         "data-versioning-reproducibility",
         "debugging-methodology",
         "deployment-rollback-strategies",
-        "dimensionality-reduction",
         "distributed-caching-design",
         "documentation-best-practices",
-        "ensemble-methods",
-        "feature-engineering",
-        "feature-importance-analysis",
         "feature-store-design",
         "flaky-test-remediation",
-        "hyperparameter-optimization",
         "iac-best-practices",
-        "imbalanced-classification",
         "incident-automation",
         "incident-response-planning",
         "infrastructure-drift-detection",
         "launch-readiness-checklist",
         "load-testing",
         "microservices-communication-patterns",
-        "ml-deployment",
-        "mlops-pipeline-design",
-        "model-evaluation",
-        "model-interpretability",
-        "model-monitoring",
-        "model-performance-debugging",
         "mutation-testing",
         "nosql-database-selection",
         "performance-optimization",
@@ -93,10 +76,8 @@ KNOWN_HOLLOW: frozenset[str] = frozenset(
         "product-analytics-setup",
         "quality-assurance",
         "requirements-specification",
-        "responsive-design-patterns",
         "roadmap-prioritization",
         "stakeholder-communication",
-        "state-management-architecture",
         "success-metrics-definition",
         "team-collaboration",
         "technical-communication",
@@ -104,7 +85,6 @@ KNOWN_HOLLOW: frozenset[str] = frozenset(
         "technical-decision-making",
         "test-data-strategies",
         "testing-strategies",
-        "time-series-preprocessing",
         "user-needs-discovery",
         "user-testing-methods",
         "ux-writing-guidelines",
@@ -166,3 +146,28 @@ class TestSkillContentQuality:
         """KNOWN_HOLLOW must not accumulate names of deleted skills."""
         unknown = sorted(KNOWN_HOLLOW - set(_skill_names(skills_dir)))
         assert not unknown, f"KNOWN_HOLLOW lists skills that no longer exist: {unknown}"
+
+    def test_minimal_variants_avoid_jinja_delimiters(self, skills_dir):
+        """Minimal skills must not contain ``{{`` or ``{%``.
+
+        ``test_value_coverage_matrix.test_output_has_no_unrendered_templates``
+        greps the whole emitted tree for those delimiters to catch a template
+        that never got rendered. It builds with ``variant="minimal"``, so a
+        literal ``{{`` in a minimal skill trips it for *every* tool at once —
+        47 failures pointing at the builder rather than at the skill file.
+
+        Legitimate syntax does collide here: GitHub Actions ``${{ github.sha }}``,
+        JSX ``value={{ ... }}``, Argo ``{{args.x}}``. Rewrite it — a hoisted
+        variable is usually clearer anyway — or keep it to the verbose variant,
+        which that matrix does not currently emit.
+        """
+        offenders = {}
+        for name in _skill_names(skills_dir):
+            text = (skills_dir / name / "minimal" / "SKILL.md").read_text(encoding="utf-8")
+            hits = [d for d in ("{{", "{%") if d in text]
+            if hits:
+                offenders[name] = hits
+        assert not offenders, (
+            "Minimal skills contain Jinja delimiters and will be reported as "
+            f"unrendered templates by the value-coverage matrix: {offenders}"
+        )
