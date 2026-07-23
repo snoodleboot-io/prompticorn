@@ -1,87 +1,157 @@
----
-name: authentication-design
-description: Design secure authentication systems
-languages: [all]
-subagents: [all]
-tools_needed: [read, write]
----
+# Authentication Design (Verbose)
 
-## Authentication Design
+## Core Patterns
 
-### Overview
-Comprehensive guide to design secure authentication systems.
+### Password Storage
 
-### Why This Matters
-- Importance 1
-- Importance 2
-- Importance 3
+Authentication starts with never holding the secret you are checking. Store a
+verifier — a slow, salted hash — not the password.
 
-### Core Concepts
+```python
+from argon2 import PasswordHasher
+from argon2.exceptions import VerifyMismatchError
 
-#### Concept 1: [Name]
-**Definition:** [What is it]
-**When to use:** [When applicable]
-**How it works:** [Mechanism]
+ph = PasswordHasher()          # argon2id: memory-hard, salt embedded in output
 
-#### Concept 2: [Name]
-**Definition:** [What is it]
-**When to use:** [When applicable]
-**How it works:** [Mechanism]
+def register(email: str, password: str) -> None:
+    db.insert(email=email, password_digest=ph.hash(password))
 
-### Implementation Guide
+def check(email: str, password: str) -> bool:
+    row = db.find(email)
+    if row is None:
+        ph.hash("dummy")       # burn equivalent time so timing can't enumerate
+        return False
+    try:
+        ph.verify(row.password_digest, password)
+    except VerifyMismatchError:
+        return False
+    if ph.check_needs_rehash(row.password_digest):
+        db.update(email, password_digest=ph.hash(password))   # transparent upgrade
+    return True
+```
 
-#### Phase 1: [Phase Name]
-[Detailed steps and explanation]
+| Algorithm | Verdict | Note |
+|---|---|---|
+| argon2id | Preferred | Memory-hard; resists GPU and ASIC |
+| bcrypt (cost ≥ 12) | Fine | Ubiquitous; 72-byte input cap |
+| scrypt | Fine | Memory-hard, tuning is fiddly |
+| PBKDF2 | Legacy-only | Acceptable only where FIPS demands it |
+| sha256 / md5 | Never | Fast by design — precisely wrong |
 
-#### Phase 2: [Phase Name]
-[Detailed steps and explanation]
+`check_needs_rehash` matters: it lets you raise cost parameters over time and
+upgrade each user's digest silently on their next successful login.
 
-#### Phase 3: [Phase Name]
-[Detailed steps and explanation]
+### Session Management
 
-### Common Patterns
+```python
+import secrets
 
-**Pattern A:** [Description]
-[Code or example]
+def start_session(user_id: int) -> str:
+    sid = secrets.token_urlsafe(32)        # 256 bits of entropy
+    cache.setex(f"sess:{sid}", 1209600, user_id)   # 14d, server-side
+    return sid
+```
 
-**Pattern B:** [Description]
-[Code or example]
+Return it with the flags that make it hard to steal:
 
-### Best Practices
+```
+Set-Cookie: session=<sid>; HttpOnly; Secure; SameSite=Lax; Path=/; Max-Age=1209600
+```
 
-1. **Practice 1:** [Explanation and rationale]
-2. **Practice 2:** [Explanation and rationale]
-3. **Practice 3:** [Explanation and rationale]
-4. **Practice 4:** [Explanation and rationale]
-5. **Practice 5:** [Explanation and rationale]
+Rotate the identifier on every privilege change — login, password change, role
+elevation. Without rotation you are open to session fixation, where an attacker
+plants a known session id before the victim authenticates.
 
-### Common Pitfalls
+### Sessions vs Tokens
 
-❌ **Mistake 1:** [What goes wrong]
-✅ **Correct:** [How to do it right]
+| Dimension | Server-side session | JWT |
+|---|---|---|
+| Revocation | Delete the key — instant | Not possible before expiry |
+| Horizontal scale | Needs shared store | None needed |
+| Payload visible to client | No | Yes (base64, not encrypted) |
+| Size on the wire | ~40 bytes | 500 bytes–2 KB |
+| Failure mode | Store outage logs everyone out | Stolen token valid until expiry |
 
-❌ **Mistake 2:** [What goes wrong]
-✅ **Correct:** [How to do it right]
+JWTs are frequently chosen for statelessness and then given a revocation list —
+which reintroduces the shared store and forfeits the only advantage. If you need
+revocation, use sessions.
 
-❌ **Mistake 3:** [What goes wrong]
-✅ **Correct:** [How to do it right]
+When you do use JWTs:
 
-### Advanced Topics
+```python
+jwt.decode(
+    token,
+    key,
+    algorithms=["RS256"],          # pin it — never trust the header's alg
+    audience="api.example.com",    # verify aud
+    issuer="auth.example.com",     # verify iss
+)
+```
 
-#### Topic 1
-[Advanced explanation]
+Pinning `algorithms` defeats the classic `alg: none` and RS256→HS256 confusion
+attacks, where an attacker re-signs a token using the public key as an HMAC secret.
 
-#### Topic 2
-[Advanced explanation]
+### Multi-Factor Authentication
 
-### Tools & Resources
-- Tool 1
-- Tool 2
-- Tool 3
+| Factor | Phishing-resistant | Cost | Notes |
+|---|---|---|---|
+| WebAuthn / passkey | Yes | Low | Credential bound to origin — the strong default |
+| TOTP (RFC 6238) | No | Low | Code is replayable within its window |
+| Push approval | No | Medium | Vulnerable to MFA-fatigue prompting |
+| SMS | No | Medium | SIM-swap; weakest, still better than nothing |
 
-### Checklist
-- [ ] Understood core concepts
-- [ ] Reviewed patterns
-- [ ] Considered pitfalls
-- [ ] Applied to your context
-- [ ] Documented decisions
+Enforce a single-use constraint on TOTP: cache the consumed `(user, code)` for
+the step window, or an intercepted code is replayable for ~30 seconds.
+
+### Account Recovery
+
+Recovery is usually the weakest link — it is a second authentication path that
+bypasses the first.
+
+```python
+raw = secrets.token_urlsafe(32)
+db.insert_reset(
+    user_id=user.id,
+    token_hash=sha256(raw),        # store the hash; a DB leak must not grant resets
+    expires_at=now() + timedelta(minutes=15),
+    used=False,
+)
+send_email(user.email, f"https://example.com/reset?t={raw}")
+```
+
+Single-use, short-lived, hashed at rest, and invalidating every active session on
+completion. Return the same response whether or not the address exists.
+
+## Common Anti-Patterns
+
+❌ **Distinguishing "no such user" from "wrong password"** — turns login into an
+account enumeration oracle.
+✅ One message, one timing profile, for every failure.
+
+❌ **Rate-limiting per IP only** — credential stuffing arrives from thousands of
+addresses, one attempt each.
+✅ Limit per account and per IP, with exponential backoff.
+
+❌ **Long-lived JWTs as the session** — a stolen token stays valid for days.
+✅ Short access TTL (≤ 15 min) plus a refresh token you can revoke.
+
+❌ **Rolling your own crypto or token format.**
+✅ Use the platform's session machinery and a vetted library.
+
+❌ **Trusting `alg` from the token header.**
+✅ Pin the accepted algorithm list at verification time.
+
+## Authentication Checklist
+
+- [ ] Passwords hashed with argon2id / bcrypt (cost ≥ 12) / scrypt
+- [ ] Rehash-on-login path in place for cost upgrades
+- [ ] Session ids ≥ 128 bits from a CSPRNG
+- [ ] `HttpOnly`, `Secure`, `SameSite` set on session cookies
+- [ ] Session id rotated on login and privilege change
+- [ ] Uniform response and timing for all login failures
+- [ ] Rate limiting per account and per IP
+- [ ] MFA available; WebAuthn offered where feasible
+- [ ] TOTP codes single-use within their window
+- [ ] Reset tokens hashed, single-use, ≤ 15 min TTL
+- [ ] All sessions invalidated on password change
+- [ ] JWT `alg`, `aud`, `iss` verified explicitly
