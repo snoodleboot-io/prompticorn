@@ -10,11 +10,13 @@ your AI coding assistant. The library ships with:
 - **25 primary agents** spanning architecture, backend, frontend, code, test,
   debug, security, devops, and more
 - **~100 workflows** for common development tasks, in minimal and verbose variants
-- **~95 specialized skills**
+- **96 specialized skills**
 - **29 languages** with first-class conventions
 
-It generates configs for 5 assistants: **Kilo** (IDE and CLI), **Cline**,
-**Claude**, **Cursor**, and **GitHub Copilot**.
+It generates configs for 16 assistants: **Kilo** (IDE and CLI), **Claude**,
+**Cline**, **Cursor**, **GitHub Copilot**, **Copilot Chat**, **Roo Code**,
+**Junie**, **Zed**, **Gemini CLI**, **Amazon Q**, **Windsurf**, **Continue**,
+**Aider**, and **Codex**.
 
 ## Install
 
@@ -38,8 +40,9 @@ prompticorn init
 `init` is fully interactive. Use the arrow keys or numbers to choose; press
 Enter to accept the highlighted default. The flow is:
 
-1. **AI assistant** — pick the assistant to configure:
-   Kilo CLI, Kilo IDE, Claude, Cline, Cursor, or Copilot.
+1. **AI assistant** — pick one of the 16 supported assistants to configure:
+   Kilo CLI, Kilo IDE, Claude, Cline, Cursor, Copilot, Copilot Chat, Roo Code,
+   Junie, Zed, Gemini CLI, Amazon Q, Windsurf, Continue, Aider, or Codex.
 2. **Repository type** — single-language project or multi-language monorepo.
    For a monorepo you add folders (backend/frontend presets or custom paths),
    each with its own language and language questions.
