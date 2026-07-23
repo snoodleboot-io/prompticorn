@@ -218,7 +218,7 @@ class TestWriteSingleSkill:
             ("kilo", ".kilo/skills/my-skill/SKILL.md"),
             ("cline", ".cline/skills/my-skill/SKILL.md"),
             ("claude", ".claude/skills/my-skill/SKILL.md"),
-            ("copilot", ".github/skills/my-skill.md"),
+            ("copilot", ".github/skills/my-skill/SKILL.md"),
             ("cursor", ".cursor/skills/my-skill/SKILL.md"),
         ],
     )

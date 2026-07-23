@@ -81,7 +81,7 @@ class TestLayoutWrites(unittest.TestCase):
             )
             self.assertEqual(
                 get_layout("copilot").write_skill(root, "verify", "c"),
-                [".github/skills/verify.md"],
+                [".github/skills/verify/SKILL.md"],
             )
 
 

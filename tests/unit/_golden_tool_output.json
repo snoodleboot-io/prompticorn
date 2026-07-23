@@ -2489,168 +2489,168 @@
       "af58b23d16c3971a3b45d6984156671afbb991607c28540d24547d196105e4ab"
     ],
     [
-      ".github/skills/api-versioning-strategy.md",
-      "ca0422f68057c9fbc27f6cc3e218c19e122502ebce9a36d063be440f2f522773"
+      ".github/skills/api-versioning-strategy/SKILL.md",
+      "e6d2f17ca2719aec2fe79f24f571d8bc5def4f23cdfd5ff7babcc758e8a83cbb"
     ],
     [
-      ".github/skills/architecture-documentation.md",
-      "993a75db771f7d88c08eb920e585d13eeb5720ae59451ba03cb89a54fa560fb1"
+      ".github/skills/architecture-documentation/SKILL.md",
+      "30724be199f07b6dc2de868499cedba6e24418c4093369a7cfe188efc9a8bb21"
     ],
     [
-      ".github/skills/code-review-practices.md",
-      "4a972e7b7e3b26e3a641de6dc07683ffcc4f7eb90b7ad020a1e5896b077f6893"
+      ".github/skills/code-review-practices/SKILL.md",
+      "0f3db58b9095c0bddb9abbec11e45ea9573a4c00aed11f4b609ff40cbdb40702"
     ],
     [
-      ".github/skills/component-design-systems.md",
-      "0ad2edd2a9bbf846aa8ace485d8a1be901668e299d62079d0377c01c14b5657e"
+      ".github/skills/component-design-systems/SKILL.md",
+      "d356b1fc2828ad96925be3ba4af0c414093b3a387bb036f0d35b79d95bf5b142"
     ],
     [
-      ".github/skills/container-security-hardening.md",
-      "3d0ac87db4ec30cead324277befde89d768983e1cdfde6d553bd4a815115550e"
+      ".github/skills/container-security-hardening/SKILL.md",
+      "47510167e203661a91574d225062964e8da84dc3439a982571e77981a74d5c90"
     ],
     [
-      ".github/skills/continuous-improvement.md",
-      "59f0ba8436b42939fc6174fd627b2e62275453a65b4f6155624a2b38b7bce0ef"
+      ".github/skills/continuous-improvement/SKILL.md",
+      "354a0ee80ed99d5929704cff519d83bf165e6ebb0dc0be76f7fcadea6789325a"
     ],
     [
-      ".github/skills/css-performance-optimization.md",
-      "b81538edb4f88832a7238ae15474c3883bccc776ddce9f51c3ee07abc732f797"
+      ".github/skills/css-performance-optimization/SKILL.md",
+      "882749d5cf61d3a8c55824544a31fd5996adce3336e63d143135f8df29e58ae9"
     ],
     [
-      ".github/skills/data-model-discovery.md",
+      ".github/skills/data-model-discovery/SKILL.md",
       "b2168e0a29217dac25abc926ae9b37d3ee25f3f745fa2af30746bcbd7775cb82"
     ],
     [
-      ".github/skills/data-validation-pipelines.md",
-      "7af2188f5e32ebb13525ac3277736d9bbb0e8484007c93f859145046574f70ac"
+      ".github/skills/data-validation-pipelines/SKILL.md",
+      "f69c4b1fe83a16186487331063fe342aa16080b9cdda60f3aa4cdb18e246d2e1"
     ],
     [
-      ".github/skills/debugging-methodology.md",
-      "ac8464fcd849e19f2a53359aec328c70187aa36d0ce5fbc92a19671b8585fdd2"
+      ".github/skills/debugging-methodology/SKILL.md",
+      "869adf60272685fe7b8219a64d81ee377a9ed1415af2ae6623c1a35182b58f64"
     ],
     [
-      ".github/skills/deployment-rollback-strategies.md",
-      "e346e95bf8a47e687ae4dbb0f34fdc646b33b8464605e49b8b4708c17d86e6c8"
+      ".github/skills/deployment-rollback-strategies/SKILL.md",
+      "aecf824dd1bf024478dffeb8227452efcdac13da0487969976bc72204b4fd611"
     ],
     [
-      ".github/skills/distributed-caching-design.md",
-      "f63c4aaa9a52bdc9b1c494c0bb28a1ce3c86aa9d5726d02d4e47e91488f9cb99"
+      ".github/skills/distributed-caching-design/SKILL.md",
+      "c68789237a83538b7c45e2fe2f7bff7f51e63d7d5edc050de2d7ec57609f0fa2"
     ],
     [
-      ".github/skills/documentation-best-practices.md",
-      "4107e22ff47cde821d25e429a816c5ea60faca74e1742914c457bc6b76c912a0"
+      ".github/skills/documentation-best-practices/SKILL.md",
+      "45f98536c1cc12ab8eff31f4e5c40bad3903a992bc32adf54afdc719c4c068f9"
     ],
     [
-      ".github/skills/feature-planning.md",
+      ".github/skills/feature-planning/SKILL.md",
       "a85d09f78dec318635b4de95f1202d3443fb9e67b9b320237572df0aa6425454"
     ],
     [
-      ".github/skills/flaky-test-remediation.md",
-      "cdb8910c240480ff193d24820d11ab9b5a5bc3e0febb0e5bcca37a0ab3190051"
+      ".github/skills/flaky-test-remediation/SKILL.md",
+      "45b92fbdfa82cbab5deb7f1507512f0dccf48b93b4c13310a380f8b261cf1374"
     ],
     [
-      ".github/skills/iac-best-practices.md",
-      "06b547078fe356b5cd7fe7133c2f16cfc33164e2f58a4cecb53a731d50fe822b"
+      ".github/skills/iac-best-practices/SKILL.md",
+      "dd765fae8e1cc92aeb39ef26fd96a5159360f43582a5bd476383e3b99e83a0c5"
     ],
     [
-      ".github/skills/idempotency-patterns.md",
-      "82bb636d4307a3938351e759fda7b6e82fe194b391a683ad1460c203be5d3ddf"
+      ".github/skills/idempotency-patterns/SKILL.md",
+      "ae155d931c080e57088d9a15b8dd4d43296f3471a05b812f4ebe545072f9458b"
     ],
     [
-      ".github/skills/incremental-implementation.md",
+      ".github/skills/incremental-implementation/SKILL.md",
       "c8db9858e7b72b9f941e9038d15d04503ebf60c51462e3a71367903f3c8e5063"
     ],
     [
-      ".github/skills/infrastructure-drift-detection.md",
-      "c3ff829521c223d78d9d5370d31b9c97e13fd5c8322820a9a43faeb31dd5de8b"
+      ".github/skills/infrastructure-drift-detection/SKILL.md",
+      "01025580d1825cc09d33d32a704ebb2bcd33abc8522385e79c702bf3d6e523dc"
     ],
     [
-      ".github/skills/kubernetes-resource-management.md",
-      "d8e90b125b39c02afc23fd7077eb02f5ce6ed1a0f866a38faf0606fbf817f6da"
+      ".github/skills/kubernetes-resource-management/SKILL.md",
+      "74ea5d4bba0fe02e859ad2870f9004005b965b397cafca9218bd88acbb118f58"
     ],
     [
-      ".github/skills/load-testing.md",
-      "f884fe4bd985016cad670f365a86fda3d709b5662cd587e9086b3df4dc63b287"
+      ".github/skills/load-testing/SKILL.md",
+      "f1ed6755e34250bdb628ceed35952b48dfda38eaf3eea414e9e6de4f32d5033b"
     ],
     [
-      ".github/skills/microservices-communication-patterns.md",
-      "669b061210bad4efe3e1c43427f10fa7fd8ebd26a9a377b88017eb9f736d04db"
+      ".github/skills/microservices-communication-patterns/SKILL.md",
+      "a50c94a952cf5351d7b31bfcd9e52f28d67c9c6025d87732f66083f0c42d5a0f"
     ],
     [
-      ".github/skills/multiagent-orchestration.md",
+      ".github/skills/multiagent-orchestration/SKILL.md",
       "d6c940687cbd37a68a491a4303032bc90ac7b9dff01e2db84e1c451082aa26b9"
     ],
     [
-      ".github/skills/mutation-testing.md",
-      "5fefe20d0f6eae771be019a8bd0c74afc6a35c3e7e80507bfbdb58ab4bf57284"
+      ".github/skills/mutation-testing/SKILL.md",
+      "954b830c4eaec5df5023c7af09caef679c8ed467b0e8763702bb9a39e3e15945"
     ],
     [
-      ".github/skills/performance-optimization.md",
-      "c1926b007cbc559c3069ee57b6ce48211ee3d001c6891c95613f9007950c72be"
+      ".github/skills/performance-optimization/SKILL.md",
+      "200c1a585187545c14cad2c0aab974367b462fc5a4eaf3db52238f50d6d177d1"
     ],
     [
-      ".github/skills/post-implementation-checklist.md",
+      ".github/skills/post-implementation-checklist/SKILL.md",
       "b3348cb58adf17c882a470bf2ffd87a0556ac6a0c4f47e5fbfc24c127217bee8"
     ],
     [
-      ".github/skills/problem-decomposition.md",
-      "93153b2a818de51b013717fb9311e04ef07d3f6d46d381ca4f927a730775460e"
+      ".github/skills/problem-decomposition/SKILL.md",
+      "9453f7efb79384fcff447a3b49c23027b8cb1d046a918edb563e8218d6b0c14e"
     ],
     [
-      ".github/skills/quality-assurance.md",
-      "65ab5e15cc2c78372b6baff88e46849e492601eda4953a6085f2bede48741cef"
+      ".github/skills/quality-assurance/SKILL.md",
+      "b2c17c7b4714b7fe8e5d5aeed3d500396a6d38cd58616fe44f62e9fb3a19cebe"
     ],
     [
-      ".github/skills/responsive-design-patterns.md",
-      "ada728d5801722d18601c22828cc9dbff7272d65e6f36ee2803628898275ea5a"
+      ".github/skills/responsive-design-patterns/SKILL.md",
+      "bff06aef56cfeaf9ed53e085e42c2894ea48cd31eb9e38e4a08cc82912217063"
     ],
     [
-      ".github/skills/root-cause-five-whys.md",
-      "3bf80710e90b704cea7bd09c12eac4ae55243c848973a444066a51d46b319fc2"
+      ".github/skills/root-cause-five-whys/SKILL.md",
+      "9e8dec4da0d938a9f7d6c48a143f6c8f570528a4d1d2864dd251318148714064"
     ],
     [
-      ".github/skills/sql-optimization.md",
-      "3182fea02148ddc71c4dde630c633cc027defc4529f35c90bd0c9f2f8cd8d2cb"
+      ".github/skills/sql-optimization/SKILL.md",
+      "0ab4e9a19ee7567c1aa6dd39bd594e85a46cc11e308b451a9b981f42ab9d7ed3"
     ],
     [
-      ".github/skills/state-management-architecture.md",
-      "b2450555b40792001db39992f9b4c2dfce164043c072d0ffd645234916d64287"
+      ".github/skills/state-management-architecture/SKILL.md",
+      "85c5deae8ee59a94cb29f1b7a455394312c4ee4f568536aed1deb2cee1ce6816"
     ],
     [
-      ".github/skills/team-collaboration.md",
-      "49a0e47936fe77f2f0c27d0d01d380725c619d3b9fb4e5ac1ab7293c05b06193"
+      ".github/skills/team-collaboration/SKILL.md",
+      "c80ca373e625779a46d815b4d3e07a8783a2bb550ae10cc86ee002bf358d2d6d"
     ],
     [
-      ".github/skills/technical-communication.md",
-      "1c52aee4891d087325705f64d38a853bfb8579e0a3ca384c655a0eba933159e9"
+      ".github/skills/technical-communication/SKILL.md",
+      "26a1ac4d60d0c9029e4b9d3f696d3b4a3b7fe17e43a3ca5b441b3f55de30f671"
     ],
     [
-      ".github/skills/technical-debt-management.md",
-      "e4d7dd2873e35d20e1f733711712411d2b1e659a07fe962fe0aa754a4c35c603"
+      ".github/skills/technical-debt-management/SKILL.md",
+      "7fbefecc654d5d2e92f3ef95b4ec1a1247e9aa2e34f147a61fd7974eadf45f11"
     ],
     [
-      ".github/skills/technical-decision-making.md",
-      "461d7f9ee57ea8e3a5962d43cc43e5fe73aa6adc0d7afafe56461407db484995"
+      ".github/skills/technical-decision-making/SKILL.md",
+      "0f029f1edd2cb66509b6a4d632ab90e4457705ab6ff7bd61d7bc6d35e5ca0258"
     ],
     [
-      ".github/skills/test-aaa-structure.md",
+      ".github/skills/test-aaa-structure/SKILL.md",
       "8376ae9e65e2cc848d84adf57849d85f0340f3b5c01a5f5d47ee83563adf48bd"
     ],
     [
-      ".github/skills/test-coverage-categories.md",
+      ".github/skills/test-coverage-categories/SKILL.md",
       "fa6fe18acd7a5bd3f899aa65ef3e00a541743f622de4e7ebfb09ff137101c954"
     ],
     [
-      ".github/skills/test-data-strategies.md",
-      "0f87265bcde065f25a300690409b19b7ee8be12ad008743dcf95eddcb2b6ff92"
+      ".github/skills/test-data-strategies/SKILL.md",
+      "9f16bf3bc958425e6f2a663851eb1db8eaf6b5833e505b9b6916e33057896139"
     ],
     [
-      ".github/skills/test-mocking-rules.md",
+      ".github/skills/test-mocking-rules/SKILL.md",
       "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec"
     ],
     [
-      ".github/skills/testing-strategies.md",
-      "0cd12cdd5a3d11d0e79e57866f43a88fc6b5eac82ec9a17a4f6265d6234740ff"
+      ".github/skills/testing-strategies/SKILL.md",
+      "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724"
     ],
     [
       "AGENTS.md",
@@ -2663,168 +2663,168 @@
       "2d81349bfa703451ee728807ff0567f6e612bd470520f195918cdd072b8e456e"
     ],
     [
-      ".github/skills/api-versioning-strategy.md",
-      "2257b3a6c90801be433161a17301f6f8c9e3b4ecd7c571ef0250e2094f5f4106"
+      ".github/skills/api-versioning-strategy/SKILL.md",
+      "f8e7fcaff53408ef5321248fc6e6230aed7cbc9c0b177b0a1a114dc71e45f81a"
     ],
     [
-      ".github/skills/architecture-documentation.md",
-      "b68120668baae9c97a86a70df348231b93880a6369c751748ada65d625ae134c"
+      ".github/skills/architecture-documentation/SKILL.md",
+      "412d3fd0885a675879dcefe580d6f1fcc6b8458a603b6f8ab18af951575f18e1"
     ],
     [
-      ".github/skills/code-review-practices.md",
-      "1557418a4ba405021ec54b657907118baa8776e19843c847f21a23c0a202a979"
+      ".github/skills/code-review-practices/SKILL.md",
+      "cb3052dc26028ce8a924eb3b03cabcd342a16cf4e2282c3d86a9b82d49ac0444"
     ],
     [
-      ".github/skills/component-design-systems.md",
-      "1b628a3f95e2d26327577eee5c0e42ff64c84de23ae794c5699ba2f14c8f2ab4"
+      ".github/skills/component-design-systems/SKILL.md",
+      "e5eb47258e2650da17ba766f5269e54c9f0db2a5cab0414403006bfeb7845e01"
     ],
     [
-      ".github/skills/container-security-hardening.md",
-      "bd5ed9c9245284d65a1a3661734dff678d458ac934eee28e58cfaa8dcf657826"
+      ".github/skills/container-security-hardening/SKILL.md",
+      "80223af84be894e9a22dfb479e356d22ea17cf3fe0d9f583e3ae6ec25f1d62a6"
     ],
     [
-      ".github/skills/continuous-improvement.md",
-      "22f70dbb2bf73e070f9bbe9b84b2daea3d2dc096e488a155756451c87439063d"
+      ".github/skills/continuous-improvement/SKILL.md",
+      "47de9775beadac688f90d50187afbe76ef20179f5486fa1d2149c7b87a984619"
     ],
     [
-      ".github/skills/css-performance-optimization.md",
-      "5175cad308908421a8979a69e211e553c7091c1c2b30d16d117c17de38acdd4c"
+      ".github/skills/css-performance-optimization/SKILL.md",
+      "33517e174c500d7b2180dc87310279d6294387e4512c4ea0c1a7155c6ce79987"
     ],
     [
-      ".github/skills/data-model-discovery.md",
+      ".github/skills/data-model-discovery/SKILL.md",
       "7bb93b77674b80de48bc5f572f0a1bd8c51458f4050ecfe0af70d6c6f3123713"
     ],
     [
-      ".github/skills/data-validation-pipelines.md",
-      "bb654d8bc690dad50fbe087e29dd58042b50e736cb23556d3e3636ebb08ac8e6"
+      ".github/skills/data-validation-pipelines/SKILL.md",
+      "cff06609a4a8aa078fca3091359dcd3f2f20afc4750cf19c7e085894ddc67e2f"
     ],
     [
-      ".github/skills/debugging-methodology.md",
-      "90ac965c951611b650aec05b5365131c0964371401fd72418c6f4a2fffe1f17d"
+      ".github/skills/debugging-methodology/SKILL.md",
+      "47c50b9712765c74cf62aaf81b93c6eb83d7d135788d18fbca01595750f61859"
     ],
     [
-      ".github/skills/deployment-rollback-strategies.md",
-      "84eff6d42b8feaa49fe9afd1bca3a1e5073cd02f8b997ad271dd906cc9404fec"
+      ".github/skills/deployment-rollback-strategies/SKILL.md",
+      "9b1005a40d0f26935094728e5b3cb9db1b3de41bb707acc7bf686cc1b9690fd9"
     ],
     [
-      ".github/skills/distributed-caching-design.md",
-      "44f6da3551c839e689884843eb17c3818b77a96fd35bb1853ef23daaf65c524d"
+      ".github/skills/distributed-caching-design/SKILL.md",
+      "fc27dbb38004fefc935250c8914df89084a7d3a4b22ef946171ad7b55934a94d"
     ],
     [
-      ".github/skills/documentation-best-practices.md",
-      "1280d4f90159e37f0315752668e5875ebd87e38b1067459a0db748c802fd67d9"
+      ".github/skills/documentation-best-practices/SKILL.md",
+      "d3239b98cb2c00d9e360e0d4f3bf42083d64062d8e07c07898dea0f8b897f5bb"
     ],
     [
-      ".github/skills/feature-planning.md",
+      ".github/skills/feature-planning/SKILL.md",
       "3b43fa04f2823fcd2adc420ba1adc4989c3fe6d0a247f93f1d0e765f5ec971e6"
     ],
     [
-      ".github/skills/flaky-test-remediation.md",
-      "b084dc5c2ff032b0fba8eb9a114150ea5e1fb9dd7afa1d66a1eb7f02a5316e30"
+      ".github/skills/flaky-test-remediation/SKILL.md",
+      "bcd35e7efe06ea02fcea743813b4678f8602d30ebbb6c388c34fd4e213a7488c"
     ],
     [
-      ".github/skills/iac-best-practices.md",
-      "0d8666abb9dd6b89f6e10454f3eeb7a9df1572d079346a4ded3df01b5795e68d"
+      ".github/skills/iac-best-practices/SKILL.md",
+      "f37a45f4466d946b970b68f2a0d5e83bce0f985ddc9940998b8f3998caa64e1c"
     ],
     [
-      ".github/skills/idempotency-patterns.md",
-      "cd4400973250e3bf2a04cb9f9022be57cb8c2d14f3eceff1834dadac316e9a68"
+      ".github/skills/idempotency-patterns/SKILL.md",
+      "36af4e86cb724ec434e7d882a9e7cab72ad7a6603ecb5a322663f8c23437b0bb"
     ],
     [
-      ".github/skills/incremental-implementation.md",
+      ".github/skills/incremental-implementation/SKILL.md",
       "af8ee67d6925c3095724964a59a134d9725d5952bfa361cf5d7eef7e42ffbe6a"
     ],
     [
-      ".github/skills/infrastructure-drift-detection.md",
-      "9a20763b27101518f8cc27115257fc9b1dc09432ade2f401142a9c35ee8e8137"
+      ".github/skills/infrastructure-drift-detection/SKILL.md",
+      "6095b53b454ff28f90c89c1e508e89375bce10a403f3ff563f3833d107d5d4e9"
     ],
     [
-      ".github/skills/kubernetes-resource-management.md",
-      "485c9cec77ade687ca97c21a6f2d0710b738c349dec76c491954d047714f5565"
+      ".github/skills/kubernetes-resource-management/SKILL.md",
+      "07d22ef790dcd248421fcdf897ed2a34e05b1e96101c07fbd8bf9743eca976ef"
     ],
     [
-      ".github/skills/load-testing.md",
-      "816ac32056ee9042d706f397872760c7831ecbd5661346ea2ee8b7b8c4671014"
+      ".github/skills/load-testing/SKILL.md",
+      "5103d1f3c1a84fe8e7608323a457e7fd6ee0e9d2ee0adc36fec1ea9198a0feae"
     ],
     [
-      ".github/skills/microservices-communication-patterns.md",
-      "e78b32f3b6a31c088f97fb82593810ce35572b180ab2b5919ad2f94bba0cc92e"
+      ".github/skills/microservices-communication-patterns/SKILL.md",
+      "dc8212a2cf2e0d37b3f4466b23b24cdce53196a2fd52373ef237e56754a42bea"
     ],
     [
-      ".github/skills/multiagent-orchestration.md",
+      ".github/skills/multiagent-orchestration/SKILL.md",
       "4f56926633e3b6527047e07041e415cbf0bc171ca9cfdf7fa0f99b8550a51705"
     ],
     [
-      ".github/skills/mutation-testing.md",
-      "cf48a41257be94a660a208669823575884ec88a51393e5b6d9447503e0e6a4ff"
+      ".github/skills/mutation-testing/SKILL.md",
+      "c909cc39e90c0e37168e38b9545ac3f42c0439c85b02a4abdbd353756f487b3f"
     ],
     [
-      ".github/skills/performance-optimization.md",
-      "49b1987d386bf65ccd845e49369adbe6f2e4dd86f074aa00e22e2e5ae5e91394"
+      ".github/skills/performance-optimization/SKILL.md",
+      "59085e58322935f3255173b21a256ff7372d3646284bfb7324064639405c802a"
     ],
     [
-      ".github/skills/post-implementation-checklist.md",
+      ".github/skills/post-implementation-checklist/SKILL.md",
       "9a41690df76da259b04cf85fb7dcb6a0330f57cc4edf9ecb04e4adfb508a130d"
     ],
     [
-      ".github/skills/problem-decomposition.md",
-      "25928a913e2b2e1400c16db872946f9124de1e11d6447abc8a12e02754b71b84"
+      ".github/skills/problem-decomposition/SKILL.md",
+      "29b3a6dfbde2608b8e5598a60bce7e40e3e88350a42911405024e6fc1e5ea31b"
     ],
     [
-      ".github/skills/quality-assurance.md",
-      "800b99cc6b54e4d97be3af66dbc797526a6a30ce046e1e202e7042457111b9d5"
+      ".github/skills/quality-assurance/SKILL.md",
+      "80c1e7a0d798ee2504243bf18a299121403469baa26a03bd29d02a8084fbfc42"
     ],
     [
-      ".github/skills/responsive-design-patterns.md",
-      "5f81c2f9b072314928b9ebe4292a60c5d02c9b2c7f1f0952dfe1b4ea0e044ecd"
+      ".github/skills/responsive-design-patterns/SKILL.md",
+      "3f879a465746781a940f029633f58ae26e190dd37e9f7b94eb13b014935110b0"
     ],
     [
-      ".github/skills/root-cause-five-whys.md",
-      "f60365561f5c771b5e322cbbfc5f4880a5fcac4468654605282a6bce38d22baf"
+      ".github/skills/root-cause-five-whys/SKILL.md",
+      "b63a7d09797d10f64ef572bae2b1a346f8deea1be40407a9f42aca668dcbdc4f"
     ],
     [
-      ".github/skills/sql-optimization.md",
-      "45dfb605b2d477fa6fc09636afe1fff5bdc529c716a87da4260ff01bb5c2275e"
+      ".github/skills/sql-optimization/SKILL.md",
+      "04d9cbc9ef1ef9ab8ca4e624cc53df497d0dbb4a2dae8c8c4156816d55ff1f43"
     ],
     [
-      ".github/skills/state-management-architecture.md",
-      "41e9ab2c063b9ec3f0d89e6182fa3c4ecb1382f565ab62f23ee5555132d1b5d0"
+      ".github/skills/state-management-architecture/SKILL.md",
+      "9c03d2c6caa757e3791df03430929355f90bf781bc39ba143afc8aa7b910315c"
     ],
     [
-      ".github/skills/team-collaboration.md",
-      "37753e0e36f339162058fcfba4f62f735a24e0ca0e250fdf5cf92d6d1887f46f"
+      ".github/skills/team-collaboration/SKILL.md",
+      "b37bf53de567e5f5aa40f4a206c3f80fb74e9da37b4ee702cac732e39dfddac2"
     ],
     [
-      ".github/skills/technical-communication.md",
-      "cd1f1ae79c34a37e4b27ff9d21478465a5385f2723fb6d9c60ca1632e9465c6b"
+      ".github/skills/technical-communication/SKILL.md",
+      "3995e3b5f7e6186068324d097d77758134079709996ccc0b7c3fbf90d9fdf9ff"
     ],
     [
-      ".github/skills/technical-debt-management.md",
-      "6d9268998529a423a6b2f41cf357a5358cb81d60dd59557055aa70b6ca5652bc"
+      ".github/skills/technical-debt-management/SKILL.md",
+      "8d16cecf7acab648e000010e1b9204db849e7ab1ff06f3180f365af73fd0282f"
     ],
     [
-      ".github/skills/technical-decision-making.md",
-      "7a531b16fedcb4554642a3f03ec073dd68706cf8cc277f09f99da778d4fa6e95"
+      ".github/skills/technical-decision-making/SKILL.md",
+      "cd49b01cae4220f29acf3bc5da63113a47785cf9b97f15412c2cde4a08075171"
     ],
     [
-      ".github/skills/test-aaa-structure.md",
+      ".github/skills/test-aaa-structure/SKILL.md",
       "752e940e6acc96e79c259fa8aca366fc6404c0d1ae0e04b067bc5033b5ecdb48"
     ],
     [
-      ".github/skills/test-coverage-categories.md",
+      ".github/skills/test-coverage-categories/SKILL.md",
       "2fdc372ca80ff46ba0df367a1c6d7751a0b367d4abcfc1d5113aa3718fee2d72"
     ],
     [
-      ".github/skills/test-data-strategies.md",
-      "5942a026afd9c8914accd6295217736ea0f851977f1b56402abe9e892c2ed68c"
+      ".github/skills/test-data-strategies/SKILL.md",
+      "d3f3f91a633277ef56caad9fcc6a2444b4290ffde3288b1c1b9132d56eb419ac"
     ],
     [
-      ".github/skills/test-mocking-rules.md",
+      ".github/skills/test-mocking-rules/SKILL.md",
       "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e"
     ],
     [
-      ".github/skills/testing-strategies.md",
-      "717f778041182c0c7cbf50d42c9971590b416c11e697abc7f6bfee72a78a7622"
+      ".github/skills/testing-strategies/SKILL.md",
+      "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326"
     ],
     [
       "AGENTS.md",

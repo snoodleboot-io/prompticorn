@@ -140,10 +140,12 @@ class CopilotLayout(ToolLayout):
         return [".github/copilot-instructions.md"]
 
     def write_skill(self, output: Path, skill_name: str, content: str) -> list[str]:
-        skills_dir = output / ".github" / "skills"
-        skills_dir.mkdir(parents=True, exist_ok=True)
-        (skills_dir / f"{skill_name}.md").write_text(content, encoding="utf-8")
-        return [f".github/skills/{skill_name}.md"]
+        # GitHub Copilot agent skills require .github/skills/<name>/SKILL.md with
+        # name/description frontmatter — the same Agent Skills shape every other
+        # tool uses, so route through the shared emitter. The previous flat
+        # ".github/skills/<name>.md" was not a location Copilot loads.
+        # https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills
+        return [write_skill(output, ".github", skill_name, content)]
 
 
 class CopilotChatLayout(ToolLayout):

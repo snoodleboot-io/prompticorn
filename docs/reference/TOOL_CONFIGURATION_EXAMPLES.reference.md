@@ -692,19 +692,19 @@ You are an expert software engineer with deep knowledge of SOLID principles, des
 You have access to these skills. Activate by name in your response:
 
 ### Skill: test-first-implementation
-**Location:** `.github/skills/test-first-implementation.md`
+**Location:** `.github/skills/test-first-implementation/SKILL.md`
 
 Activate when: Implementing new features
 Process: Generate tests → Red → Code → Green → Coverage → Edge cases
 
 ### Skill: refactor-code-module
-**Location:** `.github/skills/refactor-code-module.md`
+**Location:** `.github/skills/refactor-code-module/SKILL.md`
 
 Activate when: Improving code structure
 Process: Analyze → Propose → Execute → Verify tests pass
 
 ### Skill: code-review-audit
-**Location:** `.github/skills/code-review-audit.md`
+**Location:** `.github/skills/code-review-audit/SKILL.md`
 
 Activate when: Reviewing code for issues
 Process: Audit conventions → Check style → Report findings
@@ -803,15 +803,15 @@ You prioritize test quality over speed. A well-tested but slower feature is bett
 Activate when needed:
 
 ### Skill: pytest-generator
-Location: `.github/skills/pytest-generator.md`
+Location: `.github/skills/pytest-generator/SKILL.md`
 Activate for: Creating comprehensive test suites
 
 ### Skill: coverage-analyzer
-Location: `.github/skills/coverage-analyzer.md`
+Location: `.github/skills/coverage-analyzer/SKILL.md`
 Activate for: Analyzing and improving test coverage
 
 ### Skill: mutation-tester
-Location: `.github/skills/mutation-tester.md`
+Location: `.github/skills/mutation-tester/SKILL.md`
 Activate for: Running mutation tests to verify test quality
 
 ## Workflow
