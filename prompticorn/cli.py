@@ -1261,3 +1261,64 @@ def validate_prompts():
         fg="green",
     )
     click.echo()
+
+
+@cli.command("package-skills")
+@click.option(
+    "--source",
+    "source",
+    type=click.Path(exists=True, file_okay=False, path_type=Path),
+    default=None,
+    help="Directory of emitted skills (each <name>/SKILL.md). "
+    "Defaults to the first of .claude/skills, .agents/skills, .github/skills.",
+)
+@click.option(
+    "--output",
+    "output",
+    type=click.Path(file_okay=False, path_type=Path),
+    default=Path("dist/claude-desktop-skills"),
+    show_default=True,
+    help="Directory to write the per-skill .zip files into.",
+)
+def package_skills_cmd(source: Path | None, output: Path):
+    """
+    Package emitted Agent Skills into claude.ai / Claude Desktop upload zips.
+
+    Claude Desktop has no on-disk skill path, so its custom skills are uploaded
+    by hand (Settings > Features) as one zip per skill. This bundles each emitted
+    ``<name>/SKILL.md`` folder into ``<name>.zip`` in the structure claude.ai
+    accepts. Run a build first (e.g. ``prompticorn switch claude``) so a skills
+    directory exists.
+
+    Usage:
+        prompticorn package-skills
+        prompticorn package-skills --source .claude/skills --output dist/skills
+    """
+    from prompticorn.skills_packager import package_skills
+
+    if source is None:
+        candidates = [Path(".claude/skills"), Path(".agents/skills"), Path(".github/skills")]
+        source = next((c for c in candidates if c.is_dir()), None)
+        if source is None:
+            click.secho(
+                "  ✗ No emitted skills directory found. Run a build first "
+                "(e.g. `prompticorn switch claude`), or pass --source.",
+                fg="red",
+            )
+            sys.exit(1)
+
+    click.echo(f"\n▶ Packaging skills from {source} ...\n")
+    try:
+        results = package_skills(source, output)
+    except FileNotFoundError as exc:
+        click.secho(f"  ✗ {exc}", fg="red")
+        sys.exit(1)
+
+    packaged = [r for r in results if r.ok]
+    skipped = [r for r in results if not r.ok]
+    for result in skipped:
+        click.secho(f"  ⚠ skipped {result.name}: {result.skipped_reason}", fg="yellow")
+    click.secho(f"  ✓ Packaged {len(packaged)} skill(s) into {output}/", fg="green")
+    if skipped:
+        click.secho(f"  ⚠ {len(skipped)} skipped (see above).", fg="yellow")
+    click.echo("\n  Upload each .zip via claude.ai Settings > Features.\n")
