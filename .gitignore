@@ -105,3 +105,7 @@ _temp/
 # Local scratch/review build dirs
 test_local/
 local_test/
+
+# mutmut mutation-testing artifacts
+mutants/
+.mutmut-cache
