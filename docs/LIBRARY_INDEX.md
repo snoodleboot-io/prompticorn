@@ -18,7 +18,7 @@ Complete searchable catalog of all prompticorn agents, subagents, workflows, and
 - [Personas](#personas) - 12 personas (including 3 software-engineer specializations + 1 deprecated alias)
 - [Universal Agents](#universal-agents) - Always available
 - [Workflows](#workflows) - 100 workflows
-- [Skills](#skills) - 95 skills
+- [Skills](#skills) - 96 skills
 - [By Domain](#by-domain) - Organized by technical domain
 - [Component Counts](#component-counts) - Verified inventory
 
@@ -123,7 +123,7 @@ ls -1 prompticorn/workflows/
 
 ## Skills
 
-**95 skills** located in `prompticorn/skills/[skill-name]/`. Skills are mapped to agents
+**96 skills** located in `prompticorn/skills/[skill-name]/`. Skills are mapped to agents
 via `prompticorn/configurations/agent_skill_mapping.yaml` (language-agnostic) with optional
 language overrides in `prompticorn/configurations/language_skill_mapping.yaml`.
 
@@ -220,14 +220,14 @@ prompticorn generates assistant configurations for **5 AI coding tools**:
 | **Skills** | 95 | `prompticorn/skills/` |
 | **Personas** | 12 | `prompticorn/personas/personas.yaml` |
 | **Languages** | 29 | `prompticorn/configurations/source_layouts.yaml` |
-| **AI Tools** | 5 | Kilo, Cline, Claude, Cursor, Copilot |
+| **AI Tools** | 16 | Kilo (CLI+IDE), Claude, Cline, Cursor, Copilot, Copilot Chat, Roo Code, Junie, Zed, Gemini CLI, Amazon Q, Windsurf, Continue, Aider, Codex |
 
 ```bash
 # Reproduce the counts
 ls -1 prompticorn/agents/ | grep -v '^core$' | wc -l                          # 25 agents
 find prompticorn/agents -mindepth 3 -maxdepth 3 -type d -path '*/subagents/*' | wc -l   # 82 subagents
 ls -1 prompticorn/workflows/ | wc -l                                          # 100 workflows
-ls -1 prompticorn/skills/ | wc -l                                             # 95 skills
+ls -1 prompticorn/skills/ | wc -l                                             # 96 skills
 grep -c 'display_name:' prompticorn/personas/personas.yaml                    # 12 personas
 ```
 

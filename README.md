@@ -1,6 +1,6 @@
 # prompticorn
 
-A unified, tool-agnostic prompt architecture for managing AI coding-assistant configurations across 5 assistants.
+A unified, tool-agnostic prompt architecture for managing AI coding-assistant configurations across 16 assistants.
 
 > **Version:** the published version is dynamic. `pyproject.toml` declares
 > `dynamic = ["version"]` sourced from `prompticorn/__about__.py`, and CI/CD injects the
