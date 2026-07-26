@@ -169,7 +169,7 @@ prompticorn/
 │   ├── backend/
 │   └── [22 more agents]     # each: prompt.md (+ minimal/verbose variants, subagents/)
 │
-├── skills/                  # Reusable skill definitions (~95 skills)
+├── skills/                  # Reusable skill definitions (96 skills)
 ├── workflows/               # Workflow definitions (~100 workflows)
 │
 ├── agent_registry/          # Live agent discovery and loading
@@ -177,7 +177,7 @@ prompticorn/
 │   ├── registry.py          # Registry: builds from discovery
 │   └── errors.py
 │
-├── builders/                # Tool-specific builders (Kilo, Cline, Claude, Cursor, Copilot)
+├── builders/                # Tool-specific builders (16 tools: Kilo, Claude, Cline, Cursor, Copilot, Copilot Chat, Roo, Junie, Zed, Gemini, Amazon Q, Windsurf, Continue, Aider, Codex)
 │   ├── base.py
 │   ├── factory.py           # BuilderFactory
 │   ├── kilo_builder.py

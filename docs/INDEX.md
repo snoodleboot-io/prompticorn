@@ -3,13 +3,16 @@
 prompticorn documentation is organized by intent and purpose.
 
 prompticorn generates AI coding-assistant configs from a shared prompt library:
-**25 primary agents**, **~100 workflows**, **~95 skills**, and conventions for
+**25 primary agents**, **~100 workflows**, **96 skills**, and conventions for
 **29 languages**, targeting Kilo, Cline, Claude, Cursor, Copilot, Copilot Chat, Roo Code, Junie, Zed, Gemini CLI, Amazon Q, Windsurf, Continue.dev, Aider, and Codex.
 
 ## Getting Started (Pick Your Path)
 
 ### 🚀 Quick Start
 - **[QUICKSTART.md](./QUICKSTART.md)** — 5-minute overview and the full `init` walkthrough (start here)
+- **[user-guide/TOOLS.md](./user-guide/TOOLS.md)** — per-tool guide: what each of the 16 assistants generates and how to use it
+- **[user-guide/FAQ.md](./user-guide/FAQ.md)** — frequently asked questions, organized by persona
+- **[TROUBLESHOOTING.md](./TROUBLESHOOTING.md)** — diagnose and fix common issues
 - **[PERSONAS.md](./PERSONAS.md)** — how persona-based filtering works
 - **[PERSONA_GUIDES.md](./PERSONA_GUIDES.md)** — find resources for your role (architect, developer, QA, etc.)
 - **[LIBRARY_INDEX.md](./LIBRARY_INDEX.md)** — searchable catalog of agents, workflows, and skills
