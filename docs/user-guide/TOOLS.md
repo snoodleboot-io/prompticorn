@@ -274,6 +274,27 @@ under the tool's base.
 
 ---
 
+## AWS Bedrock
+
+Unlike the others, Bedrock is a hosted model/agent **API**, not a repo-config
+assistant. prompticorn emits a portable `bedrock/` bundle carrying each agent's
+system prompt rather than a dotfile the tool reads directly.
+
+Generates (under `bedrock/`):
+
+- `prompts/<agent>.system.md` — each agent's system prompt
+- `agents.json` — manifest (name, description, prompt file, suggested inference config)
+- `conventions.md` — your project's language + project conventions
+- `invoke_example.py` — a runnable boto3 **Converse** example
+- `cloudformation/agents.yaml` — optional `AWS::Bedrock::Agent` per agent
+- `README.bedrock.md` — how to use both paths
+
+Using it: run `invoke_example.py <agent> "message"` for the portable path (no
+provisioning), or deploy `cloudformation/agents.yaml` supplying a `FoundationModel`
+and IAM role. Bedrock has no skill/workflow primitive, so those aren't emitted.
+
+---
+
 ## Summary of artifact paths
 
 | Tool | Generates |
