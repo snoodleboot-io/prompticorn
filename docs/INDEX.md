@@ -10,7 +10,7 @@ prompticorn generates AI coding-assistant configs from a shared prompt library:
 
 ### 🚀 Quick Start
 - **[QUICKSTART.md](./QUICKSTART.md)** — 5-minute overview and the full `init` walkthrough (start here)
-- **[user-guide/TOOLS.md](./user-guide/TOOLS.md)** — per-tool guide: what each of the 16 assistants generates and how to use it
+- **[user-guide/TOOLS.md](./user-guide/TOOLS.md)** — per-tool guide: what each of the 17 assistants generates and how to use it
 - **[user-guide/FAQ.md](./user-guide/FAQ.md)** — frequently asked questions, organized by persona
 - **[TROUBLESHOOTING.md](./TROUBLESHOOTING.md)** — diagnose and fix common issues
 - **[PERSONAS.md](./PERSONAS.md)** — how persona-based filtering works

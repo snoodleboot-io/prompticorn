@@ -177,7 +177,7 @@ prompticorn/
 │   ├── registry.py          # Registry: builds from discovery
 │   └── errors.py
 │
-├── builders/                # Tool-specific builders (16 tools: Kilo, Claude, Cline, Cursor, Copilot, Copilot Chat, Roo, Junie, Zed, Gemini, Amazon Q, Windsurf, Continue, Aider, Codex)
+├── builders/                # Tool-specific builders (17 tools: Kilo, Claude, Cline, Cursor, Copilot, Copilot Chat, Roo, Junie, Zed, Gemini, Amazon Q, Windsurf, Continue, Aider, Codex, AWS Bedrock)
 │   ├── base.py
 │   ├── factory.py           # BuilderFactory
 │   ├── kilo_builder.py

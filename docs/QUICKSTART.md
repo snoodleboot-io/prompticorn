@@ -13,10 +13,10 @@ your AI coding assistant. The library ships with:
 - **96 specialized skills**
 - **29 languages** with first-class conventions
 
-It generates configs for 16 assistants: **Kilo** (IDE and CLI), **Claude**,
+It generates configs for 17 assistants: **Kilo** (IDE and CLI), **Claude**,
 **Cline**, **Cursor**, **GitHub Copilot**, **Copilot Chat**, **Roo Code**,
 **Junie**, **Zed**, **Gemini CLI**, **Amazon Q**, **Windsurf**, **Continue**,
-**Aider**, and **Codex**.
+**Aider**, **Codex**, and **AWS Bedrock**.
 
 ## Install
 
@@ -42,7 +42,7 @@ Enter to accept the highlighted default. The flow is:
 
 1. **AI assistant** — pick one of the 16 supported assistants to configure:
    Kilo CLI, Kilo IDE, Claude, Cline, Cursor, Copilot, Copilot Chat, Roo Code,
-   Junie, Zed, Gemini CLI, Amazon Q, Windsurf, Continue, Aider, or Codex.
+   Junie, Zed, Gemini CLI, Amazon Q, Windsurf, Continue, Aider, Codex, or AWS Bedrock.
 2. **Repository type** — single-language project or multi-language monorepo.
    For a monorepo you add folders (backend/frontend presets or custom paths),
    each with its own language and language questions.

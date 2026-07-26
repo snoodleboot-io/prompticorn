@@ -220,7 +220,7 @@ prompticorn generates assistant configurations for **5 AI coding tools**:
 | **Skills** | 95 | `prompticorn/skills/` |
 | **Personas** | 12 | `prompticorn/personas/personas.yaml` |
 | **Languages** | 29 | `prompticorn/configurations/source_layouts.yaml` |
-| **AI Tools** | 16 | Kilo (CLI+IDE), Claude, Cline, Cursor, Copilot, Copilot Chat, Roo Code, Junie, Zed, Gemini CLI, Amazon Q, Windsurf, Continue, Aider, Codex |
+| **AI Tools** | 17 | Kilo (CLI+IDE), Claude, Cline, Cursor, Copilot, Copilot Chat, Roo Code, Junie, Zed, Gemini CLI, Amazon Q, Windsurf, Continue, Aider, Codex, AWS Bedrock |
 
 ```bash
 # Reproduce the counts
