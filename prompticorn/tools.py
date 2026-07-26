@@ -157,6 +157,15 @@ _TOOL_SPECS: Final[tuple[ToolSpec, ...]] = (
             {".github/agents/", ".github/prompts/", ".github/instructions/"}
         ),
     ),
+    ToolSpec(
+        id="bedrock",
+        display_label="AWS Bedrock",
+        explanation="AWS Bedrock - bedrock/ system-prompt bundle + Converse example + optional CloudFormation",
+        builder_name="bedrock",
+        # Bedrock is not a repo-dotfile assistant; it emits a bedrock/ tree
+        # carrying each agent's system prompt. The directory is the switch marker.
+        create_artifacts=frozenset({"bedrock/"}),
+    ),
 )
 
 TOOLS: Final[dict[str, ToolSpec]] = {spec.id: spec for spec in _TOOL_SPECS}
@@ -181,6 +190,7 @@ MENU_ORDER: Final[tuple[str, ...]] = (
     "continue",
     "aider",
     "codex",
+    "bedrock",
 )
 
 
