@@ -8,6 +8,7 @@ Intermediate Representation (IR) Agent models.
 from prompticorn.builders.aider_builder import AiderBuilder
 from prompticorn.builders.amazonq_builder import AmazonQBuilder
 from prompticorn.builders.base import Builder, BuildOptions
+from prompticorn.builders.bedrock_builder import BedrockBuilder
 from prompticorn.builders.claude_builder import ClaudeBuilder
 from prompticorn.builders.cline_builder import ClineBuilder
 from prompticorn.builders.codex_builder import CodexBuilder
@@ -74,6 +75,7 @@ __all__ = [
     "ZedBuilder",
     "GeminiBuilder",
     "AmazonQBuilder",
+    "BedrockBuilder",
     "WindsurfBuilder",
     "ContinueBuilder",
     "AiderBuilder",
@@ -96,3 +98,4 @@ BuilderFactory.register("windsurf", WindsurfBuilder)
 BuilderFactory.register("continue", ContinueBuilder)
 BuilderFactory.register("aider", AiderBuilder)
 BuilderFactory.register("codex", CodexBuilder)
+BuilderFactory.register("bedrock", BedrockBuilder)

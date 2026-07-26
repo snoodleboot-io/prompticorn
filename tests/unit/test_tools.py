@@ -48,6 +48,7 @@ class TestToolRegistry(unittest.TestCase):
                 "continue",
                 "aider",
                 "codex",
+                "bedrock",
             },
         )
 
@@ -74,6 +75,8 @@ class TestToolRegistry(unittest.TestCase):
                 "continue": "continue",
                 "aider": "aider",
                 "codex": "codex",
+                "bedrock": "bedrock",
+                "awsbedrock": "bedrock",
             },
         )
 
@@ -98,6 +101,7 @@ class TestToolRegistry(unittest.TestCase):
                 "continue": "continue",
                 "aider": "aider",
                 "codex": "codex",
+                "bedrock": "bedrock",
             },
         )
 
@@ -121,6 +125,7 @@ class TestToolRegistry(unittest.TestCase):
                 "Continue",
                 "Aider",
                 "Codex",
+                "AWS Bedrock",
             ],
         )
 
@@ -144,6 +149,7 @@ class TestToolRegistry(unittest.TestCase):
                 "Continue": "Continue.dev - .continue/ glob-scoped rules and invokable prompts",
                 "Aider": "Aider - CONVENTIONS.md + .aider.conf.yml (conventions only)",
                 "Codex": "OpenAI Codex CLI - AGENTS.md + .agents/skills/ + .codex/config.toml",
+                "AWS Bedrock": "AWS Bedrock - bedrock/ system-prompt bundle + Converse example + optional CloudFormation",
             },
         )
 
@@ -172,6 +178,7 @@ class TestToolRegistry(unittest.TestCase):
                 "continue": {".continue/"},
                 "aider": {"CONVENTIONS.md", ".aider.conf.yml"},
                 "codex": {".agents/", ".codex/"},
+                "bedrock": {"bedrock/"},
             },
         )
         # The six original tools keep their historical ordering so that

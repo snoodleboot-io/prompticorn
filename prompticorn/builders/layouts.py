@@ -14,6 +14,13 @@ import json
 from pathlib import Path
 from typing import Any
 
+from prompticorn.builders.bedrock_builder import (
+    generate_cloudformation,
+    generate_conventions,
+    generate_invoke_example,
+    generate_manifest,
+    generate_readme,
+)
 from prompticorn.builders.codex_builder import generate_codex_config
 from prompticorn.builders.continue_builder import workflow_to_continue_prompt
 from prompticorn.builders.copilot_chat_builder import (
@@ -493,7 +500,57 @@ class CodexLayout(ToolLayout):
         return [".codex/config.toml"]
 
 
+class BedrockLayout(ToolLayout):
+    """bedrock/ : per-agent system prompts + a manifest, Converse example, and CFN.
+
+    Bedrock has no repo-dotfile convention. Each agent's system prompt is written
+    to ``bedrock/prompts/<slug>.system.md``; ``finalize`` assembles the portable
+    manifest + invoke example and the optional CloudFormation from every agent.
+    Skills/workflows have no Bedrock primitive and are dropped.
+    """
+
+    emits_agents_md = False
+
+    def write_agent(
+        self, output: Path, agent_name: str, content: str | dict[str, Any]
+    ) -> list[str]:
+        assert isinstance(content, dict)  # BedrockBuilder returns a manifest dict
+        prompts_dir = output / "bedrock" / "prompts"
+        prompts_dir.mkdir(parents=True, exist_ok=True)
+        rel = f"bedrock/prompts/{content['slug']}.system.md"
+        (output / rel).write_text(content["system_prompt"].rstrip("\n") + "\n", encoding="utf-8")
+        return [rel]
+
+    def write_skill(self, output: Path, skill_name: str, content: str) -> list[str]:
+        # Bedrock has no skill primitive; the system prompt is the whole payload.
+        return []
+
+    def finalize(
+        self, output: Path, built_agents: list[Any], config: dict[str, Any] | None
+    ) -> list[str]:
+        entries = [
+            a
+            for a in built_agents
+            if isinstance(a, dict) and {"name", "slug", "system_prompt"} <= a.keys()
+        ]
+        if not entries:
+            return []
+        base = output / "bedrock"
+        (base / "cloudformation").mkdir(parents=True, exist_ok=True)
+        written = {
+            "bedrock/agents.json": generate_manifest(entries),
+            "bedrock/conventions.md": generate_conventions(config),
+            "bedrock/invoke_example.py": generate_invoke_example(),
+            "bedrock/cloudformation/agents.yaml": generate_cloudformation(entries),
+            "bedrock/README.bedrock.md": generate_readme(),
+        }
+        for rel, text in written.items():
+            (output / rel).write_text(text, encoding="utf-8")
+        return sorted(written)
+
+
 _LAYOUTS: dict[str, ToolLayout] = {
+    "bedrock": BedrockLayout(),
     "kilo": KiloLayout(),
     "cline": ClineLayout(),
     "cursor": CursorLayout(),
