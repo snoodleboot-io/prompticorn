@@ -67,12 +67,16 @@ dev = [
 ]
 
 [tool.mutmut]
-# Mutation testing. Run:  uv run mutmut run   then:  uv run mutmut results
-# Mutation is slow over the whole tree — target a module by editing paths_to_mutate.
-paths_to_mutate = ["prompticorn/"]
-tests_dir = ["tests/"]
-# Skip the slow end-to-end builder tests during mutation runs for speed.
-runner = "uv run pytest -x -q -m 'not slow' --no-cov"
+# Mutation testing (mutmut 3.x). Run:  uv run mutmut run   then:  uv run mutmut results
+#
+# Mutation is slow: mutmut runs the test suite once per surviving mutant, so a
+# whole-tree run is an hours-long campaign. Work module by module — narrow
+# `paths_to_mutate` to the file(s) under focus, kill the survivors, then widen it.
+# The default below targets the whole package; override it per-run for a fast loop:
+#   (edit source_paths to a single file for a fast focused loop)
+source_paths = ["prompticorn"]
+# Fast, deterministic runner: unit tests only, stop at first failure, no coverage.
+runner = "uv run pytest -x -q -m 'not slow and not integration' --no-cov"
 
 
 [tool.ruff]
