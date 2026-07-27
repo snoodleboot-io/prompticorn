@@ -116,6 +116,9 @@ _KNOWN_NOT_RENDERED = {
     "abstract_class_style": "renders as a conditional block, not a literal value",
     "framework": "PRO-69: rendered for csharp/ts/fsharp core + python fungible; "
     "not collected in python single-language, so not sentinel-asserted here",
+    "engine": "PRO-134: execution engine, rendered on the Runtime line of the "
+    "typescript/javascript/csharp conventions only (where it differs from the "
+    "language version); python's convention does not render it, so not asserted here",
 }
 
 

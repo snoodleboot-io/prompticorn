@@ -22,6 +22,7 @@ _PROJECT_TEMPLATE_KEYS = (
 _SPEC_TEMPLATE_KEYS = (
     "language",
     "runtime",
+    "engine",
     "package_manager",
     "test_framework",
     "linter",

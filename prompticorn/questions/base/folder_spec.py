@@ -106,7 +106,10 @@ class FolderSpec:
     type: str  # "backend" or "frontend"
     subtype: str  # "api", "library", "worker", "cli", "data" or "ui", "library", "e2e"
     language: str = ""  # Can be empty - will be derived from preset if type/subtype provided
-    runtime: str = ""
+    runtime: str = (
+        ""  # Language/toolchain version (e.g. "1.26", "v7.0"); see also `engine` (PRO-134)
+    )
+    engine: str = ""  # Execution engine (e.g. "Node.js 24", ".NET 10"); distinct from version
     package_manager: str = ""
     test_framework: str = ""
     linter: str = ""
@@ -139,6 +142,8 @@ class FolderSpec:
         # Apply defaults if not specified
         if not self.runtime and "runtime" in defaults:
             self.runtime = defaults["runtime"]
+        if not self.engine and "engine" in defaults:
+            self.engine = defaults["engine"]
         if not self.package_manager:
             self.package_manager = defaults.get("package_manager", "")
         if not self.test_framework:
@@ -162,6 +167,7 @@ class FolderSpec:
             "subtype": self.subtype,
             "language": self.language,
             "runtime": self.runtime,
+            "engine": self.engine,
             "package_manager": self.package_manager,
             "test_framework": self.test_framework,
             "linter": self.linter,

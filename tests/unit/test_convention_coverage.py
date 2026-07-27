@@ -112,3 +112,35 @@ class TestLanguageDefaultRuntimes:
             "language_defaults runtime pin disagrees with the version picker's "
             f"default (same field, two sources): {mismatches}"
         )
+
+
+@pytest.mark.unit
+class TestEngineVsVersion:
+    """language version and execution engine render as distinct fields (PRO-134)."""
+
+    def test_js_ts_csharp_separate_version_from_engine(self):
+        from prompticorn.builders.convention_generator import generate_language_convention
+
+        cases = {
+            "typescript": ("v7.0", "Node.js 24"),
+            "javascript": ("ES2026", "Node.js 24"),
+            "csharp": ("14.0", ".NET 10"),
+        }
+        for lang, (version, engine) in cases.items():
+            out = generate_language_convention(
+                lang, {"language": lang, "runtime": version, "engine": engine}
+            )
+            lines = out.splitlines()
+            lang_line = next(ln for ln in lines if ln.startswith("Language:"))
+            rt_line = next(ln for ln in lines if ln.startswith("Runtime:"))
+            assert version in lang_line, f"{lang}: version {version} not on Language line"
+            assert engine in rt_line, f"{lang}: engine {engine} not on Runtime line"
+            # The engine must NOT be the version, and the Runtime line must not show the version.
+            assert version not in rt_line, f"{lang}: version leaked onto Runtime line (the overload)"
+
+    def test_folderspec_fills_engine_from_defaults(self):
+        from prompticorn.questions.base.folder_spec import FolderSpec
+
+        spec = FolderSpec(folder=".", type="backend", subtype="api", language="typescript")
+        assert spec.engine, "FolderSpec should populate engine from language_defaults"
+        assert "engine" in spec.to_dict()

@@ -3,6 +3,7 @@
 
 python:
   runtime: "3.14"
+  engine: "CPython 3.14"
   package_manager: "uv"
   test_framework: "pytest"
   linter: "ruff"
@@ -10,6 +11,7 @@ python:
 
 typescript:
   runtime: "v7.0"
+  engine: "Node.js 24"
   package_manager: "pnpm"
   test_framework: "vitest"
   linter: "eslint"
@@ -17,6 +19,7 @@ typescript:
 
 javascript:
   runtime: "ES2026"
+  engine: "Node.js 24"
   package_manager: "pnpm"
   test_framework: "vitest"
   linter: "eslint"
@@ -24,6 +27,7 @@ javascript:
 
 go:
   runtime: "1.26"
+  engine: "Go 1.26 toolchain"
   package_manager: "go mod"
   test_framework: "go test"
   linter: "golangci-lint"
@@ -31,6 +35,7 @@ go:
 
 java:
   runtime: "25"
+  engine: "OpenJDK 25 (JVM)"
   package_manager: "maven"
   test_framework: "junit"
   linter: "checkstyle"
@@ -38,6 +43,7 @@ java:
 
 rust:
   runtime: "1.97"
+  engine: "Rust 1.97 (native)"
   package_manager: "cargo"
   test_framework: "cargo test"
   linter: "clippy"
@@ -45,6 +51,7 @@ rust:
 
 csharp:
   runtime: "14.0"
+  engine: ".NET 10"
   package_manager: "nuget"
   test_framework: "xunit"
   linter: "roslynator"
