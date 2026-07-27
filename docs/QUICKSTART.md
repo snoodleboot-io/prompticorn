@@ -10,7 +10,7 @@ your AI coding assistant. The library ships with:
 - **25 primary agents** spanning architecture, backend, frontend, code, test,
   debug, security, devops, and more
 - **~100 workflows** for common development tasks, in minimal and verbose variants
-- **96 specialized skills**
+- **119 specialized skills**
 - **29 languages** with first-class conventions
 
 It generates configs for 17 assistants: **Kilo** (IDE and CLI), **Claude**,

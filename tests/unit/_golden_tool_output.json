@@ -414,59 +414,59 @@
   "claude::minimal": [
     [
       ".claude/agents/ask-agent.md",
-      "34d9d6696c9365297b98b6b9f2a73fd039a1d9b32539099fa149a4c5c63ba625"
+      "c2f702688347610870bbc68e100751b431e76e352c3ced6b3c12a0a2b11cfcab"
     ],
     [
       ".claude/agents/backend-agent.md",
-      "2f5241f7bb501a2b557c564aa0cabfa55862afc40344bc88bb6e684dcd75a68d"
+      "03a0819c032d4894acaaa7aac848863694142c76b2b7139b9b6005c5a7f02194"
     ],
     [
       ".claude/agents/code-agent.md",
-      "9dc3d84257a3904f1dcd6cf3facd7e0029e4cfac942959f60287bfbbc0a24c5d"
+      "39c5bab4cd1e6013178f33a4a584107ad46c652bb9ce94dc6aacfba6a2cc279b"
     ],
     [
       ".claude/agents/debug-agent.md",
-      "1edfe78a264707188fa9260084993dd55676bcf5774f15ee54b088c8c2817d82"
+      "a96777ad7db033987e7d8a893c03d4d859384dc7b811a1f0eb01237fb58b1084"
     ],
     [
       ".claude/agents/enforcement-agent.md",
-      "62c1cab70aaeb8ff8ab5b9ccbf5f46a51dc9d293d0f19c8e58f81fb29ec6b34b"
+      "55821456e3928c91e0ce08428e00491361b7173d52ec5981f2daee77c397fe4d"
     ],
     [
       ".claude/agents/explain-agent.md",
-      "bccb28306034e0fdef2d10cbb80cd2fb1cd5a1cb8f62c20033bc8b47cea95ff6"
+      "efb4910f6b1db3a6a03fd71c689ce72857ff596b9885f58ae31bf8dca60c128e"
     ],
     [
       ".claude/agents/frontend-agent.md",
-      "b024fcaebdbb03e48653ca4e08e29640e418ef9731ff6073b27fe4b22da11ad0"
+      "f1f4a942e1383ad42b86dd7b815653e338d190ed968f3b8f9f213b653b59e9b0"
     ],
     [
       ".claude/agents/migration-agent.md",
-      "c081108514897887a7a8ad473490b1eff730a5e4530942724345e77c6498fcc3"
+      "a34eb3ebeca80e6b843fdc1ef5fc5440c805af734a0e27c08c24ac15f3325441"
     ],
     [
       ".claude/agents/orchestrator-agent.md",
-      "f10167013415c64178e7c0e4fb8be4a4d433d93b2d3fb6a282faeb36a0f868bb"
+      "33bfac156bd86ce27279bbc2f5505ec6e4b9f64a51ead516fd1d379e0e83feb0"
     ],
     [
       ".claude/agents/performance-agent.md",
-      "b3629fa0a2963be22680adc33c1ed9c56916f3cdea0be926fa50c68237f8e468"
+      "bd5b2467dcc49589e14a660339b612a4ed01a95e62b66d11d63a4b93da50c772"
     ],
     [
       ".claude/agents/plan-agent.md",
-      "20e7cb14d70b81339242522bc6bf35fc08715ba037bfbf8be9739c94e8021bb4"
+      "37ce2cf79e873dea9ef97118e1a173629f466703774cee3c2c94154b5e87d0b6"
     ],
     [
       ".claude/agents/refactor-agent.md",
-      "68e7bdad2c7a14fc11415ca763f48e054d1254124d87581cdabed0ed3530138b"
+      "73f1cb4490ccf8340d337b2ae5f472d5beba9c43282612e1ba5a324b743c987a"
     ],
     [
       ".claude/agents/review-agent.md",
-      "5c9cfbf5e63b88480894b849969b662eeabd599bc9e3c2b5fa29ab4f0ade6f5f"
+      "566ebbcecd539dde7c6a513752bf91f23137b3f03dcc3a9bb589d8e9608024a9"
     ],
     [
       ".claude/agents/test-agent.md",
-      "5ed427b49f16bb5231cc0b373af4aac919943b7fdca4f5ea46dcd5f16c8fdc46"
+      "66d5ac1f099f03f8a28bf240caaeef19eab837073e33f3699e3360e041698c27"
     ],
     [
       ".claude/conventions/core/general.md",
@@ -483,6 +483,26 @@
     [
       ".claude/skills/architecture-documentation/SKILL.md",
       "30724be199f07b6dc2de868499cedba6e24418c4093369a7cfe188efc9a8bb21"
+    ],
+    [
+      ".claude/skills/autoscaling-strategies/SKILL.md",
+      "75d93e8d919eb5ea6b47c0d0cc0ba08cbad9e84f8a2360249b83cc6f39e9a4a0"
+    ],
+    [
+      ".claude/skills/cloud-cost-optimization/SKILL.md",
+      "19918edf78ad7fc22cccba9fa1c963a00e16b814a281c11322542f7bc0239daa"
+    ],
+    [
+      ".claude/skills/cloud-iam-design/SKILL.md",
+      "8a5d9f0a7b5d79e6159c061990f0805b5fed1f183862c4083f480ec46b1dd477"
+    ],
+    [
+      ".claude/skills/cloud-migration-strategy/SKILL.md",
+      "f7edf96e329cc446d3544316c64eac51ee019d7d3a84ed68e27202d78b28d915"
+    ],
+    [
+      ".claude/skills/cloud-networking-design/SKILL.md",
+      "17577805f6ff0f08daf22ed224ccbeafe31d739b50e0a9667c4b678960525211"
     ],
     [
       ".claude/skills/code-review-practices/SKILL.md",
@@ -519,6 +539,10 @@
     [
       ".claude/skills/deployment-rollback-strategies/SKILL.md",
       "aecf824dd1bf024478dffeb8227452efcdac13da0487969976bc72204b4fd611"
+    ],
+    [
+      ".claude/skills/disaster-recovery-planning/SKILL.md",
+      "e24bb761562082f95e167f8d1255779867e5ddd7c16da80b19969d7c39346538"
     ],
     [
       ".claude/skills/distributed-caching-design/SKILL.md",
@@ -561,6 +585,10 @@
       "f1ed6755e34250bdb628ceed35952b48dfda38eaf3eea414e9e6de4f32d5033b"
     ],
     [
+      ".claude/skills/message-queue-selection/SKILL.md",
+      "9140947f154c7672a5ec8c8f1428ed9bef3aedcb13d9a6e37eebef40e114875a"
+    ],
+    [
       ".claude/skills/microservices-communication-patterns/SKILL.md",
       "a50c94a952cf5351d7b31bfcd9e52f28d67c9c6025d87732f66083f0c42d5a0f"
     ],
@@ -571,6 +599,10 @@
     [
       ".claude/skills/mutation-testing/SKILL.md",
       "954b830c4eaec5df5023c7af09caef679c8ed467b0e8763702bb9a39e3e15945"
+    ],
+    [
+      ".claude/skills/object-storage-patterns/SKILL.md",
+      "12edf9bac15a591622f17e9965c47186d975aee07919c5c00801bbf219d23c51"
     ],
     [
       ".claude/skills/performance-optimization/SKILL.md",
@@ -585,6 +617,10 @@
       "9453f7efb79384fcff447a3b49c23027b8cb1d046a918edb563e8218d6b0c14e"
     ],
     [
+      ".claude/skills/python-typing-and-async/SKILL.md",
+      "cf0935bb917b3a5be741f0d95e6497747fa902f325915448d2bf008f69ffa5c0"
+    ],
+    [
       ".claude/skills/quality-assurance/SKILL.md",
       "b2c17c7b4714b7fe8e5d5aeed3d500396a6d38cd58616fe44f62e9fb3a19cebe"
     ],
@@ -595,6 +631,10 @@
     [
       ".claude/skills/root-cause-five-whys/SKILL.md",
       "9e8dec4da0d938a9f7d6c48a143f6c8f570528a4d1d2864dd251318148714064"
+    ],
+    [
+      ".claude/skills/serverless-architecture/SKILL.md",
+      "221001c046ba8033d56ae6452b04cbbea93d8943939b57f2317aabcd6361a19f"
     ],
     [
       ".claude/skills/sql-optimization/SKILL.md",
@@ -888,59 +928,59 @@
   "claude::verbose": [
     [
       ".claude/agents/ask-agent.md",
-      "3e9f9e3663d915e94e167ad8ef42911eaa2ff1b946a989c53b43993dbb43dd66"
+      "d8feff827bbb52869c1e0b03c0d9a3da941a1920208a5e8c7404b38ecd477538"
     ],
     [
       ".claude/agents/backend-agent.md",
-      "ef9a1d84785da8abc8a125797e42d01a8279443118630ffaa9024390de7c8e5a"
+      "d24dd4835386e454ddd6c4c337d11daafe3a554d980e6cdfd5538e118912e2ad"
     ],
     [
       ".claude/agents/code-agent.md",
-      "37fbb451329ff58e888d1f980eda83c898ec226c8c41a7f3f76e61613d5c8132"
+      "e2ba7d88b74aea317b50edcd604541802e6c4b911b4cf25e6b2126ed4f716ddb"
     ],
     [
       ".claude/agents/debug-agent.md",
-      "1edfe78a264707188fa9260084993dd55676bcf5774f15ee54b088c8c2817d82"
+      "a96777ad7db033987e7d8a893c03d4d859384dc7b811a1f0eb01237fb58b1084"
     ],
     [
       ".claude/agents/enforcement-agent.md",
-      "e6067ac2449825d1d5659a893785046eda049c15a5e8d84f628601c3fddec317"
+      "8e229af66446f2731b12a08b957d5d4340369ffcb89628ca92d9a28ead38b8be"
     ],
     [
       ".claude/agents/explain-agent.md",
-      "bccb28306034e0fdef2d10cbb80cd2fb1cd5a1cb8f62c20033bc8b47cea95ff6"
+      "efb4910f6b1db3a6a03fd71c689ce72857ff596b9885f58ae31bf8dca60c128e"
     ],
     [
       ".claude/agents/frontend-agent.md",
-      "98c5decbe12cea7364c4e28e80042ae2bb31fa57ca833e35254c3884bd3d014e"
+      "f31171ff4c53a4e8554097a7f40bbdd0c7c8681ebe6116cacbc8f3d7069893b7"
     ],
     [
       ".claude/agents/migration-agent.md",
-      "2416e2eea9c98a66e057fdaa67ea685fb24066464a98b1c749fa4a80051fe914"
+      "269870d01eb2d2f0e10c9b30a5709f7d49c19503f9bd71d17c9bb856c9baa8ee"
     ],
     [
       ".claude/agents/orchestrator-agent.md",
-      "c6bcbd59c4a60729f456e102d1c04ee82c3f4149880139d4db4188d22367b60f"
+      "93425209b651cd6560d120096084ea7ffb44d62ef0461a621cdc118675962aca"
     ],
     [
       ".claude/agents/performance-agent.md",
-      "b2cc4a01159fcfd9c792624fc1ec0a18e76294665260b40a4c9f2e39b4f18888"
+      "049426fd8a60e65ce9b8f11419d67d683d6f68572b036836fd46ce051f41d798"
     ],
     [
       ".claude/agents/plan-agent.md",
-      "da487f335658805c577ab8fdb34f66a3780bfe266060ef14d2e8fe75b6311833"
+      "8ccdeaeb3a88dd54203cf83180d1713c10abbf02e6b09e25e108371d509f1a41"
     ],
     [
       ".claude/agents/refactor-agent.md",
-      "49c17456a8fd212ae4033c85dd0f538e447b383a4f7edb4d9ca64009075430f2"
+      "a0c170caf4ab946d0a2a95b00a46974b391efe6a084ebb026ec32881472c6096"
     ],
     [
       ".claude/agents/review-agent.md",
-      "6f9e675e1ce7c76cfd9a0956865baf7175fabddccceeed2bc6edd1ac4c7d8059"
+      "5f1970c25660c4ae3d20ba5b33efe5a20d064de5f6131435f4d57f923840eede"
     ],
     [
       ".claude/agents/test-agent.md",
-      "cc16843a4605ec17b92bc533e879ff757c676f9f641063cbb37ea0209fbc8432"
+      "8b0bcc2fb528a29a60d249731f679e4e5b810bfae5ac2c5bbb7460c3d1dd91e6"
     ],
     [
       ".claude/conventions/core/general.md",
@@ -957,6 +997,26 @@
     [
       ".claude/skills/architecture-documentation/SKILL.md",
       "412d3fd0885a675879dcefe580d6f1fcc6b8458a603b6f8ab18af951575f18e1"
+    ],
+    [
+      ".claude/skills/autoscaling-strategies/SKILL.md",
+      "b0c382264dd283e3054baddf9042bc7b6f9b4bd8d39cb2992d854ff8f48ab780"
+    ],
+    [
+      ".claude/skills/cloud-cost-optimization/SKILL.md",
+      "31e8aabc72f0c5af3d93cedb2c8341c348d7426b9dd1ffb9832e28d13cebb63c"
+    ],
+    [
+      ".claude/skills/cloud-iam-design/SKILL.md",
+      "2a8f2d76f6cfbc13f7831da87fa102e0db616a19875964fe7130751ee1aad876"
+    ],
+    [
+      ".claude/skills/cloud-migration-strategy/SKILL.md",
+      "b1d98f8e935f313ffdca9c45b3d58f1712e1c5e9af870e51c43841c7d78b9580"
+    ],
+    [
+      ".claude/skills/cloud-networking-design/SKILL.md",
+      "595c6f3f1ca135949734e3fb86050bd2c810fb0de4a0dbcf9e16485890c81a05"
     ],
     [
       ".claude/skills/code-review-practices/SKILL.md",
@@ -993,6 +1053,10 @@
     [
       ".claude/skills/deployment-rollback-strategies/SKILL.md",
       "9b1005a40d0f26935094728e5b3cb9db1b3de41bb707acc7bf686cc1b9690fd9"
+    ],
+    [
+      ".claude/skills/disaster-recovery-planning/SKILL.md",
+      "6a429431c88d464ccccd3829bf7f50ff738578dc50f9d60bac1ba4cfbca1d4f3"
     ],
     [
       ".claude/skills/distributed-caching-design/SKILL.md",
@@ -1035,6 +1099,10 @@
       "5103d1f3c1a84fe8e7608323a457e7fd6ee0e9d2ee0adc36fec1ea9198a0feae"
     ],
     [
+      ".claude/skills/message-queue-selection/SKILL.md",
+      "cf05805efd746e242848259d5142973ad1b1867f8c1b04df0efb0b94b2d91c4b"
+    ],
+    [
       ".claude/skills/microservices-communication-patterns/SKILL.md",
       "dc8212a2cf2e0d37b3f4466b23b24cdce53196a2fd52373ef237e56754a42bea"
     ],
@@ -1045,6 +1113,10 @@
     [
       ".claude/skills/mutation-testing/SKILL.md",
       "c909cc39e90c0e37168e38b9545ac3f42c0439c85b02a4abdbd353756f487b3f"
+    ],
+    [
+      ".claude/skills/object-storage-patterns/SKILL.md",
+      "97ab0af9910915222bf6d54d4cdfbdfbfb54b1eae4501dafad271ab1964d6b79"
     ],
     [
       ".claude/skills/performance-optimization/SKILL.md",
@@ -1059,6 +1131,10 @@
       "29b3a6dfbde2608b8e5598a60bce7e40e3e88350a42911405024e6fc1e5ea31b"
     ],
     [
+      ".claude/skills/python-typing-and-async/SKILL.md",
+      "b81f8fa81a75bcd382a3361f61f8802a1cbfbe33efdbbad5efc7a60349f6ac24"
+    ],
+    [
       ".claude/skills/quality-assurance/SKILL.md",
       "80c1e7a0d798ee2504243bf18a299121403469baa26a03bd29d02a8084fbfc42"
     ],
@@ -1069,6 +1145,10 @@
     [
       ".claude/skills/root-cause-five-whys/SKILL.md",
       "b63a7d09797d10f64ef572bae2b1a346f8deea1be40407a9f42aca668dcbdc4f"
+    ],
+    [
+      ".claude/skills/serverless-architecture/SKILL.md",
+      "eb060b785f83e0470eae958935dce36c096ac2ced19fddd3aa71e8d0487d8bf1"
     ],
     [
       ".claude/skills/sql-optimization/SKILL.md",
@@ -1369,6 +1449,26 @@
       "30724be199f07b6dc2de868499cedba6e24418c4093369a7cfe188efc9a8bb21"
     ],
     [
+      ".cline/skills/autoscaling-strategies/SKILL.md",
+      "75d93e8d919eb5ea6b47c0d0cc0ba08cbad9e84f8a2360249b83cc6f39e9a4a0"
+    ],
+    [
+      ".cline/skills/cloud-cost-optimization/SKILL.md",
+      "19918edf78ad7fc22cccba9fa1c963a00e16b814a281c11322542f7bc0239daa"
+    ],
+    [
+      ".cline/skills/cloud-iam-design/SKILL.md",
+      "8a5d9f0a7b5d79e6159c061990f0805b5fed1f183862c4083f480ec46b1dd477"
+    ],
+    [
+      ".cline/skills/cloud-migration-strategy/SKILL.md",
+      "f7edf96e329cc446d3544316c64eac51ee019d7d3a84ed68e27202d78b28d915"
+    ],
+    [
+      ".cline/skills/cloud-networking-design/SKILL.md",
+      "17577805f6ff0f08daf22ed224ccbeafe31d739b50e0a9667c4b678960525211"
+    ],
+    [
       ".cline/skills/code-review-practices/SKILL.md",
       "0f3db58b9095c0bddb9abbec11e45ea9573a4c00aed11f4b609ff40cbdb40702"
     ],
@@ -1403,6 +1503,10 @@
     [
       ".cline/skills/deployment-rollback-strategies/SKILL.md",
       "aecf824dd1bf024478dffeb8227452efcdac13da0487969976bc72204b4fd611"
+    ],
+    [
+      ".cline/skills/disaster-recovery-planning/SKILL.md",
+      "e24bb761562082f95e167f8d1255779867e5ddd7c16da80b19969d7c39346538"
     ],
     [
       ".cline/skills/distributed-caching-design/SKILL.md",
@@ -1445,6 +1549,10 @@
       "f1ed6755e34250bdb628ceed35952b48dfda38eaf3eea414e9e6de4f32d5033b"
     ],
     [
+      ".cline/skills/message-queue-selection/SKILL.md",
+      "9140947f154c7672a5ec8c8f1428ed9bef3aedcb13d9a6e37eebef40e114875a"
+    ],
+    [
       ".cline/skills/microservices-communication-patterns/SKILL.md",
       "a50c94a952cf5351d7b31bfcd9e52f28d67c9c6025d87732f66083f0c42d5a0f"
     ],
@@ -1455,6 +1563,10 @@
     [
       ".cline/skills/mutation-testing/SKILL.md",
       "954b830c4eaec5df5023c7af09caef679c8ed467b0e8763702bb9a39e3e15945"
+    ],
+    [
+      ".cline/skills/object-storage-patterns/SKILL.md",
+      "12edf9bac15a591622f17e9965c47186d975aee07919c5c00801bbf219d23c51"
     ],
     [
       ".cline/skills/performance-optimization/SKILL.md",
@@ -1469,6 +1581,10 @@
       "9453f7efb79384fcff447a3b49c23027b8cb1d046a918edb563e8218d6b0c14e"
     ],
     [
+      ".cline/skills/python-typing-and-async/SKILL.md",
+      "cf0935bb917b3a5be741f0d95e6497747fa902f325915448d2bf008f69ffa5c0"
+    ],
+    [
       ".cline/skills/quality-assurance/SKILL.md",
       "b2c17c7b4714b7fe8e5d5aeed3d500396a6d38cd58616fe44f62e9fb3a19cebe"
     ],
@@ -1479,6 +1595,10 @@
     [
       ".cline/skills/root-cause-five-whys/SKILL.md",
       "9e8dec4da0d938a9f7d6c48a143f6c8f570528a4d1d2864dd251318148714064"
+    ],
+    [
+      ".cline/skills/serverless-architecture/SKILL.md",
+      "221001c046ba8033d56ae6452b04cbbea93d8943939b57f2317aabcd6361a19f"
     ],
     [
       ".cline/skills/sql-optimization/SKILL.md",
@@ -1526,7 +1646,7 @@
     ],
     [
       ".clinerules",
-      "9ca32240a6652c4b3e7dfd1bbd9b02daf5367bf5eaa03c2fb31bee7a53dcb9b9"
+      "6cbab98e27030f154ffb538269fb7a93327a9da3bdbc21337548ed5761620319"
     ],
     [
       "AGENTS.md",
@@ -1541,6 +1661,26 @@
     [
       ".cline/skills/architecture-documentation/SKILL.md",
       "412d3fd0885a675879dcefe580d6f1fcc6b8458a603b6f8ab18af951575f18e1"
+    ],
+    [
+      ".cline/skills/autoscaling-strategies/SKILL.md",
+      "b0c382264dd283e3054baddf9042bc7b6f9b4bd8d39cb2992d854ff8f48ab780"
+    ],
+    [
+      ".cline/skills/cloud-cost-optimization/SKILL.md",
+      "31e8aabc72f0c5af3d93cedb2c8341c348d7426b9dd1ffb9832e28d13cebb63c"
+    ],
+    [
+      ".cline/skills/cloud-iam-design/SKILL.md",
+      "2a8f2d76f6cfbc13f7831da87fa102e0db616a19875964fe7130751ee1aad876"
+    ],
+    [
+      ".cline/skills/cloud-migration-strategy/SKILL.md",
+      "b1d98f8e935f313ffdca9c45b3d58f1712e1c5e9af870e51c43841c7d78b9580"
+    ],
+    [
+      ".cline/skills/cloud-networking-design/SKILL.md",
+      "595c6f3f1ca135949734e3fb86050bd2c810fb0de4a0dbcf9e16485890c81a05"
     ],
     [
       ".cline/skills/code-review-practices/SKILL.md",
@@ -1577,6 +1717,10 @@
     [
       ".cline/skills/deployment-rollback-strategies/SKILL.md",
       "9b1005a40d0f26935094728e5b3cb9db1b3de41bb707acc7bf686cc1b9690fd9"
+    ],
+    [
+      ".cline/skills/disaster-recovery-planning/SKILL.md",
+      "6a429431c88d464ccccd3829bf7f50ff738578dc50f9d60bac1ba4cfbca1d4f3"
     ],
     [
       ".cline/skills/distributed-caching-design/SKILL.md",
@@ -1619,6 +1763,10 @@
       "5103d1f3c1a84fe8e7608323a457e7fd6ee0e9d2ee0adc36fec1ea9198a0feae"
     ],
     [
+      ".cline/skills/message-queue-selection/SKILL.md",
+      "cf05805efd746e242848259d5142973ad1b1867f8c1b04df0efb0b94b2d91c4b"
+    ],
+    [
       ".cline/skills/microservices-communication-patterns/SKILL.md",
       "dc8212a2cf2e0d37b3f4466b23b24cdce53196a2fd52373ef237e56754a42bea"
     ],
@@ -1629,6 +1777,10 @@
     [
       ".cline/skills/mutation-testing/SKILL.md",
       "c909cc39e90c0e37168e38b9545ac3f42c0439c85b02a4abdbd353756f487b3f"
+    ],
+    [
+      ".cline/skills/object-storage-patterns/SKILL.md",
+      "97ab0af9910915222bf6d54d4cdfbdfbfb54b1eae4501dafad271ab1964d6b79"
     ],
     [
       ".cline/skills/performance-optimization/SKILL.md",
@@ -1643,6 +1795,10 @@
       "29b3a6dfbde2608b8e5598a60bce7e40e3e88350a42911405024e6fc1e5ea31b"
     ],
     [
+      ".cline/skills/python-typing-and-async/SKILL.md",
+      "b81f8fa81a75bcd382a3361f61f8802a1cbfbe33efdbbad5efc7a60349f6ac24"
+    ],
+    [
       ".cline/skills/quality-assurance/SKILL.md",
       "80c1e7a0d798ee2504243bf18a299121403469baa26a03bd29d02a8084fbfc42"
     ],
@@ -1653,6 +1809,10 @@
     [
       ".cline/skills/root-cause-five-whys/SKILL.md",
       "b63a7d09797d10f64ef572bae2b1a346f8deea1be40407a9f42aca668dcbdc4f"
+    ],
+    [
+      ".cline/skills/serverless-architecture/SKILL.md",
+      "eb060b785f83e0470eae958935dce36c096ac2ced19fddd3aa71e8d0487d8bf1"
     ],
     [
       ".cline/skills/sql-optimization/SKILL.md",
@@ -1700,7 +1860,7 @@
     ],
     [
       ".clinerules",
-      "1514354ce4b6c614cc23518f30e6ab2cf6a39a33b41198ced7ba06472e74af70"
+      "15c3454be9e983750bc9c4d22a788039ed98da7e186ba4e3fe6a9127f6f870c6"
     ],
     [
       "AGENTS.md",
@@ -1721,8 +1881,28 @@
       "97519379dbc61b402ecfbf7960d4cbaeb8eb2bc5a38c19e8254c67f1364e1640"
     ],
     [
+      ".agents/skills/autoscaling-strategies/SKILL.md",
+      "75d93e8d919eb5ea6b47c0d0cc0ba08cbad9e84f8a2360249b83cc6f39e9a4a0"
+    ],
+    [
       ".agents/skills/backend/SKILL.md",
       "7a73c8648dc279b21bb940d9b1424694dece641338b2abbca4c504770214155f"
+    ],
+    [
+      ".agents/skills/cloud-cost-optimization/SKILL.md",
+      "19918edf78ad7fc22cccba9fa1c963a00e16b814a281c11322542f7bc0239daa"
+    ],
+    [
+      ".agents/skills/cloud-iam-design/SKILL.md",
+      "8a5d9f0a7b5d79e6159c061990f0805b5fed1f183862c4083f480ec46b1dd477"
+    ],
+    [
+      ".agents/skills/cloud-migration-strategy/SKILL.md",
+      "f7edf96e329cc446d3544316c64eac51ee019d7d3a84ed68e27202d78b28d915"
+    ],
+    [
+      ".agents/skills/cloud-networking-design/SKILL.md",
+      "17577805f6ff0f08daf22ed224ccbeafe31d739b50e0a9667c4b678960525211"
     ],
     [
       ".agents/skills/code/SKILL.md",
@@ -1767,6 +1947,10 @@
     [
       ".agents/skills/deployment-rollback-strategies/SKILL.md",
       "aecf824dd1bf024478dffeb8227452efcdac13da0487969976bc72204b4fd611"
+    ],
+    [
+      ".agents/skills/disaster-recovery-planning/SKILL.md",
+      "e24bb761562082f95e167f8d1255779867e5ddd7c16da80b19969d7c39346538"
     ],
     [
       ".agents/skills/distributed-caching-design/SKILL.md",
@@ -1821,6 +2005,10 @@
       "f1ed6755e34250bdb628ceed35952b48dfda38eaf3eea414e9e6de4f32d5033b"
     ],
     [
+      ".agents/skills/message-queue-selection/SKILL.md",
+      "9140947f154c7672a5ec8c8f1428ed9bef3aedcb13d9a6e37eebef40e114875a"
+    ],
+    [
       ".agents/skills/microservices-communication-patterns/SKILL.md",
       "a50c94a952cf5351d7b31bfcd9e52f28d67c9c6025d87732f66083f0c42d5a0f"
     ],
@@ -1835,6 +2023,10 @@
     [
       ".agents/skills/mutation-testing/SKILL.md",
       "954b830c4eaec5df5023c7af09caef679c8ed467b0e8763702bb9a39e3e15945"
+    ],
+    [
+      ".agents/skills/object-storage-patterns/SKILL.md",
+      "12edf9bac15a591622f17e9965c47186d975aee07919c5c00801bbf219d23c51"
     ],
     [
       ".agents/skills/orchestrator/SKILL.md",
@@ -1861,6 +2053,10 @@
       "9453f7efb79384fcff447a3b49c23027b8cb1d046a918edb563e8218d6b0c14e"
     ],
     [
+      ".agents/skills/python-typing-and-async/SKILL.md",
+      "cf0935bb917b3a5be741f0d95e6497747fa902f325915448d2bf008f69ffa5c0"
+    ],
+    [
       ".agents/skills/quality-assurance/SKILL.md",
       "b2c17c7b4714b7fe8e5d5aeed3d500396a6d38cd58616fe44f62e9fb3a19cebe"
     ],
@@ -1879,6 +2075,10 @@
     [
       ".agents/skills/root-cause-five-whys/SKILL.md",
       "9e8dec4da0d938a9f7d6c48a143f6c8f570528a4d1d2864dd251318148714064"
+    ],
+    [
+      ".agents/skills/serverless-architecture/SKILL.md",
+      "221001c046ba8033d56ae6452b04cbbea93d8943939b57f2317aabcd6361a19f"
     ],
     [
       ".agents/skills/sql-optimization/SKILL.md",
@@ -1951,8 +2151,28 @@
       "97519379dbc61b402ecfbf7960d4cbaeb8eb2bc5a38c19e8254c67f1364e1640"
     ],
     [
+      ".agents/skills/autoscaling-strategies/SKILL.md",
+      "b0c382264dd283e3054baddf9042bc7b6f9b4bd8d39cb2992d854ff8f48ab780"
+    ],
+    [
       ".agents/skills/backend/SKILL.md",
       "7a73c8648dc279b21bb940d9b1424694dece641338b2abbca4c504770214155f"
+    ],
+    [
+      ".agents/skills/cloud-cost-optimization/SKILL.md",
+      "31e8aabc72f0c5af3d93cedb2c8341c348d7426b9dd1ffb9832e28d13cebb63c"
+    ],
+    [
+      ".agents/skills/cloud-iam-design/SKILL.md",
+      "2a8f2d76f6cfbc13f7831da87fa102e0db616a19875964fe7130751ee1aad876"
+    ],
+    [
+      ".agents/skills/cloud-migration-strategy/SKILL.md",
+      "b1d98f8e935f313ffdca9c45b3d58f1712e1c5e9af870e51c43841c7d78b9580"
+    ],
+    [
+      ".agents/skills/cloud-networking-design/SKILL.md",
+      "595c6f3f1ca135949734e3fb86050bd2c810fb0de4a0dbcf9e16485890c81a05"
     ],
     [
       ".agents/skills/code/SKILL.md",
@@ -1997,6 +2217,10 @@
     [
       ".agents/skills/deployment-rollback-strategies/SKILL.md",
       "9b1005a40d0f26935094728e5b3cb9db1b3de41bb707acc7bf686cc1b9690fd9"
+    ],
+    [
+      ".agents/skills/disaster-recovery-planning/SKILL.md",
+      "6a429431c88d464ccccd3829bf7f50ff738578dc50f9d60bac1ba4cfbca1d4f3"
     ],
     [
       ".agents/skills/distributed-caching-design/SKILL.md",
@@ -2051,6 +2275,10 @@
       "5103d1f3c1a84fe8e7608323a457e7fd6ee0e9d2ee0adc36fec1ea9198a0feae"
     ],
     [
+      ".agents/skills/message-queue-selection/SKILL.md",
+      "cf05805efd746e242848259d5142973ad1b1867f8c1b04df0efb0b94b2d91c4b"
+    ],
+    [
       ".agents/skills/microservices-communication-patterns/SKILL.md",
       "dc8212a2cf2e0d37b3f4466b23b24cdce53196a2fd52373ef237e56754a42bea"
     ],
@@ -2065,6 +2293,10 @@
     [
       ".agents/skills/mutation-testing/SKILL.md",
       "c909cc39e90c0e37168e38b9545ac3f42c0439c85b02a4abdbd353756f487b3f"
+    ],
+    [
+      ".agents/skills/object-storage-patterns/SKILL.md",
+      "97ab0af9910915222bf6d54d4cdfbdfbfb54b1eae4501dafad271ab1964d6b79"
     ],
     [
       ".agents/skills/orchestrator/SKILL.md",
@@ -2091,6 +2323,10 @@
       "29b3a6dfbde2608b8e5598a60bce7e40e3e88350a42911405024e6fc1e5ea31b"
     ],
     [
+      ".agents/skills/python-typing-and-async/SKILL.md",
+      "b81f8fa81a75bcd382a3361f61f8802a1cbfbe33efdbbad5efc7a60349f6ac24"
+    ],
+    [
       ".agents/skills/quality-assurance/SKILL.md",
       "80c1e7a0d798ee2504243bf18a299121403469baa26a03bd29d02a8084fbfc42"
     ],
@@ -2109,6 +2345,10 @@
     [
       ".agents/skills/root-cause-five-whys/SKILL.md",
       "b63a7d09797d10f64ef572bae2b1a346f8deea1be40407a9f42aca668dcbdc4f"
+    ],
+    [
+      ".agents/skills/serverless-architecture/SKILL.md",
+      "eb060b785f83e0470eae958935dce36c096ac2ced19fddd3aa71e8d0487d8bf1"
     ],
     [
       ".agents/skills/sql-optimization/SKILL.md",
@@ -2642,7 +2882,7 @@
   "copilot::minimal": [
     [
       ".github/copilot-instructions.md",
-      "93d24f04d801b85f901bfea6bcb37a13ce77cc8814a800f6f1ed6a052ca01680"
+      "d246ee5b3ddbef957ceeea36da39df82cb404f0a81a6998fb0d6692b598fa7e8"
     ],
     [
       ".github/skills/api-versioning-strategy/SKILL.md",
@@ -2651,6 +2891,26 @@
     [
       ".github/skills/architecture-documentation/SKILL.md",
       "30724be199f07b6dc2de868499cedba6e24418c4093369a7cfe188efc9a8bb21"
+    ],
+    [
+      ".github/skills/autoscaling-strategies/SKILL.md",
+      "75d93e8d919eb5ea6b47c0d0cc0ba08cbad9e84f8a2360249b83cc6f39e9a4a0"
+    ],
+    [
+      ".github/skills/cloud-cost-optimization/SKILL.md",
+      "19918edf78ad7fc22cccba9fa1c963a00e16b814a281c11322542f7bc0239daa"
+    ],
+    [
+      ".github/skills/cloud-iam-design/SKILL.md",
+      "8a5d9f0a7b5d79e6159c061990f0805b5fed1f183862c4083f480ec46b1dd477"
+    ],
+    [
+      ".github/skills/cloud-migration-strategy/SKILL.md",
+      "f7edf96e329cc446d3544316c64eac51ee019d7d3a84ed68e27202d78b28d915"
+    ],
+    [
+      ".github/skills/cloud-networking-design/SKILL.md",
+      "17577805f6ff0f08daf22ed224ccbeafe31d739b50e0a9667c4b678960525211"
     ],
     [
       ".github/skills/code-review-practices/SKILL.md",
@@ -2687,6 +2947,10 @@
     [
       ".github/skills/deployment-rollback-strategies/SKILL.md",
       "aecf824dd1bf024478dffeb8227452efcdac13da0487969976bc72204b4fd611"
+    ],
+    [
+      ".github/skills/disaster-recovery-planning/SKILL.md",
+      "e24bb761562082f95e167f8d1255779867e5ddd7c16da80b19969d7c39346538"
     ],
     [
       ".github/skills/distributed-caching-design/SKILL.md",
@@ -2729,6 +2993,10 @@
       "f1ed6755e34250bdb628ceed35952b48dfda38eaf3eea414e9e6de4f32d5033b"
     ],
     [
+      ".github/skills/message-queue-selection/SKILL.md",
+      "9140947f154c7672a5ec8c8f1428ed9bef3aedcb13d9a6e37eebef40e114875a"
+    ],
+    [
       ".github/skills/microservices-communication-patterns/SKILL.md",
       "a50c94a952cf5351d7b31bfcd9e52f28d67c9c6025d87732f66083f0c42d5a0f"
     ],
@@ -2739,6 +3007,10 @@
     [
       ".github/skills/mutation-testing/SKILL.md",
       "954b830c4eaec5df5023c7af09caef679c8ed467b0e8763702bb9a39e3e15945"
+    ],
+    [
+      ".github/skills/object-storage-patterns/SKILL.md",
+      "12edf9bac15a591622f17e9965c47186d975aee07919c5c00801bbf219d23c51"
     ],
     [
       ".github/skills/performance-optimization/SKILL.md",
@@ -2753,6 +3025,10 @@
       "9453f7efb79384fcff447a3b49c23027b8cb1d046a918edb563e8218d6b0c14e"
     ],
     [
+      ".github/skills/python-typing-and-async/SKILL.md",
+      "cf0935bb917b3a5be741f0d95e6497747fa902f325915448d2bf008f69ffa5c0"
+    ],
+    [
       ".github/skills/quality-assurance/SKILL.md",
       "b2c17c7b4714b7fe8e5d5aeed3d500396a6d38cd58616fe44f62e9fb3a19cebe"
     ],
@@ -2763,6 +3039,10 @@
     [
       ".github/skills/root-cause-five-whys/SKILL.md",
       "9e8dec4da0d938a9f7d6c48a143f6c8f570528a4d1d2864dd251318148714064"
+    ],
+    [
+      ".github/skills/serverless-architecture/SKILL.md",
+      "221001c046ba8033d56ae6452b04cbbea93d8943939b57f2317aabcd6361a19f"
     ],
     [
       ".github/skills/sql-optimization/SKILL.md",
@@ -2816,7 +3096,7 @@
   "copilot::verbose": [
     [
       ".github/copilot-instructions.md",
-      "32f49f5ae70daced70dc11463719ebf03ff02528620786baf2d818a1cdfcc14b"
+      "0bf0bd67d4d8355561ed13854b977c492ab54d4aa4aec50a9e67ba0265c70344"
     ],
     [
       ".github/skills/api-versioning-strategy/SKILL.md",
@@ -2825,6 +3105,26 @@
     [
       ".github/skills/architecture-documentation/SKILL.md",
       "412d3fd0885a675879dcefe580d6f1fcc6b8458a603b6f8ab18af951575f18e1"
+    ],
+    [
+      ".github/skills/autoscaling-strategies/SKILL.md",
+      "b0c382264dd283e3054baddf9042bc7b6f9b4bd8d39cb2992d854ff8f48ab780"
+    ],
+    [
+      ".github/skills/cloud-cost-optimization/SKILL.md",
+      "31e8aabc72f0c5af3d93cedb2c8341c348d7426b9dd1ffb9832e28d13cebb63c"
+    ],
+    [
+      ".github/skills/cloud-iam-design/SKILL.md",
+      "2a8f2d76f6cfbc13f7831da87fa102e0db616a19875964fe7130751ee1aad876"
+    ],
+    [
+      ".github/skills/cloud-migration-strategy/SKILL.md",
+      "b1d98f8e935f313ffdca9c45b3d58f1712e1c5e9af870e51c43841c7d78b9580"
+    ],
+    [
+      ".github/skills/cloud-networking-design/SKILL.md",
+      "595c6f3f1ca135949734e3fb86050bd2c810fb0de4a0dbcf9e16485890c81a05"
     ],
     [
       ".github/skills/code-review-practices/SKILL.md",
@@ -2861,6 +3161,10 @@
     [
       ".github/skills/deployment-rollback-strategies/SKILL.md",
       "9b1005a40d0f26935094728e5b3cb9db1b3de41bb707acc7bf686cc1b9690fd9"
+    ],
+    [
+      ".github/skills/disaster-recovery-planning/SKILL.md",
+      "6a429431c88d464ccccd3829bf7f50ff738578dc50f9d60bac1ba4cfbca1d4f3"
     ],
     [
       ".github/skills/distributed-caching-design/SKILL.md",
@@ -2903,6 +3207,10 @@
       "5103d1f3c1a84fe8e7608323a457e7fd6ee0e9d2ee0adc36fec1ea9198a0feae"
     ],
     [
+      ".github/skills/message-queue-selection/SKILL.md",
+      "cf05805efd746e242848259d5142973ad1b1867f8c1b04df0efb0b94b2d91c4b"
+    ],
+    [
       ".github/skills/microservices-communication-patterns/SKILL.md",
       "dc8212a2cf2e0d37b3f4466b23b24cdce53196a2fd52373ef237e56754a42bea"
     ],
@@ -2913,6 +3221,10 @@
     [
       ".github/skills/mutation-testing/SKILL.md",
       "c909cc39e90c0e37168e38b9545ac3f42c0439c85b02a4abdbd353756f487b3f"
+    ],
+    [
+      ".github/skills/object-storage-patterns/SKILL.md",
+      "97ab0af9910915222bf6d54d4cdfbdfbfb54b1eae4501dafad271ab1964d6b79"
     ],
     [
       ".github/skills/performance-optimization/SKILL.md",
@@ -2927,6 +3239,10 @@
       "29b3a6dfbde2608b8e5598a60bce7e40e3e88350a42911405024e6fc1e5ea31b"
     ],
     [
+      ".github/skills/python-typing-and-async/SKILL.md",
+      "b81f8fa81a75bcd382a3361f61f8802a1cbfbe33efdbbad5efc7a60349f6ac24"
+    ],
+    [
       ".github/skills/quality-assurance/SKILL.md",
       "80c1e7a0d798ee2504243bf18a299121403469baa26a03bd29d02a8084fbfc42"
     ],
@@ -2937,6 +3253,10 @@
     [
       ".github/skills/root-cause-five-whys/SKILL.md",
       "b63a7d09797d10f64ef572bae2b1a346f8deea1be40407a9f42aca668dcbdc4f"
+    ],
+    [
+      ".github/skills/serverless-architecture/SKILL.md",
+      "eb060b785f83e0470eae958935dce36c096ac2ced19fddd3aa71e8d0487d8bf1"
     ],
     [
       ".github/skills/sql-optimization/SKILL.md",
@@ -2997,6 +3317,26 @@
       "30724be199f07b6dc2de868499cedba6e24418c4093369a7cfe188efc9a8bb21"
     ],
     [
+      ".cursor/skills/autoscaling-strategies/SKILL.md",
+      "75d93e8d919eb5ea6b47c0d0cc0ba08cbad9e84f8a2360249b83cc6f39e9a4a0"
+    ],
+    [
+      ".cursor/skills/cloud-cost-optimization/SKILL.md",
+      "19918edf78ad7fc22cccba9fa1c963a00e16b814a281c11322542f7bc0239daa"
+    ],
+    [
+      ".cursor/skills/cloud-iam-design/SKILL.md",
+      "8a5d9f0a7b5d79e6159c061990f0805b5fed1f183862c4083f480ec46b1dd477"
+    ],
+    [
+      ".cursor/skills/cloud-migration-strategy/SKILL.md",
+      "f7edf96e329cc446d3544316c64eac51ee019d7d3a84ed68e27202d78b28d915"
+    ],
+    [
+      ".cursor/skills/cloud-networking-design/SKILL.md",
+      "17577805f6ff0f08daf22ed224ccbeafe31d739b50e0a9667c4b678960525211"
+    ],
+    [
       ".cursor/skills/code-review-practices/SKILL.md",
       "0f3db58b9095c0bddb9abbec11e45ea9573a4c00aed11f4b609ff40cbdb40702"
     ],
@@ -3031,6 +3371,10 @@
     [
       ".cursor/skills/deployment-rollback-strategies/SKILL.md",
       "aecf824dd1bf024478dffeb8227452efcdac13da0487969976bc72204b4fd611"
+    ],
+    [
+      ".cursor/skills/disaster-recovery-planning/SKILL.md",
+      "e24bb761562082f95e167f8d1255779867e5ddd7c16da80b19969d7c39346538"
     ],
     [
       ".cursor/skills/distributed-caching-design/SKILL.md",
@@ -3073,6 +3417,10 @@
       "f1ed6755e34250bdb628ceed35952b48dfda38eaf3eea414e9e6de4f32d5033b"
     ],
     [
+      ".cursor/skills/message-queue-selection/SKILL.md",
+      "9140947f154c7672a5ec8c8f1428ed9bef3aedcb13d9a6e37eebef40e114875a"
+    ],
+    [
       ".cursor/skills/microservices-communication-patterns/SKILL.md",
       "a50c94a952cf5351d7b31bfcd9e52f28d67c9c6025d87732f66083f0c42d5a0f"
     ],
@@ -3083,6 +3431,10 @@
     [
       ".cursor/skills/mutation-testing/SKILL.md",
       "954b830c4eaec5df5023c7af09caef679c8ed467b0e8763702bb9a39e3e15945"
+    ],
+    [
+      ".cursor/skills/object-storage-patterns/SKILL.md",
+      "12edf9bac15a591622f17e9965c47186d975aee07919c5c00801bbf219d23c51"
     ],
     [
       ".cursor/skills/performance-optimization/SKILL.md",
@@ -3097,6 +3449,10 @@
       "9453f7efb79384fcff447a3b49c23027b8cb1d046a918edb563e8218d6b0c14e"
     ],
     [
+      ".cursor/skills/python-typing-and-async/SKILL.md",
+      "cf0935bb917b3a5be741f0d95e6497747fa902f325915448d2bf008f69ffa5c0"
+    ],
+    [
       ".cursor/skills/quality-assurance/SKILL.md",
       "b2c17c7b4714b7fe8e5d5aeed3d500396a6d38cd58616fe44f62e9fb3a19cebe"
     ],
@@ -3107,6 +3463,10 @@
     [
       ".cursor/skills/root-cause-five-whys/SKILL.md",
       "9e8dec4da0d938a9f7d6c48a143f6c8f570528a4d1d2864dd251318148714064"
+    ],
+    [
+      ".cursor/skills/serverless-architecture/SKILL.md",
+      "221001c046ba8033d56ae6452b04cbbea93d8943939b57f2317aabcd6361a19f"
     ],
     [
       ".cursor/skills/sql-optimization/SKILL.md",
@@ -3171,6 +3531,26 @@
       "412d3fd0885a675879dcefe580d6f1fcc6b8458a603b6f8ab18af951575f18e1"
     ],
     [
+      ".cursor/skills/autoscaling-strategies/SKILL.md",
+      "b0c382264dd283e3054baddf9042bc7b6f9b4bd8d39cb2992d854ff8f48ab780"
+    ],
+    [
+      ".cursor/skills/cloud-cost-optimization/SKILL.md",
+      "31e8aabc72f0c5af3d93cedb2c8341c348d7426b9dd1ffb9832e28d13cebb63c"
+    ],
+    [
+      ".cursor/skills/cloud-iam-design/SKILL.md",
+      "2a8f2d76f6cfbc13f7831da87fa102e0db616a19875964fe7130751ee1aad876"
+    ],
+    [
+      ".cursor/skills/cloud-migration-strategy/SKILL.md",
+      "b1d98f8e935f313ffdca9c45b3d58f1712e1c5e9af870e51c43841c7d78b9580"
+    ],
+    [
+      ".cursor/skills/cloud-networking-design/SKILL.md",
+      "595c6f3f1ca135949734e3fb86050bd2c810fb0de4a0dbcf9e16485890c81a05"
+    ],
+    [
       ".cursor/skills/code-review-practices/SKILL.md",
       "cb3052dc26028ce8a924eb3b03cabcd342a16cf4e2282c3d86a9b82d49ac0444"
     ],
@@ -3205,6 +3585,10 @@
     [
       ".cursor/skills/deployment-rollback-strategies/SKILL.md",
       "9b1005a40d0f26935094728e5b3cb9db1b3de41bb707acc7bf686cc1b9690fd9"
+    ],
+    [
+      ".cursor/skills/disaster-recovery-planning/SKILL.md",
+      "6a429431c88d464ccccd3829bf7f50ff738578dc50f9d60bac1ba4cfbca1d4f3"
     ],
     [
       ".cursor/skills/distributed-caching-design/SKILL.md",
@@ -3247,6 +3631,10 @@
       "5103d1f3c1a84fe8e7608323a457e7fd6ee0e9d2ee0adc36fec1ea9198a0feae"
     ],
     [
+      ".cursor/skills/message-queue-selection/SKILL.md",
+      "cf05805efd746e242848259d5142973ad1b1867f8c1b04df0efb0b94b2d91c4b"
+    ],
+    [
       ".cursor/skills/microservices-communication-patterns/SKILL.md",
       "dc8212a2cf2e0d37b3f4466b23b24cdce53196a2fd52373ef237e56754a42bea"
     ],
@@ -3257,6 +3645,10 @@
     [
       ".cursor/skills/mutation-testing/SKILL.md",
       "c909cc39e90c0e37168e38b9545ac3f42c0439c85b02a4abdbd353756f487b3f"
+    ],
+    [
+      ".cursor/skills/object-storage-patterns/SKILL.md",
+      "97ab0af9910915222bf6d54d4cdfbdfbfb54b1eae4501dafad271ab1964d6b79"
     ],
     [
       ".cursor/skills/performance-optimization/SKILL.md",
@@ -3271,6 +3663,10 @@
       "29b3a6dfbde2608b8e5598a60bce7e40e3e88350a42911405024e6fc1e5ea31b"
     ],
     [
+      ".cursor/skills/python-typing-and-async/SKILL.md",
+      "b81f8fa81a75bcd382a3361f61f8802a1cbfbe33efdbbad5efc7a60349f6ac24"
+    ],
+    [
       ".cursor/skills/quality-assurance/SKILL.md",
       "80c1e7a0d798ee2504243bf18a299121403469baa26a03bd29d02a8084fbfc42"
     ],
@@ -3281,6 +3677,10 @@
     [
       ".cursor/skills/root-cause-five-whys/SKILL.md",
       "b63a7d09797d10f64ef572bae2b1a346f8deea1be40407a9f42aca668dcbdc4f"
+    ],
+    [
+      ".cursor/skills/serverless-architecture/SKILL.md",
+      "eb060b785f83e0470eae958935dce36c096ac2ced19fddd3aa71e8d0487d8bf1"
     ],
     [
       ".cursor/skills/sql-optimization/SKILL.md",
@@ -3457,6 +3857,26 @@
       "30724be199f07b6dc2de868499cedba6e24418c4093369a7cfe188efc9a8bb21"
     ],
     [
+      ".gemini/skills/autoscaling-strategies/SKILL.md",
+      "75d93e8d919eb5ea6b47c0d0cc0ba08cbad9e84f8a2360249b83cc6f39e9a4a0"
+    ],
+    [
+      ".gemini/skills/cloud-cost-optimization/SKILL.md",
+      "19918edf78ad7fc22cccba9fa1c963a00e16b814a281c11322542f7bc0239daa"
+    ],
+    [
+      ".gemini/skills/cloud-iam-design/SKILL.md",
+      "8a5d9f0a7b5d79e6159c061990f0805b5fed1f183862c4083f480ec46b1dd477"
+    ],
+    [
+      ".gemini/skills/cloud-migration-strategy/SKILL.md",
+      "f7edf96e329cc446d3544316c64eac51ee019d7d3a84ed68e27202d78b28d915"
+    ],
+    [
+      ".gemini/skills/cloud-networking-design/SKILL.md",
+      "17577805f6ff0f08daf22ed224ccbeafe31d739b50e0a9667c4b678960525211"
+    ],
+    [
       ".gemini/skills/code-review-practices/SKILL.md",
       "0f3db58b9095c0bddb9abbec11e45ea9573a4c00aed11f4b609ff40cbdb40702"
     ],
@@ -3491,6 +3911,10 @@
     [
       ".gemini/skills/deployment-rollback-strategies/SKILL.md",
       "aecf824dd1bf024478dffeb8227452efcdac13da0487969976bc72204b4fd611"
+    ],
+    [
+      ".gemini/skills/disaster-recovery-planning/SKILL.md",
+      "e24bb761562082f95e167f8d1255779867e5ddd7c16da80b19969d7c39346538"
     ],
     [
       ".gemini/skills/distributed-caching-design/SKILL.md",
@@ -3533,6 +3957,10 @@
       "f1ed6755e34250bdb628ceed35952b48dfda38eaf3eea414e9e6de4f32d5033b"
     ],
     [
+      ".gemini/skills/message-queue-selection/SKILL.md",
+      "9140947f154c7672a5ec8c8f1428ed9bef3aedcb13d9a6e37eebef40e114875a"
+    ],
+    [
       ".gemini/skills/microservices-communication-patterns/SKILL.md",
       "a50c94a952cf5351d7b31bfcd9e52f28d67c9c6025d87732f66083f0c42d5a0f"
     ],
@@ -3543,6 +3971,10 @@
     [
       ".gemini/skills/mutation-testing/SKILL.md",
       "954b830c4eaec5df5023c7af09caef679c8ed467b0e8763702bb9a39e3e15945"
+    ],
+    [
+      ".gemini/skills/object-storage-patterns/SKILL.md",
+      "12edf9bac15a591622f17e9965c47186d975aee07919c5c00801bbf219d23c51"
     ],
     [
       ".gemini/skills/performance-optimization/SKILL.md",
@@ -3557,6 +3989,10 @@
       "9453f7efb79384fcff447a3b49c23027b8cb1d046a918edb563e8218d6b0c14e"
     ],
     [
+      ".gemini/skills/python-typing-and-async/SKILL.md",
+      "cf0935bb917b3a5be741f0d95e6497747fa902f325915448d2bf008f69ffa5c0"
+    ],
+    [
       ".gemini/skills/quality-assurance/SKILL.md",
       "b2c17c7b4714b7fe8e5d5aeed3d500396a6d38cd58616fe44f62e9fb3a19cebe"
     ],
@@ -3567,6 +4003,10 @@
     [
       ".gemini/skills/root-cause-five-whys/SKILL.md",
       "9e8dec4da0d938a9f7d6c48a143f6c8f570528a4d1d2864dd251318148714064"
+    ],
+    [
+      ".gemini/skills/serverless-architecture/SKILL.md",
+      "221001c046ba8033d56ae6452b04cbbea93d8943939b57f2317aabcd6361a19f"
     ],
     [
       ".gemini/skills/sql-optimization/SKILL.md",
@@ -3739,6 +4179,26 @@
       "412d3fd0885a675879dcefe580d6f1fcc6b8458a603b6f8ab18af951575f18e1"
     ],
     [
+      ".gemini/skills/autoscaling-strategies/SKILL.md",
+      "b0c382264dd283e3054baddf9042bc7b6f9b4bd8d39cb2992d854ff8f48ab780"
+    ],
+    [
+      ".gemini/skills/cloud-cost-optimization/SKILL.md",
+      "31e8aabc72f0c5af3d93cedb2c8341c348d7426b9dd1ffb9832e28d13cebb63c"
+    ],
+    [
+      ".gemini/skills/cloud-iam-design/SKILL.md",
+      "2a8f2d76f6cfbc13f7831da87fa102e0db616a19875964fe7130751ee1aad876"
+    ],
+    [
+      ".gemini/skills/cloud-migration-strategy/SKILL.md",
+      "b1d98f8e935f313ffdca9c45b3d58f1712e1c5e9af870e51c43841c7d78b9580"
+    ],
+    [
+      ".gemini/skills/cloud-networking-design/SKILL.md",
+      "595c6f3f1ca135949734e3fb86050bd2c810fb0de4a0dbcf9e16485890c81a05"
+    ],
+    [
       ".gemini/skills/code-review-practices/SKILL.md",
       "cb3052dc26028ce8a924eb3b03cabcd342a16cf4e2282c3d86a9b82d49ac0444"
     ],
@@ -3773,6 +4233,10 @@
     [
       ".gemini/skills/deployment-rollback-strategies/SKILL.md",
       "9b1005a40d0f26935094728e5b3cb9db1b3de41bb707acc7bf686cc1b9690fd9"
+    ],
+    [
+      ".gemini/skills/disaster-recovery-planning/SKILL.md",
+      "6a429431c88d464ccccd3829bf7f50ff738578dc50f9d60bac1ba4cfbca1d4f3"
     ],
     [
       ".gemini/skills/distributed-caching-design/SKILL.md",
@@ -3815,6 +4279,10 @@
       "5103d1f3c1a84fe8e7608323a457e7fd6ee0e9d2ee0adc36fec1ea9198a0feae"
     ],
     [
+      ".gemini/skills/message-queue-selection/SKILL.md",
+      "cf05805efd746e242848259d5142973ad1b1867f8c1b04df0efb0b94b2d91c4b"
+    ],
+    [
       ".gemini/skills/microservices-communication-patterns/SKILL.md",
       "dc8212a2cf2e0d37b3f4466b23b24cdce53196a2fd52373ef237e56754a42bea"
     ],
@@ -3825,6 +4293,10 @@
     [
       ".gemini/skills/mutation-testing/SKILL.md",
       "c909cc39e90c0e37168e38b9545ac3f42c0439c85b02a4abdbd353756f487b3f"
+    ],
+    [
+      ".gemini/skills/object-storage-patterns/SKILL.md",
+      "97ab0af9910915222bf6d54d4cdfbdfbfb54b1eae4501dafad271ab1964d6b79"
     ],
     [
       ".gemini/skills/performance-optimization/SKILL.md",
@@ -3839,6 +4311,10 @@
       "29b3a6dfbde2608b8e5598a60bce7e40e3e88350a42911405024e6fc1e5ea31b"
     ],
     [
+      ".gemini/skills/python-typing-and-async/SKILL.md",
+      "b81f8fa81a75bcd382a3361f61f8802a1cbfbe33efdbbad5efc7a60349f6ac24"
+    ],
+    [
       ".gemini/skills/quality-assurance/SKILL.md",
       "80c1e7a0d798ee2504243bf18a299121403469baa26a03bd29d02a8084fbfc42"
     ],
@@ -3849,6 +4325,10 @@
     [
       ".gemini/skills/root-cause-five-whys/SKILL.md",
       "b63a7d09797d10f64ef572bae2b1a346f8deea1be40407a9f42aca668dcbdc4f"
+    ],
+    [
+      ".gemini/skills/serverless-architecture/SKILL.md",
+      "eb060b785f83e0470eae958935dce36c096ac2ced19fddd3aa71e8d0487d8bf1"
     ],
     [
       ".gemini/skills/sql-optimization/SKILL.md",
@@ -3902,59 +4382,59 @@
   "junie::minimal": [
     [
       ".junie/agents/ask.md",
-      "29966fbee6efbbe5554b7c952dc867eb468b2b5332ad84a36ffa877a32282a41"
+      "e5b069c20048d21d5f13b40261514f92a3aa26ff7cdfe2083fb399e3089c9a17"
     ],
     [
       ".junie/agents/backend.md",
-      "e118391f210e8e87dde94845893e215a4c2b58f1a773d23e0935f7bef1db1fc8"
+      "a1c00d0db1b7b3e269ca42c84ca19c59c6835b5dc7836c975ea0afb44cbc879a"
     ],
     [
       ".junie/agents/code.md",
-      "247aeca88f35726b1df5444a4defed8fbbc530196c1ad8a15f26409d71c8b8df"
+      "0e9225a2dc33887b4594afbb3a5f757fb6c289e277092ecf061c7eb5c530d02a"
     ],
     [
       ".junie/agents/debug.md",
-      "864018126ca88002860c5a5d5a042acc2963192672dbe6c36a42f38ac74bd0d1"
+      "f13dbcb25339a443c23fb1f740fe6e41c3f33f08fc098ccd53cb3e30f33adc1d"
     ],
     [
       ".junie/agents/enforcement.md",
-      "75d9875f6f158183d4b3601d878e661994c20898c17ccf88b078d6bfb454e46a"
+      "a9cd11b1678377a37915209c5ba2705838559bd81bf8be441e8d345c325dae33"
     ],
     [
       ".junie/agents/explain.md",
-      "7beb7096cb6ab99d7a6ce944ca5673c211ebfc68700799cc16f4e1145908161e"
+      "66c5ccdfd8f97d446cc5fd995ffe9b32607f62be2ad43bdf183745eaf2dbc083"
     ],
     [
       ".junie/agents/frontend.md",
-      "e96fd3454e19550a5fb9ac7b36f83ce2025fd3b1a7d1a719fb3365366ccd0a4d"
+      "620a623993e7693cffd4f6a2bf253b31b88e1de61c84b30788ff5cf525bc3abc"
     ],
     [
       ".junie/agents/migration.md",
-      "5fcbd9e2576c84d0c93838bd2c39bd2c2406e7b0f6df41b08ff36a970f61ca6e"
+      "196ea62a51d7cc21b7a14c3bf83ad08190ebcdff8dfa65b231e99beaf827481a"
     ],
     [
       ".junie/agents/orchestrator.md",
-      "4fa94af851b8ccfa20ae5feedb28e0e22d48429f783dad772b3371a8a294ac6d"
+      "c513663926f0ea9601a4ce9e36af42e3945b7a7d9326eb37ef75458221f1e067"
     ],
     [
       ".junie/agents/performance.md",
-      "ef9df7558c60848a881c911054826bf0c41445c57623696bf35252342e51d153"
+      "51653e277a3dc9d70cb4c7d94d75d6ceda62f850bf7449dff1ff8f1dd3be98cc"
     ],
     [
       ".junie/agents/plan.md",
-      "fb5b56e421e494f574a207a7d6708ac5427f05ae90045b3aa947afaec711d447"
+      "a697a31666f776989c61a86dbc1ee033a986bd1f373dccf3cab4faae1b3778b1"
     ],
     [
       ".junie/agents/refactor.md",
-      "b1f538430d0311a7cfa13562a2b2b155dd88d823125143b0fe31f3a8256e6377"
+      "612f33b9386a248d2af1433ef727396f14489cd2f472e08a4ddb2976fba34054"
     ],
     [
       ".junie/agents/review.md",
-      "1b42125b0fb51208bceb1e95092813b320d557e54dd28c6ae9a4789770d5d08c"
+      "92bf23e9e6b7d24c2af4a07a429e5fd5e992b11bda6c59944960e12d0754eb20"
     ],
     [
       ".junie/agents/test.md",
-      "67aa9b79a50776ef8b4d80238ba7e5ad9c930baaff981368004c5ab59d7fbe36"
+      "19e64edaddd15aa175fbed6788725dab40797c4c3b0b9b77a2b8080edead6be7"
     ],
     [
       ".junie/commands/boilerplate.md",
@@ -4017,6 +4497,26 @@
       "30724be199f07b6dc2de868499cedba6e24418c4093369a7cfe188efc9a8bb21"
     ],
     [
+      ".junie/skills/autoscaling-strategies/SKILL.md",
+      "75d93e8d919eb5ea6b47c0d0cc0ba08cbad9e84f8a2360249b83cc6f39e9a4a0"
+    ],
+    [
+      ".junie/skills/cloud-cost-optimization/SKILL.md",
+      "19918edf78ad7fc22cccba9fa1c963a00e16b814a281c11322542f7bc0239daa"
+    ],
+    [
+      ".junie/skills/cloud-iam-design/SKILL.md",
+      "8a5d9f0a7b5d79e6159c061990f0805b5fed1f183862c4083f480ec46b1dd477"
+    ],
+    [
+      ".junie/skills/cloud-migration-strategy/SKILL.md",
+      "f7edf96e329cc446d3544316c64eac51ee019d7d3a84ed68e27202d78b28d915"
+    ],
+    [
+      ".junie/skills/cloud-networking-design/SKILL.md",
+      "17577805f6ff0f08daf22ed224ccbeafe31d739b50e0a9667c4b678960525211"
+    ],
+    [
       ".junie/skills/code-review-practices/SKILL.md",
       "0f3db58b9095c0bddb9abbec11e45ea9573a4c00aed11f4b609ff40cbdb40702"
     ],
@@ -4051,6 +4551,10 @@
     [
       ".junie/skills/deployment-rollback-strategies/SKILL.md",
       "aecf824dd1bf024478dffeb8227452efcdac13da0487969976bc72204b4fd611"
+    ],
+    [
+      ".junie/skills/disaster-recovery-planning/SKILL.md",
+      "e24bb761562082f95e167f8d1255779867e5ddd7c16da80b19969d7c39346538"
     ],
     [
       ".junie/skills/distributed-caching-design/SKILL.md",
@@ -4093,6 +4597,10 @@
       "f1ed6755e34250bdb628ceed35952b48dfda38eaf3eea414e9e6de4f32d5033b"
     ],
     [
+      ".junie/skills/message-queue-selection/SKILL.md",
+      "9140947f154c7672a5ec8c8f1428ed9bef3aedcb13d9a6e37eebef40e114875a"
+    ],
+    [
       ".junie/skills/microservices-communication-patterns/SKILL.md",
       "a50c94a952cf5351d7b31bfcd9e52f28d67c9c6025d87732f66083f0c42d5a0f"
     ],
@@ -4103,6 +4611,10 @@
     [
       ".junie/skills/mutation-testing/SKILL.md",
       "954b830c4eaec5df5023c7af09caef679c8ed467b0e8763702bb9a39e3e15945"
+    ],
+    [
+      ".junie/skills/object-storage-patterns/SKILL.md",
+      "12edf9bac15a591622f17e9965c47186d975aee07919c5c00801bbf219d23c51"
     ],
     [
       ".junie/skills/performance-optimization/SKILL.md",
@@ -4117,6 +4629,10 @@
       "9453f7efb79384fcff447a3b49c23027b8cb1d046a918edb563e8218d6b0c14e"
     ],
     [
+      ".junie/skills/python-typing-and-async/SKILL.md",
+      "cf0935bb917b3a5be741f0d95e6497747fa902f325915448d2bf008f69ffa5c0"
+    ],
+    [
       ".junie/skills/quality-assurance/SKILL.md",
       "b2c17c7b4714b7fe8e5d5aeed3d500396a6d38cd58616fe44f62e9fb3a19cebe"
     ],
@@ -4127,6 +4643,10 @@
     [
       ".junie/skills/root-cause-five-whys/SKILL.md",
       "9e8dec4da0d938a9f7d6c48a143f6c8f570528a4d1d2864dd251318148714064"
+    ],
+    [
+      ".junie/skills/serverless-architecture/SKILL.md",
+      "221001c046ba8033d56ae6452b04cbbea93d8943939b57f2317aabcd6361a19f"
     ],
     [
       ".junie/skills/sql-optimization/SKILL.md",
@@ -4180,59 +4700,59 @@
   "junie::verbose": [
     [
       ".junie/agents/ask.md",
-      "29966fbee6efbbe5554b7c952dc867eb468b2b5332ad84a36ffa877a32282a41"
+      "e5b069c20048d21d5f13b40261514f92a3aa26ff7cdfe2083fb399e3089c9a17"
     ],
     [
       ".junie/agents/backend.md",
-      "e118391f210e8e87dde94845893e215a4c2b58f1a773d23e0935f7bef1db1fc8"
+      "a1c00d0db1b7b3e269ca42c84ca19c59c6835b5dc7836c975ea0afb44cbc879a"
     ],
     [
       ".junie/agents/code.md",
-      "247aeca88f35726b1df5444a4defed8fbbc530196c1ad8a15f26409d71c8b8df"
+      "0e9225a2dc33887b4594afbb3a5f757fb6c289e277092ecf061c7eb5c530d02a"
     ],
     [
       ".junie/agents/debug.md",
-      "864018126ca88002860c5a5d5a042acc2963192672dbe6c36a42f38ac74bd0d1"
+      "f13dbcb25339a443c23fb1f740fe6e41c3f33f08fc098ccd53cb3e30f33adc1d"
     ],
     [
       ".junie/agents/enforcement.md",
-      "75d9875f6f158183d4b3601d878e661994c20898c17ccf88b078d6bfb454e46a"
+      "a9cd11b1678377a37915209c5ba2705838559bd81bf8be441e8d345c325dae33"
     ],
     [
       ".junie/agents/explain.md",
-      "7beb7096cb6ab99d7a6ce944ca5673c211ebfc68700799cc16f4e1145908161e"
+      "66c5ccdfd8f97d446cc5fd995ffe9b32607f62be2ad43bdf183745eaf2dbc083"
     ],
     [
       ".junie/agents/frontend.md",
-      "e96fd3454e19550a5fb9ac7b36f83ce2025fd3b1a7d1a719fb3365366ccd0a4d"
+      "620a623993e7693cffd4f6a2bf253b31b88e1de61c84b30788ff5cf525bc3abc"
     ],
     [
       ".junie/agents/migration.md",
-      "5fcbd9e2576c84d0c93838bd2c39bd2c2406e7b0f6df41b08ff36a970f61ca6e"
+      "196ea62a51d7cc21b7a14c3bf83ad08190ebcdff8dfa65b231e99beaf827481a"
     ],
     [
       ".junie/agents/orchestrator.md",
-      "4fa94af851b8ccfa20ae5feedb28e0e22d48429f783dad772b3371a8a294ac6d"
+      "c513663926f0ea9601a4ce9e36af42e3945b7a7d9326eb37ef75458221f1e067"
     ],
     [
       ".junie/agents/performance.md",
-      "ef9df7558c60848a881c911054826bf0c41445c57623696bf35252342e51d153"
+      "51653e277a3dc9d70cb4c7d94d75d6ceda62f850bf7449dff1ff8f1dd3be98cc"
     ],
     [
       ".junie/agents/plan.md",
-      "fb5b56e421e494f574a207a7d6708ac5427f05ae90045b3aa947afaec711d447"
+      "a697a31666f776989c61a86dbc1ee033a986bd1f373dccf3cab4faae1b3778b1"
     ],
     [
       ".junie/agents/refactor.md",
-      "b1f538430d0311a7cfa13562a2b2b155dd88d823125143b0fe31f3a8256e6377"
+      "612f33b9386a248d2af1433ef727396f14489cd2f472e08a4ddb2976fba34054"
     ],
     [
       ".junie/agents/review.md",
-      "1b42125b0fb51208bceb1e95092813b320d557e54dd28c6ae9a4789770d5d08c"
+      "92bf23e9e6b7d24c2af4a07a429e5fd5e992b11bda6c59944960e12d0754eb20"
     ],
     [
       ".junie/agents/test.md",
-      "67aa9b79a50776ef8b4d80238ba7e5ad9c930baaff981368004c5ab59d7fbe36"
+      "19e64edaddd15aa175fbed6788725dab40797c4c3b0b9b77a2b8080edead6be7"
     ],
     [
       ".junie/commands/boilerplate.md",
@@ -4295,6 +4815,26 @@
       "412d3fd0885a675879dcefe580d6f1fcc6b8458a603b6f8ab18af951575f18e1"
     ],
     [
+      ".junie/skills/autoscaling-strategies/SKILL.md",
+      "b0c382264dd283e3054baddf9042bc7b6f9b4bd8d39cb2992d854ff8f48ab780"
+    ],
+    [
+      ".junie/skills/cloud-cost-optimization/SKILL.md",
+      "31e8aabc72f0c5af3d93cedb2c8341c348d7426b9dd1ffb9832e28d13cebb63c"
+    ],
+    [
+      ".junie/skills/cloud-iam-design/SKILL.md",
+      "2a8f2d76f6cfbc13f7831da87fa102e0db616a19875964fe7130751ee1aad876"
+    ],
+    [
+      ".junie/skills/cloud-migration-strategy/SKILL.md",
+      "b1d98f8e935f313ffdca9c45b3d58f1712e1c5e9af870e51c43841c7d78b9580"
+    ],
+    [
+      ".junie/skills/cloud-networking-design/SKILL.md",
+      "595c6f3f1ca135949734e3fb86050bd2c810fb0de4a0dbcf9e16485890c81a05"
+    ],
+    [
       ".junie/skills/code-review-practices/SKILL.md",
       "cb3052dc26028ce8a924eb3b03cabcd342a16cf4e2282c3d86a9b82d49ac0444"
     ],
@@ -4329,6 +4869,10 @@
     [
       ".junie/skills/deployment-rollback-strategies/SKILL.md",
       "9b1005a40d0f26935094728e5b3cb9db1b3de41bb707acc7bf686cc1b9690fd9"
+    ],
+    [
+      ".junie/skills/disaster-recovery-planning/SKILL.md",
+      "6a429431c88d464ccccd3829bf7f50ff738578dc50f9d60bac1ba4cfbca1d4f3"
     ],
     [
       ".junie/skills/distributed-caching-design/SKILL.md",
@@ -4371,6 +4915,10 @@
       "5103d1f3c1a84fe8e7608323a457e7fd6ee0e9d2ee0adc36fec1ea9198a0feae"
     ],
     [
+      ".junie/skills/message-queue-selection/SKILL.md",
+      "cf05805efd746e242848259d5142973ad1b1867f8c1b04df0efb0b94b2d91c4b"
+    ],
+    [
       ".junie/skills/microservices-communication-patterns/SKILL.md",
       "dc8212a2cf2e0d37b3f4466b23b24cdce53196a2fd52373ef237e56754a42bea"
     ],
@@ -4381,6 +4929,10 @@
     [
       ".junie/skills/mutation-testing/SKILL.md",
       "c909cc39e90c0e37168e38b9545ac3f42c0439c85b02a4abdbd353756f487b3f"
+    ],
+    [
+      ".junie/skills/object-storage-patterns/SKILL.md",
+      "97ab0af9910915222bf6d54d4cdfbdfbfb54b1eae4501dafad271ab1964d6b79"
     ],
     [
       ".junie/skills/performance-optimization/SKILL.md",
@@ -4395,6 +4947,10 @@
       "29b3a6dfbde2608b8e5598a60bce7e40e3e88350a42911405024e6fc1e5ea31b"
     ],
     [
+      ".junie/skills/python-typing-and-async/SKILL.md",
+      "b81f8fa81a75bcd382a3361f61f8802a1cbfbe33efdbbad5efc7a60349f6ac24"
+    ],
+    [
       ".junie/skills/quality-assurance/SKILL.md",
       "80c1e7a0d798ee2504243bf18a299121403469baa26a03bd29d02a8084fbfc42"
     ],
@@ -4405,6 +4961,10 @@
     [
       ".junie/skills/root-cause-five-whys/SKILL.md",
       "b63a7d09797d10f64ef572bae2b1a346f8deea1be40407a9f42aca668dcbdc4f"
+    ],
+    [
+      ".junie/skills/serverless-architecture/SKILL.md",
+      "eb060b785f83e0470eae958935dce36c096ac2ced19fddd3aa71e8d0487d8bf1"
     ],
     [
       ".junie/skills/sql-optimization/SKILL.md",
@@ -4582,199 +5142,199 @@
   "kilo-ide::minimal": [
     [
       ".kilo/agents/ask/decision-log.md",
-      "b8e5feb4bc7c3ace1e80e8932a478a1a4aed1522531e67adc7d17234872380bc"
+      "a5515e96cb230f9456a246972433cf01347a01d46c0ca4c85336c7362754b3ff"
     ],
     [
       ".kilo/agents/ask/docs.md",
-      "29829e61828b551a28665015b1c41d209c24c27c3f0a497bae0fb31bd17cc909"
+      "6ea01e05973ca26c0d10ed7f4e1258032c3276869372993dfc80e0497aba2a0a"
     ],
     [
       ".kilo/agents/ask/testing.md",
-      "4df1846305eb90d653eb120a508eda631051b7e7cd982cd0eae9d87231bc0af0"
+      "d2e6f846dd3c4c19907d6c2a5f4d244fda96438ea60589f65f4d16ac19b93f1c"
     ],
     [
       ".kilo/agents/ask.md",
-      "c8b0e8e855daf3b0ac31e4a890a4e131bc35144c65cbd81f3e4f5254c4023196"
+      "fbca4561d8f88b69ae5ecf1b262358b0f93157a04082b9b5cfa6a65247e5eb6d"
     ],
     [
       ".kilo/agents/backend/api-design.md",
-      "232db49056a1dddd7b6e9d03d0b9887d9ce64deadc874411c745f75e876c0c58"
+      "903ecd5594a8ce019e564cb0104b53ff5278cfc571f572fe6e5040b0372927d8"
     ],
     [
       ".kilo/agents/backend/caching.md",
-      "5aa69d05cfff80679ab36520b81009b397862155146e9da549ce5b47d4204f96"
+      "9a7b2cf35e3301fd7a42354890d545fcb7f720eea5db975f9787749061da36b7"
     ],
     [
       ".kilo/agents/backend/microservices.md",
-      "b9671c9f360aef5cda39534c4ad84d148a0b706d666fd484a14294710e9c8746"
+      "da755f2a6a510cbd3a3d96b1da39655988dbf6a9979f5702971a2bf367ba340d"
     ],
     [
       ".kilo/agents/backend/storage.md",
-      "4712aba735fd729d4c6897e445bc5e02ff2f1eb7dee0c367e9523a08d0e6f3ec"
+      "98320a5ef3c302e774ed5fd092d427f83c3cba4e3f5ea84e92cc42c2b206041c"
     ],
     [
       ".kilo/agents/backend.md",
-      "d67ee70900b05b78afc24525d76831d35b09069757b68fcacd3bb15f3a8420d3"
+      "11c93443b3ae80e680789ab4a58d6a8b6517971e18b934ebe010978271947a04"
     ],
     [
       ".kilo/agents/code/boilerplate.md",
-      "d750646002cdc74e6b0ea7698a4ccb6ae19a5a09327589cb31cc91d75c581e99"
+      "1ffe43575e88cc1eb302b023ab9f296ca037885b6148078624890321d1b2e2a7"
     ],
     [
       ".kilo/agents/code/dependency-upgrade.md",
-      "843763b560fba90f82f5b597e0cdd31f3e941852025983ddd4ba313ae8621fbf"
+      "5b2c5708442f73e02500914001bacb779950828deb7a3d460677bd95d9640443"
     ],
     [
       ".kilo/agents/code/feature.md",
-      "42d41d9529ce086fbf5c4289b99d235dd33e791274ba47aeb45dc045925829f5"
+      "38bedb2b0306892927dec3164431d3bd8b4aa6d7a3a1beba8d40ccca4877980c"
     ],
     [
       ".kilo/agents/code/house-style.md",
-      "1e93df9c3378c94e671800308af04dbd3ea4a159826d22ad3ea3fb58fe6496f2"
+      "fe1e026a8d78179f93a9b0904ac09145a45ca06088d4439aa4cc6707b0f97c21"
     ],
     [
       ".kilo/agents/code/migration.md",
-      "2fcfe286fe4caca22fb8325ca7b5887e0119a73d00d6b47b19123fa60f890e76"
+      "d0cfc97889c6f9604d1130a3b3b38c8b5f809b80919aa7a0a122da437512c00e"
     ],
     [
       ".kilo/agents/code/refactor.md",
-      "fd5077127614a306ce1fb42eeab5bac9886c0e2fa81655dc5eed682b7a4e213d"
+      "74ae518f806bf6b5e744cf830add8d408700f21ff42e7f3007862b84b30a7da3"
     ],
     [
       ".kilo/agents/code.md",
-      "df1aa3dba52b3a3315a551d379f92b8c8ead719c465248f904f47272573b8eb4"
+      "190a426e917e829ac26e170429a567181b4e1c06196a5d46543005ff63b39f5d"
     ],
     [
       ".kilo/agents/debug/log-analysis.md",
-      "6051a9b07f934c1698c78ea163a17a22c9d47a17eba6bac8ff4c6c1973b3be39"
+      "187ce0cf2a66d8dcb65755f223600eb9fbde75aea91fd2764aafde7302a68464"
     ],
     [
       ".kilo/agents/debug/root-cause.md",
-      "abc51e4f1f2fd49b9782aeee8d04531599eb672f52a38c89a6c828f956570231"
+      "447a301cb088680003a650af36683f5eefcd7adce0220fd283b071aafa13fab5"
     ],
     [
       ".kilo/agents/debug/rubber-duck.md",
-      "9dbdca4b398cc24595d10db58fd9bcdabc9dbc1212d0db3524c62091bed343bd"
+      "5b34cd5edc34ceb3a28ad48da12c3d714905329c55f181f764d60e3b96b6b2cb"
     ],
     [
       ".kilo/agents/debug.md",
-      "11d719ddaf2f44d8205527ca9719b48b929df5f4209da1f85943471bd054d8fa"
+      "72ec50a312882a43cbf8d514018db16d6a9caa06afa802de153dab4b42aaef37"
     ],
     [
       ".kilo/agents/enforcement.md",
-      "c528d45d0ad9bde19c3f8d362e7d9c4b7fdf9f8528b2890cac65d1df58a9b26b"
+      "2632005da7c6ac88ea213e12a7818eeb722bc8b049497c4a7d00aca58248a656"
     ],
     [
       ".kilo/agents/explain/strategy.md",
-      "077d12c6012b5068008e434d7436bd82f6888d7fcf562bab908b4f8295a4e85d"
+      "50bbfe843af32ae20f23253d01be1f0e1e56d40acd6eb10f53f36aa1ac9ce293"
     ],
     [
       ".kilo/agents/explain.md",
-      "18ccf79ccfb32846d77030b75cb12ff49f633d19e68f09a4400a1c76e0642997"
+      "bc47caa494d299c84007c75a42fdcdcb12d466a829242764e8485a051676cd0d"
     ],
     [
       ".kilo/agents/frontend/accessibility.md",
-      "1e2bb435db056bed96c7e5908b3708ef6a28bf2ea13338b1f9cda764bb615ad6"
+      "0b7f5cedeee92c0d6317c6d2a7f5258b95f9c431a0b84b5987696ea1bc6eae88"
     ],
     [
       ".kilo/agents/frontend/mobile.md",
-      "3b5fb7f800354da9ce6e3a6411be72fcad39065cfc15ed0b1f169b54ebc4bd24"
+      "98802e3f485d1349daf631c2339fd4302110d15b9f0fd10ac5e7977549d5e29d"
     ],
     [
       ".kilo/agents/frontend/react-patterns.md",
-      "272932d4710ce8b1587635a65598020b8299c0fa8e8dabf738b446d5d526fd29"
+      "6d6504ba47b4fd4c32f4bde2821d3b9573c932d96b57fdb782dc4c202be38777"
     ],
     [
       ".kilo/agents/frontend/vue-patterns.md",
-      "9c767c747f96ee29b286fbfed399887a4dd1f564efe47e54b49e9bd0ba6f5de2"
+      "50e320c37bd1529b058c7bd720ee97e201eb116c29091b0aec07bc3ca6c04d38"
     ],
     [
       ".kilo/agents/frontend.md",
-      "cb953cd9d9981d8ca1f086d428762199ea74f763ec3da8c23eed9c1b5dd08476"
+      "021d8ea123d09ce2ab7c0d1e2db36d886ca34256276957bd40b323a34e4cc672"
     ],
     [
       ".kilo/agents/migration/strategy.md",
-      "d4e141c4f3782beb9f7471e9d0e20a1807b58c6eb2b12c07e216eae5af49ff88"
+      "03cb7858a5ff076ca720d7d362613c136e42da01e3f5739de6f91b155be3242b"
     ],
     [
       ".kilo/agents/migration.md",
-      "e016345a94755baf936b95332d85e02169e634f1f18bffb5aed7782a910edee3"
+      "af70eaaff8a6f9b91bfff8aa8fb75e3aecc8959e66176aea90ffb14b0ad0b4a6"
     ],
     [
       ".kilo/agents/orchestrator/devops.md",
-      "3f4a55572d500d570c9932d512f3a42b3882571ebd2c772407c7d62721cfd27c"
+      "a6ec64d2ce552fd579985d6151b2eb2e6e45d66ecbbe6f357947837371c23205"
     ],
     [
       ".kilo/agents/orchestrator/maintenance.md",
-      "c89cc0d9522ab481829b0ce462030d99729ddf519c782b3b9d40f4c21bcd5598"
+      "419b2cbbeff4ddb404b53850aedaae7b2a17eb4d9c55f8b8bcedba31418fbd02"
     ],
     [
       ".kilo/agents/orchestrator/meta.md",
-      "1541e85aa88406d9912050230aed4a1c88015214bbee9c4c7fca38624c8977bf"
+      "d05c43e9891f24d42a387d3a47bf17c7f5d356bbe85a20adc4dde2342b2917ff"
     ],
     [
       ".kilo/agents/orchestrator/pr-description.md",
-      "7c9ef1c52cb88b077f4ca9bbfbbed299c207d728d29da9d425c48348c364fe15"
+      "ceb8f419f9036b38f8679324ee59c137448ffdfbe29e52f949308a72d57385ad"
     ],
     [
       ".kilo/agents/orchestrator.md",
-      "c741cada01f463794994ad5ddd2bc6b53214a553493c8ec9f10cc760383400ca"
+      "186b5d6919b229365efbcd258169080ad94350a58476c7999109dab09cccaaf6"
     ],
     [
       ".kilo/agents/performance/benchmarking.md",
-      "e0afe89582e4a4ceee1f96d42d506139a194780e627a64d2d7756f2f1ef69705"
+      "ff223717d509f74f59576475418ca98c5d4f279aa44743fa4788b73a80c11bf6"
     ],
     [
       ".kilo/agents/performance/bottleneck-analysis.md",
-      "1ed5ed37e3d6b2ddf3fec3ad9d0fd5250e4be1b1624df4ee99746bc31c8cdd2d"
+      "8cdca1196f7a0d234a2ffc42b87350424b17e099f1f97fc234f0e2b7083f778a"
     ],
     [
       ".kilo/agents/performance/optimization-strategies.md",
-      "fc5e035d1d2d27d5468ecb071bb616a52fec503fa45390f255e134ebda5fbafc"
+      "48598c33c4dcf5afff83e29b461bec9b685a5dcd7837246b824347dede6ffd85"
     ],
     [
       ".kilo/agents/performance/profiling.md",
-      "5dfb5d4a142cc89be0b637acff1a564f860568d94d6ad1130164405b5bd98fcf"
+      "fb48001f604ab274c49458f4847418c74504833828119e887e5b2c2dc026d6b4"
     ],
     [
       ".kilo/agents/performance.md",
-      "26ef8bbf2d8ae8d2d44c1edcb44a8cb2a7dfdfe3c8fdc5cd0ffb0fb9b3a4f77e"
+      "c7650babaab608d633bc73024169e0a509e8879b0f34c790eefceefb1421be63"
     ],
     [
       ".kilo/agents/plan.md",
-      "1db3802d8398c984663bf20519a9892b70b252b03997c1bb2acf0e09daa929dd"
+      "b2bfb54b8dd52efd42f5ed7edefa800d5c12930aa5e0798f85fab7150132754f"
     ],
     [
       ".kilo/agents/refactor/strategy.md",
-      "cca65f3555c316e8ead1e995d6af173e570e241d14403bc4305ab99d309ddfd5"
+      "b51b047d5585e0a63414f79efd2639807bef8d60903d3e60d61a16577829924d"
     ],
     [
       ".kilo/agents/refactor.md",
-      "b0259d0f2b3b7b0530bff6613b4e7c8c74c851f3650104eef96bc45ed0827c21"
+      "04476e996c78cb3c3dc92875a5210496f1f3a1afdd6cf99cdc3b774ef49bd382"
     ],
     [
       ".kilo/agents/review/accessibility.md",
-      "17955d8d84897a3a847016c193107193a00c1d6e242c9e5dadb7d7a5a41eaf3f"
+      "91f27841ab3cbeffaf6665c08e4e8125e760c3e04751d141a1fd3f4e37de238f"
     ],
     [
       ".kilo/agents/review/code.md",
-      "773a88e9560c64157a31ea097e04199a8d3ae4b2bbb4ab460d5a669748207383"
+      "84191c962efc0349f82a17cb90626a0d6a21ecf59c68488e3e94347e3ae79efe"
     ],
     [
       ".kilo/agents/review/performance.md",
-      "fd6b2fb7b82aa5f357b6ede6573e33fa540f9589c34005f187a7b594e0004808"
+      "60cb931bfeae118373e2d7eb9bf45b842070f4d7e3362b9c554735abdc19c6e7"
     ],
     [
       ".kilo/agents/review.md",
-      "c42ab91ff6a8f12ba1d6831c985d0b8014c3068146f9d21b2202c1b50b2b3628"
+      "80a2bf9dd426e83bffc87d46beca43b7d08c02f5985f0106edad518a9ddc8873"
     ],
     [
       ".kilo/agents/test/strategy.md",
-      "53e92d427165e7b4fd14e1027e21c95d2e018559e63c62f66cfc672977c97b05"
+      "be9ddb9230e5fccd302ce49248efc1e7e1f908311ef3562137d2580c594800c0"
     ],
     [
       ".kilo/agents/test.md",
-      "cc64437f39c25de8ff8c473c1892365c5a252b2c1701b661848ca13312784bb1"
+      "4e1ff3e043922db3308110792f378d65183d35ca0aac1d95ed5f9e486728ebfc"
     ],
     [
       ".kilo/commands/boilerplate.md",
@@ -4861,6 +5421,26 @@
       "30724be199f07b6dc2de868499cedba6e24418c4093369a7cfe188efc9a8bb21"
     ],
     [
+      ".kilo/skills/autoscaling-strategies/SKILL.md",
+      "75d93e8d919eb5ea6b47c0d0cc0ba08cbad9e84f8a2360249b83cc6f39e9a4a0"
+    ],
+    [
+      ".kilo/skills/cloud-cost-optimization/SKILL.md",
+      "19918edf78ad7fc22cccba9fa1c963a00e16b814a281c11322542f7bc0239daa"
+    ],
+    [
+      ".kilo/skills/cloud-iam-design/SKILL.md",
+      "8a5d9f0a7b5d79e6159c061990f0805b5fed1f183862c4083f480ec46b1dd477"
+    ],
+    [
+      ".kilo/skills/cloud-migration-strategy/SKILL.md",
+      "f7edf96e329cc446d3544316c64eac51ee019d7d3a84ed68e27202d78b28d915"
+    ],
+    [
+      ".kilo/skills/cloud-networking-design/SKILL.md",
+      "17577805f6ff0f08daf22ed224ccbeafe31d739b50e0a9667c4b678960525211"
+    ],
+    [
       ".kilo/skills/code-review-practices/SKILL.md",
       "0f3db58b9095c0bddb9abbec11e45ea9573a4c00aed11f4b609ff40cbdb40702"
     ],
@@ -4895,6 +5475,10 @@
     [
       ".kilo/skills/deployment-rollback-strategies/SKILL.md",
       "aecf824dd1bf024478dffeb8227452efcdac13da0487969976bc72204b4fd611"
+    ],
+    [
+      ".kilo/skills/disaster-recovery-planning/SKILL.md",
+      "e24bb761562082f95e167f8d1255779867e5ddd7c16da80b19969d7c39346538"
     ],
     [
       ".kilo/skills/distributed-caching-design/SKILL.md",
@@ -4937,6 +5521,10 @@
       "f1ed6755e34250bdb628ceed35952b48dfda38eaf3eea414e9e6de4f32d5033b"
     ],
     [
+      ".kilo/skills/message-queue-selection/SKILL.md",
+      "9140947f154c7672a5ec8c8f1428ed9bef3aedcb13d9a6e37eebef40e114875a"
+    ],
+    [
       ".kilo/skills/microservices-communication-patterns/SKILL.md",
       "a50c94a952cf5351d7b31bfcd9e52f28d67c9c6025d87732f66083f0c42d5a0f"
     ],
@@ -4947,6 +5535,10 @@
     [
       ".kilo/skills/mutation-testing/SKILL.md",
       "954b830c4eaec5df5023c7af09caef679c8ed467b0e8763702bb9a39e3e15945"
+    ],
+    [
+      ".kilo/skills/object-storage-patterns/SKILL.md",
+      "12edf9bac15a591622f17e9965c47186d975aee07919c5c00801bbf219d23c51"
     ],
     [
       ".kilo/skills/performance-optimization/SKILL.md",
@@ -4961,6 +5553,10 @@
       "9453f7efb79384fcff447a3b49c23027b8cb1d046a918edb563e8218d6b0c14e"
     ],
     [
+      ".kilo/skills/python-typing-and-async/SKILL.md",
+      "cf0935bb917b3a5be741f0d95e6497747fa902f325915448d2bf008f69ffa5c0"
+    ],
+    [
       ".kilo/skills/quality-assurance/SKILL.md",
       "b2c17c7b4714b7fe8e5d5aeed3d500396a6d38cd58616fe44f62e9fb3a19cebe"
     ],
@@ -4971,6 +5567,10 @@
     [
       ".kilo/skills/root-cause-five-whys/SKILL.md",
       "9e8dec4da0d938a9f7d6c48a143f6c8f570528a4d1d2864dd251318148714064"
+    ],
+    [
+      ".kilo/skills/serverless-architecture/SKILL.md",
+      "221001c046ba8033d56ae6452b04cbbea93d8943939b57f2317aabcd6361a19f"
     ],
     [
       ".kilo/skills/sql-optimization/SKILL.md",
@@ -5024,199 +5624,199 @@
   "kilo-ide::verbose": [
     [
       ".kilo/agents/ask/decision-log.md",
-      "b8e5feb4bc7c3ace1e80e8932a478a1a4aed1522531e67adc7d17234872380bc"
+      "a5515e96cb230f9456a246972433cf01347a01d46c0ca4c85336c7362754b3ff"
     ],
     [
       ".kilo/agents/ask/docs.md",
-      "29829e61828b551a28665015b1c41d209c24c27c3f0a497bae0fb31bd17cc909"
+      "6ea01e05973ca26c0d10ed7f4e1258032c3276869372993dfc80e0497aba2a0a"
     ],
     [
       ".kilo/agents/ask/testing.md",
-      "4df1846305eb90d653eb120a508eda631051b7e7cd982cd0eae9d87231bc0af0"
+      "d2e6f846dd3c4c19907d6c2a5f4d244fda96438ea60589f65f4d16ac19b93f1c"
     ],
     [
       ".kilo/agents/ask.md",
-      "c8b0e8e855daf3b0ac31e4a890a4e131bc35144c65cbd81f3e4f5254c4023196"
+      "fbca4561d8f88b69ae5ecf1b262358b0f93157a04082b9b5cfa6a65247e5eb6d"
     ],
     [
       ".kilo/agents/backend/api-design.md",
-      "232db49056a1dddd7b6e9d03d0b9887d9ce64deadc874411c745f75e876c0c58"
+      "903ecd5594a8ce019e564cb0104b53ff5278cfc571f572fe6e5040b0372927d8"
     ],
     [
       ".kilo/agents/backend/caching.md",
-      "5aa69d05cfff80679ab36520b81009b397862155146e9da549ce5b47d4204f96"
+      "9a7b2cf35e3301fd7a42354890d545fcb7f720eea5db975f9787749061da36b7"
     ],
     [
       ".kilo/agents/backend/microservices.md",
-      "b9671c9f360aef5cda39534c4ad84d148a0b706d666fd484a14294710e9c8746"
+      "da755f2a6a510cbd3a3d96b1da39655988dbf6a9979f5702971a2bf367ba340d"
     ],
     [
       ".kilo/agents/backend/storage.md",
-      "4712aba735fd729d4c6897e445bc5e02ff2f1eb7dee0c367e9523a08d0e6f3ec"
+      "98320a5ef3c302e774ed5fd092d427f83c3cba4e3f5ea84e92cc42c2b206041c"
     ],
     [
       ".kilo/agents/backend.md",
-      "d67ee70900b05b78afc24525d76831d35b09069757b68fcacd3bb15f3a8420d3"
+      "11c93443b3ae80e680789ab4a58d6a8b6517971e18b934ebe010978271947a04"
     ],
     [
       ".kilo/agents/code/boilerplate.md",
-      "d750646002cdc74e6b0ea7698a4ccb6ae19a5a09327589cb31cc91d75c581e99"
+      "1ffe43575e88cc1eb302b023ab9f296ca037885b6148078624890321d1b2e2a7"
     ],
     [
       ".kilo/agents/code/dependency-upgrade.md",
-      "843763b560fba90f82f5b597e0cdd31f3e941852025983ddd4ba313ae8621fbf"
+      "5b2c5708442f73e02500914001bacb779950828deb7a3d460677bd95d9640443"
     ],
     [
       ".kilo/agents/code/feature.md",
-      "42d41d9529ce086fbf5c4289b99d235dd33e791274ba47aeb45dc045925829f5"
+      "38bedb2b0306892927dec3164431d3bd8b4aa6d7a3a1beba8d40ccca4877980c"
     ],
     [
       ".kilo/agents/code/house-style.md",
-      "1e93df9c3378c94e671800308af04dbd3ea4a159826d22ad3ea3fb58fe6496f2"
+      "fe1e026a8d78179f93a9b0904ac09145a45ca06088d4439aa4cc6707b0f97c21"
     ],
     [
       ".kilo/agents/code/migration.md",
-      "2fcfe286fe4caca22fb8325ca7b5887e0119a73d00d6b47b19123fa60f890e76"
+      "d0cfc97889c6f9604d1130a3b3b38c8b5f809b80919aa7a0a122da437512c00e"
     ],
     [
       ".kilo/agents/code/refactor.md",
-      "fd5077127614a306ce1fb42eeab5bac9886c0e2fa81655dc5eed682b7a4e213d"
+      "74ae518f806bf6b5e744cf830add8d408700f21ff42e7f3007862b84b30a7da3"
     ],
     [
       ".kilo/agents/code.md",
-      "df1aa3dba52b3a3315a551d379f92b8c8ead719c465248f904f47272573b8eb4"
+      "190a426e917e829ac26e170429a567181b4e1c06196a5d46543005ff63b39f5d"
     ],
     [
       ".kilo/agents/debug/log-analysis.md",
-      "6051a9b07f934c1698c78ea163a17a22c9d47a17eba6bac8ff4c6c1973b3be39"
+      "187ce0cf2a66d8dcb65755f223600eb9fbde75aea91fd2764aafde7302a68464"
     ],
     [
       ".kilo/agents/debug/root-cause.md",
-      "abc51e4f1f2fd49b9782aeee8d04531599eb672f52a38c89a6c828f956570231"
+      "447a301cb088680003a650af36683f5eefcd7adce0220fd283b071aafa13fab5"
     ],
     [
       ".kilo/agents/debug/rubber-duck.md",
-      "9dbdca4b398cc24595d10db58fd9bcdabc9dbc1212d0db3524c62091bed343bd"
+      "5b34cd5edc34ceb3a28ad48da12c3d714905329c55f181f764d60e3b96b6b2cb"
     ],
     [
       ".kilo/agents/debug.md",
-      "11d719ddaf2f44d8205527ca9719b48b929df5f4209da1f85943471bd054d8fa"
+      "72ec50a312882a43cbf8d514018db16d6a9caa06afa802de153dab4b42aaef37"
     ],
     [
       ".kilo/agents/enforcement.md",
-      "c528d45d0ad9bde19c3f8d362e7d9c4b7fdf9f8528b2890cac65d1df58a9b26b"
+      "2632005da7c6ac88ea213e12a7818eeb722bc8b049497c4a7d00aca58248a656"
     ],
     [
       ".kilo/agents/explain/strategy.md",
-      "077d12c6012b5068008e434d7436bd82f6888d7fcf562bab908b4f8295a4e85d"
+      "50bbfe843af32ae20f23253d01be1f0e1e56d40acd6eb10f53f36aa1ac9ce293"
     ],
     [
       ".kilo/agents/explain.md",
-      "18ccf79ccfb32846d77030b75cb12ff49f633d19e68f09a4400a1c76e0642997"
+      "bc47caa494d299c84007c75a42fdcdcb12d466a829242764e8485a051676cd0d"
     ],
     [
       ".kilo/agents/frontend/accessibility.md",
-      "1e2bb435db056bed96c7e5908b3708ef6a28bf2ea13338b1f9cda764bb615ad6"
+      "0b7f5cedeee92c0d6317c6d2a7f5258b95f9c431a0b84b5987696ea1bc6eae88"
     ],
     [
       ".kilo/agents/frontend/mobile.md",
-      "3b5fb7f800354da9ce6e3a6411be72fcad39065cfc15ed0b1f169b54ebc4bd24"
+      "98802e3f485d1349daf631c2339fd4302110d15b9f0fd10ac5e7977549d5e29d"
     ],
     [
       ".kilo/agents/frontend/react-patterns.md",
-      "272932d4710ce8b1587635a65598020b8299c0fa8e8dabf738b446d5d526fd29"
+      "6d6504ba47b4fd4c32f4bde2821d3b9573c932d96b57fdb782dc4c202be38777"
     ],
     [
       ".kilo/agents/frontend/vue-patterns.md",
-      "9c767c747f96ee29b286fbfed399887a4dd1f564efe47e54b49e9bd0ba6f5de2"
+      "50e320c37bd1529b058c7bd720ee97e201eb116c29091b0aec07bc3ca6c04d38"
     ],
     [
       ".kilo/agents/frontend.md",
-      "cb953cd9d9981d8ca1f086d428762199ea74f763ec3da8c23eed9c1b5dd08476"
+      "021d8ea123d09ce2ab7c0d1e2db36d886ca34256276957bd40b323a34e4cc672"
     ],
     [
       ".kilo/agents/migration/strategy.md",
-      "d4e141c4f3782beb9f7471e9d0e20a1807b58c6eb2b12c07e216eae5af49ff88"
+      "03cb7858a5ff076ca720d7d362613c136e42da01e3f5739de6f91b155be3242b"
     ],
     [
       ".kilo/agents/migration.md",
-      "e016345a94755baf936b95332d85e02169e634f1f18bffb5aed7782a910edee3"
+      "af70eaaff8a6f9b91bfff8aa8fb75e3aecc8959e66176aea90ffb14b0ad0b4a6"
     ],
     [
       ".kilo/agents/orchestrator/devops.md",
-      "3f4a55572d500d570c9932d512f3a42b3882571ebd2c772407c7d62721cfd27c"
+      "a6ec64d2ce552fd579985d6151b2eb2e6e45d66ecbbe6f357947837371c23205"
     ],
     [
       ".kilo/agents/orchestrator/maintenance.md",
-      "c89cc0d9522ab481829b0ce462030d99729ddf519c782b3b9d40f4c21bcd5598"
+      "419b2cbbeff4ddb404b53850aedaae7b2a17eb4d9c55f8b8bcedba31418fbd02"
     ],
     [
       ".kilo/agents/orchestrator/meta.md",
-      "1541e85aa88406d9912050230aed4a1c88015214bbee9c4c7fca38624c8977bf"
+      "d05c43e9891f24d42a387d3a47bf17c7f5d356bbe85a20adc4dde2342b2917ff"
     ],
     [
       ".kilo/agents/orchestrator/pr-description.md",
-      "7c9ef1c52cb88b077f4ca9bbfbbed299c207d728d29da9d425c48348c364fe15"
+      "ceb8f419f9036b38f8679324ee59c137448ffdfbe29e52f949308a72d57385ad"
     ],
     [
       ".kilo/agents/orchestrator.md",
-      "c741cada01f463794994ad5ddd2bc6b53214a553493c8ec9f10cc760383400ca"
+      "186b5d6919b229365efbcd258169080ad94350a58476c7999109dab09cccaaf6"
     ],
     [
       ".kilo/agents/performance/benchmarking.md",
-      "e0afe89582e4a4ceee1f96d42d506139a194780e627a64d2d7756f2f1ef69705"
+      "ff223717d509f74f59576475418ca98c5d4f279aa44743fa4788b73a80c11bf6"
     ],
     [
       ".kilo/agents/performance/bottleneck-analysis.md",
-      "1ed5ed37e3d6b2ddf3fec3ad9d0fd5250e4be1b1624df4ee99746bc31c8cdd2d"
+      "8cdca1196f7a0d234a2ffc42b87350424b17e099f1f97fc234f0e2b7083f778a"
     ],
     [
       ".kilo/agents/performance/optimization-strategies.md",
-      "fc5e035d1d2d27d5468ecb071bb616a52fec503fa45390f255e134ebda5fbafc"
+      "48598c33c4dcf5afff83e29b461bec9b685a5dcd7837246b824347dede6ffd85"
     ],
     [
       ".kilo/agents/performance/profiling.md",
-      "5dfb5d4a142cc89be0b637acff1a564f860568d94d6ad1130164405b5bd98fcf"
+      "fb48001f604ab274c49458f4847418c74504833828119e887e5b2c2dc026d6b4"
     ],
     [
       ".kilo/agents/performance.md",
-      "26ef8bbf2d8ae8d2d44c1edcb44a8cb2a7dfdfe3c8fdc5cd0ffb0fb9b3a4f77e"
+      "c7650babaab608d633bc73024169e0a509e8879b0f34c790eefceefb1421be63"
     ],
     [
       ".kilo/agents/plan.md",
-      "1db3802d8398c984663bf20519a9892b70b252b03997c1bb2acf0e09daa929dd"
+      "b2bfb54b8dd52efd42f5ed7edefa800d5c12930aa5e0798f85fab7150132754f"
     ],
     [
       ".kilo/agents/refactor/strategy.md",
-      "cca65f3555c316e8ead1e995d6af173e570e241d14403bc4305ab99d309ddfd5"
+      "b51b047d5585e0a63414f79efd2639807bef8d60903d3e60d61a16577829924d"
     ],
     [
       ".kilo/agents/refactor.md",
-      "b0259d0f2b3b7b0530bff6613b4e7c8c74c851f3650104eef96bc45ed0827c21"
+      "04476e996c78cb3c3dc92875a5210496f1f3a1afdd6cf99cdc3b774ef49bd382"
     ],
     [
       ".kilo/agents/review/accessibility.md",
-      "17955d8d84897a3a847016c193107193a00c1d6e242c9e5dadb7d7a5a41eaf3f"
+      "91f27841ab3cbeffaf6665c08e4e8125e760c3e04751d141a1fd3f4e37de238f"
     ],
     [
       ".kilo/agents/review/code.md",
-      "773a88e9560c64157a31ea097e04199a8d3ae4b2bbb4ab460d5a669748207383"
+      "84191c962efc0349f82a17cb90626a0d6a21ecf59c68488e3e94347e3ae79efe"
     ],
     [
       ".kilo/agents/review/performance.md",
-      "fd6b2fb7b82aa5f357b6ede6573e33fa540f9589c34005f187a7b594e0004808"
+      "60cb931bfeae118373e2d7eb9bf45b842070f4d7e3362b9c554735abdc19c6e7"
     ],
     [
       ".kilo/agents/review.md",
-      "c42ab91ff6a8f12ba1d6831c985d0b8014c3068146f9d21b2202c1b50b2b3628"
+      "80a2bf9dd426e83bffc87d46beca43b7d08c02f5985f0106edad518a9ddc8873"
     ],
     [
       ".kilo/agents/test/strategy.md",
-      "53e92d427165e7b4fd14e1027e21c95d2e018559e63c62f66cfc672977c97b05"
+      "be9ddb9230e5fccd302ce49248efc1e7e1f908311ef3562137d2580c594800c0"
     ],
     [
       ".kilo/agents/test.md",
-      "cc64437f39c25de8ff8c473c1892365c5a252b2c1701b661848ca13312784bb1"
+      "4e1ff3e043922db3308110792f378d65183d35ca0aac1d95ed5f9e486728ebfc"
     ],
     [
       ".kilo/commands/boilerplate.md",
@@ -5303,6 +5903,26 @@
       "412d3fd0885a675879dcefe580d6f1fcc6b8458a603b6f8ab18af951575f18e1"
     ],
     [
+      ".kilo/skills/autoscaling-strategies/SKILL.md",
+      "b0c382264dd283e3054baddf9042bc7b6f9b4bd8d39cb2992d854ff8f48ab780"
+    ],
+    [
+      ".kilo/skills/cloud-cost-optimization/SKILL.md",
+      "31e8aabc72f0c5af3d93cedb2c8341c348d7426b9dd1ffb9832e28d13cebb63c"
+    ],
+    [
+      ".kilo/skills/cloud-iam-design/SKILL.md",
+      "2a8f2d76f6cfbc13f7831da87fa102e0db616a19875964fe7130751ee1aad876"
+    ],
+    [
+      ".kilo/skills/cloud-migration-strategy/SKILL.md",
+      "b1d98f8e935f313ffdca9c45b3d58f1712e1c5e9af870e51c43841c7d78b9580"
+    ],
+    [
+      ".kilo/skills/cloud-networking-design/SKILL.md",
+      "595c6f3f1ca135949734e3fb86050bd2c810fb0de4a0dbcf9e16485890c81a05"
+    ],
+    [
       ".kilo/skills/code-review-practices/SKILL.md",
       "cb3052dc26028ce8a924eb3b03cabcd342a16cf4e2282c3d86a9b82d49ac0444"
     ],
@@ -5337,6 +5957,10 @@
     [
       ".kilo/skills/deployment-rollback-strategies/SKILL.md",
       "9b1005a40d0f26935094728e5b3cb9db1b3de41bb707acc7bf686cc1b9690fd9"
+    ],
+    [
+      ".kilo/skills/disaster-recovery-planning/SKILL.md",
+      "6a429431c88d464ccccd3829bf7f50ff738578dc50f9d60bac1ba4cfbca1d4f3"
     ],
     [
       ".kilo/skills/distributed-caching-design/SKILL.md",
@@ -5379,6 +6003,10 @@
       "5103d1f3c1a84fe8e7608323a457e7fd6ee0e9d2ee0adc36fec1ea9198a0feae"
     ],
     [
+      ".kilo/skills/message-queue-selection/SKILL.md",
+      "cf05805efd746e242848259d5142973ad1b1867f8c1b04df0efb0b94b2d91c4b"
+    ],
+    [
       ".kilo/skills/microservices-communication-patterns/SKILL.md",
       "dc8212a2cf2e0d37b3f4466b23b24cdce53196a2fd52373ef237e56754a42bea"
     ],
@@ -5389,6 +6017,10 @@
     [
       ".kilo/skills/mutation-testing/SKILL.md",
       "c909cc39e90c0e37168e38b9545ac3f42c0439c85b02a4abdbd353756f487b3f"
+    ],
+    [
+      ".kilo/skills/object-storage-patterns/SKILL.md",
+      "97ab0af9910915222bf6d54d4cdfbdfbfb54b1eae4501dafad271ab1964d6b79"
     ],
     [
       ".kilo/skills/performance-optimization/SKILL.md",
@@ -5403,6 +6035,10 @@
       "29b3a6dfbde2608b8e5598a60bce7e40e3e88350a42911405024e6fc1e5ea31b"
     ],
     [
+      ".kilo/skills/python-typing-and-async/SKILL.md",
+      "b81f8fa81a75bcd382a3361f61f8802a1cbfbe33efdbbad5efc7a60349f6ac24"
+    ],
+    [
       ".kilo/skills/quality-assurance/SKILL.md",
       "80c1e7a0d798ee2504243bf18a299121403469baa26a03bd29d02a8084fbfc42"
     ],
@@ -5413,6 +6049,10 @@
     [
       ".kilo/skills/root-cause-five-whys/SKILL.md",
       "b63a7d09797d10f64ef572bae2b1a346f8deea1be40407a9f42aca668dcbdc4f"
+    ],
+    [
+      ".kilo/skills/serverless-architecture/SKILL.md",
+      "eb060b785f83e0470eae958935dce36c096ac2ced19fddd3aa71e8d0487d8bf1"
     ],
     [
       ".kilo/skills/sql-optimization/SKILL.md",
@@ -5518,59 +6158,59 @@
     ],
     [
       ".roo/rules-ask/01-instructions.md",
-      "2aa4d60659fda59ff902fa71889b10719e26a5494df85e4894e3a480518f061a"
+      "4006782dcb936a89360d1340a3540c9a50dec3e1b1faec1d6b1304e68d439317"
     ],
     [
       ".roo/rules-backend/01-instructions.md",
-      "8708e7ad2536572fc85cd9e20b286e8d72ec494bf65ee862753ef54bdf88af38"
+      "4e984ef97d8a357030b8f745139f390153697f2fcde4cd20c030830d71ffc628"
     ],
     [
       ".roo/rules-code/01-instructions.md",
-      "83df24f18d2f00c9972007d449d9e104597ef62412461511be8cbc377e3a6873"
+      "921235253b250b54034eb104f0b4031ad89ae6322a3f55c3a31a4c5579130d02"
     ],
     [
       ".roo/rules-debug/01-instructions.md",
-      "ce78bc72287e8faeda25518b6d0e33f56e66ee300f2faeb009a608521c55b230"
+      "a3f702dd3d117b0d1a1d877e8b53d535d03723f8d1a9cc5bd4e7cfe09561b76e"
     ],
     [
       ".roo/rules-enforcement/01-instructions.md",
-      "3e4b374f8ddbbefd6efc319e1a0ac9f5da9727a3f34f776029b4d13020b3528f"
+      "d2fcb02c977977e783a92a208e6665420aebbdba91cf0c9a2b4906ceb6cf5b9d"
     ],
     [
       ".roo/rules-explain/01-instructions.md",
-      "6a3050b000786c7ebf47828ceebbe78438681c7ed14fc343e6efd838369ff892"
+      "1876defd0959fcf4f0fa82e6889018246d8a069cb641a9385e64eb587804d61a"
     ],
     [
       ".roo/rules-frontend/01-instructions.md",
-      "91b2bf519d983639abf07b0475def391d39284770d9600d175e11116be68705e"
+      "47b04465bd1381ad267bbdbfdc925a40a7349dec16128f8433156ff160b72eda"
     ],
     [
       ".roo/rules-migration/01-instructions.md",
-      "55217c21e9fe5a45c97ed7416783b614497270674ca065c346406c0369cf6f7b"
+      "16fd41291a019f7a8ec58f23eafd849cb5575cd86ab9b55a7c4535f99191bf18"
     ],
     [
       ".roo/rules-orchestrator/01-instructions.md",
-      "9ffbe69b9a8337c5043e882f1c2dcafffc464ac59dc301eb1ad13f49756d196b"
+      "218e3a8f7deb94463f81cfa202be59eb7e244fd0685752b5842dc0a0e77e5ac5"
     ],
     [
       ".roo/rules-performance/01-instructions.md",
-      "b4b5ed3fa26b330e6ec194080b8d5397e455858d2eba803efd4c0dbfc7a4f53f"
+      "0e59e965953e7a19b24d90649c9c196d0134c750b76c8d56428f34f7a638e547"
     ],
     [
       ".roo/rules-plan/01-instructions.md",
-      "b8f8524f6ea9f04a55144a6508b8e831714cd3ef2e45ea26171fcde340e58a30"
+      "1a9bee7ad1092eeca226cebe2f8b575bfb0b3ea7f0c3ab1a58b0a1b4d794d96c"
     ],
     [
       ".roo/rules-refactor/01-instructions.md",
-      "e0c53cafad033697956d46de6c9a181b59d4fcb0c15f804f7e06087aff616c64"
+      "279b659c060097d4e7cfc1c7a0737fbd14ae7229f0ba8371886c24ce84c01439"
     ],
     [
       ".roo/rules-review/01-instructions.md",
-      "394bd1a4555d23200434b98203259369f96cc455be44093c554e5e10e3826302"
+      "7b8cb098d50cb642310defb458011af37f59b01feddf26e3f39ce8aa19b15e8e"
     ],
     [
       ".roo/rules-test/01-instructions.md",
-      "0acb59a0a1394365afcfc1015d82d14b7b4610710168cf292e6d09564715e4af"
+      "05f450aac25bfa4a6b81da80974ace6d48abd0f26a570272c886ad0b82031b0f"
     ],
     [
       ".roo/skills/api-versioning-strategy/SKILL.md",
@@ -5579,6 +6219,26 @@
     [
       ".roo/skills/architecture-documentation/SKILL.md",
       "30724be199f07b6dc2de868499cedba6e24418c4093369a7cfe188efc9a8bb21"
+    ],
+    [
+      ".roo/skills/autoscaling-strategies/SKILL.md",
+      "75d93e8d919eb5ea6b47c0d0cc0ba08cbad9e84f8a2360249b83cc6f39e9a4a0"
+    ],
+    [
+      ".roo/skills/cloud-cost-optimization/SKILL.md",
+      "19918edf78ad7fc22cccba9fa1c963a00e16b814a281c11322542f7bc0239daa"
+    ],
+    [
+      ".roo/skills/cloud-iam-design/SKILL.md",
+      "8a5d9f0a7b5d79e6159c061990f0805b5fed1f183862c4083f480ec46b1dd477"
+    ],
+    [
+      ".roo/skills/cloud-migration-strategy/SKILL.md",
+      "f7edf96e329cc446d3544316c64eac51ee019d7d3a84ed68e27202d78b28d915"
+    ],
+    [
+      ".roo/skills/cloud-networking-design/SKILL.md",
+      "17577805f6ff0f08daf22ed224ccbeafe31d739b50e0a9667c4b678960525211"
     ],
     [
       ".roo/skills/code-review-practices/SKILL.md",
@@ -5615,6 +6275,10 @@
     [
       ".roo/skills/deployment-rollback-strategies/SKILL.md",
       "aecf824dd1bf024478dffeb8227452efcdac13da0487969976bc72204b4fd611"
+    ],
+    [
+      ".roo/skills/disaster-recovery-planning/SKILL.md",
+      "e24bb761562082f95e167f8d1255779867e5ddd7c16da80b19969d7c39346538"
     ],
     [
       ".roo/skills/distributed-caching-design/SKILL.md",
@@ -5657,6 +6321,10 @@
       "f1ed6755e34250bdb628ceed35952b48dfda38eaf3eea414e9e6de4f32d5033b"
     ],
     [
+      ".roo/skills/message-queue-selection/SKILL.md",
+      "9140947f154c7672a5ec8c8f1428ed9bef3aedcb13d9a6e37eebef40e114875a"
+    ],
+    [
       ".roo/skills/microservices-communication-patterns/SKILL.md",
       "a50c94a952cf5351d7b31bfcd9e52f28d67c9c6025d87732f66083f0c42d5a0f"
     ],
@@ -5667,6 +6335,10 @@
     [
       ".roo/skills/mutation-testing/SKILL.md",
       "954b830c4eaec5df5023c7af09caef679c8ed467b0e8763702bb9a39e3e15945"
+    ],
+    [
+      ".roo/skills/object-storage-patterns/SKILL.md",
+      "12edf9bac15a591622f17e9965c47186d975aee07919c5c00801bbf219d23c51"
     ],
     [
       ".roo/skills/performance-optimization/SKILL.md",
@@ -5681,6 +6353,10 @@
       "9453f7efb79384fcff447a3b49c23027b8cb1d046a918edb563e8218d6b0c14e"
     ],
     [
+      ".roo/skills/python-typing-and-async/SKILL.md",
+      "cf0935bb917b3a5be741f0d95e6497747fa902f325915448d2bf008f69ffa5c0"
+    ],
+    [
       ".roo/skills/quality-assurance/SKILL.md",
       "b2c17c7b4714b7fe8e5d5aeed3d500396a6d38cd58616fe44f62e9fb3a19cebe"
     ],
@@ -5691,6 +6367,10 @@
     [
       ".roo/skills/root-cause-five-whys/SKILL.md",
       "9e8dec4da0d938a9f7d6c48a143f6c8f570528a4d1d2864dd251318148714064"
+    ],
+    [
+      ".roo/skills/serverless-architecture/SKILL.md",
+      "221001c046ba8033d56ae6452b04cbbea93d8943939b57f2317aabcd6361a19f"
     ],
     [
       ".roo/skills/sql-optimization/SKILL.md",
@@ -5800,59 +6480,59 @@
     ],
     [
       ".roo/rules-ask/01-instructions.md",
-      "2aa4d60659fda59ff902fa71889b10719e26a5494df85e4894e3a480518f061a"
+      "4006782dcb936a89360d1340a3540c9a50dec3e1b1faec1d6b1304e68d439317"
     ],
     [
       ".roo/rules-backend/01-instructions.md",
-      "8708e7ad2536572fc85cd9e20b286e8d72ec494bf65ee862753ef54bdf88af38"
+      "4e984ef97d8a357030b8f745139f390153697f2fcde4cd20c030830d71ffc628"
     ],
     [
       ".roo/rules-code/01-instructions.md",
-      "83df24f18d2f00c9972007d449d9e104597ef62412461511be8cbc377e3a6873"
+      "921235253b250b54034eb104f0b4031ad89ae6322a3f55c3a31a4c5579130d02"
     ],
     [
       ".roo/rules-debug/01-instructions.md",
-      "ce78bc72287e8faeda25518b6d0e33f56e66ee300f2faeb009a608521c55b230"
+      "a3f702dd3d117b0d1a1d877e8b53d535d03723f8d1a9cc5bd4e7cfe09561b76e"
     ],
     [
       ".roo/rules-enforcement/01-instructions.md",
-      "3e4b374f8ddbbefd6efc319e1a0ac9f5da9727a3f34f776029b4d13020b3528f"
+      "d2fcb02c977977e783a92a208e6665420aebbdba91cf0c9a2b4906ceb6cf5b9d"
     ],
     [
       ".roo/rules-explain/01-instructions.md",
-      "6a3050b000786c7ebf47828ceebbe78438681c7ed14fc343e6efd838369ff892"
+      "1876defd0959fcf4f0fa82e6889018246d8a069cb641a9385e64eb587804d61a"
     ],
     [
       ".roo/rules-frontend/01-instructions.md",
-      "91b2bf519d983639abf07b0475def391d39284770d9600d175e11116be68705e"
+      "47b04465bd1381ad267bbdbfdc925a40a7349dec16128f8433156ff160b72eda"
     ],
     [
       ".roo/rules-migration/01-instructions.md",
-      "55217c21e9fe5a45c97ed7416783b614497270674ca065c346406c0369cf6f7b"
+      "16fd41291a019f7a8ec58f23eafd849cb5575cd86ab9b55a7c4535f99191bf18"
     ],
     [
       ".roo/rules-orchestrator/01-instructions.md",
-      "9ffbe69b9a8337c5043e882f1c2dcafffc464ac59dc301eb1ad13f49756d196b"
+      "218e3a8f7deb94463f81cfa202be59eb7e244fd0685752b5842dc0a0e77e5ac5"
     ],
     [
       ".roo/rules-performance/01-instructions.md",
-      "b4b5ed3fa26b330e6ec194080b8d5397e455858d2eba803efd4c0dbfc7a4f53f"
+      "0e59e965953e7a19b24d90649c9c196d0134c750b76c8d56428f34f7a638e547"
     ],
     [
       ".roo/rules-plan/01-instructions.md",
-      "b8f8524f6ea9f04a55144a6508b8e831714cd3ef2e45ea26171fcde340e58a30"
+      "1a9bee7ad1092eeca226cebe2f8b575bfb0b3ea7f0c3ab1a58b0a1b4d794d96c"
     ],
     [
       ".roo/rules-refactor/01-instructions.md",
-      "e0c53cafad033697956d46de6c9a181b59d4fcb0c15f804f7e06087aff616c64"
+      "279b659c060097d4e7cfc1c7a0737fbd14ae7229f0ba8371886c24ce84c01439"
     ],
     [
       ".roo/rules-review/01-instructions.md",
-      "394bd1a4555d23200434b98203259369f96cc455be44093c554e5e10e3826302"
+      "7b8cb098d50cb642310defb458011af37f59b01feddf26e3f39ce8aa19b15e8e"
     ],
     [
       ".roo/rules-test/01-instructions.md",
-      "0acb59a0a1394365afcfc1015d82d14b7b4610710168cf292e6d09564715e4af"
+      "05f450aac25bfa4a6b81da80974ace6d48abd0f26a570272c886ad0b82031b0f"
     ],
     [
       ".roo/skills/api-versioning-strategy/SKILL.md",
@@ -5861,6 +6541,26 @@
     [
       ".roo/skills/architecture-documentation/SKILL.md",
       "412d3fd0885a675879dcefe580d6f1fcc6b8458a603b6f8ab18af951575f18e1"
+    ],
+    [
+      ".roo/skills/autoscaling-strategies/SKILL.md",
+      "b0c382264dd283e3054baddf9042bc7b6f9b4bd8d39cb2992d854ff8f48ab780"
+    ],
+    [
+      ".roo/skills/cloud-cost-optimization/SKILL.md",
+      "31e8aabc72f0c5af3d93cedb2c8341c348d7426b9dd1ffb9832e28d13cebb63c"
+    ],
+    [
+      ".roo/skills/cloud-iam-design/SKILL.md",
+      "2a8f2d76f6cfbc13f7831da87fa102e0db616a19875964fe7130751ee1aad876"
+    ],
+    [
+      ".roo/skills/cloud-migration-strategy/SKILL.md",
+      "b1d98f8e935f313ffdca9c45b3d58f1712e1c5e9af870e51c43841c7d78b9580"
+    ],
+    [
+      ".roo/skills/cloud-networking-design/SKILL.md",
+      "595c6f3f1ca135949734e3fb86050bd2c810fb0de4a0dbcf9e16485890c81a05"
     ],
     [
       ".roo/skills/code-review-practices/SKILL.md",
@@ -5897,6 +6597,10 @@
     [
       ".roo/skills/deployment-rollback-strategies/SKILL.md",
       "9b1005a40d0f26935094728e5b3cb9db1b3de41bb707acc7bf686cc1b9690fd9"
+    ],
+    [
+      ".roo/skills/disaster-recovery-planning/SKILL.md",
+      "6a429431c88d464ccccd3829bf7f50ff738578dc50f9d60bac1ba4cfbca1d4f3"
     ],
     [
       ".roo/skills/distributed-caching-design/SKILL.md",
@@ -5939,6 +6643,10 @@
       "5103d1f3c1a84fe8e7608323a457e7fd6ee0e9d2ee0adc36fec1ea9198a0feae"
     ],
     [
+      ".roo/skills/message-queue-selection/SKILL.md",
+      "cf05805efd746e242848259d5142973ad1b1867f8c1b04df0efb0b94b2d91c4b"
+    ],
+    [
       ".roo/skills/microservices-communication-patterns/SKILL.md",
       "dc8212a2cf2e0d37b3f4466b23b24cdce53196a2fd52373ef237e56754a42bea"
     ],
@@ -5949,6 +6657,10 @@
     [
       ".roo/skills/mutation-testing/SKILL.md",
       "c909cc39e90c0e37168e38b9545ac3f42c0439c85b02a4abdbd353756f487b3f"
+    ],
+    [
+      ".roo/skills/object-storage-patterns/SKILL.md",
+      "97ab0af9910915222bf6d54d4cdfbdfbfb54b1eae4501dafad271ab1964d6b79"
     ],
     [
       ".roo/skills/performance-optimization/SKILL.md",
@@ -5963,6 +6675,10 @@
       "29b3a6dfbde2608b8e5598a60bce7e40e3e88350a42911405024e6fc1e5ea31b"
     ],
     [
+      ".roo/skills/python-typing-and-async/SKILL.md",
+      "b81f8fa81a75bcd382a3361f61f8802a1cbfbe33efdbbad5efc7a60349f6ac24"
+    ],
+    [
       ".roo/skills/quality-assurance/SKILL.md",
       "80c1e7a0d798ee2504243bf18a299121403469baa26a03bd29d02a8084fbfc42"
     ],
@@ -5973,6 +6689,10 @@
     [
       ".roo/skills/root-cause-five-whys/SKILL.md",
       "b63a7d09797d10f64ef572bae2b1a346f8deea1be40407a9f42aca668dcbdc4f"
+    ],
+    [
+      ".roo/skills/serverless-architecture/SKILL.md",
+      "eb060b785f83e0470eae958935dce36c096ac2ced19fddd3aa71e8d0487d8bf1"
     ],
     [
       ".roo/skills/sql-optimization/SKILL.md",
@@ -6049,8 +6769,28 @@
       "97519379dbc61b402ecfbf7960d4cbaeb8eb2bc5a38c19e8254c67f1364e1640"
     ],
     [
+      ".windsurf/skills/autoscaling-strategies/SKILL.md",
+      "75d93e8d919eb5ea6b47c0d0cc0ba08cbad9e84f8a2360249b83cc6f39e9a4a0"
+    ],
+    [
       ".windsurf/skills/backend/SKILL.md",
       "7a73c8648dc279b21bb940d9b1424694dece641338b2abbca4c504770214155f"
+    ],
+    [
+      ".windsurf/skills/cloud-cost-optimization/SKILL.md",
+      "19918edf78ad7fc22cccba9fa1c963a00e16b814a281c11322542f7bc0239daa"
+    ],
+    [
+      ".windsurf/skills/cloud-iam-design/SKILL.md",
+      "8a5d9f0a7b5d79e6159c061990f0805b5fed1f183862c4083f480ec46b1dd477"
+    ],
+    [
+      ".windsurf/skills/cloud-migration-strategy/SKILL.md",
+      "f7edf96e329cc446d3544316c64eac51ee019d7d3a84ed68e27202d78b28d915"
+    ],
+    [
+      ".windsurf/skills/cloud-networking-design/SKILL.md",
+      "17577805f6ff0f08daf22ed224ccbeafe31d739b50e0a9667c4b678960525211"
     ],
     [
       ".windsurf/skills/code/SKILL.md",
@@ -6095,6 +6835,10 @@
     [
       ".windsurf/skills/deployment-rollback-strategies/SKILL.md",
       "aecf824dd1bf024478dffeb8227452efcdac13da0487969976bc72204b4fd611"
+    ],
+    [
+      ".windsurf/skills/disaster-recovery-planning/SKILL.md",
+      "e24bb761562082f95e167f8d1255779867e5ddd7c16da80b19969d7c39346538"
     ],
     [
       ".windsurf/skills/distributed-caching-design/SKILL.md",
@@ -6149,6 +6893,10 @@
       "f1ed6755e34250bdb628ceed35952b48dfda38eaf3eea414e9e6de4f32d5033b"
     ],
     [
+      ".windsurf/skills/message-queue-selection/SKILL.md",
+      "9140947f154c7672a5ec8c8f1428ed9bef3aedcb13d9a6e37eebef40e114875a"
+    ],
+    [
       ".windsurf/skills/microservices-communication-patterns/SKILL.md",
       "a50c94a952cf5351d7b31bfcd9e52f28d67c9c6025d87732f66083f0c42d5a0f"
     ],
@@ -6163,6 +6911,10 @@
     [
       ".windsurf/skills/mutation-testing/SKILL.md",
       "954b830c4eaec5df5023c7af09caef679c8ed467b0e8763702bb9a39e3e15945"
+    ],
+    [
+      ".windsurf/skills/object-storage-patterns/SKILL.md",
+      "12edf9bac15a591622f17e9965c47186d975aee07919c5c00801bbf219d23c51"
     ],
     [
       ".windsurf/skills/orchestrator/SKILL.md",
@@ -6189,6 +6941,10 @@
       "9453f7efb79384fcff447a3b49c23027b8cb1d046a918edb563e8218d6b0c14e"
     ],
     [
+      ".windsurf/skills/python-typing-and-async/SKILL.md",
+      "cf0935bb917b3a5be741f0d95e6497747fa902f325915448d2bf008f69ffa5c0"
+    ],
+    [
       ".windsurf/skills/quality-assurance/SKILL.md",
       "b2c17c7b4714b7fe8e5d5aeed3d500396a6d38cd58616fe44f62e9fb3a19cebe"
     ],
@@ -6207,6 +6963,10 @@
     [
       ".windsurf/skills/root-cause-five-whys/SKILL.md",
       "9e8dec4da0d938a9f7d6c48a143f6c8f570528a4d1d2864dd251318148714064"
+    ],
+    [
+      ".windsurf/skills/serverless-architecture/SKILL.md",
+      "221001c046ba8033d56ae6452b04cbbea93d8943939b57f2317aabcd6361a19f"
     ],
     [
       ".windsurf/skills/sql-optimization/SKILL.md",
@@ -6331,8 +7091,28 @@
       "97519379dbc61b402ecfbf7960d4cbaeb8eb2bc5a38c19e8254c67f1364e1640"
     ],
     [
+      ".windsurf/skills/autoscaling-strategies/SKILL.md",
+      "b0c382264dd283e3054baddf9042bc7b6f9b4bd8d39cb2992d854ff8f48ab780"
+    ],
+    [
       ".windsurf/skills/backend/SKILL.md",
       "7a73c8648dc279b21bb940d9b1424694dece641338b2abbca4c504770214155f"
+    ],
+    [
+      ".windsurf/skills/cloud-cost-optimization/SKILL.md",
+      "31e8aabc72f0c5af3d93cedb2c8341c348d7426b9dd1ffb9832e28d13cebb63c"
+    ],
+    [
+      ".windsurf/skills/cloud-iam-design/SKILL.md",
+      "2a8f2d76f6cfbc13f7831da87fa102e0db616a19875964fe7130751ee1aad876"
+    ],
+    [
+      ".windsurf/skills/cloud-migration-strategy/SKILL.md",
+      "b1d98f8e935f313ffdca9c45b3d58f1712e1c5e9af870e51c43841c7d78b9580"
+    ],
+    [
+      ".windsurf/skills/cloud-networking-design/SKILL.md",
+      "595c6f3f1ca135949734e3fb86050bd2c810fb0de4a0dbcf9e16485890c81a05"
     ],
     [
       ".windsurf/skills/code/SKILL.md",
@@ -6377,6 +7157,10 @@
     [
       ".windsurf/skills/deployment-rollback-strategies/SKILL.md",
       "9b1005a40d0f26935094728e5b3cb9db1b3de41bb707acc7bf686cc1b9690fd9"
+    ],
+    [
+      ".windsurf/skills/disaster-recovery-planning/SKILL.md",
+      "6a429431c88d464ccccd3829bf7f50ff738578dc50f9d60bac1ba4cfbca1d4f3"
     ],
     [
       ".windsurf/skills/distributed-caching-design/SKILL.md",
@@ -6431,6 +7215,10 @@
       "5103d1f3c1a84fe8e7608323a457e7fd6ee0e9d2ee0adc36fec1ea9198a0feae"
     ],
     [
+      ".windsurf/skills/message-queue-selection/SKILL.md",
+      "cf05805efd746e242848259d5142973ad1b1867f8c1b04df0efb0b94b2d91c4b"
+    ],
+    [
       ".windsurf/skills/microservices-communication-patterns/SKILL.md",
       "dc8212a2cf2e0d37b3f4466b23b24cdce53196a2fd52373ef237e56754a42bea"
     ],
@@ -6445,6 +7233,10 @@
     [
       ".windsurf/skills/mutation-testing/SKILL.md",
       "c909cc39e90c0e37168e38b9545ac3f42c0439c85b02a4abdbd353756f487b3f"
+    ],
+    [
+      ".windsurf/skills/object-storage-patterns/SKILL.md",
+      "97ab0af9910915222bf6d54d4cdfbdfbfb54b1eae4501dafad271ab1964d6b79"
     ],
     [
       ".windsurf/skills/orchestrator/SKILL.md",
@@ -6471,6 +7263,10 @@
       "29b3a6dfbde2608b8e5598a60bce7e40e3e88350a42911405024e6fc1e5ea31b"
     ],
     [
+      ".windsurf/skills/python-typing-and-async/SKILL.md",
+      "b81f8fa81a75bcd382a3361f61f8802a1cbfbe33efdbbad5efc7a60349f6ac24"
+    ],
+    [
       ".windsurf/skills/quality-assurance/SKILL.md",
       "80c1e7a0d798ee2504243bf18a299121403469baa26a03bd29d02a8084fbfc42"
     ],
@@ -6489,6 +7285,10 @@
     [
       ".windsurf/skills/root-cause-five-whys/SKILL.md",
       "b63a7d09797d10f64ef572bae2b1a346f8deea1be40407a9f42aca668dcbdc4f"
+    ],
+    [
+      ".windsurf/skills/serverless-architecture/SKILL.md",
+      "eb060b785f83e0470eae958935dce36c096ac2ced19fddd3aa71e8d0487d8bf1"
     ],
     [
       ".windsurf/skills/sql-optimization/SKILL.md",
@@ -6605,8 +7405,28 @@
       "97519379dbc61b402ecfbf7960d4cbaeb8eb2bc5a38c19e8254c67f1364e1640"
     ],
     [
+      ".agents/skills/autoscaling-strategies/SKILL.md",
+      "75d93e8d919eb5ea6b47c0d0cc0ba08cbad9e84f8a2360249b83cc6f39e9a4a0"
+    ],
+    [
       ".agents/skills/backend/SKILL.md",
       "7a73c8648dc279b21bb940d9b1424694dece641338b2abbca4c504770214155f"
+    ],
+    [
+      ".agents/skills/cloud-cost-optimization/SKILL.md",
+      "19918edf78ad7fc22cccba9fa1c963a00e16b814a281c11322542f7bc0239daa"
+    ],
+    [
+      ".agents/skills/cloud-iam-design/SKILL.md",
+      "8a5d9f0a7b5d79e6159c061990f0805b5fed1f183862c4083f480ec46b1dd477"
+    ],
+    [
+      ".agents/skills/cloud-migration-strategy/SKILL.md",
+      "f7edf96e329cc446d3544316c64eac51ee019d7d3a84ed68e27202d78b28d915"
+    ],
+    [
+      ".agents/skills/cloud-networking-design/SKILL.md",
+      "17577805f6ff0f08daf22ed224ccbeafe31d739b50e0a9667c4b678960525211"
     ],
     [
       ".agents/skills/code/SKILL.md",
@@ -6651,6 +7471,10 @@
     [
       ".agents/skills/deployment-rollback-strategies/SKILL.md",
       "aecf824dd1bf024478dffeb8227452efcdac13da0487969976bc72204b4fd611"
+    ],
+    [
+      ".agents/skills/disaster-recovery-planning/SKILL.md",
+      "e24bb761562082f95e167f8d1255779867e5ddd7c16da80b19969d7c39346538"
     ],
     [
       ".agents/skills/distributed-caching-design/SKILL.md",
@@ -6705,6 +7529,10 @@
       "f1ed6755e34250bdb628ceed35952b48dfda38eaf3eea414e9e6de4f32d5033b"
     ],
     [
+      ".agents/skills/message-queue-selection/SKILL.md",
+      "9140947f154c7672a5ec8c8f1428ed9bef3aedcb13d9a6e37eebef40e114875a"
+    ],
+    [
       ".agents/skills/microservices-communication-patterns/SKILL.md",
       "a50c94a952cf5351d7b31bfcd9e52f28d67c9c6025d87732f66083f0c42d5a0f"
     ],
@@ -6719,6 +7547,10 @@
     [
       ".agents/skills/mutation-testing/SKILL.md",
       "954b830c4eaec5df5023c7af09caef679c8ed467b0e8763702bb9a39e3e15945"
+    ],
+    [
+      ".agents/skills/object-storage-patterns/SKILL.md",
+      "12edf9bac15a591622f17e9965c47186d975aee07919c5c00801bbf219d23c51"
     ],
     [
       ".agents/skills/orchestrator/SKILL.md",
@@ -6745,6 +7577,10 @@
       "9453f7efb79384fcff447a3b49c23027b8cb1d046a918edb563e8218d6b0c14e"
     ],
     [
+      ".agents/skills/python-typing-and-async/SKILL.md",
+      "cf0935bb917b3a5be741f0d95e6497747fa902f325915448d2bf008f69ffa5c0"
+    ],
+    [
       ".agents/skills/quality-assurance/SKILL.md",
       "b2c17c7b4714b7fe8e5d5aeed3d500396a6d38cd58616fe44f62e9fb3a19cebe"
     ],
@@ -6763,6 +7599,10 @@
     [
       ".agents/skills/root-cause-five-whys/SKILL.md",
       "9e8dec4da0d938a9f7d6c48a143f6c8f570528a4d1d2864dd251318148714064"
+    ],
+    [
+      ".agents/skills/serverless-architecture/SKILL.md",
+      "221001c046ba8033d56ae6452b04cbbea93d8943939b57f2317aabcd6361a19f"
     ],
     [
       ".agents/skills/sql-optimization/SKILL.md",
@@ -6831,8 +7671,28 @@
       "97519379dbc61b402ecfbf7960d4cbaeb8eb2bc5a38c19e8254c67f1364e1640"
     ],
     [
+      ".agents/skills/autoscaling-strategies/SKILL.md",
+      "b0c382264dd283e3054baddf9042bc7b6f9b4bd8d39cb2992d854ff8f48ab780"
+    ],
+    [
       ".agents/skills/backend/SKILL.md",
       "7a73c8648dc279b21bb940d9b1424694dece641338b2abbca4c504770214155f"
+    ],
+    [
+      ".agents/skills/cloud-cost-optimization/SKILL.md",
+      "31e8aabc72f0c5af3d93cedb2c8341c348d7426b9dd1ffb9832e28d13cebb63c"
+    ],
+    [
+      ".agents/skills/cloud-iam-design/SKILL.md",
+      "2a8f2d76f6cfbc13f7831da87fa102e0db616a19875964fe7130751ee1aad876"
+    ],
+    [
+      ".agents/skills/cloud-migration-strategy/SKILL.md",
+      "b1d98f8e935f313ffdca9c45b3d58f1712e1c5e9af870e51c43841c7d78b9580"
+    ],
+    [
+      ".agents/skills/cloud-networking-design/SKILL.md",
+      "595c6f3f1ca135949734e3fb86050bd2c810fb0de4a0dbcf9e16485890c81a05"
     ],
     [
       ".agents/skills/code/SKILL.md",
@@ -6877,6 +7737,10 @@
     [
       ".agents/skills/deployment-rollback-strategies/SKILL.md",
       "9b1005a40d0f26935094728e5b3cb9db1b3de41bb707acc7bf686cc1b9690fd9"
+    ],
+    [
+      ".agents/skills/disaster-recovery-planning/SKILL.md",
+      "6a429431c88d464ccccd3829bf7f50ff738578dc50f9d60bac1ba4cfbca1d4f3"
     ],
     [
       ".agents/skills/distributed-caching-design/SKILL.md",
@@ -6931,6 +7795,10 @@
       "5103d1f3c1a84fe8e7608323a457e7fd6ee0e9d2ee0adc36fec1ea9198a0feae"
     ],
     [
+      ".agents/skills/message-queue-selection/SKILL.md",
+      "cf05805efd746e242848259d5142973ad1b1867f8c1b04df0efb0b94b2d91c4b"
+    ],
+    [
       ".agents/skills/microservices-communication-patterns/SKILL.md",
       "dc8212a2cf2e0d37b3f4466b23b24cdce53196a2fd52373ef237e56754a42bea"
     ],
@@ -6945,6 +7813,10 @@
     [
       ".agents/skills/mutation-testing/SKILL.md",
       "c909cc39e90c0e37168e38b9545ac3f42c0439c85b02a4abdbd353756f487b3f"
+    ],
+    [
+      ".agents/skills/object-storage-patterns/SKILL.md",
+      "97ab0af9910915222bf6d54d4cdfbdfbfb54b1eae4501dafad271ab1964d6b79"
     ],
     [
       ".agents/skills/orchestrator/SKILL.md",
@@ -6971,6 +7843,10 @@
       "29b3a6dfbde2608b8e5598a60bce7e40e3e88350a42911405024e6fc1e5ea31b"
     ],
     [
+      ".agents/skills/python-typing-and-async/SKILL.md",
+      "b81f8fa81a75bcd382a3361f61f8802a1cbfbe33efdbbad5efc7a60349f6ac24"
+    ],
+    [
       ".agents/skills/quality-assurance/SKILL.md",
       "80c1e7a0d798ee2504243bf18a299121403469baa26a03bd29d02a8084fbfc42"
     ],
@@ -6989,6 +7865,10 @@
     [
       ".agents/skills/root-cause-five-whys/SKILL.md",
       "b63a7d09797d10f64ef572bae2b1a346f8deea1be40407a9f42aca668dcbdc4f"
+    ],
+    [
+      ".agents/skills/serverless-architecture/SKILL.md",
+      "eb060b785f83e0470eae958935dce36c096ac2ced19fddd3aa71e8d0487d8bf1"
     ],
     [
       ".agents/skills/sql-optimization/SKILL.md",

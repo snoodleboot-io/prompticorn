@@ -18,12 +18,19 @@
 architect:
   skills:
     - architecture-documentation
+    - cloud-migration-strategy
+    - cloud-provider-tradeoffs
     - data-model-discovery
+    - edge-and-cdn-delivery
     - feature-planning
+    - managed-database-selection
     - mermaid-erd-creation
+    - message-queue-selection
+    - multi-cloud-strategy
     - nosql-database-selection
     - post-implementation-checklist
     - problem-decomposition
+    - serverless-architecture
     - technical-communication
     - technical-decision-making
   workflows:
@@ -62,8 +69,11 @@ backend:
     - distributed-caching-design
     - idempotency-patterns
     - incremental-implementation
+    - message-queue-selection
     - microservices-communication-patterns
+    - object-storage-patterns
     - performance-optimization
+    - serverless-architecture
   workflows:
     - api-design
     - code
@@ -117,7 +127,9 @@ data:
     - data-versioning-reproducibility
     - dimensional-modeling
     - feature-store-design
+    - managed-database-selection
     - nosql-database-selection
+    - object-storage-patterns
     - slowly-changing-dimensions
     - sql-optimization
   workflows:
@@ -145,9 +157,15 @@ debug:
 # ============================================================================
 devops:
   skills:
+    - autoscaling-strategies
+    - cloud-cost-optimization
+    - cloud-iam-design
+    - cloud-migration-strategy
+    - cloud-networking-design
     - container-security-hardening
     - continuous-improvement
     - deployment-rollback-strategies
+    - disaster-recovery-planning
     - documentation-best-practices
     - iac-best-practices
     - infrastructure-drift-detection
@@ -430,6 +448,7 @@ review:
 security:
   skills:
     - api-security
+    - cloud-iam-design
     - code-review-practices
     - container-security-hardening
     - key-management

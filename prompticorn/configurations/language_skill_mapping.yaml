@@ -20,6 +20,7 @@
 
 csharp:
   skills:
+  - csharp-async-and-linq
   - feature-planning
   - incremental-implementation
   - post-implementation-checklist
@@ -48,6 +49,8 @@ csharp/test:
 go:
   skills:
   - feature-planning
+  - go-concurrency-patterns
+  - go-error-handling-and-interfaces
   - incremental-implementation
   - post-implementation-checklist
   - test-coverage-categories
@@ -83,6 +86,7 @@ java:
   skills:
   - feature-planning
   - incremental-implementation
+  - java-concurrency-and-memory
   - post-implementation-checklist
   - test-coverage-categories
   - test-mocking-rules
@@ -117,6 +121,7 @@ javascript:
   skills:
   - feature-planning
   - incremental-implementation
+  - javascript-event-loop
   - post-implementation-checklist
   - test-aaa-structure
   - test-coverage-categories
@@ -151,6 +156,7 @@ python:
   - feature-planning
   - incremental-implementation
   - post-implementation-checklist
+  - python-typing-and-async
   - test-aaa-structure
   - test-coverage-categories
   - test-mocking-rules
@@ -187,6 +193,8 @@ rust:
   - feature-planning
   - incremental-implementation
   - post-implementation-checklist
+  - rust-error-handling-patterns
+  - rust-ownership-and-lifetimes
   - test-coverage-categories
   - test-mocking-rules
   workflows:
@@ -238,6 +246,7 @@ sql:
   skills:
   - data-model-discovery
   - mermaid-erd-creation
+  - sql-window-functions-and-ctes
   workflows:
   - data-model
 typescript:
@@ -248,6 +257,7 @@ typescript:
   - test-aaa-structure
   - test-coverage-categories
   - test-mocking-rules
+  - typescript-type-system
   workflows:
   - feature
   - testing
