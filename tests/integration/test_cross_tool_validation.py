@@ -68,22 +68,8 @@ def test_every_emitted_skill_is_a_valid_agent_skill(tool, tmp_path):
     assert not offenders, f"{tool} emitted non-conformant Agent Skills: {offenders}"
 
 
-# PRO-92: kilo-cli declares .opencode/ but the shared kilo builder emits .kilo/,
-# so its distinct CLI output was never implemented. Real bug, tracked separately;
-# xfail here so the (correct) assertion documents it without reddening the suite.
-_ARTIFACT_XFAIL = {"kilo-cli": "PRO-92: kilo-cli produces .kilo/, not its declared .opencode/"}
-
-
 @pytest.mark.integration
-@pytest.mark.parametrize(
-    "tool",
-    [
-        pytest.param(t, marks=pytest.mark.xfail(reason=_ARTIFACT_XFAIL[t], strict=True))
-        if t in _ARTIFACT_XFAIL
-        else t
-        for t in _ALL_TOOLS
-    ],
-)
+@pytest.mark.parametrize("tool", _ALL_TOOLS)
 def test_declared_create_artifacts_are_produced(tool, tmp_path):
     """Every path in a tool's ``create_artifacts`` actually appears after a build.
 

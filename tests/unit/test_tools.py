@@ -85,7 +85,7 @@ class TestToolRegistry(unittest.TestCase):
         self.assertEqual(
             builder_dispatch(),
             {
-                "kilo-cli": "kilo",
+                "kilo-cli": "opencode",
                 "kilo-ide": "kilo",
                 "cline": "cline",
                 "cursor": "cursor",
@@ -133,7 +133,7 @@ class TestToolRegistry(unittest.TestCase):
         self.assertEqual(
             menu_explanations(),
             {
-                "Kilo CLI": "Kilo Code (CLI) - .opencode/rules/ with collapsed mode files",
+                "Kilo CLI": "Kilo Code (CLI) - .opencode/agents/ + root AGENTS.md (OpenCode)",
                 "Kilo IDE": "Kilo Code (IDE) - .kilo/agents/ individual agent files",
                 "Claude": "Claude - generates .claude/ directory with Markdown agent files and CLAUDE.md",
                 "Cline": "Cline - .clinerules file (concatenated rules)",

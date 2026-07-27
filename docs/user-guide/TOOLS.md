@@ -38,14 +38,18 @@ that write to different locations. Pick the one that matches how you run Kilo.
 
 ### Kilo CLI
 
-Command-line variant of Kilo.
+Command-line variant of Kilo, which uses the OpenCode agent format.
 
 Generates:
 
-- `.opencode/`
+- `.opencode/agents/<agent>.md` — one file per agent (YAML frontmatter with
+  `description` + `mode`, then the system prompt)
+- `AGENTS.md` — project conventions at the repo root
 
-Using it: run Kilo from the command line in the repo root; it reads its
-configuration from the `.opencode/` directory prompticorn populated.
+Using it: run Kilo/OpenCode from the repo root; it reads agents from
+`.opencode/agents/` and project rules from the root `AGENTS.md`. Skills are read
+via OpenCode's Claude-Code compatibility (`.claude/skills/`), so generate the
+Claude target too if you want skills.
 
 ### Kilo IDE
 
@@ -299,7 +303,7 @@ and IAM role. Bedrock has no skill/workflow primitive, so those aren't emitted.
 
 | Tool | Generates |
 |------|-----------|
-| Kilo CLI | `.opencode/` |
+| Kilo CLI | `.opencode/agents/` + `AGENTS.md` |
 | Kilo IDE | `.kilo/` |
 | Claude (Claude Code) | `.claude/`, `CLAUDE.md` |
 | Cline | `.clinerules` |
