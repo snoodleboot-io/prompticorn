@@ -94,6 +94,7 @@ class SingleLanguageSpecHandler(SpecHandler):
         spec: dict[str, Any] = {
             "language": language,
             "runtime": defaults.get("runtime", ""),
+            "engine": defaults.get("engine", ""),
             "package_manager": defaults.get("package_manager", ""),
             "test_framework": defaults.get("test_framework", ""),
             "linter": linter,

@@ -141,6 +141,7 @@ class CoreFilesLoader:
             "deploy_target": project.get("deploy_target", ""),
             "language": spec.get("language", ""),
             "runtime": spec.get("runtime", ""),
+            "engine": spec.get("engine", ""),
             "package_manager": spec.get("package_manager", ""),
             "test_framework": spec.get("test_framework", ""),
             "linter": spec.get("linter", ""),

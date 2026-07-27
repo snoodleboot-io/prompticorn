@@ -140,7 +140,12 @@ def _get_config_options() -> list[ConfigOption]:
         ),
         ConfigOption(
             key="spec.runtime",
-            display_name="Runtime",
+            display_name="Language Version",
+            option_type="text",
+        ),
+        ConfigOption(
+            key="spec.engine",
+            display_name="Runtime / Engine",
             option_type="text",
         ),
         ConfigOption(
