@@ -86,20 +86,29 @@ class TestLanguageDefaultRuntimes:
         blank = sorted(k for k, v in self._defaults().items() if not str(v["runtime"]).strip())
         assert not blank, f"languages with a blank runtime pin: {blank}"
 
-    def test_js_and_ts_runtimes_name_a_real_runtime(self):
-        """JS/TS `runtime` must name an execution runtime, not a bare version.
+    def test_default_runtime_agrees_with_the_version_picker(self):
+        """The two sources of the `runtime` field must agree (PRO-94).
 
-        Regression guard for PRO-94, where both were pinned to a nonsensical
-        `v6.0` (a compiler-ish version in a field the convention renders as
-        "Runtime:", whose hint is Node/Deno/Bun).
+        Every version question stores its answer into config_key="runtime", so a
+        language's language_defaults `runtime` pin and its version-question
+        `default` are the same field populated two ways (non-interactive vs
+        interactive). They must match, or a project's runtime differs by mode.
+        Java is compared with its " (LTS)" suffix stripped (a display-only
+        difference in the picker).
         """
-        recognized = ("node", "deno", "bun")
-        offenders = {
-            lang: v["runtime"]
-            for lang, v in self._defaults().items()
-            if lang in ("javascript", "typescript")
-            and not any(tok in str(v["runtime"]).lower() for tok in recognized)
-        }
-        assert not offenders, (
-            f"JS/TS runtime pins must name a real runtime (Node/Deno/Bun): {offenders}"
+        from prompticorn.questions.language import get_core_questions
+
+        defaults = self._defaults()
+        mismatches = {}
+        for lang, cfg in defaults.items():
+            pinned = str(cfg["runtime"])
+            runtime_qs = [q for q in get_core_questions(lang) if getattr(q, "config_key", None) == "runtime"]
+            if not runtime_qs:
+                continue
+            picker_default = runtime_qs[0].default.replace(" (LTS)", "")
+            if pinned.replace(" (LTS)", "") != picker_default:
+                mismatches[lang] = (pinned, runtime_qs[0].default)
+        assert not mismatches, (
+            "language_defaults runtime pin disagrees with the version picker's "
+            f"default (same field, two sources): {mismatches}"
         )

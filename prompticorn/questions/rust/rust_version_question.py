@@ -26,11 +26,11 @@ class RustVersionQuestion(Question):
     @property
     def options(self) -> list[str]:
         """Available options."""
-        return ["1.76", "1.75", "1.74", "1.73"]
+        return ["1.97", "1.90", "1.85", "1.80", "1.76", "1.75", "1.74", "1.73"]
 
     @property
     def default(self) -> str:
         """Default selection."""
-        return "1.76"
+        return "1.97"
 
     config_key = "runtime"

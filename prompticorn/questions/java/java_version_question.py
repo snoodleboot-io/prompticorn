@@ -26,11 +26,11 @@ class JavaVersionQuestion(Question):
     @property
     def options(self) -> list[str]:
         """Available options."""
-        return ["21 (LTS)", "17 (LTS)", "11 (LTS)", "8 (LTS)"]
+        return ["25 (LTS)", "21 (LTS)", "17 (LTS)", "11 (LTS)", "8 (LTS)"]
 
     @property
     def default(self) -> str:
         """Default selection."""
-        return "21 (LTS)"
+        return "25 (LTS)"
 
     config_key = "runtime"

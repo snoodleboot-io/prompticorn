@@ -26,11 +26,11 @@ class GoVersionQuestion(Question):
     @property
     def options(self) -> list[str]:
         """Available options."""
-        return ["1.22", "1.21", "1.20", "1.19"]
+        return ["1.26", "1.25", "1.24", "1.23", "1.22", "1.21", "1.20", "1.19"]
 
     @property
     def default(self) -> str:
         """Default selection."""
-        return "1.22"
+        return "1.26"
 
     config_key = "runtime"

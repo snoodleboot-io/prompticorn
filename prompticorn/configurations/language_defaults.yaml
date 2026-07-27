@@ -9,14 +9,14 @@ python:
   formatter: "ruff"
 
 typescript:
-  runtime: "Node.js 24"
+  runtime: "v7.0"
   package_manager: "pnpm"
   test_framework: "vitest"
   linter: "eslint"
   formatter: "prettier"
 
 javascript:
-  runtime: "Node.js 24"
+  runtime: "ES2026"
   package_manager: "pnpm"
   test_framework: "vitest"
   linter: "eslint"
@@ -44,7 +44,7 @@ rust:
   formatter: "rustfmt"
 
 csharp:
-  runtime: "10.0"
+  runtime: "14.0"
   package_manager: "nuget"
   test_framework: "xunit"
   linter: "roslynator"

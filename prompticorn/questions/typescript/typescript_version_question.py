@@ -48,11 +48,11 @@ class TypeScriptVersionQuestion(Question):
     @property
     def options(self) -> list[str]:
         """Available options."""
-        return ["v6.0", "v5.9", "v5.8", "v5.4", "v5.0"]
+        return ["v7.0", "v6.0", "v5.9", "v5.8", "v5.4", "v5.0"]
 
     @property
     def default(self) -> str:
         """Default selection."""
-        return "v6.0"
+        return "v7.0"
 
     config_key = "runtime"

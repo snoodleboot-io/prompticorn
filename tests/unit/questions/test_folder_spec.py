@@ -174,7 +174,7 @@ class TestFolderSpecDefaults:
             language="typescript",
         )
 
-        assert spec.runtime == "Node.js 24"
+        assert spec.runtime == "v7.0"
         assert spec.package_manager == "pnpm"
         assert spec.test_framework == "vitest"
         assert spec.linter == "eslint"
@@ -189,7 +189,7 @@ class TestFolderSpecDefaults:
             language="javascript",
         )
 
-        assert spec.runtime == "Node.js 24"
+        assert spec.runtime == "ES2026"
         assert spec.package_manager == "pnpm"
         assert spec.test_framework == "vitest"
         assert spec.linter == "eslint"

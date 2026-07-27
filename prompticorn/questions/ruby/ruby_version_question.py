@@ -25,11 +25,11 @@ class RubyVersionQuestion(Question):
     @property
     def options(self) -> list[str]:
         """Available options."""
-        return ["3.3", "3.2", "3.1", "3.0", "2.7"]
+        return ["4.0", "3.4", "3.3", "3.2", "3.1", "3.0", "2.7"]
 
     @property
     def default(self) -> str:
         """Default selection."""
-        return "3.3"
+        return "4.0"
 
     config_key = "runtime"
