@@ -72,7 +72,7 @@ javascript:
     └── index.js             # public entry point
     tests/
 
-golang: |
+go: |
   cmd/
   └── <app>/main.go        # binary entrypoints
   internal/                # private application code
