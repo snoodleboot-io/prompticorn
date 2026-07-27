@@ -99,7 +99,7 @@ class TestSourceLayout:
         # Arrange / Act / Assert
         assert "index.ts" in get_source_layout("typescript")
         assert "__init__.py" in get_source_layout("python")
-        assert "cmd/" in get_source_layout("golang")
+        assert "cmd/" in get_source_layout("go")
 
     def test_default_style_is_flat(self):
         # Python defaults to a flat package layout, not a src/ layout.
