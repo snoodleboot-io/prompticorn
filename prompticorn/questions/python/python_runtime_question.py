@@ -56,7 +56,7 @@ Python versions affect:
     @property
     def options(self) -> list[str]:
         """Available options."""
-        return ["3.14", "3.13", "3.12", "3.11", "pypy"]
+        return ["3.14", "3.14t", "3.13", "3.12", "3.11", "pypy"]
 
     @property
     def option_explanations(self) -> dict[str, str]:
@@ -66,6 +66,7 @@ Python versions affect:
             "3.12": "Python 3.12 - Stable release with improved performance",
             "3.13": "Python 3.13 - Recent release with modern features",
             "3.14": "Python 3.14 - Latest release with cutting-edge features and performance (recommended)",
+            "3.14t": "Python 3.14 free-threaded (PEP 703) - GIL disabled for true multi-core parallelism; opt-in, some C extensions may not yet support it and single-threaded code can be slightly slower",
             "pypy": "PyPy - Alternative Python implementation with JIT for faster execution",
         }
 

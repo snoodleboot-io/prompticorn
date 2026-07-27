@@ -1,8 +1,8 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions-csharp.md -->
 # Core Conventions C#
 
-Language:             {{ language or "e.g., C# 12, .NET 8" }}
-Runtime:              {{ runtime or "e.g., .NET 8, Mono" }}
+Language:             {{ language or "e.g., C# 14, .NET 10" }}
+Runtime:              {{ runtime or "e.g., .NET 10, Mono" }}
 Package Manager:      {{ package_manager or "e.g., NuGet, dotnet" }}
 Linter:               {{ linter or "e.g., StyleCop, SonarLint" }}
 Formatter:           {{ formatter or "e.g., dotnet format, ReSharper" }}

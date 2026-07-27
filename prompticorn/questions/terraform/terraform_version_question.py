@@ -25,11 +25,11 @@ class TerraformVersionQuestion(Question):
     @property
     def options(self) -> list[str]:
         """Available options."""
-        return ["1.7", "1.6", "1.5", "1.4"]
+        return ["1.15", "1.13", "1.11", "1.9", "1.7", "1.6", "1.5", "1.4"]
 
     @property
     def default(self) -> str:
         """Default selection."""
-        return "1.7"
+        return "1.15"
 
     config_key = "runtime"

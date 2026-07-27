@@ -2,7 +2,7 @@
 # Core Conventions F
 
 Language:             {{ language or "e.g., F# 7.0" }}
-Runtime:              {{ runtime or "e.g., .NET 8" }}
+Runtime:              {{ runtime or "e.g., .NET 10" }}
 Package Manager:      {{ package_manager or "e.g., NuGet, dotnet" }}
 Linter:               {{ linter or "e.g., Fantomas" }}
 Formatter:           {{ formatter or "e.g., Fantomas" }}

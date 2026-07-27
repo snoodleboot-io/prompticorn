@@ -25,11 +25,11 @@ class CSharpVersionQuestion(Question):
     @property
     def options(self) -> list[str]:
         """Available options."""
-        return ["12.0", "11.0", "10.0", "9.0"]
+        return ["14.0", "13.0", "12.0", "11.0", "10.0", "9.0"]
 
     @property
     def default(self) -> str:
         """Default selection."""
-        return "12.0"
+        return "14.0"
 
     config_key = "runtime"

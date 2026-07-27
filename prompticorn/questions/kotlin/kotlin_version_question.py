@@ -25,11 +25,11 @@ class KotlinVersionQuestion(Question):
     @property
     def options(self) -> list[str]:
         """Available options."""
-        return ["1.9", "1.8", "1.7", "1.6"]
+        return ["2.4", "2.3", "2.2", "2.1", "2.0", "1.9", "1.8", "1.7", "1.6"]
 
     @property
     def default(self) -> str:
         """Default selection."""
-        return "1.9"
+        return "2.4"
 
     config_key = "runtime"

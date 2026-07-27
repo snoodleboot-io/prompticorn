@@ -25,11 +25,11 @@ class PhpVersionQuestion(Question):
     @property
     def options(self) -> list[str]:
         """Available options."""
-        return ["8.3", "8.2", "8.1", "8.0", "7.4"]
+        return ["8.5", "8.4", "8.3", "8.2", "8.1", "8.0", "7.4"]
 
     @property
     def default(self) -> str:
         """Default selection."""
-        return "8.3"
+        return "8.5"
 
     config_key = "runtime"

@@ -25,7 +25,7 @@ class TestPythonRuntimeUIRendering:
         q = PythonRuntimeQuestion()
 
         # Verify the raw options first
-        assert q.options == ["3.14", "3.13", "3.12", "3.11", "pypy"]
+        assert q.options == ["3.14", "3.14t", "3.13", "3.12", "3.11", "pypy"]
 
         # Create question context for rendering
         context = QuestionContext(

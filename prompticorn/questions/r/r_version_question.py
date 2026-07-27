@@ -25,11 +25,11 @@ class RVersionQuestion(Question):
     @property
     def options(self) -> list[str]:
         """Available options."""
-        return ["4.3", "4.2", "4.1", "4.0"]
+        return ["4.6", "4.5", "4.4", "4.3", "4.2", "4.1", "4.0"]
 
     @property
     def default(self) -> str:
         """Default selection."""
-        return "4.3"
+        return "4.6"
 
     config_key = "runtime"

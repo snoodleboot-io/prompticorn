@@ -25,11 +25,11 @@ class SwiftVersionQuestion(Question):
     @property
     def options(self) -> list[str]:
         """Available options."""
-        return ["5.9", "5.8", "5.7", "5.6"]
+        return ["6.3", "6.2", "6.1", "6.0", "5.9", "5.8", "5.7", "5.6"]
 
     @property
     def default(self) -> str:
         """Default selection."""
-        return "5.9"
+        return "6.3"
 
     config_key = "runtime"

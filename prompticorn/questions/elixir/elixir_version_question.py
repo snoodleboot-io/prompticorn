@@ -25,11 +25,11 @@ class ElixirVersionQuestion(Question):
     @property
     def options(self) -> list[str]:
         """Available options."""
-        return ["1.16", "1.15", "1.14", "1.13"]
+        return ["1.19", "1.18", "1.17", "1.16", "1.15", "1.14", "1.13"]
 
     @property
     def default(self) -> str:
         """Default selection."""
-        return "1.16"
+        return "1.19"
 
     config_key = "runtime"

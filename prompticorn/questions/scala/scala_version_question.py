@@ -25,11 +25,11 @@ class ScalaVersionQuestion(Question):
     @property
     def options(self) -> list[str]:
         """Available options."""
-        return ["3.3", "3.2", "2.13", "2.12"]
+        return ["3.8", "3.7", "3.6", "3.5", "3.4", "3.3", "3.2", "2.13", "2.12"]
 
     @property
     def default(self) -> str:
         """Default selection."""
-        return "3.3"
+        return "3.8"
 
     config_key = "runtime"

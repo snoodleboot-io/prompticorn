@@ -156,7 +156,7 @@ class TestCreateDefaultConfig:
         config = create_default_config("typescript")
 
         assert config["spec"]["language"] == "typescript"
-        assert config["spec"]["runtime"] == "v6.0"
+        assert config["spec"]["runtime"] == "v7.0"
         assert config["spec"]["package_manager"] == "pnpm"
         assert config["spec"]["test_framework"] == "vitest"
 

@@ -1,8 +1,8 @@
 <!-- path: prompticorn/prompts/agents/core/core-conventions-javascript.md -->
 # Core Conventions JavaScript
 
-Language:             {{ language or "e.g., JavaScript ES2024" }}
-Runtime:              {{ runtime or "e.g., Node.js 20, Deno, Bun" }}
+Language:             {{ language or "e.g., JavaScript ES2026" }}
+Runtime:              {{ runtime or "e.g., Node.js 24, Deno, Bun" }}
 Package Manager:      {{ package_manager or "e.g., npm, pnpm, yarn" }}
 Linter:               {{ linter or "e.g., ESLint" }}
 Formatter:           {{ formatter or "e.g., Prettier" }}

@@ -2,7 +2,7 @@
 {%- import 'macros/testing_sections.jinja2' as testing -%}
 # Core Conventions Rust
 
-Language:             {{ language or "e.g., Rust 1.75" }}
+Language:             {{ language or "e.g., Rust 1.97" }}
 Runtime:              {{ runtime or "e.g., Native, WASM" }}
 Package Manager:      {{ package_manager or "e.g., Cargo" }}
 Linter:               {{ linter or "e.g., Clippy" }}

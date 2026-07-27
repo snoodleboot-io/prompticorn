@@ -25,11 +25,11 @@ class GroovyVersionQuestion(Question):
     @property
     def options(self) -> list[str]:
         """Available options."""
-        return ["4.0", "3.0", "2.5"]
+        return ["5.0", "4.0", "3.0", "2.5"]
 
     @property
     def default(self) -> str:
         """Default selection."""
-        return "4.0"
+        return "5.0"
 
     config_key = "runtime"
