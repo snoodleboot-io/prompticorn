@@ -174,7 +174,7 @@ class TestFolderSpecDefaults:
             language="typescript",
         )
 
-        assert spec.runtime == "v6.0"
+        assert spec.runtime == "Node.js 24"
         assert spec.package_manager == "pnpm"
         assert spec.test_framework == "vitest"
         assert spec.linter == "eslint"
@@ -189,7 +189,7 @@ class TestFolderSpecDefaults:
             language="javascript",
         )
 
-        assert spec.runtime == "v6.0"
+        assert spec.runtime == "Node.js 24"
         assert spec.package_manager == "pnpm"
         assert spec.test_framework == "vitest"
         assert spec.linter == "eslint"
@@ -204,7 +204,7 @@ class TestFolderSpecDefaults:
             language="go",
         )
 
-        assert spec.runtime == "1.21"
+        assert spec.runtime == "1.26"
         assert spec.package_manager == "go mod"
         assert spec.test_framework == "go test"
         assert spec.linter == "golangci-lint"
@@ -219,7 +219,7 @@ class TestFolderSpecDefaults:
             language="java",
         )
 
-        assert spec.runtime == "21"
+        assert spec.runtime == "25"
         assert spec.package_manager == "maven"
         assert spec.test_framework == "junit"
         assert spec.linter == "checkstyle"

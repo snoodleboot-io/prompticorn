@@ -2,7 +2,7 @@
 {%- import 'macros/testing_sections.jinja2' as testing -%}
 # Core Conventions Java
 
-Language:             {{ language or "e.g., Java 21" }}
+Language:             {{ language or "e.g., Java 25" }}
 Runtime:              {{ runtime or "e.g., JDK 21, OpenJDK" }}
 Build tool:           {{ build_tool or "e.g., Maven, Gradle" }}
 Linter:               {{ linter or "e.g., Checkstyle, SpotBugs" }}

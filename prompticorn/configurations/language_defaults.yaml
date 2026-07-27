@@ -9,42 +9,42 @@ python:
   formatter: "ruff"
 
 typescript:
-  runtime: "v6.0"
+  runtime: "Node.js 24"
   package_manager: "pnpm"
   test_framework: "vitest"
   linter: "eslint"
   formatter: "prettier"
 
 javascript:
-  runtime: "v6.0"
+  runtime: "Node.js 24"
   package_manager: "pnpm"
   test_framework: "vitest"
   linter: "eslint"
   formatter: "prettier"
 
 go:
-  runtime: "1.21"
+  runtime: "1.26"
   package_manager: "go mod"
   test_framework: "go test"
   linter: "golangci-lint"
   formatter: "gofmt"
 
 java:
-  runtime: "21"
+  runtime: "25"
   package_manager: "maven"
   test_framework: "junit"
   linter: "checkstyle"
   formatter: "google-java-format"
 
 rust:
-  runtime: "1.75"
+  runtime: "1.97"
   package_manager: "cargo"
   test_framework: "cargo test"
   linter: "clippy"
   formatter: "rustfmt"
 
 csharp:
-  runtime: "8.0"
+  runtime: "10.0"
   package_manager: "nuget"
   test_framework: "xunit"
   linter: "roslynator"

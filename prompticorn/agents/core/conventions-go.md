@@ -2,7 +2,7 @@
 {%- import 'macros/testing_sections.jinja2' as testing -%}
 # Core Conventions Golang
 
-Language:             {{ language or "e.g., Go 1.22" }}
+Language:             {{ language or "e.g., Go 1.26" }}
 Runtime:              {{ runtime or "e.g., Go runtime" }}
 Package Manager:      {{ package_manager or "e.g., go mod" }}
 Linter:               {{ linter or "e.g., golangci-lint" }}

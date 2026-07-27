@@ -2,8 +2,8 @@
 {%- import 'macros/testing_sections.jinja2' as testing -%}
 # Core Conventions Python
 
-Language:             {{ language or "e.g., Python 3.11+" }}
-Runtime:              {{ runtime or "e.g., CPython 3.11, PyPy" }}
+Language:             {{ language or "e.g., Python 3.14+" }}
+Runtime:              {{ runtime or "e.g., CPython 3.14, PyPy" }}
 Package Manager:      {{ package_manager or "e.g., poetry, pip, uv" }}
 Linter:               {{ linter or "e.g., Ruff, flake8" }}
 Formatter:           {{ formatter or "e.g., Ruff, Black" }}

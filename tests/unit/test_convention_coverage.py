@@ -64,3 +64,42 @@ class TestConventionCoverage:
             name for name in KNOWN_UNSELECTABLE if not (_CORE / f"conventions-{name}.md").is_file()
         )
         assert not missing, f"KNOWN_UNSELECTABLE names a nonexistent convention: {missing}"
+
+
+@pytest.mark.unit
+class TestLanguageDefaultRuntimes:
+    """Guard the runtime pins in language_defaults.yaml (PRO-94)."""
+
+    def _defaults(self):
+        import yaml
+
+        path = (
+            Path(__file__).parent.parent.parent
+            / "prompticorn"
+            / "configurations"
+            / "language_defaults.yaml"
+        )
+        data = yaml.safe_load(path.read_text(encoding="utf-8"))
+        return {k: v for k, v in data.items() if isinstance(v, dict) and "runtime" in v}
+
+    def test_every_pinned_language_has_a_nonempty_runtime(self):
+        blank = sorted(k for k, v in self._defaults().items() if not str(v["runtime"]).strip())
+        assert not blank, f"languages with a blank runtime pin: {blank}"
+
+    def test_js_and_ts_runtimes_name_a_real_runtime(self):
+        """JS/TS `runtime` must name an execution runtime, not a bare version.
+
+        Regression guard for PRO-94, where both were pinned to a nonsensical
+        `v6.0` (a compiler-ish version in a field the convention renders as
+        "Runtime:", whose hint is Node/Deno/Bun).
+        """
+        recognized = ("node", "deno", "bun")
+        offenders = {
+            lang: v["runtime"]
+            for lang, v in self._defaults().items()
+            if lang in ("javascript", "typescript")
+            and not any(tok in str(v["runtime"]).lower() for tok in recognized)
+        }
+        assert not offenders, (
+            f"JS/TS runtime pins must name a real runtime (Node/Deno/Bun): {offenders}"
+        )
