@@ -10,7 +10,7 @@ A unified, tool-agnostic prompt architecture for managing AI coding-assistant co
 Define your project's agents, conventions, and personas once, then generate the
 right config for whichever assistant your team uses:
 
-- **Kilo** Code — IDE (`.kilo/agents/`) and CLI (`.opencode/rules/`)
+- **Kilo** Code — IDE (`.kilo/agents/`) and CLI (`.opencode/agents/`)
 - **Cline** — `.clinerules`
 - **Claude** — `.claude/` directory plus `CLAUDE.md`
 - **Cursor** — `.cursor/rules/` plus `.cursorrules`

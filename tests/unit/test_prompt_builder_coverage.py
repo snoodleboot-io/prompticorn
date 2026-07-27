@@ -126,8 +126,9 @@ class TestGetPromptBuilder:
         builder = get_prompt_builder(tool)
         assert isinstance(builder, PromptBuilder)
 
-    def test_kilo_cli_maps_to_kilo_internal_name(self):
-        assert get_prompt_builder("kilo-cli").tool_name == "kilo"
+    def test_kilo_cli_maps_to_opencode_internal_name(self):
+        # PRO-92: Kilo's CLI is the OpenCode agent format, distinct from the IDE.
+        assert get_prompt_builder("kilo-cli").tool_name == "opencode"
 
     def test_unknown_tool_raises_value_error(self):
         with pytest.raises(ValueError, match="Unknown tool"):

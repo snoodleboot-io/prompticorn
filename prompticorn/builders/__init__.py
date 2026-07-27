@@ -40,6 +40,7 @@ from prompticorn.builders.interfaces import (
 )
 from prompticorn.builders.junie_builder import JunieBuilder
 from prompticorn.builders.kilo_builder import KiloBuilder
+from prompticorn.builders.opencode_builder import OpenCodeBuilder
 from prompticorn.builders.registry import BuilderRegistry
 from prompticorn.builders.roo_builder import RooBuilder
 from prompticorn.builders.windsurf_builder import WindsurfBuilder
@@ -65,6 +66,7 @@ __all__ = [
     "ComponentSelector",
     "ComponentComposer",
     "KiloBuilder",
+    "OpenCodeBuilder",
     "ClineBuilder",
     "ClaudeBuilder",
     "CopilotBuilder",
@@ -84,6 +86,7 @@ __all__ = [
 
 # Auto-register all builders when module is imported
 BuilderFactory.register("kilo", KiloBuilder)
+BuilderFactory.register("opencode", OpenCodeBuilder)
 BuilderFactory.register("cline", ClineBuilder)
 BuilderFactory.register("claude", ClaudeBuilder)
 BuilderFactory.register("copilot", CopilotBuilder)

@@ -8,8 +8,8 @@ so registering a new tool for metadata/dispatch means adding one ToolSpec entry
 
 Note the two namespaces this reconciles:
   * ``id`` — the canonical CLI-facing tool id (6 of them, e.g. ``kilo-cli``).
-  * ``builder_name`` — the internal builder key (5 of them; ``kilo-cli`` and
-    ``kilo-ide`` both dispatch to the ``kilo`` builder).
+  * ``builder_name`` — the internal builder key. ``kilo-ide`` uses ``kilo``;
+    ``kilo-cli`` uses ``opencode`` (Kilo's CLI is the OpenCode agent format).
 """
 
 import re
@@ -42,8 +42,8 @@ _TOOL_SPECS: Final[tuple[ToolSpec, ...]] = (
     ToolSpec(
         id="kilo-cli",
         display_label="Kilo CLI",
-        explanation="Kilo Code (CLI) - .opencode/rules/ with collapsed mode files",
-        builder_name="kilo",
+        explanation="Kilo Code (CLI) - .opencode/agents/ + root AGENTS.md (OpenCode)",
+        builder_name="opencode",
         create_artifacts=frozenset({".opencode/"}),
     ),
     ToolSpec(

@@ -6,8 +6,8 @@ are laid out on disk (agent output, skills) and declares its capabilities
 ``if self.tool_name == ...`` branches that used to live in ``prompt_builder``.
 
 Layouts are keyed by the *internal builder name* ("kilo", "cline", "claude",
-"copilot", "cursor"). The two Kilo CLI ids both dispatch to the ``kilo`` builder
-and produce identical output, so there is a single Kilo layout.
+"copilot", "cursor"). Kilo's two ids differ: ``kilo-ide`` uses the ``kilo``
+layout (``.kilo/``), ``kilo-cli`` uses the ``opencode`` layout (``.opencode/``).
 """
 
 import json
@@ -28,6 +28,7 @@ from prompticorn.builders.copilot_chat_builder import (
 )
 from prompticorn.builders.gemini_builder import generate_gemini_settings, workflow_to_toml
 from prompticorn.builders.junie_builder import slugify as junie_slugify
+from prompticorn.builders.opencode_builder import slugify as opencode_slugify
 from prompticorn.builders.roo_builder import generate_roomodes
 from prompticorn.builders.roo_builder import slugify as zed_slugify
 from prompticorn.builders.skill_emitter import AGENTS_SKILLS_BASE, write_skill
@@ -153,6 +154,33 @@ class CopilotLayout(ToolLayout):
         # ".github/skills/<name>.md" was not a location Copilot loads.
         # https://docs.github.com/en/copilot/how-tos/copilot-on-github/customize-copilot/customize-cloud-agent/add-skills
         return [write_skill(output, ".github", skill_name, content)]
+
+
+class OpenCodeLayout(ToolLayout):
+    """.opencode/agents/<name>.md per agent; conventions via root AGENTS.md.
+
+    Kilo Code CLI / OpenCode. Agents are one file each under ``.opencode/agents/``
+    (YAML frontmatter + body, built by OpenCodeBuilder); the filename is the
+    agent id. Project rules ride the root ``AGENTS.md`` (emits_agents_md), which
+    OpenCode reads. Skills are read via Claude-Code compatibility
+    (``.claude/skills/``), not ``.opencode/``, so none are emitted here.
+
+    Verified against opencode.ai/docs. See PRO-92.
+    """
+
+    def write_agent(
+        self, output: Path, agent_name: str, content: str | dict[str, Any]
+    ) -> list[str]:
+        assert isinstance(content, str)
+        agents_dir = output / ".opencode" / "agents"
+        agents_dir.mkdir(parents=True, exist_ok=True)
+        rel = f".opencode/agents/{opencode_slugify(agent_name)}.md"
+        (output / rel).write_text(content, encoding="utf-8")
+        return [rel]
+
+    def write_skill(self, output: Path, skill_name: str, content: str) -> list[str]:
+        # OpenCode reads skills via .claude/skills compat, not .opencode/ (PRO-92).
+        return []
 
 
 class CopilotChatLayout(ToolLayout):
@@ -552,6 +580,7 @@ class BedrockLayout(ToolLayout):
 _LAYOUTS: dict[str, ToolLayout] = {
     "bedrock": BedrockLayout(),
     "kilo": KiloLayout(),
+    "opencode": OpenCodeLayout(),
     "cline": ClineLayout(),
     "cursor": CursorLayout(),
     "copilot": CopilotLayout(),
