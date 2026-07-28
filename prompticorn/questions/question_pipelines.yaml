@@ -389,3 +389,18 @@ html:
     - HtmlFormatterQuestion
     - HtmlLinterQuestion
   fungible: []
+
+c:
+  core:
+    - CVersionQuestion
+  fungible: []
+
+cpp:
+  core:
+    - CppVersionQuestion
+  fungible: []
+
+objc:
+  core:
+    - ObjcVersionQuestion
+  fungible: []
