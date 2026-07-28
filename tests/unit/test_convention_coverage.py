@@ -19,7 +19,7 @@ _CORE = Path(__file__).parent.parent.parent / "prompticorn" / "agents" / "core"
 # Convention files that match no supported language. This set may only SHRINK:
 # wire the language into languages.yaml, or delete the file — never add entries.
 # (c/cpp/objc have conventions authored but are not offered by the picker.)
-KNOWN_UNSELECTABLE = frozenset({"c", "cpp", "objc"})
+KNOWN_UNSELECTABLE = frozenset()  # PRO-136: c/cpp/objc are now selectable
 
 
 def _convention_languages() -> set[str]:

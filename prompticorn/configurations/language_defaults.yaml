@@ -58,6 +58,30 @@ csharp:
   formatter: "dotnet format"
 
 # Default coverage targets applied to all languages
+c:
+  runtime: "C23"
+  engine: "native (compiled)"
+  package_manager: "vcpkg"
+  test_framework: "Unity"
+  linter: "clang-tidy"
+  formatter: "clang-format"
+
+cpp:
+  runtime: "C++23"
+  engine: "native (compiled)"
+  package_manager: "vcpkg"
+  test_framework: "GoogleTest"
+  linter: "clang-tidy"
+  formatter: "clang-format"
+
+objc:
+  runtime: "2.0"
+  engine: "native (Clang/ObjC runtime)"
+  package_manager: "CocoaPods"
+  test_framework: "XCTest"
+  linter: "clang-tidy"
+  formatter: "clang-format"
+
 default_coverage:
   line: 80
   branch: 70

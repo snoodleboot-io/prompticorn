@@ -28,3 +28,6 @@ supported_languages:
   - terraform
   - sql
   - html
+  - c
+  - cpp
+  - objc
