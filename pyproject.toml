@@ -69,14 +69,17 @@ dev = [
 [tool.mutmut]
 # Mutation testing (mutmut 3.x). Run:  uv run mutmut run   then:  uv run mutmut results
 #
-# Mutation is slow: mutmut runs the test suite once per surviving mutant, so a
-# whole-tree run is an hours-long campaign. Work module by module — narrow
-# `paths_to_mutate` to the file(s) under focus, kill the survivors, then widen it.
-# The default below targets the whole package; override it per-run for a fast loop:
-#   (edit source_paths to a single file for a fast focused loop)
+# mutmut copies the whole package into a `mutants/` sandbox and drives pytest
+# directly — there is NO `runner` key in 3.x (it is silently ignored). Keep
+# `source_paths` at the whole package so imports resolve in the sandbox.
+#
+# Whole-tree is an hours-long campaign (PRO-135). For a fast MODULE-BY-MODULE
+# loop, scope mutation AND tests to one module by uncommenting + editing both,
+# e.g. for the skill emitter (already at ~90%: PRO-135):
+#   only_mutate = ["prompticorn/builders/skill_emitter.py"]
+#   pytest_add_cli_args_test_selection = ["tests/unit/test_skill_emitter.py", "tests/unit/skills/test_emitted_skill_conformance.py"]
 source_paths = ["prompticorn"]
-# Fast, deterministic runner: unit tests only, stop at first failure, no coverage.
-runner = "uv run pytest -x -q -m 'not slow and not integration' --no-cov"
+pytest_add_cli_args_test_selection = ["tests/unit"]
 
 
 [tool.ruff]

@@ -77,3 +77,89 @@ class TestEmittedSkillConformance:
                 if not fm.get("description", "").strip('"'):
                     missing.append(f"{skill.name}/{variant}")
         assert not missing, f"Skills that would emit without a description: {missing}"
+
+
+@pytest.mark.unit
+class TestDescriptionExtractionMutationCoverage:
+    """Pin _extract_description / _yaml_double_quote / ensure_frontmatter behavior (PRO-135).
+
+    The earlier tests used single-line Purpose bodies where the first-prose-line
+    fallback happens to produce the same answer, so mutations to the Purpose-
+    detection logic survived. These cases make the Purpose path observably
+    different from the fallback.
+    """
+
+    def _desc(self, name, body):
+        from prompticorn.builders.skill_emitter import _extract_description
+
+        return _extract_description(name, body)
+
+    def test_purpose_wins_over_earlier_prose(self):
+        # Prose appears BEFORE Purpose; the Purpose sentence must be chosen, not
+        # the earlier line — kills the case-fold / continue-vs-break mutants.
+        body = "# Title\n\nIntro prose that is not the purpose.\n\n## Purpose\nThe real purpose sentence.\n\n## Next\n"
+        assert self._desc("s", body) == "The real purpose sentence."
+
+    def test_purpose_header_is_case_insensitive(self):
+        body = "## PURPOSE\nUpper cased header body.\n"
+        assert self._desc("s", body) == "Upper cased header body."
+
+    def test_multiline_purpose_joined_with_single_space(self):
+        # Two-line Purpose, single sentence spanning both — kills the join mutant.
+        body = "## Purpose\nFirst part\nsecond part done.\n\n## Next\n"
+        assert self._desc("s", body) == "First part second part done."
+
+    def test_first_sentence_only(self):
+        body = "## Purpose\nSentence one. Sentence two should be dropped.\n"
+        assert self._desc("s", body) == "Sentence one."
+
+    def test_purpose_ended_by_next_heading_still_used(self):
+        # break-vs-return: after the heading ends Purpose, the collected text is used.
+        body = "## Purpose\nKept sentence.\n## Other\nignored.\n"
+        assert self._desc("s", body) == "Kept sentence."
+
+    def test_falls_back_to_first_prose_when_no_purpose(self):
+        body = "# Heading\n\nFirst prose line here.\n\n## Section\n"
+        assert self._desc("s", body) == "First prose line here."
+
+    def test_falls_back_to_title_when_no_text(self):
+        # No Purpose and no prose line at all (only headings/blanks) -> title from name.
+        body = "# H1\n\n## H2\n\n### H3\n"
+        assert self._desc("my-skill-name", body) == "My Skill Name skill."
+
+    def test_length_bounded_with_ellipsis(self):
+        body = "## Purpose\n" + ("word " * 200).strip() + "\n"
+        out = self._desc("s", body)
+        assert out.endswith("…") and len(out) <= 500
+
+    def test_yaml_double_quote_escapes_backslash_and_quote(self):
+        from prompticorn.builders.skill_emitter import _yaml_double_quote
+
+        assert _yaml_double_quote(r"a\b") == r'"a\\b"'
+        assert _yaml_double_quote('say "hi"') == r'"say \"hi\""'
+
+    def test_ensure_frontmatter_detects_leading_whitespace_frontmatter(self):
+        # Leading newline before --- must still count as existing frontmatter.
+        body = "\n---\nname: kept\ndescription: kept\n---\n\nbody\n"
+        assert ensure_frontmatter("kept", body) == body
+
+    def test_ensure_frontmatter_strips_leading_newlines_from_body(self):
+        out = ensure_frontmatter("s", "\n\n# Body\n\n## Purpose\nX.\n")
+        # No blank line between the closing --- and the body.
+        assert "---\n\n# Body" in out
+
+    def test_title_from_name_replaces_underscores(self):
+        from prompticorn.builders.skill_emitter import _title_from_name
+
+        assert _title_from_name("foo_bar_baz") == "Foo Bar Baz"
+
+    def test_heading_ends_purpose_even_without_sentence_break(self):
+        # No period in the Purpose line: if the following heading is NOT treated
+        # as the section end, its text would extend the (single) sentence.
+        body = "## Purpose\nKept\n## Other\nleaked text\n"
+        assert self._desc("s", body) == "Kept"
+
+    def test_fallback_skips_code_fence_lines(self):
+        # No Purpose; a fence precedes the first real prose line, which must win.
+        body = "# H\n\n```\n\nActual prose wins.\n"
+        assert self._desc("s", body) == "Actual prose wins."
