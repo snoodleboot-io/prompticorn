@@ -14,15 +14,13 @@ Use this mode for system design, architecture planning, or making technical deci
 **Read and follow this workflow file:**
 
 ```
-.claude/workflows/architecture-documentation.md
+.claude/workflows/data-model.md
 ```
 
 This workflow will guide you through:
-- Understand requirements
-- Plan implementation
-- Execute incrementally
-- Test as you go
-- Review and complete
+- Steps
+- Common Mistakes
+- Examples
 
 ## Subagents
 
@@ -78,7 +76,7 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 1. **Read the workflow file now:**
    ```
-   Read: .claude/workflows/architecture-documentation.md
+   Read: .claude/workflows/data-model.md
    ```
 
 2. **Follow the workflow steps sequentially**

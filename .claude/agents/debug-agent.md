@@ -14,15 +14,15 @@ Use this mode when diagnosing bugs, crashes, or unexpected behavior.
 **Read and follow this workflow file:**
 
 ```
-.claude/workflows/debugging-methodology.md
+.claude/workflows/log-analysis.md
 ```
 
 This workflow will guide you through:
-- Understand requirements
-- Plan implementation
-- Execute incrementally
-- Test as you go
-- Review and complete
+- Overview
+- Log Collection
+- Pattern Recognition
+- Request Tracing
+- Root Cause Analysis
 
 ## Subagents
 
@@ -68,7 +68,7 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 1. **Read the workflow file now:**
    ```
-   Read: .claude/workflows/debugging-methodology.md
+   Read: .claude/workflows/log-analysis.md
    ```
 
 2. **Follow the workflow steps sequentially**
