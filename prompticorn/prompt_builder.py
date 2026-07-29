@@ -347,16 +347,23 @@ class PromptBuilder:
                 except Exception as e:
                     actions.append(f"✗ Failed to write skills for {agent_name}: {e}")
 
-        # Write workflows (for tools that use separate workflow files like Kilo)
+        # Write workflows (for tools that use separate workflow files like Kilo).
+        # As with skills above, workflows live in the agent/language mapping
+        # registries rather than the raw IR model, so gate on the FILTERED agent.
+        # Gating on the raw ``agent.workflows`` skipped every agent whose IR
+        # declares none — which is most of them — dropping 19 of 32 workflows for
+        # each non-Claude builder. The Claude path was unaffected because it emits
+        # workflows from inside the builder, against the already-filtered agent.
+        # (PRO-139; the workflow-side counterpart of PRO-62.)
         all_workflows_written = set()
         if not dry_run and self.layout.writes_workflows:
             for agent_name, agent in all_agents.items():
-                if agent.workflows:
-                    try:
-                        # Filter agent for language before writing workflows
-                        filtered_agent = self._filter_agent_for_language(
-                            agent, language, agent_name=agent_name
-                        )
+                try:
+                    # Filter agent for language before writing workflows
+                    filtered_agent = self._filter_agent_for_language(
+                        agent, language, agent_name=agent_name
+                    )
+                    if filtered_agent.workflows:
                         workflow_files = self._write_workflow_files(
                             output, agent_name, filtered_agent, variant
                         )
@@ -365,8 +372,8 @@ class PromptBuilder:
                             if workflow_file not in all_workflows_written:
                                 actions.append(f"✓ {workflow_file}")
                                 all_workflows_written.add(workflow_file)
-                    except Exception as e:
-                        actions.append(f"✗ Failed to write workflows for {agent_name}: {e}")
+                except Exception as e:
+                    actions.append(f"✗ Failed to write workflows for {agent_name}: {e}")
 
         # Generate root AGENTS.md or CLAUDE.md file (only for primary agents in scope)
         if not dry_run:

@@ -34,7 +34,6 @@ architect:
     - technical-communication
     - technical-decision-making
   workflows:
-    - architecture-documentation
     - data-model
     - decision-log
     - scaffold
@@ -148,7 +147,6 @@ debug:
     - root-cause-five-whys
     - technical-communication
   workflows:
-    - debugging-methodology
     - log-analysis
     - root-cause
 

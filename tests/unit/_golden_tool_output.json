@@ -77,6 +77,18 @@
       "8c522539614662585bf29e3e7e2ec0c90d9e2f51ed28b0160d5972a2f36a1d29"
     ],
     [
+      ".amazonq/prompts/accessibility.md",
+      "e2747c5792ea7cc655b2ebea1a954fd53c243d91ee89730b10322149d64a2831"
+    ],
+    [
+      ".amazonq/prompts/api-design.md",
+      "0be08f948e5335f17b160d03b9a03e8b9262337562a20eaa83a4b269129b8bdb"
+    ],
+    [
+      ".amazonq/prompts/async-workflow-execution.md",
+      "817f9b3bd73f17d5cdc4b6ffc4baa84a9f8c145373df1cba5c3a1066adeadcde"
+    ],
+    [
       ".amazonq/prompts/boilerplate.md",
       "cb90b4741a1b1c26e2f119f6a69e62e9f67a6eb6e878480a6cbcf6661f7e9865"
     ],
@@ -85,8 +97,24 @@
       "a1b827fc4585627e6921a08c920afcc9c4cc5b5e218a2226997c37012f9be5cf"
     ],
     [
+      ".amazonq/prompts/data-model.md",
+      "2dcdc262b10410f98ce82a147bc6656511e6c6cc38c3f8a06e5a4539a4c7ff76"
+    ],
+    [
+      ".amazonq/prompts/decision-log.md",
+      "b48ec39bbc5ca761c734629c9f20fd9bc4999a5099b4b8334f658cbe6591666d"
+    ],
+    [
+      ".amazonq/prompts/dependency-scanning.md",
+      "5493d7a37042671e00b43270f64567a498285310295fbd4e51445cace40d59f6"
+    ],
+    [
       ".amazonq/prompts/dependency-upgrade.md",
       "9d3000eb83fb8b40ec463b0222ebc8e94e5e5c1ffabc16c621dbb91018bc4e0e"
+    ],
+    [
+      ".amazonq/prompts/docs.md",
+      "0047575b1107cd18bbba3d7e3ba97351f3dd084b678e53a46589239d536778f7"
     ],
     [
       ".amazonq/prompts/feature.md",
@@ -97,8 +125,20 @@
       "4abc19173ed0dea7fdd208ecbf05cf12fd98aaed316eb77159ef470d04d8c392"
     ],
     [
+      ".amazonq/prompts/log-analysis.md",
+      "29b18aaa27a8d8a9eb5ad6494070beed89e40313e84b0035fe5d11f7ad638999"
+    ],
+    [
+      ".amazonq/prompts/meta.md",
+      "da1885d8b885a5b2f0ec1c1b1d4df6b41b58c1281c6248e3e6bef675fa27da17"
+    ],
+    [
       ".amazonq/prompts/migration.md",
       "dbcd192531c470acb163e0d7181d4c005540f733c7dd5e89990803c70b80f90d"
+    ],
+    [
+      ".amazonq/prompts/multi-agent-coordination.md",
+      "4487fa5984a7e0f060e2945d6698dbcd8aa92fef8fa87f525890fdf1858f48c5"
     ],
     [
       ".amazonq/prompts/performance.md",
@@ -109,24 +149,72 @@
       "15b128253b00b70ace6411671285b8aeeb593961017054f9737f7bbe7fb0acc9"
     ],
     [
+      ".amazonq/prompts/review.md",
+      "72a6bc3fd2535df06eaddf22694ec5ba576c4d6ee266fa071d3090b5bf6164c1"
+    ],
+    [
+      ".amazonq/prompts/root-cause.md",
+      "bb0155a2353602e1c3ecd85ecea371a95dee7a170cfeb3148f8090c0b28665f2"
+    ],
+    [
+      ".amazonq/prompts/secret-management.md",
+      "b6429f5a16c1c736e7e27c4526f00ba3cf133d2f6d0ea032d672736dee794973"
+    ],
+    [
+      ".amazonq/prompts/security-code-review.md",
+      "9843aa57993e20c0bf28aef094fd99d0180e86594f69507b3885d579692265b8"
+    ],
+    [
       ".amazonq/prompts/strategy.md",
       "6322fdc10564c8a47d74ff3a4313ba2bbeafa7a10aae79bc518816a97daf803b"
+    ],
+    [
+      ".amazonq/prompts/task-breakdown.md",
+      "b0a56e75e08a4312dafa84540e058259395688e00a9b7fe6a658e85b9b4708a7"
     ],
     [
       ".amazonq/prompts/testing.md",
       "d8c818f6e448e7927bbc600f10831ff7c242510751b5a67cd8fdeca6188b7c2d"
     ],
     [
+      ".amazonq/prompts/ux-validation.md",
+      "ad7ace6d594e22d122b38fa6a0cad6cd2fc6e3d3ec277f7fbc7da83d2d7a648d"
+    ],
+    [
+      ".amazonq/prompts/workflow-dependency-management.md",
+      "fff6cc6b8b09dfd0c3edaad21c60e96ddfcdf4fde13af7f0fcc86c5f7355e3c3"
+    ],
+    [
+      ".amazonq/prompts/workflow-error-handling-patterns.md",
+      "0149ca36686d315c7b684706fb8c4441cc7acbe831c6e5d09d63b246aa1c1424"
+    ],
+    [
       ".amazonq/prompts/workflow-migration-patterns.md",
       "d6280fe1a22f255e4a65713dc8d1dff2244a7aef071af2cbb5450b36eecbe7e9"
+    ],
+    [
+      ".amazonq/prompts/workflow-monitoring.md",
+      "8abc8ed00f09d0e84bec23fa4e4d99effe57945377bad6ce8ca340f312b299e7"
+    ],
+    [
+      ".amazonq/prompts/workflow-orchestration-patterns.md",
+      "398c0e9bfa0658f122b19fbb664e9e661dbfac027191bc2438dd04ca800c09b8"
     ],
     [
       ".amazonq/prompts/workflow-performance-optimization.md",
       "195e3754a724363ecb61e568b0a41226599ed259a5e168c7e05aceff938e1a8a"
     ],
     [
+      ".amazonq/prompts/workflow-rollback-strategies.md",
+      "74415706132d36fe8e5541d3ea5775917d27dd3500352bd37d0263a3bf0a96e5"
+    ],
+    [
       ".amazonq/prompts/workflow-scaling-patterns.md",
       "d60fc0d132cd55391a3dff530d18e9c7ae03666d99531b8583310af9917f18e4"
+    ],
+    [
+      ".amazonq/prompts/workflow-testing-patterns.md",
+      "f68e2623b882d807ddf6aa3c2b8d9c18770f064dbf7125cdff83d8ae5d70204f"
     ],
     [
       ".amazonq/rules/conventions-python.md",
@@ -195,6 +283,18 @@
       "8c522539614662585bf29e3e7e2ec0c90d9e2f51ed28b0160d5972a2f36a1d29"
     ],
     [
+      ".amazonq/prompts/accessibility.md",
+      "cbed2d09922b3b60034fefa0a3dc53e2b8a209593f59bea62c270d35d7fdd962"
+    ],
+    [
+      ".amazonq/prompts/api-design.md",
+      "3aee90e73d064ccacc0ff0c815c39a929561767407342a347db2c50156b6bc55"
+    ],
+    [
+      ".amazonq/prompts/async-workflow-execution.md",
+      "6246e5cc3abe5e5dbdbbc274f933b172e41cf00b9e15dce7d599409612bccc3c"
+    ],
+    [
       ".amazonq/prompts/boilerplate.md",
       "41a1fc687ec68833c88927b4d1df43c328a4d15747e4977de5df55ce5fe68851"
     ],
@@ -203,8 +303,24 @@
       "88cd8e0b6f0491e4686daf633495fc5d4e25668f6fb68224b0cc997f821d6ecc"
     ],
     [
+      ".amazonq/prompts/data-model.md",
+      "ee0f58480a54981790068b67b25a7dfc10c4b386a65189c6305c7b9e0e1de84c"
+    ],
+    [
+      ".amazonq/prompts/decision-log.md",
+      "a37bd05eaf5c8ab4b18033ae61c7f5b440f43a19403c9c3cb419abc5c9bb283e"
+    ],
+    [
+      ".amazonq/prompts/dependency-scanning.md",
+      "d12482e2b043654bf3b1d86b233727efcc5b98644633edc7985abf5f479e5b4f"
+    ],
+    [
       ".amazonq/prompts/dependency-upgrade.md",
       "89e8ef66fc3468e9e7cbf2c2b0530039a4e780cdcc4d38b0191be3db35e1b510"
+    ],
+    [
+      ".amazonq/prompts/docs.md",
+      "3811fca65d6ae36d6c7c8180d52728292f3b38544ffe5233376490f70f590ec8"
     ],
     [
       ".amazonq/prompts/feature.md",
@@ -215,8 +331,20 @@
       "7bc53eb68cdba3dbb123dde3693702ea7ccbbe5521ec92452101e79810359f34"
     ],
     [
+      ".amazonq/prompts/log-analysis.md",
+      "0301d871ec9ae7837927823769b18899af7b129699e665d93510642efa0df24d"
+    ],
+    [
+      ".amazonq/prompts/meta.md",
+      "7e7aa6f481f3b6419ff509cbcd77ffa1e4d488163081653990b74ac2cc288abb"
+    ],
+    [
       ".amazonq/prompts/migration.md",
       "073277cef32d073aa2ea918663d2e5f5310dce1e31a6205caf5ae82624666145"
+    ],
+    [
+      ".amazonq/prompts/multi-agent-coordination.md",
+      "2a1d108a40dbbce8c7281813adf097acacab0171e5b95b0d24f55518ed064488"
     ],
     [
       ".amazonq/prompts/performance.md",
@@ -227,24 +355,72 @@
       "b99c39dece9b3d49b6faaa46585b8f4a6cf449b94f49206058241334db154a95"
     ],
     [
+      ".amazonq/prompts/review.md",
+      "fed00c35b1df0c6cda8528cc3e954c8fa390a5ea023e3c2c19b1eeb99aa1678d"
+    ],
+    [
+      ".amazonq/prompts/root-cause.md",
+      "7fbc582e1904454680cff8e4249c63f484a8ddd554f642d68846ef33c3ef70a9"
+    ],
+    [
+      ".amazonq/prompts/secret-management.md",
+      "e018f8febd5df7976dd80b8dea82d54b4e9cb9b5949a0d72d2adf98147e9e342"
+    ],
+    [
+      ".amazonq/prompts/security-code-review.md",
+      "43c4a1134f5904056f8df47c20ab70a76a4e841c65f1878c8064383cf65a0e5c"
+    ],
+    [
       ".amazonq/prompts/strategy.md",
       "a5c82c27d72149fc42dcc75fc80e2618390ef2feb195741aa54eba4cf6a3efa9"
+    ],
+    [
+      ".amazonq/prompts/task-breakdown.md",
+      "dcc1aec53915b4bc086f5885bec938e8d325acf7e086c7a6a0e8e0911248aaa2"
     ],
     [
       ".amazonq/prompts/testing.md",
       "d6d0859c54f04c5c69608b75ae2569cf2bb4aae96aa7ee14936592b4472bca2d"
     ],
     [
+      ".amazonq/prompts/ux-validation.md",
+      "4eb2b8b1cb6bb27de5ea3b961b633f6f5f87ceea49b6db21fb7f4773ebfcd690"
+    ],
+    [
+      ".amazonq/prompts/workflow-dependency-management.md",
+      "439c1410c9ddc4350c9cb36be98109b46364e93b70291276013ec0665c372142"
+    ],
+    [
+      ".amazonq/prompts/workflow-error-handling-patterns.md",
+      "5ec3925c99df41a6d28147770bece688bf02336b52c51330303996b19ca09a45"
+    ],
+    [
       ".amazonq/prompts/workflow-migration-patterns.md",
       "a185ff7bcf36c11c86be1eced7213d87f8de8573637cd15ff2c2b86df311f877"
+    ],
+    [
+      ".amazonq/prompts/workflow-monitoring.md",
+      "ccfd7500bcf71d63f419c06b5ff6213a8eb6214495ff787af881c99903deae8f"
+    ],
+    [
+      ".amazonq/prompts/workflow-orchestration-patterns.md",
+      "99f680eef152122066b680088efb386bb5cb4f244eea0fb1314b09569dc82083"
     ],
     [
       ".amazonq/prompts/workflow-performance-optimization.md",
       "f8f8d0e49270fcc3ad3d7690cce919816edad7739208454cf01b0925e9b517d4"
     ],
     [
+      ".amazonq/prompts/workflow-rollback-strategies.md",
+      "b70cce4c255ccafff5b6764276c0d83f993001b896a58451d24fb9698d3594a6"
+    ],
+    [
       ".amazonq/prompts/workflow-scaling-patterns.md",
       "f472b8a729e5afabe2d2001676c5d321b368f0dbd0ebbd9f2cdd492717086b25"
+    ],
+    [
+      ".amazonq/prompts/workflow-testing-patterns.md",
+      "ce7fc2aa439debc5bd10fe7aa087d485af6b6ab21772f92039d5a4f4af28a1c9"
     ],
     [
       ".amazonq/rules/conventions-python.md",
@@ -426,7 +602,7 @@
     ],
     [
       ".claude/agents/debug-agent.md",
-      "a96777ad7db033987e7d8a893c03d4d859384dc7b811a1f0eb01237fb58b1084"
+      "4244a4c1dc0290f5cc4de641457a523df4cee1a142c1340eecffd79dc238e32e"
     ],
     [
       ".claude/agents/enforcement-agent.md",
@@ -829,10 +1005,6 @@
       "8b2b6b39ce7f902e69076563dc397bd9d469d1f3cb618ffb3d170c2f5b453a86"
     ],
     [
-      ".claude/workflows/debugging-methodology.md",
-      "743b083a323d1f9447945c5546d9e8a15260ce529414162c0d095603a853d648"
-    ],
-    [
       ".claude/workflows/decision-log.md",
       "43675903502bcde579c64b95b006f1bf75679197608528f18760d1927d3d96ec"
     ],
@@ -952,7 +1124,7 @@
     ],
     [
       ".claude/agents/debug-agent.md",
-      "a96777ad7db033987e7d8a893c03d4d859384dc7b811a1f0eb01237fb58b1084"
+      "aad33b160c1676e07cd62cbc823c3404155d663c7516a31fcff82afd553834dc"
     ],
     [
       ".claude/agents/enforcement-agent.md",
@@ -1355,10 +1527,6 @@
       "e69f6c5dd9fc41db8f448ee215ae2071ceac7843673e587d9f6867cd0b9afde0"
     ],
     [
-      ".claude/workflows/debugging-methodology.md",
-      "743b083a323d1f9447945c5546d9e8a15260ce529414162c0d095603a853d648"
-    ],
-    [
       ".claude/workflows/decision-log.md",
       "83b87742aa60aadbb408bc6603e6a065760305c38ff69c77befa365de1995746"
     ],
@@ -1670,7 +1838,7 @@
     ],
     [
       ".clinerules",
-      "c30ec3df23a5d3578606769aedc3abf92e64b48becc834de580958d3805e1dfa"
+      "5c9ee781855b2374887aac9c0c28853649714c68d9e31dfbd7ce5ecfade21c09"
     ],
     [
       "AGENTS.md",
@@ -1884,7 +2052,7 @@
     ],
     [
       ".clinerules",
-      "29b80ddca24cb034802d3bab835696acca092a37aa41766254ee20dead63081b"
+      "5aedbd873532a005327354a4581e3a96a4baf40ed6a8826efb9c138d074a6d50"
     ],
     [
       "AGENTS.md",
@@ -2433,6 +2601,18 @@
   ],
   "continue::minimal": [
     [
+      ".continue/prompts/accessibility.md",
+      "00d0a6efce0ef1d9b0a7d2ae9dc736ccb791d9986e80de16def5efd6fa72a6c1"
+    ],
+    [
+      ".continue/prompts/api-design.md",
+      "a7f694c25499b25aea0aa595f14f7017890f3d86a4caab4fa4ca54d89eafe798"
+    ],
+    [
+      ".continue/prompts/async-workflow-execution.md",
+      "3b4e903a75e61d5a9bb1bf2eac55e85e89525ff249e264f4e3e119bfe39429f2"
+    ],
+    [
       ".continue/prompts/boilerplate.md",
       "35708b51cb11ff2296364ec38afe74559b009d390e1abe2956188ff833d7c1e4"
     ],
@@ -2441,8 +2621,24 @@
       "a9299e4e0e236b1290210a3edd17f0f0a9050ab3f12a786d876c87a5b94ec04a"
     ],
     [
+      ".continue/prompts/data-model.md",
+      "c9b1033117dd291be1d1704c687a75f08364eec3c10515df7babe25dd7a282d4"
+    ],
+    [
+      ".continue/prompts/decision-log.md",
+      "fa18eb5cf79ef91d2cf97f3fd86d6f00fcff1cd8c673dd462bcf3357085af740"
+    ],
+    [
+      ".continue/prompts/dependency-scanning.md",
+      "fc1c8ac12866308a319c381a4cd9ffcd7b89a4e6162ce987d0bd71dc90512991"
+    ],
+    [
       ".continue/prompts/dependency-upgrade.md",
       "92d30370fa8a13c2a7897dbb6fca5bd51cc2973debc0e2afd63cf54a78c45568"
+    ],
+    [
+      ".continue/prompts/docs.md",
+      "9b8abd3baecedadea37d6566540b35ee0a0f3f210f5512c1f12838b36c9d2e06"
     ],
     [
       ".continue/prompts/feature.md",
@@ -2453,8 +2649,20 @@
       "fddc6b9d601585e1ebc341912252a39b962d6fbba522f6e2342a191559ff230e"
     ],
     [
+      ".continue/prompts/log-analysis.md",
+      "ea423d060d72d75188366b1bd9812db3f62bb699c104043ac0c614ab56c1499b"
+    ],
+    [
+      ".continue/prompts/meta.md",
+      "270a6b303ba5802fe53b9cf9ec0d527b5b5b7e3138f8a14407111a87d57f3742"
+    ],
+    [
       ".continue/prompts/migration.md",
       "90e1269c23baa6fe20b462a0dc55a37ad5dea028aa3334ae18f2f7b77fb782f9"
+    ],
+    [
+      ".continue/prompts/multi-agent-coordination.md",
+      "0b86e617f4650a4262eb953d114d5b24746fc9c1445efdd8c6b6d2806471b398"
     ],
     [
       ".continue/prompts/performance.md",
@@ -2465,24 +2673,72 @@
       "fb41d63895329af1726c05e781f3730d61113c31e0fc0ac98f18233b68e28074"
     ],
     [
+      ".continue/prompts/review.md",
+      "27ce65e0d73ba072b0ee57de2fedabf3580e1c4cdb6dcc5ebb4a2c87a80d9b67"
+    ],
+    [
+      ".continue/prompts/root-cause.md",
+      "5dc6327736f4898e17fe00f97a82580807d75be5630af56fe6988a4b0aa2f25d"
+    ],
+    [
+      ".continue/prompts/secret-management.md",
+      "fbb46d97d54a2ae3ed9b3ebfc4f503f3b77e55d28281889c68c0999d7d4ee2bf"
+    ],
+    [
+      ".continue/prompts/security-code-review.md",
+      "a90b60b7dbf75d7540ca3b151191f095ae984443a7107ec21e0fd8f7577d1fd1"
+    ],
+    [
       ".continue/prompts/strategy.md",
       "93f9282ce3ddc7dc9f1768ab0bb4c60975979496519a40e0909fa4c4f0b2f059"
+    ],
+    [
+      ".continue/prompts/task-breakdown.md",
+      "20f9550946738cb1c69acfdd1a1e2d2e4e282f2df9c11379118930a3877173cf"
     ],
     [
       ".continue/prompts/testing.md",
       "3ebf38ff437e6526e71c081284a2ec7edcca921b478549b0b5bafaa86138027f"
     ],
     [
+      ".continue/prompts/ux-validation.md",
+      "4d36011f8e1ff0f93b8dff1731fb03b106d360e8f27671c427a64eff2169df50"
+    ],
+    [
+      ".continue/prompts/workflow-dependency-management.md",
+      "1ff905adc108094ac150b72545384b4651c83042d23cc26563dd8f99c411fff2"
+    ],
+    [
+      ".continue/prompts/workflow-error-handling-patterns.md",
+      "cc74d06efe4ccc97f0006caf8733f6ca5ef8c5926b95a4d300f2efc6c06c675f"
+    ],
+    [
       ".continue/prompts/workflow-migration-patterns.md",
       "6553ce5b24365465be43b9cf1b85e61b08fb8eb7dcbaddc6da3864993ab87522"
+    ],
+    [
+      ".continue/prompts/workflow-monitoring.md",
+      "309602e7bbe0dc17e84ce6542dc3cead5df5eb2bbd0184ab61cbe5082fad7ea7"
+    ],
+    [
+      ".continue/prompts/workflow-orchestration-patterns.md",
+      "2608f5d61f6c751defd6a56c9398b575df54b4e36114e691f0602d1e0fff0459"
     ],
     [
       ".continue/prompts/workflow-performance-optimization.md",
       "bfffd1ef58cb8321ae22b6575bb200ea0de3ad380d3bf6aa1e0aa614c227281b"
     ],
     [
+      ".continue/prompts/workflow-rollback-strategies.md",
+      "897732246c2801f71d85ef55fb353c3f0c635a0651aabd790be3516b10ac867d"
+    ],
+    [
       ".continue/prompts/workflow-scaling-patterns.md",
       "2d3aa36b7ff9cb6f49fb599718a16880b56b8e6011a48f0206f7e0dfa5d47588"
+    ],
+    [
+      ".continue/prompts/workflow-testing-patterns.md",
+      "314ece0fcc14c521328acf67364db43cf501c055521847539063a42c0e789e21"
     ],
     [
       ".continue/rules/ask.md",
@@ -2551,6 +2807,18 @@
   ],
   "continue::verbose": [
     [
+      ".continue/prompts/accessibility.md",
+      "4e18704018ee1cdac9a106ea65a4217d0dab309277ed020a0274f739c5f2a5cf"
+    ],
+    [
+      ".continue/prompts/api-design.md",
+      "882119adbd70a0723a7895da81f559ebeb5896a384b43365b6b154cbf6560a30"
+    ],
+    [
+      ".continue/prompts/async-workflow-execution.md",
+      "0bc853b9a212129ffda4f6bde5f9d24816ee8facd214f329e711f3e9bef76e91"
+    ],
+    [
       ".continue/prompts/boilerplate.md",
       "d26986fa762d9127ddb8471174ae055410e2cf5ec312873de01472d6f570d0c6"
     ],
@@ -2559,8 +2827,24 @@
       "120d024c423be3349e734d3ee409701a1a4eff8652f26b2efdd4e5bbc3c59fa6"
     ],
     [
+      ".continue/prompts/data-model.md",
+      "011ef0b9de6e5e7cb8019ca9409a720b537b9f97e93876ee7bbb5be68b60224a"
+    ],
+    [
+      ".continue/prompts/decision-log.md",
+      "8492c3b1ca24ddb4a6e0600a12931e41d30bc1397c735d9695cb1feeb872dbad"
+    ],
+    [
+      ".continue/prompts/dependency-scanning.md",
+      "6498707592a9547a74194800bc5732ce5c9498d33b79c3cd5ec1abd8680781cf"
+    ],
+    [
       ".continue/prompts/dependency-upgrade.md",
       "1b395c4a2afbd7bcd02ef563685169f73ea3f3af50d06aa3df80569b3ea0ca07"
+    ],
+    [
+      ".continue/prompts/docs.md",
+      "77a8d52c5814a8f39a1d7dbca639b818dc2df6c3d56a6f18e9db25c73b7a308b"
     ],
     [
       ".continue/prompts/feature.md",
@@ -2571,8 +2855,20 @@
       "0f47f51f3fae2e7c944ef0e0213b10c9b4d7acad5d8d6c49df86f61145ec4109"
     ],
     [
+      ".continue/prompts/log-analysis.md",
+      "076bde486e7d391e52af22688d0fa7f98414a7cbe2c78ce407d9a164632b7b66"
+    ],
+    [
+      ".continue/prompts/meta.md",
+      "be3c31b82da74d980328574edf548b8299ecbe46a2d40319bce169adbdc8b514"
+    ],
+    [
       ".continue/prompts/migration.md",
       "00e839b46595a24ed0baa36e25d0a6bc62e02ff9b63fa237fa288e1eab252bd1"
+    ],
+    [
+      ".continue/prompts/multi-agent-coordination.md",
+      "90bf1c0ba29e4633a0035aba80134f7978e74cb4ac0fb2eca1f926e81388e037"
     ],
     [
       ".continue/prompts/performance.md",
@@ -2583,24 +2879,72 @@
       "99321e6d813f6c66450f517bec4f36be8c0d839e3646a05076ca5142ab6e5dd1"
     ],
     [
+      ".continue/prompts/review.md",
+      "4c5769c8346cb58df620a0a1b61fbdbb1b7a48a211ee0119468d8bd16111ef13"
+    ],
+    [
+      ".continue/prompts/root-cause.md",
+      "643fe81fdb3e22eceb5f32474672fa5023ac0571ba9b4f1bbc2d7ea2d701c74b"
+    ],
+    [
+      ".continue/prompts/secret-management.md",
+      "5c658adca25783f8c13632bd89d48803a92a31ef43a2d582c2faa5350b5b4ef9"
+    ],
+    [
+      ".continue/prompts/security-code-review.md",
+      "c0413324d8434772278ffe08689a61c42b26619673dc7de6b82a937b88fb319d"
+    ],
+    [
       ".continue/prompts/strategy.md",
       "c74713320e4a8613527f761fd0934900676ec00caa4ce8728d813d3099bd9138"
+    ],
+    [
+      ".continue/prompts/task-breakdown.md",
+      "7c0c4864d0d47411e6ec11718d6432b41d48e69a16a32b9ee91bcc925d4adee0"
     ],
     [
       ".continue/prompts/testing.md",
       "43051f27439a0b8fabe33c77b6ede394f91a3e6aed077b0fdbe9089837091db2"
     ],
     [
+      ".continue/prompts/ux-validation.md",
+      "2a54a1601cd1620b8baff5417ce2a5ce1786f3df85c1657b5416e1832586d834"
+    ],
+    [
+      ".continue/prompts/workflow-dependency-management.md",
+      "d93dc396e22fd558ece04fbfb129147a1cfe9c01735342198971d07c916eb50e"
+    ],
+    [
+      ".continue/prompts/workflow-error-handling-patterns.md",
+      "a2f3c6a06b4fde6710f064734764e480c2327e167bd8a2c47879023df8b1fdea"
+    ],
+    [
       ".continue/prompts/workflow-migration-patterns.md",
       "e12a47f280f25d37303bb0cf63c278b972718a4d8243a3d32a297312a682025f"
+    ],
+    [
+      ".continue/prompts/workflow-monitoring.md",
+      "4b809fafa5a47fe5b9318cc4ae98d6e24b33b6ebd0653ad44ccd6516f936e238"
+    ],
+    [
+      ".continue/prompts/workflow-orchestration-patterns.md",
+      "d63b82c1e1aef36c3a52c740b764f001a42cd5b6cd2c4c7fb7ee270e38120bb4"
     ],
     [
       ".continue/prompts/workflow-performance-optimization.md",
       "5e4043f7e0afc5f13892488cd47205720a762c2880297be0ef50930a1826a4f4"
     ],
     [
+      ".continue/prompts/workflow-rollback-strategies.md",
+      "b744aeb2468ccb0e4043914cb1a28473c0dae8e099f06f3e5269241a40c70fd5"
+    ],
+    [
       ".continue/prompts/workflow-scaling-patterns.md",
       "ee3e529cd3ab0b05e34e5ee3a21afaa18689a719a1bac25960f8fa35d8cbdee6"
+    ],
+    [
+      ".continue/prompts/workflow-testing-patterns.md",
+      "ba3e8183b19ce753a02ea3cb6cc3c3ade609859bd820539d632cec3611cad153"
     ],
     [
       ".continue/rules/ask.md",
@@ -2733,6 +3077,18 @@
       "6adb65a4fb133948898fd7e2d6bd71ce11e92f8ec1d91c4703dee4689ac17db9"
     ],
     [
+      ".github/prompts/accessibility.prompt.md",
+      "d595b89a3cad248d40e4bfb6cce9f6c87398b885e77376b5a5e7304a7d9f5492"
+    ],
+    [
+      ".github/prompts/api-design.prompt.md",
+      "a0adc4f7736491fff0f685600f39f1fa5c0fe523ea6babcd1824eb12f7bfbdd7"
+    ],
+    [
+      ".github/prompts/async-workflow-execution.prompt.md",
+      "cee5af4203a10540dc7744c9e0c2cf47e40e11f6908faabd2cab589e71aa0fee"
+    ],
+    [
       ".github/prompts/boilerplate.prompt.md",
       "6523f5d6394bea02e526e238f19c9937349680e3290efebae821aed991fd790f"
     ],
@@ -2741,8 +3097,24 @@
       "75a6adf008e4ba8682021e1bfb64b72b84ad84f8ea41718d0b5827931e3b35f6"
     ],
     [
+      ".github/prompts/data-model.prompt.md",
+      "41f7ae5ee2cff00997b46738d50b37ae258752e7f136ae2f46ff273e68d46212"
+    ],
+    [
+      ".github/prompts/decision-log.prompt.md",
+      "503008e983c29bd878ba15dbc08417da40f20dff29dc4a0a6e0a516fe25ad562"
+    ],
+    [
+      ".github/prompts/dependency-scanning.prompt.md",
+      "4ad1b638ec623b16e23119a1b2035622e131268102dd624b52b92a3b03574291"
+    ],
+    [
       ".github/prompts/dependency-upgrade.prompt.md",
       "9b3dc6020e3a25cbf29745a8b3580642d119683186d039fc98ae44b24ac58ee1"
+    ],
+    [
+      ".github/prompts/docs.prompt.md",
+      "1033696f01c9eedc1d93e85a598f06f2aed0f9b1b69c46d95c0367affa4d3041"
     ],
     [
       ".github/prompts/feature.prompt.md",
@@ -2753,8 +3125,20 @@
       "2c52f39d6fe4bf138a57b613dfedf05af1fd5da1c14e8d39817d1b6cb5df30b7"
     ],
     [
+      ".github/prompts/log-analysis.prompt.md",
+      "3d7586923a3ccdbb7baf93a94cf578cc14ccadffa73d12c0ff151e590849869e"
+    ],
+    [
+      ".github/prompts/meta.prompt.md",
+      "37a8700f42a55b3bc2fcb94bf74b4a0a7dda525ea114b1d8f66f9b0280794419"
+    ],
+    [
       ".github/prompts/migration.prompt.md",
       "2e4a533a5a5162509c6fbe200fd3ebd3f852bcb4a41cb8b804a92bb478ded3d8"
+    ],
+    [
+      ".github/prompts/multi-agent-coordination.prompt.md",
+      "a4b5b94dcbc8197f12c501e82216d9abae400af2bce4ad3949b43c2f2111b30c"
     ],
     [
       ".github/prompts/performance.prompt.md",
@@ -2765,24 +3149,72 @@
       "80c36e705e93c642d1e0de46df6edd0d7e75269d7c2f15f23486a832397ee0c9"
     ],
     [
+      ".github/prompts/review.prompt.md",
+      "01b9d3d110691a50a23807378812765ed11e84c9628b3a721b6bf06f3fc524e1"
+    ],
+    [
+      ".github/prompts/root-cause.prompt.md",
+      "d056b652ef82ceb5c051bb8939ff3c3903ea53bc6a08cc30adf28b0567c6bb47"
+    ],
+    [
+      ".github/prompts/secret-management.prompt.md",
+      "51a27edd6ad048b15b48b9b2ca00731230c86f192eaedbb72a6a335adda17225"
+    ],
+    [
+      ".github/prompts/security-code-review.prompt.md",
+      "d722fe27fcfea7c10ce8a0b1c6bce485566303df450f1557e02d209c86e29555"
+    ],
+    [
       ".github/prompts/strategy.prompt.md",
       "52dd04531aacd44fb1efe1d70b166baf61c1317b435b732d21f4fa35d01dd5ba"
+    ],
+    [
+      ".github/prompts/task-breakdown.prompt.md",
+      "1015ff56f79ff61bd7d5fe8c00c5cac60ec127e0f92a07266f9d4a60f686e8f7"
     ],
     [
       ".github/prompts/testing.prompt.md",
       "1dc61ab4e379ad00d1a9467e7273fc8e43381bb470176702729c097cadc4acc2"
     ],
     [
+      ".github/prompts/ux-validation.prompt.md",
+      "89667242c5608d18b0a3590d5208927556492afdb51aa8f6453ecf58aa8f1e19"
+    ],
+    [
+      ".github/prompts/workflow-dependency-management.prompt.md",
+      "22dbad319dd594f331e7f2aa3a7da41ea3fdf7798bc13ffa72f38e43d56b138b"
+    ],
+    [
+      ".github/prompts/workflow-error-handling-patterns.prompt.md",
+      "e3a8ae6fe860cf590a3e78e0dfa1b2d7f2f5f492ecfc28452edb5028333bd17d"
+    ],
+    [
       ".github/prompts/workflow-migration-patterns.prompt.md",
       "3d234b07456506d0b784397b48813c29ce4d06afe735ef098db5b4857efdb3a7"
+    ],
+    [
+      ".github/prompts/workflow-monitoring.prompt.md",
+      "bfcf41e7d8b25b73a4257abd537e584a0213647e3463e838b121a74a77c74088"
+    ],
+    [
+      ".github/prompts/workflow-orchestration-patterns.prompt.md",
+      "182053e543085a0b51daad0538d0c58ba43cac5dca96c557ee6fbfb73d9f28af"
     ],
     [
       ".github/prompts/workflow-performance-optimization.prompt.md",
       "724cdc0efd018c826262c38eacbed960e9f7373e6800cfd2b7586201586dd43b"
     ],
     [
+      ".github/prompts/workflow-rollback-strategies.prompt.md",
+      "aa12c2ee6947962df382eef0e72b8a41fdba818bb53810a4cf7497184c0483f9"
+    ],
+    [
       ".github/prompts/workflow-scaling-patterns.prompt.md",
       "f5f8a0a185941bf1afd4f7e00938c4bdac8cb544f8309979a37dd8d515260f5f"
+    ],
+    [
+      ".github/prompts/workflow-testing-patterns.prompt.md",
+      "2f5c77fb03e22584357098f0eb7544f039bede038739e87b0010982ea23a4bf5"
     ]
   ],
   "copilot-chat::verbose": [
@@ -2851,6 +3283,18 @@
       "6adb65a4fb133948898fd7e2d6bd71ce11e92f8ec1d91c4703dee4689ac17db9"
     ],
     [
+      ".github/prompts/accessibility.prompt.md",
+      "86f2f9ae7f1b54995961f3ce909a4a25d16b44405a135b353237a62cfad4b7b0"
+    ],
+    [
+      ".github/prompts/api-design.prompt.md",
+      "54ba3eec2b77cd59583496579596a77b68cebb3395de263248f5e846a5ff0df9"
+    ],
+    [
+      ".github/prompts/async-workflow-execution.prompt.md",
+      "55b253aef53de023f3bc8a3cb38a8907c3f28225c4f84478bbf3196f36e42e03"
+    ],
+    [
       ".github/prompts/boilerplate.prompt.md",
       "407442e7bd9c158502ef792aab7e4fcb905d94d88b1bcecace6145212cce97cc"
     ],
@@ -2859,8 +3303,24 @@
       "82d702bc3631a227871a29659a0425aa25adb5dc70944f65c664a81d0c2d9985"
     ],
     [
+      ".github/prompts/data-model.prompt.md",
+      "44159912e461a01633b8e5d95b608217f8a8c24aef063ae2811f025a10c7a2dd"
+    ],
+    [
+      ".github/prompts/decision-log.prompt.md",
+      "9600e57331db62b72d953eaac52edf5f569f4e1d4e17d2435049d944e786609f"
+    ],
+    [
+      ".github/prompts/dependency-scanning.prompt.md",
+      "5e8db9b86b384983a065fd83a7674906db6b65b260375837c7ebeb34e6d18b18"
+    ],
+    [
       ".github/prompts/dependency-upgrade.prompt.md",
       "c1b50362f79cbbc639eb3f785a3e2deea4e66cecfbf3b9498fc39b9c610fc82b"
+    ],
+    [
+      ".github/prompts/docs.prompt.md",
+      "e3b5b4967743ed87d48714b09305b7395b3325968526d7061cd32e187b67a09d"
     ],
     [
       ".github/prompts/feature.prompt.md",
@@ -2871,8 +3331,20 @@
       "1d3cfc30366e3b9d4b3d308ac7a43aafa6c06ef33ccf0734e5c07e6cf0d6c8ac"
     ],
     [
+      ".github/prompts/log-analysis.prompt.md",
+      "f136fcf0e00f30a80ead8f2bb89e5e49058642f1f65f2b8e955451a2a9d0d0e7"
+    ],
+    [
+      ".github/prompts/meta.prompt.md",
+      "280305c79ba1ae5b121f6119f522c6afa0c509c0d7d438ab8319e6a5f3ddfc38"
+    ],
+    [
       ".github/prompts/migration.prompt.md",
       "27b8492f7bdf9e7de641bf81a8e1c110f5458fd2e6ccec4299e920ad9c9cb3d6"
+    ],
+    [
+      ".github/prompts/multi-agent-coordination.prompt.md",
+      "c335b5d3dea95a4466d61faed78ccb95dad9b5d7926c7ef4f378696c3b073277"
     ],
     [
       ".github/prompts/performance.prompt.md",
@@ -2883,30 +3355,78 @@
       "471c8fe9c09f08dd3bf5e7805a4dc59ef0242d2aad2f2cce6258d0acd997b411"
     ],
     [
+      ".github/prompts/review.prompt.md",
+      "3c720f42aa631d473c62e2bf1e15dd3c50a43f9315ebe173b2e1441fe39bdb2b"
+    ],
+    [
+      ".github/prompts/root-cause.prompt.md",
+      "7fb7e9c5f51d10bece92ae7301943234ad3533f2665b5b388fd2c91fb086585c"
+    ],
+    [
+      ".github/prompts/secret-management.prompt.md",
+      "3bf04901218483d285aa80be51dae1ffc8addef6db9bad73a1de589169c2dec1"
+    ],
+    [
+      ".github/prompts/security-code-review.prompt.md",
+      "f57d6c2a7c0f2182639477e5a428430f570ecbaa3835b9fafe2ba6da9e51cd48"
+    ],
+    [
       ".github/prompts/strategy.prompt.md",
       "7c71718f47679295a4fa7c780f38fa0d2bdc338ad02ae1c4167bf29c0100ff48"
+    ],
+    [
+      ".github/prompts/task-breakdown.prompt.md",
+      "f74fbfd94255f60eaf170bf52a5b964b79f2f1864914e35ae9dca78f5774f83f"
     ],
     [
       ".github/prompts/testing.prompt.md",
       "72c6781eefc255b01c49bf3b2a48d62e788982a6b13f0a5217256c8dd52efa81"
     ],
     [
+      ".github/prompts/ux-validation.prompt.md",
+      "3bb46266d2ab651be9fbaf350eb660d116317273b5cf2abead0e80bdbe03ff70"
+    ],
+    [
+      ".github/prompts/workflow-dependency-management.prompt.md",
+      "8adddcf699cbcd260fd847dc9b5776a5c8cd70d81f67a5029d69da4f5c71a950"
+    ],
+    [
+      ".github/prompts/workflow-error-handling-patterns.prompt.md",
+      "e5bcf115ef2005f70a94b3ecb50200097a3ff11e48d770f54c5f0f3b704a9921"
+    ],
+    [
       ".github/prompts/workflow-migration-patterns.prompt.md",
       "ffc7f0b91bb58362d46e079ad837b1738d60900a08be7e83d58f16a07037c6c1"
+    ],
+    [
+      ".github/prompts/workflow-monitoring.prompt.md",
+      "f3ceeadfbdca82059711f9c03881957ec7d3558f69ee8f803583976c3eb603ee"
+    ],
+    [
+      ".github/prompts/workflow-orchestration-patterns.prompt.md",
+      "7b71f77c97a0ec6872101b816e3a2de1984e3da739a8fd6e1ab187956fb8890e"
     ],
     [
       ".github/prompts/workflow-performance-optimization.prompt.md",
       "9c1a749b2ab527f60a1684b5e09331de24999f257db2aec82fa948547d47652e"
     ],
     [
+      ".github/prompts/workflow-rollback-strategies.prompt.md",
+      "e08684976901b91aec71e5e91945f6918dfcb3b6026c09dcf8c28f3255224b3a"
+    ],
+    [
       ".github/prompts/workflow-scaling-patterns.prompt.md",
       "15090974e97bf2658883ab6260e92d2494b6e24511164b4422636bd0475f0683"
+    ],
+    [
+      ".github/prompts/workflow-testing-patterns.prompt.md",
+      "082086cf94cde2d0511d7818007e06f8bf56d6b36f8ca1ea01b5704bf087830a"
     ]
   ],
   "copilot::minimal": [
     [
       ".github/copilot-instructions.md",
-      "10392fb43570af2c48ca631fc3d5a3da100e840a94df7c73a1202a1cf4181c8f"
+      "25921f016d327e190e32ca0126884deeafe7e9d1af2477923c71bbd5c481b73a"
     ],
     [
       ".github/skills/api-versioning-strategy/SKILL.md",
@@ -3120,7 +3640,7 @@
   "copilot::verbose": [
     [
       ".github/copilot-instructions.md",
-      "3104e49e8e06850df57d0c9d9690b29fa2fd23fbbebaf664ded16ac13febee2f"
+      "f9d6698fd8f7ade273f0d0f811e8441bc96601aacdd5cec641e4ba34e97d843e"
     ],
     [
       ".github/skills/api-versioning-strategy/SKILL.md",
@@ -3538,7 +4058,7 @@
     ],
     [
       ".cursorrules",
-      "bc10ae6273d3b1779e12b73806cb6c61586ff67a4ba7ee6f3176912fd96c4f40"
+      "6c615f346917847961ba0ab6148963aeaf6f38bf64336b3305043ffc865d5981"
     ],
     [
       "AGENTS.md",
@@ -3752,7 +4272,7 @@
     ],
     [
       ".cursorrules",
-      "40320c2476fbcff388ebcc2848df24eedafc12f7296abb767855fbd7591c2477"
+      "794fd4049b61281c675fcb5b4a9b76d2758caaf20d7b920ffee2759f275fb720"
     ],
     [
       "AGENTS.md",
@@ -3817,6 +4337,18 @@
       "7cdc9e8209e0629355cc0e60feccaddd09422c403488ec1c44b11c7bbc96f015"
     ],
     [
+      ".gemini/commands/accessibility.toml",
+      "e8536b400d73d69c9ff03051c16e7f6ccf7bee9875649f31c4f5d15d3b21e4b0"
+    ],
+    [
+      ".gemini/commands/api-design.toml",
+      "837e9137a17f083ebafdda4aec46ee787f9b99ab753722cccc95bc36b81fcab9"
+    ],
+    [
+      ".gemini/commands/async-workflow-execution.toml",
+      "50ed1f9b1302275ec3580837360e4e25b2167c4ec79e480a444e0b80504fd773"
+    ],
+    [
       ".gemini/commands/boilerplate.toml",
       "4cec91029240933d419351e34551c08e0a4a8831b9356be8fb98992ab5227034"
     ],
@@ -3825,8 +4357,24 @@
       "3b52d78f9e521f247207886fb6b300a2fdad08cf980ab0e5099a80bb78bf4628"
     ],
     [
+      ".gemini/commands/data-model.toml",
+      "0a892c2c0efae2d45e13cf79a6881af4f18952c4c6d3848070bdf338321fa9ed"
+    ],
+    [
+      ".gemini/commands/decision-log.toml",
+      "63ccea6321467853146d15085478b35b8e38bc7df079e36e7a055a22a1614354"
+    ],
+    [
+      ".gemini/commands/dependency-scanning.toml",
+      "b6fa4de285e27426777471080654e9503cd37381b71047854becf239c553422a"
+    ],
+    [
       ".gemini/commands/dependency-upgrade.toml",
       "a5d346d746a85ccc6319db5af7bcb1f0b87a2aadfcb2e1f999a4b883ce3d09d4"
+    ],
+    [
+      ".gemini/commands/docs.toml",
+      "88a677948cdd3f9773ef24c1af3ef99901488b76c34f5b8a0da3b695e3447971"
     ],
     [
       ".gemini/commands/feature.toml",
@@ -3837,8 +4385,20 @@
       "24de0cf65bbb00998fab3efbd81ad50c4b3774c8ca28637c83a74245d91728e3"
     ],
     [
+      ".gemini/commands/log-analysis.toml",
+      "0cd9837fc10c93594b711b7e4bbac0167b60fc0968a7ecbaf085ac21735cbad9"
+    ],
+    [
+      ".gemini/commands/meta.toml",
+      "1b77ff161051a8ed536c286faad46e84b1649f975728eef57fe9d94ea7a6bcc5"
+    ],
+    [
       ".gemini/commands/migration.toml",
       "8a2c77b025a327a55eef628dc1fa43c951f1541762061a90c70572368ea64856"
+    ],
+    [
+      ".gemini/commands/multi-agent-coordination.toml",
+      "f4e7f91e44e277a3985dfe188aa9ea1d5b0c3e4281236e6755b67cbaedd14906"
     ],
     [
       ".gemini/commands/performance.toml",
@@ -3849,24 +4409,72 @@
       "04201dd4aeb0733bf2a90c99a4fcd5d819ca31e9ced72418c75b2f2905506b66"
     ],
     [
+      ".gemini/commands/review.toml",
+      "d5be63cfcda608676d2fb2c8ccfea94d21931c060a41f8d05ed40117c1c7f926"
+    ],
+    [
+      ".gemini/commands/root-cause.toml",
+      "5161736bdd373550ef630d2897ac4c518b803362689915a5cc422d904354ecae"
+    ],
+    [
+      ".gemini/commands/secret-management.toml",
+      "ed6c22c3bf990479158bf09ab4d0c166734edeb24a2495cfe1ab2c824bc43f59"
+    ],
+    [
+      ".gemini/commands/security-code-review.toml",
+      "60ba3263e08a1ca45c83d3bb5057aee0b9a40cc4eadbaf94381fab5aa684b2ed"
+    ],
+    [
       ".gemini/commands/strategy.toml",
       "2f5f13374030e47bf0acf2919f1b9ee1a814cbd5e640aa134f044cdf8265c003"
+    ],
+    [
+      ".gemini/commands/task-breakdown.toml",
+      "866e7bc1eab293dcecf45b945a67332634d5e8538ba49971db01f9aa42a16ffc"
     ],
     [
       ".gemini/commands/testing.toml",
       "5980b6cc509ff8e8494d2d76b89cf062cd3c610e2bb0d39cc025ce289c10e540"
     ],
     [
+      ".gemini/commands/ux-validation.toml",
+      "1c210d239f18c971723f8c425fad388184b02f7b238f0acac9ad8d6b946d6cb4"
+    ],
+    [
+      ".gemini/commands/workflow-dependency-management.toml",
+      "a2187c2e69d353e6596661f4eab80182d239757e0d5d6151b1bab355bdcbed30"
+    ],
+    [
+      ".gemini/commands/workflow-error-handling-patterns.toml",
+      "152408cecdf306cc6ac9f2ce66d5da75d7da9c88db2d6aa7ee8971179a285c60"
+    ],
+    [
       ".gemini/commands/workflow-migration-patterns.toml",
       "4ee09e81341889e16ffbac316a3707acd201c1b7a01de76140e8246471cc28d9"
+    ],
+    [
+      ".gemini/commands/workflow-monitoring.toml",
+      "9b3f28f12b6b444c574ae83af9c99862f1d430a3d38696904dda4df172885d17"
+    ],
+    [
+      ".gemini/commands/workflow-orchestration-patterns.toml",
+      "b8d7d531c46da12785d8b1687601b99468188283b3f64624d2b16bff3d72ada8"
     ],
     [
       ".gemini/commands/workflow-performance-optimization.toml",
       "0e280e2a0e0fd3f2b808049890111ce16d5ef62c0819536dc21fcd588147c10d"
     ],
     [
+      ".gemini/commands/workflow-rollback-strategies.toml",
+      "2495f045f8555d7547cda077d5500289ba1793d5427173982b48ea1ad1374677"
+    ],
+    [
       ".gemini/commands/workflow-scaling-patterns.toml",
       "f82bd1341aa9a96ccdd3f6f7ae6836ea341863c2123648bf4827176314a0337d"
+    ],
+    [
+      ".gemini/commands/workflow-testing-patterns.toml",
+      "ae96ed99b5f8928bf872731ee355e669723349bfe88e2eef9865a28204714ea2"
     ],
     [
       ".gemini/settings.json",
@@ -4139,6 +4747,18 @@
       "7cdc9e8209e0629355cc0e60feccaddd09422c403488ec1c44b11c7bbc96f015"
     ],
     [
+      ".gemini/commands/accessibility.toml",
+      "7b9be277ff78bdfc916b1aed5f5cbdf4c2dc1d800c85ac120eb6e5d538b9e0af"
+    ],
+    [
+      ".gemini/commands/api-design.toml",
+      "6f823a0835ecc6af637bac9de2dc1eb639a28ea1ef3046ceb875f8442f5a0d57"
+    ],
+    [
+      ".gemini/commands/async-workflow-execution.toml",
+      "8ac65d7170bc8005e5b9e3b1675bb15d71e3cec1f70dc28bd901dd6d318c24d9"
+    ],
+    [
       ".gemini/commands/boilerplate.toml",
       "a8fd338ccacbf6859d19a69e3c3f21a502706dce18486da73b9892cac7e9df97"
     ],
@@ -4147,8 +4767,24 @@
       "d139a8992fa6d2441178350be8208d650bc0468466af34ccfdcb5fbd1c500df0"
     ],
     [
+      ".gemini/commands/data-model.toml",
+      "e7caa0a3de6c37e591ff45b84a7d870ffab4da994039423d43248d134c1db00f"
+    ],
+    [
+      ".gemini/commands/decision-log.toml",
+      "3c4b087aa1833179961dcbd58268bf382f2db23d885e7bfcfad9a9ebfb3725ed"
+    ],
+    [
+      ".gemini/commands/dependency-scanning.toml",
+      "a372c9ac8d388d2f58578e6980b7e8bb2a0dfbf96e1c093209298922d981ccc8"
+    ],
+    [
       ".gemini/commands/dependency-upgrade.toml",
       "3b88e64d354d7e805148fda877d6c475e2f1f5473160f0266713e8535c69ed1d"
+    ],
+    [
+      ".gemini/commands/docs.toml",
+      "8d5fe1c6c192fa1be6e3c0ed128372eaa95e70984f5b5f95e4310572de833b27"
     ],
     [
       ".gemini/commands/feature.toml",
@@ -4159,8 +4795,20 @@
       "fc73485dac1ad5a7fc6930b304c203a59b971ed9d5e776e309fb40230a0bf5af"
     ],
     [
+      ".gemini/commands/log-analysis.toml",
+      "1983e77ed674debed6608e9907e9ec1bb1b18315f6c0c183bbc0ef3895ce53ec"
+    ],
+    [
+      ".gemini/commands/meta.toml",
+      "750efb906f6889b9d1213e07e2ba377997b005fdf7ca744cc4ba78ff57eb365e"
+    ],
+    [
       ".gemini/commands/migration.toml",
       "038e094dd677bb7154f97911b32b76565ebbd2d7a2232a72006d7015e3562175"
+    ],
+    [
+      ".gemini/commands/multi-agent-coordination.toml",
+      "61e874fbdc9d809db55635cc320a56d4d3830fa9a8724934a4d6575eb36003b4"
     ],
     [
       ".gemini/commands/performance.toml",
@@ -4171,24 +4819,72 @@
       "d9173c7487b961f0edbf79482d9e0b19d1a746a994d1d7f8fbafc9121dacb72d"
     ],
     [
+      ".gemini/commands/review.toml",
+      "1cd5375fa785820331f5e20492288f4bad586b6b2d73fd617ef44f83715c5ba1"
+    ],
+    [
+      ".gemini/commands/root-cause.toml",
+      "7211b1e9c98fbfc9c9183bb80d4190e28d1f92528fd30635f5b7aef9c4312632"
+    ],
+    [
+      ".gemini/commands/secret-management.toml",
+      "dae58abb641fcf5b17c9fee45c934d8297b87f1c4a1021aab9cee01b7a658a85"
+    ],
+    [
+      ".gemini/commands/security-code-review.toml",
+      "f3debb54d03081ee57ca9af6791ef03bdec00fc6b1f389518836def004fb2a5c"
+    ],
+    [
       ".gemini/commands/strategy.toml",
       "52a221ba230857e1887997c671e14e995a89958b9c2e2bc179d29c4ce6362afe"
+    ],
+    [
+      ".gemini/commands/task-breakdown.toml",
+      "c9c9634e7574bd5a59d1ce1a015f338da16e8bb21f6fac3d97c464f1733d1496"
     ],
     [
       ".gemini/commands/testing.toml",
       "e5488f10649ff2a65b6f9d07ec2f8d75547477205e33d753ff543edd3bc374bf"
     ],
     [
+      ".gemini/commands/ux-validation.toml",
+      "23a0e0802511bd4cdaed538380c09d584b41e84c69bb16ffc2d985e3b45cc4f7"
+    ],
+    [
+      ".gemini/commands/workflow-dependency-management.toml",
+      "6aadfb2854bcc608ea72eef0975e99705a26808dbb118cf154dd39b651ba403c"
+    ],
+    [
+      ".gemini/commands/workflow-error-handling-patterns.toml",
+      "f30cc693ee3c9d69a51f7aaa285aeaec531255b44abc27b4018775a784e0f2f8"
+    ],
+    [
       ".gemini/commands/workflow-migration-patterns.toml",
       "c1e5eefb10e5eaea38d4dd8d05209d4e1819e568193076a7b8d6bf54dfd63890"
+    ],
+    [
+      ".gemini/commands/workflow-monitoring.toml",
+      "50626a75f95bbb1686b91b3f547f5ac87d09015d5c68d9700209eecf4c346f0d"
+    ],
+    [
+      ".gemini/commands/workflow-orchestration-patterns.toml",
+      "10601fc3ec2c027fc404e8cd450b1110a3d555f09ee55ee723250775ba54a634"
     ],
     [
       ".gemini/commands/workflow-performance-optimization.toml",
       "3905e48c8f0a9d1f4af0bc673ad66b1cfb88b4a78e0e7107f512a9146a419e04"
     ],
     [
+      ".gemini/commands/workflow-rollback-strategies.toml",
+      "ef9c733158b61014819bc98c67777901d0138683df32b829be9519512657853d"
+    ],
+    [
       ".gemini/commands/workflow-scaling-patterns.toml",
       "1273e15f664855339c5702d0eb4134fd57fa64459812fa683d7da35a8309ada1"
+    ],
+    [
+      ".gemini/commands/workflow-testing-patterns.toml",
+      "bacbfa805f0fe8e8201f470ff46d768d71d973c0b6f668e79362dd12cd26ee72"
     ],
     [
       ".gemini/settings.json",
@@ -4461,6 +5157,18 @@
       "19e64edaddd15aa175fbed6788725dab40797c4c3b0b9b77a2b8080edead6be7"
     ],
     [
+      ".junie/commands/accessibility.md",
+      "e2747c5792ea7cc655b2ebea1a954fd53c243d91ee89730b10322149d64a2831"
+    ],
+    [
+      ".junie/commands/api-design.md",
+      "0be08f948e5335f17b160d03b9a03e8b9262337562a20eaa83a4b269129b8bdb"
+    ],
+    [
+      ".junie/commands/async-workflow-execution.md",
+      "817f9b3bd73f17d5cdc4b6ffc4baa84a9f8c145373df1cba5c3a1066adeadcde"
+    ],
+    [
       ".junie/commands/boilerplate.md",
       "cb90b4741a1b1c26e2f119f6a69e62e9f67a6eb6e878480a6cbcf6661f7e9865"
     ],
@@ -4469,8 +5177,24 @@
       "a1b827fc4585627e6921a08c920afcc9c4cc5b5e218a2226997c37012f9be5cf"
     ],
     [
+      ".junie/commands/data-model.md",
+      "2dcdc262b10410f98ce82a147bc6656511e6c6cc38c3f8a06e5a4539a4c7ff76"
+    ],
+    [
+      ".junie/commands/decision-log.md",
+      "b48ec39bbc5ca761c734629c9f20fd9bc4999a5099b4b8334f658cbe6591666d"
+    ],
+    [
+      ".junie/commands/dependency-scanning.md",
+      "5493d7a37042671e00b43270f64567a498285310295fbd4e51445cace40d59f6"
+    ],
+    [
       ".junie/commands/dependency-upgrade.md",
       "9d3000eb83fb8b40ec463b0222ebc8e94e5e5c1ffabc16c621dbb91018bc4e0e"
+    ],
+    [
+      ".junie/commands/docs.md",
+      "0047575b1107cd18bbba3d7e3ba97351f3dd084b678e53a46589239d536778f7"
     ],
     [
       ".junie/commands/feature.md",
@@ -4481,8 +5205,20 @@
       "4abc19173ed0dea7fdd208ecbf05cf12fd98aaed316eb77159ef470d04d8c392"
     ],
     [
+      ".junie/commands/log-analysis.md",
+      "29b18aaa27a8d8a9eb5ad6494070beed89e40313e84b0035fe5d11f7ad638999"
+    ],
+    [
+      ".junie/commands/meta.md",
+      "da1885d8b885a5b2f0ec1c1b1d4df6b41b58c1281c6248e3e6bef675fa27da17"
+    ],
+    [
       ".junie/commands/migration.md",
       "dbcd192531c470acb163e0d7181d4c005540f733c7dd5e89990803c70b80f90d"
+    ],
+    [
+      ".junie/commands/multi-agent-coordination.md",
+      "4487fa5984a7e0f060e2945d6698dbcd8aa92fef8fa87f525890fdf1858f48c5"
     ],
     [
       ".junie/commands/performance.md",
@@ -4493,24 +5229,72 @@
       "15b128253b00b70ace6411671285b8aeeb593961017054f9737f7bbe7fb0acc9"
     ],
     [
+      ".junie/commands/review.md",
+      "72a6bc3fd2535df06eaddf22694ec5ba576c4d6ee266fa071d3090b5bf6164c1"
+    ],
+    [
+      ".junie/commands/root-cause.md",
+      "bb0155a2353602e1c3ecd85ecea371a95dee7a170cfeb3148f8090c0b28665f2"
+    ],
+    [
+      ".junie/commands/secret-management.md",
+      "b6429f5a16c1c736e7e27c4526f00ba3cf133d2f6d0ea032d672736dee794973"
+    ],
+    [
+      ".junie/commands/security-code-review.md",
+      "9843aa57993e20c0bf28aef094fd99d0180e86594f69507b3885d579692265b8"
+    ],
+    [
       ".junie/commands/strategy.md",
       "6322fdc10564c8a47d74ff3a4313ba2bbeafa7a10aae79bc518816a97daf803b"
+    ],
+    [
+      ".junie/commands/task-breakdown.md",
+      "b0a56e75e08a4312dafa84540e058259395688e00a9b7fe6a658e85b9b4708a7"
     ],
     [
       ".junie/commands/testing.md",
       "d8c818f6e448e7927bbc600f10831ff7c242510751b5a67cd8fdeca6188b7c2d"
     ],
     [
+      ".junie/commands/ux-validation.md",
+      "ad7ace6d594e22d122b38fa6a0cad6cd2fc6e3d3ec277f7fbc7da83d2d7a648d"
+    ],
+    [
+      ".junie/commands/workflow-dependency-management.md",
+      "fff6cc6b8b09dfd0c3edaad21c60e96ddfcdf4fde13af7f0fcc86c5f7355e3c3"
+    ],
+    [
+      ".junie/commands/workflow-error-handling-patterns.md",
+      "0149ca36686d315c7b684706fb8c4441cc7acbe831c6e5d09d63b246aa1c1424"
+    ],
+    [
       ".junie/commands/workflow-migration-patterns.md",
       "d6280fe1a22f255e4a65713dc8d1dff2244a7aef071af2cbb5450b36eecbe7e9"
+    ],
+    [
+      ".junie/commands/workflow-monitoring.md",
+      "8abc8ed00f09d0e84bec23fa4e4d99effe57945377bad6ce8ca340f312b299e7"
+    ],
+    [
+      ".junie/commands/workflow-orchestration-patterns.md",
+      "398c0e9bfa0658f122b19fbb664e9e661dbfac027191bc2438dd04ca800c09b8"
     ],
     [
       ".junie/commands/workflow-performance-optimization.md",
       "195e3754a724363ecb61e568b0a41226599ed259a5e168c7e05aceff938e1a8a"
     ],
     [
+      ".junie/commands/workflow-rollback-strategies.md",
+      "74415706132d36fe8e5541d3ea5775917d27dd3500352bd37d0263a3bf0a96e5"
+    ],
+    [
       ".junie/commands/workflow-scaling-patterns.md",
       "d60fc0d132cd55391a3dff530d18e9c7ae03666d99531b8583310af9917f18e4"
+    ],
+    [
+      ".junie/commands/workflow-testing-patterns.md",
+      "f68e2623b882d807ddf6aa3c2b8d9c18770f064dbf7125cdff83d8ae5d70204f"
     ],
     [
       ".junie/skills/api-versioning-strategy/SKILL.md",
@@ -4779,6 +5563,18 @@
       "19e64edaddd15aa175fbed6788725dab40797c4c3b0b9b77a2b8080edead6be7"
     ],
     [
+      ".junie/commands/accessibility.md",
+      "cbed2d09922b3b60034fefa0a3dc53e2b8a209593f59bea62c270d35d7fdd962"
+    ],
+    [
+      ".junie/commands/api-design.md",
+      "3aee90e73d064ccacc0ff0c815c39a929561767407342a347db2c50156b6bc55"
+    ],
+    [
+      ".junie/commands/async-workflow-execution.md",
+      "6246e5cc3abe5e5dbdbbc274f933b172e41cf00b9e15dce7d599409612bccc3c"
+    ],
+    [
       ".junie/commands/boilerplate.md",
       "41a1fc687ec68833c88927b4d1df43c328a4d15747e4977de5df55ce5fe68851"
     ],
@@ -4787,8 +5583,24 @@
       "88cd8e0b6f0491e4686daf633495fc5d4e25668f6fb68224b0cc997f821d6ecc"
     ],
     [
+      ".junie/commands/data-model.md",
+      "ee0f58480a54981790068b67b25a7dfc10c4b386a65189c6305c7b9e0e1de84c"
+    ],
+    [
+      ".junie/commands/decision-log.md",
+      "a37bd05eaf5c8ab4b18033ae61c7f5b440f43a19403c9c3cb419abc5c9bb283e"
+    ],
+    [
+      ".junie/commands/dependency-scanning.md",
+      "d12482e2b043654bf3b1d86b233727efcc5b98644633edc7985abf5f479e5b4f"
+    ],
+    [
       ".junie/commands/dependency-upgrade.md",
       "89e8ef66fc3468e9e7cbf2c2b0530039a4e780cdcc4d38b0191be3db35e1b510"
+    ],
+    [
+      ".junie/commands/docs.md",
+      "3811fca65d6ae36d6c7c8180d52728292f3b38544ffe5233376490f70f590ec8"
     ],
     [
       ".junie/commands/feature.md",
@@ -4799,8 +5611,20 @@
       "7bc53eb68cdba3dbb123dde3693702ea7ccbbe5521ec92452101e79810359f34"
     ],
     [
+      ".junie/commands/log-analysis.md",
+      "0301d871ec9ae7837927823769b18899af7b129699e665d93510642efa0df24d"
+    ],
+    [
+      ".junie/commands/meta.md",
+      "7e7aa6f481f3b6419ff509cbcd77ffa1e4d488163081653990b74ac2cc288abb"
+    ],
+    [
       ".junie/commands/migration.md",
       "073277cef32d073aa2ea918663d2e5f5310dce1e31a6205caf5ae82624666145"
+    ],
+    [
+      ".junie/commands/multi-agent-coordination.md",
+      "2a1d108a40dbbce8c7281813adf097acacab0171e5b95b0d24f55518ed064488"
     ],
     [
       ".junie/commands/performance.md",
@@ -4811,24 +5635,72 @@
       "b99c39dece9b3d49b6faaa46585b8f4a6cf449b94f49206058241334db154a95"
     ],
     [
+      ".junie/commands/review.md",
+      "fed00c35b1df0c6cda8528cc3e954c8fa390a5ea023e3c2c19b1eeb99aa1678d"
+    ],
+    [
+      ".junie/commands/root-cause.md",
+      "7fbc582e1904454680cff8e4249c63f484a8ddd554f642d68846ef33c3ef70a9"
+    ],
+    [
+      ".junie/commands/secret-management.md",
+      "e018f8febd5df7976dd80b8dea82d54b4e9cb9b5949a0d72d2adf98147e9e342"
+    ],
+    [
+      ".junie/commands/security-code-review.md",
+      "43c4a1134f5904056f8df47c20ab70a76a4e841c65f1878c8064383cf65a0e5c"
+    ],
+    [
       ".junie/commands/strategy.md",
       "a5c82c27d72149fc42dcc75fc80e2618390ef2feb195741aa54eba4cf6a3efa9"
+    ],
+    [
+      ".junie/commands/task-breakdown.md",
+      "dcc1aec53915b4bc086f5885bec938e8d325acf7e086c7a6a0e8e0911248aaa2"
     ],
     [
       ".junie/commands/testing.md",
       "d6d0859c54f04c5c69608b75ae2569cf2bb4aae96aa7ee14936592b4472bca2d"
     ],
     [
+      ".junie/commands/ux-validation.md",
+      "4eb2b8b1cb6bb27de5ea3b961b633f6f5f87ceea49b6db21fb7f4773ebfcd690"
+    ],
+    [
+      ".junie/commands/workflow-dependency-management.md",
+      "439c1410c9ddc4350c9cb36be98109b46364e93b70291276013ec0665c372142"
+    ],
+    [
+      ".junie/commands/workflow-error-handling-patterns.md",
+      "5ec3925c99df41a6d28147770bece688bf02336b52c51330303996b19ca09a45"
+    ],
+    [
       ".junie/commands/workflow-migration-patterns.md",
       "a185ff7bcf36c11c86be1eced7213d87f8de8573637cd15ff2c2b86df311f877"
+    ],
+    [
+      ".junie/commands/workflow-monitoring.md",
+      "ccfd7500bcf71d63f419c06b5ff6213a8eb6214495ff787af881c99903deae8f"
+    ],
+    [
+      ".junie/commands/workflow-orchestration-patterns.md",
+      "99f680eef152122066b680088efb386bb5cb4f244eea0fb1314b09569dc82083"
     ],
     [
       ".junie/commands/workflow-performance-optimization.md",
       "f8f8d0e49270fcc3ad3d7690cce919816edad7739208454cf01b0925e9b517d4"
     ],
     [
+      ".junie/commands/workflow-rollback-strategies.md",
+      "b70cce4c255ccafff5b6764276c0d83f993001b896a58451d24fb9698d3594a6"
+    ],
+    [
       ".junie/commands/workflow-scaling-patterns.md",
       "f472b8a729e5afabe2d2001676c5d321b368f0dbd0ebbd9f2cdd492717086b25"
+    ],
+    [
+      ".junie/commands/workflow-testing-patterns.md",
+      "ce7fc2aa439debc5bd10fe7aa087d485af6b6ab21772f92039d5a4f4af28a1c9"
     ],
     [
       ".junie/skills/api-versioning-strategy/SKILL.md",
@@ -5242,7 +6114,7 @@
     ],
     [
       ".kilo/agents/debug.md",
-      "72ec50a312882a43cbf8d514018db16d6a9caa06afa802de153dab4b42aaef37"
+      "bc8329a070ef63761dbcba97aee6c014f603b31bd4c3b4716786ed44eb2cb127"
     ],
     [
       ".kilo/agents/enforcement.md",
@@ -5361,6 +6233,18 @@
       "4e1ff3e043922db3308110792f378d65183d35ca0aac1d95ed5f9e486728ebfc"
     ],
     [
+      ".kilo/commands/accessibility.md",
+      "e2747c5792ea7cc655b2ebea1a954fd53c243d91ee89730b10322149d64a2831"
+    ],
+    [
+      ".kilo/commands/api-design.md",
+      "0be08f948e5335f17b160d03b9a03e8b9262337562a20eaa83a4b269129b8bdb"
+    ],
+    [
+      ".kilo/commands/async-workflow-execution.md",
+      "817f9b3bd73f17d5cdc4b6ffc4baa84a9f8c145373df1cba5c3a1066adeadcde"
+    ],
+    [
       ".kilo/commands/boilerplate.md",
       "cb90b4741a1b1c26e2f119f6a69e62e9f67a6eb6e878480a6cbcf6661f7e9865"
     ],
@@ -5369,8 +6253,24 @@
       "a1b827fc4585627e6921a08c920afcc9c4cc5b5e218a2226997c37012f9be5cf"
     ],
     [
+      ".kilo/commands/data-model.md",
+      "2dcdc262b10410f98ce82a147bc6656511e6c6cc38c3f8a06e5a4539a4c7ff76"
+    ],
+    [
+      ".kilo/commands/decision-log.md",
+      "b48ec39bbc5ca761c734629c9f20fd9bc4999a5099b4b8334f658cbe6591666d"
+    ],
+    [
+      ".kilo/commands/dependency-scanning.md",
+      "5493d7a37042671e00b43270f64567a498285310295fbd4e51445cace40d59f6"
+    ],
+    [
       ".kilo/commands/dependency-upgrade.md",
       "9d3000eb83fb8b40ec463b0222ebc8e94e5e5c1ffabc16c621dbb91018bc4e0e"
+    ],
+    [
+      ".kilo/commands/docs.md",
+      "0047575b1107cd18bbba3d7e3ba97351f3dd084b678e53a46589239d536778f7"
     ],
     [
       ".kilo/commands/feature.md",
@@ -5381,8 +6281,20 @@
       "4abc19173ed0dea7fdd208ecbf05cf12fd98aaed316eb77159ef470d04d8c392"
     ],
     [
+      ".kilo/commands/log-analysis.md",
+      "29b18aaa27a8d8a9eb5ad6494070beed89e40313e84b0035fe5d11f7ad638999"
+    ],
+    [
+      ".kilo/commands/meta.md",
+      "da1885d8b885a5b2f0ec1c1b1d4df6b41b58c1281c6248e3e6bef675fa27da17"
+    ],
+    [
       ".kilo/commands/migration.md",
       "dbcd192531c470acb163e0d7181d4c005540f733c7dd5e89990803c70b80f90d"
+    ],
+    [
+      ".kilo/commands/multi-agent-coordination.md",
+      "4487fa5984a7e0f060e2945d6698dbcd8aa92fef8fa87f525890fdf1858f48c5"
     ],
     [
       ".kilo/commands/performance.md",
@@ -5393,24 +6305,72 @@
       "15b128253b00b70ace6411671285b8aeeb593961017054f9737f7bbe7fb0acc9"
     ],
     [
+      ".kilo/commands/review.md",
+      "72a6bc3fd2535df06eaddf22694ec5ba576c4d6ee266fa071d3090b5bf6164c1"
+    ],
+    [
+      ".kilo/commands/root-cause.md",
+      "bb0155a2353602e1c3ecd85ecea371a95dee7a170cfeb3148f8090c0b28665f2"
+    ],
+    [
+      ".kilo/commands/secret-management.md",
+      "b6429f5a16c1c736e7e27c4526f00ba3cf133d2f6d0ea032d672736dee794973"
+    ],
+    [
+      ".kilo/commands/security-code-review.md",
+      "9843aa57993e20c0bf28aef094fd99d0180e86594f69507b3885d579692265b8"
+    ],
+    [
       ".kilo/commands/strategy.md",
       "6322fdc10564c8a47d74ff3a4313ba2bbeafa7a10aae79bc518816a97daf803b"
+    ],
+    [
+      ".kilo/commands/task-breakdown.md",
+      "b0a56e75e08a4312dafa84540e058259395688e00a9b7fe6a658e85b9b4708a7"
     ],
     [
       ".kilo/commands/testing.md",
       "d8c818f6e448e7927bbc600f10831ff7c242510751b5a67cd8fdeca6188b7c2d"
     ],
     [
+      ".kilo/commands/ux-validation.md",
+      "ad7ace6d594e22d122b38fa6a0cad6cd2fc6e3d3ec277f7fbc7da83d2d7a648d"
+    ],
+    [
+      ".kilo/commands/workflow-dependency-management.md",
+      "fff6cc6b8b09dfd0c3edaad21c60e96ddfcdf4fde13af7f0fcc86c5f7355e3c3"
+    ],
+    [
+      ".kilo/commands/workflow-error-handling-patterns.md",
+      "0149ca36686d315c7b684706fb8c4441cc7acbe831c6e5d09d63b246aa1c1424"
+    ],
+    [
       ".kilo/commands/workflow-migration-patterns.md",
       "d6280fe1a22f255e4a65713dc8d1dff2244a7aef071af2cbb5450b36eecbe7e9"
+    ],
+    [
+      ".kilo/commands/workflow-monitoring.md",
+      "8abc8ed00f09d0e84bec23fa4e4d99effe57945377bad6ce8ca340f312b299e7"
+    ],
+    [
+      ".kilo/commands/workflow-orchestration-patterns.md",
+      "398c0e9bfa0658f122b19fbb664e9e661dbfac027191bc2438dd04ca800c09b8"
     ],
     [
       ".kilo/commands/workflow-performance-optimization.md",
       "195e3754a724363ecb61e568b0a41226599ed259a5e168c7e05aceff938e1a8a"
     ],
     [
+      ".kilo/commands/workflow-rollback-strategies.md",
+      "74415706132d36fe8e5541d3ea5775917d27dd3500352bd37d0263a3bf0a96e5"
+    ],
+    [
       ".kilo/commands/workflow-scaling-patterns.md",
       "d60fc0d132cd55391a3dff530d18e9c7ae03666d99531b8583310af9917f18e4"
+    ],
+    [
+      ".kilo/commands/workflow-testing-patterns.md",
+      "f68e2623b882d807ddf6aa3c2b8d9c18770f064dbf7125cdff83d8ae5d70204f"
     ],
     [
       ".kilo/rules/conventions-python.md",
@@ -5724,7 +6684,7 @@
     ],
     [
       ".kilo/agents/debug.md",
-      "72ec50a312882a43cbf8d514018db16d6a9caa06afa802de153dab4b42aaef37"
+      "bc8329a070ef63761dbcba97aee6c014f603b31bd4c3b4716786ed44eb2cb127"
     ],
     [
       ".kilo/agents/enforcement.md",
@@ -5843,6 +6803,18 @@
       "4e1ff3e043922db3308110792f378d65183d35ca0aac1d95ed5f9e486728ebfc"
     ],
     [
+      ".kilo/commands/accessibility.md",
+      "cbed2d09922b3b60034fefa0a3dc53e2b8a209593f59bea62c270d35d7fdd962"
+    ],
+    [
+      ".kilo/commands/api-design.md",
+      "3aee90e73d064ccacc0ff0c815c39a929561767407342a347db2c50156b6bc55"
+    ],
+    [
+      ".kilo/commands/async-workflow-execution.md",
+      "6246e5cc3abe5e5dbdbbc274f933b172e41cf00b9e15dce7d599409612bccc3c"
+    ],
+    [
       ".kilo/commands/boilerplate.md",
       "41a1fc687ec68833c88927b4d1df43c328a4d15747e4977de5df55ce5fe68851"
     ],
@@ -5851,8 +6823,24 @@
       "88cd8e0b6f0491e4686daf633495fc5d4e25668f6fb68224b0cc997f821d6ecc"
     ],
     [
+      ".kilo/commands/data-model.md",
+      "ee0f58480a54981790068b67b25a7dfc10c4b386a65189c6305c7b9e0e1de84c"
+    ],
+    [
+      ".kilo/commands/decision-log.md",
+      "a37bd05eaf5c8ab4b18033ae61c7f5b440f43a19403c9c3cb419abc5c9bb283e"
+    ],
+    [
+      ".kilo/commands/dependency-scanning.md",
+      "d12482e2b043654bf3b1d86b233727efcc5b98644633edc7985abf5f479e5b4f"
+    ],
+    [
       ".kilo/commands/dependency-upgrade.md",
       "89e8ef66fc3468e9e7cbf2c2b0530039a4e780cdcc4d38b0191be3db35e1b510"
+    ],
+    [
+      ".kilo/commands/docs.md",
+      "3811fca65d6ae36d6c7c8180d52728292f3b38544ffe5233376490f70f590ec8"
     ],
     [
       ".kilo/commands/feature.md",
@@ -5863,8 +6851,20 @@
       "7bc53eb68cdba3dbb123dde3693702ea7ccbbe5521ec92452101e79810359f34"
     ],
     [
+      ".kilo/commands/log-analysis.md",
+      "0301d871ec9ae7837927823769b18899af7b129699e665d93510642efa0df24d"
+    ],
+    [
+      ".kilo/commands/meta.md",
+      "7e7aa6f481f3b6419ff509cbcd77ffa1e4d488163081653990b74ac2cc288abb"
+    ],
+    [
       ".kilo/commands/migration.md",
       "073277cef32d073aa2ea918663d2e5f5310dce1e31a6205caf5ae82624666145"
+    ],
+    [
+      ".kilo/commands/multi-agent-coordination.md",
+      "2a1d108a40dbbce8c7281813adf097acacab0171e5b95b0d24f55518ed064488"
     ],
     [
       ".kilo/commands/performance.md",
@@ -5875,24 +6875,72 @@
       "b99c39dece9b3d49b6faaa46585b8f4a6cf449b94f49206058241334db154a95"
     ],
     [
+      ".kilo/commands/review.md",
+      "fed00c35b1df0c6cda8528cc3e954c8fa390a5ea023e3c2c19b1eeb99aa1678d"
+    ],
+    [
+      ".kilo/commands/root-cause.md",
+      "7fbc582e1904454680cff8e4249c63f484a8ddd554f642d68846ef33c3ef70a9"
+    ],
+    [
+      ".kilo/commands/secret-management.md",
+      "e018f8febd5df7976dd80b8dea82d54b4e9cb9b5949a0d72d2adf98147e9e342"
+    ],
+    [
+      ".kilo/commands/security-code-review.md",
+      "43c4a1134f5904056f8df47c20ab70a76a4e841c65f1878c8064383cf65a0e5c"
+    ],
+    [
       ".kilo/commands/strategy.md",
       "a5c82c27d72149fc42dcc75fc80e2618390ef2feb195741aa54eba4cf6a3efa9"
+    ],
+    [
+      ".kilo/commands/task-breakdown.md",
+      "dcc1aec53915b4bc086f5885bec938e8d325acf7e086c7a6a0e8e0911248aaa2"
     ],
     [
       ".kilo/commands/testing.md",
       "d6d0859c54f04c5c69608b75ae2569cf2bb4aae96aa7ee14936592b4472bca2d"
     ],
     [
+      ".kilo/commands/ux-validation.md",
+      "4eb2b8b1cb6bb27de5ea3b961b633f6f5f87ceea49b6db21fb7f4773ebfcd690"
+    ],
+    [
+      ".kilo/commands/workflow-dependency-management.md",
+      "439c1410c9ddc4350c9cb36be98109b46364e93b70291276013ec0665c372142"
+    ],
+    [
+      ".kilo/commands/workflow-error-handling-patterns.md",
+      "5ec3925c99df41a6d28147770bece688bf02336b52c51330303996b19ca09a45"
+    ],
+    [
       ".kilo/commands/workflow-migration-patterns.md",
       "a185ff7bcf36c11c86be1eced7213d87f8de8573637cd15ff2c2b86df311f877"
+    ],
+    [
+      ".kilo/commands/workflow-monitoring.md",
+      "ccfd7500bcf71d63f419c06b5ff6213a8eb6214495ff787af881c99903deae8f"
+    ],
+    [
+      ".kilo/commands/workflow-orchestration-patterns.md",
+      "99f680eef152122066b680088efb386bb5cb4f244eea0fb1314b09569dc82083"
     ],
     [
       ".kilo/commands/workflow-performance-optimization.md",
       "f8f8d0e49270fcc3ad3d7690cce919816edad7739208454cf01b0925e9b517d4"
     ],
     [
+      ".kilo/commands/workflow-rollback-strategies.md",
+      "b70cce4c255ccafff5b6764276c0d83f993001b896a58451d24fb9698d3594a6"
+    ],
+    [
       ".kilo/commands/workflow-scaling-patterns.md",
       "f472b8a729e5afabe2d2001676c5d321b368f0dbd0ebbd9f2cdd492717086b25"
+    ],
+    [
+      ".kilo/commands/workflow-testing-patterns.md",
+      "ce7fc2aa439debc5bd10fe7aa087d485af6b6ab21772f92039d5a4f4af28a1c9"
     ],
     [
       ".kilo/rules/conventions-python.md",
@@ -6129,6 +7177,18 @@
   ],
   "roo::minimal": [
     [
+      ".roo/commands/accessibility.md",
+      "e2747c5792ea7cc655b2ebea1a954fd53c243d91ee89730b10322149d64a2831"
+    ],
+    [
+      ".roo/commands/api-design.md",
+      "0be08f948e5335f17b160d03b9a03e8b9262337562a20eaa83a4b269129b8bdb"
+    ],
+    [
+      ".roo/commands/async-workflow-execution.md",
+      "817f9b3bd73f17d5cdc4b6ffc4baa84a9f8c145373df1cba5c3a1066adeadcde"
+    ],
+    [
       ".roo/commands/boilerplate.md",
       "cb90b4741a1b1c26e2f119f6a69e62e9f67a6eb6e878480a6cbcf6661f7e9865"
     ],
@@ -6137,8 +7197,24 @@
       "a1b827fc4585627e6921a08c920afcc9c4cc5b5e218a2226997c37012f9be5cf"
     ],
     [
+      ".roo/commands/data-model.md",
+      "2dcdc262b10410f98ce82a147bc6656511e6c6cc38c3f8a06e5a4539a4c7ff76"
+    ],
+    [
+      ".roo/commands/decision-log.md",
+      "b48ec39bbc5ca761c734629c9f20fd9bc4999a5099b4b8334f658cbe6591666d"
+    ],
+    [
+      ".roo/commands/dependency-scanning.md",
+      "5493d7a37042671e00b43270f64567a498285310295fbd4e51445cace40d59f6"
+    ],
+    [
       ".roo/commands/dependency-upgrade.md",
       "9d3000eb83fb8b40ec463b0222ebc8e94e5e5c1ffabc16c621dbb91018bc4e0e"
+    ],
+    [
+      ".roo/commands/docs.md",
+      "0047575b1107cd18bbba3d7e3ba97351f3dd084b678e53a46589239d536778f7"
     ],
     [
       ".roo/commands/feature.md",
@@ -6149,8 +7225,20 @@
       "4abc19173ed0dea7fdd208ecbf05cf12fd98aaed316eb77159ef470d04d8c392"
     ],
     [
+      ".roo/commands/log-analysis.md",
+      "29b18aaa27a8d8a9eb5ad6494070beed89e40313e84b0035fe5d11f7ad638999"
+    ],
+    [
+      ".roo/commands/meta.md",
+      "da1885d8b885a5b2f0ec1c1b1d4df6b41b58c1281c6248e3e6bef675fa27da17"
+    ],
+    [
       ".roo/commands/migration.md",
       "dbcd192531c470acb163e0d7181d4c005540f733c7dd5e89990803c70b80f90d"
+    ],
+    [
+      ".roo/commands/multi-agent-coordination.md",
+      "4487fa5984a7e0f060e2945d6698dbcd8aa92fef8fa87f525890fdf1858f48c5"
     ],
     [
       ".roo/commands/performance.md",
@@ -6161,24 +7249,72 @@
       "15b128253b00b70ace6411671285b8aeeb593961017054f9737f7bbe7fb0acc9"
     ],
     [
+      ".roo/commands/review.md",
+      "72a6bc3fd2535df06eaddf22694ec5ba576c4d6ee266fa071d3090b5bf6164c1"
+    ],
+    [
+      ".roo/commands/root-cause.md",
+      "bb0155a2353602e1c3ecd85ecea371a95dee7a170cfeb3148f8090c0b28665f2"
+    ],
+    [
+      ".roo/commands/secret-management.md",
+      "b6429f5a16c1c736e7e27c4526f00ba3cf133d2f6d0ea032d672736dee794973"
+    ],
+    [
+      ".roo/commands/security-code-review.md",
+      "9843aa57993e20c0bf28aef094fd99d0180e86594f69507b3885d579692265b8"
+    ],
+    [
       ".roo/commands/strategy.md",
       "6322fdc10564c8a47d74ff3a4313ba2bbeafa7a10aae79bc518816a97daf803b"
+    ],
+    [
+      ".roo/commands/task-breakdown.md",
+      "b0a56e75e08a4312dafa84540e058259395688e00a9b7fe6a658e85b9b4708a7"
     ],
     [
       ".roo/commands/testing.md",
       "d8c818f6e448e7927bbc600f10831ff7c242510751b5a67cd8fdeca6188b7c2d"
     ],
     [
+      ".roo/commands/ux-validation.md",
+      "ad7ace6d594e22d122b38fa6a0cad6cd2fc6e3d3ec277f7fbc7da83d2d7a648d"
+    ],
+    [
+      ".roo/commands/workflow-dependency-management.md",
+      "fff6cc6b8b09dfd0c3edaad21c60e96ddfcdf4fde13af7f0fcc86c5f7355e3c3"
+    ],
+    [
+      ".roo/commands/workflow-error-handling-patterns.md",
+      "0149ca36686d315c7b684706fb8c4441cc7acbe831c6e5d09d63b246aa1c1424"
+    ],
+    [
       ".roo/commands/workflow-migration-patterns.md",
       "d6280fe1a22f255e4a65713dc8d1dff2244a7aef071af2cbb5450b36eecbe7e9"
+    ],
+    [
+      ".roo/commands/workflow-monitoring.md",
+      "8abc8ed00f09d0e84bec23fa4e4d99effe57945377bad6ce8ca340f312b299e7"
+    ],
+    [
+      ".roo/commands/workflow-orchestration-patterns.md",
+      "398c0e9bfa0658f122b19fbb664e9e661dbfac027191bc2438dd04ca800c09b8"
     ],
     [
       ".roo/commands/workflow-performance-optimization.md",
       "195e3754a724363ecb61e568b0a41226599ed259a5e168c7e05aceff938e1a8a"
     ],
     [
+      ".roo/commands/workflow-rollback-strategies.md",
+      "74415706132d36fe8e5541d3ea5775917d27dd3500352bd37d0263a3bf0a96e5"
+    ],
+    [
       ".roo/commands/workflow-scaling-patterns.md",
       "d60fc0d132cd55391a3dff530d18e9c7ae03666d99531b8583310af9917f18e4"
+    ],
+    [
+      ".roo/commands/workflow-testing-patterns.md",
+      "f68e2623b882d807ddf6aa3c2b8d9c18770f064dbf7125cdff83d8ae5d70204f"
     ],
     [
       ".roo/rules-ask/01-instructions.md",
@@ -6194,7 +7330,7 @@
     ],
     [
       ".roo/rules-debug/01-instructions.md",
-      "a3f702dd3d117b0d1a1d877e8b53d535d03723f8d1a9cc5bd4e7cfe09561b76e"
+      "38f3ecc5671ec026d90ec00eb931b6979144ce7a8a624a2c5781edcb96101755"
     ],
     [
       ".roo/rules-enforcement/01-instructions.md",
@@ -6451,6 +7587,18 @@
   ],
   "roo::verbose": [
     [
+      ".roo/commands/accessibility.md",
+      "cbed2d09922b3b60034fefa0a3dc53e2b8a209593f59bea62c270d35d7fdd962"
+    ],
+    [
+      ".roo/commands/api-design.md",
+      "3aee90e73d064ccacc0ff0c815c39a929561767407342a347db2c50156b6bc55"
+    ],
+    [
+      ".roo/commands/async-workflow-execution.md",
+      "6246e5cc3abe5e5dbdbbc274f933b172e41cf00b9e15dce7d599409612bccc3c"
+    ],
+    [
       ".roo/commands/boilerplate.md",
       "41a1fc687ec68833c88927b4d1df43c328a4d15747e4977de5df55ce5fe68851"
     ],
@@ -6459,8 +7607,24 @@
       "88cd8e0b6f0491e4686daf633495fc5d4e25668f6fb68224b0cc997f821d6ecc"
     ],
     [
+      ".roo/commands/data-model.md",
+      "ee0f58480a54981790068b67b25a7dfc10c4b386a65189c6305c7b9e0e1de84c"
+    ],
+    [
+      ".roo/commands/decision-log.md",
+      "a37bd05eaf5c8ab4b18033ae61c7f5b440f43a19403c9c3cb419abc5c9bb283e"
+    ],
+    [
+      ".roo/commands/dependency-scanning.md",
+      "d12482e2b043654bf3b1d86b233727efcc5b98644633edc7985abf5f479e5b4f"
+    ],
+    [
       ".roo/commands/dependency-upgrade.md",
       "89e8ef66fc3468e9e7cbf2c2b0530039a4e780cdcc4d38b0191be3db35e1b510"
+    ],
+    [
+      ".roo/commands/docs.md",
+      "3811fca65d6ae36d6c7c8180d52728292f3b38544ffe5233376490f70f590ec8"
     ],
     [
       ".roo/commands/feature.md",
@@ -6471,8 +7635,20 @@
       "7bc53eb68cdba3dbb123dde3693702ea7ccbbe5521ec92452101e79810359f34"
     ],
     [
+      ".roo/commands/log-analysis.md",
+      "0301d871ec9ae7837927823769b18899af7b129699e665d93510642efa0df24d"
+    ],
+    [
+      ".roo/commands/meta.md",
+      "7e7aa6f481f3b6419ff509cbcd77ffa1e4d488163081653990b74ac2cc288abb"
+    ],
+    [
       ".roo/commands/migration.md",
       "073277cef32d073aa2ea918663d2e5f5310dce1e31a6205caf5ae82624666145"
+    ],
+    [
+      ".roo/commands/multi-agent-coordination.md",
+      "2a1d108a40dbbce8c7281813adf097acacab0171e5b95b0d24f55518ed064488"
     ],
     [
       ".roo/commands/performance.md",
@@ -6483,24 +7659,72 @@
       "b99c39dece9b3d49b6faaa46585b8f4a6cf449b94f49206058241334db154a95"
     ],
     [
+      ".roo/commands/review.md",
+      "fed00c35b1df0c6cda8528cc3e954c8fa390a5ea023e3c2c19b1eeb99aa1678d"
+    ],
+    [
+      ".roo/commands/root-cause.md",
+      "7fbc582e1904454680cff8e4249c63f484a8ddd554f642d68846ef33c3ef70a9"
+    ],
+    [
+      ".roo/commands/secret-management.md",
+      "e018f8febd5df7976dd80b8dea82d54b4e9cb9b5949a0d72d2adf98147e9e342"
+    ],
+    [
+      ".roo/commands/security-code-review.md",
+      "43c4a1134f5904056f8df47c20ab70a76a4e841c65f1878c8064383cf65a0e5c"
+    ],
+    [
       ".roo/commands/strategy.md",
       "a5c82c27d72149fc42dcc75fc80e2618390ef2feb195741aa54eba4cf6a3efa9"
+    ],
+    [
+      ".roo/commands/task-breakdown.md",
+      "dcc1aec53915b4bc086f5885bec938e8d325acf7e086c7a6a0e8e0911248aaa2"
     ],
     [
       ".roo/commands/testing.md",
       "d6d0859c54f04c5c69608b75ae2569cf2bb4aae96aa7ee14936592b4472bca2d"
     ],
     [
+      ".roo/commands/ux-validation.md",
+      "4eb2b8b1cb6bb27de5ea3b961b633f6f5f87ceea49b6db21fb7f4773ebfcd690"
+    ],
+    [
+      ".roo/commands/workflow-dependency-management.md",
+      "439c1410c9ddc4350c9cb36be98109b46364e93b70291276013ec0665c372142"
+    ],
+    [
+      ".roo/commands/workflow-error-handling-patterns.md",
+      "5ec3925c99df41a6d28147770bece688bf02336b52c51330303996b19ca09a45"
+    ],
+    [
       ".roo/commands/workflow-migration-patterns.md",
       "a185ff7bcf36c11c86be1eced7213d87f8de8573637cd15ff2c2b86df311f877"
+    ],
+    [
+      ".roo/commands/workflow-monitoring.md",
+      "ccfd7500bcf71d63f419c06b5ff6213a8eb6214495ff787af881c99903deae8f"
+    ],
+    [
+      ".roo/commands/workflow-orchestration-patterns.md",
+      "99f680eef152122066b680088efb386bb5cb4f244eea0fb1314b09569dc82083"
     ],
     [
       ".roo/commands/workflow-performance-optimization.md",
       "f8f8d0e49270fcc3ad3d7690cce919816edad7739208454cf01b0925e9b517d4"
     ],
     [
+      ".roo/commands/workflow-rollback-strategies.md",
+      "b70cce4c255ccafff5b6764276c0d83f993001b896a58451d24fb9698d3594a6"
+    ],
+    [
       ".roo/commands/workflow-scaling-patterns.md",
       "f472b8a729e5afabe2d2001676c5d321b368f0dbd0ebbd9f2cdd492717086b25"
+    ],
+    [
+      ".roo/commands/workflow-testing-patterns.md",
+      "ce7fc2aa439debc5bd10fe7aa087d485af6b6ab21772f92039d5a4f4af28a1c9"
     ],
     [
       ".roo/rules-ask/01-instructions.md",
@@ -6516,7 +7740,7 @@
     ],
     [
       ".roo/rules-debug/01-instructions.md",
-      "a3f702dd3d117b0d1a1d877e8b53d535d03723f8d1a9cc5bd4e7cfe09561b76e"
+      "38f3ecc5671ec026d90ec00eb931b6979144ce7a8a624a2c5781edcb96101755"
     ],
     [
       ".roo/rules-enforcement/01-instructions.md",
@@ -7041,6 +8265,18 @@
       "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724"
     ],
     [
+      ".windsurf/workflows/accessibility.md",
+      "d5b8c0b6e3216f0e8534cb3e62c25c8383b35f9c6d39cd1ed3e900989287b263"
+    ],
+    [
+      ".windsurf/workflows/api-design.md",
+      "fbbee8fcc1ed1b65330f16a89b818bce75c1977f9592a96b6c57c861688f033a"
+    ],
+    [
+      ".windsurf/workflows/async-workflow-execution.md",
+      "73a4d626ba5cc3449d72d4bb3e2797a7bdf16c1fced482496274995ff1928501"
+    ],
+    [
       ".windsurf/workflows/boilerplate.md",
       "e62f0443979372fdf7d50e4da2a5b7c15c839eb78361be0ad5205eb59f8cf0a1"
     ],
@@ -7049,8 +8285,24 @@
       "c1074ad32ddab7c34b0206c2ff5f7e543af1b65ce3e92399a8c291b4d1e28002"
     ],
     [
+      ".windsurf/workflows/data-model.md",
+      "bf3c8480a99e2302676e7b6e7d70a8dd95335f8153e344d86fd85e98dea273a7"
+    ],
+    [
+      ".windsurf/workflows/decision-log.md",
+      "4c26f87ed55b6299aec162e886a5ec1092dcdcde2062fbb3c43539c01d39cb98"
+    ],
+    [
+      ".windsurf/workflows/dependency-scanning.md",
+      "559d6399f4364119c30e35edf00fd9f6ef9e32e62c87ba684009ee8ceac2a1e5"
+    ],
+    [
       ".windsurf/workflows/dependency-upgrade.md",
       "b19a65f3e6d8c0d1a4db1f5f00626677532c008f3a915f72c5fec14ebc2dadff"
+    ],
+    [
+      ".windsurf/workflows/docs.md",
+      "377d6c390baa6bb92998250e9faf1b3636e86f94856f495c28f8bafb5ac1762c"
     ],
     [
       ".windsurf/workflows/feature.md",
@@ -7061,8 +8313,20 @@
       "e28b1b9b5fa6df08b5f89517953b05e9b31db1d8a058c3c60d4bbb9f297c20eb"
     ],
     [
+      ".windsurf/workflows/log-analysis.md",
+      "7312dbe0a620b06101e025ae26ba56c759d9569813d838c0baf4f15ebc2a616f"
+    ],
+    [
+      ".windsurf/workflows/meta.md",
+      "f3d36e7755bece721aa0177d13855be4da10eb671485bc2855f6215dee6ca8fd"
+    ],
+    [
       ".windsurf/workflows/migration.md",
       "1af4628a25af19f41e26966d9b63472cc549b2fd84a9a134e46c15dd109eaec1"
+    ],
+    [
+      ".windsurf/workflows/multi-agent-coordination.md",
+      "45193d949594c9908cd07b10ef20aa60781f338b1de0e9abf35255eb9987c6e6"
     ],
     [
       ".windsurf/workflows/performance.md",
@@ -7073,24 +8337,72 @@
       "0b9333f3b63dd4e719d59d0c8de314d686dd63bf35ba189fcc2db8f0ab2715e7"
     ],
     [
+      ".windsurf/workflows/review.md",
+      "b3f21b074f6d5ef678204c12ec2e63ebf19c49d23950ce00a700d0d37c55cac5"
+    ],
+    [
+      ".windsurf/workflows/root-cause.md",
+      "1387661ad3225dda6670fb5556facee9067c839ede5247cb8abc9477dbefa3f1"
+    ],
+    [
+      ".windsurf/workflows/secret-management.md",
+      "c23ddd7e8c9eb952255368881f6dba6b0bdddc8bac6d3e82d10d388a161054e9"
+    ],
+    [
+      ".windsurf/workflows/security-code-review.md",
+      "667cf448695b52e017a4803d98ab906e0955129f9dabefdfbbc7ded0dab2c097"
+    ],
+    [
       ".windsurf/workflows/strategy.md",
       "c619a76c4b1afafd5045aec4d442140318a1d796afa0dfcbceed00ab75b7784a"
+    ],
+    [
+      ".windsurf/workflows/task-breakdown.md",
+      "0f62d66045e50e586b4514260f0e130e29f425d2476bfc230f2af60a04b44a73"
     ],
     [
       ".windsurf/workflows/testing.md",
       "5fe0568c7fcc20e319e78f28c2f5274f2e702c74d5d61cd275f00e772d348c54"
     ],
     [
+      ".windsurf/workflows/ux-validation.md",
+      "7cf0a78573caf72fe05070e81b97c6275249b8806f7b4dd1cdba4d9a2494c98d"
+    ],
+    [
+      ".windsurf/workflows/workflow-dependency-management.md",
+      "752c52e5ff805e9492d3a75f91758bfc1599099071c21e152fdde2ab766657b9"
+    ],
+    [
+      ".windsurf/workflows/workflow-error-handling-patterns.md",
+      "72199bc10e82dda786738f25d21be6dca5b58657d846053e5301b3d6662d2c83"
+    ],
+    [
       ".windsurf/workflows/workflow-migration-patterns.md",
       "8bebcc61beeb20e36bbae77c01e76114c31a3c7a8bd53c5a0f3d37027a7aaadc"
+    ],
+    [
+      ".windsurf/workflows/workflow-monitoring.md",
+      "04c6f5f224c13264ed8150d120f18c1f10573e1bc92fa105a2eacf7f4a3e04a1"
+    ],
+    [
+      ".windsurf/workflows/workflow-orchestration-patterns.md",
+      "6b54c48135f8ca0ec079ec784a62e04b9591a2591b7d4e772f906dd369dc6933"
     ],
     [
       ".windsurf/workflows/workflow-performance-optimization.md",
       "f194899b09b4b08205be817e6be92f35b47ccb9e2a6bfacd80e6443b8b6e8ce5"
     ],
     [
+      ".windsurf/workflows/workflow-rollback-strategies.md",
+      "091615fb89dbbc1040744244d15b6c7a8552f61072508e15373f91164e50cc54"
+    ],
+    [
       ".windsurf/workflows/workflow-scaling-patterns.md",
       "7bf48e703d7bb5091749cfcf0ae7c81c4d09096c8cd2a5deb07024474d751b19"
+    ],
+    [
+      ".windsurf/workflows/workflow-testing-patterns.md",
+      "29e01a761ce3f33923a440a1a7ff8ae6a5cfe076d3fde769fd628f83e28b3839"
     ]
   ],
   "windsurf::verbose": [
@@ -7363,6 +8675,18 @@
       "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326"
     ],
     [
+      ".windsurf/workflows/accessibility.md",
+      "c5da1856cb3b75cd1bc1b336d7c8224b9ee69e8cda88276d0997dd35ae725828"
+    ],
+    [
+      ".windsurf/workflows/api-design.md",
+      "01d1d5d584682bc7bba1e5493461e5dffeec6c1d95a5b1297a3104d23899dae9"
+    ],
+    [
+      ".windsurf/workflows/async-workflow-execution.md",
+      "75d611ae9167c614a13d14cfc88bdd8f86669cf61686d7598c27a74be1461a6f"
+    ],
+    [
       ".windsurf/workflows/boilerplate.md",
       "9a89511ac4fdddc7e81463af16159b2e9a0a17b92d37e75ab72376f6f412ee0b"
     ],
@@ -7371,8 +8695,24 @@
       "0ab5956bb7d871389ee1ebfb36a2b6ec27c36b50c1ca554e2268fe3252f21713"
     ],
     [
+      ".windsurf/workflows/data-model.md",
+      "8208cb76257a5174018a38f6e72b962932606ce6ef5991b4ec8352d7a3469695"
+    ],
+    [
+      ".windsurf/workflows/decision-log.md",
+      "31630c28d86406bc5f0064dfd240c661910d2708f3ac73c3e9094daae5fa7ece"
+    ],
+    [
+      ".windsurf/workflows/dependency-scanning.md",
+      "f56826f7e6d934e916b5f40379865941e087034e49933d534cd33cfccc870339"
+    ],
+    [
       ".windsurf/workflows/dependency-upgrade.md",
       "bc2899532419e54bea06c35fcdd357ee42a1378fb42395da7ec3e7c0d1678dfa"
+    ],
+    [
+      ".windsurf/workflows/docs.md",
+      "048792d0e66b78f5dc15bceec758eeb3bad04d5f481107bb2a0599d274cbb3c0"
     ],
     [
       ".windsurf/workflows/feature.md",
@@ -7383,8 +8723,20 @@
       "1c99c4d40469bfb08ceb75be0c83213718ba8eba7e9d68416674281381a3c5dc"
     ],
     [
+      ".windsurf/workflows/log-analysis.md",
+      "93b16c069506da2f245ababde030ec7a705ea1109cdc1a0fbaf829b79753dafb"
+    ],
+    [
+      ".windsurf/workflows/meta.md",
+      "120d14f25ce8d8be24a80551d39f6b38dadfbe33bf7840474ec8d436d0b2a748"
+    ],
+    [
       ".windsurf/workflows/migration.md",
       "b1285f33fdf2dab2e8dda236be69a4ade0ca3ec4e485e65656f94d801d9ef60b"
+    ],
+    [
+      ".windsurf/workflows/multi-agent-coordination.md",
+      "8c12c98401f376c90641db8b8c8ac441051ad42481b3bcb4ddc770a8c9c49487"
     ],
     [
       ".windsurf/workflows/performance.md",
@@ -7395,24 +8747,72 @@
       "44a29a869f7380bb4a42497ac5e7e62f72544df82e2f92573922b57739221bcb"
     ],
     [
+      ".windsurf/workflows/review.md",
+      "2ef19f6aeed43a6e05d422b9e00b8074dcedc2b648efe7ce3dfc66e78c920562"
+    ],
+    [
+      ".windsurf/workflows/root-cause.md",
+      "811141a6a78cfd070c1cf79ea9a83713b24c53f613574bb4c07595a24f898bc5"
+    ],
+    [
+      ".windsurf/workflows/secret-management.md",
+      "1e431b557b840a4a6b5241047d3240624ddc4931dc2476fad8fbd4403434afa9"
+    ],
+    [
+      ".windsurf/workflows/security-code-review.md",
+      "3f667cdca40a90aacf337599d2c92b7a8a8328ecda86db885abc27cf7a8810de"
+    ],
+    [
       ".windsurf/workflows/strategy.md",
       "873e8593fdb5a59a17a3ac854b4b67dc4c747fba7cc019f307a2fa288a5071ec"
+    ],
+    [
+      ".windsurf/workflows/task-breakdown.md",
+      "570a08bb0f037f32d329869a2d156cd5c6324e3f33ea30fb63f28e30c39a9899"
     ],
     [
       ".windsurf/workflows/testing.md",
       "615f540da742cf3c554e3318a40018e16c966cae867a138c65440931e9590abb"
     ],
     [
+      ".windsurf/workflows/ux-validation.md",
+      "e32ac2408cf395a9790b77b1d583117249e6478b93ba56555bb48841cfcad32c"
+    ],
+    [
+      ".windsurf/workflows/workflow-dependency-management.md",
+      "99d0616484291b89f6000e7c2f5aad581240cc33b1f01dcd4ca28444e89de34a"
+    ],
+    [
+      ".windsurf/workflows/workflow-error-handling-patterns.md",
+      "fc6ce074517f3f38e4a16936e5d57d5a76886137c32516049d8609b004e9b49c"
+    ],
+    [
       ".windsurf/workflows/workflow-migration-patterns.md",
       "69c9ec13c58ad859c645e268a62218afbe4eff4e7b1266822fe1e34bdf543319"
+    ],
+    [
+      ".windsurf/workflows/workflow-monitoring.md",
+      "357b8a5f738f82f8b5f68d615027aef83ebc2242daba8fab36c106c2c21adf2d"
+    ],
+    [
+      ".windsurf/workflows/workflow-orchestration-patterns.md",
+      "b78334107bdd5fd20b967390c71890df0afbfb90011f1044acd507b6e70df0d9"
     ],
     [
       ".windsurf/workflows/workflow-performance-optimization.md",
       "52088732dd018bc0bf725df7d0bbf0edc14100bb6872edb53b214f06f52894f6"
     ],
     [
+      ".windsurf/workflows/workflow-rollback-strategies.md",
+      "5a4329fd5a4b8b9b0bf3f5b150e86f01053cae6145205cf99e8b3194fbf0cca6"
+    ],
+    [
       ".windsurf/workflows/workflow-scaling-patterns.md",
       "523eaee4b17873c4fc1614154232601d53d168f7e22045fd174302f0390859ce"
+    ],
+    [
+      ".windsurf/workflows/workflow-testing-patterns.md",
+      "dfc64e0bcc9bbbbb323f68dde5638d255228b3896ca48152e505c5f825068243"
     ]
   ],
   "zed::minimal": [
