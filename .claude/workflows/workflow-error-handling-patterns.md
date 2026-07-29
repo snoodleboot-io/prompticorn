@@ -1,11 +1,3 @@
----
-name: "workflow-error-handling-patterns"
-description: Handle errors in workflows with retries and compensation
-type: workflow
-category: workflow-patterns
-minimal: false
----
-
 # Workflow Error Handling Patterns Workflow
 
 What a workflow does when a step fails: classification, retry, compensation, and

@@ -340,6 +340,8 @@ orchestrator:
     - meta
     - multi-agent-coordination
     - task-breakdown
+    - workflow-dependency-management
+    - workflow-error-handling-patterns
     - workflow-orchestration-patterns
 
 # ============================================================================

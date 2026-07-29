@@ -118,15 +118,15 @@
     ],
     [
       ".amazonq/prompts/workflow-migration-patterns.md",
-      "760b42e31539d1433426f31bd09498bf7808a5104c24579dbf94bac13004b9d2"
+      "d6280fe1a22f255e4a65713dc8d1dff2244a7aef071af2cbb5450b36eecbe7e9"
     ],
     [
       ".amazonq/prompts/workflow-performance-optimization.md",
-      "e03e193dd8e1c84b6b86b8c2553a6f2961cfbc32a73d23f2aae17a773140e133"
+      "195e3754a724363ecb61e568b0a41226599ed259a5e168c7e05aceff938e1a8a"
     ],
     [
       ".amazonq/prompts/workflow-scaling-patterns.md",
-      "1206fb5a49bd7d9b60de274df0ccc391bfd081f8aca502213bc7901e6728f0ef"
+      "d60fc0d132cd55391a3dff530d18e9c7ae03666d99531b8583310af9917f18e4"
     ],
     [
       ".amazonq/rules/conventions-python.md",
@@ -216,7 +216,7 @@
     ],
     [
       ".amazonq/prompts/migration.md",
-      "7cfaf5b54f0303cb4b7811c2737a87b73a2e4419a3600a200050939785ae0238"
+      "073277cef32d073aa2ea918663d2e5f5310dce1e31a6205caf5ae82624666145"
     ],
     [
       ".amazonq/prompts/performance.md",
@@ -236,15 +236,15 @@
     ],
     [
       ".amazonq/prompts/workflow-migration-patterns.md",
-      "6b8cc853fcc2e8edef02c11935f70c9528dbfb3dd21cd1a215f92fac625a8768"
+      "a185ff7bcf36c11c86be1eced7213d87f8de8573637cd15ff2c2b86df311f877"
     ],
     [
       ".amazonq/prompts/workflow-performance-optimization.md",
-      "07b40c1fb5ae860a24e26a0c2cec00eedcb3f7e3c02efa8705b0a2f99f7bb784"
+      "f8f8d0e49270fcc3ad3d7690cce919816edad7739208454cf01b0925e9b517d4"
     ],
     [
       ".amazonq/prompts/workflow-scaling-patterns.md",
-      "907195f7ab03b3948bd5af14584c0a5d9221dbde55f069ce096659a6116cdec7"
+      "f472b8a729e5afabe2d2001676c5d321b368f0dbd0ebbd9f2cdd492717086b25"
     ],
     [
       ".amazonq/rules/conventions-python.md",
@@ -842,7 +842,7 @@
     ],
     [
       ".claude/workflows/docs.md",
-      "f3272f6b80e38c4177a0681f7d5c525e0c217a78d6254fdb71315d77cd771752"
+      "c1de42a77b60360b841f96e91f36c7fe06d481c8e1ae40fbfe392188441c3b7d"
     ],
     [
       ".claude/workflows/feature.md",
@@ -905,8 +905,16 @@
       "8094d682ff07b1f020d1edf64fe7c8ac026c2340f574f503b2fbe8f0432bedb9"
     ],
     [
+      ".claude/workflows/workflow-dependency-management.md",
+      "f225e45ab151886730b2b168c4fcbe5a5df7cef871097fd30c4f845c11d62614"
+    ],
+    [
+      ".claude/workflows/workflow-error-handling-patterns.md",
+      "5dfb126c8373699e9fef537fc0df3fa547127a64fde2fd9568a561fa6a1183c1"
+    ],
+    [
       ".claude/workflows/workflow-migration-patterns.md",
-      "3defe45307592bc105f7fd81fa338503647664f259c95232db5cfe8ec01eb54f"
+      "da6e5d2345f6b74fc22fcc9d984bf9d5a63e0eca7187c80bf247121c31b84460"
     ],
     [
       ".claude/workflows/workflow-orchestration-patterns.md",
@@ -914,15 +922,15 @@
     ],
     [
       ".claude/workflows/workflow-performance-optimization.md",
-      "17832cdfb5dd7d406e2b9fc701e101d4052730dcf927b8e527f42f3dfe7c3dc2"
+      "7d97952fd0d12809ba12b1a3f544411a96c1cf56068d506d878eb50219e81a65"
     ],
     [
       ".claude/workflows/workflow-scaling-patterns.md",
-      "673cb9efd6255e5ddfa215732f43a96b89ebe5f40268ae683031060c9eb3095a"
+      "b0a257a3b58a98758f3082a70ca46f72b5fbba0fc8145bcd676ff36b5b9a12f9"
     ],
     [
       ".claude/workflows/workflow-testing-patterns.md",
-      "9c8f0572ce6d66a69a927c403d1700ab0459cb1ecfa2b403854f8d5b5fc6ea45"
+      "fc56fa1dfb9a1813db734b773a6695fc4da0a53439e4e1e14f9efb2ddfd47ef1"
     ],
     [
       "CLAUDE.md",
@@ -1360,7 +1368,7 @@
     ],
     [
       ".claude/workflows/docs.md",
-      "f3272f6b80e38c4177a0681f7d5c525e0c217a78d6254fdb71315d77cd771752"
+      "1523043fb3520864bc216bc458efb8b4f8437b88f625fc365f1c744559b069b3"
     ],
     [
       ".claude/workflows/feature.md",
@@ -1380,7 +1388,7 @@
     ],
     [
       ".claude/workflows/migration.md",
-      "5d7a0ef2f8c16fbc341ebc3928bd2ca55c27620cf17def9a09955b20f6792937"
+      "65ad849b988381ceb2a61222964a9feb12d767fc5956a7774130945b29a75861"
     ],
     [
       ".claude/workflows/multi-agent-coordination.md",
@@ -1423,8 +1431,16 @@
       "9537a0b4736f5637637239045259fbc408ee6036492ef466a990080b388962e2"
     ],
     [
+      ".claude/workflows/workflow-dependency-management.md",
+      "45c6ab928ddbd938013f95de650474ef833d5b22c56dd0cf6ef5e73ca7423728"
+    ],
+    [
+      ".claude/workflows/workflow-error-handling-patterns.md",
+      "9f7a8dcba281f885ccd8c2ae27e9f0c00c5bc044bacaba6a2c97b7c7888c8215"
+    ],
+    [
       ".claude/workflows/workflow-migration-patterns.md",
-      "96d3a81557b3792780f298a4a0517c7c2ebc32f3b90cdbe47ebd9828b323329e"
+      "4bbf6712b720ade8ccb5da3b9b8c4b72f7780a46118437490c85f8d48792ea69"
     ],
     [
       ".claude/workflows/workflow-orchestration-patterns.md",
@@ -1432,15 +1448,15 @@
     ],
     [
       ".claude/workflows/workflow-performance-optimization.md",
-      "45beb719da274277f2da5f44310b45cf336b20140fdffc5779cc95f479efd4b3"
+      "9b3515b81c87281b93bb21f647efbbb68c757fa792ad1a050f82e71d709ffe85"
     ],
     [
       ".claude/workflows/workflow-scaling-patterns.md",
-      "adc892caf3ef91e3067531da2e20f768ae3c764d8b5dd901a54fe72b2fb2b832"
+      "fd30d48467273083e17fa064f3203b27086d16473e25368f3b0d2715138f6a6a"
     ],
     [
       ".claude/workflows/workflow-testing-patterns.md",
-      "cb773366823f491d080f52f8f4ad0e76560c3ca9d0f7a1419fbb0392babda0ee"
+      "62e0823d2a4b14b4b32a07be19136a206ed719ca787bf69d44d4cadb704459d9"
     ],
     [
       "CLAUDE.md",
@@ -1654,7 +1670,7 @@
     ],
     [
       ".clinerules",
-      "14669f690bc0e2df938ae365cc52775d9b003509348f614089554e7c78191215"
+      "c30ec3df23a5d3578606769aedc3abf92e64b48becc834de580958d3805e1dfa"
     ],
     [
       "AGENTS.md",
@@ -1868,7 +1884,7 @@
     ],
     [
       ".clinerules",
-      "b429e0979ded85af8cc11437c73cee339b7b7d5d538dad0273be050fe6887909"
+      "29b80ddca24cb034802d3bab835696acca092a37aa41766254ee20dead63081b"
     ],
     [
       "AGENTS.md",
@@ -2458,15 +2474,15 @@
     ],
     [
       ".continue/prompts/workflow-migration-patterns.md",
-      "0bf275564eb9ed52d46c42970bfddae400daf324ae3122f5044fb2ec30f634df"
+      "6553ce5b24365465be43b9cf1b85e61b08fb8eb7dcbaddc6da3864993ab87522"
     ],
     [
       ".continue/prompts/workflow-performance-optimization.md",
-      "ef4e96351f4beaba551cd53bd18480a1bed3b571c0ab03c53bde0a9337abdc83"
+      "bfffd1ef58cb8321ae22b6575bb200ea0de3ad380d3bf6aa1e0aa614c227281b"
     ],
     [
       ".continue/prompts/workflow-scaling-patterns.md",
-      "c87e9173d3468477f63ab869dfdabb5e4baa628a19069ad6960e9c5898a9263c"
+      "2d3aa36b7ff9cb6f49fb599718a16880b56b8e6011a48f0206f7e0dfa5d47588"
     ],
     [
       ".continue/rules/ask.md",
@@ -2556,7 +2572,7 @@
     ],
     [
       ".continue/prompts/migration.md",
-      "1ceafc8d4cbd2520523a30d07325c729018a071616d7f3fabafc64a056634ea7"
+      "00e839b46595a24ed0baa36e25d0a6bc62e02ff9b63fa237fa288e1eab252bd1"
     ],
     [
       ".continue/prompts/performance.md",
@@ -2576,15 +2592,15 @@
     ],
     [
       ".continue/prompts/workflow-migration-patterns.md",
-      "a0a514df50ec1586b5855a77f4624a9a7c20c53a2e3ebd4c869c01dfe6465815"
+      "e12a47f280f25d37303bb0cf63c278b972718a4d8243a3d32a297312a682025f"
     ],
     [
       ".continue/prompts/workflow-performance-optimization.md",
-      "be96f126429794d65e3d631c7d05d4abb93284885743d8a8359dba64ad4dfd21"
+      "5e4043f7e0afc5f13892488cd47205720a762c2880297be0ef50930a1826a4f4"
     ],
     [
       ".continue/prompts/workflow-scaling-patterns.md",
-      "b27fe2d2973f261d6a0e70bf72a7019c7939d41fd803a810dbcdfaf998d999e6"
+      "ee3e529cd3ab0b05e34e5ee3a21afaa18689a719a1bac25960f8fa35d8cbdee6"
     ],
     [
       ".continue/rules/ask.md",
@@ -2758,15 +2774,15 @@
     ],
     [
       ".github/prompts/workflow-migration-patterns.prompt.md",
-      "a1026aff7e4588155bd493f1f113c71301a5472d384154a468afcedd53aa9628"
+      "3d234b07456506d0b784397b48813c29ce4d06afe735ef098db5b4857efdb3a7"
     ],
     [
       ".github/prompts/workflow-performance-optimization.prompt.md",
-      "520aabbd4befc5274f70c86467be17ef220bb19a960cf3ee3db9c3f4f9d722b1"
+      "724cdc0efd018c826262c38eacbed960e9f7373e6800cfd2b7586201586dd43b"
     ],
     [
       ".github/prompts/workflow-scaling-patterns.prompt.md",
-      "06e58fe891a0b5d6f3c710dcc234fe6332bfae8d0b04f6ce8fcd1eb4393dfb65"
+      "f5f8a0a185941bf1afd4f7e00938c4bdac8cb544f8309979a37dd8d515260f5f"
     ]
   ],
   "copilot-chat::verbose": [
@@ -2856,7 +2872,7 @@
     ],
     [
       ".github/prompts/migration.prompt.md",
-      "e93570fd06986577dd640c08203593c28470d6776b4403e9ec23b4441b6db9ad"
+      "27b8492f7bdf9e7de641bf81a8e1c110f5458fd2e6ccec4299e920ad9c9cb3d6"
     ],
     [
       ".github/prompts/performance.prompt.md",
@@ -2876,21 +2892,21 @@
     ],
     [
       ".github/prompts/workflow-migration-patterns.prompt.md",
-      "3b40aa368af6dc02c1966470dff330384c5718fd55dac0e26431970af51bbf93"
+      "ffc7f0b91bb58362d46e079ad837b1738d60900a08be7e83d58f16a07037c6c1"
     ],
     [
       ".github/prompts/workflow-performance-optimization.prompt.md",
-      "37cde0b3d8303e2f5a7bef35fbcb4b8da93e4669459d0a21ed9e66ca2db80bca"
+      "9c1a749b2ab527f60a1684b5e09331de24999f257db2aec82fa948547d47652e"
     ],
     [
       ".github/prompts/workflow-scaling-patterns.prompt.md",
-      "03799bca9c4115b4a3cab780d6258c941fd632683f442e73eb3e55667cd2e4b5"
+      "15090974e97bf2658883ab6260e92d2494b6e24511164b4422636bd0475f0683"
     ]
   ],
   "copilot::minimal": [
     [
       ".github/copilot-instructions.md",
-      "9ae1d112083d0c8295e6a702d194f15e9fd4fc1d66e4c4cbef3ce14a2264f632"
+      "10392fb43570af2c48ca631fc3d5a3da100e840a94df7c73a1202a1cf4181c8f"
     ],
     [
       ".github/skills/api-versioning-strategy/SKILL.md",
@@ -3104,7 +3120,7 @@
   "copilot::verbose": [
     [
       ".github/copilot-instructions.md",
-      "c9e467c1cec24436bda3a44863dda471c28870d378d99c263a0d588ecf6cb15d"
+      "3104e49e8e06850df57d0c9d9690b29fa2fd23fbbebaf664ded16ac13febee2f"
     ],
     [
       ".github/skills/api-versioning-strategy/SKILL.md",
@@ -3522,7 +3538,7 @@
     ],
     [
       ".cursorrules",
-      "24db557b50a85b1fa28898de9e5bd77a88b8c424349bc1520191857e363329f4"
+      "bc10ae6273d3b1779e12b73806cb6c61586ff67a4ba7ee6f3176912fd96c4f40"
     ],
     [
       "AGENTS.md",
@@ -3736,7 +3752,7 @@
     ],
     [
       ".cursorrules",
-      "ea5a85bbcbd4ddbc4c509a4afaded604bc833453073c8190fa2fde9a4c55c9fb"
+      "40320c2476fbcff388ebcc2848df24eedafc12f7296abb767855fbd7591c2477"
     ],
     [
       "AGENTS.md",
@@ -3842,15 +3858,15 @@
     ],
     [
       ".gemini/commands/workflow-migration-patterns.toml",
-      "427ff5e023f37d4117b0051f1d5892e0e0fcd0cce0a94348df629fee379178ee"
+      "4ee09e81341889e16ffbac316a3707acd201c1b7a01de76140e8246471cc28d9"
     ],
     [
       ".gemini/commands/workflow-performance-optimization.toml",
-      "7d4a2243419cb35c366903a9f4186a4d5769d5436fd1e4b01f024c3120c3a6a8"
+      "0e280e2a0e0fd3f2b808049890111ce16d5ef62c0819536dc21fcd588147c10d"
     ],
     [
       ".gemini/commands/workflow-scaling-patterns.toml",
-      "eb40519d952b21429be673907880fa03e7873cf975243c1d79f46e97de471155"
+      "f82bd1341aa9a96ccdd3f6f7ae6836ea341863c2123648bf4827176314a0337d"
     ],
     [
       ".gemini/settings.json",
@@ -4144,7 +4160,7 @@
     ],
     [
       ".gemini/commands/migration.toml",
-      "c7c915bedb7b31db5b56b898554bc98f416f33e9c147a9f805f898e1fe17c122"
+      "038e094dd677bb7154f97911b32b76565ebbd2d7a2232a72006d7015e3562175"
     ],
     [
       ".gemini/commands/performance.toml",
@@ -4164,15 +4180,15 @@
     ],
     [
       ".gemini/commands/workflow-migration-patterns.toml",
-      "c58939bbf417e917cac8d430e20c3b307d5a8197e6337d3f781b8bf9af85e6f2"
+      "c1e5eefb10e5eaea38d4dd8d05209d4e1819e568193076a7b8d6bf54dfd63890"
     ],
     [
       ".gemini/commands/workflow-performance-optimization.toml",
-      "8366dff7242f9d7b88934374acb4d224db254ba9347f61b88ae5959d30bbd257"
+      "3905e48c8f0a9d1f4af0bc673ad66b1cfb88b4a78e0e7107f512a9146a419e04"
     ],
     [
       ".gemini/commands/workflow-scaling-patterns.toml",
-      "9653bf7b01f2684c100752487b2d7baab5a78524b48389eeb09041274be1d978"
+      "1273e15f664855339c5702d0eb4134fd57fa64459812fa683d7da35a8309ada1"
     ],
     [
       ".gemini/settings.json",
@@ -4486,15 +4502,15 @@
     ],
     [
       ".junie/commands/workflow-migration-patterns.md",
-      "760b42e31539d1433426f31bd09498bf7808a5104c24579dbf94bac13004b9d2"
+      "d6280fe1a22f255e4a65713dc8d1dff2244a7aef071af2cbb5450b36eecbe7e9"
     ],
     [
       ".junie/commands/workflow-performance-optimization.md",
-      "e03e193dd8e1c84b6b86b8c2553a6f2961cfbc32a73d23f2aae17a773140e133"
+      "195e3754a724363ecb61e568b0a41226599ed259a5e168c7e05aceff938e1a8a"
     ],
     [
       ".junie/commands/workflow-scaling-patterns.md",
-      "1206fb5a49bd7d9b60de274df0ccc391bfd081f8aca502213bc7901e6728f0ef"
+      "d60fc0d132cd55391a3dff530d18e9c7ae03666d99531b8583310af9917f18e4"
     ],
     [
       ".junie/skills/api-versioning-strategy/SKILL.md",
@@ -4784,7 +4800,7 @@
     ],
     [
       ".junie/commands/migration.md",
-      "7cfaf5b54f0303cb4b7811c2737a87b73a2e4419a3600a200050939785ae0238"
+      "073277cef32d073aa2ea918663d2e5f5310dce1e31a6205caf5ae82624666145"
     ],
     [
       ".junie/commands/performance.md",
@@ -4804,15 +4820,15 @@
     ],
     [
       ".junie/commands/workflow-migration-patterns.md",
-      "6b8cc853fcc2e8edef02c11935f70c9528dbfb3dd21cd1a215f92fac625a8768"
+      "a185ff7bcf36c11c86be1eced7213d87f8de8573637cd15ff2c2b86df311f877"
     ],
     [
       ".junie/commands/workflow-performance-optimization.md",
-      "07b40c1fb5ae860a24e26a0c2cec00eedcb3f7e3c02efa8705b0a2f99f7bb784"
+      "f8f8d0e49270fcc3ad3d7690cce919816edad7739208454cf01b0925e9b517d4"
     ],
     [
       ".junie/commands/workflow-scaling-patterns.md",
-      "907195f7ab03b3948bd5af14584c0a5d9221dbde55f069ce096659a6116cdec7"
+      "f472b8a729e5afabe2d2001676c5d321b368f0dbd0ebbd9f2cdd492717086b25"
     ],
     [
       ".junie/skills/api-versioning-strategy/SKILL.md",
@@ -5286,7 +5302,7 @@
     ],
     [
       ".kilo/agents/orchestrator.md",
-      "bc01c0085a2d3382b6ba9dfed1f03763219930cf5596649ab08a47bf652f269d"
+      "c0cb9908d5ffead540f4b996289527e46aeb1e015e01db122177d823b7904fd5"
     ],
     [
       ".kilo/agents/performance/benchmarking.md",
@@ -5386,15 +5402,15 @@
     ],
     [
       ".kilo/commands/workflow-migration-patterns.md",
-      "760b42e31539d1433426f31bd09498bf7808a5104c24579dbf94bac13004b9d2"
+      "d6280fe1a22f255e4a65713dc8d1dff2244a7aef071af2cbb5450b36eecbe7e9"
     ],
     [
       ".kilo/commands/workflow-performance-optimization.md",
-      "e03e193dd8e1c84b6b86b8c2553a6f2961cfbc32a73d23f2aae17a773140e133"
+      "195e3754a724363ecb61e568b0a41226599ed259a5e168c7e05aceff938e1a8a"
     ],
     [
       ".kilo/commands/workflow-scaling-patterns.md",
-      "1206fb5a49bd7d9b60de274df0ccc391bfd081f8aca502213bc7901e6728f0ef"
+      "d60fc0d132cd55391a3dff530d18e9c7ae03666d99531b8583310af9917f18e4"
     ],
     [
       ".kilo/rules/conventions-python.md",
@@ -5768,7 +5784,7 @@
     ],
     [
       ".kilo/agents/orchestrator.md",
-      "bc01c0085a2d3382b6ba9dfed1f03763219930cf5596649ab08a47bf652f269d"
+      "c0cb9908d5ffead540f4b996289527e46aeb1e015e01db122177d823b7904fd5"
     ],
     [
       ".kilo/agents/performance/benchmarking.md",
@@ -5848,7 +5864,7 @@
     ],
     [
       ".kilo/commands/migration.md",
-      "7cfaf5b54f0303cb4b7811c2737a87b73a2e4419a3600a200050939785ae0238"
+      "073277cef32d073aa2ea918663d2e5f5310dce1e31a6205caf5ae82624666145"
     ],
     [
       ".kilo/commands/performance.md",
@@ -5868,15 +5884,15 @@
     ],
     [
       ".kilo/commands/workflow-migration-patterns.md",
-      "6b8cc853fcc2e8edef02c11935f70c9528dbfb3dd21cd1a215f92fac625a8768"
+      "a185ff7bcf36c11c86be1eced7213d87f8de8573637cd15ff2c2b86df311f877"
     ],
     [
       ".kilo/commands/workflow-performance-optimization.md",
-      "07b40c1fb5ae860a24e26a0c2cec00eedcb3f7e3c02efa8705b0a2f99f7bb784"
+      "f8f8d0e49270fcc3ad3d7690cce919816edad7739208454cf01b0925e9b517d4"
     ],
     [
       ".kilo/commands/workflow-scaling-patterns.md",
-      "907195f7ab03b3948bd5af14584c0a5d9221dbde55f069ce096659a6116cdec7"
+      "f472b8a729e5afabe2d2001676c5d321b368f0dbd0ebbd9f2cdd492717086b25"
     ],
     [
       ".kilo/rules/conventions-python.md",
@@ -6154,15 +6170,15 @@
     ],
     [
       ".roo/commands/workflow-migration-patterns.md",
-      "760b42e31539d1433426f31bd09498bf7808a5104c24579dbf94bac13004b9d2"
+      "d6280fe1a22f255e4a65713dc8d1dff2244a7aef071af2cbb5450b36eecbe7e9"
     ],
     [
       ".roo/commands/workflow-performance-optimization.md",
-      "e03e193dd8e1c84b6b86b8c2553a6f2961cfbc32a73d23f2aae17a773140e133"
+      "195e3754a724363ecb61e568b0a41226599ed259a5e168c7e05aceff938e1a8a"
     ],
     [
       ".roo/commands/workflow-scaling-patterns.md",
-      "1206fb5a49bd7d9b60de274df0ccc391bfd081f8aca502213bc7901e6728f0ef"
+      "d60fc0d132cd55391a3dff530d18e9c7ae03666d99531b8583310af9917f18e4"
     ],
     [
       ".roo/rules-ask/01-instructions.md",
@@ -6198,7 +6214,7 @@
     ],
     [
       ".roo/rules-orchestrator/01-instructions.md",
-      "5dc1ef14504f3d58e07b860bc9e09aacb940e55830b51350769689294d777c4c"
+      "7ca3791f31c44d3990fd68c94dc943ab00cf3e2adb815e6f92c9c8ad4039c420"
     ],
     [
       ".roo/rules-performance/01-instructions.md",
@@ -6456,7 +6472,7 @@
     ],
     [
       ".roo/commands/migration.md",
-      "7cfaf5b54f0303cb4b7811c2737a87b73a2e4419a3600a200050939785ae0238"
+      "073277cef32d073aa2ea918663d2e5f5310dce1e31a6205caf5ae82624666145"
     ],
     [
       ".roo/commands/performance.md",
@@ -6476,15 +6492,15 @@
     ],
     [
       ".roo/commands/workflow-migration-patterns.md",
-      "6b8cc853fcc2e8edef02c11935f70c9528dbfb3dd21cd1a215f92fac625a8768"
+      "a185ff7bcf36c11c86be1eced7213d87f8de8573637cd15ff2c2b86df311f877"
     ],
     [
       ".roo/commands/workflow-performance-optimization.md",
-      "07b40c1fb5ae860a24e26a0c2cec00eedcb3f7e3c02efa8705b0a2f99f7bb784"
+      "f8f8d0e49270fcc3ad3d7690cce919816edad7739208454cf01b0925e9b517d4"
     ],
     [
       ".roo/commands/workflow-scaling-patterns.md",
-      "907195f7ab03b3948bd5af14584c0a5d9221dbde55f069ce096659a6116cdec7"
+      "f472b8a729e5afabe2d2001676c5d321b368f0dbd0ebbd9f2cdd492717086b25"
     ],
     [
       ".roo/rules-ask/01-instructions.md",
@@ -6520,7 +6536,7 @@
     ],
     [
       ".roo/rules-orchestrator/01-instructions.md",
-      "5dc1ef14504f3d58e07b860bc9e09aacb940e55830b51350769689294d777c4c"
+      "7ca3791f31c44d3990fd68c94dc943ab00cf3e2adb815e6f92c9c8ad4039c420"
     ],
     [
       ".roo/rules-performance/01-instructions.md",
@@ -7066,15 +7082,15 @@
     ],
     [
       ".windsurf/workflows/workflow-migration-patterns.md",
-      "bae31ce3d7e740d0b4a16d4fcb96accb7146fc8e8450ff48571108e314254ece"
+      "8bebcc61beeb20e36bbae77c01e76114c31a3c7a8bd53c5a0f3d37027a7aaadc"
     ],
     [
       ".windsurf/workflows/workflow-performance-optimization.md",
-      "60be42ceecd08755c2d9776dd0fce53745e568bd82a8c73ca11192060a16005c"
+      "f194899b09b4b08205be817e6be92f35b47ccb9e2a6bfacd80e6443b8b6e8ce5"
     ],
     [
       ".windsurf/workflows/workflow-scaling-patterns.md",
-      "6f70926a0b19f91e52e0506a50d5a724639e8f1b9ec9db67c468ff7e473f0e7e"
+      "7bf48e703d7bb5091749cfcf0ae7c81c4d09096c8cd2a5deb07024474d751b19"
     ]
   ],
   "windsurf::verbose": [
@@ -7368,7 +7384,7 @@
     ],
     [
       ".windsurf/workflows/migration.md",
-      "635445b0514f27ce38d9d78f7fa1ff8e2b3532ce12ca9dc9ce546f87accf798b"
+      "b1285f33fdf2dab2e8dda236be69a4ade0ca3ec4e485e65656f94d801d9ef60b"
     ],
     [
       ".windsurf/workflows/performance.md",
@@ -7388,15 +7404,15 @@
     ],
     [
       ".windsurf/workflows/workflow-migration-patterns.md",
-      "52379e10d2943895140f64a5dd6cc4481a7025cb0562da295fc5b60431fa3c96"
+      "69c9ec13c58ad859c645e268a62218afbe4eff4e7b1266822fe1e34bdf543319"
     ],
     [
       ".windsurf/workflows/workflow-performance-optimization.md",
-      "ec0602745fb7745d96b248df6976de04f4c08af42e7eeaa2a312098e7dd36321"
+      "52088732dd018bc0bf725df7d0bbf0edc14100bb6872edb53b214f06f52894f6"
     ],
     [
       ".windsurf/workflows/workflow-scaling-patterns.md",
-      "ad65b79b89eb92b9f7bebacb856f9d1640ec0f9fdeb5970636a8e534ce62d4d2"
+      "523eaee4b17873c4fc1614154232601d53d168f7e22045fd174302f0390859ce"
     ]
   ],
   "zed::minimal": [

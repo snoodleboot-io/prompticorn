@@ -1,11 +1,3 @@
----
-name: "workflow-dependency-management"
-description: Manage dependencies between workflow tasks
-type: workflow
-category: workflow-patterns
-minimal: false
----
-
 # Workflow Dependency Management Workflow
 
 Declaring what a task needs before it can run, and deriving the execution order
