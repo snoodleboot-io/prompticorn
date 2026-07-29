@@ -2,6 +2,7 @@
 
 import json
 import warnings
+from collections.abc import Iterable
 from pathlib import Path
 from typing import Any
 
@@ -229,6 +230,12 @@ class PromptBuilder:
         all_skills_written = set()
         all_files_written = set()  # Track unique files for Claude deduplication
 
+        # Every path this build emits, relative to ``output``. The
+        # {{PRIMARY_AGENTS_LIST}} pass is confined to these files — it must never
+        # walk the output root, which for `prompticorn switch` is the user's whole
+        # repository. (PRO-137)
+        emitted: set[str] = set()
+
         # Track primary agents being built (for AGENTS.md)
         primary_agents_built = []
 
@@ -240,6 +247,7 @@ class PromptBuilder:
         if self.layout.writes_rules and not dry_run:
             try:
                 rules_files_written = self.builder.write_rules_files(output, config)
+                emitted.update(rules_files_written)
                 actions.extend([f"✓ {f}" for f in rules_files_written])
             except Exception as e:
                 actions.append(f"✗ Failed to write rules files: {e}")
@@ -270,6 +278,7 @@ class PromptBuilder:
                 # Write output
                 if not dry_run:
                     written = self._write_output(output, agent_name, output_content)
+                    emitted.update(written)
                     # Deduplicate file reports (especially for Claude workflows)
                     new_files = [f for f in written if f not in all_files_written]
                     all_files_written.update(written)
@@ -303,6 +312,7 @@ class PromptBuilder:
                                 subagent_files = self._write_subagent_output(
                                     output, agent_name, subagent_name, subagent_output
                                 )
+                                emitted.update(subagent_files)
                                 actions.extend([f"✓ {f}" for f in subagent_files])
                         except Exception as e:
                             actions.append(
@@ -329,6 +339,7 @@ class PromptBuilder:
                     skill_files = self._write_skill_files(
                         output, agent_name, filtered_agent, variant
                     )
+                    emitted.update(skill_files)
                     for skill_file in skill_files:
                         if skill_file not in all_skills_written:
                             actions.append(f"✓ {skill_file}")
@@ -349,6 +360,7 @@ class PromptBuilder:
                         workflow_files = self._write_workflow_files(
                             output, agent_name, filtered_agent, variant
                         )
+                        emitted.update(workflow_files)
                         for workflow_file in workflow_files:
                             if workflow_file not in all_workflows_written:
                                 actions.append(f"✓ {workflow_file}")
@@ -369,6 +381,7 @@ class PromptBuilder:
                     claude_md_content = generate_claude_md(primary_agents_built, persona_name)
                     claude_md_path = output / "CLAUDE.md"
                     claude_md_path.write_text(claude_md_content, encoding="utf-8")
+                    emitted.add("CLAUDE.md")
                     actions.append("✓ CLAUDE.md")
 
                     # Generate convention files for Claude (only selected languages)
@@ -385,6 +398,7 @@ class PromptBuilder:
                             full_path = output / file_path_str
                             full_path.parent.mkdir(parents=True, exist_ok=True)
                             full_path.write_text(content_str, encoding="utf-8")
+                            emitted.add(file_path_str)
                         actions.append(f"✓ {len(conventions)} convention files")
                     except Exception as conv_error:
                         actions.append(f"⚠ Failed to generate conventions: {conv_error}")
@@ -407,6 +421,7 @@ class PromptBuilder:
                     )
                     agents_md_path = output / "AGENTS.md"
                     agents_md_path.write_text(agents_md_content, encoding="utf-8")
+                    emitted.add("AGENTS.md")
                     actions.append("✓ AGENTS.md")
             except Exception as e:
                 file_name = self.layout.root_doc_filename()
@@ -416,29 +431,40 @@ class PromptBuilder:
         if not dry_run:
             try:
                 for finalized in self.layout.finalize(output, built_agent_outputs, config):
+                    emitted.add(finalized)
                     actions.append(f"✓ {finalized}")
             except Exception as e:
                 actions.append(f"⚠ Failed to finalize output: {e}")
 
-        # Resolve legacy {{PRIMARY_AGENTS_LIST}} in whatever files carry it. The
-        # IR-based builders (gemini/roo/zed/junie/codex/amazonq/windsurf/continue/
-        # copilot-chat) emit the orchestrator's system prompt and skill files
-        # verbatim, so unlike the Claude/Cline/Cursor/Copilot path they never run
-        # the substitution. Resolving here — after every file is written — covers
-        # agent, skill and workflow files uniformly and is a no-op for builders
-        # that already substituted (the token is gone). (PRO-72)
+        # Resolve legacy {{PRIMARY_AGENTS_LIST}} in the files this build emitted.
+        # The IR-based builders (gemini/roo/zed/junie/codex/amazonq/windsurf/
+        # continue/copilot-chat) emit the orchestrator's system prompt and skill
+        # files verbatim, so unlike the Claude/Cline/Cursor/Copilot path they never
+        # run the substitution. Resolving here — after every file is written —
+        # covers agent, skill and workflow files uniformly and is a no-op for
+        # builders that already substituted (the token is gone). (PRO-72)
         if not dry_run:
-            self._resolve_primary_agents_token(output, config)
+            self._resolve_primary_agents_token(output, config, emitted)
 
         return actions
 
-    def _resolve_primary_agents_token(self, output: Path, config: dict[str, Any] | None) -> None:
+    def _resolve_primary_agents_token(
+        self, output: Path, config: dict[str, Any] | None, emitted: Iterable[str]
+    ) -> None:
         """Replace any literal ``{{PRIMARY_AGENTS_LIST}}`` in emitted files.
 
         Computes the list once (it depends on the config's active personas) and
         rewrites only files that actually contain the token, via plain string
         replacement — never a Jinja re-render, so literal ``{{ }}`` in code
         examples is untouched.
+
+        ``emitted`` is the set of paths this build wrote, relative to ``output``.
+        Only those are considered. It must never walk ``output`` itself: callers
+        pass the repository root (``prompticorn switch`` uses ``Path(".")``), so
+        an ``rglob`` there rewrites the user's own source files — any file merely
+        *mentioning* the token, including this module and the source agent
+        templates, whose placeholder would be destroyed and the emitted agent list
+        silently frozen. (PRO-137)
 
         The replacement is a multi-line markdown bullet list. In a markdown/YAML
         body those newlines are harmless, but a builder that embeds the token
@@ -449,7 +475,8 @@ class PromptBuilder:
         """
         token = "{{PRIMARY_AGENTS_LIST}}"
         value: str | None = None
-        for path in output.rglob("*"):
+        for relative in sorted(set(emitted)):
+            path = output / relative
             if not path.is_file():
                 continue
             try:
