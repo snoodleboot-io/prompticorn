@@ -87,7 +87,8 @@ class TestNoHollowContent:
             for d in sorted(workflows_dir.iterdir())
             if d.is_dir()
             and not (
-                (d / "minimal" / "workflow.md").exists() and (d / "verbose" / "workflow.md").exists()
+                (d / "minimal" / "workflow.md").exists()
+                and (d / "verbose" / "workflow.md").exists()
             )
         ]
         assert not missing, f"workflows missing a variant: {missing}"
