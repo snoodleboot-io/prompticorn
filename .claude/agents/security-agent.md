@@ -120,12 +120,15 @@ I coordinate with four specialized security subagents for deep domain expertise:
 **Read and follow this workflow file:**
 
 ```
-.claude/workflows/feature.md
+.claude/workflows/penetration-testing-guide.md
 ```
 
 This workflow will guide you through:
-- Steps
-- Complete Flow Summary
+- Overview
+- Prerequisites
+- Penetration Testing Methodologies
+- Pre-Engagement and Scoping
+- Reconnaissance and Information Gathering
 
 ## Subagents
 
@@ -151,9 +154,19 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 | Skill | Purpose | File Path | When to Use |
 |-------|---------|-----------|-------------|
+| Api Security | Capability for api-security | .claude/skills/api-security/SKILL.md | When workflow requires api-security |
+| Cloud Iam Design | Capability for cloud-iam-design | .claude/skills/cloud-iam-design/SKILL.md | When workflow requires cloud-iam-design |
+| Code Review Practices | Capability for code-review-practices | .claude/skills/code-review-practices/SKILL.md | When workflow requires code-review-practices |
+| Container Security Hardening | Capability for container-security-hardening | .claude/skills/container-security-hardening/SKILL.md | When workflow requires container-security-hardening |
+| Key Management | Capability for key-management | .claude/skills/key-management/SKILL.md | When workflow requires key-management |
+| Problem Decomposition | Capability for problem-decomposition | .claude/skills/problem-decomposition/SKILL.md | When workflow requires problem-decomposition |
+| Quality Assurance | Capability for quality-assurance | .claude/skills/quality-assurance/SKILL.md | When workflow requires quality-assurance |
+| Technical Decision Making | Capability for technical-decision-making | .claude/skills/technical-decision-making/SKILL.md | When workflow requires technical-decision-making |
+| Threat Modeling | Capability for threat-modeling | .claude/skills/threat-modeling/SKILL.md | When workflow requires threat-modeling |
 | Feature Planning | Capability for feature-planning | .claude/skills/feature-planning/SKILL.md | When workflow requires feature-planning |
 | Incremental Implementation | Capability for incremental-implementation | .claude/skills/incremental-implementation/SKILL.md | When workflow requires incremental-implementation |
 | Post Implementation Checklist | Capability for post-implementation-checklist | .claude/skills/post-implementation-checklist/SKILL.md | When workflow requires post-implementation-checklist |
+| Python Typing And Async | Capability for python-typing-and-async | .claude/skills/python-typing-and-async/SKILL.md | When workflow requires python-typing-and-async |
 | Test Aaa Structure | Capability for test-aaa-structure | .claude/skills/test-aaa-structure/SKILL.md | When workflow requires test-aaa-structure |
 | Test Coverage Categories | Capability for test-coverage-categories | .claude/skills/test-coverage-categories/SKILL.md | When workflow requires test-coverage-categories |
 | Test Mocking Rules | Capability for test-mocking-rules | .claude/skills/test-mocking-rules/SKILL.md | When workflow requires test-mocking-rules |
@@ -169,7 +182,7 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 1. **Read the workflow file now:**
    ```
-   Read: .claude/workflows/feature.md
+   Read: .claude/workflows/penetration-testing-guide.md
    ```
 
 2. **Follow the workflow steps sequentially**

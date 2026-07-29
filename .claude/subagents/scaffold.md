@@ -6,7 +6,6 @@ workflows:
   - scaffold-workflow
 ---
 
-<!-- path: prompticorn/prompts/agents/architect/subagents/architect-scaffold.md -->
 # Subagent - Architect Scaffold
 
 Behavior when the user asks to scaffold or start a new project.

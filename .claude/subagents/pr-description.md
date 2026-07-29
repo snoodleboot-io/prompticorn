@@ -9,7 +9,6 @@ mode: subagent
 tools: [bash]
 ---
 
-<!-- path: prompticorn/prompts/agents/orchestrator/subagents/orchestrator-pr-description.md -->
 # Subagent - Orchestrator PR Description
 
 PR Description Generator

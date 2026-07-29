@@ -6,7 +6,6 @@ workflows:
   - dependency-upgrade-workflow
 ---
 
-<!-- path: prompticorn/prompts/agents/code/subagents/code-dependency-upgrade.md -->
 # Subagent - Code Dependency Upgrade
 
 Behavior when upgrading dependencies.

@@ -14,12 +14,15 @@ Use this mode for system design, architecture planning, or making technical deci
 **Read and follow this workflow file:**
 
 ```
-.claude/workflows/feature.md
+.claude/workflows/architecture-documentation.md
 ```
 
 This workflow will guide you through:
-- Steps
-- Complete Flow Summary
+- Understand requirements
+- Plan implementation
+- Execute incrementally
+- Test as you go
+- Review and complete
 
 ## Subagents
 
@@ -42,9 +45,24 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 | Skill | Purpose | File Path | When to Use |
 |-------|---------|-----------|-------------|
+| Architecture Documentation | Capability for architecture-documentation | .claude/skills/architecture-documentation/SKILL.md | When workflow requires architecture-documentation |
+| Cloud Migration Strategy | Capability for cloud-migration-strategy | .claude/skills/cloud-migration-strategy/SKILL.md | When workflow requires cloud-migration-strategy |
+| Cloud Provider Tradeoffs | Capability for cloud-provider-tradeoffs | .claude/skills/cloud-provider-tradeoffs/SKILL.md | When workflow requires cloud-provider-tradeoffs |
+| Data Model Discovery | Capability for data-model-discovery | .claude/skills/data-model-discovery/SKILL.md | When workflow requires data-model-discovery |
+| Edge And Cdn Delivery | Capability for edge-and-cdn-delivery | .claude/skills/edge-and-cdn-delivery/SKILL.md | When workflow requires edge-and-cdn-delivery |
 | Feature Planning | Capability for feature-planning | .claude/skills/feature-planning/SKILL.md | When workflow requires feature-planning |
-| Incremental Implementation | Capability for incremental-implementation | .claude/skills/incremental-implementation/SKILL.md | When workflow requires incremental-implementation |
+| Managed Database Selection | Capability for managed-database-selection | .claude/skills/managed-database-selection/SKILL.md | When workflow requires managed-database-selection |
+| Mermaid Erd Creation | Capability for mermaid-erd-creation | .claude/skills/mermaid-erd-creation/SKILL.md | When workflow requires mermaid-erd-creation |
+| Message Queue Selection | Capability for message-queue-selection | .claude/skills/message-queue-selection/SKILL.md | When workflow requires message-queue-selection |
+| Multi Cloud Strategy | Capability for multi-cloud-strategy | .claude/skills/multi-cloud-strategy/SKILL.md | When workflow requires multi-cloud-strategy |
+| Nosql Database Selection | Capability for nosql-database-selection | .claude/skills/nosql-database-selection/SKILL.md | When workflow requires nosql-database-selection |
 | Post Implementation Checklist | Capability for post-implementation-checklist | .claude/skills/post-implementation-checklist/SKILL.md | When workflow requires post-implementation-checklist |
+| Problem Decomposition | Capability for problem-decomposition | .claude/skills/problem-decomposition/SKILL.md | When workflow requires problem-decomposition |
+| Serverless Architecture | Capability for serverless-architecture | .claude/skills/serverless-architecture/SKILL.md | When workflow requires serverless-architecture |
+| Technical Communication | Capability for technical-communication | .claude/skills/technical-communication/SKILL.md | When workflow requires technical-communication |
+| Technical Decision Making | Capability for technical-decision-making | .claude/skills/technical-decision-making/SKILL.md | When workflow requires technical-decision-making |
+| Incremental Implementation | Capability for incremental-implementation | .claude/skills/incremental-implementation/SKILL.md | When workflow requires incremental-implementation |
+| Python Typing And Async | Capability for python-typing-and-async | .claude/skills/python-typing-and-async/SKILL.md | When workflow requires python-typing-and-async |
 | Test Aaa Structure | Capability for test-aaa-structure | .claude/skills/test-aaa-structure/SKILL.md | When workflow requires test-aaa-structure |
 | Test Coverage Categories | Capability for test-coverage-categories | .claude/skills/test-coverage-categories/SKILL.md | When workflow requires test-coverage-categories |
 | Test Mocking Rules | Capability for test-mocking-rules | .claude/skills/test-mocking-rules/SKILL.md | When workflow requires test-mocking-rules |
@@ -60,7 +78,7 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 1. **Read the workflow file now:**
    ```
-   Read: .claude/workflows/feature.md
+   Read: .claude/workflows/architecture-documentation.md
    ```
 
 2. **Follow the workflow steps sequentially**

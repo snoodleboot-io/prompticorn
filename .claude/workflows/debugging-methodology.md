@@ -26,8 +26,8 @@ ELSE IF language = typescript:
     Read: .claude/conventions/languages/typescript.md
 ELSE IF language = rust:
     Read: .claude/conventions/languages/rust.md
-ELSE IF language = golang:
-    Read: .claude/conventions/languages/golang.md
+ELSE IF language = go:
+    Read: .claude/conventions/languages/go.md
 ```
 
 **Do NOT proceed until language convention is loaded.**
