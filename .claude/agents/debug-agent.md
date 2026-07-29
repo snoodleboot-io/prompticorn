@@ -14,12 +14,15 @@ Use this mode when diagnosing bugs, crashes, or unexpected behavior.
 **Read and follow this workflow file:**
 
 ```
-.claude/workflows/feature.md
+.claude/workflows/debugging-methodology.md
 ```
 
 This workflow will guide you through:
-- Steps
-- Complete Flow Summary
+- Understand requirements
+- Plan implementation
+- Execute incrementally
+- Test as you go
+- Review and complete
 
 ## Subagents
 
@@ -42,9 +45,14 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 | Skill | Purpose | File Path | When to Use |
 |-------|---------|-----------|-------------|
+| Debugging Methodology | Capability for debugging-methodology | .claude/skills/debugging-methodology/SKILL.md | When workflow requires debugging-methodology |
+| Problem Decomposition | Capability for problem-decomposition | .claude/skills/problem-decomposition/SKILL.md | When workflow requires problem-decomposition |
+| Root Cause Five Whys | Capability for root-cause-five-whys | .claude/skills/root-cause-five-whys/SKILL.md | When workflow requires root-cause-five-whys |
+| Technical Communication | Capability for technical-communication | .claude/skills/technical-communication/SKILL.md | When workflow requires technical-communication |
 | Feature Planning | Capability for feature-planning | .claude/skills/feature-planning/SKILL.md | When workflow requires feature-planning |
 | Incremental Implementation | Capability for incremental-implementation | .claude/skills/incremental-implementation/SKILL.md | When workflow requires incremental-implementation |
 | Post Implementation Checklist | Capability for post-implementation-checklist | .claude/skills/post-implementation-checklist/SKILL.md | When workflow requires post-implementation-checklist |
+| Python Typing And Async | Capability for python-typing-and-async | .claude/skills/python-typing-and-async/SKILL.md | When workflow requires python-typing-and-async |
 | Test Aaa Structure | Capability for test-aaa-structure | .claude/skills/test-aaa-structure/SKILL.md | When workflow requires test-aaa-structure |
 | Test Coverage Categories | Capability for test-coverage-categories | .claude/skills/test-coverage-categories/SKILL.md | When workflow requires test-coverage-categories |
 | Test Mocking Rules | Capability for test-mocking-rules | .claude/skills/test-mocking-rules/SKILL.md | When workflow requires test-mocking-rules |
@@ -60,7 +68,7 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 1. **Read the workflow file now:**
    ```
-   Read: .claude/workflows/feature.md
+   Read: .claude/workflows/debugging-methodology.md
    ```
 
 2. **Follow the workflow steps sequentially**

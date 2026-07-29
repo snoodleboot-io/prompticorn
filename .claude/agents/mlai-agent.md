@@ -61,12 +61,15 @@ Use this mode when designing ML pipelines, training models, selecting algorithms
 **Read and follow this workflow file:**
 
 ```
-.claude/workflows/feature.md
+.claude/workflows/experiment-tracking-setup.md
 ```
 
 This workflow will guide you through:
-- Steps
-- Complete Flow Summary
+- Overview
+- Experiment Tracking Systems
+- What to Track
+- Experiment Structure
+- Reproducibility
 
 ## Subagents
 
@@ -94,9 +97,29 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 | Skill | Purpose | File Path | When to Use |
 |-------|---------|-----------|-------------|
+| Anomaly Detection Techniques | Capability for anomaly-detection-techniques | .claude/skills/anomaly-detection-techniques/SKILL.md | When workflow requires anomaly-detection-techniques |
+| Batch Vs Realtime Scoring | Capability for batch-vs-realtime-scoring | .claude/skills/batch-vs-realtime-scoring/SKILL.md | When workflow requires batch-vs-realtime-scoring |
+| Cross Validation Strategies | Capability for cross-validation-strategies | .claude/skills/cross-validation-strategies/SKILL.md | When workflow requires cross-validation-strategies |
+| Data Validation Pipelines | Capability for data-validation-pipelines | .claude/skills/data-validation-pipelines/SKILL.md | When workflow requires data-validation-pipelines |
+| Data Versioning Reproducibility | Capability for data-versioning-reproducibility | .claude/skills/data-versioning-reproducibility/SKILL.md | When workflow requires data-versioning-reproducibility |
+| Dimensionality Reduction | Capability for dimensionality-reduction | .claude/skills/dimensionality-reduction/SKILL.md | When workflow requires dimensionality-reduction |
+| Ensemble Methods | Capability for ensemble-methods | .claude/skills/ensemble-methods/SKILL.md | When workflow requires ensemble-methods |
+| Feature Engineering | Capability for feature-engineering | .claude/skills/feature-engineering/SKILL.md | When workflow requires feature-engineering |
+| Feature Importance Analysis | Capability for feature-importance-analysis | .claude/skills/feature-importance-analysis/SKILL.md | When workflow requires feature-importance-analysis |
+| Feature Store Design | Capability for feature-store-design | .claude/skills/feature-store-design/SKILL.md | When workflow requires feature-store-design |
+| Hyperparameter Optimization | Capability for hyperparameter-optimization | .claude/skills/hyperparameter-optimization/SKILL.md | When workflow requires hyperparameter-optimization |
+| Imbalanced Classification | Capability for imbalanced-classification | .claude/skills/imbalanced-classification/SKILL.md | When workflow requires imbalanced-classification |
+| Ml Deployment | Capability for ml-deployment | .claude/skills/ml-deployment/SKILL.md | When workflow requires ml-deployment |
+| Mlops Pipeline Design | Capability for mlops-pipeline-design | .claude/skills/mlops-pipeline-design/SKILL.md | When workflow requires mlops-pipeline-design |
+| Model Evaluation | Capability for model-evaluation | .claude/skills/model-evaluation/SKILL.md | When workflow requires model-evaluation |
+| Model Interpretability | Capability for model-interpretability | .claude/skills/model-interpretability/SKILL.md | When workflow requires model-interpretability |
+| Model Monitoring | Capability for model-monitoring | .claude/skills/model-monitoring/SKILL.md | When workflow requires model-monitoring |
+| Model Performance Debugging | Capability for model-performance-debugging | .claude/skills/model-performance-debugging/SKILL.md | When workflow requires model-performance-debugging |
+| Time Series Preprocessing | Capability for time-series-preprocessing | .claude/skills/time-series-preprocessing/SKILL.md | When workflow requires time-series-preprocessing |
 | Feature Planning | Capability for feature-planning | .claude/skills/feature-planning/SKILL.md | When workflow requires feature-planning |
 | Incremental Implementation | Capability for incremental-implementation | .claude/skills/incremental-implementation/SKILL.md | When workflow requires incremental-implementation |
 | Post Implementation Checklist | Capability for post-implementation-checklist | .claude/skills/post-implementation-checklist/SKILL.md | When workflow requires post-implementation-checklist |
+| Python Typing And Async | Capability for python-typing-and-async | .claude/skills/python-typing-and-async/SKILL.md | When workflow requires python-typing-and-async |
 | Test Aaa Structure | Capability for test-aaa-structure | .claude/skills/test-aaa-structure/SKILL.md | When workflow requires test-aaa-structure |
 | Test Coverage Categories | Capability for test-coverage-categories | .claude/skills/test-coverage-categories/SKILL.md | When workflow requires test-coverage-categories |
 | Test Mocking Rules | Capability for test-mocking-rules | .claude/skills/test-mocking-rules/SKILL.md | When workflow requires test-mocking-rules |
@@ -112,7 +135,7 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 1. **Read the workflow file now:**
    ```
-   Read: .claude/workflows/feature.md
+   Read: .claude/workflows/experiment-tracking-setup.md
    ```
 
 2. **Follow the workflow steps sequentially**

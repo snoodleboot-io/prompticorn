@@ -336,6 +336,7 @@ orchestrator:
     - team-collaboration
     - technical-decision-making
   workflows:
+    - async-workflow-execution
     - meta
     - multi-agent-coordination
     - task-breakdown

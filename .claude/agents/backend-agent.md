@@ -14,12 +14,15 @@ Use this mode when designing APIs, architecting microservices, optimizing databa
 **Read and follow this workflow file:**
 
 ```
-.claude/workflows/feature.md
+.claude/workflows/api-design.md
 ```
 
 This workflow will guide you through:
-- Steps
-- Complete Flow Summary
+- Purpose
+- When to Use This Workflow
+- Workflow Steps
+- Key Concepts to Consider
+- Best Practices
 
 ## Subagents
 
@@ -43,9 +46,22 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 | Skill | Purpose | File Path | When to Use |
 |-------|---------|-----------|-------------|
-| Feature Planning | Capability for feature-planning | .claude/skills/feature-planning/SKILL.md | When workflow requires feature-planning |
+| Api Versioning Strategy | Capability for api-versioning-strategy | .claude/skills/api-versioning-strategy/SKILL.md | When workflow requires api-versioning-strategy |
+| Architecture Documentation | Capability for architecture-documentation | .claude/skills/architecture-documentation/SKILL.md | When workflow requires architecture-documentation |
+| Code Review Practices | Capability for code-review-practices | .claude/skills/code-review-practices/SKILL.md | When workflow requires code-review-practices |
+| Data Model Discovery | Capability for data-model-discovery | .claude/skills/data-model-discovery/SKILL.md | When workflow requires data-model-discovery |
+| Data Validation Pipelines | Capability for data-validation-pipelines | .claude/skills/data-validation-pipelines/SKILL.md | When workflow requires data-validation-pipelines |
+| Distributed Caching Design | Capability for distributed-caching-design | .claude/skills/distributed-caching-design/SKILL.md | When workflow requires distributed-caching-design |
+| Idempotency Patterns | Capability for idempotency-patterns | .claude/skills/idempotency-patterns/SKILL.md | When workflow requires idempotency-patterns |
 | Incremental Implementation | Capability for incremental-implementation | .claude/skills/incremental-implementation/SKILL.md | When workflow requires incremental-implementation |
+| Message Queue Selection | Capability for message-queue-selection | .claude/skills/message-queue-selection/SKILL.md | When workflow requires message-queue-selection |
+| Microservices Communication Patterns | Capability for microservices-communication-patterns | .claude/skills/microservices-communication-patterns/SKILL.md | When workflow requires microservices-communication-patterns |
+| Object Storage Patterns | Capability for object-storage-patterns | .claude/skills/object-storage-patterns/SKILL.md | When workflow requires object-storage-patterns |
+| Performance Optimization | Capability for performance-optimization | .claude/skills/performance-optimization/SKILL.md | When workflow requires performance-optimization |
+| Serverless Architecture | Capability for serverless-architecture | .claude/skills/serverless-architecture/SKILL.md | When workflow requires serverless-architecture |
+| Feature Planning | Capability for feature-planning | .claude/skills/feature-planning/SKILL.md | When workflow requires feature-planning |
 | Post Implementation Checklist | Capability for post-implementation-checklist | .claude/skills/post-implementation-checklist/SKILL.md | When workflow requires post-implementation-checklist |
+| Python Typing And Async | Capability for python-typing-and-async | .claude/skills/python-typing-and-async/SKILL.md | When workflow requires python-typing-and-async |
 | Test Aaa Structure | Capability for test-aaa-structure | .claude/skills/test-aaa-structure/SKILL.md | When workflow requires test-aaa-structure |
 | Test Coverage Categories | Capability for test-coverage-categories | .claude/skills/test-coverage-categories/SKILL.md | When workflow requires test-coverage-categories |
 | Test Mocking Rules | Capability for test-mocking-rules | .claude/skills/test-mocking-rules/SKILL.md | When workflow requires test-mocking-rules |
@@ -61,7 +77,7 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 1. **Read the workflow file now:**
    ```
-   Read: .claude/workflows/feature.md
+   Read: .claude/workflows/api-design.md
    ```
 
 2. **Follow the workflow steps sequentially**

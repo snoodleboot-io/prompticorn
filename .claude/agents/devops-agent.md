@@ -14,12 +14,15 @@ Use this mode when setting up CI/CD pipelines, designing cloud infrastructure, c
 **Read and follow this workflow file:**
 
 ```
-.claude/workflows/feature.md
+.claude/workflows/dependency-scanning.md
 ```
 
 This workflow will guide you through:
-- Steps
-- Complete Flow Summary
+- Overview
+- Prerequisites
+- Dependency Landscape
+- Detailed Implementation Steps
+- Best Practices
 
 ## Subagents
 
@@ -44,9 +47,24 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 | Skill | Purpose | File Path | When to Use |
 |-------|---------|-----------|-------------|
+| Autoscaling Strategies | Capability for autoscaling-strategies | .claude/skills/autoscaling-strategies/SKILL.md | When workflow requires autoscaling-strategies |
+| Cloud Cost Optimization | Capability for cloud-cost-optimization | .claude/skills/cloud-cost-optimization/SKILL.md | When workflow requires cloud-cost-optimization |
+| Cloud Iam Design | Capability for cloud-iam-design | .claude/skills/cloud-iam-design/SKILL.md | When workflow requires cloud-iam-design |
+| Cloud Migration Strategy | Capability for cloud-migration-strategy | .claude/skills/cloud-migration-strategy/SKILL.md | When workflow requires cloud-migration-strategy |
+| Cloud Networking Design | Capability for cloud-networking-design | .claude/skills/cloud-networking-design/SKILL.md | When workflow requires cloud-networking-design |
+| Container Security Hardening | Capability for container-security-hardening | .claude/skills/container-security-hardening/SKILL.md | When workflow requires container-security-hardening |
+| Continuous Improvement | Capability for continuous-improvement | .claude/skills/continuous-improvement/SKILL.md | When workflow requires continuous-improvement |
+| Deployment Rollback Strategies | Capability for deployment-rollback-strategies | .claude/skills/deployment-rollback-strategies/SKILL.md | When workflow requires deployment-rollback-strategies |
+| Disaster Recovery Planning | Capability for disaster-recovery-planning | .claude/skills/disaster-recovery-planning/SKILL.md | When workflow requires disaster-recovery-planning |
+| Documentation Best Practices | Capability for documentation-best-practices | .claude/skills/documentation-best-practices/SKILL.md | When workflow requires documentation-best-practices |
+| Iac Best Practices | Capability for iac-best-practices | .claude/skills/iac-best-practices/SKILL.md | When workflow requires iac-best-practices |
+| Infrastructure Drift Detection | Capability for infrastructure-drift-detection | .claude/skills/infrastructure-drift-detection/SKILL.md | When workflow requires infrastructure-drift-detection |
+| Kubernetes Resource Management | Capability for kubernetes-resource-management | .claude/skills/kubernetes-resource-management/SKILL.md | When workflow requires kubernetes-resource-management |
+| Technical Decision Making | Capability for technical-decision-making | .claude/skills/technical-decision-making/SKILL.md | When workflow requires technical-decision-making |
 | Feature Planning | Capability for feature-planning | .claude/skills/feature-planning/SKILL.md | When workflow requires feature-planning |
 | Incremental Implementation | Capability for incremental-implementation | .claude/skills/incremental-implementation/SKILL.md | When workflow requires incremental-implementation |
 | Post Implementation Checklist | Capability for post-implementation-checklist | .claude/skills/post-implementation-checklist/SKILL.md | When workflow requires post-implementation-checklist |
+| Python Typing And Async | Capability for python-typing-and-async | .claude/skills/python-typing-and-async/SKILL.md | When workflow requires python-typing-and-async |
 | Test Aaa Structure | Capability for test-aaa-structure | .claude/skills/test-aaa-structure/SKILL.md | When workflow requires test-aaa-structure |
 | Test Coverage Categories | Capability for test-coverage-categories | .claude/skills/test-coverage-categories/SKILL.md | When workflow requires test-coverage-categories |
 | Test Mocking Rules | Capability for test-mocking-rules | .claude/skills/test-mocking-rules/SKILL.md | When workflow requires test-mocking-rules |
@@ -62,7 +80,7 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 1. **Read the workflow file now:**
    ```
-   Read: .claude/workflows/feature.md
+   Read: .claude/workflows/dependency-scanning.md
    ```
 
 2. **Follow the workflow steps sequentially**

@@ -54,6 +54,8 @@ credentials/
 !.prompty/session/.gitkeep
 .promptosaurus/sessions/
 !.promptosaurus/sessions/.gitkeep
+.prompticorn/sessions/
+!.prompticorn/sessions/.gitkeep
 
 # --- Actionable Reports (active) ---
 .promptosaurus/reports/

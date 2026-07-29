@@ -1,16 +1,11 @@
-<!-- path: prompticorn/prompts/agents/core/core-conventions-python.md -->
-{%- import 'macros/naming_conventions.jinja2' as naming -%}
-{%- import 'macros/testing_sections.jinja2' as testing -%}
-{%- import 'macros/coverage_targets.jinja2' as coverage -%}
-{%- import 'macros/code_examples.jinja2' as examples -%}
 # Core Conventions Python
 
-Language:             {{ language }} e.g., Python 3.11+
-Runtime:              {{ runtime }} e.g., CPython 3.11, PyPy
-Package Manager:      {{ package_manager }} e.g., poetry, pip, uv
-Linter:               {{ linter }} e.g., Ruff, flake8
-Formatter:           {{ formatter }} e.g., Ruff, Black
-Abstract Class Style: {{ abstract_class_style }} e.g., abc, interface
+Language:             python
+Runtime:              3.14
+Package Manager:      uv
+Linter:               ['ruff', 'pyright']
+Formatter:           ['ruff']
+Abstract Class Style: interface
 
 ### Naming Conventions
 
@@ -79,14 +74,39 @@ Environment vars:    UPPER_SNAKE_CASE always
 
 ### Testing
 
-[Dynamic content - see template]
+#### Test Types
 
-TODO
+##### Unit Tests
+- One function or method in isolation
+- Mock all external dependencies (database, API calls, filesystem)
+- Use `pytest` fixtures for setup/teardown
+- Use `pytest.mark.parametrize` for table-driven tests
+- Use `pytest.raises` for exception testing
 
-[Dynamic content - see template]
+##### Integration Tests
+- Test at service or module boundary
+- Use real database (testcontainers) or in-memory alternatives
+- Test API endpoints, database queries, file operations
+- Clean up test data after each test
 
-[Dynamic content - see template]
+##### Mutation Tests
+- Use `mutmut` or `pytest-mutmut` to verify test quality
+- Run after unit tests pass
+- Aim to kill mutations in core business logic
 
+##### Property-Based Tests
+- Use `hypothesis` for generative testing
+- Test edge cases automatically generated
+
+#### Framework & Tools
+Framework:         hybrid
+
+#### Testing Tools
+- Test runner: pytest
+- Mocking library: unittest.mock
+- Coverage tool: pytest-cov
+- Mutation tool: mutmut
+- Additional linters: ruff
 ### Code Style
 - Follow PEP 8 (enforced by Ruff)
 - Use f-strings for string formatting
@@ -101,8 +121,6 @@ TODO
 - Use `@property` decorator with getters/setters instead of `get_x()` / `set_x()` methods
 - Use `@property.deleter` when cleanup logic is needed on attribute deletion
 - Prevent setting when inappropriate by raising `AttributeError` or `TypeError` in setters
-
-[Dynamic content - see template]
 
 #### Public/Protected/Private Scoping
 - Use single underscore `_` prefix for protected/internal attributes and methods
@@ -173,8 +191,6 @@ def my_decorator(func):
 - Use `async for` for async iterators
 - Never use `time.sleep()` in async code - use `await asyncio.sleep()`
 
-[Dynamic content - see template]
-
 #### Context Managers (sync and async)
 - **ALWAYS use context managers** for resource management (files, connections, locks)
 - Use `contextlib.contextmanager` for simple sync context managers
@@ -239,32 +255,9 @@ def create_handler(config: dict):
 
 ### Abstract Classes and Interfaces
 
-Selected Style: **{{ abstract_class_style }}**
+Selected Style: **interface**
 
-{% if config.abstract_class_style == "abc" %}
-#### Using Abstract Base Classes (abc module)
-- Inherit from `abc.ABC` for abstract base classes
-- Use `@abstractmethod` decorator for methods that must be implemented
-- Use `@abstractclassmethod` and `@abstractstaticmethod` where appropriate
-- Type checkers will catch incomplete implementations at static analysis time
 
-```python
-from abc import ABC, abstractmethod
-
-class Repository(ABC):
-    @abstractmethod
-    def get(self, id: str) -> Entity | None:
-        """Retrieve entity by ID. Must be implemented by subclasses."""
-        ...
-
-class SqlRepository(Repository):
-    def get(self, id: str) -> Entity | None:
-        # Concrete implementation
-        return self.session.query(Entity).get(id)
-```
-{% endif %}
-
-{% if config.abstract_class_style == "interface" %}
 #### Using Interface Pattern (Traditional OOP Interfaces)
 - Interfaces are base classes with standard `__init__` containing base details repeated across classes
 - Interface methods raise `NotImplementedError` for methods that must be implemented by subclasses
@@ -338,4 +331,3 @@ def process_data(repo: Repository) -> None:
 - For classes that will be instantiated and need base behavior
 - When runtime type checking with inheritance is important
 
-{% endif %}

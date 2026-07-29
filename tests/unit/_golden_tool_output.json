@@ -54,7 +54,7 @@
     ],
     [
       ".amazonq/cli-agents/orchestrator.json",
-      "ed62c61052fe90a0b529da2478f2dbda1418a1f14a6d7b8bda03ed1bbb30c38e"
+      "1caa3ca4c55756a0cb71d8abee096a24a80dbe8540a47a632ff07c18fa1d7476"
     ],
     [
       ".amazonq/cli-agents/performance.json",
@@ -172,7 +172,7 @@
     ],
     [
       ".amazonq/cli-agents/orchestrator.json",
-      "ed62c61052fe90a0b529da2478f2dbda1418a1f14a6d7b8bda03ed1bbb30c38e"
+      "1caa3ca4c55756a0cb71d8abee096a24a80dbe8540a47a632ff07c18fa1d7476"
     ],
     [
       ".amazonq/cli-agents/performance.json",
@@ -266,7 +266,7 @@
     ],
     [
       "bedrock/cloudformation/agents.yaml",
-      "0f0fafc50f0be73d51fa054a359a4f4518d4330f1c8e7aea45fd5859ed7e25a5"
+      "75dee3ca081078236856109b81b1c1645f841231b5da10ad070691b4ddd87189"
     ],
     [
       "bedrock/conventions.md",
@@ -310,7 +310,7 @@
     ],
     [
       "bedrock/prompts/orchestrator.system.md",
-      "ba3f86e428efa45e384982a8b1dcf6d0ac3c30bb8536c4bece16c2955239b0f9"
+      "465d04bd45d851094fdb34267108fdb6139f87aeb355320b4f9477eba4e30fb5"
     ],
     [
       "bedrock/prompts/performance.system.md",
@@ -344,7 +344,7 @@
     ],
     [
       "bedrock/cloudformation/agents.yaml",
-      "0f0fafc50f0be73d51fa054a359a4f4518d4330f1c8e7aea45fd5859ed7e25a5"
+      "75dee3ca081078236856109b81b1c1645f841231b5da10ad070691b4ddd87189"
     ],
     [
       "bedrock/conventions.md",
@@ -388,7 +388,7 @@
     ],
     [
       "bedrock/prompts/orchestrator.system.md",
-      "ba3f86e428efa45e384982a8b1dcf6d0ac3c30bb8536c4bece16c2955239b0f9"
+      "465d04bd45d851094fdb34267108fdb6139f87aeb355320b4f9477eba4e30fb5"
     ],
     [
       "bedrock/prompts/performance.system.md",
@@ -446,7 +446,7 @@
     ],
     [
       ".claude/agents/orchestrator-agent.md",
-      "33bfac156bd86ce27279bbc2f5505ec6e4b9f64a51ead516fd1d379e0e83feb0"
+      "18890874f5f98b3214510e1bdb9e9ed5b656b009edd8576c15ae70abd43e31d4"
     ],
     [
       ".claude/agents/performance-agent.md",
@@ -813,6 +813,10 @@
       "e4ac30c934ebed0723b8d548742e4a38b21f09810ef9dd2100c9a724a79673bf"
     ],
     [
+      ".claude/workflows/async-workflow-execution.md",
+      "14fa8e64f9b4f5ad027a94e78439ac0d04836e9fcd436b715d13846e1f8ff021"
+    ],
+    [
       ".claude/workflows/boilerplate.md",
       "70aa4508b39d2036db31e43dc09f655dab446a58587fe2cb69ef9e58f33c5bff"
     ],
@@ -960,7 +964,7 @@
     ],
     [
       ".claude/agents/orchestrator-agent.md",
-      "93425209b651cd6560d120096084ea7ffb44d62ef0461a621cdc118675962aca"
+      "85e475240f38acf44c124c838dbf3c0bfe0535b54d53d8727f26290252fedb2c"
     ],
     [
       ".claude/agents/performance-agent.md",
@@ -1327,6 +1331,10 @@
       "845f020a20a5e48d19c4a7d6ef03d0e568c8da9128c7396968d07985e176cb69"
     ],
     [
+      ".claude/workflows/async-workflow-execution.md",
+      "f3ab29cf480c958431726329e6bc8eb438f151fb9044814847d25f1658794bf7"
+    ],
+    [
       ".claude/workflows/boilerplate.md",
       "a71635fd43997ee7e47b12437a8a75256a0f19310dcfb7e48de657602e60da4e"
     ],
@@ -1646,7 +1654,7 @@
     ],
     [
       ".clinerules",
-      "6cbab98e27030f154ffb538269fb7a93327a9da3bdbc21337548ed5761620319"
+      "14669f690bc0e2df938ae365cc52775d9b003509348f614089554e7c78191215"
     ],
     [
       "AGENTS.md",
@@ -1860,7 +1868,7 @@
     ],
     [
       ".clinerules",
-      "15c3454be9e983750bc9c4d22a788039ed98da7e186ba4e3fe6a9127f6f870c6"
+      "b429e0979ded85af8cc11437c73cee339b7b7d5d538dad0273be050fe6887909"
     ],
     [
       "AGENTS.md",
@@ -2030,7 +2038,7 @@
     ],
     [
       ".agents/skills/orchestrator/SKILL.md",
-      "e17faea9fc151089cabff9af202da8f1e084c46bda1845d6fe45673b3f4b14db"
+      "d94e6c99069425e35c7b6c4daaa62101d606d1d9901a652c048321ffcecc28c1"
     ],
     [
       ".agents/skills/performance/SKILL.md",
@@ -2300,7 +2308,7 @@
     ],
     [
       ".agents/skills/orchestrator/SKILL.md",
-      "e17faea9fc151089cabff9af202da8f1e084c46bda1845d6fe45673b3f4b14db"
+      "d94e6c99069425e35c7b6c4daaa62101d606d1d9901a652c048321ffcecc28c1"
     ],
     [
       ".agents/skills/performance/SKILL.md",
@@ -2502,7 +2510,7 @@
     ],
     [
       ".continue/rules/orchestrator.md",
-      "ba0b25747d1628dec1e90f0cae887c42f42a883f0591d6db081a49784638d6db"
+      "6ffaea531d491b1b4260f3ee349f7b9027d23824753c17246873335ac2392c32"
     ],
     [
       ".continue/rules/performance.md",
@@ -2620,7 +2628,7 @@
     ],
     [
       ".continue/rules/orchestrator.md",
-      "ba0b25747d1628dec1e90f0cae887c42f42a883f0591d6db081a49784638d6db"
+      "6ffaea531d491b1b4260f3ee349f7b9027d23824753c17246873335ac2392c32"
     ],
     [
       ".continue/rules/performance.md",
@@ -2678,7 +2686,7 @@
     ],
     [
       ".github/agents/orchestrator.agent.md",
-      "e17faea9fc151089cabff9af202da8f1e084c46bda1845d6fe45673b3f4b14db"
+      "d94e6c99069425e35c7b6c4daaa62101d606d1d9901a652c048321ffcecc28c1"
     ],
     [
       ".github/agents/performance.agent.md",
@@ -2796,7 +2804,7 @@
     ],
     [
       ".github/agents/orchestrator.agent.md",
-      "e17faea9fc151089cabff9af202da8f1e084c46bda1845d6fe45673b3f4b14db"
+      "d94e6c99069425e35c7b6c4daaa62101d606d1d9901a652c048321ffcecc28c1"
     ],
     [
       ".github/agents/performance.agent.md",
@@ -2882,7 +2890,7 @@
   "copilot::minimal": [
     [
       ".github/copilot-instructions.md",
-      "d246ee5b3ddbef957ceeea36da39df82cb404f0a81a6998fb0d6692b598fa7e8"
+      "9ae1d112083d0c8295e6a702d194f15e9fd4fc1d66e4c4cbef3ce14a2264f632"
     ],
     [
       ".github/skills/api-versioning-strategy/SKILL.md",
@@ -3096,7 +3104,7 @@
   "copilot::verbose": [
     [
       ".github/copilot-instructions.md",
-      "0bf0bd67d4d8355561ed13854b977c492ab54d4aa4aec50a9e67ba0265c70344"
+      "c9e467c1cec24436bda3a44863dda471c28870d378d99c263a0d588ecf6cb15d"
     ],
     [
       ".github/skills/api-versioning-strategy/SKILL.md",
@@ -3514,7 +3522,7 @@
     ],
     [
       ".cursorrules",
-      "f2686fb725a3bbf80267332e16675c423283feb204dc48f559c8f966b16d0cfe"
+      "24db557b50a85b1fa28898de9e5bd77a88b8c424349bc1520191857e363329f4"
     ],
     [
       "AGENTS.md",
@@ -3728,7 +3736,7 @@
     ],
     [
       ".cursorrules",
-      "a82b500efa42c05c9b08ab0993824426451e724f778e4e2bb8f1fa360020b531"
+      "ea5a85bbcbd4ddbc4c509a4afaded604bc833453073c8190fa2fde9a4c55c9fb"
     ],
     [
       "AGENTS.md",
@@ -3770,7 +3778,7 @@
     ],
     [
       ".gemini/agents/orchestrator.md",
-      "e17faea9fc151089cabff9af202da8f1e084c46bda1845d6fe45673b3f4b14db"
+      "d94e6c99069425e35c7b6c4daaa62101d606d1d9901a652c048321ffcecc28c1"
     ],
     [
       ".gemini/agents/performance.md",
@@ -4092,7 +4100,7 @@
     ],
     [
       ".gemini/agents/orchestrator.md",
-      "e17faea9fc151089cabff9af202da8f1e084c46bda1845d6fe45673b3f4b14db"
+      "d94e6c99069425e35c7b6c4daaa62101d606d1d9901a652c048321ffcecc28c1"
     ],
     [
       ".gemini/agents/performance.md",
@@ -4414,7 +4422,7 @@
     ],
     [
       ".junie/agents/orchestrator.md",
-      "c513663926f0ea9601a4ce9e36af42e3945b7a7d9326eb37ef75458221f1e067"
+      "0dc5cbdad379de30fdaf7a95fb2a16a7e92bcc7705d34d17c6ef8f4e33131c30"
     ],
     [
       ".junie/agents/performance.md",
@@ -4732,7 +4740,7 @@
     ],
     [
       ".junie/agents/orchestrator.md",
-      "c513663926f0ea9601a4ce9e36af42e3945b7a7d9326eb37ef75458221f1e067"
+      "0dc5cbdad379de30fdaf7a95fb2a16a7e92bcc7705d34d17c6ef8f4e33131c30"
     ],
     [
       ".junie/agents/performance.md",
@@ -5050,7 +5058,7 @@
     ],
     [
       ".opencode/agents/orchestrator.md",
-      "2c979ec18323ec70a3fd2fb27f112197c78ea5b7ed1d9d2deee9deb66a6d6b80"
+      "4e3ee368e3b389a0c89caeab1056f32d7ab8ce02764a1b1141dc4cdd7de86e1e"
     ],
     [
       ".opencode/agents/performance.md",
@@ -5112,7 +5120,7 @@
     ],
     [
       ".opencode/agents/orchestrator.md",
-      "2c979ec18323ec70a3fd2fb27f112197c78ea5b7ed1d9d2deee9deb66a6d6b80"
+      "4e3ee368e3b389a0c89caeab1056f32d7ab8ce02764a1b1141dc4cdd7de86e1e"
     ],
     [
       ".opencode/agents/performance.md",
@@ -5278,7 +5286,7 @@
     ],
     [
       ".kilo/agents/orchestrator.md",
-      "186b5d6919b229365efbcd258169080ad94350a58476c7999109dab09cccaaf6"
+      "bc01c0085a2d3382b6ba9dfed1f03763219930cf5596649ab08a47bf652f269d"
     ],
     [
       ".kilo/agents/performance/benchmarking.md",
@@ -5760,7 +5768,7 @@
     ],
     [
       ".kilo/agents/orchestrator.md",
-      "186b5d6919b229365efbcd258169080ad94350a58476c7999109dab09cccaaf6"
+      "bc01c0085a2d3382b6ba9dfed1f03763219930cf5596649ab08a47bf652f269d"
     ],
     [
       ".kilo/agents/performance/benchmarking.md",
@@ -6190,7 +6198,7 @@
     ],
     [
       ".roo/rules-orchestrator/01-instructions.md",
-      "218e3a8f7deb94463f81cfa202be59eb7e244fd0685752b5842dc0a0e77e5ac5"
+      "5dc1ef14504f3d58e07b860bc9e09aacb940e55830b51350769689294d777c4c"
     ],
     [
       ".roo/rules-performance/01-instructions.md",
@@ -6512,7 +6520,7 @@
     ],
     [
       ".roo/rules-orchestrator/01-instructions.md",
-      "218e3a8f7deb94463f81cfa202be59eb7e244fd0685752b5842dc0a0e77e5ac5"
+      "5dc1ef14504f3d58e07b860bc9e09aacb940e55830b51350769689294d777c4c"
     ],
     [
       ".roo/rules-performance/01-instructions.md",
@@ -6918,7 +6926,7 @@
     ],
     [
       ".windsurf/skills/orchestrator/SKILL.md",
-      "e17faea9fc151089cabff9af202da8f1e084c46bda1845d6fe45673b3f4b14db"
+      "d94e6c99069425e35c7b6c4daaa62101d606d1d9901a652c048321ffcecc28c1"
     ],
     [
       ".windsurf/skills/performance/SKILL.md",
@@ -7240,7 +7248,7 @@
     ],
     [
       ".windsurf/skills/orchestrator/SKILL.md",
-      "e17faea9fc151089cabff9af202da8f1e084c46bda1845d6fe45673b3f4b14db"
+      "d94e6c99069425e35c7b6c4daaa62101d606d1d9901a652c048321ffcecc28c1"
     ],
     [
       ".windsurf/skills/performance/SKILL.md",
@@ -7554,7 +7562,7 @@
     ],
     [
       ".agents/skills/orchestrator/SKILL.md",
-      "e17faea9fc151089cabff9af202da8f1e084c46bda1845d6fe45673b3f4b14db"
+      "d94e6c99069425e35c7b6c4daaa62101d606d1d9901a652c048321ffcecc28c1"
     ],
     [
       ".agents/skills/performance/SKILL.md",
@@ -7820,7 +7828,7 @@
     ],
     [
       ".agents/skills/orchestrator/SKILL.md",
-      "e17faea9fc151089cabff9af202da8f1e084c46bda1845d6fe45673b3f4b14db"
+      "d94e6c99069425e35c7b6c4daaa62101d606d1d9901a652c048321ffcecc28c1"
     ],
     [
       ".agents/skills/performance/SKILL.md",

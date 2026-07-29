@@ -14,12 +14,15 @@ Use this mode when profiling applications, identifying performance bottlenecks, 
 **Read and follow this workflow file:**
 
 ```
-.claude/workflows/feature.md
+.claude/workflows/performance.md
 ```
 
 This workflow will guide you through:
+- Purpose
+- When to Use This Workflow
+- Prerequisites
 - Steps
-- Complete Flow Summary
+- GET /api/users
 
 ## Subagents
 
@@ -43,9 +46,16 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 | Skill | Purpose | File Path | When to Use |
 |-------|---------|-----------|-------------|
+| Continuous Improvement | Capability for continuous-improvement | .claude/skills/continuous-improvement/SKILL.md | When workflow requires continuous-improvement |
+| Debugging Methodology | Capability for debugging-methodology | .claude/skills/debugging-methodology/SKILL.md | When workflow requires debugging-methodology |
+| Load Testing | Capability for load-testing | .claude/skills/load-testing/SKILL.md | When workflow requires load-testing |
+| Performance Optimization | Capability for performance-optimization | .claude/skills/performance-optimization/SKILL.md | When workflow requires performance-optimization |
+| Problem Decomposition | Capability for problem-decomposition | .claude/skills/problem-decomposition/SKILL.md | When workflow requires problem-decomposition |
+| Sql Optimization | Capability for sql-optimization | .claude/skills/sql-optimization/SKILL.md | When workflow requires sql-optimization |
 | Feature Planning | Capability for feature-planning | .claude/skills/feature-planning/SKILL.md | When workflow requires feature-planning |
 | Incremental Implementation | Capability for incremental-implementation | .claude/skills/incremental-implementation/SKILL.md | When workflow requires incremental-implementation |
 | Post Implementation Checklist | Capability for post-implementation-checklist | .claude/skills/post-implementation-checklist/SKILL.md | When workflow requires post-implementation-checklist |
+| Python Typing And Async | Capability for python-typing-and-async | .claude/skills/python-typing-and-async/SKILL.md | When workflow requires python-typing-and-async |
 | Test Aaa Structure | Capability for test-aaa-structure | .claude/skills/test-aaa-structure/SKILL.md | When workflow requires test-aaa-structure |
 | Test Coverage Categories | Capability for test-coverage-categories | .claude/skills/test-coverage-categories/SKILL.md | When workflow requires test-coverage-categories |
 | Test Mocking Rules | Capability for test-mocking-rules | .claude/skills/test-mocking-rules/SKILL.md | When workflow requires test-mocking-rules |
@@ -61,7 +71,7 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 1. **Read the workflow file now:**
    ```
-   Read: .claude/workflows/feature.md
+   Read: .claude/workflows/performance.md
    ```
 
 2. **Follow the workflow steps sequentially**

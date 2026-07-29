@@ -14,12 +14,13 @@ Use this mode when designing data systems, optimizing queries, creating data pip
 **Read and follow this workflow file:**
 
 ```
-.claude/workflows/feature.md
+.claude/workflows/data-model.md
 ```
 
 This workflow will guide you through:
 - Steps
-- Complete Flow Summary
+- Common Mistakes
+- Examples
 
 ## Subagents
 
@@ -44,9 +45,22 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 | Skill | Purpose | File Path | When to Use |
 |-------|---------|-----------|-------------|
+| Architecture Documentation | Capability for architecture-documentation | .claude/skills/architecture-documentation/SKILL.md | When workflow requires architecture-documentation |
+| Data Model Discovery | Capability for data-model-discovery | .claude/skills/data-model-discovery/SKILL.md | When workflow requires data-model-discovery |
+| Data Partitioning | Capability for data-partitioning | .claude/skills/data-partitioning/SKILL.md | When workflow requires data-partitioning |
+| Data Validation Pipelines | Capability for data-validation-pipelines | .claude/skills/data-validation-pipelines/SKILL.md | When workflow requires data-validation-pipelines |
+| Data Versioning Reproducibility | Capability for data-versioning-reproducibility | .claude/skills/data-versioning-reproducibility/SKILL.md | When workflow requires data-versioning-reproducibility |
+| Dimensional Modeling | Capability for dimensional-modeling | .claude/skills/dimensional-modeling/SKILL.md | When workflow requires dimensional-modeling |
+| Feature Store Design | Capability for feature-store-design | .claude/skills/feature-store-design/SKILL.md | When workflow requires feature-store-design |
+| Managed Database Selection | Capability for managed-database-selection | .claude/skills/managed-database-selection/SKILL.md | When workflow requires managed-database-selection |
+| Nosql Database Selection | Capability for nosql-database-selection | .claude/skills/nosql-database-selection/SKILL.md | When workflow requires nosql-database-selection |
+| Object Storage Patterns | Capability for object-storage-patterns | .claude/skills/object-storage-patterns/SKILL.md | When workflow requires object-storage-patterns |
+| Slowly Changing Dimensions | Capability for slowly-changing-dimensions | .claude/skills/slowly-changing-dimensions/SKILL.md | When workflow requires slowly-changing-dimensions |
+| Sql Optimization | Capability for sql-optimization | .claude/skills/sql-optimization/SKILL.md | When workflow requires sql-optimization |
 | Feature Planning | Capability for feature-planning | .claude/skills/feature-planning/SKILL.md | When workflow requires feature-planning |
 | Incremental Implementation | Capability for incremental-implementation | .claude/skills/incremental-implementation/SKILL.md | When workflow requires incremental-implementation |
 | Post Implementation Checklist | Capability for post-implementation-checklist | .claude/skills/post-implementation-checklist/SKILL.md | When workflow requires post-implementation-checklist |
+| Python Typing And Async | Capability for python-typing-and-async | .claude/skills/python-typing-and-async/SKILL.md | When workflow requires python-typing-and-async |
 | Test Aaa Structure | Capability for test-aaa-structure | .claude/skills/test-aaa-structure/SKILL.md | When workflow requires test-aaa-structure |
 | Test Coverage Categories | Capability for test-coverage-categories | .claude/skills/test-coverage-categories/SKILL.md | When workflow requires test-coverage-categories |
 | Test Mocking Rules | Capability for test-mocking-rules | .claude/skills/test-mocking-rules/SKILL.md | When workflow requires test-mocking-rules |
@@ -62,7 +76,7 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 1. **Read the workflow file now:**
    ```
-   Read: .claude/workflows/feature.md
+   Read: .claude/workflows/data-model.md
    ```
 
 2. **Follow the workflow steps sequentially**

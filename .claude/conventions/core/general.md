@@ -1,6 +1,5 @@
 # System Instructions
 
-<!-- path: prompticorn/prompts/agents/core/core-system.md -->
 # Core System
 Always-on base behaviors for all modes and tools.
 EDIT THIS FILE to change global assistant behavior.
@@ -233,6 +232,31 @@ When a task can be broken down into smaller, specialized components:
 - Coordinate between agents using orchestrator mode for complex workflows
 - Ensure proper session management when switching between agents
 
+### Subagent Progress Heartbeats
+
+Any delegated subagent whose work you cannot directly observe — background,
+long-running, or running in an isolated checkout (e.g. a separate worktree) — MUST
+be instructed, in its brief, to emit periodic progress so a human can tell "still
+working" from "stalled." Apply this whenever the delegation runs detached from the
+main conversation; skip it for quick inline calls whose result returns immediately.
+
+Rules (state these tool-agnostically in the subagent's brief):
+- **One file per agent** under the session directory: `.prompticorn/sessions/<agent-label>.md`
+  (e.g. `.prompticorn/sessions/phase2-f24.md`). Several agents sharing one file
+  clobber each other's lines — never share a heartbeat file.
+- **Resolve the directory in the MAIN repository**, not in the subagent's isolated
+  copy. If the subagent works in a separate worktree, its local `.prompticorn/` is
+  gitignored and never surfaces in the checkout the human is watching — point it at
+  the main repo's session directory instead.
+- **Cadence:** append one timestamped line after each completed unit of work
+  (story/task), not on a wall-clock timer. Format:
+  `- <UTC time> <Feature>-S<k> done: <one-line summary>`.
+- **Non-blocking:** the heartbeat is for visibility only; it never replaces the
+  subagent's final report or its actual deliverable.
+- **Orchestrator rollup:** when coordinating multiple subagents, additionally
+  maintain a progress table (e.g. `session_<date>_<phase>_progress.md`) and update
+  it at each launch / gate / PR / merge checkpoint.
+
 ### Questions
 
 - Ask one focused question at a time — never a list of blockers
@@ -257,28 +281,24 @@ When a task can be broken down into smaller, specialized components:
 - Never hardcode secrets, URLs, or environment-specific values
 - Flag anything hacky or temporary with a comment
 
-
 ---
 
 # General Conventions
 
-<!-- path: prompticorn/prompts/agents/core/core-conventions.md -->
-{%- import 'macros/naming_conventions.jinja2' as naming -%}
-{%- import 'macros/checklist.jinja2' as checklist -%}
 # Core Conventions
 
 Project coding standards - base conventions for all projects. 
 
-For language-specific rules, see: core-conventions-ts.md, core-conventions-py.md, etc.
+For language-specific rules, see the per-language files under `.claude/conventions/languages/` (e.g. `python.md`, `typescript.md`).
 
 All mode-specific rules inherit from this file.
 
 ## Repository Structure
 
-Repository type: TODO
+Repository type: single-language
 
 ### If single-language:
-Include: core-conventions-[LANG].md where [LANG] matches your primary language
+Include `.claude/conventions/languages/<language>.md` for your primary language.
 
 ### If multi-language-monorepo:
 Define each language area:
@@ -294,8 +314,16 @@ File extension determines which rules apply:
 
 ## File & Folder Structure
 
-src/
-└── TODO
+<your_package>/          # importable package at repo root (flat layout, default)
+├── __init__.py
+├── domain/              # entities, value objects, domain logic
+├── services/            # application / business logic
+├── adapters/            # external IO (db, http, filesystem)
+└── settings.py          # pydantic-settings configuration
+tests/
+├── unit/
+└── integration/
+pyproject.toml
 
 Rule: One export per file unless it is a barrel (index.ts).
 Rule: Co-locate tests with source (auth.ts → auth.test.ts).
@@ -347,7 +375,7 @@ All OOP components must follow SOLID principles:
 
 ## Error Handling
 
-Pattern: TODO
+Pattern: _(not specified)_
 
 - Never swallow errors silently
 - Always include context: Error("failed to fetch user: " + userId)
@@ -371,20 +399,20 @@ Testing conventions are language-specific. See your language's conventions file 
 
 ## Database
 
-Database:            TODO           e.g., PostgreSQL, DynamoDB
-ORM/Query:           TODO                e.g., Prisma, SQLAlchemy, GORM
+Database:            _(not specified)_           e.g., PostgreSQL, DynamoDB
+Data access:         _(not specified)_                e.g., Prisma, SQLAlchemy, GORM, raw SQL
 
 ## Git & PR Conventions
 
 Branch naming:       feat|fix|chore|docs / ticket-id - short-description
 MANDATORY WITHOUT EXCEPTION: Ticket IDs MUST be real and obtained from user-provided files, actual project tickets, or the feature request. 
 DO NOT hallucinate, invent, or use fake ticket IDs like "PROJ-123" or "#456" unless they are explicitly provided in the user's request or associated project documentation.
-Commit style:        TODO  e.g., Conventional Commits, free-form
-PR size:             TODO lines changed (soft limit)
+Commit style:        _(not specified)_  e.g., Conventional Commits, free-form
+PR size:             _(not specified)_ lines changed (soft limit)
 
 ## Deployment
 
-Target:              TODO  e.g., AWS Lambda, Vercel, GKE
+Target:              _(not specified)_  e.g., AWS Lambda, Vercel, GKE
 
 ---
 
@@ -417,12 +445,10 @@ All modes must follow the session management protocol defined in `core-session.m
 Session files provide continuity across mode switches and persist workflow state.
 See `Core Session` for complete protocol and file format specifications.
 
-
 ---
 
 # Session Management
 
-<!-- path: prompticorn/prompts/agents/core/core-session.md -->
 # Core Session
 
 ## 🔴 CRITICAL: Session Management is MANDATORY
@@ -468,6 +494,13 @@ Session files provide persistent context across mode switches, enabling continui
 - **Naming:** `session_{YYYYMMDD}_{random}.md` (e.g., `session_20260302_a7x9k2.md`)
 - **Format:** Markdown with YAML frontmatter
 - **Git:** Session files are gitignored and NOT committed
+- **Subagent heartbeat files:** one per delegated background/isolated subagent,
+  named for the agent (e.g. `phase2-f24.md`), living in this same directory. See
+  "Subagent Progress Heartbeats" in the core system conventions for the cadence
+  and line format. Resolve this directory in the MAIN repo (a subagent's isolated
+  worktree copy is gitignored and never surfaces in the human's checkout).
+- **Orchestrator progress rollup:** `session_{YYYYMMDD}_{phase}_progress.md` — a
+  table the orchestrator updates at each launch / gate / PR / merge checkpoint.
 
 ## Session File Format
 

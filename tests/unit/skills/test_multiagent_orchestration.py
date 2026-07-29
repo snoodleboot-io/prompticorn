@@ -54,7 +54,9 @@ class TestMultiagentOrchestrationSkill:
 
     def test_wired_to_orchestrator(self, project_root):
         mapping = yaml.safe_load(
-            (project_root / "prompticorn" / "configurations" / "agent_skill_mapping.yaml").read_text()
+            (
+                project_root / "prompticorn" / "configurations" / "agent_skill_mapping.yaml"
+            ).read_text()
         )
         assert _SKILL in mapping["orchestrator"]["skills"]
 
@@ -77,7 +79,9 @@ class TestMultiagentOrchestrationSkill:
         with TemporaryDirectory() as tmp:
             root = Path(tmp)
             try:
-                written = PromptBuilder(tool)._write_skill_files(root, "orchestrator", agent, "minimal")
+                written = PromptBuilder(tool)._write_skill_files(
+                    root, "orchestrator", agent, "minimal"
+                )
             except BuilderException as exc:  # pragma: no cover - defensive
                 pytest.fail(f"{tool} failed to emit the skill: {exc}")
             assert expected in written
@@ -102,6 +106,36 @@ class TestMultiagentOrchestrationSkill:
             # language override that does not list it.
             assert (root / ".claude" / "skills" / _SKILL / "SKILL.md").exists()
 
+    def test_orchestrator_prompt_can_invoke_the_skill(self, project_root):
+        """PRO-91: the mapping alone only *lists* the skill in a table. The
+        orchestrator's own prompt must tell it to reach for the procedure,
+        otherwise its flow stays sequential and the skill is never invoked."""
+        prompt = (
+            project_root / "prompticorn" / "agents" / "orchestrator" / "prompt.md"
+        ).read_text()
+        assert _SKILL in prompt
+        body = prompt.lower()
+        # It must convey the trigger (parallelism) and that the gates are hard.
+        assert "parallel" in body
+        assert "gate" in body
+
+    def test_orchestrator_build_output_references_the_skill(self):
+        """The skill reaches the orchestrator's generated markdown, not just the
+        source prompt."""
+        with TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            get_prompt_builder("claude").build(
+                root,
+                {
+                    "spec": {"language": "python"},
+                    "active_personas": ["software_engineer"],
+                    "variant": "minimal",
+                },
+                dry_run=False,
+            )
+            orchestrator = (root / ".claude" / "agents" / "orchestrator-agent.md").read_text()
+            assert f".claude/skills/{_SKILL}/SKILL.md" in orchestrator
+
     def test_no_dangling_skill_references_in_single_language_build(self):
         """Every skill a built agent's markdown references must have its SKILL.md
         emitted on disk (no broken links)."""
@@ -118,9 +152,7 @@ class TestMultiagentOrchestrationSkill:
             )
             referenced = set()
             for md in (root / ".claude" / "agents").glob("*.md"):
-                referenced.update(
-                    re.findall(r"\.claude/skills/([\w-]+)/SKILL\.md", md.read_text())
-                )
+                referenced.update(re.findall(r"\.claude/skills/([\w-]+)/SKILL\.md", md.read_text()))
             missing = sorted(
                 name
                 for name in referenced
