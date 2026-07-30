@@ -30,3 +30,34 @@ unexpected pass, which fails the suite and signals the marker's removal.
 Reusable seam: `select_from_answers({question_text: option})` builds a UI
 selector that drives the flow from an explicit answer map without touching the
 interactive Click command.
+
+### Golden output corpus (`tests/golden/manifest.json`)
+
+The pre-refactor baseline for the content-resolution seam. Snapshots every
+builder's generated file tree across **tool × variant × repository-type ×
+language** — 136 cells — as `{relative_path: sha256}`, with ISO dates normalized
+so the corpus is stable across day boundaries and filesystem ordering.
+
+Hashes rather than file bodies: the matrix is ~10,700 files, which is not
+something to commit. A mismatch therefore reports *which* paths were added,
+removed, or changed — not line-level content. Regenerate and inspect the working
+tree for that.
+
+Split across two jobs so a common-path regression fails fast:
+
+| | Scope | Runtime |
+|---|---|---|
+| `unit/test_tool_output_golden.py` | `python-single` only, 34 cells | ~35s |
+| `slow/test_golden_corpus_matrix.py` | the full 136-cell matrix | ~2m40s |
+
+Both read the same corpus. The matrix definition lives in `tests/golden_corpus.py`.
+
+**Regenerating** — only when output changes intentionally:
+
+```bash
+uv run python -m tests.golden_corpus
+git diff -- tests/golden/manifest.json
+```
+
+Never regenerate to make a failing refactor pass. Read the reported diff first
+and confirm every changed path is one you meant to change.
