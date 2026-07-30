@@ -8,9 +8,15 @@ from enum import Enum
 class UnitKind(Enum):
     """A category of addressable content, and the shape its ID must take.
 
-    Arity is part of the grammar rather than a downstream check: ``agent/foo``
-    without a variant addresses nothing, so it is rejected at parse time instead
-    of failing later with a confusing miss.
+    These address **authored source** — a file in the bundled tree — not rendered
+    output. That is why an agent takes no variant (it is authored as one
+    ``prompt.md``) while a skill does (it is authored per variant). Rendered
+    artifacts, which do vary by variant for every kind, get their own identity in
+    the artifact-model work.
+
+    Arity is part of the grammar rather than a downstream check: an ID whose
+    shape disagrees with the content addresses nothing, so it is rejected at
+    parse time instead of failing later as a confusing miss.
     """
 
     AGENT = "agent"
@@ -18,7 +24,6 @@ class UnitKind(Enum):
     SKILL = "skill"
     WORKFLOW = "workflow"
     CONVENTION = "convention"
-    PERSONA = "persona"
     CONFIGURATION = "configuration"
 
     @property
@@ -47,13 +52,17 @@ class UnitKind(Enum):
         return _TEMPLATES[self]
 
 
+# Arities follow the bundled tree, verified against it rather than assumed.
+# An agent is authored as a single `prompt.md` with no variant; skills and
+# workflows are authored per variant. Addressing that disagrees with the content
+# produces IDs that resolve to nothing, which is the failure the arity rule
+# exists to prevent. (Corrected in PRO-104.)
 _ARITIES: dict[UnitKind, tuple[int, ...]] = {
-    UnitKind.AGENT: (2,),
+    UnitKind.AGENT: (1,),
     UnitKind.SUBAGENT: (3,),
-    UnitKind.SKILL: (1,),
-    UnitKind.WORKFLOW: (1, 2),
+    UnitKind.SKILL: (2,),
+    UnitKind.WORKFLOW: (2,),
     UnitKind.CONVENTION: (2,),
-    UnitKind.PERSONA: (1,),
     UnitKind.CONFIGURATION: (1,),
 }
 
@@ -62,11 +71,10 @@ _DISCRIMINATORS: dict[UnitKind, tuple[str, ...]] = {
 }
 
 _TEMPLATES: dict[UnitKind, str] = {
-    UnitKind.AGENT: "agent/{agent}/{variant}",
+    UnitKind.AGENT: "agent/{agent}",
     UnitKind.SUBAGENT: "subagent/{agent}/{subagent}/{variant}",
-    UnitKind.SKILL: "skill/{skill}",
-    UnitKind.WORKFLOW: "workflow/{workflow}[/{variant}]",
+    UnitKind.SKILL: "skill/{skill}/{variant}",
+    UnitKind.WORKFLOW: "workflow/{workflow}/{variant}",
     UnitKind.CONVENTION: "convention/core/{name} or convention/language/{language}",
-    UnitKind.PERSONA: "persona/{persona}",
     UnitKind.CONFIGURATION: "configuration/{name}",
 }
