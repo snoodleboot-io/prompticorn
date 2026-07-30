@@ -21,9 +21,7 @@ class AgentSkillMappingLoader:
         True
     """
 
-    def __init__(
-        self, mapping_file: Path | str = "prompticorn/configurations/agent_skill_mapping.yaml"
-    ):
+    def __init__(self, mapping_file: Path | str | None = None):
         """Initialize with path to mapping file.
 
         Args:
@@ -32,7 +30,14 @@ class AgentSkillMappingLoader:
         Raises:
             FileNotFoundError: If mapping file does not exist
         """
-        self.mapping_file = Path(mapping_file)
+        # A CWD-relative default silently resolves to nothing whenever the
+        # process runs outside the repository root. Default from the package.
+        # (PRO-105)
+        self.mapping_file = (
+            Path(mapping_file)
+            if mapping_file is not None
+            else Path(__file__).resolve().parents[2] / "configurations" / "agent_skill_mapping.yaml"
+        )
         if not self.mapping_file.exists():
             raise FileNotFoundError(f"Mapping file not found: {self.mapping_file}")
         self._mapping = None

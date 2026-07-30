@@ -422,17 +422,16 @@ class KiloBuilder(Builder):
         ]
 
         for filename in static_files:
-            source_path = self.core_loader.core_dir / filename
-            if source_path.exists():
-                content = strip_source_header_comments(source_path.read_text(encoding="utf-8"))
+            raw = self.core_loader.read_core(filename.removesuffix(".md"))
+            if raw is not None:
+                content = strip_source_header_comments(raw)
                 output_path = rules_dir / filename
                 output_path.write_text(content, encoding="utf-8")
                 written_files.append(f"rules/{filename}")
 
         # Templated conventions.md (always include, render if config available)
-        conventions_source = self.core_loader.core_dir / "conventions.md"
-        if conventions_source.exists():
-            content = conventions_source.read_text(encoding="utf-8")
+        content = self.core_loader.read_core("conventions")
+        if content is not None:
             if config:
                 content = self.core_loader._template_content(content, config)
             output_path = rules_dir / "conventions.md"
@@ -450,9 +449,8 @@ class KiloBuilder(Builder):
             else:
                 language = None
             if language:
-                lang_source = self.core_loader.core_dir / f"conventions-{language}.md"
-                if lang_source.exists():
-                    content = lang_source.read_text(encoding="utf-8")
+                content = self.core_loader.read_language(language)
+                if content is not None:
                     content = self.core_loader._template_content(content, config)
                     output_path = rules_dir / f"conventions-{language}.md"
                     output_path.write_text(content, encoding="utf-8")

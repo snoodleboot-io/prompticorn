@@ -1,13 +1,12 @@
 """Loader for loading complete component bundles from directories.
 
 This module provides utilities for loading a complete set of component files
-(prompt.md, skills.md, workflow.md) from a directory.
+(prompt.md, skills.md, workflow.md) supplied as text by a content source.
 """
 
-from pathlib import Path
 from typing import Any, NamedTuple
 
-from prompticorn.ir.exceptions import MissingFileError, ParseError
+from prompticorn.ir.exceptions import ParseError
 from prompticorn.ir.parsers import MarkdownParser, YAMLParser
 
 
@@ -49,108 +48,62 @@ class ComponentLoader:
         self._yaml_parser = YAMLParser()
         self._markdown_parser = MarkdownParser()
 
-    def load(self, directory: str) -> ComponentBundle:
-        """Load all component files from a directory.
+    def parse(
+        self,
+        prompt_text: str,
+        skills_text: str | None = None,
+        workflow_text: str | None = None,
+        source: str = "<memory>",
+    ) -> ComponentBundle:
+        """Parse component text into a bundle.
 
-        Loads the required prompt.md file and optional skills.md and workflow.md
-        files from the specified directory.
+        Text in, model out. Fetching bytes is a source's job — this loader used
+        to open ``prompt.md``/``skills.md``/``workflow.md`` itself, which meant a
+        source abstraction above it changed nothing. (PRO-105)
 
         Args:
-            directory: Path to the directory containing component files.
+            prompt_text: Required prompt document text.
+            skills_text: Optional skills document text.
+            workflow_text: Optional workflow document text.
+            source: Label used in error messages (a unit id or path).
 
         Returns:
-            ComponentBundle containing loaded component content.
+            ComponentBundle containing parsed component content.
 
         Raises:
-            MissingFileError: If the required prompt.md file is not found.
-            ParseError: If parsing any file fails.
-
-        Example:
-            >>> loader = ComponentLoader()
-            >>> bundle = loader.load("src/prompts/analyzer/")
-            >>> 'name' in bundle.prompt_content
-            True
+            ParseError: If parsing any document fails.
         """
-        dir_path = Path(directory)
-
-        if not dir_path.is_dir():
-            raise MissingFileError(f"Directory not found: {directory}")
-
         try:
-            # Load required prompt.md
-            prompt_file = dir_path / "prompt.md"
-            if not prompt_file.exists():
-                raise MissingFileError(f"Required file 'prompt.md' not found in {directory}")
-
-            prompt_content = self._load_file(prompt_file)
-
-            # Load optional skills.md
-            skills_file = dir_path / "skills.md"
-            skills_content = None
-            if skills_file.exists():
-                skills_content = self._load_file(skills_file)
-
-            # Load optional workflow.md
-            workflow_file = dir_path / "workflow.md"
-            workflow_content = None
-            if workflow_file.exists():
-                workflow_content = self._load_file(workflow_file)
-
             return ComponentBundle(
-                prompt_content=prompt_content,
-                skills_content=skills_content,
-                workflow_content=workflow_content,
+                prompt_content=self._parse_text(prompt_text),
+                skills_content=self._parse_text(skills_text) if skills_text is not None else None,
+                workflow_content=(
+                    self._parse_text(workflow_text) if workflow_text is not None else None
+                ),
             )
-
-        except MissingFileError:
-            raise
         except Exception as e:
-            raise ParseError(f"Failed to load components from {directory}: {str(e)}") from e
+            raise ParseError(f"Failed to parse components from {source}: {str(e)}") from e
 
-    def load_as_dict(self, directory: str) -> dict[str, Any]:
-        """Load all component files as a flat dictionary.
+    def as_dict(self, bundle: ComponentBundle) -> dict[str, Any]:
+        """Flatten a bundle to ``{'prompt', 'skills', 'workflow'}``.
 
-        Loads all component files and returns them as a single dictionary
-        with keys: 'prompt', 'skills', 'workflow'.
-
-        Args:
-            directory: Path to the directory containing component files.
-
-        Returns:
-            Dictionary with keys 'prompt', 'skills', 'workflow' (optional keys
-            may be absent if files don't exist).
-
-        Raises:
-            MissingFileError: If the required prompt.md file is not found.
-            ParseError: If parsing any file fails.
-
-        Example:
-            >>> loader = ComponentLoader()
-            >>> components = loader.load_as_dict("src/prompts/agent/")
-            >>> 'prompt' in components
-            True
+        Optional keys are absent when the corresponding document was not
+        supplied, matching the previous ``load_as_dict`` shape.
         """
-        bundle = self.load(directory)
-
-        result = {
-            "prompt": bundle.prompt_content,
-        }
-
+        result: dict[str, Any] = {"prompt": bundle.prompt_content}
         if bundle.skills_content is not None:
             result["skills"] = bundle.skills_content
-
         if bundle.workflow_content is not None:
             result["workflow"] = bundle.workflow_content
-
         return result
 
-    def _load_file(self, file_path: Path) -> dict[str, Any]:
-        """Load and parse a single component file.
+    def _parse_text(self, content: str) -> dict[str, Any]:
+        """Parse one component document.
 
         Tries YAML parsing first, then falls back to markdown parsing.
 
         Args:
-            file_path: Path to the file to load.
+            content: Document text.
 
         Returns:
             Dictionary containing parsed content.
@@ -159,9 +112,6 @@ class ComponentLoader:
             ParseError: If parsing fails.
         """
         try:
-            with open(file_path, encoding="utf-8") as f:
-                content = f.read()
-
             # Try YAML parsing first (for files with frontmatter)
             yaml_data = self._yaml_parser.parse(content)
             if yaml_data:
@@ -176,4 +126,4 @@ class ComponentLoader:
             return {"content": content}
 
         except Exception as e:
-            raise ParseError(f"Failed to load file {file_path}: {str(e)}") from e
+            raise ParseError(f"Failed to parse component document: {str(e)}") from e

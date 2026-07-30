@@ -30,10 +30,9 @@ def temp_agent_dir():
 
 
 @pytest.fixture
-def sample_prompt_md(temp_agent_dir):
-    """Create a sample prompt.md file."""
-    prompt_file = temp_agent_dir / "prompt.md"
-    content = """---
+def sample_prompt_text():
+    """Sample prompt.md text. No file: the loader parses text. (PRO-105)"""
+    return """---
 name: test-agent
 description: A test agent
 system_prompt: You are a helpful assistant
@@ -52,15 +51,12 @@ subagents:
 
 This is the main prompt content.
 """
-    prompt_file.write_text(content, encoding="utf-8")
-    return prompt_file
 
 
 @pytest.fixture
-def sample_skills_md(temp_agent_dir):
-    """Create a sample skills.md file."""
-    skills_file = temp_agent_dir / "skills.md"
-    content = """---
+def sample_skills_text():
+    """Sample skills.md text."""
+    return """---
 skills:
   - name: refactor
     description: Improve code structure
@@ -83,15 +79,12 @@ Details about refactoring.
 
 Details about testing.
 """
-    skills_file.write_text(content, encoding="utf-8")
-    return skills_file
 
 
 @pytest.fixture
-def sample_workflow_md(temp_agent_dir):
-    """Create a sample workflow.md file."""
-    workflow_file = temp_agent_dir / "workflow.md"
-    content = """---
+def sample_workflow_text():
+    """Sample workflow.md text."""
+    return """---
 workflows:
   - name: code-review
     description: Review code for quality
@@ -106,28 +99,28 @@ workflows:
 
 Process for reviewing code.
 """
-    workflow_file.write_text(content, encoding="utf-8")
-    return workflow_file
 
 
 @pytest.fixture
-def complete_agent_dir(sample_prompt_md, sample_skills_md, sample_workflow_md):
-    """Get the temporary directory with all component files."""
-    return sample_prompt_md.parent
+def complete_bundle(sample_prompt_text, sample_skills_text, sample_workflow_text):
+    """A bundle parsed from all three documents."""
+    return ComponentLoader().parse(
+        sample_prompt_text,
+        skills_text=sample_skills_text,
+        workflow_text=sample_workflow_text,
+    )
 
 
 @pytest.fixture
-def minimal_agent_dir(temp_agent_dir, sample_prompt_md):
-    """Temporary directory with only prompt.md (minimal agent)."""
-    return sample_prompt_md.parent
+def minimal_bundle(sample_prompt_text):
+    """A bundle parsed from the prompt document alone."""
+    return ComponentLoader().parse(sample_prompt_text)
 
 
 @pytest.fixture
-def sample_skill_file(temp_agent_dir):
-    """Create a sample skill.md file."""
-    skill_file = temp_agent_dir / "skill.md"
-    skill_file.write_text(
-        """---
+def sample_skill_text():
+    """Sample skill document text."""
+    return """---
 name: refactor
 description: Improve code structure
 tools_needed:
@@ -145,18 +138,13 @@ Apply SOLID principles to improve code structure. Follow these guidelines:
 
 ## Details
 Additional skill details here.
-""",
-        encoding="utf-8",
-    )
-    return skill_file
+"""
 
 
 @pytest.fixture
-def sample_workflow_file(temp_agent_dir):
-    """Create a sample workflow file."""
-    workflow_file = temp_agent_dir / "workflow.md"
-    workflow_file.write_text(
-        """---
+def sample_workflow_text_fixture():
+    """Sample standalone workflow document text."""
+    return """---
 name: code-review
 description: Review code for quality
 steps:
@@ -168,10 +156,7 @@ steps:
 
 ## Process
 Details about the workflow.
-""",
-        encoding="utf-8",
-    )
-    return workflow_file
+"""
 
 
 # ============================================================================
@@ -182,69 +167,52 @@ Details about the workflow.
 class TestComponentLoaderHappyPath:
     """Test ComponentLoader with valid inputs."""
 
-    def test_load_complete_components(self, complete_agent_dir):
-        """Test loading all component files."""
-        loader = ComponentLoader()
-        bundle = loader.load(str(complete_agent_dir))
-
-        assert isinstance(bundle, ComponentBundle)
-        assert bundle.prompt_content is not None
-        assert bundle.skills_content is not None
-        assert bundle.workflow_content is not None
+    def test_parse_complete_components(self, complete_bundle):
+        """Test parsing all component documents."""
+        assert isinstance(complete_bundle, ComponentBundle)
+        assert complete_bundle.prompt_content is not None
+        assert complete_bundle.skills_content is not None
+        assert complete_bundle.workflow_content is not None
         # Verify they're dictionaries
-        assert isinstance(bundle.prompt_content, dict)
-        assert isinstance(bundle.skills_content, dict)
-        assert isinstance(bundle.workflow_content, dict)
+        assert isinstance(complete_bundle.prompt_content, dict)
+        assert isinstance(complete_bundle.skills_content, dict)
+        assert isinstance(complete_bundle.workflow_content, dict)
 
-    def test_load_prompt_content(self, complete_agent_dir):
-        """Test prompt.md content is loaded correctly."""
-        loader = ComponentLoader()
-        bundle = loader.load(str(complete_agent_dir))
+    def test_parse_prompt_content(self, complete_bundle):
+        """Test prompt content is parsed correctly."""
+        assert complete_bundle.prompt_content["name"] == "test-agent"
+        assert complete_bundle.prompt_content["description"] == "A test agent"
 
-        assert bundle.prompt_content["name"] == "test-agent"
-        assert bundle.prompt_content["description"] == "A test agent"
+    def test_parse_skills_content(self, complete_bundle):
+        """Test skills content is parsed correctly."""
+        assert complete_bundle.skills_content is not None
+        assert "skills" in complete_bundle.skills_content
+        assert len(complete_bundle.skills_content["skills"]) == 2
 
-    def test_load_skills_content(self, complete_agent_dir):
-        """Test skills.md content is loaded correctly."""
-        loader = ComponentLoader()
-        bundle = loader.load(str(complete_agent_dir))
+    def test_parse_workflow_content(self, complete_bundle):
+        """Test workflow content is parsed correctly."""
+        assert complete_bundle.workflow_content is not None
+        assert "workflows" in complete_bundle.workflow_content
+        assert complete_bundle.workflow_content["workflows"][0]["name"] == "code-review"
 
-        assert bundle.skills_content is not None
-        assert "skills" in bundle.skills_content
-        assert len(bundle.skills_content["skills"]) == 2
+    def test_parse_minimal_components(self, minimal_bundle):
+        """Test parsing only the required prompt document."""
+        assert minimal_bundle.prompt_content is not None
+        assert minimal_bundle.skills_content is None
+        assert minimal_bundle.workflow_content is None
 
-    def test_load_workflow_content(self, complete_agent_dir):
-        """Test workflow.md content is loaded correctly."""
-        loader = ComponentLoader()
-        bundle = loader.load(str(complete_agent_dir))
-
-        assert bundle.workflow_content is not None
-        assert "workflows" in bundle.workflow_content
-        assert bundle.workflow_content["workflows"][0]["name"] == "code-review"
-
-    def test_load_minimal_components(self, minimal_agent_dir):
-        """Test loading only required prompt.md."""
-        loader = ComponentLoader()
-        bundle = loader.load(str(minimal_agent_dir))
-
-        assert bundle.prompt_content is not None
-        assert bundle.skills_content is None
-        assert bundle.workflow_content is None
-
-    def test_load_as_dict_complete(self, complete_agent_dir):
-        """Test load_as_dict with all components."""
-        loader = ComponentLoader()
-        components = loader.load_as_dict(str(complete_agent_dir))
+    def test_as_dict_complete(self, complete_bundle):
+        """Test as_dict with all components."""
+        components = ComponentLoader().as_dict(complete_bundle)
 
         assert isinstance(components, dict)
         assert "prompt" in components
         assert "skills" in components
         assert "workflow" in components
 
-    def test_load_as_dict_minimal(self, minimal_agent_dir):
-        """Test load_as_dict with only prompt."""
-        loader = ComponentLoader()
-        components = loader.load_as_dict(str(minimal_agent_dir))
+    def test_as_dict_minimal(self, minimal_bundle):
+        """Test as_dict with only the prompt."""
+        components = ComponentLoader().as_dict(minimal_bundle)
 
         assert "prompt" in components
         assert "skills" not in components
@@ -252,58 +220,38 @@ class TestComponentLoaderHappyPath:
 
 
 class TestComponentLoaderEdgeCases:
-    """Test ComponentLoader edge cases."""
+    """Test ComponentLoader edge cases.
 
-    def test_load_nonexistent_directory(self):
-        """Test loading from non-existent directory raises MissingFileError."""
-        loader = ComponentLoader()
-        with pytest.raises(MissingFileError, match="Directory not found"):
-            loader.load("/nonexistent/directory")
+    These no longer build temp directory trees: the loader parses text, so the
+    inputs are strings. (PRO-105)
+    """
 
-    def test_load_missing_prompt_file(self, temp_agent_dir):
-        """Test loading without required prompt.md raises MissingFileError."""
-        loader = ComponentLoader()
-        with pytest.raises(MissingFileError, match="prompt.md"):
-            loader.load(str(temp_agent_dir))
-
-    def test_load_with_only_skills(self, temp_agent_dir, sample_prompt_md, sample_skills_md):
-        """Test loading with prompt and skills but no workflow."""
-        loader = ComponentLoader()
-        bundle = loader.load(str(temp_agent_dir))
+    def test_parse_with_only_skills(self, sample_prompt_text, sample_skills_text):
+        """Prompt and skills, no workflow."""
+        bundle = ComponentLoader().parse(sample_prompt_text, skills_text=sample_skills_text)
 
         assert bundle.prompt_content is not None
         assert bundle.skills_content is not None
         assert bundle.workflow_content is None
 
-    def test_load_with_only_workflow(self, temp_agent_dir, sample_prompt_md, sample_workflow_md):
-        """Test loading with prompt and workflow but no skills."""
-        loader = ComponentLoader()
-        bundle = loader.load(str(temp_agent_dir))
+    def test_parse_with_only_workflow(self, sample_prompt_text, sample_workflow_text):
+        """Prompt and workflow, no skills."""
+        bundle = ComponentLoader().parse(sample_prompt_text, workflow_text=sample_workflow_text)
 
         assert bundle.prompt_content is not None
         assert bundle.skills_content is None
         assert bundle.workflow_content is not None
 
-    def test_load_empty_prompt_file(self, temp_agent_dir):
-        """Test loading empty prompt.md."""
-        prompt_file = temp_agent_dir / "prompt.md"
-        prompt_file.write_text("", encoding="utf-8")
+    def test_parse_empty_prompt(self):
+        """Empty documents parse to an empty content mapping."""
+        bundle = ComponentLoader().parse("")
 
-        loader = ComponentLoader()
-        bundle = loader.load(str(temp_agent_dir))
-
-        # Empty files return {"content": ""}
         assert bundle.prompt_content == {"content": ""}
 
-    def test_load_prompt_with_only_markdown(self, temp_agent_dir):
-        """Test loading prompt.md with no frontmatter."""
-        prompt_file = temp_agent_dir / "prompt.md"
-        prompt_file.write_text("# Markdown Content\nNo frontmatter here", encoding="utf-8")
+    def test_parse_prompt_with_only_markdown(self):
+        """A document with no frontmatter keeps its body under 'content'."""
+        bundle = ComponentLoader().parse("# Markdown Content\nNo frontmatter here")
 
-        loader = ComponentLoader()
-        bundle = loader.load(str(temp_agent_dir))
-
-        # Files with only markdown (no frontmatter) return {"content": "..."}
         assert "content" in bundle.prompt_content
         assert bundle.prompt_content["content"] == "# Markdown Content\nNo frontmatter here"
 
@@ -311,39 +259,44 @@ class TestComponentLoaderEdgeCases:
 class TestComponentLoaderErrors:
     """Test ComponentLoader error handling."""
 
-    def test_load_invalid_yaml_in_prompt(self, temp_agent_dir):
-        """Test loading prompt with invalid YAML raises ParseError."""
-        prompt_file = temp_agent_dir / "prompt.md"
-        prompt_file.write_text(
-            """---
+    def test_parse_invalid_yaml_raises_parse_error(self):
+        """Invalid frontmatter surfaces as ParseError."""
+        loader = ComponentLoader()
+        with pytest.raises(ParseError):
+            loader.parse(
+                """---
 invalid: yaml: content
   bad indent
 ---
 Content
-""",
-            encoding="utf-8",
-        )
+"""
+            )
 
+    def test_parse_error_names_the_source(self):
+        """The error must say which unit failed, not merely that one did."""
         loader = ComponentLoader()
-        with pytest.raises(ParseError):
-            loader.load(str(temp_agent_dir))
+        with pytest.raises(ParseError, match="agent/broken"):
+            loader.parse("---\ninvalid: yaml: content\n  bad\n---\n", source="agent/broken")
 
-    def test_load_file_permission_error(self, temp_agent_dir):
-        """Test loading from directory without read permission."""
-        prompt_file = temp_agent_dir / "prompt.md"
-        prompt_file.write_text("---\nname: test\n---\n", encoding="utf-8")
 
-        # Change permissions on the file itself (not the directory)
-        prompt_file.chmod(0o000)
+class TestComponentLoaderIsPure:
+    """The loader must not reach for the filesystem (PRO-105)."""
 
-        try:
-            loader = ComponentLoader()
-            # When we can't read the file, we get ParseError or PermissionError
-            with pytest.raises((ParseError, PermissionError)):
-                loader.load(str(temp_agent_dir))
-        finally:
-            # Restore permissions for cleanup
-            prompt_file.chmod(0o644)
+    def test_module_imports_nothing_filesystem_related(self):
+        import ast
+        from pathlib import Path as _Path
+
+        import prompticorn.ir.loaders.component_loader as module
+
+        tree = ast.parse(_Path(module.__file__).read_text(encoding="utf-8"))
+        imported: set[str] = set()
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import):
+                imported.update(alias.name.split(".")[0] for alias in node.names)
+            elif isinstance(node, ast.ImportFrom) and node.module:
+                imported.add(node.module.split(".")[0])
+
+        assert not (imported & {"os", "pathlib", "shutil", "glob", "io", "tempfile"})
 
 
 # ============================================================================
@@ -354,10 +307,10 @@ Content
 class TestSkillLoaderHappyPath:
     """Test SkillLoader with valid inputs."""
 
-    def test_load_single_skill(self, sample_skill_file):
+    def test_load_single_skill(self, sample_skill_text):
         """Test loading a single skill from file."""
         loader = SkillLoader()
-        skill = loader.load(str(sample_skill_file))
+        skill = loader.parse(sample_skill_text)
 
         assert isinstance(skill, Skill)
         assert skill.name == "refactor"
@@ -367,9 +320,7 @@ class TestSkillLoaderHappyPath:
 
     def test_load_skill_minimal(self, temp_agent_dir):
         """Test loading skill with only required fields."""
-        skill_file = temp_agent_dir / "minimal.md"
-        skill_file.write_text(
-            """---
+        skill_text = """---
 name: minimal
 description: A minimal skill
 tools_needed: []
@@ -377,11 +328,9 @@ tools_needed: []
 
 ## Instructions
 Do something useful.
-""",
-            encoding="utf-8",
-        )
+"""
         loader = SkillLoader()
-        skill = loader.load(str(skill_file))
+        skill = loader.parse(skill_text)
 
         assert skill.name == "minimal"
         assert skill.tools_needed == []
@@ -389,9 +338,7 @@ Do something useful.
 
     def test_load_skill_with_tools(self, temp_agent_dir):
         """Test skill with multiple tools."""
-        skill_file = temp_agent_dir / "tools.md"
-        skill_file.write_text(
-            """---
+        skill_text = """---
 name: advanced
 description: Advanced skill with many tools
 tools_needed:
@@ -403,11 +350,9 @@ tools_needed:
 
 ## Instructions
 Use all the tools to accomplish the task.
-""",
-            encoding="utf-8",
-        )
+"""
         loader = SkillLoader()
-        skill = loader.load(str(skill_file))
+        skill = loader.parse(skill_text)
 
         assert len(skill.tools_needed) == 4
 
@@ -417,9 +362,7 @@ class TestSkillLoaderEdgeCases:
 
     def test_load_skill_no_tools_needed(self, temp_agent_dir):
         """Test skill without tools_needed field."""
-        skill_file = temp_agent_dir / "no_tools.md"
-        skill_file.write_text(
-            """---
+        skill_text = """---
 name: analysis
 description: Analyze code
 tools_needed: []
@@ -427,20 +370,16 @@ tools_needed: []
 
 ## Instructions
 Look carefully at the code and analyze it.
-""",
-            encoding="utf-8",
-        )
+"""
         loader = SkillLoader()
-        skill = loader.load(str(skill_file))
+        skill = loader.parse(skill_text)
 
         # Should have empty list
         assert skill.tools_needed == []
 
     def test_load_skill_with_extra_fields(self, temp_agent_dir):
         """Test skill with additional metadata fields (should be ignored)."""
-        skill_file = temp_agent_dir / "extra.md"
-        skill_file.write_text(
-            """---
+        skill_text = """---
 name: advanced
 description: Advanced skill
 tools_needed:
@@ -451,19 +390,15 @@ deprecated: false
 
 ## Instructions
 Complex instructions for this skill.
-""",
-            encoding="utf-8",
-        )
+"""
         loader = SkillLoader()
-        skill = loader.load(str(skill_file))
+        skill = loader.parse(skill_text)
 
         assert skill.name == "advanced"
 
     def test_load_skill_with_markdown_content(self, temp_agent_dir):
         """Test skill with markdown sections after frontmatter."""
-        skill_file = temp_agent_dir / "with_content.md"
-        skill_file.write_text(
-            """---
+        skill_text = """---
 name: documented
 description: Well documented skill
 tools_needed:
@@ -479,11 +414,9 @@ Step 3: Finally this
 ## Examples
 
 Example code here.
-""",
-            encoding="utf-8",
-        )
+"""
         loader = SkillLoader()
-        skill = loader.load(str(skill_file))
+        skill = loader.parse(skill_text)
 
         assert skill.name == "documented"
 
@@ -493,56 +426,43 @@ class TestSkillLoaderErrors:
 
     def test_load_skill_missing_name(self, temp_agent_dir):
         """Test skill without required name field."""
-        skill_file = temp_agent_dir / "no_name.md"
-        skill_file.write_text(
-            """---
+        skill_text = """---
 description: No name skill
 instructions: Do something
 tools_needed: []
 ---
-""",
-            encoding="utf-8",
-        )
+"""
         loader = SkillLoader()
         with pytest.raises((ParseError, ValidationError)):
-            loader.load(str(skill_file))
+            loader.parse(skill_text)
 
     def test_load_skill_missing_description(self, temp_agent_dir):
         """Test skill without required description field."""
-        skill_file = temp_agent_dir / "no_desc.md"
-        skill_file.write_text(
-            """---
+        skill_text = """---
 name: no-desc
 instructions: Do something
 tools_needed: []
 ---
-""",
-            encoding="utf-8",
-        )
+"""
         loader = SkillLoader()
         with pytest.raises((ParseError, ValidationError)):
-            loader.load(str(skill_file))
+            loader.parse(skill_text)
 
     def test_load_skill_invalid_yaml(self, temp_agent_dir):
         """Test skill with invalid YAML raises ParseError."""
-        skill_file = temp_agent_dir / "invalid.md"
-        skill_file.write_text(
-            """---
+        skill_text = """---
 invalid: yaml: content
   bad indent
 ---
-""",
-            encoding="utf-8",
-        )
+"""
         loader = SkillLoader()
         with pytest.raises(ParseError):
-            loader.load(str(skill_file))
+            loader.parse(skill_text)
 
-    def test_load_skill_file_not_found(self):
-        """Test loading non-existent skill file."""
-        loader = SkillLoader()
-        with pytest.raises(MissingFileError):
-            loader.load("/nonexistent/skill.md")
+    def test_loader_has_no_file_loading_api(self):
+        """Missing-content is the source's concern now; the loader only parses.
+        (PRO-105)"""
+        assert not hasattr(SkillLoader(), "load")
 
 
 # ============================================================================
@@ -553,10 +473,10 @@ invalid: yaml: content
 class TestWorkflowLoaderHappyPath:
     """Test WorkflowLoader with valid inputs."""
 
-    def test_load_single_workflow(self, sample_workflow_file):
-        """Test loading a single workflow from file."""
+    def test_parse_single_workflow(self, sample_workflow_text_fixture):
+        """Test parsing a single workflow document."""
         loader = WorkflowLoader()
-        workflow = loader.load(str(sample_workflow_file))
+        workflow = loader.parse(sample_workflow_text_fixture)
 
         assert isinstance(workflow, Workflow)
         assert workflow.name == "code-review"
@@ -565,28 +485,22 @@ class TestWorkflowLoaderHappyPath:
 
     def test_load_workflow_minimal(self, temp_agent_dir):
         """Test loading workflow with only required fields."""
-        workflow_file = temp_agent_dir / "minimal.md"
-        workflow_file.write_text(
-            """---
+        workflow_text = """---
 name: minimal
 description: A minimal workflow
 steps:
   - Step 1
 ---
-""",
-            encoding="utf-8",
-        )
+"""
         loader = WorkflowLoader()
-        workflow = loader.load(str(workflow_file))
+        workflow = loader.parse(workflow_text)
 
         assert workflow.name == "minimal"
         assert workflow.steps == ["Step 1"]
 
     def test_load_workflow_many_steps(self, temp_agent_dir):
         """Test loading workflow with many steps."""
-        workflow_file = temp_agent_dir / "complex.md"
-        workflow_file.write_text(
-            """---
+        workflow_text = """---
 name: complex
 description: Complex workflow
 steps:
@@ -596,11 +510,9 @@ steps:
   - Step 4
   - Step 5
 ---
-""",
-            encoding="utf-8",
-        )
+"""
         loader = WorkflowLoader()
-        workflow = loader.load(str(workflow_file))
+        workflow = loader.parse(workflow_text)
 
         assert len(workflow.steps) == 5
 
@@ -610,45 +522,35 @@ class TestWorkflowLoaderEdgeCases:
 
     def test_load_workflow_empty_steps(self, temp_agent_dir):
         """Test workflow with empty steps list raises validation error."""
-        workflow_file = temp_agent_dir / "empty.md"
-        workflow_file.write_text(
-            """---
+        workflow_text = """---
 name: empty
 description: No steps
 steps: []
 ---
-""",
-            encoding="utf-8",
-        )
+"""
         loader = WorkflowLoader()
         # Workflows require at least one step
         with pytest.raises((ParseError, ValidationError)):
-            loader.load(str(workflow_file))
+            loader.parse(workflow_text)
 
     def test_load_workflow_single_step(self, temp_agent_dir):
         """Test workflow with single step."""
-        workflow_file = temp_agent_dir / "simple.md"
-        workflow_file.write_text(
-            """---
+        workflow_text = """---
 name: simple
 description: Single step
 steps:
   - Do the thing
 ---
-""",
-            encoding="utf-8",
-        )
+"""
         loader = WorkflowLoader()
-        workflow = loader.load(str(workflow_file))
+        workflow = loader.parse(workflow_text)
 
         assert len(workflow.steps) == 1
         assert workflow.steps[0] == "Do the thing"
 
     def test_load_workflow_with_extra_fields(self, temp_agent_dir):
         """Test workflow with additional metadata fields."""
-        workflow_file = temp_agent_dir / "extra.md"
-        workflow_file.write_text(
-            """---
+        workflow_text = """---
 name: advanced
 description: Advanced workflow
 steps:
@@ -657,19 +559,15 @@ steps:
 priority: high
 author: test-author
 ---
-""",
-            encoding="utf-8",
-        )
+"""
         loader = WorkflowLoader()
-        workflow = loader.load(str(workflow_file))
+        workflow = loader.parse(workflow_text)
 
         assert workflow.name == "advanced"
 
     def test_load_workflow_with_markdown_content(self, temp_agent_dir):
         """Test workflow with markdown sections after frontmatter."""
-        workflow_file = temp_agent_dir / "with_content.md"
-        workflow_file.write_text(
-            """---
+        workflow_text = """---
 name: documented
 description: Well documented workflow
 steps:
@@ -685,11 +583,9 @@ Step 2: Then that
 ## Success Criteria
 
 All steps completed successfully.
-""",
-            encoding="utf-8",
-        )
+"""
         loader = WorkflowLoader()
-        workflow = loader.load(str(workflow_file))
+        workflow = loader.parse(workflow_text)
 
         assert workflow.name == "documented"
 
@@ -699,71 +595,54 @@ class TestWorkflowLoaderErrors:
 
     def test_load_workflow_missing_name(self, temp_agent_dir):
         """Test workflow without required name field."""
-        workflow_file = temp_agent_dir / "no_name.md"
-        workflow_file.write_text(
-            """---
+        workflow_text = """---
 description: No name
 steps:
   - Step 1
 ---
-""",
-            encoding="utf-8",
-        )
+"""
         loader = WorkflowLoader()
         with pytest.raises((ParseError, ValidationError)):
-            loader.load(str(workflow_file))
+            loader.parse(workflow_text)
 
     def test_load_workflow_missing_description(self, temp_agent_dir):
         """Test workflow without required description field."""
-        workflow_file = temp_agent_dir / "no_desc.md"
-        workflow_file.write_text(
-            """---
+        workflow_text = """---
 name: no-desc
 steps:
   - Step 1
 ---
-""",
-            encoding="utf-8",
-        )
+"""
         loader = WorkflowLoader()
         with pytest.raises((ParseError, ValidationError)):
-            loader.load(str(workflow_file))
+            loader.parse(workflow_text)
 
     def test_load_workflow_missing_steps(self, temp_agent_dir):
         """Test workflow without required steps field."""
-        workflow_file = temp_agent_dir / "no_steps.md"
-        workflow_file.write_text(
-            """---
+        workflow_text = """---
 name: no-steps
 description: Missing steps
 ---
-""",
-            encoding="utf-8",
-        )
+"""
         loader = WorkflowLoader()
         with pytest.raises((ParseError, ValidationError)):
-            loader.load(str(workflow_file))
+            loader.parse(workflow_text)
 
     def test_load_workflow_invalid_yaml(self, temp_agent_dir):
         """Test workflow with invalid YAML."""
-        workflow_file = temp_agent_dir / "invalid.md"
-        workflow_file.write_text(
-            """---
+        workflow_text = """---
 invalid: yaml: content
   bad indent
 ---
-""",
-            encoding="utf-8",
-        )
+"""
         loader = WorkflowLoader()
         with pytest.raises(ParseError):
-            loader.load(str(workflow_file))
+            loader.parse(workflow_text)
 
-    def test_load_workflow_file_not_found(self):
-        """Test loading non-existent workflow file."""
-        loader = WorkflowLoader()
-        with pytest.raises(MissingFileError):
-            loader.load("/nonexistent/workflow.md")
+    def test_loader_has_no_file_loading_api(self):
+        """Missing-content is the source's concern now; the loader only parses.
+        (PRO-105)"""
+        assert not hasattr(WorkflowLoader(), "load")
 
 
 # ============================================================================
@@ -774,10 +653,9 @@ invalid: yaml: content
 class TestLoadersIntegration:
     """Test loaders working together with ComponentLoader."""
 
-    def test_load_all_components(self, complete_agent_dir):
-        """Test loading all components."""
-        component_loader = ComponentLoader()
-        bundle = component_loader.load(str(complete_agent_dir))
+    def test_parse_all_components(self, complete_bundle):
+        """Test parsing all components together."""
+        bundle = complete_bundle
 
         # Verify all components are loaded
         assert bundle.prompt_content is not None
@@ -789,15 +667,10 @@ class TestLoadersIntegration:
         assert isinstance(bundle.skills_content, dict)
         assert isinstance(bundle.workflow_content, dict)
 
-    def test_load_individual_files_match_bundle(self, complete_agent_dir):
-        """Test that individual file loads match bundle loads."""
-        # Load as bundle
-        component_loader = ComponentLoader()
-        bundle = component_loader.load(str(complete_agent_dir))
+    def test_parsed_bundle_exposes_each_document(self, complete_bundle):
+        """Each document is reachable from the bundle it was parsed into."""
+        bundle = complete_bundle
 
-        # Load prompt individually
-        Path(complete_agent_dir) / "prompt.md"
-        # Note: We don't have a direct prompt loader, but we can verify structure
         assert bundle.prompt_content["name"] == "test-agent"
 
         # Verify bundle integrity
