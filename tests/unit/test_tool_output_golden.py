@@ -1,44 +1,32 @@
-"""Golden byte-identical output test for all tools (PRO-60 / F2b).
+"""Fast golden slice: every tool/variant on the default config (PRO-60 / PRO-102).
 
-Builds a fixed sample configuration for every tool id + variant and asserts the
-generated file tree (relative path + sha256 of content) exactly matches the
-recorded baseline. This guards the write-layout strategy refactor: extracting
-the per-tool ``if self.tool_name ==`` branches must not change any emitted byte.
+Builds every tool id for both variants against the single-language python config
+and asserts the generated file tree matches the recorded baseline byte-for-byte
+(path + sha256, with ISO dates normalized).
 
-To regenerate the baseline (only when output changes intentionally), run the
-snippet in the module docstring of the generator, or delete the fixture and
-re-capture. Do NOT regenerate to make a failing refactor pass.
+This is the *fast* slice — one config, ~35s — so an output regression fails in the
+unit job rather than waiting for the slow job. The full
+tool x variant x repository-type x language matrix lives in
+``tests/slow/test_golden_corpus_matrix.py``; both read the same corpus.
+
+Regenerate the corpus (only when output changes intentionally)::
+
+    uv run python -m tests.golden_corpus
+
+Do NOT regenerate to make a failing refactor pass — read the diff first.
 """
 
-import hashlib
-import json
-import re
-import tempfile
 import unittest
-from pathlib import Path
 
-from prompticorn.prompt_builder import get_prompt_builder
+from tests.golden_corpus import (
+    build_manifest,
+    corpus_keys,
+    describe_difference,
+    load,
+    split_key,
+)
 
-_FIXTURE = Path(__file__).parent / "_golden_tool_output.json"
-_CONFIG_BASE = {"spec": {"language": "python"}, "active_personas": ["software_engineer"]}
-
-# ISO dates are normalized before hashing so the golden is stable across day
-# boundaries (e.g. CLAUDE.md stamps datetime.now() into a "Last Updated" line).
-_DATE_RE = re.compile(rb"\d{4}-\d{2}-\d{2}")
-
-
-def _digest(path: Path) -> str:
-    """sha256 of a file's bytes with ISO dates normalized out."""
-    return hashlib.sha256(_DATE_RE.sub(b"YYYY-MM-DD", path.read_bytes())).hexdigest()
-
-
-def _manifest(root: Path) -> list[list[str]]:
-    """Return sorted [relative_posix_path, date-normalized sha256] under root."""
-    return [
-        [path.relative_to(root).as_posix(), _digest(path)]
-        for path in sorted(root.rglob("*"))
-        if path.is_file()
-    ]
+_FAST_CONFIG = "python-single"
 
 
 class TestToolOutputGolden(unittest.TestCase):
@@ -46,20 +34,26 @@ class TestToolOutputGolden(unittest.TestCase):
 
     @classmethod
     def setUpClass(cls) -> None:
-        cls.baseline = json.loads(_FIXTURE.read_text(encoding="utf-8"))
+        cls.corpus = load()
+
+    def test_corpus_covers_the_fast_config(self) -> None:
+        """The fixture must actually contain the slice this test asserts on."""
+        expected = {k for k in corpus_keys() if k.startswith(f"{_FAST_CONFIG}::")}
+        missing = sorted(expected - self.corpus.keys())
+        self.assertFalse(missing, f"corpus is missing entries: {missing}")
 
     def test_all_tools_match_golden_baseline(self) -> None:
-        for key, expected in self.baseline.items():
-            tool_id, variant = key.split("::")
+        for key in sorted(self.corpus):
+            config_id, tool_id, variant = split_key(key)
+            if config_id != _FAST_CONFIG:
+                continue
             with self.subTest(tool=tool_id, variant=variant):
-                with tempfile.TemporaryDirectory() as tmp:
-                    root = Path(tmp)
-                    builder = get_prompt_builder(tool_id)
-                    builder.build(root, {**_CONFIG_BASE, "variant": variant}, dry_run=False)
-                    self.assertEqual(
-                        _manifest(root),
-                        [list(pair) for pair in expected],
-                        f"output for {tool_id}::{variant} diverged from golden baseline",
+                actual = build_manifest(key)
+                expected = self.corpus[key]
+                if actual != expected:
+                    self.fail(
+                        f"output for {key} diverged from the golden corpus:\n"
+                        + describe_difference(expected, actual)
                     )
 
 
