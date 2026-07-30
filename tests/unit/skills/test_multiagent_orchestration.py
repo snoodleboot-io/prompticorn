@@ -27,7 +27,9 @@ class TestMultiagentOrchestrationSkill:
 
     @pytest.mark.parametrize("variant", _VARIANTS)
     def test_discovered_by_loader(self, skills_dir, variant):
-        skill = SkillLoader().load(str(_skill_path(skills_dir, variant)))
+        # The loader parses text; fetching bytes is the caller's job. (PRO-105)
+        path = _skill_path(skills_dir, variant)
+        skill = SkillLoader().parse(path.read_text(encoding="utf-8"), source=str(path))
         assert skill.name == _SKILL
         assert skill.description
 

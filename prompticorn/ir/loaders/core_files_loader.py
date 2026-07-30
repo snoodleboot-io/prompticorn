@@ -4,6 +4,9 @@ from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader, StrictUndefined
 
+from prompticorn.content.content_resolver import ContentResolver, default_resolver
+from prompticorn.content.errors import InvalidUnitIdError
+from prompticorn.content.unit_id import UnitId
 from prompticorn.source_layouts import get_source_layout
 from prompticorn.text_utils import strip_source_header_comments
 
@@ -24,19 +27,27 @@ class CoreFilesLoader:
         True
     """
 
-    def __init__(self, core_dir: Path | str = "prompticorn/agents/core"):
-        """Initialize with path to core files directory.
+    def __init__(self, resolver: ContentResolver | None = None):
+        """Initialize with a content resolver.
+
+        Previously this took ``core_dir`` defaulting to the **CWD-relative**
+        ``"prompticorn/agents/core"``, so every core file silently vanished
+        whenever the process ran from anywhere but the repository root — which
+        is always, for an installed package. Content now comes from the
+        resolver, which addresses the bundled tree from the package's own
+        location. (PRO-105)
 
         Args:
-            core_dir: Path to prompticorn/agents/core directory
+            resolver: Where core conventions are read from. Defaults to the
+                process-wide resolver over the bundled tree.
         """
-        self.core_dir = Path(core_dir)
+        self._resolver = resolver if resolver is not None else default_resolver()
 
         # Resolve macro imports (``macros/...``) against the canonical macro
-        # library under prompticorn/prompts, matching ConventionGenerator. (The
-        # core_dir contains only stub macros; using it as the import root would
-        # break convention templates that call the testing/coverage macros.)
-        prompts_dir = self.core_dir.parent.parent / "prompts"
+        # library under prompticorn/prompts, matching ConventionGenerator. This
+        # is a Jinja template root rather than addressable content, so it stays
+        # a path — but a package-relative one.
+        prompts_dir = Path(__file__).resolve().parents[2] / "prompts"
 
         # Create Jinja2 environment with FileSystemLoader for template imports
         self.jinja_env = Environment(
@@ -69,22 +80,19 @@ class CoreFilesLoader:
 
         # Always include core files (templated when config is provided so macro
         # imports and {{ }} placeholders are resolved, not emitted raw).
-        for filename in ["system.md", "conventions.md", "session.md"]:
-            filepath = self.core_dir / filename
-            if filepath.exists():
-                content = filepath.read_text(encoding="utf-8")
+        for name in ["system", "conventions", "session"]:
+            content = self.read_core(name)
+            if content is not None:
                 if config:
                     content = self._template_content(content, config)
                 else:
                     content = strip_source_header_comments(content)
-                files[filename.replace(".md", "")] = content
+                files[name] = content
 
         # Conditionally include language conventions
         if language:
-            lang_file = self.core_dir / f"conventions-{language}.md"
-            if lang_file.exists():
-                content = lang_file.read_text(encoding="utf-8")
-
+            content = self.read_language(language)
+            if content is not None:
                 # If config provided, template the content
                 if config:
                     content = self._template_content(content, config)
@@ -94,6 +102,28 @@ class CoreFilesLoader:
                 files[f"conventions_{language}"] = content
 
         return files
+
+    def read_core(self, name: str) -> str | None:
+        """Raw text of a core convention (``system``, ``conventions``, …).
+
+        Returns None when absent, preserving the previous ``if path.exists()``
+        semantics for callers that treat core files as optional.
+        """
+        return self._read(f"convention/core/{name}")
+
+    def read_language(self, language: str) -> str | None:
+        """Raw text of a language convention, or None when the language has none."""
+        return self._read(f"convention/language/{language}")
+
+    def _read(self, raw_unit_id: str) -> str | None:
+        try:
+            unit_id = UnitId.parse(raw_unit_id)
+        except InvalidUnitIdError:
+            # A config may name a language that is not a legal unit segment
+            # (uppercase, punctuation). Previously that simply missed the file;
+            # keep it a miss rather than raising into the build.
+            return None
+        return self._resolver.read_optional(unit_id)
 
     def _template_content(self, content: str, config: dict) -> str:
         """Template content with Jinja2 using config values.
@@ -183,10 +213,10 @@ class CoreFilesLoader:
         Raises:
             FileNotFoundError: If system.md does not exist
         """
-        system_file = self.core_dir / "system.md"
-        if not system_file.exists():
-            raise FileNotFoundError(f"system.md not found at {system_file}")
-        return system_file.read_text(encoding="utf-8")
+        content = self.read_core("system")
+        if content is None:
+            raise FileNotFoundError("system.md not found in the resolved content")
+        return content
 
     def get_conventions(self) -> str:
         """Get the conventions.md core file.
@@ -197,10 +227,10 @@ class CoreFilesLoader:
         Raises:
             FileNotFoundError: If conventions.md does not exist
         """
-        conventions_file = self.core_dir / "conventions.md"
-        if not conventions_file.exists():
-            raise FileNotFoundError(f"conventions.md not found at {conventions_file}")
-        return conventions_file.read_text(encoding="utf-8")
+        content = self.read_core("conventions")
+        if content is None:
+            raise FileNotFoundError("conventions.md not found in the resolved content")
+        return content
 
     def get_session(self) -> str:
         """Get the session.md core file.
@@ -211,10 +241,10 @@ class CoreFilesLoader:
         Raises:
             FileNotFoundError: If session.md does not exist
         """
-        session_file = self.core_dir / "session.md"
-        if not session_file.exists():
-            raise FileNotFoundError(f"session.md not found at {session_file}")
-        return session_file.read_text(encoding="utf-8")
+        content = self.read_core("session")
+        if content is None:
+            raise FileNotFoundError("session.md not found in the resolved content")
+        return content
 
     def get_language_conventions(self, language: str, config: dict | None = None) -> str | None:
         """Get language-specific conventions, optionally templated.
@@ -235,11 +265,10 @@ class CoreFilesLoader:
             >>> ts_conv is None
             True
         """
-        lang_file = self.core_dir / f"conventions-{language}.md"
-        if not lang_file.exists():
+        content = self.read_language(language)
+        if content is None:
             return None
 
-        content = lang_file.read_text(encoding="utf-8")
         if config:
             content = self._template_content(content, config)
         else:

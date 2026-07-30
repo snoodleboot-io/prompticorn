@@ -4,12 +4,11 @@ This module provides utilities for loading and parsing skill definitions
 from markdown files with YAML frontmatter.
 """
 
-from pathlib import Path
 from typing import Any
 
 from pydantic import ValidationError as PydanticValidationError
 
-from prompticorn.ir.exceptions import MissingFileError, ParseError, ValidationError
+from prompticorn.ir.exceptions import ParseError, ValidationError
 from prompticorn.ir.models import Skill
 from prompticorn.ir.parsers import MarkdownParser, YAMLParser
 
@@ -43,14 +42,15 @@ class SkillLoader:
         self._yaml_parser = YAMLParser()
         self._markdown_parser = MarkdownParser()
 
-    def load(self, file_path: str) -> Skill:
+    def parse(self, text: str, source: str = "<memory>") -> Skill:
         """Load a skill from a markdown file.
 
         Parses the YAML frontmatter to extract skill metadata (name, description,
         tools_needed) and the markdown sections to extract detailed instructions.
 
         Args:
-            file_path: Path to the skill markdown file.
+            text: Skill markdown text.
+            source: Label used in error messages (a unit id or path).
 
         Returns:
             Loaded Skill IR model.
@@ -66,36 +66,25 @@ class SkillLoader:
             >>> skill.instructions
             'Perform detailed analysis...'
         """
-        file_path_obj = Path(file_path)
-
-        if not file_path_obj.exists():
-            raise MissingFileError(f"Skill file not found: {file_path}")
-
         try:
-            # Read the file content
-            with open(file_path_obj, encoding="utf-8") as f:
-                content = f.read()
-
             # Parse YAML frontmatter for metadata
-            metadata = self._yaml_parser.parse(content)
+            metadata = self._yaml_parser.parse(text)
 
             # Parse markdown sections for instructions
-            sections = self._markdown_parser.parse(content)
+            sections = self._markdown_parser.parse(text)
 
             # Build the skill data
-            skill_data = self._build_skill_data(metadata, sections, file_path)
+            skill_data = self._build_skill_data(metadata, sections, source)
 
             # Create and validate the Skill model
             return Skill(**skill_data)
 
-        except MissingFileError:
-            raise
         except PydanticValidationError as e:
-            raise ValidationError(f"Invalid skill definition in {file_path}: {str(e)}") from e
+            raise ValidationError(f"Invalid skill definition in {source}: {str(e)}") from e
         except ParseError:
             raise
         except Exception as e:
-            raise ParseError(f"Failed to load skill from {file_path}: {str(e)}") from e
+            raise ParseError(f"Failed to parse skill from {source}: {str(e)}") from e
 
     def _build_skill_data(
         self, metadata: dict[str, Any], sections: dict[str, str], file_path: str

@@ -57,6 +57,24 @@ class RegistryDiscovery:
         self.agents_dir = Path(agents_dir)
         self._component_loader = ComponentLoader()
 
+    @staticmethod
+    def _read_component(directory: Path, filename: str) -> str:
+        """Read a required component document.
+
+        Raises:
+            MissingFileError: If it is absent — preserving the semantics the
+                loader used to enforce before it became pure. (PRO-105)
+        """
+        path = directory / filename
+        if not path.is_file():
+            raise MissingFileError(f"Required file '{filename}' not found in {directory}")
+        return path.read_text(encoding="utf-8")
+
+    @staticmethod
+    def _read_optional_component(directory: Path, filename: str) -> str | None:
+        path = directory / filename
+        return path.read_text(encoding="utf-8") if path.is_file() else None
+
     def discover(self) -> dict[str, Agent]:
         """Scan filesystem and auto-discover all agents.
 
@@ -276,8 +294,14 @@ class RegistryDiscovery:
             MissingFileError: If required files are missing.
             ParseError: If parsing fails.
         """
-        # Load component bundle (prompt.md only, skills/workflows at subagent level)
-        bundle = self._component_loader.load(str(agent_dir))
+        # Load component bundle (prompt.md only, skills/workflows at subagent level).
+        # Bytes are fetched here; the loader only parses. (PRO-105)
+        bundle = self._component_loader.parse(
+            self._read_component(agent_dir, "prompt.md"),
+            skills_text=self._read_optional_component(agent_dir, "skills.md"),
+            workflow_text=self._read_optional_component(agent_dir, "workflow.md"),
+            source=str(agent_dir),
+        )
 
         # Extract agent fields from prompt content
         prompt_data = bundle.prompt_content
@@ -334,8 +358,13 @@ class RegistryDiscovery:
             MissingFileError: If required files are missing.
             ParseError: If parsing fails.
         """
-        # Load component bundle
-        bundle = self._component_loader.load(str(variant_dir))
+        # Load component bundle. Bytes here, parsing in the loader. (PRO-105)
+        bundle = self._component_loader.parse(
+            self._read_component(variant_dir, "prompt.md"),
+            skills_text=self._read_optional_component(variant_dir, "skills.md"),
+            workflow_text=self._read_optional_component(variant_dir, "workflow.md"),
+            source=str(variant_dir),
+        )
 
         # Extract agent fields from prompt content
         prompt_data = bundle.prompt_content
