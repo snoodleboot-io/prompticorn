@@ -238,7 +238,7 @@ class PromptBuildCLI:
                 # content is already a string
                 content_str = str(content)
 
-            output_path.write_text(content_str)
+            output_path.write_text(content_str, encoding="utf-8")
 
             print(f"✓ Built {tool} agent: {output_path}")
 

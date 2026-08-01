@@ -155,7 +155,7 @@ import sys
 import boto3
 
 HERE = pathlib.Path(__file__).parent
-MANIFEST = json.loads((HERE / "agents.json").read_text())
+MANIFEST = json.loads((HERE / "agents.json").read_text(encoding="utf-8"))
 
 
 def main() -> None:
@@ -168,7 +168,7 @@ def main() -> None:
     if entry is None:
         sys.exit(f"unknown agent: {slug}")
 
-    system_prompt = (HERE / entry["systemPromptFile"]).read_text()
+    system_prompt = (HERE / entry["systemPromptFile"]).read_text(encoding="utf-8")
     cfg = entry["suggestedInferenceConfig"]
 
     client = boto3.client("bedrock-runtime")

@@ -54,7 +54,7 @@ class PersonaRegistry:
             msg = f"Personas file not found: {yaml_path}"
             raise FileNotFoundError(msg)
 
-        with yaml_path.open("r") as f:
+        with yaml_path.open("r", encoding="utf-8") as f:
             personas_data = yaml.safe_load(f)
 
         return cls(personas_data)
