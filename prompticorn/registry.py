@@ -49,6 +49,18 @@ def _prompt_body_cached(prompts_dir: Path, filename: str) -> str:
     return "".join(lines[start:])
 
 
+def clear_prompt_body_cache() -> None:
+    """Drop every cached prompt body.
+
+    The cache is module-level and keyed on ``(prompts_dir, filename)``, so it
+    outlives any single test in a process. A test that writes a file, reads it,
+    rewrites it and reads again would otherwise see the first content — which is
+    why several tests were calling ``cache_clear()`` by hand. An autouse fixture
+    now does it for everyone. (PRO-106 follow-up)
+    """
+    _prompt_body_cached.cache_clear()
+
+
 def _dest_name(mode_key: str, filename: str, ext: str = ".md") -> str:
     """Strip the mode prefix from a filename for output.
 

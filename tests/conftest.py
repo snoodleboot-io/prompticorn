@@ -90,3 +90,14 @@ def pytest_configure(config):
     config.addinivalue_line("markers", "unit: unit tests")
     config.addinivalue_line("markers", "integration: integration tests")
     config.addinivalue_line("markers", "validation: validation tests")
+
+
+@pytest.fixture(autouse=True)
+def _clear_prompt_body_cache():
+    """Prompt bodies are cached module-level, so state leaks between tests
+    unless cleared. Autouse so no test has to remember. (PRO-106 follow-up)"""
+    from prompticorn.registry import clear_prompt_body_cache
+
+    clear_prompt_body_cache()
+    yield
+    clear_prompt_body_cache()
