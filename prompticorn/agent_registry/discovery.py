@@ -7,8 +7,9 @@ agents and subagents from a directory structure, building Agent IR models.
 from pathlib import Path
 
 from prompticorn.agent_registry.errors import RegistryLoadError
+from prompticorn.content.content_resolver import ContentResolver
 from prompticorn.ir.exceptions import MissingFileError, ParseError
-from prompticorn.ir.loaders import ComponentLoader
+from prompticorn.ir.loaders import ComponentBundle, ComponentLoader
 from prompticorn.ir.models import Agent
 from prompticorn.text_utils import strip_source_header_comments
 
@@ -56,6 +57,45 @@ class RegistryDiscovery:
         """
         self.agents_dir = Path(agents_dir)
         self._component_loader = ComponentLoader()
+        self._resolver: ContentResolver | None = None
+
+    @classmethod
+    def from_resolver(cls, resolver=None) -> "RegistryDiscovery":
+        """Discover agents from resolved content instead of a directory walk.
+
+        The preferred constructor: nothing outside the content package should
+        need to know where agent sources live. The directory-taking form remains
+        for callers holding a path. (PRO-106)
+        """
+        from prompticorn.content.content_resolver import default_resolver
+
+        instance = cls.__new__(cls)
+        instance.agents_dir = None
+        instance._component_loader = ComponentLoader()
+        instance._resolver = resolver if resolver is not None else default_resolver()
+        return instance
+
+    def _resolved_agent_names(self) -> list[str]:
+        """Agent names carried by the resolver, sorted."""
+        from prompticorn.content.unit_kind import UnitKind
+
+        assert self._resolver is not None
+        return sorted(
+            unit.id.segments[0] for unit in self._resolver.units() if unit.kind is UnitKind.AGENT
+        )
+
+    def _resolved_subagent_names(self, agent_name: str) -> list[str]:
+        """Subagent names under an agent, sorted and de-duplicated across variants."""
+        from prompticorn.content.unit_kind import UnitKind
+
+        assert self._resolver is not None
+        return sorted(
+            {
+                unit.id.segments[1]
+                for unit in self._resolver.units()
+                if unit.kind is UnitKind.SUBAGENT and unit.id.segments[0] == agent_name
+            }
+        )
 
     @staticmethod
     def _read_component(directory: Path, filename: str) -> str:
@@ -87,6 +127,9 @@ class RegistryDiscovery:
             RegistryLoadError: If discovery fails.
         """
         try:
+            if self._resolver is not None:
+                return self._discover_via_resolver()
+
             all_agents: dict[str, Agent] = {}
 
             # Discover top-level agents
@@ -184,6 +227,11 @@ class RegistryDiscovery:
         """
         issues: list[str] = []
 
+        if self.agents_dir is None:
+            # Structure validation is about the filesystem layout; a
+            # resolver-backed discovery has no directory to validate. (PRO-106)
+            return issues
+
         if not self.agents_dir.is_dir():
             issues.append(f"Agents directory not found: {self.agents_dir}")
             return issues
@@ -280,6 +328,39 @@ class RegistryDiscovery:
 
         return None
 
+    def _discover_via_resolver(self) -> dict[str, Agent]:
+        """Discover every agent and subagent from resolved content.
+
+        Enumeration order comes from the resolver, which sorts by unit id, so
+        discovery no longer depends on filesystem ordering. (PRO-106)
+        """
+        from prompticorn.content.unit_id import UnitId
+
+        assert self._resolver is not None
+        all_agents: dict[str, Agent] = {}
+
+        for agent_name in self._resolved_agent_names():
+            prompt_text = self._resolver.read(UnitId.parse(f"agent/{agent_name}"))
+            bundle = self._component_loader.parse(prompt_text, source=f"agent/{agent_name}")
+            subagent_names = self._resolved_subagent_names(agent_name)
+            all_agents[agent_name] = self._build_agent(
+                agent_name, bundle, f"agent/{agent_name}", subagent_names
+            )
+
+            for subagent_name in subagent_names:
+                for variant in ("minimal", "verbose"):
+                    unit_id = f"subagent/{agent_name}/{subagent_name}/{variant}"
+                    text = self._resolver.read_optional(UnitId.parse(unit_id))
+                    if text is None:
+                        continue
+                    sub_bundle = self._component_loader.parse(text, source=unit_id)
+                    all_agents[f"{agent_name}/{subagent_name}"] = self._build_agent(
+                        subagent_name, sub_bundle, unit_id, []
+                    )
+                    break
+
+        return all_agents
+
     def _load_agent_from_directory(self, agent_name: str, agent_dir: Path) -> Agent:
         """Load a top-level agent from a directory with prompt.md directly.
 
@@ -303,10 +384,33 @@ class RegistryDiscovery:
             source=str(agent_dir),
         )
 
-        # Extract agent fields from prompt content
+        # Auto-discover subagents from the filesystem, merged with frontmatter.
+        extra_subagents: list[str] = []
+        subagents_dir = agent_dir / "subagents"
+        if subagents_dir.is_dir():
+            extra_subagents = [
+                p.name
+                for p in sorted(subagents_dir.iterdir())
+                if p.is_dir() and not p.name.startswith(".")
+            ]
+
+        return self._build_agent(agent_name, bundle, str(agent_dir), extra_subagents)
+
+    def _build_agent(
+        self,
+        agent_name: str,
+        bundle: ComponentBundle,
+        source: str,
+        extra_subagents: list[str],
+    ) -> Agent:
+        """Build the Agent model from parsed components.
+
+        Shared by the directory walk and the resolver path so both produce
+        identical models — the whole point of the seam. (PRO-106)
+        """
         prompt_data = bundle.prompt_content
         if not isinstance(prompt_data, dict):
-            raise ParseError(f"Invalid prompt.md format in {agent_dir}")
+            raise ParseError(f"Invalid prompt.md format in {source}")
 
         name = prompt_data.get("name") or agent_name
         description = prompt_data.get("description", "")
@@ -316,21 +420,12 @@ class RegistryDiscovery:
         skills = prompt_data.get("skills", [])
         workflows = prompt_data.get("workflows", [])
         subagents = prompt_data.get("subagents", [])
-
-        # Extract permissions (tool-specific)
         permissions = prompt_data.get("permissions", None)
 
-        # Auto-discover subagents from filesystem if not in frontmatter
-        subagents_dir = agent_dir / "subagents"
-        if subagents_dir.is_dir():
-            discovered_subagents = set(subagents)  # Start with what's in frontmatter
-            for subagent_path in sorted(subagents_dir.iterdir()):
-                if subagent_path.is_dir() and not subagent_path.name.startswith("."):
-                    discovered_subagents.add(subagent_path.name)
-            subagents = sorted(discovered_subagents)
+        if extra_subagents:
+            subagents = sorted(set(subagents) | set(extra_subagents))
 
-        # Create Agent IR model
-        agent = Agent(
+        return Agent(
             name=name or agent_name,
             description=description or f"Agent: {agent_name}",
             mode=mode,
@@ -341,8 +436,6 @@ class RegistryDiscovery:
             subagents=subagents if isinstance(subagents, list) else [],
             permissions=permissions if isinstance(permissions, dict) else None,
         )
-
-        return agent
 
     def _load_agent_from_variant(self, agent_name: str, variant_dir: Path) -> Agent:
         """Load an agent from a specific variant directory.

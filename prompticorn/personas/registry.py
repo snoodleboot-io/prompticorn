@@ -36,6 +36,20 @@ class PersonaRegistry:
         self._version = personas_data.get("version", "unknown")
 
     @classmethod
+    def from_resolver(cls) -> "PersonaRegistry":
+        """Create a registry from resolved content rather than a path.
+
+        The preferred constructor: consumers should not need to know where
+        personas.yaml lives. ``from_yaml`` remains for callers holding an
+        explicit path. (PRO-106)
+        """
+        import yaml
+
+        from prompticorn.content.content_resolver import read_configuration
+
+        return cls(yaml.safe_load(read_configuration("personas")))
+
+    @classmethod
     def from_yaml(cls, yaml_path: Path | str) -> "PersonaRegistry":
         """Create registry from personas.yaml file.
 

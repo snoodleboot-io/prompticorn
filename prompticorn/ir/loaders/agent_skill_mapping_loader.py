@@ -21,6 +21,22 @@ class AgentSkillMappingLoader:
         True
     """
 
+    @classmethod
+    def from_resolver(cls) -> "AgentSkillMappingLoader":
+        """Build from resolved content instead of a filesystem path.
+
+        The preferred constructor — consumers should not need to know where the
+        mapping lives. The path-taking form remains for callers holding one.
+        (PRO-106)
+        """
+        from prompticorn.content.content_resolver import read_configuration
+
+        instance = cls.__new__(cls)
+        instance.mapping_file = None
+        instance._mapping = None
+        instance._mapping_text = read_configuration("agent_skill_mapping")
+        return instance
+
     def __init__(self, mapping_file: Path | str | None = None):
         """Initialize with path to mapping file.
 
@@ -40,7 +56,8 @@ class AgentSkillMappingLoader:
         )
         if not self.mapping_file.exists():
             raise FileNotFoundError(f"Mapping file not found: {self.mapping_file}")
-        self._mapping = None
+        self._mapping: dict | None = None
+        self._mapping_text: str | None = None
 
     @property
     def mapping(self) -> dict:
@@ -50,9 +67,12 @@ class AgentSkillMappingLoader:
             Parsed YAML mapping dictionary
         """
         if self._mapping is None:
-            with open(self.mapping_file, encoding="utf-8") as f:
-                self._mapping = yaml.safe_load(f) or {}
-        return self._mapping
+            if self._mapping_text is not None:
+                self._mapping = yaml.safe_load(self._mapping_text) or {}
+            else:
+                with open(self.mapping_file, encoding="utf-8") as f:
+                    self._mapping = yaml.safe_load(f) or {}
+        return self._mapping or {}
 
     def get_skills_for_agent(self, agent_name: str) -> list[str]:
         """Get skills for an agent.

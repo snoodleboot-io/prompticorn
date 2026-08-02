@@ -41,6 +41,15 @@ class Registry:
             self._build_variant_index()
 
     @classmethod
+    def from_resolver(cls, resolver=None, cache: bool = True) -> "Registry":
+        """Create a registry from resolved content rather than a directory.
+
+        The preferred constructor. ``from_discovery`` keeps taking a path so
+        callers outside the seam work are unaffected. (PRO-106)
+        """
+        return cls(RegistryDiscovery.from_resolver(resolver).discover(), cache=cache)
+
+    @classmethod
     def from_discovery(cls, agents_dir: Path | str, cache: bool = True) -> "Registry":
         """Create registry from filesystem discovery.
 

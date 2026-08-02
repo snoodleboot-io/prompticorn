@@ -15,6 +15,7 @@ from prompticorn.content.content_source import ContentSource
 from prompticorn.content.content_unit import ContentUnit
 from prompticorn.content.errors import UnitNotFoundError
 from prompticorn.content.unit_id import UnitId
+from prompticorn.content.unit_kind import UnitKind
 
 RESOLVER_NAME = "resolver"
 
@@ -123,3 +124,63 @@ def reset_default_resolver() -> None:
     """Drop the singleton. For tests that swap the bundled tree."""
     global _default_resolver
     _default_resolver = None
+
+
+def read_configuration(name: str) -> str:
+    """Text of a bundled configuration YAML, by name.
+
+    A convenience over the resolver for the many consumers that want exactly one
+    configuration document. Keeps them from re-deriving `configuration/{name}`
+    and, more importantly, from reaching for a filesystem path. (PRO-106)
+    """
+    return default_resolver().read(UnitId.parse(f"configuration/{name}"))
+
+
+def read_core_convention(name: str) -> str | None:
+    """Text of a core convention (``system``, ``conventions``, …), or None."""
+    return default_resolver().read_optional(UnitId.parse(f"convention/core/{name}"))
+
+
+def read_language_convention(language: str) -> str | None:
+    """Text of a language convention, or None when the language has none.
+
+    An illegal segment (uppercase, punctuation) is a miss rather than an error:
+    a config may name a language that was never a unit.
+    """
+    from prompticorn.content.errors import InvalidUnitIdError
+
+    try:
+        unit_id = UnitId.parse(f"convention/language/{language}")
+    except InvalidUnitIdError:
+        return None
+    return default_resolver().read_optional(unit_id)
+
+
+def available_convention_languages() -> list[str]:
+    """Every language with a bundled convention, sorted."""
+    return sorted(
+        unit.id.segments[1]
+        for unit in default_resolver().units()
+        if unit.kind is UnitKind.CONVENTION and unit.id.segments[0] == "language"
+    )
+
+
+def read_variant_unit(kind: UnitKind, name: str, variant: str) -> str | None:
+    """Text of a variant-addressed unit, falling back to the other variant.
+
+    The fallback matches long-standing builder behaviour: a unit authored in one
+    variant only is still emitted rather than silently dropped.
+    """
+    from prompticorn.content.errors import InvalidUnitIdError
+
+    resolver = default_resolver()
+    other = "verbose" if variant == "minimal" else "minimal"
+    for candidate in (variant, other):
+        try:
+            unit_id = UnitId.parse(f"{kind.value}/{name}/{candidate}")
+        except InvalidUnitIdError:
+            return None
+        text = resolver.read_optional(unit_id)
+        if text is not None:
+            return text
+    return None

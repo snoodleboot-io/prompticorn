@@ -2,14 +2,13 @@
 
 Loads ``configurations/source_layouts.yaml`` and exposes the standard source
 layout for a language, falling back to a generic layout when the language has no
-specific entry. No internal deps (safe to import from builders and ir.loaders).
+specific entry. Content comes from the resolver, never a filesystem path.
 """
-
-from pathlib import Path
 
 import yaml
 
-_LAYOUTS_FILE = Path(__file__).parent / "configurations" / "source_layouts.yaml"
+from prompticorn.content.content_resolver import read_configuration
+
 _DEFAULT_KEY = "default"
 DEFAULT_STYLE = "flat"
 
@@ -21,8 +20,7 @@ _cache: dict[str, dict[str, str]] | None = None
 def _load() -> dict[str, dict[str, str]]:
     global _cache
     if _cache is None:
-        with open(_LAYOUTS_FILE, encoding="utf-8") as handle:
-            data = yaml.safe_load(handle) or {}
+        data = yaml.safe_load(read_configuration("source_layouts")) or {}
         cache: dict[str, dict[str, str]] = {}
         for key, value in data.items():
             name = str(key).lower()

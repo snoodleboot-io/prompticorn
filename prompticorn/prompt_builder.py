@@ -14,6 +14,9 @@ from prompticorn.builders.convention_generator import generate_all_conventions
 from prompticorn.builders.factory import BuilderFactory
 from prompticorn.builders.layouts import get_layout
 from prompticorn.builders.template_handlers.primary_agents_handler import PrimaryAgentsHandler
+from prompticorn.content.content_resolver import read_variant_unit
+from prompticorn.content.errors import ContentError
+from prompticorn.content.unit_kind import UnitKind
 from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
 from prompticorn.ir.loaders.language_skill_mapping_loader import LanguageSkillMappingLoader
 from prompticorn.ir.models.agent import Agent
@@ -55,24 +58,19 @@ class PromptBuilder:
         self.builder = BuilderFactory.get_builder(tool_name)
         self.layout = get_layout(tool_name)
 
-        # Load agents from bundled IR directory
-        agents_dir = Path(__file__).parent / "agents"
-        self.registry = Registry.from_discovery(agents_dir)
+        # Agents come from resolved content, not a directory. (PRO-106)
+        self.registry = Registry.from_resolver()
 
-        # Initialize language skill mapping loader
-        language_mapping_file = (
-            Path(__file__).parent / "configurations" / "language_skill_mapping.yaml"
-        )
+        # Mappings come from the resolver — no consumer needs to know where they
+        # live on disk. (PRO-106)
         try:
-            self.language_skill_loader = LanguageSkillMappingLoader(language_mapping_file)
-        except FileNotFoundError:
+            self.language_skill_loader = LanguageSkillMappingLoader.from_resolver()
+        except (FileNotFoundError, ContentError):
             self.language_skill_loader = None
 
-        # Initialize agent skill mapping loader (language-agnostic)
-        agent_mapping_file = Path(__file__).parent / "configurations" / "agent_skill_mapping.yaml"
         try:
-            self.agent_skill_loader = AgentSkillMappingLoader(agent_mapping_file)
-        except FileNotFoundError:
+            self.agent_skill_loader = AgentSkillMappingLoader.from_resolver()
+        except (FileNotFoundError, ContentError):
             self.agent_skill_loader = None
 
     @staticmethod
@@ -194,8 +192,7 @@ class PromptBuilder:
         if active_personas is not None:
             # Load persona registry and filter agents
             try:
-                personas_yaml_path = Path(__file__).parent / "personas" / "personas.yaml"
-                persona_registry = PersonaRegistry.from_yaml(personas_yaml_path)
+                persona_registry = PersonaRegistry.from_resolver()
                 persona_filter = PersonaFilter(persona_registry, active_personas)
 
                 # Get enabled agents for selected personas
@@ -687,37 +684,22 @@ class PromptBuilder:
         if not hasattr(agent, "skills") or not agent.skills:
             return written_files
 
-        # Top-level skills directory
-        skills_dir = Path(__file__).parent / "skills"
-
-        if not skills_dir.exists():
-            return written_files
-
-        # Load each skill the agent uses
+        # Load each skill the agent uses, through the resolver. (PRO-106)
         for skill_name in agent.skills:
-            skill_variant_dir = skills_dir / skill_name / variant
-            skill_file = skill_variant_dir / "SKILL.md"
+            skill_content = read_variant_unit(UnitKind.SKILL, skill_name, variant)
 
-            if not skill_file.exists():
-                # Try other variant as fallback
-                other_variant = "verbose" if variant == "minimal" else "minimal"
-                skill_file = skills_dir / skill_name / other_variant / "SKILL.md"
-
-            if not skill_file.exists():
-                # A skill an agent maps to but that has no SKILL.md on disk would
+            if skill_content is None:
+                # A skill an agent maps to but that has no SKILL.md would
                 # otherwise vanish from the build with no signal at all (PRO-89).
                 warnings.warn(
                     f"Agent '{agent_name}' maps to skill '{skill_name}', but no "
-                    f"SKILL.md exists in either variant under "
-                    f"{skills_dir / skill_name}; the skill will be missing from "
-                    "the build. Check the skill name and the file's casing.",
+                    f"SKILL.md exists in either variant for skill/{skill_name}; "
+                    "the skill will be missing from the build. Check the skill "
+                    "name and the file's casing.",
                     MissingSkillWarning,
                     stacklevel=2,
                 )
                 continue
-
-            # Read skill content
-            skill_content = skill_file.read_text(encoding="utf-8")
 
             # Parse to extract name and content
             skill_data = {
@@ -774,18 +756,7 @@ class PromptBuilder:
         Returns:
             Workflow content as string, or None if not found
         """
-        workflows_dir = Path(__file__).parent / "workflows"
-        workflow_file = workflows_dir / workflow_name / variant / "workflow.md"
-
-        if not workflow_file.exists():
-            # Try other variant as fallback
-            other_variant = "verbose" if variant == "minimal" else "minimal"
-            workflow_file = workflows_dir / workflow_name / other_variant / "workflow.md"
-
-        if workflow_file.exists():
-            return workflow_file.read_text(encoding="utf-8")
-
-        return None
+        return read_variant_unit(UnitKind.WORKFLOW, workflow_name, variant)
 
     def _parse_skills_file(self, content: str) -> list[dict[str, str]]:
         """Parse skills.md content into individual skills.
