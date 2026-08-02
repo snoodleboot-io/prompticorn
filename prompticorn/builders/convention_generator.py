@@ -5,6 +5,11 @@ from typing import Any
 
 import jinja2
 
+from prompticorn.content.content_resolver import (
+    available_convention_languages,
+    read_core_convention,
+    read_language_convention,
+)
 from prompticorn.source_layouts import get_source_layout
 from prompticorn.text_utils import strip_source_header_comments
 
@@ -140,7 +145,6 @@ def generate_core_convention(
     Returns:
         Content for .claude/conventions/core/general.md
     """
-    core_dir = Path(__file__).parent.parent / "agents" / "core"
     environment = _get_convention_environment()
     project = project or {}
     primary_spec = primary_spec or {}
@@ -160,27 +164,21 @@ def generate_core_convention(
     }
     context.update({key: project.get(key, "") for key in _PROJECT_TEMPLATE_KEYS})
 
-    def _render_section(path: Path) -> str:
-        """Read and render a core convention source (resolves macro imports)."""
-        source = strip_source_header_comments(path.read_text(encoding="utf-8"))
+    def _render_section(text: str) -> str:
+        """Render a core convention source (resolves macro imports)."""
+        source = strip_source_header_comments(text)
         return environment.from_string(source).render(**context)
 
     sections = []
 
-    # Read system.md
-    system_path = core_dir / "system.md"
-    if system_path.exists():
-        sections.append("# System Instructions\n\n" + _render_section(system_path))
-
-    # Read conventions.md
-    conventions_path = core_dir / "conventions.md"
-    if conventions_path.exists():
-        sections.append("# General Conventions\n\n" + _render_section(conventions_path))
-
-    # Read session.md
-    session_path = core_dir / "session.md"
-    if session_path.exists():
-        sections.append("# Session Management\n\n" + _render_section(session_path))
+    for heading, unit_name in (
+        ("# System Instructions", "system"),
+        ("# General Conventions", "conventions"),
+        ("# Session Management", "session"),
+    ):
+        text = read_core_convention(unit_name)
+        if text is not None:
+            sections.append(f"{heading}\n\n" + _render_section(text))
 
     return "\n\n---\n\n".join(sections)
 
@@ -204,13 +202,11 @@ def generate_language_convention(language: str, spec: dict[str, Any] | None = No
         Rendered content for .claude/conventions/languages/{language}.md, or None
         if no convention template exists for the language.
     """
-    core_dir = Path(__file__).parent.parent / "agents" / "core"
-    convention_path = core_dir / f"conventions-{language}.md"
-
-    if not convention_path.exists():
+    raw = read_language_convention(language)
+    if raw is None:
         return None
 
-    template_source = strip_source_header_comments(convention_path.read_text(encoding="utf-8"))
+    template_source = strip_source_header_comments(raw)
     environment = _get_convention_environment()
     context = _build_template_context(spec)
     return environment.from_string(template_source).render(**context)
@@ -222,15 +218,7 @@ def get_all_languages() -> list[str]:
     Returns:
         List of language names (e.g., ["python", "typescript", "rust"])
     """
-    core_dir = Path(__file__).parent.parent / "agents" / "core"
-    languages = []
-
-    for path in core_dir.glob("conventions-*.md"):
-        # Extract language from "conventions-{language}.md"
-        language = path.stem.replace("conventions-", "")
-        languages.append(language)
-
-    return sorted(languages)
+    return sorted(available_convention_languages())
 
 
 def _normalize_specs(

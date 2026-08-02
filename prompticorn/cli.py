@@ -59,7 +59,23 @@ from prompticorn.tools import menu_explanations as tool_menu_explanations
 from prompticorn.tools import menu_options as tool_menu_options
 
 # Bundled agents directory (same location prompt_builder discovers from)
+# `validate` checks the on-disk *structure* of the bundled agents tree — a
+# filesystem concern the resolver deliberately abstracts away, so it keeps a
+# path. Content reads go through the resolver. (PRO-106)
 _AGENTS_DIR = Path(__file__).parent / "agents"
+
+
+def _content_exists(raw_unit_id: str) -> bool:
+    """Whether the resolver carries a unit. Used by `list` to flag gaps. (PRO-106)"""
+    from prompticorn.content.content_resolver import default_resolver
+    from prompticorn.content.errors import InvalidUnitIdError
+    from prompticorn.content.unit_id import UnitId
+
+    try:
+        return default_resolver().has(UnitId.parse(raw_unit_id))
+    except InvalidUnitIdError:
+        return False
+
 
 # Valid languages for each preset type/subtype
 
@@ -76,13 +92,12 @@ def _get_valid_languages(preset_type: str, subtype: str) -> list[str]:
     Returns:
         List of valid language keys
     """
-    from pathlib import Path
 
     import yaml
 
-    config_file = Path(__file__).parent / "configurations" / "preset_languages.yaml"
-    with open(config_file, encoding="utf-8") as f:
-        preset_languages = yaml.safe_load(f)
+    from prompticorn.content.content_resolver import read_configuration
+
+    preset_languages = yaml.safe_load(read_configuration("preset_languages"))
 
     if preset_type in preset_languages:
         if subtype in preset_languages[preset_type]:
@@ -472,7 +487,7 @@ def list_prompts():
     from prompticorn.agent_registry import RegistryLoadError
 
     try:
-        reg = AgentRegistry.from_discovery(_AGENTS_DIR)
+        reg = AgentRegistry.from_resolver()
     except RegistryLoadError as exc:
         click.secho(f"\n✗ Failed to load agent registry: {exc}", fg="red")
         sys.exit(1)
@@ -482,8 +497,7 @@ def list_prompts():
         agent = reg.get_agent(name)
         click.echo("\n" + click.style(name, bold=True) + f"  — {agent.description}")
 
-        base = _AGENTS_DIR / name / "prompt.md"
-        base_mark = "✓" if base.exists() else click.style("✗ MISSING", fg="red")
+        base_mark = "✓" if _content_exists(f"agent/{name}") else click.style("✗ MISSING", fg="red")
         click.echo(f"  {base_mark}  prompt.md")
 
         subagents = reg.list_subagents(name)
@@ -492,8 +506,11 @@ def list_prompts():
             for sub in subagents:
                 click.echo(f"    {sub}")
                 for variant in ("minimal", "verbose"):
-                    vpath = _AGENTS_DIR / name / "subagents" / sub / variant / "prompt.md"
-                    vmark = "✓" if vpath.exists() else click.style("✗ MISSING", fg="red")
+                    vmark = (
+                        "✓"
+                        if _content_exists(f"subagent/{name}/{sub}/{variant}")
+                        else click.style("✗ MISSING", fg="red")
+                    )
                     click.echo(f"      {vmark}  {variant}/prompt.md")
 
     click.echo()
@@ -598,8 +615,7 @@ def init_prompts():
             from prompticorn.personas import PersonaRegistry
 
             # Load persona registry
-            personas_yaml_path = Path(__file__).parent / "personas" / "personas.yaml"
-            persona_registry = PersonaRegistry.from_yaml(personas_yaml_path)
+            persona_registry = PersonaRegistry.from_resolver()
 
             # Build options and explanations for persona selection
             persona_ids = persona_registry.list_personas()
@@ -920,8 +936,7 @@ def swap_command():
 
     # Load persona registry
     try:
-        personas_yaml_path = Path(__file__).parent / "personas" / "personas.yaml"
-        persona_registry = PersonaRegistry.from_yaml(personas_yaml_path)
+        persona_registry = PersonaRegistry.from_resolver()
     except Exception as e:
         click.secho(f"Error: Could not load personas ({e})", fg="red")
         raise click.Abort() from e

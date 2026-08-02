@@ -345,7 +345,8 @@ class TestBuild:
         def boom(*args, **kwargs):
             raise RuntimeError("persona blew up")
 
-        monkeypatch.setattr(pb.PersonaRegistry, "from_yaml", boom)
+        # Personas now load through the resolver rather than a path. (PRO-106)
+        monkeypatch.setattr(pb.PersonaRegistry, "from_resolver", boom)
         config = {"variant": "minimal", "active_personas": ["software_engineer"]}
         actions = kilo_builder.build(tmp_path, config=config, dry_run=True)
         assert any("Persona filtering failed" in a for a in actions)

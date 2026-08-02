@@ -12,11 +12,11 @@ Configuration is loaded from YAML files in prompticorn/configurations/
 """
 
 from dataclasses import dataclass
-from pathlib import Path
 from typing import Any
 
 import yaml
 
+from prompticorn.content.content_resolver import read_configuration
 from prompticorn.questions.language import LanguageRegistry
 
 
@@ -37,9 +37,7 @@ class ConfigOptionsRegistry:
             Dictionary with option lists for repo_type, package_manager, etc.
         """
         if cls._config is None:
-            config_file = Path(__file__).parent / "configurations" / "config_options.yaml"
-            with open(config_file, encoding="utf-8") as f:
-                cls._config = yaml.safe_load(f)
+            cls._config = yaml.safe_load(read_configuration("config_options"))
         assert cls._config is not None
         return cls._config
 
