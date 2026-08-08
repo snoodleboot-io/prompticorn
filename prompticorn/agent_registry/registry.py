@@ -8,6 +8,8 @@ from pathlib import Path
 
 from prompticorn.agent_registry.discovery import RegistryDiscovery
 from prompticorn.agent_registry.errors import AgentNotFoundError
+from prompticorn.artifact.artifact_id import ArtifactId
+from prompticorn.artifact.bundled_identity import BundledIdentity
 from prompticorn.ir.models import Agent
 
 
@@ -24,16 +26,25 @@ class Registry:
         >>> agent_names = registry.list_agents()
     """
 
-    def __init__(self, agents: dict[str, Agent], cache: bool = True) -> None:
+    def __init__(
+        self,
+        agents: dict[str, Agent],
+        cache: bool = True,
+        identity: BundledIdentity | None = None,
+    ) -> None:
         """Initialize registry with discovered agents.
 
         Args:
             agents: Dictionary of agents where keys are "agent_name" or
                    "agent_name/subagent_name" and values are Agent IR models.
             cache: Whether to cache agents in memory (default: True).
+            identity: Artifact-identity assigner. Defaults to bundled identity
+                at the package version. Injectable so a test can pin a version
+                without patching the distribution metadata. (PRO-108)
         """
         self._agents = agents
         self._cache_enabled = cache
+        self._identity = identity if identity is not None else BundledIdentity()
         self._variant_cache: dict[str, dict[str, Agent]] = {}
 
         # Build variant index if cache is enabled
@@ -155,6 +166,34 @@ class Registry:
         return sorted(
             [name.replace(prefix, "") for name in self._agents.keys() if name.startswith(prefix)]
         )
+
+    def artifact_id(self, name: str) -> ArtifactId:
+        """Artifact identity for a registry key. (PRO-108)
+
+        Surfaced *alongside* the name keys rather than replacing them: every
+        existing lookup keeps taking the same string, and identity is additive.
+
+        Args:
+            name: Registry key — ``"code"`` or ``"code/boilerplate"``.
+
+        Returns:
+            The artifact identity, e.g. ``local/agent.code@0.1.0``.
+
+        Raises:
+            AgentNotFoundError: If the key is not in the registry. Deriving an
+                identity for something that was never discovered would invent an
+                artifact that does not exist.
+        """
+        if name not in self._agents:
+            raise AgentNotFoundError(name)
+        return self._identity.for_registry_key(name)
+
+    def artifact_ids(self) -> dict[str, ArtifactId]:
+        """Identity for every discovered agent and subagent, keyed as the registry is.
+
+        Sorted, because this feeds `list` output and, later, lockfile writing.
+        """
+        return {key: self._identity.for_registry_key(key) for key in sorted(self._agents)}
 
     def has_agent(self, name: str) -> bool:
         """Check if agent exists in registry.

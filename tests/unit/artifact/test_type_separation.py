@@ -66,9 +66,46 @@ def _public_signatures(module: ModuleType) -> Iterator[tuple[str, str]]:
             yield label, str(inspect.signature(attribute))
 
 
-def test_no_artifact_signature_mentions_unit_id() -> None:
+# The single sanctioned translation boundary. `BundledIdentity` exists to map a
+# UnitId to the ArtifactId of the artifact containing it (PRO-108), so it must
+# name both types. That is the opposite of conflation — a converter proves the
+# two are distinct — but it has to be declared, not silently tolerated.
+_UNIT_ID_TRANSLATION_BOUNDARY = "BundledIdentity"
+
+
+def test_no_artifact_signature_mentions_unit_id_outside_the_translation_boundary() -> None:
     offenders = [
-        f"{label}{text}" for label, text in _public_signatures(artifact_package) if "UnitId" in text
+        f"{label}{text}"
+        for label, text in _public_signatures(artifact_package)
+        if "UnitId" in text and not label.startswith(_UNIT_ID_TRANSLATION_BOUNDARY)
+    ]
+
+    assert offenders == []
+
+
+def test_the_translation_boundary_exemption_is_actually_used() -> None:
+    """Guards against the exemption quietly becoming dead and hiding a new leak."""
+    boundary_signatures = [
+        label
+        for label, text in _public_signatures(artifact_package)
+        if "UnitId" in text and label.startswith(_UNIT_ID_TRANSLATION_BOUNDARY)
+    ]
+
+    assert boundary_signatures != []
+
+
+def test_no_signature_accepts_either_type_interchangeably() -> None:
+    """The actual acceptance criterion: neither type substitutes for the other.
+
+    Converting between them is fine; a parameter that would swallow *either* is
+    not, because that is the signature under which a caller can pass the wrong
+    one and never learn.
+    """
+    offenders = [
+        f"{label}{text}"
+        for module in (artifact_package, content_package)
+        for label, text in _public_signatures(module)
+        if "ArtifactId" in text and "UnitId" in text and "|" in text
     ]
 
     assert offenders == []
