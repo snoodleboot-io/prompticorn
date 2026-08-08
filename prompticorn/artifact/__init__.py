@@ -13,6 +13,7 @@ id with the digest of its content.
 
 from prompticorn.artifact.artifact_id import ArtifactId
 from prompticorn.artifact.artifact_requirement import ArtifactRequirement
+from prompticorn.artifact.bundled_identity import BundledIdentity
 from prompticorn.artifact.comparison_operator import ComparisonOperator
 from prompticorn.artifact.errors import (
     ArtifactError,
@@ -22,6 +23,7 @@ from prompticorn.artifact.errors import (
     InvalidVersionRangeError,
 )
 from prompticorn.artifact.naming import DEFAULT_NAMESPACE
+from prompticorn.artifact.package_version import bundled_version, to_semantic_version
 from prompticorn.artifact.pinned_artifact import PinnedArtifact
 from prompticorn.artifact.semantic_version import SemanticVersion
 from prompticorn.artifact.version_constraint import VersionConstraint
@@ -32,6 +34,7 @@ __all__ = [
     "ArtifactError",
     "ArtifactId",
     "ArtifactRequirement",
+    "BundledIdentity",
     "ComparisonOperator",
     "InvalidArtifactIdError",
     "InvalidDigestError",
@@ -41,4 +44,6 @@ __all__ = [
     "SemanticVersion",
     "VersionConstraint",
     "VersionRange",
+    "bundled_version",
+    "to_semantic_version",
 ]

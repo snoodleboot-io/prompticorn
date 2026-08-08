@@ -77,6 +77,28 @@ def _content_exists(raw_unit_id: str) -> bool:
         return False
 
 
+def _digest_column(raw_unit_id: str) -> str:
+    """Short content digest for `list`, or empty when the unit is absent. (PRO-108)
+
+    Truncated for readability only — the full digest is what a lockfile pins.
+    Absent content yields an empty string rather than a placeholder, so the
+    ✗ MISSING marker stays the single signal for "not there".
+    """
+    from prompticorn.content.content_resolver import default_resolver
+    from prompticorn.content.errors import ContentError
+    from prompticorn.content.unit_id import UnitId
+
+    try:
+        digest = default_resolver().digest(UnitId.parse(raw_unit_id))
+    except ContentError:
+        return ""
+    return f"  {click.style(digest[:_DIGEST_DISPLAY_LENGTH], dim=True)}"
+
+
+# Enough hex to be unambiguous by eye without dominating the line.
+_DIGEST_DISPLAY_LENGTH = 12
+
+
 # Valid languages for each preset type/subtype
 
 
@@ -496,22 +518,23 @@ def list_prompts():
     for name in reg.list_agents():
         agent = reg.get_agent(name)
         click.echo("\n" + click.style(name, bold=True) + f"  — {agent.description}")
+        click.echo("  " + click.style(reg.artifact_id(name).render(), fg="cyan"))
 
         base_mark = "✓" if _content_exists(f"agent/{name}") else click.style("✗ MISSING", fg="red")
-        click.echo(f"  {base_mark}  prompt.md")
+        click.echo(f"  {base_mark}  prompt.md{_digest_column(f'agent/{name}')}")
 
         subagents = reg.list_subagents(name)
         if subagents:
             click.echo("  subagents:")
             for sub in subagents:
                 click.echo(f"    {sub}")
+                click.echo(
+                    "      " + click.style(reg.artifact_id(f"{name}/{sub}").render(), fg="cyan")
+                )
                 for variant in ("minimal", "verbose"):
-                    vmark = (
-                        "✓"
-                        if _content_exists(f"subagent/{name}/{sub}/{variant}")
-                        else click.style("✗ MISSING", fg="red")
-                    )
-                    click.echo(f"      {vmark}  {variant}/prompt.md")
+                    unit = f"subagent/{name}/{sub}/{variant}"
+                    vmark = "✓" if _content_exists(unit) else click.style("✗ MISSING", fg="red")
+                    click.echo(f"      {vmark}  {variant}/prompt.md{_digest_column(unit)}")
 
     click.echo()
 

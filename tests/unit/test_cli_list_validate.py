@@ -1,5 +1,6 @@
 """Tests for the `list` and `validate` CLI commands (discovery-based)."""
 
+import re
 from pathlib import Path
 
 from click.testing import CliRunner
@@ -28,6 +29,47 @@ class TestListCommand:
         result = runner.invoke(cli, ["list"])
         # Assert — user-facing output must not reference the assistant by name
         assert "Claude" not in result.output
+
+    def test_list_shows_artifact_identity(self):
+        """PRO-108 AC 3: identity is visible before anything depends on it."""
+        # Arrange
+        runner = CliRunner()
+        # Act
+        result = runner.invoke(cli, ["list"])
+        # Assert
+        assert result.exit_code == 0, result.output
+        assert "local/agent.code@" in result.output
+        assert "local/subagent.code.boilerplate@" in result.output
+
+    def test_list_shows_a_short_digest(self):
+        """PRO-108 AC 3: a short digest per unit, alongside the ✓ marker."""
+        # Arrange
+        runner = CliRunner()
+        # Act
+        result = runner.invoke(cli, ["list"])
+        # Assert — 12 hex chars trailing a present prompt.md line
+        assert re.search(r"✓\s+prompt\.md\s+[0-9a-f]{12}\b", result.output)
+
+    def test_list_agents_are_sorted(self):
+        """PRO-108 AC 3: output sorted, so it never depends on the filesystem."""
+        # Arrange
+        runner = CliRunner()
+        # Act
+        result = runner.invoke(cli, ["list"])
+        # Assert
+        identities = re.findall(r"local/agent\.([a-z0-9._-]+)@", result.output)
+        assert identities == sorted(identities)
+        assert len(identities) > 10
+
+    def test_list_is_stable_across_runs(self):
+        """PRO-108 AC 2: unchanged content, byte-identical output."""
+        # Arrange
+        runner = CliRunner()
+        # Act
+        first = runner.invoke(cli, ["list"])
+        second = runner.invoke(cli, ["list"])
+        # Assert
+        assert first.output == second.output
 
 
 class TestValidateCommand:

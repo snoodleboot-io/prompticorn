@@ -7,6 +7,8 @@ agents and subagents from a directory structure, building Agent IR models.
 from pathlib import Path
 
 from prompticorn.agent_registry.errors import RegistryLoadError
+from prompticorn.artifact.artifact_id import ArtifactId
+from prompticorn.artifact.bundled_identity import BundledIdentity
 from prompticorn.content.content_resolver import ContentResolver
 from prompticorn.ir.exceptions import MissingFileError, ParseError
 from prompticorn.ir.loaders import ComponentBundle, ComponentLoader
@@ -58,6 +60,7 @@ class RegistryDiscovery:
         self.agents_dir = Path(agents_dir)
         self._component_loader = ComponentLoader()
         self._resolver: ContentResolver | None = None
+        self._identity = BundledIdentity()
 
     @classmethod
     def from_resolver(cls, resolver=None) -> "RegistryDiscovery":
@@ -73,6 +76,9 @@ class RegistryDiscovery:
         instance.agents_dir = None
         instance._component_loader = ComponentLoader()
         instance._resolver = resolver if resolver is not None else default_resolver()
+        # Set here as well as in __init__: this constructor bypasses __init__
+        # entirely, so anything it forgets is an AttributeError at first use.
+        instance._identity = BundledIdentity()
         return instance
 
     def _resolved_agent_names(self) -> list[str]:
@@ -96,6 +102,18 @@ class RegistryDiscovery:
                 if unit.kind is UnitKind.SUBAGENT and unit.id.segments[0] == agent_name
             }
         )
+
+    def artifact_id(self, key: str) -> ArtifactId:
+        """Artifact identity for a discovered key. (PRO-108)
+
+        Unlike :meth:`Registry.artifact_id` this does not check membership —
+        discovery is the thing that decides what exists, so it has no set to
+        check against until :meth:`discover` has run.
+
+        Args:
+            key: ``"code"`` or ``"code/boilerplate"``.
+        """
+        return self._identity.for_registry_key(key)
 
     @staticmethod
     def _read_component(directory: Path, filename: str) -> str:
