@@ -28,6 +28,7 @@ from typing import Any
 
 from ruamel.yaml import YAML
 
+from prompticorn.manifest.manifest_schema import SCHEMA_VERSION_V2
 from prompticorn.questions.base.spec_handler import (
     SpecHandler,
 )
@@ -136,7 +137,44 @@ class ConfigHandler:
             config = cls._get_yaml().load(f) or {}
 
         cls._migrate_old_orm_database_to_fungible(config)
+        cls._migrate_v1_to_v2(config)
         return config
+
+    @classmethod
+    def _migrate_v1_to_v2(cls, config: dict[str, Any]) -> None:
+        """Raise a v1 manifest to schema v2. (PRO-109)
+
+        v2 is **purely additive** — it introduces ``artifacts:`` and ``sources:``,
+        and absent keys mean exactly today's behaviour. So the migration is only
+        the version stamp: there is no shape to rewrite, and deliberately so.
+        That is what lets a v1 config keep producing byte-identical output.
+
+        Two consequences worth stating, because both are easy to assume away:
+
+        - **Only the one scalar is touched.** ``ruamel`` preserves comments and
+          key order only while the object graph stays its own ``CommentedMap``.
+          Assigning a plain ``dict`` anywhere in the tree would silently discard
+          the author's comments on the next save. Setting a string does not.
+        - **Nothing is written to disk.** Like
+          :meth:`_migrate_old_orm_database_to_fungible`, this runs on load and
+          mutates the in-memory mapping. The file is rewritten only when the user
+          does something that calls ``save_config``.
+
+        Idempotent: a config already at v2 returns before touching anything, so
+        running it repeatedly is a no-op.
+
+        Args:
+            config: Configuration dictionary to migrate in place.
+        """
+        if not config:
+            return
+        if config.get("version") == SCHEMA_VERSION_V2:
+            return
+
+        # An absent version means a config written before the key was added.
+        # Treated as v1 rather than rejected — the key was inert until PRO-109,
+        # so its absence says nothing about the file's shape.
+        config["version"] = SCHEMA_VERSION_V2
 
     @classmethod
     def _migrate_old_orm_database_to_fungible(cls, config: dict[str, Any]) -> None:
@@ -267,7 +305,7 @@ class ConfigHandler:
             Dictionary with default single-language configuration structure.
         """
         return {
-            "version": "1.0",
+            "version": SCHEMA_VERSION_V2,
             "repository": {
                 "type": "single-language",
                 "mappings": {},
@@ -324,7 +362,7 @@ class ConfigHandler:
             Dictionary with default multi-language-monorepo configuration structure.
         """
         return {
-            "version": "1.0",
+            "version": SCHEMA_VERSION_V2,
             "repository": {
                 "type": "multi-language-monorepo",
                 "mappings": {},

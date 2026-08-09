@@ -60,7 +60,9 @@ class TestConfigHandler:
             ConfigHandler.save_config(test_config, config_path)
 
             loaded = ConfigHandler.load_config(config_path)
-            assert loaded == test_config
+            # Everything round-trips unchanged except the schema stamp: loading a
+            # v1 config migrates it to v2 in memory (PRO-109).
+            assert loaded == {**test_config, "version": "2.0"}
 
     def test_save_config_yaml_formatting(self):
         """YAML should use proper 2-space indentation for lists."""
