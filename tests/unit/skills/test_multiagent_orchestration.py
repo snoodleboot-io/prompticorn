@@ -11,6 +11,7 @@ from prompticorn.builders.errors import BuilderException
 from prompticorn.ir.loaders.skill_loader import SkillLoader
 from prompticorn.ir.models import Agent
 from prompticorn.prompt_builder import PromptBuilder, get_prompt_builder
+from prompticorn.text_utils import frontmatter_field, parse_frontmatter
 
 _SKILL = "multiagent-orchestration"
 _VARIANTS = ["minimal", "verbose"]
@@ -61,6 +62,64 @@ class TestMultiagentOrchestrationSkill:
             ).read_text()
         )
         assert _SKILL in mapping["orchestrator"]["skills"]
+
+    @pytest.mark.parametrize("agent", ["plan", "architect", "code"])
+    def test_wired_to_the_agents_that_plan_work(self, project_root, agent):
+        """PRO-142: mapped to the orchestrator alone, the skill was invisible during
+        planning — planning routes to plan-agent, which never saw it. The agents that
+        decide how work is decomposed must carry it too."""
+        mapping = yaml.safe_load(
+            (
+                project_root / "prompticorn" / "configurations" / "agent_skill_mapping.yaml"
+            ).read_text()
+        )
+        assert _SKILL in mapping[agent]["skills"]
+
+    def test_every_mapping_key_names_a_real_agent(self, project_root):
+        """PRO-142: `planning:` addressed no agent, so plan-agent silently fell back
+        to defaults. A key that matches nothing is dead config that looks live."""
+        root = project_root / "prompticorn"
+        mapping = yaml.safe_load((root / "configurations" / "agent_skill_mapping.yaml").read_text())
+        agents = {p.name for p in (root / "agents").iterdir() if (p / "prompt.md").exists()}
+        assert not sorted(set(mapping) - agents)
+
+    @pytest.mark.parametrize("variant", _VARIANTS)
+    def test_declares_a_trigger_for_loading(self, skills_dir, variant):
+        """The emitted skill table shows `when_to_use`; without it the row falls back
+        to "When workflow requires <name>", which states no condition at all."""
+        path = _skill_path(skills_dir, variant)
+        trigger = frontmatter_field(path.read_text(encoding="utf-8"), "when_to_use")
+        assert trigger and "parallel" in trigger.lower()
+
+    @pytest.mark.parametrize("variant", _VARIANTS)
+    def test_covers_the_gaps_the_procedure_depends_on(self, skills_dir, variant):
+        """PRO-142: the spec's hard requirements that the skill body had dropped."""
+        body = _skill_path(skills_dir, variant).read_text().lower()
+        for phrase, why in [
+            ("environment-setup", "names the subagent that owns the env gate"),
+            ("interfaces", "each subagent brief declares its shared interfaces"),
+            ("own subagents", "units with parallelisable subtasks spawn recursively"),
+            ("markdown", "the plan is delivered as a markdown document"),
+            ("re-present", "material mid-run change pauses lanes and re-presents"),
+        ]:
+            assert phrase in body, f"{variant}: missing '{phrase}' — {why}"
+
+    def test_environment_setup_subagent_exists(self, project_root):
+        """Step 4 gates on a dedicated setup subagent; it must be a real agent with
+        the tooling to actually start a service, not a doc that describes one."""
+        subagent = (
+            project_root
+            / "prompticorn"
+            / "agents"
+            / "orchestrator"
+            / "subagents"
+            / "environment-setup"
+        )
+        for variant in _VARIANTS:
+            text = (subagent / variant / "prompt.md").read_text(encoding="utf-8")
+            metadata, _ = parse_frontmatter(text)
+            assert "bash" in metadata["tools"], f"{variant}: cannot start anything without bash"
+            assert frontmatter_field(text, "when_to_use")
 
     @pytest.mark.parametrize(
         ("tool", "expected"),

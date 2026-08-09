@@ -77,14 +77,14 @@ This agent can delegate to the following subagents when needed:
 
 | Subagent | Purpose | File Path | When to Use |
 |----------|---------|-----------|-------------|
-| Data Preparation | Specialized for data-preparation tasks | .claude/subagents/data-preparation.md | When you need focused data-preparation assistance |
-| Deployment | Specialized for deployment tasks | .claude/subagents/deployment.md | When you need focused deployment assistance |
-| Ml Ethics Reviewer | Specialized for ml-ethics-reviewer tasks | .claude/subagents/ml-ethics-reviewer.md | When you need focused ml-ethics-reviewer assistance |
-| Ml Evaluation Expert | Specialized for ml-evaluation-expert tasks | .claude/subagents/ml-evaluation-expert.md | When you need focused ml-evaluation-expert assistance |
-| Mlops Engineer | Specialized for mlops-engineer tasks | .claude/subagents/mlops-engineer.md | When you need focused mlops-engineer assistance |
-| Model Training | Specialized for model-training tasks | .claude/subagents/model-training.md | When you need focused model-training assistance |
-| Model Training Specialist | Specialized for model-training-specialist tasks | .claude/subagents/model-training-specialist.md | When you need focused model-training-specialist assistance |
-| Monitoring | Specialized for monitoring tasks | .claude/subagents/monitoring.md | When you need focused monitoring assistance |
+| Data Preparation | data preparation & feature engineering | .claude/subagents/data-preparation.md | When you need focused data-preparation assistance |
+| Deployment | model deployment & serving | .claude/subagents/deployment.md | When you need focused deployment assistance |
+| Ml Ethics Reviewer | Comprehensive ethical ML frameworks, bias detection, and responsible AI governance | .claude/subagents/ml-ethics-reviewer.md | When you need focused ml-ethics-reviewer assistance |
+| Ml Evaluation Expert | Comprehensive ML evaluation frameworks, metrics, and validation strategies | .claude/subagents/ml-evaluation-expert.md | When you need focused ml-evaluation-expert assistance |
+| Mlops Engineer | Comprehensive MLOps engineering for production ML systems | .claude/subagents/mlops-engineer.md | When you need focused mlops-engineer assistance |
+| Model Training | model training & tuning | .claude/subagents/model-training.md | When you need focused model-training assistance |
+| Model Training Specialist | Comprehensive ML model training, optimization, and advanced techniques | .claude/subagents/model-training-specialist.md | When you need focused model-training-specialist assistance |
+| Monitoring | model monitoring & drift detection | .claude/subagents/monitoring.md | When you need focused monitoring assistance |
 
 **Loading Instructions:**
 - Do NOT load subagents upfront
@@ -116,13 +116,13 @@ Skills are reusable capabilities. Load only when workflow requires:
 | Model Monitoring | Capability for model-monitoring | .claude/skills/model-monitoring/SKILL.md | When workflow requires model-monitoring |
 | Model Performance Debugging | Capability for model-performance-debugging | .claude/skills/model-performance-debugging/SKILL.md | When workflow requires model-performance-debugging |
 | Time Series Preprocessing | Capability for time-series-preprocessing | .claude/skills/time-series-preprocessing/SKILL.md | When workflow requires time-series-preprocessing |
-| Feature Planning | Capability for feature-planning | .claude/skills/feature-planning/SKILL.md | When workflow requires feature-planning |
-| Incremental Implementation | Capability for incremental-implementation | .claude/skills/incremental-implementation/SKILL.md | When workflow requires incremental-implementation |
-| Post Implementation Checklist | Capability for post-implementation-checklist | .claude/skills/post-implementation-checklist/SKILL.md | When workflow requires post-implementation-checklist |
+| Feature Planning | Plan before implementing - understand scope and approach with detailed guidance | .claude/skills/feature-planning/SKILL.md | When workflow requires feature-planning |
+| Incremental Implementation | Comprehensive guide for implementing code incrementally following established patterns, conventions, and quality standards | .claude/skills/incremental-implementation/SKILL.md | When workflow requires incremental-implementation |
+| Post Implementation Checklist | Comprehensive checklist for documenting follow-up work and testing needs after implementation | .claude/skills/post-implementation-checklist/SKILL.md | When workflow requires post-implementation-checklist |
 | Python Typing And Async | Capability for python-typing-and-async | .claude/skills/python-typing-and-async/SKILL.md | When workflow requires python-typing-and-async |
-| Test Aaa Structure | Capability for test-aaa-structure | .claude/skills/test-aaa-structure/SKILL.md | When workflow requires test-aaa-structure |
-| Test Coverage Categories | Capability for test-coverage-categories | .claude/skills/test-coverage-categories/SKILL.md | When workflow requires test-coverage-categories |
-| Test Mocking Rules | Capability for test-mocking-rules | .claude/skills/test-mocking-rules/SKILL.md | When workflow requires test-mocking-rules |
+| Test Aaa Structure | Apply Arrange-Act-Assert pattern for clear, maintainable tests with detailed guidance | .claude/skills/test-aaa-structure/SKILL.md | When workflow requires test-aaa-structure |
+| Test Coverage Categories | Comprehensive systematic approach to achieving complete test coverage through structured category-based testing | .claude/skills/test-coverage-categories/SKILL.md | When workflow requires test-coverage-categories |
+| Test Mocking Rules | Comprehensive guidelines for when and how to use mocks, stubs, and fakes in tests | .claude/skills/test-mocking-rules/SKILL.md | When workflow requires test-mocking-rules |
 
 **Loading Instructions:**
 - Skills are loaded on-demand

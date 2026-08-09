@@ -128,6 +128,18 @@ def _generate_routing_categories() -> list[dict]:
             "agent": "orchestrator-agent",
         },
         {
+            "name": "Parallel / Multiagent Execution",
+            "keywords": '"parallel", "multiagent", "concurrently", "spawn agents", '
+            '"fan out", "run lanes"',
+            "agent": "orchestrator-agent",
+        },
+        {
+            "name": "Acceptance Criteria",
+            "keywords": '"acceptance criteria", "ATDD", "acceptance test", '
+            '"given/when/then", "definition of done"',
+            "agent": "atdd-agent",
+        },
+        {
             "name": "Planning",
             "keywords": '"plan", "PRD", "requirements", "design document"',
             "agent": "plan-agent",

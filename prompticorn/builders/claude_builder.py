@@ -18,9 +18,11 @@ from prompticorn.builders.naming_utils import (
     workflow_to_file_name,
 )
 from prompticorn.builders.workflow_loader import WorkflowLoader
+from prompticorn.content.content_resolver import read_variant_unit
+from prompticorn.content.unit_kind import UnitKind
 from prompticorn.ir.loaders import CoreFilesLoader
 from prompticorn.ir.models import Agent
-from prompticorn.text_utils import strip_source_header_comments
+from prompticorn.text_utils import frontmatter_field, strip_source_header_comments
 
 
 class ClaudeBuilder(Builder):
@@ -168,7 +170,9 @@ class ClaudeBuilder(Builder):
         """
         template = self.jinja_env.get_template("agent.md.j2")
 
-        prepared_skills = self._prepare_skills_data(agent.skills) if agent.skills else []
+        prepared_skills = (
+            self._prepare_skills_data(agent.skills, options.variant) if agent.skills else []
+        )
 
         # Substitute template variables (e.g. {{PRIMARY_AGENTS_LIST}}) in the
         # system prompt before rendering, mirroring the KiloBuilder behaviour.
@@ -190,7 +194,9 @@ class ClaudeBuilder(Builder):
             "workflow_steps": self._extract_workflow_steps(agent.workflows[0], options.variant)
             if agent.workflows
             else [],
-            "subagents": self._prepare_subagents_data(agent.subagents) if agent.subagents else [],
+            "subagents": self._prepare_subagents_data(agent.subagents, agent.name, options.variant)
+            if agent.subagents
+            else [],
             "skills": prepared_skills,
             "notes": self._generate_agent_notes(agent),
         }
@@ -344,6 +350,10 @@ class ClaudeBuilder(Builder):
             "ask": "Answering questions, providing explanations",
             "enforcement": "Reviewing code against coding standards",
             "migration": "Handling dependency upgrades, framework migrations",
+            "atdd": (
+                "Defining acceptance criteria, writing acceptance scenarios before "
+                "implementation, validating a feature against what was asked for"
+            ),
         }
         return scenarios.get(agent.name, f"Working on {agent.name} tasks")
 
@@ -385,11 +395,19 @@ class ClaudeBuilder(Builder):
             "Review and complete",
         ]
 
-    def _prepare_subagents_data(self, subagent_names: list[str]) -> list[dict[str, str]]:
+    def _prepare_subagents_data(
+        self, subagent_names: list[str], parent_agent: str, variant: str = "minimal"
+    ) -> list[dict[str, str]]:
         """Prepare subagent data for template rendering.
+
+        Purpose and trigger text come from the authored prompt's frontmatter so the
+        table tells the agent what the subagent does and when to reach for it. Only
+        content that declares neither falls back to a name-derived placeholder.
 
         Args:
             subagent_names: List of subagent names
+            parent_agent: Name of the agent that owns these subagents
+            variant: Variant (minimal/verbose)
 
         Returns:
             List of subagent dictionaries with metadata
@@ -399,21 +417,35 @@ class ClaudeBuilder(Builder):
             file_name = subagent_to_file_name(name)
             # Clean up the name for display
             display_name = name.replace("-", " ").replace("/", " - ").title()
+            # Names already qualified as "{agent}/{subagent}" carry their own owner.
+            qualified = name if "/" in name else f"{parent_agent}/{name}"
+            source = read_variant_unit(UnitKind.SUBAGENT, qualified, variant) or ""
+            readable = name.replace("/", " ")
             subagents.append(
                 {
                     "name": display_name,
-                    "purpose": f"Specialized for {name.replace('/', ' ')} tasks",
+                    "purpose": frontmatter_field(source, "description")
+                    or f"Specialized for {readable} tasks",
                     "file_name": file_name,
-                    "when_to_use": f"When you need focused {name.replace('/', ' ')} assistance",
+                    "when_to_use": frontmatter_field(source, "when_to_use")
+                    or f"When you need focused {readable} assistance",
                 }
             )
         return subagents
 
-    def _prepare_skills_data(self, skill_names: list[str]) -> list[dict[str, str]]:
+    def _prepare_skills_data(
+        self, skill_names: list[str], variant: str = "minimal"
+    ) -> list[dict[str, str]]:
         """Prepare skills data for template rendering.
+
+        The authored SKILL.md frontmatter already states what a skill is for and,
+        where declared, the conditions that should trigger it. Emitting that beats
+        the name-derived placeholder it replaces, which said only that the skill
+        was "a capability for" itself and gave the agent no reason to load it.
 
         Args:
             skill_names: List of skill names
+            variant: Variant (minimal/verbose)
 
         Returns:
             List of skill dictionaries with metadata
@@ -421,12 +453,14 @@ class ClaudeBuilder(Builder):
         skills = []
         for name in skill_names:
             dir_name = skill_to_directory_name(name)
+            source = read_variant_unit(UnitKind.SKILL, name, variant) or ""
             skills.append(
                 {
                     "name": name.replace("-", " ").title(),
-                    "purpose": f"Capability for {name}",
+                    "purpose": frontmatter_field(source, "description") or f"Capability for {name}",
                     "directory": dir_name,
-                    "when_to_use": f"When workflow requires {name}",
+                    "when_to_use": frontmatter_field(source, "when_to_use")
+                    or f"When workflow requires {name}",
                 }
             )
         return skills

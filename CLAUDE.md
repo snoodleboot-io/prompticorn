@@ -1,7 +1,7 @@
 # Claude Configuration
 
-**Last Updated:** 2026-07-28  
-**Agent Count:** 24 primary agents  
+**Last Updated:** 2026-08-08  
+**Agent Count:** 26 primary agents  
 **Persona:** Software Engineer
 
 ## Core Conventions
@@ -27,6 +27,7 @@ Match the user's request to **ONE** agent and load **ONLY** that file.
 |-------|---------|-----------|
 | architect-agent | System design, architecture planning, and technical decision making | .claude/agents/architect-agent.md |
 | ask-agent | Answer questions and provide explanations | .claude/agents/ask-agent.md |
+| atdd-agent | Turn requirements into executable acceptance criteria before any implementation begins | .claude/agents/atdd-agent.md |
 | backend-agent | Design scalable backend systems, APIs, microservices, and distributed architectures | .claude/agents/backend-agent.md |
 | code-agent | Implement features and make direct code changes | .claude/agents/code-agent.md |
 | compliance-agent | SOC 2, ISO 27001, GDPR, HIPAA, PCI-DSS compliance | .claude/agents/compliance-agent.md |
@@ -45,6 +46,7 @@ Match the user's request to **ONE** agent and load **ONLY** that file.
 | performance-agent | Optimize application performance, identify bottlenecks, and implement benchmarking | .claude/agents/performance-agent.md |
 | plan-agent | Develops PRDs and works with architects to create ARDs | .claude/agents/plan-agent.md |
 | product-agent | Drive product strategy, requirements, roadmap planning, and metrics | .claude/agents/product-agent.md |
+| qa-tester-agent | Design testing strategies, quality assurance processes, and automated test suites | .claude/agents/qa-tester-agent.md |
 | refactor-agent | Improve code structure while preserving behavior | .claude/agents/refactor-agent.md |
 | review-agent | Code, performance, and accessibility reviews | .claude/agents/review-agent.md |
 | security-agent | Design secure systems, threat modeling, vulnerability assessment, and compliance | .claude/agents/security-agent.md |
@@ -101,6 +103,14 @@ Match the user's request to the appropriate agent:
 ### Multi-step Workflows
 - **Keywords:** "coordinate", "manage", "orchestrate", "complex task"
 - **Agent:** orchestrator-agent
+
+### Parallel / Multiagent Execution
+- **Keywords:** "parallel", "multiagent", "concurrently", "spawn agents", "fan out", "run lanes"
+- **Agent:** orchestrator-agent
+
+### Acceptance Criteria
+- **Keywords:** "acceptance criteria", "ATDD", "acceptance test", "given/when/then", "definition of done"
+- **Agent:** atdd-agent
 
 ### Planning
 - **Keywords:** "plan", "PRD", "requirements", "design document"

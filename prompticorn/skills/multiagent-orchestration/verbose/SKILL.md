@@ -1,6 +1,7 @@
 ---
 name: multiagent-orchestration
 description: Run a genuinely-parallel multiagent implementation with detailed guidance - plan, gate on environment, spawn subagents concurrently, aggregate, and debug/retry
+when_to_use: Load before planning ANY work with independently executable units - the request names parallel/multiagent/concurrent execution, asks to orchestrate or fan out agents, or decomposes into lanes that would otherwise run one at a time
 languages: [all]
 subagents: [all]
 tools_needed: [read, glob]
@@ -42,29 +43,50 @@ both pass.
 
 **Purpose:** Maximize safe parallelism.
 
-- **Explicit dependencies:** each agent/subagent declares what it depends on.
-- **Parallel by default:** independent units run concurrently.
-- **Aggregator per phase:** define the aggregator that collects a phase's outputs
-  and gates the next phase. Reuse the coordinator pattern from
-  `multi-agent-coordination` / `workflow-orchestration-patterns` rather than
-  reinventing it.
+- **Explicit dependencies:** each agent/subagent declares what it depends on and
+  what its completion unblocks. Two units with no dependency between them run in
+  parallel by default — sequencing is the thing that needs justifying.
+- **Spawn a subagent per independently executable unit.** Every brief carries four
+  things, and a brief missing any of them is not ready to dispatch:
+  1. the agent prompt the unit runs as,
+  2. the conventions loaded in Step 1,
+  3. its specific task scope — and the boundary it must not cross,
+  4. the interfaces it shares with other units: what it consumes, what it produces.
+- **Recursive spawning:** a unit whose own work decomposes into parallelisable
+  subtasks spawns its own subagents rather than working through them serially.
+  Parallelism is not reserved for the top level.
+- **Aggregator per phase:** define the aggregator that collects a phase's outputs,
+  validates consistency *across* them, and gates the next phase. Reuse the
+  coordinator pattern from `multi-agent-coordination` /
+  `workflow-orchestration-patterns` rather than reinventing it.
 
 ### Step 4: Environment-readiness gate (HARD)
 
 **Purpose:** No lane starts against a dead dependency.
 
-- A **dedicated setup subagent** identifies, starts, and health-checks every
-  required service (DBs, queues, caches, external stubs) before any other lane is
-  unblocked.
-- **The pipeline owns setup.** Never instruct the human to start services.
-- An **unstartable service is a surfaced blocker** — stop and report it, don't
-  silently proceed with a degraded environment.
+The `environment-setup` subagent runs first, alone, and must finish green before
+any coding, testing, or verification lane is unblocked — regardless of how much
+parallelism exists elsewhere. It must:
+
+- Identify **every** service, server, daemon, or process this phase needs: dev
+  server, test runner, database, message broker, mock/stub server, compiler
+  watcher, cache.
+- Start or verify each one. **Assume nothing is already up** — check, don't hope.
+- Confirm ports bind, connections open, and health checks pass.
+- Start the watchers and live-reload processes the work ahead depends on.
+- Document what it started, how to verify each, and how to stop it cleanly.
+
+**The pipeline owns setup.** Never instruct the human to start a service, run a
+command, or provision infrastructure by hand. If a service is needed, start it.
+
+An **unstartable service is a surfaced blocker** — stop and report it. Do not
+silently proceed against a degraded environment.
 
 ### Step 5: Present the plan for approval (HARD gate)
 
 **Purpose:** The human approves the shape of the run before any work happens.
 
-Present, in one plan:
+Deliver the plan as a **markdown document**, containing:
 - Conventions loaded (from Step 1).
 - Agent roster and role mapping (Step 2).
 - Environment manifest (services + health checks, Step 4).
@@ -85,6 +107,10 @@ Present, in one plan:
 - Spawn all currently-unblocked subagents **simultaneously**.
 - Unblock a downstream unit the moment its dependencies resolve — do not wait for a
   whole phase if a unit is ready.
+- **Never serialize by accident.** Do not wait for one subagent to return before
+  launching the next. Each lane runs as an independent stream with its own context,
+  and progress from all streams surfaces concurrently rather than being queued to
+  the end.
 - **Aggregate at each gate**; a gate advances only when its inputs are complete and
   pass enforcement.
 - On failure, run the debug/retry loop; escalate a persistently-failing unit as a
@@ -92,3 +118,10 @@ Present, in one plan:
 
 Delegated background/isolated subagents must emit progress heartbeats per the core
 "Subagent Progress Heartbeats" convention so their status is observable.
+
+### Re-presenting mid-run
+
+If the agent roster, the loaded conventions, the environment state, or the plan
+itself changes materially once execution is under way, **pause every lane and
+re-present** the amended plan for approval. An approved plan authorizes the run it
+described, not whatever it turned into.
