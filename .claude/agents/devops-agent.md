@@ -30,11 +30,11 @@ This agent can delegate to the following subagents when needed:
 
 | Subagent | Purpose | File Path | When to Use |
 |----------|---------|-----------|-------------|
-| Aws | Specialized for aws tasks | .claude/subagents/aws.md | When you need focused aws assistance |
-| Docker | Specialized for docker tasks | .claude/subagents/docker.md | When you need focused docker assistance |
-| Gitops | Specialized for gitops tasks | .claude/subagents/gitops.md | When you need focused gitops assistance |
-| Kubernetes | Specialized for kubernetes tasks | .claude/subagents/kubernetes.md | When you need focused kubernetes assistance |
-| Terraform Deployment | Specialized for terraform-deployment tasks | .claude/subagents/terraform-deployment.md | When you need focused terraform-deployment assistance |
+| Aws | aws infrastructure | .claude/subagents/aws.md | When you need focused aws assistance |
+| Docker | docker & containerization | .claude/subagents/docker.md | When you need focused docker assistance |
+| Gitops | gitops & deployment automation | .claude/subagents/gitops.md | When you need focused gitops assistance |
+| Kubernetes | kubernetes orchestration | .claude/subagents/kubernetes.md | When you need focused kubernetes assistance |
+| Terraform Deployment | terraform & iac | .claude/subagents/terraform-deployment.md | When you need focused terraform-deployment assistance |
 
 **Loading Instructions:**
 - Do NOT load subagents upfront
@@ -61,13 +61,13 @@ Skills are reusable capabilities. Load only when workflow requires:
 | Infrastructure Drift Detection | Capability for infrastructure-drift-detection | .claude/skills/infrastructure-drift-detection/SKILL.md | When workflow requires infrastructure-drift-detection |
 | Kubernetes Resource Management | Capability for kubernetes-resource-management | .claude/skills/kubernetes-resource-management/SKILL.md | When workflow requires kubernetes-resource-management |
 | Technical Decision Making | Capability for technical-decision-making | .claude/skills/technical-decision-making/SKILL.md | When workflow requires technical-decision-making |
-| Feature Planning | Capability for feature-planning | .claude/skills/feature-planning/SKILL.md | When workflow requires feature-planning |
-| Incremental Implementation | Capability for incremental-implementation | .claude/skills/incremental-implementation/SKILL.md | When workflow requires incremental-implementation |
-| Post Implementation Checklist | Capability for post-implementation-checklist | .claude/skills/post-implementation-checklist/SKILL.md | When workflow requires post-implementation-checklist |
+| Feature Planning | Plan before implementing - understand scope and approach with detailed guidance | .claude/skills/feature-planning/SKILL.md | When workflow requires feature-planning |
+| Incremental Implementation | Comprehensive guide for implementing code incrementally following established patterns, conventions, and quality standards | .claude/skills/incremental-implementation/SKILL.md | When workflow requires incremental-implementation |
+| Post Implementation Checklist | Comprehensive checklist for documenting follow-up work and testing needs after implementation | .claude/skills/post-implementation-checklist/SKILL.md | When workflow requires post-implementation-checklist |
 | Python Typing And Async | Capability for python-typing-and-async | .claude/skills/python-typing-and-async/SKILL.md | When workflow requires python-typing-and-async |
-| Test Aaa Structure | Capability for test-aaa-structure | .claude/skills/test-aaa-structure/SKILL.md | When workflow requires test-aaa-structure |
-| Test Coverage Categories | Capability for test-coverage-categories | .claude/skills/test-coverage-categories/SKILL.md | When workflow requires test-coverage-categories |
-| Test Mocking Rules | Capability for test-mocking-rules | .claude/skills/test-mocking-rules/SKILL.md | When workflow requires test-mocking-rules |
+| Test Aaa Structure | Apply Arrange-Act-Assert pattern for clear, maintainable tests with detailed guidance | .claude/skills/test-aaa-structure/SKILL.md | When workflow requires test-aaa-structure |
+| Test Coverage Categories | Comprehensive systematic approach to achieving complete test coverage through structured category-based testing | .claude/skills/test-coverage-categories/SKILL.md | When workflow requires test-coverage-categories |
+| Test Mocking Rules | Comprehensive guidelines for when and how to use mocks, stubs, and fakes in tests | .claude/skills/test-mocking-rules/SKILL.md | When workflow requires test-mocking-rules |
 
 **Loading Instructions:**
 - Skills are loaded on-demand

@@ -27,6 +27,7 @@ architect:
     - mermaid-erd-creation
     - message-queue-selection
     - multi-cloud-strategy
+    - multiagent-orchestration
     - nosql-database-selection
     - post-implementation-checklist
     - problem-decomposition
@@ -54,6 +55,23 @@ ask:
     - decision-log
     - docs
     - testing
+
+# ============================================================================
+# ATDD
+# ============================================================================
+atdd:
+  skills:
+    - feature-planning
+    - problem-decomposition
+    - quality-assurance
+    - test-aaa-structure
+    - test-coverage-categories
+    - test-data-strategies
+    - testing-strategies
+  workflows:
+    - requirements-gathering
+    - testing
+    - ux-validation
 
 # ============================================================================
 # BACKEND
@@ -88,6 +106,7 @@ code:
     - code-review-practices
     - feature-planning
     - incremental-implementation
+    - multiagent-orchestration
     - post-implementation-checklist
     - quality-assurance
     - technical-debt-management
@@ -359,19 +378,22 @@ performance:
     - workflow-scaling-patterns
 
 # ============================================================================
-# PLANNING
+# PLAN
 # ============================================================================
-planning:
+plan:
   skills:
     - architecture-documentation
     - feature-planning
+    - multiagent-orchestration
     - problem-decomposition
     - technical-communication
     - technical-decision-making
   workflows:
+    # requirements-gathering leads deliberately: the first entry becomes the
+    # agent's driving workflow, and a PRD/ARD agent starts from requirements.
+    - requirements-gathering
     - decision-log
     - feature-prioritization
-    - requirements-gathering
     - roadmap-planning
     - task-breakdown
 

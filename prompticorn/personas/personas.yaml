@@ -33,6 +33,7 @@ personas:
       - backend
       - performance
       - enforcement
+      - atdd
     
     # Key workflows for this persona
     workflows:
@@ -75,6 +76,7 @@ personas:
       - frontend
       - performance
       - enforcement
+      - atdd
     
     # Key workflows for this persona
     workflows:
@@ -118,6 +120,7 @@ personas:
       - frontend
       - performance
       - enforcement
+      - atdd
     
     # Key workflows for this persona
     workflows:
@@ -161,6 +164,7 @@ personas:
       - frontend
       - performance
       - enforcement
+      - atdd
     
     # Key workflows for this persona
     workflows:
@@ -226,6 +230,7 @@ personas:
     primary_agents:
       - test
       - review
+      - atdd
     
     secondary_agents:
       - performance
