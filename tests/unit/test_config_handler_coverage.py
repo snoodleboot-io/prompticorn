@@ -166,8 +166,8 @@ class TestLoadConfig:
         # Act
         loaded = ConfigHandler.load_config(config_path)
 
-        # Assert
-        assert loaded["version"] == "1.0"
+        # Assert — a v1 file is migrated to v2 on load (PRO-109); the rest is untouched
+        assert loaded["version"] == "2.0"
         assert loaded["spec"]["language"] == "python"
 
     def test_uses_default_path_when_none(self, monkeypatch, tmp_path):
@@ -195,8 +195,8 @@ class TestSaveConfig:
         ConfigHandler.save_config(config, config_path)
         loaded = ConfigHandler.load_config(config_path)
 
-        # Assert
-        assert loaded == config
+        # Assert — identical but for the v1 → v2 schema stamp applied on load
+        assert loaded == {**config, "version": "2.0"}
         assert (tmp_path / "sub" / "sessions").is_dir()
 
     def test_uses_default_path_when_none(self, monkeypatch, tmp_path):
@@ -259,8 +259,8 @@ class TestDefaultTemplates:
         # Act
         template = ConfigHandler.get_default_single_language_template()
 
-        # Assert
-        assert template["version"] == "1.0"
+        # Assert — new configs are written at the current schema version (PRO-109)
+        assert template["version"] == "2.0"
         assert template["repository"]["type"] == "single-language"
         assert template["spec"]["abstract_class_style"] == "interface"
         assert template["spec"]["coverage"]["line"] == 80
@@ -349,8 +349,8 @@ class TestCreateMultiLanguageConfig:
         # Act
         config = create_multi_language_config([], version="", type=None)
 
-        # Assert
-        assert config["version"] == "1.0"
+        # Assert — new configs are written at the current schema version (PRO-109)
+        assert config["version"] == "2.0"
         assert config["repository"]["type"] == "multi-language-monorepo"
 
 
