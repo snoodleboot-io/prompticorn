@@ -85,18 +85,25 @@ pip install pytest pytest-cov ruff pyright pre-commit build mutmut
 
 ### Verify Installation
 
+The harness provisions the environment and proves each piece of it works, so
+this is one command rather than four:
+
 ```bash
-# Check CLI works
-uv run prompticorn --help
+uv run python tools/harness.py up
+```
 
-# Run tests
-uv run pytest
+It health-checks `uv`, the interpreter, the synced dev group, the package
+import, pytest collection, ruff, and pyright, then prints a manifest of what it
+started and how to stop it. Anything it cannot bring up is reported as a
+blocker — don't start work against a failed manifest.
 
-# Type checking
-uv run pyright
+If you would rather check by hand:
 
-# Linting
-uv run ruff check .
+```bash
+uv run prompticorn --help     # CLI works
+uv run pytest                 # tests
+uv run pyright                # type checking
+uv run ruff check .           # linting
 ```
 
 If all commands succeed, you're ready to contribute!
@@ -150,7 +157,57 @@ uv run pytest -m "not slow"
 uv run pytest -x
 ```
 
-### 4. Coverage
+To run the same lanes CI runs — lint, format, types, unit, integration,
+security, slow — use the harness. Lanes are independent processes, so it runs
+them concurrently and the wall-clock is the slowest lane rather than their sum:
+
+```bash
+# Everything CI runs (~11 min, bounded by the integration lane)
+uv run python tools/harness.py check
+
+# Static tier only: lint, format, types, security (~15s)
+uv run python tools/harness.py check --fast
+
+# One lane
+uv run python tools/harness.py check --lane types
+
+# Re-run a trimmed unit run whenever a .py file changes
+uv run python tools/harness.py watch
+uv run python tools/harness.py down   # stop the watcher
+```
+
+`--fast` deliberately runs no test lane. The measured split is lint 0.2s,
+format 0.2s, security 1.9s and types 14.3s against unit 320s and integration
+667s, and profiling found no hot spot in the unit suite to carve out — the
+slowest single test is 15.9s and the top twenty together are ~110s of a 285s
+run. The cost is spread across hundreds of builder invocations, so there is no
+honest "fast" subset of it. Use `--fast` as the pre-commit gate and the full
+`check` before opening a PR.
+
+### 4. Regenerated Output
+
+`.claude/` and `CLAUDE.md` are **generated**, not hand-written. Editing them
+directly is always wrong: the next build overwrites it. Change the source under
+`prompticorn/` — agent prompts, `configurations/agent_skill_mapping.yaml`,
+`skills/`, `personas/personas.yaml` — and regenerate.
+
+```bash
+# Fails if the tracked tree disagrees with what source produces
+uv run python tools/harness.py verify
+
+# Rebuild the tree and the golden corpus, then review both diffs
+uv run python tools/harness.py regen
+```
+
+> **Important:** the tracked tree was built **verbose with persona filtering
+> off**, which is *not* what `.prompticorn.yaml` declares (`variant: minimal`,
+> `active_personas: [software_engineer]`). Building from that file as written
+> flips every emitted skill to the minimal variant and drops ten agents. The
+> config that actually reproduces the tree is pinned in
+> `GENERATED_TREE_CONFIG` in `tools/harness.py` — use `regen`, never a
+> hand-rolled build call.
+
+### 5. Coverage
 
 Coverage is collected with [pytest-cov](https://pytest-cov.readthedocs.io/). The
 project sits at roughly **85%** line coverage; new code should not regress it.
@@ -168,7 +225,7 @@ xdg-open htmlcov/index.html  # Linux
 start htmlcov/index.html     # Windows
 ```
 
-### 5. Mutation Testing
+### 6. Mutation Testing
 
 For changes to core logic, run [mutmut](https://mutmut.readthedocs.io/) to check
 that the test suite actually catches injected faults. Mutation testing is
@@ -187,7 +244,7 @@ uv run mutmut results
 Mutation runs over the full package are slow — when iterating on one module,
 narrow `paths_to_mutate` in `[tool.mutmut]` to that path before running.
 
-### 6. Type Checking
+### 7. Type Checking
 
 Type checking uses [pyright](https://github.com/microsoft/pyright). Its
 configuration is in the `[tool.pyright]` table of `pyproject.toml`
@@ -201,7 +258,7 @@ uv run pyright
 # Fix all reported type issues before opening a PR
 ```
 
-### 7. Linting and Formatting
+### 8. Linting and Formatting
 
 Both linting and formatting use [ruff](https://docs.astral.sh/ruff/), configured
 in the `[tool.ruff]` tables of `pyproject.toml` (line length 100, target
@@ -218,7 +275,7 @@ uv run ruff check --fix .
 uv run ruff format .
 ```
 
-### 8. Commit Changes
+### 9. Commit Changes
 
 ```bash
 # Stage changes
@@ -236,7 +293,7 @@ git commit -m "feat: add new builder for XYZ"
 - `test:` - Adding/updating tests
 - `chore:` - Maintenance tasks
 
-### 9. Push and Create PR
+### 10. Push and Create PR
 
 ```bash
 # Push to your fork

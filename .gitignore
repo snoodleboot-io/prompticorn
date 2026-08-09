@@ -111,3 +111,6 @@ local_test/
 # mutmut mutation-testing artifacts
 mutants/
 .mutmut-cache
+
+# Development harness state (pid files for the watcher)
+.harness/
