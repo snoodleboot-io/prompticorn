@@ -19,6 +19,7 @@ from prompticorn.lockfile.locked_unit import LockedUnit
 
 LOCK_VERSION_KEY = "lock_version"
 PROMPTICORN_VERSION_KEY = "prompticorn_version"
+MANIFEST_DIGEST_KEY = "manifest_digest"
 RESOLVED_AT_KEY = "resolved_at"
 ARTIFACTS_KEY = "artifacts"
 UNITS_KEY = "units"
@@ -47,6 +48,11 @@ class LockFile:
         units: Resolved units, sorted by unit id.
         outputs: Generated files, sorted by path.
         lock_version: Schema version of the lock format itself.
+        manifest_digest: Canonical digest of ``.prompticorn.yaml`` at resolution
+            time (PRO-111). Without it "the manifest changed" is undetectable:
+            comparing declared *artifacts* would miss edits to ``spec``, which
+            drive generation while touching no artifact. Optional so a lock
+            written by hand, or before this field existed, still reads.
     """
 
     prompticorn_version: str
@@ -55,6 +61,7 @@ class LockFile:
     units: tuple[LockedUnit, ...] = ()
     outputs: tuple[LockedOutput, ...] = ()
     lock_version: str = LOCK_SCHEMA_VERSION
+    manifest_digest: str | None = None
 
     def __post_init__(self) -> None:
         """Reject a timestamp that is not in the one canonical spelling.
@@ -102,7 +109,7 @@ class LockFile:
         never emit an anchor.
         """
         canonical = self.canonical()
-        return {
+        mapping: dict[str, Any] = {
             LOCK_VERSION_KEY: canonical.lock_version,
             PROMPTICORN_VERSION_KEY: canonical.prompticorn_version,
             RESOLVED_AT_KEY: canonical.resolved_at,
@@ -110,3 +117,9 @@ class LockFile:
             UNITS_KEY: [unit.to_mapping() for unit in canonical.units],
             OUTPUTS_KEY: [output.to_mapping() for output in canonical.outputs],
         }
+        # Omitted rather than written as null, on the same reasoning as an
+        # artifact's absent source: a key that is always present but usually
+        # empty is noise in every review of the file.
+        if canonical.manifest_digest is not None:
+            mapping[MANIFEST_DIGEST_KEY] = canonical.manifest_digest
+        return mapping

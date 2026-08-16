@@ -1252,6 +1252,158 @@ def _get_builder(tool: str):
     return get_prompt_builder(tool)
 
 
+# ── lock / build ───────────────────────────────────────────────────────────
+
+
+def _utc_now() -> str:
+    """Current time in the lock's one canonical spelling."""
+    from datetime import datetime, timezone
+
+    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+
+
+def _require_config():
+    """Load the manifest, or abort with the standard message."""
+    if not ConfigHandler.config_exists():
+        click.secho("Error: No configuration found. Run 'prompticorn init' first.", fg="red")
+        raise click.Abort()
+    return ConfigHandler.load_config()
+
+
+def _selected_tool(config: dict) -> str | None:
+    """The tool this project builds for, if one has been chosen."""
+    tool = config.get("ai_tool")
+    return tool if isinstance(tool, str) and tool else None
+
+
+def _output_paths_for(tool: str) -> tuple[str, ...]:
+    """The roots a tool emits, used to digest outputs into the lock."""
+    return tuple(sorted(ArtifactManager().get_artifacts_to_create(tool)))
+
+
+@cli.command("lock")
+def lock_command():
+    """
+    Resolve the manifest and write .prompticorn/prompticorn.lock.
+
+    Records what this project resolved to — artifact versions and digests, every
+    content unit with the layer that supplied it, and the digest of each
+    generated file — so a later build can tell whether anything moved.
+
+    Re-running with nothing changed rewrites nothing: the lock is committed, and
+    a file that churns on every run is one reviewers stop reading.
+
+    Exit codes:
+        0  lock written or already up to date
+        3  an existing lock is unusable (corrupt, or from a newer prompticorn)
+
+    Usage:
+        prompticorn lock
+    """
+    from prompticorn.lockfile import ExitCode, LockService
+
+    config = _require_config()
+    root = Path(".")
+    tool = _selected_tool(config)
+    output_paths = _output_paths_for(tool) if tool else ()
+
+    outcome = LockService.inspect(root, config, _utc_now(), output_paths)
+    if outcome.is_unusable:
+        click.secho(f"\n✗ {outcome.unusable_reason}", fg="red", err=True)
+        sys.exit(ExitCode.UNUSABLE_LOCK)
+
+    changed = LockService.write(root, outcome.lock)
+    location = LockService.lock_path(root)
+    if changed:
+        click.secho(f"\n✓ Wrote {location}", fg="green")
+    else:
+        click.echo(f"\n  {location} is already up to date.")
+    sys.exit(ExitCode.CLEAN)
+
+
+@cli.command("build")
+@click.option(
+    "--frozen",
+    is_flag=True,
+    help="Fail instead of re-resolving if the lock and reality diverge.",
+)
+def build_command(frozen: bool):
+    """
+    Regenerate configuration for the currently selected tool.
+
+    Unlike `switch`, this does not change which tool is selected and does not
+    remove another tool's files — it rebuilds what is already configured.
+
+    With --frozen, nothing is written to the lock and any divergence is an
+    error. That is the mode for CI: it answers "would this build differ from
+    what was committed?" without quietly making the answer no.
+
+    Exit codes:
+        0  clean; outputs match the lock
+        1  the lock and reality diverge (--frozen only)
+        3  the lock is unusable (corrupt, or from a newer prompticorn)
+
+    Usage:
+        prompticorn build
+        prompticorn build --frozen
+    """
+    from prompticorn.lockfile import ExitCode, LockService
+
+    config = _require_config()
+    root = Path(".")
+
+    tool = _selected_tool(config)
+    if tool is None:
+        click.secho(
+            "Error: No tool selected. Run 'prompticorn switch <tool>' first.",
+            fg="red",
+        )
+        raise click.Abort()
+
+    builder = _get_builder(tool)
+    if builder is None:
+        click.secho(f"Error: Unknown tool: {tool}", fg="red")
+        raise click.Abort()
+
+    click.secho(f"\n  Generating {tool} configuration...", bold=True)
+    try:
+        for action in builder.build(root, config=config, dry_run=False):
+            click.echo(f"    {action}")
+    except Exception as exc:
+        click.secho(f"\n  Error building configuration: {exc}", fg="red", err=True)
+        raise click.Abort() from exc
+
+    outcome = LockService.inspect(root, config, _utc_now(), _output_paths_for(tool))
+
+    if outcome.is_unusable:
+        click.secho(f"\n✗ {outcome.unusable_reason}", fg="red", err=True)
+        sys.exit(ExitCode.UNUSABLE_LOCK)
+
+    if not outcome.had_existing_lock:
+        # Not an error: a project without a lock is simply one that has not
+        # opted in yet, and refusing to build would make the feature a tax.
+        from prompticorn.lockfile import NO_LOCK_HINT
+
+        click.echo(f"\n  {NO_LOCK_HINT}")
+        sys.exit(ExitCode.CLEAN)
+
+    if outcome.report.is_clean:
+        click.secho("\n✓ No drift: outputs match the lock.", fg="green")
+        sys.exit(ExitCode.CLEAN)
+
+    click.echo("\n" + outcome.report.render())
+
+    if frozen:
+        # Deliberately no write. A frozen build that re-locked would report drift
+        # once and never again, which defeats the entire point of the flag.
+        click.secho("\n✗ Frozen build: refusing to re-resolve.", fg="red", err=True)
+        sys.exit(ExitCode.DRIFT)
+
+    LockService.write(root, outcome.lock)
+    click.secho(f"\n✓ Updated {LockService.lock_path(root)}", fg="yellow")
+    sys.exit(ExitCode.CLEAN)
+
+
 # ── validate ───────────────────────────────────────────────────────────────
 
 

@@ -31,7 +31,7 @@ from __future__ import annotations
 from collections.abc import Sequence
 
 from prompticorn.artifact.artifact_id import ArtifactId
-from prompticorn.artifact.naming import DEFAULT_NAMESPACE
+from prompticorn.artifact.naming import DEFAULT_NAMESPACE, VERSION_SEPARATOR
 from prompticorn.artifact.package_version import bundled_version
 from prompticorn.artifact.semantic_version import SemanticVersion
 from prompticorn.content.unit_id import SEPARATOR as UNIT_SEPARATOR
@@ -133,6 +133,25 @@ class BundledIdentity:
         if separator:
             return self.for_parts(UnitKind.SUBAGENT, (agent_name, subagent_name))
         return self.for_parts(UnitKind.AGENT, (agent_name,))
+
+    def for_coordinate(self, coordinate: str) -> ArtifactId:
+        """The identity of an already-qualified ``namespace/name``. (PRO-111)
+
+        What a manifest declaration resolves to: the declaration names the
+        coordinate and the range, and this supplies the exact version the
+        bundled content is published at.
+
+        Args:
+            coordinate: ``namespace/name``, as produced by
+                :attr:`ArtifactRequirement.coordinate`.
+
+        Returns:
+            The artifact identity at this instance's version.
+
+        Raises:
+            InvalidArtifactIdError: If the coordinate is not well-formed.
+        """
+        return ArtifactId.parse(f"{coordinate}{VERSION_SEPARATOR}{self._version.render()}")
 
     @staticmethod
     def artifact_name(kind: UnitKind, names: Sequence[str]) -> str:

@@ -19,6 +19,7 @@ the line, and each guards a different failure:
 
 from __future__ import annotations
 
+from dataclasses import replace
 from pathlib import Path
 from typing import Any
 
@@ -90,14 +91,10 @@ class LockWriter:
         """
         existing = cls._read_existing(path)
         if existing is not None and existing.equals_ignoring_resolved_at(lock):
-            lock = LockFile(
-                prompticorn_version=lock.prompticorn_version,
-                resolved_at=existing.resolved_at,
-                artifacts=lock.artifacts,
-                units=lock.units,
-                outputs=lock.outputs,
-                lock_version=lock.lock_version,
-            )
+            # `replace` rather than a field-by-field rebuild: a new field added to
+            # the model must not be silently dropped here, which is exactly what
+            # an explicit constructor call would do.
+            lock = replace(lock, resolved_at=existing.resolved_at)
 
         rendered = cls.render(lock)
         if path.exists() and path.read_text(encoding="utf-8") == rendered:

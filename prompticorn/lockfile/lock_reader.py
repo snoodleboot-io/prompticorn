@@ -26,6 +26,7 @@ from prompticorn.lockfile.errors import LockCorruptError, LockSchemaVersionError
 from prompticorn.lockfile.lock_file import (
     ARTIFACTS_KEY,
     LOCK_VERSION_KEY,
+    MANIFEST_DIGEST_KEY,
     OUTPUTS_KEY,
     PROMPTICORN_VERSION_KEY,
     RESOLVED_AT_KEY,
@@ -93,7 +94,21 @@ class LockReader:
             units=tuple(cls._read_units(data, location)),
             outputs=tuple(cls._read_outputs(data, location)),
             lock_version=_required_string(data, LOCK_VERSION_KEY, location),
+            manifest_digest=cls._read_manifest_digest(data, location),
         )
+
+    @staticmethod
+    def _read_manifest_digest(data: dict[str, Any], location: str) -> str | None:
+        """Optional: a hand-made or pre-PRO-111 lock may not carry one."""
+        value = data.get(MANIFEST_DIGEST_KEY)
+        if value is None:
+            return None
+        if not isinstance(value, str) or not _DIGEST_RE.match(value):
+            raise LockCorruptError(
+                location,
+                f"{MANIFEST_DIGEST_KEY!r} is not a sha256 digest (64 lowercase hex characters)",
+            )
+        return value
 
     @staticmethod
     def _check_schema_version(data: dict[str, Any], location: str) -> None:
