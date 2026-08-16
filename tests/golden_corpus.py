@@ -26,6 +26,10 @@ from pathlib import Path
 from typing import Any
 
 from prompticorn.prompt_builder import get_prompt_builder
+from prompticorn.provenance.output_format import OutputFormat
+from prompticorn.provenance.provenance_emitter import SIDECAR_DIRECTORY
+from prompticorn.provenance.provenance_header import ProvenanceHeader
+from prompticorn.provenance.provenance_sidecar import SIDECAR_FILENAME
 from prompticorn.tools import supported_tool_ids
 
 FIXTURE = Path(__file__).parent / "golden" / "manifest.json"
@@ -33,6 +37,13 @@ FIXTURE = Path(__file__).parent / "golden" / "manifest.json"
 # ISO dates are normalized before hashing so the corpus is stable across day
 # boundaries (e.g. CLAUDE.md stamps datetime.now() into a "Last Updated" line).
 _DATE_RE = re.compile(rb"\d{4}-\d{2}-\d{2}")
+
+_SIDECAR_PATH = f"{SIDECAR_DIRECTORY}/{SIDECAR_FILENAME}"
+
+# The one field of the sidecar that is not a function of the content: the
+# artifact version, which a release build stamps into ``__about__.py``. Masking
+# it keeps the corpus reproducible in a checkout where that has happened.
+_SIDECAR_VERSION_RE = re.compile(rb'"version": "[^"]*"')
 
 VARIANTS = ("minimal", "verbose")
 
@@ -101,9 +112,34 @@ def split_key(key: str) -> tuple[str, str, str]:
     return config_id, tool, variant
 
 
-def digest(path: Path) -> str:
-    """sha256 of a file's bytes with ISO dates normalized out."""
-    return hashlib.sha256(_DATE_RE.sub(b"YYYY-MM-DD", path.read_bytes())).hexdigest()
+def normalize(raw: bytes, relative: str) -> bytes:
+    """Strip out everything that is not the file's content.
+
+    Two things vary without the output having changed. ISO dates, as before.
+    And the provenance header (PRO-112), which every non-JSON output now
+    carries: it embeds the artifact version and a digest of the body it sits on,
+    so a corpus that hashed it would re-baseline on a version bump and would
+    otherwise merely restate a hash it already has.
+
+    Removing it via ``ProvenanceHeader.strip`` rather than a local regex keeps
+    one definition of what a header is. Nothing about provenance is lost from
+    the corpus by doing so: the sidecar is itself an output, so unit
+    attribution, layer and per-file digests are all still pinned — through the
+    one file where a reviewer can read them.
+    """
+    if relative == _SIDECAR_PATH:
+        return _SIDECAR_VERSION_RE.sub(b'"version": "VERSION"', raw)
+    try:
+        text = raw.decode("utf-8")
+    except UnicodeDecodeError:
+        return raw
+    return ProvenanceHeader.strip(text, OutputFormat.of(relative)).encode("utf-8")
+
+
+def digest(path: Path, relative: str) -> str:
+    """sha256 of a file's content, with the varying parts normalized out."""
+    normalized = normalize(_DATE_RE.sub(b"YYYY-MM-DD", path.read_bytes()), relative)
+    return hashlib.sha256(normalized).hexdigest()
 
 
 def manifest(root: Path) -> dict[str, str]:
@@ -112,9 +148,12 @@ def manifest(root: Path) -> dict[str, str]:
     Enumeration is sorted so the corpus does not depend on filesystem ordering.
     """
     return {
-        path.relative_to(root).as_posix(): digest(path)
-        for path in sorted(root.rglob("*"))
-        if path.is_file()
+        relative: digest(path, relative)
+        for path, relative in (
+            (path, path.relative_to(root).as_posix())
+            for path in sorted(root.rglob("*"))
+            if path.is_file()
+        )
     }
 
 

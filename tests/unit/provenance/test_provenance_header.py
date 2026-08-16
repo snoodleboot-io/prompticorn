@@ -30,6 +30,15 @@ _BODIES = [
     "# a yaml comment\n",
     "<!-- someone else's comment -->\nbody\n",
     "---\nfrontmatter: true\n---\nbody\n",
+    # Frontmatter shapes the offset calculation has to survive: empty, nothing
+    # after it, never closed, only an opener, and delimiters that are content
+    # rather than frontmatter because they do not start the document.
+    "---\n---\nbody\n",
+    "---\nname: x\n---\n",
+    "---\nname: x\n---",
+    "---\nnever: closed\nbody\n",
+    "---\n",
+    "prose\n---\nnot frontmatter\n---\n",
     '{\n  "a": 1\n}\n',
     "  indented\n",
     "trailing spaces   \n",
@@ -130,6 +139,74 @@ def test_field_order_is_fixed() -> None:
 
     positions = [header.index(f"{key}=") for key in ("unit", "layer", "version", "digest")]
     assert positions == sorted(positions)
+
+
+# ── where the header goes ─────────────────────────────────────────────────────
+
+
+def test_the_header_goes_below_frontmatter() -> None:
+    """The Agent Skills format requires frontmatter at the very start of a
+    SKILL.md, so a comment above it does not annotate the file — it invalidates
+    it for the tool that reads it."""
+    body = "---\nname: code-review-practices\n---\n\n# Body\n"
+
+    rendered = ProvenanceHeader.render(body, RECORD, OutputFormat.MARKDOWN)
+
+    assert rendered.startswith("---\nname: code-review-practices\n---\n")
+    assert rendered.splitlines()[3].startswith("<!--")
+
+
+def test_frontmatter_still_parses_as_frontmatter_afterwards() -> None:
+    body = "---\nname: x\ndescription: y\n---\n\n# Body\n"
+
+    rendered = ProvenanceHeader.render(body, RECORD, OutputFormat.MARKDOWN)
+
+    _, _, after_open = rendered.partition("---\n")
+    frontmatter, delimiter, _ = after_open.partition("\n---\n")
+    assert delimiter
+    assert MARKER not in frontmatter
+
+
+def test_the_header_goes_first_when_there_is_no_frontmatter() -> None:
+    rendered = ProvenanceHeader.render("# Body\n", RECORD, OutputFormat.MARKDOWN)
+
+    assert rendered.startswith("<!--")
+
+
+def test_an_unclosed_opener_is_not_frontmatter() -> None:
+    """Three dashes with no closing delimiter is content, so the header belongs
+    above it — and, either way, strip has to undo exactly what render did."""
+    body = "---\nnever: closed\n"
+
+    rendered = ProvenanceHeader.render(body, RECORD, OutputFormat.MARKDOWN)
+
+    assert rendered.startswith("<!--")
+    assert ProvenanceHeader.strip(rendered, OutputFormat.MARKDOWN) == body
+
+
+def test_a_header_below_frontmatter_is_read_back() -> None:
+    body = "---\nname: x\n---\nbody\n"
+
+    rendered = ProvenanceHeader.render(body, RECORD, OutputFormat.MARKDOWN)
+
+    assert ProvenanceHeader.has_header(rendered)
+    assert ProvenanceHeader.parse(rendered) == RECORD
+
+
+def test_frontmatter_alone_is_not_mistaken_for_a_header() -> None:
+    assert not ProvenanceHeader.has_header("---\nname: x\n---\nbody\n")
+
+
+def test_the_digest_is_unchanged_by_where_the_header_sits() -> None:
+    """The digest covers the body with the header stripped, so moving the
+    insertion point below frontmatter must not move the digest."""
+    body = "---\nname: x\n---\nbody\n"
+
+    rendered = ProvenanceHeader.render(body, RECORD, OutputFormat.MARKDOWN)
+
+    assert ProvenanceHeader.body_digest(rendered, OutputFormat.MARKDOWN) == (
+        ProvenanceHeader.body_digest(body, OutputFormat.MARKDOWN)
+    )
 
 
 # ── reading it back ───────────────────────────────────────────────────────────

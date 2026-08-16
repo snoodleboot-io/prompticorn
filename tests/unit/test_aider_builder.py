@@ -59,7 +59,12 @@ class TestAiderLayout(unittest.TestCase):
                 dry_run=False,
             )
             files = sorted(p.relative_to(root).as_posix() for p in root.rglob("*") if p.is_file())
-            self.assertEqual(files, [".aider.conf.yml", "CONVENTIONS.md"])
+            # The provenance sidecar is emitted by every build, not by this
+            # layout; what this test pins is that aider writes no agent or
+            # skill files. (PRO-112)
+            self.assertEqual(
+                files, [".aider.conf.yml", ".prompticorn/provenance.json", "CONVENTIONS.md"]
+            )
 
 
 class TestAgentBuildDiscarded(unittest.TestCase):

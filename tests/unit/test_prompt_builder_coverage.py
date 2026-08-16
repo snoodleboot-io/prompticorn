@@ -264,14 +264,20 @@ class TestWriteSkillFiles:
 
     def test_agent_without_skills_returns_empty(self, kilo_builder, tmp_path):
         agent = make_agent(skills=[])
-        assert kilo_builder._write_skill_files(tmp_path, "code", agent, "minimal") == []
+        assert kilo_builder._write_skill_files(tmp_path, "code", agent, "minimal") == {}
 
     def test_real_skill_is_written(self, kilo_builder, tmp_path):
         # code-review-practices exists in the bundled skills directory.
         agent = make_agent(skills=["code-review-practices"])
         written = kilo_builder._write_skill_files(tmp_path, "review", agent, "minimal")
-        assert written == [".kilo/skills/code-review-practices/SKILL.md"]
-        assert (tmp_path / written[0]).exists()
+        # Keyed by path, valued by the unit the file came from — the attribution
+        # the provenance pass needs, which only this loop can supply. (PRO-112)
+        assert written == {
+            ".kilo/skills/code-review-practices/SKILL.md": (
+                "skill/code-review-practices/minimal"
+            )
+        }
+        assert (tmp_path / ".kilo/skills/code-review-practices/SKILL.md").exists()
 
     def test_unknown_skill_is_skipped_with_a_warning(self, kilo_builder, tmp_path):
         # PRO-89: an unresolvable skill still yields no file, but it must no
@@ -279,7 +285,7 @@ class TestWriteSkillFiles:
         agent = make_agent(skills=["totally-made-up-skill"])
         with pytest.warns(MissingSkillWarning, match="totally-made-up-skill"):
             written = kilo_builder._write_skill_files(tmp_path, "code", agent, "minimal")
-        assert written == []
+        assert written == {}
 
 
 class TestWriteWorkflowFiles:
@@ -287,16 +293,21 @@ class TestWriteWorkflowFiles:
 
     def test_agent_without_workflows_returns_empty(self, kilo_builder, tmp_path):
         agent = make_agent(workflows=[])
-        assert kilo_builder._write_workflow_files(tmp_path, "code", agent, "minimal") == []
+        assert kilo_builder._write_workflow_files(tmp_path, "code", agent, "minimal") == {}
 
     def test_non_kilo_tool_returns_empty(self, tmp_path):
         builder = PromptBuilder("cline")
         agent = make_agent(workflows=["some-workflow"])
-        assert builder._write_workflow_files(tmp_path, "code", agent, "minimal") == []
+        assert builder._write_workflow_files(tmp_path, "code", agent, "minimal") == {}
 
     def test_unknown_workflow_is_skipped(self, kilo_builder, tmp_path):
         agent = make_agent(workflows=["nonexistent-workflow"])
-        assert kilo_builder._write_workflow_files(tmp_path, "code", agent, "minimal") == []
+        assert kilo_builder._write_workflow_files(tmp_path, "code", agent, "minimal") == {}
+
+    def test_workflow_is_attributed_to_its_unit(self, kilo_builder, tmp_path):
+        agent = make_agent(workflows=["boilerplate"])
+        written = kilo_builder._write_workflow_files(tmp_path, "code", agent, "minimal")
+        assert written == {".kilo/commands/boilerplate.md": "workflow/boilerplate/minimal"}
 
 
 class TestFilterAgentForLanguage:

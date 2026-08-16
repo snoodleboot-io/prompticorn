@@ -29,9 +29,39 @@ from prompticorn.provenance.provenance_record import ProvenanceRecord
 
 MARKER = "prompticorn:"
 
-# One header line, in either comment syntax. Anchored to the start of the file:
-# a line further down is content, not something this module wrote.
-_HEADER_RE = re.compile(r"^(?:<!--\s*prompticorn:.*?-->|#\s*prompticorn:.*?)(?:\r\n|\r|\n|$)")
+# One header line, in either comment syntax. Never searched for — only matched at
+# the one offset :func:`_header_offset` computes, so a line further down stays
+# content rather than something this module is entitled to delete.
+_HEADER_RE = re.compile(r"(?:<!--\s*prompticorn:.*?-->|#\s*prompticorn:.*?)(?:\r\n|\r|\n|$)")
+
+# A leading YAML frontmatter block: `---` on its own line, through the next such
+# line. Detected without reference to the format because the question is about
+# the document's first bytes, not its comment syntax.
+# The closing delimiter must end in a line break. Without one the frontmatter is
+# the whole document and there is no line boundary below it to insert at — and
+# an insertion point that has to invent a newline is one strip cannot undo.
+_FRONTMATTER_OPEN_RE = re.compile(r"---[ \t]*(?:\r\n|\r|\n)")
+_FRONTMATTER_CLOSE_RE = re.compile(r"^---[ \t]*(?:\r\n|\r|\n)", re.MULTILINE)
+
+
+def _header_offset(text: str) -> int:
+    """Where the header goes: after any leading frontmatter, else byte 0.
+
+    Frontmatter is a contract with the consuming tool, not content — the Agent
+    Skills format requires it at the very start of a SKILL.md, so a comment
+    prepended above it does not annotate the file, it invalidates it.
+
+    There are exactly two candidate offsets and both are determined by the
+    document's structure, which is what keeps :meth:`ProvenanceHeader.strip`
+    an exact inverse of :meth:`ProvenanceHeader.render`: the offset computed
+    from a headed file is the same one the header was written at, because
+    inserting after the frontmatter leaves the frontmatter untouched.
+    """
+    opening = _FRONTMATTER_OPEN_RE.match(text)
+    if opening is None:
+        return 0
+    closing = next(_FRONTMATTER_CLOSE_RE.finditer(text, opening.end()), None)
+    return closing.end() if closing is not None else 0
 
 
 class ProvenanceHeader:
@@ -39,7 +69,11 @@ class ProvenanceHeader:
 
     @staticmethod
     def render(body: str, record: ProvenanceRecord, output_format: OutputFormat) -> str:
-        """Prepend a provenance header to ``body``.
+        """Write a provenance header into ``body``.
+
+        The header goes at the top, unless the document opens with YAML
+        frontmatter — see :func:`_header_offset` for why it must go below that
+        rather than above it.
 
         JSON is returned unchanged — it has no comment syntax, and the sidecar
         carries its provenance instead.
@@ -51,15 +85,17 @@ class ProvenanceHeader:
         suffix = output_format.comment_suffix
         inner = f"{MARKER} {record.to_header_body()}"
         line = f"{prefix} {inner} {suffix}".rstrip() if suffix else f"{prefix} {inner}"
-        return f"{line}\n{body}"
+        offset = _header_offset(body)
+        return f"{body[:offset]}{line}\n{body[offset:]}"
 
     @staticmethod
     def strip(text: str, output_format: OutputFormat | None = None) -> str:
-        """Remove a leading provenance header, if there is one.
+        """Remove the provenance header, if there is one.
 
-        Exactly inverse to :meth:`render`: it removes the one line render adds,
-        including the newline that separated it from the body, and nothing else.
-        Text without a header is returned untouched, so the operation is safe to
+        Exactly inverse to :meth:`render`: it looks at the one offset render
+        writes to, removes the single line it would have put there — including
+        the newline that separated it from the body — and nothing else. Text
+        without a header is returned untouched, so the operation is safe to
         apply to anything and is idempotent on already-stripped content.
 
         ``output_format`` matters for one case. :meth:`render` is the identity
@@ -71,12 +107,16 @@ class ProvenanceHeader:
         """
         if output_format is not None and not output_format.supports_inline_header:
             return text
-        return _HEADER_RE.sub("", text, count=1)
+        offset = _header_offset(text)
+        match = _HEADER_RE.match(text, offset)
+        if match is None:
+            return text
+        return f"{text[:offset]}{text[match.end() :]}"
 
     @classmethod
     def has_header(cls, text: str) -> bool:
-        """Whether ``text`` already begins with a provenance header."""
-        return _HEADER_RE.match(text) is not None
+        """Whether ``text`` carries a provenance header where render writes one."""
+        return _HEADER_RE.match(text, _header_offset(text)) is not None
 
     @classmethod
     def parse(cls, text: str) -> ProvenanceRecord | None:
@@ -85,7 +125,7 @@ class ProvenanceHeader:
         Lets a verifier check a file against its own claim without consulting
         the sidecar — useful precisely when the two disagree.
         """
-        match = _HEADER_RE.match(text)
+        match = _HEADER_RE.match(text, _header_offset(text))
         if match is None:
             return None
 

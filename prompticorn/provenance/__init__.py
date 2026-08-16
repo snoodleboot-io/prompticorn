@@ -11,14 +11,22 @@ its gap exactly where a human is least able to notice it.
 """
 
 from prompticorn.provenance.output_format import OutputFormat
+from prompticorn.provenance.provenance_emitter import (
+    GENERATED_UNIT_PREFIX,
+    SIDECAR_DIRECTORY,
+    ProvenanceEmitter,
+)
 from prompticorn.provenance.provenance_header import MARKER, ProvenanceHeader
 from prompticorn.provenance.provenance_record import ProvenanceRecord
 from prompticorn.provenance.provenance_sidecar import SIDECAR_FILENAME, ProvenanceSidecar
 
 __all__ = [
+    "GENERATED_UNIT_PREFIX",
     "MARKER",
+    "SIDECAR_DIRECTORY",
     "SIDECAR_FILENAME",
     "OutputFormat",
+    "ProvenanceEmitter",
     "ProvenanceHeader",
     "ProvenanceRecord",
     "ProvenanceSidecar",
