@@ -162,7 +162,7 @@ security, slow — use the harness. Lanes are independent processes, so it runs
 them concurrently and the wall-clock is the slowest lane rather than their sum:
 
 ```bash
-# Everything CI runs (~11 min, bounded by the integration lane)
+# Everything CI runs (~13 min: concurrent lanes, then the benchmark alone)
 uv run python tools/harness.py check
 
 # Static tier only: lint, format, types, security (~15s)
@@ -175,6 +175,11 @@ uv run python tools/harness.py check --lane types
 uv run python tools/harness.py watch
 uv run python tools/harness.py down   # stop the watcher
 ```
+
+The `benchmarks` lane runs **alone, after** the concurrent batch. It asserts a
+total build time under a fixed ceiling, so sharing the machine with six
+saturating lanes makes it fail for reasons unrelated to your change. CI is
+unaffected — each lane is its own runner there.
 
 `--fast` deliberately runs no test lane. The measured split is lint 0.2s,
 format 0.2s, security 1.9s and types 14.3s against unit 320s and integration
