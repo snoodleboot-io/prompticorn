@@ -45,14 +45,14 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 | Skill | Purpose | File Path | When to Use |
 |-------|---------|-----------|-------------|
-| Compliance Automation | Capability for compliance-automation | .claude/skills/compliance-automation/SKILL.md | When workflow requires compliance-automation |
-| Documentation Best Practices | Capability for documentation-best-practices | .claude/skills/documentation-best-practices/SKILL.md | When workflow requires documentation-best-practices |
-| Quality Assurance | Capability for quality-assurance | .claude/skills/quality-assurance/SKILL.md | When workflow requires quality-assurance |
-| Technical Communication | Capability for technical-communication | .claude/skills/technical-communication/SKILL.md | When workflow requires technical-communication |
+| Compliance Automation | The annual compliance scramble exists because controls are tested once, by | .claude/skills/compliance-automation/SKILL.md | When workflow requires compliance-automation |
+| Documentation Best Practices | Almost all bad documentation is well-intentioned writing in which two or more | .claude/skills/documentation-best-practices/SKILL.md | When workflow requires documentation-best-practices |
+| Quality Assurance | "Quality" is unmanageable until it is a set of numbers with agreed definitions. | .claude/skills/quality-assurance/SKILL.md | When workflow requires quality-assurance |
+| Technical Communication | Before writing anything, answer three questions: who reads this, what do they | .claude/skills/technical-communication/SKILL.md | When workflow requires technical-communication |
 | Feature Planning | Plan before implementing - understand scope and approach with detailed guidance | .claude/skills/feature-planning/SKILL.md | When workflow requires feature-planning |
 | Incremental Implementation | Comprehensive guide for implementing code incrementally following established patterns, conventions, and quality standards | .claude/skills/incremental-implementation/SKILL.md | When workflow requires incremental-implementation |
 | Post Implementation Checklist | Comprehensive checklist for documenting follow-up work and testing needs after implementation | .claude/skills/post-implementation-checklist/SKILL.md | When workflow requires post-implementation-checklist |
-| Python Typing And Async | Capability for python-typing-and-async | .claude/skills/python-typing-and-async/SKILL.md | When workflow requires python-typing-and-async |
+| Python Typing And Async | Type hints are checked by a separate tool (`mypy`, `pyright`), never by CPython | .claude/skills/python-typing-and-async/SKILL.md | When workflow requires python-typing-and-async |
 | Test Aaa Structure | Apply Arrange-Act-Assert pattern for clear, maintainable tests with detailed guidance | .claude/skills/test-aaa-structure/SKILL.md | When workflow requires test-aaa-structure |
 | Test Coverage Categories | Comprehensive systematic approach to achieving complete test coverage through structured category-based testing | .claude/skills/test-coverage-categories/SKILL.md | When workflow requires test-coverage-categories |
 | Test Mocking Rules | Comprehensive guidelines for when and how to use mocks, stubs, and fakes in tests | .claude/skills/test-mocking-rules/SKILL.md | When workflow requires test-mocking-rules |

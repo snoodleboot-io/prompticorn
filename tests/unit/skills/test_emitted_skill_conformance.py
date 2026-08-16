@@ -90,9 +90,9 @@ class TestDescriptionExtractionMutationCoverage:
     """
 
     def _desc(self, name, body):
-        from prompticorn.builders.skill_emitter import _extract_description
+        from prompticorn.builders.skill_emitter import extract_description
 
-        return _extract_description(name, body)
+        return extract_description(name, body)
 
     def test_purpose_wins_over_earlier_prose(self):
         # Prose appears BEFORE Purpose; the Purpose sentence must be chosen, not

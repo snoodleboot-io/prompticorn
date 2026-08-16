@@ -17,12 +17,17 @@ from prompticorn.builders.naming_utils import (
     subagent_to_file_name,
     workflow_to_file_name,
 )
+from prompticorn.builders.skill_emitter import extract_description
 from prompticorn.builders.workflow_loader import WorkflowLoader
 from prompticorn.content.content_resolver import read_variant_unit
 from prompticorn.content.unit_kind import UnitKind
 from prompticorn.ir.loaders import CoreFilesLoader
 from prompticorn.ir.models import Agent
-from prompticorn.text_utils import frontmatter_field, strip_source_header_comments
+from prompticorn.text_utils import (
+    frontmatter_field,
+    parse_frontmatter,
+    strip_source_header_comments,
+)
 
 
 class ClaudeBuilder(Builder):
@@ -454,10 +459,21 @@ class ClaudeBuilder(Builder):
         for name in skill_names:
             dir_name = skill_to_directory_name(name)
             source = read_variant_unit(UnitKind.SKILL, name, variant) or ""
+            _, body = parse_frontmatter(source)
+            # Only 9 of 119 authored skills declare frontmatter, so reading it alone
+            # left the rest saying "Capability for <name>" — which names the skill
+            # and says nothing else. The emitter already derives a real description
+            # from the body when it writes each SKILL.md; reuse that here so the
+            # table says the same thing the file it points at says.
+            purpose = (
+                frontmatter_field(source, "description")
+                or (extract_description(name, body) if body.strip() else None)
+                or f"Capability for {name}"
+            )
             skills.append(
                 {
                     "name": name.replace("-", " ").title(),
-                    "purpose": frontmatter_field(source, "description") or f"Capability for {name}",
+                    "purpose": purpose,
                     "directory": dir_name,
                     "when_to_use": frontmatter_field(source, "when_to_use")
                     or f"When workflow requires {name}",

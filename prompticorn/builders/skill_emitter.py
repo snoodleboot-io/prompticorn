@@ -46,7 +46,7 @@ def _title_from_name(skill_name: str) -> str:
     return skill_name.replace("-", " ").replace("_", " ").strip().title()
 
 
-def _extract_description(skill_name: str, body: str) -> str:
+def extract_description(skill_name: str, body: str) -> str:
     """Derive a one-line description from a skill body.
 
     Prefers the first sentence of the ``## Purpose`` section (the house format).
@@ -103,7 +103,7 @@ def ensure_frontmatter(skill_name: str, content: str) -> str:
     if content.lstrip().startswith("---"):
         return content
 
-    description = _extract_description(skill_name, content)
+    description = extract_description(skill_name, content)
     frontmatter = (
         f"---\nname: {skill_name}\ndescription: {_yaml_double_quote(description)}\n---\n\n"
     )

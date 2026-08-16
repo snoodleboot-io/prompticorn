@@ -39,15 +39,15 @@ Skills are reusable capabilities. Load only when workflow requires:
 | Skill | Purpose | File Path | When to Use |
 |-------|---------|-----------|-------------|
 | Feature Planning | Plan before implementing - understand scope and approach with detailed guidance | .claude/skills/feature-planning/SKILL.md | When workflow requires feature-planning |
-| Problem Decomposition | Capability for problem-decomposition | .claude/skills/problem-decomposition/SKILL.md | When workflow requires problem-decomposition |
-| Quality Assurance | Capability for quality-assurance | .claude/skills/quality-assurance/SKILL.md | When workflow requires quality-assurance |
+| Problem Decomposition | A stakeholder asks to make search faster. | .claude/skills/problem-decomposition/SKILL.md | When workflow requires problem-decomposition |
+| Quality Assurance | "Quality" is unmanageable until it is a set of numbers with agreed definitions. | .claude/skills/quality-assurance/SKILL.md | When workflow requires quality-assurance |
 | Test Aaa Structure | Apply Arrange-Act-Assert pattern for clear, maintainable tests with detailed guidance | .claude/skills/test-aaa-structure/SKILL.md | When workflow requires test-aaa-structure |
 | Test Coverage Categories | Comprehensive systematic approach to achieving complete test coverage through structured category-based testing | .claude/skills/test-coverage-categories/SKILL.md | When workflow requires test-coverage-categories |
-| Test Data Strategies | Capability for test-data-strategies | .claude/skills/test-data-strategies/SKILL.md | When workflow requires test-data-strategies |
-| Testing Strategies | Capability for testing-strategies | .claude/skills/testing-strategies/SKILL.md | When workflow requires testing-strategies |
+| Test Data Strategies | These three are not interchangeable, and picking the wrong one is the root of a | .claude/skills/test-data-strategies/SKILL.md | When workflow requires test-data-strategies |
+| Testing Strategies | Three shapes get argued about as if one were correct. | .claude/skills/testing-strategies/SKILL.md | When workflow requires testing-strategies |
 | Incremental Implementation | Comprehensive guide for implementing code incrementally following established patterns, conventions, and quality standards | .claude/skills/incremental-implementation/SKILL.md | When workflow requires incremental-implementation |
 | Post Implementation Checklist | Comprehensive checklist for documenting follow-up work and testing needs after implementation | .claude/skills/post-implementation-checklist/SKILL.md | When workflow requires post-implementation-checklist |
-| Python Typing And Async | Capability for python-typing-and-async | .claude/skills/python-typing-and-async/SKILL.md | When workflow requires python-typing-and-async |
+| Python Typing And Async | Type hints are checked by a separate tool (`mypy`, `pyright`), never by CPython | .claude/skills/python-typing-and-async/SKILL.md | When workflow requires python-typing-and-async |
 | Test Mocking Rules | Comprehensive guidelines for when and how to use mocks, stubs, and fakes in tests | .claude/skills/test-mocking-rules/SKILL.md | When workflow requires test-mocking-rules |
 
 **Loading Instructions:**

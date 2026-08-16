@@ -45,22 +45,22 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 | Skill | Purpose | File Path | When to Use |
 |-------|---------|-----------|-------------|
-| Architecture Documentation | Capability for architecture-documentation | .claude/skills/architecture-documentation/SKILL.md | When workflow requires architecture-documentation |
+| Architecture Documentation | An ADR records one decision at the moment it is made, with the information that | .claude/skills/architecture-documentation/SKILL.md | When workflow requires architecture-documentation |
 | Data Model Discovery | Comprehensive process for discovering and validating data model requirements before design | .claude/skills/data-model-discovery/SKILL.md | When workflow requires data-model-discovery |
-| Data Partitioning | Capability for data-partitioning | .claude/skills/data-partitioning/SKILL.md | When workflow requires data-partitioning |
-| Data Validation Pipelines | Capability for data-validation-pipelines | .claude/skills/data-validation-pipelines/SKILL.md | When workflow requires data-validation-pipelines |
-| Data Versioning Reproducibility | Capability for data-versioning-reproducibility | .claude/skills/data-versioning-reproducibility/SKILL.md | When workflow requires data-versioning-reproducibility |
-| Dimensional Modeling | Capability for dimensional-modeling | .claude/skills/dimensional-modeling/SKILL.md | When workflow requires dimensional-modeling |
-| Feature Store Design | Capability for feature-store-design | .claude/skills/feature-store-design/SKILL.md | When workflow requires feature-store-design |
-| Managed Database Selection | Capability for managed-database-selection | .claude/skills/managed-database-selection/SKILL.md | When workflow requires managed-database-selection |
-| Nosql Database Selection | Capability for nosql-database-selection | .claude/skills/nosql-database-selection/SKILL.md | When workflow requires nosql-database-selection |
-| Object Storage Patterns | Capability for object-storage-patterns | .claude/skills/object-storage-patterns/SKILL.md | When workflow requires object-storage-patterns |
-| Slowly Changing Dimensions | Capability for slowly-changing-dimensions | .claude/skills/slowly-changing-dimensions/SKILL.md | When workflow requires slowly-changing-dimensions |
-| Sql Optimization | Capability for sql-optimization | .claude/skills/sql-optimization/SKILL.md | When workflow requires sql-optimization |
+| Data Partitioning | **Monthly Partitions:** | .claude/skills/data-partitioning/SKILL.md | When workflow requires data-partitioning |
+| Data Validation Pipelines | A validation *boundary* is any point where data crosses from a system you do not | .claude/skills/data-validation-pipelines/SKILL.md | When workflow requires data-validation-pipelines |
+| Data Versioning Reproducibility | A git SHA pins the transformation. | .claude/skills/data-versioning-reproducibility/SKILL.md | When workflow requires data-versioning-reproducibility |
+| Dimensional Modeling | **Structure:** | .claude/skills/dimensional-modeling/SKILL.md | When workflow requires dimensional-modeling |
+| Feature Store Design | The pitch is often "a central place to store features," which undersells it into | .claude/skills/feature-store-design/SKILL.md | When workflow requires feature-store-design |
+| Managed Database Selection | The most expensive database mistakes are made before a single row is written, by | .claude/skills/managed-database-selection/SKILL.md | When workflow requires managed-database-selection |
+| Nosql Database Selection | Relational modelling lets you defer query design: normalize the entities, and | .claude/skills/nosql-database-selection/SKILL.md | When workflow requires nosql-database-selection |
+| Object Storage Patterns | Almost every object-storage mistake comes from carrying filesystem instincts into | .claude/skills/object-storage-patterns/SKILL.md | When workflow requires object-storage-patterns |
+| Slowly Changing Dimensions | **When:** Not important (contact info) | .claude/skills/slowly-changing-dimensions/SKILL.md | When workflow requires slowly-changing-dimensions |
+| Sql Optimization | Always start with EXPLAIN ANALYZE to understand execution: | .claude/skills/sql-optimization/SKILL.md | When workflow requires sql-optimization |
 | Feature Planning | Plan before implementing - understand scope and approach with detailed guidance | .claude/skills/feature-planning/SKILL.md | When workflow requires feature-planning |
 | Incremental Implementation | Comprehensive guide for implementing code incrementally following established patterns, conventions, and quality standards | .claude/skills/incremental-implementation/SKILL.md | When workflow requires incremental-implementation |
 | Post Implementation Checklist | Comprehensive checklist for documenting follow-up work and testing needs after implementation | .claude/skills/post-implementation-checklist/SKILL.md | When workflow requires post-implementation-checklist |
-| Python Typing And Async | Capability for python-typing-and-async | .claude/skills/python-typing-and-async/SKILL.md | When workflow requires python-typing-and-async |
+| Python Typing And Async | Type hints are checked by a separate tool (`mypy`, `pyright`), never by CPython | .claude/skills/python-typing-and-async/SKILL.md | When workflow requires python-typing-and-async |
 | Test Aaa Structure | Apply Arrange-Act-Assert pattern for clear, maintainable tests with detailed guidance | .claude/skills/test-aaa-structure/SKILL.md | When workflow requires test-aaa-structure |
 | Test Coverage Categories | Comprehensive systematic approach to achieving complete test coverage through structured category-based testing | .claude/skills/test-coverage-categories/SKILL.md | When workflow requires test-coverage-categories |
 | Test Mocking Rules | Comprehensive guidelines for when and how to use mocks, stubs, and fakes in tests | .claude/skills/test-mocking-rules/SKILL.md | When workflow requires test-mocking-rules |
