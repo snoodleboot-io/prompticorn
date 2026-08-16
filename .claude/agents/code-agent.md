@@ -48,15 +48,15 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 | Skill | Purpose | File Path | When to Use |
 |-------|---------|-----------|-------------|
-| Code Review Practices | Capability for code-review-practices | .claude/skills/code-review-practices/SKILL.md | When workflow requires code-review-practices |
+| Code Review Practices | The single highest-leverage convention in code review is prefixing every comment | .claude/skills/code-review-practices/SKILL.md | When workflow requires code-review-practices |
 | Feature Planning | Plan before implementing - understand scope and approach with detailed guidance | .claude/skills/feature-planning/SKILL.md | When workflow requires feature-planning |
 | Incremental Implementation | Comprehensive guide for implementing code incrementally following established patterns, conventions, and quality standards | .claude/skills/incremental-implementation/SKILL.md | When workflow requires incremental-implementation |
 | Multiagent Orchestration | Run a genuinely-parallel multiagent implementation with detailed guidance - plan, gate on environment, spawn subagents concurrently, aggregate, and debug/retry | .claude/skills/multiagent-orchestration/SKILL.md | Load before planning ANY work with independently executable units - the request names parallel/multiagent/concurrent execution, asks to orchestrate or fan out agents, or decomposes into lanes that would otherwise run one at a time |
 | Post Implementation Checklist | Comprehensive checklist for documenting follow-up work and testing needs after implementation | .claude/skills/post-implementation-checklist/SKILL.md | When workflow requires post-implementation-checklist |
-| Quality Assurance | Capability for quality-assurance | .claude/skills/quality-assurance/SKILL.md | When workflow requires quality-assurance |
-| Technical Debt Management | Capability for technical-debt-management | .claude/skills/technical-debt-management/SKILL.md | When workflow requires technical-debt-management |
+| Quality Assurance | "Quality" is unmanageable until it is a set of numbers with agreed definitions. | .claude/skills/quality-assurance/SKILL.md | When workflow requires quality-assurance |
+| Technical Debt Management | Debt that exists only in engineers' heads cannot be prioritised, funded, or | .claude/skills/technical-debt-management/SKILL.md | When workflow requires technical-debt-management |
 | Test Coverage Categories | Comprehensive systematic approach to achieving complete test coverage through structured category-based testing | .claude/skills/test-coverage-categories/SKILL.md | When workflow requires test-coverage-categories |
-| Python Typing And Async | Capability for python-typing-and-async | .claude/skills/python-typing-and-async/SKILL.md | When workflow requires python-typing-and-async |
+| Python Typing And Async | Type hints are checked by a separate tool (`mypy`, `pyright`), never by CPython | .claude/skills/python-typing-and-async/SKILL.md | When workflow requires python-typing-and-async |
 | Test Aaa Structure | Apply Arrange-Act-Assert pattern for clear, maintainable tests with detailed guidance | .claude/skills/test-aaa-structure/SKILL.md | When workflow requires test-aaa-structure |
 | Test Mocking Rules | Comprehensive guidelines for when and how to use mocks, stubs, and fakes in tests | .claude/skills/test-mocking-rules/SKILL.md | When workflow requires test-mocking-rules |
 

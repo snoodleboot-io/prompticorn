@@ -46,17 +46,17 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 | Skill | Purpose | File Path | When to Use |
 |-------|---------|-----------|-------------|
-| Continuous Improvement | Capability for continuous-improvement | .claude/skills/continuous-improvement/SKILL.md | When workflow requires continuous-improvement |
-| Debugging Methodology | Capability for debugging-methodology | .claude/skills/debugging-methodology/SKILL.md | When workflow requires debugging-methodology |
-| Incident Automation | Capability for incident-automation | .claude/skills/incident-automation/SKILL.md | When workflow requires incident-automation |
-| Incident Timeline Creation | Capability for incident-timeline-creation | .claude/skills/incident-timeline-creation/SKILL.md | When workflow requires incident-timeline-creation |
-| Problem Decomposition | Capability for problem-decomposition | .claude/skills/problem-decomposition/SKILL.md | When workflow requires problem-decomposition |
-| Root Cause Five Whys | Capability for root-cause-five-whys | .claude/skills/root-cause-five-whys/SKILL.md | When workflow requires root-cause-five-whys |
-| Technical Communication | Capability for technical-communication | .claude/skills/technical-communication/SKILL.md | When workflow requires technical-communication |
+| Continuous Improvement | The purpose of a postmortem is to change the system, and that only works if people | .claude/skills/continuous-improvement/SKILL.md | When workflow requires continuous-improvement |
+| Debugging Methodology | Debugging is the scientific method under time pressure. | .claude/skills/debugging-methodology/SKILL.md | When workflow requires debugging-methodology |
+| Incident Automation | A runbook written in a wiki decays silently: the dashboard is renamed, the | .claude/skills/incident-automation/SKILL.md | When workflow requires incident-automation |
+| Incident Timeline Creation | **Server Logs:** | .claude/skills/incident-timeline-creation/SKILL.md | When workflow requires incident-timeline-creation |
+| Problem Decomposition | A stakeholder asks to make search faster. | .claude/skills/problem-decomposition/SKILL.md | When workflow requires problem-decomposition |
+| Root Cause Five Whys | 1. | .claude/skills/root-cause-five-whys/SKILL.md | When workflow requires root-cause-five-whys |
+| Technical Communication | Before writing anything, answer three questions: who reads this, what do they | .claude/skills/technical-communication/SKILL.md | When workflow requires technical-communication |
 | Feature Planning | Plan before implementing - understand scope and approach with detailed guidance | .claude/skills/feature-planning/SKILL.md | When workflow requires feature-planning |
 | Incremental Implementation | Comprehensive guide for implementing code incrementally following established patterns, conventions, and quality standards | .claude/skills/incremental-implementation/SKILL.md | When workflow requires incremental-implementation |
 | Post Implementation Checklist | Comprehensive checklist for documenting follow-up work and testing needs after implementation | .claude/skills/post-implementation-checklist/SKILL.md | When workflow requires post-implementation-checklist |
-| Python Typing And Async | Capability for python-typing-and-async | .claude/skills/python-typing-and-async/SKILL.md | When workflow requires python-typing-and-async |
+| Python Typing And Async | Type hints are checked by a separate tool (`mypy`, `pyright`), never by CPython | .claude/skills/python-typing-and-async/SKILL.md | When workflow requires python-typing-and-async |
 | Test Aaa Structure | Apply Arrange-Act-Assert pattern for clear, maintainable tests with detailed guidance | .claude/skills/test-aaa-structure/SKILL.md | When workflow requires test-aaa-structure |
 | Test Coverage Categories | Comprehensive systematic approach to achieving complete test coverage through structured category-based testing | .claude/skills/test-coverage-categories/SKILL.md | When workflow requires test-coverage-categories |
 | Test Mocking Rules | Comprehensive guidelines for when and how to use mocks, stubs, and fakes in tests | .claude/skills/test-mocking-rules/SKILL.md | When workflow requires test-mocking-rules |

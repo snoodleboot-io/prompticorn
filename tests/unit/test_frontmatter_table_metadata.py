@@ -70,6 +70,25 @@ class TestEmittedTables:
         assert "parallel" in row["when_to_use"].lower()
         assert row["when_to_use"] != "When workflow requires multiagent-orchestration"
 
+    def test_body_derived_description_when_source_has_no_frontmatter(self):
+        """PRO-145: only 9 of 119 authored skills declare frontmatter. Reading it
+        alone left 79 referenced rows saying "Capability for <name>", which names
+        the skill and says nothing else. The emitter already derives a description
+        from the body when it writes each SKILL.md; the table reuses it."""
+        (row,) = ClaudeBuilder()._prepare_skills_data(["api-security"], "verbose")
+        assert row["purpose"] == "An API has no UI to hide things behind."
+        assert "Capability for" not in row["purpose"]
+
+    def test_no_referenced_skill_falls_back_to_the_placeholder(self):
+        """The fallback should now be unreachable for real skills — every authored
+        skill has either frontmatter or a body to derive from."""
+        import pathlib as _pathlib
+
+        names = sorted(p.name for p in _pathlib.Path("prompticorn/skills").iterdir() if p.is_dir())
+        rows = ClaudeBuilder()._prepare_skills_data(names, "verbose")
+        placeholders = [r["name"] for r in rows if r["purpose"].startswith("Capability for")]
+        assert not placeholders
+
     def test_skill_row_falls_back_when_no_trigger_is_declared(self):
         """Most skills declare only a description; their rows keep the old cell
         rather than inventing a condition the author never stated."""

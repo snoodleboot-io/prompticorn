@@ -47,24 +47,24 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 | Skill | Purpose | File Path | When to Use |
 |-------|---------|-----------|-------------|
-| Autoscaling Strategies | Capability for autoscaling-strategies | .claude/skills/autoscaling-strategies/SKILL.md | When workflow requires autoscaling-strategies |
-| Cloud Cost Optimization | Capability for cloud-cost-optimization | .claude/skills/cloud-cost-optimization/SKILL.md | When workflow requires cloud-cost-optimization |
-| Cloud Iam Design | Capability for cloud-iam-design | .claude/skills/cloud-iam-design/SKILL.md | When workflow requires cloud-iam-design |
-| Cloud Migration Strategy | Capability for cloud-migration-strategy | .claude/skills/cloud-migration-strategy/SKILL.md | When workflow requires cloud-migration-strategy |
-| Cloud Networking Design | Capability for cloud-networking-design | .claude/skills/cloud-networking-design/SKILL.md | When workflow requires cloud-networking-design |
-| Container Security Hardening | Capability for container-security-hardening | .claude/skills/container-security-hardening/SKILL.md | When workflow requires container-security-hardening |
-| Continuous Improvement | Capability for continuous-improvement | .claude/skills/continuous-improvement/SKILL.md | When workflow requires continuous-improvement |
-| Deployment Rollback Strategies | Capability for deployment-rollback-strategies | .claude/skills/deployment-rollback-strategies/SKILL.md | When workflow requires deployment-rollback-strategies |
-| Disaster Recovery Planning | Capability for disaster-recovery-planning | .claude/skills/disaster-recovery-planning/SKILL.md | When workflow requires disaster-recovery-planning |
-| Documentation Best Practices | Capability for documentation-best-practices | .claude/skills/documentation-best-practices/SKILL.md | When workflow requires documentation-best-practices |
-| Iac Best Practices | Capability for iac-best-practices | .claude/skills/iac-best-practices/SKILL.md | When workflow requires iac-best-practices |
-| Infrastructure Drift Detection | Capability for infrastructure-drift-detection | .claude/skills/infrastructure-drift-detection/SKILL.md | When workflow requires infrastructure-drift-detection |
-| Kubernetes Resource Management | Capability for kubernetes-resource-management | .claude/skills/kubernetes-resource-management/SKILL.md | When workflow requires kubernetes-resource-management |
-| Technical Decision Making | Capability for technical-decision-making | .claude/skills/technical-decision-making/SKILL.md | When workflow requires technical-decision-making |
+| Autoscaling Strategies | Every autoscaling decision is driven by one of three trigger types, and mature | .claude/skills/autoscaling-strategies/SKILL.md | When workflow requires autoscaling-strategies |
+| Cloud Cost Optimization | Almost every cloud estate is over-provisioned. | .claude/skills/cloud-cost-optimization/SKILL.md | When workflow requires cloud-cost-optimization |
+| Cloud Iam Design | Least privilege is easy to state and hard to hold: grant each identity only the | .claude/skills/cloud-iam-design/SKILL.md | When workflow requires cloud-iam-design |
+| Cloud Migration Strategy | There is no such thing as "the migration." An estate is a collection of | .claude/skills/cloud-migration-strategy/SKILL.md | When workflow requires cloud-migration-strategy |
+| Cloud Networking Design | A VPC is a private IP space you own inside a region. | .claude/skills/cloud-networking-design/SKILL.md | When workflow requires cloud-networking-design |
+| Container Security Hardening | A container image is an attack surface you chose. | .claude/skills/container-security-hardening/SKILL.md | When workflow requires container-security-hardening |
+| Continuous Improvement | The purpose of a postmortem is to change the system, and that only works if people | .claude/skills/continuous-improvement/SKILL.md | When workflow requires continuous-improvement |
+| Deployment Rollback Strategies | The relevant axis is not "how do we deploy" but "how fast and how cheaply can we | .claude/skills/deployment-rollback-strategies/SKILL.md | When workflow requires deployment-rollback-strategies |
+| Disaster Recovery Planning | Disaster recovery has exactly two quantitative inputs, and every architectural | .claude/skills/disaster-recovery-planning/SKILL.md | When workflow requires disaster-recovery-planning |
+| Documentation Best Practices | Almost all bad documentation is well-intentioned writing in which two or more | .claude/skills/documentation-best-practices/SKILL.md | When workflow requires documentation-best-practices |
+| Iac Best Practices | State is the map between your code and real resources. | .claude/skills/iac-best-practices/SKILL.md | When workflow requires iac-best-practices |
+| Infrastructure Drift Detection | Drift is the divergence between declared infrastructure and live infrastructure. | .claude/skills/infrastructure-drift-detection/SKILL.md | When workflow requires infrastructure-drift-detection |
+| Kubernetes Resource Management | Two numbers with two different audiences. | .claude/skills/kubernetes-resource-management/SKILL.md | When workflow requires kubernetes-resource-management |
+| Technical Decision Making | The single most useful question before analysing anything is: *what does it cost | .claude/skills/technical-decision-making/SKILL.md | When workflow requires technical-decision-making |
 | Feature Planning | Plan before implementing - understand scope and approach with detailed guidance | .claude/skills/feature-planning/SKILL.md | When workflow requires feature-planning |
 | Incremental Implementation | Comprehensive guide for implementing code incrementally following established patterns, conventions, and quality standards | .claude/skills/incremental-implementation/SKILL.md | When workflow requires incremental-implementation |
 | Post Implementation Checklist | Comprehensive checklist for documenting follow-up work and testing needs after implementation | .claude/skills/post-implementation-checklist/SKILL.md | When workflow requires post-implementation-checklist |
-| Python Typing And Async | Capability for python-typing-and-async | .claude/skills/python-typing-and-async/SKILL.md | When workflow requires python-typing-and-async |
+| Python Typing And Async | Type hints are checked by a separate tool (`mypy`, `pyright`), never by CPython | .claude/skills/python-typing-and-async/SKILL.md | When workflow requires python-typing-and-async |
 | Test Aaa Structure | Apply Arrange-Act-Assert pattern for clear, maintainable tests with detailed guidance | .claude/skills/test-aaa-structure/SKILL.md | When workflow requires test-aaa-structure |
 | Test Coverage Categories | Comprehensive systematic approach to achieving complete test coverage through structured category-based testing | .claude/skills/test-coverage-categories/SKILL.md | When workflow requires test-coverage-categories |
 | Test Mocking Rules | Comprehensive guidelines for when and how to use mocks, stubs, and fakes in tests | .claude/skills/test-mocking-rules/SKILL.md | When workflow requires test-mocking-rules |

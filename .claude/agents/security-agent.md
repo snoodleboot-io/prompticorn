@@ -154,19 +154,19 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 | Skill | Purpose | File Path | When to Use |
 |-------|---------|-----------|-------------|
-| Api Security | Capability for api-security | .claude/skills/api-security/SKILL.md | When workflow requires api-security |
-| Cloud Iam Design | Capability for cloud-iam-design | .claude/skills/cloud-iam-design/SKILL.md | When workflow requires cloud-iam-design |
-| Code Review Practices | Capability for code-review-practices | .claude/skills/code-review-practices/SKILL.md | When workflow requires code-review-practices |
-| Container Security Hardening | Capability for container-security-hardening | .claude/skills/container-security-hardening/SKILL.md | When workflow requires container-security-hardening |
-| Key Management | Capability for key-management | .claude/skills/key-management/SKILL.md | When workflow requires key-management |
-| Problem Decomposition | Capability for problem-decomposition | .claude/skills/problem-decomposition/SKILL.md | When workflow requires problem-decomposition |
-| Quality Assurance | Capability for quality-assurance | .claude/skills/quality-assurance/SKILL.md | When workflow requires quality-assurance |
-| Technical Decision Making | Capability for technical-decision-making | .claude/skills/technical-decision-making/SKILL.md | When workflow requires technical-decision-making |
-| Threat Modeling | Capability for threat-modeling | .claude/skills/threat-modeling/SKILL.md | When workflow requires threat-modeling |
+| Api Security | An API has no UI to hide things behind. | .claude/skills/api-security/SKILL.md | When workflow requires api-security |
+| Cloud Iam Design | Least privilege is easy to state and hard to hold: grant each identity only the | .claude/skills/cloud-iam-design/SKILL.md | When workflow requires cloud-iam-design |
+| Code Review Practices | The single highest-leverage convention in code review is prefixing every comment | .claude/skills/code-review-practices/SKILL.md | When workflow requires code-review-practices |
+| Container Security Hardening | A container image is an attack surface you chose. | .claude/skills/container-security-hardening/SKILL.md | When workflow requires container-security-hardening |
+| Key Management | The central pattern. | .claude/skills/key-management/SKILL.md | When workflow requires key-management |
+| Problem Decomposition | A stakeholder asks to make search faster. | .claude/skills/problem-decomposition/SKILL.md | When workflow requires problem-decomposition |
+| Quality Assurance | "Quality" is unmanageable until it is a set of numbers with agreed definitions. | .claude/skills/quality-assurance/SKILL.md | When workflow requires quality-assurance |
+| Technical Decision Making | The single most useful question before analysing anything is: *what does it cost | .claude/skills/technical-decision-making/SKILL.md | When workflow requires technical-decision-making |
+| Threat Modeling | Every methodology — STRIDE, PASTA, LINDDUN, attack trees — is a technique for | .claude/skills/threat-modeling/SKILL.md | When workflow requires threat-modeling |
 | Feature Planning | Plan before implementing - understand scope and approach with detailed guidance | .claude/skills/feature-planning/SKILL.md | When workflow requires feature-planning |
 | Incremental Implementation | Comprehensive guide for implementing code incrementally following established patterns, conventions, and quality standards | .claude/skills/incremental-implementation/SKILL.md | When workflow requires incremental-implementation |
 | Post Implementation Checklist | Comprehensive checklist for documenting follow-up work and testing needs after implementation | .claude/skills/post-implementation-checklist/SKILL.md | When workflow requires post-implementation-checklist |
-| Python Typing And Async | Capability for python-typing-and-async | .claude/skills/python-typing-and-async/SKILL.md | When workflow requires python-typing-and-async |
+| Python Typing And Async | Type hints are checked by a separate tool (`mypy`, `pyright`), never by CPython | .claude/skills/python-typing-and-async/SKILL.md | When workflow requires python-typing-and-async |
 | Test Aaa Structure | Apply Arrange-Act-Assert pattern for clear, maintainable tests with detailed guidance | .claude/skills/test-aaa-structure/SKILL.md | When workflow requires test-aaa-structure |
 | Test Coverage Categories | Comprehensive systematic approach to achieving complete test coverage through structured category-based testing | .claude/skills/test-coverage-categories/SKILL.md | When workflow requires test-coverage-categories |
 | Test Mocking Rules | Comprehensive guidelines for when and how to use mocks, stubs, and fakes in tests | .claude/skills/test-mocking-rules/SKILL.md | When workflow requires test-mocking-rules |

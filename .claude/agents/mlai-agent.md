@@ -97,29 +97,29 @@ Skills are reusable capabilities. Load only when workflow requires:
 
 | Skill | Purpose | File Path | When to Use |
 |-------|---------|-----------|-------------|
-| Anomaly Detection Techniques | Capability for anomaly-detection-techniques | .claude/skills/anomaly-detection-techniques/SKILL.md | When workflow requires anomaly-detection-techniques |
-| Batch Vs Realtime Scoring | Capability for batch-vs-realtime-scoring | .claude/skills/batch-vs-realtime-scoring/SKILL.md | When workflow requires batch-vs-realtime-scoring |
-| Cross Validation Strategies | Capability for cross-validation-strategies | .claude/skills/cross-validation-strategies/SKILL.md | When workflow requires cross-validation-strategies |
-| Data Validation Pipelines | Capability for data-validation-pipelines | .claude/skills/data-validation-pipelines/SKILL.md | When workflow requires data-validation-pipelines |
-| Data Versioning Reproducibility | Capability for data-versioning-reproducibility | .claude/skills/data-versioning-reproducibility/SKILL.md | When workflow requires data-versioning-reproducibility |
-| Dimensionality Reduction | Capability for dimensionality-reduction | .claude/skills/dimensionality-reduction/SKILL.md | When workflow requires dimensionality-reduction |
-| Ensemble Methods | Capability for ensemble-methods | .claude/skills/ensemble-methods/SKILL.md | When workflow requires ensemble-methods |
-| Feature Engineering | Capability for feature-engineering | .claude/skills/feature-engineering/SKILL.md | When workflow requires feature-engineering |
-| Feature Importance Analysis | Capability for feature-importance-analysis | .claude/skills/feature-importance-analysis/SKILL.md | When workflow requires feature-importance-analysis |
-| Feature Store Design | Capability for feature-store-design | .claude/skills/feature-store-design/SKILL.md | When workflow requires feature-store-design |
-| Hyperparameter Optimization | Capability for hyperparameter-optimization | .claude/skills/hyperparameter-optimization/SKILL.md | When workflow requires hyperparameter-optimization |
-| Imbalanced Classification | Capability for imbalanced-classification | .claude/skills/imbalanced-classification/SKILL.md | When workflow requires imbalanced-classification |
-| Ml Deployment | Capability for ml-deployment | .claude/skills/ml-deployment/SKILL.md | When workflow requires ml-deployment |
-| Mlops Pipeline Design | Capability for mlops-pipeline-design | .claude/skills/mlops-pipeline-design/SKILL.md | When workflow requires mlops-pipeline-design |
-| Model Evaluation | Capability for model-evaluation | .claude/skills/model-evaluation/SKILL.md | When workflow requires model-evaluation |
-| Model Interpretability | Capability for model-interpretability | .claude/skills/model-interpretability/SKILL.md | When workflow requires model-interpretability |
-| Model Monitoring | Capability for model-monitoring | .claude/skills/model-monitoring/SKILL.md | When workflow requires model-monitoring |
-| Model Performance Debugging | Capability for model-performance-debugging | .claude/skills/model-performance-debugging/SKILL.md | When workflow requires model-performance-debugging |
-| Time Series Preprocessing | Capability for time-series-preprocessing | .claude/skills/time-series-preprocessing/SKILL.md | When workflow requires time-series-preprocessing |
+| Anomaly Detection Techniques | "Anomaly" covers three distinct problems, and a detector built for one is close to | .claude/skills/anomaly-detection-techniques/SKILL.md | When workflow requires anomaly-detection-techniques |
+| Batch Vs Realtime Scoring | The choice is not about scale or sophistication. | .claude/skills/batch-vs-realtime-scoring/SKILL.md | When workflow requires batch-vs-realtime-scoring |
+| Cross Validation Strategies | Cross-validation only estimates generalization if the split mimics the gap between | .claude/skills/cross-validation-strategies/SKILL.md | When workflow requires cross-validation-strategies |
+| Data Validation Pipelines | A validation *boundary* is any point where data crosses from a system you do not | .claude/skills/data-validation-pipelines/SKILL.md | When workflow requires data-validation-pipelines |
+| Data Versioning Reproducibility | A git SHA pins the transformation. | .claude/skills/data-versioning-reproducibility/SKILL.md | When workflow requires data-versioning-reproducibility |
+| Dimensionality Reduction | Reduction is a trade, not an improvement. | .claude/skills/dimensionality-reduction/SKILL.md | When workflow requires dimensionality-reduction |
+| Ensemble Methods | Expected error decomposes into bias, variance, and irreducible noise. | .claude/skills/ensemble-methods/SKILL.md | When workflow requires ensemble-methods |
+| Feature Engineering | Cardinality and model family jointly determine the encoding. | .claude/skills/feature-engineering/SKILL.md | When workflow requires feature-engineering |
+| Feature Importance Analysis | "Feature importance" is ambiguous. | .claude/skills/feature-importance-analysis/SKILL.md | When workflow requires feature-importance-analysis |
+| Feature Store Design | The pitch is often "a central place to store features," which undersells it into | .claude/skills/feature-store-design/SKILL.md | When workflow requires feature-store-design |
+| Hyperparameter Optimization | The search algorithm matters far less than the budget and the space you give it, | .claude/skills/hyperparameter-optimization/SKILL.md | When workflow requires hyperparameter-optimization |
+| Imbalanced Classification | Imbalance is not itself a problem — it is a symptom that the default loss and the | .claude/skills/imbalanced-classification/SKILL.md | When workflow requires imbalanced-classification |
+| Ml Deployment | A model in production is never just weights. | .claude/skills/ml-deployment/SKILL.md | When workflow requires ml-deployment |
+| Mlops Pipeline Design | Software CI assumes a git sha plus a lockfile determines the build. | .claude/skills/mlops-pipeline-design/SKILL.md | When workflow requires mlops-pipeline-design |
+| Model Evaluation | Every metric encodes an opinion about which mistake hurts. | .claude/skills/model-evaluation/SKILL.md | When workflow requires model-evaluation |
+| Model Interpretability | "Make it interpretable" is four different requests. | .claude/skills/model-interpretability/SKILL.md | When workflow requires model-interpretability |
+| Model Monitoring | The layers trade timeliness against definitiveness. | .claude/skills/model-monitoring/SKILL.md | When workflow requires model-monitoring |
+| Model Performance Debugging | Run this before anything else. | .claude/skills/model-performance-debugging/SKILL.md | When workflow requires model-performance-debugging |
+| Time Series Preprocessing | Almost every downstream bug traces back to an index that was assumed regular and | .claude/skills/time-series-preprocessing/SKILL.md | When workflow requires time-series-preprocessing |
 | Feature Planning | Plan before implementing - understand scope and approach with detailed guidance | .claude/skills/feature-planning/SKILL.md | When workflow requires feature-planning |
 | Incremental Implementation | Comprehensive guide for implementing code incrementally following established patterns, conventions, and quality standards | .claude/skills/incremental-implementation/SKILL.md | When workflow requires incremental-implementation |
 | Post Implementation Checklist | Comprehensive checklist for documenting follow-up work and testing needs after implementation | .claude/skills/post-implementation-checklist/SKILL.md | When workflow requires post-implementation-checklist |
-| Python Typing And Async | Capability for python-typing-and-async | .claude/skills/python-typing-and-async/SKILL.md | When workflow requires python-typing-and-async |
+| Python Typing And Async | Type hints are checked by a separate tool (`mypy`, `pyright`), never by CPython | .claude/skills/python-typing-and-async/SKILL.md | When workflow requires python-typing-and-async |
 | Test Aaa Structure | Apply Arrange-Act-Assert pattern for clear, maintainable tests with detailed guidance | .claude/skills/test-aaa-structure/SKILL.md | When workflow requires test-aaa-structure |
 | Test Coverage Categories | Comprehensive systematic approach to achieving complete test coverage through structured category-based testing | .claude/skills/test-coverage-categories/SKILL.md | When workflow requires test-coverage-categories |
 | Test Mocking Rules | Comprehensive guidelines for when and how to use mocks, stubs, and fakes in tests | .claude/skills/test-mocking-rules/SKILL.md | When workflow requires test-mocking-rules |
