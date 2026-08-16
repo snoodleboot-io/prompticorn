@@ -40,7 +40,7 @@ class TestLaneSelection:
         """unit-watch is a subset of unit; running both would duplicate the work."""
         names = {lane.name for lane in harness._select_lanes(Namespace(fast=False, lane=None))}
         assert "unit" in names and "unit-watch" not in names
-        assert {"integration", "slow"} <= names
+        assert {"integration", "slow", "benchmarks"} <= names
 
     def test_explicit_lane_selection_wins_over_fast(self):
         lanes = harness._select_lanes(Namespace(fast=True, lane=["slow"]))
@@ -53,6 +53,23 @@ class TestLaneSelection:
         for namespace in (Namespace(fast=True, lane=None), Namespace(fast=False, lane=None)):
             selected = {lane.name for lane in harness._select_lanes(namespace)}
             assert "unit-watch" not in selected
+
+    def test_benchmark_lane_is_exclusive(self):
+        """PRO-146: it asserts a total build time under a fixed ceiling. Sharing the
+        machine with six saturating lanes blew that budget and failed for reasons
+        unrelated to the diff."""
+        benchmarks = next(lane for lane in harness.LANES if lane.name == "benchmarks")
+        assert benchmarks.exclusive
+
+    def test_slow_lane_excludes_the_benchmark_it_handed_off(self):
+        """Otherwise the benchmark runs twice — once concurrently, defeating the fix."""
+        slow = next(lane for lane in harness.LANES if lane.name == "slow")
+        assert "--ignore=tests/slow/test_build_benchmarks.py" in slow.command
+
+    def test_only_timing_sensitive_lanes_are_exclusive(self):
+        """Exclusivity costs wall-clock, so it should not spread by habit."""
+        exclusive = {lane.name for lane in harness.LANES if lane.exclusive}
+        assert exclusive == {"benchmarks"}
 
     def test_unknown_lane_is_rejected_rather_than_silently_dropped(self):
         with pytest.raises(SystemExit, match="nope"):
@@ -154,3 +171,30 @@ class TestWatchSnapshot:
     def test_only_python_sources_are_watched(self, tmp_path):
         (tmp_path / "notes.md").write_text("prose")
         assert harness._snapshot([tmp_path]) == {}
+
+
+class TestExclusiveScheduling:
+    def test_exclusive_lanes_run_after_the_concurrent_batch(self, monkeypatch):
+        """Ordering is the whole point: the benchmark must start on a quiet machine,
+        so it cannot be dispatched into the pool alongside everything else."""
+        order: list[str] = []
+
+        def fake_run(command, env=None):
+            order.append(command[-1])
+            return 0, ""
+
+        monkeypatch.setattr(harness, "_run", fake_run)
+        lanes = [
+            harness.Lane("a", ("uv", "a")),
+            harness.Lane("bench", ("uv", "bench"), exclusive=True),
+            harness.Lane("b", ("uv", "b")),
+        ]
+        results = harness._run_lanes(lanes)
+
+        assert order[-1] == "bench", "exclusive lane must run last"
+        assert {r.name for r in results} == {"a", "bench", "b"}
+
+    def test_a_sweep_of_only_exclusive_lanes_still_runs(self, monkeypatch):
+        monkeypatch.setattr(harness, "_run", lambda command, env=None: (0, ""))
+        (result,) = harness._run_lanes([harness.Lane("bench", ("uv", "bench"), exclusive=True)])
+        assert result.ok and result.name == "bench"

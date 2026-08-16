@@ -77,6 +77,10 @@ class Lane:
     command: Sequence[str]
     fast: bool = False
     env: dict[str, str] = field(default_factory=dict)
+    # Exclusive lanes measure wall-clock and must not share the machine. They run
+    # alone, after the concurrent batch, so their result reflects the code rather
+    # than how busy the box was.
+    exclusive: bool = False
 
 
 # Lanes mirror .github/workflows/ci-cd.yml so a green `check` means a green CI.
@@ -95,7 +99,21 @@ LANES: tuple[Lane, ...] = (
     Lane("security", ("uv", "run", "pytest", "tests/security", "-q"), fast=True),
     Lane("unit", ("uv", "run", "pytest", "tests/unit", "-q"), fast=False),
     Lane("integration", ("uv", "run", "pytest", "tests/integration", "-q"), fast=False),
-    Lane("slow", ("uv", "run", "pytest", "tests/slow", "-q"), fast=False),
+    Lane(
+        "slow",
+        ("uv", "run", "pytest", "tests/slow", "-q", "--ignore=tests/slow/test_build_benchmarks.py"),
+        fast=False,
+    ),
+    # Asserts a total build time under a fixed ceiling. Alone it takes ~51s; run
+    # beside six saturating lanes it blew the 90s budget and failed for reasons
+    # that had nothing to do with the diff. CI does not hit this — each lane is
+    # its own runner there.
+    Lane(
+        "benchmarks",
+        ("uv", "run", "pytest", "tests/slow/test_build_benchmarks.py", "-q"),
+        fast=False,
+        exclusive=True,
+    ),
     # Not in either default set: a trimmed unit run for `watch`, reachable with
     # --lane when you want it deliberately.
     Lane(
@@ -274,10 +292,19 @@ def _run_lanes(lanes: Iterable[Lane]) -> list[LaneResult]:
         code, output = _run(lane.command, env=lane.env)
         return LaneResult(lane.name, code == 0, time.monotonic() - started, output)
 
-    # Lanes are independent processes over a read-only checkout, so they run
-    # concurrently; wall-clock is the slowest lane rather than their sum.
-    with ThreadPoolExecutor(max_workers=len(lanes) or 1) as pool:
-        return list(pool.map(execute, lanes))
+    shared = [lane for lane in lanes if not lane.exclusive]
+    alone = [lane for lane in lanes if lane.exclusive]
+
+    results: list[LaneResult] = []
+    # Shared lanes are independent processes over a read-only checkout, so they
+    # run concurrently; wall-clock is the slowest lane rather than their sum.
+    if shared:
+        with ThreadPoolExecutor(max_workers=len(shared)) as pool:
+            results.extend(pool.map(execute, shared))
+    # Exclusive lanes wait for a quiet machine, then run one at a time.
+    for lane in alone:
+        results.append(execute(lane))
+    return results
 
 
 def _report(results: Sequence[LaneResult]) -> int:
@@ -296,8 +323,12 @@ def _report(results: Sequence[LaneResult]) -> int:
 
 def command_check(namespace: argparse.Namespace) -> int:
     lanes = _select_lanes(namespace)
-    names = ", ".join(lane.name for lane in lanes)
-    print(f"Running {len(lanes)} lane(s) concurrently: {names}")
+    shared = [lane.name for lane in lanes if not lane.exclusive]
+    alone = [lane.name for lane in lanes if lane.exclusive]
+    if shared:
+        print(f"Running {len(shared)} lane(s) concurrently: {', '.join(shared)}")
+    if alone:
+        print(f"Then {len(alone)} exclusive lane(s), alone: {', '.join(alone)}")
     return _report(_run_lanes(lanes))
 
 
