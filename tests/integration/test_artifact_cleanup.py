@@ -4,7 +4,7 @@ import shutil
 import unittest
 from pathlib import Path
 
-from prompticorn.artifacts import ARTIFACT_FILES, ArtifactManager
+from prompticorn.tool_outputs import TOOL_OUTPUT_FILES, ToolOutputManager
 
 
 class TestArtifactCleanup(unittest.TestCase):
@@ -16,7 +16,7 @@ class TestArtifactCleanup(unittest.TestCase):
         if self.test_dir.exists():
             shutil.rmtree(self.test_dir)
         self.test_dir.mkdir(parents=True)
-        self.manager = ArtifactManager(self.test_dir)
+        self.manager = ToolOutputManager(self.test_dir)
 
     def tearDown(self):
         """Clean up test artifacts."""
@@ -25,12 +25,12 @@ class TestArtifactCleanup(unittest.TestCase):
 
     def test_kilo_ide_creates_kilo_directory(self):
         """Test that kilo-ide creates .kilo/ directory."""
-        artifacts = ARTIFACT_FILES["kilo-ide"]["create"]
+        artifacts = TOOL_OUTPUT_FILES["kilo-ide"]["create"]
         self.assertIn(".kilo/", artifacts)
 
     def test_claude_creates_claude_directory(self):
         """Test that claude creates .claude/ directory and CLAUDE.md file."""
-        artifacts = ARTIFACT_FILES["claude"]["create"]
+        artifacts = TOOL_OUTPUT_FILES["claude"]["create"]
         self.assertIn(".claude/", artifacts)
         self.assertIn("CLAUDE.md", artifacts)
 
@@ -44,7 +44,7 @@ class TestArtifactCleanup(unittest.TestCase):
         self.assertTrue(kilo_dir.exists())
 
         # Remove artifacts created by kilo-ide
-        actions = self.manager.remove_artifacts_created_by("kilo-ide")
+        actions = self.manager.remove_outputs_created_by("kilo-ide")
 
         # Verify .kilo/ is removed
         self.assertFalse(kilo_dir.exists())
@@ -63,7 +63,7 @@ class TestArtifactCleanup(unittest.TestCase):
         self.assertTrue(claude_md.exists())
 
         # Remove artifacts created by claude
-        actions = self.manager.remove_artifacts_created_by("claude")
+        actions = self.manager.remove_outputs_created_by("claude")
 
         # Verify both .claude/ directory and CLAUDE.md are removed
         self.assertFalse(claude_dir.exists())
@@ -111,7 +111,7 @@ class TestArtifactCleanup(unittest.TestCase):
         self.assertEqual(current_tool, "kilo-ide")
 
         # Step 2: Remove kilo artifacts
-        removal_actions = self.manager.remove_artifacts_created_by(current_tool)
+        removal_actions = self.manager.remove_outputs_created_by(current_tool)
 
         # Step 3: Verify kilo is removed
         self.assertFalse(kilo_dir.exists())
@@ -129,12 +129,12 @@ class TestArtifactCleanup(unittest.TestCase):
 
     def test_removing_wrong_artifacts_should_fail(self):
         """Test that removing artifacts for non-existent tool returns empty list."""
-        actions = self.manager.remove_artifacts_created_by("nonexistent-tool")
+        actions = self.manager.remove_outputs_created_by("nonexistent-tool")
         self.assertEqual(actions, [])
 
     def test_all_tools_have_create_and_remove_artifacts(self):
         """Test that all tools have proper artifact definitions."""
-        for tool_name, artifact_config in ARTIFACT_FILES.items():
+        for tool_name, artifact_config in TOOL_OUTPUT_FILES.items():
             self.assertIn("create", artifact_config, f"{tool_name} missing 'create'")
             self.assertIn("remove", artifact_config, f"{tool_name} missing 'remove'")
             self.assertIsInstance(artifact_config["create"], set, f"{tool_name} 'create' not a set")
@@ -146,7 +146,7 @@ class TestArtifactCleanup(unittest.TestCase):
         disambiguates via most-specific match — Codex also writes ``.codex/``)."""
         seen = {}
         overlaps = set()
-        for tool, config in ARTIFACT_FILES.items():
+        for tool, config in TOOL_OUTPUT_FILES.items():
             for artifact in config["create"]:
                 if artifact in seen:
                     overlaps.add((frozenset({seen[artifact], tool}), artifact))

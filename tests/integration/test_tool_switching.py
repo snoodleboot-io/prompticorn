@@ -4,7 +4,7 @@ import shutil
 import unittest
 from pathlib import Path
 
-from prompticorn.artifacts import ArtifactManager
+from prompticorn.tool_outputs import ToolOutputManager
 from prompticorn.prompt_builder import get_prompt_builder
 
 
@@ -105,11 +105,11 @@ class TestToolSwitching(unittest.TestCase):
         self.assertFalse((self.test_dir / ".claude").exists())
 
         # Step 2: Clean up old artifacts (simulate init removal)
-        manager = ArtifactManager(self.test_dir)
+        manager = ToolOutputManager(self.test_dir)
         current = manager.current_tool
         self.assertEqual(current, "kilo-ide")
 
-        manager.remove_artifacts_created_by(current)
+        manager.remove_outputs_created_by(current)
 
         # Verify kilo is removed
         self.assertFalse((self.test_dir / ".kilo").exists())
@@ -139,11 +139,11 @@ class TestToolSwitching(unittest.TestCase):
         self.assertFalse((self.test_dir / ".claude").exists())
 
         # Detected as the current tool
-        manager = ArtifactManager(self.test_dir)
+        manager = ToolOutputManager(self.test_dir)
         self.assertEqual(manager.current_tool, "roo")
 
         # Switching away removes Roo's artifacts
-        manager.remove_artifacts_created_by("roo")
+        manager.remove_outputs_created_by("roo")
         self.assertFalse((self.test_dir / ".roomodes").exists())
         self.assertFalse((self.test_dir / ".roo").exists())
 
@@ -157,8 +157,8 @@ class TestToolSwitching(unittest.TestCase):
         get_prompt_builder("claude").build(self.test_dir, config, dry_run=False)
         self.assertTrue((self.test_dir / ".claude").exists())
 
-        manager = ArtifactManager(self.test_dir)
-        manager.remove_artifacts_created_by(manager.current_tool)
+        manager = ToolOutputManager(self.test_dir)
+        manager.remove_outputs_created_by(manager.current_tool)
         self.assertFalse((self.test_dir / ".claude").exists())
         self.assertFalse((self.test_dir / "CLAUDE.md").exists())
 
@@ -179,10 +179,10 @@ class TestToolSwitching(unittest.TestCase):
         self.assertFalse((self.test_dir / ".kilo").exists())
         self.assertFalse((self.test_dir / ".claude").exists())
 
-        manager = ArtifactManager(self.test_dir)
+        manager = ToolOutputManager(self.test_dir)
         self.assertEqual(manager.current_tool, "junie")
 
-        manager.remove_artifacts_created_by("junie")
+        manager.remove_outputs_created_by("junie")
         self.assertFalse((self.test_dir / ".junie").exists())
 
     def test_switching_junie_to_roo_cleans_junie(self):
@@ -195,8 +195,8 @@ class TestToolSwitching(unittest.TestCase):
         get_prompt_builder("junie").build(self.test_dir, config, dry_run=False)
         self.assertTrue((self.test_dir / ".junie").exists())
 
-        manager = ArtifactManager(self.test_dir)
-        manager.remove_artifacts_created_by(manager.current_tool)
+        manager = ToolOutputManager(self.test_dir)
+        manager.remove_outputs_created_by(manager.current_tool)
         self.assertFalse((self.test_dir / ".junie").exists())
 
         get_prompt_builder("roo").build(self.test_dir, config, dry_run=False)
@@ -216,10 +216,10 @@ class TestToolSwitching(unittest.TestCase):
         self.assertFalse((self.test_dir / ".junie").exists())
         self.assertFalse((self.test_dir / ".claude").exists())
 
-        manager = ArtifactManager(self.test_dir)
+        manager = ToolOutputManager(self.test_dir)
         self.assertEqual(manager.current_tool, "zed")
 
-        manager.remove_artifacts_created_by("zed")
+        manager.remove_outputs_created_by("zed")
         self.assertFalse((self.test_dir / ".agents").exists())
 
     def test_switching_zed_to_junie_cleans_zed(self):
@@ -232,8 +232,8 @@ class TestToolSwitching(unittest.TestCase):
         get_prompt_builder("zed").build(self.test_dir, config, dry_run=False)
         self.assertTrue((self.test_dir / ".agents").exists())
 
-        manager = ArtifactManager(self.test_dir)
-        manager.remove_artifacts_created_by(manager.current_tool)
+        manager = ToolOutputManager(self.test_dir)
+        manager.remove_outputs_created_by(manager.current_tool)
         self.assertFalse((self.test_dir / ".agents").exists())
 
         get_prompt_builder("junie").build(self.test_dir, config, dry_run=False)
@@ -254,10 +254,10 @@ class TestToolSwitching(unittest.TestCase):
         self.assertFalse((self.test_dir / ".junie").exists())
         self.assertFalse((self.test_dir / ".claude").exists())
 
-        manager = ArtifactManager(self.test_dir)
+        manager = ToolOutputManager(self.test_dir)
         self.assertEqual(manager.current_tool, "gemini")
 
-        manager.remove_artifacts_created_by("gemini")
+        manager.remove_outputs_created_by("gemini")
         self.assertFalse((self.test_dir / ".gemini").exists())
 
     def test_switching_gemini_to_claude_cleans_gemini(self):
@@ -270,8 +270,8 @@ class TestToolSwitching(unittest.TestCase):
         get_prompt_builder("gemini").build(self.test_dir, config, dry_run=False)
         self.assertTrue((self.test_dir / ".gemini").exists())
 
-        manager = ArtifactManager(self.test_dir)
-        manager.remove_artifacts_created_by(manager.current_tool)
+        manager = ToolOutputManager(self.test_dir)
+        manager.remove_outputs_created_by(manager.current_tool)
         self.assertFalse((self.test_dir / ".gemini").exists())
 
         get_prompt_builder("claude").build(self.test_dir, config, dry_run=False)
@@ -293,10 +293,10 @@ class TestToolSwitching(unittest.TestCase):
         self.assertFalse((self.test_dir / "AGENTS.md").exists())
         self.assertFalse((self.test_dir / ".claude").exists())
 
-        manager = ArtifactManager(self.test_dir)
+        manager = ToolOutputManager(self.test_dir)
         self.assertEqual(manager.current_tool, "amazonq")
 
-        manager.remove_artifacts_created_by("amazonq")
+        manager.remove_outputs_created_by("amazonq")
         self.assertFalse((self.test_dir / ".amazonq").exists())
 
     def test_switching_amazonq_to_kilo_cleans_amazonq(self):
@@ -309,8 +309,8 @@ class TestToolSwitching(unittest.TestCase):
         get_prompt_builder("amazonq").build(self.test_dir, config, dry_run=False)
         self.assertTrue((self.test_dir / ".amazonq").exists())
 
-        manager = ArtifactManager(self.test_dir)
-        manager.remove_artifacts_created_by(manager.current_tool)
+        manager = ToolOutputManager(self.test_dir)
+        manager.remove_outputs_created_by(manager.current_tool)
         self.assertFalse((self.test_dir / ".amazonq").exists())
 
         get_prompt_builder("kilo-ide").build(self.test_dir, config, dry_run=False)
@@ -332,10 +332,10 @@ class TestToolSwitching(unittest.TestCase):
         self.assertFalse((self.test_dir / "AGENTS.md").exists())
         self.assertFalse((self.test_dir / ".claude").exists())
 
-        manager = ArtifactManager(self.test_dir)
+        manager = ToolOutputManager(self.test_dir)
         self.assertEqual(manager.current_tool, "windsurf")
 
-        manager.remove_artifacts_created_by("windsurf")
+        manager.remove_outputs_created_by("windsurf")
         self.assertFalse((self.test_dir / ".windsurf").exists())
 
     def test_switching_windsurf_to_cursor_cleans_windsurf(self):
@@ -348,8 +348,8 @@ class TestToolSwitching(unittest.TestCase):
         get_prompt_builder("windsurf").build(self.test_dir, config, dry_run=False)
         self.assertTrue((self.test_dir / ".windsurf").exists())
 
-        manager = ArtifactManager(self.test_dir)
-        manager.remove_artifacts_created_by(manager.current_tool)
+        manager = ToolOutputManager(self.test_dir)
+        manager.remove_outputs_created_by(manager.current_tool)
         self.assertFalse((self.test_dir / ".windsurf").exists())
 
         get_prompt_builder("cursor").build(self.test_dir, config, dry_run=False)
@@ -371,10 +371,10 @@ class TestToolSwitching(unittest.TestCase):
         self.assertFalse((self.test_dir / "AGENTS.md").exists())
         self.assertFalse((self.test_dir / ".claude").exists())
 
-        manager = ArtifactManager(self.test_dir)
+        manager = ToolOutputManager(self.test_dir)
         self.assertEqual(manager.current_tool, "continue")
 
-        manager.remove_artifacts_created_by("continue")
+        manager.remove_outputs_created_by("continue")
         self.assertFalse((self.test_dir / ".continue").exists())
 
     def test_switching_continue_to_cline_cleans_continue(self):
@@ -387,8 +387,8 @@ class TestToolSwitching(unittest.TestCase):
         get_prompt_builder("continue").build(self.test_dir, config, dry_run=False)
         self.assertTrue((self.test_dir / ".continue").exists())
 
-        manager = ArtifactManager(self.test_dir)
-        manager.remove_artifacts_created_by(manager.current_tool)
+        manager = ToolOutputManager(self.test_dir)
+        manager.remove_outputs_created_by(manager.current_tool)
         self.assertFalse((self.test_dir / ".continue").exists())
 
         get_prompt_builder("cline").build(self.test_dir, config, dry_run=False)
@@ -409,10 +409,10 @@ class TestToolSwitching(unittest.TestCase):
         self.assertFalse((self.test_dir / "AGENTS.md").exists())
         self.assertFalse((self.test_dir / ".claude").exists())
 
-        manager = ArtifactManager(self.test_dir)
+        manager = ToolOutputManager(self.test_dir)
         self.assertEqual(manager.current_tool, "aider")
 
-        manager.remove_artifacts_created_by("aider")
+        manager.remove_outputs_created_by("aider")
         self.assertFalse((self.test_dir / "CONVENTIONS.md").exists())
         self.assertFalse((self.test_dir / ".aider.conf.yml").exists())
 
@@ -426,8 +426,8 @@ class TestToolSwitching(unittest.TestCase):
         get_prompt_builder("aider").build(self.test_dir, config, dry_run=False)
         self.assertTrue((self.test_dir / ".aider.conf.yml").exists())
 
-        manager = ArtifactManager(self.test_dir)
-        manager.remove_artifacts_created_by(manager.current_tool)
+        manager = ToolOutputManager(self.test_dir)
+        manager.remove_outputs_created_by(manager.current_tool)
         self.assertFalse((self.test_dir / ".aider.conf.yml").exists())
         self.assertFalse((self.test_dir / "CONVENTIONS.md").exists())
 
@@ -448,10 +448,10 @@ class TestToolSwitching(unittest.TestCase):
         self.assertTrue((self.test_dir / ".codex" / "config.toml").exists())
         self.assertTrue((self.test_dir / "AGENTS.md").exists())
 
-        manager = ArtifactManager(self.test_dir)
+        manager = ToolOutputManager(self.test_dir)
         self.assertEqual(manager.current_tool, "codex")
 
-        manager.remove_artifacts_created_by("codex")
+        manager.remove_outputs_created_by("codex")
         self.assertFalse((self.test_dir / ".agents").exists())
         self.assertFalse((self.test_dir / ".codex").exists())
 
@@ -463,20 +463,20 @@ class TestToolSwitching(unittest.TestCase):
             "spec": {"language": "python"},
             "active_personas": ["software_engineer"],
         }
-        manager = ArtifactManager(self.test_dir)
+        manager = ToolOutputManager(self.test_dir)
 
         # Start on Zed: only .agents/, detected as zed.
         get_prompt_builder("zed").build(self.test_dir, config, dry_run=False)
         self.assertEqual(manager.current_tool, "zed")
 
         # Switch to Codex: clean the detected tool, then build codex.
-        manager.remove_artifacts_created_by(manager.current_tool)
+        manager.remove_outputs_created_by(manager.current_tool)
         get_prompt_builder("codex").build(self.test_dir, config, dry_run=False)
         self.assertTrue((self.test_dir / ".codex" / "config.toml").exists())
         self.assertEqual(manager.current_tool, "codex")
 
         # Switch back to Zed: codex cleanup removes .codex/ + .agents/, then zed rebuilds.
-        manager.remove_artifacts_created_by(manager.current_tool)
+        manager.remove_outputs_created_by(manager.current_tool)
         self.assertFalse((self.test_dir / ".codex").exists())
         get_prompt_builder("zed").build(self.test_dir, config, dry_run=False)
         self.assertFalse((self.test_dir / ".codex").exists())
@@ -496,10 +496,10 @@ class TestToolSwitching(unittest.TestCase):
         self.assertTrue((self.test_dir / ".github" / "instructions").exists())
         self.assertFalse((self.test_dir / "AGENTS.md").exists())
 
-        manager = ArtifactManager(self.test_dir)
+        manager = ToolOutputManager(self.test_dir)
         self.assertEqual(manager.current_tool, "copilot-chat")
 
-        manager.remove_artifacts_created_by("copilot-chat")
+        manager.remove_outputs_created_by("copilot-chat")
         self.assertFalse((self.test_dir / ".github" / "agents").exists())
         self.assertFalse((self.test_dir / ".github" / "prompts").exists())
         self.assertFalse((self.test_dir / ".github" / "instructions").exists())
@@ -512,20 +512,20 @@ class TestToolSwitching(unittest.TestCase):
             "spec": {"language": "python"},
             "active_personas": ["software_engineer"],
         }
-        manager = ArtifactManager(self.test_dir)
+        manager = ToolOutputManager(self.test_dir)
 
         # Start on Copilot: only .github/copilot-instructions.md.
         get_prompt_builder("copilot").build(self.test_dir, config, dry_run=False)
         self.assertEqual(manager.current_tool, "copilot")
 
         # Switch to Copilot Chat: clean what copilot created (copilot-instructions.md).
-        manager.remove_artifacts_created_by(manager.current_tool or "")
+        manager.remove_outputs_created_by(manager.current_tool or "")
         get_prompt_builder("copilot-chat").build(self.test_dir, config, dry_run=False)
         self.assertFalse((self.test_dir / ".github" / "copilot-instructions.md").exists())
         self.assertEqual(manager.current_tool, "copilot-chat")
 
         # Switch back to Copilot: clean the agents/prompts/instructions dirs.
-        manager.remove_artifacts_created_by(manager.current_tool or "")
+        manager.remove_outputs_created_by(manager.current_tool or "")
         self.assertFalse((self.test_dir / ".github" / "agents").exists())
         get_prompt_builder("copilot").build(self.test_dir, config, dry_run=False)
         self.assertEqual(manager.current_tool, "copilot")

@@ -12,7 +12,7 @@ else:  # Python 3.10 has no stdlib tomllib
 
 import yaml
 
-from prompticorn.artifacts import ArtifactManager
+from prompticorn.tool_outputs import ToolOutputManager
 from prompticorn.builders.base import BuildOptions
 from prompticorn.builders.codex_builder import CodexBuilder, generate_codex_config
 from prompticorn.builders.layouts import get_layout
@@ -82,14 +82,14 @@ class TestCodexZedDetection(unittest.TestCase):
             # Codex writes both .agents/ (shared with Zed) and .codex/ (unique).
             self.assertTrue((root / ".agents").exists())
             self.assertTrue((root / ".codex" / "config.toml").exists())
-            self.assertEqual(ArtifactManager(root).current_tool, "codex")
+            self.assertEqual(ToolOutputManager(root).current_tool, "codex")
 
     def test_zed_project_detected_as_zed(self) -> None:
         with TemporaryDirectory() as tmp:
             root = Path(tmp)
             get_prompt_builder("zed").build(root, _CFG, dry_run=False)
             self.assertFalse((root / ".codex").exists())
-            self.assertEqual(ArtifactManager(root).current_tool, "zed")
+            self.assertEqual(ToolOutputManager(root).current_tool, "zed")
 
 
 if __name__ == "__main__":
