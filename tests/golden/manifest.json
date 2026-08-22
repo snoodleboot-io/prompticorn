@@ -1,12 +1,12 @@
 {
   "go-single::aider::minimal": {
     ".aider.conf.yml": "3c44a5f3fd7fd95e7053d5260de7c2b907dd53e5d6546cf2be869591eaa79cce",
-    ".prompticorn/provenance.json": "6917ad59b384bd4cf4e484334981c67b6b7d7dca2d998f0a69d03715690ac9c0",
+    ".prompticorn/provenance.json": "0e5b72b2103c5586deabe214e34a0253a7a40bc23627fbe28e407612e057a1a9",
     "CONVENTIONS.md": "0eb86b56dd4ab107ebd1071e0ab4bb554d52f6f9e28d2b319bed48a292e08848"
   },
   "go-single::aider::verbose": {
     ".aider.conf.yml": "3c44a5f3fd7fd95e7053d5260de7c2b907dd53e5d6546cf2be869591eaa79cce",
-    ".prompticorn/provenance.json": "6917ad59b384bd4cf4e484334981c67b6b7d7dca2d998f0a69d03715690ac9c0",
+    ".prompticorn/provenance.json": "0e5b72b2103c5586deabe214e34a0253a7a40bc23627fbe28e407612e057a1a9",
     "CONVENTIONS.md": "0eb86b56dd4ab107ebd1071e0ab4bb554d52f6f9e28d2b319bed48a292e08848"
   },
   "go-single::amazonq::minimal": {
@@ -66,7 +66,7 @@
     ".amazonq/prompts/workflow-testing-patterns.md": "f68e2623b882d807ddf6aa3c2b8d9c18770f064dbf7125cdff83d8ae5d70204f",
     ".amazonq/rules/conventions-go.md": "f81e88cc6f713e9d4efd1fd1b0322b34cd1320c726c3eabe65035e695c56bb10",
     ".amazonq/rules/conventions.md": "ba4be1dc88f3a3b49c51c38df9b0085fb139554e01e6213d1dbb9e285d5e21f1",
-    ".prompticorn/provenance.json": "9ce0546abd21eba934bb09f71b4f103d65720d72eb7eb5b3114554888bb1cd25"
+    ".prompticorn/provenance.json": "2137298cecae233ca3673011a8cf419143fda419b50e02a5a8636b6d66bb2e64"
   },
   "go-single::amazonq::verbose": {
     ".amazonq/cli-agents/ask.json": "33fb4c5463b3b11beb6c8465b8abb1d3f717e311faae4773ebe46dd8307225a5",
@@ -125,10 +125,10 @@
     ".amazonq/prompts/workflow-testing-patterns.md": "ce7fc2aa439debc5bd10fe7aa087d485af6b6ab21772f92039d5a4f4af28a1c9",
     ".amazonq/rules/conventions-go.md": "f81e88cc6f713e9d4efd1fd1b0322b34cd1320c726c3eabe65035e695c56bb10",
     ".amazonq/rules/conventions.md": "ba4be1dc88f3a3b49c51c38df9b0085fb139554e01e6213d1dbb9e285d5e21f1",
-    ".prompticorn/provenance.json": "53533bdf32e1943ceee67328c967c984768e11c67b7141ca0d467574af3b1fba"
+    ".prompticorn/provenance.json": "036634bb7929ef022035e8e9746ae9f9fec0ca84c5f8294fbb3b9076605ae685"
   },
   "go-single::bedrock::minimal": {
-    ".prompticorn/provenance.json": "28554c07feb7642b86e3acf4aa80fadbb9e05e78479d8425043e69b18571a981",
+    ".prompticorn/provenance.json": "130cf24ef5adf95b855bc9486e887f4044e9bd70db80ab6f132852ea90bb4461",
     "bedrock/README.bedrock.md": "e1cd14c0eb5f66dfbc10b20392b2b0ad8b36766e57ced7a03b833aae6a051c7c",
     "bedrock/agents.json": "381c4903d77c9c73112f0a0374b62106a61e8db9a456eadf713335b31416da16",
     "bedrock/cloudformation/agents.yaml": "3119bb07bc14ca38639611260d2644080aaf0addd445a19d16a1cd4a2e855440",
@@ -151,7 +151,7 @@
     "bedrock/prompts/test.system.md": "a53fab90c5afa099a03fa3baa1a15380c13a7a078e15406b91aeecc6adf4c91c"
   },
   "go-single::bedrock::verbose": {
-    ".prompticorn/provenance.json": "28554c07feb7642b86e3acf4aa80fadbb9e05e78479d8425043e69b18571a981",
+    ".prompticorn/provenance.json": "130cf24ef5adf95b855bc9486e887f4044e9bd70db80ab6f132852ea90bb4461",
     "bedrock/README.bedrock.md": "e1cd14c0eb5f66dfbc10b20392b2b0ad8b36766e57ced7a03b833aae6a051c7c",
     "bedrock/agents.json": "381c4903d77c9c73112f0a0374b62106a61e8db9a456eadf713335b31416da16",
     "bedrock/cloudformation/agents.yaml": "3119bb07bc14ca38639611260d2644080aaf0addd445a19d16a1cd4a2e855440",
@@ -310,7 +310,7 @@
     ".claude/workflows/workflow-performance-optimization.md": "7d97952fd0d12809ba12b1a3f544411a96c1cf56068d506d878eb50219e81a65",
     ".claude/workflows/workflow-scaling-patterns.md": "b0a257a3b58a98758f3082a70ca46f72b5fbba0fc8145bcd676ff36b5b9a12f9",
     ".claude/workflows/workflow-testing-patterns.md": "fc56fa1dfb9a1813db734b773a6695fc4da0a53439e4e1e14f9efb2ddfd47ef1",
-    ".prompticorn/provenance.json": "b0f7692dec2c815bfab7a21c1aceb1a9d18d65d56040a1feb53884ef645a2189",
+    ".prompticorn/provenance.json": "5ba37111c677fe17b667bc6bd021b706c8db1c4c646532b7f918289e9b0dbe0c",
     "CLAUDE.md": "bd8b30d88fd7c70e40492c9412a604f5af12ee12a1691762a6310fbf87c71d00"
   },
   "go-single::claude::verbose": {
@@ -450,7 +450,7 @@
     ".claude/workflows/workflow-performance-optimization.md": "9b3515b81c87281b93bb21f647efbbb68c757fa792ad1a050f82e71d709ffe85",
     ".claude/workflows/workflow-scaling-patterns.md": "fd30d48467273083e17fa064f3203b27086d16473e25368f3b0d2715138f6a6a",
     ".claude/workflows/workflow-testing-patterns.md": "62e0823d2a4b14b4b32a07be19136a206ed719ca787bf69d44d4cadb704459d9",
-    ".prompticorn/provenance.json": "a3d2b34f6608ccdb2a72a95e99361f56ee4e46c0dd311ebf1f723eaaba1978a7",
+    ".prompticorn/provenance.json": "891d7a6e38bf45d49d45b988f8beaf41989d697a0b830f2578151a9a612c2225",
     "CLAUDE.md": "bd8b30d88fd7c70e40492c9412a604f5af12ee12a1691762a6310fbf87c71d00"
   },
   "go-single::cline::minimal": {
@@ -507,7 +507,7 @@
     ".cline/skills/test-mocking-rules/SKILL.md": "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec",
     ".cline/skills/testing-strategies/SKILL.md": "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724",
     ".clinerules": "d0006be0d37d53145e8ff08b24191b601713e047189518a0de4990f0235ee547",
-    ".prompticorn/provenance.json": "9fb5d83344799f051c62359aedf1d334026769beeedad23461b0177bfb012615",
+    ".prompticorn/provenance.json": "d6069a18ac71ff6ed9fb4dcb93a778a61ae947c1ec98fb6add5af7b980128aa7",
     "AGENTS.md": "553c6dc002c6bccc240c52332ecd7a60652106566bb6996d095e44e3b868c7d7"
   },
   "go-single::cline::verbose": {
@@ -564,7 +564,7 @@
     ".cline/skills/test-mocking-rules/SKILL.md": "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e",
     ".cline/skills/testing-strategies/SKILL.md": "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326",
     ".clinerules": "fcc8bc13f5e5eb11e8f4aa8c4170e0b4cb6e62f03c28860bb5bf072eacb3f717",
-    ".prompticorn/provenance.json": "90071517599e804945ea118601cf41b75d8f1f1810e4e4ee06c38c71fa18267c",
+    ".prompticorn/provenance.json": "bc382e2c96e745f9092d43ae0524b8039ddddd78c6967bf1e99b3964f35ff703",
     "AGENTS.md": "553c6dc002c6bccc240c52332ecd7a60652106566bb6996d095e44e3b868c7d7"
   },
   "go-single::codex::minimal": {
@@ -636,7 +636,7 @@
     ".agents/skills/test/SKILL.md": "7cdc9e8209e0629355cc0e60feccaddd09422c403488ec1c44b11c7bbc96f015",
     ".agents/skills/testing-strategies/SKILL.md": "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724",
     ".codex/config.toml": "04aaafba5826fd49c8436a89e227eed7e6ebdcc5ea3a18990ba5ff5539979de7",
-    ".prompticorn/provenance.json": "12c3f3085a9e0962bac5caabe2f0a96c11b0facb06543c4d154c0b82b084624c",
+    ".prompticorn/provenance.json": "382a2995f612846e80cad308723f9864fb1762057929e85016f7028564df8a99",
     "AGENTS.md": "553c6dc002c6bccc240c52332ecd7a60652106566bb6996d095e44e3b868c7d7"
   },
   "go-single::codex::verbose": {
@@ -708,7 +708,7 @@
     ".agents/skills/test/SKILL.md": "7cdc9e8209e0629355cc0e60feccaddd09422c403488ec1c44b11c7bbc96f015",
     ".agents/skills/testing-strategies/SKILL.md": "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326",
     ".codex/config.toml": "04aaafba5826fd49c8436a89e227eed7e6ebdcc5ea3a18990ba5ff5539979de7",
-    ".prompticorn/provenance.json": "a848fce987ebf6636de1e4016f5380871a298606fcc218f897aa1e68dfe69335",
+    ".prompticorn/provenance.json": "ce66974379f6f6e9537532d29053606431b791f73e1e6c00a4133f4cb4ed78d5",
     "AGENTS.md": "553c6dc002c6bccc240c52332ecd7a60652106566bb6996d095e44e3b868c7d7"
   },
   "go-single::continue::minimal": {
@@ -768,7 +768,7 @@
     ".continue/rules/refactor.md": "2583e7306de435c85bb5cfff99beb5b9adfc3bc86aeca8fd2ffdce402b490ff9",
     ".continue/rules/review.md": "b8bff1b28968f4c620c88fd88c231f5de50aa41b45486b3f7e3a340145d19adf",
     ".continue/rules/test.md": "f372345589c16a4944a26a796680ee9ae6d6a8d49cb64fc4dde236ee9acd677f",
-    ".prompticorn/provenance.json": "dc4d4a0c8da4337ceb3d42ec5366ae71ef50220d95aac3e3a2b238b156bd6b2b"
+    ".prompticorn/provenance.json": "a6ae66381bd8f2a1a5f3506a0052c40be15de5f0cf76cb04435a14be90dedd6c"
   },
   "go-single::continue::verbose": {
     ".continue/prompts/accessibility.md": "4e18704018ee1cdac9a106ea65a4217d0dab309277ed020a0274f739c5f2a5cf",
@@ -827,7 +827,7 @@
     ".continue/rules/refactor.md": "2583e7306de435c85bb5cfff99beb5b9adfc3bc86aeca8fd2ffdce402b490ff9",
     ".continue/rules/review.md": "b8bff1b28968f4c620c88fd88c231f5de50aa41b45486b3f7e3a340145d19adf",
     ".continue/rules/test.md": "f372345589c16a4944a26a796680ee9ae6d6a8d49cb64fc4dde236ee9acd677f",
-    ".prompticorn/provenance.json": "e1179e3889c4124c16b1cdf88b44e2c60e4f562ba2f385394ca8caaa0760e7da"
+    ".prompticorn/provenance.json": "d5ab3b2e2bf52f0fd6661efafc39b61cd89958ea33537576619fd0b1e7545045"
   },
   "go-single::copilot-chat::minimal": {
     ".github/agents/ask.agent.md": "97519379dbc61b402ecfbf7960d4cbaeb8eb2bc5a38c19e8254c67f1364e1640",
@@ -886,7 +886,7 @@
     ".github/prompts/workflow-rollback-strategies.prompt.md": "aa12c2ee6947962df382eef0e72b8a41fdba818bb53810a4cf7497184c0483f9",
     ".github/prompts/workflow-scaling-patterns.prompt.md": "f5f8a0a185941bf1afd4f7e00938c4bdac8cb544f8309979a37dd8d515260f5f",
     ".github/prompts/workflow-testing-patterns.prompt.md": "2f5c77fb03e22584357098f0eb7544f039bede038739e87b0010982ea23a4bf5",
-    ".prompticorn/provenance.json": "60bc5bb78e76f5f9a2505a53a0bef387ec04b2a18dfce7d1d685ae00561d6cb2"
+    ".prompticorn/provenance.json": "89122695e53f7669c2d7288eee7e67996a31a56795f96b19f42df5750582cce2"
   },
   "go-single::copilot-chat::verbose": {
     ".github/agents/ask.agent.md": "97519379dbc61b402ecfbf7960d4cbaeb8eb2bc5a38c19e8254c67f1364e1640",
@@ -945,7 +945,7 @@
     ".github/prompts/workflow-rollback-strategies.prompt.md": "e08684976901b91aec71e5e91945f6918dfcb3b6026c09dcf8c28f3255224b3a",
     ".github/prompts/workflow-scaling-patterns.prompt.md": "15090974e97bf2658883ab6260e92d2494b6e24511164b4422636bd0475f0683",
     ".github/prompts/workflow-testing-patterns.prompt.md": "082086cf94cde2d0511d7818007e06f8bf56d6b36f8ca1ea01b5704bf087830a",
-    ".prompticorn/provenance.json": "f0a6cee4a64528fb79e1c8c86750658a4eda1cf017a60c60623eb1607253ffd8"
+    ".prompticorn/provenance.json": "8ca6cf3657b8fa369731c43289077c622bd627d9cbdf00d48c78bcef45d980d2"
   },
   "go-single::copilot::minimal": {
     ".github/copilot-instructions.md": "f3e1a4182b33a922a51a285bccab0ba1512f28e7b5ea5b21fda52045b21d4024",
@@ -1001,7 +1001,7 @@
     ".github/skills/test-data-strategies/SKILL.md": "9f16bf3bc958425e6f2a663851eb1db8eaf6b5833e505b9b6916e33057896139",
     ".github/skills/test-mocking-rules/SKILL.md": "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec",
     ".github/skills/testing-strategies/SKILL.md": "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724",
-    ".prompticorn/provenance.json": "174fe745d1d413cecf47da9debfe75fda76d1ecf679cdf1b08fecb7aff73e8b5",
+    ".prompticorn/provenance.json": "8da36c350ba3b2bd4bec9e7f795e8d21911247f8d8b21d811f65c4684c22ed79",
     "AGENTS.md": "553c6dc002c6bccc240c52332ecd7a60652106566bb6996d095e44e3b868c7d7"
   },
   "go-single::copilot::verbose": {
@@ -1058,7 +1058,7 @@
     ".github/skills/test-data-strategies/SKILL.md": "d3f3f91a633277ef56caad9fcc6a2444b4290ffde3288b1c1b9132d56eb419ac",
     ".github/skills/test-mocking-rules/SKILL.md": "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e",
     ".github/skills/testing-strategies/SKILL.md": "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326",
-    ".prompticorn/provenance.json": "2e2b949abd6f7c4fb71274da744225ad264382096839bd5a0f397e5251d405b4",
+    ".prompticorn/provenance.json": "7d77c999d6cf0b64dfb3f66c059cb09dc89d57ad4813c43ba90c5a9eee90df0e",
     "AGENTS.md": "553c6dc002c6bccc240c52332ecd7a60652106566bb6996d095e44e3b868c7d7"
   },
   "go-single::cursor::minimal": {
@@ -1115,7 +1115,7 @@
     ".cursor/skills/test-mocking-rules/SKILL.md": "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec",
     ".cursor/skills/testing-strategies/SKILL.md": "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724",
     ".cursorrules": "c36e987a008eafc4a1e49c684323e0fe7cc86966ffcfa765fa8ccaffaf8ba80b",
-    ".prompticorn/provenance.json": "1fb5a78b5fbd29d78dc4c2c7099feb0fc3d8bf296dca793d8302c2cd08cd7765",
+    ".prompticorn/provenance.json": "a753cb694401eb6b803cb85fe5df409dae9409d7684e4f7340a9cb0744d2864e",
     "AGENTS.md": "553c6dc002c6bccc240c52332ecd7a60652106566bb6996d095e44e3b868c7d7"
   },
   "go-single::cursor::verbose": {
@@ -1172,7 +1172,7 @@
     ".cursor/skills/test-mocking-rules/SKILL.md": "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e",
     ".cursor/skills/testing-strategies/SKILL.md": "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326",
     ".cursorrules": "aebb3ca4012b4549d6100009d31092d3eb2a4e7c54e18b04769f4d2f40362d2e",
-    ".prompticorn/provenance.json": "e6e2166c7ce0fbb339c92b5f7ef0cfaa2060ee2833bde80053d3632f67478051",
+    ".prompticorn/provenance.json": "ff43bc9473f85c956ab123f703b35bbb069753961a56f2d849812acf5d3e8741",
     "AGENTS.md": "553c6dc002c6bccc240c52332ecd7a60652106566bb6996d095e44e3b868c7d7"
   },
   "go-single::gemini::minimal": {
@@ -1283,7 +1283,7 @@
     ".gemini/skills/test-data-strategies/SKILL.md": "9f16bf3bc958425e6f2a663851eb1db8eaf6b5833e505b9b6916e33057896139",
     ".gemini/skills/test-mocking-rules/SKILL.md": "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec",
     ".gemini/skills/testing-strategies/SKILL.md": "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724",
-    ".prompticorn/provenance.json": "7017a15efc8c5a6a2e05c2f36fa0c6c074a9b3ef96b293b5c8d0a53f679375e7",
+    ".prompticorn/provenance.json": "ddddb406798fd7fca2701f1bd623c5652f4108426f2fbde0344f665757527330",
     "AGENTS.md": "553c6dc002c6bccc240c52332ecd7a60652106566bb6996d095e44e3b868c7d7"
   },
   "go-single::gemini::verbose": {
@@ -1394,7 +1394,7 @@
     ".gemini/skills/test-data-strategies/SKILL.md": "d3f3f91a633277ef56caad9fcc6a2444b4290ffde3288b1c1b9132d56eb419ac",
     ".gemini/skills/test-mocking-rules/SKILL.md": "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e",
     ".gemini/skills/testing-strategies/SKILL.md": "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326",
-    ".prompticorn/provenance.json": "8e128869eacc9293380d118bc2c143726edfde840dc4b16aa0c0499147b3a9e4",
+    ".prompticorn/provenance.json": "f39aeacd8575c92dd01ed59db7bd078a92c9615076a124f1c1851a64ac11ac03",
     "AGENTS.md": "553c6dc002c6bccc240c52332ecd7a60652106566bb6996d095e44e3b868c7d7"
   },
   "go-single::junie::minimal": {
@@ -1504,7 +1504,7 @@
     ".junie/skills/test-data-strategies/SKILL.md": "9f16bf3bc958425e6f2a663851eb1db8eaf6b5833e505b9b6916e33057896139",
     ".junie/skills/test-mocking-rules/SKILL.md": "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec",
     ".junie/skills/testing-strategies/SKILL.md": "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724",
-    ".prompticorn/provenance.json": "b7fe20e6cc18676397041395a25fa05c1fb56a533085b9c829b2b77a5647d118",
+    ".prompticorn/provenance.json": "4c2b00effd37b0744385792173ea7b2f3145452a7f9f76781624973caebff236",
     "AGENTS.md": "553c6dc002c6bccc240c52332ecd7a60652106566bb6996d095e44e3b868c7d7"
   },
   "go-single::junie::verbose": {
@@ -1614,7 +1614,7 @@
     ".junie/skills/test-data-strategies/SKILL.md": "d3f3f91a633277ef56caad9fcc6a2444b4290ffde3288b1c1b9132d56eb419ac",
     ".junie/skills/test-mocking-rules/SKILL.md": "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e",
     ".junie/skills/testing-strategies/SKILL.md": "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326",
-    ".prompticorn/provenance.json": "61b7e99e4a265bb5fa4c008a959502861d916bd784efea3cff67e4b53e9e24d2",
+    ".prompticorn/provenance.json": "996be96aa073d3d74e248caf8efca9ec11f9b7d674d9c09d9d2dca717e529634",
     "AGENTS.md": "553c6dc002c6bccc240c52332ecd7a60652106566bb6996d095e44e3b868c7d7"
   },
   "go-single::kilo-cli::minimal": {
@@ -1633,7 +1633,7 @@
     ".opencode/agents/refactor.md": "d8f648b467479d89489f2f4532b1c9ca500faec382afdee7af769c7c5ccc9f59",
     ".opencode/agents/review.md": "07324d0958404d0e815ffe70d9435adbc648bf782edfa8f16d1096e4aa1d73de",
     ".opencode/agents/test.md": "13fc2885f7fa74b7c1af6d635116adb672d14a514c5898e320d7de0a93a84e18",
-    ".prompticorn/provenance.json": "0a51acb29861e71355d6923d4cb637306eb0c66e3cc1c561e7655026de625a27",
+    ".prompticorn/provenance.json": "d9c9c8b6d2110c03d8b4c9728b7da6281efaadb84950bbe8daa6131273345096",
     "AGENTS.md": "553c6dc002c6bccc240c52332ecd7a60652106566bb6996d095e44e3b868c7d7"
   },
   "go-single::kilo-cli::verbose": {
@@ -1652,7 +1652,7 @@
     ".opencode/agents/refactor.md": "d8f648b467479d89489f2f4532b1c9ca500faec382afdee7af769c7c5ccc9f59",
     ".opencode/agents/review.md": "07324d0958404d0e815ffe70d9435adbc648bf782edfa8f16d1096e4aa1d73de",
     ".opencode/agents/test.md": "13fc2885f7fa74b7c1af6d635116adb672d14a514c5898e320d7de0a93a84e18",
-    ".prompticorn/provenance.json": "0a51acb29861e71355d6923d4cb637306eb0c66e3cc1c561e7655026de625a27",
+    ".prompticorn/provenance.json": "d9c9c8b6d2110c03d8b4c9728b7da6281efaadb84950bbe8daa6131273345096",
     "AGENTS.md": "553c6dc002c6bccc240c52332ecd7a60652106566bb6996d095e44e3b868c7d7"
   },
   "go-single::kilo-ide::minimal": {
@@ -1804,7 +1804,7 @@
     ".kilo/skills/test-data-strategies/SKILL.md": "9f16bf3bc958425e6f2a663851eb1db8eaf6b5833e505b9b6916e33057896139",
     ".kilo/skills/test-mocking-rules/SKILL.md": "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec",
     ".kilo/skills/testing-strategies/SKILL.md": "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724",
-    ".prompticorn/provenance.json": "360d38315bef11435c6a1fe7571a0aeac767d35626f79df2c97b815609f1c67b",
+    ".prompticorn/provenance.json": "83b5bb2b6af01001bd0cd560f5cd70862e5a5461444742a3c78b245bb50ff4c3",
     "AGENTS.md": "553c6dc002c6bccc240c52332ecd7a60652106566bb6996d095e44e3b868c7d7"
   },
   "go-single::kilo-ide::verbose": {
@@ -1956,11 +1956,11 @@
     ".kilo/skills/test-data-strategies/SKILL.md": "d3f3f91a633277ef56caad9fcc6a2444b4290ffde3288b1c1b9132d56eb419ac",
     ".kilo/skills/test-mocking-rules/SKILL.md": "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e",
     ".kilo/skills/testing-strategies/SKILL.md": "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326",
-    ".prompticorn/provenance.json": "8f98544faac0816f89f80ca34182654048daf2c2fcf6c614d40c5dcba1d7968a",
+    ".prompticorn/provenance.json": "90c12e4549a0cfd26f53f9bcfd6dba4d3235edc3d4b6cff41598608e31bf10c8",
     "AGENTS.md": "553c6dc002c6bccc240c52332ecd7a60652106566bb6996d095e44e3b868c7d7"
   },
   "go-single::roo::minimal": {
-    ".prompticorn/provenance.json": "f218f0606c6987a2c503be23793b2a7335a68eae84e14dbcfbcd29b61d8c69ad",
+    ".prompticorn/provenance.json": "987644b7fca29750b28c8c3f383b32c3847325ffcf6b5861a5a29bdbd480a969",
     ".roo/commands/accessibility.md": "e2747c5792ea7cc655b2ebea1a954fd53c243d91ee89730b10322149d64a2831",
     ".roo/commands/api-design.md": "0be08f948e5335f17b160d03b9a03e8b9262337562a20eaa83a4b269129b8bdb",
     ".roo/commands/async-workflow-execution.md": "817f9b3bd73f17d5cdc4b6ffc4baa84a9f8c145373df1cba5c3a1066adeadcde",
@@ -2071,7 +2071,7 @@
     "AGENTS.md": "553c6dc002c6bccc240c52332ecd7a60652106566bb6996d095e44e3b868c7d7"
   },
   "go-single::roo::verbose": {
-    ".prompticorn/provenance.json": "4cbd9e797a4f1ff62fc44ac54f998383c4caccea9bb607fe2945c1a1b351988e",
+    ".prompticorn/provenance.json": "78a170857e5512bfc136b194d5c56480bcabf00062b11666bda3b296da2692a6",
     ".roo/commands/accessibility.md": "cbed2d09922b3b60034fefa0a3dc53e2b8a209593f59bea62c270d35d7fdd962",
     ".roo/commands/api-design.md": "3aee90e73d064ccacc0ff0c815c39a929561767407342a347db2c50156b6bc55",
     ".roo/commands/async-workflow-execution.md": "6246e5cc3abe5e5dbdbbc274f933b172e41cf00b9e15dce7d599409612bccc3c",
@@ -2182,7 +2182,7 @@
     "AGENTS.md": "553c6dc002c6bccc240c52332ecd7a60652106566bb6996d095e44e3b868c7d7"
   },
   "go-single::windsurf::minimal": {
-    ".prompticorn/provenance.json": "b9595c51aed9b105d3ada4d066367a0982338620adb4d2dd16e87bf6ab108369",
+    ".prompticorn/provenance.json": "df2b1c7b490a35bcb05cdeba9f12ac2d05cb5987cebcaa533ae7f3c53a139443",
     ".windsurf/rules/conventions-core.md": "b2706755d0ed0b00565949b105de7c328d3dac011c3a428543c9d5d5b3f4ff90",
     ".windsurf/rules/conventions-go.md": "3b00b78a1331b1b3032e8992a2f89693fc71f89f20a2de754cd3b8a688527cb9",
     ".windsurf/skills/api-versioning-strategy/SKILL.md": "e6d2f17ca2719aec2fe79f24f571d8bc5def4f23cdfd5ff7babcc758e8a83cbb",
@@ -2293,7 +2293,7 @@
     ".windsurf/workflows/workflow-testing-patterns.md": "29e01a761ce3f33923a440a1a7ff8ae6a5cfe076d3fde769fd628f83e28b3839"
   },
   "go-single::windsurf::verbose": {
-    ".prompticorn/provenance.json": "4cd63258a0257d4c0d734b369a5da1b0c1ce394504aeb23fedba281a329e6a66",
+    ".prompticorn/provenance.json": "e7631dad54d9b7c9031afc452e38ab647513046de99ec60cd3da024e81cac411",
     ".windsurf/rules/conventions-core.md": "b2706755d0ed0b00565949b105de7c328d3dac011c3a428543c9d5d5b3f4ff90",
     ".windsurf/rules/conventions-go.md": "3b00b78a1331b1b3032e8992a2f89693fc71f89f20a2de754cd3b8a688527cb9",
     ".windsurf/skills/api-versioning-strategy/SKILL.md": "f8e7fcaff53408ef5321248fc6e6230aed7cbc9c0b177b0a1a114dc71e45f81a",
@@ -2471,7 +2471,7 @@
     ".agents/skills/test-mocking-rules/SKILL.md": "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec",
     ".agents/skills/test/SKILL.md": "7cdc9e8209e0629355cc0e60feccaddd09422c403488ec1c44b11c7bbc96f015",
     ".agents/skills/testing-strategies/SKILL.md": "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724",
-    ".prompticorn/provenance.json": "7adc742f18d345daf297de90671d510599e19d06a1907bfbfe6b3ad4b257eae0",
+    ".prompticorn/provenance.json": "9eaec982327d7d5106c85e92cd58684f23b26991c87168cd25268a9b51ca500c",
     "AGENTS.md": "553c6dc002c6bccc240c52332ecd7a60652106566bb6996d095e44e3b868c7d7"
   },
   "go-single::zed::verbose": {
@@ -2542,17 +2542,17 @@
     ".agents/skills/test-mocking-rules/SKILL.md": "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e",
     ".agents/skills/test/SKILL.md": "7cdc9e8209e0629355cc0e60feccaddd09422c403488ec1c44b11c7bbc96f015",
     ".agents/skills/testing-strategies/SKILL.md": "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326",
-    ".prompticorn/provenance.json": "6e35fc729f3be4668fc779d1d5ffd76d2adda1ae7df2d39353be2401245b8be5",
+    ".prompticorn/provenance.json": "2886121700f6556d656504313482ce1d9bed4356082c87ad46b49cf3f3191216",
     "AGENTS.md": "553c6dc002c6bccc240c52332ecd7a60652106566bb6996d095e44e3b868c7d7"
   },
   "monorepo::aider::minimal": {
     ".aider.conf.yml": "3c44a5f3fd7fd95e7053d5260de7c2b907dd53e5d6546cf2be869591eaa79cce",
-    ".prompticorn/provenance.json": "79f64492b8d03fd4b6d10e45da4f65cd23a38034e2fe7809c4ad3d6f7ced8282",
+    ".prompticorn/provenance.json": "0e5b72b2103c5586deabe214e34a0253a7a40bc23627fbe28e407612e057a1a9",
     "CONVENTIONS.md": "cd96ec44eb707a888a53404f0f268c64c4bb6d157c1601af2f2c820297db50c4"
   },
   "monorepo::aider::verbose": {
     ".aider.conf.yml": "3c44a5f3fd7fd95e7053d5260de7c2b907dd53e5d6546cf2be869591eaa79cce",
-    ".prompticorn/provenance.json": "79f64492b8d03fd4b6d10e45da4f65cd23a38034e2fe7809c4ad3d6f7ced8282",
+    ".prompticorn/provenance.json": "0e5b72b2103c5586deabe214e34a0253a7a40bc23627fbe28e407612e057a1a9",
     "CONVENTIONS.md": "cd96ec44eb707a888a53404f0f268c64c4bb6d157c1601af2f2c820297db50c4"
   },
   "monorepo::amazonq::minimal": {
@@ -2639,7 +2639,7 @@
     ".amazonq/rules/conventions-python.md": "d8bfe12d7f1114a2996b877782ed478378deacf3c7775cf45061ddce61f4f466",
     ".amazonq/rules/conventions-typescript.md": "6f2bf7f95547a7ba872fa10f7f4b36cd31cbee3a5f7c6c16fc9f54dbf3fe5591",
     ".amazonq/rules/conventions.md": "7dca2083e6f0ef0fef3caa6aee9e44f3719a86f73176981bb274a42ec0da3761",
-    ".prompticorn/provenance.json": "8bb7e33cf40cb2f93bdea7f8eb975dbc5f118239e76a30ae7e3ca1d08e843098"
+    ".prompticorn/provenance.json": "7473c291d45ef4161eb00a6ff938ceadbd8f47de7fa2927d0609cfa7e519034a"
   },
   "monorepo::amazonq::verbose": {
     ".amazonq/cli-agents/ask.json": "33fb4c5463b3b11beb6c8465b8abb1d3f717e311faae4773ebe46dd8307225a5",
@@ -2725,10 +2725,10 @@
     ".amazonq/rules/conventions-python.md": "d8bfe12d7f1114a2996b877782ed478378deacf3c7775cf45061ddce61f4f466",
     ".amazonq/rules/conventions-typescript.md": "6f2bf7f95547a7ba872fa10f7f4b36cd31cbee3a5f7c6c16fc9f54dbf3fe5591",
     ".amazonq/rules/conventions.md": "7dca2083e6f0ef0fef3caa6aee9e44f3719a86f73176981bb274a42ec0da3761",
-    ".prompticorn/provenance.json": "d41335be60d3b8bfa1d1feb3842d1b8a7019b6263490daa802930634651470af"
+    ".prompticorn/provenance.json": "ca3cc64cecc7a93eec560a989398f61aaf437c433ede6a224e482da93c231391"
   },
   "monorepo::bedrock::minimal": {
-    ".prompticorn/provenance.json": "c07148cde922bd3d80970ab3f81e826880060004bd5c959d10d7f80ebf57c678",
+    ".prompticorn/provenance.json": "92b5b3dc2c5872878c00dfcd67b4129b75eece2217586c5c4d28d832e241a7ea",
     "bedrock/README.bedrock.md": "e1cd14c0eb5f66dfbc10b20392b2b0ad8b36766e57ced7a03b833aae6a051c7c",
     "bedrock/agents.json": "3676cf3572961f33f58ed7adcc9daab27047d03281149aec56d10967ac1c62c2",
     "bedrock/cloudformation/agents.yaml": "852d7ea5d2a174a8335a51d680d24bdd28df592477b39f3a81f4df27e7c1700f",
@@ -2757,7 +2757,7 @@
     "bedrock/prompts/test.system.md": "a53fab90c5afa099a03fa3baa1a15380c13a7a078e15406b91aeecc6adf4c91c"
   },
   "monorepo::bedrock::verbose": {
-    ".prompticorn/provenance.json": "c07148cde922bd3d80970ab3f81e826880060004bd5c959d10d7f80ebf57c678",
+    ".prompticorn/provenance.json": "92b5b3dc2c5872878c00dfcd67b4129b75eece2217586c5c4d28d832e241a7ea",
     "bedrock/README.bedrock.md": "e1cd14c0eb5f66dfbc10b20392b2b0ad8b36766e57ced7a03b833aae6a051c7c",
     "bedrock/agents.json": "3676cf3572961f33f58ed7adcc9daab27047d03281149aec56d10967ac1c62c2",
     "bedrock/cloudformation/agents.yaml": "852d7ea5d2a174a8335a51d680d24bdd28df592477b39f3a81f4df27e7c1700f",
@@ -3017,7 +3017,7 @@
     ".claude/workflows/workflow-security-in-workflows.md": "3b15ab5d755fd44bf60b80242a760fec64ed9da407af2dc29452712c027b8cfa",
     ".claude/workflows/workflow-testing-patterns.md": "fc56fa1dfb9a1813db734b773a6695fc4da0a53439e4e1e14f9efb2ddfd47ef1",
     ".claude/workflows/workflow-versioning-management.md": "20a2564679c8651866eb418dc91fb8901f6072c246e2071bf021b17fe61089d4",
-    ".prompticorn/provenance.json": "0cfebba4dbe41088343e9e14d127cc7e365a16d88755f83946adc7a27e698f40",
+    ".prompticorn/provenance.json": "140c1531cedff8c4d4267f8db998b18c6b9994e1169c40ecef117797311b3de0",
     "CLAUDE.md": "01050b8e747c3044618eb047a3cd785b5499c8cc2f0d2594494ed5242aba9ea3"
   },
   "monorepo::claude::verbose": {
@@ -3252,7 +3252,7 @@
     ".claude/workflows/workflow-security-in-workflows.md": "2e8a87791fb635b5b91106888131345fb1b359e2e3df1a3a38e1bcbd3d6da5aa",
     ".claude/workflows/workflow-testing-patterns.md": "62e0823d2a4b14b4b32a07be19136a206ed719ca787bf69d44d4cadb704459d9",
     ".claude/workflows/workflow-versioning-management.md": "d0c3ccbf3aad4662272a9dd9996d9dd6f1667943171f838b3362729cf3c3b9b0",
-    ".prompticorn/provenance.json": "d772c10da92ade3159de7835b62b559042fdd41bc04df71c08b412e8ed1389eb",
+    ".prompticorn/provenance.json": "fad3e6ad5361b09339399864a6583f42f5dea611e83d347fc0338c8150ca86c3",
     "CLAUDE.md": "01050b8e747c3044618eb047a3cd785b5499c8cc2f0d2594494ed5242aba9ea3"
   },
   "monorepo::cline::minimal": {
@@ -3340,7 +3340,7 @@
     ".cline/skills/threat-modeling/SKILL.md": "e6b3d2837877ba690bb1b4419305f7062140f93d742a4985641872d6a903c059",
     ".cline/skills/time-series-preprocessing/SKILL.md": "ca7b6ff6d43d60042840a2c43df172f19d0d755326fd1fa5df255e32683e7f39",
     ".clinerules": "3095dd427438dbf6389d5f2ecc4ff6de24dfa315a4d85e1b5647fa2ee05e9123",
-    ".prompticorn/provenance.json": "286810bf15e7e76e63ab8f90f25b5875549d8db2a32179556875e501fbb28beb",
+    ".prompticorn/provenance.json": "8f037a7fe1779e8c0a34549d8cc7a272d0bdcdec9d82fc1dc1fc01eb467da51e",
     "AGENTS.md": "e0e91511bc060d05e1d122de2e9e14d5195bfa2a5e52f412e593c6270132a3fa"
   },
   "monorepo::cline::verbose": {
@@ -3428,7 +3428,7 @@
     ".cline/skills/threat-modeling/SKILL.md": "032c11b4df650d544e13f4ba872dfdd722c94eb268e4224b61ccad6cbf368cb0",
     ".cline/skills/time-series-preprocessing/SKILL.md": "78410f45196a8ee1a95301290573ccd95696d0e8cde168341091b5b04f271edf",
     ".clinerules": "daa1149d1ad6494bb1eee5d4a1a0927020af706db6ca3caa50b1528500b73243",
-    ".prompticorn/provenance.json": "6cf30fa86bd42d1e3fe34185912082eb37bf12b47411e09edef76ae2e083f321",
+    ".prompticorn/provenance.json": "45776febc718780a623aff9b6349de280460a953f2f5cb0232285549ea35a3f9",
     "AGENTS.md": "e0e91511bc060d05e1d122de2e9e14d5195bfa2a5e52f412e593c6270132a3fa"
   },
   "monorepo::codex::minimal": {
@@ -3537,7 +3537,7 @@
     ".agents/skills/threat-modeling/SKILL.md": "e6b3d2837877ba690bb1b4419305f7062140f93d742a4985641872d6a903c059",
     ".agents/skills/time-series-preprocessing/SKILL.md": "ca7b6ff6d43d60042840a2c43df172f19d0d755326fd1fa5df255e32683e7f39",
     ".codex/config.toml": "04aaafba5826fd49c8436a89e227eed7e6ebdcc5ea3a18990ba5ff5539979de7",
-    ".prompticorn/provenance.json": "81d235babf3aea0037d75e3183f236ab88d1a25aeb1c6b5ba17731829f24cde9",
+    ".prompticorn/provenance.json": "7e9b9d447f60f72c0b27693ebd70dd1e3b553f0a01b8392ddec8a592851df728",
     "AGENTS.md": "e0e91511bc060d05e1d122de2e9e14d5195bfa2a5e52f412e593c6270132a3fa"
   },
   "monorepo::codex::verbose": {
@@ -3646,7 +3646,7 @@
     ".agents/skills/threat-modeling/SKILL.md": "032c11b4df650d544e13f4ba872dfdd722c94eb268e4224b61ccad6cbf368cb0",
     ".agents/skills/time-series-preprocessing/SKILL.md": "78410f45196a8ee1a95301290573ccd95696d0e8cde168341091b5b04f271edf",
     ".codex/config.toml": "04aaafba5826fd49c8436a89e227eed7e6ebdcc5ea3a18990ba5ff5539979de7",
-    ".prompticorn/provenance.json": "22aa69272fd5fd59b6c2c87c40ead8b09955ad123753aca00a79bcb8db34bed2",
+    ".prompticorn/provenance.json": "ecdaead52f4a0dbab1c3c9b30e634cdc4e419de8d39067b3df9186c23964185b",
     "AGENTS.md": "e0e91511bc060d05e1d122de2e9e14d5195bfa2a5e52f412e593c6270132a3fa"
   },
   "monorepo::continue::minimal": {
@@ -3733,7 +3733,7 @@
     ".continue/rules/review.md": "b8bff1b28968f4c620c88fd88c231f5de50aa41b45486b3f7e3a340145d19adf",
     ".continue/rules/security.md": "6c8e25d9d6b89a31b0d2cde6f08d3a684ace08a189833f1303c6af9c26819d7b",
     ".continue/rules/test.md": "f372345589c16a4944a26a796680ee9ae6d6a8d49cb64fc4dde236ee9acd677f",
-    ".prompticorn/provenance.json": "1d1d802fcf0d17a14b1bf443de17cf00e9abd27a35c979a3eb433563d91fcf4a"
+    ".prompticorn/provenance.json": "65c59fb52cdd65cff6ad1c1cd797a72952cd624672c72b33c0e8901c28697a62"
   },
   "monorepo::continue::verbose": {
     ".continue/prompts/accessibility.md": "4e18704018ee1cdac9a106ea65a4217d0dab309277ed020a0274f739c5f2a5cf",
@@ -3819,7 +3819,7 @@
     ".continue/rules/review.md": "b8bff1b28968f4c620c88fd88c231f5de50aa41b45486b3f7e3a340145d19adf",
     ".continue/rules/security.md": "6c8e25d9d6b89a31b0d2cde6f08d3a684ace08a189833f1303c6af9c26819d7b",
     ".continue/rules/test.md": "f372345589c16a4944a26a796680ee9ae6d6a8d49cb64fc4dde236ee9acd677f",
-    ".prompticorn/provenance.json": "f18e0ce9767c70b2fdbeb85dbfcf07f8d15d29e85d1227f2c89a8f832f4550a1"
+    ".prompticorn/provenance.json": "001b424cb68132406a42c9fbedd121cd981ae6f9b0173c49fd3171dce40e4e5a"
   },
   "monorepo::copilot-chat::minimal": {
     ".github/agents/ask.agent.md": "97519379dbc61b402ecfbf7960d4cbaeb8eb2bc5a38c19e8254c67f1364e1640",
@@ -3905,7 +3905,7 @@
     ".github/prompts/workflow-security-in-workflows.prompt.md": "e8ab5014bd0914e9efed274fc592fb8b36d944b2a60d618f338dd6df0727df74",
     ".github/prompts/workflow-testing-patterns.prompt.md": "2f5c77fb03e22584357098f0eb7544f039bede038739e87b0010982ea23a4bf5",
     ".github/prompts/workflow-versioning-management.prompt.md": "1f575cf08c06e4818076f852ea9e5cbeb88be9306c38664568d89187f76f9f00",
-    ".prompticorn/provenance.json": "a09afeda370913d458d70fdccd7e347a61f898937ed836fc8b58551f9820b80d"
+    ".prompticorn/provenance.json": "c5367eb47b54dac394133c7ea3ab0d37861b7e05c153f9a4d26b67b989eb1c13"
   },
   "monorepo::copilot-chat::verbose": {
     ".github/agents/ask.agent.md": "97519379dbc61b402ecfbf7960d4cbaeb8eb2bc5a38c19e8254c67f1364e1640",
@@ -3991,7 +3991,7 @@
     ".github/prompts/workflow-security-in-workflows.prompt.md": "0c450a9aafd0ac748f4fa1b0dcfa1057ad476eaf0fd1779488f4febaacd0fae4",
     ".github/prompts/workflow-testing-patterns.prompt.md": "082086cf94cde2d0511d7818007e06f8bf56d6b36f8ca1ea01b5704bf087830a",
     ".github/prompts/workflow-versioning-management.prompt.md": "f6a938141f320c355490ac6336b06bb7c5b0f0c712044b44be18ab769c5d2e3c",
-    ".prompticorn/provenance.json": "ef20a343cde6c8f2ade5fbc1f0ae40771716d93ad47392ab2767044c46036c5c"
+    ".prompticorn/provenance.json": "c99fdf7b449cda2111cc77a69730e15638c1dd66a3dce6078ab53236a0ef3067"
   },
   "monorepo::copilot::minimal": {
     ".github/copilot-instructions.md": "ea1e890c10bc9960e8f6d66ca9a0b6fcedaceee87e979e699b9454cf3f68c6fb",
@@ -4078,7 +4078,7 @@
     ".github/skills/testing-strategies/SKILL.md": "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724",
     ".github/skills/threat-modeling/SKILL.md": "e6b3d2837877ba690bb1b4419305f7062140f93d742a4985641872d6a903c059",
     ".github/skills/time-series-preprocessing/SKILL.md": "ca7b6ff6d43d60042840a2c43df172f19d0d755326fd1fa5df255e32683e7f39",
-    ".prompticorn/provenance.json": "77431120f38f5b79668857c97e928436494046fa5f6f5dfab0bfb4fb175334dd",
+    ".prompticorn/provenance.json": "3f27ef81543082bdc74dc2bfd9c1e83bc5d34779e13ccee576653c00b786506a",
     "AGENTS.md": "e0e91511bc060d05e1d122de2e9e14d5195bfa2a5e52f412e593c6270132a3fa"
   },
   "monorepo::copilot::verbose": {
@@ -4166,7 +4166,7 @@
     ".github/skills/testing-strategies/SKILL.md": "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326",
     ".github/skills/threat-modeling/SKILL.md": "032c11b4df650d544e13f4ba872dfdd722c94eb268e4224b61ccad6cbf368cb0",
     ".github/skills/time-series-preprocessing/SKILL.md": "78410f45196a8ee1a95301290573ccd95696d0e8cde168341091b5b04f271edf",
-    ".prompticorn/provenance.json": "4c92b9649ffadf75850fd9e705f824154953491e9d9e6fa80c6915648c4d1ba0",
+    ".prompticorn/provenance.json": "becbca4f6988fcae054212b633a48a72cc9395acc791241be1af84bfc24a68f8",
     "AGENTS.md": "e0e91511bc060d05e1d122de2e9e14d5195bfa2a5e52f412e593c6270132a3fa"
   },
   "monorepo::cursor::minimal": {
@@ -4254,7 +4254,7 @@
     ".cursor/skills/threat-modeling/SKILL.md": "e6b3d2837877ba690bb1b4419305f7062140f93d742a4985641872d6a903c059",
     ".cursor/skills/time-series-preprocessing/SKILL.md": "ca7b6ff6d43d60042840a2c43df172f19d0d755326fd1fa5df255e32683e7f39",
     ".cursorrules": "19b2802b5a3f4f980c6debd4da6be1650946bf1b66b03228aad22974a34383d3",
-    ".prompticorn/provenance.json": "28a7f4cab8e6de3c52f31c4be354f50fd89d8e0d3871a9a5769d17959e2d90fc",
+    ".prompticorn/provenance.json": "52e260a75b162c36efe8a121dad3a518eb4a4a3c9d1991b58c16c6a2883406b7",
     "AGENTS.md": "e0e91511bc060d05e1d122de2e9e14d5195bfa2a5e52f412e593c6270132a3fa"
   },
   "monorepo::cursor::verbose": {
@@ -4342,7 +4342,7 @@
     ".cursor/skills/threat-modeling/SKILL.md": "032c11b4df650d544e13f4ba872dfdd722c94eb268e4224b61ccad6cbf368cb0",
     ".cursor/skills/time-series-preprocessing/SKILL.md": "78410f45196a8ee1a95301290573ccd95696d0e8cde168341091b5b04f271edf",
     ".cursorrules": "b1b1b1e7e6f77d797d00adfa052df771b85b4b6d62b93ac387b21f0e222de369",
-    ".prompticorn/provenance.json": "27cf12cdf219e36c3615a33b424447fa782783bb95c623792714a6c2ca2daf30",
+    ".prompticorn/provenance.json": "b7e79d583b923a81828bc7603a02e517d9f9ee1453920051d93b7e3b5b25ca0b",
     "AGENTS.md": "e0e91511bc060d05e1d122de2e9e14d5195bfa2a5e52f412e593c6270132a3fa"
   },
   "monorepo::gemini::minimal": {
@@ -4510,7 +4510,7 @@
     ".gemini/skills/testing-strategies/SKILL.md": "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724",
     ".gemini/skills/threat-modeling/SKILL.md": "e6b3d2837877ba690bb1b4419305f7062140f93d742a4985641872d6a903c059",
     ".gemini/skills/time-series-preprocessing/SKILL.md": "ca7b6ff6d43d60042840a2c43df172f19d0d755326fd1fa5df255e32683e7f39",
-    ".prompticorn/provenance.json": "47f8107976a1cc07210d88e54c840a3e0dc85bddd3c2b915928f64c36f1366e0",
+    ".prompticorn/provenance.json": "7a578cffafbbed203cc6e7b4aee7407d7ea76550c2c3a3181b6ddb8f3c151a2a",
     "AGENTS.md": "e0e91511bc060d05e1d122de2e9e14d5195bfa2a5e52f412e593c6270132a3fa"
   },
   "monorepo::gemini::verbose": {
@@ -4678,7 +4678,7 @@
     ".gemini/skills/testing-strategies/SKILL.md": "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326",
     ".gemini/skills/threat-modeling/SKILL.md": "032c11b4df650d544e13f4ba872dfdd722c94eb268e4224b61ccad6cbf368cb0",
     ".gemini/skills/time-series-preprocessing/SKILL.md": "78410f45196a8ee1a95301290573ccd95696d0e8cde168341091b5b04f271edf",
-    ".prompticorn/provenance.json": "77c4950cbfa4e0df52fed91b50936d0b8ce2f2dc8ee48124ca250a4a38bf1a88",
+    ".prompticorn/provenance.json": "b78a9b4b3f45394782cd0d6613215121cf4aa5279c595d6120497c671df9bd2c",
     "AGENTS.md": "e0e91511bc060d05e1d122de2e9e14d5195bfa2a5e52f412e593c6270132a3fa"
   },
   "monorepo::junie::minimal": {
@@ -4845,7 +4845,7 @@
     ".junie/skills/testing-strategies/SKILL.md": "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724",
     ".junie/skills/threat-modeling/SKILL.md": "e6b3d2837877ba690bb1b4419305f7062140f93d742a4985641872d6a903c059",
     ".junie/skills/time-series-preprocessing/SKILL.md": "ca7b6ff6d43d60042840a2c43df172f19d0d755326fd1fa5df255e32683e7f39",
-    ".prompticorn/provenance.json": "f22697431ebc9f4790fdc95cf23ccf5e2259160db26b00b24aa4ad294aa79483",
+    ".prompticorn/provenance.json": "14b7a1514c73f5046d309a41e5d66b94714d0e58ee4d62bb941015bebc50295c",
     "AGENTS.md": "e0e91511bc060d05e1d122de2e9e14d5195bfa2a5e52f412e593c6270132a3fa"
   },
   "monorepo::junie::verbose": {
@@ -5012,7 +5012,7 @@
     ".junie/skills/testing-strategies/SKILL.md": "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326",
     ".junie/skills/threat-modeling/SKILL.md": "032c11b4df650d544e13f4ba872dfdd722c94eb268e4224b61ccad6cbf368cb0",
     ".junie/skills/time-series-preprocessing/SKILL.md": "78410f45196a8ee1a95301290573ccd95696d0e8cde168341091b5b04f271edf",
-    ".prompticorn/provenance.json": "5696b6f4e9d3f262675fc38770d6116c4513e59c8897ad7490d3949167fa539d",
+    ".prompticorn/provenance.json": "e35192eecd8b1b9aa18db73fc54bf6f389df57909e867e041d44ce4539305220",
     "AGENTS.md": "e0e91511bc060d05e1d122de2e9e14d5195bfa2a5e52f412e593c6270132a3fa"
   },
   "monorepo::kilo-cli::minimal": {
@@ -5037,7 +5037,7 @@
     ".opencode/agents/review.md": "07324d0958404d0e815ffe70d9435adbc648bf782edfa8f16d1096e4aa1d73de",
     ".opencode/agents/security.md": "b17bba9b5d0a22f62fab0288c9f33baccf463fc5d50560443ad3dff979ecabbb",
     ".opencode/agents/test.md": "13fc2885f7fa74b7c1af6d635116adb672d14a514c5898e320d7de0a93a84e18",
-    ".prompticorn/provenance.json": "95000374843a32e6857562dfc5ade24a2e17b4f17d50021a5e8a0fecd72ef23c",
+    ".prompticorn/provenance.json": "e7e301ca4ca14902763c441274f059ff9ddbae1e039c61a81e63f7663bfb034f",
     "AGENTS.md": "e0e91511bc060d05e1d122de2e9e14d5195bfa2a5e52f412e593c6270132a3fa"
   },
   "monorepo::kilo-cli::verbose": {
@@ -5062,7 +5062,7 @@
     ".opencode/agents/review.md": "07324d0958404d0e815ffe70d9435adbc648bf782edfa8f16d1096e4aa1d73de",
     ".opencode/agents/security.md": "b17bba9b5d0a22f62fab0288c9f33baccf463fc5d50560443ad3dff979ecabbb",
     ".opencode/agents/test.md": "13fc2885f7fa74b7c1af6d635116adb672d14a514c5898e320d7de0a93a84e18",
-    ".prompticorn/provenance.json": "95000374843a32e6857562dfc5ade24a2e17b4f17d50021a5e8a0fecd72ef23c",
+    ".prompticorn/provenance.json": "e7e301ca4ca14902763c441274f059ff9ddbae1e039c61a81e63f7663bfb034f",
     "AGENTS.md": "e0e91511bc060d05e1d122de2e9e14d5195bfa2a5e52f412e593c6270132a3fa"
   },
   "monorepo::kilo-ide::minimal": {
@@ -5304,7 +5304,7 @@
     ".kilo/skills/testing-strategies/SKILL.md": "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724",
     ".kilo/skills/threat-modeling/SKILL.md": "e6b3d2837877ba690bb1b4419305f7062140f93d742a4985641872d6a903c059",
     ".kilo/skills/time-series-preprocessing/SKILL.md": "ca7b6ff6d43d60042840a2c43df172f19d0d755326fd1fa5df255e32683e7f39",
-    ".prompticorn/provenance.json": "9c95cd561a27dbab64c6d2d2634af4eb37dc490808034f8b58962fcfacf05a27",
+    ".prompticorn/provenance.json": "8c71373ba490f73853b157f427572f02af63988f8de32b3c9b698f9d9d2684b9",
     "AGENTS.md": "e0e91511bc060d05e1d122de2e9e14d5195bfa2a5e52f412e593c6270132a3fa"
   },
   "monorepo::kilo-ide::verbose": {
@@ -5546,11 +5546,11 @@
     ".kilo/skills/testing-strategies/SKILL.md": "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326",
     ".kilo/skills/threat-modeling/SKILL.md": "032c11b4df650d544e13f4ba872dfdd722c94eb268e4224b61ccad6cbf368cb0",
     ".kilo/skills/time-series-preprocessing/SKILL.md": "78410f45196a8ee1a95301290573ccd95696d0e8cde168341091b5b04f271edf",
-    ".prompticorn/provenance.json": "c9a9f2d64b1accc887a6fdb28156d90c304238c8e94a3066d8294790b5944071",
+    ".prompticorn/provenance.json": "97272aaf47e7be50111b6861bdb516501000608ac1f55f77cc4847eff4fa211d",
     "AGENTS.md": "e0e91511bc060d05e1d122de2e9e14d5195bfa2a5e52f412e593c6270132a3fa"
   },
   "monorepo::roo::minimal": {
-    ".prompticorn/provenance.json": "5c2487204a4699466af8e57f7f637a2c1096ca2728e553209ffbf3432aa6d9c7",
+    ".prompticorn/provenance.json": "56f552e75198c128831e8358012d58cb7c9b782a92962f2dbb785d0b4ef9e006",
     ".roo/commands/accessibility.md": "e2747c5792ea7cc655b2ebea1a954fd53c243d91ee89730b10322149d64a2831",
     ".roo/commands/analytics-setup.md": "8f0d65b582a20e5536bd38f23ff532a6966d69237e9fddcada078e4d692125c7",
     ".roo/commands/api-design.md": "0be08f948e5335f17b160d03b9a03e8b9262337562a20eaa83a4b269129b8bdb",
@@ -5718,7 +5718,7 @@
     "AGENTS.md": "e0e91511bc060d05e1d122de2e9e14d5195bfa2a5e52f412e593c6270132a3fa"
   },
   "monorepo::roo::verbose": {
-    ".prompticorn/provenance.json": "8a596ad977c079311a372409957b7be5f754d28f00265ce064a39e8c6d118a18",
+    ".prompticorn/provenance.json": "1fc8b14661d86a5cbd893a76bc1e7bd0ac1502884b4d8c2fc70d38160447afb6",
     ".roo/commands/accessibility.md": "cbed2d09922b3b60034fefa0a3dc53e2b8a209593f59bea62c270d35d7fdd962",
     ".roo/commands/analytics-setup.md": "33d317b2e852fb2ffc6f317dc5663fd02f5fce4c59d61e45ae010846884ee508",
     ".roo/commands/api-design.md": "3aee90e73d064ccacc0ff0c815c39a929561767407342a347db2c50156b6bc55",
@@ -5886,7 +5886,7 @@
     "AGENTS.md": "e0e91511bc060d05e1d122de2e9e14d5195bfa2a5e52f412e593c6270132a3fa"
   },
   "monorepo::windsurf::minimal": {
-    ".prompticorn/provenance.json": "2fe657e074749036f72bffddae8d12a7b69a81a81edf7b490cbf6ada9664cc34",
+    ".prompticorn/provenance.json": "8f779cd4be1b52ecdb9830f4030678a750aa8027523eb67f9d26ad40d1fa4062",
     ".windsurf/rules/conventions-core.md": "7644f7561faac20d8211d9f8c207f8658285061296b586e31c5cce76a127971a",
     ".windsurf/rules/conventions-python.md": "368458cdb3cccac2afa5380dc0cf6a7b5481073a7b7bf931d25870019916646e",
     ".windsurf/rules/conventions-typescript.md": "c71760ee757a47464001359b45b3830250904efa919752f32ac1d16c42aae4ae",
@@ -6055,7 +6055,7 @@
     ".windsurf/workflows/workflow-versioning-management.md": "291d8af09858baf08e36f6527baaa317f1f14137ee14cbdbb7f28c965757128c"
   },
   "monorepo::windsurf::verbose": {
-    ".prompticorn/provenance.json": "f1cdbb5d9eb7bf943002b2a0f027980908b3a80b30af5fbd23be7c61d971db8a",
+    ".prompticorn/provenance.json": "513c2d791ef62827fe60ae4d1d794f309c07f4b8bad3883b7ff317623c51cac3",
     ".windsurf/rules/conventions-core.md": "7644f7561faac20d8211d9f8c207f8658285061296b586e31c5cce76a127971a",
     ".windsurf/rules/conventions-python.md": "368458cdb3cccac2afa5380dc0cf6a7b5481073a7b7bf931d25870019916646e",
     ".windsurf/rules/conventions-typescript.md": "c71760ee757a47464001359b45b3830250904efa919752f32ac1d16c42aae4ae",
@@ -6328,7 +6328,7 @@
     ".agents/skills/testing-strategies/SKILL.md": "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724",
     ".agents/skills/threat-modeling/SKILL.md": "e6b3d2837877ba690bb1b4419305f7062140f93d742a4985641872d6a903c059",
     ".agents/skills/time-series-preprocessing/SKILL.md": "ca7b6ff6d43d60042840a2c43df172f19d0d755326fd1fa5df255e32683e7f39",
-    ".prompticorn/provenance.json": "513d3b0332ae053acf2df7705715e3a21b1161449be51f8771097ac6521bb905",
+    ".prompticorn/provenance.json": "fae3cef1e7d3fdd5ced78c818863f707216d767d2e6e418049c54d32d9c13cec",
     "AGENTS.md": "e0e91511bc060d05e1d122de2e9e14d5195bfa2a5e52f412e593c6270132a3fa"
   },
   "monorepo::zed::verbose": {
@@ -6436,17 +6436,17 @@
     ".agents/skills/testing-strategies/SKILL.md": "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326",
     ".agents/skills/threat-modeling/SKILL.md": "032c11b4df650d544e13f4ba872dfdd722c94eb268e4224b61ccad6cbf368cb0",
     ".agents/skills/time-series-preprocessing/SKILL.md": "78410f45196a8ee1a95301290573ccd95696d0e8cde168341091b5b04f271edf",
-    ".prompticorn/provenance.json": "f8f490783add2eab2b3c274edc11837a6c57f41cc5343523aea434f2196897a7",
+    ".prompticorn/provenance.json": "870e2f7c85873fe3dcf9294132eddf2068d1383cfac52f45ab76911c77c10be5",
     "AGENTS.md": "e0e91511bc060d05e1d122de2e9e14d5195bfa2a5e52f412e593c6270132a3fa"
   },
   "python-single::aider::minimal": {
     ".aider.conf.yml": "3c44a5f3fd7fd95e7053d5260de7c2b907dd53e5d6546cf2be869591eaa79cce",
-    ".prompticorn/provenance.json": "304fa2341ad5dff973d8dfdff59aef0fffb7965ab7f1e847bf8fb839c3623e24",
+    ".prompticorn/provenance.json": "0e5b72b2103c5586deabe214e34a0253a7a40bc23627fbe28e407612e057a1a9",
     "CONVENTIONS.md": "0ae2c58375ef43f0a9b853a1a00e13b3dcb85d30893107eb3670eaca6f42fb6d"
   },
   "python-single::aider::verbose": {
     ".aider.conf.yml": "3c44a5f3fd7fd95e7053d5260de7c2b907dd53e5d6546cf2be869591eaa79cce",
-    ".prompticorn/provenance.json": "304fa2341ad5dff973d8dfdff59aef0fffb7965ab7f1e847bf8fb839c3623e24",
+    ".prompticorn/provenance.json": "0e5b72b2103c5586deabe214e34a0253a7a40bc23627fbe28e407612e057a1a9",
     "CONVENTIONS.md": "0ae2c58375ef43f0a9b853a1a00e13b3dcb85d30893107eb3670eaca6f42fb6d"
   },
   "python-single::amazonq::minimal": {
@@ -6505,7 +6505,7 @@
     ".amazonq/prompts/workflow-testing-patterns.md": "f68e2623b882d807ddf6aa3c2b8d9c18770f064dbf7125cdff83d8ae5d70204f",
     ".amazonq/rules/conventions-python.md": "7e837019a7f5580e48ebc6a211046e7c4233e8aa8de5cf7d4e1e0e0adef5b057",
     ".amazonq/rules/conventions.md": "304c17c57671bb42fd8d5c2d1d450043cc2057977eec4ac82f335b038cabcf3f",
-    ".prompticorn/provenance.json": "8b1a9a60d2fe03b3f88fbad47e3981fcb3e13e0b05c3f0133d0e864ee9b611ba"
+    ".prompticorn/provenance.json": "6891185bd7f0226d7696fc844381d411ae09877cc89e3d4ee6eee0936ab0e954"
   },
   "python-single::amazonq::verbose": {
     ".amazonq/cli-agents/ask.json": "33fb4c5463b3b11beb6c8465b8abb1d3f717e311faae4773ebe46dd8307225a5",
@@ -6563,10 +6563,10 @@
     ".amazonq/prompts/workflow-testing-patterns.md": "ce7fc2aa439debc5bd10fe7aa087d485af6b6ab21772f92039d5a4f4af28a1c9",
     ".amazonq/rules/conventions-python.md": "7e837019a7f5580e48ebc6a211046e7c4233e8aa8de5cf7d4e1e0e0adef5b057",
     ".amazonq/rules/conventions.md": "304c17c57671bb42fd8d5c2d1d450043cc2057977eec4ac82f335b038cabcf3f",
-    ".prompticorn/provenance.json": "9bb84ebc0ca9881f483da8cebc2317362d56ad878baa88c5ad31d6bb6b16e6dc"
+    ".prompticorn/provenance.json": "775791daf2b3db67e8bd020c8dc74fb02c1d28e9f0f076c6143c903d9bf049d0"
   },
   "python-single::bedrock::minimal": {
-    ".prompticorn/provenance.json": "c3c4e030f4d56f0649e6b2569ea73c3cb971017f99c903add47347124e02b58e",
+    ".prompticorn/provenance.json": "130cf24ef5adf95b855bc9486e887f4044e9bd70db80ab6f132852ea90bb4461",
     "bedrock/README.bedrock.md": "e1cd14c0eb5f66dfbc10b20392b2b0ad8b36766e57ced7a03b833aae6a051c7c",
     "bedrock/agents.json": "381c4903d77c9c73112f0a0374b62106a61e8db9a456eadf713335b31416da16",
     "bedrock/cloudformation/agents.yaml": "3119bb07bc14ca38639611260d2644080aaf0addd445a19d16a1cd4a2e855440",
@@ -6589,7 +6589,7 @@
     "bedrock/prompts/test.system.md": "a53fab90c5afa099a03fa3baa1a15380c13a7a078e15406b91aeecc6adf4c91c"
   },
   "python-single::bedrock::verbose": {
-    ".prompticorn/provenance.json": "c3c4e030f4d56f0649e6b2569ea73c3cb971017f99c903add47347124e02b58e",
+    ".prompticorn/provenance.json": "130cf24ef5adf95b855bc9486e887f4044e9bd70db80ab6f132852ea90bb4461",
     "bedrock/README.bedrock.md": "e1cd14c0eb5f66dfbc10b20392b2b0ad8b36766e57ced7a03b833aae6a051c7c",
     "bedrock/agents.json": "381c4903d77c9c73112f0a0374b62106a61e8db9a456eadf713335b31416da16",
     "bedrock/cloudformation/agents.yaml": "3119bb07bc14ca38639611260d2644080aaf0addd445a19d16a1cd4a2e855440",
@@ -6746,7 +6746,7 @@
     ".claude/workflows/workflow-performance-optimization.md": "7d97952fd0d12809ba12b1a3f544411a96c1cf56068d506d878eb50219e81a65",
     ".claude/workflows/workflow-scaling-patterns.md": "b0a257a3b58a98758f3082a70ca46f72b5fbba0fc8145bcd676ff36b5b9a12f9",
     ".claude/workflows/workflow-testing-patterns.md": "fc56fa1dfb9a1813db734b773a6695fc4da0a53439e4e1e14f9efb2ddfd47ef1",
-    ".prompticorn/provenance.json": "51f93fba6a4ae45dda766f109d2c2747383e5d5c15a1ccb46a455d5f375eee8d",
+    ".prompticorn/provenance.json": "07563297b6b48507200ee8b8cf33dc50fd98d7141ed86cfaca8924cc23a7d358",
     "CLAUDE.md": "bd8b30d88fd7c70e40492c9412a604f5af12ee12a1691762a6310fbf87c71d00"
   },
   "python-single::claude::verbose": {
@@ -6884,7 +6884,7 @@
     ".claude/workflows/workflow-performance-optimization.md": "9b3515b81c87281b93bb21f647efbbb68c757fa792ad1a050f82e71d709ffe85",
     ".claude/workflows/workflow-scaling-patterns.md": "fd30d48467273083e17fa064f3203b27086d16473e25368f3b0d2715138f6a6a",
     ".claude/workflows/workflow-testing-patterns.md": "62e0823d2a4b14b4b32a07be19136a206ed719ca787bf69d44d4cadb704459d9",
-    ".prompticorn/provenance.json": "906f86d09c5a75dac22869808bb7fc40b2e20e9a24a3142419fef19693f7ef73",
+    ".prompticorn/provenance.json": "6dfc5835eb1e611337d1935e07224226690f30a9f5eda6163300b16d6129520c",
     "CLAUDE.md": "bd8b30d88fd7c70e40492c9412a604f5af12ee12a1691762a6310fbf87c71d00"
   },
   "python-single::cline::minimal": {
@@ -6940,7 +6940,7 @@
     ".cline/skills/test-mocking-rules/SKILL.md": "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec",
     ".cline/skills/testing-strategies/SKILL.md": "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724",
     ".clinerules": "d922da9236111b63aa6b36cb2cb5ffed716561c6cf9734fa83dd86516fc86a35",
-    ".prompticorn/provenance.json": "85325e1dbc9544a8be9eb71a5745faa828e71aa324a10cc4069491a966feaa60",
+    ".prompticorn/provenance.json": "087b898b02dbb20c49c765bd75bea8f9c2dbb55e0ed18c59800ce0e062d03245",
     "AGENTS.md": "9f38de70b18377b078e2387047be44b33fc6aa1621a0d1c074ee220d1c38b8ff"
   },
   "python-single::cline::verbose": {
@@ -6996,7 +6996,7 @@
     ".cline/skills/test-mocking-rules/SKILL.md": "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e",
     ".cline/skills/testing-strategies/SKILL.md": "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326",
     ".clinerules": "d9ade9881826696ae91438735b0634c36f8f6f755c36457ca44bdbf88b6de88b",
-    ".prompticorn/provenance.json": "eef80807147b2f6cc08a8a104970af5584049d8f719185df103040a22e132538",
+    ".prompticorn/provenance.json": "2e7e63beaaf41810e3812d0abbe66ae971b79206500231a2a0b17bf179a63df9",
     "AGENTS.md": "9f38de70b18377b078e2387047be44b33fc6aa1621a0d1c074ee220d1c38b8ff"
   },
   "python-single::codex::minimal": {
@@ -7067,7 +7067,7 @@
     ".agents/skills/test/SKILL.md": "7cdc9e8209e0629355cc0e60feccaddd09422c403488ec1c44b11c7bbc96f015",
     ".agents/skills/testing-strategies/SKILL.md": "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724",
     ".codex/config.toml": "04aaafba5826fd49c8436a89e227eed7e6ebdcc5ea3a18990ba5ff5539979de7",
-    ".prompticorn/provenance.json": "1347493282587c28eded426badd41cd5f1c28fb92eb1bf77a808a5adcad457fc",
+    ".prompticorn/provenance.json": "40b78c39cefbbee34c35938140a8a6cf5aeabd177a760ca177b56b5e49c211f8",
     "AGENTS.md": "9f38de70b18377b078e2387047be44b33fc6aa1621a0d1c074ee220d1c38b8ff"
   },
   "python-single::codex::verbose": {
@@ -7138,7 +7138,7 @@
     ".agents/skills/test/SKILL.md": "7cdc9e8209e0629355cc0e60feccaddd09422c403488ec1c44b11c7bbc96f015",
     ".agents/skills/testing-strategies/SKILL.md": "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326",
     ".codex/config.toml": "04aaafba5826fd49c8436a89e227eed7e6ebdcc5ea3a18990ba5ff5539979de7",
-    ".prompticorn/provenance.json": "e173956b315c06157e405eaac82249eb2f5d5e28021b073be3062e905dff87dd",
+    ".prompticorn/provenance.json": "fd3158a30e81df297273808a96110c4b631f73fab60ba05dd526ea686efe5ce1",
     "AGENTS.md": "9f38de70b18377b078e2387047be44b33fc6aa1621a0d1c074ee220d1c38b8ff"
   },
   "python-single::continue::minimal": {
@@ -7197,7 +7197,7 @@
     ".continue/rules/refactor.md": "2583e7306de435c85bb5cfff99beb5b9adfc3bc86aeca8fd2ffdce402b490ff9",
     ".continue/rules/review.md": "b8bff1b28968f4c620c88fd88c231f5de50aa41b45486b3f7e3a340145d19adf",
     ".continue/rules/test.md": "f372345589c16a4944a26a796680ee9ae6d6a8d49cb64fc4dde236ee9acd677f",
-    ".prompticorn/provenance.json": "beccaa359cd46d659a6d3eac99ade99adbe8f185bd9a64a542d9a28695a2dfb1"
+    ".prompticorn/provenance.json": "675ae8423bbac51676c499996330c4b82529f4d73e3e0b0f8d7502d3f09bb81a"
   },
   "python-single::continue::verbose": {
     ".continue/prompts/accessibility.md": "4e18704018ee1cdac9a106ea65a4217d0dab309277ed020a0274f739c5f2a5cf",
@@ -7255,7 +7255,7 @@
     ".continue/rules/refactor.md": "2583e7306de435c85bb5cfff99beb5b9adfc3bc86aeca8fd2ffdce402b490ff9",
     ".continue/rules/review.md": "b8bff1b28968f4c620c88fd88c231f5de50aa41b45486b3f7e3a340145d19adf",
     ".continue/rules/test.md": "f372345589c16a4944a26a796680ee9ae6d6a8d49cb64fc4dde236ee9acd677f",
-    ".prompticorn/provenance.json": "11841afb0e271b0a654ded57fbdebc452dabd657b7a579edab8314c6ea483c3b"
+    ".prompticorn/provenance.json": "5648783a46246fd3f93c2320b613a49f3a5a049d0ce02e12c85f71292e0898c1"
   },
   "python-single::copilot-chat::minimal": {
     ".github/agents/ask.agent.md": "97519379dbc61b402ecfbf7960d4cbaeb8eb2bc5a38c19e8254c67f1364e1640",
@@ -7313,7 +7313,7 @@
     ".github/prompts/workflow-rollback-strategies.prompt.md": "aa12c2ee6947962df382eef0e72b8a41fdba818bb53810a4cf7497184c0483f9",
     ".github/prompts/workflow-scaling-patterns.prompt.md": "f5f8a0a185941bf1afd4f7e00938c4bdac8cb544f8309979a37dd8d515260f5f",
     ".github/prompts/workflow-testing-patterns.prompt.md": "2f5c77fb03e22584357098f0eb7544f039bede038739e87b0010982ea23a4bf5",
-    ".prompticorn/provenance.json": "79db3920df160f836c5dfce83948bf9fe174219fa38c28618c78879c2f5e0843"
+    ".prompticorn/provenance.json": "e60349e8552712f5b264523c55e238e96e266b9434d86ba8045e7c67e8eccff7"
   },
   "python-single::copilot-chat::verbose": {
     ".github/agents/ask.agent.md": "97519379dbc61b402ecfbf7960d4cbaeb8eb2bc5a38c19e8254c67f1364e1640",
@@ -7371,7 +7371,7 @@
     ".github/prompts/workflow-rollback-strategies.prompt.md": "e08684976901b91aec71e5e91945f6918dfcb3b6026c09dcf8c28f3255224b3a",
     ".github/prompts/workflow-scaling-patterns.prompt.md": "15090974e97bf2658883ab6260e92d2494b6e24511164b4422636bd0475f0683",
     ".github/prompts/workflow-testing-patterns.prompt.md": "082086cf94cde2d0511d7818007e06f8bf56d6b36f8ca1ea01b5704bf087830a",
-    ".prompticorn/provenance.json": "e7a4a7521b29702876d7585f330c0a05a9c380ee64d6f821c1e47e7d45a2291b"
+    ".prompticorn/provenance.json": "c895f5679803af6a54f41a47dd29caefb4f5cee5af9dd3f13406e25a204d5b96"
   },
   "python-single::copilot::minimal": {
     ".github/copilot-instructions.md": "566e408db3c646c59e6e70c74a577b3c26acdd60d6cde8277099982f08b02800",
@@ -7426,7 +7426,7 @@
     ".github/skills/test-data-strategies/SKILL.md": "9f16bf3bc958425e6f2a663851eb1db8eaf6b5833e505b9b6916e33057896139",
     ".github/skills/test-mocking-rules/SKILL.md": "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec",
     ".github/skills/testing-strategies/SKILL.md": "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724",
-    ".prompticorn/provenance.json": "05b379d03dc607033f530ba9001c12e0fa03f1cf5f020fa7b26099df9b8918b4",
+    ".prompticorn/provenance.json": "8520e8134e13f239caa5890c959e1a72cd3dbd29feee40d6836bd79df4bc7fd9",
     "AGENTS.md": "9f38de70b18377b078e2387047be44b33fc6aa1621a0d1c074ee220d1c38b8ff"
   },
   "python-single::copilot::verbose": {
@@ -7482,7 +7482,7 @@
     ".github/skills/test-data-strategies/SKILL.md": "d3f3f91a633277ef56caad9fcc6a2444b4290ffde3288b1c1b9132d56eb419ac",
     ".github/skills/test-mocking-rules/SKILL.md": "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e",
     ".github/skills/testing-strategies/SKILL.md": "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326",
-    ".prompticorn/provenance.json": "bd6581b0d3ce2874e15b7921d41003acd5bd5c66d6570c4b83224452f1522999",
+    ".prompticorn/provenance.json": "5a189c433545d0f79e4fe1dd4f185e85dee8023a13ffbc274d1964dec6d15304",
     "AGENTS.md": "9f38de70b18377b078e2387047be44b33fc6aa1621a0d1c074ee220d1c38b8ff"
   },
   "python-single::cursor::minimal": {
@@ -7538,7 +7538,7 @@
     ".cursor/skills/test-mocking-rules/SKILL.md": "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec",
     ".cursor/skills/testing-strategies/SKILL.md": "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724",
     ".cursorrules": "34c8712f93e9cc4c37330f1baf059bfc66898de5861b9f19fac8f8367b80c044",
-    ".prompticorn/provenance.json": "384a19e67b613e6c8aec733733a36a2118e744a89e3639f2370a5c7fdf6f7eeb",
+    ".prompticorn/provenance.json": "d2f5d3e8f5316ba346068c615f374c1de33bebaee8a6a226935a358447d47a0d",
     "AGENTS.md": "9f38de70b18377b078e2387047be44b33fc6aa1621a0d1c074ee220d1c38b8ff"
   },
   "python-single::cursor::verbose": {
@@ -7594,7 +7594,7 @@
     ".cursor/skills/test-mocking-rules/SKILL.md": "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e",
     ".cursor/skills/testing-strategies/SKILL.md": "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326",
     ".cursorrules": "90472b46d75e5269ab20c15c66e6bd4f6c9af93991bc746832711796f328f696",
-    ".prompticorn/provenance.json": "b718b0ec2829f2c3e1120c9d033a76957593ae772a78d130d1cfbab53da1c003",
+    ".prompticorn/provenance.json": "d529b3333d1360c30c60bde021556ff5c7973329916d333b8f161d8cbbcbfa80",
     "AGENTS.md": "9f38de70b18377b078e2387047be44b33fc6aa1621a0d1c074ee220d1c38b8ff"
   },
   "python-single::gemini::minimal": {
@@ -7703,7 +7703,7 @@
     ".gemini/skills/test-data-strategies/SKILL.md": "9f16bf3bc958425e6f2a663851eb1db8eaf6b5833e505b9b6916e33057896139",
     ".gemini/skills/test-mocking-rules/SKILL.md": "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec",
     ".gemini/skills/testing-strategies/SKILL.md": "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724",
-    ".prompticorn/provenance.json": "8e70ab78b1542cbe1ad3c7ca1da139690a444ccb6ab2bddbb098a8432c168c6d",
+    ".prompticorn/provenance.json": "bf213c52de5cbcf0f2a70cc1d22b1c501c30b72e59b95f24d0f6854a054bef62",
     "AGENTS.md": "9f38de70b18377b078e2387047be44b33fc6aa1621a0d1c074ee220d1c38b8ff"
   },
   "python-single::gemini::verbose": {
@@ -7812,7 +7812,7 @@
     ".gemini/skills/test-data-strategies/SKILL.md": "d3f3f91a633277ef56caad9fcc6a2444b4290ffde3288b1c1b9132d56eb419ac",
     ".gemini/skills/test-mocking-rules/SKILL.md": "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e",
     ".gemini/skills/testing-strategies/SKILL.md": "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326",
-    ".prompticorn/provenance.json": "185ea53d379f909e5b37bd23f31a1a14063b24a5f6e90b08f8a3d11167d33f4b",
+    ".prompticorn/provenance.json": "96139297bab97f4d7440ac4a7a652d6dbe803905ee20f8c4ae5c1ae6d507f6eb",
     "AGENTS.md": "9f38de70b18377b078e2387047be44b33fc6aa1621a0d1c074ee220d1c38b8ff"
   },
   "python-single::junie::minimal": {
@@ -7920,7 +7920,7 @@
     ".junie/skills/test-data-strategies/SKILL.md": "9f16bf3bc958425e6f2a663851eb1db8eaf6b5833e505b9b6916e33057896139",
     ".junie/skills/test-mocking-rules/SKILL.md": "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec",
     ".junie/skills/testing-strategies/SKILL.md": "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724",
-    ".prompticorn/provenance.json": "b7b45b8bc7b1060e819d9e4f3b5f876949b23716170a7ccb98b2736cf9046487",
+    ".prompticorn/provenance.json": "6e32d1915db759a6ae39b6d1f591211f67b446c96fb32b742594d8168b98c727",
     "AGENTS.md": "9f38de70b18377b078e2387047be44b33fc6aa1621a0d1c074ee220d1c38b8ff"
   },
   "python-single::junie::verbose": {
@@ -8028,7 +8028,7 @@
     ".junie/skills/test-data-strategies/SKILL.md": "d3f3f91a633277ef56caad9fcc6a2444b4290ffde3288b1c1b9132d56eb419ac",
     ".junie/skills/test-mocking-rules/SKILL.md": "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e",
     ".junie/skills/testing-strategies/SKILL.md": "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326",
-    ".prompticorn/provenance.json": "7be47b4534efdc84a89ec19056a49d99955d7dd91fc96b2a9deef3c83a984d5f",
+    ".prompticorn/provenance.json": "8bcc0cdd8deafe4e915442148889631a911337a4dd3d452e554f7bc16cf93a09",
     "AGENTS.md": "9f38de70b18377b078e2387047be44b33fc6aa1621a0d1c074ee220d1c38b8ff"
   },
   "python-single::kilo-cli::minimal": {
@@ -8047,7 +8047,7 @@
     ".opencode/agents/refactor.md": "d8f648b467479d89489f2f4532b1c9ca500faec382afdee7af769c7c5ccc9f59",
     ".opencode/agents/review.md": "07324d0958404d0e815ffe70d9435adbc648bf782edfa8f16d1096e4aa1d73de",
     ".opencode/agents/test.md": "13fc2885f7fa74b7c1af6d635116adb672d14a514c5898e320d7de0a93a84e18",
-    ".prompticorn/provenance.json": "797d461fdaa00211b88b1e5dd4f8db5e8cc8a958b112452fc6998a2936946517",
+    ".prompticorn/provenance.json": "d9c9c8b6d2110c03d8b4c9728b7da6281efaadb84950bbe8daa6131273345096",
     "AGENTS.md": "9f38de70b18377b078e2387047be44b33fc6aa1621a0d1c074ee220d1c38b8ff"
   },
   "python-single::kilo-cli::verbose": {
@@ -8066,7 +8066,7 @@
     ".opencode/agents/refactor.md": "d8f648b467479d89489f2f4532b1c9ca500faec382afdee7af769c7c5ccc9f59",
     ".opencode/agents/review.md": "07324d0958404d0e815ffe70d9435adbc648bf782edfa8f16d1096e4aa1d73de",
     ".opencode/agents/test.md": "13fc2885f7fa74b7c1af6d635116adb672d14a514c5898e320d7de0a93a84e18",
-    ".prompticorn/provenance.json": "797d461fdaa00211b88b1e5dd4f8db5e8cc8a958b112452fc6998a2936946517",
+    ".prompticorn/provenance.json": "d9c9c8b6d2110c03d8b4c9728b7da6281efaadb84950bbe8daa6131273345096",
     "AGENTS.md": "9f38de70b18377b078e2387047be44b33fc6aa1621a0d1c074ee220d1c38b8ff"
   },
   "python-single::kilo-ide::minimal": {
@@ -8216,7 +8216,7 @@
     ".kilo/skills/test-data-strategies/SKILL.md": "9f16bf3bc958425e6f2a663851eb1db8eaf6b5833e505b9b6916e33057896139",
     ".kilo/skills/test-mocking-rules/SKILL.md": "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec",
     ".kilo/skills/testing-strategies/SKILL.md": "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724",
-    ".prompticorn/provenance.json": "4e3b90448eadcf6f81e056dcf31f0327729af38fe5c3c0dbb31a4cefdcc10c21",
+    ".prompticorn/provenance.json": "e02462c57c03f5fab44c8f2b97df2d410809b4752a1b8bc40e2eb30065034371",
     "AGENTS.md": "9f38de70b18377b078e2387047be44b33fc6aa1621a0d1c074ee220d1c38b8ff"
   },
   "python-single::kilo-ide::verbose": {
@@ -8366,11 +8366,11 @@
     ".kilo/skills/test-data-strategies/SKILL.md": "d3f3f91a633277ef56caad9fcc6a2444b4290ffde3288b1c1b9132d56eb419ac",
     ".kilo/skills/test-mocking-rules/SKILL.md": "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e",
     ".kilo/skills/testing-strategies/SKILL.md": "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326",
-    ".prompticorn/provenance.json": "b893fc4b1a8bc065a9eb80f136173bfbec9d786496ae0111ba561c9a7573cea7",
+    ".prompticorn/provenance.json": "ba1f7fb0b0c40ad88071e49fdc51d06e5ece826fec451c96474d9e88c967d2c5",
     "AGENTS.md": "9f38de70b18377b078e2387047be44b33fc6aa1621a0d1c074ee220d1c38b8ff"
   },
   "python-single::roo::minimal": {
-    ".prompticorn/provenance.json": "c850f0f98d04aef4b33730a34f8897b65884e65e4d212950c23ad88e8a29b715",
+    ".prompticorn/provenance.json": "bb922234f3433ad0078ef67154de11f92513b4a5fe76a74c423d772d82ad8574",
     ".roo/commands/accessibility.md": "e2747c5792ea7cc655b2ebea1a954fd53c243d91ee89730b10322149d64a2831",
     ".roo/commands/api-design.md": "0be08f948e5335f17b160d03b9a03e8b9262337562a20eaa83a4b269129b8bdb",
     ".roo/commands/async-workflow-execution.md": "817f9b3bd73f17d5cdc4b6ffc4baa84a9f8c145373df1cba5c3a1066adeadcde",
@@ -8479,7 +8479,7 @@
     "AGENTS.md": "9f38de70b18377b078e2387047be44b33fc6aa1621a0d1c074ee220d1c38b8ff"
   },
   "python-single::roo::verbose": {
-    ".prompticorn/provenance.json": "9bcf970382d3fd25abc359caeabc491fd8bb05972431ca35bf4816e381491d46",
+    ".prompticorn/provenance.json": "fff544dd40c379cb73ef5286146cf2543589f317e7e830cf4f805f73178d82da",
     ".roo/commands/accessibility.md": "cbed2d09922b3b60034fefa0a3dc53e2b8a209593f59bea62c270d35d7fdd962",
     ".roo/commands/api-design.md": "3aee90e73d064ccacc0ff0c815c39a929561767407342a347db2c50156b6bc55",
     ".roo/commands/async-workflow-execution.md": "6246e5cc3abe5e5dbdbbc274f933b172e41cf00b9e15dce7d599409612bccc3c",
@@ -8588,7 +8588,7 @@
     "AGENTS.md": "9f38de70b18377b078e2387047be44b33fc6aa1621a0d1c074ee220d1c38b8ff"
   },
   "python-single::windsurf::minimal": {
-    ".prompticorn/provenance.json": "d8e0dad0a64af8109462c43acbc64d48fde7298bc0feef6e75ac776b6d565cab",
+    ".prompticorn/provenance.json": "26f44eb0dff85d32807f1ecbb7cacdd4c1e870d59e574c55d0ae4bdf6719e556",
     ".windsurf/rules/conventions-core.md": "28240e099084889d3dbb60ad3d1be1488102abd73ffdab59d298b2e9b9b48d38",
     ".windsurf/rules/conventions-python.md": "8cef4a72dec9928e300aba714e38cffe8c67b48d8be4146c4ce4e9cdf69caa03",
     ".windsurf/skills/api-versioning-strategy/SKILL.md": "e6d2f17ca2719aec2fe79f24f571d8bc5def4f23cdfd5ff7babcc758e8a83cbb",
@@ -8697,7 +8697,7 @@
     ".windsurf/workflows/workflow-testing-patterns.md": "29e01a761ce3f33923a440a1a7ff8ae6a5cfe076d3fde769fd628f83e28b3839"
   },
   "python-single::windsurf::verbose": {
-    ".prompticorn/provenance.json": "9525183682845444a23415f5ae91abd03aeb0493ec968f3f1ab43f09a66ce41a",
+    ".prompticorn/provenance.json": "af7c333def5582b219e924db17459a94c00c6fc1c0745b9ec1aad2ef024ac2bf",
     ".windsurf/rules/conventions-core.md": "28240e099084889d3dbb60ad3d1be1488102abd73ffdab59d298b2e9b9b48d38",
     ".windsurf/rules/conventions-python.md": "8cef4a72dec9928e300aba714e38cffe8c67b48d8be4146c4ce4e9cdf69caa03",
     ".windsurf/skills/api-versioning-strategy/SKILL.md": "f8e7fcaff53408ef5321248fc6e6230aed7cbc9c0b177b0a1a114dc71e45f81a",
@@ -8872,7 +8872,7 @@
     ".agents/skills/test-mocking-rules/SKILL.md": "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec",
     ".agents/skills/test/SKILL.md": "7cdc9e8209e0629355cc0e60feccaddd09422c403488ec1c44b11c7bbc96f015",
     ".agents/skills/testing-strategies/SKILL.md": "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724",
-    ".prompticorn/provenance.json": "a2c031595a1d5c0e953494e814b354c27e18482af0ea97f8731c57cb09684159",
+    ".prompticorn/provenance.json": "be4d452bf6fd40a9291b54c7fa61262aec0978fe3152096766a71b26d00cf69e",
     "AGENTS.md": "9f38de70b18377b078e2387047be44b33fc6aa1621a0d1c074ee220d1c38b8ff"
   },
   "python-single::zed::verbose": {
@@ -8942,17 +8942,17 @@
     ".agents/skills/test-mocking-rules/SKILL.md": "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e",
     ".agents/skills/test/SKILL.md": "7cdc9e8209e0629355cc0e60feccaddd09422c403488ec1c44b11c7bbc96f015",
     ".agents/skills/testing-strategies/SKILL.md": "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326",
-    ".prompticorn/provenance.json": "98ba38db7394e503b1ece734aec5b8adf8fdb6edc8cb842457aa9b0770890fbc",
+    ".prompticorn/provenance.json": "4dbc7dc1729621fea75517557fdd1aa4b959eb4cecd4a843c6b8e49ae2e1a6e2",
     "AGENTS.md": "9f38de70b18377b078e2387047be44b33fc6aa1621a0d1c074ee220d1c38b8ff"
   },
   "typescript-single::aider::minimal": {
     ".aider.conf.yml": "3c44a5f3fd7fd95e7053d5260de7c2b907dd53e5d6546cf2be869591eaa79cce",
-    ".prompticorn/provenance.json": "9fba1a529029f95cfc32f0338b0bfad8c2cb2c0278ad021ea520e6d6e7c362b9",
+    ".prompticorn/provenance.json": "0e5b72b2103c5586deabe214e34a0253a7a40bc23627fbe28e407612e057a1a9",
     "CONVENTIONS.md": "ab8a6f1645a55f136328bf53145932b121804fec8dd61ec711f2c5726cb76d6e"
   },
   "typescript-single::aider::verbose": {
     ".aider.conf.yml": "3c44a5f3fd7fd95e7053d5260de7c2b907dd53e5d6546cf2be869591eaa79cce",
-    ".prompticorn/provenance.json": "9fba1a529029f95cfc32f0338b0bfad8c2cb2c0278ad021ea520e6d6e7c362b9",
+    ".prompticorn/provenance.json": "0e5b72b2103c5586deabe214e34a0253a7a40bc23627fbe28e407612e057a1a9",
     "CONVENTIONS.md": "ab8a6f1645a55f136328bf53145932b121804fec8dd61ec711f2c5726cb76d6e"
   },
   "typescript-single::amazonq::minimal": {
@@ -9012,7 +9012,7 @@
     ".amazonq/prompts/workflow-testing-patterns.md": "f68e2623b882d807ddf6aa3c2b8d9c18770f064dbf7125cdff83d8ae5d70204f",
     ".amazonq/rules/conventions-typescript.md": "6f2bf7f95547a7ba872fa10f7f4b36cd31cbee3a5f7c6c16fc9f54dbf3fe5591",
     ".amazonq/rules/conventions.md": "a1cb4370c86f6b9db041355166b0c4fc3d8cb36ff6a0056d9fa0e6979e571380",
-    ".prompticorn/provenance.json": "053ca219408c144bdc3e522fd56a4a735c13ee57cac7f759c4fb0a28d6b39466"
+    ".prompticorn/provenance.json": "079243f20b008ff2f9bfa9595fa0fcce29cfe64bb2f26d0870841f281fe03e7b"
   },
   "typescript-single::amazonq::verbose": {
     ".amazonq/cli-agents/ask.json": "33fb4c5463b3b11beb6c8465b8abb1d3f717e311faae4773ebe46dd8307225a5",
@@ -9071,10 +9071,10 @@
     ".amazonq/prompts/workflow-testing-patterns.md": "ce7fc2aa439debc5bd10fe7aa087d485af6b6ab21772f92039d5a4f4af28a1c9",
     ".amazonq/rules/conventions-typescript.md": "6f2bf7f95547a7ba872fa10f7f4b36cd31cbee3a5f7c6c16fc9f54dbf3fe5591",
     ".amazonq/rules/conventions.md": "a1cb4370c86f6b9db041355166b0c4fc3d8cb36ff6a0056d9fa0e6979e571380",
-    ".prompticorn/provenance.json": "5c1c94d8fd6e580d7d197f84457dcc4b62c8ed970e8a2c5b7d2e60d88ea495cb"
+    ".prompticorn/provenance.json": "9db8de11a8caa3f55c8eb3cdabe10c497c017a2e5def10017ae9b8923dd072ef"
   },
   "typescript-single::bedrock::minimal": {
-    ".prompticorn/provenance.json": "d7f95f71e23b5f7bc78f6798f8205c3878d9d9103ad757f26cb3df63b11d50ae",
+    ".prompticorn/provenance.json": "130cf24ef5adf95b855bc9486e887f4044e9bd70db80ab6f132852ea90bb4461",
     "bedrock/README.bedrock.md": "e1cd14c0eb5f66dfbc10b20392b2b0ad8b36766e57ced7a03b833aae6a051c7c",
     "bedrock/agents.json": "381c4903d77c9c73112f0a0374b62106a61e8db9a456eadf713335b31416da16",
     "bedrock/cloudformation/agents.yaml": "3119bb07bc14ca38639611260d2644080aaf0addd445a19d16a1cd4a2e855440",
@@ -9097,7 +9097,7 @@
     "bedrock/prompts/test.system.md": "a53fab90c5afa099a03fa3baa1a15380c13a7a078e15406b91aeecc6adf4c91c"
   },
   "typescript-single::bedrock::verbose": {
-    ".prompticorn/provenance.json": "d7f95f71e23b5f7bc78f6798f8205c3878d9d9103ad757f26cb3df63b11d50ae",
+    ".prompticorn/provenance.json": "130cf24ef5adf95b855bc9486e887f4044e9bd70db80ab6f132852ea90bb4461",
     "bedrock/README.bedrock.md": "e1cd14c0eb5f66dfbc10b20392b2b0ad8b36766e57ced7a03b833aae6a051c7c",
     "bedrock/agents.json": "381c4903d77c9c73112f0a0374b62106a61e8db9a456eadf713335b31416da16",
     "bedrock/cloudformation/agents.yaml": "3119bb07bc14ca38639611260d2644080aaf0addd445a19d16a1cd4a2e855440",
@@ -9255,7 +9255,7 @@
     ".claude/workflows/workflow-performance-optimization.md": "7d97952fd0d12809ba12b1a3f544411a96c1cf56068d506d878eb50219e81a65",
     ".claude/workflows/workflow-scaling-patterns.md": "b0a257a3b58a98758f3082a70ca46f72b5fbba0fc8145bcd676ff36b5b9a12f9",
     ".claude/workflows/workflow-testing-patterns.md": "fc56fa1dfb9a1813db734b773a6695fc4da0a53439e4e1e14f9efb2ddfd47ef1",
-    ".prompticorn/provenance.json": "05733e3629a8cf26e53478eb8370d01605065a85f1db6c352e1cfe2f927bcc11",
+    ".prompticorn/provenance.json": "22d913cf7d82fc0d4e802e8986349ad6c2075870b5525bc07bb9d4a9a234aead",
     "CLAUDE.md": "bd8b30d88fd7c70e40492c9412a604f5af12ee12a1691762a6310fbf87c71d00"
   },
   "typescript-single::claude::verbose": {
@@ -9394,7 +9394,7 @@
     ".claude/workflows/workflow-performance-optimization.md": "9b3515b81c87281b93bb21f647efbbb68c757fa792ad1a050f82e71d709ffe85",
     ".claude/workflows/workflow-scaling-patterns.md": "fd30d48467273083e17fa064f3203b27086d16473e25368f3b0d2715138f6a6a",
     ".claude/workflows/workflow-testing-patterns.md": "62e0823d2a4b14b4b32a07be19136a206ed719ca787bf69d44d4cadb704459d9",
-    ".prompticorn/provenance.json": "41729142395677f8f26ba35ada77c8564862b1a5c3d06ee6f2f315b744b49c92",
+    ".prompticorn/provenance.json": "07ed8fddff9fa2e97f29e03e37d301e3a29c589e71b5309e1ab596d4aeb42079",
     "CLAUDE.md": "bd8b30d88fd7c70e40492c9412a604f5af12ee12a1691762a6310fbf87c71d00"
   },
   "typescript-single::cline::minimal": {
@@ -9450,7 +9450,7 @@
     ".cline/skills/testing-strategies/SKILL.md": "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724",
     ".cline/skills/typescript-type-system/SKILL.md": "5197fbd56d28125fb204c0a8646defd73afabc0d76dd63b795fcacc3499920d1",
     ".clinerules": "685e31c2fcba6b0bf3589c6d35329be35bc59a99bda723aba9a52eb0345d6fc1",
-    ".prompticorn/provenance.json": "8c30b9aa006d1e55f55ecdb2361f3754bb96afd658201b979ed33313d50dc540",
+    ".prompticorn/provenance.json": "0c8a8c588d0f88a4174db9519cee99c8c45a8e541ac78290555adde8ef7c32e8",
     "AGENTS.md": "f524672ab32766a07f6cdbc4bbe18033733fd22e7d2bb2c058b76eff71747fe7"
   },
   "typescript-single::cline::verbose": {
@@ -9506,7 +9506,7 @@
     ".cline/skills/testing-strategies/SKILL.md": "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326",
     ".cline/skills/typescript-type-system/SKILL.md": "8ab22a539899bfbdb554c45215d795c507f38782b00165904fba76a0352a5e49",
     ".clinerules": "9d712b1541dd4f46e286a441e571c388f664d478180b234136f711283914f4f7",
-    ".prompticorn/provenance.json": "8656c57be5e66cf2bf4ca479b50bf00560e9e1dcf6d83e65985544ea921d1107",
+    ".prompticorn/provenance.json": "e5d9a540658585411f506376513ca5d21d617976618a8eaf1b9c5df93946cd25",
     "AGENTS.md": "f524672ab32766a07f6cdbc4bbe18033733fd22e7d2bb2c058b76eff71747fe7"
   },
   "typescript-single::codex::minimal": {
@@ -9577,7 +9577,7 @@
     ".agents/skills/testing-strategies/SKILL.md": "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724",
     ".agents/skills/typescript-type-system/SKILL.md": "5197fbd56d28125fb204c0a8646defd73afabc0d76dd63b795fcacc3499920d1",
     ".codex/config.toml": "04aaafba5826fd49c8436a89e227eed7e6ebdcc5ea3a18990ba5ff5539979de7",
-    ".prompticorn/provenance.json": "ad8e56c63c89f3cf50a4751d45d1a13150bebd14d838cb75db90cd6724def231",
+    ".prompticorn/provenance.json": "deff02e378525391648c364251827f994625fba6863121fccfb3bcf0e589f7d9",
     "AGENTS.md": "f524672ab32766a07f6cdbc4bbe18033733fd22e7d2bb2c058b76eff71747fe7"
   },
   "typescript-single::codex::verbose": {
@@ -9648,7 +9648,7 @@
     ".agents/skills/testing-strategies/SKILL.md": "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326",
     ".agents/skills/typescript-type-system/SKILL.md": "8ab22a539899bfbdb554c45215d795c507f38782b00165904fba76a0352a5e49",
     ".codex/config.toml": "04aaafba5826fd49c8436a89e227eed7e6ebdcc5ea3a18990ba5ff5539979de7",
-    ".prompticorn/provenance.json": "5b206399fb976f5a7ca1df847bd7f65a46a645d865468035a11c25c48b226e94",
+    ".prompticorn/provenance.json": "aca9165a227b3daaf5facb6132a2b8144a305a9e8b7db6c014822cbf79059f63",
     "AGENTS.md": "f524672ab32766a07f6cdbc4bbe18033733fd22e7d2bb2c058b76eff71747fe7"
   },
   "typescript-single::continue::minimal": {
@@ -9708,7 +9708,7 @@
     ".continue/rules/refactor.md": "2583e7306de435c85bb5cfff99beb5b9adfc3bc86aeca8fd2ffdce402b490ff9",
     ".continue/rules/review.md": "b8bff1b28968f4c620c88fd88c231f5de50aa41b45486b3f7e3a340145d19adf",
     ".continue/rules/test.md": "f372345589c16a4944a26a796680ee9ae6d6a8d49cb64fc4dde236ee9acd677f",
-    ".prompticorn/provenance.json": "133dd01fe1bd187ea98453649e8ca9d10b8e5e5efe301dc97527a2694cf88727"
+    ".prompticorn/provenance.json": "40dd0f106c9df372ac02eb2ff5701a70137c550a780c34aef7a6c41da56228a5"
   },
   "typescript-single::continue::verbose": {
     ".continue/prompts/accessibility.md": "4e18704018ee1cdac9a106ea65a4217d0dab309277ed020a0274f739c5f2a5cf",
@@ -9767,7 +9767,7 @@
     ".continue/rules/refactor.md": "2583e7306de435c85bb5cfff99beb5b9adfc3bc86aeca8fd2ffdce402b490ff9",
     ".continue/rules/review.md": "b8bff1b28968f4c620c88fd88c231f5de50aa41b45486b3f7e3a340145d19adf",
     ".continue/rules/test.md": "f372345589c16a4944a26a796680ee9ae6d6a8d49cb64fc4dde236ee9acd677f",
-    ".prompticorn/provenance.json": "d88f185bff5896b9e8dd5d1646c2aba866de794b7a6d8d5d72d0f2e08ae4cb31"
+    ".prompticorn/provenance.json": "8f5904de688416e25948f918e79c6cd8c974cd8d45ca1df262e8ea8fd246848a"
   },
   "typescript-single::copilot-chat::minimal": {
     ".github/agents/ask.agent.md": "97519379dbc61b402ecfbf7960d4cbaeb8eb2bc5a38c19e8254c67f1364e1640",
@@ -9826,7 +9826,7 @@
     ".github/prompts/workflow-rollback-strategies.prompt.md": "aa12c2ee6947962df382eef0e72b8a41fdba818bb53810a4cf7497184c0483f9",
     ".github/prompts/workflow-scaling-patterns.prompt.md": "f5f8a0a185941bf1afd4f7e00938c4bdac8cb544f8309979a37dd8d515260f5f",
     ".github/prompts/workflow-testing-patterns.prompt.md": "2f5c77fb03e22584357098f0eb7544f039bede038739e87b0010982ea23a4bf5",
-    ".prompticorn/provenance.json": "a2f72f31a8a0cc190bff53fccc4c8c344e4d085f71f400e7df89dfede0978b2c"
+    ".prompticorn/provenance.json": "a5c6e49e6f7e0ed8ec2c2ab889a4ac0fcc6ea3e0ce315c7e78f1fbcb26664457"
   },
   "typescript-single::copilot-chat::verbose": {
     ".github/agents/ask.agent.md": "97519379dbc61b402ecfbf7960d4cbaeb8eb2bc5a38c19e8254c67f1364e1640",
@@ -9885,7 +9885,7 @@
     ".github/prompts/workflow-rollback-strategies.prompt.md": "e08684976901b91aec71e5e91945f6918dfcb3b6026c09dcf8c28f3255224b3a",
     ".github/prompts/workflow-scaling-patterns.prompt.md": "15090974e97bf2658883ab6260e92d2494b6e24511164b4422636bd0475f0683",
     ".github/prompts/workflow-testing-patterns.prompt.md": "082086cf94cde2d0511d7818007e06f8bf56d6b36f8ca1ea01b5704bf087830a",
-    ".prompticorn/provenance.json": "686f87d42ff3f3c00a457ba31b70d9b5cd31ef7e22e5bd27c9d52f7577119561"
+    ".prompticorn/provenance.json": "76de63fa0c95b6088a97e2c5e02f1d8639d8d996d48420f4c081036434f15b26"
   },
   "typescript-single::copilot::minimal": {
     ".github/copilot-instructions.md": "1e6fcd1fa11e1e360395543dc2a4bffb7277a31ae4e14fec11d6731437920903",
@@ -9940,7 +9940,7 @@
     ".github/skills/test-mocking-rules/SKILL.md": "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec",
     ".github/skills/testing-strategies/SKILL.md": "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724",
     ".github/skills/typescript-type-system/SKILL.md": "5197fbd56d28125fb204c0a8646defd73afabc0d76dd63b795fcacc3499920d1",
-    ".prompticorn/provenance.json": "edc63b10a16df108da4b04a40f184d9414b314ddcc4f1c850844ed02a813c292",
+    ".prompticorn/provenance.json": "cc4ce3194b82fb542133afb8d64291977ba1e75115aad2f9c2aa5f87992dbfb0",
     "AGENTS.md": "f524672ab32766a07f6cdbc4bbe18033733fd22e7d2bb2c058b76eff71747fe7"
   },
   "typescript-single::copilot::verbose": {
@@ -9996,7 +9996,7 @@
     ".github/skills/test-mocking-rules/SKILL.md": "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e",
     ".github/skills/testing-strategies/SKILL.md": "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326",
     ".github/skills/typescript-type-system/SKILL.md": "8ab22a539899bfbdb554c45215d795c507f38782b00165904fba76a0352a5e49",
-    ".prompticorn/provenance.json": "376d6849723268b50b396038d4ff6e12c7a8aa13669b21032b94265f8aa49962",
+    ".prompticorn/provenance.json": "bda3cb397bc8676b6872683593c306a6b619be16870fcbad4becbf182af8d37a",
     "AGENTS.md": "f524672ab32766a07f6cdbc4bbe18033733fd22e7d2bb2c058b76eff71747fe7"
   },
   "typescript-single::cursor::minimal": {
@@ -10052,7 +10052,7 @@
     ".cursor/skills/testing-strategies/SKILL.md": "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724",
     ".cursor/skills/typescript-type-system/SKILL.md": "5197fbd56d28125fb204c0a8646defd73afabc0d76dd63b795fcacc3499920d1",
     ".cursorrules": "3114aa881b75c8d73f7271971478c10dad238ee263ec457d5651ca97000c010e",
-    ".prompticorn/provenance.json": "e3e67008b063df782aa4fd96cc7a4b3a669369d4ac609b0e88e5fdde23271faa",
+    ".prompticorn/provenance.json": "c5b517fe6481222d758032ea9d0aced45678f9872d241f271740b09084ee77f6",
     "AGENTS.md": "f524672ab32766a07f6cdbc4bbe18033733fd22e7d2bb2c058b76eff71747fe7"
   },
   "typescript-single::cursor::verbose": {
@@ -10108,7 +10108,7 @@
     ".cursor/skills/testing-strategies/SKILL.md": "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326",
     ".cursor/skills/typescript-type-system/SKILL.md": "8ab22a539899bfbdb554c45215d795c507f38782b00165904fba76a0352a5e49",
     ".cursorrules": "ae7a576d50ce1eb071f028bd599889b337c8fbcc9d29b8196d6ea99a20785aa3",
-    ".prompticorn/provenance.json": "ecf1286eb8187a7d5ad5d0b90dee066c54354e27e205e74dd4e6678f641128db",
+    ".prompticorn/provenance.json": "fb480def75b45fc815a24ddf22cd91384187fd8bbe740cfeb6a8eab3070c29f1",
     "AGENTS.md": "f524672ab32766a07f6cdbc4bbe18033733fd22e7d2bb2c058b76eff71747fe7"
   },
   "typescript-single::gemini::minimal": {
@@ -10218,7 +10218,7 @@
     ".gemini/skills/test-mocking-rules/SKILL.md": "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec",
     ".gemini/skills/testing-strategies/SKILL.md": "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724",
     ".gemini/skills/typescript-type-system/SKILL.md": "5197fbd56d28125fb204c0a8646defd73afabc0d76dd63b795fcacc3499920d1",
-    ".prompticorn/provenance.json": "3686c56bb31397cf2b8261f2b2e2364f21fbd1a4f3c534e7bf1b8d301450e8e6",
+    ".prompticorn/provenance.json": "5b91c06744ca2126ac638462dd23e09fb1c73edeed15758e526f604f5cea0b02",
     "AGENTS.md": "f524672ab32766a07f6cdbc4bbe18033733fd22e7d2bb2c058b76eff71747fe7"
   },
   "typescript-single::gemini::verbose": {
@@ -10328,7 +10328,7 @@
     ".gemini/skills/test-mocking-rules/SKILL.md": "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e",
     ".gemini/skills/testing-strategies/SKILL.md": "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326",
     ".gemini/skills/typescript-type-system/SKILL.md": "8ab22a539899bfbdb554c45215d795c507f38782b00165904fba76a0352a5e49",
-    ".prompticorn/provenance.json": "735e112817effedcda1111989363314e3482c063b1a862eb50ae767b6ae54b30",
+    ".prompticorn/provenance.json": "6aa2a9ad6ce3b1b2dfcb09a00016665b60c0fb4c74b7aaefc2805c7cc9a680cc",
     "AGENTS.md": "f524672ab32766a07f6cdbc4bbe18033733fd22e7d2bb2c058b76eff71747fe7"
   },
   "typescript-single::junie::minimal": {
@@ -10437,7 +10437,7 @@
     ".junie/skills/test-mocking-rules/SKILL.md": "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec",
     ".junie/skills/testing-strategies/SKILL.md": "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724",
     ".junie/skills/typescript-type-system/SKILL.md": "5197fbd56d28125fb204c0a8646defd73afabc0d76dd63b795fcacc3499920d1",
-    ".prompticorn/provenance.json": "ca4b24489d91331f9390056af0ec59525852e383ac7043e3cd7600ed7256a024",
+    ".prompticorn/provenance.json": "f4b2e2ba37c9cfa7f9ac2f6e2a5197b3fdecb6d3f39ad4102f31c245e3b465e6",
     "AGENTS.md": "f524672ab32766a07f6cdbc4bbe18033733fd22e7d2bb2c058b76eff71747fe7"
   },
   "typescript-single::junie::verbose": {
@@ -10546,7 +10546,7 @@
     ".junie/skills/test-mocking-rules/SKILL.md": "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e",
     ".junie/skills/testing-strategies/SKILL.md": "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326",
     ".junie/skills/typescript-type-system/SKILL.md": "8ab22a539899bfbdb554c45215d795c507f38782b00165904fba76a0352a5e49",
-    ".prompticorn/provenance.json": "b2482c6f0c5831653af24038a4a4f21ab35e0444378e04f286f73086d6449952",
+    ".prompticorn/provenance.json": "a0167c63910787946718d267060c508d9a80eaa24661fc8e5c44e79a466f16a1",
     "AGENTS.md": "f524672ab32766a07f6cdbc4bbe18033733fd22e7d2bb2c058b76eff71747fe7"
   },
   "typescript-single::kilo-cli::minimal": {
@@ -10565,7 +10565,7 @@
     ".opencode/agents/refactor.md": "d8f648b467479d89489f2f4532b1c9ca500faec382afdee7af769c7c5ccc9f59",
     ".opencode/agents/review.md": "07324d0958404d0e815ffe70d9435adbc648bf782edfa8f16d1096e4aa1d73de",
     ".opencode/agents/test.md": "13fc2885f7fa74b7c1af6d635116adb672d14a514c5898e320d7de0a93a84e18",
-    ".prompticorn/provenance.json": "032a85b5f39d1989db185b74f6837f3378c68e4fb835c3600a04958e1fb99d80",
+    ".prompticorn/provenance.json": "d9c9c8b6d2110c03d8b4c9728b7da6281efaadb84950bbe8daa6131273345096",
     "AGENTS.md": "f524672ab32766a07f6cdbc4bbe18033733fd22e7d2bb2c058b76eff71747fe7"
   },
   "typescript-single::kilo-cli::verbose": {
@@ -10584,7 +10584,7 @@
     ".opencode/agents/refactor.md": "d8f648b467479d89489f2f4532b1c9ca500faec382afdee7af769c7c5ccc9f59",
     ".opencode/agents/review.md": "07324d0958404d0e815ffe70d9435adbc648bf782edfa8f16d1096e4aa1d73de",
     ".opencode/agents/test.md": "13fc2885f7fa74b7c1af6d635116adb672d14a514c5898e320d7de0a93a84e18",
-    ".prompticorn/provenance.json": "032a85b5f39d1989db185b74f6837f3378c68e4fb835c3600a04958e1fb99d80",
+    ".prompticorn/provenance.json": "d9c9c8b6d2110c03d8b4c9728b7da6281efaadb84950bbe8daa6131273345096",
     "AGENTS.md": "f524672ab32766a07f6cdbc4bbe18033733fd22e7d2bb2c058b76eff71747fe7"
   },
   "typescript-single::kilo-ide::minimal": {
@@ -10735,7 +10735,7 @@
     ".kilo/skills/test-mocking-rules/SKILL.md": "cd92601416d2e342f2ed6e3f7f80a689e066fbef74c50b928d21aac66db6d0ec",
     ".kilo/skills/testing-strategies/SKILL.md": "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724",
     ".kilo/skills/typescript-type-system/SKILL.md": "5197fbd56d28125fb204c0a8646defd73afabc0d76dd63b795fcacc3499920d1",
-    ".prompticorn/provenance.json": "8c93fdeb7ae013ccb2d5a48bfe9770dd915ec23c2635252155318d2a852fcbc1",
+    ".prompticorn/provenance.json": "f1a3d95dac13d248c4a0cf3fc65dedbdf4aa7c4306c347cd2c7f5e37cb41b200",
     "AGENTS.md": "f524672ab32766a07f6cdbc4bbe18033733fd22e7d2bb2c058b76eff71747fe7"
   },
   "typescript-single::kilo-ide::verbose": {
@@ -10886,11 +10886,11 @@
     ".kilo/skills/test-mocking-rules/SKILL.md": "b734b75d0040edc12c130f400a43a4150850fc172c4cebcf776247e6af68b09e",
     ".kilo/skills/testing-strategies/SKILL.md": "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326",
     ".kilo/skills/typescript-type-system/SKILL.md": "8ab22a539899bfbdb554c45215d795c507f38782b00165904fba76a0352a5e49",
-    ".prompticorn/provenance.json": "a14de7613b1e8e5c95cc9e82521e22245c245654480527a80bc49963ede09868",
+    ".prompticorn/provenance.json": "463ed955338168b8e16648ff8ccc1f6a7dcae983fe2a5ee5b513003ea3236835",
     "AGENTS.md": "f524672ab32766a07f6cdbc4bbe18033733fd22e7d2bb2c058b76eff71747fe7"
   },
   "typescript-single::roo::minimal": {
-    ".prompticorn/provenance.json": "cc2fa05bbba9a417ab394d78f808b744740c9aca8b3cf221a5dfd6a5793e0edf",
+    ".prompticorn/provenance.json": "cbcd2767fcd90eef3d335004a8d103fd43e94f496dab514341beae452bc28e9c",
     ".roo/commands/accessibility.md": "e2747c5792ea7cc655b2ebea1a954fd53c243d91ee89730b10322149d64a2831",
     ".roo/commands/api-design.md": "0be08f948e5335f17b160d03b9a03e8b9262337562a20eaa83a4b269129b8bdb",
     ".roo/commands/async-workflow-execution.md": "817f9b3bd73f17d5cdc4b6ffc4baa84a9f8c145373df1cba5c3a1066adeadcde",
@@ -11000,7 +11000,7 @@
     "AGENTS.md": "f524672ab32766a07f6cdbc4bbe18033733fd22e7d2bb2c058b76eff71747fe7"
   },
   "typescript-single::roo::verbose": {
-    ".prompticorn/provenance.json": "7371c33206912a0bafecb2df453ada9db0fa60b825f1c54ccd83b53e9db5d12e",
+    ".prompticorn/provenance.json": "f225bc07c7e71bfd044101655a0875524f5decc6699288b704dc0e303cb49ade",
     ".roo/commands/accessibility.md": "cbed2d09922b3b60034fefa0a3dc53e2b8a209593f59bea62c270d35d7fdd962",
     ".roo/commands/api-design.md": "3aee90e73d064ccacc0ff0c815c39a929561767407342a347db2c50156b6bc55",
     ".roo/commands/async-workflow-execution.md": "6246e5cc3abe5e5dbdbbc274f933b172e41cf00b9e15dce7d599409612bccc3c",
@@ -11110,7 +11110,7 @@
     "AGENTS.md": "f524672ab32766a07f6cdbc4bbe18033733fd22e7d2bb2c058b76eff71747fe7"
   },
   "typescript-single::windsurf::minimal": {
-    ".prompticorn/provenance.json": "c943102c00eabf59e7286aa8ce00e4c387ffbbe3ba0e847096bd30be48661957",
+    ".prompticorn/provenance.json": "c98b57d147ea8563d6f8fcb8cd7447cb91557d19de472ff961d31be23d79f016",
     ".windsurf/rules/conventions-core.md": "733b382cbea33488f50abd06e8d597b1797656a272ad63fd3943cc93207d5a55",
     ".windsurf/rules/conventions-typescript.md": "c71760ee757a47464001359b45b3830250904efa919752f32ac1d16c42aae4ae",
     ".windsurf/skills/api-versioning-strategy/SKILL.md": "e6d2f17ca2719aec2fe79f24f571d8bc5def4f23cdfd5ff7babcc758e8a83cbb",
@@ -11220,7 +11220,7 @@
     ".windsurf/workflows/workflow-testing-patterns.md": "29e01a761ce3f33923a440a1a7ff8ae6a5cfe076d3fde769fd628f83e28b3839"
   },
   "typescript-single::windsurf::verbose": {
-    ".prompticorn/provenance.json": "56673465f2c6918e2f1f1ddcdba6949198e71636902f25ddf3cbe6d482a362ca",
+    ".prompticorn/provenance.json": "28cd2d6f41b529c1d39575de01ce3f8496922cde7013ae38b5db275eef6fb804",
     ".windsurf/rules/conventions-core.md": "733b382cbea33488f50abd06e8d597b1797656a272ad63fd3943cc93207d5a55",
     ".windsurf/rules/conventions-typescript.md": "c71760ee757a47464001359b45b3830250904efa919752f32ac1d16c42aae4ae",
     ".windsurf/skills/api-versioning-strategy/SKILL.md": "f8e7fcaff53408ef5321248fc6e6230aed7cbc9c0b177b0a1a114dc71e45f81a",
@@ -11396,7 +11396,7 @@
     ".agents/skills/test/SKILL.md": "7cdc9e8209e0629355cc0e60feccaddd09422c403488ec1c44b11c7bbc96f015",
     ".agents/skills/testing-strategies/SKILL.md": "4a8456d3f066fa3609ec09c69b2c8def186300c634436ca051c04d3e9f9d5724",
     ".agents/skills/typescript-type-system/SKILL.md": "5197fbd56d28125fb204c0a8646defd73afabc0d76dd63b795fcacc3499920d1",
-    ".prompticorn/provenance.json": "4e3a64a5ef9a5f4a5c92638d4bebd142ebb312e452d281add49a3620037de3bd",
+    ".prompticorn/provenance.json": "afe5261fda8efe190a149872d85ff5bb0480c415c2b52f4b4b6ab69d42564e21",
     "AGENTS.md": "f524672ab32766a07f6cdbc4bbe18033733fd22e7d2bb2c058b76eff71747fe7"
   },
   "typescript-single::zed::verbose": {
@@ -11466,7 +11466,7 @@
     ".agents/skills/test/SKILL.md": "7cdc9e8209e0629355cc0e60feccaddd09422c403488ec1c44b11c7bbc96f015",
     ".agents/skills/testing-strategies/SKILL.md": "faa0ef2952117da3416a483b1ed5fd3dfd4677d2c073754072b80689493c0326",
     ".agents/skills/typescript-type-system/SKILL.md": "8ab22a539899bfbdb554c45215d795c507f38782b00165904fba76a0352a5e49",
-    ".prompticorn/provenance.json": "763cb0279e92428a40a8637b05e5420f63e1f17ceb68decd5a8ae99c2b3af650",
+    ".prompticorn/provenance.json": "bb7d8bb6f78fd59fc098cb9491cec0e43f4cb713b76c1bd9844380075b236ef7",
     "AGENTS.md": "f524672ab32766a07f6cdbc4bbe18033733fd22e7d2bb2c058b76eff71747fe7"
   }
 }

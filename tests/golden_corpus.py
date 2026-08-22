@@ -40,10 +40,22 @@ _DATE_RE = re.compile(rb"\d{4}-\d{2}-\d{2}")
 
 _SIDECAR_PATH = f"{SIDECAR_DIRECTORY}/{SIDECAR_FILENAME}"
 
-# The one field of the sidecar that is not a function of the content: the
-# artifact version, which a release build stamps into ``__about__.py``. Masking
-# it keeps the corpus reproducible in a checkout where that has happened.
-_SIDECAR_VERSION_RE = re.compile(rb'"version": "[^"]*"')
+# The two sidecar fields that move without the build having changed.
+#
+# ``version`` is stamped into ``__about__.py`` by a release build, so a checkout
+# where that has happened would otherwise disagree with a clean one.
+#
+# ``digest`` is subtler, and CI caught it where a single machine could not. The
+# digests are taken over the real file bytes — dates included — so masking a
+# date at the *file* level while hashing a digest *of* that date just moves the
+# instability down a level: the corpus would go red at every day boundary.
+# Nothing is lost by masking them. A sidecar digest is a restatement of content
+# the corpus already hashes per file, whereas ``unit`` and ``layer`` are
+# attribution that exists nowhere else in the corpus, and those stay pinned.
+_SIDECAR_MASKS: tuple[tuple[re.Pattern[bytes], bytes], ...] = (
+    (re.compile(rb'"version": "[^"]*"'), b'"version": "VERSION"'),
+    (re.compile(rb'"digest": "[^"]*"'), b'"digest": "DIGEST"'),
+)
 
 VARIANTS = ("minimal", "verbose")
 
@@ -122,13 +134,16 @@ def normalize(raw: bytes, relative: str) -> bytes:
     otherwise merely restate a hash it already has.
 
     Removing it via ``ProvenanceHeader.strip`` rather than a local regex keeps
-    one definition of what a header is. Nothing about provenance is lost from
-    the corpus by doing so: the sidecar is itself an output, so unit
-    attribution, layer and per-file digests are all still pinned — through the
-    one file where a reviewer can read them.
+    one definition of what a header is. What provenance the corpus still pins it
+    pins through the sidecar, which is itself an output: the set of covered
+    paths, and each one's ``unit`` and ``layer``. That is the attribution the
+    corpus adds; the digests are masked, for the reason given on
+    ``_SIDECAR_MASKS``.
     """
     if relative == _SIDECAR_PATH:
-        return _SIDECAR_VERSION_RE.sub(b'"version": "VERSION"', raw)
+        for pattern, replacement in _SIDECAR_MASKS:
+            raw = pattern.sub(replacement, raw)
+        return raw
     try:
         text = raw.decode("utf-8")
     except UnicodeDecodeError:
