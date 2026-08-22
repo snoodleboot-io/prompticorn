@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from prompticorn.agent_registry.registry import Registry
+from prompticorn.artifact.package_version import bundled_version
 from prompticorn.builders.agents_md import generate_agents_md
 from prompticorn.builders.base import BuildOptions
 from prompticorn.builders.claude_md import generate_claude_md
@@ -15,12 +16,14 @@ from prompticorn.builders.factory import BuilderFactory
 from prompticorn.builders.layouts import get_layout
 from prompticorn.builders.template_handlers.primary_agents_handler import PrimaryAgentsHandler
 from prompticorn.content.content_resolver import read_variant_unit
+from prompticorn.content.content_unit import BUILTIN_LAYER
 from prompticorn.content.errors import ContentError
 from prompticorn.content.unit_kind import UnitKind
 from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
 from prompticorn.ir.loaders.language_skill_mapping_loader import LanguageSkillMappingLoader
 from prompticorn.ir.models.agent import Agent
 from prompticorn.personas import PersonaFilter, PersonaRegistry
+from prompticorn.provenance.provenance_emitter import GENERATED_UNIT_PREFIX, ProvenanceEmitter
 from prompticorn.tools import builder_dispatch
 
 
@@ -233,6 +236,12 @@ class PromptBuilder:
         # repository. (PRO-137)
         emitted: set[str] = set()
 
+        # Each emitted path mapped to the unit it was generated from, for the
+        # provenance pass at the end of the build. Recorded here rather than
+        # derived later because the write sites are the only place that knows
+        # it: by the time a path is in ``emitted`` it is just a string. (PRO-112)
+        attribution: dict[str, str] = {}
+
         # Track primary agents being built (for AGENTS.md)
         primary_agents_built = []
 
@@ -245,6 +254,9 @@ class PromptBuilder:
             try:
                 rules_files_written = self.builder.write_rules_files(output, config)
                 emitted.update(rules_files_written)
+                attribution.update(
+                    dict.fromkeys(rules_files_written, f"{GENERATED_UNIT_PREFIX}/rules")
+                )
                 actions.extend([f"✓ {f}" for f in rules_files_written])
             except Exception as e:
                 actions.append(f"✗ Failed to write rules files: {e}")
@@ -276,6 +288,9 @@ class PromptBuilder:
                 if not dry_run:
                     written = self._write_output(output, agent_name, output_content)
                     emitted.update(written)
+                    attribution.update(
+                        dict.fromkeys(written, f"{UnitKind.AGENT.value}/{agent_name}")
+                    )
                     # Deduplicate file reports (especially for Claude workflows)
                     new_files = [f for f in written if f not in all_files_written]
                     all_files_written.update(written)
@@ -310,6 +325,11 @@ class PromptBuilder:
                                     output, agent_name, subagent_name, subagent_output
                                 )
                                 emitted.update(subagent_files)
+                                subagent_unit = (
+                                    f"{UnitKind.SUBAGENT.value}/{agent_name}/"
+                                    f"{subagent_name}/{variant}"
+                                )
+                                attribution.update(dict.fromkeys(subagent_files, subagent_unit))
                                 actions.extend([f"✓ {f}" for f in subagent_files])
                         except Exception as e:
                             actions.append(
@@ -337,6 +357,7 @@ class PromptBuilder:
                         output, agent_name, filtered_agent, variant
                     )
                     emitted.update(skill_files)
+                    attribution.update(skill_files)
                     for skill_file in skill_files:
                         if skill_file not in all_skills_written:
                             actions.append(f"✓ {skill_file}")
@@ -365,6 +386,7 @@ class PromptBuilder:
                             output, agent_name, filtered_agent, variant
                         )
                         emitted.update(workflow_files)
+                        attribution.update(workflow_files)
                         for workflow_file in workflow_files:
                             if workflow_file not in all_workflows_written:
                                 actions.append(f"✓ {workflow_file}")
@@ -386,6 +408,7 @@ class PromptBuilder:
                     claude_md_path = output / "CLAUDE.md"
                     claude_md_path.write_text(claude_md_content, encoding="utf-8")
                     emitted.add("CLAUDE.md")
+                    attribution["CLAUDE.md"] = f"{GENERATED_UNIT_PREFIX}/claude-md"
                     actions.append("✓ CLAUDE.md")
 
                     # Generate convention files for Claude (only selected languages)
@@ -403,6 +426,10 @@ class PromptBuilder:
                             full_path.parent.mkdir(parents=True, exist_ok=True)
                             full_path.write_text(content_str, encoding="utf-8")
                             emitted.add(file_path_str)
+                            # A convention file is assembled from a spec rather
+                            # than copied from one authored unit, so it has no
+                            # single ``convention/...`` id to name.
+                            attribution[file_path_str] = f"{GENERATED_UNIT_PREFIX}/conventions"
                         actions.append(f"✓ {len(conventions)} convention files")
                     except Exception as conv_error:
                         actions.append(f"⚠ Failed to generate conventions: {conv_error}")
@@ -426,6 +453,7 @@ class PromptBuilder:
                     agents_md_path = output / "AGENTS.md"
                     agents_md_path.write_text(agents_md_content, encoding="utf-8")
                     emitted.add("AGENTS.md")
+                    attribution["AGENTS.md"] = f"{GENERATED_UNIT_PREFIX}/agents-md"
                     actions.append("✓ AGENTS.md")
             except Exception as e:
                 file_name = self.layout.root_doc_filename()
@@ -436,6 +464,9 @@ class PromptBuilder:
             try:
                 for finalized in self.layout.finalize(output, built_agent_outputs, config):
                     emitted.add(finalized)
+                    # An aggregate built from every agent, so no one unit owns it.
+                    stem = Path(finalized).name.lstrip(".")
+                    attribution[finalized] = f"{GENERATED_UNIT_PREFIX}/{stem}"
                     actions.append(f"✓ {finalized}")
             except Exception as e:
                 actions.append(f"⚠ Failed to finalize output: {e}")
@@ -450,7 +481,30 @@ class PromptBuilder:
         if not dry_run:
             self._resolve_primary_agents_token(output, config, emitted)
 
+            # Provenance goes last, and it must: the token pass above rewrites
+            # files that are already on disk, so a digest taken before it would
+            # describe bytes that no longer exist. (PRO-112)
+            try:
+                for provenance_file in self._emit_provenance(output, attribution):
+                    emitted.add(provenance_file)
+                    actions.append(f"✓ {provenance_file}")
+            except OSError as e:
+                actions.append(f"⚠ Failed to write provenance: {e}")
+
         return actions
+
+    def _emit_provenance(self, output: Path, attribution: dict[str, str]) -> list[str]:
+        """Header the emitted files and write ``.prompticorn/provenance.json``.
+
+        Args:
+            output: Build root. Attribution keys are relative to it.
+            attribution: Emitted path to the unit id it was generated from.
+
+        Returns:
+            The paths the provenance pass itself wrote.
+        """
+        emitter = ProvenanceEmitter(layer=BUILTIN_LAYER, version=bundled_version().render())
+        return emitter.emit(output, attribution)
 
     def _resolve_primary_agents_token(
         self, output: Path, config: dict[str, Any] | None, emitted: Iterable[str]
@@ -664,7 +718,7 @@ class PromptBuilder:
 
     def _write_skill_files(
         self, output: Path, agent_name: str, agent: Any, variant: str
-    ) -> list[str]:
+    ) -> dict[str, str]:
         """Write skill files for agent's skills.
 
         Loads skills from top-level skills/ directory and writes to output.
@@ -676,9 +730,12 @@ class PromptBuilder:
             variant: Variant (minimal/verbose)
 
         Returns:
-            List of files written
+            Each file written, mapped to the unit id it came from. Keyed by path
+            rather than returned as a bare list because provenance has to name
+            the *skill* a file came from, and only this loop knows which skill
+            produced which path. (PRO-112)
         """
-        written_files = []
+        written_files: dict[str, str] = {}
 
         # Get list of skills from agent model
         if not hasattr(agent, "skills") or not agent.skills:
@@ -708,14 +765,15 @@ class PromptBuilder:
             }
 
             # Write skill to tool-specific location
-            skill_files = self._write_single_skill(output, skill_data)
-            written_files.extend(skill_files)
+            unit = f"{UnitKind.SKILL.value}/{skill_name}/{variant}"
+            for skill_file in self._write_single_skill(output, skill_data):
+                written_files[skill_file] = unit
 
         return written_files
 
     def _write_workflow_files(
         self, output: Path, agent_name: str, agent: Any, variant: str
-    ) -> list[str]:
+    ) -> dict[str, str]:
         """Write workflow files for agent's workflows.
 
         Loads workflows from top-level workflows/ directory and writes to output.
@@ -728,9 +786,10 @@ class PromptBuilder:
             variant: Variant (minimal/verbose)
 
         Returns:
-            List of files written
+            Each file written, mapped to the unit id it came from — see
+            :meth:`_write_skill_files` for why this is keyed by path.
         """
-        written_files = []
+        written_files: dict[str, str] = {}
 
         if not hasattr(agent, "workflows") or not agent.workflows:
             return written_files
@@ -740,9 +799,11 @@ class PromptBuilder:
             for workflow_name in agent.workflows:
                 workflow_content = self._load_workflow_content(workflow_name, variant)
                 if workflow_content:
-                    written_files.extend(
-                        self.layout.write_workflow(output, workflow_name, workflow_content)
-                    )
+                    unit = f"{UnitKind.WORKFLOW.value}/{workflow_name}/{variant}"
+                    for workflow_file in self.layout.write_workflow(
+                        output, workflow_name, workflow_content
+                    ):
+                        written_files[workflow_file] = unit
 
         return written_files
 

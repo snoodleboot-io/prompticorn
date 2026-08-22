@@ -397,14 +397,19 @@ class KiloBuilder(Builder):
             config: Optional config dict with 'spec' key containing language, runtime, etc.
 
         Returns:
-            List of file paths written relative to .kilo directory
+            List of file paths written, relative to ``output_dir``. These used to
+            be relative to ``.kilo/`` instead, which made Kilo the only builder
+            whose paths did not match the contract the caller documents for its
+            ``emitted`` set — so the post-write passes keyed on those paths (the
+            ``{{PRIMARY_AGENTS_LIST}}`` resolution, and provenance) skipped every
+            rules file. (PRO-112)
 
         Example:
             >>> builder = KiloBuilder()
             >>> config = {"spec": {"language": "python", "runtime": "3.11"}}
             >>> files = builder.write_rules_files(Path("."), config)
             >>> files
-            ['rules/system.md', 'rules/session.md', 'rules/conventions.md', 'rules/conventions-python.md']
+            ['.kilo/rules/system.md', '.kilo/rules/session.md', '.kilo/rules/conventions.md', '.kilo/rules/conventions-python.md']
         """
         # Create .kilo/rules/ directory
         kilo_dir = output_dir / ".kilo"
@@ -427,7 +432,7 @@ class KiloBuilder(Builder):
                 content = strip_source_header_comments(raw)
                 output_path = rules_dir / filename
                 output_path.write_text(content, encoding="utf-8")
-                written_files.append(f"rules/{filename}")
+                written_files.append(f".kilo/rules/{filename}")
 
         # Templated conventions.md (always include, render if config available)
         content = self.core_loader.read_core("conventions")
@@ -436,7 +441,7 @@ class KiloBuilder(Builder):
                 content = self.core_loader._template_content(content, config)
             output_path = rules_dir / "conventions.md"
             output_path.write_text(content, encoding="utf-8")
-            written_files.append("rules/conventions.md")
+            written_files.append(".kilo/rules/conventions.md")
 
         # Language-specific conventions (only if language configured)
         if config:
@@ -454,6 +459,6 @@ class KiloBuilder(Builder):
                     content = self.core_loader._template_content(content, config)
                     output_path = rules_dir / f"conventions-{language}.md"
                     output_path.write_text(content, encoding="utf-8")
-                    written_files.append(f"rules/conventions-{language}.md")
+                    written_files.append(f".kilo/rules/conventions-{language}.md")
 
         return written_files
