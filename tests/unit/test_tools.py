@@ -182,7 +182,7 @@ class TestToolRegistry(unittest.TestCase):
             },
         )
         # The six original tools keep their historical ordering so that
-        # ArtifactManager.current_tool first-match detection is unchanged; new
+        # ToolOutputManager.current_tool first-match detection is unchanged; new
         # tools append after them.
         self.assertEqual(
             list(create)[:6],

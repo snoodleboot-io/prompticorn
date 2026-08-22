@@ -4,7 +4,7 @@ import shutil
 import unittest
 from pathlib import Path
 
-from prompticorn.artifacts import ArtifactManager
+from prompticorn.tool_outputs import ToolOutputManager
 from prompticorn.prompt_builder import get_prompt_builder
 
 
@@ -59,14 +59,14 @@ class TestInitSwitchingBug(unittest.TestCase):
 
         # STEP 2: Detect current tool and remove its artifacts (like init does)
         print("\n=== STEP 2: Detect tool and remove old artifacts ===")
-        manager = ArtifactManager(self.test_dir)
+        manager = ToolOutputManager(self.test_dir)
         current_tool = manager.current_tool
         print(f"Detected current tool: {current_tool}")
 
         self.assertEqual(current_tool, "kilo-ide", "Should detect kilo-ide")
 
         # Remove old artifacts
-        removal_actions = manager.remove_artifacts_created_by(current_tool)
+        removal_actions = manager.remove_outputs_created_by(current_tool)
         print(f"Removal actions: {removal_actions}")
 
         # Verify kilo is removed

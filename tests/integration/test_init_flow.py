@@ -4,7 +4,7 @@ import shutil
 import unittest
 from pathlib import Path
 
-from prompticorn.artifacts import ArtifactManager
+from prompticorn.tool_outputs import ToolOutputManager
 from prompticorn.cli_utils import normalize_tool_name
 from prompticorn.prompt_builder import get_prompt_builder
 
@@ -54,7 +54,7 @@ class TestInitFlow(unittest.TestCase):
         print(f"Normalized tool: '{normalized_tool}'")
 
         # Step 3: Detect current tool
-        manager = ArtifactManager(self.test_dir)
+        manager = ToolOutputManager(self.test_dir)
         current_tool = manager.current_tool
         print(f"Current tool detected: '{current_tool}'")
 
@@ -65,7 +65,7 @@ class TestInitFlow(unittest.TestCase):
 
             # This is what init does - but it should compare canonical names!
             # The bug might be in the comparison itself
-            removal_actions = manager.remove_artifacts_created_by(current_tool)
+            removal_actions = manager.remove_outputs_created_by(current_tool)
             print(f"Removed: {removal_actions}")
 
             self.assertFalse((self.test_dir / ".kilo").exists(), ".kilo/ should be removed")

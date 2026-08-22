@@ -28,8 +28,6 @@ from typing import Any
 
 import click
 
-# Legacy sweet_tea import removed - using Phase 2A builders
-from prompticorn.artifacts import ArtifactManager
 from prompticorn.cli_utils import (
     get_supported_tools_display,
     normalize_tool_name,
@@ -55,6 +53,9 @@ from prompticorn.questions.handlers.handle_single_language_questions import (
     spec_key_for,
 )
 from prompticorn.questions.language import LANGUAGE_KEYS
+
+# Legacy sweet_tea import removed - using Phase 2A builders
+from prompticorn.tool_outputs import ToolOutputManager
 from prompticorn.tools import menu_explanations as tool_menu_explanations
 from prompticorn.tools import menu_options as tool_menu_options
 
@@ -742,13 +743,13 @@ def init_prompts():
         click.echo(f"\n  Config file: {ConfigHandler.get_config_path()}")
 
         # Step 5: Clean up old artifacts if switching tools
-        artifact_manager = ArtifactManager()
+        artifact_manager = ToolOutputManager()
         current_tool = artifact_manager.current_tool
         if selected_tool and current_tool and current_tool != selected_tool:
             click.echo("\n" + "-" * 60)
             click.secho("  Removing old artifacts...", bold=True)
             click.echo("-" * 60)
-            removal_actions = artifact_manager.remove_artifacts_created_by(current_tool)
+            removal_actions = artifact_manager.remove_outputs_created_by(current_tool)
             for action in removal_actions:
                 click.echo(f"    {action}")
 
@@ -853,7 +854,7 @@ def switch_command(tool_name: str | None):
             raise click.Abort() from None
 
     # Get current tool
-    artifact_manager = ArtifactManager()
+    artifact_manager = ToolOutputManager()
     current_tool = artifact_manager.current_tool
 
     click.echo("\n" + "=" * 60)
@@ -866,7 +867,7 @@ def switch_command(tool_name: str | None):
     if current_tool and current_tool != target_tool:
         click.echo("\n" + "-" * 60)
         click.secho("  Removing old artifacts...", bold=True)
-        removal_actions = artifact_manager.remove_artifacts_created_by(current_tool)
+        removal_actions = artifact_manager.remove_outputs_created_by(current_tool)
         for action in removal_actions:
             click.echo(f"    {action}")
 
@@ -947,7 +948,7 @@ def swap_command():
     config = ConfigHandler.load_config()
 
     # Get current tool
-    artifact_manager = ArtifactManager()
+    artifact_manager = ToolOutputManager()
     current_tool = artifact_manager.current_tool
 
     if not current_tool:
@@ -1053,7 +1054,7 @@ def swap_command():
     # NOT the artifacts from other tools
     import shutil
 
-    artifacts_to_remove = artifact_manager.get_artifacts_to_create(current_tool)
+    artifacts_to_remove = artifact_manager.outputs_to_create(current_tool)
     removal_actions = []
     for artifact in artifacts_to_remove:
         artifact_path = Path(artifact)
@@ -1278,7 +1279,7 @@ def _selected_tool(config: dict) -> str | None:
 
 def _output_paths_for(tool: str) -> tuple[str, ...]:
     """The roots a tool emits, used to digest outputs into the lock."""
-    return tuple(sorted(ArtifactManager().get_artifacts_to_create(tool)))
+    return tuple(sorted(ToolOutputManager().outputs_to_create(tool)))
 
 
 @cli.command("lock")

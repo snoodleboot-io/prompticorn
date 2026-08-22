@@ -37,7 +37,7 @@ class ToolSpec:
 
 
 # Registry order intentionally matches the historical ``artifacts`` ordering so
-# that ArtifactManager.current_tool (first-match detection) is unchanged.
+# that ToolOutputManager.current_tool (first-match detection) is unchanged.
 _TOOL_SPECS: Final[tuple[ToolSpec, ...]] = (
     ToolSpec(
         id="kilo-cli",
