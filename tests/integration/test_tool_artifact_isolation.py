@@ -1,6 +1,7 @@
 """Test that each tool ONLY creates its own artifacts, not other tools' artifacts."""
 
 import shutil
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -11,16 +12,16 @@ class TestToolArtifactIsolation(unittest.TestCase):
     """Verify complete artifact isolation - each tool only creates its own files."""
 
     def setUp(self):
-        """Set up test fixtures."""
-        self.test_dir = Path(".test_tool_isolation")
-        if self.test_dir.exists():
-            shutil.rmtree(self.test_dir)
-        self.test_dir.mkdir(parents=True)
+        """Set up test fixtures.
 
-    def tearDown(self):
-        """Clean up test artifacts."""
-        if self.test_dir.exists():
-            shutil.rmtree(self.test_dir)
+        A real temp directory, not a CWD-relative one — see PRO-147: a test that
+        writes into the working tree leaves generated output next to real source
+        whenever the run does not reach teardown. ``addCleanup`` also covers a
+        ``setUp`` that fails partway.
+        """
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        self.test_dir = Path(tmp.name)
 
     def _get_all_artifacts(self):
         """Get all tool artifact directories."""
