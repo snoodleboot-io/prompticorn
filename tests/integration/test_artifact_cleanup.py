@@ -1,6 +1,6 @@
 """Integration tests for artifact cleanup during tool switching."""
 
-import shutil
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -11,17 +11,19 @@ class TestArtifactCleanup(unittest.TestCase):
     """Test artifact cleanup when switching between tools."""
 
     def setUp(self):
-        """Set up test fixtures."""
-        self.test_dir = Path(".test_artifacts")
-        if self.test_dir.exists():
-            shutil.rmtree(self.test_dir)
-        self.test_dir.mkdir(parents=True)
-        self.manager = ToolOutputManager(self.test_dir)
+        """Set up test fixtures.
 
-    def tearDown(self):
-        """Clean up test artifacts."""
-        if self.test_dir.exists():
-            shutil.rmtree(self.test_dir)
+        The directory is a real temp directory, not a CWD-relative one. A test
+        that writes into the working tree leaves debris behind whenever the run
+        does not reach teardown — a crash, a Ctrl-C, a ``-x`` bail-out — and
+        that debris is generated output sitting next to real source. Registering
+        the cleanup with ``addCleanup`` rather than a ``tearDown`` means it also
+        runs when ``setUp`` itself fails partway. (PRO-147)
+        """
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        self.test_dir = Path(tmp.name)
+        self.manager = ToolOutputManager(self.test_dir)
 
     def test_kilo_ide_creates_kilo_directory(self):
         """Test that kilo-ide creates .kilo/ directory."""

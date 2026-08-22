@@ -1,6 +1,6 @@
 """Integration tests for tool switching during init."""
 
-import shutil
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -12,16 +12,18 @@ class TestToolSwitching(unittest.TestCase):
     """Test tool selection and switching behavior."""
 
     def setUp(self):
-        """Set up test fixtures."""
-        self.test_dir = Path(".test_switching")
-        if self.test_dir.exists():
-            shutil.rmtree(self.test_dir)
-        self.test_dir.mkdir(parents=True)
+        """Set up test fixtures.
 
-    def tearDown(self):
-        """Clean up test artifacts."""
-        if self.test_dir.exists():
-            shutil.rmtree(self.test_dir)
+        The directory is a real temp directory, not a CWD-relative one. A test
+        that writes into the working tree leaves debris behind whenever the run
+        does not reach teardown — a crash, a Ctrl-C, a ``-x`` bail-out — and
+        that debris is generated output sitting next to real source. Registering
+        the cleanup with ``addCleanup`` rather than a ``tearDown`` means it also
+        runs when ``setUp`` itself fails partway. (PRO-147)
+        """
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        self.test_dir = Path(tmp.name)
 
     def test_get_prompt_builder_for_claude(self):
         """Test that get_prompt_builder returns correct builder for claude."""
@@ -557,13 +559,9 @@ if __name__ == "__main__":
         claude_dir = self.test_dir / ".claude"
         self.assertTrue(claude_dir.exists(), ".claude/ should exist for Claude")
 
-        # Build with Kilo (separate test dir to avoid conflicts)
-        kilo_test_dir = Path(".test_kilo_subagents")
-        if kilo_test_dir.exists():
-            shutil.rmtree(kilo_test_dir)
-        kilo_test_dir.mkdir()
-
-        try:
+        # Build with Kilo (separate directory to avoid conflicts)
+        with tempfile.TemporaryDirectory() as tmp:
+            kilo_test_dir = Path(tmp)
             kilo_builder = get_prompt_builder("kilo-ide")
             kilo_builder.build(kilo_test_dir, config, dry_run=False)
 
@@ -579,6 +577,3 @@ if __name__ == "__main__":
                 len(subagent_files) > 0,
                 "Kilo should have subagent files in .kilo/agents/{agent}/{subagent}.md",
             )
-        finally:
-            if kilo_test_dir.exists():
-                shutil.rmtree(kilo_test_dir)
