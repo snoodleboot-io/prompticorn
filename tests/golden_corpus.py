@@ -34,10 +34,6 @@ from prompticorn.tools import supported_tool_ids
 
 FIXTURE = Path(__file__).parent / "golden" / "manifest.json"
 
-# ISO dates are normalized before hashing so the corpus is stable across day
-# boundaries (e.g. CLAUDE.md stamps datetime.now() into a "Last Updated" line).
-_DATE_RE = re.compile(rb"\d{4}-\d{2}-\d{2}")
-
 _SIDECAR_PATH = f"{SIDECAR_DIRECTORY}/{SIDECAR_FILENAME}"
 
 # The two sidecar fields that move without the build having changed.
@@ -45,13 +41,13 @@ _SIDECAR_PATH = f"{SIDECAR_DIRECTORY}/{SIDECAR_FILENAME}"
 # ``version`` is stamped into ``__about__.py`` by a release build, so a checkout
 # where that has happened would otherwise disagree with a clean one.
 #
-# ``digest`` is subtler, and CI caught it where a single machine could not. The
-# digests are taken over the real file bytes — dates included — so masking a
-# date at the *file* level while hashing a digest *of* that date just moves the
-# instability down a level: the corpus would go red at every day boundary.
-# Nothing is lost by masking them. A sidecar digest is a restatement of content
-# the corpus already hashes per file, whereas ``unit`` and ``layer`` are
-# attribution that exists nowhere else in the corpus, and those stay pinned.
+# ``digest`` was masked because it restated a date the corpus normalized away at
+# the file level, so the instability just moved down a level and CI went red at
+# a day boundary. PRO-116 removed the last build-time timestamp from emitted
+# output, so that reason is gone — the mask stays only because a sidecar digest
+# is a restatement of content the corpus already hashes per file, and nothing is
+# lost by dropping it. ``unit`` and ``layer`` are attribution that exists nowhere
+# else in the corpus, and those stay pinned.
 _SIDECAR_MASKS: tuple[tuple[re.Pattern[bytes], bytes], ...] = (
     (re.compile(rb'"version": "[^"]*"'), b'"version": "VERSION"'),
     (re.compile(rb'"digest": "[^"]*"'), b'"digest": "DIGEST"'),
@@ -127,11 +123,11 @@ def split_key(key: str) -> tuple[str, str, str]:
 def normalize(raw: bytes, relative: str) -> bytes:
     """Strip out everything that is not the file's content.
 
-    Two things vary without the output having changed. ISO dates, as before.
-    And the provenance header (PRO-112), which every non-JSON output now
-    carries: it embeds the artifact version and a digest of the body it sits on,
-    so a corpus that hashed it would re-baseline on a version bump and would
-    otherwise merely restate a hash it already has.
+    One thing varies without the output having changed: the provenance header
+    (PRO-112), which every non-JSON output carries. It embeds the artifact
+    version and a digest of the body it sits on, so a corpus that hashed it
+    would re-baseline on a version bump and would otherwise merely restate a
+    hash it already has.
 
     Removing it via ``ProvenanceHeader.strip`` rather than a local regex keeps
     one definition of what a header is. What provenance the corpus still pins it
@@ -152,9 +148,15 @@ def normalize(raw: bytes, relative: str) -> bytes:
 
 
 def digest(path: Path, relative: str) -> str:
-    """sha256 of a file's content, with the varying parts normalized out."""
-    normalized = normalize(_DATE_RE.sub(b"YYYY-MM-DD", path.read_bytes()), relative)
-    return hashlib.sha256(normalized).hexdigest()
+    """sha256 of a file's content, with the varying parts normalized out.
+
+    Dates used to be masked here, because CLAUDE.md stamped ``datetime.now()``
+    into a "Last Updated" line. PRO-116 removed that — no emitted file carries a
+    build-time timestamp any more — and the mask went with it. Removing it is
+    what makes the corpus able to *notice* one being reintroduced, which a mask
+    would hide by construction.
+    """
+    return hashlib.sha256(normalize(path.read_bytes(), relative)).hexdigest()
 
 
 def manifest(root: Path) -> dict[str, str]:

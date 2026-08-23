@@ -22,6 +22,7 @@ New to prompticorn? Start here:
 Located in [`user-guide/`](./user-guide/):
 - **GETTING_STARTED.md** — Installation, configuration, and first steps
 - **CLI_REFERENCE.md** — Complete command reference
+- **GENERATED_OUTPUT.md** — Why generated directories are disposable, and how to recover one that was edited
 - **CLAUDE_USAGE.md** — Claude configuration and lazy loading guide
 - **TOOL_CONFIGURATION_EXAMPLES.md** — Setup for different AI tools
 

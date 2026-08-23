@@ -26,6 +26,7 @@ from typing import Any
 import yaml
 
 from prompticorn.lockfile.lock_file import LockFile
+from prompticorn.text_writer import write_text
 
 # Wide enough that no scalar is ever folded. A 64-character digest under a nested
 # key exceeds PyYAML's default width of 80, and a folded scalar makes the bytes
@@ -101,7 +102,7 @@ class LockWriter:
             return False
 
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(rendered, encoding="utf-8")
+        write_text(path, rendered)
         return True
 
     @staticmethod

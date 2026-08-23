@@ -46,6 +46,7 @@ from prompticorn.builders.template_handlers.test_runner_handler import TestRunne
 from prompticorn.builders.template_handlers.testing_framework_handler import (
     TestingFrameworkHandler,
 )
+from prompticorn.text_writer import write_text
 
 logger = logging.getLogger(__name__)
 
@@ -415,7 +416,7 @@ class Builder:
         if config and source_path.name.startswith("core-"):
             content = source_path.read_text(encoding="utf-8")
             content = self._substitute_template_variables(content, config)
-            destination.write_text(content, encoding="utf-8")
+            write_text(destination, content)
         else:
             import shutil
 

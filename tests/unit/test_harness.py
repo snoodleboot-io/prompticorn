@@ -2,7 +2,7 @@
 
 The harness provisions the environment and runs the verification lanes, so its
 own logic has to be trustworthy without shelling out to the real toolchain. What
-is covered here is the decision-making — lane selection, drift normalization,
+is covered here is the decision-making — lane selection, drift comparison,
 failure reporting, change detection — not the subprocess calls themselves.
 """
 
@@ -81,24 +81,13 @@ class TestLaneSelection:
         assert all(lane.command[0] == "uv" for lane in harness.LANES)
 
 
-class TestDriftNormalization:
-    def test_build_date_is_not_treated_as_drift(self):
-        older = b"# Config\n**Last Updated:** 2026-01-01  \n**Agent Count:** 26\n"
-        newer = b"# Config\n**Last Updated:** 2026-08-09  \n**Agent Count:** 26\n"
-        assert harness.normalize_generated("CLAUDE.md", older) == harness.normalize_generated(
-            "CLAUDE.md", newer
-        )
-
-    def test_real_content_change_still_registers(self):
-        before = b"**Last Updated:** 2026-01-01\n**Agent Count:** 24\n"
-        after = b"**Last Updated:** 2026-01-01\n**Agent Count:** 26\n"
-        assert harness.normalize_generated("CLAUDE.md", before) != harness.normalize_generated(
-            "CLAUDE.md", after
-        )
-
-    def test_other_files_are_compared_verbatim(self):
-        blob = b"**Last Updated:** 2026-01-01\nbody\n"
-        assert harness.normalize_generated(".claude/agents/code-agent.md", blob) == blob
+class TestDriftComparison:
+    def test_nothing_is_normalized_away_before_comparing(self):
+        """CLAUDE.md stamped the build date until PRO-116, so its "Last Updated"
+        line had to be dropped before comparing or the tracked tree read as
+        dirty forever. Nothing stamps a date now, and the exemption is gone —
+        which is what lets this check notice one coming back."""
+        assert not hasattr(harness, "normalize_generated")
 
 
 class TestReporting:

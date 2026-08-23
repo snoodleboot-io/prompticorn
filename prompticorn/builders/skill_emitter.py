@@ -20,6 +20,8 @@ import re
 from pathlib import Path
 from typing import Final
 
+from prompticorn.text_writer import write_text
+
 # Canonical Agent Skills base directory (used by Codex/Zed/Roo/Junie).
 AGENTS_SKILLS_BASE: Final[str] = ".agents"
 
@@ -128,5 +130,5 @@ def write_skill(output_root: Path, base_dir: str, skill_name: str, content: str)
     relative = skill_relative_path(base_dir, skill_name)
     destination = output_root / relative
     destination.parent.mkdir(parents=True, exist_ok=True)
-    destination.write_text(ensure_frontmatter(skill_name, content), encoding="utf-8")
+    write_text(destination, ensure_frontmatter(skill_name, content))
     return relative

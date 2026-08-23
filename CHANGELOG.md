@@ -18,6 +18,27 @@ normal release line.
 ## [Unreleased]
 
 ### Added
+- **`prompticorn regenerate`** — throw the generated tree away and rebuild it from
+  the lock. The documented answer to a hand-edited generated file: it removes rogue
+  files, overwrites edits, and restores a deleted tree, then checks the result
+  against the lock. Nothing is re-resolved and the lock is never written; if the
+  sources have moved since the lock was written, the rebuild is refused before
+  anything is deleted.
+- **Cross-platform reproducibility matrix in CI** — every pull request locks a
+  project on Linux, then regenerates it on Linux, macOS and Windows and compares
+  raw bytes. It gates the release build.
+- **[`docs/user-guide/GENERATED_OUTPUT.md`](docs/user-guide/GENERATED_OUTPUT.md)**,
+  and `build` / `lock` / `verify` / `regenerate` added to the CLI reference.
+
+### Changed
+- **Generated output no longer carries a build timestamp.** `CLAUDE.md`'s
+  `**Last Updated:**` line is gone. It was stamped from local time, so two machines
+  in different timezones produced different files at the same instant, and a tree
+  locked yesterday failed `prompticorn verify` today. **Every project's `CLAUDE.md`
+  changes**; re-run `prompticorn lock` after upgrading.
+- **Every generated file is written with LF line endings on every platform.**
+  Python translates `\n` to CRLF on Windows by default, which hashes identically
+  once read back and so escaped every check except a byte comparison.
 - **Project-level settings captured in `init`** — database, ORM, error-handling
   pattern, commit style, PR-size limit, deploy target, and source-layout style,
   stored in a config `project` section and rendered into the core conventions.

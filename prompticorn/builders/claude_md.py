@@ -1,6 +1,5 @@
 """Generator for CLAUDE.md routing file."""
 
-from datetime import datetime
 from pathlib import Path
 
 from jinja2 import Environment, FileSystemLoader
@@ -52,7 +51,6 @@ def generate_claude_md(primary_agents: list[dict], persona_name: str = "software
 
     # Render template
     return template.render(
-        last_updated=datetime.now().strftime("%Y-%m-%d"),
         agent_count=len(primary_agents),
         persona_name=persona_name.replace("_", " ").title(),
         agents=agents_data,

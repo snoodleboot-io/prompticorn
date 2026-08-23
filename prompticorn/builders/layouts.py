@@ -33,15 +33,16 @@ from prompticorn.builders.roo_builder import generate_roomodes
 from prompticorn.builders.roo_builder import slugify as zed_slugify
 from prompticorn.builders.skill_emitter import AGENTS_SKILLS_BASE, write_skill
 from prompticorn.builders.windsurf_builder import workflow_to_windsurf
+from prompticorn.text_writer import write_text
 
 
 def _append_or_write(path: Path, content: Any) -> None:
     """Append to an existing concatenated file, or create it."""
     if path.exists():
         existing = path.read_text(encoding="utf-8")
-        path.write_text(f"{existing}\n\n{content}", encoding="utf-8")
+        write_text(path, f"{existing}\n\n{content}")
     else:
-        path.write_text(str(content), encoding="utf-8")
+        write_text(path, str(content))
 
 
 class ToolLayout:
@@ -97,7 +98,7 @@ class KiloLayout(ToolLayout):
     ) -> list[str]:
         agents_dir = output / ".kilo" / "agents"
         agents_dir.mkdir(parents=True, exist_ok=True)
-        (agents_dir / f"{agent_name}.md").write_text(str(content), encoding="utf-8")
+        write_text(agents_dir / f"{agent_name}.md", str(content))
         return [f".kilo/agents/{agent_name}.md"]
 
     def write_skill(self, output: Path, skill_name: str, content: str) -> list[str]:
@@ -106,7 +107,7 @@ class KiloLayout(ToolLayout):
     def write_workflow(self, output: Path, workflow_name: str, content: str) -> list[str]:
         commands_dir = output / ".kilo" / "commands"
         commands_dir.mkdir(parents=True, exist_ok=True)
-        (commands_dir / f"{workflow_name}.md").write_text(content, encoding="utf-8")
+        write_text(commands_dir / f"{workflow_name}.md", content)
         return [f".kilo/commands/{workflow_name}.md"]
 
 
@@ -175,7 +176,7 @@ class OpenCodeLayout(ToolLayout):
         agents_dir = output / ".opencode" / "agents"
         agents_dir.mkdir(parents=True, exist_ok=True)
         rel = f".opencode/agents/{opencode_slugify(agent_name)}.md"
-        (output / rel).write_text(content, encoding="utf-8")
+        write_text(output / rel, content)
         return [rel]
 
     def write_skill(self, output: Path, skill_name: str, content: str) -> list[str]:
@@ -205,7 +206,7 @@ class CopilotChatLayout(ToolLayout):
         agents_dir = output / ".github" / "agents"
         agents_dir.mkdir(parents=True, exist_ok=True)
         rel = f".github/agents/{junie_slugify(agent_name)}.agent.md"
-        (output / rel).write_text(content, encoding="utf-8")
+        write_text(output / rel, content)
         return [rel]
 
     def write_skill(self, output: Path, skill_name: str, content: str) -> list[str]:
@@ -216,9 +217,7 @@ class CopilotChatLayout(ToolLayout):
         prompts_dir = output / ".github" / "prompts"
         prompts_dir.mkdir(parents=True, exist_ok=True)
         rel = f".github/prompts/{junie_slugify(workflow_name)}.prompt.md"
-        (output / rel).write_text(
-            workflow_to_copilot_prompt(workflow_name, content), encoding="utf-8"
-        )
+        write_text(output / rel, workflow_to_copilot_prompt(workflow_name, content))
         return [rel]
 
 
@@ -238,7 +237,7 @@ class ClaudeLayout(ToolLayout):
             for file_path_str, markdown_content in content.items():
                 full_path = output / file_path_str
                 full_path.parent.mkdir(parents=True, exist_ok=True)
-                full_path.write_text(markdown_content, encoding="utf-8")
+                write_text(full_path, markdown_content)
                 written.append(file_path_str)
             return written
 
@@ -246,7 +245,7 @@ class ClaudeLayout(ToolLayout):
         instructions_dir = output / "custom_instructions"
         instructions_dir.mkdir(parents=True, exist_ok=True)
         file_path = instructions_dir / f"{agent_name}.json"
-        file_path.write_text(json.dumps(content, indent=2), encoding="utf-8")
+        write_text(file_path, json.dumps(content, indent=2))
         return [f"custom_instructions/{agent_name}.json"]
 
     def write_skill(self, output: Path, skill_name: str, content: str) -> list[str]:
@@ -272,7 +271,7 @@ class RooLayout(ToolLayout):
         rules_dir = output / f".roo/rules-{content['slug']}"
         rules_dir.mkdir(parents=True, exist_ok=True)
         rel = f".roo/rules-{content['slug']}/01-instructions.md"
-        (output / rel).write_text(content["instructions"], encoding="utf-8")
+        write_text(output / rel, content["instructions"])
         return [rel]
 
     def write_skill(self, output: Path, skill_name: str, content: str) -> list[str]:
@@ -281,7 +280,7 @@ class RooLayout(ToolLayout):
     def write_workflow(self, output: Path, workflow_name: str, content: str) -> list[str]:
         commands_dir = output / ".roo" / "commands"
         commands_dir.mkdir(parents=True, exist_ok=True)
-        (commands_dir / f"{workflow_name}.md").write_text(content, encoding="utf-8")
+        write_text(commands_dir / f"{workflow_name}.md", content)
         return [f".roo/commands/{workflow_name}.md"]
 
     def finalize(
@@ -290,7 +289,7 @@ class RooLayout(ToolLayout):
         mode_entries = [c for c in built_agents if isinstance(c, dict) and "slug" in c]
         if not mode_entries:
             return []
-        (output / ".roomodes").write_text(generate_roomodes(mode_entries), encoding="utf-8")
+        write_text(output / ".roomodes", generate_roomodes(mode_entries))
         return [".roomodes"]
 
 
@@ -310,7 +309,7 @@ class JunieLayout(ToolLayout):
         agents_dir = output / ".junie" / "agents"
         agents_dir.mkdir(parents=True, exist_ok=True)
         rel = f".junie/agents/{junie_slugify(agent_name)}.md"
-        (output / rel).write_text(content, encoding="utf-8")
+        write_text(output / rel, content)
         return [rel]
 
     def write_skill(self, output: Path, skill_name: str, content: str) -> list[str]:
@@ -319,7 +318,7 @@ class JunieLayout(ToolLayout):
     def write_workflow(self, output: Path, workflow_name: str, content: str) -> list[str]:
         commands_dir = output / ".junie" / "commands"
         commands_dir.mkdir(parents=True, exist_ok=True)
-        (commands_dir / f"{workflow_name}.md").write_text(content, encoding="utf-8")
+        write_text(commands_dir / f"{workflow_name}.md", content)
         return [f".junie/commands/{workflow_name}.md"]
 
 
@@ -358,7 +357,7 @@ class GeminiLayout(ToolLayout):
         agents_dir = output / ".gemini" / "agents"
         agents_dir.mkdir(parents=True, exist_ok=True)
         rel = f".gemini/agents/{junie_slugify(agent_name)}.md"
-        (output / rel).write_text(content, encoding="utf-8")
+        write_text(output / rel, content)
         return [rel]
 
     def write_skill(self, output: Path, skill_name: str, content: str) -> list[str]:
@@ -368,7 +367,7 @@ class GeminiLayout(ToolLayout):
         commands_dir = output / ".gemini" / "commands"
         commands_dir.mkdir(parents=True, exist_ok=True)
         rel = f".gemini/commands/{junie_slugify(workflow_name)}.toml"
-        (output / rel).write_text(workflow_to_toml(workflow_name, content), encoding="utf-8")
+        write_text(output / rel, workflow_to_toml(workflow_name, content))
         return [rel]
 
     def finalize(
@@ -376,7 +375,7 @@ class GeminiLayout(ToolLayout):
     ) -> list[str]:
         gemini_dir = output / ".gemini"
         gemini_dir.mkdir(parents=True, exist_ok=True)
-        (gemini_dir / "settings.json").write_text(generate_gemini_settings(), encoding="utf-8")
+        write_text(gemini_dir / "settings.json", generate_gemini_settings())
         return [".gemini/settings.json"]
 
 
@@ -400,7 +399,7 @@ class AmazonQLayout(ToolLayout):
         agents_dir = output / ".amazonq" / "cli-agents"
         agents_dir.mkdir(parents=True, exist_ok=True)
         rel = f".amazonq/cli-agents/{junie_slugify(agent_name)}.json"
-        (output / rel).write_text(content, encoding="utf-8")
+        write_text(output / rel, content)
         return [rel]
 
     def write_skill(self, output: Path, skill_name: str, content: str) -> list[str]:
@@ -411,7 +410,7 @@ class AmazonQLayout(ToolLayout):
         prompts_dir = output / ".amazonq" / "prompts"
         prompts_dir.mkdir(parents=True, exist_ok=True)
         rel = f".amazonq/prompts/{junie_slugify(workflow_name)}.md"
-        (output / rel).write_text(content, encoding="utf-8")
+        write_text(output / rel, content)
         return [rel]
 
 
@@ -440,7 +439,7 @@ class WindsurfLayout(ToolLayout):
         workflows_dir = output / ".windsurf" / "workflows"
         workflows_dir.mkdir(parents=True, exist_ok=True)
         rel = f".windsurf/workflows/{junie_slugify(workflow_name)}.md"
-        (output / rel).write_text(workflow_to_windsurf(workflow_name, content), encoding="utf-8")
+        write_text(output / rel, workflow_to_windsurf(workflow_name, content))
         return [rel]
 
 
@@ -464,7 +463,7 @@ class ContinueLayout(ToolLayout):
         rules_dir = output / ".continue" / "rules"
         rules_dir.mkdir(parents=True, exist_ok=True)
         rel = f".continue/rules/{junie_slugify(agent_name)}.md"
-        (output / rel).write_text(content, encoding="utf-8")
+        write_text(output / rel, content)
         return [rel]
 
     def write_skill(self, output: Path, skill_name: str, content: str) -> list[str]:
@@ -475,9 +474,7 @@ class ContinueLayout(ToolLayout):
         prompts_dir = output / ".continue" / "prompts"
         prompts_dir.mkdir(parents=True, exist_ok=True)
         rel = f".continue/prompts/{junie_slugify(workflow_name)}.md"
-        (output / rel).write_text(
-            workflow_to_continue_prompt(workflow_name, content), encoding="utf-8"
-        )
+        write_text(output / rel, workflow_to_continue_prompt(workflow_name, content))
         return [rel]
 
 
@@ -524,7 +521,7 @@ class CodexLayout(ToolLayout):
     ) -> list[str]:
         codex_dir = output / ".codex"
         codex_dir.mkdir(parents=True, exist_ok=True)
-        (codex_dir / "config.toml").write_text(generate_codex_config(), encoding="utf-8")
+        write_text(codex_dir / "config.toml", generate_codex_config())
         return [".codex/config.toml"]
 
 
@@ -546,7 +543,7 @@ class BedrockLayout(ToolLayout):
         prompts_dir = output / "bedrock" / "prompts"
         prompts_dir.mkdir(parents=True, exist_ok=True)
         rel = f"bedrock/prompts/{content['slug']}.system.md"
-        (output / rel).write_text(content["system_prompt"].rstrip("\n") + "\n", encoding="utf-8")
+        write_text(output / rel, content["system_prompt"].rstrip("\n") + "\n")
         return [rel]
 
     def write_skill(self, output: Path, skill_name: str, content: str) -> list[str]:
@@ -573,7 +570,7 @@ class BedrockLayout(ToolLayout):
             "bedrock/README.bedrock.md": generate_readme(),
         }
         for rel, text in written.items():
-            (output / rel).write_text(text, encoding="utf-8")
+            write_text(output / rel, text)
         return sorted(written)
 
 

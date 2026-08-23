@@ -13,6 +13,7 @@ from prompticorn.builders.errors import BuilderValidationError
 from prompticorn.ir.loaders import CoreFilesLoader
 from prompticorn.ir.models import Agent
 from prompticorn.text_utils import strip_source_header_comments
+from prompticorn.text_writer import write_text
 
 
 class KiloBuilder(Builder):
@@ -431,7 +432,7 @@ class KiloBuilder(Builder):
             if raw is not None:
                 content = strip_source_header_comments(raw)
                 output_path = rules_dir / filename
-                output_path.write_text(content, encoding="utf-8")
+                write_text(output_path, content)
                 written_files.append(f".kilo/rules/{filename}")
 
         # Templated conventions.md (always include, render if config available)
@@ -440,7 +441,7 @@ class KiloBuilder(Builder):
             if config:
                 content = self.core_loader._template_content(content, config)
             output_path = rules_dir / "conventions.md"
-            output_path.write_text(content, encoding="utf-8")
+            write_text(output_path, content)
             written_files.append(".kilo/rules/conventions.md")
 
         # Language-specific conventions (only if language configured)
@@ -458,7 +459,7 @@ class KiloBuilder(Builder):
                 if content is not None:
                     content = self.core_loader._template_content(content, config)
                     output_path = rules_dir / f"conventions-{language}.md"
-                    output_path.write_text(content, encoding="utf-8")
+                    write_text(output_path, content)
                     written_files.append(f".kilo/rules/conventions-{language}.md")
 
         return written_files

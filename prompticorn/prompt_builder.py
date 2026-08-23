@@ -24,6 +24,7 @@ from prompticorn.ir.loaders.language_skill_mapping_loader import LanguageSkillMa
 from prompticorn.ir.models.agent import Agent
 from prompticorn.personas import PersonaFilter, PersonaRegistry
 from prompticorn.provenance.provenance_emitter import GENERATED_UNIT_PREFIX, ProvenanceEmitter
+from prompticorn.text_writer import write_text
 from prompticorn.tools import builder_dispatch
 
 
@@ -406,7 +407,7 @@ class PromptBuilder:
                     )
                     claude_md_content = generate_claude_md(primary_agents_built, persona_name)
                     claude_md_path = output / "CLAUDE.md"
-                    claude_md_path.write_text(claude_md_content, encoding="utf-8")
+                    write_text(claude_md_path, claude_md_content)
                     emitted.add("CLAUDE.md")
                     attribution["CLAUDE.md"] = f"{GENERATED_UNIT_PREFIX}/claude-md"
                     actions.append("✓ CLAUDE.md")
@@ -424,7 +425,7 @@ class PromptBuilder:
                         for file_path_str, content_str in conventions.items():
                             full_path = output / file_path_str
                             full_path.parent.mkdir(parents=True, exist_ok=True)
-                            full_path.write_text(content_str, encoding="utf-8")
+                            write_text(full_path, content_str)
                             emitted.add(file_path_str)
                             # A convention file is assembled from a spec rather
                             # than copied from one authored unit, so it has no
@@ -451,7 +452,7 @@ class PromptBuilder:
                         language_specs=selected_specs,
                     )
                     agents_md_path = output / "AGENTS.md"
-                    agents_md_path.write_text(agents_md_content, encoding="utf-8")
+                    write_text(agents_md_path, agents_md_content)
                     emitted.add("AGENTS.md")
                     attribution["AGENTS.md"] = f"{GENERATED_UNIT_PREFIX}/agents-md"
                     actions.append("✓ AGENTS.md")
@@ -549,7 +550,7 @@ class PromptBuilder:
             # the replacement to match (json.dumps(...)[1:-1] = the escaped inner
             # content, without the surrounding quotes).
             replacement = json.dumps(value)[1:-1] if path.suffix == ".json" else value
-            path.write_text(text.replace(token, replacement), encoding="utf-8")
+            write_text(path, text.replace(token, replacement))
 
     def _filter_agent_for_language(
         self, agent: Agent, language: str | None, agent_name: str | None = None
@@ -712,7 +713,7 @@ class PromptBuilder:
         subagent_dir.mkdir(parents=True, exist_ok=True)
 
         subagent_file = subagent_dir / f"{subagent_name}.md"
-        subagent_file.write_text(str(content), encoding="utf-8")
+        write_text(subagent_file, str(content))
 
         return [str(subagent_file.relative_to(output))]
 

@@ -3,6 +3,11 @@
 The corpus is only a baseline if two clean checkouts agree about it. Anything in
 the output that moves without the build having changed has to be normalized out
 before hashing, and every one of these has cost a red CI run at some point.
+
+The other direction matters just as much, and PRO-116 moved the line: a mask
+that is no longer needed is not free, because it also hides the thing coming
+back. Dates were masked while CLAUDE.md stamped one; now that nothing does, they
+are hashed, and the corpus fails if a timestamp reappears.
 """
 
 import unittest
@@ -29,15 +34,20 @@ def _sidecar(digest_value: str, version: str = "0.5.0") -> bytes:
 
 
 class TestSidecarNormalization(unittest.TestCase):
-    def test_a_digest_over_dated_content_does_not_move_the_corpus(self) -> None:
-        """CLAUDE.md stamps datetime.now() into a "Last Updated" line. The corpus
-        masks that date at the file level, but the sidecar records a digest *of*
-        the dated bytes — so without masking it too, the corpus would go red at
-        every day boundary. It did, in CI, before this was fixed."""
-        yesterday = normalize(_sidecar("a" * 64), _SIDECAR)
-        today = normalize(_sidecar("b" * 64), _SIDECAR)
+    def test_a_moved_digest_does_not_move_the_corpus(self) -> None:
+        """CLAUDE.md used to stamp datetime.now() into a "Last Updated" line.
+        The corpus masked that date at the file level, but the sidecar records a
+        digest *of* the dated bytes, so without masking it too the corpus went
+        red at every day boundary — it did, in CI, where a single machine could
+        not have caught it.
 
-        self.assertEqual(yesterday, today)
+        PRO-116 removed the timestamp, so that reason is gone. The mask stays
+        because a sidecar digest only restates content the corpus already hashes
+        per file, and this test stays because the mask does."""
+        one = normalize(_sidecar("a" * 64), _SIDECAR)
+        another = normalize(_sidecar("b" * 64), _SIDECAR)
+
+        self.assertEqual(one, another)
 
     def test_the_artifact_version_does_not_move_the_corpus(self) -> None:
         """A release build stamps the version into __about__.py; a clean checkout
@@ -97,7 +107,15 @@ class TestHeaderNormalization(unittest.TestCase):
 
 
 class TestDigestEntryPoint(unittest.TestCase):
-    def test_dates_are_normalized_before_hashing(self) -> None:
+    def test_a_changed_date_now_moves_the_corpus(self) -> None:
+        """Dates were masked before hashing while CLAUDE.md stamped one. PRO-116
+        removed the last build-time timestamp and the mask went with it, which is
+        what lets the corpus *notice* one being reintroduced — a mask would hide
+        that by construction, and hiding it is how the instability survived two
+        releases.
+
+        `tests/unit/test_output_determinism.py` is the guard that makes dropping
+        the mask safe: it asserts nothing in the emit path reads the clock."""
         import tempfile
         from pathlib import Path
 
@@ -105,10 +123,10 @@ class TestDigestEntryPoint(unittest.TestCase):
             root = Path(tmp)
             first = root / "first.md"
             second = root / "second.md"
-            first.write_text("Last Updated: 2026-08-21\n", encoding="utf-8")
-            second.write_text("Last Updated: 2026-08-22\n", encoding="utf-8")
+            first.write_text("Released: 2026-08-21\n", encoding="utf-8")
+            second.write_text("Released: 2026-08-22\n", encoding="utf-8")
 
-            self.assertEqual(digest(first, "first.md"), digest(second, "second.md"))
+            self.assertNotEqual(digest(first, "first.md"), digest(second, "second.md"))
 
 
 if __name__ == "__main__":

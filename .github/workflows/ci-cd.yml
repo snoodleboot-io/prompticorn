@@ -227,6 +227,84 @@ jobs:
           path: test-results/slow-test-results.xml
           retention-days: 30
 
+  reproducibility-seed:
+    name: Reproducibility (seed on Linux)
+    runs-on: ubuntu-latest
+    needs: [lint, unit-tests]
+    # Only run on main branch or PRs
+    if: github.ref == 'refs/heads/main' || github.event_name == 'pull_request'
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+
+      # --no-dev deliberately: this job needs the package, not the test
+      # toolchain, and its sibling below runs the same install on macOS and
+      # Windows. Fewer dependencies to resolve is fewer ways for a job that
+      # gates the release build to fail for reasons unrelated to what it tests.
+      - name: Install dependencies
+        run: uv sync --no-dev
+
+      - name: Build and lock the reference project
+        run: uv run python tools/reproducibility.py seed --root reproducibility-reference
+
+      - name: Upload the reference tree
+        uses: actions/upload-artifact@v4
+        with:
+          name: reproducibility-reference
+          path: reproducibility-reference
+          # The generated tree is .claude/ and .prompticorn/ — every path in it
+          # is hidden, and upload-artifact drops hidden files by default. Without
+          # this the artifact is empty and the matrix compares nothing.
+          include-hidden-files: true
+          retention-days: 7
+
+  reproducibility-matrix:
+    name: Reproducibility (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    needs: [reproducibility-seed]
+    strategy:
+      # Every platform reports. Stopping at the first failure would hide whether
+      # a bug is one platform's or everything-but-Linux's, which is the single
+      # most useful thing this job can tell you.
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v3
+        with:
+          enable-cache: true
+
+      - name: Install dependencies
+        run: uv sync --no-dev
+
+      - name: Download the reference tree
+        uses: actions/download-artifact@v4
+        with:
+          name: reproducibility-reference
+          path: reproducibility-reference
+
+      - name: Regenerate from the Linux lock and compare byte for byte
+        run: uv run python tools/reproducibility.py check --reference reproducibility-reference
+
   # =============================================================================
   # PHASE 2: BUILD
   # =============================================================================
@@ -298,7 +376,7 @@ jobs:
   build-release:
     name: Build Package (Release)
     runs-on: ubuntu-latest
-    needs: [lint, unit-tests, integration-tests, security-tests, slow-tests]
+    needs: [lint, unit-tests, integration-tests, security-tests, slow-tests, reproducibility-matrix]
     # Only run on PRs or main branch pushes.ref == 'refs/heads/main'
     outputs:
       version: ${{ steps.version.outputs.version }}

@@ -23,6 +23,7 @@ from prompticorn.builders.convention_generator import (
 from prompticorn.builders.errors import BuilderValidationError
 from prompticorn.builders.windsurf_builder import _LANG_EXT
 from prompticorn.ir.models import Agent
+from prompticorn.text_writer import write_text
 
 
 def _rule(frontmatter: dict[str, object], body: str) -> str:
@@ -77,9 +78,9 @@ class ContinueBuilder(Builder):
             primary_language=primary_spec.get("language", ""),
             primary_spec=primary_spec,
         )
-        (rules_dir / "conventions-core.md").write_text(
+        write_text(
+            rules_dir / "conventions-core.md",
             _rule({"name": "Core project conventions", "alwaysApply": True}, core),
-            encoding="utf-8",
         )
         written.append(".continue/rules/conventions-core.md")
 
@@ -100,9 +101,7 @@ class ContinueBuilder(Builder):
             ext = _LANG_EXT.get(language)
             if ext:
                 fm["globs"] = [f"**/*.{ext}"]
-            (rules_dir / f"conventions-{language}.md").write_text(
-                _rule(fm, lang_content), encoding="utf-8"
-            )
+            write_text(rules_dir / f"conventions-{language}.md", _rule(fm, lang_content))
             written.append(f".continue/rules/conventions-{language}.md")
 
         return written

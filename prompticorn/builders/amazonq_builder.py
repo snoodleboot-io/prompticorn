@@ -21,6 +21,7 @@ from prompticorn.builders.convention_generator import (
 from prompticorn.builders.errors import BuilderValidationError
 from prompticorn.builders.junie_builder import slugify
 from prompticorn.ir.models import Agent
+from prompticorn.text_writer import write_text
 
 # Glob that makes an agent load every convention file; a custom agent does NOT
 # inherit the built-in default agent's resources, so each agent must list it.
@@ -84,7 +85,7 @@ class AmazonQBuilder(Builder):
             primary_language=primary_language,
             primary_spec=primary_spec,
         )
-        (rules_dir / "conventions.md").write_text(core, encoding="utf-8")
+        write_text(rules_dir / "conventions.md", core)
         written.append(".amazonq/rules/conventions.md")
 
         seen: set[str] = set()
@@ -95,9 +96,7 @@ class AmazonQBuilder(Builder):
             seen.add(language)
             lang_content = generate_language_convention(language, spec)
             if lang_content:
-                (rules_dir / f"conventions-{language}.md").write_text(
-                    lang_content, encoding="utf-8"
-                )
+                write_text(rules_dir / f"conventions-{language}.md", lang_content)
                 written.append(f".amazonq/rules/conventions-{language}.md")
 
         return written

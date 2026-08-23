@@ -1386,6 +1386,80 @@ def verify_command():
     sys.exit(code)
 
 
+@cli.command("regenerate")
+def regenerate_command():
+    """
+    Rebuild the generated tree from the lock, discarding whatever is there now.
+
+    This is the answer to a hand-edited generated file: recompile, don't edit.
+    Generated directories are disposable — this deletes the ones the selected
+    tool owns and rebuilds them, then checks the result against the lock.
+
+    \b
+    Unlike `build`, nothing is re-resolved and nothing is written to the lock.
+    If the sources no longer match what the lock recorded, the rebuild is
+    refused rather than quietly producing a tree the lock does not describe.
+
+    \b
+    Exit codes:
+        0  the tree was rebuilt and matches the lock
+        1  the sources moved, so nothing was regenerated
+        3  there is no lock, or it is unusable
+        4  the rebuild did not reproduce the lock (a defect; please report it)
+
+    \b
+    Usage:
+        prompticorn regenerate
+    """
+    from prompticorn.lockfile import ExitCode, LockService
+    from prompticorn.lockfile.errors import LockError
+    from prompticorn.lockfile.lock_reader import LockReader
+    from prompticorn.regenerate import RegenerationService
+
+    config = _require_config()
+    root = Path(".")
+
+    tool = _selected_tool(config)
+    if tool is None:
+        click.secho("\n✗ No tool is selected; run `prompticorn switch` first.", fg="red", err=True)
+        sys.exit(ExitCode.DRIFT)
+
+    builder = _get_builder(tool)
+    if builder is None:
+        click.secho(f"Error: Unknown tool: {tool}", fg="red")
+        raise click.Abort()
+
+    location = LockService.lock_path(root)
+    if not location.is_file():
+        click.secho(
+            f"\n✗ No lock at {location}. Run `prompticorn lock` first — there is "
+            "nothing to regenerate from.",
+            fg="red",
+            err=True,
+        )
+        sys.exit(ExitCode.UNUSABLE_LOCK)
+
+    try:
+        lock = LockReader.read(location)
+    except LockError as error:
+        click.secho(f"\n✗ {error}", fg="red", err=True)
+        sys.exit(ExitCode.UNUSABLE_LOCK)
+
+    click.secho(f"\n  Regenerating {tool} configuration from {location}...", bold=True)
+    report = RegenerationService(root=root, tool=tool, config=config).regenerate(
+        lock, builder, _utc_now()
+    )
+
+    for action in (*report.removed, *report.rebuilt):
+        click.echo(f"    {action}")
+
+    if report.is_clean:
+        click.secho(f"\n✓ {report.render()}", fg="green")
+    else:
+        click.secho(f"\n{report.render()}", fg="red" if report.refused else "yellow")
+    sys.exit(report.exit_code)
+
+
 @cli.command("build")
 @click.option(
     "--frozen",

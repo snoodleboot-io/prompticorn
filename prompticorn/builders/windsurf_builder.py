@@ -26,6 +26,7 @@ from prompticorn.builders.convention_generator import (
 from prompticorn.builders.errors import BuilderValidationError
 from prompticorn.builders.junie_builder import slugify
 from prompticorn.ir.models import Agent
+from prompticorn.text_writer import write_text
 
 # Language -> file extension for glob-scoped convention rules. Languages absent
 # here fall back to a description-triggered (model_decision) rule.
@@ -130,7 +131,7 @@ class WindsurfBuilder(Builder):
         core_rule = _rule(
             {"trigger": core_trigger, "description": "Core project conventions"}, core
         )
-        (rules_dir / "conventions-core.md").write_text(core_rule, encoding="utf-8")
+        write_text(rules_dir / "conventions-core.md", core_rule)
         _warn_if_over_budget(".windsurf/rules/conventions-core.md", core_rule)
         written.append(".windsurf/rules/conventions-core.md")
 
@@ -154,7 +155,7 @@ class WindsurfBuilder(Builder):
                 fm = {"trigger": "model_decision", "description": f"{language} conventions"}
             rel = f".windsurf/rules/conventions-{language}.md"
             lang_rule = _rule(fm, lang_content)
-            (rules_dir / f"conventions-{language}.md").write_text(lang_rule, encoding="utf-8")
+            write_text(rules_dir / f"conventions-{language}.md", lang_rule)
             _warn_if_over_budget(rel, lang_rule)
             written.append(rel)
 

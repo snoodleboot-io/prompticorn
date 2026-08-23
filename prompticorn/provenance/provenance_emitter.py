@@ -28,6 +28,7 @@ from prompticorn.provenance.output_format import OutputFormat
 from prompticorn.provenance.provenance_header import ProvenanceHeader
 from prompticorn.provenance.provenance_record import ProvenanceRecord
 from prompticorn.provenance.provenance_sidecar import SIDECAR_FILENAME, ProvenanceSidecar
+from prompticorn.text_writer import write_text
 
 SIDECAR_DIRECTORY = ".prompticorn"
 
@@ -101,7 +102,7 @@ class ProvenanceEmitter:
 
         headed = ProvenanceHeader.render(body, record, output_format)
         if headed != text:
-            path.write_text(headed, encoding="utf-8")
+            write_text(path, headed)
         return record
 
 
