@@ -113,12 +113,19 @@ def _excerpt(blob: bytes, other: bytes) -> str:
 
 
 def _prompticorn(*arguments: str, cwd: Path) -> int:
-    """Run the installed CLI in ``cwd`` and echo what it said."""
+    """Run the installed CLI in ``cwd`` and echo what it said.
+
+    The encoding is named on both sides. The CLI writes UTF-8 (see
+    ``prompticorn.console``), so decoding with ``text=True`` would use the
+    parent's locale — cp1252 on a Windows runner — and mangle or reject the
+    tick marks it is quoting back.
+    """
     completed = subprocess.run(
         [sys.executable, "-c", "from prompticorn.cli import cli; cli()", *arguments],
         cwd=cwd,
         capture_output=True,
-        text=True,
+        encoding="utf-8",
+        errors="replace",
     )
     sys.stdout.write(completed.stdout)
     sys.stderr.write(completed.stderr)
@@ -193,6 +200,13 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def main(argv: list[str] | None = None) -> int:
+    # This script re-prints the CLI's output, so it needs the same treatment the
+    # CLI gives itself: on a Windows runner its own stdout is a pipe, and a
+    # quoted tick mark would abort the check rather than fail it.
+    from prompticorn.console import configure_output_streams
+
+    configure_output_streams()
+
     namespace = build_parser().parse_args(argv)
     return namespace.handler(namespace)
 

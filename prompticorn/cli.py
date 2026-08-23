@@ -41,6 +41,7 @@ from prompticorn.config_options import (
     load_current_values,
     set_nested_value,
 )
+from prompticorn.console import configure_output_streams
 from prompticorn.personas import PersonaRegistry
 from prompticorn.questions.base.constants import RepositoryTypes
 from prompticorn.questions.base.folder_spec import (
@@ -489,6 +490,10 @@ def cli():
     Edit files in prompts/, then use `prompticorn list` to see available modes and
     `prompticorn validate` to check configuration integrity.
     """
+    # Before any command prints anything. The CLI's own output uses characters
+    # cp1252 cannot encode, and a redirected stream on Windows would otherwise
+    # abort a half-finished command while reporting what it had already done.
+    configure_output_streams()
 
 
 # ── list ───────────────────────────────────────────────────────────────────────
