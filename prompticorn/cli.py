@@ -1322,6 +1322,70 @@ def lock_command():
     sys.exit(ExitCode.CLEAN)
 
 
+@cli.command("verify")
+def verify_command():
+    """
+    Check that generated output still matches the lock, and nothing extra exists.
+
+    This is the CI gate that makes the source/generated wall real rather than a
+    convention people are asked to respect. It answers three questions:
+
+    \b
+      1. Does every output the lock names still exist, unmodified?
+      2. Is there anything in the generated directories the lock does not know
+         about? Without this, a rogue agent added to .claude/agents/ passes
+         unnoticed, which defeats the point of checking at all.
+      3. Does the lock carry a digest for every unit it references?
+
+    Digests cover the file body with the provenance header stripped, the same
+    way .prompticorn/provenance.json digests it, so a version bump that changed
+    no content does not read as a modified file.
+
+    Nothing is written. Every finding is reported, not just the first.
+
+    \b
+    Exit codes:
+        0  clean; outputs match the lock and nothing extra exists
+        1  outputs are missing, or files exist that the lock does not know about
+        3  the lock is unusable (corrupt, or from a newer prompticorn)
+        4  a generated file was modified by hand
+
+    \b
+    Usage:
+        prompticorn verify
+    """
+    from prompticorn.lockfile import ExitCode, LockService
+    from prompticorn.lockfile.errors import LockError
+    from prompticorn.lockfile.lock_reader import LockReader
+    from prompticorn.verify import OutputVerifier
+
+    config = _require_config()
+    root = Path(".")
+    tool = _selected_tool(config)
+    if tool is None:
+        click.secho("\n✗ No tool is selected; run `prompticorn switch` first.", fg="red", err=True)
+        sys.exit(ExitCode.DRIFT)
+
+    location = LockService.lock_path(root)
+    if not location.is_file():
+        click.secho(f"\n✗ No lock at {location}. Run `prompticorn lock` first.", fg="red", err=True)
+        sys.exit(ExitCode.UNUSABLE_LOCK)
+
+    try:
+        lock = LockReader.read(location)
+    except LockError as error:
+        click.secho(f"\n✗ {error}", fg="red", err=True)
+        sys.exit(ExitCode.UNUSABLE_LOCK)
+
+    report = OutputVerifier(root=root, tool=tool).verify(lock)
+    code = report.exit_code
+    if report.is_clean:
+        click.secho(f"\n✓ {report.render()}", fg="green")
+    else:
+        click.secho(f"\n{report.render()}", fg="red" if report.has_tampering else "yellow")
+    sys.exit(code)
+
+
 @cli.command("build")
 @click.option(
     "--frozen",

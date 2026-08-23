@@ -25,6 +25,8 @@ from prompticorn.lockfile.locked_artifact import LockedArtifact
 from prompticorn.lockfile.locked_output import LockedOutput
 from prompticorn.lockfile.locked_unit import LockedUnit
 from prompticorn.manifest.manifest_schema import ManifestSchema
+from prompticorn.provenance.output_format import OutputFormat
+from prompticorn.provenance.provenance_header import ProvenanceHeader
 
 LOCK_FILENAME = "prompticorn.lock"
 
@@ -152,7 +154,18 @@ def _digest_outputs(root: Path | None, paths: tuple[str, ...]) -> tuple[LockedOu
 
 
 def _locked_output(root: Path, path: Path) -> LockedOutput:
+    """Digest one output, with its provenance header stripped (PRO-115).
+
+    Stripped rather than whole-file for two reasons. The header embeds the
+    artifact version, so hashing it would move every output's digest on a
+    version bump that changed no content. And `.prompticorn/provenance.json`
+    digests the body the same way — two mechanisms describing the same file and
+    disagreeing about it is worse than either one alone.
+    """
+    relative = path.relative_to(root).as_posix()
     return LockedOutput(
-        path=path.relative_to(root).as_posix(),
-        digest=digest_text(path.read_text(encoding="utf-8")),
+        path=relative,
+        digest=ProvenanceHeader.body_digest(
+            path.read_text(encoding="utf-8"), OutputFormat.of(relative)
+        ),
     )
