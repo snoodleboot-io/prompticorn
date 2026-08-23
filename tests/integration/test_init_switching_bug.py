@@ -1,6 +1,6 @@
 """Test to reproduce the init tool switching bug."""
 
-import shutil
+import tempfile
 import unittest
 from pathlib import Path
 
@@ -12,16 +12,16 @@ class TestInitSwitchingBug(unittest.TestCase):
     """Reproduce: Running init to switch from Kilo to Claude."""
 
     def setUp(self):
-        """Set up test fixtures."""
-        self.test_dir = Path(".test_init_bug")
-        if self.test_dir.exists():
-            shutil.rmtree(self.test_dir)
-        self.test_dir.mkdir(parents=True)
+        """Set up test fixtures.
 
-    def tearDown(self):
-        """Clean up test artifacts."""
-        if self.test_dir.exists():
-            shutil.rmtree(self.test_dir)
+        A real temp directory, not a CWD-relative one — see PRO-147: a test that
+        writes into the working tree leaves generated output next to real source
+        whenever the run does not reach teardown. ``addCleanup`` also covers a
+        ``setUp`` that fails partway.
+        """
+        tmp = tempfile.TemporaryDirectory()
+        self.addCleanup(tmp.cleanup)
+        self.test_dir = Path(tmp.name)
 
     def test_init_kilo_then_init_claude(self):
         """Reproduce the bug: Init with Kilo, then init with Claude.
