@@ -13,6 +13,12 @@ Two failure modes, the silent one being worse:
 
 This bites hardest in the Bedrock builder, which emits an ``invoke_example.py``
 that runs on the *user's* machine, where we control neither locale nor platform.
+
+``prompticorn.text_writer.write_text`` pins both the encoding and the line
+ending, so calls to it are exempt (PRO-116). The exemption is deliberately
+narrow — a bare ``write_text(...)`` counts only in a module that actually
+imports the helper — because the scan is the only thing standing between this
+rule and a call that silently reintroduces the platform default.
 """
 
 from __future__ import annotations
@@ -27,6 +33,10 @@ _PACKAGE = Path(__file__).parent.parent.parent / "prompticorn"
 # Calls that take an `encoding` argument and silently default without one.
 _ENCODING_SENSITIVE = {"open", "read_text", "write_text"}
 
+# The helper that pins encoding *and* newline for every generated file.
+_SAFE_WRITER = "prompticorn.text_writer"
+_SAFE_WRITER_NAME = "write_text"
+
 # Emitted-code templates: python source we generate into the user's output. The
 # same rule applies, but it cannot be caught by parsing our own AST because the
 # code lives inside a string literal.
@@ -35,8 +45,24 @@ _EMITTED_TEMPLATE_SOURCES = [
 ]
 
 
+def _imports_the_safe_writer(tree: ast.Module) -> bool:
+    """Whether this module imports ``write_text`` from ``prompticorn.text_writer``.
+
+    Checked rather than assumed: a module that defined its own ``write_text``
+    would otherwise be exempted by name alone, which is how a scan stops
+    scanning.
+    """
+    return any(
+        isinstance(node, ast.ImportFrom)
+        and node.module == _SAFE_WRITER
+        and any(alias.name == _SAFE_WRITER_NAME and alias.asname is None for alias in node.names)
+        for node in ast.walk(tree)
+    )
+
+
 def _unencoded_calls(path: Path) -> list[str]:
     tree = ast.parse(path.read_text(encoding="utf-8"))
+    uses_safe_writer = _imports_the_safe_writer(tree)
     findings = []
     for node in ast.walk(tree):
         if not isinstance(node, ast.Call):
@@ -48,6 +74,15 @@ def _unencoded_calls(path: Path) -> list[str]:
             else (func.id if isinstance(func, ast.Name) else "")
         )
         if name not in _ENCODING_SENSITIVE:
+            continue
+        # A bare `write_text(path, text)` is the helper, which pins the encoding
+        # itself. `path.write_text(...)` is an attribute call and still counts —
+        # that is the one that defaults.
+        if (
+            name == _SAFE_WRITER_NAME
+            and isinstance(func, ast.Name)
+            and uses_safe_writer
+        ):
             continue
         # `open(...)` in binary mode takes no encoding; "b" in the mode argument.
         if name == "open" and any(
@@ -71,6 +106,34 @@ class TestNoImplicitEncoding:
             "file I/O without an explicit encoding relies on the platform default "
             f"and breaks on non-UTF-8 systems: {offenders}"
         )
+
+    def test_the_helper_exemption_does_not_disable_the_scan(self, tmp_path):
+        """A bare `write_text` is exempt only where the helper is imported, and
+        `path.write_text(...)` is never exempt. Without this, the exemption
+        added in PRO-116 would quietly cover every call named `write_text`."""
+        unimported = tmp_path / "unimported.py"
+        unimported.write_text('write_text("a", "b")\n', encoding="utf-8")
+
+        attribute = tmp_path / "attribute.py"
+        attribute.write_text(
+            "from prompticorn.text_writer import write_text\n\n"
+            'Path("a").write_text("b")\n',
+            encoding="utf-8",
+        )
+
+        exempt = tmp_path / "exempt.py"
+        exempt.write_text(
+            'from prompticorn.text_writer import write_text\n\nwrite_text("a", "b")\n',
+            encoding="utf-8",
+        )
+
+        assert _unencoded_calls(unimported) == ["unimported.py:1 write_text()"]
+        assert _unencoded_calls(attribute) == ["attribute.py:3 write_text()"]
+        assert _unencoded_calls(exempt) == []
+
+    def test_the_helper_itself_still_pins_the_encoding(self):
+        """The exemption is only sound because the helper does the thing."""
+        assert _unencoded_calls(_PACKAGE / "text_writer.py") == []
 
     @pytest.mark.parametrize("source", _EMITTED_TEMPLATE_SOURCES, ids=lambda p: p.name)
     def test_emitted_python_templates_read_utf8_explicitly(self, source):

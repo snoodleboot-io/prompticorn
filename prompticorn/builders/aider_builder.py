@@ -20,6 +20,7 @@ from prompticorn.builders.convention_generator import (
     generate_language_convention,
 )
 from prompticorn.ir.models import Agent
+from prompticorn.text_writer import write_text
 
 
 def _specs_from_config(config: dict | None) -> list[dict]:
@@ -64,11 +65,11 @@ class AiderBuilder(Builder):
                 parts.append(lang_content)
 
         conventions = "\n\n---\n\n".join(part.strip() for part in parts) + "\n"
-        (output_dir / "CONVENTIONS.md").write_text(conventions, encoding="utf-8")
+        write_text(output_dir / "CONVENTIONS.md", conventions)
 
         # aider does not auto-discover CONVENTIONS.md; the read: list loads it.
         conf = yaml.safe_dump({"read": ["CONVENTIONS.md"]}, sort_keys=False)
-        (output_dir / ".aider.conf.yml").write_text(conf, encoding="utf-8")
+        write_text(output_dir / ".aider.conf.yml", conf)
 
         return ["CONVENTIONS.md", ".aider.conf.yml"]
 

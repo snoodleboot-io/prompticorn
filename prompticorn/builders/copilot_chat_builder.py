@@ -36,6 +36,7 @@ from prompticorn.builders.errors import BuilderValidationError
 from prompticorn.builders.roo_builder import slugify
 from prompticorn.builders.windsurf_builder import _LANG_EXT
 from prompticorn.ir.models import Agent
+from prompticorn.text_writer import write_text
 
 
 def _specs_from_config(config: dict | None) -> list[dict]:
@@ -118,9 +119,7 @@ class CopilotChatBuilder(Builder):
             primary_language=primary_language,
             primary_spec=primary_spec,
         )
-        (instructions_dir / "core.instructions.md").write_text(
-            f"---\napplyTo: '**'\n---\n\n{core}", encoding="utf-8"
-        )
+        write_text(instructions_dir / "core.instructions.md", f"---\napplyTo: '**'\n---\n\n{core}")
         written.append(".github/instructions/core.instructions.md")
 
         seen: set[str] = set()
@@ -134,8 +133,9 @@ class CopilotChatBuilder(Builder):
                 continue
             ext = _LANG_EXT.get(language)
             apply_to = f"**/*.{ext}" if ext else "**"
-            (instructions_dir / f"conventions-{language}.instructions.md").write_text(
-                f"---\napplyTo: '{apply_to}'\n---\n\n{lang_content}", encoding="utf-8"
+            write_text(
+                instructions_dir / f"conventions-{language}.instructions.md",
+                f"---\napplyTo: '{apply_to}'\n---\n\n{lang_content}",
             )
             written.append(f".github/instructions/conventions-{language}.instructions.md")
 

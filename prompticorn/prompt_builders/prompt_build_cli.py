@@ -24,6 +24,7 @@ from prompticorn.builders.base import Builder, BuildOptions
 from prompticorn.builders.errors import BuilderException, BuilderNotFoundError
 from prompticorn.builders.factory import BuilderFactory
 from prompticorn.ir.models import Agent
+from prompticorn.text_writer import write_text
 
 
 class PromptBuildCLI:
@@ -238,7 +239,7 @@ class PromptBuildCLI:
                 # content is already a string
                 content_str = str(content)
 
-            output_path.write_text(content_str, encoding="utf-8")
+            write_text(output_path, content_str)
 
             print(f"✓ Built {tool} agent: {output_path}")
 

@@ -7,8 +7,6 @@ prompt library. It discovers a registry of agents (and their subagents) bundled
 with the package, asks you about your project, and generates tool-specific
 configuration files for the assistant you choose.
 
-There are six commands:
-
 | Command | Purpose |
 |---------|---------|
 | `prompticorn init` | Interactive setup: ask questions, save config, generate tool files |
@@ -17,6 +15,14 @@ There are six commands:
 | `prompticorn switch` | Switch the active AI assistant and regenerate configs |
 | `prompticorn swap` | Change active personas and regenerate configs |
 | `prompticorn update` | Edit individual config options interactively |
+| `prompticorn build` | Rebuild the selected tool's configuration and check it against the lock |
+| `prompticorn lock` | Record what this project resolved to, in `.prompticorn/prompticorn.lock` |
+| `prompticorn verify` | Check that generated output still matches the lock. Writes nothing |
+| `prompticorn regenerate` | Throw the generated tree away and rebuild it from the lock |
+
+The last four are the source/generated wall: generated directories are
+disposable, and these are the commands that make that safe to rely on. See
+[GENERATED_OUTPUT.md](./GENERATED_OUTPUT.md).
 
 ### Supported AI assistants
 
@@ -374,6 +380,113 @@ prompticorn update
 
 ---
 
+## `prompticorn build`
+
+Regenerate configuration for the currently selected tool.
+
+Unlike `switch`, this does not change which tool is selected and does not remove
+another tool's files — it rebuilds what is already configured. It then compares
+the result against `.prompticorn/prompticorn.lock` and reports any drift.
+
+```bash
+prompticorn build
+prompticorn build --frozen
+```
+
+`--frozen` writes nothing to the lock and treats any divergence as an error.
+That is the mode for CI: it answers "would this build differ from what was
+committed?" without quietly making the answer no.
+
+| Code | Meaning |
+|---|---|
+| `0` | Clean: outputs match the lock |
+| `1` | The lock and reality diverge (`--frozen` only) |
+| `3` | The lock is unusable |
+
+A project with no lock is not an error. It has simply not opted in yet, and
+`build` says so rather than failing.
+
+---
+
+## `prompticorn lock`
+
+Resolve the manifest and write `.prompticorn/prompticorn.lock`.
+
+```bash
+prompticorn lock
+```
+
+The lock records what this project resolved to: artifact versions and digests,
+every content unit with the layer that supplied it, and the digest of each
+generated file. A later `build`, `verify` or `regenerate` compares against it,
+which is how a source that changed underneath you becomes visible instead of
+silent.
+
+Commit the lock. Re-running with nothing changed rewrites nothing — a committed
+generated file that churns on every run is one reviewers stop reading.
+
+| Code | Meaning |
+|---|---|
+| `0` | Lock written, or already up to date |
+| `3` | An existing lock is unusable — corrupt, or from a newer `prompticorn` |
+
+---
+
+## `prompticorn verify`
+
+Check that generated output still matches the lock, and that nothing extra
+exists. Writes nothing.
+
+```bash
+prompticorn verify
+```
+
+This is the CI gate that makes generated output trustworthy. It reports every
+finding, not just the first, and it fails on files the lock does not know
+about — without that, an extra agent dropped into `.claude/agents/` would pass
+unnoticed.
+
+| Code | Meaning |
+|---|---|
+| `0` | Clean: outputs match the lock and nothing extra exists |
+| `1` | Outputs are missing, or files exist that the lock does not know about |
+| `3` | The lock is unusable |
+| `4` | A generated file was modified by hand |
+
+Digests cover the file body with the provenance header stripped, so a version
+bump that changed no content does not read as a modified file.
+
+---
+
+## `prompticorn regenerate`
+
+Rebuild the generated tree from the lock, discarding whatever is there now.
+
+```bash
+prompticorn regenerate
+```
+
+This is the answer to a hand-edited generated file: recompile, don't edit. It
+deletes the directories the selected tool owns, rebuilds them, and checks the
+result against the lock. A rogue file is removed, an edit is overwritten, a
+deleted tree is restored.
+
+Unlike `build`, **nothing is re-resolved and nothing is written to the lock**.
+If the sources no longer match what the lock recorded, the rebuild is refused
+before anything is deleted, because rebuilding from moved sources would produce
+a tree the lock does not describe.
+
+| Code | Meaning |
+|---|---|
+| `0` | The tree was rebuilt and matches the lock |
+| `1` | The sources moved, so nothing was regenerated |
+| `3` | There is no lock, or it is unusable |
+| `4` | The rebuild did not reproduce the lock — a defect; please report it |
+
+See [GENERATED_OUTPUT.md](./GENERATED_OUTPUT.md) for the full recovery story.
+
+---
+
 ## Configuration file
 
 Configuration is stored in `.prompticorn/.prompticorn.yaml`. Key sections:
@@ -423,6 +536,20 @@ core conventions based on `project.layout_style`.
 Interactive commands raise a Click abort when the configuration is missing or
 when you cancel the operation (Ctrl+C / Esc).
 
+`build`, `lock`, `verify` and `regenerate` return a documented contract that CI
+scripts can branch on:
+
+| Code | Meaning |
+|---|---|
+| `0` | Clean |
+| `1` | The lock and reality diverge |
+| `3` | The lock is unusable — corrupt, or written by a newer `prompticorn` |
+| `4` | A generated file was modified by hand |
+
+`2` is never returned by any of them. `click` uses it for usage errors, and a
+tampering signal that also fires on a mistyped flag is one people learn to
+ignore.
+
 ---
 
 ## Quick reference
@@ -435,3 +562,7 @@ when you cancel the operation (Ctrl+C / Esc).
 | `prompticorn switch [TOOL]` | Switch AI tool and regenerate configs | Optional |
 | `prompticorn swap` | Change active personas and regenerate configs | Yes |
 | `prompticorn update` | Edit individual config options | Yes |
+| `prompticorn build` | Rebuild the selected tool's config and check it against the lock | No |
+| `prompticorn lock` | Write `.prompticorn/prompticorn.lock` | No |
+| `prompticorn verify` | Check generated output against the lock; writes nothing | No |
+| `prompticorn regenerate` | Rebuild the generated tree from the lock | No |

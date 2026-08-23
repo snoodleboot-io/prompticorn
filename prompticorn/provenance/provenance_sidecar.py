@@ -17,6 +17,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 from prompticorn.provenance.provenance_record import ProvenanceRecord
+from prompticorn.text_writer import write_text
 
 SIDECAR_FILENAME = "provenance.json"
 
@@ -49,7 +50,7 @@ class ProvenanceSidecar:
         if path.exists() and path.read_text(encoding="utf-8") == rendered:
             return False
         path.parent.mkdir(parents=True, exist_ok=True)
-        path.write_text(rendered, encoding="utf-8")
+        write_text(path, rendered)
         return True
 
     @classmethod

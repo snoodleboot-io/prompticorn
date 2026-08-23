@@ -277,7 +277,9 @@ class ConfigHandler:
 
         cls.ensure_config_dir(config_path.parent)
 
-        with open(config_path, "w", encoding="utf-8") as f:
+        # newline="\n" for the same reason prompticorn.text_writer exists: the
+        # manifest is committed, and CPython would otherwise emit CRLF on Windows.
+        with open(config_path, "w", encoding="utf-8", newline="\n") as f:
             # Use ruamel.yaml with proper list indentation
             cls._get_yaml().dump(config, f)
 

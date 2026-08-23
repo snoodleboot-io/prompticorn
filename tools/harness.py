@@ -359,19 +359,6 @@ def _relative_files(root: Path) -> dict[str, bytes]:
     return files
 
 
-def normalize_generated(name: str, blob: bytes) -> bytes:
-    """Drop content that legitimately differs between two builds of the same source.
-
-    The routing file stamps the build date. That changes on every run and is not
-    drift, so comparing it verbatim would report the tree as dirty forever.
-    """
-    if name != "CLAUDE.md":
-        return blob
-    return b"\n".join(
-        line for line in blob.splitlines() if not line.startswith(b"**Last Updated:**")
-    )
-
-
 def command_verify(_: argparse.Namespace) -> int:
     """Fail if the tracked generated tree disagrees with what source produces.
 
@@ -384,15 +371,14 @@ def command_verify(_: argparse.Namespace) -> int:
         fresh = _relative_files(fresh_root)
 
     tracked = _relative_files(ROOT)
-    normalize = normalize_generated
 
+    # Compared verbatim. CLAUDE.md used to stamp the build date, so its
+    # "Last Updated" line had to be dropped before comparing or the tree read as
+    # dirty forever; PRO-116 removed the stamp, and the exemption went with it.
+    # Keeping it would have left this check blind to the stamp coming back.
     missing = sorted(set(fresh) - set(tracked))
     extra = sorted(set(tracked) - set(fresh))
-    changed = sorted(
-        name
-        for name in set(fresh) & set(tracked)
-        if normalize(name, fresh[name]) != normalize(name, tracked[name])
-    )
+    changed = sorted(name for name in set(fresh) & set(tracked) if fresh[name] != tracked[name])
 
     if not (missing or extra or changed):
         print(f"Generated output is in sync ({len(tracked)} files).")

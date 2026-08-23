@@ -1,0 +1,10 @@
+# Line endings are LF in the repository and in the working tree, on every
+# platform (PRO-116).
+#
+# prompticorn's generated trees are committed, and the tool now writes them with
+# LF everywhere — see prompticorn/text_writer.py. Without this file, a Windows
+# checkout with core.autocrlf=true converts them to CRLF on the way in, and the
+# next `prompticorn regenerate` converts them back, so every generated file shows
+# as modified. Pinning eol=lf here means the bytes git hands you are the bytes
+# prompticorn writes.
+* text=auto eol=lf
