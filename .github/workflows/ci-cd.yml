@@ -25,6 +25,20 @@ env:
   MAJOR_VERSION: "1"  # Hardcoded - edit this to bump major version for breaking changes
   IS_MAIN: ${{ github.ref == 'refs/heads/main' }}
 
+# Least privilege for the default GITHUB_TOKEN, applied to every job that does
+# not declare its own (PRO-116, CodeQL actions/missing-workflow-permissions).
+#
+# Read is genuinely all this pipeline needs: it checks out, builds, tests and
+# uploads artifacts, and nothing here writes through the token — Codecov uses
+# its own secret, and the two publish jobs declare `id-token: write` for PyPI
+# trusted publishing. A job-level block replaces this one entirely rather than
+# adding to it, so those two are unaffected.
+#
+# Stated explicitly even though the repository default may already be read-only,
+# so the workflow keeps its own guarantee if that default is ever widened.
+permissions:
+  contents: read
+
 jobs:
   # =============================================================================
   # PHASE 1: TEST
