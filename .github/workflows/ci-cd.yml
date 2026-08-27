@@ -101,7 +101,7 @@ jobs:
       - name: Run unit tests with coverage
         run: |
           uv run pytest tests/unit \
-            --cov=promptcli \
+            --cov=prompticorn \
             --cov-report=xml \
             --cov-report=html \
             --junitxml=test-results/unit-test-results-${{ matrix.python-version }}.xml \
