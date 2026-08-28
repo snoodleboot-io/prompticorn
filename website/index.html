@@ -43,16 +43,19 @@
         <a href="#how-it-works" role="listitem" data-show-mode="startup">How It Works</a>
         <a href="#personas" role="listitem" data-show-mode="startup">Personas</a>
         <a href="#tools" role="listitem" data-show-mode="startup">Tools</a>
+        <a href="#reproducibility" role="listitem" data-show-mode="startup">Reproducible</a>
         <a href="#getting-started" role="listitem" data-show-mode="startup">Get Started</a>
         <!-- enterprise nav -->
         <a href="#features" role="listitem" data-show-mode="enterprise">Capabilities</a>
         <a href="#how-it-works" role="listitem" data-show-mode="enterprise">Architecture</a>
         <a href="#tools" role="listitem" data-show-mode="enterprise">AI Tools</a>
+        <a href="#reproducibility" role="listitem" data-show-mode="enterprise">Reproducible</a>
         <a href="#getting-started" role="listitem" data-show-mode="enterprise">Deploy</a>
         <!-- engineer nav -->
         <a href="#features" role="listitem" data-show-mode="engineer">Features</a>
         <a href="#how-it-works" role="listitem" data-show-mode="engineer">How It Works</a>
         <a href="#tools" role="listitem" data-show-mode="engineer">AI Tools</a>
+        <a href="#reproducibility" role="listitem" data-show-mode="engineer">Reproducible</a>
         <a href="#getting-started" role="listitem" data-show-mode="engineer">Get Started</a>
 
         <a href="https://github.com/snoodleboot-io/prompticorn" target="_blank" rel="noopener" class="nav-cta" role="listitem">GitHub ↗</a>
@@ -74,14 +77,17 @@
     <a href="#how-it-works" role="listitem" data-show-mode="startup">How It Works</a>
     <a href="#personas" role="listitem" data-show-mode="startup">Personas</a>
     <a href="#tools" role="listitem" data-show-mode="startup">Tools</a>
+    <a href="#reproducibility" role="listitem" data-show-mode="startup">Reproducible</a>
     <a href="#getting-started" role="listitem" data-show-mode="startup">Get Started</a>
     <a href="#features" role="listitem" data-show-mode="enterprise">Capabilities</a>
     <a href="#how-it-works" role="listitem" data-show-mode="enterprise">Architecture</a>
     <a href="#tools" role="listitem" data-show-mode="enterprise">AI Tools</a>
+    <a href="#reproducibility" role="listitem" data-show-mode="enterprise">Reproducible</a>
     <a href="#getting-started" role="listitem" data-show-mode="enterprise">Deploy</a>
     <a href="#features" role="listitem" data-show-mode="engineer">Features</a>
     <a href="#how-it-works" role="listitem" data-show-mode="engineer">How It Works</a>
     <a href="#tools" role="listitem" data-show-mode="engineer">AI Tools</a>
+    <a href="#reproducibility" role="listitem" data-show-mode="engineer">Reproducible</a>
     <a href="#getting-started" role="listitem" data-show-mode="engineer">Get Started</a>
     <div class="mode-switcher" role="tablist" aria-label="Site mode">
       <button class="mode-btn active" data-mode="startup" role="tab" aria-selected="true">Teams</button>
@@ -198,7 +204,7 @@
           <span class="gradient-text">Deploy everywhere.</span>
         </h1>
         <p class="hero-subtitle reveal reveal-delay-1">
-          Stop maintaining a separate agent config for every assistant. Run <code>prompticorn init</code> once — prompticorn generates production-ready configurations for <strong>Kilo, Cline, Claude, Cursor,</strong> and <strong>Copilot</strong> automatically.
+          Stop maintaining a separate agent config for every assistant. Run <code>prompticorn init</code> once — prompticorn generates production-ready configurations for <strong>Claude, Cursor, Copilot, Codex, Gemini, Windsurf, Roo, Zed, Amazon Q</strong> and eight more, automatically.
         </p>
         <div class="hero-actions reveal reveal-delay-2">
           <a href="#getting-started" class="btn btn-primary">Get Started</a>
@@ -208,7 +214,7 @@
           <div class="hero-callout">
             <div class="hero-callout-icon">⚡</div>
             <h4>17 AI Tools</h4>
-            <p>Kilo, Cline, Claude, Cursor, Copilot</p>
+            <p>Claude, Cursor, Copilot, Codex, Gemini, Windsurf, Roo, Zed, Amazon Q, Junie, Continue, Aider, Cline, Kilo, Bedrock</p>
           </div>
           <div class="hero-callout">
             <div class="hero-callout-icon">⚙️</div>
@@ -328,8 +334,8 @@
         <div class="feature-card reveal"><div class="feature-icon">🔍</div><h4>Auto-Discovery Registry</h4><p>Zero-config agent registration. The <code>BuilderFactory</code> and <code>Registry</code> automatically discover and register builders. Edit <code>.prompticorn.yaml</code> directly or use <code>prompticorn update</code>.</p></div>
         <div class="feature-card reveal reveal-delay-1"><div class="feature-icon">🧩</div><h4>Jinja2 Template Engine</h4><p>A full Jinja2-powered rendering pipeline with custom filters, resolvers, and template handlers. Deterministic, testable, extensible output generation.</p></div>
         <div class="feature-card reveal reveal-delay-2"><div class="feature-icon">🔄</div><h4>Backwards Compatible</h4><p>Existing configurations continue to work. The Loader and Parser subsystems handle both legacy Markdown/YAML and the new config format.</p></div>
-        <div class="feature-card reveal"><div class="feature-icon">⌨️</div><h4>CLI First</h4><p>Rich CLI covering full lifecycle: <code>init</code>, <code>list</code>, <code>switch</code>, <code>swap</code>, <code>update</code>, and <code>validate</code>. Integrate into onboarding scripts or CI pipelines.</p></div>
-        <div class="feature-card reveal reveal-delay-1"><div class="feature-icon">✅</div><h4>Validate Before You Ship</h4><p>Built-in validation with <code>prompticorn validate</code> checks for correctness, missing references, and schema compliance before any output is generated.</p></div>
+        <div class="feature-card reveal"><div class="feature-icon">⌨️</div><h4>CLI First</h4><p>Rich CLI covering the full lifecycle: <code>init</code>, <code>build</code>, <code>lock</code>, <code>verify</code>, <code>regenerate</code>, <code>switch</code>, <code>swap</code> and more. Documented exit codes, so CI can branch on them.</p></div>
+        <div class="feature-card reveal reveal-delay-1"><div class="feature-icon">✅</div><h4>Verify Before You Ship</h4><p><code>prompticorn verify</code> fails the build if a generated file was hand-edited, deleted, or if anything exists that the lock does not account for. <code>prompticorn validate</code> checks the agent registry itself.</p></div>
       </div>
     </div>
 
@@ -632,63 +638,477 @@ personas:
       <h2 class="section-title reveal">17 tools. <span>One config.</span></h2>
       <p class="section-desc reveal reveal-delay-1">Pick your AI coding assistant during <code>prompticorn init</code> — prompticorn writes the right files to the right locations automatically.</p>
       <div class="builders-nav reveal">
-        <button class="builder-tab active" data-target="bkilo-ent">Kilo</button>
-        <button class="builder-tab" data-target="bcline-ent">Cline</button>
+        <button class="builder-tab active" data-target="bkilocli-ent">Kilo CLI</button>
+        <button class="builder-tab" data-target="bkiloide-ent">Kilo IDE</button>
         <button class="builder-tab" data-target="bclaude-ent">Claude</button>
-        <button class="builder-tab" data-target="bcopilot-ent">Copilot</button>
+        <button class="builder-tab" data-target="bcline-ent">Cline</button>
         <button class="builder-tab" data-target="bcursor-ent">Cursor</button>
+        <button class="builder-tab" data-target="bcopilot-ent">Copilot</button>
+        <button class="builder-tab" data-target="bcopilotchat-ent">Copilot Chat</button>
+        <button class="builder-tab" data-target="broo-ent">Roo Code</button>
+        <button class="builder-tab" data-target="bjunie-ent">Junie</button>
+        <button class="builder-tab" data-target="bzed-ent">Zed</button>
+        <button class="builder-tab" data-target="bgemini-ent">Gemini CLI</button>
+        <button class="builder-tab" data-target="bamazonq-ent">Amazon Q</button>
+        <button class="builder-tab" data-target="bwindsurf-ent">Windsurf</button>
+        <button class="builder-tab" data-target="bcontinue-ent">Continue</button>
+        <button class="builder-tab" data-target="baider-ent">Aider</button>
+        <button class="builder-tab" data-target="bcodex-ent">Codex</button>
+        <button class="builder-tab" data-target="bbedrock-ent">AWS Bedrock</button>
       </div>
-      <div id="bkilo-ent" class="builder-panel active reveal">
-        <div class="builder-info"><div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Kilo IDE</span></div><h3>Kilo IDE</h3><p>Generates YAML frontmatter plus Markdown agent files for Kilo IDE.</p><div class="builder-specs"><div class="builder-spec">Output: <code>.kilo/agents/{agent_name}.md</code></div><div class="builder-spec">YAML frontmatter + Markdown body</div><div class="builder-spec">Minimal and verbose variants</div><div class="builder-spec">Persona-filtered</div></div></div>
-        <div class="code-wrap"><div class="code-header"><span class="code-lang">Output Preview</span></div><pre><code class="language-yaml">---
-name: code
-description: Code implementation expert
-variant: verbose
+      <div id="bkilocli-ent" class="builder-panel active reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Kilo CLI</span></div>
+          <h3>Kilo CLI</h3>
+          <p>Kilo Code (CLI) - .opencode/agents/ + root AGENTS.md (OpenCode)</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.opencode/</code></div>
+            <div class="builder-spec">16 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">.opencode/agents/ask.md</span></div>
+          <pre><code class="language-markdown">---
+description: Answer questions and provide explanations
+mode: primary
 ---
 
-# Code Agent
+You are a principal engineer and technical mentor with deep expertise in the codebase and software development. You provide clear, accurate, and helpful answers to technical questions. You explain complex concepts in accessible terms, reference relevant code or documentation, and provide examples when helpful. You distinguish between what you know firsthand versus what you&#x27;re inferring, and you acknowledge uncertainty when appropriate.
 
-You are a senior software engineer...</code></pre></div>
+Use this mode when you have questions about the codebase, architecture, or technical decisions.</code></pre>
+        </div>
       </div>
-      <div id="bcline-ent" class="builder-panel reveal">
-        <div class="builder-info"><div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Cline</span></div><h3>Cline</h3><p>Generates a pure Markdown <code>.clinerules</code> file rendered into Cline's natural-language rule format.</p><div class="builder-specs"><div class="builder-spec">Output: <code>.clinerules</code></div><div class="builder-spec">Pure Markdown, prose-based</div><div class="builder-spec">Minimal and verbose variants</div></div></div>
-        <div class="code-wrap"><div class="code-header"><span class="code-lang">Output Preview</span></div><pre><code class="language-markdown"># Code Agent Rules
+      <div id="bkiloide-ent" class="builder-panel reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Kilo IDE</span></div>
+          <h3>Kilo IDE</h3>
+          <p>Kilo Code (IDE) - .kilo/agents/ individual agent files</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.kilo/</code></div>
+            <div class="builder-spec">147 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">.kilo/agents/ask.md</span></div>
+          <pre><code class="language-markdown">---
+name: ask
+description: Answer questions and provide explanations
+mode: primary
+state_management: .prompticorn/sessions/
+permission:
+  read: {&#x27;*&#x27;: &#x27;allow&#x27;}
+  edit: {&#x27;\\.prompticorn/sessions/.*\\.md$&#x27;: &#x27;allow&#x27;, &#x27;*&#x27;: &#x27;deny&#x27;}
+  bash: allow
+---
 
-You are a code implementation expert.
-
-When writing tests, use_skill: testing-strategies</code></pre></div>
+# System Prompt</code></pre>
+        </div>
       </div>
       <div id="bclaude-ent" class="builder-panel reveal">
-        <div class="builder-info"><div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Claude</span></div><h3>Claude</h3><p>Generates the full <code>.claude/</code> directory with agents, workflows, and skills as Markdown files.</p><div class="builder-specs"><div class="builder-spec">Output: <code>.claude/</code> directory</div><div class="builder-spec">Agents, workflows, skills</div><div class="builder-spec">Minimal and verbose variants</div></div></div>
-        <div class="code-wrap"><div class="code-header"><span class="code-lang">Output Preview</span></div><pre><code class="language-markdown">.claude/
-  agents/
-    code.md
-    debug.md
-  workflows/
-    code.md
-  skills/
-    testing-strategies.md</code></pre></div>
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Claude</span></div>
+          <h3>Claude</h3>
+          <p>Claude - generates .claude/ directory with Markdown agent files and CLAUDE.md</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.claude/</code></div><div class="builder-spec">Writes: <code>CLAUDE.md</code></div>
+            <div class="builder-spec">135 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">.claude/agents/ask-agent.md</span></div>
+          <pre><code class="language-markdown"># Ask
+
+**Purpose:** Answer questions and provide explanations  
+**When to Use:** Answering questions, providing explanations
+
+## Role
+
+You are a principal engineer and technical mentor with deep expertise in the codebase and software development. You provide clear, accurate, and helpful answers to technical questions. You explain complex concepts in accessible terms, reference relevant code or documentation, and provide examples when helpful. You distinguish between what you know firsthand versus what you&#x27;re inferring, and you acknowledge uncertainty when appropriate.
+
+Use this mode when you have questions about the codebase, architecture, or technical decisions.
+
+## Workflow</code></pre>
+        </div>
       </div>
-      <div id="bcopilot-ent" class="builder-panel reveal">
-        <div class="builder-info"><div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">GitHub Copilot</span></div><h3>Copilot</h3><p>Generates a single concatenated instructions file for GitHub Copilot's agentic coding tool.</p><div class="builder-specs"><div class="builder-spec">Output: <code>.github/copilot-instructions.md</code></div><div class="builder-spec">Single concatenated file</div><div class="builder-spec">Minimal and verbose variants</div></div></div>
-        <div class="code-wrap"><div class="code-header"><span class="code-lang">Output Preview</span></div><pre><code class="language-yaml">---
-applyTo: "**"
----
+      <div id="bcline-ent" class="builder-panel reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Cline</span></div>
+          <h3>Cline</h3>
+          <p>Cline - .clinerules file (concatenated rules)</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.clinerules</code></div>
+            <div class="builder-spec">53 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">AGENTS.md</span></div>
+          <pre><code class="language-markdown"># Agents
 
-# Code Agent
+This file defines the AI agents available for this project and the conventions they follow. It is loaded automatically by tools that read `AGENTS.md`.
 
-Apply these instructions when writing code...</code></pre></div>
+## Available agents
+
+This configuration includes the following 15 primary agent(s). Route to the agent whose purpose best matches the task, and switch agents as the task changes.
+
+| Agent | Purpose |
+|-------|---------|
+| **ask** | Answer questions and provide explanations |
+| **atdd** | Turn requirements into executable acceptance criteria before any implementation begins |</code></pre>
+        </div>
       </div>
       <div id="bcursor-ent" class="builder-panel reveal">
-        <div class="builder-info"><div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Cursor</span></div><h3>Cursor</h3><p>Generates Markdown rules files for Cursor, written to both <code>.cursor/rules/</code> and <code>.cursorrules</code>.</p><div class="builder-specs"><div class="builder-spec">Output: <code>.cursor/rules/</code> + <code>.cursorrules</code></div><div class="builder-spec">Cursor rules format compliant</div><div class="builder-spec">Minimal and verbose variants</div></div></div>
-        <div class="code-wrap"><div class="code-header"><span class="code-lang">Output Preview</span></div><pre><code class="language-markdown">---
-description: Code implementation
-globs: ["**/*.py", "**/*.ts"]
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Cursor</span></div>
+          <h3>Cursor</h3>
+          <p>Cursor - .cursor/rules/ directory + .cursorrules</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.cursor/</code></div><div class="builder-spec">Writes: <code>.cursorrules</code></div>
+            <div class="builder-spec">53 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">AGENTS.md</span></div>
+          <pre><code class="language-markdown"># Agents
+
+This file defines the AI agents available for this project and the conventions they follow. It is loaded automatically by tools that read `AGENTS.md`.
+
+## Available agents
+
+This configuration includes the following 15 primary agent(s). Route to the agent whose purpose best matches the task, and switch agents as the task changes.
+
+| Agent | Purpose |
+|-------|---------|
+| **ask** | Answer questions and provide explanations |
+| **atdd** | Turn requirements into executable acceptance criteria before any implementation begins |</code></pre>
+        </div>
+      </div>
+      <div id="bcopilot-ent" class="builder-panel reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Copilot</span></div>
+          <h3>Copilot</h3>
+          <p>GitHub Copilot - .github/copilot-instructions.md</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.github/copilot-instructions.md</code></div>
+            <div class="builder-spec">53 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">AGENTS.md</span></div>
+          <pre><code class="language-markdown"># Agents
+
+This file defines the AI agents available for this project and the conventions they follow. It is loaded automatically by tools that read `AGENTS.md`.
+
+## Available agents
+
+This configuration includes the following 15 primary agent(s). Route to the agent whose purpose best matches the task, and switch agents as the task changes.
+
+| Agent | Purpose |
+|-------|---------|
+| **ask** | Answer questions and provide explanations |
+| **atdd** | Turn requirements into executable acceptance criteria before any implementation begins |</code></pre>
+        </div>
+      </div>
+      <div id="bcopilotchat-ent" class="builder-panel reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Copilot Chat</span></div>
+          <h3>Copilot Chat</h3>
+          <p>GitHub Copilot Chat - .github/agents/ custom agents, /prompt commands, applyTo instructions</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.github/agents/</code></div><div class="builder-spec">Writes: <code>.github/instructions/</code></div><div class="builder-spec">Writes: <code>.github/prompts/</code></div>
+            <div class="builder-spec">55 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">.github/agents/ask.agent.md</span></div>
+          <pre><code class="language-markdown">---
+name: ask
+description: Answer questions and provide explanations
 ---
 
-# Code Agent
+You are a principal engineer and technical mentor with deep expertise in the codebase and software development. You provide clear, accurate, and helpful answers to technical questions. You explain complex concepts in accessible terms, reference relevant code or documentation, and provide examples when helpful. You distinguish between what you know firsthand versus what you&#x27;re inferring, and you acknowledge uncertainty when appropriate.
 
-You are a senior software engineer...</code></pre></div>
+Use this mode when you have questions about the codebase, architecture, or technical decisions.</code></pre>
+        </div>
+      </div>
+      <div id="broo-ent" class="builder-panel reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Roo Code</span></div>
+          <h3>Roo Code</h3>
+          <p>Roo Code - .roomodes custom modes + .roo/ rules, skills, and commands</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.roo/</code></div><div class="builder-spec">Writes: <code>.roomodes</code></div>
+            <div class="builder-spec">106 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">AGENTS.md</span></div>
+          <pre><code class="language-markdown"># Agents
+
+This file defines the AI agents available for this project and the conventions they follow. It is loaded automatically by tools that read `AGENTS.md`.
+
+## Available agents
+
+This configuration includes the following 15 primary agent(s). Route to the agent whose purpose best matches the task, and switch agents as the task changes.
+
+| Agent | Purpose |
+|-------|---------|
+| **ask** | Answer questions and provide explanations |
+| **atdd** | Turn requirements into executable acceptance criteria before any implementation begins |</code></pre>
+        </div>
+      </div>
+      <div id="bjunie-ent" class="builder-panel reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Junie</span></div>
+          <h3>Junie</h3>
+          <p>JetBrains Junie (CLI) - .junie/ agents, skills, and commands + AGENTS.md</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.junie/</code></div>
+            <div class="builder-spec">105 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">.junie/agents/ask.md</span></div>
+          <pre><code class="language-markdown">---
+name: ask
+description: Answer questions and provide explanations
+tools:
+- Read
+- Grep
+- Glob
+- Write
+- Edit
+- Bash
+skills:
+- documentation-best-practices</code></pre>
+        </div>
+      </div>
+      <div id="bzed-ent" class="builder-panel reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Zed</span></div>
+          <h3>Zed</h3>
+          <p>Zed - .agents/skills/ (agents-as-skills) + AGENTS.md instructions</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.agents/</code></div>
+            <div class="builder-spec">67 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">.agents/skills/api-versioning-strategy/SKILL.md</span></div>
+          <pre><code class="language-markdown">---
+name: api-versioning-strategy
+description: &quot;Versioning exists because you cannot deploy your clients.&quot;
+---
+
+# API Versioning Strategy (Verbose)
+
+## Core Patterns
+
+### The Compatibility Contract
+
+Versioning exists because you cannot deploy your clients. Once a third party — or</code></pre>
+        </div>
+      </div>
+      <div id="bgemini-ent" class="builder-panel reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Gemini CLI</span></div>
+          <h3>Gemini CLI</h3>
+          <p>Google Gemini CLI - .gemini/ agents, skills, and TOML commands + AGENTS.md</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.gemini/</code></div>
+            <div class="builder-spec">106 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">.gemini/agents/ask.md</span></div>
+          <pre><code class="language-markdown">---
+name: ask
+description: Answer questions and provide explanations
+---
+
+You are a principal engineer and technical mentor with deep expertise in the codebase and software development. You provide clear, accurate, and helpful answers to technical questions. You explain complex concepts in accessible terms, reference relevant code or documentation, and provide examples when helpful. You distinguish between what you know firsthand versus what you&#x27;re inferring, and you acknowledge uncertainty when appropriate.
+
+Use this mode when you have questions about the codebase, architecture, or technical decisions.</code></pre>
+        </div>
+      </div>
+      <div id="bamazonq-ent" class="builder-panel reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Amazon Q</span></div>
+          <h3>Amazon Q</h3>
+          <p>Amazon Q Developer CLI - .amazonq/ JSON agents, rules, and prompts</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.amazonq/</code></div>
+            <div class="builder-spec">55 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">.amazonq/cli-agents/ask.json</span></div>
+          <pre><code class="language-json">{
+  &quot;name&quot;: &quot;ask&quot;,
+  &quot;description&quot;: &quot;Answer questions and provide explanations&quot;,
+  &quot;prompt&quot;: &quot;You are a principal engineer and technical mentor with deep expertise in the codebase and software development. You provide clear, accurate, and helpful answers to technical questions. You explain complex concepts in accessible terms, reference relevant code or documentation, and provide examples when helpful. You distinguish between what you know firsthand versus what you&#x27;re inferring, and you acknowledge uncertainty when appropriate.\n\nUse this mode when you have questions about the codebase, architecture, or technical decisions.&quot;,
+  &quot;tools&quot;: [
+    &quot;*&quot;
+  ],
+  &quot;resources&quot;: [
+    &quot;file://.amazonq/rules/**/*.md&quot;
+  ]
+}</code></pre>
+        </div>
+      </div>
+      <div id="bwindsurf-ent" class="builder-panel reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Windsurf</span></div>
+          <h3>Windsurf</h3>
+          <p>Windsurf / Cascade - .windsurf/ skills, glob-scoped rules, and workflows</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.windsurf/</code></div>
+            <div class="builder-spec">106 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">.windsurf/rules/conventions-core.md</span></div>
+          <pre><code class="language-markdown">---
+trigger: model_decision
+description: Core project conventions
+---
+
+# System Instructions
+
+# Core System
+Always-on base behaviors for all modes and tools.
+EDIT THIS FILE to change global assistant behavior.
+
+## ⚠️ STARTUP CHECKLIST - COMPLETE BEFORE ANY WORK</code></pre>
+        </div>
+      </div>
+      <div id="bcontinue-ent" class="builder-panel reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Continue</span></div>
+          <h3>Continue</h3>
+          <p>Continue.dev - .continue/ glob-scoped rules and invokable prompts</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.continue/</code></div>
+            <div class="builder-spec">55 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">.continue/prompts/accessibility.md</span></div>
+          <pre><code class="language-markdown">---
+name: accessibility
+description: accessibility workflow
+invokable: true
+---
+
+---
+name: &quot;accessibility&quot;
+languages: [&quot;python&quot;, &quot;typescript&quot;, &quot;javascript&quot;, &quot;html&quot;]
+subagents: [&quot;review&quot;, &quot;test&quot;]
+---
+</code></pre>
+        </div>
+      </div>
+      <div id="baider-ent" class="builder-panel reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Aider</span></div>
+          <h3>Aider</h3>
+          <p>Aider - CONVENTIONS.md + .aider.conf.yml (conventions only)</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.aider.conf.yml</code></div><div class="builder-spec">Writes: <code>CONVENTIONS.md</code></div>
+            <div class="builder-spec">2 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">.aider.conf.yml</span></div>
+          <pre><code class="language-yaml"># prompticorn: unit=generated/rules layer=builtin version=0.0.0-dev.0 digest=3c44a5f3fd7fd95e7053d5260de7c2b907dd53e5d6546cf2be869591eaa79cce
+read:
+- CONVENTIONS.md</code></pre>
+        </div>
+      </div>
+      <div id="bcodex-ent" class="builder-panel reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Codex</span></div>
+          <h3>Codex</h3>
+          <p>OpenAI Codex CLI - AGENTS.md + .agents/skills/ + .codex/config.toml</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.agents/</code></div><div class="builder-spec">Writes: <code>.codex/</code></div>
+            <div class="builder-spec">68 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">.agents/skills/api-versioning-strategy/SKILL.md</span></div>
+          <pre><code class="language-markdown">---
+name: api-versioning-strategy
+description: &quot;Versioning exists because you cannot deploy your clients.&quot;
+---
+
+# API Versioning Strategy (Verbose)
+
+## Core Patterns
+
+### The Compatibility Contract
+
+Versioning exists because you cannot deploy your clients. Once a third party — or</code></pre>
+        </div>
+      </div>
+      <div id="bbedrock-ent" class="builder-panel reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">AWS Bedrock</span></div>
+          <h3>AWS Bedrock</h3>
+          <p>AWS Bedrock - bedrock/ system-prompt bundle + Converse example + optional CloudFormation</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>bedrock/</code></div>
+            <div class="builder-spec">20 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">bedrock/README.bedrock.md</span></div>
+          <pre><code class="language-markdown"># AWS Bedrock output
+
+prompticorn cannot write a repo dotfile for Bedrock — it is a hosted model/agent
+API. Instead it emits your agents&#x27; **system prompts** in two forms.
+
+## 1. Portable prompts (recommended, no provisioning)
+
+- `prompts/&lt;slug&gt;.system.md` — one agent&#x27;s system prompt.
+- `conventions.md` — your project&#x27;s language + project conventions (runtime, test
+  framework, linter, formatter, …). Bedrock has no rules-file concept, so prepend
+  this to a prompt (or pass it as an extra system block) to give the agent your
+  project&#x27;s standards.</code></pre>
+        </div>
       </div>
     </div>
 
@@ -698,71 +1118,477 @@ You are a senior software engineer...</code></pre></div>
       <h2 class="section-title reveal">One config.<br><span class="gradient-text">17 native outputs.</span></h2>
       <p class="section-desc reveal reveal-delay-1">Pick your AI coding assistant and prompticorn generates the right config files in the right format. No lowest-common-denominator compromises.</p>
       <div class="builders-nav reveal">
-        <button class="builder-tab active" data-target="bkilo-eng">Kilo</button>
-        <button class="builder-tab" data-target="bcline-eng">Cline</button>
+        <button class="builder-tab active" data-target="bkilocli-eng">Kilo CLI</button>
+        <button class="builder-tab" data-target="bkiloide-eng">Kilo IDE</button>
         <button class="builder-tab" data-target="bclaude-eng">Claude</button>
-        <button class="builder-tab" data-target="bcopilot-eng">Copilot</button>
+        <button class="builder-tab" data-target="bcline-eng">Cline</button>
         <button class="builder-tab" data-target="bcursor-eng">Cursor</button>
+        <button class="builder-tab" data-target="bcopilot-eng">Copilot</button>
+        <button class="builder-tab" data-target="bcopilotchat-eng">Copilot Chat</button>
+        <button class="builder-tab" data-target="broo-eng">Roo Code</button>
+        <button class="builder-tab" data-target="bjunie-eng">Junie</button>
+        <button class="builder-tab" data-target="bzed-eng">Zed</button>
+        <button class="builder-tab" data-target="bgemini-eng">Gemini CLI</button>
+        <button class="builder-tab" data-target="bamazonq-eng">Amazon Q</button>
+        <button class="builder-tab" data-target="bwindsurf-eng">Windsurf</button>
+        <button class="builder-tab" data-target="bcontinue-eng">Continue</button>
+        <button class="builder-tab" data-target="baider-eng">Aider</button>
+        <button class="builder-tab" data-target="bcodex-eng">Codex</button>
+        <button class="builder-tab" data-target="bbedrock-eng">AWS Bedrock</button>
       </div>
-      <div id="bkilo-eng" class="builder-panel active reveal">
-        <div class="builder-info"><div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Kilo IDE</span></div><h3>Kilo IDE</h3><p>Generates YAML frontmatter + Markdown agent files for Kilo IDE. Files written to <code>.kilo/agents/</code> automatically.</p><div class="builder-specs"><div class="builder-spec">Output: <code>.kilo/agents/{agent_name}.md</code></div><div class="builder-spec">YAML frontmatter generation</div><div class="builder-spec">Subagent support</div><div class="builder-spec">Minimal &amp; verbose variants</div></div></div>
-        <div class="code-wrap"><div class="code-header"><span class="code-lang">Output Preview</span></div><pre><code class="language-yaml">---
-name: code
-description: Code implementation expert
-subagents:
-  - test
-  - review
-variant: verbose
+      <div id="bkilocli-eng" class="builder-panel active reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Kilo CLI</span></div>
+          <h3>Kilo CLI</h3>
+          <p>Kilo Code (CLI) - .opencode/agents/ + root AGENTS.md (OpenCode)</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.opencode/</code></div>
+            <div class="builder-spec">16 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">.opencode/agents/ask.md</span></div>
+          <pre><code class="language-markdown">---
+description: Answer questions and provide explanations
+mode: primary
 ---
 
-# Code Agent
+You are a principal engineer and technical mentor with deep expertise in the codebase and software development. You provide clear, accurate, and helpful answers to technical questions. You explain complex concepts in accessible terms, reference relevant code or documentation, and provide examples when helpful. You distinguish between what you know firsthand versus what you&#x27;re inferring, and you acknowledge uncertainty when appropriate.
 
-You are a senior software engineer...</code></pre></div>
+Use this mode when you have questions about the codebase, architecture, or technical decisions.</code></pre>
+        </div>
       </div>
-      <div id="bcline-eng" class="builder-panel reveal">
-        <div class="builder-info"><div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Cline</span></div><h3>Cline</h3><p>Generates a pure Markdown <code>.clinerules</code> file. Rendered into Cline's natural-language rule format.</p><div class="builder-specs"><div class="builder-spec">Output: <code>.clinerules</code></div><div class="builder-spec">Pure Markdown output</div><div class="builder-spec"><code>use_skill</code> invocation pattern</div><div class="builder-spec">Prose-based rules</div></div></div>
-        <div class="code-wrap"><div class="code-header"><span class="code-lang">Output Preview</span></div><pre><code class="language-markdown"># Code Agent Rules
+      <div id="bkiloide-eng" class="builder-panel reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Kilo IDE</span></div>
+          <h3>Kilo IDE</h3>
+          <p>Kilo Code (IDE) - .kilo/agents/ individual agent files</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.kilo/</code></div>
+            <div class="builder-spec">147 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">.kilo/agents/ask.md</span></div>
+          <pre><code class="language-markdown">---
+name: ask
+description: Answer questions and provide explanations
+mode: primary
+state_management: .prompticorn/sessions/
+permission:
+  read: {&#x27;*&#x27;: &#x27;allow&#x27;}
+  edit: {&#x27;\\.prompticorn/sessions/.*\\.md$&#x27;: &#x27;allow&#x27;, &#x27;*&#x27;: &#x27;deny&#x27;}
+  bash: allow
+---
 
-You are a code implementation expert.
-
-When writing tests, use_skill: testing-strategies
-
-## Conventions
-Follow the project's established patterns...</code></pre></div>
+# System Prompt</code></pre>
+        </div>
       </div>
       <div id="bclaude-eng" class="builder-panel reveal">
-        <div class="builder-info"><div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Claude</span></div><h3>Claude</h3><p>Generates the full <code>.claude/</code> directory with agents, workflows, and skills. Populates your entire Claude Code configuration tree.</p><div class="builder-specs"><div class="builder-spec">Output: <code>.claude/</code> directory</div><div class="builder-spec">Agents, workflows, skills</div><div class="builder-spec">Minimal &amp; verbose variants</div><div class="builder-spec">Persona-filtered output</div></div></div>
-        <div class="code-wrap"><div class="code-header"><span class="code-lang">Output Preview</span></div><pre><code class="language-markdown">.claude/
-  agents/
-    code.md
-    debug.md
-  workflows/
-    code.md
-  skills/
-    testing-strategies.md</code></pre></div>
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Claude</span></div>
+          <h3>Claude</h3>
+          <p>Claude - generates .claude/ directory with Markdown agent files and CLAUDE.md</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.claude/</code></div><div class="builder-spec">Writes: <code>CLAUDE.md</code></div>
+            <div class="builder-spec">135 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">.claude/agents/ask-agent.md</span></div>
+          <pre><code class="language-markdown"># Ask
+
+**Purpose:** Answer questions and provide explanations  
+**When to Use:** Answering questions, providing explanations
+
+## Role
+
+You are a principal engineer and technical mentor with deep expertise in the codebase and software development. You provide clear, accurate, and helpful answers to technical questions. You explain complex concepts in accessible terms, reference relevant code or documentation, and provide examples when helpful. You distinguish between what you know firsthand versus what you&#x27;re inferring, and you acknowledge uncertainty when appropriate.
+
+Use this mode when you have questions about the codebase, architecture, or technical decisions.
+
+## Workflow</code></pre>
+        </div>
       </div>
-      <div id="bcopilot-eng" class="builder-panel reveal">
-        <div class="builder-info"><div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">GitHub Copilot</span></div><h3>Copilot</h3><p>Generates a single concatenated instructions file for GitHub Copilot's agentic coding tool.</p><div class="builder-specs"><div class="builder-spec">Output: <code>.github/copilot-instructions.md</code></div><div class="builder-spec">Single concatenated file</div><div class="builder-spec">Version-controlled with repo</div><div class="builder-spec">Minimal &amp; verbose variants</div></div></div>
-        <div class="code-wrap"><div class="code-header"><span class="code-lang">Output Preview</span></div><pre><code class="language-yaml">---
-applyTo: "**/*.py"
----
+      <div id="bcline-eng" class="builder-panel reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Cline</span></div>
+          <h3>Cline</h3>
+          <p>Cline - .clinerules file (concatenated rules)</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.clinerules</code></div>
+            <div class="builder-spec">53 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">AGENTS.md</span></div>
+          <pre><code class="language-markdown"># Agents
 
-# Code Agent
+This file defines the AI agents available for this project and the conventions they follow. It is loaded automatically by tools that read `AGENTS.md`.
 
-Apply these instructions when writing
-Python code in this repository...</code></pre></div>
+## Available agents
+
+This configuration includes the following 15 primary agent(s). Route to the agent whose purpose best matches the task, and switch agents as the task changes.
+
+| Agent | Purpose |
+|-------|---------|
+| **ask** | Answer questions and provide explanations |
+| **atdd** | Turn requirements into executable acceptance criteria before any implementation begins |</code></pre>
+        </div>
       </div>
       <div id="bcursor-eng" class="builder-panel reveal">
-        <div class="builder-info"><div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Cursor</span></div><h3>Cursor</h3><p>Generates Markdown rules files for Cursor. Configuration written to both <code>.cursor/rules/</code> and <code>.cursorrules</code>.</p><div class="builder-specs"><div class="builder-spec">Output: <code>.cursor/rules/</code> + <code>.cursorrules</code></div><div class="builder-spec">Cursor rules format</div><div class="builder-spec">Per-agent file scoping</div><div class="builder-spec">Minimal &amp; verbose variants</div></div></div>
-        <div class="code-wrap"><div class="code-header"><span class="code-lang">Output Preview</span></div><pre><code class="language-markdown">---
-description: Code implementation
-globs: ["**/*.py", "**/*.ts"]
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Cursor</span></div>
+          <h3>Cursor</h3>
+          <p>Cursor - .cursor/rules/ directory + .cursorrules</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.cursor/</code></div><div class="builder-spec">Writes: <code>.cursorrules</code></div>
+            <div class="builder-spec">53 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">AGENTS.md</span></div>
+          <pre><code class="language-markdown"># Agents
+
+This file defines the AI agents available for this project and the conventions they follow. It is loaded automatically by tools that read `AGENTS.md`.
+
+## Available agents
+
+This configuration includes the following 15 primary agent(s). Route to the agent whose purpose best matches the task, and switch agents as the task changes.
+
+| Agent | Purpose |
+|-------|---------|
+| **ask** | Answer questions and provide explanations |
+| **atdd** | Turn requirements into executable acceptance criteria before any implementation begins |</code></pre>
+        </div>
+      </div>
+      <div id="bcopilot-eng" class="builder-panel reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Copilot</span></div>
+          <h3>Copilot</h3>
+          <p>GitHub Copilot - .github/copilot-instructions.md</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.github/copilot-instructions.md</code></div>
+            <div class="builder-spec">53 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">AGENTS.md</span></div>
+          <pre><code class="language-markdown"># Agents
+
+This file defines the AI agents available for this project and the conventions they follow. It is loaded automatically by tools that read `AGENTS.md`.
+
+## Available agents
+
+This configuration includes the following 15 primary agent(s). Route to the agent whose purpose best matches the task, and switch agents as the task changes.
+
+| Agent | Purpose |
+|-------|---------|
+| **ask** | Answer questions and provide explanations |
+| **atdd** | Turn requirements into executable acceptance criteria before any implementation begins |</code></pre>
+        </div>
+      </div>
+      <div id="bcopilotchat-eng" class="builder-panel reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Copilot Chat</span></div>
+          <h3>Copilot Chat</h3>
+          <p>GitHub Copilot Chat - .github/agents/ custom agents, /prompt commands, applyTo instructions</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.github/agents/</code></div><div class="builder-spec">Writes: <code>.github/instructions/</code></div><div class="builder-spec">Writes: <code>.github/prompts/</code></div>
+            <div class="builder-spec">55 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">.github/agents/ask.agent.md</span></div>
+          <pre><code class="language-markdown">---
+name: ask
+description: Answer questions and provide explanations
 ---
 
-# Code Agent
+You are a principal engineer and technical mentor with deep expertise in the codebase and software development. You provide clear, accurate, and helpful answers to technical questions. You explain complex concepts in accessible terms, reference relevant code or documentation, and provide examples when helpful. You distinguish between what you know firsthand versus what you&#x27;re inferring, and you acknowledge uncertainty when appropriate.
 
-You are a senior software engineer.
-Follow project conventions strictly...</code></pre></div>
+Use this mode when you have questions about the codebase, architecture, or technical decisions.</code></pre>
+        </div>
+      </div>
+      <div id="broo-eng" class="builder-panel reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Roo Code</span></div>
+          <h3>Roo Code</h3>
+          <p>Roo Code - .roomodes custom modes + .roo/ rules, skills, and commands</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.roo/</code></div><div class="builder-spec">Writes: <code>.roomodes</code></div>
+            <div class="builder-spec">106 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">AGENTS.md</span></div>
+          <pre><code class="language-markdown"># Agents
+
+This file defines the AI agents available for this project and the conventions they follow. It is loaded automatically by tools that read `AGENTS.md`.
+
+## Available agents
+
+This configuration includes the following 15 primary agent(s). Route to the agent whose purpose best matches the task, and switch agents as the task changes.
+
+| Agent | Purpose |
+|-------|---------|
+| **ask** | Answer questions and provide explanations |
+| **atdd** | Turn requirements into executable acceptance criteria before any implementation begins |</code></pre>
+        </div>
+      </div>
+      <div id="bjunie-eng" class="builder-panel reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Junie</span></div>
+          <h3>Junie</h3>
+          <p>JetBrains Junie (CLI) - .junie/ agents, skills, and commands + AGENTS.md</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.junie/</code></div>
+            <div class="builder-spec">105 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">.junie/agents/ask.md</span></div>
+          <pre><code class="language-markdown">---
+name: ask
+description: Answer questions and provide explanations
+tools:
+- Read
+- Grep
+- Glob
+- Write
+- Edit
+- Bash
+skills:
+- documentation-best-practices</code></pre>
+        </div>
+      </div>
+      <div id="bzed-eng" class="builder-panel reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Zed</span></div>
+          <h3>Zed</h3>
+          <p>Zed - .agents/skills/ (agents-as-skills) + AGENTS.md instructions</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.agents/</code></div>
+            <div class="builder-spec">67 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">.agents/skills/api-versioning-strategy/SKILL.md</span></div>
+          <pre><code class="language-markdown">---
+name: api-versioning-strategy
+description: &quot;Versioning exists because you cannot deploy your clients.&quot;
+---
+
+# API Versioning Strategy (Verbose)
+
+## Core Patterns
+
+### The Compatibility Contract
+
+Versioning exists because you cannot deploy your clients. Once a third party — or</code></pre>
+        </div>
+      </div>
+      <div id="bgemini-eng" class="builder-panel reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Gemini CLI</span></div>
+          <h3>Gemini CLI</h3>
+          <p>Google Gemini CLI - .gemini/ agents, skills, and TOML commands + AGENTS.md</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.gemini/</code></div>
+            <div class="builder-spec">106 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">.gemini/agents/ask.md</span></div>
+          <pre><code class="language-markdown">---
+name: ask
+description: Answer questions and provide explanations
+---
+
+You are a principal engineer and technical mentor with deep expertise in the codebase and software development. You provide clear, accurate, and helpful answers to technical questions. You explain complex concepts in accessible terms, reference relevant code or documentation, and provide examples when helpful. You distinguish between what you know firsthand versus what you&#x27;re inferring, and you acknowledge uncertainty when appropriate.
+
+Use this mode when you have questions about the codebase, architecture, or technical decisions.</code></pre>
+        </div>
+      </div>
+      <div id="bamazonq-eng" class="builder-panel reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Amazon Q</span></div>
+          <h3>Amazon Q</h3>
+          <p>Amazon Q Developer CLI - .amazonq/ JSON agents, rules, and prompts</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.amazonq/</code></div>
+            <div class="builder-spec">55 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">.amazonq/cli-agents/ask.json</span></div>
+          <pre><code class="language-json">{
+  &quot;name&quot;: &quot;ask&quot;,
+  &quot;description&quot;: &quot;Answer questions and provide explanations&quot;,
+  &quot;prompt&quot;: &quot;You are a principal engineer and technical mentor with deep expertise in the codebase and software development. You provide clear, accurate, and helpful answers to technical questions. You explain complex concepts in accessible terms, reference relevant code or documentation, and provide examples when helpful. You distinguish between what you know firsthand versus what you&#x27;re inferring, and you acknowledge uncertainty when appropriate.\n\nUse this mode when you have questions about the codebase, architecture, or technical decisions.&quot;,
+  &quot;tools&quot;: [
+    &quot;*&quot;
+  ],
+  &quot;resources&quot;: [
+    &quot;file://.amazonq/rules/**/*.md&quot;
+  ]
+}</code></pre>
+        </div>
+      </div>
+      <div id="bwindsurf-eng" class="builder-panel reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Windsurf</span></div>
+          <h3>Windsurf</h3>
+          <p>Windsurf / Cascade - .windsurf/ skills, glob-scoped rules, and workflows</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.windsurf/</code></div>
+            <div class="builder-spec">106 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">.windsurf/rules/conventions-core.md</span></div>
+          <pre><code class="language-markdown">---
+trigger: model_decision
+description: Core project conventions
+---
+
+# System Instructions
+
+# Core System
+Always-on base behaviors for all modes and tools.
+EDIT THIS FILE to change global assistant behavior.
+
+## ⚠️ STARTUP CHECKLIST - COMPLETE BEFORE ANY WORK</code></pre>
+        </div>
+      </div>
+      <div id="bcontinue-eng" class="builder-panel reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Continue</span></div>
+          <h3>Continue</h3>
+          <p>Continue.dev - .continue/ glob-scoped rules and invokable prompts</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.continue/</code></div>
+            <div class="builder-spec">55 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">.continue/prompts/accessibility.md</span></div>
+          <pre><code class="language-markdown">---
+name: accessibility
+description: accessibility workflow
+invokable: true
+---
+
+---
+name: &quot;accessibility&quot;
+languages: [&quot;python&quot;, &quot;typescript&quot;, &quot;javascript&quot;, &quot;html&quot;]
+subagents: [&quot;review&quot;, &quot;test&quot;]
+---
+</code></pre>
+        </div>
+      </div>
+      <div id="baider-eng" class="builder-panel reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Aider</span></div>
+          <h3>Aider</h3>
+          <p>Aider - CONVENTIONS.md + .aider.conf.yml (conventions only)</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.aider.conf.yml</code></div><div class="builder-spec">Writes: <code>CONVENTIONS.md</code></div>
+            <div class="builder-spec">2 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">.aider.conf.yml</span></div>
+          <pre><code class="language-yaml"># prompticorn: unit=generated/rules layer=builtin version=0.0.0-dev.0 digest=3c44a5f3fd7fd95e7053d5260de7c2b907dd53e5d6546cf2be869591eaa79cce
+read:
+- CONVENTIONS.md</code></pre>
+        </div>
+      </div>
+      <div id="bcodex-eng" class="builder-panel reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">Codex</span></div>
+          <h3>Codex</h3>
+          <p>OpenAI Codex CLI - AGENTS.md + .agents/skills/ + .codex/config.toml</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>.agents/</code></div><div class="builder-spec">Writes: <code>.codex/</code></div>
+            <div class="builder-spec">68 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">.agents/skills/api-versioning-strategy/SKILL.md</span></div>
+          <pre><code class="language-markdown">---
+name: api-versioning-strategy
+description: &quot;Versioning exists because you cannot deploy your clients.&quot;
+---
+
+# API Versioning Strategy (Verbose)
+
+## Core Patterns
+
+### The Compatibility Contract
+
+Versioning exists because you cannot deploy your clients. Once a third party — or</code></pre>
+        </div>
+      </div>
+      <div id="bbedrock-eng" class="builder-panel reveal">
+        <div class="builder-info">
+          <div class="builder-badge"><span class="builder-badge-dot"></span><span class="tag red">AWS Bedrock</span></div>
+          <h3>AWS Bedrock</h3>
+          <p>AWS Bedrock - bedrock/ system-prompt bundle + Converse example + optional CloudFormation</p>
+          <div class="builder-specs">
+            <div class="builder-spec">Writes: <code>bedrock/</code></div>
+            <div class="builder-spec">20 files generated</div>
+            <div class="builder-spec">Minimal and verbose variants</div>
+            <div class="builder-spec">Persona-filtered</div>
+          </div>
+        </div>
+        <div class="code-wrap">
+          <div class="code-header"><span class="code-lang">bedrock/README.bedrock.md</span></div>
+          <pre><code class="language-markdown"># AWS Bedrock output
+
+prompticorn cannot write a repo dotfile for Bedrock — it is a hosted model/agent
+API. Instead it emits your agents&#x27; **system prompts** in two forms.
+
+## 1. Portable prompts (recommended, no provisioning)
+
+- `prompts/&lt;slug&gt;.system.md` — one agent&#x27;s system prompt.
+- `conventions.md` — your project&#x27;s language + project conventions (runtime, test
+  framework, linter, formatter, …). Bedrock has no rules-file concept, so prepend
+  this to a prompt (or pass it as an extra system block) to give the agent your
+  project&#x27;s standards.</code></pre>
+        </div>
       </div>
     </div>
 
@@ -807,7 +1633,7 @@ Follow project conventions strictly...</code></pre></div>
     <h2 class="section-title reveal">Generated config is <span>disposable.</span></h2>
     <p class="section-desc reveal reveal-delay-1">Everything prompticorn writes into your repo is compiled from source. Delete it, rebuild it, and get the same bytes &mdash; on Linux, macOS and Windows alike.</p>
 
-    <div class="feature-grid">
+    <div class="features-grid">
       <div class="feature-card reveal">
         <div class="feature-icon">&#128274;</div>
         <h4>A lockfile, like any package manager</h4>
@@ -893,12 +1719,14 @@ $ prompticorn verify
         <div class="code-header"><span class="code-lang">Bash</span><button class="copy-btn" aria-label="Copy code">Copy</button></div>
 <pre><code class="language-bash">$ prompticorn init
 
-? Which AI tools does your team use?
-  [x] Claude Code
-  [x] Cursor
-  [ ] Cline
-  [ ] Kilo IDE
-  [ ] Copilot
+? Which AI tool should this project target?
+  [x] Claude
+  [ ] Cursor      [ ] Copilot     [ ] Codex
+  [ ] Gemini CLI  [ ] Windsurf    [ ] Roo Code
+  [ ] Amazon Q    [ ] Junie       [ ] Zed
+  [ ] Continue    [ ] Aider       [ ] Cline
+  [ ] Kilo IDE    [ ] Kilo CLI    [ ] AWS Bedrock
+  ... 17 targets in all
 
 ? Primary programming language?  > TypeScript
 
@@ -1032,6 +1860,7 @@ personas:
         <ul>
           <li><a href="#features">Features</a></li>
           <li><a href="#tools">AI Tools</a></li>
+          <li><a href="#reproducibility">Reproducible builds</a></li>
           <li><a href="#how-it-works">How It Works</a></li>
           <li><a href="#getting-started">Get Started</a></li>
         </ul>

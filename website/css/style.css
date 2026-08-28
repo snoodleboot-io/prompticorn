@@ -1017,3 +1017,14 @@ code[class*="language-"] { font-family: var(--font-mono) !important; font-size: 
 .tool-chip-out code {
   white-space: nowrap;
 }
+
+
+/* Generated previews are real files, so some lines are long. Scroll the block
+   rather than letting it run off the panel or reflow the two-column layout. */
+.code-wrap pre {
+  overflow-x: auto;
+}
+
+.builder-panel .code-wrap pre code {
+  white-space: pre;
+}
