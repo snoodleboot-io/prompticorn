@@ -25,11 +25,18 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Publish to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
+      # website/wrangler.jsonc declares a Worker with static assets, not a Pages
+      # project. `cloudflare/pages-action` therefore asked the Pages API for a
+      # project named `prompticorn`, which does not exist, and every run since
+      # 2026-05-15 failed with 8000007 "Project not found" (PRO-150).
+      #
+      # `wrangler deploy` run from website/ picks up the committed wrangler.jsonc,
+      # so the deploy target is defined in one place rather than split between a
+      # config file and a workflow input that can disagree with it.
+      - name: Publish to Cloudflare Workers
+        uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: prompticorn
-          directory: website
-          gitHubToken: ${{ github.token }}
+          workingDirectory: website
+          command: deploy
