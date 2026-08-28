@@ -25,23 +25,22 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # website/wrangler.jsonc declares a Worker with static assets, not a Pages
-      # project. `cloudflare/pages-action` therefore asked the Pages API for a
-      # project named `prompticorn`, which does not exist, and every run since
-      # 2026-05-15 failed with 8000007 "Project not found" (PRO-150).
+      # projectName is `prompticorn-site`, not `prompticorn` (PRO-150).
       #
-      # `wrangler deploy` run from website/ picks up the committed wrangler.jsonc,
-      # so the deploy target is defined in one place rather than split between a
-      # config file and a workflow input that can disagree with it.
-      - name: Publish to Cloudflare Workers
-        uses: cloudflare/wrangler-action@v3
+      # Every run from 2026-05-15 failed with 8000007 "Project not found"
+      # because the name was wrong. Confirmed by fetching both:
+      # prompticorn-site.pages.dev and www.prompticorn.com serve the same
+      # bytes, differing only by the bot-management script Cloudflare injects
+      # on a custom domain.
+      #
+      # website/wrangler.jsonc is a red herring — added in the same May commit
+      # that broke this, describing a Workers deploy that was never the thing
+      # serving the site.
+      - name: Publish to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          workingDirectory: website
-          # wrangler 4 or newer. The action defaults to 3.90, which predates
-          # assets-only Workers and rejects wrangler.jsonc with "Missing
-          # entry-point" because there is no `main` script to point at — this
-          # site is static assets and nothing else.
-          wranglerVersion: "4"
-          command: deploy
+          projectName: prompticorn-site
+          directory: website
+          gitHubToken: ${{ github.token }}
