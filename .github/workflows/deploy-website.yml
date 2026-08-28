@@ -39,4 +39,9 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           workingDirectory: website
+          # wrangler 4 or newer. The action defaults to 3.90, which predates
+          # assets-only Workers and rejects wrangler.jsonc with "Missing
+          # entry-point" because there is no `main` script to point at — this
+          # site is static assets and nothing else.
+          wranglerVersion: "4"
           command: deploy
