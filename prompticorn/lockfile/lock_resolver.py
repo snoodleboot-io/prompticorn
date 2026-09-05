@@ -15,6 +15,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 
+from prompticorn.artifact.artifact_digest import artifact_digest
 from prompticorn.artifact.bundled_identity import BundledIdentity
 from prompticorn.artifact.package_version import bundled_version
 from prompticorn.artifact.pinned_artifact import PinnedArtifact
@@ -110,17 +111,16 @@ class LockResolver:
     def _artifact_digest(self, coordinate: str) -> str:
         """Digest covering everything the artifact contains.
 
-        Built from the units' own digests rather than by re-reading content: the
-        unit digests are already canonical, so composing them keeps one
-        definition of canonicalisation in the codebase instead of two that can
-        drift apart.
+        Delegates to :func:`artifact_digest` rather than composing the hash
+        here, because a source verifies the same digest on fetch (PRO-124). Two
+        implementations of this would make every fetched artifact disagree with
+        the lock that pinned it, and the failure would read as corruption.
         """
-        members = [
-            f"{unit.id.render()}:{self.resolver.digest(unit.id)}"
+        return artifact_digest(
+            (unit.id.render(), self.resolver.digest(unit.id))
             for unit in self.resolver.units()
             if self.identity.for_unit(unit.id).coordinate == coordinate
-        ]
-        return digest_text("\n".join(sorted(members)))
+        )
 
     def _resolve_units(self) -> tuple[LockedUnit, ...]:
         """Every resolvable unit, with the layer that supplied it."""
