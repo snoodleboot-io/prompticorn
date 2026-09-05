@@ -1551,6 +1551,68 @@ def build_command(frozen: bool):
 # ── validate ───────────────────────────────────────────────────────────────
 
 
+@cli.group("cache")
+def cache_group():
+    """
+    Inspect and purge the machine-local blob cache.
+
+    Artifacts fetched from a source are cached under `~/.prompticorn/cas`,
+    addressed by the digest of their own content. The cache is shared by every
+    repository on this machine and holds nothing that cannot be fetched again,
+    so clearing it costs a refetch and nothing else.
+
+    \b
+    Usage:
+        prompticorn cache status
+        prompticorn cache clear
+    """
+
+
+@cache_group.command("status")
+def cache_status():
+    """
+    Report where the cache is and how much it holds.
+    """
+    from prompticorn.store import BlobStore, home
+
+    store = BlobStore()
+    digests = list(store.blobs())
+    total = sum(store.path_for(digest).stat().st_size for digest in digests)
+
+    click.echo(f"\n  Store:  {home()}")
+    click.echo(f"  Cache:  {store.directory}")
+    if not digests:
+        click.echo("\n  The cache is empty.")
+        return
+    click.echo(f"\n  {len(digests)} blob(s), {total / 1024:.1f} KiB")
+
+
+@cache_group.command("clear")
+@click.option("--yes", is_flag=True, help="Do not ask for confirmation.")
+def cache_clear(yes: bool):
+    """
+    Delete every cached blob.
+
+    Safe by construction: the cache is a cache. Anything removed is fetched
+    again the next time it is needed.
+    """
+    from prompticorn.store import BlobStore
+
+    store = BlobStore()
+    digests = list(store.blobs())
+    if not digests:
+        click.echo(f"\n  {store.directory} is already empty.")
+        return
+
+    if not yes:
+        click.confirm(
+            f"\n  Delete {len(digests)} cached blob(s) from {store.directory}?", abort=True
+        )
+
+    removed = store.clear()
+    click.secho(f"\n\u2713 Cleared {removed} file(s) from {store.directory}", fg="green")
+
+
 @cli.command("validate")
 def validate_prompts():
     """

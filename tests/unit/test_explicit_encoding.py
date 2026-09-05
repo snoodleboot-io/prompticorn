@@ -60,6 +60,24 @@ def _imports_the_safe_writer(tree: ast.Module) -> bool:
     )
 
 
+def _is_binary_mode(node: ast.Call) -> bool:
+    """Whether this `open` call asks for binary mode.
+
+    `Path.open("wb")` puts the mode first; the builtin `open(path, "wb")` puts
+    it second. Getting this wrong in the lenient direction exempts text writes
+    that genuinely need an encoding; getting it wrong in the strict direction
+    reports binary writes that can never take one.
+    """
+    mode_position = 0 if isinstance(node.func, ast.Attribute) else 1
+    arguments = node.args[mode_position : mode_position + 1]
+    return any(
+        isinstance(argument, ast.Constant)
+        and isinstance(argument.value, str)
+        and "b" in argument.value
+        for argument in arguments
+    )
+
+
 def _unencoded_calls(path: Path) -> list[str]:
     tree = ast.parse(path.read_text(encoding="utf-8"))
     uses_safe_writer = _imports_the_safe_writer(tree)
@@ -84,11 +102,11 @@ def _unencoded_calls(path: Path) -> list[str]:
             and uses_safe_writer
         ):
             continue
-        # `open(...)` in binary mode takes no encoding; "b" in the mode argument.
-        if name == "open" and any(
-            isinstance(a, ast.Constant) and isinstance(a.value, str) and "b" in a.value
-            for a in node.args[1:]
-        ):
+        # Binary mode takes no encoding. The mode is the *second* argument to
+        # the builtin `open(path, mode)` and the *first* to `Path.open(mode)`,
+        # so the position depends on the call shape. Checking every argument
+        # instead would exempt `open("blob.txt")` on the "b" in its filename.
+        if name == "open" and _is_binary_mode(node):
             continue
         if "encoding" not in {kw.arg for kw in node.keywords}:
             findings.append(f"{path.name}:{node.lineno} {name}()")
@@ -130,6 +148,27 @@ class TestNoImplicitEncoding:
         assert _unencoded_calls(unimported) == ["unimported.py:1 write_text()"]
         assert _unencoded_calls(attribute) == ["attribute.py:3 write_text()"]
         assert _unencoded_calls(exempt) == []
+
+    def test_binary_mode_is_exempt_in_both_call_shapes(self, tmp_path: Path):
+        """`Path.open("wb")` puts the mode first and the builtin puts it second.
+        A guard that only knew one shape reported every binary write through the
+        other as missing an encoding it cannot take."""
+        planted = tmp_path / "binary.py"
+        planted.write_text(
+            'from pathlib import Path\n\n'
+            'Path("x").open("wb")\n'
+            'open("x", "wb")\n',
+            encoding="utf-8",
+        )
+
+        assert _unencoded_calls(planted) == []
+
+    def test_a_filename_containing_b_is_not_mistaken_for_binary_mode(self, tmp_path: Path):
+        """The lazy fix — scan every argument for a "b" — would exempt this."""
+        planted = tmp_path / "textual.py"
+        planted.write_text('open("blob.txt")\n', encoding="utf-8")
+
+        assert _unencoded_calls(planted) == ["textual.py:1 open()"]
 
     def test_the_helper_itself_still_pins_the_encoding(self):
         """The exemption is only sound because the helper does the thing."""
