@@ -1551,6 +1551,55 @@ def build_command(frozen: bool):
 # ── validate ───────────────────────────────────────────────────────────────
 
 
+@cli.command("status")
+def status_command():
+    """
+    Show what this repository has installed, and where it sits in the store.
+
+    Reads the machine-local index under `~/.prompticorn`, which records what
+    every repository on this machine resolved to. The index is a convenience,
+    never an authority: this project's lock is the truth about this project, and
+    the index is refreshed from it on every run.
+
+    \b
+    Usage:
+        prompticorn status
+    """
+    from prompticorn.store import InstallIndex, InstallRecorder, home
+
+    root = Path(".")
+    click.echo(f"\n  Store:   {home()}")
+    click.echo(f"  Project: {root.resolve()}")
+
+    with InstallIndex() as index:
+        identity = InstallRecorder(index=index).record(root, _utc_now())
+        if identity is None:
+            click.echo("\n  No usable lock here — run `prompticorn lock` first.")
+            return
+
+        click.echo(f"  Repo id: {identity}")
+        installs = index.installs_for(identity)
+        if not installs:
+            click.echo("\n  The lock records no artifacts.")
+            return
+
+        click.echo(f"\n  {len(installs)} artifact(s):")
+        for record in installs:
+            origin = record.source or "bundled"
+            click.echo(f"    {record.artifact_id}  ({origin})")
+
+        elsewhere = {
+            other
+            for record in installs
+            for other in index.repos_with(record.artifact_id)
+            if other != identity
+        }
+        if elsewhere:
+            click.echo(
+                f"\n  {len(elsewhere)} other repo(s) on this machine share artifacts with it."
+            )
+
+
 @cli.group("cache")
 def cache_group():
     """

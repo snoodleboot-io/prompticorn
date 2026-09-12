@@ -1782,7 +1782,7 @@ personas:
     <!-- CLI Reference -->
     <div style="margin-top: 4rem;">
       <h3 class="reveal" style="margin-bottom: 0.5rem;">CLI Reference</h3>
-      <p class="reveal reveal-delay-1" style="margin-bottom: 2rem; color: var(--white-dim);">Twelve commands. Complete lifecycle coverage.</p>
+      <p class="reveal reveal-delay-1" style="margin-bottom: 2rem; color: var(--white-dim);">Thirteen commands. Complete lifecycle coverage.</p>
       <div style="background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden;" class="reveal">
         <table class="cli-table" aria-label="CLI commands">
           <thead><tr><th>Command</th><th>What it does</th></tr></thead>
@@ -1798,6 +1798,7 @@ personas:
             <tr><td><code class="cli-cmd">prompticorn verify</code></td><td class="cli-desc">Checks generated output against the lock, and fails on anything the lock does not know about. Writes nothing. This is the CI gate.</td></tr>
             <tr><td><code class="cli-cmd">prompticorn regenerate</code></td><td class="cli-desc">Throws the generated tree away and rebuilds it from the lock. The answer to a hand-edited file: recompile, don't edit.</td></tr>
             <tr><td><code class="cli-cmd">prompticorn package-skills</code></td><td class="cli-desc">Packages emitted skills into uploadable <code>.zip</code> archives.</td></tr>
+            <tr><td><code class="cli-cmd">prompticorn status</code></td><td class="cli-desc">Shows what this repository has installed, and which other repos on this machine share artifacts with it. Refreshed from the lock on every run.</td></tr>
             <tr><td><code class="cli-cmd">prompticorn cache</code></td><td class="cli-desc">Inspects and purges the machine-local blob cache under <code>~/.prompticorn/cas</code>. Shared by every repo on the machine; clearing it costs a refetch and nothing else.</td></tr>
           </tbody>
         </table>
