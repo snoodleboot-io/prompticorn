@@ -549,7 +549,13 @@ def list_prompts():
 
 
 @cli.command("init")
-def init_prompts():
+@click.option(
+    "--profile",
+    "profile_name",
+    default=None,
+    help="Configure from a saved profile instead of asking questions.",
+)
+def init_prompts(profile_name: str | None):
     """
     Interactively initialize prompt configuration for your project.
 
@@ -577,6 +583,13 @@ def init_prompts():
         ✓ Configuration saved
         ✓ Tool configs generated
     """
+    if profile_name is not None:
+        # The adoption path: a project configured correctly without anyone
+        # answering twenty questions. Delegated, so this file gains wiring
+        # rather than behaviour (PRO-133).
+        from prompticorn.commands import profile_init
+
+        raise SystemExit(profile_init.run(profile_name))
 
     from prompticorn.ui._selector import select_option_with_explain
     from prompticorn.ui.exceptions import UserCancelledError
@@ -1549,6 +1562,16 @@ def build_command(frozen: bool):
 
 
 # ── validate ───────────────────────────────────────────────────────────────
+
+
+# ── commands defined outside this file ─────────────────────────────────────
+#
+# cli.py is long enough that adding to it is no longer free, so new commands
+# live in prompticorn/commands/ and are registered here (PRO-133). Registration
+# only — no behaviour in this file.
+from prompticorn.commands import profile_group  # noqa: E402
+
+cli.add_command(profile_group)
 
 
 @cli.command("status")
