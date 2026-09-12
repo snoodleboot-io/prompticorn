@@ -29,7 +29,7 @@ from prompticorn.profiles.apply_outcome import ApplyOutcome
 from prompticorn.profiles.config_diff import ConfigDiff
 from prompticorn.profiles.errors import InvalidProfileError, ProfileNotFoundError
 from prompticorn.profiles.file_profile_store import FileProfileStore
-from prompticorn.profiles.profile import Profile
+from prompticorn.profiles.profile import Profile, plain_data
 
 # The manifest keys a profile carries. An allowlist rather than the whole
 # document, so a key that is genuinely local to one checkout cannot travel to
@@ -139,5 +139,10 @@ def portable_payload(config: dict[str, Any]) -> dict[str, Any]:
     Keys are copied in :data:`PORTABLE_KEYS` order rather than the document's,
     so two captures of the same project produce the same payload regardless of
     how either manifest happened to be written.
+
+    Values are normalised to plain containers here, at the boundary where
+    manifest data becomes portable data. `ConfigHandler` reads with ruamel, and
+    a `CommentedSeq` that travels any further fails the moment anything tries to
+    serialise it — which is a long way from where it came in.
     """
-    return {key: config[key] for key in PORTABLE_KEYS if key in config}
+    return {key: plain_data(config[key]) for key in PORTABLE_KEYS if key in config}
