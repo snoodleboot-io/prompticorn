@@ -60,6 +60,21 @@ def _imports_the_safe_writer(tree: ast.Module) -> bool:
     )
 
 
+def _is_os_open(node: ast.Call) -> bool:
+    """Whether this is `os.open`, which returns a file descriptor.
+
+    It has no text layer and therefore no encoding to declare — the encoding
+    question arrives later, if the descriptor is ever wrapped. Reporting it
+    would be asking for an argument the function does not accept.
+    """
+    func = node.func
+    return (
+        isinstance(func, ast.Attribute)
+        and isinstance(func.value, ast.Name)
+        and func.value.id == "os"
+    )
+
+
 def _is_binary_mode(node: ast.Call) -> bool:
     """Whether this `open` call asks for binary mode.
 
@@ -106,7 +121,7 @@ def _unencoded_calls(path: Path) -> list[str]:
         # the builtin `open(path, mode)` and the *first* to `Path.open(mode)`,
         # so the position depends on the call shape. Checking every argument
         # instead would exempt `open("blob.txt")` on the "b" in its filename.
-        if name == "open" and _is_binary_mode(node):
+        if name == "open" and (_is_binary_mode(node) or _is_os_open(node)):
             continue
         if "encoding" not in {kw.arg for kw in node.keywords}:
             findings.append(f"{path.name}:{node.lineno} {name}()")
@@ -162,6 +177,19 @@ class TestNoImplicitEncoding:
         )
 
         assert _unencoded_calls(planted) == []
+
+    def test_os_open_is_exempt_but_path_open_is_not(self, tmp_path: Path):
+        """`os.open` returns a file descriptor and takes no encoding at all.
+        `Path.open` does, so the exemption must not spread to it."""
+        planted = tmp_path / "descriptors.py"
+        planted.write_text(
+            "import os\nfrom pathlib import Path\n\n"
+            "os.open('x', os.O_CREAT)\n"
+            "Path('x').open('w')\n",
+            encoding="utf-8",
+        )
+
+        assert _unencoded_calls(planted) == ["descriptors.py:5 open()"]
 
     def test_a_filename_containing_b_is_not_mistaken_for_binary_mode(self, tmp_path: Path):
         """The lazy fix — scan every argument for a "b" — would exempt this."""

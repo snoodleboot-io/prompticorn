@@ -17,6 +17,7 @@ digest sorts keys and drops everything that is presentation.
 from __future__ import annotations
 
 import io
+from collections.abc import Mapping, Sequence, Set
 from dataclasses import dataclass
 from typing import Any
 
@@ -55,6 +56,18 @@ class Profile:
     payload: dict[str, Any]
     description: str = ""
     created_at: str = ""
+
+    def __post_init__(self) -> None:
+        """Normalise the payload to plain Python containers.
+
+        `ConfigHandler` reads manifests with ruamel, which returns
+        `CommentedMap` and `CommentedSeq` so that comments and ordering survive
+        a round trip. Those types carry presentation state and PyYAML's safe
+        dumper refuses to represent them, so a profile captured straight from a
+        manifest could be neither digested nor written. Converting once, here,
+        means every consumer downstream sees ordinary dicts and lists.
+        """
+        object.__setattr__(self, "payload", plain_data(self.payload))
 
     def canonical_text(self) -> str:
         """The form the digest is taken over.
@@ -124,3 +137,21 @@ class Profile:
 
     def __str__(self) -> str:
         return f"{self.name}@v{self.version}"
+
+
+def plain_data(value: Any) -> Any:
+    """Recursively convert mappings and sequences to dict, list and scalars.
+
+    Strings are sequences too, and converting one to a list of characters is a
+    corruption that looks like data — so they are returned untouched before the
+    sequence branch is reached.
+    """
+    if isinstance(value, str | bytes):
+        return value
+    if isinstance(value, Mapping):
+        return {plain_data(key): plain_data(item) for key, item in value.items()}
+    if isinstance(value, Sequence):
+        return [plain_data(item) for item in value]
+    if isinstance(value, Set):
+        return sorted(plain_data(item) for item in value)
+    return value
