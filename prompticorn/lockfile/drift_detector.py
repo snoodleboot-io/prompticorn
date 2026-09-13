@@ -43,9 +43,21 @@ class DriftDetector:
         drifts: list[Drift] = []
         drifts.extend(cls._package_drift(recorded, current))
         drifts.extend(cls._manifest_drift(recorded, current))
-        changed_artifacts = cls._artifact_drift(recorded, current)
+        moved_refs = cls._ref_drift(recorded, current)
+        drifts.extend(moved_refs)
+        # A moved tag usually changes the digest too. Reporting it again as
+        # ordinary ARTIFACT drift would put the alarming finding next to a
+        # routine-looking duplicate of itself.
+        already_reported = {drift.subject for drift in moved_refs}
+        changed_artifacts = [
+            drift
+            for drift in cls._artifact_drift(recorded, current)
+            if drift.subject not in already_reported
+        ]
         drifts.extend(changed_artifacts)
-        drifts.extend(cls._unit_drift(recorded, current, bool(changed_artifacts)))
+        drifts.extend(
+            cls._unit_drift(recorded, current, bool(changed_artifacts) or bool(moved_refs))
+        )
         return DriftReport(drifts=tuple(drifts))
 
     @staticmethod
@@ -82,6 +94,28 @@ class DriftDetector:
                 current.manifest_digest,
             )
         ]
+
+    @staticmethod
+    def _ref_drift(recorded: LockFile, current: LockFile) -> list[Drift]:
+        """Git artifacts at an unchanged version whose commit is different (PRO-151).
+
+        Defined by what it requires: the *same* version, a commit on both sides,
+        and the commits disagreeing. A version bump that lands on a new commit
+        is an upgrade and belongs to ARTIFACT drift; only a version that stayed
+        put while the thing underneath it moved is this.
+        """
+        before = {artifact.identity.coordinate: artifact for artifact in recorded.artifacts}
+        after = {artifact.identity.coordinate: artifact for artifact in current.artifacts}
+
+        drifts = []
+        for coordinate in sorted(before.keys() & after.keys()):
+            old, new = before[coordinate], after[coordinate]
+            if old.identity.version != new.identity.version:
+                continue
+            if old.commit is None or new.commit is None or old.commit == new.commit:
+                continue
+            drifts.append(Drift(DriftKind.REF_MOVED, coordinate, old.commit, new.commit))
+        return drifts
 
     @staticmethod
     def _artifact_drift(recorded: LockFile, current: LockFile) -> list[Drift]:

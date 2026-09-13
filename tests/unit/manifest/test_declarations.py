@@ -100,9 +100,48 @@ def test_a_source_declaration_parses() -> None:
 
 def test_source_type_lists_what_is_legal() -> None:
     """The message has to name the alternatives; the enum is the only source of them."""
-    assert SourceType.known() == "builtin"
+    assert SourceType.known() == "builtin, git, local-dir"
 
     with pytest.raises(ManifestSchemaError) as caught:
         SourceDeclaration.parse({"name": "acme", "type": "svn"}, "sources[0]")
 
     assert SourceType.known() in caught.value.reason
+
+
+class TestSourceLocations:
+    """PRO-151: a source says where it is, in the key its own users expect."""
+
+    def test_a_git_source_carries_its_url(self):
+        from prompticorn.manifest.source_declaration import SourceDeclaration
+
+        declaration = SourceDeclaration.parse(
+            {"name": "house", "type": "git", "url": "git@github.com:acme/prompts.git"}, "sources[0]"
+        )
+
+        assert declaration.location == "git@github.com:acme/prompts.git"
+
+    def test_a_directory_source_carries_its_path(self):
+        from prompticorn.manifest.source_declaration import SourceDeclaration
+
+        declaration = SourceDeclaration.parse(
+            {"name": "shared", "type": "local-dir", "path": "../registry"}, "sources[0]"
+        )
+
+        assert declaration.location == "../registry"
+
+    def test_a_builtin_source_has_no_location(self):
+        """Unchanged from PRO-109: existing declarations parse exactly as before."""
+        from prompticorn.manifest.source_declaration import SourceDeclaration
+
+        declaration = SourceDeclaration.parse({"name": "b", "type": "builtin"}, "sources[0]")
+
+        assert declaration.location is None
+
+    def test_every_non_builtin_type_names_a_location_key(self):
+        """Guards the lookup table: a new type without a key would parse with a
+        location of None and fail far from here, inside the source factory."""
+        from prompticorn.manifest.source_type import SourceType
+
+        for member in SourceType:
+            if member is not SourceType.BUILTIN:
+                assert member.location_key, f"{member.value} has no location key"

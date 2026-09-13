@@ -10,6 +10,7 @@ from prompticorn.artifact.pinned_artifact import PinnedArtifact
 IDENTITY_KEY = "identity"
 DIGEST_KEY = "digest"
 SOURCE_KEY = "source"
+COMMIT_KEY = "commit"
 
 
 @dataclass(frozen=True)
@@ -24,10 +25,15 @@ class LockedArtifact:
     Attributes:
         pinned: Exact identity plus content digest.
         source: Name of the source it came from, or None for the default stack.
+        commit: The commit a git source's tag resolved to (PRO-151). Recorded
+            because tags are mutable: a lock that pinned only the tag would let a
+            tag moved upstream change what a locked build produces, which is the
+            one thing a lock exists to prevent. None for every other source.
     """
 
     pinned: PinnedArtifact
     source: str | None = None
+    commit: str | None = None
 
     @property
     def identity(self) -> ArtifactId:
@@ -54,4 +60,8 @@ class LockedArtifact:
         # every review of the file.
         if self.source is not None:
             mapping[SOURCE_KEY] = self.source
+        # Omitted for the same reason: absent means "not a git source", and
+        # writing it only when present keeps every existing lock byte-identical.
+        if self.commit is not None:
+            mapping[COMMIT_KEY] = self.commit
         return mapping
