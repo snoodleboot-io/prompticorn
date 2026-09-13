@@ -77,3 +77,22 @@ class DigestMismatchError(SourceError):
         self.artifact = artifact
         self.expected = expected
         self.actual = actual
+
+
+class RefMovedError(SourceError):
+    """A version's tag now points at a different commit than the lock pinned.
+
+    Tags are mutable; commits are not. A lock pins the commit precisely so that
+    a tag moved upstream cannot silently change what a locked build produces.
+    When re-resolution finds the tag elsewhere, that is drift to be reported and
+    decided on — not an update to adopt quietly.
+    """
+
+    def __init__(self, artifact: str, pinned: str, current: str) -> None:
+        super().__init__(
+            f"{artifact} has moved: the lock pinned {pinned[:12]}, "
+            f"the tag now points at {current[:12]}"
+        )
+        self.artifact = artifact
+        self.pinned = pinned
+        self.current = current

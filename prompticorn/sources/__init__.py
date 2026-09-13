@@ -15,11 +15,13 @@ from prompticorn.sources.artifact_source import ArtifactSource
 from prompticorn.sources.errors import (
     ArtifactNotFoundError,
     DigestMismatchError,
+    RefMovedError,
     SourceError,
     SourceUnavailableError,
     VersionNotFoundError,
 )
 from prompticorn.sources.fetched_artifact import FetchedArtifact
+from prompticorn.sources.git_source import GitSource
 from prompticorn.sources.local_directory_source import (
     DIGEST_KEY,
     MANIFEST_FILENAME,
@@ -34,7 +36,9 @@ __all__ = [
     "ArtifactSource",
     "DigestMismatchError",
     "FetchedArtifact",
+    "GitSource",
     "LocalDirectorySource",
+    "RefMovedError",
     "SourceError",
     "SourceUnavailableError",
     "VersionNotFoundError",
