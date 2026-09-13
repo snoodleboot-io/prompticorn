@@ -395,12 +395,21 @@ prompticorn build --frozen
 
 `--frozen` writes nothing to the lock and treats any divergence as an error.
 That is the mode for CI: it answers "would this build differ from what was
-committed?" without quietly making the answer no.
+committed?" without quietly making the answer no. A frozen build also uses the
+commits the lock recorded for git sources, so it needs no network once they are
+cached.
+
+Without `--frozen`, ordinary drift — you edited the manifest, or upgraded an
+artifact — is re-locked for you. **Suspicious drift is not**: content that
+changed under a pinned version, or a git tag that was moved to a different
+commit. Those are reported and the lock is left alone, because re-locking is
+exactly how they would be accepted. Investigate, then run `prompticorn lock`
+deliberately.
 
 | Code | Meaning |
 |---|---|
-| `0` | Clean: outputs match the lock |
-| `1` | The lock and reality diverge (`--frozen` only) |
+| `0` | Clean, or ordinary drift was re-locked |
+| `1` | The lock and reality diverge (`--frozen`), or suspicious drift was found |
 | `3` | The lock is unusable |
 
 A project with no lock is not an error. It has simply not opted in yet, and
@@ -484,6 +493,39 @@ a tree the lock does not describe.
 | `4` | The rebuild did not reproduce the lock — a defect; please report it |
 
 See [GENERATED_OUTPUT.md](./GENERATED_OUTPUT.md) for the full recovery story.
+
+---
+
+## Artifact sources
+
+Artifacts can come from somewhere other than the bundled library. Declare the
+source under `sources:` and name it from an artifact:
+
+```yaml
+version: '2.0'
+sources:
+  - name: house
+    type: git
+    url: git@github.com:acme/prompts.git
+  - name: shared
+    type: local-dir
+    path: ../prompt-registry          # relative to this project
+artifacts:
+  - name: local/house-standards
+    version: ">=2.0.0,<3.0.0"
+    source: house
+```
+
+| Type | Location key | Notes |
+|---|---|---|
+| `builtin` | — | The bundled library. The default when an artifact names no source. |
+| `git` | `url` | Versions are tags named like `local/house-standards@2.1.0`. Authenticates however your git already does. |
+| `local-dir` | `path` | A directory laid out as `<namespace>/<name>/<version>/`. |
+
+**For git sources the lock records the commit, not the tag.** Tags can be moved
+upstream; a commit cannot. If a version's tag later points somewhere else,
+`prompticorn build` reports it as suspicious drift instead of following it, and
+a build pinned to the recorded commit keeps working — offline, once cached.
 
 ---
 

@@ -1495,9 +1495,14 @@ def build_command(frozen: bool):
     error. That is the mode for CI: it answers "would this build differ from
     what was committed?" without quietly making the answer no.
 
+    Without --frozen, ordinary drift is re-locked automatically. Suspicious
+    drift — content changed under a pinned version, or a tag moved — is not:
+    it is reported and the lock is left alone for `prompticorn lock` to accept
+    deliberately.
+
     Exit codes:
-        0  clean; outputs match the lock
-        1  the lock and reality diverge (--frozen only)
+        0  clean; outputs match the lock, or ordinary drift was re-locked
+        1  the lock and reality diverge (--frozen), or suspicious drift was found
         3  the lock is unusable (corrupt, or from a newer prompticorn)
 
     Usage:
@@ -1530,7 +1535,9 @@ def build_command(frozen: bool):
         click.secho(f"\n  Error building configuration: {exc}", fg="red", err=True)
         raise click.Abort() from exc
 
-    outcome = LockService.inspect(root, config, _utc_now(), _output_paths_for(tool))
+    outcome = LockService.inspect(
+        root, config, _utc_now(), _output_paths_for(tool), honour_lock=frozen
+    )
 
     if outcome.is_unusable:
         click.secho(f"\n✗ {outcome.unusable_reason}", fg="red", err=True)
@@ -1554,6 +1561,21 @@ def build_command(frozen: bool):
         # Deliberately no write. A frozen build that re-locked would report drift
         # once and never again, which defeats the entire point of the flag.
         click.secho("\n✗ Frozen build: refusing to re-resolve.", fg="red", err=True)
+        sys.exit(ExitCode.DRIFT)
+
+    if outcome.report.has_suspicious_drift:
+        # Not accepted automatically, frozen or not (PRO-151). Suspicious drift
+        # means a version that should be immutable is not — content changed
+        # under it, or its tag was moved. Re-locking is exactly how that gets
+        # accepted, and the report above has just told the reader to
+        # investigate first; writing the lock anyway would contradict it in the
+        # same run. `prompticorn lock` is the deliberate way through.
+        click.secho(
+            "\n✗ Not updating the lock: investigate the finding above, then run "
+            "`prompticorn lock` once you trust it.",
+            fg="red",
+            err=True,
+        )
         sys.exit(ExitCode.DRIFT)
 
     LockService.write(root, outcome.lock)
