@@ -117,6 +117,22 @@ class GitSource(ArtifactSource):
         """
         return self.resolve_commit(artifact_id) != pinned_commit
 
+    # -- pinning hooks (PRO-151) -----------------------------------------
+
+    def commit_for(self, artifact_id: ArtifactId) -> str | None:
+        """A tag is mutable, so the commit it resolved to is what gets locked."""
+        return self.resolve_commit(artifact_id)
+
+    def can_fetch_offline(self, artifact_id: ArtifactId, commit: str | None) -> bool:
+        """True once the locked commit's tree is cached — it cannot change."""
+        return commit is not None and self.is_cached(commit)
+
+    def fetch_locked(self, artifact_id: ArtifactId, commit: str | None) -> FetchedArtifact:
+        """Build from the locked commit, never from wherever the tag points now."""
+        if commit is None:
+            return self.fetch(artifact_id)
+        return self.fetch_pinned(artifact_id, commit)
+
     # -- fetching --------------------------------------------------------
 
     def _fetch(self, artifact_id: ArtifactId) -> FetchedArtifact:

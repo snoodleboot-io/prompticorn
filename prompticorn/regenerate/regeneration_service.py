@@ -86,5 +86,7 @@ class RegenerationService:
         ignores them in any case — reading every generated file to build digests
         that are then discarded would be work done to answer no question.
         """
-        current = LockService.resolve_current(self.root, self.config, resolved_at)
+        # Pinned to the lock being reproduced: regenerate works from the lock
+        # alone, so a git source whose locked commit is cached is not contacted.
+        current = LockService.resolve_current(self.root, self.config, resolved_at, pinned_to=lock)
         return DriftDetector.compare(lock, current)
