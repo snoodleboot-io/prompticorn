@@ -34,14 +34,24 @@ from prompticorn.lockfile.lock_file import (
     UNITS_KEY,
     LockFile,
 )
+from prompticorn.lockfile.locked_artifact import (
+    COMMIT_KEY,
+    IDENTITY_KEY,
+    SOURCE_KEY,
+    LockedArtifact,
+)
 from prompticorn.lockfile.locked_artifact import DIGEST_KEY as ARTIFACT_DIGEST_KEY
-from prompticorn.lockfile.locked_artifact import IDENTITY_KEY, SOURCE_KEY, LockedArtifact
 from prompticorn.lockfile.locked_output import DIGEST_KEY as OUTPUT_DIGEST_KEY
 from prompticorn.lockfile.locked_output import PATH_KEY, LockedOutput
 from prompticorn.lockfile.locked_unit import DIGEST_KEY as UNIT_DIGEST_KEY
 from prompticorn.lockfile.locked_unit import ID_KEY, LAYER_KEY, LockedUnit
 
 _DIGEST_RE = re.compile(r"^[0-9a-f]{64}$")
+
+# SHA-1 object ids are 40 hex characters; repositories using the SHA-256 object
+# format use 64. Both are accepted, lowercase only, because git always prints
+# them that way and a mixed-case id in a lock was written by hand.
+_COMMIT_PATTERN = re.compile(r"^(?:[0-9a-f]{40}|[0-9a-f]{64})$")
 
 
 class LockReader:
@@ -144,13 +154,24 @@ class LockReader:
             source = mapping.get(SOURCE_KEY)
             if source is not None and not isinstance(source, str):
                 raise LockCorruptError(location, f"{where}.{SOURCE_KEY} must be a string")
+            commit = mapping.get(COMMIT_KEY)
+            if commit is not None and not (
+                isinstance(commit, str) and _COMMIT_PATTERN.match(commit)
+            ):
+                raise LockCorruptError(
+                    location,
+                    f"{where}.{COMMIT_KEY} is not a git commit id "
+                    "(40 or 64 lowercase hex characters)",
+                )
             try:
                 artifact_id = ArtifactId.parse(identity)
             except ArtifactError as exc:
                 raise LockCorruptError(location, f"{where}.{IDENTITY_KEY}: {exc}") from exc
             artifacts.append(
                 LockedArtifact(
-                    pinned=PinnedArtifact(artifact_id=artifact_id, digest=digest), source=source
+                    pinned=PinnedArtifact(artifact_id=artifact_id, digest=digest),
+                    source=source,
+                    commit=commit,
                 )
             )
         return artifacts

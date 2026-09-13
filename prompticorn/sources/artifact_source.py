@@ -122,3 +122,35 @@ class ArtifactSource(ABC):
     def has(self, artifact_id: ArtifactId) -> bool:
         """Whether this source carries an exact version."""
         return artifact_id in set(self.list_artifacts())
+
+    # -- pinning (PRO-151) -----------------------------------------------
+    #
+    # Defaults describe a source whose versions are immutable by construction,
+    # which is every source except one addressed by mutable names. A source
+    # like git overrides these; nothing else needs to know it exists, so the
+    # resolver never has to ask what kind of source it is holding.
+
+    def commit_for(self, artifact_id: ArtifactId) -> str | None:
+        """The immutable id a mutable version name resolved to, if any.
+
+        None means the version *is* the immutable reference and there is
+        nothing further to pin.
+        """
+        return None
+
+    def can_fetch_offline(self, artifact_id: ArtifactId, commit: str | None) -> bool:
+        """Whether a locked version can be fetched without reaching the source.
+
+        False by default: a source that cannot promise it must not be treated
+        as though it can, or a frozen build would contact a remote it claimed
+        not to need.
+        """
+        return False
+
+    def fetch_locked(self, artifact_id: ArtifactId, commit: str | None) -> FetchedArtifact:
+        """Fetch exactly what a lock recorded.
+
+        Defaults to :meth:`fetch`, which is exact for any source whose versions
+        cannot move. Still integrity-checked either way.
+        """
+        return self.fetch(artifact_id)

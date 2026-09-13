@@ -138,10 +138,13 @@ def test_unit_drift_is_suppressed_when_an_artifact_changed() -> None:
     assert report.of_kind(DriftKind.UNIT) == ()
 
 
-def test_unit_drift_is_the_only_suspicious_kind() -> None:
-    """It means a source mutated in place; the others mean someone did something."""
-    assert DriftKind.UNIT.is_suspicious
-    assert not any(kind.is_suspicious for kind in DriftKind if kind is not DriftKind.UNIT)
+def test_only_a_mutated_pinned_version_is_suspicious() -> None:
+    """Suspicious means a version that should be immutable is not — content
+    changed under it (UNIT) or its tag was moved (REF_MOVED, PRO-151). Every
+    other kind means someone did something on purpose."""
+    suspicious = {kind for kind in DriftKind if kind.is_suspicious}
+
+    assert suspicious == {DriftKind.UNIT, DriftKind.REF_MOVED}
 
 
 def test_a_report_with_unit_drift_is_flagged_suspicious() -> None:
@@ -204,3 +207,70 @@ def test_kinds_are_reported_in_declared_order_not_discovery_order() -> None:
     )
 
     assert list(report.kinds) == [kind for kind in DriftKind if kind in report.kinds]
+
+
+# -- REF_MOVED (PRO-151) -------------------------------------------------------
+
+COMMIT_A = "a" * 40
+COMMIT_B = "b" * 40
+
+
+def _git_artifact(version: str = "1.0.0", commit: str | None = COMMIT_A, digest: str = DIGEST_A):
+    from prompticorn.artifact.artifact_id import ArtifactId
+    from prompticorn.artifact.pinned_artifact import PinnedArtifact
+    from prompticorn.lockfile.locked_artifact import LockedArtifact
+
+    return LockedArtifact(
+        pinned=PinnedArtifact(artifact_id=ArtifactId.parse(f"local/house@{version}"), digest=digest),
+        source="house",
+        commit=commit,
+    )
+
+
+def test_a_moved_tag_at_the_same_version_is_ref_moved_drift() -> None:
+    report = DriftDetector.compare(
+        lock(artifacts=(_git_artifact(commit=COMMIT_A),)),
+        lock(artifacts=(_git_artifact(commit=COMMIT_B),)),
+    )
+
+    assert report.kinds == (DriftKind.REF_MOVED,)
+    assert report.has_suspicious_drift
+
+
+def test_a_moved_tag_is_not_also_reported_as_ordinary_artifact_drift() -> None:
+    """A moved tag usually changes the digest too. Reporting it twice would set
+    the alarming finding next to a routine-looking duplicate of itself."""
+    report = DriftDetector.compare(
+        lock(artifacts=(_git_artifact(commit=COMMIT_A, digest=DIGEST_A),)),
+        lock(artifacts=(_git_artifact(commit=COMMIT_B, digest=DIGEST_B),)),
+    )
+
+    assert DriftKind.ARTIFACT not in report.kinds
+    assert report.kinds == (DriftKind.REF_MOVED,)
+
+
+def test_a_version_upgrade_to_a_new_commit_is_not_ref_moved() -> None:
+    """New version, new commit: an upgrade, not a re-tag."""
+    report = DriftDetector.compare(
+        lock(artifacts=(_git_artifact(version="1.0.0", commit=COMMIT_A),)),
+        lock(artifacts=(_git_artifact(version="2.0.0", commit=COMMIT_B),)),
+    )
+
+    assert DriftKind.REF_MOVED not in report.kinds
+    assert DriftKind.ARTIFACT in report.kinds
+
+
+def test_an_unchanged_commit_is_not_drift() -> None:
+    assert DriftDetector.compare(
+        lock(artifacts=(_git_artifact(),)), lock(artifacts=(_git_artifact(),))
+    ).is_clean
+
+
+def test_a_non_git_artifact_never_reports_ref_moved() -> None:
+    """No commit on either side means there is no tag to have moved."""
+    report = DriftDetector.compare(
+        lock(artifacts=(_git_artifact(commit=None),)),
+        lock(artifacts=(_git_artifact(commit=None),)),
+    )
+
+    assert report.is_clean

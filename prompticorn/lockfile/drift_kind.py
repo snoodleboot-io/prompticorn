@@ -24,6 +24,7 @@ class DriftKind(Enum):
     ARTIFACT = "artifact"
     PACKAGE = "package"
     UNIT = "unit"
+    REF_MOVED = "ref_moved"
 
     @property
     def headline(self) -> str:
@@ -43,7 +44,7 @@ class DriftKind(Enum):
         their own manifest should not look like a security incident, and a
         mutated source should not look like routine noise.
         """
-        return self is DriftKind.UNIT
+        return self in _SUSPICIOUS
 
 
 _HEADLINES: dict[DriftKind, str] = {
@@ -51,6 +52,7 @@ _HEADLINES: dict[DriftKind, str] = {
     DriftKind.ARTIFACT: "A declared artifact resolved to something else",
     DriftKind.PACKAGE: "This prompticorn is not the one that wrote the lock",
     DriftKind.UNIT: "Content changed under a pinned version — a source was modified in place",
+    DriftKind.REF_MOVED: "A version's tag now points at a different commit than the lock pinned",
 }
 
 _REMEDIATION: dict[DriftKind, str] = {
@@ -68,4 +70,13 @@ _REMEDIATION: dict[DriftKind, str] = {
         "content; verify the source has not been tampered with, then run "
         "`prompticorn lock` only once you trust it."
     ),
+    DriftKind.REF_MOVED: (
+        "A release should never be re-tagged. Find out who moved it and why "
+        "before accepting it — the locked commit still builds exactly as it did, "
+        "and `prompticorn lock` would silently adopt the new one."
+    ),
 }
+
+# Both mean a version that should be immutable is not. Grouped so the report,
+# and anything deciding how loudly to say it, cannot treat them differently.
+_SUSPICIOUS = frozenset({DriftKind.UNIT, DriftKind.REF_MOVED})

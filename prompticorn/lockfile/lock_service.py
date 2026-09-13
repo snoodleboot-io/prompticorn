@@ -65,8 +65,13 @@ class LockService:
         resolved_at: str,
         output_paths: tuple[str, ...] = (),
         resolver: LockResolver | None = None,
+        pinned_to: LockFile | None = None,
     ) -> LockFile:
-        """Resolve the project at ``root`` into a lock."""
+        """Resolve the project at ``root`` into a lock.
+
+        ``pinned_to`` makes resolution honour an existing lock where it can —
+        see :meth:`LockResolver.resolve`.
+        """
         manifest_path = (
             root / ConfigHandler.DEFAULT_CONFIG_DIR.name / ConfigHandler.DEFAULT_CONFIG_FILE
         )
@@ -80,6 +85,7 @@ class LockService:
             manifest_text=manifest_text,
             output_root=root,
             output_paths=output_paths,
+            pinned_to=pinned_to,
         )
 
     @classmethod
@@ -90,25 +96,44 @@ class LockService:
         resolved_at: str,
         output_paths: tuple[str, ...] = (),
         resolver: LockResolver | None = None,
+        honour_lock: bool = False,
     ) -> LockOutcome:
         """Compare the recorded lock against a fresh resolution. Writes nothing.
 
         A lock that cannot be read is reported rather than raised, so the caller
         can turn it into the documented exit code instead of a traceback.
+
+        Args:
+            honour_lock: Resolve against the recorded lock where possible rather
+                than afresh (PRO-151). Set for a frozen build, which must not
+                contact a remote whose locked commit is already cached. Left
+                unset for `lock` and an ordinary `build`, because re-resolving
+                is the only way a moved tag is noticed.
         """
-        current = cls.resolve_current(root, config, resolved_at, output_paths, resolver)
         path = cls.lock_path(root)
+        recorded: LockFile | None = None
+        unusable: str | None = None
+        if path.exists():
+            try:
+                recorded = LockReader.read(path)
+            except LockError as exc:
+                unusable = str(exc)
+
+        current = cls.resolve_current(
+            root,
+            config,
+            resolved_at,
+            output_paths,
+            resolver,
+            pinned_to=recorded if honour_lock else None,
+        )
 
         if not path.exists():
             return LockOutcome(DriftReport(), current, had_existing_lock=False)
-
-        try:
-            recorded = LockReader.read(path)
-        except LockError as exc:
+        if unusable is not None or recorded is None:
             return LockOutcome(
-                DriftReport(), current, had_existing_lock=True, unusable_reason=str(exc)
+                DriftReport(), current, had_existing_lock=True, unusable_reason=unusable
             )
-
         return LockOutcome(
             DriftDetector.compare(recorded, current), current, had_existing_lock=True
         )
