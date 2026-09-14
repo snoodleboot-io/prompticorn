@@ -41,6 +41,16 @@ class ContentResolver:
         self._cache = cache if cache is not None else ContentCache()
 
     @property
+    def name(self) -> str:
+        """What this composite calls itself in errors (PRO-117).
+
+        Present so a resolver can be checked against the ContentSource contract
+        as a composite — it answers every question a single source does, over
+        the whole stack.
+        """
+        return RESOLVER_NAME
+
+    @property
     def sources(self) -> tuple[ContentSource, ...]:
         return self._sources
 
@@ -124,6 +134,18 @@ def reset_default_resolver() -> None:
     """Drop the singleton. For tests that swap the bundled tree."""
     global _default_resolver
     _default_resolver = None
+
+
+def install_resolver(resolver: ContentResolver) -> None:
+    """Make ``resolver`` the one every consumer reads through (PRO-117).
+
+    The CLI installs a project's layer stack here before a command runs, so the
+    builders and the lock resolver — which both read through
+    :func:`default_resolver` — see the same layers without either being told
+    about them. Pair with :func:`reset_default_resolver` when the command ends.
+    """
+    global _default_resolver
+    _default_resolver = resolver
 
 
 def read_configuration(name: str) -> str:

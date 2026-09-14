@@ -484,7 +484,8 @@ def _ask_project_questions(select_option) -> dict[str, str]:
 
 
 @click.group()
-def cli():
+@click.pass_context
+def cli(ctx: click.Context):
     """prompticorn CLI — manage and validate your prompt configurations.
 
     Edit files in prompts/, then use `prompticorn list` to see available modes and
@@ -494,6 +495,15 @@ def cli():
     # cp1252 cannot encode, and a redirected stream on Windows would otherwise
     # abort a half-finished command while reporting what it had already done.
     configure_output_streams()
+
+    # Content resolves through this project's layers for the length of the
+    # command, and is put back afterwards so nothing leaks into a later
+    # invocation in the same process (PRO-117). Wiring only; see layer_setup.
+    from prompticorn.commands.layer_setup import install_project_layers
+    from prompticorn.content.content_resolver import reset_default_resolver
+
+    install_project_layers(Path.cwd())
+    ctx.call_on_close(reset_default_resolver)
 
 
 # ── list ───────────────────────────────────────────────────────────────────────
