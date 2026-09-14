@@ -54,7 +54,12 @@ class BuiltinContentSource(ContentSource):
     def units(self) -> Iterable[ContentUnit]:
         self._require_available()
         ids = sorted(self._discover(), key=lambda unit_id: unit_id.render())
-        return [ContentUnit(id=unit_id, layer=BUILTIN_LAYER) for unit_id in ids]
+        # `self.name`, not the BUILTIN_LAYER constant. For this class they are the
+        # same string; for a subclass that reads the same layout from another
+        # root under another name, stamping the constant would report content
+        # from an artifact or a project directory as though it came from the
+        # package — and the lock would record it that way (PRO-117).
+        return [ContentUnit(id=unit_id, layer=self.name) for unit_id in ids]
 
     def read(self, unit_id: UnitId) -> str:
         self._require_available()
