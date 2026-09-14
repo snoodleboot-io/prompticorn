@@ -496,6 +496,40 @@ See [GENERATED_OUTPUT.md](./GENERATED_OUTPUT.md) for the full recovery story.
 
 ---
 
+## Overriding bundled content
+
+Put a file in `.prompticorn/content/`, laid out like the bundled library, and it
+replaces the bundled unit of the same name for this project:
+
+```text
+.prompticorn/content/skills/api-versioning-strategy/minimal/SKILL.md
+```
+
+The whole file wins; nothing is merged. Everything you do not override still
+comes from the library. Commit the directory — it is part of the project, so the
+override resolves the same way on every checkout, and the lock records that the
+`project` layer supplied it.
+
+Layers, highest precedence first:
+
+| Layer | Where | On by default |
+|---|---|---|
+| `user` | `~/.prompticorn/content/` | **No** — see below |
+| `project` | `.prompticorn/content/` | Yes, when the directory exists |
+| `team`, `org` | Reserved for plugins | Empty unless a provider is installed |
+| `builtin` | The bundled library | Always |
+
+**The user layer is off unless `PROMPTICORN_USER_LAYER=1` is set.** Its content
+lives on one machine and is not committed, so an override there changes the
+lock in a way no teammate can reproduce — on their machine it would read as
+content changed under a pinned version, which `build` refuses. Enable it only
+for output you intend to keep local.
+
+Additional layers can be registered by a package under the
+`prompticorn.layer_providers` entry point, without changes to prompticorn itself.
+
+---
+
 ## Artifact sources
 
 Artifacts can come from somewhere other than the bundled library. Declare the
