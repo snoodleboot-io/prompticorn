@@ -31,6 +31,7 @@ architect:
     - nosql-database-selection
     - post-implementation-checklist
     - problem-decomposition
+    - security-architecture-review
     - serverless-architecture
     - technical-communication
     - technical-decision-making
@@ -82,8 +83,11 @@ atdd:
 # ============================================================================
 backend:
   skills:
+    - api-security-hardening
     - api-versioning-strategy
     - architecture-documentation
+    - authentication-design
+    - authorization-patterns
     - code-review-practices
     - data-model-discovery
     - data-validation-pipelines
@@ -131,6 +135,7 @@ code:
 # ============================================================================
 compliance:
   skills:
+    - compliance-assessment
     - compliance-automation
     - documentation-best-practices
     - quality-assurance
@@ -198,6 +203,7 @@ devops:
     - iac-best-practices
     - infrastructure-drift-detection
     - kubernetes-resource-management
+    - secret-management
     - technical-decision-making
   workflows:
     - capacity-planning
@@ -265,6 +271,9 @@ frontend:
     - responsive-design-patterns
     - state-management-architecture
     - testing-strategies
+    - user-needs-discovery
+    - user-testing-methods
+    - ux-writing-guidelines
   workflows:
     - accessibility
     - code
@@ -283,6 +292,7 @@ incident:
     - continuous-improvement
     - debugging-methodology
     - incident-automation
+    - incident-response-planning
     - incident-timeline-creation
     - problem-decomposition
     - root-cause-five-whys
@@ -421,6 +431,8 @@ plan:
     - feature-planning
     - multiagent-orchestration
     - problem-decomposition
+    - requirements-specification
+    - stakeholder-communication
     - technical-communication
     - technical-decision-making
   workflows:
@@ -437,10 +449,20 @@ plan:
 # ============================================================================
 product:
   skills:
+    - competitor-analysis
     - feature-planning
+    - launch-readiness-checklist
     - problem-decomposition
+    - product-analytics-setup
+    - requirements-specification
+    - roadmap-prioritization
+    - stakeholder-communication
+    - success-metrics-definition
     - team-collaboration
     - technical-communication
+    - user-needs-discovery
+    - user-testing-methods
+    - ux-writing-guidelines
   workflows:
     - a-b-testing
     - analytics-setup
@@ -498,6 +520,7 @@ review:
     - code-review-practices
     - performance-optimization
     - quality-assurance
+    - secure-code-review
     - technical-communication
     - technical-debt-management
   workflows:
@@ -512,14 +535,25 @@ review:
 security:
   skills:
     - api-security
+    - api-security-hardening
+    - authentication-design
+    - authorization-patterns
     - cloud-iam-design
     - code-review-practices
     - container-security-hardening
+    - cryptography-fundamentals
+    - incident-response-planning
     - key-management
     - problem-decomposition
     - quality-assurance
+    - secret-management
+    - secure-code-review
+    - security-architecture-review
+    - security-testing-strategies
     - technical-decision-making
+    - threat-identification
     - threat-modeling
+    - vulnerability-assessment
   workflows:
     - authentication-authorization
     - data-encryption
@@ -543,6 +577,7 @@ test:
     - load-testing
     - mutation-testing
     - quality-assurance
+    - security-testing-strategies
     - test-aaa-structure
     - test-coverage-categories
     - test-data-strategies

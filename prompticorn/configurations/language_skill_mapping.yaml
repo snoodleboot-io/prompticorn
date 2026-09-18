@@ -167,27 +167,6 @@ python:
   - refactor
   - boilerplate
   - house-style
-product:
-  skills:
-  - user-needs-discovery
-  - requirements-specification
-  - success-metrics-definition
-  - roadmap-prioritization
-  - user-testing-methods
-  - competitor-analysis
-  - ux-writing-guidelines
-  - launch-readiness-checklist
-  - stakeholder-communication
-  - product-analytics-setup
-  workflows:
-  - requirements-gathering
-  - roadmap-planning
-  - feature-prioritization
-  - user-research-guide
-  - ux-validation
-  - analytics-setup
-  - a-b-testing
-  - feature-launch-checklist
 rust:
   skills:
   - feature-planning
@@ -217,31 +196,6 @@ rust/test:
   - test-mocking-rules
   workflows:
   - testing
-security:
-  skills:
-  - threat-identification
-  - vulnerability-assessment
-  - secure-code-review
-  - cryptography-fundamentals
-  - authentication-design
-  - authorization-patterns
-  - api-security-hardening
-  - security-testing-strategies
-  - incident-response-planning
-  - compliance-assessment
-  - secret-management
-  - security-architecture-review
-  workflows:
-  - threat-modeling
-  - vulnerability-scanning
-  - security-testing
-  - compliance-audit
-  - incident-response-security
-  - security-hardening-checklist
-  - penetration-testing-guide
-  - security-code-review
-  - dependency-scanning
-  - secret-management
 sql:
   skills:
   - data-model-discovery
