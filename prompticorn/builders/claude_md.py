@@ -7,12 +7,19 @@ from jinja2 import Environment, FileSystemLoader
 from prompticorn.builders.naming_utils import agent_to_file_name
 
 
-def generate_claude_md(primary_agents: list[dict], persona_name: str = "software_engineer") -> str:
+#: Header text when nothing narrowed the build. Saying "Software Engineer"
+#: here — the old default — claimed a persona the user never chose. (PRO-160)
+NO_PERSONA_LABEL = "None (no persona filtering — all agents)"
+
+
+def generate_claude_md(primary_agents: list[dict], persona_label: str = NO_PERSONA_LABEL) -> str:
     """Generate CLAUDE.md content with agent routing table.
 
     Args:
         primary_agents: List of dicts with 'name' and 'description' for each agent
-        persona_name: Name of the persona (e.g., "software_engineer")
+        persona_label: Display-ready persona text, rendered verbatim. Callers
+            pass display names (possibly several, comma-joined), not persona
+            ids — title-casing here would render "QA / Tester" as "Qa / Tester".
 
     Returns:
         Content for root CLAUDE.md file
@@ -52,7 +59,7 @@ def generate_claude_md(primary_agents: list[dict], persona_name: str = "software
     # Render template
     return template.render(
         agent_count=len(primary_agents),
-        persona_name=persona_name.replace("_", " ").title(),
+        persona_name=persona_label,
         agents=agents_data,
         routing_categories=routing_categories,
     )

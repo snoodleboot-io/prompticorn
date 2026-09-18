@@ -2,6 +2,8 @@
 
 import json
 import warnings
+
+import yaml
 from collections.abc import Iterable
 from pathlib import Path
 from typing import Any
@@ -10,7 +12,7 @@ from prompticorn.agent_registry.registry import Registry
 from prompticorn.artifact.package_version import bundled_version
 from prompticorn.builders.agents_md import generate_agents_md
 from prompticorn.builders.base import BuildOptions
-from prompticorn.builders.claude_md import generate_claude_md
+from prompticorn.builders.claude_md import NO_PERSONA_LABEL, generate_claude_md
 from prompticorn.builders.convention_generator import generate_all_conventions
 from prompticorn.builders.factory import BuilderFactory
 from prompticorn.builders.layouts import get_layout
@@ -42,6 +44,28 @@ def _dedupe_preserve_order(*lists: list[str] | None) -> list[str]:
                 seen.add(item)
                 result.append(item)
     return result
+
+
+def _describe_personas(config: dict | None) -> str:
+    """Human-readable persona line for the CLAUDE.md header.
+
+    Reads ``active_personas`` — the key the CLI actually writes. The previous
+    code read ``config.get("persona")``, singular, which the CLI never sets, so
+    the default fired every time and every generated CLAUDE.md claimed
+    "Persona: Software Engineer" no matter what was selected. (PRO-160)
+
+    Falls back to the raw ids if the registry will not load, since a cosmetic
+    header must never fail a build.
+    """
+    selected = (config or {}).get("active_personas") or []
+    if not selected:
+        return NO_PERSONA_LABEL
+
+    try:
+        registry = PersonaRegistry.from_resolver()
+        return ", ".join(registry.get_display_name(name) for name in selected)
+    except (ContentError, KeyError, OSError, yaml.YAMLError):
+        return ", ".join(selected)
 
 
 class PromptBuilder:
@@ -400,12 +424,8 @@ class PromptBuilder:
             try:
                 if self.layout.emits_claude_md:
                     # Generate CLAUDE.md for Claude
-                    persona_name = (
-                        config.get("persona", "software_engineer")
-                        if config
-                        else "software_engineer"
-                    )
-                    claude_md_content = generate_claude_md(primary_agents_built, persona_name)
+                    persona_label = _describe_personas(config)
+                    claude_md_content = generate_claude_md(primary_agents_built, persona_label)
                     claude_md_path = output / "CLAUDE.md"
                     write_text(claude_md_path, claude_md_content)
                     emitted.add("CLAUDE.md")
