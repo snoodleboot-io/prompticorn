@@ -228,10 +228,11 @@ personas:
     focus: "Ensuring quality through comprehensive testing"
     
     primary_agents:
+      - qa-tester
       - test
       - review
       - atdd
-    
+
     secondary_agents:
       - performance
       - enforcement
@@ -279,8 +280,7 @@ personas:
       - incident-response
       - postmortem
       - capacity-planning
-      - deployment-automation
-    
+
     skills:
       - performance-optimization
       - debugging-methodology
@@ -342,7 +342,6 @@ personas:
       - feature-planning
       - technical-communication
       - problem-decomposition
-      - feature-prioritization-workflow
 
   data_engineer:
     display_name: "Data Engineer"
@@ -417,7 +416,7 @@ personas:
       - dimensionality-reduction
       - anomaly-detection-techniques
       - model-performance-debugging
-      - feature-engineering-guide
+      - feature-engineering
       - feature-store-design
       - data-validation-pipelines
       - time-series-preprocessing
