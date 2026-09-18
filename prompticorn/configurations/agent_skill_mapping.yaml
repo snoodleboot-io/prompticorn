@@ -35,8 +35,12 @@ architect:
     - technical-communication
     - technical-decision-making
   workflows:
+    - capacity-planning
+    - component-architecture
     - data-model
+    - database-selection
     - decision-log
+    - microservices-architecture
     - scaffold
     - strategy
     - task-breakdown
@@ -93,8 +97,11 @@ backend:
     - serverless-architecture
   workflows:
     - api-design
+    - authentication-authorization
+    - caching-strategy
     - code
     - data-model
+    - microservices-architecture
     - performance
     - review
 
@@ -152,8 +159,12 @@ data:
     - sql-optimization
   workflows:
     - data-model
+    - data-pipeline
+    - data-quality
     - data-quality-monitoring
+    - database-selection
     - experiment-tracking-setup
+    - schema-migration
     - workflow-versioning-management
 
 # ============================================================================
@@ -189,7 +200,13 @@ devops:
     - kubernetes-resource-management
     - technical-decision-making
   workflows:
+    - capacity-planning
+    - cicd-pipeline
+    - container-orchestration
     - dependency-scanning
+    - disaster-recovery
+    - infrastructure-as-code
+    - release-cycle-maintenance
     - secret-management
     - workflow-monitoring
     - workflow-orchestration-patterns
@@ -219,6 +236,7 @@ enforcement:
     - technical-debt-management
   workflows:
     - code
+    - code-quality-maintenance
     - house-style
     - review
 
@@ -250,6 +268,10 @@ frontend:
   workflows:
     - accessibility
     - code
+    - component-architecture
+    - frontend-performance
+    - responsive-design
+    - state-management
     - testing
     - ux-validation
 
@@ -266,8 +288,11 @@ incident:
     - root-cause-five-whys
     - technical-communication
   workflows:
+    - disaster-recovery
+    - incident-response
     - incident-response-security
     - log-analysis
+    - postmortem
     - root-cause
 
 # ============================================================================
@@ -280,8 +305,10 @@ migration:
     - technical-debt-management
     - technical-decision-making
   workflows:
+    - dependency-update-maintenance
     - dependency-upgrade
     - migration
+    - schema-migration
     - strategy
     - workflow-migration-patterns
 
@@ -338,8 +365,12 @@ observability:
   workflows:
     - analytics-setup
     - log-analysis
+    - metrics-tracking-maintenance
     - ml-monitoring-observability
+    - observability
     - performance
+    - performance-monitoring-maintenance
+    - slo-sli
     - workflow-monitoring
 
 # ============================================================================
@@ -373,7 +404,11 @@ performance:
     - problem-decomposition
     - sql-optimization
   workflows:
+    - caching-strategy
+    - frontend-performance
     - performance
+    - performance-monitoring-maintenance
+    - performance-testing
     - workflow-performance-optimization
     - workflow-scaling-patterns
 
@@ -430,8 +465,12 @@ qa-tester:
     - test-mocking-rules
     - testing-strategies
   workflows:
+    - automated-testing
+    - coverage-improvement-maintenance
+    - performance-testing
     - review
     - testing
+    - testing-strategy
     - workflow-testing-patterns
 
 # ============================================================================
@@ -446,8 +485,10 @@ refactor:
     - technical-debt-management
   workflows:
     - code
+    - code-quality-maintenance
     - refactor
     - strategy
+    - tech-debt-cleanup-maintenance
 
 # ============================================================================
 # REVIEW
@@ -480,11 +521,15 @@ security:
     - technical-decision-making
     - threat-modeling
   workflows:
+    - authentication-authorization
+    - data-encryption
     - penetration-testing-guide
+    - security-audit-maintenance
     - security-code-review
     - security-hardening-checklist
     - security-testing
     - threat-modeling
+    - vulnerability-assessment
     - vulnerability-scanning
     - workflow-security-in-workflows
 
@@ -504,6 +549,9 @@ test:
     - test-mocking-rules
     - testing-strategies
   workflows:
+    - automated-testing
+    - coverage-improvement-maintenance
     - strategy
     - testing
+    - testing-strategy
     - workflow-testing-patterns
