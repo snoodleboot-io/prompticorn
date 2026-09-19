@@ -159,4 +159,9 @@ def _generate_routing_categories() -> list[dict]:
             "keywords": '"migrate", "upgrade", "update dependencies", "framework migration"',
             "agent": "migration-agent",
         },
+        {
+            "name": "AI / LLM Engineering",
+            "keywords": '"LLM", "prompt", "RAG", "retrieval", "agent", "eval", "embedding"',
+            "agent": "ai-agent",
+        },
     ]
