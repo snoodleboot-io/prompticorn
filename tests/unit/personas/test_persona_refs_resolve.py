@@ -102,6 +102,35 @@ def test_a_skill_ref_is_never_really_a_workflow(personas_data):
     assert not confused, f"workflow names listed as skills: {confused}"
 
 
+@pytest.mark.parametrize("key", ["skills", "workflows"])
+def test_persona_lists_are_reachable_from_their_own_agents(personas_data, key):
+    """A persona may only narrow what its agents map — it can never add.
+
+    Under the intersect semantics of PRO-153 a persona ref that no selected
+    agent maps is not an error, it is silently dropped content. ai_engineer
+    listed ``model-evaluation`` this way: the skill lives on ``mlai``, which
+    that persona does not select.
+    """
+    with (CONTENT_ROOT / "configurations" / "agent_skill_mapping.yaml").open(
+        encoding="utf-8"
+    ) as f:
+        agent_map = yaml.safe_load(f)
+
+    unreachable = []
+    for persona_name, persona in personas_data["personas"].items():
+        agents = (persona.get("primary_agents") or []) + (persona.get("secondary_agents") or [])
+        reachable = {
+            ref for agent in agents for ref in (agent_map.get(agent, {}).get(key) or [])
+        }
+        for ref in sorted(set(persona.get(key) or []) - reachable):
+            unreachable.append(f"{persona_name} -> {ref}")
+
+    assert not unreachable, (
+        f"persona {key} that no selected agent maps, so the build would drop them "
+        f"without a word: {unreachable}"
+    )
+
+
 def test_every_shipped_agent_is_claimed_by_some_persona(personas_data):
     """An agent no persona selects can never be emitted.
 

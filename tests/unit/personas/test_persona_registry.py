@@ -31,8 +31,8 @@ class TestPersonaRegistry:
         """Test listing all persona IDs"""
         personas = registry.list_personas()
 
-        # Should have 12 personas
-        assert len(personas) == 12
+        # 12 original + the 9 discipline personas added in PRO-155
+        assert len(personas) == 21
 
         # Check expected personas exist
         expected_personas = [
@@ -48,6 +48,16 @@ class TestPersonaRegistry:
             "data_engineer",
             "data_scientist",
             "technical_writer",
+            # PRO-155
+            "sre",
+            "platform_engineer",
+            "appsec_engineer",
+            "performance_engineer",
+            "database_engineer",
+            "ux_designer",
+            "ml_engineer",
+            "ai_engineer",
+            "engineering_manager",
         ]
 
         for expected in expected_personas:

@@ -439,6 +439,348 @@ personas:
       - documentation-best-practices
       - technical-communication
 
+  # ==========================================================================
+  # Discipline personas (PRO-155)
+  #
+  # Each lists only content its own agents can reach through
+  # agent_skill_mapping.yaml — the persona narrows that set, it never adds to
+  # it. Subagents are deliberately absent: they inherit their parent agent's
+  # enabled status, so listing them here would be a second, drifting source of
+  # truth. The "brings" note on each persona records which subagents ride
+  # along, since that is the part a reader cannot see from the agent list.
+  # ==========================================================================
+
+  sre:
+    display_name: "Site Reliability Engineer"
+    description: "Service reliability, incident response, and production operations"
+    focus: "Keeping production within its error budget, and learning from it when it is not"
+    # brings: incident/{log-analysis,root-cause,rubber-duck}, observability/{dashboards,...}
+
+    primary_agents:
+      - incident
+      - observability
+      - performance
+
+    secondary_agents:
+      - devops
+
+    workflows:
+      - incident-response
+      - postmortem
+      - slo-sli
+      - observability
+      - disaster-recovery
+      - capacity-planning
+      - root-cause
+      - log-analysis
+      - metrics-tracking-maintenance
+      - performance-monitoring-maintenance
+
+    skills:
+      - slo-sli-definition
+      - incident-response-planning
+      - incident-timeline-creation
+      - incident-automation
+      - root-cause-five-whys
+      - disaster-recovery-planning
+      - prometheus-query-patterns
+      - grafana-dashboard-design
+      - distributed-tracing-instrumentation
+      - continuous-improvement
+      - load-testing
+
+  platform_engineer:
+    display_name: "Platform Engineer"
+    description: "Cloud infrastructure, CI/CD, and the internal developer platform"
+    focus: "Making the paved road faster than going around it"
+    # brings: devops/{aws,docker,gitops,kubernetes,terraform-deployment}
+
+    primary_agents:
+      - devops
+      - architect
+
+    secondary_agents:
+      - code
+
+    workflows:
+      - cicd-pipeline
+      - infrastructure-as-code
+      - container-orchestration
+      - release-cycle-maintenance
+      - secret-management
+      - disaster-recovery
+      - capacity-planning
+      - decision-log
+
+    skills:
+      - iac-best-practices
+      - kubernetes-resource-management
+      - container-security-hardening
+      - infrastructure-drift-detection
+      - cloud-provider-tradeoffs
+      - cloud-iam-design
+      - cloud-networking-design
+      - cloud-cost-optimization
+      - multi-cloud-strategy
+      - serverless-architecture
+      - autoscaling-strategies
+      - deployment-rollback-strategies
+      - secret-management
+
+  appsec_engineer:
+    display_name: "Application Security Engineer"
+    description: "Secure code, threat modeling, and vulnerability management"
+    focus: "Finding the flaw before it ships, not after it is exploited"
+    # brings: security/{threat-model,compliance-auditor,...}, compliance/{gdpr,soc2,review}
+
+    primary_agents:
+      - security
+      - review
+
+    secondary_agents:
+      - enforcement
+      - compliance
+
+    workflows:
+      - threat-modeling
+      - security-code-review
+      - security-testing
+      - vulnerability-scanning
+      - vulnerability-assessment
+      - penetration-testing-guide
+      - security-hardening-checklist
+      - authentication-authorization
+      - data-encryption
+      - security-audit-maintenance
+
+    skills:
+      - threat-identification
+      - secure-code-review
+      - security-architecture-review
+      - vulnerability-assessment
+      - authentication-design
+      - authorization-patterns
+      - api-security
+      - api-security-hardening
+      - cryptography-fundamentals
+      - key-management
+      - security-testing-strategies
+      - secret-management
+      - container-security-hardening
+
+  performance_engineer:
+    display_name: "Performance Engineer"
+    description: "Profiling, load testing, and latency optimization"
+    focus: "Making it measurably faster, with the measurement first"
+    # Note: the performance agent was secondary to eight personas and primary to
+    # none before this persona existed.
+
+    primary_agents:
+      - performance
+
+    secondary_agents:
+      - backend
+      - frontend
+      - observability
+
+    workflows:
+      - performance
+      - performance-testing
+      - frontend-performance
+      - performance-monitoring-maintenance
+      - caching-strategy
+      - slo-sli
+      - observability
+
+    skills:
+      - performance-optimization
+      - load-testing
+      - css-performance-optimization
+      - distributed-caching-design
+      - distributed-tracing-instrumentation
+      - prometheus-query-patterns
+      - sql-optimization
+      - slo-sli-definition
+      - object-storage-patterns
+
+  database_engineer:
+    display_name: "Database Engineer"
+    description: "Data modeling, query performance, and schema evolution"
+    focus: "Designing storage that survives the second year"
+    # brings: data/{governance,pipeline,quality,streaming,warehouse}
+
+    primary_agents:
+      - data
+      - architect
+
+    secondary_agents:
+      - backend
+      - migration
+
+    workflows:
+      - data-model
+      - database-selection
+      - schema-migration
+      - data-pipeline
+      - data-quality
+      - data-quality-monitoring
+      - migration
+      - caching-strategy
+
+    skills:
+      - managed-database-selection
+      - nosql-database-selection
+      - sql-optimization
+      - data-partitioning
+      - dimensional-modeling
+      - slowly-changing-dimensions
+      - data-model-discovery
+      - mermaid-erd-creation
+      - object-storage-patterns
+      - message-queue-selection
+      - distributed-caching-design
+      - data-versioning-reproducibility
+
+  ux_designer:
+    display_name: "UX Designer"
+    description: "User research, interaction design, and design systems"
+    focus: "Designing what users can actually use, then checking that they can"
+    # brings: frontend/{accessibility,mobile,react-patterns,vue-patterns}
+
+    primary_agents:
+      - frontend
+      - product
+
+    secondary_agents: []
+
+    workflows:
+      - ux-validation
+      - user-research-guide
+      - responsive-design
+      - component-architecture
+      - accessibility
+      - a-b-testing
+      - feature-prioritization
+
+    skills:
+      - user-needs-discovery
+      - user-testing-methods
+      - ux-writing-guidelines
+      - component-design-systems
+      - responsive-design-patterns
+      - css-performance-optimization
+      - success-metrics-definition
+      - competitor-analysis
+
+  ml_engineer:
+    display_name: "ML Engineer"
+    description: "Model deployment, serving infrastructure, and production ML operations"
+    focus: "Getting a trained model into production and keeping it healthy there"
+    # Distinct from data_scientist (who trains it) and ai_engineer (who composes
+    # someone else's model into a product). Shares only the mlai agent with the latter.
+
+    primary_agents:
+      - mlai
+      - devops
+
+    secondary_agents:
+      - data
+      - observability
+
+    workflows:
+      - production-ml-deployment
+      - model-serving
+      - mlops-pipeline-setup
+      - ml-monitoring-observability
+      - model-retraining-strategy
+      - model-governance
+      - model-evaluation
+      - experiment-tracking-setup
+
+    skills:
+      - ml-deployment
+      - mlops-pipeline-design
+      - model-monitoring
+      - model-evaluation
+      - batch-vs-realtime-scoring
+      - feature-store-design
+      - data-versioning-reproducibility
+      - deployment-rollback-strategies
+      - kubernetes-resource-management
+
+  ai_engineer:
+    display_name: "AI Engineer"
+    description: "LLM applications, RAG systems, agents, and evaluation harnesses"
+    focus: "Composing a model you did not train into a product that behaves"
+    # The model is a dependency this role does not control and cannot pin by
+    # default, which is why evaluation and observability sit in the primary set
+    # rather than being treated as follow-up work.
+    #
+    # Routes to `ai`, not `mlai`. The mlai prompt is the classical training
+    # lifecycle — algorithm selection, hyperparameter tuning, drift detection —
+    # and its eight subagents are all classical ML, so pointing this persona
+    # there would have dragged model-training subagents into an LLM build and
+    # contradicted the split that justifies a separate persona. (PRO-156)
+
+    primary_agents:
+      - ai
+      - backend
+
+    secondary_agents:
+      - architect
+      - test
+
+    workflows:
+      - llm-feature-build
+      - rag-pipeline-setup
+      - eval-harness-setup
+      - prompt-iteration-cycle
+      - api-design
+
+    skills:
+      - llm-application-architecture
+      - prompt-engineering-practices
+      - rag-system-design
+      - vector-store-selection
+      - llm-evaluation-and-testing
+      - agent-tool-design
+      - llm-safety-and-guardrails
+      - llm-observability
+      - multiagent-orchestration
+
+  engineering_manager:
+    display_name: "Engineering Manager"
+    description: "Planning, prioritization, and team coordination"
+    focus: "Sequencing the work and keeping the people unblocked"
+
+    primary_agents:
+      - plan
+      - product
+
+    secondary_agents:
+      - orchestrator
+      - architect
+
+    workflows:
+      - roadmap-planning
+      - feature-prioritization
+      - requirements-gathering
+      - task-breakdown
+      - strategy
+      - decision-log
+      - multi-agent-coordination
+
+    skills:
+      - team-collaboration
+      - stakeholder-communication
+      - requirements-specification
+      - roadmap-prioritization
+      - success-metrics-definition
+      - problem-decomposition
+      - technical-decision-making
+      - feature-planning
+      - post-implementation-checklist
+
 # Metadata
-version: "1.0"
-last_updated: "2026-04-12"
+version: "1.1"
+last_updated: "2026-09-18"

@@ -33,6 +33,15 @@ secondary (cross-cutting) agents and the 5 universal agents are added on top.
 | **Data Engineer** | Data pipelines, data quality, and data infrastructure | code, data |
 | **Data Scientist** | ML, model development, and optimization | code, mlai |
 | **Technical Writer** | Documentation and technical communication | document |
+| **Site Reliability Engineer** | Reliability, incident response, production operations | incident, observability, performance |
+| **Platform Engineer** | Cloud infrastructure, CI/CD, internal developer platform | devops, architect |
+| **Application Security Engineer** | Secure code, threat modeling, vulnerability management | security, review |
+| **Performance Engineer** | Profiling, load testing, latency optimization | performance |
+| **Database Engineer** | Data modeling, query performance, schema evolution | data, architect |
+| **UX Designer** | User research, interaction design, design systems | frontend, product |
+| **ML Engineer** | Model deployment, serving infrastructure, production ML | mlai, devops |
+| **AI Engineer** | LLM applications, RAG, agents, evaluation harnesses | ai, backend |
+| **Engineering Manager** | Planning, prioritization, team coordination | plan, product |
 
 > Secondary agents per persona (from `personas.yaml`): for example, QA/Tester also pulls
 > in `performance` and `enforcement`; Security Engineer also pulls in `incident`, `review`,
@@ -72,6 +81,15 @@ Which personas (SDLC roles) will be working on this codebase?
   [ ] Data Engineer - Data pipelines, data quality, data infrastructure
   [ ] Data Scientist - ML, model development, optimization
   [ ] Technical Writer - Documentation and technical communication
+  [ ] Site Reliability Engineer - Reliability, incidents, production operations
+  [ ] Platform Engineer - Cloud infrastructure, CI/CD, developer platform
+  [ ] Application Security Engineer - Secure code, threat modeling, vulnerabilities
+  [ ] Performance Engineer - Profiling, load testing, latency optimization
+  [ ] Database Engineer - Data modeling, query performance, schema evolution
+  [ ] UX Designer - User research, interaction design, design systems
+  [ ] ML Engineer - Model deployment, serving, production ML operations
+  [ ] AI Engineer - LLM applications, RAG, agents, evaluation harnesses
+  [ ] Engineering Manager - Planning, prioritization, team coordination
 
 Select one or more roles. Only agents/workflows for selected personas will be generated.
 ```
@@ -188,7 +206,9 @@ active_personas:
 > Persona keys use snake_case as defined in `prompticorn/personas/personas.yaml` (for
 > example `backend_software_engineer`, `frontend_software_engineer`,
 > `fullstack_software_engineer`, `qa_tester`, `devops_engineer`, `security_engineer`,
-> `product_manager`, `data_engineer`, `data_scientist`, `technical_writer`). The
+> `product_manager`, `data_engineer`, `data_scientist`, `technical_writer`, `sre`,
+> `platform_engineer`, `appsec_engineer`, `performance_engineer`, `database_engineer`,
+> `ux_designer`, `ml_engineer`, `ai_engineer`, `engineering_manager`). The
 > `software_engineer` key remains as a deprecated alias for `fullstack_software_engineer`.
 
 ## Changing Personas Later
