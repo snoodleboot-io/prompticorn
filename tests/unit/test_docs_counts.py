@@ -55,12 +55,50 @@ def test_doc_has_no_stale_assistant_count(doc):
         assert stale not in text, f"{doc.name} contains stale '{stale}'"
 
 
+def _live_workflow_count() -> int:
+    return len([d for d in (_ROOT / "prompticorn" / "workflows").iterdir() if d.is_dir()])
+
+
 @pytest.mark.unit
-def test_quickstart_states_current_skill_count():
-    """QUICKSTART cites the skill count; keep it in step with the library."""
-    text = _QUICKSTART.read_text(encoding="utf-8")
+@pytest.mark.parametrize("doc", [_README, _QUICKSTART], ids=lambda p: p.name)
+def test_doc_states_current_skill_count(doc):
+    """Both entry-point docs cite the skill count; keep them in step.
+
+    Guarding only QUICKSTART let README drift to "~95 specialized skills"
+    against a library of 127 — the exact drift this module exists to catch,
+    in the other one of the two documents it names. (PRO-156)
+    """
+    text = doc.read_text(encoding="utf-8")
     n = _live_skill_count()
     assert re.search(rf"\b{n}\b\s+(?:specialized )?skills", text), (
-        f"docs/QUICKSTART.md does not state the current skill count ({n}). "
+        f"{doc.name} does not state the current skill count ({n}). "
         "Skills changed — update the doc."
+    )
+
+
+@pytest.mark.unit
+@pytest.mark.parametrize("doc", [_README, _QUICKSTART], ids=lambda p: p.name)
+def test_doc_has_no_approximate_library_counts(doc):
+    """A "~" count is how these drift: it reads as current long after it is not.
+
+    The live numbers are exact and cheap to assert, so the docs should state
+    them exactly.
+    """
+    text = doc.read_text(encoding="utf-8")
+    approximate = re.findall(r"~\s*\d+\s+(?:specialized skills|skills|workflows)", text)
+    assert not approximate, (
+        f"{doc.name} states approximate library counts {approximate}; "
+        "use the exact number so this test can keep it honest."
+    )
+
+
+@pytest.mark.unit
+@pytest.mark.parametrize("doc", [_README, _QUICKSTART], ids=lambda p: p.name)
+def test_doc_states_current_workflow_count(doc):
+    """Workflow counts drifted the same way the skill count did."""
+    text = doc.read_text(encoding="utf-8")
+    n = _live_workflow_count()
+    assert re.search(rf"\b{n}\b\s+workflows", text), (
+        f"{doc.name} does not state the current workflow count ({n}). "
+        "Workflows changed — update the doc."
     )

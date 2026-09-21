@@ -7,10 +7,10 @@ Get up and running with prompticorn in about 5 minutes.
 prompticorn turns one shared prompt library into ready-to-use configuration for
 your AI coding assistant. The library ships with:
 
-- **25 primary agents** spanning architecture, backend, frontend, code, test,
-  debug, security, devops, and more
-- **~100 workflows** for common development tasks, in minimal and verbose variants
-- **119 specialized skills**
+- **27 primary agents** spanning architecture, backend, frontend, code, test,
+  debug, security, devops, AI/LLM engineering, and more
+- **104 workflows** for common development tasks, in minimal and verbose variants
+- **127 specialized skills**
 - **29 languages** with first-class conventions
 
 It generates configs for 17 assistants: **Kilo** (IDE and CLI), **Claude**,
