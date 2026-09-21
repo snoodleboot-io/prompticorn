@@ -186,6 +186,7 @@ data:
     - data-validation-pipelines
     - data-versioning-reproducibility
     - dimensional-modeling
+    - feature-engineering
     - feature-store-design
     - managed-database-selection
     - nosql-database-selection
@@ -193,6 +194,7 @@ data:
     - rag-system-design
     - slowly-changing-dimensions
     - sql-optimization
+    - time-series-preprocessing
     - vector-store-selection
   workflows:
     - data-model
@@ -236,6 +238,8 @@ devops:
     - iac-best-practices
     - infrastructure-drift-detection
     - kubernetes-resource-management
+    - managed-database-selection
+    - object-storage-patterns
     - secret-management
     - technical-decision-making
   workflows:

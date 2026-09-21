@@ -265,11 +265,14 @@ personas:
       - observability
       - incident
     
+    # mlai and data were secondary here and brought 29 skills this role does
+    # not do — cross-validation, ensemble methods, dimensionality reduction,
+    # dimensional modelling, slowly-changing-dimensions. The two that were
+    # genuinely operational (managed-database-selection, object-storage-patterns)
+    # now sit on the devops agent itself, which is where they belong. (PRO-162)
     secondary_agents:
       - security
-      - mlai
-      - data
-    
+
     workflows:
       - cicd-pipeline
       - secret-management
@@ -352,12 +355,17 @@ personas:
       - code         # ETL and pipeline code
       - data
     
+    # mlai was secondary and brought 15 modelling skills this role does not do
+    # — cross-validation, ensembles, hyperparameter optimization, model
+    # interpretability. Data engineers build the pipelines; data_scientist and
+    # ml_engineer own the modelling and both have mlai already. The two that
+    # are genuinely pipeline work (feature-engineering, time-series-preprocessing)
+    # moved onto the data agent. (PRO-162)
     secondary_agents:
-      - mlai
       - devops
       - observability
       - performance
-    
+
     workflows:
       - data-pipeline
       - data-quality
@@ -750,16 +758,22 @@ personas:
 
   engineering_manager:
     display_name: "Engineering Manager"
-    description: "Planning, prioritization, and team coordination"
+    description: "Planning, prioritization, technical debt, and team coordination"
     focus: "Sequencing the work and keeping the people unblocked"
+    # `plan` and `orchestrator` are universal agents — always enabled for every
+    # persona — so listing them here selected nothing and left this persona
+    # differentiating on product+architect alone, a near-duplicate of picking
+    # product_manager and architect together. Replaced with agents it genuinely
+    # owns: refactor carries technical-debt-management, which this role lives
+    # in and which PRO-155 had to leave out for exactly this reason. (PRO-162)
 
     primary_agents:
-      - plan
       - product
+      - architect
 
     secondary_agents:
-      - orchestrator
-      - architect
+      - refactor
+      - document
 
     workflows:
       - roadmap-planning
@@ -780,6 +794,9 @@ personas:
       - technical-decision-making
       - feature-planning
       - post-implementation-checklist
+      - technical-debt-management
+      - continuous-improvement
+      - documentation-best-practices
 
 # Metadata
 version: "1.1"

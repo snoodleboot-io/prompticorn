@@ -116,9 +116,17 @@ def test_persona_lists_are_reachable_from_their_own_agents(personas_data, key):
     ) as f:
         agent_map = yaml.safe_load(f)
 
+    # Universal agents are enabled for every persona (PersonaFilter always adds
+    # them), so content they map is genuinely reachable and must count here.
+    universal = list(personas_data.get("universal_agents") or [])
+
     unreachable = []
     for persona_name, persona in personas_data["personas"].items():
-        agents = (persona.get("primary_agents") or []) + (persona.get("secondary_agents") or [])
+        agents = (
+            (persona.get("primary_agents") or [])
+            + (persona.get("secondary_agents") or [])
+            + universal
+        )
         reachable = {
             ref for agent in agents for ref in (agent_map.get(agent, {}).get(key) or [])
         }
@@ -128,6 +136,49 @@ def test_persona_lists_are_reachable_from_their_own_agents(personas_data, key):
     assert not unreachable, (
         f"persona {key} that no selected agent maps, so the build would drop them "
         f"without a word: {unreachable}"
+    )
+
+
+def test_personas_differentiate_on_non_universal_agents(personas_data):
+    """A persona built on universal agents selects nothing.
+
+    Universal agents are enabled for every persona regardless of choice, so
+    listing them is not a selection. `engineering_manager` shipped with `plan`
+    primary and `orchestrator` secondary — both universal — leaving it
+    differentiating on two agents and effectively duplicating
+    product_manager + architect. (PRO-162)
+    """
+    universal = set(personas_data.get("universal_agents") or [])
+    thin = []
+    for persona_name, persona in personas_data["personas"].items():
+        selected = set(persona.get("primary_agents") or []) | set(
+            persona.get("secondary_agents") or []
+        )
+        if not selected - universal:
+            thin.append(persona_name)
+
+    assert not thin, (
+        f"personas selecting only universal agents, so they narrow nothing: {thin}"
+    )
+
+
+def test_no_persona_lists_a_universal_agent(personas_data):
+    """Listing a universal agent is misleading rather than harmful.
+
+    It reads as a selection in the docs and the picker, but changes nothing —
+    which is how the engineering_manager defect survived review.
+    """
+    universal = set(personas_data.get("universal_agents") or [])
+    listed = [
+        f"{persona_name} -> {agent}"
+        for persona_name, persona in personas_data["personas"].items()
+        for agent in sorted(
+            (set(persona.get("primary_agents") or []) | set(persona.get("secondary_agents") or []))
+            & universal
+        )
+    ]
+    assert not listed, (
+        f"personas listing universal agents, which are always enabled anyway: {listed}"
     )
 
 
