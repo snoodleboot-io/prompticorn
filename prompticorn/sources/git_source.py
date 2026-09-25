@@ -30,8 +30,11 @@ user's git already does. This module handles no credentials, which keeps the
 source free of any secret-management surface.
 
 **Offline works for pinned builds.** A commit already checked out needs no
-remote, because its content cannot change. Only listing and re-resolution need
-the network, and both fail with a message that says so.
+remote, because its content cannot change. The network is needed to list, to
+re-resolve, and to fetch a pinned commit this machine has never seen — and all
+three fail with a message that says so. What it is never needed for is deciding
+*which* artifact a locked build uses: that is the commit in the lock, cache or no
+cache (PRO-164).
 """
 
 from __future__ import annotations
@@ -165,18 +168,45 @@ class GitSource(ArtifactSource):
         """
         return self.resolve_commit(artifact_id) != pinned_commit
 
-    # -- pinning hooks (PRO-151) -----------------------------------------
+    # -- pinning hooks (PRO-151, corrected by PRO-164) -------------------
 
-    def commit_for(self, artifact_id: ArtifactId) -> str | None:
-        """A tag is mutable, so the commit it resolved to is what gets locked."""
-        return self.resolve_commit(artifact_id)
+    def resolve_pinned(self, coordinate: str, spec: str) -> tuple[ArtifactId, str | None]:
+        """Pick the version and read its commit from one ``ls-remote``.
+
+        The version list and the commit each tag points at arrive together, so
+        taking both from the same listing costs one network round trip instead
+        of three and — the reason it is written this way — makes it impossible
+        for the lock to pin a commit whose content it did not hash. Three
+        separate lookups could see a tag move between them and record the digest
+        of one commit beside the id of another (PRO-164).
+        """
+        tags = self._tags()
+        candidates = tuple(
+            sorted(
+                (artifact for artifact in tags if artifact.coordinate == coordinate),
+                key=lambda artifact: artifact.version,
+            )
+        )
+        artifact_id = self.highest_admitted(candidates, coordinate, spec)
+        return artifact_id, tags[artifact_id]
 
     def can_fetch_offline(self, artifact_id: ArtifactId, commit: str | None) -> bool:
-        """True once the locked commit's tree is cached — it cannot change."""
+        """True once the locked commit's tree is cached — it cannot change.
+
+        Reports what this machine happens to hold, and nothing more. Whether the
+        lock is honoured is not this question: see
+        :meth:`ArtifactSource.can_fetch_offline`.
+        """
         return commit is not None and self.is_cached(commit)
 
     def fetch_locked(self, artifact_id: ArtifactId, commit: str | None) -> FetchedArtifact:
-        """Build from the locked commit, never from wherever the tag points now."""
+        """Build from the locked commit, never from wherever the tag points now.
+
+        Fetches the commit by id when it is not cached, which works on a machine
+        that has never seen this repository. A cold cache therefore needs the
+        network and a warm one does not, and both produce the same artifact —
+        which is the whole point of pinning a commit.
+        """
         if commit is None:
             return self.fetch(artifact_id)
         return self.fetch_pinned(artifact_id, commit)

@@ -177,3 +177,70 @@ def test_the_version_is_checked_before_the_body() -> None:
 
     with pytest.raises(LockSchemaVersionError):
         LockReader.parse(from_the_future, "prompticorn.lock")
+
+
+# ── commit ids (PRO-151, tightened by PRO-164) ────────────────────────────────
+#
+# A commit read out of the lock becomes a cache directory name and an argument to
+# `git fetch`, so the reader is the only place that can insist it is a hex id and
+# nothing else. It had no test at all, and it accepted a trailing newline.
+
+
+def with_commit(commit: str) -> str:
+    """The valid lock, with a git artifact pinned to ``commit``."""
+    return VALID.replace("  source: acme\n", f"  source: acme\n  commit: {commit}\n")
+
+
+@pytest.mark.parametrize(
+    ("label", "commit"),
+    [("sha-1", "a" * 40), ("sha-256", "b" * 64), ("mixed hex digits", "0123456789abcdef" * 4)],
+)
+def test_a_well_formed_commit_id_is_accepted(label: str, commit: str) -> None:
+    assert LockReader.parse(with_commit(commit), "test").artifacts[0].commit == commit
+
+
+def test_a_commit_with_a_trailing_newline_is_corrupt() -> None:
+    """The defect. `re.match` with `$` also matches before a trailing newline, and
+    a YAML block scalar produces exactly that — so `aaa…a\\n` was accepted and
+    went on to name a cache directory and to be handed to `git fetch`."""
+    block_scalar = VALID.replace(
+        "  source: acme\n", "  source: acme\n  commit: |\n    " + "a" * 40 + "\n"
+    )
+
+    with pytest.raises(LockCorruptError) as caught:
+        LockReader.parse(block_scalar, "prompticorn.lock")
+
+    assert "not a git commit id" in str(caught.value)
+
+
+@pytest.mark.parametrize(
+    ("label", "commit"),
+    [
+        ("one character short", "a" * 39),
+        ("one character long", "a" * 41),
+        ("between the two widths", "a" * 50),
+        ("not hex", "z" * 40),
+        ("uppercase", "A" * 40),
+        ("empty", "''"),
+        ("abbreviated", "a" * 7),
+    ],
+)
+def test_a_malformed_commit_id_is_corrupt(label: str, commit: str) -> None:
+    with pytest.raises(LockCorruptError):
+        LockReader.parse(with_commit(commit), "prompticorn.lock")
+
+
+def test_a_non_string_commit_is_corrupt() -> None:
+    """A bare number is still YAML-valid, and is not a commit id."""
+    with pytest.raises(LockCorruptError):
+        LockReader.parse(with_commit("12345"), "prompticorn.lock")
+
+
+def test_a_digest_with_a_trailing_newline_is_corrupt() -> None:
+    """Same anchoring defect, same fix: digests are compared, not just stored."""
+    block_scalar = VALID.replace(
+        f"- digest: {DIGEST}\n  identity", "- digest: |\n    " + DIGEST + "\n  identity"
+    )
+
+    with pytest.raises(LockCorruptError):
+        LockReader.parse(block_scalar, "prompticorn.lock")
