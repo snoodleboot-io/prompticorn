@@ -28,6 +28,7 @@ from prompticorn.provenance.output_format import OutputFormat
 from prompticorn.provenance.provenance_header import ProvenanceHeader
 from prompticorn.provenance.provenance_record import ProvenanceRecord
 from prompticorn.provenance.provenance_sidecar import SIDECAR_FILENAME, ProvenanceSidecar
+from prompticorn.provenance.unit_origins import UnitOrigins
 from prompticorn.text_writer import write_text
 
 SIDECAR_DIRECTORY = ".prompticorn"
@@ -45,12 +46,13 @@ class ProvenanceEmitter:
     """Writes inline headers and the sidecar for one build's outputs.
 
     Attributes:
-        layer: Which content layer supplied the units — "which layer won".
-        version: The artifact version the units came from.
+        origins: Which layer supplied each unit, and the version to stamp for
+            it. Per unit rather than per build (PRO-165): with a layer stack,
+            "which layer won" is answered one unit at a time, and a constant
+            here contradicted the lock written by the same run.
     """
 
-    layer: str
-    version: str
+    origins: UnitOrigins
 
     def emit(self, output: Path, attribution: Mapping[str, str]) -> list[str]:
         """Attach provenance to every attributed output under ``output``.
@@ -95,8 +97,11 @@ class ProvenanceEmitter:
         body = ProvenanceHeader.strip(text, output_format)
         record = ProvenanceRecord(
             unit=_header_safe(unit),
-            layer=self.layer,
-            version=self.version,
+            # Every value is collapsed, not just the unit: layer names now come
+            # from whatever a layer provider calls itself, so they are data of
+            # the same kind as the unit id and carry the same hazard.
+            layer=_header_safe(self.origins.layer_of(unit)),
+            version=_header_safe(self.origins.version_of(unit)),
             digest=ProvenanceHeader.body_digest(body, output_format),
         )
 
@@ -106,13 +111,13 @@ class ProvenanceEmitter:
         return record
 
 
-def _header_safe(unit: str) -> str:
-    """A unit id that survives the header's whitespace-separated encoding.
+def _header_safe(value: str) -> str:
+    """A header value that survives the whitespace-separated encoding.
 
     ``ProvenanceRecord.to_header_body`` neither quotes nor escapes values, so a
-    unit containing whitespace would render a header that parses back as
+    value containing whitespace would render a header that parses back as
     something else. Every id the builders produce is already safe; collapsing
-    here means an unusual name degrades to a slightly odd id rather than to a
+    here means an unusual name degrades to a slightly odd value rather than to a
     silently unparseable file.
     """
-    return _WHITESPACE_RE.sub("_", unit.strip())
+    return _WHITESPACE_RE.sub("_", value.strip())
