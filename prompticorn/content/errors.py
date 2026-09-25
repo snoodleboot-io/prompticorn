@@ -64,3 +64,47 @@ class SourceUnavailableError(ContentError):
         self.source = source
         self.reason = reason
         super().__init__(f"source {source!r} unavailable: {reason}")
+
+
+class SkippedContentWarning(UserWarning):
+    """A file in a content layer was not addressable as a unit, and was skipped.
+
+    A *warning* rather than an error because the tree a layer is read from is
+    authored by a person, not generated: a ``README.md`` beside the overrides
+    that explains them is an entirely reasonable thing to commit, and refusing
+    to build because of it would make the layer feature a trap. It is not
+    silence either — the message names the file, the layer it came from and the
+    unit id the name would have had to be, because the other reading of an
+    unaddressable name is a typo in an override that is now doing nothing.
+
+    A warning class rather than an exception, and so not a
+    :class:`ContentError`: nothing should be able to catch it as one.
+    """
+
+
+class MalformedConfigurationError(ValueError):
+    """A ``configuration/...`` unit parsed as YAML that cannot be used.
+
+    Deliberately **not** a :class:`ContentError`. Consumers already tolerate
+    "this configuration is absent" by catching :class:`ContentError` and
+    carrying on with a default; a document that is *present and wrong* must not
+    take that path, because the result is a build that silently emits something
+    other than what was asked for. Making this a sibling of ContentError rather
+    than a subclass is what keeps those handlers from swallowing it.
+
+    Attributes:
+        name: The configuration's unit name, e.g. ``personas``.
+        layer: Which layer supplied it — the one whose file needs fixing.
+        location: The file it was read from, when the layer can name one.
+        reason: What is wrong with it, in terms the author can act on.
+    """
+
+    def __init__(self, name: str, layer: str, location: str, reason: str) -> None:
+        self.name = name
+        self.layer = layer
+        self.location = location
+        self.reason = reason
+        super().__init__(
+            f"{location} (the {layer!r} content layer) is not a usable "
+            f"{name!r} configuration: {reason}"
+        )
