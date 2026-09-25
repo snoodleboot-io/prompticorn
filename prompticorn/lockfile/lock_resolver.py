@@ -30,6 +30,7 @@ from prompticorn.manifest.manifest_schema import ManifestSchema
 from prompticorn.provenance.output_format import OutputFormat
 from prompticorn.provenance.provenance_header import ProvenanceHeader
 from prompticorn.sources.artifact_source import ArtifactSource
+from prompticorn.sources.errors import PinnedArtifactUnavailableError, SourceUnavailableError
 from prompticorn.sources.source_factory import build_artifact_source
 
 LOCK_FILENAME = "prompticorn.lock"
@@ -78,11 +79,11 @@ class LockResolver:
             output_paths: Roots a build emits, e.g. ``.claude/``, ``CLAUDE.md``.
             pinned_to: A lock to honour rather than re-resolve (PRO-151). Given
                 for a frozen build and for `regenerate`: an artifact whose
-                locked version still satisfies its requirement, and which its
-                source can serve offline, is taken from the lock instead of
-                being looked up again. Omitted for `lock` and an ordinary
-                `build`, which re-resolve — and which is how a moved tag is
-                found at all.
+                locked version still satisfies its requirement is taken from the
+                lock instead of being looked up again — unconditionally, never
+                subject to what this machine has cached (PRO-164). Omitted for
+                `lock` and an ordinary `build`, which re-resolve — and which is
+                how a moved tag is found at all.
 
         Returns:
             The resolved lock, with every sequence in canonical order.
@@ -173,36 +174,63 @@ def _resolve_through(
 ) -> LockedArtifact:
     """Resolve one declaration through the source it names.
 
-    Takes the locked version when one was supplied, still satisfies the
-    requirement, and can be served without reaching the source — that is what
-    lets a frozen build and `regenerate` run offline. Otherwise resolves afresh:
-    the highest version the range admits, fetched and integrity-checked, with
-    whatever immutable id the source pins it to.
+    Takes the locked version whenever one was supplied and still satisfies the
+    requirement. **That is the whole condition** (PRO-164). It used to also
+    require that the source could serve the artifact without the network, which
+    made honouring the lock depend on whether a directory existed on this
+    machine: the same lock and the same manifest resolved to the locked version
+    on a developer's warm machine and to the newest version the range admitted on
+    a fresh CI runner. A lock whose meaning varies by cache state is not a lock.
+
+    Otherwise resolves afresh: the highest version the range admits, fetched and
+    integrity-checked, pinned to whatever immutable id the source resolved it to.
 
     A locked version that no longer satisfies the requirement is re-resolved
     rather than kept. The manifest was edited to exclude it, and honouring the
     lock over the manifest would build something the author has just said they
     do not want.
     """
-    if (
-        recorded is not None
-        and declaration.requirement.matches(recorded.identity)
-        and source.can_fetch_offline(recorded.identity, recorded.commit)
-    ):
-        fetched = source.fetch_locked(recorded.identity, recorded.commit)
-        return LockedArtifact(
-            pinned=fetched.pinned, source=declaration.source, commit=recorded.commit
-        )
+    if recorded is not None and declaration.requirement.matches(recorded.identity):
+        return _honour_the_lock(declaration, source, recorded)
 
-    artifact_id = source.resolve_version(
+    artifact_id, commit = source.resolve_pinned(
         declaration.requirement.coordinate, declaration.requirement.version_range.render()
     )
-    fetched = source.fetch(artifact_id)
-    return LockedArtifact(
-        pinned=fetched.pinned,
-        source=declaration.source,
-        commit=source.commit_for(artifact_id),
-    )
+    # Fetched from the id just resolved, so the digest recorded below and the
+    # commit recorded beside it describe the same tree (PRO-164).
+    fetched = source.fetch_locked(artifact_id, commit)
+    return LockedArtifact(pinned=fetched.pinned, source=declaration.source, commit=commit)
+
+
+def _honour_the_lock(
+    declaration: ArtifactDeclaration,
+    source: ArtifactSource,
+    recorded: LockedArtifact,
+) -> LockedArtifact:
+    """Reproduce exactly what the lock recorded for this declaration.
+
+    The network is contacted when — and only when — the pinned artifact is not
+    already in hand. That is not a weakening of the offline promise: the promise
+    is that a *cached* pinned build needs no remote, and a machine that has never
+    seen the source has nothing to build from.
+
+    If it is neither cached nor reachable, this fails. Re-resolving would be the
+    one thing worse than failing: it would hand back whatever the range admits
+    today, under a lock that names something else, and report success.
+    """
+    cached = source.can_fetch_offline(recorded.identity, recorded.commit)
+    try:
+        fetched = source.fetch_locked(recorded.identity, recorded.commit)
+    except SourceUnavailableError as error:
+        if cached:
+            # The source said it had this in hand and then could not produce it.
+            # That is a fault in the cache, not an offline failure, and saying
+            # otherwise would send the reader to look at their network.
+            raise
+        raise PinnedArtifactUnavailableError(
+            source.name, recorded.identity.render(), recorded.commit, error.reason
+        ) from error
+    return LockedArtifact(pinned=fetched.pinned, source=declaration.source, commit=recorded.commit)
 
 
 def _digest_outputs(root: Path | None, paths: tuple[str, ...]) -> tuple[LockedOutput, ...]:

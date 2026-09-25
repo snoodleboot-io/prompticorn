@@ -1315,6 +1315,7 @@ def lock_command():
     Exit codes:
         0  lock written or already up to date
         3  an existing lock is unusable (corrupt, or from a newer prompticorn)
+        5  a declared source could not be reached, so nothing was resolved
 
     Usage:
         prompticorn lock
@@ -1330,8 +1331,13 @@ def lock_command():
     if outcome.is_unusable:
         click.secho(f"\n✗ {outcome.unusable_reason}", fg="red", err=True)
         sys.exit(ExitCode.UNUSABLE_LOCK)
+    if outcome.is_unavailable:
+        # Its own code, not DRIFT: nothing was compared, so there is no finding
+        # here to act on — only a source to get working again (PRO-164).
+        click.secho(f"\n✗ {outcome.unavailable_reason}", fg="red", err=True)
+        sys.exit(ExitCode.SOURCE_ERROR)
 
-    changed = LockService.write(root, outcome.lock)
+    changed = LockService.write(root, outcome.resolved)
     location = LockService.lock_path(root)
     if changed:
         click.secho(f"\n✓ Wrote {location}", fg="green")
@@ -1424,6 +1430,7 @@ def regenerate_command():
         1  the sources moved, so nothing was regenerated
         3  there is no lock, or it is unusable
         4  the rebuild did not reproduce the lock (a defect; please report it)
+        5  an artifact the lock pins could not be obtained, so nothing was touched
 
     \b
     Usage:
@@ -1504,6 +1511,7 @@ def build_command(frozen: bool):
         0  clean; outputs match the lock, or ordinary drift was re-locked
         1  the lock and reality diverge (--frozen), or suspicious drift was found
         3  the lock is unusable (corrupt, or from a newer prompticorn)
+        5  a declared source could not supply an artifact the build needed
 
     Usage:
         prompticorn build
@@ -1543,6 +1551,14 @@ def build_command(frozen: bool):
         click.secho(f"\n✗ {outcome.unusable_reason}", fg="red", err=True)
         sys.exit(ExitCode.UNUSABLE_LOCK)
 
+    if outcome.is_unavailable:
+        # Never DRIFT. A frozen build that reported an unreachable source as
+        # divergence would be indistinguishable from one that found a real
+        # difference, and a pinned build never silently resolves something else
+        # to get past it (PRO-164).
+        click.secho(f"\n✗ {outcome.unavailable_reason}", fg="red", err=True)
+        sys.exit(ExitCode.SOURCE_ERROR)
+
     if not outcome.had_existing_lock:
         # Not an error: a project without a lock is simply one that has not
         # opted in yet, and refusing to build would make the feature a tax.
@@ -1578,7 +1594,7 @@ def build_command(frozen: bool):
         )
         sys.exit(ExitCode.DRIFT)
 
-    LockService.write(root, outcome.lock)
+    LockService.write(root, outcome.resolved)
     click.secho(f"\n✓ Updated {LockService.lock_path(root)}", fg="yellow")
     sys.exit(ExitCode.CLEAN)
 

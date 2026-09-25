@@ -107,7 +107,20 @@ class ArtifactSource(ABC):
                 alternatives leaves the reader with nowhere to go.
             SourceUnavailableError: If the source cannot be read at all.
         """
-        candidates = self.versions_of(coordinate)
+        return self.highest_admitted(self.versions_of(coordinate), coordinate, spec)
+
+    def highest_admitted(
+        self, candidates: tuple[ArtifactId, ...], coordinate: str, spec: str
+    ) -> ArtifactId:
+        """The newest of ``candidates`` — oldest first — that ``spec`` admits.
+
+        Separated from :meth:`resolve_version` so a source that already holds the
+        candidate list from an earlier call can apply the *same* selection rule
+        to it rather than restating the rule and drifting from it.
+
+        Raises:
+            VersionNotFoundError: If nothing satisfies the range.
+        """
         admitted = VersionRange.parse(spec)
         for artifact in reversed(candidates):
             if admitted.contains(artifact.version):
@@ -123,34 +136,60 @@ class ArtifactSource(ABC):
         """Whether this source carries an exact version."""
         return artifact_id in set(self.list_artifacts())
 
-    # -- pinning (PRO-151) -----------------------------------------------
+    # -- pinning (PRO-151, corrected by PRO-164) -------------------------
     #
     # Defaults describe a source whose versions are immutable by construction,
     # which is every source except one addressed by mutable names. A source
     # like git overrides these; nothing else needs to know it exists, so the
     # resolver never has to ask what kind of source it is holding.
 
-    def commit_for(self, artifact_id: ArtifactId) -> str | None:
-        """The immutable id a mutable version name resolved to, if any.
+    def resolve_pinned(self, coordinate: str, spec: str) -> tuple[ArtifactId, str | None]:
+        """The version a range resolves to, and the immutable id to pin with it.
 
-        None means the version *is* the immutable reference and there is
-        nothing further to pin.
+        One call rather than "resolve the version, then ask what it points at",
+        because those are two answers to a question that can change between
+        them: a tag moved in the gap would have the lock record the digest of one
+        commit beside the id of another. Everything a source records about one
+        resolution is therefore derived from a single lookup.
+
+        Returns:
+            The resolved identity, and the immutable id it resolved to — None
+            when the version *is* the immutable reference and there is nothing
+            further to pin.
+
+        Raises:
+            VersionNotFoundError: If nothing satisfies the range.
+            SourceUnavailableError: If the source cannot be read at all.
         """
-        return None
+        return self.resolve_version(coordinate, spec), None
 
     def can_fetch_offline(self, artifact_id: ArtifactId, commit: str | None) -> bool:
-        """Whether a locked version can be fetched without reaching the source.
+        """Whether this locked version is already in hand, needing no network.
 
-        False by default: a source that cannot promise it must not be treated
-        as though it can, or a frozen build would contact a remote it claimed
-        not to need.
+        **This decides whether the network is needed, never whether the lock is
+        obeyed.** The lock is obeyed because it is the lock; a caller that
+        conditioned that on this answer would make a pinned build depend on
+        machine-local cache state, so the same lock and the same manifest would
+        resolve to one thing on a developer's warm machine and another on a
+        fresh CI runner (PRO-164).
+
+        False by default: a source that cannot promise a cached copy must not be
+        treated as though it can.
         """
         return False
 
     def fetch_locked(self, artifact_id: ArtifactId, commit: str | None) -> FetchedArtifact:
-        """Fetch exactly what a lock recorded.
+        """Fetch exactly what a lock recorded, cached or not.
 
         Defaults to :meth:`fetch`, which is exact for any source whose versions
         cannot move. Still integrity-checked either way.
+
+        Implementations reach the source when they must: this is what the lock
+        names, so a cold cache is a reason to fetch it, not a reason to resolve
+        something else.
+
+        Raises:
+            SourceUnavailableError: If the pinned artifact is not in hand and
+                the source cannot be reached.
         """
         return self.fetch(artifact_id)

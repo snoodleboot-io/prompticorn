@@ -46,12 +46,16 @@ from prompticorn.lockfile.locked_output import PATH_KEY, LockedOutput
 from prompticorn.lockfile.locked_unit import DIGEST_KEY as UNIT_DIGEST_KEY
 from prompticorn.lockfile.locked_unit import ID_KEY, LAYER_KEY, LockedUnit
 
-_DIGEST_RE = re.compile(r"^[0-9a-f]{64}$")
+# Matched with fullmatch, and anchorless for that reason (PRO-164). `$` also
+# matches before a trailing newline, and a YAML block scalar yields exactly that:
+# `aaa…a\n` passed, then went on to become a cache directory name and a git
+# argument. What a lock claims is a hex id has to be only a hex id.
+_DIGEST_RE = re.compile(r"[0-9a-f]{64}")
 
 # SHA-1 object ids are 40 hex characters; repositories using the SHA-256 object
 # format use 64. Both are accepted, lowercase only, because git always prints
 # them that way and a mixed-case id in a lock was written by hand.
-_COMMIT_PATTERN = re.compile(r"^(?:[0-9a-f]{40}|[0-9a-f]{64})$")
+_COMMIT_PATTERN = re.compile(r"(?:[0-9a-f]{40}|[0-9a-f]{64})")
 
 
 class LockReader:
@@ -113,7 +117,7 @@ class LockReader:
         value = data.get(MANIFEST_DIGEST_KEY)
         if value is None:
             return None
-        if not isinstance(value, str) or not _DIGEST_RE.match(value):
+        if not isinstance(value, str) or not _DIGEST_RE.fullmatch(value):
             raise LockCorruptError(
                 location,
                 f"{MANIFEST_DIGEST_KEY!r} is not a sha256 digest (64 lowercase hex characters)",
@@ -156,7 +160,7 @@ class LockReader:
                 raise LockCorruptError(location, f"{where}.{SOURCE_KEY} must be a string")
             commit = mapping.get(COMMIT_KEY)
             if commit is not None and not (
-                isinstance(commit, str) and _COMMIT_PATTERN.match(commit)
+                isinstance(commit, str) and _COMMIT_PATTERN.fullmatch(commit)
             ):
                 raise LockCorruptError(
                     location,
@@ -246,7 +250,7 @@ def _digest(data: dict[str, Any], key: str, location: str, where: str) -> str:
     happening while never matching anything.
     """
     value = _required_string(data, key, location, where)
-    if not _DIGEST_RE.match(value):
+    if not _DIGEST_RE.fullmatch(value):
         raise LockCorruptError(
             location, f"{where}.{key} is not a sha256 digest (64 lowercase hex characters)"
         )

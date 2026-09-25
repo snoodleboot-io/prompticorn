@@ -587,10 +587,24 @@ scripts can branch on:
 | `1` | The lock and reality diverge |
 | `3` | The lock is unusable — corrupt, or written by a newer `prompticorn` |
 | `4` | A generated file was modified by hand |
+| `5` | A declared source could not supply what was asked for |
 
 `2` is never returned by any of them. `click` uses it for usage errors, and a
 tampering signal that also fires on a mistyped flag is one people learn to
 ignore.
+
+`5` is separate from `1` on purpose. An unreachable remote, a version no longer
+published, or content that does not match its digest means nothing was compared,
+so it is not a finding about your project — and a CI gate that cannot tell a
+network blip from real drift either blocks on every blip or learns to retry past
+the drift. A corrupt lock outranks it: a lock that cannot be read is `3` whether
+or not the sources are reachable.
+
+A build or `regenerate` pinned to a lock never resolves something else to get
+past `5`. If the pinned artifact is neither cached on this machine nor
+obtainable from its source, the command fails and says the lock cannot be
+satisfied offline, because the alternative would be reporting success for a
+build the lock does not describe.
 
 ---
 

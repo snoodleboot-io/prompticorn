@@ -28,6 +28,7 @@ from prompticorn.sources import (
     InvalidCommitError,
     RefMovedError,
     SourceUnavailableError,
+    VersionNotFoundError,
 )
 from tests.unit.sources.artifact_source_contract import ArtifactSourceContract
 
@@ -551,3 +552,47 @@ class TestAnnotatedTags:
         fetched = source.fetch_resolving(identity("house-standards", "4.0.0"), commit)
 
         assert fetched.content.read(fetched.content.units()[0].id) == "# Four\n"
+
+
+class TestOneResolutionPerLock:
+    """The pin and the content it describes come from the same lookup (PRO-164).
+
+    `resolve_version`, then `fetch`, then `commit_for` was three `ls-remote`
+    calls: the digest came from the second lookup's tree and the pin from the
+    third. A tag moved in that gap made the lock record digest(A) beside
+    commit(B) — a lock nothing can ever verify.
+    """
+
+    def test_resolve_pinned_returns_the_version_and_its_commit(self, source: GitSource):
+        artifact_id, commit = source.resolve_pinned("local/house-standards", ">=1.0.0")
+
+        assert artifact_id == identity("house-standards", "2.0.0")
+        assert commit == source.resolve_commit(artifact_id)
+
+    def test_resolve_pinned_applies_the_range(self, source: GitSource):
+        """The same selection rule as `resolve_version`, not a second copy of it."""
+        artifact_id, _ = source.resolve_pinned("local/house-standards", ">=1.0.0,<2.0.0")
+
+        assert artifact_id == identity("house-standards", "1.0.0")
+
+    def test_an_unsatisfiable_range_still_names_what_is_available(self, source: GitSource):
+        with pytest.raises(VersionNotFoundError) as caught:
+            source.resolve_pinned("local/house-standards", ">=9.0.0")
+
+        assert caught.value.available == ("1.0.0", "2.0.0")
+
+    def test_it_asks_the_remote_once(self, source: GitSource, monkeypatch):
+        """The reason it is one method. Counted rather than asserted in prose,
+        because "three calls where one would do" is exactly what regressed."""
+        calls: list[tuple[str, ...]] = []
+        real = GitSource._git
+
+        def counting(self, *args: str, **kwargs):
+            calls.append(args)
+            return real(self, *args, **kwargs)
+
+        monkeypatch.setattr(GitSource, "_git", counting)
+
+        source.resolve_pinned("local/house-standards", ">=1.0.0")
+
+        assert [args[0] for args in calls] == ["ls-remote"]

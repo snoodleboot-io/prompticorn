@@ -36,11 +36,12 @@ def build_artifact_source(
     if declaration.type is SourceType.BUILTIN:
         return None
     location = declaration.location
-    # The schema guarantees a location for every non-builtin type; asserting it
-    # here turns a schema regression into an immediate, local failure.
-    assert location is not None, (
-        f"{declaration.type.value} source {declaration.name!r} has no location"
-    )
+    if location is None:
+        # Raised, not asserted (PRO-164). `python -O` strips an assert, and the
+        # invariant would then resurface as an AttributeError inside a source
+        # constructor — a stack trace about None having no `.encode` rather than
+        # a sentence naming the source that has no location.
+        raise ValueError(f"{declaration.type.value} source {declaration.name!r} has no location")
 
     if declaration.type is SourceType.GIT:
         return GitSource(location, name=declaration.name)
