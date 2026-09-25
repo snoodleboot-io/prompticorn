@@ -69,6 +69,11 @@ class KiloConfig:
         Returns:
             Path to the default kilo_modes.yaml file in the kilo directory.
         """
+        # A package path, and correctly so (PRO-166). This file lives under
+        # prompticorn/builders/kilo/, not in the content layout, and describes
+        # Kilo's own mode schema — the shape of the file the builder writes.
+        # There is no content unit that addresses it and nowhere in a layer tree
+        # for an override of it to go.
         return Path(__file__).parent / "kilo" / "kilo_modes.yaml"
 
     @staticmethod
@@ -78,6 +83,9 @@ class KiloConfig:
         Returns:
             Path to the default kilo_language_file_map.yaml file in the kilo directory.
         """
+        # A package path, for the same reason as the modes file above (PRO-166):
+        # builder-local data under prompticorn/builders/kilo/, outside the
+        # content layout and unaddressable as a unit.
         return Path(__file__).parent / "kilo" / "kilo_language_file_map.yaml"
 
     @property

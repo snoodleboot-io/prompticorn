@@ -103,6 +103,10 @@ class Registry(BaseModel):
     )
 
     # ── Prompt file directory ─────────────────────────────────────────────────
+    # A package path, and correctly so (PRO-166). prompticorn/prompts holds the
+    # Jinja macro library and the legacy flat prompt files, which are template
+    # machinery rather than addressable content: they have no UnitKind, so a
+    # layer has nowhere to put an override of one and nothing to address it by.
     prompts_dir: Path = Path(__file__).parent / "prompts"
 
     # ── Default ignore patterns for all agents ─────────────────────────────
