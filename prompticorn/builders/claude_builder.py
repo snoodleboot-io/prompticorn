@@ -59,7 +59,10 @@ class ClaudeBuilder(Builder):
         # {{PRIMARY_AGENTS_LIST}}, {{LANGUAGE}}) via registered handlers.
         self._legacy_builder = LegacyBuilder()
 
-        # Setup Jinja2 template environment
+        # Setup Jinja2 template environment. A package path, and correctly so
+        # (PRO-166): these are THIS BUILDER's output templates, not authored
+        # content. They encode the .claude/ file format, so a project overriding
+        # one would be overriding prompticorn's code through a data file.
         template_dir = Path(__file__).parent.parent / "templates" / "claude"
         self.jinja_env = Environment(
             loader=FileSystemLoader(str(template_dir)),

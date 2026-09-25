@@ -23,7 +23,9 @@ def generate_claude_md(primary_agents: list[dict], persona_label: str = NO_PERSO
     Returns:
         Content for root CLAUDE.md file
     """
-    # Load template
+    # Load template. A package path, and correctly so (PRO-166): the CLAUDE.md
+    # template is this builder's output format, not authored content — it has no
+    # UnitKind and a layer has nowhere to hold an override of it.
     template_dir = Path(__file__).parent.parent / "templates" / "claude"
     jinja_env = Environment(
         loader=FileSystemLoader(str(template_dir)),
