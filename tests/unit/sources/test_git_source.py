@@ -22,7 +22,10 @@ from prompticorn.artifact.artifact_id import ArtifactId
 from prompticorn.content.digest import digest_text
 from prompticorn.sources import (
     ArtifactNotFoundError,
+    CacheCorruptError,
+    CommitNotFoundError,
     GitSource,
+    InvalidCommitError,
     RefMovedError,
     SourceUnavailableError,
 )
@@ -55,8 +58,14 @@ class Registry:
         git("config", "user.name", "T", cwd=self.work)
         git("config", "commit.gpgsign", "false", cwd=self.work)
 
-    def publish(self, name: str, version: str, body: str) -> str:
-        """Commit one artifact version, tag it, push. Returns the commit."""
+    def publish(self, name: str, version: str, body: str, annotated: bool = False) -> str:
+        """Commit one artifact version, tag it, push. Returns the commit.
+
+        Args:
+            annotated: Tag with a tag *object* rather than a lightweight ref.
+                Annotated tags list twice in ``ls-remote``, so they are the only
+                thing that exercises peeling.
+        """
         directory = self.work / "local" / name / version
         skill = directory / "skills" / "testing-strategies" / "minimal"
         skill.mkdir(parents=True, exist_ok=True)
@@ -66,7 +75,10 @@ class Registry:
         git("add", ".", cwd=self.work)
         git("commit", "-qm", f"{name} {version}", cwd=self.work)
         tag = f"local/{name}@{version}"
-        git("tag", "-f", tag, cwd=self.work)
+        if annotated:
+            git("tag", "-f", "-a", "-m", f"release {version}", tag, cwd=self.work)
+        else:
+            git("tag", "-f", tag, cwd=self.work)
         git("push", "-q", "-f", "origin", "HEAD", f"refs/tags/{tag}", cwd=self.work)
         return git("rev-parse", "HEAD", cwd=self.work)
 
@@ -286,3 +298,256 @@ class TestIntegrity:
 
         with pytest.raises(DigestMismatchError):
             source.fetch_pinned(identity("bad", "1.0.0"), commit)
+
+
+# A commit id and nothing else. Everything else in this list is something a
+# `prompticorn.lock` could carry into a path join or a git argument list, and a
+# lock file travels with a repository — so it is input from outside.
+REFUSED_PINS = [
+    pytest.param("", id="empty"),
+    pytest.param("..", id="parent"),
+    pytest.param("../../victim", id="traversal"),
+    pytest.param("/nonexistent-prompticorn-victim", id="absolute"),
+    pytest.param("--upload-pack=false", id="option"),
+    pytest.param("-q", id="short-option"),
+    pytest.param("0" * 40 + "\n", id="trailing-newline"),
+    pytest.param("0" * 40 + " ", id="trailing-space"),
+    pytest.param("0" * 39, id="too-short"),
+    pytest.param("0" * 41, id="between-lengths"),
+    pytest.param("0" * 65, id="too-long"),
+    pytest.param("A" * 40, id="uppercase"),
+    pytest.param("z" * 40, id="not-hex"),
+    pytest.param("refs/tags/local/house-standards@1.0.0", id="ref-name"),
+    pytest.param("HEAD", id="head"),
+    pytest.param("main", id="branch"),
+]
+
+
+@pytest.fixture
+def no_remote(tmp_path: Path) -> GitSource:
+    """A source whose remote does not exist.
+
+    A refused pin is refused before anything is contacted, and asserting that
+    against an unreachable remote is what proves it: reaching the remote at all
+    would raise `SourceUnavailableError` instead.
+    """
+    return GitSource(
+        str(tmp_path / "no-such-remote.git"), name="house", cache_root=tmp_path / "cache"
+    )
+
+
+class TestPinValidation:
+    """A pin is a commit id, checked before it is used for anything (PRO-163).
+
+    The pin reaches a filesystem path and a git argument list, and both are
+    dangerous: the path is handed to `shutil.rmtree` and the argument is parsed
+    by git as an option if it starts with a dash.
+    """
+
+    @pytest.mark.parametrize("pin", REFUSED_PINS)
+    def test_a_pin_that_is_not_a_commit_id_is_refused(self, no_remote: GitSource, pin: str):
+        with pytest.raises(InvalidCommitError):
+            no_remote.fetch_pinned(identity("house-standards", "1.0.0"), pin)
+
+    @pytest.mark.parametrize("pin", REFUSED_PINS)
+    def test_the_path_for_a_bad_pin_is_never_even_computed(self, no_remote: GitSource, pin: str):
+        """`checkout_path` is public and is where the traversal would land."""
+        with pytest.raises(InvalidCommitError):
+            no_remote.checkout_path(pin)
+
+    @pytest.mark.parametrize("pin", REFUSED_PINS)
+    def test_re_resolution_refuses_a_bad_pin_before_touching_the_remote(
+        self, no_remote: GitSource, pin: str
+    ):
+        with pytest.raises(InvalidCommitError):
+            no_remote.fetch_resolving(identity("house-standards", "1.0.0"), pin)
+
+    def test_a_traversing_pin_does_not_delete_the_directory_it_points_at(
+        self, no_remote: GitSource, tmp_path: Path
+    ):
+        """The blocker. `cache/<digest>/../../victim` is `tmp_path/victim`, and
+        the unguarded path handed it straight to `shutil.rmtree`."""
+        victim = tmp_path / "victim"
+        (victim / "keep").mkdir(parents=True)
+        (victim / "keep" / "file.txt").write_text("precious\n", encoding="utf-8")
+
+        with pytest.raises(InvalidCommitError):
+            no_remote.fetch_pinned(identity("house-standards", "1.0.0"), "../../victim")
+
+        assert (victim / "keep" / "file.txt").read_text(encoding="utf-8") == "precious\n"
+
+    def test_a_parent_pin_does_not_wipe_the_cache(self, source: GitSource):
+        """`..` resolves to the cache directory itself, taking every other
+        checkout with it — including ones a concurrent build is reading."""
+        source.fetch(identity("house-standards", "1.0.0"))
+        cached = source.resolve_commit(identity("house-standards", "1.0.0"))
+
+        with pytest.raises(InvalidCommitError):
+            source.fetch_pinned(identity("house-standards", "1.0.0"), "..")
+
+        assert source.is_cached(cached)
+
+    def test_an_option_shaped_pin_is_not_handed_to_git_as_an_option(
+        self, source: GitSource, tmp_path: Path
+    ):
+        """`git fetch <url> --upload-pack=<command>` runs <command>. The pin is
+        positional, but git parses options after positionals too, so ordering is
+        no defence — only refusing the value is."""
+        sentinel = tmp_path / "pwned"
+
+        with pytest.raises(InvalidCommitError):
+            source.fetch_pinned(
+                identity("house-standards", "1.0.0"), f"--upload-pack=touch {sentinel}"
+            )
+
+        assert not sentinel.exists()
+
+    @pytest.mark.parametrize("pin", ["0" * 40, "a" * 64, "0123456789abcdef" * 4])
+    def test_a_commit_id_is_accepted(self, no_remote: GitSource, pin: str):
+        """sha1 is 40 hex, sha256 is 64. Both are commit ids; refusing the
+        longer one would break the moment a repository is converted."""
+        assert no_remote.checkout_path(pin).name == pin
+        assert not no_remote.is_cached(pin)
+
+
+class TestTheCheckoutIsTheRequestedCommit:
+    def test_a_fetch_that_lands_elsewhere_is_refused(self, source: GitSource):
+        """`git fetch <url> <refish>` takes refs as well as object ids, so the
+        promise that a cache entry is keyed by its own content rests on a check,
+        not on how git happens to resolve a 40-hex argument today.
+
+        Faked at the `git` seam because today's git does resolve a full hex
+        argument as an object id, which is exactly why the branch would
+        otherwise ship untested.
+        """
+        other = source.resolve_commit(identity("house-standards", "2.0.0"))
+        pinned = source.resolve_commit(identity("house-standards", "1.0.0"))
+        original = GitSource._git
+
+        def lying_git(self, *args: str, **kwargs):
+            if args[0] == "rev-parse":
+                return f"{other}\n"
+            return original(self, *args, **kwargs)
+
+        source._git = lying_git.__get__(source, GitSource)
+
+        with pytest.raises(CommitNotFoundError) as caught:
+            source.fetch_pinned(identity("house-standards", "1.0.0"), pinned)
+
+        assert caught.value.commit == pinned
+        assert not source.is_cached(pinned)
+
+    def test_a_pinned_commit_the_remote_no_longer_has_is_not_a_network_error(
+        self, registry: Registry, tmp_path: Path
+    ):
+        """The one failure a lock exists to surface. Reporting it as "check your
+        credentials" sends the reader to the wrong problem entirely."""
+        source = GitSource(str(registry.remote), name="house", cache_root=tmp_path / "cache")
+        registry.publish("house-standards", "1.0.0", "# One\n")
+
+        with pytest.raises(CommitNotFoundError):
+            source.fetch_pinned(identity("house-standards", "1.0.0"), "0" * 40)
+
+
+class TestCorruptCache:
+    def test_a_file_where_a_checkout_belongs_is_reported_not_crashed(self, source: GitSource):
+        """`shutil.rmtree` raises `NotADirectoryError` on a file, which escapes
+        as an unhandled crash instead of an error the CLI can report."""
+        commit = source.resolve_commit(identity("house-standards", "1.0.0"))
+        squatter = source.checkout_path(commit)
+        squatter.parent.mkdir(parents=True, exist_ok=True)
+        squatter.write_text("not a checkout\n", encoding="utf-8")
+
+        with pytest.raises(CacheCorruptError):
+            source.fetch(identity("house-standards", "1.0.0"))
+
+
+class TestConcurrentFetches:
+    """Two builds of the same commit must not corrupt each other.
+
+    Nothing here locks, so the staging area has to be private to one fetch and
+    the hand-over has to tolerate losing the race.
+    """
+
+    def test_staging_is_private_to_one_fetch(self, source: GitSource):
+        """A deterministic `.{commit}.partial` is shared state: the second build
+        deletes the first one's half-fetched tree, and the first one's rename
+        then fails with a bare `OSError: Directory not empty`."""
+        seen: list[str] = []
+        original = GitSource._git
+
+        def recording_git(self: GitSource, *args: str, **kwargs: object) -> str:
+            if args[0] == "init":
+                seen.append(Path(args[-1]).name)
+            return original(self, *args, **kwargs)
+
+        source._git = recording_git.__get__(source, GitSource)
+        wanted = identity("house-standards", "1.0.0")
+        commit = source.resolve_commit(wanted)
+
+        source.fetch(wanted)
+        shutil.rmtree(source.checkout_path(commit))
+        source.fetch(wanted)
+
+        assert len(seen) == 2
+        assert seen[0] != seen[1]
+
+    def test_a_checkout_another_build_finished_first_is_kept(
+        self, source: GitSource, tmp_path: Path
+    ):
+        """The loser of the race must not crash on the hand-over. The winner's
+        tree is the same tree by construction — the entry is named after the
+        commit — so keeping it is correct as well as cheaper."""
+        wanted = identity("house-standards", "1.0.0")
+        commit = source.resolve_commit(wanted)
+        source.fetch(wanted)
+        winner = tmp_path / "winner"
+        shutil.copytree(source.checkout_path(commit), winner, symlinks=True)
+        shutil.rmtree(source.checkout_path(commit))
+        original = GitSource._git
+
+        def racing_git(self: GitSource, *args: str, **kwargs: object) -> str:
+            output = original(self, *args, **kwargs)
+            if args[0] == "checkout":
+                # Another build completes this commit while this one still has
+                # its tree in staging.
+                shutil.copytree(winner, self.checkout_path(commit))
+            return output
+
+        source._git = racing_git.__get__(source, GitSource)
+
+        fetched = source.fetch_pinned(wanted, commit)
+
+        assert fetched.content.read(fetched.content.units()[0].id) == "# One\n"
+        assert source.is_cached(commit)
+
+
+class TestAnnotatedTags:
+    """Annotated tags list twice in `ls-remote`: the tag object, then `^{}` for
+    the commit it peels to. Only the peeled line may be pinned, and every other
+    test here tags lightweight — so without these the peeling branch is guesswork.
+    """
+
+    def test_an_annotated_tag_resolves_to_the_commit_not_the_tag_object(
+        self, registry: Registry, tmp_path: Path
+    ):
+        commit = registry.publish("house-standards", "4.0.0", "# Four\n", annotated=True)
+        source = GitSource(str(registry.remote), name="house", cache_root=tmp_path / "cache")
+
+        resolved = source.resolve_commit(identity("house-standards", "4.0.0"))
+
+        assert resolved == commit
+        assert resolved != git("rev-parse", "local/house-standards@4.0.0", cwd=registry.work)
+
+    def test_an_annotated_tag_re_resolves_and_checks_out_clean(
+        self, registry: Registry, tmp_path: Path
+    ):
+        """End to end: the commit a lock would record from an annotated tag has
+        to be the one re-resolution finds and the one that checks out. Pinning
+        the tag object instead reads as drift on the very next build."""
+        commit = registry.publish("house-standards", "4.0.0", "# Four\n", annotated=True)
+        source = GitSource(str(registry.remote), name="house", cache_root=tmp_path / "cache")
+
+        fetched = source.fetch_resolving(identity("house-standards", "4.0.0"), commit)
+
+        assert fetched.content.read(fetched.content.units()[0].id) == "# Four\n"
