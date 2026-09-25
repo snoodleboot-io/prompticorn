@@ -259,8 +259,26 @@ class PromptBuilder:
                 actions.append(
                     f"ℹ Building {len([k for k in all_agents.keys() if '/' not in k])} primary agents (from {len(enabled_agent_names)} enabled)"
                 )
-            except Exception as e:
-                # If persona filtering fails, log warning and continue without filtering
+            except KeyError as e:
+                # Narrowed from `except Exception` (PRO-165). The broad catch was
+                # defensible while the persona data was a bundled file valid by
+                # construction: the only thing that could realistically go wrong
+                # was a selection naming a persona that does not exist, and
+                # carrying on unfiltered is the long-standing answer to that.
+                #
+                # Since PRO-117 a project layer can supply personas.yaml, so
+                # "persona filtering failed" also covered a malformed override —
+                # and the fallback for that is to emit every agent and every
+                # skill, exit 0, with one ⚠ line buried in an action list of
+                # ninety. A build that quietly produced 26 agents and 88 skills
+                # where 15 and 51 were asked for reported success for output
+                # nobody requested.
+                #
+                # So only KeyError — a selection that does not match otherwise
+                # valid data — is tolerated here. A document that is present and
+                # wrong raises MalformedConfigurationError from
+                # PersonaRegistry.from_resolver, which is not caught anywhere and
+                # names the offending file and the layer it came from.
                 actions.append(f"⚠ Persona filtering failed ({e}), building all agents")
 
         # Collect all unique skills from all agents (including subagents)
