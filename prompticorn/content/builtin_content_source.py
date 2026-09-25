@@ -11,12 +11,18 @@ can always be read, and the two cannot drift.
 
 from __future__ import annotations
 
+import warnings
 from collections.abc import Iterable, Iterator
 from pathlib import Path
 
 from prompticorn.content.content_source import ContentSource
 from prompticorn.content.content_unit import BUILTIN_LAYER, ContentUnit
-from prompticorn.content.errors import SourceUnavailableError, UnitNotFoundError
+from prompticorn.content.errors import (
+    InvalidUnitIdError,
+    SkippedContentWarning,
+    SourceUnavailableError,
+    UnitNotFoundError,
+)
 from prompticorn.content.unit_id import UnitId
 from prompticorn.content.unit_kind import UnitKind
 
@@ -123,7 +129,7 @@ class BuiltinContentSource(ContentSource):
             if not agent_dir.is_dir() or agent_dir.name == "core":
                 continue
             if (agent_dir / "prompt.md").is_file():
-                yield UnitId.parse(f"agent/{agent_dir.name}")
+                yield from self._addressed(f"agent/{agent_dir.name}", agent_dir / "prompt.md")
             subagents_dir = agent_dir / "subagents"
             if not subagents_dir.is_dir():
                 continue
@@ -132,8 +138,9 @@ class BuiltinContentSource(ContentSource):
                     continue
                 for variant_dir in sorted(subagent_dir.iterdir()):
                     if (variant_dir / "prompt.md").is_file():
-                        yield UnitId.parse(
-                            f"subagent/{agent_dir.name}/{subagent_dir.name}/{variant_dir.name}"
+                        yield from self._addressed(
+                            f"subagent/{agent_dir.name}/{subagent_dir.name}/{variant_dir.name}",
+                            variant_dir / "prompt.md",
                         )
 
     def _discover_variant_tree(
@@ -147,7 +154,10 @@ class BuiltinContentSource(ContentSource):
                 continue
             for variant_dir in sorted(item_dir.iterdir()):
                 if (variant_dir / filename).is_file():
-                    yield UnitId.parse(f"{kind.value}/{item_dir.name}/{variant_dir.name}")
+                    yield from self._addressed(
+                        f"{kind.value}/{item_dir.name}/{variant_dir.name}",
+                        variant_dir / filename,
+                    )
 
     def _discover_conventions(self) -> Iterator[UnitId]:
         core_dir = self._root / "agents" / "core"
@@ -157,17 +167,59 @@ class BuiltinContentSource(ContentSource):
             stem = path.stem
             if stem.startswith(_LANGUAGE_CONVENTION_PREFIX):
                 language = stem[len(_LANGUAGE_CONVENTION_PREFIX) :]
-                yield UnitId.parse(f"convention/language/{language}")
+                yield from self._addressed(f"convention/language/{language}", path)
             else:
-                yield UnitId.parse(f"convention/core/{stem}")
+                yield from self._addressed(f"convention/core/{stem}", path)
 
     def _discover_configurations(self) -> Iterator[UnitId]:
         configurations_dir = self._root / "configurations"
         if configurations_dir.is_dir():
             for path in sorted(configurations_dir.glob("*.yaml")):
-                yield UnitId.parse(f"configuration/{path.stem}")
-        if (self._root / "personas" / "personas.yaml").is_file():
-            yield UnitId.parse(f"configuration/{_PERSONAS_UNIT_NAME}")
+                yield from self._addressed(f"configuration/{path.stem}", path)
+        personas = self._root / "personas" / "personas.yaml"
+        if personas.is_file():
+            yield from self._addressed(f"configuration/{_PERSONAS_UNIT_NAME}", personas)
+
+    def _addressed(self, raw_id: str, path: Path) -> Iterator[UnitId]:
+        """The unit for a discovered file, or nothing plus a warning.
+
+        Discovery derives an ID from directory and file *names*, and
+        :meth:`UnitId.parse` rejects names that are not addressable — uppercase,
+        spaces, punctuation. For the bundled tree those names are repo-controlled
+        and a rejection would be a packaging bug; for a layer somebody authored
+        they are not, and an unhandled rejection there takes down every command
+        that enumerates content, with a message that names neither the file nor
+        the layer (PRO-165).
+
+        So an unaddressable name is skipped, and the skip is announced: the file
+        might be a README nobody meant as content, or it might be a misspelled
+        override that is now doing nothing, and only the author can tell which.
+
+        Yields:
+            The parsed unit, or nothing at all.
+        """
+        try:
+            yield UnitId.parse(raw_id)
+        except InvalidUnitIdError as error:
+            warnings.warn(
+                f"{self._describe(path)} in the {self.name!r} content layer is not "
+                f"addressable content and was skipped: it would have to be the unit "
+                f"{raw_id!r}, but {error.reason}. If it was meant to override "
+                f"something, rename it to match the unit it overrides.",
+                SkippedContentWarning,
+                stacklevel=2,
+            )
+
+    def _describe(self, path: Path) -> str:
+        """The offending file, named relative to this source's root when it can be.
+
+        Relative because the root is already named by the layer, and an absolute
+        path to a site-packages directory buries the part the reader needs.
+        """
+        try:
+            return path.relative_to(self._root).as_posix()
+        except ValueError:  # pragma: no cover - a discovered path is under the root
+            return str(path)
 
     def _require_available(self) -> None:
         if not self._root.is_dir():
