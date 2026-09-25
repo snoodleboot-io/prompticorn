@@ -17,8 +17,7 @@ from prompticorn.builders.convention_generator import generate_all_conventions
 from prompticorn.builders.factory import BuilderFactory
 from prompticorn.builders.layouts import get_layout
 from prompticorn.builders.template_handlers.primary_agents_handler import PrimaryAgentsHandler
-from prompticorn.content.content_resolver import read_variant_unit
-from prompticorn.content.content_unit import BUILTIN_LAYER
+from prompticorn.content.content_resolver import default_resolver, read_variant_unit
 from prompticorn.content.errors import ContentError
 from prompticorn.content.unit_kind import UnitKind
 from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
@@ -27,6 +26,7 @@ from prompticorn.ir.models.agent import Agent
 from prompticorn.personas import PersonaFilter, PersonaRegistry
 from prompticorn.personas.registry import config_file_naming
 from prompticorn.provenance.provenance_emitter import GENERATED_UNIT_PREFIX, ProvenanceEmitter
+from prompticorn.provenance.unit_origins import UnitOrigins
 from prompticorn.text_writer import write_text
 from prompticorn.tools import builder_dispatch
 
@@ -536,8 +536,13 @@ class PromptBuilder:
         Returns:
             The paths the provenance pass itself wrote.
         """
-        emitter = ProvenanceEmitter(layer=BUILTIN_LAYER, version=bundled_version().render())
-        return emitter.emit(output, attribution)
+        # Origins come from the resolver this build read through, so a header's
+        # ``layer`` is the same answer the lock records for the same unit rather
+        # than a constant that contradicts it (PRO-165). Read here rather than
+        # captured in ``__init__`` because the CLI installs the project's layer
+        # stack for the length of one command.
+        origins = UnitOrigins.from_resolver(default_resolver(), bundled_version().render())
+        return ProvenanceEmitter(origins=origins).emit(output, attribution)
 
     def _resolve_primary_agents_token(
         self, output: Path, config: dict[str, Any] | None, emitted: Iterable[str]
