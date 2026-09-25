@@ -12,6 +12,14 @@ from pathlib import Path
 
 import yaml
 
+from prompticorn.content.configuration_document import ConfigurationDocument
+
+# The configuration unit personas.yaml is addressed as, and the keys the document
+# is required to have the right shape for.
+PERSONAS_CONFIGURATION = "personas"
+PERSONAS_KEY = "personas"
+UNIVERSAL_AGENTS_KEY = "universal_agents"
+
 
 class DeprecatedPersonaWarning(UserWarning):
     """A configuration named a persona id that is now only an alias.
@@ -106,12 +114,32 @@ class PersonaRegistry:
         The preferred constructor: consumers should not need to know where
         personas.yaml lives. ``from_yaml`` remains for callers holding an
         explicit path. (PRO-106)
+
+        **Validated, not merely parsed** (PRO-165). This used to be a bare
+        ``yaml.safe_load``, which was defensible while the only possible source
+        was the bundled file. Since PRO-117 a project layer can supply
+        ``personas/personas.yaml``, and a wrong-shaped document does not fail
+        here — it loads as a registry that knows no personas, filters nothing,
+        and produces a build emitting all 26 agents where 15 were asked for. So
+        the shape is checked, and a document that fails the check is rejected
+        with a message naming the file and the layer that supplied it.
+
+        Raises:
+            MalformedConfigurationError: If the document is not usable persona
+                data. Not a ContentError, deliberately: consumers tolerate an
+                absent configuration by catching that, and a present-and-wrong
+                one must not take the same path.
         """
-        import yaml
-
-        from prompticorn.content.content_resolver import read_configuration
-
-        return cls(yaml.safe_load(read_configuration("personas")))
+        document = ConfigurationDocument.load(PERSONAS_CONFIGURATION)
+        # personas: the sections that make the document mean anything. An empty
+        # mapping is rejected rather than accepted as "no personas", because a
+        # selection against it fails and the failure path builds everything.
+        document.require_mapping(PERSONAS_KEY)
+        document.require_mapping_values(PERSONAS_KEY)
+        # universal_agents is optional — a file may define none — but if it is
+        # there it is read as a list of names and must be one.
+        document.require_string_list(UNIVERSAL_AGENTS_KEY)
+        return cls(document.data)
 
     @classmethod
     def from_yaml(cls, yaml_path: Path | str) -> "PersonaRegistry":

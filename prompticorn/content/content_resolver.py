@@ -107,6 +107,21 @@ class ContentResolver:
                 winners.setdefault(unit.id.render(), unit)
         return [winners[key] for key in sorted(winners)]
 
+    def owner_of(self, unit_id: UnitId) -> ContentSource | None:
+        """The source that wins for this unit, or None when nothing carries it.
+
+        Public because "which layer won, and where does its copy live" is a
+        question about one unit, and answering it by enumerating the whole stack
+        reads every layer to learn something a single lookup already knows.
+        Callers that only want the name should use :meth:`layer_of`.
+        """
+        return self._owner(unit_id)
+
+    def layer_of(self, unit_id: UnitId) -> str | None:
+        """Name of the layer that wins for this unit, or None."""
+        source = self._owner(unit_id)
+        return None if source is None else source.name
+
     def _owner(self, unit_id: UnitId) -> ContentSource | None:
         for source in self._sources:
             if source.has(unit_id):

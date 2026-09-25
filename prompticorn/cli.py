@@ -1282,10 +1282,20 @@ def _get_builder(tool: str):
 
     Raises:
         ValueError: If tool is unknown.
+        click.Abort: If a configuration the builder needs is present but
+            malformed — which since PRO-117 means an override somebody wrote.
+            Caught here because every command that builds comes through this
+            function, and the alternative is a Python traceback carrying a
+            message that was written to be read. (PRO-165)
     """
+    from prompticorn.content.errors import MalformedConfigurationError
     from prompticorn.prompt_builder import get_prompt_builder
 
-    return get_prompt_builder(tool)
+    try:
+        return get_prompt_builder(tool)
+    except MalformedConfigurationError as exc:
+        click.secho(f"\nError: {exc}", fg="red", err=True)
+        raise click.Abort() from exc
 
 
 # ── lock / build ───────────────────────────────────────────────────────────
