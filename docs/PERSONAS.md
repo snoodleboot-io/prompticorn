@@ -4,7 +4,7 @@
 
 prompticorn uses a **persona-based filtering system** to reduce cognitive overload by showing only the agents, workflows, and skills relevant to your team's roles.
 
-Instead of generating all 25 primary agents (plus their subagents), you select which
+Instead of generating all 27 primary agents (plus their subagents), you select which
 **personas** (SDLC roles) your team uses, and prompticorn generates only the agents,
 workflows, and skills needed for those roles.
 
@@ -12,9 +12,9 @@ workflows, and skills needed for those roles.
 
 Personas represent common software development roles (SDLC personas). Each persona has a specific focus and set of agents/workflows/skills mapped to it.
 
-Personas are defined in `prompticorn/personas/personas.yaml`. There are **12 persona
-definitions** (3 software-engineer specializations plus a deprecated `software_engineer`
-alias). The "Primary Agents" column lists each persona's primary agents from the YAML;
+Personas are defined in `prompticorn/personas/personas.yaml`. There are **21 persona
+definitions** (3 software-engineer specializations, a deprecated `software_engineer`
+alias, and nine discipline personas added in PRO-155). The "Primary Agents" column lists each persona's primary agents from the YAML;
 secondary (cross-cutting) agents and the 5 universal agents are added on top.
 
 **Available Personas:**
@@ -26,7 +26,7 @@ secondary (cross-cutting) agents and the 5 universal agents are added on top.
 | **Frontend Software Engineer** | Performant, accessible UIs for web and mobile | code, test, refactor, migration |
 | **Fullstack Software Engineer** | Full-stack development across backend and frontend | code, test, refactor, migration |
 | **Architect** | System design, architecture planning, technical decisions | architect, backend, frontend, data |
-| **QA / Tester** | Quality assurance, testing strategy, test automation | test, review |
+| **QA / Tester** | Quality assurance, testing strategy, test automation | qa-tester, test, review, atdd |
 | **DevOps Engineer** | Infrastructure as code, deployment, operations, CI/CD | code, devops, observability, incident |
 | **Security Engineer** | Security hardening, threat modeling, and compliance | security, compliance |
 | **Product Manager** | Requirements, prioritization, and roadmap planning | product |
@@ -41,7 +41,7 @@ secondary (cross-cutting) agents and the 5 universal agents are added on top.
 | **UX Designer** | User research, interaction design, design systems | frontend, product |
 | **ML Engineer** | Model deployment, serving infrastructure, production ML | mlai, devops |
 | **AI Engineer** | LLM applications, RAG, agents, evaluation harnesses | ai, backend |
-| **Engineering Manager** | Planning, prioritization, team coordination | plan, product |
+| **Engineering Manager** | Planning, prioritization, technical debt, and team coordination | product, architect |
 
 > Secondary agents per persona (from `personas.yaml`): for example, QA/Tester also pulls
 > in `performance` and `enforcement`; Security Engineer also pulls in `incident`, `review`,
@@ -236,7 +236,7 @@ prompticorn init
 
 ### Q: What if I select all personas?
 
-**A:** You'll get all ~25 primary agents. This defeats the purpose of persona filtering but is allowed if your team truly uses all roles.
+**A:** You'll get all 27 primary agents. This defeats the purpose of persona filtering but is allowed if your team truly uses all roles.
 
 ### Q: What if I select no personas?
 
