@@ -7,9 +7,49 @@ skill and workflow mappings live in agent_skill_mapping.yaml.
 Reference: planning/current/adrs/ADR-001-persona-based-filtering.md
 """
 
+import warnings
 from pathlib import Path
 
 import yaml
+
+
+class DeprecatedPersonaWarning(UserWarning):
+    """A configuration named a persona id that is now only an alias.
+
+    ``UserWarning`` rather than ``DeprecationWarning``, deliberately. Python
+    hides ``DeprecationWarning`` unless it is triggered from ``__main__``, and
+    the only reader who can act on this is the person running ``prompticorn``
+    against their own config — exactly the reader who would never see it.
+    """
+
+
+def config_file_naming(persona_ids: list[str] | None) -> Path | None:
+    """The project config file that genuinely lists one of ``persona_ids``.
+
+    Provenance the registry cannot recover on its own: ``active_personas``
+    reaches the builders as a bare list, so by the time an alias is resolved,
+    where it was written down is gone. The project's own config is the
+    overwhelmingly likely answer but not the only one — profiles, test fixtures
+    and programmatic callers all pass configurations that file knows nothing
+    about — so this reads it and names it only when it really carries the id.
+    Naming the wrong file is worse than naming none: it sends the reader to edit
+    something that is already correct. (PRO-159)
+    """
+    if not persona_ids:
+        return None
+
+    from prompticorn.config_handler import ConfigHandler
+
+    try:
+        path = ConfigHandler.get_config_path()
+        if not path.is_file():
+            return None
+        data = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
+    except (OSError, yaml.YAMLError):
+        return None
+
+    listed = data.get("active_personas") or []
+    return path if set(persona_ids) & set(listed) else None
 
 
 class PersonaRegistry:
@@ -21,7 +61,7 @@ class PersonaRegistry:
     Example:
         >>> registry = PersonaRegistry.from_yaml("prompticorn/personas/personas.yaml")
         >>> personas = registry.list_personas()
-        >>> agents = registry.get_agents_for_persona("software_engineer")
+        >>> agents = registry.get_agents_for_persona("fullstack_software_engineer")
     """
 
     def __init__(self, personas_data: dict) -> None:
@@ -29,12 +69,35 @@ class PersonaRegistry:
 
         Args:
             personas_data: Dictionary loaded from personas.yaml containing
-                          persona definitions and universal agents.
+                          persona definitions, universal agents and any
+                          deprecated aliases.
         """
         self._raw_data = personas_data
         self._personas = personas_data.get("personas", {})
         self._universal_agents = personas_data.get("universal_agents", [])
         self._version = personas_data.get("version", "unknown")
+        self._aliases = self._read_aliases(personas_data)
+        # Resolution happens on every lookup, so without this the same
+        # deprecation would be reported once per get_* call — dozens of times in
+        # one build. One registry, one telling.
+        self._warned_aliases: set[str] = set()
+
+    @staticmethod
+    def _read_aliases(personas_data: dict) -> dict[str, str]:
+        """Build the alias -> canonical map declared by ``deprecated_aliases``.
+
+        An alias naming a persona that does not exist is dropped rather than
+        obeyed. Honouring it would resolve a selection to nothing, which filters
+        nothing: a typo in this map would make a working persona unreachable
+        while every assertion about the personas themselves still passed.
+        """
+        personas = personas_data.get("personas", {})
+        declared = personas_data.get("deprecated_aliases") or {}
+        return {
+            alias: target
+            for alias, target in declared.items()
+            if alias != target and target in personas
+        }
 
     @classmethod
     def from_resolver(cls) -> "PersonaRegistry":
@@ -74,32 +137,97 @@ class PersonaRegistry:
 
         return cls(personas_data)
 
-    def list_personas(self) -> list[str]:
-        """Get list of all persona identifiers.
+    def resolve_persona(self, persona_name: str, *, source: Path | str | None = None) -> str:
+        """Map a configured persona id onto the persona it stands for.
+
+        Deprecated ids keep resolving so a config written against an older
+        release still builds the set it always built. The alternative — letting
+        the id fail — is not a loud failure anywhere it matters: ``PersonaFilter``
+        raises ``KeyError``, but ``prompt_builder`` catches broadly around persona
+        filtering and falls back to building *every* agent. A dropped id would
+        quietly emit the whole library instead of the role's slice. (PRO-159)
+
+        Args:
+            persona_name: Persona identifier as a configuration spelled it.
+            source: Config file the value came from, when the caller knows it.
+                ``active_personas`` reaches here as a bare list, so provenance
+                can only come from above; callers holding a synthetic config
+                pass nothing rather than naming a file that has nothing to do
+                with the value.
 
         Returns:
-            List of persona keys (e.g., ['software_engineer', 'architect', ...])
+            The canonical persona identifier, or ``persona_name`` unchanged when
+            it is not a deprecated alias.
         """
-        return list(self._personas.keys())
+        target = self._aliases.get(persona_name)
+        if target is None:
+            return persona_name
+
+        if persona_name not in self._warned_aliases:
+            self._warned_aliases.add(persona_name)
+            location = f" in {source}" if source else ""
+            warnings.warn(
+                f"Persona '{persona_name}'{location} is a deprecated alias for "
+                f"'{target}' and will be removed in a future release. Update "
+                f"active_personas to '{target}'.",
+                DeprecatedPersonaWarning,
+                stacklevel=3,
+            )
+        return target
+
+    def list_personas(self) -> list[str]:
+        """Get the persona identifiers offered for selection.
+
+        Deprecated aliases are excluded: this list feeds the ``init`` and
+        ``swap`` pickers, where an alias is a duplicate entry competing with the
+        persona it points at — and the duplicate wins, because it was listed
+        first under the friendlier name. Use
+        :meth:`list_resolvable_personas` where the question is what a config may
+        legally say rather than what a user may choose.
+
+        Returns:
+            List of selectable persona keys
+            (e.g., ['fullstack_software_engineer', 'architect', ...])
+        """
+        return [name for name in self._personas if name not in self._aliases]
+
+    def list_resolvable_personas(self) -> list[str]:
+        """Get every persona identifier a configuration may legally name.
+
+        That is the selectable personas plus the deprecated aliases. Aliases are
+        listed even once their duplicate definition is deleted, since resolution
+        is what keeps the stale config building.
+
+        Returns:
+            List of accepted persona keys, selectable ones first.
+        """
+        return self.list_personas() + list(self._aliases)
 
     def get_persona_info(self, persona_name: str) -> dict:
         """Get full persona definition.
 
         Args:
-            persona_name: Persona identifier (e.g., 'software_engineer').
+            persona_name: Persona identifier (e.g., 'fullstack_software_engineer'),
+                          or a deprecated alias for one.
 
         Returns:
             Dictionary with persona definition including display_name, description,
             focus, primary_agents, secondary_agents.
 
+            A deprecated alias returns the definition of the persona it resolves
+            to, so every derived value — the agent list, and the display name the
+            CLAUDE.md header is stamped with — describes the persona actually
+            being built rather than the id that asked for it.
+
         Raises:
             KeyError: If persona doesn't exist.
         """
-        if persona_name not in self._personas:
+        resolved = self.resolve_persona(persona_name)
+        if resolved not in self._personas:
             msg = f"Persona '{persona_name}' not found. Available: {self.list_personas()}"
             raise KeyError(msg)
 
-        return self._personas[persona_name]
+        return self._personas[resolved]
 
     def get_agents_for_persona(self, persona_name: str) -> list[str]:
         """Get all agents (primary + secondary) for a persona.
@@ -156,29 +284,49 @@ class PersonaFilter:
 
     Example:
         >>> registry = PersonaRegistry.from_yaml("personas.yaml")
-        >>> filter = PersonaFilter(registry, ["software_engineer", "qa_tester"])
+        >>> filter = PersonaFilter(registry, ["fullstack_software_engineer", "qa_tester"])
         >>> enabled_agents = filter.get_enabled_agents()
     """
 
-    def __init__(self, registry: PersonaRegistry, selected_personas: list[str]) -> None:
+    def __init__(
+        self,
+        registry: PersonaRegistry,
+        selected_personas: list[str],
+        *,
+        source: Path | str | None = None,
+    ) -> None:
         """Initialize filter with registry and selected personas.
+
+        Deprecated aliases are resolved up front, so the rest of the filter —
+        and everything downstream that asks it what was selected — only ever
+        sees canonical ids. Selecting an alias alongside the persona it points at
+        is one selection, not two.
 
         Args:
             registry: PersonaRegistry instance.
-            selected_personas: List of persona identifiers to enable.
+            selected_personas: List of persona identifiers to enable, as the
+                configuration spelled them.
+            source: Config file the selection came from, when the caller knows
+                it, so a deprecation warning can name the file to edit.
 
         Raises:
-            KeyError: If any selected persona doesn't exist.
+            KeyError: If any selected persona neither exists nor resolves.
         """
         self._registry = registry
-        self._selected_personas = selected_personas
 
-        # Validate personas exist
+        # Validate personas exist, naming the id the config used rather than
+        # what it resolved to — the reader has to find it in their own file.
         available = registry.list_personas()
+        resolved: list[str] = []
         for persona in selected_personas:
-            if persona not in available:
+            canonical = registry.resolve_persona(persona, source=source)
+            if canonical not in available:
                 msg = f"Invalid persona: '{persona}'. Available: {available}"
                 raise KeyError(msg)
+            if canonical not in resolved:
+                resolved.append(canonical)
+
+        self._selected_personas = resolved
 
     def get_enabled_agents(self) -> set[str]:
         """Get all agents that should be enabled for selected personas.
@@ -225,6 +373,8 @@ class PersonaFilter:
         """Get list of currently selected personas.
 
         Returns:
-            List of persona identifiers.
+            List of canonical persona identifiers: deprecated aliases have been
+            resolved and duplicates collapsed, so this is what is being built
+            rather than what the configuration asked for verbatim.
         """
         return self._selected_personas

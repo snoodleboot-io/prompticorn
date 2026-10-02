@@ -937,10 +937,10 @@ def swap_command():
     only the agents relevant to the selected personas.
 
     Personas determine which agents are included:
-    - software_engineer: code, test, refactor, migration
+    - fullstack_software_engineer: code, test, refactor, migration
     - qa_tester: test, review
     - devops_engineer: devops, observability, incident
-    - backend_software_engineer, frontend_software_engineer, fullstack_software_engineer
+    - backend_software_engineer, frontend_software_engineer
     - And more based on configured personas
 
     Universal agents (ask, debug, explain, plan, orchestrator) are always
@@ -983,8 +983,15 @@ def swap_command():
         click.secho(f"Error: Could not load personas ({e})", fg="red")
         raise click.Abort() from e
 
-    # Get current active personas
-    current_personas = config.get("active_personas", [])
+    # Get current active personas, resolving any deprecated alias. The picker and
+    # the change summary below are keyed by selectable ids, which aliases are not,
+    # so a stale config would otherwise fail to show its own current selection —
+    # and the rewritten config is canonical, which makes `swap` the migration
+    # path off the alias. (PRO-159)
+    current_personas = [
+        persona_registry.resolve_persona(persona, source=ConfigHandler.get_config_path())
+        for persona in config.get("active_personas", [])
+    ]
 
     # Build options and explanations for persona selection
     persona_ids = persona_registry.list_personas()
@@ -1009,7 +1016,7 @@ def swap_command():
     click.echo("=" * 60)
 
     if current_personas:
-        current_display = [id_to_display[pid] for pid in current_personas]
+        current_display = [id_to_display.get(pid, pid) for pid in current_personas]
         click.echo(f"\n  Current personas: {', '.join(current_display)}")
     else:
         click.echo("\n  Current personas: (none selected)")

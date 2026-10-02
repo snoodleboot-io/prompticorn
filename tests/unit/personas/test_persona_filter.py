@@ -17,9 +17,9 @@ def registry():
 class TestPersonaFilter:
     """Tests for PersonaFilter class"""
 
-    def test_single_persona_software_engineer(self, registry):
-        """Test filtering with Software Engineer persona"""
-        pfilter = PersonaFilter(registry, ["software_engineer"])
+    def test_single_persona_fullstack_software_engineer(self, registry):
+        """Test filtering with the Fullstack Software Engineer persona"""
+        pfilter = PersonaFilter(registry, ["fullstack_software_engineer"])
         enabled = pfilter.get_enabled_agents()
 
         # Should have agents
@@ -52,7 +52,7 @@ class TestPersonaFilter:
 
     def test_multiple_personas_union(self, registry):
         """Test filtering with multiple personas (union of agents)"""
-        pfilter = PersonaFilter(registry, ["software_engineer", "qa_tester"])
+        pfilter = PersonaFilter(registry, ["fullstack_software_engineer", "qa_tester"])
         enabled = pfilter.get_enabled_agents()
 
         # Should have code agent (from Software Engineer)
@@ -137,7 +137,7 @@ class TestPersonaFilter:
         all_enabled = set(pfilter_all.get_enabled_agents())
 
         # Single persona should be subset
-        pfilter_single = PersonaFilter(registry, ["software_engineer"])
+        pfilter_single = PersonaFilter(registry, ["fullstack_software_engineer"])
         single_enabled = set(pfilter_single.get_enabled_agents())
 
         assert single_enabled.issubset(all_enabled)
@@ -147,7 +147,12 @@ class TestPersonaFilter:
         universal_agents = set(registry.get_universal_agents())
 
         # Test with different personas
-        for persona_id in ["software_engineer", "qa_tester", "architect", "devops_engineer"]:
+        for persona_id in [
+            "fullstack_software_engineer",
+            "qa_tester",
+            "architect",
+            "devops_engineer",
+        ]:
             pfilter = PersonaFilter(registry, [persona_id])
             enabled = set(pfilter.get_enabled_agents())
 

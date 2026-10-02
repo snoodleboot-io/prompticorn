@@ -12,6 +12,19 @@
 # tests/unit/test_content_reachability.py and the persona coverage matrix in
 # tests/integration/test_persona_coverage_matrix.py. (PRO-153)
 
+# Deprecated persona aliases - alias id -> the persona it stands for.
+#
+# PersonaRegistry resolves these at load time, keeps them out of the selection
+# list, and warns once naming the replacement. They exist so a config written
+# against an older release keeps building the same set: an id that simply
+# stopped resolving would not fail loudly, because prompt_builder catches
+# broadly around persona filtering and falls back to emitting every agent.
+#
+# An alias's own definition below is kept for one release so nothing changes for
+# anyone mid-upgrade; this map is what must outlive it. (PRO-159)
+deprecated_aliases:
+  software_engineer: fullstack_software_engineer
+
 # Universal agents - always available to all personas
 universal_agents:
   - ask        # General Q&A and research
@@ -83,9 +96,20 @@ personas:
       - enforcement
       - atdd
     
+  # DEPRECATED ALIAS of fullstack_software_engineer - see deprecated_aliases at
+  # the top of this file, which is what resolves it.
+  #
+  # Nothing below is read any more: every lookup of this id resolves to
+  # fullstack_software_engineer first, so the duplicated display name, agents,
+  # workflows and skills are dead data. The block stays one release as the
+  # deprecation window - this release only warns, so a config that has not been
+  # updated yet still resolves whether or not the registry supports the alias
+  # map. DELETE IT WHOLESALE in the next release, and leave the
+  # deprecated_aliases entry behind: that entry, not this block, is what keeps a
+  # stale config building the right agents.
   software_engineer:
     display_name: "Software Engineer (Fullstack)"
-    description: "Alias for Fullstack Software Engineer - deprecated, use fullstack_software_engineer"
+    description: "Deprecated alias of fullstack_software_engineer - unused, resolved before it is read"
     focus: "Building complete applications from UI to API to database"
     
     # PRIMARY agents (core to this role)

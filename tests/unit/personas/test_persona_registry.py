@@ -28,15 +28,23 @@ class TestPersonaRegistry:
         assert len(registry.list_personas()) > 0
 
     def test_list_personas(self, registry):
-        """Test listing all persona IDs"""
+        """Test listing the selectable persona IDs.
+
+        21 definitions ship, but one of them — ``software_engineer`` — is a
+        deprecated alias of ``fullstack_software_engineer`` and is deliberately
+        withheld from this list, which is what the pickers offer. It stays
+        resolvable; see test_persona_aliases.py. (PRO-159)
+        """
         personas = registry.list_personas()
 
-        # 12 original + the 9 discipline personas added in PRO-155
-        assert len(personas) == 21
+        # 12 original + the 9 discipline personas added in PRO-155,
+        # less the one deprecated alias withdrawn by PRO-159
+        assert len(personas) == 20
+        assert "software_engineer" not in personas
+        assert "software_engineer" in registry.list_resolvable_personas()
 
         # Check expected personas exist
         expected_personas = [
-            "software_engineer",
             "backend_software_engineer",
             "frontend_software_engineer",
             "fullstack_software_engineer",
@@ -65,8 +73,8 @@ class TestPersonaRegistry:
 
     def test_get_display_name(self, registry):
         """Test getting display names for personas"""
-        display_name = registry.get_display_name("software_engineer")
-        assert display_name == "Software Engineer (Fullstack)"
+        display_name = registry.get_display_name("fullstack_software_engineer")
+        assert display_name == "Fullstack Software Engineer"
 
         display_name2 = registry.get_display_name("qa_tester")
         # Note: YAML has "QA / Tester" with spaces
@@ -74,16 +82,16 @@ class TestPersonaRegistry:
 
     def test_get_description(self, registry):
         """Test getting descriptions for personas"""
-        desc = registry.get_description("software_engineer")
+        desc = registry.get_description("fullstack_software_engineer")
         assert desc is not None
         assert len(desc) > 0
         assert "software" in desc.lower() or "development" in desc.lower()
 
     def test_get_agents_for_persona(self, registry):
         """Test getting agents for a persona"""
-        agents = registry.get_agents_for_persona("software_engineer")
+        agents = registry.get_agents_for_persona("fullstack_software_engineer")
 
-        # Software Engineer should have agents
+        # Fullstack Software Engineer should have agents
         assert len(agents) > 0
 
         # Should have code agent (primary for Software Engineer)
@@ -121,7 +129,7 @@ class TestPersonaRegistry:
 
     def test_persona_has_focus(self, registry):
         """Test that personas have focus field"""
-        persona_info = registry.get_persona_info("software_engineer")
+        persona_info = registry.get_persona_info("fullstack_software_engineer")
         focus = persona_info.get("focus")
         assert focus is not None
         assert len(focus) > 0

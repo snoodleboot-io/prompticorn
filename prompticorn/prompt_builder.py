@@ -25,6 +25,7 @@ from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingL
 from prompticorn.ir.loaders.language_skill_mapping_loader import LanguageSkillMappingLoader
 from prompticorn.ir.models.agent import Agent
 from prompticorn.personas import PersonaFilter, PersonaRegistry
+from prompticorn.personas.registry import config_file_naming
 from prompticorn.provenance.provenance_emitter import GENERATED_UNIT_PREFIX, ProvenanceEmitter
 from prompticorn.text_writer import write_text
 from prompticorn.tools import builder_dispatch
@@ -54,6 +55,11 @@ def _describe_personas(config: dict | None) -> str:
     the default fired every time and every generated CLAUDE.md claimed
     "Persona: Software Engineer" no matter what was selected. (PRO-160)
 
+    A deprecated alias is named after the persona it resolves to, not after
+    itself: stamping "Software Engineer (Fullstack)" into the document would keep
+    advertising an id that is on its way out, and would describe the build as
+    something other than what was built. (PRO-159)
+
     Falls back to the raw ids if the registry will not load, since a cosmetic
     header must never fail a build.
     """
@@ -63,7 +69,9 @@ def _describe_personas(config: dict | None) -> str:
 
     try:
         registry = PersonaRegistry.from_resolver()
-        return ", ".join(registry.get_display_name(name) for name in selected)
+        source = config_file_naming(selected)
+        resolved = [registry.resolve_persona(name, source=source) for name in selected]
+        return ", ".join(registry.get_display_name(name) for name in resolved)
     except (ContentError, KeyError, OSError, yaml.YAMLError):
         return ", ".join(selected)
 
@@ -221,7 +229,11 @@ class PromptBuilder:
             # Load persona registry and filter agents
             try:
                 persona_registry = PersonaRegistry.from_resolver()
-                persona_filter = PersonaFilter(persona_registry, active_personas)
+                persona_filter = PersonaFilter(
+                    persona_registry,
+                    active_personas,
+                    source=config_file_naming(active_personas),
+                )
 
                 # Get enabled agents for selected personas
                 enabled_agent_names = persona_filter.get_enabled_agents()

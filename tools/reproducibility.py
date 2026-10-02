@@ -46,7 +46,7 @@ spec:
   language: python
 variant: verbose
 active_personas:
-  - software_engineer
+  - fullstack_software_engineer
 ai_tool: claude
 """
 
