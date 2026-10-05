@@ -602,8 +602,21 @@ class PromptBuilder:
         agent_workflows = []
 
         if self.agent_skill_loader:
-            agent_skills = self.agent_skill_loader.get_skills_for_agent(agent.name)
-            agent_workflows = self.agent_skill_loader.get_workflows_for_agent(agent.name)
+            # Look the mapping up by the agent's REGISTRY KEY, not its declared
+            # name. A subagent's frontmatter name is a leaf, unique only within
+            # its parent, while the mapping is keyed by top-level agent — so
+            # `orchestrator/devops` (name: devops) resolved the top-level devops
+            # agent's 17 skills and leaked them into every build, orchestrator
+            # being universal. Six other subagents collided the same way.
+            #
+            # The mapping has no slash-keyed entries, so a subagent now matches
+            # nothing here and falls through to its own declared skills below.
+            # That loses nothing: the only two subagents declaring any
+            # (architect/data-model, test/strategy) list skills their parents
+            # already map. (PRO-167)
+            lookup = agent_name or agent.name
+            agent_skills = self.agent_skill_loader.get_skills_for_agent(lookup)
+            agent_workflows = self.agent_skill_loader.get_workflows_for_agent(lookup)
 
         # Get language-specific overrides (if any)
         language_skills = []

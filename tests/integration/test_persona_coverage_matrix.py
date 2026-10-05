@@ -44,18 +44,6 @@ CONTENT = Path("prompticorn")
 LANGUAGE = "python"
 VARIANT = "minimal"
 
-#: Subagents whose leaf name collides with a top-level agent's mapping key, so
-#: the build resolves the wrong entry and leaks that agent's skills. PRO-167.
-_COLLIDING_SUBAGENTS = {
-    "orchestrator/devops": "devops",
-    "review/code": "code",
-    "compliance/review": "review",
-    "security/review": "review",
-    "review/performance": "performance",
-    "code/refactor": "refactor",
-    "code/migration": "migration",
-}
-
 
 def _load(path):
     with path.open(encoding="utf-8") as f:
@@ -91,16 +79,6 @@ def expected_content(persona: str, key: str) -> set[str]:
     for a in agents:
         found |= set((LANGUAGE_MAP.get(f"{LANGUAGE}/{a}") or {}).get(key) or [])
     return found
-
-
-def leaked_by_collision(persona: str, key: str) -> set[str]:
-    """What PRO-167's name collision adds on top of the correct expectation."""
-    agents = expected_agents(persona)
-    leaked = set()
-    for registry_key, resolves_to in _COLLIDING_SUBAGENTS.items():
-        if registry_key.split("/")[0] in agents:
-            leaked |= set(AGENT_MAP.get(resolves_to, {}).get(key) or [])
-    return leaked - expected_content(persona, key)
 
 
 @pytest.fixture(scope="module")
@@ -155,7 +133,7 @@ def test_emitted_content_is_reachable_from_the_personas_agents(built, persona, k
     counterpart is pinned below pending PRO-167.
     """
     emitted = _emitted(built[persona], kind)
-    allowed = expected_content(persona, kind) | leaked_by_collision(persona, kind)
+    allowed = expected_content(persona, kind)
     assert not (emitted - allowed), (
         f"{persona}: emitted {kind} that no selected agent maps: {sorted(emitted - allowed)}"
     )
@@ -178,14 +156,12 @@ def test_everything_reachable_is_actually_emitted(built, persona, kind):
 @pytest.mark.parametrize("kind", ["skills", "workflows"])
 @pytest.mark.parametrize("persona", PERSONAS)
 def test_emitted_content_is_exactly_what_the_persona_reaches(built, persona, kind):
-    """Strict set equality — the assertion PRO-167 currently violates.
+    """Strict set equality: exactly what the persona reaches, nothing more.
 
-    Pinned per persona rather than skipped: a persona with no colliding parent
-    passes today and must keep passing, and the rest flip to an unexpected pass
-    the moment PRO-167 lands.
+    This is the assertion that found PRO-167 — a subagent leaf name colliding
+    with a top-level agent's mapping key leaked that agent's skills into every
+    build. It asserts unconditionally now that the lookup is keyed correctly.
     """
-    if leaked_by_collision(persona, kind):
-        pytest.xfail(f"PRO-167: subagent name collision leaks into {persona} {kind}")
     emitted = _emitted(built[persona], kind)
     expected = expected_content(persona, kind)
     assert emitted == expected, (
