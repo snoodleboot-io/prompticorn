@@ -346,68 +346,68 @@ class TestPhase3Registration:
         assert "test-coverage-categories" in python_skills
         assert "test-mocking-rules" in python_skills
 
-    def test_security_section_exists(self):
-        """Verify new 'security' section exists"""
-        content = self.MAPPING_FILE.read_text()
-        parsed = yaml.safe_load(content)
+    # The security and product content below moved off the language axis in
+    # PRO-154. It had been registered under `security:` and `product:` keys in
+    # language_skill_mapping.yaml, but neither is a selectable language — see
+    # LANGUAGE_KEYS — so all 22 skills were unreachable by any build. They now
+    # live on the agents that own them, and these tests assert that rather than
+    # the file they used to sit in. The pseudo-language keys are gone by design;
+    # tests/unit/test_content_reachability.py asserts no unselectable key
+    # returns.
+    AGENT_MAPPING_FILE = Path("prompticorn/configurations/agent_skill_mapping.yaml")
 
-        assert "security" in parsed, "security section not found"
-        assert "workflows" in parsed["security"], "security workflows not found"
-        assert "skills" in parsed["security"], "security skills not found"
+    def _agent_mapping(self):
+        return yaml.safe_load(self.AGENT_MAPPING_FILE.read_text(encoding="utf-8"))
 
-    def test_product_section_exists(self):
-        """Verify new 'product' section exists"""
-        content = self.MAPPING_FILE.read_text()
-        parsed = yaml.safe_load(content)
+    def _reachable(self, agents, key):
+        mapping = self._agent_mapping()
+        return {name for a in agents for name in (mapping.get(a, {}).get(key) or [])}
 
-        assert "product" in parsed, "product section not found"
-        assert "workflows" in parsed["product"], "product workflows not found"
-        assert "skills" in parsed["product"], "product skills not found"
+    def test_the_security_agent_owns_the_security_content(self):
+        """The security discipline is reachable by selecting an agent, not a 'language'."""
+        mapping = self._agent_mapping()
+        assert "security" in mapping, "security agent has no mapping entry"
+        assert mapping["security"].get("skills"), "security agent maps no skills"
+        assert mapping["security"].get("workflows"), "security agent maps no workflows"
+
+    def test_the_product_agent_owns_the_product_content(self):
+        mapping = self._agent_mapping()
+        assert "product" in mapping, "product agent has no mapping entry"
+        assert mapping["product"].get("skills"), "product agent maps no skills"
+        assert mapping["product"].get("workflows"), "product agent maps no workflows"
 
     def test_security_workflows_registered(self):
-        """Verify Phase 3 security workflows registered"""
-        content = self.MAPPING_FILE.read_text()
-        parsed = yaml.safe_load(content)
+        """Verify Phase 3 security workflows are reachable."""
+        reachable = self._reachable(["security", "compliance"], "workflows")
 
-        security_workflows = parsed.get("security", {}).get("workflows", [])
-
-        assert "threat-modeling" in security_workflows
-        assert "vulnerability-scanning" in security_workflows
-        assert "security-testing" in security_workflows
-        assert "compliance-audit" in security_workflows
+        assert "threat-modeling" in reachable
+        assert "vulnerability-scanning" in reachable
+        assert "security-testing" in reachable
+        assert "compliance-audit" in reachable
 
     def test_security_skills_registered(self):
-        """Verify Phase 3 security skills registered"""
-        content = self.MAPPING_FILE.read_text()
-        parsed = yaml.safe_load(content)
+        """Verify Phase 3 security skills are reachable."""
+        reachable = self._reachable(["security"], "skills")
 
-        security_skills = parsed.get("security", {}).get("skills", [])
-
-        assert "threat-identification" in security_skills
-        assert "vulnerability-assessment" in security_skills
-        assert "secure-code-review" in security_skills
+        assert "threat-identification" in reachable
+        assert "vulnerability-assessment" in reachable
+        assert "secure-code-review" in reachable
 
     def test_product_workflows_registered(self):
-        """Verify Phase 3 product workflows registered"""
-        content = self.MAPPING_FILE.read_text()
-        parsed = yaml.safe_load(content)
+        """Verify Phase 3 product workflows are reachable."""
+        reachable = self._reachable(["product"], "workflows")
 
-        product_workflows = parsed.get("product", {}).get("workflows", [])
-
-        assert "requirements-gathering" in product_workflows
-        assert "roadmap-planning" in product_workflows
-        assert "feature-prioritization" in product_workflows
+        assert "requirements-gathering" in reachable
+        assert "roadmap-planning" in reachable
+        assert "feature-prioritization" in reachable
 
     def test_product_skills_registered(self):
-        """Verify Phase 3 product skills registered"""
-        content = self.MAPPING_FILE.read_text()
-        parsed = yaml.safe_load(content)
+        """Verify Phase 3 product skills are reachable."""
+        reachable = self._reachable(["product"], "skills")
 
-        product_skills = parsed.get("product", {}).get("skills", [])
-
-        assert "user-needs-discovery" in product_skills
-        assert "requirements-specification" in product_skills
-        assert "success-metrics-definition" in product_skills
+        assert "user-needs-discovery" in reachable
+        assert "requirements-specification" in reachable
+        assert "success-metrics-definition" in reachable
 
 
 class TestPhase3Totals:
