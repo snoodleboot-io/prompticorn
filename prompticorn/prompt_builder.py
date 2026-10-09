@@ -2,11 +2,11 @@
 
 import json
 import warnings
-
-import yaml
 from collections.abc import Iterable
 from pathlib import Path
 from typing import Any
+
+import yaml
 
 from prompticorn.agent_registry.registry import Registry
 from prompticorn.artifact.package_version import bundled_version

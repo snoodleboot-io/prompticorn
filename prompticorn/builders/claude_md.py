@@ -6,7 +6,6 @@ from jinja2 import Environment, FileSystemLoader
 
 from prompticorn.builders.naming_utils import agent_to_file_name
 
-
 #: Header text when nothing narrowed the build. Saying "Software Engineer"
 #: here — the old default — claimed a persona the user never chose. (PRO-160)
 NO_PERSONA_LABEL = "None (no persona filtering — all agents)"
