@@ -1,13 +1,15 @@
-"""Every persona ref must resolve to content that actually ships.
+"""Every persona agent ref must resolve to an agent that actually ships.
 
-``personas.yaml`` is hand-maintained and its refs were unchecked, so three
-typos sat in it undetected: a workflow that never existed
-(``deployment-automation``), and two skills that were really workflow names
-(``feature-prioritization-workflow``, ``feature-engineering-guide``). They were
-inert only because the persona skill/workflow lists were dead data at the time.
-Once those lists drive the build, a bad ref is silently dropped content.
+``personas.yaml`` is hand-maintained. It once carried per-persona skill and
+workflow lists too, and three typos sat in them undetected for months —
+harmless only because the build never read the lists. PRO-153 removed the
+lists outright rather than wire them live: a persona selects agents, and what
+those agents reach is the agent mappings' job, enforced by
+``tests/unit/test_content_reachability.py`` and the persona coverage matrix.
 
-Reference: PRO-158
+What remains here is the agent side of that contract.
+
+Reference: PRO-158, PRO-153
 """
 
 from pathlib import Path
@@ -26,16 +28,6 @@ NON_SELECTABLE_AGENTS = {"core"}
 def personas_data():
     with (CONTENT_ROOT / "personas" / "personas.yaml").open(encoding="utf-8") as f:
         return yaml.safe_load(f)
-
-
-def _refs(personas_data, key):
-    """Every (persona, ref) pair for one persona key, sorted for stable output."""
-    pairs = set()
-    for persona_name, persona in personas_data["personas"].items():
-        for ref in persona.get(key) or []:
-            pairs.add((persona_name, ref))
-    return sorted(pairs)
-
 
 def _agent_refs(personas_data):
     pairs = {
@@ -66,77 +58,6 @@ def test_no_persona_references_a_non_selectable_agent(personas_data):
         if ref in NON_SELECTABLE_AGENTS
     ]
     assert not bad, f"personas referencing non-selectable agents: {bad}"
-
-
-@pytest.mark.parametrize(
-    ("key", "directory"),
-    [("workflows", "workflows"), ("skills", "skills")],
-)
-def test_content_refs_resolve_with_both_variants(personas_data, key, directory):
-    """Refs must resolve, and carry both verbosity variants.
-
-    A directory with only ``verbose/`` builds fine until someone selects
-    ``minimal``, so existence alone is not enough to assert.
-    """
-    missing = []
-    for persona, ref in _refs(personas_data, key):
-        base = CONTENT_ROOT / directory / ref
-        if not base.is_dir():
-            missing.append((persona, ref, "no directory"))
-            continue
-        absent = sorted(v for v in ("minimal", "verbose") if not (base / v).is_dir())
-        if absent:
-            missing.append((persona, ref, f"missing variant(s): {absent}"))
-
-    assert not missing, f"unresolvable persona {key} refs: {missing}"
-
-
-def test_a_skill_ref_is_never_really_a_workflow(personas_data):
-    """The two typos that shipped were both workflow names in a skills list."""
-    confused = [
-        (persona, ref)
-        for persona, ref in _refs(personas_data, "skills")
-        if not (CONTENT_ROOT / "skills" / ref).is_dir()
-        and (CONTENT_ROOT / "workflows" / ref).is_dir()
-    ]
-    assert not confused, f"workflow names listed as skills: {confused}"
-
-
-@pytest.mark.parametrize("key", ["skills", "workflows"])
-def test_persona_lists_are_reachable_from_their_own_agents(personas_data, key):
-    """A persona may only narrow what its agents map — it can never add.
-
-    Under the intersect semantics of PRO-153 a persona ref that no selected
-    agent maps is not an error, it is silently dropped content. ai_engineer
-    listed ``model-evaluation`` this way: the skill lives on ``mlai``, which
-    that persona does not select.
-    """
-    with (CONTENT_ROOT / "configurations" / "agent_skill_mapping.yaml").open(
-        encoding="utf-8"
-    ) as f:
-        agent_map = yaml.safe_load(f)
-
-    # Universal agents are enabled for every persona (PersonaFilter always adds
-    # them), so content they map is genuinely reachable and must count here.
-    universal = list(personas_data.get("universal_agents") or [])
-
-    unreachable = []
-    for persona_name, persona in personas_data["personas"].items():
-        agents = (
-            (persona.get("primary_agents") or [])
-            + (persona.get("secondary_agents") or [])
-            + universal
-        )
-        reachable = {
-            ref for agent in agents for ref in (agent_map.get(agent, {}).get(key) or [])
-        }
-        for ref in sorted(set(persona.get(key) or []) - reachable):
-            unreachable.append(f"{persona_name} -> {ref}")
-
-    assert not unreachable, (
-        f"persona {key} that no selected agent maps, so the build would drop them "
-        f"without a word: {unreachable}"
-    )
 
 
 def test_personas_differentiate_on_non_universal_agents(personas_data):

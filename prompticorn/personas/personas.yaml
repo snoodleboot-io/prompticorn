@@ -1,9 +1,16 @@
-# Persona-Based Agent, Workflow, and Skill Mappings
+# Persona-Based Agent Mappings
 # Reference: planning/current/adrs/ADR-001-persona-based-filtering.md
 #
-# This file defines which agents, workflows, and skills are available
-# to each persona (SDLC role). Users select personas during initialization,
-# and the system enables only the content mapped to those personas.
+# This file defines which agents each persona (SDLC role) enables. Users select
+# personas during initialization, and the build emits only those agents — plus
+# the universal ones — and whatever skills and workflows those agents map in
+# configurations/agent_skill_mapping.yaml (and language_skill_mapping.yaml).
+#
+# Personas deliberately do NOT list skills or workflows. They used to; the lists
+# were never read by the build, drifted for months, and hid three dangling refs.
+# Content reachability is the agents' job, and is enforced by
+# tests/unit/test_content_reachability.py and the persona coverage matrix in
+# tests/integration/test_persona_coverage_matrix.py. (PRO-153)
 
 # Universal agents - always available to all personas
 universal_agents:
@@ -35,29 +42,6 @@ personas:
       - enforcement
       - atdd
     
-    # Key workflows for this persona
-    workflows:
-      - code
-      - testing
-      - feature
-      - refactor
-      - dependency-upgrade
-      - boilerplate
-      - code-quality-maintenance
-      - coverage-improvement-maintenance
-      - automated-testing
-    
-    # Key skills for this persona
-    skills:
-      - incremental-implementation
-      - code-review-practices
-      - testing-strategies
-      - debugging-methodology
-      - technical-debt-management
-      - test-aaa-structure
-      - test-mocking-rules
-      - test-coverage-categories
-
   frontend_software_engineer:
     display_name: "Frontend Software Engineer"
     description: "Frontend development, UI/UX, and accessible web experiences"
@@ -78,29 +62,6 @@ personas:
       - enforcement
       - atdd
     
-    # Key workflows for this persona
-    workflows:
-      - code
-      - testing
-      - feature
-      - refactor
-      - dependency-upgrade
-      - boilerplate
-      - code-quality-maintenance
-      - coverage-improvement-maintenance
-      - automated-testing
-    
-    # Key skills for this persona
-    skills:
-      - incremental-implementation
-      - code-review-practices
-      - testing-strategies
-      - debugging-methodology
-      - technical-debt-management
-      - test-aaa-structure
-      - test-mocking-rules
-      - test-coverage-categories
-
   fullstack_software_engineer:
     display_name: "Fullstack Software Engineer"
     description: "Full-stack development across frontend and backend"
@@ -122,29 +83,6 @@ personas:
       - enforcement
       - atdd
     
-    # Key workflows for this persona
-    workflows:
-      - code
-      - testing
-      - feature
-      - refactor
-      - dependency-upgrade
-      - boilerplate
-      - code-quality-maintenance
-      - coverage-improvement-maintenance
-      - automated-testing
-    
-    # Key skills for this persona
-    skills:
-      - incremental-implementation
-      - code-review-practices
-      - testing-strategies
-      - debugging-methodology
-      - technical-debt-management
-      - test-aaa-structure
-      - test-mocking-rules
-      - test-coverage-categories
-
   software_engineer:
     display_name: "Software Engineer (Fullstack)"
     description: "Alias for Fullstack Software Engineer - deprecated, use fullstack_software_engineer"
@@ -166,29 +104,6 @@ personas:
       - enforcement
       - atdd
     
-    # Key workflows for this persona
-    workflows:
-      - code
-      - testing
-      - feature
-      - refactor
-      - dependency-upgrade
-      - boilerplate
-      - code-quality-maintenance
-      - coverage-improvement-maintenance
-      - automated-testing
-    
-    # Key skills for this persona
-    skills:
-      - incremental-implementation
-      - code-review-practices
-      - testing-strategies
-      - debugging-methodology
-      - technical-debt-management
-      - test-aaa-structure
-      - test-mocking-rules
-      - test-coverage-categories
-
   architect:
     display_name: "Architect"
     description: "System design, architecture planning, and technical decisions"
@@ -203,25 +118,6 @@ personas:
     secondary_agents:
       - performance
     
-    workflows:
-      - scaffold
-      - data-model
-      - strategy
-      - decision-log
-      - component-architecture
-      - microservices-architecture
-      - api-design
-      - database-selection
-      - caching-strategy
-      - capacity-planning
-    
-    skills:
-      - architecture-documentation
-      - technical-decision-making
-      - problem-decomposition
-      - mermaid-erd-creation
-      - data-model-discovery
-
   qa_tester:
     display_name: "QA / Tester"
     description: "Quality assurance, testing strategy, and test automation"
@@ -237,23 +133,6 @@ personas:
       - performance
       - enforcement
     
-    workflows:
-      - testing
-      - testing-strategy
-      - performance-testing
-      - automated-testing
-      - coverage-improvement-maintenance
-      - review
-      - accessibility
-    
-    skills:
-      - testing-strategies
-      - test-coverage-categories
-      - test-aaa-structure
-      - test-mocking-rules
-      - code-review-practices
-      - quality-assurance
-
   devops_engineer:
     display_name: "DevOps Engineer"
     description: "Infrastructure, deployment, operations, and CI/CD"
@@ -273,23 +152,6 @@ personas:
     secondary_agents:
       - security
 
-    workflows:
-      - cicd-pipeline
-      - secret-management
-      - infrastructure-as-code
-      - disaster-recovery
-      - container-orchestration
-      - observability
-      - incident-response
-      - postmortem
-      - capacity-planning
-
-    skills:
-      - performance-optimization
-      - debugging-methodology
-      - technical-communication
-      - continuous-improvement
-
   security_engineer:
     display_name: "Security Engineer"
     description: "Security hardening, threat modeling, and compliance"
@@ -304,23 +166,6 @@ personas:
       - review
       - enforcement
     
-    workflows:
-      - security-code-review
-      - security-testing
-      - vulnerability-scanning
-      - vulnerability-assessment
-      - threat-modeling
-      - compliance-audit
-      - penetration-testing-guide
-      - data-encryption
-      - authentication-authorization
-      - incident-response-security
-    
-    skills:
-      - technical-communication
-      - code-review-practices
-      - problem-decomposition
-
   product_manager:
     display_name: "Product Manager"
     description: "Requirements, prioritization, and roadmap planning"
@@ -331,21 +176,6 @@ personas:
     
     secondary_agents: []
     
-    workflows:
-      - requirements-gathering
-      - feature-prioritization
-      - roadmap-planning
-      - user-research-guide
-      - feature-launch-checklist
-      - a-b-testing
-      - analytics-setup
-      - ux-validation
-    
-    skills:
-      - feature-planning
-      - technical-communication
-      - problem-decomposition
-
   data_engineer:
     display_name: "Data Engineer"
     description: "Data pipelines, data quality, and data infrastructure"
@@ -366,23 +196,6 @@ personas:
       - observability
       - performance
 
-    workflows:
-      - data-pipeline
-      - data-quality
-      - data-quality-monitoring
-      - data-model
-      - database-selection
-      - schema-migration
-      - observability
-      - performance-testing
-    
-    skills:
-      - data-validation-pipelines
-      - data-versioning-reproducibility
-      - technical-decision-making
-      - performance-optimization
-      - debugging-methodology
-
   data_scientist:
     display_name: "Data Scientist"
     description: "Machine learning, model development, and optimization"
@@ -399,36 +212,6 @@ personas:
       - devops
       - observability
     
-    workflows:
-      - model-evaluation
-      - hyperparameter-tuning
-      - model-retraining-strategy
-      - model-serving
-      - production-ml-deployment
-      - ml-monitoring-observability
-      - mlops-pipeline-setup
-      - experiment-tracking-setup
-      - feature-engineering-guide
-      - model-interpretability-guide
-      - model-governance
-    
-    skills:
-      - feature-importance-analysis
-      - mlops-pipeline-design
-      - model-interpretability
-      - batch-vs-realtime-scoring
-      - hyperparameter-optimization
-      - cross-validation-strategies
-      - imbalanced-classification
-      - ensemble-methods
-      - dimensionality-reduction
-      - anomaly-detection-techniques
-      - model-performance-debugging
-      - feature-engineering
-      - feature-store-design
-      - data-validation-pipelines
-      - time-series-preprocessing
-
   technical_writer:
     display_name: "Technical Writer"
     description: "Documentation and technical communication"
@@ -439,14 +222,6 @@ personas:
     
     secondary_agents: []
     
-    workflows:
-      - docs
-      - decision-log
-    
-    skills:
-      - documentation-best-practices
-      - technical-communication
-
   # ==========================================================================
   # Discipline personas (PRO-155)
   #
@@ -472,31 +247,6 @@ personas:
     secondary_agents:
       - devops
 
-    workflows:
-      - incident-response
-      - postmortem
-      - slo-sli
-      - observability
-      - disaster-recovery
-      - capacity-planning
-      - root-cause
-      - log-analysis
-      - metrics-tracking-maintenance
-      - performance-monitoring-maintenance
-
-    skills:
-      - slo-sli-definition
-      - incident-response-planning
-      - incident-timeline-creation
-      - incident-automation
-      - root-cause-five-whys
-      - disaster-recovery-planning
-      - prometheus-query-patterns
-      - grafana-dashboard-design
-      - distributed-tracing-instrumentation
-      - continuous-improvement
-      - load-testing
-
   platform_engineer:
     display_name: "Platform Engineer"
     description: "Cloud infrastructure, CI/CD, and the internal developer platform"
@@ -509,31 +259,6 @@ personas:
 
     secondary_agents:
       - code
-
-    workflows:
-      - cicd-pipeline
-      - infrastructure-as-code
-      - container-orchestration
-      - release-cycle-maintenance
-      - secret-management
-      - disaster-recovery
-      - capacity-planning
-      - decision-log
-
-    skills:
-      - iac-best-practices
-      - kubernetes-resource-management
-      - container-security-hardening
-      - infrastructure-drift-detection
-      - cloud-provider-tradeoffs
-      - cloud-iam-design
-      - cloud-networking-design
-      - cloud-cost-optimization
-      - multi-cloud-strategy
-      - serverless-architecture
-      - autoscaling-strategies
-      - deployment-rollback-strategies
-      - secret-management
 
   appsec_engineer:
     display_name: "Application Security Engineer"
@@ -548,33 +273,6 @@ personas:
     secondary_agents:
       - enforcement
       - compliance
-
-    workflows:
-      - threat-modeling
-      - security-code-review
-      - security-testing
-      - vulnerability-scanning
-      - vulnerability-assessment
-      - penetration-testing-guide
-      - security-hardening-checklist
-      - authentication-authorization
-      - data-encryption
-      - security-audit-maintenance
-
-    skills:
-      - threat-identification
-      - secure-code-review
-      - security-architecture-review
-      - vulnerability-assessment
-      - authentication-design
-      - authorization-patterns
-      - api-security
-      - api-security-hardening
-      - cryptography-fundamentals
-      - key-management
-      - security-testing-strategies
-      - secret-management
-      - container-security-hardening
 
   performance_engineer:
     display_name: "Performance Engineer"
@@ -591,26 +289,6 @@ personas:
       - frontend
       - observability
 
-    workflows:
-      - performance
-      - performance-testing
-      - frontend-performance
-      - performance-monitoring-maintenance
-      - caching-strategy
-      - slo-sli
-      - observability
-
-    skills:
-      - performance-optimization
-      - load-testing
-      - css-performance-optimization
-      - distributed-caching-design
-      - distributed-tracing-instrumentation
-      - prometheus-query-patterns
-      - sql-optimization
-      - slo-sli-definition
-      - object-storage-patterns
-
   database_engineer:
     display_name: "Database Engineer"
     description: "Data modeling, query performance, and schema evolution"
@@ -625,30 +303,6 @@ personas:
       - backend
       - migration
 
-    workflows:
-      - data-model
-      - database-selection
-      - schema-migration
-      - data-pipeline
-      - data-quality
-      - data-quality-monitoring
-      - migration
-      - caching-strategy
-
-    skills:
-      - managed-database-selection
-      - nosql-database-selection
-      - sql-optimization
-      - data-partitioning
-      - dimensional-modeling
-      - slowly-changing-dimensions
-      - data-model-discovery
-      - mermaid-erd-creation
-      - object-storage-patterns
-      - message-queue-selection
-      - distributed-caching-design
-      - data-versioning-reproducibility
-
   ux_designer:
     display_name: "UX Designer"
     description: "User research, interaction design, and design systems"
@@ -660,25 +314,6 @@ personas:
       - product
 
     secondary_agents: []
-
-    workflows:
-      - ux-validation
-      - user-research-guide
-      - responsive-design
-      - component-architecture
-      - accessibility
-      - a-b-testing
-      - feature-prioritization
-
-    skills:
-      - user-needs-discovery
-      - user-testing-methods
-      - ux-writing-guidelines
-      - component-design-systems
-      - responsive-design-patterns
-      - css-performance-optimization
-      - success-metrics-definition
-      - competitor-analysis
 
   ml_engineer:
     display_name: "ML Engineer"
@@ -694,27 +329,6 @@ personas:
     secondary_agents:
       - data
       - observability
-
-    workflows:
-      - production-ml-deployment
-      - model-serving
-      - mlops-pipeline-setup
-      - ml-monitoring-observability
-      - model-retraining-strategy
-      - model-governance
-      - model-evaluation
-      - experiment-tracking-setup
-
-    skills:
-      - ml-deployment
-      - mlops-pipeline-design
-      - model-monitoring
-      - model-evaluation
-      - batch-vs-realtime-scoring
-      - feature-store-design
-      - data-versioning-reproducibility
-      - deployment-rollback-strategies
-      - kubernetes-resource-management
 
   ai_engineer:
     display_name: "AI Engineer"
@@ -738,24 +352,6 @@ personas:
       - architect
       - test
 
-    workflows:
-      - llm-feature-build
-      - rag-pipeline-setup
-      - eval-harness-setup
-      - prompt-iteration-cycle
-      - api-design
-
-    skills:
-      - llm-application-architecture
-      - prompt-engineering-practices
-      - rag-system-design
-      - vector-store-selection
-      - llm-evaluation-and-testing
-      - agent-tool-design
-      - llm-safety-and-guardrails
-      - llm-observability
-      - multiagent-orchestration
-
   engineering_manager:
     display_name: "Engineering Manager"
     description: "Planning, prioritization, technical debt, and team coordination"
@@ -774,29 +370,6 @@ personas:
     secondary_agents:
       - refactor
       - document
-
-    workflows:
-      - roadmap-planning
-      - feature-prioritization
-      - requirements-gathering
-      - task-breakdown
-      - strategy
-      - decision-log
-      - multi-agent-coordination
-
-    skills:
-      - team-collaboration
-      - stakeholder-communication
-      - requirements-specification
-      - roadmap-prioritization
-      - success-metrics-definition
-      - problem-decomposition
-      - technical-decision-making
-      - feature-planning
-      - post-implementation-checklist
-      - technical-debt-management
-      - continuous-improvement
-      - documentation-best-practices
 
 # Metadata
 version: "1.1"

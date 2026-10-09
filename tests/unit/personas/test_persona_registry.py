@@ -102,23 +102,6 @@ class TestPersonaRegistry:
         # QA/Tester should NOT have code agent (per ADR-001 design)
         assert "code" not in agents
 
-    def test_get_workflows_for_persona(self, registry):
-        """Test getting workflows for a persona"""
-        workflows = registry.get_workflows_for_persona("software_engineer")
-
-        # Software Engineer should have workflows
-        assert len(workflows) > 0
-
-        # Should have code workflow
-        assert "code" in workflows
-
-    def test_get_skills_for_persona(self, registry):
-        """Test getting skills for a persona"""
-        skills = registry.get_skills_for_persona("software_engineer")
-
-        # Software Engineer should have skills
-        assert len(skills) > 0
-
     def test_get_universal_agents(self, registry):
         """Test getting universal agents"""
         universal = registry.get_universal_agents()

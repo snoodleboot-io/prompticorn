@@ -248,11 +248,16 @@ prompticorn init
 
 ### Q: Do personas affect workflows and skills too?
 
-**A:** Yes! Each persona has workflows and skills mapped to it (in `personas.yaml`, with
-agent-level detail in `prompticorn/configurations/agent_skill_mapping.yaml`). For example,
-the software-engineer personas get workflows like `code`, `testing`, and `refactor`, and
-skills like `incremental-implementation`, `code-review-practices`, `testing-strategies`,
-and `debugging-methodology`.
+**A:** Yes, through the agents. A persona selects agents; each agent maps its own skills
+and workflows in `prompticorn/configurations/agent_skill_mapping.yaml` (with per-language
+additions in `language_skill_mapping.yaml`). So the software-engineer personas, by selecting
+the `code` and `test` agents, get workflows like `code`, `testing`, and `refactor`, and
+skills like `incremental-implementation`, `code-review-practices`, and `testing-strategies`.
+
+Personas deliberately do **not** carry their own skill or workflow lists. They used to, but
+the build never read them — they drifted silently and hid dangling references. Everything a
+persona reaches is now exactly what its agents map, and
+`tests/integration/test_persona_coverage_matrix.py` asserts that for all 21 personas.
 
 ### Q: Are agents from unselected personas completely unavailable?
 

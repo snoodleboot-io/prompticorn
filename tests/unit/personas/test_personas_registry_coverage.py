@@ -158,28 +158,6 @@ class TestPersonaRegistryQueries:
         # Assert
         assert agents == []
 
-    def test_get_workflows(self, registry):
-        # Act / Assert
-        assert registry.get_workflows_for_persona("engineer") == ["code", "test"]
-
-    def test_get_workflows_default_when_absent(self):
-        # Arrange
-        reg = PersonaRegistry({"personas": {"bare": {}}})
-
-        # Act / Assert
-        assert reg.get_workflows_for_persona("bare") == []
-
-    def test_get_skills(self, registry):
-        # Act / Assert
-        assert registry.get_skills_for_persona("engineer") == ["aaa", "mocking"]
-
-    def test_get_skills_default_when_absent(self):
-        # Arrange
-        reg = PersonaRegistry({"personas": {"bare": {}}})
-
-        # Act / Assert
-        assert reg.get_skills_for_persona("bare") == []
-
     def test_get_display_name(self, registry):
         # Act / Assert
         assert registry.get_display_name("tester") == "Tester"
@@ -217,8 +195,6 @@ class TestPersonaFilter:
 
         # Assert: only universal agents remain enabled
         assert flt.get_enabled_agents() == {"ask", "debug"}
-        assert flt.get_enabled_workflows() == set()
-        assert flt.get_enabled_skills() == set()
 
     def test_get_enabled_agents_includes_universal_and_persona(self, registry):
         # Arrange
@@ -240,20 +216,6 @@ class TestPersonaFilter:
         # Assert: union of both personas + universal, deduplicated
         assert enabled == {"ask", "debug", "code", "test", "review"}
 
-    def test_get_enabled_workflows(self, registry):
-        # Arrange
-        flt = PersonaFilter(registry, ["engineer", "tester"])
-
-        # Act / Assert
-        assert flt.get_enabled_workflows() == {"code", "test"}
-
-    def test_get_enabled_skills(self, registry):
-        # Arrange
-        flt = PersonaFilter(registry, ["engineer", "tester"])
-
-        # Act / Assert
-        assert flt.get_enabled_skills() == {"aaa", "mocking", "coverage"}
-
     def test_is_agent_enabled_true_and_false(self, registry):
         # Arrange
         flt = PersonaFilter(registry, ["tester"])
@@ -262,22 +224,6 @@ class TestPersonaFilter:
         assert flt.is_agent_enabled("test") is True
         assert flt.is_agent_enabled("ask") is True  # universal
         assert flt.is_agent_enabled("code") is False  # tester lacks code
-
-    def test_is_workflow_enabled_true_and_false(self, registry):
-        # Arrange
-        flt = PersonaFilter(registry, ["tester"])
-
-        # Act / Assert
-        assert flt.is_workflow_enabled("test") is True
-        assert flt.is_workflow_enabled("code") is False
-
-    def test_is_skill_enabled_true_and_false(self, registry):
-        # Arrange
-        flt = PersonaFilter(registry, ["tester"])
-
-        # Act / Assert
-        assert flt.is_skill_enabled("coverage") is True
-        assert flt.is_skill_enabled("aaa") is False
 
     def test_get_selected_personas(self, registry):
         # Arrange
