@@ -18,6 +18,16 @@ normal release line.
 ## [Unreleased]
 
 ### Added
+- **Nine discipline personas** — `sre`, `platform_engineer`, `appsec_engineer`,
+  `performance_engineer`, `database_engineer`, `ux_designer`, `ml_engineer`,
+  `ai_engineer`, `engineering_manager`. 12 personas become 21. (PRO-155)
+- **`ai` agent** — LLM applications, RAG, agents and evaluation harnesses, kept
+  distinct from `mlai` (which trains models). Eight skills and four workflows ship
+  with it. (PRO-156)
+- **Persona coverage matrix** — `tests/integration/test_persona_coverage_matrix.py`
+  builds every persona and asserts the emitted agents, skills and workflows equal
+  an expectation derived independently from the YAML. 169 tests. It found PRO-167
+  on its first run. (PRO-168)
 - **`prompticorn regenerate`** — throw the generated tree away and rebuild it from
   the lock. The documented answer to a hand-edited generated file: it removes rogue
   files, overwrites edits, and restores a deleted tree, then checks the result
@@ -31,6 +41,19 @@ normal release line.
   and `build` / `lock` / `verify` / `regenerate` added to the CLI reference.
 
 ### Changed
+- **`devops_engineer` no longer selects the `mlai` and `data` agents.** A DevOps
+  persona was receiving cross-validation, ensemble methods and dimensional
+  modelling — 29 of its 79 skills belonged to other roles. Teams that deploy
+  models select `ml_engineer`. **Existing `devops_engineer` projects lose those
+  agent trees on the next regenerate.** (PRO-162)
+- **Every build loses 17 devops skills it was never meant to have.** The
+  subagent `orchestrator/devops` declares `name: devops`; the skill lookup used
+  that leaf name and resolved the top-level `devops` agent's mapping, and
+  `orchestrator` is enabled for every persona. `devops_engineer` and
+  `platform_engineer` keep the skills legitimately. (PRO-167)
+- **`software_engineer` is no longer offered in the persona picker.** It still
+  resolves, as a deprecated alias for `fullstack_software_engineer`, and warns.
+  The duplicate block is kept one release. (PRO-159)
 - **Generated output no longer carries a build timestamp.** `CLAUDE.md`'s
   `**Last Updated:**` line is gone. It was stamped from local time, so two machines
   in different timezones produced different files at the same instant, and a tree
@@ -58,6 +81,13 @@ normal release line.
   abstract-class style) across Claude, Kilo, Cline, Cursor, and Copilot.
 
 ### Fixed
+- 22 skills and 33 workflows that no build could ever emit. `product` and
+  `security` were keys in `language_skill_mapping.yaml` but not selectable
+  languages; 33 workflows were mapped by no agent. (PRO-154, PRO-157)
+- Every generated `CLAUDE.md` claimed "Persona: Software Engineer" regardless of
+  selection — the builder read a `persona` key the CLI never writes. (PRO-160)
+- `docs/PERSONAS.md` and `docs/PERSONA_GUIDES.md` had drifted from the YAML;
+  both now reconciled, and the table is tested against `personas.yaml`. (PRO-161)
 - Generated artifacts no longer emit raw Jinja2, unresolved `{{PRIMARY_AGENTS_LIST}}`,
   or internal `<!-- path: … -->` source comments; the orchestrator agent list is
   filtered to the active personas.
@@ -65,6 +95,12 @@ normal release line.
 
 ---
 
+### Removed
+- **Per-persona `skills:` and `workflows:` lists in `personas.yaml`.** They were
+  never read by the build, drifted for months and hid three dangling refs. A
+  persona selects agents; what those agents reach is `agent_skill_mapping.yaml`'s
+  job. Measured before deleting: 103 skills and 83 workflows named, 0 orphaned.
+  Output is byte-identical. (PRO-153)
 ## [2.1.0] - 2026-04-11
 
 **Phase 2 Complete - Comprehensive Agent Library with 113 Entities, 216 Tests, Intent-Based Organization**
