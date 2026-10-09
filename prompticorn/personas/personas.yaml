@@ -1,9 +1,16 @@
-# Persona-Based Agent, Workflow, and Skill Mappings
+# Persona-Based Agent Mappings
 # Reference: planning/current/adrs/ADR-001-persona-based-filtering.md
 #
-# This file defines which agents, workflows, and skills are available
-# to each persona (SDLC role). Users select personas during initialization,
-# and the system enables only the content mapped to those personas.
+# This file defines which agents each persona (SDLC role) enables. Users select
+# personas during initialization, and the build emits only those agents — plus
+# the universal ones — and whatever skills and workflows those agents map in
+# configurations/agent_skill_mapping.yaml (and language_skill_mapping.yaml).
+#
+# Personas deliberately do NOT list skills or workflows. They used to; the lists
+# were never read by the build, drifted for months, and hid three dangling refs.
+# Content reachability is the agents' job, and is enforced by
+# tests/unit/test_content_reachability.py and the persona coverage matrix in
+# tests/integration/test_persona_coverage_matrix.py. (PRO-153)
 
 # Universal agents - always available to all personas
 universal_agents:
@@ -35,29 +42,6 @@ personas:
       - enforcement
       - atdd
     
-    # Key workflows for this persona
-    workflows:
-      - code
-      - testing
-      - feature
-      - refactor
-      - dependency-upgrade
-      - boilerplate
-      - code-quality-maintenance
-      - coverage-improvement-maintenance
-      - automated-testing
-    
-    # Key skills for this persona
-    skills:
-      - incremental-implementation
-      - code-review-practices
-      - testing-strategies
-      - debugging-methodology
-      - technical-debt-management
-      - test-aaa-structure
-      - test-mocking-rules
-      - test-coverage-categories
-
   frontend_software_engineer:
     display_name: "Frontend Software Engineer"
     description: "Frontend development, UI/UX, and accessible web experiences"
@@ -78,29 +62,6 @@ personas:
       - enforcement
       - atdd
     
-    # Key workflows for this persona
-    workflows:
-      - code
-      - testing
-      - feature
-      - refactor
-      - dependency-upgrade
-      - boilerplate
-      - code-quality-maintenance
-      - coverage-improvement-maintenance
-      - automated-testing
-    
-    # Key skills for this persona
-    skills:
-      - incremental-implementation
-      - code-review-practices
-      - testing-strategies
-      - debugging-methodology
-      - technical-debt-management
-      - test-aaa-structure
-      - test-mocking-rules
-      - test-coverage-categories
-
   fullstack_software_engineer:
     display_name: "Fullstack Software Engineer"
     description: "Full-stack development across frontend and backend"
@@ -122,29 +83,6 @@ personas:
       - enforcement
       - atdd
     
-    # Key workflows for this persona
-    workflows:
-      - code
-      - testing
-      - feature
-      - refactor
-      - dependency-upgrade
-      - boilerplate
-      - code-quality-maintenance
-      - coverage-improvement-maintenance
-      - automated-testing
-    
-    # Key skills for this persona
-    skills:
-      - incremental-implementation
-      - code-review-practices
-      - testing-strategies
-      - debugging-methodology
-      - technical-debt-management
-      - test-aaa-structure
-      - test-mocking-rules
-      - test-coverage-categories
-
   software_engineer:
     display_name: "Software Engineer (Fullstack)"
     description: "Alias for Fullstack Software Engineer - deprecated, use fullstack_software_engineer"
@@ -166,29 +104,6 @@ personas:
       - enforcement
       - atdd
     
-    # Key workflows for this persona
-    workflows:
-      - code
-      - testing
-      - feature
-      - refactor
-      - dependency-upgrade
-      - boilerplate
-      - code-quality-maintenance
-      - coverage-improvement-maintenance
-      - automated-testing
-    
-    # Key skills for this persona
-    skills:
-      - incremental-implementation
-      - code-review-practices
-      - testing-strategies
-      - debugging-methodology
-      - technical-debt-management
-      - test-aaa-structure
-      - test-mocking-rules
-      - test-coverage-categories
-
   architect:
     display_name: "Architect"
     description: "System design, architecture planning, and technical decisions"
@@ -203,56 +118,21 @@ personas:
     secondary_agents:
       - performance
     
-    workflows:
-      - scaffold
-      - data-model
-      - strategy
-      - decision-log
-      - component-architecture
-      - microservices-architecture
-      - api-design
-      - database-selection
-      - caching-strategy
-      - capacity-planning
-    
-    skills:
-      - architecture-documentation
-      - technical-decision-making
-      - problem-decomposition
-      - mermaid-erd-creation
-      - data-model-discovery
-
   qa_tester:
     display_name: "QA / Tester"
     description: "Quality assurance, testing strategy, and test automation"
     focus: "Ensuring quality through comprehensive testing"
     
     primary_agents:
+      - qa-tester
       - test
       - review
       - atdd
-    
+
     secondary_agents:
       - performance
       - enforcement
     
-    workflows:
-      - testing
-      - testing-strategy
-      - performance-testing
-      - automated-testing
-      - coverage-improvement-maintenance
-      - review
-      - accessibility
-    
-    skills:
-      - testing-strategies
-      - test-coverage-categories
-      - test-aaa-structure
-      - test-mocking-rules
-      - code-review-practices
-      - quality-assurance
-
   devops_engineer:
     display_name: "DevOps Engineer"
     description: "Infrastructure, deployment, operations, and CI/CD"
@@ -264,28 +144,13 @@ personas:
       - observability
       - incident
     
+    # mlai and data were secondary here and brought 29 skills this role does
+    # not do — cross-validation, ensemble methods, dimensionality reduction,
+    # dimensional modelling, slowly-changing-dimensions. The two that were
+    # genuinely operational (managed-database-selection, object-storage-patterns)
+    # now sit on the devops agent itself, which is where they belong. (PRO-162)
     secondary_agents:
       - security
-      - mlai
-      - data
-    
-    workflows:
-      - cicd-pipeline
-      - secret-management
-      - infrastructure-as-code
-      - disaster-recovery
-      - container-orchestration
-      - observability
-      - incident-response
-      - postmortem
-      - capacity-planning
-      - deployment-automation
-    
-    skills:
-      - performance-optimization
-      - debugging-methodology
-      - technical-communication
-      - continuous-improvement
 
   security_engineer:
     display_name: "Security Engineer"
@@ -301,23 +166,6 @@ personas:
       - review
       - enforcement
     
-    workflows:
-      - security-code-review
-      - security-testing
-      - vulnerability-scanning
-      - vulnerability-assessment
-      - threat-modeling
-      - compliance-audit
-      - penetration-testing-guide
-      - data-encryption
-      - authentication-authorization
-      - incident-response-security
-    
-    skills:
-      - technical-communication
-      - code-review-practices
-      - problem-decomposition
-
   product_manager:
     display_name: "Product Manager"
     description: "Requirements, prioritization, and roadmap planning"
@@ -328,22 +176,6 @@ personas:
     
     secondary_agents: []
     
-    workflows:
-      - requirements-gathering
-      - feature-prioritization
-      - roadmap-planning
-      - user-research-guide
-      - feature-launch-checklist
-      - a-b-testing
-      - analytics-setup
-      - ux-validation
-    
-    skills:
-      - feature-planning
-      - technical-communication
-      - problem-decomposition
-      - feature-prioritization-workflow
-
   data_engineer:
     display_name: "Data Engineer"
     description: "Data pipelines, data quality, and data infrastructure"
@@ -353,28 +185,16 @@ personas:
       - code         # ETL and pipeline code
       - data
     
+    # mlai was secondary and brought 15 modelling skills this role does not do
+    # — cross-validation, ensembles, hyperparameter optimization, model
+    # interpretability. Data engineers build the pipelines; data_scientist and
+    # ml_engineer own the modelling and both have mlai already. The two that
+    # are genuinely pipeline work (feature-engineering, time-series-preprocessing)
+    # moved onto the data agent. (PRO-162)
     secondary_agents:
-      - mlai
       - devops
       - observability
       - performance
-    
-    workflows:
-      - data-pipeline
-      - data-quality
-      - data-quality-monitoring
-      - data-model
-      - database-selection
-      - schema-migration
-      - observability
-      - performance-testing
-    
-    skills:
-      - data-validation-pipelines
-      - data-versioning-reproducibility
-      - technical-decision-making
-      - performance-optimization
-      - debugging-methodology
 
   data_scientist:
     display_name: "Data Scientist"
@@ -392,36 +212,6 @@ personas:
       - devops
       - observability
     
-    workflows:
-      - model-evaluation
-      - hyperparameter-tuning
-      - model-retraining-strategy
-      - model-serving
-      - production-ml-deployment
-      - ml-monitoring-observability
-      - mlops-pipeline-setup
-      - experiment-tracking-setup
-      - feature-engineering-guide
-      - model-interpretability-guide
-      - model-governance
-    
-    skills:
-      - feature-importance-analysis
-      - mlops-pipeline-design
-      - model-interpretability
-      - batch-vs-realtime-scoring
-      - hyperparameter-optimization
-      - cross-validation-strategies
-      - imbalanced-classification
-      - ensemble-methods
-      - dimensionality-reduction
-      - anomaly-detection-techniques
-      - model-performance-debugging
-      - feature-engineering-guide
-      - feature-store-design
-      - data-validation-pipelines
-      - time-series-preprocessing
-
   technical_writer:
     display_name: "Technical Writer"
     description: "Documentation and technical communication"
@@ -432,14 +222,155 @@ personas:
     
     secondary_agents: []
     
-    workflows:
-      - docs
-      - decision-log
-    
-    skills:
-      - documentation-best-practices
-      - technical-communication
+  # ==========================================================================
+  # Discipline personas (PRO-155)
+  #
+  # Each lists only content its own agents can reach through
+  # agent_skill_mapping.yaml — the persona narrows that set, it never adds to
+  # it. Subagents are deliberately absent: they inherit their parent agent's
+  # enabled status, so listing them here would be a second, drifting source of
+  # truth. The "brings" note on each persona records which subagents ride
+  # along, since that is the part a reader cannot see from the agent list.
+  # ==========================================================================
+
+  sre:
+    display_name: "Site Reliability Engineer"
+    description: "Service reliability, incident response, and production operations"
+    focus: "Keeping production within its error budget, and learning from it when it is not"
+    # brings: incident/{log-analysis,root-cause,rubber-duck}, observability/{dashboards,...}
+
+    primary_agents:
+      - incident
+      - observability
+      - performance
+
+    secondary_agents:
+      - devops
+
+  platform_engineer:
+    display_name: "Platform Engineer"
+    description: "Cloud infrastructure, CI/CD, and the internal developer platform"
+    focus: "Making the paved road faster than going around it"
+    # brings: devops/{aws,docker,gitops,kubernetes,terraform-deployment}
+
+    primary_agents:
+      - devops
+      - architect
+
+    secondary_agents:
+      - code
+
+  appsec_engineer:
+    display_name: "Application Security Engineer"
+    description: "Secure code, threat modeling, and vulnerability management"
+    focus: "Finding the flaw before it ships, not after it is exploited"
+    # brings: security/{threat-model,compliance-auditor,...}, compliance/{gdpr,soc2,review}
+
+    primary_agents:
+      - security
+      - review
+
+    secondary_agents:
+      - enforcement
+      - compliance
+
+  performance_engineer:
+    display_name: "Performance Engineer"
+    description: "Profiling, load testing, and latency optimization"
+    focus: "Making it measurably faster, with the measurement first"
+    # Note: the performance agent was secondary to eight personas and primary to
+    # none before this persona existed.
+
+    primary_agents:
+      - performance
+
+    secondary_agents:
+      - backend
+      - frontend
+      - observability
+
+  database_engineer:
+    display_name: "Database Engineer"
+    description: "Data modeling, query performance, and schema evolution"
+    focus: "Designing storage that survives the second year"
+    # brings: data/{governance,pipeline,quality,streaming,warehouse}
+
+    primary_agents:
+      - data
+      - architect
+
+    secondary_agents:
+      - backend
+      - migration
+
+  ux_designer:
+    display_name: "UX Designer"
+    description: "User research, interaction design, and design systems"
+    focus: "Designing what users can actually use, then checking that they can"
+    # brings: frontend/{accessibility,mobile,react-patterns,vue-patterns}
+
+    primary_agents:
+      - frontend
+      - product
+
+    secondary_agents: []
+
+  ml_engineer:
+    display_name: "ML Engineer"
+    description: "Model deployment, serving infrastructure, and production ML operations"
+    focus: "Getting a trained model into production and keeping it healthy there"
+    # Distinct from data_scientist (who trains it) and ai_engineer (who composes
+    # someone else's model into a product). Shares only the mlai agent with the latter.
+
+    primary_agents:
+      - mlai
+      - devops
+
+    secondary_agents:
+      - data
+      - observability
+
+  ai_engineer:
+    display_name: "AI Engineer"
+    description: "LLM applications, RAG systems, agents, and evaluation harnesses"
+    focus: "Composing a model you did not train into a product that behaves"
+    # The model is a dependency this role does not control and cannot pin by
+    # default, which is why evaluation and observability sit in the primary set
+    # rather than being treated as follow-up work.
+    #
+    # Routes to `ai`, not `mlai`. The mlai prompt is the classical training
+    # lifecycle — algorithm selection, hyperparameter tuning, drift detection —
+    # and its eight subagents are all classical ML, so pointing this persona
+    # there would have dragged model-training subagents into an LLM build and
+    # contradicted the split that justifies a separate persona. (PRO-156)
+
+    primary_agents:
+      - ai
+      - backend
+
+    secondary_agents:
+      - architect
+      - test
+
+  engineering_manager:
+    display_name: "Engineering Manager"
+    description: "Planning, prioritization, technical debt, and team coordination"
+    focus: "Sequencing the work and keeping the people unblocked"
+    # `plan` and `orchestrator` are universal agents — always enabled for every
+    # persona — so listing them here selected nothing and left this persona
+    # differentiating on product+architect alone, a near-duplicate of picking
+    # product_manager and architect together. Replaced with agents it genuinely
+    # owns: refactor carries technical-debt-management, which this role lives
+    # in and which PRO-155 had to leave out for exactly this reason. (PRO-162)
+
+    primary_agents:
+      - product
+      - architect
+
+    secondary_agents:
+      - refactor
+      - document
 
 # Metadata
-version: "1.0"
-last_updated: "2026-04-12"
+version: "1.1"
+last_updated: "2026-09-18"

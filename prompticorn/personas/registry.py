@@ -1,7 +1,8 @@
 """Persona registry and filtering for role-based agent selection.
 
 This module provides the PersonaRegistry and PersonaFilter classes for managing
-persona-based filtering of agents, workflows, and skills.
+persona-based filtering of agents. A persona selects agents; the agents'
+skill and workflow mappings live in agent_skill_mapping.yaml.
 
 Reference: planning/current/adrs/ADR-001-persona-based-filtering.md
 """
@@ -15,7 +16,7 @@ class PersonaRegistry:
     """Registry for managing persona definitions and mappings.
 
     Loads persona definitions from personas.yaml and provides methods to query
-    persona information, agent mappings, workflow mappings, and skill mappings.
+    persona information and agent mappings.
 
     Example:
         >>> registry = PersonaRegistry.from_yaml("prompticorn/personas/personas.yaml")
@@ -89,7 +90,7 @@ class PersonaRegistry:
 
         Returns:
             Dictionary with persona definition including display_name, description,
-            focus, primary_agents, secondary_agents, workflows, skills.
+            focus, primary_agents, secondary_agents.
 
         Raises:
             KeyError: If persona doesn't exist.
@@ -113,30 +114,6 @@ class PersonaRegistry:
         primary = persona.get("primary_agents", [])
         secondary = persona.get("secondary_agents", [])
         return primary + secondary
-
-    def get_workflows_for_persona(self, persona_name: str) -> list[str]:
-        """Get workflows mapped to a persona.
-
-        Args:
-            persona_name: Persona identifier.
-
-        Returns:
-            List of workflow names.
-        """
-        persona = self.get_persona_info(persona_name)
-        return persona.get("workflows", [])
-
-    def get_skills_for_persona(self, persona_name: str) -> list[str]:
-        """Get skills mapped to a persona.
-
-        Args:
-            persona_name: Persona identifier.
-
-        Returns:
-            List of skill names.
-        """
-        persona = self.get_persona_info(persona_name)
-        return persona.get("skills", [])
 
     def get_universal_agents(self) -> list[str]:
         """Get list of universal agents (always enabled).
@@ -172,7 +149,7 @@ class PersonaRegistry:
 
 
 class PersonaFilter:
-    """Filters agents, workflows, and skills based on selected personas.
+    """Filters agents based on selected personas.
 
     Implements the dynamic agent enabling/disabling mechanism described in ADR-001.
     Agents are enabled if present in ANY selected persona, disabled otherwise.
@@ -181,7 +158,6 @@ class PersonaFilter:
         >>> registry = PersonaRegistry.from_yaml("personas.yaml")
         >>> filter = PersonaFilter(registry, ["software_engineer", "qa_tester"])
         >>> enabled_agents = filter.get_enabled_agents()
-        >>> enabled_workflows = filter.get_enabled_workflows()
     """
 
     def __init__(self, registry: PersonaRegistry, selected_personas: list[str]) -> None:
@@ -234,34 +210,6 @@ class PersonaFilter:
 
         return enabled_agents
 
-    def get_enabled_workflows(self) -> set[str]:
-        """Get all workflows that should be enabled for selected personas.
-
-        Returns:
-            Set of workflow names to enable.
-        """
-        enabled_workflows: set[str] = set()
-
-        for persona_name in self._selected_personas:
-            persona_workflows = self._registry.get_workflows_for_persona(persona_name)
-            enabled_workflows.update(persona_workflows)
-
-        return enabled_workflows
-
-    def get_enabled_skills(self) -> set[str]:
-        """Get all skills that should be enabled for selected personas.
-
-        Returns:
-            Set of skill names to enable.
-        """
-        enabled_skills: set[str] = set()
-
-        for persona_name in self._selected_personas:
-            persona_skills = self._registry.get_skills_for_persona(persona_name)
-            enabled_skills.update(persona_skills)
-
-        return enabled_skills
-
     def is_agent_enabled(self, agent_name: str) -> bool:
         """Check if a specific agent should be enabled.
 
@@ -272,28 +220,6 @@ class PersonaFilter:
             True if agent should be enabled, False otherwise.
         """
         return agent_name in self.get_enabled_agents()
-
-    def is_workflow_enabled(self, workflow_name: str) -> bool:
-        """Check if a specific workflow should be enabled.
-
-        Args:
-            workflow_name: Workflow identifier.
-
-        Returns:
-            True if workflow should be enabled, False otherwise.
-        """
-        return workflow_name in self.get_enabled_workflows()
-
-    def is_skill_enabled(self, skill_name: str) -> bool:
-        """Check if a specific skill should be enabled.
-
-        Args:
-            skill_name: Skill identifier.
-
-        Returns:
-            True if skill should be enabled, False otherwise.
-        """
-        return skill_name in self.get_enabled_skills()
 
     def get_selected_personas(self) -> list[str]:
         """Get list of currently selected personas.

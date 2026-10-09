@@ -6,11 +6,13 @@ from collections.abc import Iterable
 from pathlib import Path
 from typing import Any
 
+import yaml
+
 from prompticorn.agent_registry.registry import Registry
 from prompticorn.artifact.package_version import bundled_version
 from prompticorn.builders.agents_md import generate_agents_md
 from prompticorn.builders.base import BuildOptions
-from prompticorn.builders.claude_md import generate_claude_md
+from prompticorn.builders.claude_md import NO_PERSONA_LABEL, generate_claude_md
 from prompticorn.builders.convention_generator import generate_all_conventions
 from prompticorn.builders.factory import BuilderFactory
 from prompticorn.builders.layouts import get_layout
@@ -42,6 +44,28 @@ def _dedupe_preserve_order(*lists: list[str] | None) -> list[str]:
                 seen.add(item)
                 result.append(item)
     return result
+
+
+def _describe_personas(config: dict | None) -> str:
+    """Human-readable persona line for the CLAUDE.md header.
+
+    Reads ``active_personas`` — the key the CLI actually writes. The previous
+    code read ``config.get("persona")``, singular, which the CLI never sets, so
+    the default fired every time and every generated CLAUDE.md claimed
+    "Persona: Software Engineer" no matter what was selected. (PRO-160)
+
+    Falls back to the raw ids if the registry will not load, since a cosmetic
+    header must never fail a build.
+    """
+    selected = (config or {}).get("active_personas") or []
+    if not selected:
+        return NO_PERSONA_LABEL
+
+    try:
+        registry = PersonaRegistry.from_resolver()
+        return ", ".join(registry.get_display_name(name) for name in selected)
+    except (ContentError, KeyError, OSError, yaml.YAMLError):
+        return ", ".join(selected)
 
 
 class PromptBuilder:
@@ -400,12 +424,8 @@ class PromptBuilder:
             try:
                 if self.layout.emits_claude_md:
                     # Generate CLAUDE.md for Claude
-                    persona_name = (
-                        config.get("persona", "software_engineer")
-                        if config
-                        else "software_engineer"
-                    )
-                    claude_md_content = generate_claude_md(primary_agents_built, persona_name)
+                    persona_label = _describe_personas(config)
+                    claude_md_content = generate_claude_md(primary_agents_built, persona_label)
                     claude_md_path = output / "CLAUDE.md"
                     write_text(claude_md_path, claude_md_content)
                     emitted.add("CLAUDE.md")
@@ -582,8 +602,21 @@ class PromptBuilder:
         agent_workflows = []
 
         if self.agent_skill_loader:
-            agent_skills = self.agent_skill_loader.get_skills_for_agent(agent.name)
-            agent_workflows = self.agent_skill_loader.get_workflows_for_agent(agent.name)
+            # Look the mapping up by the agent's REGISTRY KEY, not its declared
+            # name. A subagent's frontmatter name is a leaf, unique only within
+            # its parent, while the mapping is keyed by top-level agent — so
+            # `orchestrator/devops` (name: devops) resolved the top-level devops
+            # agent's 17 skills and leaked them into every build, orchestrator
+            # being universal. Six other subagents collided the same way.
+            #
+            # The mapping has no slash-keyed entries, so a subagent now matches
+            # nothing here and falls through to its own declared skills below.
+            # That loses nothing: the only two subagents declaring any
+            # (architect/data-model, test/strategy) list skills their parents
+            # already map. (PRO-167)
+            lookup = agent_name or agent.name
+            agent_skills = self.agent_skill_loader.get_skills_for_agent(lookup)
+            agent_workflows = self.agent_skill_loader.get_workflows_for_agent(lookup)
 
         # Get language-specific overrides (if any)
         language_skills = []

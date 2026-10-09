@@ -28,9 +28,9 @@ right config for whichever assistant your team uses:
 
 ## What's in the library
 
-- **25 primary agents** (architect, backend, frontend, code, test, debug, security, devops, and more)
-- **~100 workflows** in minimal and verbose variants
-- **~95 specialized skills**
+- **27 primary agents** (architect, backend, frontend, code, test, debug, security, devops, ai, and more)
+- **104 workflows** in minimal and verbose variants
+- **127 specialized skills**
 - **29 languages** with first-class conventions (`prompticorn/agents/core/conventions-*.md`)
 
 ## Install

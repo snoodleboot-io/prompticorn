@@ -13,6 +13,33 @@
 # 3. Fallback - Original agent skills/workflows (if no mappings)
 
 # ============================================================================
+# AI
+# ----------------------------------------------------------------------------
+# LLM/agent systems built on a model the team did not train. Deliberately
+# separate from MLAI, which owns the classical training lifecycle. (PRO-156)
+# ============================================================================
+ai:
+  skills:
+    - agent-tool-design
+    - api-versioning-strategy
+    - idempotency-patterns
+    - llm-application-architecture
+    - llm-evaluation-and-testing
+    - llm-observability
+    - llm-safety-and-guardrails
+    - multiagent-orchestration
+    - prompt-engineering-practices
+    - rag-system-design
+    - technical-decision-making
+    - vector-store-selection
+  workflows:
+    - api-design
+    - eval-harness-setup
+    - llm-feature-build
+    - prompt-iteration-cycle
+    - rag-pipeline-setup
+
+# ============================================================================
 # ARCHITECT
 # ============================================================================
 architect:
@@ -23,6 +50,7 @@ architect:
     - data-model-discovery
     - edge-and-cdn-delivery
     - feature-planning
+    - llm-application-architecture
     - managed-database-selection
     - mermaid-erd-creation
     - message-queue-selection
@@ -31,12 +59,17 @@ architect:
     - nosql-database-selection
     - post-implementation-checklist
     - problem-decomposition
+    - security-architecture-review
     - serverless-architecture
     - technical-communication
     - technical-decision-making
   workflows:
+    - capacity-planning
+    - component-architecture
     - data-model
+    - database-selection
     - decision-log
+    - microservices-architecture
     - scaffold
     - strategy
     - task-breakdown
@@ -78,14 +111,19 @@ atdd:
 # ============================================================================
 backend:
   skills:
+    - agent-tool-design
+    - api-security-hardening
     - api-versioning-strategy
     - architecture-documentation
+    - authentication-design
+    - authorization-patterns
     - code-review-practices
     - data-model-discovery
     - data-validation-pipelines
     - distributed-caching-design
     - idempotency-patterns
     - incremental-implementation
+    - llm-application-architecture
     - message-queue-selection
     - microservices-communication-patterns
     - object-storage-patterns
@@ -93,8 +131,11 @@ backend:
     - serverless-architecture
   workflows:
     - api-design
+    - authentication-authorization
+    - caching-strategy
     - code
     - data-model
+    - microservices-architecture
     - performance
     - review
 
@@ -124,6 +165,7 @@ code:
 # ============================================================================
 compliance:
   skills:
+    - compliance-assessment
     - compliance-automation
     - documentation-best-practices
     - quality-assurance
@@ -144,16 +186,25 @@ data:
     - data-validation-pipelines
     - data-versioning-reproducibility
     - dimensional-modeling
+    - feature-engineering
     - feature-store-design
     - managed-database-selection
     - nosql-database-selection
     - object-storage-patterns
+    - rag-system-design
     - slowly-changing-dimensions
     - sql-optimization
+    - time-series-preprocessing
+    - vector-store-selection
   workflows:
     - data-model
+    - data-pipeline
+    - data-quality
     - data-quality-monitoring
+    - database-selection
     - experiment-tracking-setup
+    - rag-pipeline-setup
+    - schema-migration
     - workflow-versioning-management
 
 # ============================================================================
@@ -187,9 +238,18 @@ devops:
     - iac-best-practices
     - infrastructure-drift-detection
     - kubernetes-resource-management
+    - managed-database-selection
+    - object-storage-patterns
+    - secret-management
     - technical-decision-making
   workflows:
+    - capacity-planning
+    - cicd-pipeline
+    - container-orchestration
     - dependency-scanning
+    - disaster-recovery
+    - infrastructure-as-code
+    - release-cycle-maintenance
     - secret-management
     - workflow-monitoring
     - workflow-orchestration-patterns
@@ -205,6 +265,7 @@ document:
     - mermaid-erd-creation
     - technical-communication
   workflows:
+    - decision-log
     - docs
     - strategy-for-applications
     - workflow-documentation-patterns
@@ -219,6 +280,7 @@ enforcement:
     - technical-debt-management
   workflows:
     - code
+    - code-quality-maintenance
     - house-style
     - review
 
@@ -247,9 +309,16 @@ frontend:
     - responsive-design-patterns
     - state-management-architecture
     - testing-strategies
+    - user-needs-discovery
+    - user-testing-methods
+    - ux-writing-guidelines
   workflows:
     - accessibility
     - code
+    - component-architecture
+    - frontend-performance
+    - responsive-design
+    - state-management
     - testing
     - ux-validation
 
@@ -261,13 +330,17 @@ incident:
     - continuous-improvement
     - debugging-methodology
     - incident-automation
+    - incident-response-planning
     - incident-timeline-creation
     - problem-decomposition
     - root-cause-five-whys
     - technical-communication
   workflows:
+    - disaster-recovery
+    - incident-response
     - incident-response-security
     - log-analysis
+    - postmortem
     - root-cause
 
 # ============================================================================
@@ -280,8 +353,10 @@ migration:
     - technical-debt-management
     - technical-decision-making
   workflows:
+    - dependency-update-maintenance
     - dependency-upgrade
     - migration
+    - schema-migration
     - strategy
     - workflow-migration-patterns
 
@@ -332,14 +407,19 @@ observability:
     - debugging-methodology
     - distributed-tracing-instrumentation
     - grafana-dashboard-design
+    - llm-observability
     - performance-optimization
     - prometheus-query-patterns
     - slo-sli-definition
   workflows:
     - analytics-setup
     - log-analysis
+    - metrics-tracking-maintenance
     - ml-monitoring-observability
+    - observability
     - performance
+    - performance-monitoring-maintenance
+    - slo-sli
     - workflow-monitoring
 
 # ============================================================================
@@ -373,7 +453,11 @@ performance:
     - problem-decomposition
     - sql-optimization
   workflows:
+    - caching-strategy
+    - frontend-performance
     - performance
+    - performance-monitoring-maintenance
+    - performance-testing
     - workflow-performance-optimization
     - workflow-scaling-patterns
 
@@ -386,6 +470,8 @@ plan:
     - feature-planning
     - multiagent-orchestration
     - problem-decomposition
+    - requirements-specification
+    - stakeholder-communication
     - technical-communication
     - technical-decision-making
   workflows:
@@ -402,10 +488,20 @@ plan:
 # ============================================================================
 product:
   skills:
+    - competitor-analysis
     - feature-planning
+    - launch-readiness-checklist
     - problem-decomposition
+    - product-analytics-setup
+    - requirements-specification
+    - roadmap-prioritization
+    - stakeholder-communication
+    - success-metrics-definition
     - team-collaboration
     - technical-communication
+    - user-needs-discovery
+    - user-testing-methods
+    - ux-writing-guidelines
   workflows:
     - a-b-testing
     - analytics-setup
@@ -414,6 +510,7 @@ product:
     - requirements-gathering
     - roadmap-planning
     - user-research-guide
+    - ux-validation
 
 # ============================================================================
 # QA-TESTER
@@ -430,8 +527,12 @@ qa-tester:
     - test-mocking-rules
     - testing-strategies
   workflows:
+    - automated-testing
+    - coverage-improvement-maintenance
+    - performance-testing
     - review
     - testing
+    - testing-strategy
     - workflow-testing-patterns
 
 # ============================================================================
@@ -446,8 +547,10 @@ refactor:
     - technical-debt-management
   workflows:
     - code
+    - code-quality-maintenance
     - refactor
     - strategy
+    - tech-debt-cleanup-maintenance
 
 # ============================================================================
 # REVIEW
@@ -457,6 +560,7 @@ review:
     - code-review-practices
     - performance-optimization
     - quality-assurance
+    - secure-code-review
     - technical-communication
     - technical-debt-management
   workflows:
@@ -471,20 +575,36 @@ review:
 security:
   skills:
     - api-security
+    - api-security-hardening
+    - authentication-design
+    - authorization-patterns
     - cloud-iam-design
     - code-review-practices
     - container-security-hardening
+    - cryptography-fundamentals
+    - incident-response-planning
     - key-management
+    - llm-safety-and-guardrails
     - problem-decomposition
     - quality-assurance
+    - secret-management
+    - secure-code-review
+    - security-architecture-review
+    - security-testing-strategies
     - technical-decision-making
+    - threat-identification
     - threat-modeling
+    - vulnerability-assessment
   workflows:
+    - authentication-authorization
+    - data-encryption
     - penetration-testing-guide
+    - security-audit-maintenance
     - security-code-review
     - security-hardening-checklist
     - security-testing
     - threat-modeling
+    - vulnerability-assessment
     - vulnerability-scanning
     - workflow-security-in-workflows
 
@@ -495,15 +615,21 @@ test:
   skills:
     - flaky-test-remediation
     - incremental-implementation
+    - llm-evaluation-and-testing
     - load-testing
     - mutation-testing
     - quality-assurance
+    - security-testing-strategies
     - test-aaa-structure
     - test-coverage-categories
     - test-data-strategies
     - test-mocking-rules
     - testing-strategies
   workflows:
+    - automated-testing
+    - coverage-improvement-maintenance
+    - eval-harness-setup
     - strategy
     - testing
+    - testing-strategy
     - workflow-testing-patterns

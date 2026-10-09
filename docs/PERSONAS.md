@@ -4,7 +4,7 @@
 
 prompticorn uses a **persona-based filtering system** to reduce cognitive overload by showing only the agents, workflows, and skills relevant to your team's roles.
 
-Instead of generating all 25 primary agents (plus their subagents), you select which
+Instead of generating all 27 primary agents (plus their subagents), you select which
 **personas** (SDLC roles) your team uses, and prompticorn generates only the agents,
 workflows, and skills needed for those roles.
 
@@ -12,9 +12,9 @@ workflows, and skills needed for those roles.
 
 Personas represent common software development roles (SDLC personas). Each persona has a specific focus and set of agents/workflows/skills mapped to it.
 
-Personas are defined in `prompticorn/personas/personas.yaml`. There are **12 persona
-definitions** (3 software-engineer specializations plus a deprecated `software_engineer`
-alias). The "Primary Agents" column lists each persona's primary agents from the YAML;
+Personas are defined in `prompticorn/personas/personas.yaml`. There are **21 persona
+definitions** (3 software-engineer specializations, a deprecated `software_engineer`
+alias, and nine discipline personas added in PRO-155). The "Primary Agents" column lists each persona's primary agents from the YAML;
 secondary (cross-cutting) agents and the 5 universal agents are added on top.
 
 **Available Personas:**
@@ -26,13 +26,22 @@ secondary (cross-cutting) agents and the 5 universal agents are added on top.
 | **Frontend Software Engineer** | Performant, accessible UIs for web and mobile | code, test, refactor, migration |
 | **Fullstack Software Engineer** | Full-stack development across backend and frontend | code, test, refactor, migration |
 | **Architect** | System design, architecture planning, technical decisions | architect, backend, frontend, data |
-| **QA / Tester** | Quality assurance, testing strategy, test automation | test, review |
+| **QA / Tester** | Quality assurance, testing strategy, test automation | qa-tester, test, review, atdd |
 | **DevOps Engineer** | Infrastructure as code, deployment, operations, CI/CD | code, devops, observability, incident |
 | **Security Engineer** | Security hardening, threat modeling, and compliance | security, compliance |
 | **Product Manager** | Requirements, prioritization, and roadmap planning | product |
 | **Data Engineer** | Data pipelines, data quality, and data infrastructure | code, data |
 | **Data Scientist** | ML, model development, and optimization | code, mlai |
 | **Technical Writer** | Documentation and technical communication | document |
+| **Site Reliability Engineer** | Reliability, incident response, production operations | incident, observability, performance |
+| **Platform Engineer** | Cloud infrastructure, CI/CD, internal developer platform | devops, architect |
+| **Application Security Engineer** | Secure code, threat modeling, vulnerability management | security, review |
+| **Performance Engineer** | Profiling, load testing, latency optimization | performance |
+| **Database Engineer** | Data modeling, query performance, schema evolution | data, architect |
+| **UX Designer** | User research, interaction design, design systems | frontend, product |
+| **ML Engineer** | Model deployment, serving infrastructure, production ML | mlai, devops |
+| **AI Engineer** | LLM applications, RAG, agents, evaluation harnesses | ai, backend |
+| **Engineering Manager** | Planning, prioritization, technical debt, and team coordination | product, architect |
 
 > Secondary agents per persona (from `personas.yaml`): for example, QA/Tester also pulls
 > in `performance` and `enforcement`; Security Engineer also pulls in `incident`, `review`,
@@ -72,6 +81,15 @@ Which personas (SDLC roles) will be working on this codebase?
   [ ] Data Engineer - Data pipelines, data quality, data infrastructure
   [ ] Data Scientist - ML, model development, optimization
   [ ] Technical Writer - Documentation and technical communication
+  [ ] Site Reliability Engineer - Reliability, incidents, production operations
+  [ ] Platform Engineer - Cloud infrastructure, CI/CD, developer platform
+  [ ] Application Security Engineer - Secure code, threat modeling, vulnerabilities
+  [ ] Performance Engineer - Profiling, load testing, latency optimization
+  [ ] Database Engineer - Data modeling, query performance, schema evolution
+  [ ] UX Designer - User research, interaction design, design systems
+  [ ] ML Engineer - Model deployment, serving, production ML operations
+  [ ] AI Engineer - LLM applications, RAG, agents, evaluation harnesses
+  [ ] Engineering Manager - Planning, prioritization, team coordination
 
 Select one or more roles. Only agents/workflows for selected personas will be generated.
 ```
@@ -188,7 +206,9 @@ active_personas:
 > Persona keys use snake_case as defined in `prompticorn/personas/personas.yaml` (for
 > example `backend_software_engineer`, `frontend_software_engineer`,
 > `fullstack_software_engineer`, `qa_tester`, `devops_engineer`, `security_engineer`,
-> `product_manager`, `data_engineer`, `data_scientist`, `technical_writer`). The
+> `product_manager`, `data_engineer`, `data_scientist`, `technical_writer`, `sre`,
+> `platform_engineer`, `appsec_engineer`, `performance_engineer`, `database_engineer`,
+> `ux_designer`, `ml_engineer`, `ai_engineer`, `engineering_manager`). The
 > `software_engineer` key remains as a deprecated alias for `fullstack_software_engineer`.
 
 ## Changing Personas Later
@@ -216,7 +236,7 @@ prompticorn init
 
 ### Q: What if I select all personas?
 
-**A:** You'll get all ~25 primary agents. This defeats the purpose of persona filtering but is allowed if your team truly uses all roles.
+**A:** You'll get all 27 primary agents. This defeats the purpose of persona filtering but is allowed if your team truly uses all roles.
 
 ### Q: What if I select no personas?
 
@@ -228,11 +248,16 @@ prompticorn init
 
 ### Q: Do personas affect workflows and skills too?
 
-**A:** Yes! Each persona has workflows and skills mapped to it (in `personas.yaml`, with
-agent-level detail in `prompticorn/configurations/agent_skill_mapping.yaml`). For example,
-the software-engineer personas get workflows like `code`, `testing`, and `refactor`, and
-skills like `incremental-implementation`, `code-review-practices`, `testing-strategies`,
-and `debugging-methodology`.
+**A:** Yes, through the agents. A persona selects agents; each agent maps its own skills
+and workflows in `prompticorn/configurations/agent_skill_mapping.yaml` (with per-language
+additions in `language_skill_mapping.yaml`). So the software-engineer personas, by selecting
+the `code` and `test` agents, get workflows like `code`, `testing`, and `refactor`, and
+skills like `incremental-implementation`, `code-review-practices`, and `testing-strategies`.
+
+Personas deliberately do **not** carry their own skill or workflow lists. They used to, but
+the build never read them — they drifted silently and hid dangling references. Everything a
+persona reaches is now exactly what its agents map, and
+`tests/integration/test_persona_coverage_matrix.py` asserts that for all 21 personas.
 
 ### Q: Are agents from unselected personas completely unavailable?
 
