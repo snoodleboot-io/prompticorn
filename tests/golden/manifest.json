@@ -356,7 +356,7 @@
     ".claude/workflows/workflow-scaling-patterns.md": "b0a257a3b58a98758f3082a70ca46f72b5fbba0fc8145bcd676ff36b5b9a12f9",
     ".claude/workflows/workflow-testing-patterns.md": "fc56fa1dfb9a1813db734b773a6695fc4da0a53439e4e1e14f9efb2ddfd47ef1",
     ".prompticorn/provenance.json": "5fa621f298e73bdd5504dd2c505188067e3a69184faad4744dec39bf38836531",
-    "CLAUDE.md": "3abdead6f3d154786fd664154e9dd1f471619eb50fa0031f803150d224947059"
+    "CLAUDE.md": "ae32329f1255cfeacf5875263765fe20034e6f8db385babf350dfbe1603edfc0"
   },
   "go-single::claude::verbose": {
     ".claude/agents/ask-agent.md": "ed5499cfbe50353ab6c0c34f8bb929c32a0d7bfc9ede95c1e9172ef1b30e4f4c",
@@ -515,7 +515,7 @@
     ".claude/workflows/workflow-scaling-patterns.md": "fd30d48467273083e17fa064f3203b27086d16473e25368f3b0d2715138f6a6a",
     ".claude/workflows/workflow-testing-patterns.md": "93f1d353cf1cba2db2326a81078cd91d351299c350326cdf6e68dab954efc505",
     ".prompticorn/provenance.json": "e87a68428c69894add34e00370b099cf975644887dc41b69bf2d5476c8a80a34",
-    "CLAUDE.md": "3abdead6f3d154786fd664154e9dd1f471619eb50fa0031f803150d224947059"
+    "CLAUDE.md": "ae32329f1255cfeacf5875263765fe20034e6f8db385babf350dfbe1603edfc0"
   },
   "go-single::cline::minimal": {
     ".cline/skills/agent-tool-design/SKILL.md": "50d0df3137f102d61d75c4297cf01374974928fc9864758a64598a33443d29c6",
@@ -3347,7 +3347,7 @@
     ".claude/workflows/workflow-security-in-workflows.md": "3b15ab5d755fd44bf60b80242a760fec64ed9da407af2dc29452712c027b8cfa",
     ".claude/workflows/workflow-testing-patterns.md": "fc56fa1dfb9a1813db734b773a6695fc4da0a53439e4e1e14f9efb2ddfd47ef1",
     ".prompticorn/provenance.json": "ee8865238d76b43afa06fecd5c441fed9f5ba7978ba528fabba20ac36f112144",
-    "CLAUDE.md": "8e1d1214d2cf2fa941491945263432e16af5de96d9220c01355690fdc2293ff9"
+    "CLAUDE.md": "87799af2831f546f6ddcc73b63087c8e63e7ef4cfb61743e069c23e0eef81d83"
   },
   "monorepo::claude::verbose": {
     ".claude/agents/ask-agent.md": "1803ebfb8049aadcee287e3b32b6a71058e8dfb89828df53a432bc5a4cb70a69",
@@ -3591,7 +3591,7 @@
     ".claude/workflows/workflow-security-in-workflows.md": "2e8a87791fb635b5b91106888131345fb1b359e2e3df1a3a38e1bcbd3d6da5aa",
     ".claude/workflows/workflow-testing-patterns.md": "93f1d353cf1cba2db2326a81078cd91d351299c350326cdf6e68dab954efc505",
     ".prompticorn/provenance.json": "dff2845e25f711e812811c3434deaa23f25d190cb952d8dff5733034f4d5a964",
-    "CLAUDE.md": "8e1d1214d2cf2fa941491945263432e16af5de96d9220c01355690fdc2293ff9"
+    "CLAUDE.md": "87799af2831f546f6ddcc73b63087c8e63e7ef4cfb61743e069c23e0eef81d83"
   },
   "monorepo::cline::minimal": {
     ".cline/skills/agent-tool-design/SKILL.md": "50d0df3137f102d61d75c4297cf01374974928fc9864758a64598a33443d29c6",
@@ -7358,7 +7358,7 @@
     ".claude/workflows/workflow-scaling-patterns.md": "b0a257a3b58a98758f3082a70ca46f72b5fbba0fc8145bcd676ff36b5b9a12f9",
     ".claude/workflows/workflow-testing-patterns.md": "fc56fa1dfb9a1813db734b773a6695fc4da0a53439e4e1e14f9efb2ddfd47ef1",
     ".prompticorn/provenance.json": "3c9c4f52bd4b5d1bca234dd932352247bc4461ac9927df963801be489c07ff61",
-    "CLAUDE.md": "3abdead6f3d154786fd664154e9dd1f471619eb50fa0031f803150d224947059"
+    "CLAUDE.md": "ae32329f1255cfeacf5875263765fe20034e6f8db385babf350dfbe1603edfc0"
   },
   "python-single::claude::verbose": {
     ".claude/agents/ask-agent.md": "1803ebfb8049aadcee287e3b32b6a71058e8dfb89828df53a432bc5a4cb70a69",
@@ -7515,7 +7515,7 @@
     ".claude/workflows/workflow-scaling-patterns.md": "fd30d48467273083e17fa064f3203b27086d16473e25368f3b0d2715138f6a6a",
     ".claude/workflows/workflow-testing-patterns.md": "93f1d353cf1cba2db2326a81078cd91d351299c350326cdf6e68dab954efc505",
     ".prompticorn/provenance.json": "f40375785767d84ad139c1f701afdb1eed9df3da936a29fef9b2920d445d5544",
-    "CLAUDE.md": "3abdead6f3d154786fd664154e9dd1f471619eb50fa0031f803150d224947059"
+    "CLAUDE.md": "ae32329f1255cfeacf5875263765fe20034e6f8db385babf350dfbe1603edfc0"
   },
   "python-single::cline::minimal": {
     ".cline/skills/agent-tool-design/SKILL.md": "50d0df3137f102d61d75c4297cf01374974928fc9864758a64598a33443d29c6",
@@ -10153,7 +10153,7 @@
     ".claude/workflows/workflow-scaling-patterns.md": "b0a257a3b58a98758f3082a70ca46f72b5fbba0fc8145bcd676ff36b5b9a12f9",
     ".claude/workflows/workflow-testing-patterns.md": "fc56fa1dfb9a1813db734b773a6695fc4da0a53439e4e1e14f9efb2ddfd47ef1",
     ".prompticorn/provenance.json": "697a8984c6f28680a1168f1b773b4558f854835e921934de69f3e1260c9daedd",
-    "CLAUDE.md": "3abdead6f3d154786fd664154e9dd1f471619eb50fa0031f803150d224947059"
+    "CLAUDE.md": "ae32329f1255cfeacf5875263765fe20034e6f8db385babf350dfbe1603edfc0"
   },
   "typescript-single::claude::verbose": {
     ".claude/agents/ask-agent.md": "ba79b15b45c8dbae5f4c91a04dfb82f5a0a86b0a3be47480383c932d5d321364",
@@ -10311,7 +10311,7 @@
     ".claude/workflows/workflow-scaling-patterns.md": "fd30d48467273083e17fa064f3203b27086d16473e25368f3b0d2715138f6a6a",
     ".claude/workflows/workflow-testing-patterns.md": "93f1d353cf1cba2db2326a81078cd91d351299c350326cdf6e68dab954efc505",
     ".prompticorn/provenance.json": "d3f2d162bd73595bccff07bae46be6e4eaad3f375623399b49248e50f4bcf67a",
-    "CLAUDE.md": "3abdead6f3d154786fd664154e9dd1f471619eb50fa0031f803150d224947059"
+    "CLAUDE.md": "ae32329f1255cfeacf5875263765fe20034e6f8db385babf350dfbe1603edfc0"
   },
   "typescript-single::cline::minimal": {
     ".cline/skills/agent-tool-design/SKILL.md": "50d0df3137f102d61d75c4297cf01374974928fc9864758a64598a33443d29c6",
