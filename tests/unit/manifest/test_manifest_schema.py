@@ -110,15 +110,23 @@ def test_an_artifact_may_name_a_declared_source() -> None:
             "artifacts[0]",
             "unknown key(s) 'versoin'",
         ),
-        ({"sources": [{"name": "s", "type": "builtin", "url": "x"}]}, "sources[0]", "unknown key"),
+        # A location key the type does not take is refused, not ignored (PRO-151).
+        ({"sources": [{"name": "s", "type": "builtin", "url": "x"}]}, "sources[0].url", "does not take"),
+        ({"sources": [{"name": "s", "type": "local-dir", "url": "x"}]}, "sources[0].url", "takes 'path'"),
+        # A type that needs a location and has none says which key.
+        ({"sources": [{"name": "s", "type": "git"}]}, "sources[0].url", "needs 'url'"),
+        ({"sources": [{"name": "s", "type": "local-dir"}]}, "sources[0].path", "needs 'path'"),
+        # Genuinely unknown keys still fail as unknown.
+        ({"sources": [{"name": "s", "type": "builtin", "branch": "x"}]}, "sources[0]", "unknown key"),
         # Delegated grammar failures, re-pointed at the key actually at fault.
         ({"artifacts": [{"name": "a", "version": ">=oops"}]}, "artifacts[0].version", "invalid"),
         ({"artifacts": [{"name": "A/B", "version": ">=1.0.0"}]}, "artifacts[0].name", "uppercase"),
         # Unknown source type lists what is legal.
+        # `git` became a real type in PRO-151, so an unknown one is needed here.
         (
-            {"sources": [{"name": "s", "type": "git"}]},
+            {"sources": [{"name": "s", "type": "svn"}]},
             "sources[0].type",
-            "expected one of: builtin",
+            "expected one of: builtin, git, local-dir",
         ),
     ],
 )

@@ -1322,6 +1322,7 @@ def lock_command():
     Exit codes:
         0  lock written or already up to date
         3  an existing lock is unusable (corrupt, or from a newer prompticorn)
+        5  a declared source could not be reached, so nothing was resolved
 
     Usage:
         prompticorn lock
@@ -1337,8 +1338,13 @@ def lock_command():
     if outcome.is_unusable:
         click.secho(f"\n✗ {outcome.unusable_reason}", fg="red", err=True)
         sys.exit(ExitCode.UNUSABLE_LOCK)
+    if outcome.is_unavailable:
+        # Its own code, not DRIFT: nothing was compared, so there is no finding
+        # here to act on — only a source to get working again (PRO-164).
+        click.secho(f"\n✗ {outcome.unavailable_reason}", fg="red", err=True)
+        sys.exit(ExitCode.SOURCE_ERROR)
 
-    changed = LockService.write(root, outcome.lock)
+    changed = LockService.write(root, outcome.resolved)
     location = LockService.lock_path(root)
     if changed:
         click.secho(f"\n✓ Wrote {location}", fg="green")
@@ -1431,6 +1437,7 @@ def regenerate_command():
         1  the sources moved, so nothing was regenerated
         3  there is no lock, or it is unusable
         4  the rebuild did not reproduce the lock (a defect; please report it)
+        5  an artifact the lock pins could not be obtained, so nothing was touched
 
     \b
     Usage:
@@ -1502,10 +1509,16 @@ def build_command(frozen: bool):
     error. That is the mode for CI: it answers "would this build differ from
     what was committed?" without quietly making the answer no.
 
+    Without --frozen, ordinary drift is re-locked automatically. Suspicious
+    drift — content changed under a pinned version, or a tag moved — is not:
+    it is reported and the lock is left alone for `prompticorn lock` to accept
+    deliberately.
+
     Exit codes:
-        0  clean; outputs match the lock
-        1  the lock and reality diverge (--frozen only)
+        0  clean; outputs match the lock, or ordinary drift was re-locked
+        1  the lock and reality diverge (--frozen), or suspicious drift was found
         3  the lock is unusable (corrupt, or from a newer prompticorn)
+        5  a declared source could not supply an artifact the build needed
 
     Usage:
         prompticorn build
@@ -1537,11 +1550,21 @@ def build_command(frozen: bool):
         click.secho(f"\n  Error building configuration: {exc}", fg="red", err=True)
         raise click.Abort() from exc
 
-    outcome = LockService.inspect(root, config, _utc_now(), _output_paths_for(tool))
+    outcome = LockService.inspect(
+        root, config, _utc_now(), _output_paths_for(tool), honour_lock=frozen
+    )
 
     if outcome.is_unusable:
         click.secho(f"\n✗ {outcome.unusable_reason}", fg="red", err=True)
         sys.exit(ExitCode.UNUSABLE_LOCK)
+
+    if outcome.is_unavailable:
+        # Never DRIFT. A frozen build that reported an unreachable source as
+        # divergence would be indistinguishable from one that found a real
+        # difference, and a pinned build never silently resolves something else
+        # to get past it (PRO-164).
+        click.secho(f"\n✗ {outcome.unavailable_reason}", fg="red", err=True)
+        sys.exit(ExitCode.SOURCE_ERROR)
 
     if not outcome.had_existing_lock:
         # Not an error: a project without a lock is simply one that has not
@@ -1563,7 +1586,22 @@ def build_command(frozen: bool):
         click.secho("\n✗ Frozen build: refusing to re-resolve.", fg="red", err=True)
         sys.exit(ExitCode.DRIFT)
 
-    LockService.write(root, outcome.lock)
+    if outcome.report.has_suspicious_drift:
+        # Not accepted automatically, frozen or not (PRO-151). Suspicious drift
+        # means a version that should be immutable is not — content changed
+        # under it, or its tag was moved. Re-locking is exactly how that gets
+        # accepted, and the report above has just told the reader to
+        # investigate first; writing the lock anyway would contradict it in the
+        # same run. `prompticorn lock` is the deliberate way through.
+        click.secho(
+            "\n✗ Not updating the lock: investigate the finding above, then run "
+            "`prompticorn lock` once you trust it.",
+            fg="red",
+            err=True,
+        )
+        sys.exit(ExitCode.DRIFT)
+
+    LockService.write(root, outcome.resolved)
     click.secho(f"\n✓ Updated {LockService.lock_path(root)}", fg="yellow")
     sys.exit(ExitCode.CLEAN)
 

@@ -10,12 +10,20 @@ recompiling is a single command that provably lands back on the lock.
 resolves the project as it stands and then records what it found. A regeneration
 starts from what the lock already recorded, and refuses if the sources no longer
 agree with it — because a rebuild from moved sources produces a tree the lock
-does not describe, which is the opposite of what the caller asked for. Nothing
-here writes the lock, on any path.
+does not describe, which is the opposite of what the caller asked for.
 
-**No network** follows from the same rule. Resolution reads bundled and local
-content only, and the check below is a comparison against the lock rather than a
-fetch, so there is nothing to reach for even when real remote sources arrive.
+**No re-resolution is not the same as no network** (PRO-164). The check below
+resolves strictly against what the lock pins, so bundled and local content need
+nothing. A pinned git commit needs the network exactly once — on a machine that
+has never fetched it — and never again, and what comes back is the commit the
+lock names rather than whatever a range admits today. If that commit is neither
+cached nor reachable, this refuses and touches nothing: that is the second
+machine, the fresh clone and the CI runner, all of which have the lock and not
+the cache. Before PRO-164 those three ignored ``pinned_to`` entirely, ran
+``git ls-remote``, and — with the remote gone — died with a traceback.
+
+**Nothing here writes the lock, on any path.** Unchanged, and the reason the
+refusal above is a refusal rather than a re-resolution.
 """
 
 from __future__ import annotations
@@ -29,6 +37,7 @@ from prompticorn.lockfile.drift_report import DriftReport
 from prompticorn.lockfile.lock_file import LockFile
 from prompticorn.lockfile.lock_service import LockService
 from prompticorn.regenerate.regeneration_report import RegenerationReport
+from prompticorn.sources.errors import SourceError
 from prompticorn.tool_outputs import ToolOutputManager
 from prompticorn.verify.output_verifier import OutputVerifier
 
@@ -66,7 +75,13 @@ class RegenerationService:
         Returns:
             What happened, including the post-rebuild verification.
         """
-        drift = self._source_drift(lock, resolved_at)
+        try:
+            drift = self._source_drift(lock, resolved_at)
+        except SourceError as error:
+            # Reported, not raised. An artifact the lock pins that cannot be
+            # obtained is a condition of this machine, and the caller turns it
+            # into an exit code rather than a traceback (PRO-164).
+            return RegenerationReport(drift=DriftReport(), source_error=str(error))
         if not drift.is_clean:
             return RegenerationReport(drift=drift)
 
@@ -86,5 +101,9 @@ class RegenerationService:
         ignores them in any case — reading every generated file to build digests
         that are then discarded would be work done to answer no question.
         """
-        current = LockService.resolve_current(self.root, self.config, resolved_at)
+        # Pinned to the lock being reproduced: regenerate works from the lock
+        # alone, so nothing is ever re-resolved and a cached git commit is not
+        # contacted. See the module docstring for the one case that needs the
+        # network — a pinned commit this machine has never fetched.
+        current = LockService.resolve_current(self.root, self.config, resolved_at, pinned_to=lock)
         return DriftDetector.compare(lock, current)
