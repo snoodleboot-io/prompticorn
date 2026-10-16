@@ -4,6 +4,11 @@ from pathlib import Path
 
 import yaml
 
+from prompticorn.content.configuration_document import ConfigurationDocument
+
+# The configuration unit agent_skill_mapping.yaml is addressed as.
+AGENT_SKILL_MAPPING_CONFIGURATION = "agent_skill_mapping"
+
 
 class AgentSkillMappingLoader:
     """Loads agent to skills/workflows mapping from YAML registry.
@@ -28,13 +33,30 @@ class AgentSkillMappingLoader:
         The preferred constructor — consumers should not need to know where the
         mapping lives. The path-taking form remains for callers holding one.
         (PRO-106)
+
+        Parsed and shape-checked here rather than lazily on first use (PRO-165).
+        A project layer can supply this document, and a malformed one used to
+        surface as a YAMLError raised from inside the per-agent build loop —
+        caught there as "✗ Failed to build {agent}" once per agent, with a build
+        that still exited 0. A wrong *shape* did not surface at all: it loaded as
+        a mapping with no agents in it and every agent was emitted with no
+        skills.
+
+        Raises:
+            MalformedConfigurationError: If the document is not usable mapping
+                data, naming the file and the layer that supplied it.
         """
-        from prompticorn.content.content_resolver import read_configuration
+        document = ConfigurationDocument.load(AGENT_SKILL_MAPPING_CONFIGURATION)
+        # The top level IS the agent index — there is no wrapper key — so the
+        # document itself has to be non-empty, and every value a definition.
+        if not document.data:
+            raise document.invalid("it defines no agents")
+        document.require_mapping_values()
 
         instance = cls.__new__(cls)
         instance.mapping_file = None
-        instance._mapping = None
-        instance._mapping_text = read_configuration("agent_skill_mapping")
+        instance._mapping = document.data
+        instance._mapping_text = None
         return instance
 
     def __init__(self, mapping_file: Path | str | None = None):
@@ -49,6 +71,11 @@ class AgentSkillMappingLoader:
         # A CWD-relative default silently resolves to nothing whenever the
         # process runs outside the repository root. Default from the package.
         # (PRO-105)
+        #
+        # This path deliberately does NOT go through the layer stack: it is the
+        # explicit-path constructor, and the whole point of it is to read one
+        # named file. Everything in the build reads through `from_resolver`,
+        # which does layer. (PRO-166)
         self.mapping_file = (
             Path(mapping_file)
             if mapping_file is not None

@@ -19,9 +19,11 @@ from prompticorn.provenance.provenance_emitter import (
 from prompticorn.provenance.provenance_header import MARKER, ProvenanceHeader
 from prompticorn.provenance.provenance_record import ProvenanceRecord
 from prompticorn.provenance.provenance_sidecar import SIDECAR_FILENAME, ProvenanceSidecar
+from prompticorn.provenance.unit_origins import UNVERSIONED, UnitOrigins
 
 __all__ = [
     "GENERATED_UNIT_PREFIX",
+    "UNVERSIONED",
     "MARKER",
     "SIDECAR_DIRECTORY",
     "SIDECAR_FILENAME",
@@ -30,4 +32,5 @@ __all__ = [
     "ProvenanceHeader",
     "ProvenanceRecord",
     "ProvenanceSidecar",
+    "UnitOrigins",
 ]

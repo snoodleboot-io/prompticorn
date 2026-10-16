@@ -1,6 +1,5 @@
 """Template handler for PRIMARY_AGENTS_LIST variable."""
 
-from pathlib import Path
 from typing import Any
 
 from prompticorn.builders.template_handlers.template_handler import TemplateHandler
@@ -27,39 +26,24 @@ class PrimaryAgentsHandler(TemplateHandler):
     def handle(self, variable_name: str, config: dict[str, Any]) -> str:
         """Generate formatted list of all primary agents.
 
+        Agents come from the content resolver, so the list names the agents this
+        build actually resolved — including any supplied by a project layer. It
+        used to try three filesystem paths in turn, the first two relative to the
+        current working directory and the third the installed package, which
+        meant the token was resolved from the bundled tree no matter which layers
+        the rest of the build read from. (PRO-165, PRO-166)
+
         Args:
             variable_name: The name of the template variable
-            config: The configuration dictionary (unused)
+            config: The configuration dictionary
 
         Returns:
             Formatted markdown list of primary agents with descriptions
         """
         from prompticorn.agent_registry.registry import Registry
 
-        # Try multiple possible paths for agents directory
-        possible_paths = [
-            Path("agents"),  # Relative from CWD
-            Path("prompticorn/agents"),  # Relative from project root
-            Path(__file__).parent.parent.parent / "agents",  # Relative from this file
-        ]
-
-        registry = None
-        for agents_dir in possible_paths:
-            if agents_dir.exists() and agents_dir.is_dir():
-                try:
-                    registry = Registry.from_discovery(agents_dir)
-                    break
-                except Exception:
-                    continue
-
-        if registry is None:
-            return "*(No agents discovered - agents directory not found)*"
-
-        # Get all agents
-        try:
-            all_agents_dict = registry.get_all_agents()
-        except Exception:
-            return "*(No agents discovered - registry error)*"
+        registry = Registry.from_resolver()
+        all_agents_dict = registry.get_all_agents()
 
         # Top-level agents only (keys without "/").
         top_level = [
@@ -91,32 +75,44 @@ class PrimaryAgentsHandler(TemplateHandler):
     def _enabled_agent_names(config: dict[str, Any]) -> set[str] | None:
         """Resolve the set of agent names enabled by the config's active personas.
 
+        Personas are resolved rather than read from
+        ``prompticorn/personas/personas.yaml`` on disk, so a project overriding
+        that file gets an orchestrator whose agent list agrees with the agents
+        the build emitted. (PRO-165)
+
         Returns:
             Set of enabled agent names, or None when no personas are selected or
-            persona data cannot be loaded (caller then falls back to mode-based
-            selection).
+            a selected persona does not exist (caller then falls back to
+            mode-based selection).
+
+        Raises:
+            MalformedConfigurationError: If the persona data is present and
+                unusable. Narrowed from a bare `except Exception` (PRO-165):
+                an unknown persona name is tolerated here because
+                ``PromptBuilder.build`` tolerates exactly the same thing and
+                built every agent, so falling back to the mode-based list keeps
+                the two in step. A malformed document is not tolerated in either
+                place.
         """
         active_personas = (config or {}).get("active_personas")
         if not active_personas:
             return None
 
-        try:
-            from pathlib import Path
+        from prompticorn.personas import PersonaFilter, PersonaRegistry
 
+        try:
             from prompticorn.personas import PersonaFilter, PersonaRegistry
             from prompticorn.personas.registry import config_file_naming
 
-            personas_yaml = Path(__file__).parent.parent.parent / "personas" / "personas.yaml"
-            persona_registry = PersonaRegistry.from_yaml(personas_yaml)
-            # Deprecated aliases resolve inside PersonaFilter. They have to be
-            # resolved *somewhere* on this path: the except below returns None on
-            # any failure, which falls back to mode-based selection, so an id
-            # that stopped resolving would silently change which agents this
-            # template lists rather than complaining. (PRO-159)
+            # Through the resolver, not Path(__file__) (PRO-166) — so a project
+            # layer's personas.yaml is the one this list is computed from.
+            # Deprecated aliases resolve inside PersonaFilter, and `source` lets
+            # the warning name the config file they came from. (PRO-159)
+            registry = PersonaRegistry.from_resolver()
             return PersonaFilter(
-                persona_registry,
+                registry,
                 active_personas,
                 source=config_file_naming(active_personas),
             ).get_enabled_agents()
-        except Exception:
+        except KeyError:
             return None

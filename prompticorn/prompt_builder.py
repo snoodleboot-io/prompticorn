@@ -17,8 +17,7 @@ from prompticorn.builders.convention_generator import generate_all_conventions
 from prompticorn.builders.factory import BuilderFactory
 from prompticorn.builders.layouts import get_layout
 from prompticorn.builders.template_handlers.primary_agents_handler import PrimaryAgentsHandler
-from prompticorn.content.content_resolver import read_variant_unit
-from prompticorn.content.content_unit import BUILTIN_LAYER
+from prompticorn.content.content_resolver import default_resolver, read_variant_unit
 from prompticorn.content.errors import ContentError
 from prompticorn.content.unit_kind import UnitKind
 from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
@@ -27,6 +26,7 @@ from prompticorn.ir.models.agent import Agent
 from prompticorn.personas import PersonaFilter, PersonaRegistry
 from prompticorn.personas.registry import config_file_naming
 from prompticorn.provenance.provenance_emitter import GENERATED_UNIT_PREFIX, ProvenanceEmitter
+from prompticorn.provenance.unit_origins import UnitOrigins
 from prompticorn.text_writer import write_text
 from prompticorn.tools import builder_dispatch
 
@@ -259,8 +259,26 @@ class PromptBuilder:
                 actions.append(
                     f"ℹ Building {len([k for k in all_agents.keys() if '/' not in k])} primary agents (from {len(enabled_agent_names)} enabled)"
                 )
-            except Exception as e:
-                # If persona filtering fails, log warning and continue without filtering
+            except KeyError as e:
+                # Narrowed from `except Exception` (PRO-165). The broad catch was
+                # defensible while the persona data was a bundled file valid by
+                # construction: the only thing that could realistically go wrong
+                # was a selection naming a persona that does not exist, and
+                # carrying on unfiltered is the long-standing answer to that.
+                #
+                # Since PRO-117 a project layer can supply personas.yaml, so
+                # "persona filtering failed" also covered a malformed override —
+                # and the fallback for that is to emit every agent and every
+                # skill, exit 0, with one ⚠ line buried in an action list of
+                # ninety. A build that quietly produced 26 agents and 88 skills
+                # where 15 and 51 were asked for reported success for output
+                # nobody requested.
+                #
+                # So only KeyError — a selection that does not match otherwise
+                # valid data — is tolerated here. A document that is present and
+                # wrong raises MalformedConfigurationError from
+                # PersonaRegistry.from_resolver, which is not caught anywhere and
+                # names the offending file and the layer it came from.
                 actions.append(f"⚠ Persona filtering failed ({e}), building all agents")
 
         # Collect all unique skills from all agents (including subagents)
@@ -536,8 +554,13 @@ class PromptBuilder:
         Returns:
             The paths the provenance pass itself wrote.
         """
-        emitter = ProvenanceEmitter(layer=BUILTIN_LAYER, version=bundled_version().render())
-        return emitter.emit(output, attribution)
+        # Origins come from the resolver this build read through, so a header's
+        # ``layer`` is the same answer the lock records for the same unit rather
+        # than a constant that contradicts it (PRO-165). Read here rather than
+        # captured in ``__init__`` because the CLI installs the project's layer
+        # stack for the length of one command.
+        origins = UnitOrigins.from_resolver(default_resolver(), bundled_version().render())
+        return ProvenanceEmitter(origins=origins).emit(output, attribution)
 
     def _resolve_primary_agents_token(
         self, output: Path, config: dict[str, Any] | None, emitted: Iterable[str]

@@ -24,7 +24,12 @@ import yaml  # type: ignore[import-untyped]
 from sweet_tea.abstract_factory import AbstractFactory
 from sweet_tea.sweet_tea_error import SweetTeaError
 
+from prompticorn.content.configuration_document import ConfigurationDocument
 from prompticorn.questions.base.question import Question
+
+# The configuration unit languages.yaml is addressed as, and the key it holds.
+LANGUAGES_CONFIGURATION = "languages"
+SUPPORTED_LANGUAGES_KEY = "supported_languages"
 
 
 class LanguageRegistry:
@@ -44,10 +49,14 @@ class LanguageRegistry:
             List of supported language keys.
         """
         if cls._languages is None:
-            config_file = Path(__file__).parent.parent / "configurations" / "languages.yaml"
-            with open(config_file, encoding="utf-8") as f:
-                data = yaml.safe_load(f)
-                cls._languages = data["supported_languages"]
+            # Resolved, not read from the package directory: this is a
+            # `configuration/...` unit and a project layer may override it.
+            # (PRO-165)
+            document = ConfigurationDocument.load(LANGUAGES_CONFIGURATION)
+            document.require_string_list(SUPPORTED_LANGUAGES_KEY)
+            if SUPPORTED_LANGUAGES_KEY not in document.data:
+                raise document.invalid(f"it has no {SUPPORTED_LANGUAGES_KEY!r} list")
+            cls._languages = document.data[SUPPORTED_LANGUAGES_KEY]
         assert cls._languages is not None
         return cls._languages
 
@@ -121,6 +130,10 @@ def _load_pipelines() -> dict[str, Any]:
         FileNotFoundError: If the pipelines YAML file doesn't exist.
         yaml.YAMLError: If the YAML file is malformed.
     """
+    # Deliberately a package path and NOT a content unit (PRO-166). This file
+    # names Python question classes that must exist in this package; overriding
+    # it from a project layer could only name classes that do not, so it is part
+    # of the interview implementation rather than overridable content.
     pipelines_path = Path(__file__).parent / "question_pipelines.yaml"
     with open(pipelines_path, encoding="utf-8") as f:
         return yaml.safe_load(f)  # type: ignore[no-any-return]
