@@ -1,9 +1,9 @@
 """What can go wrong when talking to an artifact source (PRO-124).
 
-Typed rather than generic, because the three failures below want three
-different responses and a caller cannot tell them apart from a message. A
-source that is unreachable is worth retrying; an artifact that does not exist
-is not; a digest that does not match is neither — it is a reason to stop.
+Typed rather than generic, because these failures want different responses and
+a caller cannot tell them apart from a message. A source that is unreachable is
+worth retrying; an artifact that does not exist is not; a digest that does not
+match is neither — it is a reason to stop.
 """
 
 from __future__ import annotations
@@ -77,3 +77,73 @@ class DigestMismatchError(SourceError):
         self.artifact = artifact
         self.expected = expected
         self.actual = actual
+
+
+class RefMovedError(SourceError):
+    """A version's tag now points at a different commit than the lock pinned.
+
+    Tags are mutable; commits are not. A lock pins the commit precisely so that
+    a tag moved upstream cannot silently change what a locked build produces.
+    When re-resolution finds the tag elsewhere, that is drift to be reported and
+    decided on — not an update to adopt quietly.
+    """
+
+    def __init__(self, artifact: str, pinned: str, current: str) -> None:
+        super().__init__(
+            f"{artifact} has moved: the lock pinned {pinned[:12]}, "
+            f"the tag now points at {current[:12]}"
+        )
+        self.artifact = artifact
+        self.pinned = pinned
+        self.current = current
+
+
+class InvalidCommitError(SourceError):
+    """A pin that is not a commit id at all.
+
+    Raised before the value is used for anything, because a lock file travels
+    with a repository and is therefore input from outside: a pin of ``..`` or
+    ``--upload-pack=…`` is only harmless while nothing has joined it to a path
+    or handed it to a subprocess. Refusing it is cheap; recovering from it is
+    not (PRO-163).
+    """
+
+    def __init__(self, source: str, commit: str) -> None:
+        super().__init__(
+            f"source {source!r} was given {commit!r} as a commit, which is not a "
+            "commit id (40 or 64 lowercase hex characters)"
+        )
+        self.source = source
+        self.commit = commit
+
+
+class CommitNotFoundError(SourceError):
+    """The remote answered, and does not have the commit a lock pinned.
+
+    Kept apart from :class:`SourceUnavailableError` because the advice is the
+    opposite of it: no retry and no credential check brings back a commit that
+    was garbage-collected or force-pushed away. It is the one failure a lock
+    exists to surface, so reporting it as a network problem sends the reader to
+    the wrong place.
+    """
+
+    def __init__(self, source: str, commit: str, reason: str) -> None:
+        super().__init__(f"source {source!r} has no commit {commit[:12]}: {reason}")
+        self.source = source
+        self.commit = commit
+        self.reason = reason
+
+
+class CacheCorruptError(SourceError):
+    """A local cache entry is not the kind of thing the cache puts there.
+
+    A file, or a symlink, where a checkout directory belongs. Reported with the
+    path rather than cleared away, because deleting whatever is found is how a
+    cache path turns into a delete primitive.
+    """
+
+    def __init__(self, source: str, path: str, reason: str) -> None:
+        super().__init__(f"source {source!r} cannot use cache entry {path}: {reason}")
+        self.source = source
+        self.path = path
+        self.reason = reason

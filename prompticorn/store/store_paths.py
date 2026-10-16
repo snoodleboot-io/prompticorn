@@ -29,6 +29,7 @@ DEFAULT_HOME_NAME = ".prompticorn"
 DIRECTORY_MODE = 0o700
 
 CAS_DIRNAME = "cas"
+GIT_DIRNAME = "git"
 TMP_DIRNAME = "tmp"
 PROFILES_DIRNAME = "profiles"
 CONTENT_DIRNAME = "content"
@@ -77,6 +78,16 @@ def cas_staging() -> Path:
     device where ``os.replace`` degrades to a copy.
     """
     return cas_root() / TMP_DIRNAME
+
+
+def git_cache_root() -> Path:
+    """Checkouts of git sources, one directory per resolved commit.
+
+    Separate from the CAS rather than inside it. The CAS stores blobs addressed
+    by their own digest; a checkout is a tree addressed by a commit, and forcing
+    one into the other would mean archiving every tree to store it.
+    """
+    return home() / GIT_DIRNAME
 
 
 def database_path() -> Path:
