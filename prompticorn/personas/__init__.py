@@ -6,10 +6,14 @@ role-based selection of prompticorn content.
 Example usage:
     >>> from prompticorn.personas import PersonaRegistry, PersonaFilter
     >>> registry = PersonaRegistry.from_yaml("prompticorn/personas/personas.yaml")
-    >>> filter = PersonaFilter(registry, ["software_engineer"])
+    >>> filter = PersonaFilter(registry, ["fullstack_software_engineer"])
     >>> enabled_agents = filter.get_enabled_agents()
 """
 
-from prompticorn.personas.registry import PersonaFilter, PersonaRegistry
+from prompticorn.personas.registry import (
+    DeprecatedPersonaWarning,
+    PersonaFilter,
+    PersonaRegistry,
+)
 
-__all__ = ["PersonaRegistry", "PersonaFilter"]
+__all__ = ["DeprecatedPersonaWarning", "PersonaFilter", "PersonaRegistry"]

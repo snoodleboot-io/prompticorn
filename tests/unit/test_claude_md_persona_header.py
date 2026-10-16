@@ -11,6 +11,7 @@ Reference: PRO-160
 import pytest
 
 from prompticorn.builders.claude_md import NO_PERSONA_LABEL, generate_claude_md
+from prompticorn.personas.registry import DeprecatedPersonaWarning
 from prompticorn.prompt_builder import _describe_personas
 
 
@@ -54,3 +55,14 @@ def test_label_reaches_the_rendered_document_verbatim():
 def test_default_rendered_header_claims_nothing():
     rendered = generate_claude_md([{"name": "test", "description": "Write tests"}])
     assert f"**Persona:** {NO_PERSONA_LABEL}" in rendered
+
+
+def test_a_deprecated_alias_renders_as_the_persona_it_resolves_to():
+    """`software_engineer` resolves to `fullstack_software_engineer`, and the
+    header must say so — stamping the alias's own "Software Engineer
+    (Fullstack)" label would keep advertising an id nobody should copy. (PRO-159)
+    """
+    with pytest.warns(DeprecatedPersonaWarning):
+        label = _describe_personas({"active_personas": ["software_engineer"]})
+
+    assert label == "Fullstack Software Engineer"

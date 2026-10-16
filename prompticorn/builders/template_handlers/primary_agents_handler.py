@@ -104,9 +104,19 @@ class PrimaryAgentsHandler(TemplateHandler):
             from pathlib import Path
 
             from prompticorn.personas import PersonaFilter, PersonaRegistry
+            from prompticorn.personas.registry import config_file_naming
 
             personas_yaml = Path(__file__).parent.parent.parent / "personas" / "personas.yaml"
             persona_registry = PersonaRegistry.from_yaml(personas_yaml)
-            return PersonaFilter(persona_registry, active_personas).get_enabled_agents()
+            # Deprecated aliases resolve inside PersonaFilter. They have to be
+            # resolved *somewhere* on this path: the except below returns None on
+            # any failure, which falls back to mode-based selection, so an id
+            # that stopped resolving would silently change which agents this
+            # template lists rather than complaining. (PRO-159)
+            return PersonaFilter(
+                persona_registry,
+                active_personas,
+                source=config_file_naming(active_personas),
+            ).get_enabled_agents()
         except Exception:
             return None
