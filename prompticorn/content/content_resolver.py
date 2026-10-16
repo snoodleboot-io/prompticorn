@@ -39,6 +39,10 @@ class ContentResolver:
             sources if sources is not None else (BuiltinContentSource(),)
         )
         self._cache = cache if cache is not None else ContentCache()
+        # units() is a full walk of every layer; memoised because the stack is
+        # fixed for this resolver's lifetime (one per command) and discovery
+        # asks per agent. Without it a build walked the tree ~290k times.
+        self._units_memo: list[ContentUnit] | None = None
 
     @property
     def name(self) -> str:
@@ -101,11 +105,13 @@ class ContentResolver:
         Sorted because this feeds discovery and lockfiles; enumeration order
         must not depend on the filesystem.
         """
-        winners: dict[str, ContentUnit] = {}
-        for source in self._sources:
-            for unit in source.units():
-                winners.setdefault(unit.id.render(), unit)
-        return [winners[key] for key in sorted(winners)]
+        if self._units_memo is None:
+            winners: dict[str, ContentUnit] = {}
+            for source in self._sources:
+                for unit in source.units():
+                    winners.setdefault(unit.id.render(), unit)
+            self._units_memo = [winners[key] for key in sorted(winners)]
+        return list(self._units_memo)
 
     def owner_of(self, unit_id: UnitId) -> ContentSource | None:
         """The source that wins for this unit, or None when nothing carries it.
