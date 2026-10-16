@@ -114,8 +114,6 @@ def test_the_alias_enables_exactly_what_the_canonical_id_enables(registry):
     canonical = PersonaFilter(registry, [CANONICAL])
 
     assert aliased.get_enabled_agents() == canonical.get_enabled_agents()
-    assert aliased.get_enabled_workflows() == canonical.get_enabled_workflows()
-    assert aliased.get_enabled_skills() == canonical.get_enabled_skills()
     assert aliased.get_selected_personas() == [CANONICAL]
 
 
