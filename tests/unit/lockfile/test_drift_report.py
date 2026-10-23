@@ -34,13 +34,16 @@ def test_each_kind_has_its_own_remediation() -> None:
     assert len(remediations) == len(DriftKind)
 
 
-def test_the_unit_remediation_says_investigate_rather_than_re_lock() -> None:
-    """The others tell you to re-lock. This one must not, at least not first."""
+def test_suspicious_remediations_do_not_tell_you_to_re_lock() -> None:
+    """Ordinary drift tells you to re-lock. A suspicious finding must not, at
+    least not first — re-locking is exactly how the mutation gets accepted."""
     assert "Investigate" in DriftKind.UNIT.remediation
 
     for kind in DriftKind:
-        if kind is not DriftKind.UNIT:
-            assert "Run `prompticorn lock`" in kind.remediation
+        if kind.is_suspicious:
+            assert "Run `prompticorn lock`" not in kind.remediation, kind
+        else:
+            assert "Run `prompticorn lock`" in kind.remediation, kind
 
 
 def test_a_rendered_report_carries_headline_evidence_and_remediation() -> None:

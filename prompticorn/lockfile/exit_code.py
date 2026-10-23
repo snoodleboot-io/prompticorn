@@ -23,12 +23,19 @@ class ExitCode(IntEnum):
     signal in the system — a generated file edited by hand — fire on a mistyped
     flag. A supply-chain alert that cries wolf at typos is one people learn to
     ignore.
+
+    ``SOURCE_ERROR`` is 5 because an outage is not drift (PRO-164). It used to
+    arrive as an uncaught exception, so a remote that happened to be down exited
+    1 — the same number as "this build differs from what was committed". A CI
+    gate that cannot tell a network failure from a real finding either blocks on
+    every blip or learns to retry past genuine drift.
     """
 
     CLEAN = 0
     DRIFT = 1
     UNUSABLE_LOCK = 3
     TAMPERED = 4
+    SOURCE_ERROR = 5
 
     @property
     def meaning(self) -> str:
@@ -41,4 +48,5 @@ _MEANINGS: dict[ExitCode, str] = {
     ExitCode.DRIFT: "the lock and reality diverge",
     ExitCode.UNUSABLE_LOCK: "the lock is corrupt, or written by a newer prompticorn",
     ExitCode.TAMPERED: "a generated file was modified by hand",
+    ExitCode.SOURCE_ERROR: "an artifact source could not supply what was asked for",
 }

@@ -147,3 +147,40 @@ class CacheCorruptError(SourceError):
         self.source = source
         self.path = path
         self.reason = reason
+
+
+class PinnedArtifactUnavailableError(SourceError):
+    """The exact artifact a lock pinned could not be obtained on this machine.
+
+    Raised when honouring a lock needed the source — what it pins is not already
+    in hand here, whether that is an uncached commit or an unreadable directory —
+    and the source could not be reached. Distinct from
+    :class:`SourceUnavailableError`, which says only that a source is down; this
+    says *the lock cannot be satisfied offline*, which is a different message
+    with a different remedy.
+
+    It exists so that the alternative is never taken silently. Re-resolving
+    would produce whatever the range admits *today*, which is not what the lock
+    names and not what the caller asked for, so a build that cannot reach the
+    pinned artifact stops instead.
+
+    Attributes:
+        source: The source that could not be reached.
+        artifact: The rendered identity the lock pinned.
+        pinned: The immutable id it pinned, when there was one.
+        reason: Why the source could not be reached.
+    """
+
+    def __init__(self, source: str, artifact: str, pinned: str | None, reason: str) -> None:
+        at = f" at {pinned[:12]}" if pinned else ""
+        super().__init__(
+            f"the lock cannot be satisfied offline: {artifact}{at} is not available "
+            f"on this machine and source {source!r} cannot be reached ({reason}). "
+            "Nothing was re-resolved — the lock names this exact artifact, and "
+            "anything else would be a different build. Restore access to the "
+            "source, or copy a warm cache from a machine that has it."
+        )
+        self.source = source
+        self.artifact = artifact
+        self.pinned = pinned
+        self.reason = reason
