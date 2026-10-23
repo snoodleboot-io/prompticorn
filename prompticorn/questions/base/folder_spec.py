@@ -1,10 +1,12 @@
 """Folder specification for multi-language monorepo configuration."""
 
 from dataclasses import dataclass, field
-from pathlib import Path
 from typing import Any
 
-import yaml
+from prompticorn.content.configuration_document import ConfigurationDocument
+
+# The configuration unit language_defaults.yaml is addressed as.
+LANGUAGE_DEFAULTS_CONFIGURATION = "language_defaults"
 
 
 class FolderSpecRegistry:
@@ -24,11 +26,10 @@ class FolderSpecRegistry:
             Dictionary with language_defaults, default_coverage, and folder_type_presets.
         """
         if cls._config is None:
-            config_file = (
-                Path(__file__).parent.parent.parent / "configurations" / "language_defaults.yaml"
-            )
-            with open(config_file, encoding="utf-8") as f:
-                cls._config = yaml.safe_load(f)
+            # Resolved, not read from the package directory: this is a
+            # `configuration/...` unit, so a project layer is entitled to
+            # override it and before PRO-166 could not. (PRO-165)
+            cls._config = ConfigurationDocument.load(LANGUAGE_DEFAULTS_CONFIGURATION).data
         assert cls._config is not None
         return cls._config
 

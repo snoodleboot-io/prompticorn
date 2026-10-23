@@ -60,6 +60,13 @@ def _get_convention_environment() -> jinja2.Environment:
     Returns:
         Configured Jinja2 environment.
     """
+    # A package path, and correctly so (PRO-166). This is the Jinja *loader
+    # root*, used only to resolve `{% import 'macros/...' %}` from inside a
+    # convention. The convention sources themselves are resolved through the
+    # layer stack by `read_core_convention`; the macro library is template
+    # machinery with no UnitKind, and Jinja needs a directory rather than a
+    # resolver. Matches CoreFilesLoader, deliberately — two roots would let the
+    # same import resolve differently in two places.
     prompts_dir = Path(__file__).parent.parent / "prompts"
     return jinja2.Environment(
         loader=jinja2.FileSystemLoader(str(prompts_dir)),

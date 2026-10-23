@@ -39,6 +39,20 @@ class ContentResolver:
             sources if sources is not None else (BuiltinContentSource(),)
         )
         self._cache = cache if cache is not None else ContentCache()
+        # units() is a full walk of every layer; memoised because the stack is
+        # fixed for this resolver's lifetime (one per command) and discovery
+        # asks per agent. Without it a build walked the tree ~290k times.
+        self._units_memo: list[ContentUnit] | None = None
+
+    @property
+    def name(self) -> str:
+        """What this composite calls itself in errors (PRO-117).
+
+        Present so a resolver can be checked against the ContentSource contract
+        as a composite — it answers every question a single source does, over
+        the whole stack.
+        """
+        return RESOLVER_NAME
 
     @property
     def sources(self) -> tuple[ContentSource, ...]:
@@ -91,11 +105,28 @@ class ContentResolver:
         Sorted because this feeds discovery and lockfiles; enumeration order
         must not depend on the filesystem.
         """
-        winners: dict[str, ContentUnit] = {}
-        for source in self._sources:
-            for unit in source.units():
-                winners.setdefault(unit.id.render(), unit)
-        return [winners[key] for key in sorted(winners)]
+        if self._units_memo is None:
+            winners: dict[str, ContentUnit] = {}
+            for source in self._sources:
+                for unit in source.units():
+                    winners.setdefault(unit.id.render(), unit)
+            self._units_memo = [winners[key] for key in sorted(winners)]
+        return list(self._units_memo)
+
+    def owner_of(self, unit_id: UnitId) -> ContentSource | None:
+        """The source that wins for this unit, or None when nothing carries it.
+
+        Public because "which layer won, and where does its copy live" is a
+        question about one unit, and answering it by enumerating the whole stack
+        reads every layer to learn something a single lookup already knows.
+        Callers that only want the name should use :meth:`layer_of`.
+        """
+        return self._owner(unit_id)
+
+    def layer_of(self, unit_id: UnitId) -> str | None:
+        """Name of the layer that wins for this unit, or None."""
+        source = self._owner(unit_id)
+        return None if source is None else source.name
 
     def _owner(self, unit_id: UnitId) -> ContentSource | None:
         for source in self._sources:
@@ -124,6 +155,18 @@ def reset_default_resolver() -> None:
     """Drop the singleton. For tests that swap the bundled tree."""
     global _default_resolver
     _default_resolver = None
+
+
+def install_resolver(resolver: ContentResolver) -> None:
+    """Make ``resolver`` the one every consumer reads through (PRO-117).
+
+    The CLI installs a project's layer stack here before a command runs, so the
+    builders and the lock resolver — which both read through
+    :func:`default_resolver` — see the same layers without either being told
+    about them. Pair with :func:`reset_default_resolver` when the command ends.
+    """
+    global _default_resolver
+    _default_resolver = resolver
 
 
 def read_configuration(name: str) -> str:

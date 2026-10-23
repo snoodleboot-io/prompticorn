@@ -349,18 +349,34 @@ class TestBuild:
         # No agent files written during dry run.
         assert not (tmp_path / ".kilo" / "agents").exists()
 
-    def test_persona_filtering_failure_is_logged(self, kilo_builder, tmp_path, monkeypatch):
-        # Force persona filtering to raise so the warning branch executes.
+    def test_an_unknown_persona_is_logged_and_the_build_continues(
+        self, kilo_builder, tmp_path, monkeypatch
+    ):
+        # The one failure that still falls back to building everything: a
+        # persona name the registry does not know. PRO-165 narrowed the catch
+        # from Exception to KeyError, so this is the only path that logs.
+        import prompticorn.prompt_builder as pb
+
+        def boom(*args, **kwargs):
+            raise KeyError("no such persona")
+
+        monkeypatch.setattr(pb.PersonaRegistry, "from_resolver", boom)
+        config = {"variant": "minimal", "active_personas": ["software_engineer"]}
+        actions = kilo_builder.build(tmp_path, config=config, dry_run=True)
+        assert any("Persona filtering failed" in a for a in actions)
+
+    def test_any_other_persona_failure_propagates(self, kilo_builder, tmp_path, monkeypatch):
+        # Before PRO-165 this was swallowed and the build silently emitted every
+        # agent, exit 0. A broken persona config must now stop the build.
         import prompticorn.prompt_builder as pb
 
         def boom(*args, **kwargs):
             raise RuntimeError("persona blew up")
 
-        # Personas now load through the resolver rather than a path. (PRO-106)
         monkeypatch.setattr(pb.PersonaRegistry, "from_resolver", boom)
         config = {"variant": "minimal", "active_personas": ["software_engineer"]}
-        actions = kilo_builder.build(tmp_path, config=config, dry_run=True)
-        assert any("Persona filtering failed" in a for a in actions)
+        with pytest.raises(RuntimeError, match="persona blew up"):
+            kilo_builder.build(tmp_path, config=config, dry_run=True)
 
     def test_claude_build_writes_claude_md(self, tmp_path):
         builder = PromptBuilder("claude")

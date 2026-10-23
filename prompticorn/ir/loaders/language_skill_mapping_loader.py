@@ -50,6 +50,11 @@ class LanguageSkillMappingLoader:
         # A CWD-relative default silently resolves to nothing whenever the
         # process runs outside the repository root. Default from the package.
         # (PRO-105)
+        #
+        # This path deliberately does NOT go through the layer stack: it is the
+        # explicit-path constructor, whose job is to read one named file.
+        # Everything in the build reads through `from_resolver`, which layers.
+        # (PRO-166)
         self.mapping_file = (
             Path(mapping_file)
             if mapping_file is not None
