@@ -59,7 +59,10 @@ class ClaudeBuilder(Builder):
         # {{PRIMARY_AGENTS_LIST}}, {{LANGUAGE}}) via registered handlers.
         self._legacy_builder = LegacyBuilder()
 
-        # Setup Jinja2 template environment
+        # Setup Jinja2 template environment. A package path, and correctly so
+        # (PRO-166): these are THIS BUILDER's output templates, not authored
+        # content. They encode the .claude/ file format, so a project overriding
+        # one would be overriding prompticorn's code through a data file.
         template_dir = Path(__file__).parent.parent / "templates" / "claude"
         self.jinja_env = Environment(
             loader=FileSystemLoader(str(template_dir)),
@@ -294,7 +297,15 @@ class ClaudeBuilder(Builder):
     def _load_subagent_content(
         self, parent_agent: str, subagent_name: str, variant: str = "minimal"
     ) -> str | None:
-        """Load subagent content from agents directory.
+        """Load a subagent's authored prompt, through the content layer stack.
+
+        Read through the resolver, not the installed package directory. The
+        directory read this replaces was the other half of a split that produced
+        half-overridden output: :meth:`_prepare_subagents_data` already resolved
+        the subagent TABLE in the parent agent's file through
+        ``read_variant_unit``, so a project overriding a subagent got a parent
+        agent describing it from the override and an emitted subagent document
+        with the bundled text in it. (PRO-165)
 
         Args:
             parent_agent: Name of the parent agent
@@ -302,32 +313,15 @@ class ClaudeBuilder(Builder):
             variant: Variant (minimal/verbose)
 
         Returns:
-            Subagent content as string, or None if not found
+            Subagent content as string, or None if no layer carries it
         """
-        # Subagents are stored in prompticorn/agents/{agent}/subagents/{subagent}/{variant}/prompt.md
-        agents_dir = Path(__file__).parent.parent / "agents"
-
-        # Try exact path match first
-        subagent_path = (
-            agents_dir / parent_agent / "subagents" / subagent_name / variant / "prompt.md"
-        )
-
-        if not subagent_path.exists():
-            # Try other variant as fallback
-            other_variant = "verbose" if variant == "minimal" else "minimal"
-            subagent_path = (
-                agents_dir
-                / parent_agent
-                / "subagents"
-                / subagent_name
-                / other_variant
-                / "prompt.md"
-            )
-
-        if subagent_path.exists():
-            return strip_source_header_comments(subagent_path.read_text(encoding="utf-8"))
-
-        return None
+        # Names already qualified as "{agent}/{subagent}" carry their own owner —
+        # matching _prepare_subagents_data, which addresses the same unit.
+        qualified = subagent_name if "/" in subagent_name else f"{parent_agent}/{subagent_name}"
+        source = read_variant_unit(UnitKind.SUBAGENT, qualified, variant)
+        if source is None:
+            return None
+        return strip_source_header_comments(source)
 
     def _generate_when_to_use(self, agent: Agent) -> str:
         """Generate 'when to use' description for agent.

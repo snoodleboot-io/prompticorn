@@ -12,13 +12,17 @@ import pytest
 
 from prompticorn.provenance import (
     GENERATED_UNIT_PREFIX,
+    UNVERSIONED,
     OutputFormat,
     ProvenanceEmitter,
     ProvenanceHeader,
     ProvenanceSidecar,
+    UnitOrigins,
 )
 
-EMITTER = ProvenanceEmitter(layer="builtin", version="1.2.3")
+# No per-unit origins: every unit falls back to the bundled library, which is the
+# single-layer case every assertion below was written against.
+EMITTER = ProvenanceEmitter(origins=UnitOrigins(bundled_version="1.2.3"))
 
 
 def write(root, relative: str, text: str) -> None:
@@ -167,3 +171,81 @@ def test_an_empty_build_still_writes_a_sidecar(tmp_path) -> None:
 
     assert (tmp_path / ".prompticorn/provenance.json").is_file()
     assert sidecar_of(tmp_path).paths == ()
+
+
+def test_a_unit_from_an_override_layer_is_headed_with_that_layer(tmp_path) -> None:
+    """`layer` is documented as "which layer won", and a build reading through a
+    layer stack has a different answer per unit (PRO-165). A constant here made
+    the header contradict the lock written by the same run."""
+    write(tmp_path, "a.md", "a\n")
+    emitter = ProvenanceEmitter(
+        origins=UnitOrigins(layers={"skill/a/minimal": "project"}, bundled_version="1.2.3")
+    )
+
+    emitter.emit(tmp_path, {"a.md": "skill/a/minimal"})
+
+    record = ProvenanceHeader.parse((tmp_path / "a.md").read_text())
+    assert record is not None
+    assert record.layer == "project"
+
+
+def test_an_override_layer_is_not_stamped_with_the_package_version(tmp_path) -> None:
+    """A directory layer is a working tree, not a release. Borrowing the bundled
+    version would put a number in the header that describes content that lost."""
+    write(tmp_path, "a.md", "a\n")
+    emitter = ProvenanceEmitter(
+        origins=UnitOrigins(layers={"skill/a/minimal": "project"}, bundled_version="1.2.3")
+    )
+
+    emitter.emit(tmp_path, {"a.md": "skill/a/minimal"})
+
+    record = ProvenanceHeader.parse((tmp_path / "a.md").read_text())
+    assert record is not None
+    assert record.version == UNVERSIONED
+
+
+def test_units_in_one_build_can_come_from_different_layers(tmp_path) -> None:
+    """The property a per-build constant cannot express at all."""
+    write(tmp_path, "overridden.md", "a\n")
+    write(tmp_path, "bundled.md", "b\n")
+    emitter = ProvenanceEmitter(
+        origins=UnitOrigins(layers={"skill/a/minimal": "project"}, bundled_version="1.2.3")
+    )
+
+    emitter.emit(tmp_path, {"overridden.md": "skill/a/minimal", "bundled.md": "skill/b/minimal"})
+
+    sidecar = sidecar_of(tmp_path)
+    assert sidecar.record_for("overridden.md").layer == "project"
+    assert sidecar.record_for("bundled.md").layer == "builtin"
+
+
+def test_an_aggregate_output_falls_back_to_the_bundled_layer(tmp_path) -> None:
+    """`generated/...` names no unit, so no layer supplied it. The bundled
+    library is the honest answer: the templates that assemble it ship with the
+    package."""
+    write(tmp_path, "AGENTS.md", "# Agents\n")
+    emitter = ProvenanceEmitter(
+        origins=UnitOrigins(layers={"skill/a/minimal": "project"}, bundled_version="1.2.3")
+    )
+
+    emitter.emit(tmp_path, {"AGENTS.md": f"{GENERATED_UNIT_PREFIX}/agents-md"})
+
+    record = sidecar_of(tmp_path).record_for("AGENTS.md")
+    assert record is not None
+    assert record.layer == "builtin"
+    assert record.version == "1.2.3"
+
+
+def test_a_layer_name_containing_whitespace_cannot_break_the_header(tmp_path) -> None:
+    """Layer names are now data from a layer provider, not a constant from this
+    package, so they carry the same hazard the unit id already did."""
+    write(tmp_path, "a.md", "a\n")
+    emitter = ProvenanceEmitter(
+        origins=UnitOrigins(layers={"skill/a/minimal": "my layer"}, bundled_version="1.2.3")
+    )
+
+    emitter.emit(tmp_path, {"a.md": "skill/a/minimal"})
+
+    record = ProvenanceHeader.parse((tmp_path / "a.md").read_text())
+    assert record is not None
+    assert record.layer == "my_layer"
