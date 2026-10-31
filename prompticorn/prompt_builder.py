@@ -18,7 +18,12 @@ from prompticorn.builders.factory import BuilderFactory
 from prompticorn.builders.layouts import get_layout
 from prompticorn.builders.template_handlers.primary_agents_handler import PrimaryAgentsHandler
 from prompticorn.content.content_resolver import default_resolver, read_variant_unit
-from prompticorn.content.errors import ContentError
+from prompticorn.content.errors import (
+    ContentError,
+    MalformedConfigurationError,
+    RequiredSlotUnfilledError,
+    UndeclaredSlotError,
+)
 from prompticorn.content.unit_kind import UnitKind
 from prompticorn.ir.loaders.agent_skill_mapping_loader import AgentSkillMappingLoader
 from prompticorn.ir.loaders.language_skill_mapping_loader import LanguageSkillMappingLoader
@@ -45,6 +50,31 @@ def _dedupe_preserve_order(*lists: list[str] | None) -> list[str]:
                 seen.add(item)
                 result.append(item)
     return result
+
+
+#: Errors a per-item handler must never turn into a logged line and carry on
+#: from. Each means the *configuration* is wrong, not that one agent had a bad
+#: moment: a malformed configuration document, or a slot contract that the body
+#: and its declaration disagree about. Swallowing one of these produces a build
+#: that exits 0 having silently omitted a file, which is the failure mode
+#: PRO-165 narrowed the persona-filtering catch to avoid. (PRO-118)
+_FAIL_LOUD = (
+    MalformedConfigurationError,
+    UndeclaredSlotError,
+    RequiredSlotUnfilledError,
+)
+
+
+def _never_swallow(error: BaseException) -> None:
+    """Re-raise ``error`` if it is one the build must not continue past.
+
+    Called at the top of the broad per-item handlers. They stay broad on
+    purpose — one unbuildable agent should not lose the other twenty-six — but
+    "broad" must not extend to a wrong configuration, which affects every item
+    and will affect the next run too.
+    """
+    if isinstance(error, _FAIL_LOUD):
+        raise error
 
 
 def _describe_personas(config: dict | None) -> str:
@@ -314,6 +344,7 @@ class PromptBuilder:
                 )
                 actions.extend([f"✓ {f}" for f in rules_files_written])
             except Exception as e:
+                _never_swallow(e)
                 actions.append(f"✗ Failed to write rules files: {e}")
 
         # Build each top-level agent (skip subagents, they're included in parent)
@@ -387,11 +418,13 @@ class PromptBuilder:
                                 attribution.update(dict.fromkeys(subagent_files, subagent_unit))
                                 actions.extend([f"✓ {f}" for f in subagent_files])
                         except Exception as e:
+                            _never_swallow(e)
                             actions.append(
                                 f"✗ Failed to build subagent {agent_name}/{subagent_name}: {e}"
                             )
 
             except Exception as e:
+                _never_swallow(e)
                 actions.append(f"✗ Failed to build {agent_name}: {e}")
 
         # Now collect and write skills from ALL agents (including subagents).
@@ -418,6 +451,7 @@ class PromptBuilder:
                             actions.append(f"✓ {skill_file}")
                             all_skills_written.add(skill_file)
                 except Exception as e:
+                    _never_swallow(e)
                     actions.append(f"✗ Failed to write skills for {agent_name}: {e}")
 
         # Write workflows (for tools that use separate workflow files like Kilo).
@@ -447,6 +481,7 @@ class PromptBuilder:
                                 actions.append(f"✓ {workflow_file}")
                                 all_workflows_written.add(workflow_file)
                 except Exception as e:
+                    _never_swallow(e)
                     actions.append(f"✗ Failed to write workflows for {agent_name}: {e}")
 
         # Generate root AGENTS.md or CLAUDE.md file (only for primary agents in scope)

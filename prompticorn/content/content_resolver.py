@@ -8,6 +8,7 @@ are additional layers here and no consumer changes.
 from __future__ import annotations
 
 from collections.abc import Sequence
+from typing import Any
 
 from prompticorn.content.builtin_content_source import BuiltinContentSource
 from prompticorn.content.content_cache import ContentCache
@@ -25,9 +26,15 @@ class ContentResolver:
 
     Sources are consulted in order and the **first** that carries a unit wins,
     so a higher-priority layer shadows the bundled tree without removing it.
-    Full override semantics — patching, parameter slots, resolution traces —
-    belong to the resolver milestone; this is deliberately the minimum that lets
-    consumers stop touching the filesystem.
+
+    Parameter slots are filled here (PRO-118), not by each builder, so no
+    consumer can forget to — which is exactly how workflow and subagent
+    overrides shipped broken in PRO-165. Configuration units are exempt: the
+    slot schema and values are themselves configuration, and filling them would
+    be circular.
+
+    Still to come in the resolver milestone: patch operations and resolution
+    traces.
     """
 
     def __init__(
@@ -43,6 +50,11 @@ class ContentResolver:
         # fixed for this resolver's lifetime (one per command) and discovery
         # asks per agent. Without it a build walked the tree ~290k times.
         self._units_memo: list[ContentUnit] | None = None
+        # Slot schema and values, loaded on first use and then fixed. Typed
+        # loosely to avoid importing slots at module scope: slots imports
+        # ConfigurationDocument, which imports this module. (PRO-118)
+        self._slot_schema: Any = None
+        self._slot_values: Any = None
 
     @property
     def name(self) -> str:
@@ -74,9 +86,34 @@ class ContentResolver:
         cached = self._cache.get(source.name, unit_id)
         if cached is not None:
             return cached
-        text = source.read(unit_id)
+        text = self._fill_slots(unit_id, source.read(unit_id))
         self._cache.put(source.name, unit_id, text)
         return text
+
+    def _fill_slots(self, unit_id: UnitId, text: str) -> str:
+        """``text`` with its declared slots filled (PRO-118).
+
+        Configuration units are returned untouched: the slot schema and the
+        slot values are configuration themselves, so filling them would ask
+        this method to resolve the documents it depends on.
+
+        The schema and values are loaded once per resolver and cached, because
+        the layer stack is fixed for a resolver's lifetime and ``read`` is
+        called once per unit per build — reloading would reparse two YAML
+        documents hundreds of times, which is the shape of the regression
+        PRO-168 fixed in ``units()``.
+        """
+        if unit_id.kind is UnitKind.CONFIGURATION:
+            return text
+        if "<<slot:" not in text:
+            return text
+        from prompticorn.content import slots
+
+        if self._slot_schema is None:
+            self._slot_schema = slots.SlotSchema.load()
+            self._slot_values = slots.SlotValues.load()
+        assert self._slot_values is not None
+        return slots.fill(unit_id, text, self._slot_schema, self._slot_values)
 
     def read_optional(self, unit_id: UnitId) -> str | None:
         """Text, or None when absent.

@@ -108,3 +108,80 @@ class MalformedConfigurationError(ValueError):
             f"{location} (the {layer!r} content layer) is not a usable "
             f"{name!r} configuration: {reason}"
         )
+
+
+class UndeclaredSlotError(ValueError):
+    """A slot was referenced that the unit does not declare (PRO-118).
+
+    Either a layer supplied a value for a slot the artifact never offered, or
+    the artifact's body references one its declaration has lost. Both mean body
+    and declaration have diverged, and there is no safe guess: treating a
+    stray value as a typo-to-ignore silently drops a customisation someone is
+    relying on, and treating a stray placeholder as empty silently blanks part
+    of a document.
+
+    Deliberately **not** a :class:`ContentError`, for the same reason as
+    :class:`MalformedConfigurationError`: consumers catch ContentError to mean
+    "absent, carry on with the default", and this is present-and-wrong.
+
+    Attributes:
+        unit_id: The unit whose slots disagree.
+        slot: The name that is not declared.
+        layer: Which layer supplied the value, or ``"body"`` when the
+            placeholder in the artifact itself is the undeclared one.
+        declared: What the unit does declare, so the message can show the
+            likely intended name rather than only the wrong one.
+    """
+
+    def __init__(self, unit_id: str, slot: str, layer: str, declared: list[str]) -> None:
+        self.unit_id = unit_id
+        self.slot = slot
+        self.layer = layer
+        self.declared = declared
+        offered = ", ".join(repr(name) for name in declared) if declared else "no slots at all"
+        origin = (
+            "the unit's own body references"
+            if layer == "body"
+            else f"the {layer!r} content layer supplies a value for"
+        )
+        super().__init__(
+            f"{origin} slot {slot!r}, which {unit_id} does not declare; it offers {offered}"
+        )
+
+
+class RequiredSlotUnfilledError(ValueError):
+    """A slot declared ``required: true`` has no value (PRO-118).
+
+    Required is opt-in precisely so this can be strict: an artifact that marks
+    a slot required is saying it cannot render usefully without one, and
+    emitting it blank would ship a document with a hole where a command or a
+    target belongs. Slots without the marker render empty and warn instead, so
+    declaring a new slot upstream does not break every layer below it.
+
+    Not a :class:`ContentError`, as above.
+
+    Attributes:
+        unit_id: The unit with the unfilled slot.
+        slot: Which slot needs a value.
+    """
+
+    def __init__(self, unit_id: str, slot: str) -> None:
+        self.unit_id = unit_id
+        self.slot = slot
+        super().__init__(
+            f"{unit_id} declares slot {slot!r} as required and nothing fills it; "
+            f"set it in configurations/slot-values.yaml"
+        )
+
+
+class UnfilledSlotWarning(UserWarning):
+    """A declared, undefaulted, not-required slot rendered empty (PRO-118).
+
+    A warning and not an error because that combination is a legitimate way to
+    say "optional, omit when unset". It is not silent either: an empty string
+    where a value was expected is indistinguishable in the output from content
+    that was never written, so the message names the unit and the slot.
+
+    A warning class, so not a :class:`ContentError` — nothing should catch it
+    as one.
+    """
