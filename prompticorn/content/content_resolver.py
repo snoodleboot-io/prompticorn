@@ -8,6 +8,7 @@ are additional layers here and no consumer changes.
 from __future__ import annotations
 
 from collections.abc import Sequence
+from typing import Any
 
 from prompticorn.content.builtin_content_source import BuiltinContentSource
 from prompticorn.content.content_cache import ContentCache
@@ -25,9 +26,14 @@ class ContentResolver:
 
     Sources are consulted in order and the **first** that carries a unit wins,
     so a higher-priority layer shadows the bundled tree without removing it.
-    Full override semantics — patching, parameter slots, resolution traces —
-    belong to the resolver milestone; this is deliberately the minimum that lets
-    consumers stop touching the filesystem.
+
+Patches (PRO-119) and parameter slots (PRO-118) are applied here, not by
+    each builder, so no consumer can forget to — which is exactly how workflow
+    and subagent overrides shipped broken in PRO-165. Configuration units are
+    exempt from both: the patch set, the slot schema and the slot values are
+    themselves configuration, and rewriting them would be circular.
+
+    Still to come in the resolver milestone: resolution traces.
     """
 
     def __init__(
@@ -43,6 +49,12 @@ class ContentResolver:
         # fixed for this resolver's lifetime (one per command) and discovery
         # asks per agent. Without it a build walked the tree ~290k times.
         self._units_memo: list[ContentUnit] | None = None
+        # Slot schema and values, loaded on first use and then fixed. Typed
+        # loosely to avoid importing slots at module scope: slots imports
+        # ConfigurationDocument, which imports this module. (PRO-118)
+        self._slot_schema: Any = None
+        self._slot_values: Any = None
+        self._patch_applier: Any = None
 
     @property
     def name(self) -> str:
@@ -75,8 +87,58 @@ class ContentResolver:
         if cached is not None:
             return cached
         text = source.read(unit_id)
+        if unit_id.kind is not UnitKind.CONFIGURATION:
+            # Order matters: patch, then fill. A patch may introduce a slot
+            # placeholder, and it should be filled like any other; filling
+            # first would leave a patch's own placeholder in the output.
+            text = self._apply_patches(unit_id, text)
+            text = self._fill_slots(unit_id, text)
         self._cache.put(source.name, unit_id, text)
         return text
+
+    @property
+    def patches(self) -> Any:
+        """The collected patch set, built on first use (PRO-119)."""
+        if self._patch_applier is None:
+            from prompticorn.content.patches import PatchApplier
+
+            self._patch_applier = PatchApplier.collect(self)
+        return self._patch_applier
+
+    def _apply_patches(self, unit_id: UnitId, text: str) -> str:
+        """``text`` with every layer's matching patches applied, in order.
+
+        Patches are collected from the whole stack rather than from the winning
+        source, so a project replacing a unit does not thereby discard an org's
+        policy patch. See :class:`PatchApplier` for why that is load-bearing.
+        """
+        applier = self.patches
+        if not applier.patches:
+            return text
+        return applier.apply(unit_id, text)
+
+    def _fill_slots(self, unit_id: UnitId, text: str) -> str:
+        """``text`` with its declared slots filled (PRO-118).
+
+        Configuration units are returned untouched: the slot schema and the
+        slot values are configuration themselves, so filling them would ask
+        this method to resolve the documents it depends on.
+
+        The schema and values are loaded once per resolver and cached, because
+        the layer stack is fixed for a resolver's lifetime and ``read`` is
+        called once per unit per build — reloading would reparse two YAML
+        documents hundreds of times, which is the shape of the regression
+        PRO-168 fixed in ``units()``.
+        """
+        if "<<slot:" not in text:
+            return text
+        from prompticorn.content import slots
+
+        if self._slot_schema is None:
+            self._slot_schema = slots.SlotSchema.load()
+            self._slot_values = slots.SlotValues.load()
+        assert self._slot_values is not None
+        return slots.fill(unit_id, text, self._slot_schema, self._slot_values)
 
     def read_optional(self, unit_id: UnitId) -> str | None:
         """Text, or None when absent.
