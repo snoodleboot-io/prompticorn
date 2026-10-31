@@ -27,14 +27,13 @@ class ContentResolver:
     Sources are consulted in order and the **first** that carries a unit wins,
     so a higher-priority layer shadows the bundled tree without removing it.
 
-    Parameter slots are filled here (PRO-118), not by each builder, so no
-    consumer can forget to — which is exactly how workflow and subagent
-    overrides shipped broken in PRO-165. Configuration units are exempt: the
-    slot schema and values are themselves configuration, and filling them would
-    be circular.
+Patches (PRO-119) and parameter slots (PRO-118) are applied here, not by
+    each builder, so no consumer can forget to — which is exactly how workflow
+    and subagent overrides shipped broken in PRO-165. Configuration units are
+    exempt from both: the patch set, the slot schema and the slot values are
+    themselves configuration, and rewriting them would be circular.
 
-    Still to come in the resolver milestone: patch operations and resolution
-    traces.
+    Still to come in the resolver milestone: resolution traces.
     """
 
     def __init__(
@@ -55,6 +54,7 @@ class ContentResolver:
         # ConfigurationDocument, which imports this module. (PRO-118)
         self._slot_schema: Any = None
         self._slot_values: Any = None
+        self._patch_applier: Any = None
 
     @property
     def name(self) -> str:
@@ -86,9 +86,36 @@ class ContentResolver:
         cached = self._cache.get(source.name, unit_id)
         if cached is not None:
             return cached
-        text = self._fill_slots(unit_id, source.read(unit_id))
+        text = source.read(unit_id)
+        if unit_id.kind is not UnitKind.CONFIGURATION:
+            # Order matters: patch, then fill. A patch may introduce a slot
+            # placeholder, and it should be filled like any other; filling
+            # first would leave a patch's own placeholder in the output.
+            text = self._apply_patches(unit_id, text)
+            text = self._fill_slots(unit_id, text)
         self._cache.put(source.name, unit_id, text)
         return text
+
+    @property
+    def patches(self) -> Any:
+        """The collected patch set, built on first use (PRO-119)."""
+        if self._patch_applier is None:
+            from prompticorn.content.patches import PatchApplier
+
+            self._patch_applier = PatchApplier.collect(self)
+        return self._patch_applier
+
+    def _apply_patches(self, unit_id: UnitId, text: str) -> str:
+        """``text`` with every layer's matching patches applied, in order.
+
+        Patches are collected from the whole stack rather than from the winning
+        source, so a project replacing a unit does not thereby discard an org's
+        policy patch. See :class:`PatchApplier` for why that is load-bearing.
+        """
+        applier = self.patches
+        if not applier.patches:
+            return text
+        return applier.apply(unit_id, text)
 
     def _fill_slots(self, unit_id: UnitId, text: str) -> str:
         """``text`` with its declared slots filled (PRO-118).
@@ -103,8 +130,6 @@ class ContentResolver:
         documents hundreds of times, which is the shape of the regression
         PRO-168 fixed in ``units()``.
         """
-        if unit_id.kind is UnitKind.CONFIGURATION:
-            return text
         if "<<slot:" not in text:
             return text
         from prompticorn.content import slots

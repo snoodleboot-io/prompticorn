@@ -19,8 +19,11 @@ from prompticorn.builders.layouts import get_layout
 from prompticorn.builders.template_handlers.primary_agents_handler import PrimaryAgentsHandler
 from prompticorn.content.content_resolver import default_resolver, read_variant_unit
 from prompticorn.content.errors import (
+    AmbiguousPatchTargetError,
     ContentError,
     MalformedConfigurationError,
+    PatchMatchedNothingError,
+    PatchTargetMissingError,
     RequiredSlotUnfilledError,
     UndeclaredSlotError,
 )
@@ -54,14 +57,22 @@ def _dedupe_preserve_order(*lists: list[str] | None) -> list[str]:
 
 #: Errors a per-item handler must never turn into a logged line and carry on
 #: from. Each means the *configuration* is wrong, not that one agent had a bad
-#: moment: a malformed configuration document, or a slot contract that the body
-#: and its declaration disagree about. Swallowing one of these produces a build
-#: that exits 0 having silently omitted a file, which is the failure mode
-#: PRO-165 narrowed the persona-filtering catch to avoid. (PRO-118)
+#: moment: a malformed configuration document, a slot contract whose body and
+#: declaration disagree, or a patch whose anchor is gone. Swallowing one of
+#: these produces a build that exits 0 having silently omitted a file, which is
+#: the failure mode PRO-165 narrowed the persona-filtering catch to avoid.
+#:
+#: Both halves of this list were added because an end-to-end test caught the
+#: swallow: PRO-118's required slot and PRO-119's missing anchor each raised
+#: correctly and were each logged away. A unit test on the raising code would
+#: have passed in both cases. (PRO-118, PRO-119)
 _FAIL_LOUD = (
     MalformedConfigurationError,
     UndeclaredSlotError,
     RequiredSlotUnfilledError,
+    PatchTargetMissingError,
+    AmbiguousPatchTargetError,
+    PatchMatchedNothingError,
 )
 
 
@@ -576,6 +587,15 @@ class PromptBuilder:
                     actions.append(f"✓ {provenance_file}")
             except OSError as e:
                 actions.append(f"⚠ Failed to write provenance: {e}")
+
+        # Only knowable once every unit has been resolved: a patch is not
+        # unused until there is nothing left for it to be used on. Raised, not
+        # logged — a glob that silently matches nothing is how a patch rots
+        # after an upstream rename, which is the whole reason the check exists.
+        # (PRO-119)
+        from prompticorn.content.content_resolver import default_resolver
+
+        default_resolver().patches.verify_all_matched()
 
         return actions
 

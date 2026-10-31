@@ -185,3 +185,92 @@ class UnfilledSlotWarning(UserWarning):
     A warning class, so not a :class:`ContentError` — nothing should catch it
     as one.
     """
+
+
+class PatchTargetMissingError(ValueError):
+    """A patch's anchor heading is not in the unit it targets (PRO-119).
+
+    A hard error, deliberately. A house standard that quietly stops applying is
+    worse than one that was never installed, because nobody goes looking: the
+    build keeps succeeding and the rule is simply gone. Failing here turns an
+    upstream rename into something the patch author finds out about on the next
+    build rather than in an incident review.
+
+    Not a :class:`ContentError`, like the other present-and-wrong conditions.
+
+    Attributes:
+        unit_id: The unit that lacks the heading.
+        heading: The anchor that was looked for, exactly as written.
+        patch: Which patch wanted it, named by operation, index and layer.
+    """
+
+    def __init__(self, unit_id: str, heading: str, patch: str) -> None:
+        self.unit_id = unit_id
+        self.heading = heading
+        self.patch = patch
+        super().__init__(
+            f"{patch} anchors to {heading!r}, which {unit_id} does not contain; "
+            f"the heading was renamed or removed upstream"
+        )
+
+
+class AmbiguousPatchTargetError(ValueError):
+    """A patch's anchor heading appears more than once (PRO-119).
+
+    First-match would make the outcome depend on upstream edits the patch
+    author never sees: insert a second "## Notes" above the intended one and the
+    patch silently starts rewriting a different section. Refusing is the only
+    answer that cannot change meaning behind the author's back.
+
+    Attributes:
+        unit_id: The unit with the repeated heading.
+        heading: The anchor, exactly as written.
+        patch: Which patch wanted it.
+        occurrences: 1-based line numbers, so the author can see both.
+    """
+
+    def __init__(self, unit_id: str, heading: str, patch: str, occurrences: list[int]) -> None:
+        self.unit_id = unit_id
+        self.heading = heading
+        self.patch = patch
+        self.occurrences = occurrences
+        lines = ", ".join(str(line) for line in occurrences)
+        super().__init__(
+            f"{patch} anchors to {heading!r}, which {unit_id} contains "
+            f"{len(occurrences)} times (lines {lines}); it is ambiguous which was meant"
+        )
+
+
+class PatchMatchedNothingError(ValueError):
+    """A patch's unit glob matched nothing in the whole build (PRO-119).
+
+    Silent zero-match is how a patch rots after an upstream rename: it keeps
+    "working" and does nothing at all. A patch that is genuinely conditional
+    says so with ``allow_empty: true``, which makes the intent reviewable
+    instead of leaving every zero-match indistinguishable from a typo.
+
+    Attributes:
+        patch: Which patch matched nothing.
+        units: The glob it was looking for.
+        layer: The layer whose file needs fixing.
+    """
+
+    def __init__(self, patch: str, units: str, layer: str) -> None:
+        self.patch = patch
+        self.units = units
+        self.layer = layer
+        super().__init__(
+            f"{patch} targets {units!r}, which matched no unit in this build; "
+            f"fix the glob in the {layer!r} layer, or set 'allow_empty: true' "
+            f"if matching nothing is expected"
+        )
+
+
+class ConflictingPatchWarning(UserWarning):
+    """Two patches replace the same heading; the later one wins (PRO-119).
+
+    A warning rather than an error because two layers caring about one section
+    is ordinary in a deep stack, and precedence already decides it. What would
+    not be acceptable is silence: the losing layer's author has no other way to
+    discover their rule stopped applying.
+    """
